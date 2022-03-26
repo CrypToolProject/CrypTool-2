@@ -160,7 +160,7 @@
     <value>The string after processing with the Vigenère cipher</value>
   </data>
   <data name="ShiftCharCaption" xml:space="preserve">
-    <value>Shift key (multiple letters)</value>
+    <value>Key (as string)</value>
   </data>
   <data name="ShiftCharTooltip" xml:space="preserve">
     <value>Enter multiple letters as the key.</value>
@@ -172,7 +172,7 @@
     <value>Enter the keyword as a string.</value>
   </data>
   <data name="ShiftValueTPCaption" xml:space="preserve">
-    <value>Shift value (integer)</value>
+    <value>Key (integer)</value>
   </data>
   <data name="ShiftValueTPTooltip" xml:space="preserve">
     <value>Enter the numbers of letters to shift separated by comma.</value>
@@ -196,10 +196,10 @@
     <value>Decrypt</value>
   </data>
   <data name="ModeList2" xml:space="preserve">
-    <value>Autokey</value>
+    <value>Vigenère Autokey</value>
   </data>
   <data name="ModeList1" xml:space="preserve">
-    <value>Classic</value>
+    <value>Vigenère Classic</value>
   </data>
   <data name="UnknownSymbolHandlingList1" xml:space="preserve">
     <value>Ignore (leave unmodified)</value>
@@ -218,5 +218,11 @@
   </data>
   <data name="MemorizeCaseTooltip" xml:space="preserve">
     <value>Even the lowercase letters where mapped to uppercase letters (so that an "a" is processed like an "A") the old spelling of the letters remains</value>
+  </data>
+  <data name="ModeList3" xml:space="preserve">
+    <value>Beaufort Classic </value>
+  </data>
+  <data name="ModeList4" xml:space="preserve">
+    <value>Beaufort Autokey</value>
   </data>
 </root>

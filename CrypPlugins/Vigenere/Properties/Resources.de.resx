@@ -196,10 +196,10 @@
     <value>Entschlüsselung</value>
   </data>
   <data name="ModeList2" xml:space="preserve">
-    <value>Selbstschlüssel-Verfahren (Autokey)</value>
+    <value>Vigenère-Selbstschlüssel-Verfahren (Autokey)</value>
   </data>
   <data name="ModeList1" xml:space="preserve">
-    <value>Klassisch</value>
+    <value>Klassischer Vigenère</value>
   </data>
   <data name="UnknownSymbolHandlingList1" xml:space="preserve">
     <value>Ignorieren (nicht ändern)</value>
@@ -218,5 +218,11 @@
   </data>
   <data name="MemorizeCaseTooltip" xml:space="preserve">
     <value>Obwohl die Kleinbuchstaben vor der Verschlüsselung einander zugeordnet wurden (so dass ein "a" wie ein "A" behandelt wird), merkt sich das Programm, welche Schreibweise der Buchstabe hatte und stellt ihn in der Ausgabe entsprechend dar</value>
+  </data>
+  <data name="ModeList3" xml:space="preserve">
+    <value>Klassischer Beaufort</value>
+  </data>
+  <data name="ModeList4" xml:space="preserve">
+    <value>Beaufort-Selbstschlüssel-Verfahren (Autokey)</value>
   </data>
 </root>

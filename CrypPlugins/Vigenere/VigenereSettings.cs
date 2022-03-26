@@ -1,5 +1,6 @@
 /*
    Copyright 2008 Sebastian Przybylski, University of Siegen
+   2022: Added Beaufort and Beaufort Autokey, Nils Kopal, CrypTool project
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -224,7 +225,7 @@ namespace CrypTool.Vigenere
         #region Algorithm settings properties (visible in the Settings pane)
 
         [PropertySaveOrder(3)]
-        [TaskPane("ModeCaption", "ModeTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ModeList1", "ModeList2" })]
+        [TaskPane("ModeCaption", "ModeTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ModeList1", "ModeList2" , "ModeList3", "ModeList4" })]
         public int Mode
         {
             get => _selectedMode;

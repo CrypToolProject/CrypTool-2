@@ -19,7 +19,7 @@ namespace CrypTool.Vigenere.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -205,7 +205,7 @@ namespace CrypTool.Vigenere.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Classic ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Vigenère Classic ähnelt.
         /// </summary>
         internal static string ModeList1 {
             get {
@@ -214,11 +214,29 @@ namespace CrypTool.Vigenere.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Autokey ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Vigenère Autokey ähnelt.
         /// </summary>
         internal static string ModeList2 {
             get {
                 return ResourceManager.GetString("ModeList2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Beaufort Classic  ähnelt.
+        /// </summary>
+        internal static string ModeList3 {
+            get {
+                return ResourceManager.GetString("ModeList3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Beaufort Autokey ähnelt.
+        /// </summary>
+        internal static string ModeList4 {
+            get {
+                return ResourceManager.GetString("ModeList4", resourceCulture);
             }
         }
         
@@ -268,7 +286,7 @@ namespace CrypTool.Vigenere.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Shift key (multiple letters) ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Key (as string) ähnelt.
         /// </summary>
         internal static string ShiftCharCaption {
             get {
@@ -304,7 +322,7 @@ namespace CrypTool.Vigenere.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Shift value (integer) ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Key (integer) ähnelt.
         /// </summary>
         internal static string ShiftValueTPCaption {
             get {

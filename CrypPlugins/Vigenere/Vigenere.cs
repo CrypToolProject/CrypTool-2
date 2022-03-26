@@ -1,5 +1,6 @@
 /*
    Copyright 2008 Sebastian Przybylski, University of Siegen
+   2022: Added Beaufort and Beaufort Autokey, Nils Kopal, CrypTool project
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -16,6 +17,7 @@
 
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.ComponentModel;
 using System.Text;
 
@@ -29,12 +31,20 @@ namespace CrypTool.Vigenere
     {
         #region Private variables
 
-        private VigenereSettings settings;
-        private string inputString;
-        private string outputString;
-        private enum VigenereMode { encrypt, decrypt, autoencrypt, autodecrypt };
-
-        private readonly string topAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private VigenereSettings _settings;
+        private string _inputString;
+        private string _outputString;
+        private enum CipherMode 
+        { 
+            VigenereEncrypt, 
+            VigenereDecrypt, 
+            VigenereAutokeyEncrypt, 
+            VigenereAutokeyDecrypt,
+            BeaufortEncrypt,
+            BeaufortDecrypt,
+            BeaufortAutokeyEncrypt,
+            BeaufortAutokeyDecrypt
+        };
 
         #endregion
 
@@ -45,8 +55,8 @@ namespace CrypTool.Vigenere
         /// </summary>
         public Vigenere()
         {
-            settings = new VigenereSettings();
-            settings.LogMessage += Vigenere_LogMessage;
+            _settings = new VigenereSettings();
+            _settings.LogMessage += Vigenere_LogMessage;
         }
 
         /// <summary>
@@ -54,19 +64,19 @@ namespace CrypTool.Vigenere
         /// </summary>
         public ISettings Settings
         {
-            get => settings;
-            set => settings = (VigenereSettings)value;
+            get => _settings;
+            set => _settings = (VigenereSettings)value;
         }
 
         [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", true)]
         public string InputString
         {
-            get => inputString;
+            get => _inputString;
             set
             {
-                if (value != inputString)
+                if (value != _inputString)
                 {
-                    inputString = value;
+                    _inputString = value;
                     OnPropertyChanged("InputString");
                 }
             }
@@ -75,10 +85,10 @@ namespace CrypTool.Vigenere
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", false)]
         public string OutputString
         {
-            get => outputString;
+            get => _outputString;
             set
             {
-                outputString = value;
+                _outputString = value;
                 OnPropertyChanged("OutputString");
             }
         }
@@ -86,12 +96,12 @@ namespace CrypTool.Vigenere
         [PropertyInfo(Direction.InputData, "InputAlphabetCaption", "InputAlphabetTooltip", false)]
         public string AlphabetSymbols
         {
-            get => settings.AlphabetSymbols;
+            get => _settings.AlphabetSymbols;
             set
             {
-                if (value != null && value != settings.AlphabetSymbols)
+                if (value != null && value != _settings.AlphabetSymbols)
                 {
-                    settings.AlphabetSymbols = value;
+                    _settings.AlphabetSymbols = value;
                     OnPropertyChanged("AlphabetSymbols");
                 }
             }
@@ -99,44 +109,18 @@ namespace CrypTool.Vigenere
         [PropertyInfo(Direction.InputData, "ShiftValueCaption", "ShiftValueTooltip", false)]
         public string ShiftValue
         {
-            get => settings.ShiftChar;
+            get => _settings.ShiftChar;
             set
             {
-                if (value != settings.ShiftChar)
+                if (value != _settings.ShiftChar)
                 {
-                    settings.ShiftChar = value;
+                    _settings.ShiftChar = value;
                     OnPropertyChanged("ShiftValue");
 
                 }
             }
-        }
-
-        /// <summary>
-        /// Vigenere encryption
-        /// </summary>
-        public void Encrypt()
-        {
-            ProcessVigenere(VigenereMode.encrypt);
-        }
-
-        public void AutoKeyEncrypt()
-        {
-            ProcessVigenere(VigenereMode.autoencrypt);
-        }
-
-        /// <summary>
-        /// Vigenere decryption
-        /// </summary>
-        public void Decrypt()
-        {
-            ProcessVigenere(VigenereMode.decrypt);
-        }
-
-        public void AutoKeyDecrypt()
-        {
-            ProcessVigenere(VigenereMode.autodecrypt);
-        }
-
+        }      
+        
         #endregion
 
         #region IPlugin members
@@ -198,12 +182,12 @@ namespace CrypTool.Vigenere
         #region Private methods
 
         /// <summary>
-        /// Does the actual Vigenere processing, i.e. encryption or decryption
+        /// Does the actual cipher processing, i.e. encryption or decryption
         /// </summary>
         /// <param name="mode"></param>
-        private void ProcessVigenere(VigenereMode mode)
+        private void Crypt(CipherMode mode)
         {
-            VigenereSettings cfg = settings;
+            VigenereSettings cfg = _settings;
             StringBuilder output = new StringBuilder(string.Empty);
             string alphabet = cfg.AlphabetSymbols;
             int autopos = 0;
@@ -212,13 +196,13 @@ namespace CrypTool.Vigenere
             {
                 alphabet = cfg.AlphabetSymbols.ToUpper();
             }
-            if (inputString != null)
+            if (_inputString != null)
             {
                 int shiftPos = 0;
-                for (int i = 0; i < inputString.Length; i++)
+                for (int i = 0; i < _inputString.Length; i++)
                 {
                     //get plaintext char which is currently processed
-                    char currentChar = inputString[i];
+                    char currentChar = _inputString[i];
 
                     //remember if it is upper case (otherwise lowercase is assumed)
                     bool uppercase = char.IsUpper(currentChar);
@@ -232,7 +216,7 @@ namespace CrypTool.Vigenere
                         int cpos = 0;
                         switch (mode)
                         {
-                            case VigenereMode.encrypt:
+                            case CipherMode.VigenereEncrypt:
 
                                 cpos = (ppos + cfg.ShiftKey[shiftPos]) % alphabet.Length;
 
@@ -246,7 +230,7 @@ namespace CrypTool.Vigenere
 
                                 break;
 
-                            case VigenereMode.decrypt:
+                            case CipherMode.VigenereDecrypt:
 
                                 cpos = (ppos - cfg.ShiftKey[shiftPos] + alphabet.Length) % alphabet.Length;
 
@@ -260,7 +244,21 @@ namespace CrypTool.Vigenere
 
                                 break;
 
-                            case VigenereMode.autoencrypt:
+                            case CipherMode.BeaufortEncrypt:
+                            case CipherMode.BeaufortDecrypt:
+
+                                cpos = Mod((cfg.ShiftKey[shiftPos] - ppos), alphabet.Length);
+
+                                //increment shiftPos to map inputString whith all keys
+                                //if shiftPos > ShiftKey.Length, begin again at the beginning
+                                shiftPos++;
+                                if (shiftPos >= cfg.ShiftKey.Length)
+                                {
+                                    shiftPos = 0;
+                                }
+                                break;                           
+
+                            case CipherMode.VigenereAutokeyEncrypt:
 
                                 //key still used
                                 if (shiftPos < cfg.ShiftKey.Length)
@@ -271,12 +269,12 @@ namespace CrypTool.Vigenere
                                 else //using plaintext
                                 {
                                     //taking the plaintextchar from the next position
-                                    int pkey = alphabet.IndexOf(char.ToUpper(inputString[autopos]));
+                                    int pkey = alphabet.IndexOf(char.ToUpper(_inputString[autopos]));
                                     //check if the next plaintextchar is in the alphabet
                                     while (pkey < 0)
                                     {
                                         autopos++;
-                                        pkey = alphabet.IndexOf(char.ToUpper(inputString[autopos]));
+                                        pkey = alphabet.IndexOf(char.ToUpper(_inputString[autopos]));
                                     }
 
                                     cpos = (ppos + pkey) % alphabet.Length;
@@ -285,7 +283,7 @@ namespace CrypTool.Vigenere
                                 break;
 
 
-                            case VigenereMode.autodecrypt:
+                            case CipherMode.VigenereAutokeyDecrypt:
 
                                 //key still used
                                 if (shiftPos < cfg.ShiftKey.Length)
@@ -295,17 +293,17 @@ namespace CrypTool.Vigenere
                                 }
                                 else //using plaintext
                                 {
-                                    outputString = output.ToString();
+                                    _outputString = output.ToString();
 
                                     //taking the deciphered plaintextchar from the next position
-                                    int pkey = alphabet.IndexOf(char.ToUpper(outputString[autopos]));
+                                    int pkey = alphabet.IndexOf(char.ToUpper(_outputString[autopos]));
                                     //check if the next deciphered plaintextchar is in the alphabet
                                     while (pkey < 0)
                                     {
                                         autopos++;
                                         try
                                         {
-                                            pkey = alphabet.IndexOf(char.ToUpper(outputString[autopos]));
+                                            pkey = alphabet.IndexOf(char.ToUpper(_outputString[autopos]));
                                         }
                                         catch
                                         {
@@ -318,8 +316,51 @@ namespace CrypTool.Vigenere
                                     autopos++;
                                 }
                                 break;
-                        }
 
+                            case CipherMode.BeaufortAutokeyEncrypt:
+                                //key still used
+                                if (shiftPos < cfg.ShiftKey.Length)
+                                {
+                                    cpos = Mod((cfg.ShiftKey[shiftPos] - ppos), alphabet.Length);
+                                    shiftPos++;
+                                }
+                                else //using plaintext
+                                {
+                                    //taking the plaintextchar from the next position
+                                    int pkey = alphabet.IndexOf(char.ToUpper(_inputString[autopos]));
+                                    //check if the next plaintextchar is in the alphabet
+                                    while (pkey < 0)
+                                    {
+                                        autopos++;
+                                        pkey = alphabet.IndexOf(char.ToUpper(_inputString[autopos]));
+                                    }
+                                    cpos = Mod((pkey - ppos), alphabet.Length);
+                                    autopos++;
+                                }
+                                break;
+                            case CipherMode.BeaufortAutokeyDecrypt:
+
+                                //key still used
+                                if (shiftPos < cfg.ShiftKey.Length)
+                                {
+                                    cpos = Mod((cfg.ShiftKey[shiftPos] - ppos), alphabet.Length);                                    
+                                    shiftPos++;
+                                }
+                                else //using plaintext
+                                {
+                                    //taking the plaintextchar from the next position
+                                    int pkey = alphabet.IndexOf(char.ToUpper(output[autopos]));
+                                    //check if the next plaintextchar is in the alphabet
+                                    while (pkey < 0)
+                                    {
+                                        autopos++;
+                                        pkey = alphabet.IndexOf(char.ToUpper(output[autopos]));
+                                    }
+                                    cpos = Mod((pkey - ppos), alphabet.Length);
+                                    autopos++;
+                                }
+                                break;
+                        }
 
                         //we have the position of the ciphertext character, now we have to output it in the right case
                         char c = alphabet[cpos];
@@ -336,7 +377,7 @@ namespace CrypTool.Vigenere
                         switch ((VigenereSettings.UnknownSymbolHandlingMode)cfg.UnknownSymbolHandling)
                         {
                             case VigenereSettings.UnknownSymbolHandlingMode.Ignore:
-                                output.Append(inputString[i]);
+                                output.Append(_inputString[i]);
                                 break;
                             case VigenereSettings.UnknownSymbolHandlingMode.Replace:
                                 output.Append('?');
@@ -345,12 +386,22 @@ namespace CrypTool.Vigenere
                     }
 
                     //show the progress
-                    Progress(i, inputString.Length - 1);
+                    Progress(i, _inputString.Length - 1);
                 }
 
-                outputString = settings.AlphabetCase | settings.MemorizeCase ? output.ToString() : output.ToString().ToUpper();
+                _outputString = _settings.AlphabetCase | _settings.MemorizeCase ? output.ToString() : output.ToString().ToUpper();
                 OnPropertyChanged("OutputString");
             }
+        }
+
+        private static int Mod(int number, int module)
+        {
+            int result = number % module;
+            if ((result < 0 && module > 0) || (result > 0 && module < 0))
+            {
+                result += module;
+            }
+            return result;
         }
 
         /// <summary>
@@ -377,43 +428,73 @@ namespace CrypTool.Vigenere
 
         public void Execute()
         {
-            switch (settings.Mode)
+            switch (_settings.Mode)
             {
-                //Classic Mode
+                //Vigenère Classic
                 case 0:
 
-                    switch (settings.Action)
+                    switch (_settings.Action)
                     {
                         case 0:
-                            Encrypt();
+                            Crypt(CipherMode.VigenereEncrypt);
                             break;
                         case 1:
-                            Decrypt();
+                            Crypt(CipherMode.VigenereDecrypt);
+                            break;                       
+                        default:
+                            break;
+                    }
+                    break;
+
+                //Vigenère Autokey
+                case 1:
+
+                    switch (_settings.Action)
+                    {
+                        case 0:
+                            Crypt(CipherMode.VigenereAutokeyEncrypt);
+                            break;
+                        case 1:
+                            Crypt(CipherMode.VigenereAutokeyDecrypt);
                             break;
                         default:
                             break;
                     }
                     break;
 
-                //Autokey Mode
-                case 1:
+                //Beaufort Classic
+                case 2:
 
-                    switch (settings.Action)
+                    switch (_settings.Action)
                     {
                         case 0:
-                            AutoKeyEncrypt();
+                            Crypt(CipherMode.BeaufortEncrypt);
                             break;
                         case 1:
-                            AutoKeyDecrypt();
+                            Crypt(CipherMode.BeaufortDecrypt);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+
+                //Beaufort Autokey
+                case 3:
+
+                    switch (_settings.Action)
+                    {
+                        case 0:
+                            Crypt(CipherMode.BeaufortAutokeyEncrypt);
+                            break;
+                        case 1:
+                            Crypt(CipherMode.BeaufortAutokeyDecrypt);
                             break;
                         default:
                             break;
                     }
                     break;
             }
-
         }
-
         #endregion
 
     }
