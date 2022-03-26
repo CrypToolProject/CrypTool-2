@@ -1,6 +1,5 @@
 ﻿/*
-   Copyright 2021 Nils Kopal, Applied Information Security, Uni Kassel
-   https://www.uni-kassel.de/eecs/fachgebiete/ais/mitarbeiter/nils-kopal-m-sc.html
+   Copyright 2022 Nils Kopal, CrypTool project
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -172,7 +171,7 @@ namespace CrypTool.VigenereAnalyzer
             for (int keylength = _settings.FromKeylength; keylength <= _settings.ToKeyLength; keylength++)
             {
                 UpdateDisplayEnd(keylength);
-                HillclimbVigenere(ciphertext, keylength, _settings.Restarts);
+                Hillclimb(ciphertext, keylength, _settings.Restarts);
                 if (_stopped)
                 {
                     return;
@@ -239,12 +238,12 @@ namespace CrypTool.VigenereAnalyzer
         }
 
         /// <summary>
-        /// Hillclimbs Vigenere or Vigenere Autokey
+        /// Hillclimbs Vigenere, Vigenere Autokey, Beaufort, or Beaufort Autokey
         /// </summary>
         /// <param name="ciphertext"></param>
         /// <param name="keylength"></param>
         /// <param name="restarts"></param>
-        private void HillclimbVigenere(int[] ciphertext, int keylength, int restarts = 100)
+        private void Hillclimb(int[] ciphertext, int keylength, int restarts = 100)
         {
             double globalbestkeycost = double.MinValue;
             int[] bestkey = new int[keylength];
@@ -270,18 +269,28 @@ namespace CrypTool.VigenereAnalyzer
                 bool foundbetter;
                 double bestkeycost = double.MinValue;
 
-                int[] plaintext = _settings.Mode == Mode.Vigenere
-                    ? DecryptVigenereOwnAlphabet(ciphertext, runkey, numvigalphabet)
-                    : DecryptAutokeyOwnAlphabet(ciphertext, runkey, numvigalphabet);
+                int[] plaintext = null;              
 
                 DecryptVigenereFunction decryptVigenereFunction;
-                if (_settings.Mode == Mode.Vigenere)
+                switch (_settings.Mode)
                 {
-                    decryptVigenereFunction = DecryptVigenereOwnAlphabetInPlace;
-                }
-                else
-                {
-                    decryptVigenereFunction = DecryptAutokeyOwnAlphabetInPlace;
+                    default:
+                    case Mode.Vigenere:
+                        decryptVigenereFunction = DecryptVigenereOwnAlphabetInPlace;
+                        plaintext = DecryptVigenereOwnAlphabet(ciphertext, runkey, numvigalphabet);
+                        break;
+                    case Mode.VigenereAutokey:
+                        decryptVigenereFunction = DecryptVigenereAutokeyOwnAlphabetInPlace;
+                        plaintext = DecryptVigenereAutokeyOwnAlphabet(ciphertext, runkey, numvigalphabet);
+                        break;
+                    case Mode.Beaufort:
+                        decryptVigenereFunction = DecryptBeaufortOwnAlphabetInPlace;
+                        plaintext = DecryptBeaufortOwnAlphabet(ciphertext, runkey, numvigalphabet);
+                        break;
+                    case Mode.BeaufortAutokey:
+                        decryptVigenereFunction = DecryptBeaufortAutokeyOwnAlphabetInPlace;
+                        plaintext = DecryptBeaufortAutokeyOwnAlphabet(ciphertext, runkey, numvigalphabet);
+                        break;
                 }
 
                 do
@@ -382,11 +391,29 @@ namespace CrypTool.VigenereAnalyzer
         /// <param name="ciphertext"></param>
         private void AddNewBestListEntry(int[] key, double value, int[] ciphertext)
         {
+            int[] text = null;
+
+            switch (_settings.Mode)
+            {
+                default:
+                case Mode.Vigenere:
+                    text = DecryptVigenereOwnAlphabet(ciphertext, key, MapTextIntoNumberSpace(VigenereAlphabet, Alphabet));
+                    break;
+                case Mode.VigenereAutokey:
+                    text = DecryptVigenereAutokeyOwnAlphabet(ciphertext, key, MapTextIntoNumberSpace(VigenereAlphabet, Alphabet));
+                    break;
+                case Mode.Beaufort:
+                    text = DecryptBeaufortOwnAlphabet(ciphertext, key, MapTextIntoNumberSpace(VigenereAlphabet, Alphabet));
+                    break;
+                case Mode.BeaufortAutokey:
+                    text = DecryptBeaufortAutokeyOwnAlphabet(ciphertext, key, MapTextIntoNumberSpace(VigenereAlphabet, Alphabet));
+                    break;
+            }
+
             ResultEntry entry = new ResultEntry
             {
                 Key = MapNumbersIntoTextSpace(key, Alphabet),
-                Text = MapNumbersIntoTextSpace(_settings.Mode == Mode.Vigenere ? DecryptVigenereOwnAlphabet(ciphertext, key, MapTextIntoNumberSpace(VigenereAlphabet, Alphabet)) :
-                    DecryptAutokeyOwnAlphabet(ciphertext, key, MapTextIntoNumberSpace(VigenereAlphabet, Alphabet)), Alphabet),
+                Text = MapNumbersIntoTextSpace(text, Alphabet),
                 Value = value
             };
 
@@ -458,6 +485,31 @@ namespace CrypTool.VigenereAnalyzer
         }
 
         /// <summary>
+        /// Decrypts the given plaintext using the given key and an own alphabet
+        /// </summary>
+        /// <param name="ciphertext"></param>
+        /// <param name="key"></param>
+        /// <param name="alphabet"></param>
+        /// <returns></returns>
+        public static int[] DecryptBeaufortOwnAlphabet(int[] ciphertext, int[] key, int[] alphabet)
+        {
+            int plaintextlength = ciphertext.Length; // improves the speed because length has not to be calculated in the loop
+            int[] plaintext = new int[plaintextlength];
+            int keylength = key.Length; // improves the speed because length has not to be calculated in the loop
+            int alphabetlength = alphabet.Length; // improves the speed because length has not to be calculated in the loop
+            int[] lookup = new int[alphabetlength]; // improves the speed because length has not to be calculated in the loop
+            for (int position = 0; position < alphabetlength; position++)
+            {
+                lookup[alphabet[position]] = position;
+            }
+            for (int position = 0; position < plaintextlength; position++)
+            {
+                plaintext[position] = alphabet[(lookup[key[position % keylength]] - lookup[ciphertext[position]] + alphabetlength) % alphabetlength];
+            }
+            return plaintext;
+        }
+
+        /// <summary>
         /// Decrypts the given plaintext using the given key and an own alphabet in place of the given plaintext exchanging only the symbol defined by the offset
         /// </summary>
         /// <param name="plaintext"></param>
@@ -484,13 +536,39 @@ namespace CrypTool.VigenereAnalyzer
         }
 
         /// <summary>
+        /// Decrypts the given plaintext using the given key and an own alphabet in place of the given plaintext exchanging only the symbol defined by the offset
+        /// </summary>
+        /// <param name="plaintext"></param>
+        /// <param name="key"></param>
+        /// <param name="alphabet"></param>
+        /// <param name="offset"></param>
+        /// <param name="oldciphertext"></param>
+        /// <returns></returns>
+        public static int[] DecryptBeaufortOwnAlphabetInPlace(int[] plaintext, int[] key, int[] alphabet, int offset, int[] oldciphertext)
+        {
+            int plaintextlength = plaintext.Length; // improves the speed because length has not to be calculated in the loop
+            int keylength = key.Length; // improves the speed because length has not to be calculated in the loop
+            int alphabetlength = alphabet.Length; // improves the speed because length has not to be calculated in the loop
+            int[] lookup = new int[alphabetlength]; // improves the speed because length has not to be calculated in the loop
+            for (int position = 0; position < alphabetlength; position++)
+            {
+                lookup[alphabet[position]] = position;
+            }
+            for (int position = offset; position < plaintextlength; position += keylength)
+            {
+                plaintext[position] = alphabet[(lookup[key[position % keylength]] - lookup[oldciphertext[position]] + alphabetlength) % alphabetlength];
+            }
+            return plaintext;
+        }
+
+        /// <summary>
         /// Decrypts the given plaintext using the given key and an own alphabet
         /// </summary>
         /// <param name="ciphertext"></param>
         /// <param name="key"></param>
         /// <param name="alphabet"></param>
         /// <returns></returns>
-        public static int[] DecryptAutokeyOwnAlphabet(int[] ciphertext, int[] key, int[] alphabet)
+        public static int[] DecryptVigenereAutokeyOwnAlphabet(int[] ciphertext, int[] key, int[] alphabet)
         {
             int plaintextlength = ciphertext.Length; // improves the speed because length has not to be calculated in the loop
             int[] plaintext = new int[plaintextlength];
@@ -513,6 +591,35 @@ namespace CrypTool.VigenereAnalyzer
         }
 
         /// <summary>
+        /// Decrypts the given plaintext using the given key and an own alphabet
+        /// </summary>
+        /// <param name="ciphertext"></param>
+        /// <param name="key"></param>
+        /// <param name="alphabet"></param>
+        /// <returns></returns>
+        public static int[] DecryptBeaufortAutokeyOwnAlphabet(int[] ciphertext, int[] key, int[] alphabet)
+        {
+            int plaintextlength = ciphertext.Length; // improves the speed because length has not to be calculated in the loop
+            int[] plaintext = new int[plaintextlength];
+            int keylength = key.Length; // improves the speed because length has not to be calculated in the loop
+            int alphabetlength = alphabet.Length; // improves the speed because length has not to be calculated in the loop
+            int[] lookup = new int[alphabetlength]; // improves the speed because length has not to be calculated in the loop
+            for (int position = 0; position < alphabetlength; position++)
+            {
+                lookup[alphabet[position]] = position;
+            }
+            for (int position = 0; position < keylength; position++)
+            {
+                plaintext[position] = alphabet[(lookup[key[position % keylength]] - lookup[ciphertext[position]] + alphabetlength) % alphabetlength];
+            }
+            for (int position = keylength; position < plaintextlength; position++)
+            {
+                plaintext[position] = alphabet[(lookup[plaintext[position - keylength]] - lookup[ciphertext[position]] + alphabetlength) % alphabetlength];
+            }
+            return plaintext;
+        }
+
+        /// <summary>
         /// Decrypts the given plaintext using the given key and an own alphabet in place of the given plaintext exchanging only the symbol defined by the offset
         /// </summary>
         /// <param name="plaintext"></param>
@@ -521,7 +628,7 @@ namespace CrypTool.VigenereAnalyzer
         /// <param name="offset"></param>
         /// <param name="oldciphertext"></param>
         /// <returns></returns>
-        public static int[] DecryptAutokeyOwnAlphabetInPlace(int[] plaintext, int[] key, int[] alphabet, int offset, int[] oldciphertext)
+        public static int[] DecryptVigenereAutokeyOwnAlphabetInPlace(int[] plaintext, int[] key, int[] alphabet, int offset, int[] oldciphertext)
         {
             int plaintextlength = plaintext.Length; // improves the speed because length has not to be calculated in the loop
 
@@ -543,6 +650,36 @@ namespace CrypTool.VigenereAnalyzer
             return plaintext;
         }
 
+        /// <summary>
+        /// Decrypts the given plaintext using the given key and an own alphabet in place of the given plaintext exchanging only the symbol defined by the offset
+        /// </summary>
+        /// <param name="plaintext"></param>
+        /// <param name="key"></param>
+        /// <param name="alphabet"></param>
+        /// <param name="offset"></param>
+        /// <param name="oldciphertext"></param>
+        /// <returns></returns>
+        public static int[] DecryptBeaufortAutokeyOwnAlphabetInPlace(int[] plaintext, int[] key, int[] alphabet, int offset, int[] oldciphertext)
+        {
+            int plaintextlength = plaintext.Length; // improves the speed because length has not to be calculated in the loop
+
+            int keylength = key.Length; // improves the speed because length has not to be calculated in the loop
+            int alphabetlength = alphabet.Length; // improves the speed because length has not to be calculated in the loop
+            int[] lookup = new int[alphabetlength]; // improves the speed because length has not to be calculated in the loop
+            for (int position = 0; position < alphabetlength; position++)
+            {
+                lookup[alphabet[position]] = position;
+            }
+            for (int position = offset; position < keylength; position += keylength)
+            {
+                plaintext[position] = alphabet[(lookup[key[position % keylength]] - lookup[oldciphertext[position]] + alphabetlength) % alphabetlength];
+            }
+            for (int position = keylength + offset; position < plaintextlength; position += keylength)
+            {
+                plaintext[position] = alphabet[(lookup[plaintext[position - keylength]] - lookup[oldciphertext[position]] + alphabetlength) % alphabetlength];
+            }
+            return plaintext;
+        }
 
         /// <summary>
         /// Maps a given array of numbers into the "textspace" defined by the alphabet

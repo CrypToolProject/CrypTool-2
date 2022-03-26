@@ -19,7 +19,7 @@ namespace CrypTool.VigenereAnalyzer.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -57,6 +57,24 @@ namespace CrypTool.VigenereAnalyzer.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Classic Beaufort ähnelt.
+        /// </summary>
+        public static string Beaufort {
+            get {
+                return ResourceManager.GetString("Beaufort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Beaufort Autokey ähnelt.
+        /// </summary>
+        public static string BeaufortAutokey {
+            get {
+                return ResourceManager.GetString("BeaufortAutokey", resourceCulture);
             }
         }
         

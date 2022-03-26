@@ -1,6 +1,5 @@
 ﻿/*
-   Copyright 2021 Nils Kopal, Applied Information Security, Uni Kassel
-   http://www.uni-kassel.de/eecs/fachgebiete/ais/mitarbeiter/nils-kopal-m-sc.html
+   Copyright 2022 Nils Kopal, CrypTool project
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -25,7 +24,9 @@ namespace CrypTool.VigenereAnalyzer
     public enum Mode
     {
         Vigenere = 0,
-        Autokey = 1
+        VigenereAutokey = 1,
+        Beaufort,
+        BeaufortAutokey,
     };
 
     public enum UnknownSymbolHandlingMode
@@ -58,7 +59,7 @@ namespace CrypTool.VigenereAnalyzer
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [TaskPane("ModeCaption", "ModeTooltip", null, 1, false, ControlType.ComboBox, new[] { "Vigenere", "VigenereAutokey" })]
+        [TaskPane("ModeCaption", "ModeTooltip", null, 1, false, ControlType.ComboBox, new[] { "Vigenere", "VigenereAutokey", "Beaufort", "BeaufortAutokey" })]
         public Mode Mode
         {
             get => _mode;

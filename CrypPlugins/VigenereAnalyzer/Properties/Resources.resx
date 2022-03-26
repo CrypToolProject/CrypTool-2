@@ -297,4 +297,10 @@
   <data name="Unigrams" xml:space="preserve">
     <value>Unigrams</value>
   </data>
+  <data name="Beaufort" xml:space="preserve">
+    <value>Classic Beaufort</value>
+  </data>
+  <data name="BeaufortAutokey" xml:space="preserve">
+    <value>Beaufort Autokey</value>
+  </data>
 </root>
