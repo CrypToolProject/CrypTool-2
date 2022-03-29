@@ -97,6 +97,17 @@ namespace CrypTool.PluginBase.Utils
         }
 
         /// <summary>
+        /// Returns the language code for the given language id (enum value)
+        /// Returns string.empty, if language id is invalid
+        /// </summary>
+        /// <param name="languageId"></param>
+        /// <returns></returns>
+        public static string LanguageCode(Languages languageId)
+        {
+            return LanguageCode((int)languageId);
+        }
+
+        /// <summary>
         /// Returns the language id (unique integer number) for the given language code
         /// returns -1, if language code is unknown
         /// </summary>
@@ -210,6 +221,18 @@ namespace CrypTool.PluginBase.Utils
                 case GramsType.Hexagrams:  // 6
                     return new Hexagrams(LanguageCode(languageId), useSpaces);
             }
+        }
+
+        /// <summary>
+        /// Creates a Grams object based on the given parameters
+        /// </summary>
+        /// <param name="languageId"></param>
+        /// <param name="gramsType"></param>
+        /// <param name="useSpaces"></param>
+        /// <returns></returns>
+        public static Grams CreateGrams(Languages languageId, GramsType gramsType, bool useSpaces)
+        {
+            return CreateGrams((int)languageId, gramsType, useSpaces);
         }
 
         public static string Alphabet(string language, bool useSpaces = false)
@@ -348,7 +371,7 @@ namespace CrypTool.PluginBase.Utils
         /// <returns></returns>
         public static Grams CreateNGrams(int gramsSize, string language, bool useSpaces = false)
         {
-            return CreateNGrams(GetGramsTypeByLength(gramsSize), language, useSpaces);
+            return CreateGrams(GetGramsTypeByLength(gramsSize), language, useSpaces);
         }
 
         /// <summary>
@@ -359,7 +382,7 @@ namespace CrypTool.PluginBase.Utils
         /// <param name="language"></param>
         /// <param name="useSpaces"></param>
         /// <returns></returns>
-        public static Grams CreateNGrams(GramsType gramsType, string language, bool useSpaces = false)
+        public static Grams CreateGrams(GramsType gramsType, string language, bool useSpaces = false)
         {
             try
             {

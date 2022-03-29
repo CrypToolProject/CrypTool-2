@@ -115,7 +115,6 @@
     <Compile Include="Analysis\Common\CtAPI.cs" />
     <Compile Include="Analysis\Common\CtBestList.cs" />
     <Compile Include="Analysis\Common\AnalysisInstance.cs" />
-    <Compile Include="Analysis\Common\NGrams.cs" />
     <Compile Include="Analysis\Common\Permutations.cs" />
     <Compile Include="Analysis\Common\SimulatedAnnealing.cs" />
     <Compile Include="Analysis\Common\Stats.cs" />
@@ -166,11 +165,6 @@
     <ProjectReference Include="..\..\CrypPluginBase\CrypPluginBase.csproj">
       <Project>{25DB2B47-A457-4EC2-960B-395CE07AE093}</Project>
       <Name>CrypPluginBase</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CrypToolStore\CrypToolStore.csproj">
-      <Project>{0182e69c-7f75-4b4f-953d-748d9a6d168e}</Project>
-      <Name>CrypToolStore</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\LibSource\CrypAnalysisViewControl\CrypAnalysisViewControl.csproj">

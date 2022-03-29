@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2019 George Lasry, Nils Kopal, CrypTool 2 Team
+   Copyright 2022 George Lasry, Nils Kopal, CrypTool 2 Team
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -14,22 +14,18 @@
    limitations under the License.
 */
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.Utils;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace CrypTool.PlayfairAnalyzer
 {
-
-    public enum Language
-    {
-        English
-    }
     public class PlayfairAnalyzerSettings : ISettings
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private Language _language;
+        private string _languageCode = "en"; //default language is English
 
         private int _threads;
         private int _cycles;
@@ -79,19 +75,20 @@ namespace CrypTool.PlayfairAnalyzer
             }
         }
 
-        [TaskPane("LanguageCaption", "LanguageTooltip", null, 4, false, ControlType.ComboBox, new string[] { "English" })]
-        public Language Language
+        [TaskPane("LanguageCaption", "LanguageTooltip", null, 4, false, ControlType.LanguageSelector)]
+        public int Language
         {
-            get => _language;
+            get => LanguageStatistics.LanguageId(_languageCode);
             set
             {
-                if (value != _language)
+                if (value != LanguageStatistics.LanguageId(_languageCode))
                 {
-                    _language = value;
+                    _languageCode = LanguageStatistics.LanguageCode(value);
+                    OnPropertyChanged("Language");
                 }
             }
         }
-
+       
         [TaskPane("DiscardSamePlaintextsCaption", "DiscardSamePlaintextsTooltip", null, 5, false, ControlType.CheckBox)]
         public bool DiscardSamePlaintexts
         {

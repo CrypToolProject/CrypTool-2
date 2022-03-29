@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2019 George Lasry, Nils Kopal, CrypTool 2 Team
+   Copyright 2022 George Lasry, Nils Kopal, CrypTool 2 Team
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 using CrypTool.CrypAnalysisViewControl;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.PluginBase.Utils;
 using PlayfairAnalysis;
 using PlayfairAnalysis.Common;
 using System;
@@ -168,49 +169,7 @@ namespace CrypTool.PlayfairAnalyzer
                 return;
             }
 
-            _alreadyExecuted = true;
-            string hexfilename = null;
-
-            try
-            {
-                // Step -2: Download and reference language statistics file
-                switch (_settings.Language)
-                {
-                    case Language.English:
-                        // Current English file is Resource-1-1
-                        hexfilename = CrypToolStore.ResourceHelper.GetResourceFile(1, 1, this, "To work with the Playfair Analyzer, a special language statistics file (English log hexagrams) has to be downloaded. If you do not download this file, the Playfair Analyzer won't work. Please press the download button to start the download.");
-                        if (string.IsNullOrEmpty(hexfilename))
-                        {
-                            GuiLogMessage("The Playfair Analyzer cannot work without English hexagram statistics. Please download the statistics first. The download dialog will automatically popup the next time you start the Playfair Analyzer.", NotificationLevel.Warning);
-                            return;
-                        }
-                        break;
-                    default:
-                        throw new NotImplementedException(string.Format("Language {0} has not been implemented", _settings.Language.ToString()));
-                }
-            }
-            catch (Exception ex)
-            {
-                GuiLogMessage(string.Format("An error occurred during execution of CrypToolStore resource download: {0}", ex.Message), NotificationLevel.Error);
-                return;
-            }
-
-            try
-            {
-                //Step -1: Check for correct file size; if wrong => delete file
-                long length = new FileInfo(hexfilename).Length;
-                if (length != fileSizeResource11bin)
-                {
-                    GuiLogMessage(string.Format("The filesize of the statistics file is wrong ({0} byte). Expected {1} byte. Delete file now. Please restart the workspace to download the file again", length, fileSizeResource11bin), NotificationLevel.Error);
-                    File.Delete(hexfilename);
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-                GuiLogMessage(string.Format("An error occurred during file size check of resource file: {0}", ex.Message), NotificationLevel.Error);
-                return;
-            }
+            _alreadyExecuted = true;           
 
             try
             {
@@ -240,7 +199,7 @@ namespace CrypTool.PlayfairAnalyzer
                 _analysisInstance?.Cancel();
 
                 //Step 1: Start analysis                
-                RunAnalysis(hexfilename);
+                RunAnalysis();
             }
             finally
             {
@@ -264,9 +223,11 @@ namespace CrypTool.PlayfairAnalyzer
             }
         }
 
-        private void RunAnalysis(string hexfilename)
+        private void RunAnalysis()
         {
-            AnalysisInstance analysisInstance = new AnalysisInstance(_settings.DiscardSamePlaintexts);
+            Grams grams = LanguageStatistics.CreateGrams(_settings.Language, LanguageStatistics.GramsType.Pentragrams, false);
+            grams.Normalize(10_000_000); //normalize cost function for simulated annealing
+            AnalysisInstance analysisInstance = new AnalysisInstance(_settings.DiscardSamePlaintexts, grams);
             _analysisInstance = analysisInstance;
             analysisInstance.CtAPI.BestListChangedEvent += HandleIncomingBestList;
             analysisInstance.CtAPI.BestResultChangedEvent += HandleBestResultChangedEvent;
@@ -275,15 +236,6 @@ namespace CrypTool.PlayfairAnalyzer
             try
             {
                 CancellationToken ct = analysisInstance.CancellationToken;
-                if (!analysisInstance.Stats.readHexagramStatsFile(hexfilename, ct))
-                {
-                    if (ct.IsCancellationRequested)
-                    {
-                        return;
-                    }
-                    throw new Exception($"Error trying to read hexagram stats file: {hexfilename}");
-                }
-
                 int[] cipherText = Utils.getText(Ciphertext);
                 if (cipherText.Length < 6)
                 {

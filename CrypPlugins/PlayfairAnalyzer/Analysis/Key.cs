@@ -1,4 +1,19 @@
-﻿using PlayfairAnalysis.Common;
+﻿/*
+   Copyright 2022 George Lasry, Nils Kopal, CrypTool 2 Team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using PlayfairAnalysis.Common;
 using System.Text;
 
 namespace PlayfairAnalysis
@@ -8,7 +23,6 @@ namespace PlayfairAnalysis
     {
         private readonly AnalysisInstance instance;
         private readonly Utils utils;
-        private readonly NGrams nGrams;
 
         internal int[] key;
         internal int[] inverseKey;
@@ -33,7 +47,6 @@ namespace PlayfairAnalysis
             keyword = "";
             this.instance = instance;
             this.utils = utils;
-            nGrams = new NGrams(instance);
         }
 
 
@@ -42,40 +55,11 @@ namespace PlayfairAnalysis
             Arrays.arraycopy(key.key, 0, this.key, 0, Playfair.SQUARE);
         }
 
-        private long evalNgrams()
-        {
-            decrypt();
-
-            //long ngrams = Stats.evalPlaintextHexagram(decryptionRemoveNulls, decryptionRemoveNullsLength);
-            long ngrams = nGrams.eval8(decryptionRemoveNulls, decryptionRemoveNullsLength);
-            if (crib == null)
-            {
-                score = ngrams;
-            }
-            else
-            {
-                long cribMismatch = 0;
-                for (int i = 0; i < crib.Length; i++)
-                {
-                    if (crib[i] != fullDecryption[i])
-                    {
-                        cribMismatch++;
-                    }
-                }
-                if (crib.Length == cipher.Length)
-                {
-                    return 3_000_000 * (cipher.Length - cribMismatch) / cipher.Length;
-                }
-                score = -100_000 * cribMismatch + ngrams;
-            }
-            return score;
-        }
         public long eval()
         {
             decrypt();
 
-            long ngrams = instance.Stats.evalPlaintextHexagram(decryptionRemoveNulls, decryptionRemoveNullsLength);
-            //long ngrams = NGrams.eval7(decryptionRemoveNulls, decryptionRemoveNullsLength);
+            long ngrams = instance.Stats.EvalPlaintext(decryptionRemoveNulls, decryptionRemoveNullsLength);
             if (crib == null)
             {
                 score = ngrams;
