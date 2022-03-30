@@ -29,7 +29,7 @@ namespace CrypTool.VigenereAnalyzer
 {
     public delegate void PluginProgress(double current, double maximum);
     public delegate void UpdateOutput(string keyString, string plaintextString);
-    public delegate int[] DecryptVigenereFunction(int[] plaintext, int[] key, int[] alphabet, int offset, int[] oldciphertext);
+    public delegate int[] DecryptFunction(int[] plaintext, int[] key, int[] alphabet, int offset, int[] oldciphertext);
 
     [Author("Nils Kopal", "Nils.Kopal@Uni-Kassel.de", "Uni Kassel", "https://www.ais.uni-kassel.de")]
     [PluginInfo("CrypTool.VigenereAnalyzer.Properties.Resources",
@@ -151,6 +151,7 @@ namespace CrypTool.VigenereAnalyzer
             {
                 Alphabet = string.Join("", VigenereAlphabet.Distinct().OrderBy(q => q).ToArray());
                 _grams.ReduceAlphabet(Alphabet);
+                _grams.Normalize(10_000_000);
             }
 
             int[] ciphertext = MapTextIntoNumberSpace(RemoveInvalidChars(_ciphertextInput.ToUpper(), Alphabet), Alphabet);
@@ -178,7 +179,6 @@ namespace CrypTool.VigenereAnalyzer
                 }
             }
             UpdateDisplayEnd(_settings.ToKeyLength);
-
 
             if (_presentation.BestList.Count > 0)
             {
@@ -271,24 +271,24 @@ namespace CrypTool.VigenereAnalyzer
 
                 int[] plaintext = null;              
 
-                DecryptVigenereFunction decryptVigenereFunction;
+                DecryptFunction decryptFunction;
                 switch (_settings.Mode)
                 {
                     default:
                     case Mode.Vigenere:
-                        decryptVigenereFunction = DecryptVigenereOwnAlphabetInPlace;
+                        decryptFunction = DecryptVigenereOwnAlphabetInPlace;
                         plaintext = DecryptVigenereOwnAlphabet(ciphertext, runkey, numvigalphabet);
                         break;
                     case Mode.VigenereAutokey:
-                        decryptVigenereFunction = DecryptVigenereAutokeyOwnAlphabetInPlace;
+                        decryptFunction = DecryptVigenereAutokeyOwnAlphabetInPlace;
                         plaintext = DecryptVigenereAutokeyOwnAlphabet(ciphertext, runkey, numvigalphabet);
                         break;
                     case Mode.Beaufort:
-                        decryptVigenereFunction = DecryptBeaufortOwnAlphabetInPlace;
+                        decryptFunction = DecryptBeaufortOwnAlphabetInPlace;
                         plaintext = DecryptBeaufortOwnAlphabet(ciphertext, runkey, numvigalphabet);
                         break;
                     case Mode.BeaufortAutokey:
-                        decryptVigenereFunction = DecryptBeaufortAutokeyOwnAlphabetInPlace;
+                        decryptFunction = DecryptBeaufortAutokeyOwnAlphabetInPlace;
                         plaintext = DecryptBeaufortAutokeyOwnAlphabet(ciphertext, runkey, numvigalphabet);
                         break;
                 }
@@ -303,10 +303,20 @@ namespace CrypTool.VigenereAnalyzer
                         {
                             int oldLetter = runkey[i];
                             runkey[i] = j;
-                            plaintext = decryptVigenereFunction(plaintext, runkey, numvigalphabet, i, ciphertext);
+                            plaintext = decryptFunction(plaintext, runkey, numvigalphabet, i, ciphertext);
 
                             keys++;
-                            double costvalue = _grams.CalculateCost(plaintext);
+                            double costvalue = 0;                            
+                            //for very short ciphertexts, that may help to find the correct key, in case the key is also natural language
+                            if(_settings.KeyStyle == KeyStyle.Random)
+                            {
+                                costvalue = _grams.CalculateCost(plaintext);
+                            }
+                            else
+                            {
+                                var plaintext_and_key = AppendIntegerArrays(plaintext, runkey);
+                                costvalue = _grams.CalculateCost(plaintext_and_key);
+                            }
 
                             if (costvalue > bestkeycost)
                             {
@@ -320,7 +330,7 @@ namespace CrypTool.VigenereAnalyzer
                                 runkey[i] = oldLetter;
                                 if (j == alphabetlength - 1)
                                 {
-                                    plaintext = decryptVigenereFunction(plaintext, runkey, numvigalphabet, i, ciphertext);
+                                    plaintext = decryptFunction(plaintext, runkey, numvigalphabet, i, ciphertext);
                                 }
                             }
 
@@ -339,11 +349,9 @@ namespace CrypTool.VigenereAnalyzer
                                     {
                                         _presentation.CurrentSpeed.Value = string.Format("{0:0,0}", keysDispatcher);
                                     }
-                                    // ReSharper disable once EmptyGeneralCatchClause
                                     catch (Exception)
                                     {
-                                        //wtf?
-                                        //Console.WriteLine("e1: " + e);
+                                        //do nothing
                                     }
                                 }, null);
                                 keys = 0;
@@ -356,7 +364,6 @@ namespace CrypTool.VigenereAnalyzer
 
                 UpdateDisplayEnd(keylength);
                 restarts--;
-
 
                 if (bestkeycost > globalbestkeycost)
                 {
@@ -375,12 +382,25 @@ namespace CrypTool.VigenereAnalyzer
                 {
                     _presentation.CurrentSpeed.Value = string.Format("{0:0,0}", Math.Round(keysDispatcher2 * 1000 / (DateTime.Now - lasttimeDispatcher2).TotalMilliseconds, 0));
                 }
-                // ReSharper disable once EmptyGeneralCatchClause
                 catch (Exception)
                 {
                     //do nothing
                 }
             }, null);
+        }
+
+        /// <summary>
+        /// Returns a new array that contains a nd b
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        private int[] AppendIntegerArrays(int[] a, int[] b)
+        {
+            int[] c = new int[a.Length + b.Length];
+            Array.Copy(a, c, a.Length);
+            Array.Copy(b, 0, c, a.Length, b.Length);
+            return c;
         }
 
         /// <summary>
@@ -451,10 +471,9 @@ namespace CrypTool.VigenereAnalyzer
                         ranking++;
                     }
                 }
-                // ReSharper disable once EmptyGeneralCatchClause
                 catch (Exception)
                 {
-                    //wtf?
+                    //do nothing
                 }
             }, null);
         }
@@ -766,20 +785,28 @@ namespace CrypTool.VigenereAnalyzer
         }
 
         public double Value { get; set; }
+
+        public string DisplayValue
+        {
+            get
+            {
+                return $"{Value:N0}";
+            }
+
+        }
+
         public string Key { get; set; }
         public string Text { get; set; }
 
-        public string ClipboardValue => ExactValue.ToString();
+        public string ClipboardValue => Value.ToString();
         public string ClipboardKey => Key;
         public string ClipboardText => Text;
         public string ClipboardEntry =>
             "Rank: " + Ranking + Environment.NewLine +
-            "Value: " + ExactValue + Environment.NewLine +
+            "Value: " + Value + Environment.NewLine +
             "Key: " + Key + Environment.NewLine +
             "KeyLength: " + KeyLength + Environment.NewLine +
             "Text: " + Text;
-
-        public double ExactValue => Math.Abs(Value);
 
         public int KeyLength => Key.Length;
     }

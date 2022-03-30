@@ -28,7 +28,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="{Loc ValueHeader}" DisplayMemberBinding="{Binding Path=ExactValue}" Width="100">
+                    <GridViewColumn Header="{Loc ValueHeader}" DisplayMemberBinding="{Binding Path=DisplayValue}" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Label/>
