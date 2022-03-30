@@ -1,0 +1,137 @@
+﻿<!-- THis xaml class creates the RAPPOR presentation view. This view sits on top of the other
+    views and allows the user to switch between the differing views.-->
+    <UserControl x:Class="CrypTool.Plugins.RAPPOR.View.RAPPORPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:CrypTool.Plugins.RAPPOR.View"
+             xmlns:vw="clr-namespace:CrypTool.Plugins.RAPPOR.View"
+                 xmlns:vw1="clr-namespace:RAPPOR.View"
+             xmlns:vm="clr-namespace:CrypTool.Plugins.RAPPOR.ViewModel" 
+                xmlns:vm1="clr-namespace:RAPPOR.ViewModel"
+                 xmlns:vm2="clr-namespace:RAPPOR.ViewModel"
+             d:DataContext="{d:DesignInstance Type=vm:RAPPORPresentationViewModel}"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="#d3e7d8">
+    <UserControl.Resources>
+        <DataTemplate x:Name="StartTemplate" DataType="{x:Type vm:StartViewModel}">
+            <vw:Start DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="OverviewTemplate" DataType="{x:Type vm:OverviewViewModel}">
+            <vw:Overview DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="BloomFilterTemplate" DataType="{x:Type vm:BloomFilterViewModel}">
+            <vw:BloomFilter DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="RandomizedResponsesTemplate" DataType="{x:Type vm1:RandomizedResponsesViewModel}">
+            <vw1:RandomizedResponses DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="HeatMapsTemplate" DataType="{x:Type vm2:HeatMapsViewModel}">
+            <vw1:HeatMaps DataContext="{Binding}"/>
+        </DataTemplate>
+        <LinearGradientBrush x:Key="GrayBlueGardientBrush"  
+                            StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#d3e7d8" Offset="0"/>
+            <GradientStop Color="#bcebbc" Offset="0.5"/>
+            <GradientStop Color="#d3e7d8" Offset="1"/>
+        </LinearGradientBrush>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Border>
+                            <Grid>
+                                <Grid>
+                                    <Border x:Name="border" 
+                                            CornerRadius="3,3,0,0"
+                                            Background="WhiteSmoke"/>
+                                </Grid>
+                                <ContentPresenter ContentSource="Header"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="border"
+                                        Property="Background"
+                                        Value="LightGray" />
+                            </Trigger>
+                            <Trigger Property="IsSelected"
+                                     Value="True">
+                                <Setter TargetName="border"
+                                        Property="Background"
+                                        Value="gray" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="unselectedColor">
+            #d3e7d8
+        </SolidColorBrush>
+        <Style x:Key="HeaderButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{StaticResource GrayBlueGardientBrush}"/>
+        </Style>
+    </UserControl.Resources>
+    <ContentControl>
+        <Grid Name="TopBar">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="0.5*"/>
+            </Grid.RowDefinitions>
+            <DockPanel Name="dockPanel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" MinWidth="1000">
+                <Button Name="Button0" Style="{StaticResource HeaderButtonStyle}" DockPanel.Dock="Left" Width="Auto" Click="StartButton_Click" MinWidth="200">
+                    <TextBlock Name="Textblock0">
+                        <Run Text="{Loc Start}"/>
+                    </TextBlock>
+                </Button>
+                <Button Name="Button1"  Style="{StaticResource HeaderButtonStyle}" DockPanel.Dock="Left" Width="Auto" Click="OvewviewButton_Click" MinWidth="200">
+                    <TextBlock Name="Textblock1">
+                        <Run Text="{Loc Overview}"/>
+                    </TextBlock>
+                </Button>
+                <Button Name="Button2" Style="{StaticResource HeaderButtonStyle}" DockPanel.Dock="Left" Width="Auto" Click="BloomFilterButton_Click" MinWidth="200">
+                    <TextBlock Name="Textblock2">
+                          <Run Text="{Loc BloomFilter}"/>
+                        </TextBlock>
+                    </Button>
+                    <Button Name="Button3" Style="{StaticResource HeaderButtonStyle}" DockPanel.Dock="Left" Width="Auto" Click="RandomizedResponseButton_Click" MinWidth="200">
+                        <TextBlock Name="Textblock3">
+                          <Run Text="{Loc RandomizedResponse}"/>
+                        </TextBlock>
+                    </Button>
+                    <Button Name="Button4" Style="{StaticResource HeaderButtonStyle}" DockPanel.Dock="Left" Width="Auto" Click="HeatMapsButton_Click" MinWidth="200">
+                    <TextBlock Name="Textblock4" >
+                          <Run Text="{Loc HeatMaps}"/>
+                        </TextBlock>
+                    </Button>
+                </DockPanel>
+                <ContentControl Grid.Row ="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="5" Content="{Binding}"/>
+            <Grid Grid.Row="6" Grid.Column="0" Background="GhostWhite">
+                <Border BorderThickness="1" BorderBrush="black"/>
+                <TextBox TextAlignment="Center" VerticalAlignment="Top" FontSize="20" FontFamily="Times New Roman" ToolTip="{Loc AbbreveationsToolTip}" Text="{Loc Abbreveations}" IsReadOnly="True" BorderBrush="Transparent" Background="GhostWhite" Padding="0,3,0,0" BorderThickness="0">
+                </TextBox>
+                <TextBlock TextAlignment="Center" VerticalAlignment="Bottom" FontSize="12" FontFamily="Times New Roman" ToolTip="{Loc AbbreveationsToolTip}" Background="Transparent" Text="{Loc AbbreveationsBottom}" Padding="0,0,0,5"></TextBlock>
+            </Grid>
+        </Grid>
+        
+            
+    </ContentControl>
+</UserControl>

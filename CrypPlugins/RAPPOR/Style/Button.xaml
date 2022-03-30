@@ -1,0 +1,10 @@
+﻿<!--This xaml file is used to style the Button in the header bar of the component.-->
+    <ResourceDictionary x:Class="CrypTool.Plugins.RAPPOR.Style.Button"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="Button" TargetType="{x:Type Button}">
+        <Setter Property="Content" Value="&#x1f860;" />
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+    </Style>
+</ResourceDictionary>
