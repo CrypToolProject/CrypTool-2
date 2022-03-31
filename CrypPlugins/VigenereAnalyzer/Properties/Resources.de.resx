@@ -202,7 +202,7 @@
     <value>Schlüssel</value>
   </data>
   <data name="KeyLengthHeader" xml:space="preserve">
-    <value>Schlüssellänge:</value>
+    <value>Schlüssellänge</value>
   </data>
   <data name="KeyStyleCaption" xml:space="preserve">
     <value>Art des Schlüssels</value>
