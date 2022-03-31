@@ -10,14 +10,14 @@
   <title lang="en">RAPPOR</title>
   <summary lang="en">Usage of the <i>RAPPOR</i> mechanism</summary>
   <description lang="en">The RAPPOR mechanism allows for anonymously data collection with tunable privacy gurantees.</description>
-  <keywords>RAPPOR, Differential, Privacy, Bloom, Filer, Randomized, Response</keywords>
+  <keywords>RAPPOR, Differential, Privacy, Bloom, Filter, Randomized, Response</keywords>
   <replacements lang="en">
     <replacement key="$Initial_data_ set_box$" value="Initial data set" />
 	<replacement key="$result$" value="Result of the RAPPOR mechanism" />
 	<replacement key="$Memo$" value="This template shows how the RAPPOR component can be used. RAPPOR enables applications to anonymously and locally collect user data and still maintain strong data protection. RAPPOR thus belongs to the area of differential privacy. 
 \line \line The used data set consists of the user data to be processed by the RAPPOR mechanism. Each entry of the data set is separated by a comma.
-\line \line In the settings of the component you are able to tune the parameters of the RAPPOR mechanism directly. 
-\line \line The output of the RAPPOR component consists of three 0-1 sequences, each separated by a newline. The first sequence is the Bloom filter, the next sequences are its modified variations created by the RAPPOR mechanism." />
+\line \line All parameters of the RAPPORT mechanism can be configured in the component settings.
+\line \line The output of the RAPPOR component consists of three 0-1 sequences, each separated by a newline. The first sequence is the Bloom filter, the next two sequences are modified by RAPPOR." />
   </replacements>  
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -25,14 +25,14 @@
  <title lang="de">RAPPOR</title>
   <summary lang="de">Verwendung des <i>RAPPOR</i>-Mechanismus</summary>
   <description lang="de">Der RAPPOR-Mechanismus ermöglicht eine anonyme Datenerfassung mit einstellbaren Datenschutzgarantien.</description>
-  <keywords>RAPPOR, Differential, Privacy, Bloom, Filer, Randomized, Response</keywords>
+  <keywords>RAPPOR, differentielle, Privatsphäre, Bloom, Filter, randomisiert, Antwort</keywords>
   <replacements lang="de">
 	<replacement key="$Initial_data_ set_box$" value="Ursprünglicher Datensatz" />
 	<replacement key="$result$" value="Ergebnis des RAPPOR-Verfahrens" />
-	<replacement key="$Memo$" value="Diese Vorlage zeigt, wie die RAPPOR-Komponente verwendet werden kann. RAPPOR ermöglicht Anwendungen, anonym und lokal Benutzerdaten zu sammeln und trotzdem starken Datenschutz einzuhalten. Damit gehört RAPPOR zum Bereich der differentiellen Privacy.
+	<replacement key="$Memo$" value="Diese Vorlage zeigt, wie die RAPPOR-Komponente verwendet werden kann. RAPPOR ermöglicht Anwendungen, anonym und lokal Benutzerdaten zu sammeln und trotzdem starken Datenschutz einzuhalten. Damit gehört RAPPOR zum Bereich der Differential Privacy.
 \line \line Der verwendete Datensatz besteht aus den Benutzerdaten, die durch den RAPPOR-Mechanismus verarbeitet werden sollen. Jeder Eintrag des Datensatzes wird durch ein Komma getrennt.
-\line \line In den Einstellungen der Komponente können Sie die Parameter des RAPPOR-Mechanismus direkt einstellen.
-\line \line Die Ausgabe der RAPPOR-Komponente besteht aus drei 0-1-Sequenzen, die jeweils durch einen Zeilenumbruch getrennt sind. Die erste Sequenz ist der Bloom-Filter, die nächsten Sequenzen sind seine veränderten Variationen, die durch den RAPPOR-Mechanismus erstellt wurden." />
+\line \line Alle Parameter der RAPPORT-Mechanismus können in den Einstellungen der Komponente konfiguriert werden.
+\line \line Die Ausgabe der RAPPOR-Komponente besteht aus drei 0-1-Sequenzen, die jeweils durch einen Zeilenumbruch getrennt sind. Die erste Sequenz ist der Bloom-Filter, die nächsten beiden Sequenzen von RAPPOR verändert." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
