@@ -204,8 +204,8 @@ Die Animation kann über die Schaltflächen in der oberen Leiste gesteuert werde
   <data name="HeatMapViewText" xml:space="preserve">
     <value>Diese Seite zeigt eine Heatmap, die visualisiert, wie oft 
 eine Zelle des Booleschen Arrays gesetzt wurde.
-Zellen des Boolschen Arrays stellen hierbei ein Bit in der 0-1 Seqenz da.
-Die Farbe der Legende zeigt hierbei wie häufig das Bit auf 1 gesetzt wurde.</value>
+Zellen des Boolschen Arrays stellen hierbei ein Bit in der 0-1 Sequenz da.
+Die Farbe der Legende zeigt wie häufig das Bit auf 1 gesetzt wurde.</value>
   </data>
   <data name="Input" xml:space="preserve">
     <value>Eingabe</value>
