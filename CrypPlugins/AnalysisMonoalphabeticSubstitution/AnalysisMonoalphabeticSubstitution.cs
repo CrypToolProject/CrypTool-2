@@ -148,6 +148,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
             // create language statics
             grams = LanguageStatistics.CreateGrams(settings.Language, (LanguageStatistics.GramsType)(settings.GramsType + 1), settings.UseSpaces);
+            grams.Normalize(10_000_000);
 
             plaintextalphabet = grams.Alphabet;
             ciphertextalphabet = string.IsNullOrEmpty(CiphertextAlphabet)
@@ -486,8 +487,8 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                                    {
                                        entry.Attack = Resources.HillAttackDisplay;
                                    }
-                                   double f = keyCandidate.Fitness;
-                                   entry.Value = string.Format("{0:0.00000} ", f);
+                                   double fitness = keyCandidate.Fitness;
+                                   entry.Value = fitness;
                                    ((AssignmentPresentation)Presentation).Entries.Add(entry);
                                }
                            }
@@ -614,12 +615,20 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             }
         }
 
-        public string Value { get; set; }
+        public double Value { get; set; }
+        public string DisplayValue
+        {
+            get
+            {
+                return $"{Value:N0}";
+            }
+
+        }
         public string Key { get; set; }
         public string Text { get; set; }
         public string Attack { get; set; }
 
-        public string ClipboardValue => Value;
+        public string ClipboardValue => Value.ToString();
         public string ClipboardKey => Key;
         public string ClipboardText => Text;
         public string ClipboardEntry =>

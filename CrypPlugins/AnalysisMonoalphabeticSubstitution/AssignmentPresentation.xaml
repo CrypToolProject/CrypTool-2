@@ -30,7 +30,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="{x:Static properties:Resources.ValueHeader}" DisplayMemberBinding="{Binding Value}">
+                    <GridViewColumn Header="{x:Static properties:Resources.ValueHeader}" DisplayMemberBinding="{Binding DisplayValue}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Label/>
