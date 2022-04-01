@@ -74,11 +74,11 @@ namespace CrypTool.Plugins.FEAL
                 L[r] = R[r - 1];
             }
 
-            L[3] = XOR(L[3], R[3]);
-            R[3] = XOR(R[3], Concat(K[8], K[9]));
-            L[3] = XOR(L[3], Concat(K[10], K[11]));
+            L[4] = XOR(L[4], R[4]);
+            R[4] = XOR(R[4], Concat(K[8], K[9]));
+            L[4] = XOR(L[4], Concat(K[10], K[11]));
 
-            return Concat(R[3], L[3]);
+            return Concat(R[4], L[4]);
         }
 
         /// <summary>
@@ -101,20 +101,20 @@ namespace CrypTool.Plugins.FEAL
 
             byte[][] K = FEAL_Algorithms.K(key, 6);
 
-            byte[][] R = new byte[4][];
-            byte[][] L = new byte[4][];
+            byte[][] R = new byte[4 + 1][];
+            byte[][] L = new byte[4 + 1][];
 
-            R[3] = new byte[4];
-            L[3] = new byte[4];
-            Array.Copy(C, 0, R[3], 0, 4);
-            Array.Copy(C, 4, L[3], 0, 4);
+            R[4] = new byte[4];
+            L[4] = new byte[4];
+            Array.Copy(C, 0, R[4], 0, 4);
+            Array.Copy(C, 4, L[4], 0, 4);
 
-            R[3] = XOR(R[3], Concat(K[8], K[9]));
-            L[3] = XOR(L[3], Concat(K[10], K[11]));
+            R[4] = XOR(R[4], Concat(K[8], K[9]));
+            L[4] = XOR(L[4], Concat(K[10], K[11]));
 
-            L[3] = XOR(L[3], R[3]);
+            L[4] = XOR(L[4], R[4]);
 
-            for (uint r = 3; r >= 1; r--)
+            for (uint r = 4; r >= 1; r--)
             {
                 L[r - 1] = XOR(R[r], f(L[r], K[r - 1]));
                 R[r - 1] = L[r];
@@ -338,15 +338,8 @@ namespace CrypTool.Plugins.FEAL
         public static byte[] Concat(byte[] a, byte[] b)
         {
             byte[] c = new byte[a.Length + b.Length];
-            for (int i = 0; i < a.Length; i++)
-            {
-                c[i] = a[i];
-            }
-            for (int i = 0; i < b.Length; i++)
-            {
-                c[a.Length + i] = b[i];
-            }
-
+            Array.Copy(a, c, a.Length);
+            Array.Copy(b, 0, c, a.Length, b.Length);
             return c;
         }
     }
