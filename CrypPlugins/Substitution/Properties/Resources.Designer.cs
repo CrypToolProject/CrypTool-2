@@ -19,7 +19,7 @@ namespace Substitution.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -147,6 +147,24 @@ namespace Substitution.Properties {
         internal static string InputStringTooltip {
             get {
                 return ResourceManager.GetString("InputStringTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Maximum number of mappings shown ähnelt.
+        /// </summary>
+        internal static string MaxMappingsShownInPresentationCaption {
+            get {
+                return ResourceManager.GetString("MaxMappingsShownInPresentationCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Maximum number of substitution mappings that are shown in the presentation ähnelt.
+        /// </summary>
+        internal static string MaxMappingsShownInPresentationTooltip {
+            get {
+                return ResourceManager.GetString("MaxMappingsShownInPresentationTooltip", resourceCulture);
             }
         }
         

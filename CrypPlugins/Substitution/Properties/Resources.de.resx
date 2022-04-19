@@ -147,6 +147,12 @@
   <data name="InputStringTooltip" xml:space="preserve">
     <value>Eingabetext welcher mit der Substition verarbeitet werden soll</value>
   </data>
+  <data name="MaxMappingsShownInPresentationCaption" xml:space="preserve">
+    <value>Maximale Anzahl der angezeigten Substitutionszuordnungen</value>
+  </data>
+  <data name="MaxMappingsShownInPresentationTooltip" xml:space="preserve">
+    <value>Maximale Anzahl von Substitutionszuordnungen, die in der Präsentation angezeigt werden</value>
+  </data>
   <data name="OutputSeparatorSymbolCaption" xml:space="preserve">
     <value>Ausgabesymboltrenner</value>
   </data>

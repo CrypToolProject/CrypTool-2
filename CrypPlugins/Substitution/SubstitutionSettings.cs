@@ -1,5 +1,5 @@
 /*
-   Copyright 2013 Nils Kopal, Universität Kassel
+   Copyright 2022 Nils Kopal, CrypTool Team
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ namespace CrypTool.Substitution
         private string _inputSeparatorSymbol = "";
         private string _outputSeparatorSymbol = "";
         private bool _processPolypartit = true;
+        private int _maxMappingsShownInPresentation = 100;
 
         [TaskPane("UnknownSymbolHandlingCaption", "UnknownSymbolHandlingTooltip", null, 1, false, ControlType.ComboBox, new string[] { "UnknownSymbolHandlingList1", "UnknownSymbolHandlingList2", "UnknownSymbolHandlingList3" })]
         public UnknownSymbolHandling UnknownSymbolHandling
@@ -101,6 +102,20 @@ namespace CrypTool.Substitution
                 {
                     _outputSeparatorSymbol = value;
                     OnPropertyChanged("OutputSeparatorSymbol");
+                }
+            }
+        }
+
+        [TaskPane("MaxMappingsShownInPresentationCaption", "MaxMappingsShownInPresentationTooltip", null, 6, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
+        public int MaxMappingsShownInPresentation
+        {
+            get => _maxMappingsShownInPresentation;
+            set
+            {
+                if (_maxMappingsShownInPresentation != value)
+                {
+                    _maxMappingsShownInPresentation = value;
+                    OnPropertyChanged("MaxMappingsShownInPresentation");
                 }
             }
         }

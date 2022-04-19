@@ -210,4 +210,10 @@
   <data name="ProcessPolypartitTooltio" xml:space="preserve">
     <value>Process polypartit substitution</value>
   </data>
+  <data name="MaxMappingsShownInPresentationCaption" xml:space="preserve">
+    <value>Maximum number of mappings shown</value>
+  </data>
+  <data name="MaxMappingsShownInPresentationTooltip" xml:space="preserve">
+    <value>Maximum number of substitution mappings that are shown in the presentation</value>
+  </data>
 </root>
