@@ -82,5 +82,24 @@
       <publisher>Inedita</publisher>
       <name>Soldados sin rostro</name>
     </bookReference>
+	  <bookReference id="MasterThesisSanguino">
+		  <author>Luis Alberto Benthin Sanguino</author>
+		  <year>2014</year>
+		  <publisher>Ruhr Universität Bochum, https://www.emsec.rub.de/media/attachments/files/2014/03/MA-Thesis_Luis-Alberto-Benthin.pdf</publisher>
+		  <name>Analyzing Spanish Civil War Ciphers by Combining Combinatorial and Statistical Methods</name>
+	  </bookReference>
+	<bookReference id="Cryptologia">
+		<author>Luis Alberto Benthin Sanguino, Gregor Leander, Christof Paar, Bernhard Esslinger and Ingo Niebel</author>
+		<year>2016</year>
+		<publisher>Cryptologia, Volume 40, Issue 3, 2016</publisher>
+		<name>Analyzing the Spanish strip cipher by combining combinatorial and statistical methods</name>
+	</bookReference>
+	<bookReference id="Cryptologia">
+		<author>Luis Alberto Benthin Sanguino, Gregor Leander, Christof Paar, Bernhard Esslinger and Ingo Niebel</author>
+		<year>2016</year>
+		<publisher>MysteryTwister</publisher>
+		<name lang="en">In MT3 there are two SSC challenges. Example: https://www.mysterytwisterc3.org/de/challenges/level-2-kryptographie-challenges/spanische-Streifenchiffre-teil-1</name>
+		<name lang="de-DE">In MT3 sind zwei SSC-Challenges. Beispiel: https://www.mysterytwisterc3.org/de/challenges/level-2-kryptographie-challenges/spanische-Streifenchiffre-teil-1</name>
+	</bookReference>
   </references>
 </documentation>
