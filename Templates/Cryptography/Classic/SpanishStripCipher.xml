@@ -25,7 +25,7 @@ The term strip cipher is used for ciphers that use movable alphabets on strips o
 \line
 The homophone groups are fixed and pre-generated. The entered keyword is used to generate the random alphabet. The random alphabet is then shifted below the ordered alphabet, until the two &quot;position letters&quot; are below each other. Finally, one creates the mapping between random alphabet letters and homophone groups, as can be seen in the &quot;Homophones table&quot; in the settings of the component.\line
 \line
-Video about the SSC:\line
+{\b Video about the SSC}\line
 https://www.youtube.com/watch?v=-C-hgnrUMKo"/>
     <replacement key="$memo2$" value="{\b Usage of the template}\line
 \line
@@ -60,7 +60,7 @@ Die Bezeichnung Streifenchiffre wird für Chiffren verwendet, bei denen beweglic
 \line
 Die Homophonen-Gruppen sind fest vorgegeben und vorgeneriert. Das eingegebene Schlüsselwort wird verwendet, um das Zufallsalphabet zu generieren. Das Zufallsalphabet wird dann unter das geordnete Alphabet geschoben, bis die beiden &quot;Positionsbuchstaben&quot; untereinander stehen. Schließlich wird die Zuordnung zwischen den Buchstaben des Zufallsalphabets und den Homophongruppen erstellt, wie in der Tabelle &quot;Homophone&quot; in den Einstellungen der Komponente zu sehen ist.\line
 \line
-Video über die SSC:\line
+{\b Video über die SSC}\line
 https://www.youtube.com/watch?v=-C-hgnrUMKo" />
     <replacement key="$memo2$" value="{\b Bedienung der Vorlage}\line
 \line
