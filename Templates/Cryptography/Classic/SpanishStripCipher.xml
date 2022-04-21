@@ -58,7 +58,7 @@ Die Bezeichnung Streifenchiffre wird für Chiffren verwendet, bei denen beweglic
 \line
 {\b Schlüsselerzeugung}\line 
 \line
-Die Homophonen-Gruppen sind fest vorgegeben und vorgeneriert. Das eingegebene Schlüsselwort wird verwendet, um das Zufallsalphabet zu generieren. Das Zufallsalphabet wird dann unter das geordnete Alphabet geschoben, bis die beiden &quot;Positionsbuchstaben&quot; untereinander stehen. Schließlich wird die Zuordnung zwischen den Buchstaben des Zufallsalphabets und den Homophongruppen erstellt, wie in der Tabelle &quot;Homophone&quot; in den Einstellungen der Komponente zu sehen ist.\line
+Die Homophonen-Gruppen sind fest vorgegeben und vorgeneriert. Das eingegebene Schlüsselwort wird verwendet, um das Zufallsalphabet zu generieren. Das Zufallsalphabet wird dann unter das geordnete Alphabet geschoben, bis die beiden &quot;Positionsbuchstaben&quot; untereinander stehen. Schließlich wird die Zuordnung zwischen den Buchstaben des Zufallsalphabets und den Homophonen-Gruppen erstellt, wie in der Tabelle &quot;Homophone&quot; in den Einstellungen der Komponente zu sehen ist.\line
 \line
 {\b Video über die SSC}\line
 https://www.youtube.com/watch?v=-C-hgnrUMKo" />
