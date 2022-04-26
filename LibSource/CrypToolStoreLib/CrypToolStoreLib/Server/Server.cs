@@ -203,18 +203,18 @@ namespace CrypToolStoreLib.Server
                         //and dispose them
                         foreach (Task task in _handlerTasks)
                         {
-                            if (task.IsCompleted)
+                            if (task.IsCompleted || task.IsCanceled || task.IsFaulted)
                             {
                                 try
                                 {
-                                    task.Dispose();
-                                    tasksToRemove.Add(task);
+                                    task.Dispose();                                    
                                 }
                                 catch (Exception ex)
                                 {
                                     logger.LogText(string.Format("Exception during Disposal of task: {0}", ex.Message), this, Logtype.Error);
                                     logger.LogException(ex, this, Logtype.Error);
                                 }
+                                tasksToRemove.Add(task);
                             }
                         }
                         //remove all tasks from the internal list
@@ -230,7 +230,7 @@ namespace CrypToolStoreLib.Server
                     {
                         if (Running)
                         {
-                            logger.LogText(string.Format("Exception in ListenThread: {0}", ex.Message), this, Logtype.Error);
+                            logger.LogText(string.Format("Exception in HousekeeperThread: {0}", ex.Message), this, Logtype.Error);
                             logger.LogException(ex, this, Logtype.Error);
                         }
                     }
