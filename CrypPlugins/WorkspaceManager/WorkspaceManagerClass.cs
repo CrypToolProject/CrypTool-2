@@ -977,6 +977,11 @@ namespace WorkspaceManager
         /// <param name="args"></param>
         public void GuiLogNotificationOccured(IPlugin sender, GuiLogEventArgs args)
         {
+            if(sender == null || args == null)
+            {
+                return;
+            }
+
             //Check if the logging event is Warning or Error and set the State of the PluginModel to
             //the corresponding PluginModelState
             if (args.NotificationLevel == NotificationLevel.Warning)
@@ -988,7 +993,10 @@ namespace WorkspaceManager
                         pluginModel.State = PluginModelState.Warning;
                         Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                         {
-                            pluginModel.UpdateableView.updateStatus();
+                            if (pluginModel.UpdateableView != null)
+                            {
+                                pluginModel.UpdateableView.updateStatus();
+                            }
                         }, null);
                         break;
                     }
@@ -1004,7 +1012,10 @@ namespace WorkspaceManager
                         pluginModel.State = PluginModelState.Error;
                         Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                         {
-                            pluginModel.UpdateableView.updateStatus();
+                            if (pluginModel.UpdateableView != null)
+                            {
+                                pluginModel.UpdateableView.updateStatus();
+                            }
                         }, null);
                         break;
                     }
