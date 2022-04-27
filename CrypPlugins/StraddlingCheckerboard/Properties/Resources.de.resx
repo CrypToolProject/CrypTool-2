@@ -193,7 +193,7 @@
     <value>Doppelte Zeichen sind im Straddling-Checkerboard nicht erlaubt. Ausführung wird gestoppt!</value>
   </data>
   <data name="NotEnoughSpace" xml:space="preserve">
-    <value>Nicht genug Platz auf dem Straddling-Checkerboard. Ausführung wird gestoppen!</value>
+    <value>Nicht genug Platz auf dem Straddling-Checkerboard. Ausführung wird gestoppt!</value>
   </data>
   <data name="CharNotInBoard" xml:space="preserve">
     <value>Das Zeichen "{0}" ist nicht Teil des Straddling-Checkerboards.</value>
