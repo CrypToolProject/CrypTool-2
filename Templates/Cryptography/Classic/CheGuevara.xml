@@ -21,7 +21,15 @@
     <replacement key="$One time pad$" value="One-Time-Pad" />
     <replacement key="$StringDecoder$" value="String-Decodierer" />
     <replacement key="$StringEncoder$" value="String-Codierer" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise der Ché Guevara-Chiffre.         Die Zeilen- und Spaltenbenennung kann bei diesem Verfahren dynamisch angepasst werden. Die Substitution des Klartextzeichens in den Geheimtext entsteht aus der Bezeichnung Zeile+Spalte. Somit entsteht eine Spreizung, da ein Klartextzeichen entweder auf ein oder zwei Zahlen abgebildet wird. Typischerweise wurde bei diesem Verfahren ein Schlüsselwort in die erste Zeile geschriben. Dies wird hier durch den Alphabet-Permutator erreicht." />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise der Ché Guevara-Chiffre.\line         
+\line
+Die Chiffre besteht aus zwei Teilen:\line
+1) dem Straddling-Checkerboard\line
+2) der Vernam-Chiffre (One-Time-Pad)\line
+\line
+Das Straddling-Checkerboard wandelt einen gegebenen Klartext in eine Folge von Ziffern um. Diese Ziffern werden dann mittels Vernam verschlüsselt. Vernam arbeitet in dieser Vorlage nur auf Ziffern. Somit erhält man einen finalen Geheimtext, der auch nur aus Ziffern besteht. Das hier benutzte Pad sollte zufällig gewählt werden und auch nur genau einmal eingesetzt werden (One-Time-Pad-Anforderungen).\line
+\line
+Wir haben sechs verschiedene Eingaben: Die folgenden vier für das Straddling-Checkeroard: Klartext, Schlüssel, Alphabet, Zeilen- und Spaltenbelegung. Die folgenden zwei für Vernam: ein zusätzliches Alphabet, das nur aus Ziffern besteht, sowie ein One-Time-Pad. Eigentlich könnte man alle Eingaben für das Straddling-Checkerboard konstant halten oder sogar veröffentlichen, da die Sicherheit gegeben ist, solange das One-Time-Pad geheim gehalten wird." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -40,7 +48,15 @@
     <replacement key="$One time pad$" value="One-Time-Pad" />
     <replacement key="$StringDecoder$" value="String-Decoder" />
     <replacement key="$StringEncoder$" value="String-Encoder" />
-    <replacement key="$memo$" value="This template demonstrates how the Ché Guevara cipher works. The row and column designation can be adjusted dynamically with this method. The substitution of the plaintext character into the ciphertext arises from the row+column designation. Thus, a spread is created as a plaintext character is mapped to either one or two numbers. Typically, in this procedure, a keyword was written in the first line. This is achieved here by the alphabet permutator." />
+    <replacement key="$memo$" value="This template demonstrates how the Ché Guevara cipher works.\line         
+\line
+The cipher consists of two parts:\line
+1) the straddling checkerboard\line
+2) the Vernam cipher (one-time pad)\line
+\line
+The straddling checkerboard converts a given plaintext into a sequence of digits. These digits are then encrypted using Vernam. In this template, Vernam works only on digits. Thus, you get a final ciphertext that also consists only of digits. The pad used here should be chosen randomly and should also only be used exactly once (one-time pad requirements).\line
+\line
+We have six different inputs: The following four for the straddling checkerboard: plaintext, key, alphabet, row and column assignments. The following two for Vernam: an additional alphabet consisting only of digits and a one-time pad. Actually, all inputs for the straddling checkerboard could be kept constant or even published, since security is given as long as the one-time pad is kept secret." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
