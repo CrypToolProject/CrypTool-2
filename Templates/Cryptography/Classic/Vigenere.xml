@@ -10,7 +10,7 @@
   <title lang="en">Vigenère Cipher</title>
   <summary lang="en">Usage of the <i>Vigenère</i> cipher</summary>
   <description lang="en">The Vigenère cipher is a method of encrypting alphabetic text by using a series of different Caesar ciphers based on the letters of a keyword. It is a simple form of polyalphabetic substitution. The Vigenère (French pronunciation: [viʒnɛːʁ]) cipher has been reinvented many times. The method was originally described by Giovan Battista Bellaso in his 1553 book La cifra del. Sig. Giovan Battista Bellaso; however, the scheme was later misattributed to Blaise de Vigenère in the 19th century, and is now widely known as the "Vigenère cipher". This cipher is well known because while it is easy to understand and implement, it often appears to beginners to be unbreakable; this earned it the description le chiffre indéchiffrable (French for 'the indecipherable cipher'). Consequently, many people have tried to implement encryption schemes that are essentially Vigenère ciphers, only to have them broken.<newline /><newline /><external ref="http://en.wikipedia.org/wiki/Vigenère_cipher" /></description>
-  <keywords>vigenère, vigenere, substitution, polyalphabetic, autokey</keywords>
+  <keywords>vigenère, vigenere, substitution, polyalphabetic, autokey, Beaufort, Beaufort autokey</keywords>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
@@ -18,7 +18,7 @@
     <replacement key="$Vigenère dec$" value="Vigenère" />
     <replacement key="$Decrypted Ciphertext$" value="Decrypted Ciphertext" />
     <replacement key="$Key$" value="Key" />
-    <replacement key="$memo$" value="This template shows how you can use the Vigenère component to encrypt and decrypt plaintext using the Vigenère cipher. The secret key can be entered in the key TextInput component.\line \line The Vigenère component also supports the Vigenère autokey variant. This can be set in the settings of the component." />
+    <replacement key="$memo$" value="This template shows how you can use the Vigenère component to encrypt and decrypt plaintext using the Vigenère cipher. The secret key can be entered in the text input component &quot;Key&quot;.\line \line The Vigenère component also supports the Vigenère autokey, the Beaufort, and the Beaufort autokey variants. These variants can be chosen in the settings of the component." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -26,7 +26,7 @@
   <title lang="de">Vigenère-Chiffre</title>
   <summary lang="de">Benutzung der <i>Vigenère</i>-Chiffre</summary>
   <description lang="de">Die im 16. Jahrhundert entstandene Vigenère-Verschlüsselung (nach Blaise de Vigenère) galt lange als sicherer Chiffrieralgorithmus („Le Chiffre indéchiffrable“, deutsch: „Die unentzifferbare Verschlüsselung“). Ein Schlüsselwort bestimmt, wie viele und welche Alphabete genutzt werden. Die Alphabete leiten sich aus der Caesar-Substitution ab. Dem britischen Mathematiker Charles Babbage gelang um das Jahr 1854 erstmals die Entzifferung einer Vigenère-Chiffre. Diese Entdeckung wurde jedoch damals nicht öffentlich bekannt gemacht. Der preußische Offizier Friedrich Kasiski veröffentlichte im Jahr 1863 seine Lösung und ging damit in die Geschichte ein.<newline /><newline /><external ref="http://de.wikipedia.org/wiki/Vigenère-Chiffre" /></description>
-  <keywords lang="de">Vigenère, Vigenere, Substitution, polyalphabetisch, Selbstschlüssel</keywords>
+  <keywords lang="de">Vigenère, Vigenere, Substitution, polyalphabetisch, Selbstschlüssel, Beaufort, Beaufort-Selbstschlüssel</keywords>
   <replacements lang="de">
     <replacement key="$Plaintext$" value="Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />
@@ -34,7 +34,7 @@
     <replacement key="$Vigenère dec$" value="Vigenère" />
     <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
     <replacement key="$Key$" value="Schlüssel" />
-    <replacement key="$memo$" value="Diese Vorlage zeigt, wie man mit Hilfe der Vigenère-Komponente Klartext mit der Vigenère-Chiffre verschlüsseln und entschlüsseln kann. In der Schlüssel-Texteingabe-Komponente kann der geheime Schlüssel eingegeben werden.\line \line Die Vigenère-Komponente unterstützt auch die Vigenère-Selbstschlüssel-Variante. Diese Variante kann in den Komponenten-Einstellungen ausgewählt werden." />
+    <replacement key="$memo$" value="Diese Vorlage zeigt, wie man mit Hilfe der Vigenère-Komponente Klartext mit der Vigenère-Chiffre verschlüsseln und entschlüsseln kann. In der Texteingabe-Komponente &quot;Schlüssel&quot; kann der geheime Schlüssel eingegeben werden.\line \line Die Vigenère-Komponente unterstützt auch die Vigenère-Selbstschlüssel-, die Beaufort- und die Beaufort-Selbstschlüssel-Variante. Diese Varianten können in den Komponenten-Einstellungen ausgewählt werden." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

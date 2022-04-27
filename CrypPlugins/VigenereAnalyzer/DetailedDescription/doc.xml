@@ -11,8 +11,8 @@
     A variation of the Vigenère cipher is the Vigenère Autokey cipher.
     It avoids the periodicity of the keyword by appending the plaintext to the keyword and using the resulting string as the new keyword.
     <newline /><newline />
-    The Vigenère Analyzer allows to analyze the two differend variations. 
-    To decipher a given encrypted text, the analyzer internally uses the hillclimbing algorithm.
+	The Vigenère Analyzer allows also to analyze Vigenère autokey, Beaufort, and Beaufort autokey ciphers.
+	To decipher a given encrypted text, the analyzer internally uses the hillclimbing algorithm.
   </introduction>
   <introduction lang="de-DE">
     Mit der Vigenère-Analyse können Texte analysiert werden, die mit der Vigenère-Chiffre verschlüsselt wurden.
@@ -23,8 +23,8 @@
     Eine Variante der Vigenère-Chiffre ist das Vigenère-Selbstschlüssel-Verfahren.
     Es vermeidet die Periodizität des Schlüsselworts, indem es Klartext an das Schlüsselwort anhängt und somit die resultierende Zeichenfolge als neues Schlüsselwort verwendet. 
     <newline /><newline />
-    Die Vigenère-Analyse kann beide oben genannten Varianten analysieren.
-    Um einen verschlüsselten Text zu entschlüsseln, verwendet die Analyse intern den Bergsteige-Algorithmus (hillclimbing).
+	Die Vigenère-Analyse kann auch Vigenère-Selbstschlüssel-, Beaufort- und Beaufort-Selbstschlüssel-Chiffren analysieren.
+	Um einen verschlüsselten Text zu entschlüsseln, verwendet die Analyse intern den Bergsteige-Algorithmus (hillclimbing).
   </introduction>
   <usage lang="en">
     The Vigenère Analyzer allows to use one of the two modes: "Classic Vigenère" and "Vigenère Autokey".

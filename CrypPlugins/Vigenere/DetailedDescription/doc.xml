@@ -2,29 +2,31 @@
 <documentation>
   <language culture="en" />
   <language culture="de-DE" />
-  <introduction lang="en">
-    The Vigenère cipher is a polyalphabetic substitution cipher.
-    In contrast to the monoalphabetic substitution, where all characters of the plaintext are replaced using a single substitution alphabet,
-    the polyalphabetic substitution uses several different substitution alphabets.
-    <newline /><newline />
-    The Vigenère cipher was invented by Blaise de Vigenère in the 16th century and was deemed undecipherable for a long time. The cipher is consequently also known as "Le Chiffre indéchiffrable".
-    <newline /><newline />
-    The Vigenère cipher uses a keyword to decide, which of several substitution alphabets will be used to encrypt a letter from the plaintext.
-    The substitution alphabets that are used by Vigenère are the 26 shifts of the standard alphabet:
-    <newline /><newline />
-    ABCDEFGHIJKLMNOPQRSTUVWXYZ<newline />
-    BCDEFGHIJKLMNOPQRSTUVWXYZA<newline />
-    CDEFGHIJKLMNOPQRSTUVWXYZAB<newline />
-    ...<newline />
-    ZABCDEFGHIJKLMNOPQRSTUVWXY<newline /><newline />
-    The 26 alphabets are identified by their first character.
-    When a text is encrypted, the first letter is encrypted with a substitution, that uses the substitution alphabet that is specified by the first letter of the keyword.
-    The second letter is encrypted with the alphabet specified by the second letter of the keyword, and so on.
-    The keyword is used periodically: If the end of the keyword is reached, its first letter will be used again in the next step.
-    <newline /><newline />
-    A variation of the Vigenère cipher is the Vigenère Autokey cipher. It avoids the periodicity of the keyword by appending the plaintext to the keyword
-    and using the resulting string as the new keyword.
-  </introduction>
+	<introduction lang="en">
+	The Vigenère cipher is a polyalphabetic substitution cipher.
+	In contrast to the monoalphabetic substitution, where all characters of the plaintext are replaced using a single substitution alphabet,
+	the polyalphabetic substitution uses several different substitution alphabets.
+	<newline /><newline />
+	The Vigenère cipher was invented by Blaise de Vigenère in the 16th century and was deemed undecipherable for a long time. The cipher is consequently also known as "Le Chiffre indéchiffrable".
+	<newline /><newline />
+	The Vigenère cipher uses a keyword to decide, which of several substitution alphabets will be used to encrypt a letter from the plaintext.
+	The substitution alphabets that are used by Vigenère are the 26 shifts of the standard alphabet:
+	<newline /><newline />
+	ABCDEFGHIJKLMNOPQRSTUVWXYZ<newline />
+	BCDEFGHIJKLMNOPQRSTUVWXYZA<newline />
+	CDEFGHIJKLMNOPQRSTUVWXYZAB<newline />
+	...<newline />
+	ZABCDEFGHIJKLMNOPQRSTUVWXY<newline /><newline />
+	The 26 alphabets are identified by their first character.
+	When a text is encrypted, the first letter is encrypted with a substitution, that uses the substitution alphabet that is specified by the first letter of the keyword.
+	The second letter is encrypted with the alphabet specified by the second letter of the keyword, and so on.
+	The keyword is used periodically: If the end of the keyword is reached, its first letter will be used again in the next step.
+	<newline /><newline />
+	A variation of the Vigenère cipher is the Vigenère Autokey cipher. It avoids the periodicity of the keyword by appending the plaintext to the keyword
+	and using the resulting string as the new keyword.
+	<newline /><newline/>
+	Besides the standard Vigenère cipher, the component is also able to operate as a Beaufort cipher. Here, the alphabet is reversed and the cipher is a reciprocal cipher, that means that encryption and decryption are identical.
+	</introduction>
   <introduction lang="de-DE">
     Die Vigenère-Chiffre gehört zur Klasse der polyalphabetischen Substitutionen.
     Im Gegensatz zur monoalphabetischen Substitution, bei der alle Buchstaben eines Klartextes mittels desselben Substitutions-Alphabets ersetzt werden,
@@ -47,6 +49,8 @@
     <newline /><newline />
     Eine Variante des Vigenère-Verfahrens ist das Vigenère-Selbstschlüssel-Verfahren (auch Autokey-Verfahren genannt), bei dem der Schlüssel nicht wie beim klassischen Vigenère-Verfahren periodisch wiederholt wird.
     Stattdessen wird an den Schlüssel der Klartext angehängt und diese neue Zeichenkette als Schlüssel verwendet.
+	<newline/><newline/>
+	Neben der Standard-Vigenère-Chiffre kann die Komponente auch als Beaufort-Chiffre arbeiten. Hier wird das Alphabet umgekehrt und die Chiffre ist eine reziproke Chiffre, d.h. Ver- und Entschlüsselung sind identisch.
   </introduction>
   <usage lang="en">
     You can select in the settings whether you want to use the classic Vigenère cipher or the Vigenère Autokey cipher.
@@ -78,5 +82,11 @@
       <link url="http://de.wikipedia.org/wiki/Vigen%C3%A8re-Chiffre" lang="de-DE" />
       <caption lang="de-DE">Vigenère in Wikipedia</caption>
     </linkReference>
+  </references>
+  <references>
+	  <linkReference>
+		<link url="https://en.wikipedia.org/wiki/Beaufort_cipher" lang="en" />
+		<caption lang="en">Beaufort cipher in Wikipedia</caption>			
+	  </linkReference>
   </references>
 </documentation>
