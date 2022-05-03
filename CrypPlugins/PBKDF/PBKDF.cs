@@ -91,6 +91,15 @@ namespace CrypTool.PBKDF
         public void Execute()
         {
             Progress(0, 1.0);
+            
+            if (_password == null)
+            {
+                _password = new byte[0];
+            }
+            if (_salt == null)
+            {
+                _salt = new byte[0];
+            }
 
             //1. Create hash algo
             CreateHashAlgorithmInstanec();
