@@ -359,15 +359,11 @@ namespace PKCS5
         public void Hash()
         {
             System.Security.Cryptography.PKCS5MaskGenerationMethod pkcs5Hash =
-                                  new System.Security.Cryptography.PKCS5MaskGenerationMethod
-                                  {
-                                      SelectedShaFunction =
-              (PKCS5MaskGenerationMethod.ShaFunction)settings.SHAFunction
-                                  };
-
-            outputData =
-        pkcs5Hash.GenerateMask(key, salt, settings.Count, (settings.Length + 7) >> 3);
-
+            new System.Security.Cryptography.PKCS5MaskGenerationMethod
+            {
+                SelectedShaFunction = (PKCS5MaskGenerationMethod.ShaFunction)settings.SHAFunction
+            };
+            outputData = pkcs5Hash.GenerateMask(key ?? (new byte[0]), salt ?? (new byte[0]), settings.Count, (settings.Length + 7) >> 3);
             NotifyUpdateOutput();
         }
         #endregion
