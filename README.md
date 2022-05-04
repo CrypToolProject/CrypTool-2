@@ -1,30 +1,49 @@
-# CrypTool 2 
-## _CrypTool 2 is the modern successor of CrypTool 1, the well-known e-learning platform for cryptography and cryptanalysis_
+# CrypTool 2
 
-Visit the official CrypTool website: https://www.cryptool.org/ct2
+Open-source e-learning Windows application for cryptography and cryptanalysis. Part of the [CrypTool project](https://www.cryptool.org).
 
-## Modern Plug’n’Play Interface / Visual Programming
+## About
 
-CrypTool 2 provides a graphical user interface for visual programming. So workflows can be visualized and controlled to enable intuitive manipulation and interaction of cryptographic functions.
+CrypTool 2 (CT2) is a modern e-learning program for Windows, which visualizes cryptography and cryptanalysis. It includes not only the encryption and cryptanalysis of ciphers, but also their basics and the whole spectrum of modern cryptography. 
+
+CT2 provides a graphical user interface for visual programming. So workflows can be visualized and controlled to enable intuitive manipulation and interaction of cryptographic functions.
 
 The vector-oriented GUI is based on the Windows Presentation Foundation (WPF) and gives users the ability to scale the current view at will.
 
-CrypTool 2 follows the Microsoft Office 2007 User Interface Design Guideline, providing a consistent and rich user experience.
+## Screenshots
 
-## Visualization of Algorithms
+![startencter.png](https://github.com/CrypToolProject/CrypTool-2/blob/main/documentation/images/startcenter.png)
+The Startcenter is the first screen that appears, when you start CrypTool 2
 
-The same component used for visual workflow programming can also visualize its inner operation. This makes it handy for the user to comprehend all the details of a cryptographic algorithm while seeing the bigger picture of how this algorithm may be used in a real-life scenario.
+![blockmode_visualization.png](https://github.com/CrypToolProject/CrypTool-2/blob/main/documentation/images/blockmode_visualization.png)
+A template showing two different modes of operation (ECB and CBC) for AES
 
-## Comprehensive Cryptanalysis Functions
+## Features
 
-CrypTool 2 provides a variety of cryptanalytical tools to analyze or even break classical and modern ciphers. With the current version you can, for instance, apply a ciphertext-only attack on an Enigma-encrypted ciphertext. Plenty of other cryptanalysis functions are also available, such as performing frequency tests to find n-grams and assessing the length of a codeword used for a polyalphabetic cipher (such as the Vigenère cipher).
+* Written in C#. User interface created with WPF
+* Contains more than 200 components for cryptography and cryptanalysis
+* Shipped with more than 250 templates (ready-to-run scenarios)
+* Plugin architecture, allowing to extend CT2 easily
+* Implements rich graphical programming language, allowing to cascade ciphers and analysis methods using components, connectors, and connections
+* Many components visualize internal workings of classic (e.g. the Enigma machine) and modern ciphers (e.g. the Keccack)
+* Implements most modern ciphers and many cryptographic protocols, e.g. Diffie-Hellman-Merkle key-exchange and zero-knowledge protocol
+* Implements state-of-the-art cryptanalysis algorithms for classical and historical ciphers
+* Each component contains an online help in English and German
 
-## Integrated Online Help
+## Documentation
 
-It has always been essential for every version of CrypTool to come with thorough documentation about its functions. Whenever the user presses F1 on their keyboard, corresponding information about the function currently selected appears. The online help comprises instructions about using the function as well as a theoretical background and references for further reading on the topic.
+* Documentation is available in the GitHub project's [wiki](https://github.com/CrypToolProject/CrypTool-2/wiki).
+* Download nightly builds and release versions from our [website](https://www.cryptool.org/en/ct2/downloads).
+* Additional infos and videos on the ["Cryptography for everybody" - YouTube channel](https://www.youtube.com/c/CrypTool2).
 
-## Open-Source
+## Building CrypTool 2
 
-CrypTool always was and always will be an open source project. CrypTool 2 is licensed under the Apache Open Source Licence 2.0.
+* [Build instructions](todo) how to clone and build your own CT2.
 
-Anyone interested in adding functionality is welcome to do so. CrypTool 2 is based on the latest .NET Framework (currently .NET 4.7.2) and has a pure-plugin architecture, which makes it very easy for new volunteers to develop additional functions. A new developer can fully concentrate on the functional aspects of his or her plugin and must merely implement some rather simple interfaces to integrate in the core system.
+## Get in Touch
+
+* [Contact us](https://www.cryptool.org/en/contact)
+
+## License
+
+Apache License, Version 2.0.
