@@ -38,7 +38,7 @@ A template showing two different modes of operation (ECB and CBC) for AES
 
 ## Building CrypTool 2
 
-* [Build instructions](todo) how to clone and build your own CT2.
+* [Build instructions](https://github.com/CrypToolProject/CrypTool-2/wiki/Build-Instructions) how to clone and build your own CT2.
 
 ## Get in Touch
 
