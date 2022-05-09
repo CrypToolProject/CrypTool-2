@@ -464,7 +464,7 @@ namespace TranspositionAnalyser
                 DateTime nextUpdate = DateTime.Now.AddMilliseconds(100);
 
                 ulong totalKeys = 0;
-                for (int i = 1; i <= _settings.MaxLength; i++)
+                for (int i = _settings.MinLength; i <= _settings.MaxLength; i++)
                 {
                     totalKeys += (ulong)permutationGenerator.getFactorial(i);
                 }
@@ -474,7 +474,7 @@ namespace TranspositionAnalyser
 
                 stop = false;
 
-                for (int keylength = 1; keylength <= _settings.MaxLength; keylength++)
+                for (int keylength = _settings.MinLength; keylength <= _settings.MaxLength; keylength++)
                 {
                     if (stop)
                     {
