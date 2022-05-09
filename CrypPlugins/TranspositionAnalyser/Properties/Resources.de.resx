@@ -302,4 +302,7 @@
   <data name="MinLengthTooltip" xml:space="preserve">
     <value>Geben Sie die minimale Länge für Analyse an.</value>
   </data>
+  <data name="CurrentlyAnalyzedKeylengthLabel" xml:space="preserve">
+    <value>Aktuell analysierte Schlüssellänge:</value>
+  </data>
 </root>

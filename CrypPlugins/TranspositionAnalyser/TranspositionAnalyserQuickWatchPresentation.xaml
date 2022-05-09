@@ -16,8 +16,7 @@
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc EndLabel}" Name="EndTime" />
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc ElapsedLabel}" Name="ElapsedTime" />
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc RemainingLabel}" Name="TimeLeft" />
-            <!--Empty for layouting purposes:-->
-            <crypanalysisviewcontrol:ViewLabel />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc CurrentlyAnalyzedKeylengthLabel}" Name="CurrentlyAnalyzedKeylength"/>
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc Keys_secLabel}" Name="KeysPerSecond" />
         </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
 
@@ -31,7 +30,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="{x:Static properties:Resources.ValueHeader}" DisplayMemberBinding="{Binding Path=Value}">
+                    <GridViewColumn Header="{x:Static properties:Resources.ValueHeader}" DisplayMemberBinding="{Binding Path=DisplayValue}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Label/>

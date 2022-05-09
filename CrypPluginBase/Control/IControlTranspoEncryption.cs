@@ -22,6 +22,6 @@ namespace CrypTool.PluginBase.Control
     {
         string Decrypt(string ciphertext, string key);
         void changeSettings(string setting, object value);
-        object getSettings(string setting);
+        int getSettings(string setting);
     }
 }

@@ -19,7 +19,7 @@ namespace TranspositionAnalyser.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -313,6 +313,15 @@ namespace TranspositionAnalyser.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Currently analyzed keylength: ähnelt.
+        /// </summary>
+        public static string CurrentlyAnalyzedKeylengthLabel {
+            get {
+                return ResourceManager.GetString("CurrentlyAnalyzedKeylengthLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Dictionary ähnelt.
         /// </summary>
         public static string DictionaryCaption {
@@ -403,7 +412,7 @@ namespace TranspositionAnalyser.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Keysize ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Keylength ähnelt.
         /// </summary>
         public static string KeySizeCaption {
             get {
@@ -412,7 +421,7 @@ namespace TranspositionAnalyser.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Enter the keysize to be searched. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enter the keylength to be searched. ähnelt.
         /// </summary>
         public static string KeySizeTooltip {
             get {

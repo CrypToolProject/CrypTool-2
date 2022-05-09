@@ -137,6 +137,10 @@
       <Name>CrypAnalysisViewControl</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\CostFunction\CostFunction.csproj">
+      <Project>{3c72ff93-48c2-4929-b3b2-83f165aae636}</Project>
+      <Name>CostFunction</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\icon.png" />

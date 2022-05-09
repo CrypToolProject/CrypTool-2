@@ -184,10 +184,10 @@
     <value>Enter the number of iterations the algorithm should perform for one random start value.</value>
   </data>
   <data name="KeySizeCaption" xml:space="preserve">
-    <value>Keysize</value>
+    <value>Keylength</value>
   </data>
   <data name="KeySizeTooltip" xml:space="preserve">
-    <value>Enter the keysize to be searched.</value>
+    <value>Enter the keylength to be searched.</value>
   </data>
   <data name="MaxLengthCaption" xml:space="preserve">
     <value>Max length of keyword</value>
@@ -301,5 +301,8 @@
   </data>
   <data name="MinLengthTooltip" xml:space="preserve">
     <value>Enter the minimum length to be analyzed</value>
+  </data>
+  <data name="CurrentlyAnalyzedKeylengthLabel" xml:space="preserve">
+    <value>Currently analyzed keylength:</value>
   </data>
 </root>

@@ -1,4 +1,19 @@
-﻿using CrypTool.PluginBase;
+﻿/*                              
+   Copyright 2022 CrypToolTeam
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using CrypTool.PluginBase;
 using System.ComponentModel;
 using System.Windows;
 namespace TranspositionAnalyser
@@ -19,52 +34,44 @@ namespace TranspositionAnalyser
             {
                 case 0:
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("MaxLength", Visibility.Visible)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("MinLength", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CaseSensitive", Visibility.Collapsed)));
+                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("MinLength", Visibility.Visible))); TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CaseSensitive", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("RowColumnColumn", Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("RowColumnRow", Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("ColumnColumnRow", Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("ColumnColumnColumn", Visibility.Visible)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("KeySize", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Repeatings", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Iterations", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CribSearchKeylength", Visibility.Collapsed)));
                     break;
                 case 1:
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("MaxLength", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("MinLength", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CaseSensitive", Visibility.Collapsed)));
+                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("MinLength", Visibility.Collapsed))); TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CaseSensitive", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("RowColumnColumn", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("RowColumnRow", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("ColumnColumnRow", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("ColumnColumnColumn", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("KeySize", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Repeatings", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Iterations", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CribSearchKeylength", Visibility.Visible)));
                     break;
                 case 2:
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("MaxLength", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("MinLength", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CaseSensitive", Visibility.Collapsed)));
+                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("MaxLength", Visibility.Visible)));
+                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("MinLength", Visibility.Visible))); TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CaseSensitive", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("RowColumnColumn", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("RowColumnRow", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("ColumnColumnRow", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("ColumnColumnColumn", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("KeySize", Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Repeatings", Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Iterations", Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CribSearchKeylength", Visibility.Collapsed)));
                     break;
                 case 3:
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("MaxLength", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("MinLength", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CaseSensitive", Visibility.Collapsed)));
+                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("MaxLength", Visibility.Visible)));
+                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("MinLength", Visibility.Visible))); TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CaseSensitive", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("RowColumnColumn", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("RowColumnRow", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("ColumnColumnRow", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("ColumnColumnColumn", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("KeySize", Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Repeatings", Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Iterations", Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CribSearchKeylength", Visibility.Collapsed)));
@@ -77,7 +84,6 @@ namespace TranspositionAnalyser
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("RowColumnRow", Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("ColumnColumnRow", Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("ColumnColumnColumn", Visibility.Visible)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("KeySize", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Repeatings", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Iterations", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CribSearchKeylength", Visibility.Collapsed)));
@@ -116,56 +122,7 @@ namespace TranspositionAnalyser
                     OnPropertyChanged("CaseSensitive");
                 }
             }
-        }
-
-        // FIX: REGEX 
-        private int bruteforce_length = 12;
-        [PropertySaveOrder(2)]
-        [TaskPaneAttribute("MaxLengthCaption", "MaxLengthTooltip", null, 3, false, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
-        public int MaxLength
-        {
-            get => bruteforce_length;
-            set
-            {
-                if (value != bruteforce_length)
-                {
-                    bruteforce_length = value;
-                    OnPropertyChanged("MaxLength");
-                }
-            }
-        }
-
-        private int min_length = 1;
-        [PropertySaveOrder(2)]
-        [TaskPaneAttribute("MinLengthCaption", "MinLengthTooltip", null, 2, false, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
-        public int MinLength
-        {
-            get => min_length;
-            set
-            {
-                if (value != min_length)
-                {
-                    min_length = value;
-                    OnPropertyChanged("MinLength");
-                }
-            }
-        }
-
-        private int keysize = 8;
-        [PropertySaveOrder(3)]
-        [TaskPaneAttribute("KeySizeCaption", "KeySizeTooltip", null, 4, false, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
-        public int KeySize
-        {
-            get => keysize;
-            set
-            {
-                if (value != keysize)
-                {
-                    keysize = value;
-                    OnPropertyChanged("KeySize");
-                }
-            }
-        }
+        }       
 
         private bool row_colum_column = true;
         [PropertySaveOrder(4)]
@@ -266,7 +223,7 @@ namespace TranspositionAnalyser
 
         private int cribSearchKeylength = 12;
         [PropertySaveOrder(10)]
-        [TaskPaneAttribute("CribSearchKeylengthCaption", "CribSearchKeylengthTooltip", null, 3, true, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
+        [TaskPaneAttribute("CribSearchKeylengthCaption", "CribSearchKeylengthTooltip", null, 3, true, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 500)]
         public int CribSearchKeylength
         {
             get => cribSearchKeylength;
@@ -276,6 +233,53 @@ namespace TranspositionAnalyser
                 {
                     cribSearchKeylength = value;
                     OnPropertyChanged("CribSearchKeylength");
+                }
+            }
+        }
+
+        private int min_length = 2;
+        [PropertySaveOrder(2)]
+        [TaskPaneAttribute("MinLengthCaption", "MinLengthTooltip", null, 12, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 2, 500)]
+        public int MinLength
+        {
+            get => min_length;
+            set
+            {
+                if (value != min_length)
+                {
+                    if(value < 2)
+                    {
+                        min_length = 2;
+                    }
+                    else
+                    {
+                        min_length = value;
+                    }
+                    
+                    OnPropertyChanged("MinLength");
+                }
+            }
+        }
+
+        private int max_length = 10;
+        [PropertySaveOrder(2)]
+        [TaskPaneAttribute("MaxLengthCaption", "MaxLengthTooltip", null, 13, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 2, 500)]
+        public int MaxLength
+        {
+            get => max_length;
+            set
+            {
+                if (value != max_length)
+                {
+                    if (value < min_length)
+                    {
+                        max_length = min_length;
+                    }
+                    else
+                    {
+                        max_length = value;
+                    }                    
+                    OnPropertyChanged("MaxLength");
                 }
             }
         }

@@ -40,8 +40,7 @@ namespace CrypTool.Plugins.CostFunction
         private bool stopped = true;
         private IControlCost controlSlave;
         private RegEx regularexpression = null;
-        private Grams grams = null;
-
+             
         #endregion
 
         #region public interface
@@ -49,6 +48,16 @@ namespace CrypTool.Plugins.CostFunction
         public CostFunction()
         {
 
+        }
+
+        /// <summary>
+        /// The Grams currently used with this cost function
+        /// Public access is needed by e.g. the TranspositionAnalyzer to normalize the ngrams
+        /// </summary>
+        public Grams Grams
+        {
+            get;
+            private set;
         }
 
         #endregion
@@ -142,11 +151,11 @@ namespace CrypTool.Plugins.CostFunction
             {
                 //CreateNGrams returns null, if it is not possible to create an Grams object based on the given settings
                 //this happens, e.g, when a n-gram size and language combination is selected, where we do not have a corrsponding language file
-                grams = LanguageStatistics.CreateNGrams(settings.NGramSize, LanguageStatistics.LanguageCode(settings.Language), settings.UseSpaces);
-                if (grams == null)
+                Grams = LanguageStatistics.CreateNGrams(settings.NGramSize, LanguageStatistics.LanguageCode(settings.Language), settings.UseSpaces);
+                if (Grams == null)
                 {
                     GuiLogMessage(string.Format("CrypTool 2 has no {0}-grams for {1}. Falling back to English {0}-grams.", settings.NGramSize, LanguageStatistics.SupportedLanguages[settings.Language]), NotificationLevel.Error);
-                    grams = LanguageStatistics.CreateNGrams(settings.NGramSize, "en", settings.UseSpaces);
+                    Grams = LanguageStatistics.CreateNGrams(settings.NGramSize, "en", settings.UseSpaces);
                 }
             }
             stopped = false;
@@ -210,7 +219,7 @@ namespace CrypTool.Plugins.CostFunction
                     return calculateEntropy(text, settings.BytesToUseInteger);
 
                 case CostFunctionSettings.CostFunctionType.NGramsLog2:
-                    return grams.CalculateCost(LanguageStatistics.MapTextIntoNumberSpace(Encoding.UTF8.GetString(text).ToUpper(),
+                    return Grams.CalculateCost(LanguageStatistics.MapTextIntoNumberSpace(Encoding.UTF8.GetString(text).ToUpper(),
                                                LanguageStatistics.Alphabets[LanguageStatistics.LanguageCode(settings.Language)]));
 
                 case CostFunctionSettings.CostFunctionType.RegEx:
@@ -667,6 +676,15 @@ namespace CrypTool.Plugins.CostFunction
              */
             return plugin.CalculateCost(text);
         }
+
+        public void NormalizeNGrams()
+        {
+            if (plugin.Grams != null && !plugin.Grams.IsNormalized)
+            {
+                plugin.Grams.Normalize(10_000_000);
+            }
+        }
+
         #endregion
     }
 }

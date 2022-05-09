@@ -62,6 +62,16 @@ namespace Transposition
             }
         }
 
+        /// <summary>
+        /// Method to change ReadIn without firing the Property Changed event
+        /// Thus, Transposition Analyzer may change settings without making workspace "dirty"
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetReadIn(int value)
+        {
+            selectedReadIn = (ReadInMode)value;
+        }
+
         [PropertySaveOrder(3)]
         [ContextMenu("PermutationCaption", "PermutationTooltip", 3, ContextMenuControlType.ComboBox, null, new string[] { "PermutationList1", "PermutationList2" })]
         [TaskPane("PermutationCaption", "PermutationTooltip", null, 3, false, ControlType.ComboBox, new string[] { "PermutationList1", "PermutationList2" })]
@@ -76,6 +86,16 @@ namespace Transposition
                     OnPropertyChanged("Permutation");
                 }
             }
+        }
+
+        /// <summary>
+        /// Method to change Permutation without firing the Property Changed event
+        /// Thus, Transposition Analyzer may change settings without making workspace "dirty"
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetPermutation(int value)
+        {
+            selectedPermutation = (PermutationMode)value;
         }
 
         [PropertySaveOrder(4)]
@@ -94,7 +114,15 @@ namespace Transposition
             }
         }
 
-
+        /// <summary>
+        /// Method to change ReadOut without firing the Property Changed event
+        /// Thus, Transposition Analyzer may change settings without making workspace "dirty"
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetReadOut(int value)
+        {
+            selectedReadOut = (ReadOutMode)value;
+        }
 
         [PropertySaveOrder(5)]
         [TaskPane("PresentationSpeedCaption", "PresentationSpeedTooltip", "PresentationGroup", 6, true, ControlType.Slider, 1, 1000)]

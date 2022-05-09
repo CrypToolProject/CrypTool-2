@@ -1040,19 +1040,19 @@ namespace Transposition
         {
             if (setting.Equals("ReadIn"))
             {
-                _settings.ReadIn = (int)value;
+                _settings.SetReadIn((int)value);
             }
             else if (setting.Equals("Permute"))
             {
-                _settings.Permutation = (int)value;
+                _settings.SetPermutation((int)value);
             }
             else if (setting.Equals("ReadOut"))
             {
-                _settings.ReadOut = (int)value;
+                _settings.SetReadOut((int)value);
             }
         }
 
-        public object getSettings(string setting)
+        public int getSettings(string setting)
         {
             if (setting.Equals("ReadIn"))
             {
@@ -1067,7 +1067,7 @@ namespace Transposition
                 return _settings.ReadOut;
             }
 
-            return null;
+            throw new ArgumentException(string.Format("Setting {0} does not exist!", setting));
         }
 
         # endregion
@@ -1120,7 +1120,7 @@ namespace Transposition
             plugin.changeSettings(setting, value);
         }
 
-        public object getSettings(string setting)
+        public int getSettings(string setting)
         {
             return plugin.getSettings(setting);
         }
