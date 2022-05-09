@@ -1,0 +1,1 @@
+Copy the template folder into 'C:\Users\youruser\Documents\Visual Studio 2019\Templates\ProjectTemplates\Visual C#'
