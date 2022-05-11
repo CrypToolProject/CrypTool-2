@@ -19,7 +19,7 @@ namespace CrypTool.PluginBase.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -250,6 +250,123 @@ namespace CrypTool.PluginBase.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 2
+        ///3
+        ///5
+        ///7
+        ///11
+        ///13
+        ///17
+        ///19
+        ///23
+        ///29
+        ///31
+        ///37
+        ///41
+        ///43
+        ///47
+        ///53
+        ///59
+        ///61
+        ///67
+        ///71
+        ///73
+        ///79
+        ///83
+        ///89
+        ///97
+        ///101
+        ///103
+        ///107
+        ///109
+        ///113
+        ///127
+        ///131
+        ///137
+        ///139
+        ///149
+        ///151
+        ///157
+        ///163
+        ///167
+        ///173
+        ///179
+        ///181
+        ///191
+        ///193
+        ///197
+        ///199
+        ///211
+        ///223
+        ///227
+        ///229
+        ///233
+        ///239
+        ///241
+        ///251
+        ///257
+        ///263
+        ///269
+        ///271
+        ///277
+        ///281
+        ///283
+        ///293
+        ///307
+        ///311
+        ///313
+        ///317
+        ///331
+        ///337
+        ///347
+        ///349
+        ///353
+        ///359
+        ///367
+        ///373
+        ///379
+        ///383
+        ///389
+        ///397
+        ///401
+        ///409
+        ///419
+        ///421
+        ///431
+        ///433
+        ///439
+        ///443
+        ///449
+        ///457
+        ///461
+        ///463
+        ///467
+        ///479
+        ///487
+        ///491
+        ///499
+        ///503
+        ///509
+        ///521
+        ///523
+        ///541
+        ///547
+        ///557
+        ///563
+        ///569
+        ///571
+        ///577
+        ///587
+        ///593
+        ///5 [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
+        public static string primes {
+            get {
+                return ResourceManager.GetString("primes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die This is a standalone component. ähnelt.
         /// </summary>
         public static string This_is_a_standalone_component_ {
@@ -279,7 +396,7 @@ namespace CrypTool.PluginBase.Properties {
         ///0008;&lt;control&gt;;Cc;0;BN;;;;;N;BACKSPACE;;;;
         ///0009;&lt;control&gt;;Cc;0;S;;;;;N;CHARACTER TABULATION;;;;
         ///000A;&lt;control&gt;;Cc;0;B;;;;;N;LINE FEED (LF);;;;
-        ///000B;&lt;contro [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///0 [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         public static string UnicodeData {
             get {

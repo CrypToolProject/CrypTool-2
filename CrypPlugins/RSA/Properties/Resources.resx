@@ -297,4 +297,10 @@
   <data name="E_or_D" xml:space="preserve">
     <value>Enter e or d</value>
   </data>
+  <data name="GenerateSafePrimesCaption" xml:space="preserve">
+    <value>Generate safe primes</value>
+  </data>
+  <data name="GenerateSafePrimesTooltip" xml:space="preserve">
+    <value>If enabled, the generated primes will be safe primes. This will take a lot of more time.</value>
+  </data>
 </root>

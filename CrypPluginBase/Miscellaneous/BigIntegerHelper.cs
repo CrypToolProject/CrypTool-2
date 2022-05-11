@@ -21,6 +21,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using System.Security.Cryptography;
@@ -31,33 +32,21 @@ namespace CrypTool.PluginBase.Miscellaneous
 {
     public static class BigIntegerHelper
     {
-        private static readonly BigInteger[] smallPrimes = new BigInteger[] { };
-        private static readonly HashSet<BigInteger> smallPrimesSet;
-        private static readonly int smallPrimesLimit = 2000;
+        private static readonly BigInteger[] primesList;
+        private static readonly HashSet<BigInteger> smallPrimesSet = new HashSet<BigInteger>();
 
         static BigIntegerHelper()
         {
-            List<int> primes = new List<int> { 2 };
-
-            for (int n = 3; n < smallPrimesLimit; n += 2)
-            {
-                int i, w = (int)Math.Sqrt(n);
-                for (i = 0; primes[i] <= w; i++)
-                {
-                    if (n % primes[i] == 0)
-                    {
-                        break;
-                    }
-                }
-
-                if (primes[i] > w)
-                {
-                    primes.Add(n);
-                }
+            //Here, we load the first 100_000 (and a few more) primes from the resources
+            //Soure of primes: https://archive.org/details/thefirst100000pr00065gut
+            string[] primeNumbers = Properties.Resources.primes.Split(new char[] { '\n' });
+            primesList = new BigInteger[primeNumbers.Length];
+            for (int i = 0; i < primeNumbers.Length; i++)
+            { 
+                BigInteger p = BigInteger.Parse(primeNumbers[i]);
+                primesList[i] = p;
+                smallPrimesSet.Add(p);
             }
-
-            smallPrimes = primes.Select(p => (BigInteger)p).ToArray();
-            smallPrimesSet = new HashSet<BigInteger>(smallPrimes);
         }
 
         #region internal stuff of expression parser
@@ -762,6 +751,31 @@ namespace CrypTool.PluginBase.Miscellaneous
         }
 
         /// <summary>
+        /// Returns a random prime less than limit
+        /// </summary>
+        public static BigInteger RandomSafePrimeLimit(this BigInteger limit, ref bool stop)
+        {
+            if (limit <= 2)
+            {
+                throw new ArithmeticException("No primes below this limit");
+            }
+
+            while (true)
+            {
+                BigInteger p = NextProbableSafePrime(RandomIntLimit(limit, ref stop), ref stop);
+                if (stop)
+                {
+                    return -1;
+                }
+
+                if (p < limit)
+                {
+                    return p;
+                }
+            }
+        }
+
+        /// <summary>
         /// Returns a random prime less than 2^bits
         /// </summary>
         public static BigInteger RandomPrimeBits(int bits)
@@ -918,6 +932,69 @@ namespace CrypTool.PluginBase.Miscellaneous
             }
         }
 
+        public static BigInteger NextProbableSafePrime(this BigInteger n, ref bool stop)
+        {
+            if (n < 0)
+            {
+                throw new ArithmeticException("NextProbablePrime cannot be called on value < 0");
+            }
+
+            if (n <= 2)
+            {
+                return 2;
+            }
+
+            if (n.IsEven)
+            {
+                n++;
+            }
+
+            if (n == 3)
+            {
+                return 3;
+            }
+
+            BigInteger r = n % 6;
+            if (r == 3)
+            {
+                n += 2;
+            }
+
+            if (r == 1)
+            {
+                if (IsProbableSafePrime(n, ref stop))
+                {
+                    return n;
+                }
+                else
+                {
+                    n += 4;
+                }
+            }
+
+            // at this point n mod 6 = 5
+
+            while (true)
+            {
+                if (IsProbableSafePrime(n, ref stop))
+                {
+                    return n;
+                }
+
+                n += 2;
+                if (IsProbableSafePrime(n, ref stop))
+                {
+                    return n;
+                }
+
+                n += 4;
+                if (stop)
+                {
+                    return -1;
+                }
+            }
+        }
+
         public static BigInteger PreviousProbablePrime(this BigInteger n)
         {
             if (n < 2)
@@ -989,14 +1066,14 @@ namespace CrypTool.PluginBase.Miscellaneous
 
             // test small numbers
 
-            if (n < smallPrimesLimit)
+            if (n < primesList.Length)
             {
                 return smallPrimesSet.Contains(n);
             }
 
             //if (smallPrimes.Any(p => n % p == 0)) return false;
             // previous line converted to foreach-loop to allow to stop the search
-            foreach (BigInteger p in smallPrimes)
+            foreach (BigInteger p in primesList)
             {
                 if (n % p == 0 || stop)
                 {
@@ -1029,10 +1106,49 @@ namespace CrypTool.PluginBase.Miscellaneous
             return true;
         }
 
-
-        public static bool IsStrongPseudoprime(BigInteger n, BigInteger a, ref bool stop)
+        public static bool IsProbableSafePrime(this BigInteger n, ref bool stop)
         {
-            BigInteger d = n - 1;
+            n = BigInteger.Abs(n);
+            BigInteger n_min1_div2 = (n - 1) / 2;
+
+            // test small numbers            
+            foreach (BigInteger p in primesList)
+            {
+                if (n_min1_div2 % p == 0 || n % p == 0 || stop)
+                {
+                    return false;
+                }
+            }
+
+            // perform Miller-Rabin Test on number and its "divisor"
+
+            // By a result from Pomerance, Selfridge, Wagstaff and Jaeschke, Miller-Rabin is deterministic for values < 318665857834031151167461 if the following witnesses are used:
+            // (see https://de.wikipedia.org/wiki/Miller-Rabin-Test)
+
+            int[] tests =
+                n < 1373653 ? new int[] { 2, 3 } :
+                n < 9080191 ? new int[] { 31, 73 } :
+                n < 4759123141 ? new int[] { 2, 7, 61 } :
+                n < 2152302898747 ? new int[] { 2, 3, 5, 7, 11 } :
+                n < 3474749660383 ? new int[] { 2, 3, 5, 7, 11, 13 } :
+                n < 341550071728321 ? new int[] { 2, 3, 5, 7, 11, 13, 17 } :
+                n < 3825123056546413051 ? new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23 } :
+                /*n < 318665857834031151167461*/ new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37 };
+
+            foreach (int test in tests)
+            {
+                if (!IsStrongPseudoprime(n_min1_div2, test, ref stop) || 
+                    !IsStrongPseudoprime(n, test, ref stop))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool IsStrongPseudoprime(BigInteger p, BigInteger a, ref bool stop)
+        {
+            BigInteger d = p - 1;
             int s = 0;
 
             while ((d & 1) == 0)
@@ -1046,7 +1162,7 @@ namespace CrypTool.PluginBase.Miscellaneous
                 s++;
             }
 
-            BigInteger t = BigInteger.ModPow(a, d, n);
+            BigInteger t = BigInteger.ModPow(a, d, p);
             if (t == 1)
             {
                 return true;
@@ -1059,12 +1175,12 @@ namespace CrypTool.PluginBase.Miscellaneous
                     return false;
                 }
 
-                if (t == n - 1)
+                if (t == p - 1)
                 {
                     return true;
                 }
 
-                t = BigInteger.ModPow(t, 2, n);
+                t = BigInteger.ModPow(t, 2, p);
                 s--;
             }
 

@@ -25,9 +25,7 @@ namespace CrypTool.Plugins.RSA
     /// </summary>
     internal class RSAKeyGeneratorSettings : ISettings
     {
-
         #region private members
-
         private int source;
         private int e_or_d;
 
@@ -40,7 +38,7 @@ namespace CrypTool.Plugins.RSA
         private string password = "";
         private string range = "100";
         private int rangeType = 0;  // interpret range as: 0=number of bits, 1=upper limit
-
+        private bool generateSafePrimes = false;
         #endregion
 
         #region events
@@ -116,6 +114,7 @@ namespace CrypTool.Plugins.RSA
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("N", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("RangeType", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Range", Visibility.Collapsed)));
+                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("GenerateSafePrimes", Visibility.Collapsed)));
                     break;
                 case 1:
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CertificateFile", Visibility.Collapsed)));
@@ -129,6 +128,7 @@ namespace CrypTool.Plugins.RSA
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("N", Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("RangeType", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Range", Visibility.Collapsed)));
+                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("GenerateSafePrimes", Visibility.Collapsed)));
                     break;
                 case 2:
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CertificateFile", Visibility.Collapsed)));
@@ -142,6 +142,7 @@ namespace CrypTool.Plugins.RSA
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("N", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("RangeType", Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Range", Visibility.Visible)));
+                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("GenerateSafePrimes", Visibility.Visible)));
                     break;
                 case 3:
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("CertificateFile", Visibility.Visible)));
@@ -155,6 +156,7 @@ namespace CrypTool.Plugins.RSA
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("N", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("RangeType", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Range", Visibility.Collapsed)));
+                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("GenerateSafePrimes", Visibility.Collapsed)));
                     break;
             }
         }
@@ -283,6 +285,7 @@ namespace CrypTool.Plugins.RSA
                 OnPropertyChanged("RangeType");
             }
         }
+
         /// <summary>
         /// Getter/Setter for the range of the primes
         /// </summary>
@@ -296,6 +299,23 @@ namespace CrypTool.Plugins.RSA
                 {
                     range = value;
                     OnPropertyChanged("Range");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Enable/disable generation of safe primes
+        /// </summary>
+        [TaskPane("GenerateSafePrimesCaption", "GenerateSafePrimesTooltip", null, 5, false, ControlType.CheckBox)]
+        public bool GenerateSafePrimes
+        {
+            get => generateSafePrimes;
+            set
+            {
+                if (value != generateSafePrimes)
+                {
+                    generateSafePrimes = value;
+                    OnPropertyChanged("GenerateSafePrimes");
                 }
             }
         }

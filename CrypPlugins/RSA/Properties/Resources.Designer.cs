@@ -19,7 +19,7 @@ namespace RSA.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -210,6 +210,24 @@ namespace RSA.Properties {
         internal static string ETooltip {
             get {
                 return ResourceManager.GetString("ETooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Generate safe primes ähnelt.
+        /// </summary>
+        internal static string GenerateSafePrimesCaption {
+            get {
+                return ResourceManager.GetString("GenerateSafePrimesCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die If enabled, the generated primes will be safe primes. This will take a lot of more time. ähnelt.
+        /// </summary>
+        internal static string GenerateSafePrimesTooltip {
+            get {
+                return ResourceManager.GetString("GenerateSafePrimesTooltip", resourceCulture);
             }
         }
         

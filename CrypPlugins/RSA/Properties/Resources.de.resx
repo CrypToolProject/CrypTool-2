@@ -298,4 +298,10 @@ Diese werden dann anstatt der automatisch ermittelten Blockgrößen verwendet. <
   <data name="E_or_D" xml:space="preserve">
     <value>e oder d eingeben</value>
   </data>
+  <data name="GenerateSafePrimesCaption" xml:space="preserve">
+    <value>Sichere Primzahlen generieren</value>
+  </data>
+  <data name="GenerateSafePrimesTooltip" xml:space="preserve">
+    <value>Wenn diese Option aktiviert ist, werden die erzeugten Primzahlen sichere Primzahlen sein. Dies wird sehr viel mehr Zeit in Anspruch nehmen.</value>
+  </data>
 </root>
