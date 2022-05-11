@@ -325,6 +325,8 @@ namespace CrypTool.Plugins.RSA
                                 limittries = (int)(BigInteger.Log(limit) / 6);
                                 if (settings.GenerateSafePrimes)
                                 {
+                                    //simply by "eye balling" estimated value to allow to see a progress
+                                    //also when generating safe primes
                                     limittries = limittries * 1000;
                                 }
                                 expectedtries = 2 * limittries;
