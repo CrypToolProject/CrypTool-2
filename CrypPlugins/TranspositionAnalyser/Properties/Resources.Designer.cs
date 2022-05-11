@@ -403,6 +403,15 @@ namespace TranspositionAnalyser.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Key Length ähnelt.
+        /// </summary>
+        public static string KeyLengthHeader {
+            get {
+                return ResourceManager.GetString("KeyLengthHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Keys / sec: ähnelt.
         /// </summary>
         public static string Keys_secLabel {

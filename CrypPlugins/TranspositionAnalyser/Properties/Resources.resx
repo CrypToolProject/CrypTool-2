@@ -305,4 +305,7 @@
   <data name="CurrentlyAnalyzedKeylengthLabel" xml:space="preserve">
     <value>Currently analyzed keylength:</value>
   </data>
+  <data name="KeyLengthHeader" xml:space="preserve">
+    <value>Key Length</value>
+  </data>
 </root>

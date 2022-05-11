@@ -1124,12 +1124,11 @@ namespace TranspositionAnalyser
                 if (stop)
                 {
                     break;
-                }
-
-                highscoreList.Clear();
+                }                
 
                 for (int repeating = 0; repeating < _settings.Repeatings; repeating++)
                 {
+                    highscoreList.Clear();
 
                     for (int i = 0; i < highscoreList.Capacity; i++)
                     {
@@ -1147,7 +1146,7 @@ namespace TranspositionAnalyser
                         int rndInt = 0;
                         int childrenCount = highscoreList.Count < 6 ? highscoreList.Count : 6;
 
-                        for (int a = 0; a < childrenCount; a++)
+                        for (int a = 0; a < childrenCount - 1; a++)
                         {
                             if (a % 2 == 0)
                             {
@@ -1530,6 +1529,13 @@ namespace TranspositionAnalyser
         }
 
         public string Key { get; set; }
+        public int KeyLength
+        {
+            get
+            {
+                return KeyArray != null ? KeyArray.Length : 0;
+            }
+        }
         public char[] KeyArray { get; set; }
         public string Mode { get; set; }
         public string Text { get; set; }

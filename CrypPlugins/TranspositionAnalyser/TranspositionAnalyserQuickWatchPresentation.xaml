@@ -44,6 +44,13 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    <GridViewColumn Header="{x:Static properties:Resources.KeyLengthHeader}" DisplayMemberBinding="{Binding Path=KeyLength}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="{x:Static properties:Resources.ModeHeader}" DisplayMemberBinding="{Binding Path=Mode}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
