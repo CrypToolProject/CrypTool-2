@@ -19,6 +19,7 @@
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators;
 using RandomNumberGenerator;
 using RandomNumberGenerator.Properties;
 using System;
@@ -36,7 +37,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
     {
         #region Private Variables
 
-        private readonly RandomNumberGeneratorSettings _Settings = new RandomNumberGeneratorSettings();
+        private readonly RandomNumberGeneratorSettings _settings = new RandomNumberGeneratorSettings();
 
         private object _output;
 
@@ -56,7 +57,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings => _Settings;
+        public ISettings Settings => _settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
@@ -79,7 +80,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
 
             bool executedWithoutError = false;
 
-            switch (_Settings.AlgorithmType)
+            switch (_settings.AlgorithmType)
             {
                 case AlgorithmType.RandomRandom:
                     //Basic random number generator of .net:
@@ -101,8 +102,11 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 case AlgorithmType.SubtractiveGenerator:
                     executedWithoutError = ExecuteXpat2();
                     break;
+                case AlgorithmType.XORShift:
+                    executedWithoutError = ExecuteXORShift();
+                    break;
                 default:
-                    throw new Exception(string.Format("Algorithm type {0} not implemented", _Settings.AlgorithmType.ToString()));
+                    throw new Exception(string.Format("Algorithm type {0} not implemented", _settings.AlgorithmType.ToString()));
             }
             //We only show 100% if execution was without an error
             if (executedWithoutError)
@@ -118,7 +122,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         private bool ExecuteRandomRandomGenerator()
         {
             Random random;
-            if (string.IsNullOrEmpty(_Settings.Seed))
+            if (string.IsNullOrEmpty(_settings.Seed))
             {
                 random = new Random();
             }
@@ -127,18 +131,18 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 int seed;
                 try
                 {
-                    seed = int.Parse(_Settings.Seed);
+                    seed = int.Parse(_settings.Seed);
                 }
                 catch (Exception)
                 {
-                    GuiLogMessage(string.Format(Resources.InvalidSeedValue, _Settings.Seed), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(Resources.InvalidSeedValue, _settings.Seed), NotificationLevel.Error);
                     return false;
                 }
                 random = new Random(seed);
             }
 
             int outputlength;
-            if (string.IsNullOrEmpty(_Settings.OutputLength))
+            if (string.IsNullOrEmpty(_settings.OutputLength))
             {
                 outputlength = 0;
             }
@@ -146,15 +150,15 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             {
                 try
                 {
-                    outputlength = int.Parse(_Settings.OutputLength);
+                    outputlength = int.Parse(_settings.OutputLength);
                 }
                 catch (Exception)
                 {
-                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _Settings.Modulus), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.Modulus), NotificationLevel.Error);
                     return false;
                 }
             }
-            switch (_Settings.OutputType)
+            switch (_settings.OutputType)
             {
                 case OutputType.ByteArray:
                     {
@@ -187,7 +191,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 case OutputType.NumberArray:
                     {
                         int outputamount;
-                        if (string.IsNullOrEmpty(_Settings.OutputAmount))
+                        if (string.IsNullOrEmpty(_settings.OutputAmount))
                         {
                             outputamount = 1;
                         }
@@ -195,11 +199,11 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                         {
                             try
                             {
-                                outputamount = int.Parse(_Settings.OutputAmount);
+                                outputamount = int.Parse(_settings.OutputAmount);
                             }
                             catch (Exception)
                             {
-                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _Settings.Modulus), NotificationLevel.Error);
+                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _settings.Modulus), NotificationLevel.Error);
                                 return false;
                             }
                         }
@@ -227,7 +231,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                     break;
 
                 default:
-                    throw new Exception(string.Format("Output type {0} not implemented", _Settings.OutputType.ToString()));
+                    throw new Exception(string.Format("Output type {0} not implemented", _settings.OutputType.ToString()));
             }
             return true;
         }
@@ -242,7 +246,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             {
 
                 int outputlength;
-                if (string.IsNullOrEmpty(_Settings.OutputLength))
+                if (string.IsNullOrEmpty(_settings.OutputLength))
                 {
                     outputlength = 0;
                 }
@@ -250,15 +254,15 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 {
                     try
                     {
-                        outputlength = int.Parse(_Settings.OutputLength);
+                        outputlength = int.Parse(_settings.OutputLength);
                     }
                     catch (Exception)
                     {
-                        GuiLogMessage(string.Format(Resources.InvalidOutputLength, _Settings.Modulus), NotificationLevel.Error);
+                        GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.Modulus), NotificationLevel.Error);
                         return false;
                     }
                 }
-                switch (_Settings.OutputType)
+                switch (_settings.OutputType)
                 {
                     case OutputType.ByteArray:
                         {
@@ -291,7 +295,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                     case OutputType.NumberArray:
                         {
                             int outputamount;
-                            if (string.IsNullOrEmpty(_Settings.OutputAmount))
+                            if (string.IsNullOrEmpty(_settings.OutputAmount))
                             {
                                 outputamount = 1;
                             }
@@ -299,11 +303,11 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                             {
                                 try
                                 {
-                                    outputamount = int.Parse(_Settings.OutputAmount);
+                                    outputamount = int.Parse(_settings.OutputAmount);
                                 }
                                 catch (Exception)
                                 {
-                                    GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _Settings.Modulus), NotificationLevel.Error);
+                                    GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _settings.Modulus), NotificationLevel.Error);
                                     return false;
                                 }
                             }
@@ -332,7 +336,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                         break;
 
                     default:
-                        throw new Exception(string.Format("Output type {0} not implemented", _Settings.OutputType.ToString()));
+                        throw new Exception(string.Format("Output type {0} not implemented", _settings.OutputType.ToString()));
                 }
                 return true;
             }
@@ -349,23 +353,23 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             int outputlength;
             try
             {
-                seed = BigInteger.Parse(_Settings.Seed);
+                seed = BigInteger.Parse(_settings.Seed);
             }
             catch (Exception)
             {
-                GuiLogMessage(string.Format(Resources.InvalidSeedValue, _Settings.Seed), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.InvalidSeedValue, _settings.Seed), NotificationLevel.Error);
                 return false;
             }
             try
             {
-                modulus = BigInteger.Parse(_Settings.Modulus);
+                modulus = BigInteger.Parse(_settings.Modulus);
             }
             catch (Exception)
             {
-                GuiLogMessage(string.Format(Resources.InvalidModulus, _Settings.Modulus), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.InvalidModulus, _settings.Modulus), NotificationLevel.Error);
                 return false;
             }
-            if (string.IsNullOrEmpty(_Settings.OutputLength))
+            if (string.IsNullOrEmpty(_settings.OutputLength))
             {
                 outputlength = 0;
             }
@@ -373,27 +377,27 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             {
                 try
                 {
-                    outputlength = int.Parse(_Settings.OutputLength);
+                    outputlength = int.Parse(_settings.OutputLength);
                 }
                 catch (Exception)
                 {
-                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _Settings.Modulus), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.Modulus), NotificationLevel.Error);
                     return false;
                 }
             }
-            switch (_Settings.OutputType)
+            switch (_settings.OutputType)
             {
                 case OutputType.ByteArray:
                     {
                         X2 x2Generator = new X2(seed, modulus, outputlength);
-                        _output = x2Generator.generateRNDNums();
+                        _output = x2Generator.GenerateRandomByteArray();
                         OnPropertyChanged("Output");
                     }
                     break;
                 case OutputType.CrypToolStream:
                     {
                         X2 x2Generator = new X2(seed, modulus, outputlength);
-                        byte[] output = x2Generator.generateRNDNums();
+                        byte[] output = x2Generator.GenerateRandomByteArray();
                         _output = new CStreamWriter(output);
                         OnPropertyChanged("Output");
                     }
@@ -401,7 +405,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 case OutputType.Number:
                     {
                         X2 x2Generator = new X2(seed, modulus, outputlength);
-                        byte[] output = x2Generator.generateRNDNums();
+                        byte[] output = x2Generator.GenerateRandomByteArray();
                         OnPropertyChanged("Output");
                         _output = new CStreamWriter(output);
                         if (output.Length > 0)
@@ -415,7 +419,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 case OutputType.NumberArray:
                     {
                         int outputamount;
-                        if (string.IsNullOrEmpty(_Settings.OutputAmount))
+                        if (string.IsNullOrEmpty(_settings.OutputAmount))
                         {
                             outputamount = 1;
                         }
@@ -423,11 +427,11 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                         {
                             try
                             {
-                                outputamount = int.Parse(_Settings.OutputAmount);
+                                outputamount = int.Parse(_settings.OutputAmount);
                             }
                             catch (Exception)
                             {
-                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _Settings.Modulus), NotificationLevel.Error);
+                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _settings.Modulus), NotificationLevel.Error);
                                 return false;
                             }
                         }
@@ -435,7 +439,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                         X2 x2Generator = new X2(seed, modulus, outputlength);
                         for (int i = 0; i < outputamount; i++)
                         {
-                            byte[] output = x2Generator.generateRNDNums();
+                            byte[] output = x2Generator.GenerateRandomByteArray();
                             if (output.Length > 0)
                             {
                                 output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
@@ -449,16 +453,15 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 case OutputType.Bool:
                     {
                         X2 x2Generator = new X2(seed, modulus, 1);
-                        _output = x2Generator.randBit() == 0;
+                        _output = x2Generator.GenerateRandomBit();
                         OnPropertyChanged("Output");
                     }
                     break;
                 default:
-                    throw new Exception(string.Format("Output type {0} not implemented", _Settings.OutputType.ToString()));
+                    throw new Exception(string.Format("Output type {0} not implemented", _settings.OutputType.ToString()));
             }
             return true;
         }
-
 
         private bool ExecuteLCG()
         {
@@ -469,23 +472,23 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             BigInteger b;
             try
             {
-                seed = BigInteger.Parse(_Settings.Seed);
+                seed = BigInteger.Parse(_settings.Seed);
             }
             catch (Exception)
             {
-                GuiLogMessage(string.Format(Resources.InvalidSeedValue, _Settings.Seed), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.InvalidSeedValue, _settings.Seed), NotificationLevel.Error);
                 return false;
             }
             try
             {
-                modulus = BigInteger.Parse(_Settings.Modulus);
+                modulus = BigInteger.Parse(_settings.Modulus);
             }
             catch (Exception)
             {
-                GuiLogMessage(string.Format(Resources.InvalidModulus, _Settings.Modulus), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.InvalidModulus, _settings.Modulus), NotificationLevel.Error);
                 return false;
             }
-            if (string.IsNullOrEmpty(_Settings.OutputLength))
+            if (string.IsNullOrEmpty(_settings.OutputLength))
             {
                 outputlength = 0;
             }
@@ -493,45 +496,45 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             {
                 try
                 {
-                    outputlength = int.Parse(_Settings.OutputLength);
+                    outputlength = int.Parse(_settings.OutputLength);
                 }
                 catch (Exception)
                 {
-                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _Settings.Modulus), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.Modulus), NotificationLevel.Error);
                     return false;
                 }
             }
             try
             {
-                a = BigInteger.Parse(_Settings.a);
+                a = BigInteger.Parse(_settings.a);
             }
             catch (Exception)
             {
-                GuiLogMessage(string.Format(Resources.InvalidaValue, _Settings.Modulus), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.InvalidaValue, _settings.Modulus), NotificationLevel.Error);
                 return false;
             }
             try
             {
-                b = BigInteger.Parse(_Settings.b);
+                b = BigInteger.Parse(_settings.b);
             }
             catch (Exception)
             {
-                GuiLogMessage(string.Format(Resources.InvalidbValue, _Settings.Modulus), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.InvalidbValue, _settings.Modulus), NotificationLevel.Error);
                 return false;
             }
-            switch (_Settings.OutputType)
+            switch (_settings.OutputType)
             {
                 case OutputType.ByteArray:
                     {
                         LCG lcgGenerator = new LCG(seed, modulus, a, b, outputlength);
-                        _output = lcgGenerator.generateRNDNums();
+                        _output = lcgGenerator.GenerateRandomByteArray();
                         OnPropertyChanged("Output");
                     }
                     break;
                 case OutputType.CrypToolStream:
                     {
                         LCG lcgGenerator = new LCG(seed, modulus, a, b, outputlength);
-                        byte[] output = lcgGenerator.generateRNDNums();
+                        byte[] output = lcgGenerator.GenerateRandomByteArray();
                         _output = new CStreamWriter(output);
                         OnPropertyChanged("Output");
                     }
@@ -539,7 +542,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 case OutputType.Number:
                     {
                         LCG lcgGenerator = new LCG(seed, modulus, a, b, outputlength);
-                        byte[] output = lcgGenerator.generateRNDNums();
+                        byte[] output = lcgGenerator.GenerateRandomByteArray();
                         OnPropertyChanged("Output");
                         _output = new CStreamWriter(output);
                         if (output.Length > 0)
@@ -553,7 +556,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 case OutputType.NumberArray:
                     {
                         int outputamount;
-                        if (string.IsNullOrEmpty(_Settings.OutputAmount))
+                        if (string.IsNullOrEmpty(_settings.OutputAmount))
                         {
                             outputamount = 1;
                         }
@@ -561,11 +564,11 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                         {
                             try
                             {
-                                outputamount = int.Parse(_Settings.OutputAmount);
+                                outputamount = int.Parse(_settings.OutputAmount);
                             }
                             catch (Exception)
                             {
-                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _Settings.Modulus), NotificationLevel.Error);
+                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _settings.Modulus), NotificationLevel.Error);
                                 return false;
                             }
                         }
@@ -573,7 +576,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                         LCG lcgGenerator = new LCG(seed, modulus, a, b, outputlength);
                         for (int i = 0; i < outputamount; i++)
                         {
-                            byte[] output = lcgGenerator.generateRNDNums();
+                            byte[] output = lcgGenerator.GenerateRandomByteArray();
                             if (output.Length > 0)
                             {
                                 output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
@@ -587,12 +590,12 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 case OutputType.Bool:
                     {
                         LCG lcgGenerator = new LCG(seed, modulus, a, b, outputlength);
-                        _output = lcgGenerator.randBit() == 0;
+                        _output = lcgGenerator.GenerateRandomBit();
                         OnPropertyChanged("Output");
                     }
                     break;
                 default:
-                    throw new Exception(string.Format("Output type {0} not implemented", _Settings.OutputType.ToString()));
+                    throw new Exception(string.Format("Output type {0} not implemented", _settings.OutputType.ToString()));
             }
             return true;
         }
@@ -606,23 +609,23 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             BigInteger b;
             try
             {
-                seed = BigInteger.Parse(_Settings.Seed);
+                seed = BigInteger.Parse(_settings.Seed);
             }
             catch (Exception)
             {
-                GuiLogMessage(string.Format(Resources.InvalidSeedValue, _Settings.Seed), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.InvalidSeedValue, _settings.Seed), NotificationLevel.Error);
                 return false;
             }
             try
             {
-                modulus = BigInteger.Parse(_Settings.Modulus);
+                modulus = BigInteger.Parse(_settings.Modulus);
             }
             catch (Exception)
             {
-                GuiLogMessage(string.Format(Resources.InvalidModulus, _Settings.Modulus), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.InvalidModulus, _settings.Modulus), NotificationLevel.Error);
                 return false;
             }
-            if (string.IsNullOrEmpty(_Settings.OutputLength))
+            if (string.IsNullOrEmpty(_settings.OutputLength))
             {
                 outputlength = 0;
             }
@@ -630,50 +633,50 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             {
                 try
                 {
-                    outputlength = int.Parse(_Settings.OutputLength);
+                    outputlength = int.Parse(_settings.OutputLength);
                 }
                 catch (Exception)
                 {
-                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _Settings.Modulus), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.Modulus), NotificationLevel.Error);
                     return false;
                 }
             }
             try
             {
-                a = BigInteger.Parse(_Settings.a);
+                a = BigInteger.Parse(_settings.a);
             }
             catch (Exception)
             {
-                GuiLogMessage(string.Format(Resources.InvalidaValue, _Settings.Modulus), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.InvalidaValue, _settings.Modulus), NotificationLevel.Error);
                 return false;
             }
             try
             {
-                b = BigInteger.Parse(_Settings.b);
+                b = BigInteger.Parse(_settings.b);
             }
             catch (Exception)
             {
-                GuiLogMessage(string.Format(Resources.InvalidbValue, _Settings.Modulus), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.InvalidbValue, _settings.Modulus), NotificationLevel.Error);
                 return false;
             }
             if (!isPrime(modulus))
             {
-                GuiLogMessage(string.Format(Resources.ErrorPrime, _Settings.Modulus, stdPrime), NotificationLevel.Warning);
+                GuiLogMessage(string.Format(Resources.ErrorPrime, _settings.Modulus, stdPrime), NotificationLevel.Warning);
                 modulus = stdPrime;
             }
-            switch (_Settings.OutputType)
+            switch (_settings.OutputType)
             {
                 case OutputType.ByteArray:
                     {
                         ICG icgGenerator = new ICG(seed, modulus, a, b, outputlength);
-                        _output = icgGenerator.generateRNDNums();
+                        _output = icgGenerator.GenerateRandomByteArray();
                         OnPropertyChanged("Output");
                     }
                     break;
                 case OutputType.CrypToolStream:
                     {
                         ICG icgGenerator = new ICG(seed, modulus, a, b, outputlength);
-                        byte[] output = icgGenerator.generateRNDNums();
+                        byte[] output = icgGenerator.GenerateRandomByteArray();
                         _output = new CStreamWriter(output);
                         OnPropertyChanged("Output");
                     }
@@ -681,7 +684,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 case OutputType.Number:
                     {
                         ICG icgGenerator = new ICG(seed, modulus, a, b, outputlength);
-                        byte[] output = icgGenerator.generateRNDNums();
+                        byte[] output = icgGenerator.GenerateRandomByteArray();
                         OnPropertyChanged("Output");
                         _output = new CStreamWriter(output);
                         if (output.Length > 0)
@@ -695,7 +698,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 case OutputType.NumberArray:
                     {
                         int outputamount;
-                        if (string.IsNullOrEmpty(_Settings.OutputAmount))
+                        if (string.IsNullOrEmpty(_settings.OutputAmount))
                         {
                             outputamount = 1;
                         }
@@ -703,11 +706,11 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                         {
                             try
                             {
-                                outputamount = int.Parse(_Settings.OutputAmount);
+                                outputamount = int.Parse(_settings.OutputAmount);
                             }
                             catch (Exception)
                             {
-                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _Settings.Modulus), NotificationLevel.Error);
+                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _settings.Modulus), NotificationLevel.Error);
                                 return false;
                             }
                         }
@@ -715,7 +718,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                         ICG icgGenerator = new ICG(seed, modulus, a, b, outputlength);
                         for (int i = 0; i < outputamount; i++)
                         {
-                            byte[] output = icgGenerator.generateRNDNums();
+                            byte[] output = icgGenerator.GenerateRandomByteArray();
                             if (output.Length > 0)
                             {
                                 output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
@@ -729,12 +732,12 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 case OutputType.Bool:
                     {
                         ICG icgGenerator = new ICG(seed, modulus, a, b, outputlength);
-                        _output = icgGenerator.randBit() == 0;
+                        _output = icgGenerator.GenerateRandomBit();
                         OnPropertyChanged("Output");
                     }
                     break;
                 default:
-                    throw new Exception(string.Format("Output type {0} not implemented", _Settings.OutputType.ToString()));
+                    throw new Exception(string.Format("Output type {0} not implemented", _settings.OutputType.ToString()));
             }
             return true;
         }
@@ -745,14 +748,14 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             int outputlength;
             try
             {
-                seed = BigInteger.Parse(_Settings.Seed);
+                seed = BigInteger.Parse(_settings.Seed);
             }
             catch (Exception)
             {
-                GuiLogMessage(string.Format(Resources.InvalidSeedValue, _Settings.Seed), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.InvalidSeedValue, _settings.Seed), NotificationLevel.Error);
                 return false;
             }
-            if (string.IsNullOrEmpty(_Settings.OutputLength))
+            if (string.IsNullOrEmpty(_settings.OutputLength))
             {
                 outputlength = 0;
             }
@@ -760,28 +763,28 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             {
                 try
                 {
-                    outputlength = int.Parse(_Settings.OutputLength);
+                    outputlength = int.Parse(_settings.OutputLength);
                 }
                 catch (Exception)
                 {
-                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _Settings.Modulus), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.Modulus), NotificationLevel.Error);
                     return false;
                 }
             }
 
-            switch (_Settings.OutputType)
+            switch (_settings.OutputType)
             {
                 case OutputType.ByteArray:
                     {
                         SubtractiveGenerator xpat2Generator = new SubtractiveGenerator(seed, outputlength);
-                        _output = xpat2Generator.generateRNDNums();
+                        _output = xpat2Generator.GenerateRandomByteArray();
                         OnPropertyChanged("Output");
                     }
                     break;
                 case OutputType.CrypToolStream:
                     {
                         SubtractiveGenerator icgGenerator = new SubtractiveGenerator(seed, outputlength);
-                        byte[] output = icgGenerator.generateRNDNums();
+                        byte[] output = icgGenerator.GenerateRandomByteArray();
                         _output = new CStreamWriter(output);
                         OnPropertyChanged("Output");
                     }
@@ -789,7 +792,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 case OutputType.Number:
                     {
                         SubtractiveGenerator xpat2Generator = new SubtractiveGenerator(seed, outputlength);
-                        byte[] output = xpat2Generator.generateRNDNums();
+                        byte[] output = xpat2Generator.GenerateRandomByteArray();
                         OnPropertyChanged("Output");
                         _output = new CStreamWriter(output);
                         if (output.Length > 0)
@@ -803,7 +806,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 case OutputType.NumberArray:
                     {
                         int outputamount;
-                        if (string.IsNullOrEmpty(_Settings.OutputAmount))
+                        if (string.IsNullOrEmpty(_settings.OutputAmount))
                         {
                             outputamount = 1;
                         }
@@ -811,11 +814,11 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                         {
                             try
                             {
-                                outputamount = int.Parse(_Settings.OutputAmount);
+                                outputamount = int.Parse(_settings.OutputAmount);
                             }
                             catch (Exception)
                             {
-                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _Settings.Modulus), NotificationLevel.Error);
+                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _settings.Modulus), NotificationLevel.Error);
                                 return false;
                             }
                         }
@@ -823,7 +826,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                         SubtractiveGenerator xpat2Generator = new SubtractiveGenerator(seed, outputlength);
                         for (int i = 0; i < outputamount; i++)
                         {
-                            byte[] output = xpat2Generator.generateRNDNums();
+                            byte[] output = xpat2Generator.GenerateRandomByteArray();
                             if (output.Length > 0)
                             {
                                 output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
@@ -837,12 +840,120 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 case OutputType.Bool:
                     {
                         SubtractiveGenerator xpat2Generator = new SubtractiveGenerator(seed, outputlength);
-                        _output = xpat2Generator.randBit() == 0;
+                        _output = xpat2Generator.GenerateRandomBit();
                         OnPropertyChanged("Output");
                     }
                     break;
                 default:
-                    throw new Exception(string.Format("Output type {0} not implemented", _Settings.OutputType.ToString()));
+                    throw new Exception(string.Format("Output type {0} not implemented", _settings.OutputType.ToString()));
+            }
+            return true;
+        }
+
+        private bool ExecuteXORShift()
+        {
+            BigInteger seed;
+            int outputlength;
+            try
+            {
+                seed = BigInteger.Parse(_settings.Seed);
+            }
+            catch (Exception)
+            {
+                GuiLogMessage(string.Format(Resources.InvalidSeedValue, _settings.Seed), NotificationLevel.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(_settings.OutputLength))
+            {
+                outputlength = 0;
+            }
+            else
+            {
+                try
+                {
+                    outputlength = int.Parse(_settings.OutputLength);
+                }
+                catch (Exception)
+                {
+                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.Modulus), NotificationLevel.Error);
+                    return false;
+                }
+            }
+
+            switch (_settings.OutputType)
+            {
+                case OutputType.ByteArray:
+                    {
+                        XORShift xorShift = new XORShift(seed, outputlength, _settings.XORShiftType);
+                        _output = xorShift.GenerateRandomByteArray();
+                        OnPropertyChanged("Output");
+                    }
+                    break;
+                case OutputType.CrypToolStream:
+                    {
+                        XORShift icgGenerator = new XORShift(seed, outputlength, _settings.XORShiftType);
+                        byte[] output = icgGenerator.GenerateRandomByteArray();
+                        _output = new CStreamWriter(output);
+                        OnPropertyChanged("Output");
+                    }
+                    break;
+                case OutputType.Number:
+                    {
+                        XORShift xorShift = new XORShift(seed, outputlength, _settings.XORShiftType);
+                        byte[] output = xorShift.GenerateRandomByteArray();
+                        OnPropertyChanged("Output");
+                        _output = new CStreamWriter(output);
+                        if (output.Length > 0)
+                        {
+                            output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
+                        }
+                        _output = new BigInteger(output);
+                        OnPropertyChanged("Output");
+                    }
+                    break;
+                case OutputType.NumberArray:
+                    {
+                        int outputamount;
+                        if (string.IsNullOrEmpty(_settings.OutputAmount))
+                        {
+                            outputamount = 1;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                outputamount = int.Parse(_settings.OutputAmount);
+                            }
+                            catch (Exception)
+                            {
+                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _settings.Modulus), NotificationLevel.Error);
+                                return false;
+                            }
+                        }
+                        BigInteger[] array = new BigInteger[outputamount];
+                        XORShift xorShift = new XORShift(seed, outputlength, _settings.XORShiftType);
+                        for (int i = 0; i < outputamount; i++)
+                        {
+                            byte[] output = xorShift.GenerateRandomByteArray();
+                            if (output.Length > 0)
+                            {
+                                output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
+                            }
+                            array[i] = new BigInteger(output);
+                        }
+                        _output = array;
+                        OnPropertyChanged("Output");
+                    }
+                    break;
+                case OutputType.Bool:
+                    {
+                        XORShift xorShift = new XORShift(seed, outputlength, _settings.XORShiftType);
+                        _output = xorShift.GenerateRandomBit();
+                        OnPropertyChanged("Output");
+                    }
+                    break;
+                default:
+                    throw new Exception(string.Format("Output type {0} not implemented", _settings.OutputType.ToString()));
             }
             return true;
         }

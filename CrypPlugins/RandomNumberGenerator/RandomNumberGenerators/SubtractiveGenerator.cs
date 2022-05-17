@@ -19,9 +19,9 @@
 using CrypTool.Plugins.RandomNumberGenerator;
 using System.Numerics;
 
-namespace RandomNumberGenerator
+namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
 {
-    public class SubtractiveGenerator : IrndNum
+    public class SubtractiveGenerator : RandomGenerator
     {
         private readonly int MAX = 1000000000;
         private int[] _State;
@@ -56,27 +56,27 @@ namespace RandomNumberGenerator
             _Position = 54;
             for (int i = 55; i < 220; ++i)
             {
-                randomize();
+                Randomize();
             }
         }
 
-        public override byte[] generateRNDNums()
+        public override byte[] GenerateRandomByteArray()
         {
             byte[] res = new byte[(int)OutputLength];
             for (int j = 0; j < OutputLength; j++)
             {
                 res[j] = (byte)(_CurrentValue % 255);
-                randomize();
+                Randomize();
             }
             return res;
         }
 
-        public override BigInteger randBit()
+        public override bool GenerateRandomBit()
         {
-            return _CurrentValue % 2 == 0 ? 0 : 1;
+            return _CurrentValue % 2 == 0;
         }
 
-        public override void randomize()
+        public override void Randomize()
         {
             _CurrentValue = Mod(_State[(_Position + 1) % 55] - _State[(_Position + 32) % 55]);
             _Position = (_Position + 1) % 55;

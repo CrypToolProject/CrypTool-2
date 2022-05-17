@@ -108,9 +108,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICG.cs" />
-    <Compile Include="IrndNum.cs" />
-    <Compile Include="LCG.cs" />
+    <Compile Include="RandomNumberGenerators\ICG.cs" />
+    <Compile Include="RandomNumberGenerators\RandomGenerator.cs" />
+    <Compile Include="RandomNumberGenerators\LCG.cs" />
     <Compile Include="RandomNumberGenerator.cs" />
     <Compile Include="RandomNumberGeneratorSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,8 +124,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="SubtractiveGenerator.cs" />
-    <Compile Include="X2.cs" />
+    <Compile Include="RandomNumberGenerators\SubtractiveGenerator.cs" />
+    <Compile Include="RandomNumberGenerators\X2.cs" />
+    <Compile Include="RandomNumberGenerators\XORShift.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrypPluginBase\CrypPluginBase.csproj">

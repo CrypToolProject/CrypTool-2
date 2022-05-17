@@ -37,7 +37,16 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         X2modN = 2,
         LCG = 3,
         ICG = 4,
-        SubtractiveGenerator = 5
+        SubtractiveGenerator = 5,
+        XORShift = 6
+    }
+
+    public enum XORShiftType
+    {
+        XOR_Shift8 = 0,
+        XOR_Shift16 = 1,
+        XOR_Shift32 = 2,
+        XOR_Shift64 = 3
     }
 
     public enum OutputType
@@ -58,11 +67,12 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         private readonly List<string> _settingsList = new List<string>();
 
         private AlgorithmType _AlgorithmType = 0;
+        private XORShiftType _XORShiftType = XORShiftType.XOR_Shift32;
         private OutputType _OutputType = 0;
 
         private string _OutputLength = string.Empty;
         private string _OutputAmount = string.Empty;
-        private string _Seed = string.Empty;
+        private string _Seed = "42";
         private string _Modulus = string.Empty;
         private string _a = string.Empty;
         private string _b = string.Empty;
@@ -79,7 +89,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
 
         #region TaskPane Settings
 
-        [TaskPane("AlgorithmTypeCaption", "AlgorithmTypeTooltip", "GeneralSettingsGroup", 0, false, ControlType.ComboBox, new string[] { "Random.Random", "RNGCryptoServiceProvider", "X^2 mod N", "LCG", "ICG", "Subtractive Generator" })]
+        [TaskPane("AlgorithmTypeCaption", "AlgorithmTypeTooltip", "GeneralSettingsGroup", 0, false, ControlType.ComboBox, new string[] { "Random.Random", "RNGCryptoServiceProvider", "X^2 mod N", "LCG", "ICG", "Subtractive Generator", "XORShift" })]
         public AlgorithmType AlgorithmType
         {
             get => _AlgorithmType;
@@ -91,7 +101,19 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             }
         }
 
-        [TaskPane("OutputTypeCaption", "OutputTypeTooltip", "GeneralSettingsGroup", 1, false, ControlType.ComboBox, new string[] { "Byte Array", "CrypToolStream", "Number", "Number Array", "Bool" })]
+        [TaskPane("XORShiftTypeCaption", "XORShiftTypeTooltip", "GeneralSettingsGroup", 1, false, ControlType.ComboBox, new string[] { "XORShift8", "XORShift16", "XORShift32", "XORShift64" })]
+        public XORShiftType XORShiftType
+        {
+            get => _XORShiftType;
+            set
+            {
+                _XORShiftType = value;
+                UpdateTaskPaneVisibility();
+                OnPropertyChanged("XORShiftType");
+            }
+        }
+
+        [TaskPane("OutputTypeCaption", "OutputTypeTooltip", "GeneralSettingsGroup", 2, false, ControlType.ComboBox, new string[] { "Byte Array", "CrypToolStream", "Number", "Number Array", "Bool" })]
         public OutputType OutputType
         {
             get => _OutputType;
@@ -104,7 +126,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             }
         }
 
-        [TaskPane("OutputLengthCaption", "OutputLengthTooltip", "GeneralSettingsGroup", 2, false, ControlType.TextBox)]
+        [TaskPane("OutputLengthCaption", "OutputLengthTooltip", "GeneralSettingsGroup", 3, false, ControlType.TextBox)]
         public string OutputLength
         {
             get => _OutputLength;
@@ -115,7 +137,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             }
         }
 
-        [TaskPane("OutputAmountCaption", "OutputAmountTooltip", "GeneralSettingsGroup", 3, false, ControlType.TextBox)]
+        [TaskPane("OutputAmountCaption", "OutputAmountTooltip", "GeneralSettingsGroup", 4, false, ControlType.TextBox)]
         public string OutputAmount
         {
             get => _OutputAmount;
@@ -190,6 +212,8 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             _settingsList.Add("Modulus");
             _settingsList.Add("a");
             _settingsList.Add("b");
+            _settingsList.Add("XORShiftType");
+            _settingsList.Add("Seed");
             _settingsVisibility[AlgorithmType.RandomRandom].Add("Seed");
             _settingsVisibility[AlgorithmType.X2modN].Add("Seed");
             _settingsVisibility[AlgorithmType.X2modN].Add("Modulus");
@@ -202,6 +226,8 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             _settingsVisibility[AlgorithmType.LCG].Add("a");
             _settingsVisibility[AlgorithmType.LCG].Add("b");
             _settingsVisibility[AlgorithmType.SubtractiveGenerator].Add("Seed");
+            _settingsVisibility[AlgorithmType.XORShift].Add("XORShiftType");
+            _settingsVisibility[AlgorithmType.XORShift].Add("Seed");
             UpdateTaskPaneVisibility();
         }
 

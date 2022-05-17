@@ -19,9 +19,9 @@
 using System;
 using System.Numerics;
 
-namespace CrypTool.Plugins.RandomNumberGenerator
+namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
 {
-    internal class ICG : IrndNum
+    internal class ICG : RandomGenerator
     {
         private int _count;
 
@@ -49,7 +49,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         /// generates the output
         /// </summary>
         /// <returns
-        public override byte[] generateRNDNums()
+        public override byte[] GenerateRandomByteArray()
         {
             Count = 0;
             int k = 0;
@@ -60,8 +60,8 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 int tmp = 128;
                 for (int i = 0; i < 8; i++)
                 {
-                    randomize();
-                    if (randBit() != 0)
+                    Randomize();
+                    if (GenerateRandomBit())
                     {
                         curByte += tmp;
                     }
@@ -79,15 +79,15 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         /// returns next random bit
         /// </summary>
         /// <returns></returns>
-        public override BigInteger randBit()
+        public override bool GenerateRandomBit()
         {
-            return (RandNo > Modulus / 2) ? 1 : 0;
+            return RandNo > Modulus / 2;
         }
 
         /// <summary>
         /// randomize RandNo
         /// </summary>
-        public override void randomize()
+        public override void Randomize()
         {
             BigInteger tmp;
             if (Modulus < (A * (Seed + Count) + B))

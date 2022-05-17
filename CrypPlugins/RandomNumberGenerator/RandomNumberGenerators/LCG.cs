@@ -15,28 +15,20 @@
    limitations under the License.
 */
 
+
 using System;
 using System.Numerics;
 
-namespace CrypTool.Plugins.RandomNumberGenerator
+namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
 {
-    /// <summary>
-    /// X^2 Mod N randomumber generator
-    /// </summary>
-    internal class X2 : IrndNum
+    internal class LCG : RandomGenerator
     {
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="Seed"></param>
-        /// <param name="Modul"></param>
-        public X2(BigInteger Seed, BigInteger Modul, BigInteger OutputLength) : base()
+        public LCG(BigInteger Seed, BigInteger Modul, BigInteger a, BigInteger b, BigInteger OutputLength) : base()
         {
-            //B is fixed to 2
-            B = 2;
             this.Seed = Seed;
             Modulus = Modul;
+            A = a;
+            B = b;
             this.OutputLength = OutputLength;
             //RandNo takes value of the seed
             RandNo = this.Seed;
@@ -46,24 +38,23 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         /// generates the output
         /// </summary>
         /// <returns></returns>
-        public override byte[] generateRNDNums()
+        public override byte[] GenerateRandomByteArray()
         {
             byte[] res = new byte[(int)OutputLength];
-
-            for (int i = 0; i < res.Length; i++)
+            for (int j = 0; j < OutputLength; j++)
             {
                 int curByte = 0;
                 int tmp = 128;
-                for (int j = 0; j < 8; j++)
+                for (int i = 0; i < 8; i++)
                 {
-                    randomize();
-                    if (randBit() != 0)
+                    Randomize();
+                    if (GenerateRandomBit())
                     {
                         curByte += tmp;
                     }
                     tmp /= 2;
                 }
-                res[i] = Convert.ToByte(curByte);
+                res[j] = Convert.ToByte(curByte);
             }
             return res;
         }
@@ -72,18 +63,17 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         /// returns next random bit
         /// </summary>
         /// <returns></returns>
-        public override BigInteger randBit()
+        public override bool GenerateRandomBit()
         {
-            return RandNo % 2;
+            return RandNo > Modulus / 2;
         }
 
         /// <summary>
         /// randomize RandNo
         /// </summary>
-        public override void randomize()
+        public override void Randomize()
         {
-            BigInteger tmp = RandNo;
-            RandNo = BigInteger.Pow(tmp, (int)B) % Modulus;
+            RandNo = (A * RandNo + B) % Modulus;
         }
     }
 }

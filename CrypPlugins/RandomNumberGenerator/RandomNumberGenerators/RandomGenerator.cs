@@ -18,13 +18,13 @@
 
 using System.Numerics;
 
-namespace CrypTool.Plugins.RandomNumberGenerator
+namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
 {
 
     /// <summary>
     /// abstract class for randomnumber generators
     /// </summary>
-    public abstract class IrndNum
+    public abstract class RandomGenerator
     {
         /// <summary>
         /// needed attributes
@@ -90,22 +90,11 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             set => _outputLength = value;
         }
 
-        /// <summary>
-        /// must be implemented in inherting class
-        /// </summary>
-        public abstract void randomize();
+        public abstract void Randomize();
 
-        /// <summary>
-        /// must be implemented in inherting class
-        /// </summary>
-        /// <returns></returns>
-        public abstract BigInteger randBit();
+        public abstract bool GenerateRandomBit();
 
-        /// <summary>
-        /// must be implemented in inherting class
-        /// </summary>
-        /// <returns></returns>
-        public abstract byte[] generateRNDNums();
+        public abstract byte[] GenerateRandomByteArray();
 
     }
 }
