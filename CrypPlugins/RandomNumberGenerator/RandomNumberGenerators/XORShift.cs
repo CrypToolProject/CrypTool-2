@@ -22,10 +22,10 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
 {
     internal class XORShift : RandomGenerator
     {
-        private XORShiftType _xorShiftType;
+        private readonly XORShiftType _xorShiftType;
         private ulong _state;
 
-        public XORShift(BigInteger seed, BigInteger outputLength, XORShiftType xorShiftType)
+        public XORShift(BigInteger seed, int outputLength, XORShiftType xorShiftType)
         {
             _xorShiftType = xorShiftType;
             OutputLength = outputLength;
@@ -51,29 +51,46 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
 
         public override byte[] GenerateRandomByteArray()
         {
-            byte[] res = new byte[(int)OutputLength];
-
-            for (int i = 0; i < res.Length; i++)
+            byte[] result = new byte[OutputLength];
+            int resultoffset = 0;
+            while (resultoffset < result.Length)
             {
-                int curByte = 0;
-                int tmp = 128;
-                for (int j = 0; j < 8; j++)
+                Randomize();
+                byte[] array = ConvertCurrentNumberToByteArray();
+                for (int arrayoffset = 0; arrayoffset < array.Length; arrayoffset++)
                 {
-                    Randomize();
-                    if (GenerateRandomBit())
+                    if (resultoffset + arrayoffset == result.Length)
                     {
-                        curByte += tmp;
+                        break;
                     }
-                    tmp /= 2;
+                    result[resultoffset + arrayoffset] = array[arrayoffset];
                 }
-                res[i] = Convert.ToByte(curByte);
+                resultoffset = resultoffset + array.Length;
             }
-            return res;
+            return result;
+        }
+
+        private byte[] ConvertCurrentNumberToByteArray()
+        {
+            switch (_xorShiftType)
+            {
+                case XORShiftType.XOR_Shift8:
+                    return new byte[] { (byte)_state };
+                case XORShiftType.XOR_Shift16:
+                    return BitConverter.GetBytes((ushort)_state);
+                case XORShiftType.XOR_Shift32:
+                    return BitConverter.GetBytes((uint)_state);
+                case XORShiftType.XOR_Shift64:
+                    return BitConverter.GetBytes(_state);
+                default:
+                    throw new Exception(string.Format("XORShiftType {0} not implemented", _xorShiftType));
+            }
         }
 
         public override bool GenerateRandomBit()
         {
-            return RandNo % 2 == 1;
+            Randomize();
+            return (RandNo & 0b00000001) == 1;
         }
 
         public override void Randomize()
@@ -96,9 +113,9 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
                     _state = (uint)(_state ^ (_state << 5));
                     break;
                 case XORShiftType.XOR_Shift64:
-                    _state = (ulong)(_state ^ (_state << 13));
-                    _state = (ulong)(_state ^ (_state >> 17));
-                    _state = (ulong)(_state ^ (_state << 5));
+                    _state = _state ^ (_state << 13);
+                    _state = _state ^ (_state >> 17);
+                    _state = _state ^ (_state << 5);
                     break;
                 default:
                     throw new Exception(string.Format("XORShiftType {0} not implemented", _xorShiftType));

@@ -17,13 +17,13 @@
 */
 
 
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.RandomNumberGenerator
 {
@@ -77,6 +77,8 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         private string _a = string.Empty;
         private string _b = string.Empty;
 
+        private bool _nonZeroBytes = false;
+
         #endregion
 
         public RandomNumberGeneratorSettings()
@@ -110,6 +112,18 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 _XORShiftType = value;
                 UpdateTaskPaneVisibility();
                 OnPropertyChanged("XORShiftType");
+            }
+        }
+
+        [TaskPane("NonZeroBytesCaption", "NonZeroBytesTooltip", "GeneralSettingsGroup", 1, false, ControlType.CheckBox)]
+        public bool NonZeroBytes
+        {
+            get => _nonZeroBytes;
+            set
+            {
+                _nonZeroBytes = value;
+                UpdateTaskPaneVisibility();
+                OnPropertyChanged("NonZeroBytes");
             }
         }
 
@@ -213,8 +227,10 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             _settingsList.Add("a");
             _settingsList.Add("b");
             _settingsList.Add("XORShiftType");
+            _settingsList.Add("NonZeroBytes");
             _settingsList.Add("Seed");
             _settingsVisibility[AlgorithmType.RandomRandom].Add("Seed");
+            _settingsVisibility[AlgorithmType.RNGCryptoServiceProvider].Add("NonZeroBytes");
             _settingsVisibility[AlgorithmType.X2modN].Add("Seed");
             _settingsVisibility[AlgorithmType.X2modN].Add("Modulus");
             _settingsVisibility[AlgorithmType.ICG].Add("Seed");

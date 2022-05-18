@@ -210,4 +210,10 @@
   <data name="NumberArray" xml:space="preserve">
     <value>Zahlen-Array</value>
   </data>
+  <data name="NonZeroBytesCaption" xml:space="preserve">
+    <value>Bytes ungleich Null</value>
+  </data>
+  <data name="NonZeroBytesTooltip" xml:space="preserve">
+    <value>Wenn diese Option aktiviert ist, enthalten die erzeugten Bytes keine Null-Bytes</value>
+  </data>
 </root>

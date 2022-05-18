@@ -109,6 +109,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RandomNumberGenerators\ICG.cs" />
+    <Compile Include="RandomNumberGenerators\NetCryptoRandomGenerator.cs" />
+    <Compile Include="RandomNumberGenerators\NetRandomGenerator.cs" />
     <Compile Include="RandomNumberGenerators\RandomGenerator.cs" />
     <Compile Include="RandomNumberGenerators\LCG.cs" />
     <Compile Include="RandomNumberGenerator.cs" />

@@ -16,47 +16,20 @@
 */
 
 
-using System;
 using System.Numerics;
 
 namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
 {
     internal class LCG : RandomGenerator
     {
-        public LCG(BigInteger Seed, BigInteger Modul, BigInteger a, BigInteger b, BigInteger OutputLength) : base()
+        public LCG(BigInteger seed, BigInteger modul, BigInteger a, BigInteger b, int outputLength) : base()
         {
-            this.Seed = Seed;
-            Modulus = Modul;
+            Seed = seed;
+            RandNo = seed;
+            Modulus = modul;
             A = a;
             B = b;
-            this.OutputLength = OutputLength;
-            //RandNo takes value of the seed
-            RandNo = this.Seed;
-        }
-
-        /// <summary>
-        /// generates the output
-        /// </summary>
-        /// <returns></returns>
-        public override byte[] GenerateRandomByteArray()
-        {
-            byte[] res = new byte[(int)OutputLength];
-            for (int j = 0; j < OutputLength; j++)
-            {
-                int curByte = 0;
-                int tmp = 128;
-                for (int i = 0; i < 8; i++)
-                {
-                    Randomize();
-                    if (GenerateRandomBit())
-                    {
-                        curByte += tmp;
-                    }
-                    tmp /= 2;
-                }
-                res[j] = Convert.ToByte(curByte);
-            }
-            return res;
+            OutputLength = outputLength;
         }
 
         /// <summary>
@@ -65,6 +38,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
         /// <returns></returns>
         public override bool GenerateRandomBit()
         {
+            Randomize();
             return RandNo > Modulus / 2;
         }
 

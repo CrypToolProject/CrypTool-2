@@ -24,77 +24,75 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
     /// <summary>
     /// abstract class for randomnumber generators
     /// </summary>
-    public abstract class RandomGenerator
+    internal abstract class RandomGenerator
     {
-        /// <summary>
-        /// needed attributes
-        /// </summary>
         private BigInteger _seed;
         private BigInteger _modulus;
         private BigInteger _randNo;
         private BigInteger _a;
         private BigInteger _b;
-        private BigInteger _outputLength;
-
-        /// <summary>
-        /// getter, setter for the seed
-        /// </summary>
+        private int _outputLength;
+       
         public BigInteger Seed
         {
             set => _seed = value;
             get => _seed;
         }
 
-        /// <summary>
-        /// getter, setter for modulus
-        /// </summary>
         public BigInteger Modulus
         {
             set => _modulus = value;
             get => _modulus;
         }
 
-        /// <summary>
-        /// getter, setter for randNo
-        /// </summary>
         public BigInteger RandNo
         {
             set => _randNo = value;
             get => _randNo;
         }
 
-        /// <summary>
-        /// getter, setter for a
-        /// </summary>
         public BigInteger A
         {
             set => _a = value;
             get => _a;
         }
 
-        /// <summary>
-        /// getter, setter for b
-        /// </summary>
         public BigInteger B
         {
             set => _b = value;
             get => _b;
         }
 
-        /// <summary>
-        /// getter, setter for OutputLength
-        /// </summary>
-        public BigInteger OutputLength
+        public int OutputLength
         {
             get => _outputLength;
             set => _outputLength = value;
         }
 
         public abstract void Randomize();
+        
+        public virtual byte[] GenerateRandomByteArray()
+        {
+            byte[] result = new byte[OutputLength];
+            int resultoffset = 0;
+            while (resultoffset < result.Length)
+            {
+                Randomize();
+                byte[] array = RandNo.ToByteArray();
+                for (int arrayoffset = 0; arrayoffset < array.Length; arrayoffset++)
+                {
+                    if (resultoffset + arrayoffset == result.Length)
+                    {
+                        break;
+                    }
+                    result[resultoffset + arrayoffset] = array[arrayoffset];
+                }
+                resultoffset = resultoffset + array.Length;
+            }
+            return result;
+        }
 
         public abstract bool GenerateRandomBit();
-
-        public abstract byte[] GenerateRandomByteArray();
 
     }
 }

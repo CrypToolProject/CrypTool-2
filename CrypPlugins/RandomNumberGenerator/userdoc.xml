@@ -45,7 +45,11 @@
     </section><section headline="Subtractive Generator">
       The generator calculates a sequence of random numbers, where each number is congruent to the subtraction of two previous numbers from the sequence.
       Its code is based on the implementation of the rosetta stone webpage, see <ref id="SubtractiveGenerator" /> for details.
-    </section></introduction>
+    </section>
+	<section headline="XORShift">
+		The generator calculates a sequence of random numbers, where each number is computed using three shifts and XOR of the previous number. See <ref id="XORShift" /> for details.
+	</section>
+  </introduction>
   <introduction lang="de-DE">
     Der Begriff der Zufälligkeit spielt in wachsendem Maße nicht nur in der Informatik eine Rolle, sondern auch in der modernen Kryptografie. Zufallsdaten werden in der Kryptografie für verschiedene Zwecke benötigt. Unter anderem spielen sie eine wichtige Rolle bei der Schlüsselgenerierung asymmetrischer Verschlüsselungsverfahren.
     Zufallsdaten werden mit Hilfe eines sogenannten Pseudozufallsgenerators erzeugt. Ein Pseudozufallsgenerator mag ein statistisch durchaus brauchbares Verhalten besitzen, kryptografisch jedoch unzumutbare Sicherheitsmängel aufweisen. Um für kryptografische Zwecke einsetzbar zu sein, reicht es nicht, dass die produzierten Folgen alle möglichen statistischen Tests bestehen, sondern es muss jeweils für die als nächstes produzierte Zufallszahl eine gewisse Form der Unvorhersagbarkeit vorliegen.
@@ -89,7 +93,11 @@
     </section><section headline="Subtractive Generator">
       Der Generator berechnet eine Folge von Zufallszahlen, wobei jede Zahl zur Subtraktion von zwei vorhergehenden Zahlen der Folge kongruent ist.
       Der Code basiert auf der Implementierung der Rosetta Stone-Webseite. Weitere Informationen finden Sie unter <ref id="SubtractiveGenerator" />.
-    </section></introduction>
+    </section>
+	<section headline="XORShift">
+		Der Generator berechnet eine Folge von Zufallszahlen, wobei jede Zahl durch drei Shifts und XOR der vorherigen Zahl berechnet wird. Siehe <ref id="XORShift" /> für Details.
+	</section>
+  </introduction>
   <usage lang="en">
   The algorithm is selected via the configuration. Depending on the pseudorandom generator used, different parameters are used. These are assigned values via the entries.
   </usage>
@@ -134,13 +142,19 @@
       <link url="https://ru.wikipedia.org/wiki/Инверсный_конгруэнтный_метод" lang="ru" />
       <caption lang="ru">Инверсный конгруэнтный метод</caption>
     </linkReference>
-    <linkReference id="SubtractiveGenerator">
-      <link url="https://rosettacode.org/wiki/Subtractive_generator" lang="en" />
-      <caption lang="en">Subtractive generator</caption>
-      <link url="https://rosettacode.org/wiki/Subtractive_generator" lang="de-DE" />
-      <caption lang="de-DE">Subtractive generator</caption>
-      <link url="https://rosettacode.org/wiki/Subtractive_generator" lang="ru" />
-      <caption lang="ru">Subtractive generator</caption>
-    </linkReference>
+	<linkReference id="SubtractiveGenerator">
+		<link url="https://rosettacode.org/wiki/Subtractive_generator" lang="en" />
+		<caption lang="en">Subtractive generator</caption>
+		<link url="https://rosettacode.org/wiki/Subtractive_generator" lang="de-DE" />
+		<caption lang="de-DE">Subtractive generator</caption>
+		<link url="https://rosettacode.org/wiki/Subtractive_generator" lang="ru" />
+		<caption lang="ru">Subtractive generator</caption>
+	</linkReference>
+	<linkReference id="XORShift">
+		<link url="https://en.wikipedia.org/wiki/Xorshift" lang="en" />
+		<caption lang="en">Xorshift (Wikipedia)</caption>
+		<link url="https://de.wikipedia.org/wiki/Xorshift" lang="de-DE" />
+		<caption lang="de-DE">Xorshift (Wikipedia)</caption>
+	</linkReference>
   </references>
 </documentation>

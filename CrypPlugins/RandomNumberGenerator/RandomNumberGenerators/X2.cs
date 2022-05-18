@@ -15,7 +15,6 @@
    limitations under the License.
 */
 
-using System;
 using System.Numerics;
 
 namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
@@ -29,43 +28,15 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="Seed"></param>
-        /// <param name="Modul"></param>
-        public X2(BigInteger Seed, BigInteger Modul, BigInteger OutputLength) : base()
-        {
-            //B is fixed to 2
-            B = 2;
-            this.Seed = Seed;
-            Modulus = Modul;
-            this.OutputLength = OutputLength;
-            //RandNo takes value of the seed
-            RandNo = this.Seed;
-        }
-
-        /// <summary>
-        /// generates the output
-        /// </summary>
-        /// <returns></returns>
-        public override byte[] GenerateRandomByteArray()
-        {
-            byte[] res = new byte[(int)OutputLength];
-
-            for (int i = 0; i < res.Length; i++)
-            {
-                int curByte = 0;
-                int tmp = 128;
-                for (int j = 0; j < 8; j++)
-                {
-                    Randomize();
-                    if (GenerateRandomBit())
-                    {
-                        curByte += tmp;
-                    }
-                    tmp /= 2;
-                }
-                res[i] = Convert.ToByte(curByte);
-            }
-            return res;
+        /// <param name="seed"></param>
+        /// <param name="modul"></param>
+        public X2(BigInteger seed, BigInteger modul, int outputLength) : base()
+        {            
+            B = 2; //B is fixed to 2
+            Seed = seed;
+            RandNo = seed;
+            Modulus = modul;
+            OutputLength = outputLength;
         }
 
         /// <summary>
@@ -74,7 +45,8 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
         /// <returns></returns>
         public override bool GenerateRandomBit()
         {
-            return RandNo % 2 == 1;
+            Randomize();
+            return (RandNo & 0b00000001) == 1;
         }
 
         /// <summary>

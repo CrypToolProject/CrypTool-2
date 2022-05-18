@@ -16,17 +16,16 @@
    limitations under the License.
 */
 
+using System;
+using System.ComponentModel;
+using System.Numerics;
+using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators;
-using RandomNumberGenerator;
 using RandomNumberGenerator.Properties;
-using System;
-using System.ComponentModel;
-using System.Numerics;
-using System.Security.Cryptography;
-using System.Windows.Controls;
+using RandomNumberGenerator.RandomNumberGenerators;
 
 namespace CrypTool.Plugins.RandomNumberGenerator
 {
@@ -38,10 +37,14 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         #region Private Variables
 
         private readonly RandomNumberGeneratorSettings _settings = new RandomNumberGeneratorSettings();
+        private RandomGenerator _generator;
+        private int _outputlength = 0;
+        private BigInteger _seed = BigInteger.Zero;
+        private BigInteger _modulus = BigInteger.Zero;        
+        private BigInteger _a = BigInteger.Zero;
+        private BigInteger _b = BigInteger.Zero;
 
         private object _output;
-
-        private BigInteger stdPrime = BigInteger.Parse("3");
 
         #endregion
 
@@ -54,135 +57,97 @@ namespace CrypTool.Plugins.RandomNumberGenerator
 
         #region IPlugin Members
 
-        /// <summary>
-        /// Provide plugin-related parameters (per instance) or return null.
-        /// </summary>
         public ISettings Settings => _settings;
 
-        /// <summary>
-        /// Provide custom presentation to visualize the execution or return null.
-        /// </summary>
         public UserControl Presentation => null;
 
-        /// <summary>
-        /// Called once when workflow execution starts.
-        /// </summary>
         public void PreExecution()
         {
         }
 
-        /// <summary>
-        /// Called every time this plugin is run in the workflow execution.
-        /// </summary>
         public void Execute()
         {
             ProgressChanged(0, 1);
 
-            bool executedWithoutError = false;
+            //Step 1: read and check settings
+            ReadSettings();
 
+            //Step 2: create algorithm object
+            CreateRandomAlgorithm();
+
+            //Step 3: generate output data
+            GenerateRandomOutputData();
+
+            ProgressChanged(1, 1);
+        }
+
+        private void CreateRandomAlgorithm()
+        {
             switch (_settings.AlgorithmType)
             {
                 case AlgorithmType.RandomRandom:
-                    //Basic random number generator of .net:
-                    executedWithoutError = ExecuteRandomRandomGenerator();
+
+                    if (string.IsNullOrEmpty(_settings.Seed))
+                    {
+                        _generator = new NetRandomGenerator(_outputlength);
+                    }
+                    else
+                    {
+                        _generator = new NetRandomGenerator(_seed, _outputlength);
+                    }
                     break;
                 case AlgorithmType.RNGCryptoServiceProvider:
-                    //CryptoService random number generator of .net
-                    executedWithoutError = ExecuteRNGCryptoServiceProvider();
+                    _generator = new NetCryptoRandomGenerator(_outputlength);
                     break;
                 case AlgorithmType.X2modN:
-                    executedWithoutError = ExecuteX2modNGenerator();
+                    _generator = new X2(_seed, _modulus, _outputlength);
                     break;
                 case AlgorithmType.LCG:
-                    executedWithoutError = ExecuteLCG();
+                    _generator = new LCG(_seed, _modulus, _a, _b, _outputlength);
                     break;
                 case AlgorithmType.ICG:
-                    executedWithoutError = ExecuteICG();
+                    _generator = new ICG(_seed, _modulus, _a, _b, _outputlength);
                     break;
                 case AlgorithmType.SubtractiveGenerator:
-                    executedWithoutError = ExecuteXpat2();
+                    _generator = new SubtractiveGenerator(_seed, _outputlength);
                     break;
                 case AlgorithmType.XORShift:
-                    executedWithoutError = ExecuteXORShift();
+                    _generator = new XORShift(_seed, _outputlength, _settings.XORShiftType);
                     break;
                 default:
                     throw new Exception(string.Format("Algorithm type {0} not implemented", _settings.AlgorithmType.ToString()));
             }
-            //We only show 100% if execution was without an error
-            if (executedWithoutError)
-            {
-                ProgressChanged(1, 1);
-            }
         }
 
-        /// <summary>
-        /// This method executes the basic random number generator of .net
-        /// </summary>
-        /// <returns></returns>
-        private bool ExecuteRandomRandomGenerator()
+        private void GenerateRandomOutputData()
         {
-            Random random;
-            if (string.IsNullOrEmpty(_settings.Seed))
-            {
-                random = new Random();
-            }
-            else
-            {
-                int seed;
-                try
-                {
-                    seed = int.Parse(_settings.Seed);
-                }
-                catch (Exception)
-                {
-                    GuiLogMessage(string.Format(Resources.InvalidSeedValue, _settings.Seed), NotificationLevel.Error);
-                    return false;
-                }
-                random = new Random(seed);
-            }
-
-            int outputlength;
-            if (string.IsNullOrEmpty(_settings.OutputLength))
-            {
-                outputlength = 0;
-            }
-            else
-            {
-                try
-                {
-                    outputlength = int.Parse(_settings.OutputLength);
-                }
-                catch (Exception)
-                {
-                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.Modulus), NotificationLevel.Error);
-                    return false;
-                }
-            }
             switch (_settings.OutputType)
             {
                 case OutputType.ByteArray:
                     {
-                        byte[] output = new byte[outputlength];
-                        random.NextBytes(output);
-                        _output = output;
+                        _output = _generator.GenerateRandomByteArray();
                         OnPropertyChanged("Output");
                     }
                     break;
                 case OutputType.CrypToolStream:
                     {
-                        byte[] output = new byte[outputlength];
-                        random.NextBytes(output);
+                        byte[] output = _generator.GenerateRandomByteArray();
                         _output = new CStreamWriter(output);
                         OnPropertyChanged("Output");
                     }
                     break;
                 case OutputType.Number:
                     {
-                        byte[] output = new byte[outputlength];
-                        random.NextBytes(output);
-                        if (output.Length > 0)
+                        byte[] output = _generator.GenerateRandomByteArray();
+                        OnPropertyChanged("Output");
+                        _output = new CStreamWriter(output);
+                        //if the highest bit is set, we have to add 1 byte to allow
+                        //the maximum number range and keep the number positive (highest bit =0)
+                        if ((output[output.Length - 1] & 0b10000000) > 0)
                         {
-                            output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
+                            byte[] temp = output;
+                            output = new byte[output.Length + 1];
+                            Array.Copy(temp, 0, output, 0, temp.Length);
                         }
                         _output = new BigInteger(output);
                         OnPropertyChanged("Output");
@@ -204,245 +169,20 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                             catch (Exception)
                             {
                                 GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _settings.Modulus), NotificationLevel.Error);
-                                return false;
+                                return;
                             }
                         }
                         BigInteger[] array = new BigInteger[outputamount];
                         for (int i = 0; i < outputamount; i++)
                         {
-                            byte[] output = new byte[outputlength];
-                            random.NextBytes(output);
-                            if (output.Length > 0)
+                            byte[] output = _generator.GenerateRandomByteArray();
+                            //if the highest bit is set, we have to add 1 byte to allow
+                            //the maximum number range and keep the number positive (highest bit =0)
+                            if ((output[output.Length - 1] & 0b10000000) > 0)
                             {
-                                output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
-                            }
-                            array[i] = new BigInteger(output);
-                        }
-                        _output = array;
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-
-                case OutputType.Bool:
-                    {
-                        _output = random.Next(2) == 1;
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-
-                default:
-                    throw new Exception(string.Format("Output type {0} not implemented", _settings.OutputType.ToString()));
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// This method executes the RNGCryptoServiceProvider of .net
-        /// </summary>
-        /// <returns></returns>
-        private bool ExecuteRNGCryptoServiceProvider()
-        {
-            using (RNGCryptoServiceProvider random = new RNGCryptoServiceProvider())
-            {
-
-                int outputlength;
-                if (string.IsNullOrEmpty(_settings.OutputLength))
-                {
-                    outputlength = 0;
-                }
-                else
-                {
-                    try
-                    {
-                        outputlength = int.Parse(_settings.OutputLength);
-                    }
-                    catch (Exception)
-                    {
-                        GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.Modulus), NotificationLevel.Error);
-                        return false;
-                    }
-                }
-                switch (_settings.OutputType)
-                {
-                    case OutputType.ByteArray:
-                        {
-                            byte[] output = new byte[outputlength];
-                            random.GetBytes(output);
-                            _output = output;
-                            OnPropertyChanged("Output");
-                        }
-                        break;
-                    case OutputType.CrypToolStream:
-                        {
-                            byte[] output = new byte[outputlength];
-                            random.GetBytes(output);
-                            _output = new CStreamWriter(output);
-                            OnPropertyChanged("Output");
-                        }
-                        break;
-                    case OutputType.Number:
-                        {
-                            byte[] output = new byte[outputlength];
-                            random.GetBytes(output);
-                            if (output.Length > 0)
-                            {
-                                output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
-                            }
-                            _output = new BigInteger(output);
-                            OnPropertyChanged("Output");
-                        }
-                        break;
-                    case OutputType.NumberArray:
-                        {
-                            int outputamount;
-                            if (string.IsNullOrEmpty(_settings.OutputAmount))
-                            {
-                                outputamount = 1;
-                            }
-                            else
-                            {
-                                try
-                                {
-                                    outputamount = int.Parse(_settings.OutputAmount);
-                                }
-                                catch (Exception)
-                                {
-                                    GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _settings.Modulus), NotificationLevel.Error);
-                                    return false;
-                                }
-                            }
-                            BigInteger[] array = new BigInteger[outputamount];
-                            for (int i = 0; i < outputamount; i++)
-                            {
-                                byte[] output = new byte[outputlength];
-                                random.GetBytes(output);
-                                if (output.Length > 0)
-                                {
-                                    output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
-                                }
-                                array[i] = new BigInteger(output);
-                            }
-                            _output = array;
-                            OnPropertyChanged("Output");
-                        }
-                        break;
-                    case OutputType.Bool:
-                        {
-                            byte[] output = new byte[1];
-                            random.GetBytes(output);
-                            _output = output[0] % 2 == 0;
-                            OnPropertyChanged("Output");
-                        }
-                        break;
-
-                    default:
-                        throw new Exception(string.Format("Output type {0} not implemented", _settings.OutputType.ToString()));
-                }
-                return true;
-            }
-        }
-
-        /// <summary>
-        /// Executes the X2modN random number generator
-        /// </summary>
-        /// <returns></returns>
-        private bool ExecuteX2modNGenerator()
-        {
-            BigInteger seed;
-            BigInteger modulus;
-            int outputlength;
-            try
-            {
-                seed = BigInteger.Parse(_settings.Seed);
-            }
-            catch (Exception)
-            {
-                GuiLogMessage(string.Format(Resources.InvalidSeedValue, _settings.Seed), NotificationLevel.Error);
-                return false;
-            }
-            try
-            {
-                modulus = BigInteger.Parse(_settings.Modulus);
-            }
-            catch (Exception)
-            {
-                GuiLogMessage(string.Format(Resources.InvalidModulus, _settings.Modulus), NotificationLevel.Error);
-                return false;
-            }
-            if (string.IsNullOrEmpty(_settings.OutputLength))
-            {
-                outputlength = 0;
-            }
-            else
-            {
-                try
-                {
-                    outputlength = int.Parse(_settings.OutputLength);
-                }
-                catch (Exception)
-                {
-                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.Modulus), NotificationLevel.Error);
-                    return false;
-                }
-            }
-            switch (_settings.OutputType)
-            {
-                case OutputType.ByteArray:
-                    {
-                        X2 x2Generator = new X2(seed, modulus, outputlength);
-                        _output = x2Generator.GenerateRandomByteArray();
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.CrypToolStream:
-                    {
-                        X2 x2Generator = new X2(seed, modulus, outputlength);
-                        byte[] output = x2Generator.GenerateRandomByteArray();
-                        _output = new CStreamWriter(output);
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.Number:
-                    {
-                        X2 x2Generator = new X2(seed, modulus, outputlength);
-                        byte[] output = x2Generator.GenerateRandomByteArray();
-                        OnPropertyChanged("Output");
-                        _output = new CStreamWriter(output);
-                        if (output.Length > 0)
-                        {
-                            output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
-                        }
-                        _output = new BigInteger(output);
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.NumberArray:
-                    {
-                        int outputamount;
-                        if (string.IsNullOrEmpty(_settings.OutputAmount))
-                        {
-                            outputamount = 1;
-                        }
-                        else
-                        {
-                            try
-                            {
-                                outputamount = int.Parse(_settings.OutputAmount);
-                            }
-                            catch (Exception)
-                            {
-                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _settings.Modulus), NotificationLevel.Error);
-                                return false;
-                            }
-                        }
-                        BigInteger[] array = new BigInteger[outputamount];
-                        X2 x2Generator = new X2(seed, modulus, outputlength);
-                        for (int i = 0; i < outputamount; i++)
-                        {
-                            byte[] output = x2Generator.GenerateRandomByteArray();
-                            if (output.Length > 0)
-                            {
-                                output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
+                                byte[] temp = output;
+                                output = new byte[output.Length + 1];
+                                Array.Copy(temp, 0, output, 0, temp.Length);
                             }
                             array[i] = new BigInteger(output);
                         }
@@ -452,510 +192,79 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                     break;
                 case OutputType.Bool:
                     {
-                        X2 x2Generator = new X2(seed, modulus, 1);
-                        _output = x2Generator.GenerateRandomBit();
+                        _output = _generator.GenerateRandomBit();
                         OnPropertyChanged("Output");
                     }
                     break;
                 default:
                     throw new Exception(string.Format("Output type {0} not implemented", _settings.OutputType.ToString()));
             }
-            return true;
         }
 
-        private bool ExecuteLCG()
+        private void ReadSettings()
         {
-            BigInteger seed;
-            BigInteger modulus;
-            int outputlength;
-            BigInteger a;
-            BigInteger b;
             try
             {
-                seed = BigInteger.Parse(_settings.Seed);
+                if (!string.IsNullOrEmpty(_settings.Seed))
+                {
+                    _seed = BigInteger.Parse(_settings.Seed);
+                }
             }
             catch (Exception)
             {
                 GuiLogMessage(string.Format(Resources.InvalidSeedValue, _settings.Seed), NotificationLevel.Error);
-                return false;
+                return;
             }
             try
             {
-                modulus = BigInteger.Parse(_settings.Modulus);
+                if (!string.IsNullOrEmpty(_settings.Modulus))
+                {
+                    _modulus = BigInteger.Parse(_settings.Modulus);
+                }
             }
             catch (Exception)
             {
                 GuiLogMessage(string.Format(Resources.InvalidModulus, _settings.Modulus), NotificationLevel.Error);
-                return false;
+                return;
             }
-            if (string.IsNullOrEmpty(_settings.OutputLength))
-            {
-                outputlength = 0;
-            }
-            else
-            {
-                try
-                {
-                    outputlength = int.Parse(_settings.OutputLength);
-                }
-                catch (Exception)
-                {
-                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.Modulus), NotificationLevel.Error);
-                    return false;
-                }
-            }
+
             try
             {
-                a = BigInteger.Parse(_settings.a);
+                if (!string.IsNullOrEmpty(_settings.OutputLength))
+                {
+                    _outputlength = int.Parse(_settings.OutputLength);
+                }
+            }
+            catch (Exception)
+            {
+                GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.OutputLength), NotificationLevel.Error);
+                return;
+            }
+
+            try
+            {
+                if (!string.IsNullOrEmpty(_settings.a))
+                {
+                    _a = BigInteger.Parse(_settings.a);
+                }
             }
             catch (Exception)
             {
                 GuiLogMessage(string.Format(Resources.InvalidaValue, _settings.Modulus), NotificationLevel.Error);
-                return false;
+                return;
             }
             try
             {
-                b = BigInteger.Parse(_settings.b);
+                if (!string.IsNullOrEmpty(_settings.b))
+                {
+                    _b = BigInteger.Parse(_settings.b);
+                }
             }
             catch (Exception)
             {
                 GuiLogMessage(string.Format(Resources.InvalidbValue, _settings.Modulus), NotificationLevel.Error);
-                return false;
+                return;
             }
-            switch (_settings.OutputType)
-            {
-                case OutputType.ByteArray:
-                    {
-                        LCG lcgGenerator = new LCG(seed, modulus, a, b, outputlength);
-                        _output = lcgGenerator.GenerateRandomByteArray();
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.CrypToolStream:
-                    {
-                        LCG lcgGenerator = new LCG(seed, modulus, a, b, outputlength);
-                        byte[] output = lcgGenerator.GenerateRandomByteArray();
-                        _output = new CStreamWriter(output);
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.Number:
-                    {
-                        LCG lcgGenerator = new LCG(seed, modulus, a, b, outputlength);
-                        byte[] output = lcgGenerator.GenerateRandomByteArray();
-                        OnPropertyChanged("Output");
-                        _output = new CStreamWriter(output);
-                        if (output.Length > 0)
-                        {
-                            output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
-                        }
-                        _output = new BigInteger(output);
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.NumberArray:
-                    {
-                        int outputamount;
-                        if (string.IsNullOrEmpty(_settings.OutputAmount))
-                        {
-                            outputamount = 1;
-                        }
-                        else
-                        {
-                            try
-                            {
-                                outputamount = int.Parse(_settings.OutputAmount);
-                            }
-                            catch (Exception)
-                            {
-                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _settings.Modulus), NotificationLevel.Error);
-                                return false;
-                            }
-                        }
-                        BigInteger[] array = new BigInteger[outputamount];
-                        LCG lcgGenerator = new LCG(seed, modulus, a, b, outputlength);
-                        for (int i = 0; i < outputamount; i++)
-                        {
-                            byte[] output = lcgGenerator.GenerateRandomByteArray();
-                            if (output.Length > 0)
-                            {
-                                output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
-                            }
-                            array[i] = new BigInteger(output);
-                        }
-                        _output = array;
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.Bool:
-                    {
-                        LCG lcgGenerator = new LCG(seed, modulus, a, b, outputlength);
-                        _output = lcgGenerator.GenerateRandomBit();
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                default:
-                    throw new Exception(string.Format("Output type {0} not implemented", _settings.OutputType.ToString()));
-            }
-            return true;
-        }
-
-        private bool ExecuteICG()
-        {
-            BigInteger seed;
-            BigInteger modulus;
-            int outputlength;
-            BigInteger a;
-            BigInteger b;
-            try
-            {
-                seed = BigInteger.Parse(_settings.Seed);
-            }
-            catch (Exception)
-            {
-                GuiLogMessage(string.Format(Resources.InvalidSeedValue, _settings.Seed), NotificationLevel.Error);
-                return false;
-            }
-            try
-            {
-                modulus = BigInteger.Parse(_settings.Modulus);
-            }
-            catch (Exception)
-            {
-                GuiLogMessage(string.Format(Resources.InvalidModulus, _settings.Modulus), NotificationLevel.Error);
-                return false;
-            }
-            if (string.IsNullOrEmpty(_settings.OutputLength))
-            {
-                outputlength = 0;
-            }
-            else
-            {
-                try
-                {
-                    outputlength = int.Parse(_settings.OutputLength);
-                }
-                catch (Exception)
-                {
-                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.Modulus), NotificationLevel.Error);
-                    return false;
-                }
-            }
-            try
-            {
-                a = BigInteger.Parse(_settings.a);
-            }
-            catch (Exception)
-            {
-                GuiLogMessage(string.Format(Resources.InvalidaValue, _settings.Modulus), NotificationLevel.Error);
-                return false;
-            }
-            try
-            {
-                b = BigInteger.Parse(_settings.b);
-            }
-            catch (Exception)
-            {
-                GuiLogMessage(string.Format(Resources.InvalidbValue, _settings.Modulus), NotificationLevel.Error);
-                return false;
-            }
-            if (!isPrime(modulus))
-            {
-                GuiLogMessage(string.Format(Resources.ErrorPrime, _settings.Modulus, stdPrime), NotificationLevel.Warning);
-                modulus = stdPrime;
-            }
-            switch (_settings.OutputType)
-            {
-                case OutputType.ByteArray:
-                    {
-                        ICG icgGenerator = new ICG(seed, modulus, a, b, outputlength);
-                        _output = icgGenerator.GenerateRandomByteArray();
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.CrypToolStream:
-                    {
-                        ICG icgGenerator = new ICG(seed, modulus, a, b, outputlength);
-                        byte[] output = icgGenerator.GenerateRandomByteArray();
-                        _output = new CStreamWriter(output);
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.Number:
-                    {
-                        ICG icgGenerator = new ICG(seed, modulus, a, b, outputlength);
-                        byte[] output = icgGenerator.GenerateRandomByteArray();
-                        OnPropertyChanged("Output");
-                        _output = new CStreamWriter(output);
-                        if (output.Length > 0)
-                        {
-                            output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
-                        }
-                        _output = new BigInteger(output);
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.NumberArray:
-                    {
-                        int outputamount;
-                        if (string.IsNullOrEmpty(_settings.OutputAmount))
-                        {
-                            outputamount = 1;
-                        }
-                        else
-                        {
-                            try
-                            {
-                                outputamount = int.Parse(_settings.OutputAmount);
-                            }
-                            catch (Exception)
-                            {
-                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _settings.Modulus), NotificationLevel.Error);
-                                return false;
-                            }
-                        }
-                        BigInteger[] array = new BigInteger[outputamount];
-                        ICG icgGenerator = new ICG(seed, modulus, a, b, outputlength);
-                        for (int i = 0; i < outputamount; i++)
-                        {
-                            byte[] output = icgGenerator.GenerateRandomByteArray();
-                            if (output.Length > 0)
-                            {
-                                output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
-                            }
-                            array[i] = new BigInteger(output);
-                        }
-                        _output = array;
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.Bool:
-                    {
-                        ICG icgGenerator = new ICG(seed, modulus, a, b, outputlength);
-                        _output = icgGenerator.GenerateRandomBit();
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                default:
-                    throw new Exception(string.Format("Output type {0} not implemented", _settings.OutputType.ToString()));
-            }
-            return true;
-        }
-
-        private bool ExecuteXpat2()
-        {
-            BigInteger seed;
-            int outputlength;
-            try
-            {
-                seed = BigInteger.Parse(_settings.Seed);
-            }
-            catch (Exception)
-            {
-                GuiLogMessage(string.Format(Resources.InvalidSeedValue, _settings.Seed), NotificationLevel.Error);
-                return false;
-            }
-            if (string.IsNullOrEmpty(_settings.OutputLength))
-            {
-                outputlength = 0;
-            }
-            else
-            {
-                try
-                {
-                    outputlength = int.Parse(_settings.OutputLength);
-                }
-                catch (Exception)
-                {
-                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.Modulus), NotificationLevel.Error);
-                    return false;
-                }
-            }
-
-            switch (_settings.OutputType)
-            {
-                case OutputType.ByteArray:
-                    {
-                        SubtractiveGenerator xpat2Generator = new SubtractiveGenerator(seed, outputlength);
-                        _output = xpat2Generator.GenerateRandomByteArray();
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.CrypToolStream:
-                    {
-                        SubtractiveGenerator icgGenerator = new SubtractiveGenerator(seed, outputlength);
-                        byte[] output = icgGenerator.GenerateRandomByteArray();
-                        _output = new CStreamWriter(output);
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.Number:
-                    {
-                        SubtractiveGenerator xpat2Generator = new SubtractiveGenerator(seed, outputlength);
-                        byte[] output = xpat2Generator.GenerateRandomByteArray();
-                        OnPropertyChanged("Output");
-                        _output = new CStreamWriter(output);
-                        if (output.Length > 0)
-                        {
-                            output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
-                        }
-                        _output = new BigInteger(output);
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.NumberArray:
-                    {
-                        int outputamount;
-                        if (string.IsNullOrEmpty(_settings.OutputAmount))
-                        {
-                            outputamount = 1;
-                        }
-                        else
-                        {
-                            try
-                            {
-                                outputamount = int.Parse(_settings.OutputAmount);
-                            }
-                            catch (Exception)
-                            {
-                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _settings.Modulus), NotificationLevel.Error);
-                                return false;
-                            }
-                        }
-                        BigInteger[] array = new BigInteger[outputamount];
-                        SubtractiveGenerator xpat2Generator = new SubtractiveGenerator(seed, outputlength);
-                        for (int i = 0; i < outputamount; i++)
-                        {
-                            byte[] output = xpat2Generator.GenerateRandomByteArray();
-                            if (output.Length > 0)
-                            {
-                                output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
-                            }
-                            array[i] = new BigInteger(output);
-                        }
-                        _output = array;
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.Bool:
-                    {
-                        SubtractiveGenerator xpat2Generator = new SubtractiveGenerator(seed, outputlength);
-                        _output = xpat2Generator.GenerateRandomBit();
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                default:
-                    throw new Exception(string.Format("Output type {0} not implemented", _settings.OutputType.ToString()));
-            }
-            return true;
-        }
-
-        private bool ExecuteXORShift()
-        {
-            BigInteger seed;
-            int outputlength;
-            try
-            {
-                seed = BigInteger.Parse(_settings.Seed);
-            }
-            catch (Exception)
-            {
-                GuiLogMessage(string.Format(Resources.InvalidSeedValue, _settings.Seed), NotificationLevel.Error);
-                return false;
-            }
-            if (string.IsNullOrEmpty(_settings.OutputLength))
-            {
-                outputlength = 0;
-            }
-            else
-            {
-                try
-                {
-                    outputlength = int.Parse(_settings.OutputLength);
-                }
-                catch (Exception)
-                {
-                    GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.Modulus), NotificationLevel.Error);
-                    return false;
-                }
-            }
-
-            switch (_settings.OutputType)
-            {
-                case OutputType.ByteArray:
-                    {
-                        XORShift xorShift = new XORShift(seed, outputlength, _settings.XORShiftType);
-                        _output = xorShift.GenerateRandomByteArray();
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.CrypToolStream:
-                    {
-                        XORShift icgGenerator = new XORShift(seed, outputlength, _settings.XORShiftType);
-                        byte[] output = icgGenerator.GenerateRandomByteArray();
-                        _output = new CStreamWriter(output);
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.Number:
-                    {
-                        XORShift xorShift = new XORShift(seed, outputlength, _settings.XORShiftType);
-                        byte[] output = xorShift.GenerateRandomByteArray();
-                        OnPropertyChanged("Output");
-                        _output = new CStreamWriter(output);
-                        if (output.Length > 0)
-                        {
-                            output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
-                        }
-                        _output = new BigInteger(output);
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.NumberArray:
-                    {
-                        int outputamount;
-                        if (string.IsNullOrEmpty(_settings.OutputAmount))
-                        {
-                            outputamount = 1;
-                        }
-                        else
-                        {
-                            try
-                            {
-                                outputamount = int.Parse(_settings.OutputAmount);
-                            }
-                            catch (Exception)
-                            {
-                                GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _settings.Modulus), NotificationLevel.Error);
-                                return false;
-                            }
-                        }
-                        BigInteger[] array = new BigInteger[outputamount];
-                        XORShift xorShift = new XORShift(seed, outputlength, _settings.XORShiftType);
-                        for (int i = 0; i < outputamount; i++)
-                        {
-                            byte[] output = xorShift.GenerateRandomByteArray();
-                            if (output.Length > 0)
-                            {
-                                output[output.Length - 1] &= 0x7F; // set sign bit 0 = positive
-                            }
-                            array[i] = new BigInteger(output);
-                        }
-                        _output = array;
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                case OutputType.Bool:
-                    {
-                        XORShift xorShift = new XORShift(seed, outputlength, _settings.XORShiftType);
-                        _output = xorShift.GenerateRandomBit();
-                        OnPropertyChanged("Output");
-                    }
-                    break;
-                default:
-                    throw new Exception(string.Format("Output type {0} not implemented", _settings.OutputType.ToString()));
-            }
-            return true;
         }
 
         /// <summary>
@@ -985,38 +294,6 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         /// </summary>
         public void Dispose()
         {
-        }
-
-        #endregion
-
-        #region Helpermethods
-
-        /// <summary>
-        /// simple test for prime numbers
-        /// </summary>
-        /// <param name="num"></param>
-        /// <returns></returns>
-        private bool isPrime(BigInteger num)
-        {
-            if (num == 1)
-            {
-                return false;
-            }
-
-            if (num == 2)
-            {
-                return true;
-            }
-
-            BigInteger r = (BigInteger)Math.Sqrt((double)num);
-            for (BigInteger i = 3; i <= r; i += 2)
-            {
-                if (num % i == 0)
-                {
-                    return false;
-                }
-            }
-            return true;
         }
 
         #endregion

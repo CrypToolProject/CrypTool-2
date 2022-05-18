@@ -16,7 +16,6 @@
 */
 
 
-using System;
 using System.Numerics;
 
 namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
@@ -34,45 +33,14 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
             get => _count;
         }
 
-        public ICG(BigInteger Seed, BigInteger Modul, BigInteger a, BigInteger b, BigInteger OutputLength) : base()
+        public ICG(BigInteger seed, BigInteger modulus, BigInteger a, BigInteger b, int outputLength) : base()
         {
-            this.Seed = Seed;
-            Modulus = Modul;
+            Seed = seed;
+            RandNo = seed;
+            Modulus = modulus;
             A = a;
             B = b;
-            this.OutputLength = OutputLength;
-            //RandNo takes value of the seed
-            RandNo = this.Seed;
-        }
-
-        /// <summary>
-        /// generates the output
-        /// </summary>
-        /// <returns
-        public override byte[] GenerateRandomByteArray()
-        {
-            Count = 0;
-            int k = 0;
-            byte[] res = new byte[(int)OutputLength];
-            for (int j = 0; j < OutputLength * 9; j++)
-            {
-                int curByte = 0;
-                int tmp = 128;
-                for (int i = 0; i < 8; i++)
-                {
-                    Randomize();
-                    if (GenerateRandomBit())
-                    {
-                        curByte += tmp;
-                    }
-                    tmp /= 2;
-                    Count = j + i;
-                }
-                res[k] = Convert.ToByte(curByte);
-                k++;
-                j += 8;
-            }
-            return res;
+            OutputLength = outputLength;
         }
 
         /// <summary>
@@ -81,6 +49,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
         /// <returns></returns>
         public override bool GenerateRandomBit()
         {
+            Randomize();
             return RandNo > Modulus / 2;
         }
 
@@ -90,13 +59,13 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
         public override void Randomize()
         {
             BigInteger tmp;
-            if (Modulus < (A * (Seed + Count) + B))
+            if (Modulus < (A * (RandNo + Count) + B))
             {
-                tmp = ((Ext_EA((A * (Seed + Count) + B), Modulus)[1] + Modulus) % Modulus);
+                tmp = ((Ext_EA((A * (RandNo + Count) + B), Modulus)[1] + Modulus) % Modulus);
             }
             else
             {
-                tmp = ((Ext_EA(Modulus, (A * (Seed + Count) + B))[2] + Modulus) % Modulus);
+                tmp = ((Ext_EA(Modulus, (A * (RandNo + Count) + B))[2] + Modulus) % Modulus);
             }
             RandNo = ((tmp + Modulus) % Modulus);
         }
@@ -149,7 +118,6 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
             result[1] = x;
             result[2] = y;
 
-            //return result
             return result;
         }
     }
