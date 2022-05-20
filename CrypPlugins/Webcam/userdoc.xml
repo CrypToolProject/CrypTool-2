@@ -14,7 +14,7 @@
     After you drag the component onto the workspace, you may select in the settings which of the detected cameras you want to use.
     Additionally, you can choose the time interval for the forwarding, and the quality of the pictures.
     <newline /><newline />
-    Pictures are recorded, if the according boolean input is <i>true</i>.
+    Images are recorded, if the according boolean input is <i>true</i>.
   </usage>
   <usage lang="de-DE">
     Nachdem Sie die Komponente auf den Arbeitsbereich gezogen haben, können Sie in den Einstellungen auswählen, welche der erkannten Kameras verwendet werden soll.

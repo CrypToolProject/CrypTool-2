@@ -127,25 +127,19 @@
     <value>Geräteauswahl</value>
   </data>
   <data name="DeviceChoiceTooltip" xml:space="preserve">
-    <value>Zeigt die angeschlossenen Geräte an.</value>
+    <value>Zeigt die angeschlossenen Geräte an</value>
   </data>
-  <data name="PictureOutPutCaption" xml:space="preserve">
+  <data name="ImageOutPutCaption" xml:space="preserve">
     <value>Bildausgang</value>
   </data>
-  <data name="PictureOutPutTooltip" xml:space="preserve">
+  <data name="ImageOutPutTooltip" xml:space="preserve">
     <value>Hier wird das aktuelle Kamerabild ausgegeben.</value>
   </data>
-  <data name="PictureQualityCaption" xml:space="preserve">
+  <data name="ImageQualityCaption" xml:space="preserve">
     <value>Bildqualität</value>
   </data>
-  <data name="PictureQualityTooltip" xml:space="preserve">
+  <data name="ImageQualityTooltip" xml:space="preserve">
     <value>Verändert die Paketgröße und Bildqualität der Kamera</value>
-  </data>
-  <data name="SendPictureCaption" xml:space="preserve">
-    <value>Periode</value>
-  </data>
-  <data name="SendPictureTooltip" xml:space="preserve">
-    <value>Bestimmt die Zeitspanne in Millisekunden, in der das Kamerabild zum Bildausgang geschickt wird.</value>
   </data>
   <data name="SingleOutPutCaption" xml:space="preserve">
     <value>Einzelbildausgang</value>
@@ -153,46 +147,52 @@
   <data name="SingleOutPutTooltip" xml:space="preserve">
     <value>Gibt ein einzelnes Bild aus</value>
   </data>
-  <data name="TakePictureCaption" xml:space="preserve">
-    <value>Einzelbild aufnehmen.</value>
+  <data name="TakeImageCaption" xml:space="preserve">
+    <value>Einzelbild aufnehmen</value>
   </data>
-  <data name="TakePictureTooltip" xml:space="preserve">
+  <data name="TakeImageTooltip" xml:space="preserve">
     <value>Nimmt einen booleschen Wert entgegen und gibt das momentane Bild am Einzelbildausgang aus. Siehe "Aktion für Bild".</value>
   </data>
-  <data name="TakePictureChoiceCaption" xml:space="preserve">
+  <data name="TakeImageChoiceCaption" xml:space="preserve">
     <value>Aktion für Einzelbildaufnahme</value>
   </data>
-  <data name="TakePictureChoiceTooltip" xml:space="preserve">
+  <data name="TakeImageChoiceTooltip" xml:space="preserve">
     <value>Stellt ein, bei welchem booleschen Wert das Bild aufgenommen werden soll</value>
   </data>
   <data name="DeviceSettingsGroup" xml:space="preserve">
     <value>Geräteeinstellungen</value>
   </data>
-  <data name="TakePictureChoiceList1" xml:space="preserve">
+  <data name="TakeImageChoiceList1" xml:space="preserve">
     <value>Wahr/Falsch</value>
   </data>
-  <data name="TakePictureChoiceList2" xml:space="preserve">
+  <data name="TakeImageChoiceList2" xml:space="preserve">
     <value>Wahr</value>
   </data>
-  <data name="TakePictureChoiceList3" xml:space="preserve">
+  <data name="TakeImageChoiceList3" xml:space="preserve">
     <value>Falsch</value>
   </data>
   <data name="BrightnessCaption" xml:space="preserve">
     <value>Helligkeit</value>
   </data>
   <data name="BrightnessTooltip" xml:space="preserve">
-    <value>Ändert die Helligkeit des Kamerabildes.</value>
+    <value>Ändert die Helligkeit des Kamerabildes</value>
   </data>
   <data name="ContrastCaption" xml:space="preserve">
     <value>Kontrast</value>
   </data>
   <data name="ContrastTooltip" xml:space="preserve">
-    <value>Ändert den Kontrast des Kamerabildes.</value>
+    <value>Ändert den Kontrast des Kamerabildes</value>
   </data>
   <data name="SharpnessCaption" xml:space="preserve">
     <value>Schärfe</value>
   </data>
   <data name="SharpnessTooltip" xml:space="preserve">
-    <value>Ändert die Schärfe des Kamerabildes.</value>
+    <value>Ändert die Schärfe des Kamerabildes</value>
+  </data>
+  <data name="CaptureFrequencyCaption" xml:space="preserve">
+    <value>Aufnahmefrequenz</value>
+  </data>
+  <data name="CaptureFrequencyTooltip" xml:space="preserve">
+    <value>Die Aufnahmefrequenz ist die Anzahl der Bilder, die pro Sekunde aufgenommen werden</value>
   </data>
 </root>

@@ -14,6 +14,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Image Name="Picture" Grid.Row="0" Grid.Column="0" Width="Auto" Height="Auto"/>
+        <Image Name="Image" Grid.Row="0" Grid.Column="0" Width="Auto" Height="Auto"/>
     </Grid>
 </UserControl>

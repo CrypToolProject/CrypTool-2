@@ -31,11 +31,9 @@ namespace CrypTool.Plugins.Webcam
     {
         #region Private Variables
 
-        private static readonly WebcamSettings settings = new WebcamSettings();
-        private readonly WebcamPresentation presentation = new WebcamPresentation(settings);
-        private readonly DateTime lastExecuted = DateTime.Now;
-        private readonly System.Timers.Timer grabOutputPicture = null;
-        private bool takePicture;
+        private readonly WebcamSettings _settings = new WebcamSettings();
+        private readonly WebcamPresentation _presentation = new WebcamPresentation();
+        private bool takeImage;
         private bool running = false;
 
         public Webcam()
@@ -49,8 +47,8 @@ namespace CrypTool.Plugins.Webcam
 
         /// <summary>
         /// </summary>
-        [PropertyInfo(Direction.OutputData, "PictureOutPutCaption", "PictureOutPutTooltip")]
-        public byte[] PictureOutput
+        [PropertyInfo(Direction.OutputData, "ImageOutPutCaption", "ImageOutPutTooltip")]
+        public byte[] ImageOutput
         {
             get;
             set;
@@ -64,46 +62,46 @@ namespace CrypTool.Plugins.Webcam
         }
 
 
-        [PropertyInfo(Direction.InputData, "TakePictureCaption", "TakePictureTooltip", false)]
-        public bool TakePicture
+        [PropertyInfo(Direction.InputData, "TakeImageCaption", "TakeImageTooltip", false)]
+        public bool TakeImage
         {
-            get => takePicture;
+            get => takeImage;
             set
             {
-                takePicture = value;
-                TakePictureNow();
+                takeImage = value;
+                CaptureImage();
             }
         }
 
         /// <summary>
         /// Takes a single picture and outputs it to the "single output"
-        /// triggered by the TakePicture (boolean) input
+        /// triggered by the TakeImage (boolean) input
         /// </summary>
-        private void TakePictureNow()
+        private void CaptureImage()
         {
             if (running)
             {
                 bool takeit = false;
-                switch (settings.TakePictureChoice)
+                switch (_settings.TakeImageChoice)
                 {
-                    case 0://if takePicture == true OR takePicture == false
+                    case 0://if takeImage == true OR takeImage == false
                     default:
                         takeit = true;
                         break;
-                    case 1://if takePicture == true
-                        takeit = takePicture;
+                    case 1://if takeImage == true
+                        takeit = takeImage;
                         break;
-                    case 2://if takePicture == false
-                        takeit = !takePicture;
+                    case 2://if takeImage == false
+                        takeit = !takeImage;
                         break;
                 }
 
                 if (takeit)
                 {
                     byte[] data = null;
-                    presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                    _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                        data = presentation.CaptureImage();
+                        data = _presentation.CaptureImage();
                     }, null);
 
                     if (data != null)
@@ -122,12 +120,12 @@ namespace CrypTool.Plugins.Webcam
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings => settings;
+        public ISettings Settings => _settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation => presentation;
+        public UserControl Presentation => _presentation;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -144,6 +142,7 @@ namespace CrypTool.Plugins.Webcam
             ProgressChanged(0, 1);
             if (!running)
             {
+                _presentation.WebcamSettings = _settings;
                 running = true;
                 Thread thread = new Thread(CaptureThread)
                 {
@@ -160,32 +159,32 @@ namespace CrypTool.Plugins.Webcam
         private void CaptureThread()
         {
             // 1) start camera
-            presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                presentation.Start(settings.DeviceChoice);
+                _presentation.Start(_settings.DeviceChoice);
             }, null);
 
             // 2) loop capturing images
             while (running)
             {
                 byte[] data = null;
-                presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
-                    data = presentation.CaptureImage();
+                    data = _presentation.CaptureImage();
                 }, null);
 
                 if (data != null)
                 {
-                    PictureOutput = data;
-                    OnPropertyChanged("PictureOutput");
+                    ImageOutput = data;
+                    OnPropertyChanged("ImageOutput");
                 }
-                Thread.Sleep(settings.SendPicture);
+                Thread.Sleep((int)(1000.0 / _settings.CaptureFrequency));
             }
 
             // 3) stop camera
-            presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                presentation.Stop();
+                _presentation.Stop();
             }, null);
         }
 

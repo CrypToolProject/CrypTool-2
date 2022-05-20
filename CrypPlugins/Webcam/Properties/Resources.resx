@@ -129,34 +129,28 @@
   <data name="DeviceChoiceTooltip" xml:space="preserve">
     <value>Shows a list of camera devices.</value>
   </data>
-  <data name="PictureOutPutCaption" xml:space="preserve">
-    <value>Picture output</value>
+  <data name="ImageOutPutCaption" xml:space="preserve">
+    <value>Image output</value>
   </data>
-  <data name="PictureOutPutTooltip" xml:space="preserve">
+  <data name="ImageOutPutTooltip" xml:space="preserve">
     <value>Sends the image file as a byte array.</value>
   </data>
-  <data name="PictureQualityCaption" xml:space="preserve">
-    <value>Picture quality</value>
+  <data name="ImageQualityCaption" xml:space="preserve">
+    <value>Image quality</value>
   </data>
-  <data name="PictureQualityTooltip" xml:space="preserve">
+  <data name="ImageQualityTooltip" xml:space="preserve">
     <value>Sets the packet size and picture quality of the camera.</value>
   </data>
-  <data name="SendPictureCaption" xml:space="preserve">
-    <value>Period</value>
+  <data name="TakeImageCaption" xml:space="preserve">
+    <value>Take image trigger</value>
   </data>
-  <data name="SendPictureTooltip" xml:space="preserve">
-    <value>Sets the time in milliseconds in which the image file is sent to the output.</value>
+  <data name="TakeImageChoiceCaption" xml:space="preserve">
+    <value>Trigger for "Take image" input</value>
   </data>
-  <data name="TakePictureCaption" xml:space="preserve">
-    <value>Take picture</value>
-  </data>
-  <data name="TakePictureChoiceCaption" xml:space="preserve">
-    <value>Action for "Take picture" input</value>
-  </data>
-  <data name="TakePictureChoiceTooltip" xml:space="preserve">
+  <data name="TakeImageChoiceTooltip" xml:space="preserve">
     <value>Represents the boolean value at which the image is to be recorded</value>
   </data>
-  <data name="TakePictureTooltip" xml:space="preserve">
+  <data name="TakeImageTooltip" xml:space="preserve">
     <value>Capture the current camera picture and send it to the single picture output.</value>
   </data>
   <data name="SingleOutPutCaption" xml:space="preserve">
@@ -168,13 +162,13 @@
   <data name="DeviceSettingsGroup" xml:space="preserve">
     <value>Device settings</value>
   </data>
-  <data name="TakePictureChoiceList1" xml:space="preserve">
+  <data name="TakeImageChoiceList1" xml:space="preserve">
     <value>True/False</value>
   </data>
-  <data name="TakePictureChoiceList2" xml:space="preserve">
+  <data name="TakeImageChoiceList2" xml:space="preserve">
     <value>True</value>
   </data>
-  <data name="TakePictureChoiceList3" xml:space="preserve">
+  <data name="TakeImageChoiceList3" xml:space="preserve">
     <value>False</value>
   </data>
   <data name="BrightnessCaption" xml:space="preserve">
@@ -194,5 +188,11 @@
   </data>
   <data name="SharpnessTooltip" xml:space="preserve">
     <value>Changes the sharpness of the camera image.</value>
+  </data>
+  <data name="CaptureFrequencyCaption" xml:space="preserve">
+    <value>Capture frequency</value>
+  </data>
+  <data name="CaptureFrequencyTooltip" xml:space="preserve">
+    <value>The capture frequency is the number of capture images per second</value>
   </data>
 </root>

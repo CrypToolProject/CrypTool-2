@@ -15,6 +15,7 @@
 */
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using DirectShowLib;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -26,35 +27,30 @@ namespace CrypTool.Plugins.Webcam
     {
         #region Private Variables
 
-        private int quality = 50;
+        private int _quality = 50;
         private int _brightness = 100;
         private int _contrast = 25;
         private int _sharpness = 100;
 
         private ObservableCollection<string> device = new ObservableCollection<string>();
         private int capDevice;
-        private int sendPicture = 1000;
-        private int takePictureChoice;
+        private int _captureFrequency = 25;
+        private int _takeImageChoice;
 
         #endregion
 
         public WebcamSettings()
         {
-            Device.Clear();
-
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE (PNPClass = 'Image' OR PNPClass = 'Camera')");
-            foreach (ManagementBaseObject info in searcher.Get())
+            CameraDevices.Clear();
+            DsDevice[] captureDevices = DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice);
+            for (int cameraIndex = 0; cameraIndex < captureDevices.Length; cameraIndex++)
             {
-                string name = Convert.ToString(info["Caption"]);
-                Device.Add(name);
+                CameraDevices.Add($"{cameraIndex}: {captureDevices[cameraIndex].Name}");
             }
 
-
-            //devices hinzufügen
-            //standard camera auswählen
         }
 
-        public ObservableCollection<string> Device
+        public ObservableCollection<string> CameraDevices
         {
             get => device;
             set
@@ -62,14 +58,14 @@ namespace CrypTool.Plugins.Webcam
                 if (value != device)
                 {
                     device = value;
-                    OnPropertyChanged("Device");
+                    OnPropertyChanged("CameraDevices");
                 }
             }
         }
 
         #region TaskPane Settings
 
-        [TaskPane("DeviceChoiceCaption", "DeviceChoiceTooltip", null, 0, false, ControlType.DynamicComboBox, new string[] { "Device" })]
+        [TaskPane("DeviceChoiceCaption", "DeviceChoiceTooltip", null, 0, false, ControlType.DynamicComboBox, new string[] { "CameraDevices" })]
         public int DeviceChoice
         {
             get => capDevice;
@@ -83,30 +79,30 @@ namespace CrypTool.Plugins.Webcam
             }
         }
 
-        [TaskPane("TakePictureChoiceCaption", "TakePictureChoiceTooltip", null, 0, false, ControlType.ComboBox, new string[] { "TakePictureChoiceList1", "TakePictureChoiceList2", "TakePictureChoiceList3" })]
-        public int TakePictureChoice
+        [TaskPane("TakeImageCaption", "TakeImageTooltip", null, 0, false, ControlType.ComboBox, new string[] { "TakeImageChoiceList1", "TakeImageChoiceList2", "TakeImageChoiceList3" })]
+        public int TakeImageChoice
         {
-            get => takePictureChoice;
+            get => _takeImageChoice;
             set
             {
-                if (takePictureChoice != value)
+                if (_takeImageChoice != value)
                 {
-                    takePictureChoice = value;
-                    OnPropertyChanged("TakePictureChoice");
+                    _takeImageChoice = value;
+                    OnPropertyChanged("TakeImageChoice");
                 }
             }
         }
 
-        [TaskPane("PictureQualityCaption", "PictureQualityTooltip", "DeviceSettingsGroup", 1, true, ControlType.Slider, 1, 100)]
-        public int PictureQuality
+        [TaskPane("ImageQualityCaption", "ImageQualityTooltip", "DeviceSettingsGroup", 1, true, ControlType.Slider, 1, 100)]
+        public int ImageQuality
         {
-            get => quality;
+            get => _quality;
             set
             {
-                if (quality != value)
+                if (_quality != value)
                 {
-                    quality = value;
-                    OnPropertyChanged("PictureQuality");
+                    _quality = value;
+                    OnPropertyChanged("ImageQuality");
                 }
             }
         }
@@ -153,16 +149,16 @@ namespace CrypTool.Plugins.Webcam
             }
         }
 
-        [TaskPane("SendPictureCaption", "SendPictureTooltip", "DeviceSettingsGroup", 5, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 40, 10000)]
-        public int SendPicture
+        [TaskPane("CaptureFrequencyCaption", "CaptureFrequencyTooltip", "DeviceSettingsGroup", 5, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 250)]
+        public int CaptureFrequency
         {
-            get => sendPicture;
+            get => _captureFrequency;
             set
             {
-                if (sendPicture != value)
+                if (_captureFrequency != value)
                 {
-                    sendPicture = value;
-                    OnPropertyChanged("SendPicture");
+                    _captureFrequency = value;
+                    OnPropertyChanged("SendImage");
                 }
             }
         }

@@ -33,12 +33,11 @@ namespace Webcam
         private Capture _capture = null;
         private ImageCodecInfo _jpgEncoder;
         private Encoder _encoder;
-        private readonly WebcamSettings _settings;
+        public WebcamSettings WebcamSettings  { get;set;}
 
-        public WebcamPresentation(WebcamSettings settings)
+        public WebcamPresentation()
         {
             InitializeComponent();
-            _settings = settings;
         }
 
         /// <summary>
@@ -63,12 +62,12 @@ namespace Webcam
             {
                 using (MemoryStream stream = new MemoryStream())
                 {
-                    _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.Brightness, _settings.Brightness);
-                    _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.Contrast, _settings.Contrast);
-                    _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.Sharpness, _settings.Sharpness);
+                    _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.Brightness, WebcamSettings.Brightness);
+                    _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.Contrast, WebcamSettings.Contrast);
+                    _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.Sharpness, WebcamSettings.Sharpness);
                     System.Drawing.Bitmap bitmap = _capture.QueryFrame().Bitmap;
                     EncoderParameters encoderParameters = new EncoderParameters(1);
-                    EncoderParameter encoderParameter = new EncoderParameter(_encoder, _settings.PictureQuality);
+                    EncoderParameter encoderParameter = new EncoderParameter(_encoder, WebcamSettings.ImageQuality);
                     encoderParameters.Param[0] = encoderParameter;
                     bitmap.Save(stream, _jpgEncoder, encoderParameters);
                     stream.Position = 0;
@@ -78,7 +77,7 @@ namespace Webcam
                     bitmapImage.StreamSource = stream;
                     bitmapImage.EndInit();
                     bitmapImage.Freeze();
-                    Picture.Source = bitmapImage;
+                    Image.Source = bitmapImage;
                     return stream.ToArray();
                 }
             }
