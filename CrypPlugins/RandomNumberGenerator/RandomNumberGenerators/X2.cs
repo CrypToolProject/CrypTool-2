@@ -37,22 +37,12 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
             RandNo = seed;
             Modulus = modul;
             OutputLength = outputLength;
-        }
-
-        /// <summary>
-        /// returns next random bit
-        /// </summary>
-        /// <returns></returns>
-        public override bool GenerateRandomBit()
-        {
-            Randomize();
-            return (RandNo & 0b00000001) == 1;
-        }
+        }       
 
         /// <summary>
         /// randomize RandNo
         /// </summary>
-        public override void Randomize()
+        public override void ComputeNextRandomNumber()
         {
             BigInteger tmp = RandNo;
             RandNo = BigInteger.Pow(tmp, (int)B) % Modulus;

@@ -55,7 +55,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
             int resultoffset = 0;
             while (resultoffset < result.Length)
             {
-                Randomize();
+                ComputeNextRandomNumber();
                 byte[] array = ConvertCurrentNumberToByteArray();
                 for (int arrayoffset = 0; arrayoffset < array.Length; arrayoffset++)
                 {
@@ -87,13 +87,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
             }
         }
 
-        public override bool GenerateRandomBit()
-        {
-            Randomize();
-            return (RandNo & 0b00000001) == 1;
-        }
-
-        public override void Randomize()
+        public override void ComputeNextRandomNumber()
         {
             switch (_xorShiftType)
             {

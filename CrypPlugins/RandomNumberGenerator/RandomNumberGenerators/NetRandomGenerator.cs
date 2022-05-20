@@ -42,13 +42,6 @@ namespace RandomNumberGenerator.RandomNumberGenerators
             _random = new Random((int)seed);
         }
 
-        public override bool GenerateRandomBit()
-        {
-            byte[] value = new byte[1];
-            _random.NextBytes(value);
-            return (value[0] & 0b00000001) == 1;
-        }
-
         public override byte[] GenerateRandomByteArray()
         {
             byte[] array = new byte[OutputLength];
@@ -56,7 +49,7 @@ namespace RandomNumberGenerator.RandomNumberGenerators
             return array;
         }
 
-        public override void Randomize()
+        public override void ComputeNextRandomNumber()
         {
             
         }

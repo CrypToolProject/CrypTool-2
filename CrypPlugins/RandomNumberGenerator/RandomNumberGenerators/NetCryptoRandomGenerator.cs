@@ -35,20 +35,6 @@ namespace RandomNumberGenerator.RandomNumberGenerators
             _random = new RNGCryptoServiceProvider();
         }
 
-        public override bool GenerateRandomBit()
-        {
-            byte[] value = new byte[1];
-            if (_nonZeroBytes)
-            {
-                _random.GetNonZeroBytes(value);
-            }
-            else
-            {
-                _random.GetBytes(value);
-            }
-            return (value[0] & 0b00000001) == 1;
-        }
-
         public override byte[] GenerateRandomByteArray()
         {
             byte[] array = new byte[OutputLength];
@@ -63,7 +49,7 @@ namespace RandomNumberGenerator.RandomNumberGenerators
             return array;
         }
 
-        public override void Randomize()
+        public override void ComputeNextRandomNumber()
         {
 
         }

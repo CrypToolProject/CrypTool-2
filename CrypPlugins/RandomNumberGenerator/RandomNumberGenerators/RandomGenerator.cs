@@ -16,6 +16,7 @@
 */
 
 
+using System;
 using System.Numerics;
 
 namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
@@ -32,7 +33,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
         private BigInteger _a;
         private BigInteger _b;
         private int _outputLength;
-       
+
         public BigInteger Seed
         {
             set => _seed = value;
@@ -67,17 +68,19 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
         {
             get => _outputLength;
             set => _outputLength = value;
-        }
-
-        public abstract void Randomize();
+        }       
         
+        /// <summary>
+        /// Generates a random byte array
+        /// </summary>
+        /// <returns></returns>
         public virtual byte[] GenerateRandomByteArray()
         {
             byte[] result = new byte[OutputLength];
             int resultoffset = 0;
             while (resultoffset < result.Length)
             {
-                Randomize();
+                ComputeNextRandomNumber();
                 byte[] array = RandNo.ToByteArray();
                 for (int arrayoffset = 0; arrayoffset < array.Length; arrayoffset++)
                 {
@@ -92,7 +95,19 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
             return result;
         }
 
-        public abstract bool GenerateRandomBit();
+        /// <summary>
+        /// Returns a random bool by generating a random byte array and testing the least significant bit
+        /// </summary>
+        /// <returns></returns>
+        public bool GenerateRandomBit()
+        {
+            return (GenerateRandomByteArray()[0] & 1) == 1;           
+        }
 
+        /// <summary>
+        /// Has to be implemented by each random number generator
+        /// After execution, RandNo has to contain the new random number
+        /// </summary>
+        public abstract void ComputeNextRandomNumber();
     }
 }

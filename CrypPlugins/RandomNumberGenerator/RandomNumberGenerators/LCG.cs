@@ -31,21 +31,11 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
             B = b;
             OutputLength = outputLength;
         }
-
-        /// <summary>
-        /// returns next random bit
-        /// </summary>
-        /// <returns></returns>
-        public override bool GenerateRandomBit()
-        {
-            Randomize();
-            return RandNo > Modulus / 2;
-        }
-
+        
         /// <summary>
         /// randomize RandNo
         /// </summary>
-        public override void Randomize()
+        public override void ComputeNextRandomNumber()
         {
             RandNo = (A * RandNo + B) % Modulus;
         }

@@ -55,17 +55,11 @@ namespace CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerators
             _Position = 54;
             for (int i = 55; i < 220; ++i)
             {
-                Randomize();
+                ComputeNextRandomNumber();
             }
         }
 
-        public override bool GenerateRandomBit()
-        {
-            Randomize();
-            return (RandNo & 0b00000001) == 1;
-        }
-
-        public override void Randomize()
+        public override void ComputeNextRandomNumber()
         {
             _CurrentValue = Mod(_State[(_Position + 1) % 55] - _State[(_Position + 32) % 55]);
             _Position = (_Position + 1) % 55;
