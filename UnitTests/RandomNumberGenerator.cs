@@ -30,7 +30,9 @@ namespace Tests.TemplateAndPluginTests
             RNGCryptoServiceProvider = 1,   //.net RNGCryptoServiceProvider
             X2modN = 2,
             LCG = 3,
-            ICG = 4
+            ICG = 4,
+            SubtractiveGenerator = 5,
+            XORShift = 6
         }
 
         /// <summary>
@@ -71,18 +73,25 @@ namespace Tests.TemplateAndPluginTests
         // Self defined by using the CT1
         // </summary>
         private readonly TestVector[] testvectors = new TestVector[] {
-            new TestVector () { n=0, t=AlgorithmType.X2modN, o=OutputType.ByteArray, Seed="19", Modulo="3", A="", B="", OutputAmount="8", Result="FFFFFFFFFFFFFFFF" },
-            new TestVector () { n=1, t=AlgorithmType.X2modN, o=OutputType.ByteArray, Seed="3", Modulo="17", A="", B="", OutputAmount="8", Result="DFFFFFFFFFFFFFFF" },
-            new TestVector () { n=2, t=AlgorithmType.X2modN, o=OutputType.ByteArray, Seed="11", Modulo="19457325865870232370589789343309096381", A="", B="", OutputAmount="8", Result="F8CFF9E9D7EFC060" },
+            new TestVector () { n=0, t=AlgorithmType.X2modN, o=OutputType.ByteArray, Seed="19", Modulo="3", A="", B="", OutputAmount="8", Result="0101010101010101" },
+            new TestVector () { n=1, t=AlgorithmType.X2modN, o=OutputType.ByteArray, Seed="3", Modulo="17", A="", B="", OutputAmount="8", Result="090D100101010101" },
+            new TestVector () { n=2, t=AlgorithmType.X2modN, o=OutputType.ByteArray, Seed="11", Modulo="19457325865870232370589789343309096381", A="", B="", OutputAmount="8", Result="79313961DBC60CC1" },
 
-            new TestVector () { n=3, t=AlgorithmType.LCG, o=OutputType.ByteArray, Seed="11", Modulo="256", A="2", B="23", OutputAmount="8", Result="23FFFFFFFFFFFFFF" },
-            new TestVector () { n=4, t=AlgorithmType.LCG, o=OutputType.ByteArray, Seed="11", Modulo="256", A="3", B="23", OutputAmount="8", Result="41F0EB72C3980121" },
-            new TestVector () { n=5, t=AlgorithmType.LCG, o=OutputType.ByteArray, Seed="11", Modulo="19457325865870232370589789343309096381", A="3", B="23", OutputAmount="8", Result="0000000000000000" },
+            new TestVector () { n=3, t=AlgorithmType.LCG, o=OutputType.ByteArray, Seed="11", Modulo="256", A="2", B="23", OutputAmount="8", Result="2D71F900092969E9" },
+            new TestVector () { n=4, t=AlgorithmType.LCG, o=OutputType.ByteArray, Seed="11", Modulo="256", A="3", B="23", OutputAmount="8", Result="38BF00541350072C" },
+            new TestVector () { n=5, t=AlgorithmType.LCG, o=OutputType.ByteArray, Seed="11", Modulo="19457325865870232370589789343309096381", A="3", B="23", OutputAmount="8", Result="38BF005402130750" },
 
-            new TestVector () { n=6, t=AlgorithmType.ICG, o=OutputType.ByteArray, Seed="11", Modulo="3", A="21", B="2", OutputAmount="8", Result="FFFFFFFFFFFFFFFF" },
-            new TestVector () { n=7, t=AlgorithmType.ICG, o=OutputType.ByteArray, Seed="11", Modulo="7", A="2", B="21", OutputAmount="8", Result="251554D2CAAA2925" },
-            new TestVector () { n=8, t=AlgorithmType.ICG, o=OutputType.ByteArray, Seed="12", Modulo="5", A="3", B="21", OutputAmount="8", Result="C66331988C466331"},
-            new TestVector () { n=9, t=AlgorithmType.ICG, o=OutputType.ByteArray, Seed="12", Modulo="46633", A="3", B="21", OutputAmount="8", Result="0FFF30DA09FB9B17" }
+            new TestVector () { n=6, t=AlgorithmType.ICG, o=OutputType.ByteArray, Seed="11", Modulo="256", A="21", B="2", OutputAmount="8", Result="59AF00F500137177" },
+            new TestVector () { n=7, t=AlgorithmType.ICG, o=OutputType.ByteArray, Seed="11", Modulo="256", A="2", B="21", OutputAmount="8", Result="830013F30033B300" },
+            new TestVector () { n=8, t=AlgorithmType.ICG, o=OutputType.ByteArray, Seed="17", Modulo="19457325865870232370589789343309096381", A="3", B="23", OutputAmount="8", Result="DE3424A9D78D5960" },
+
+            new TestVector () { n=9, t=AlgorithmType.SubtractiveGenerator, o=OutputType.ByteArray, Seed="17",Result="DED2881CB82AB51A" },
+            new TestVector () { n=10, t=AlgorithmType.SubtractiveGenerator, o=OutputType.ByteArray, Seed="171",Result="540CBD1B989C8C1C" },
+            new TestVector () { n=11, t=AlgorithmType.SubtractiveGenerator, o=OutputType.ByteArray, Seed="12031984",Result="D7770A370894D30A" },
+
+            new TestVector () { n=12, t=AlgorithmType.XORShift, o=OutputType.ByteArray, Seed="1",Result="2120040001060804" },
+            new TestVector () { n=13, t=AlgorithmType.XORShift, o=OutputType.ByteArray, Seed="42",Result="2845AD00AC340AA9" },
+            new TestVector () { n=14, t=AlgorithmType.XORShift, o=OutputType.ByteArray, Seed="12031984",Result="543474BBCBFF2B82" },
         };
     }
 }

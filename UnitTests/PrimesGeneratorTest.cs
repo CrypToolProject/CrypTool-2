@@ -51,10 +51,10 @@ namespace Tests.TemplateAndPluginTests
             new TestVector () { n=2, mode=4, input=7, output=11 },
             new TestVector () { n=3, mode=3, input=BigInteger.Parse("1267650600228229401496703205376"), output=BigInteger.Parse("1267650600228229401496703205361") },
             new TestVector () { n=4, mode=4, input=BigInteger.Parse("1267650600228229401496703205376"), output=BigInteger.Parse("1267650600228229401496703205653") },
-            new TestVector () { n=5, mode=0, input=100, count=1000 },       // generate count numbers with input bits 
-            new TestVector () { n=5, mode=0, input=1000, count=1 },         // generate count numbers with input bits
-            new TestVector () { n=6, mode=1, input=100, count=1000 },       // generate count numbers with input bits, MSB set
-            new TestVector () { n=7, mode=2, input=1000000, count=1000 },   // generate count numbers <= input
+            new TestVector () { n=5, mode=0, input=100, count=5 },         // create primes with m_Input bits
+            new TestVector () { n=5, mode=0, input=1000, count=5 },        // create primes with m_Input bits
+            new TestVector () { n=6, mode=1, input=100, count=5 },         // create primes with m_Input bits, MSB set
+            new TestVector () { n=7, mode=2, input=1000000 },              // create prime <= m_Input
         };
 
     }
