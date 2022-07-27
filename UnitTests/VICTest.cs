@@ -15,18 +15,17 @@ namespace UnitTests
         public void VICTestMethod()
         {
             CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("VIC");
-            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "Input", "Phrase", "Date", "InitializingString", "Number", "Password", ".Action", ".Alphabet" }, new[] { "Output" });
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "Input", "Phrase", "Date", "InitializingString", "Number", "Password", ".Action", ".Alphabet" }, new[] { "Output" });            
+
             object[] output;
             object[] secondOutput;
 
             foreach (TestVector vector in testvectors)
             {
                 string input = vector.input;
-                input = formatValues(input, vector.alphabetType);
+                input = FormatString(input, vector.alphabetType);
                 output = scenario.GetOutputs(new object[] { input, vector.phrase, vector.date, vector.initializingString, vector.number, vector.password, vector.actionType, vector.alphabetType });
                 secondOutput = scenario.GetOutputs(new object[] { (string)output[0], vector.phrase, vector.date, vector.initializingString, vector.number, vector.password, 1, vector.alphabetType });
-                Console.WriteLine("Original input:                   " + input + "\n");
-                Console.WriteLine("Output after deciphering: " + (string)secondOutput[0] + "\n");
                 Assert.AreEqual(true, CheckStringEquality(input, (string)secondOutput[0]), "Unexpected value in test #" + vector.n + ".");
             }
 
@@ -65,7 +64,7 @@ namespace UnitTests
             return true;
         }
 
-        public string formatValues(string input, int usedAlphabet)
+        public string FormatString(string input, int usedAlphabet)
         {
             string alphabet;
             if (usedAlphabet == 0)

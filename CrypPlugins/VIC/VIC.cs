@@ -35,13 +35,6 @@ namespace CrypTool.Plugins.VIC
 
         private readonly VICSettings settings = new VICSettings();
 
-        private string _Input;
-        private string _Date;
-        private string _Password;
-        private string _Phrase;
-        private string _Number;
-        private string _InitializingString;
-
         private string input;
         private string date;
         private string password;
@@ -101,98 +94,45 @@ namespace CrypTool.Plugins.VIC
         [PropertyInfo(Direction.InputData, "DateCaption", "DateTooltip")]
         public string Date
         {
-            get => _Date;
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    if (DateCheck(ref value))
-                    {
-                        _Date = value;
-                        OnPropertyChanged("Date");
-                    }
-                }
-            }
+            get;
+            set;
         }
 
         [PropertyInfo(Direction.InputData, "PasswordCaption", "PasswordTooltip")]
         public string Password
         {
-            get => _Password;
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    if (PasswordCheck(ref value))
-                    {
-                        _Password = value;
-                        OnPropertyChanged("Password");
-                    }
-
-                }
-            }
+            get;
+            set;
         }
 
         [PropertyInfo(Direction.InputData, "PhraseCaption", "PhraseTooltip")]
         public string Phrase
         {
-            get => _Phrase;
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    if (PhraseCheck(ref value))
-                    {
-                        _Phrase = value;
-                        OnPropertyChanged("Phrase");
-                    }
-                }
-            }
+            get;
+            set;
         }
 
         [PropertyInfo(Direction.InputData, "NumberCaption", "NumberTooltip")]
         public string Number
         {
-            get => _Number;
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    if (NumberCheck(ref value))
-                    {
-                        _Number = value;
-                        OnPropertyChanged("Number");
-                    }
-                }
-            }
+            get;
+            set;
         }
 
         [PropertyInfo(Direction.InputData, "InitializingStringCaption", "InitializingStringTooltip")]
         public string InitializingString
         {
-            get => _InitializingString;
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    if (InitializingStringCheck(ref value))
-                    {
-                        _InitializingString = value;
-                        OnPropertyChanged("InitializingString");
-                    }
-                }
-            }
+            get;
+            set;
         }
+
         [PropertyInfo(Direction.InputData, "TextInputCaption", "TextInputTooltip")]
         public string Input
         {
-            get => _Input;
-            set
-            {
-                _Input = value;
-                OnPropertyChanged("Input");
-            }
+            get;
+            set;
         }
+
         [PropertyInfo(Direction.OutputData, "OutputCaption", "OutputTooltip")]
         public string Output
         {
@@ -235,10 +175,10 @@ namespace CrypTool.Plugins.VIC
             password = null;
             phrase = null;
             number = null;
-            InitializingString = null;
+            initializingString = null;
         }
 
-        private bool DateCheck(ref string date)
+        private bool CheckAndFormatDate(ref string date)
         {
             try
             {
@@ -256,7 +196,7 @@ namespace CrypTool.Plugins.VIC
             }
         }
 
-        private bool PasswordCheck(ref string password)
+        private bool CheckAndFormatPassword(ref string password)
         {
             try
             {
@@ -277,7 +217,7 @@ namespace CrypTool.Plugins.VIC
             }
         }
 
-        private bool PhraseCheck(ref string phrase)
+        private bool CheckAndFormatPhrase(ref string phrase)
         {
             try
             {
@@ -296,7 +236,7 @@ namespace CrypTool.Plugins.VIC
             }
         }
 
-        private bool NumberCheck(ref string number)
+        private bool CheckAndFormatNumber(ref string number)
         {
             try
             {
@@ -313,7 +253,7 @@ namespace CrypTool.Plugins.VIC
             }
         }
 
-        private bool InitializingStringCheck(ref string initializingString)
+        private bool CheckAndFormatInitializingString(ref string initializingString)
         {
             try
             {
@@ -338,32 +278,31 @@ namespace CrypTool.Plugins.VIC
         private void FormatInput()
         {
 
-            if (!DateCheck(ref date))
+            if (!CheckAndFormatDate(ref date))
             {
-                throw new InvalidInputException("ShortDateError");
+                throw new InvalidInputException("Date is too short!");
             }
 
             if ((ActionType)settings.Action == ActionType.Decrypt)
             {
                 int saltInsertionIndex = int.Parse(date.ElementAt(date.Length - 1).ToString());
                 input = RemoveSalt(input, saltInsertionIndex);
-
             }
-            if (!PasswordCheck(ref password))
+            if (!CheckAndFormatPassword(ref password))
             {
-                throw new InvalidInputException("ShortPasswordException");
+                throw new InvalidInputException("Invalid password given!");
             }
-            if (!PhraseCheck(ref phrase))
+            if (!CheckAndFormatPhrase(ref phrase))
             {
-                throw new InvalidInputException("ShortPhraseError");
+                throw new InvalidInputException("Phrase is too short!");
             }
-            if (!InitializingStringCheck(ref initializingString))
+            if (!CheckAndFormatInitializingString(ref initializingString))
             {
-                throw new InvalidInputException("ShortInitializingStringError");
+                throw new InvalidInputException("Initializing String is too short!");
             }
-            if (!NumberCheck(ref number))
+            if (!CheckAndFormatNumber(ref number))
             {
-                throw new InvalidInputException("InvalidNumberError");
+                throw new InvalidInputException("Invalid number given!");
             }
 
             StringBuilder StringBuilder = new StringBuilder();
@@ -511,7 +450,6 @@ namespace CrypTool.Plugins.VIC
         /// <returns></returns>
         private string SubstractModulo(string a, string b)
         {
-
             string output = string.Empty;
             int aa, bb, cc;
             for (int i = 0; i < a.Length; ++i)
@@ -567,7 +505,6 @@ namespace CrypTool.Plugins.VIC
 
             return output;
         }
-
 
         /// <summary>
         /// Finds last two dissimilar digits in a string of numbers and returns them as items of tuple.
@@ -1632,6 +1569,7 @@ namespace CrypTool.Plugins.VIC
                 textStartSymbol = "TS";
                 digitLetterSymbol = "C/D";
             }
+
             try
             {
                 input = Input;
@@ -1765,9 +1703,8 @@ namespace CrypTool.Plugins.VIC
             }
             catch (Exception ex)
             {
-                GuiLogMessage(string.Format(ex.Message) + "\n" + string.Format(ex.StackTrace), NotificationLevel.Error);
+                GuiLogMessage(ex.Message, NotificationLevel.Error);
             }
-            GuiLogMessage("Input values were formatted and used as following: \nInput Plaintext:" + input + "\nDate:" + date + "\nPassword:" + password + "\nPhrase:" + phrase + "\nNumber:" + number + "\nInitializing string:" + InitializingString, NotificationLevel.Info);
             ProgressChanged(1, 1);
         }
 
