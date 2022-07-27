@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text;
 
-namespace Tests
+namespace UnitTests
 {
     [TestClass]
     public class CostFunctionTest

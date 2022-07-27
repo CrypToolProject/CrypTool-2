@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Tests.TemplateAndPluginTests
+namespace UnitTests
 {
     internal abstract class TestScenario
     {

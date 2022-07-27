@@ -2,7 +2,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace Tests.TemplateAndPluginTests
+namespace UnitTests
 {
     [TestClass]
     public class VICTest

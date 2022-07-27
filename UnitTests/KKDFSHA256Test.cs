@@ -3,7 +3,7 @@ using System;
 using System.Numerics;
 using System.Threading;
 
-namespace Tests.TemplateAndPluginTests
+namespace UnitTests
 {
 
     /// <summary>

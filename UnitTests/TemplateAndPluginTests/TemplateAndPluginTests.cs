@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using WorkspaceManager.Model;
 using Application = System.Windows.Forms.Application;
 
-namespace Tests.TemplateAndPluginTests
+namespace UnitTests
 {
     [TestClass]
     public class TemplateAndPluginTests

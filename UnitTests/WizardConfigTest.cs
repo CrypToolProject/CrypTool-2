@@ -11,7 +11,7 @@ using Wizard;
 using WorkspaceManager.Model;
 using ValidationType = System.Xml.ValidationType;
 
-namespace Tests
+namespace UnitTests
 {
     [TestClass]
     public class WizardConfigTest

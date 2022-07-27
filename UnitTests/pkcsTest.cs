@@ -1,19 +1,7 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
-// CrypTool V2
-// © 2008 - Gerhard Junker
-// Apache License see http://www.apache.org/licenses/
-//
-// $HeadURL: https://svn.CrypTool.org/CrypTool2/trunk/UnitTests/pkcsTest.cs $
-//////////////////////////////////////////////////////////////////////////////////////////////////
-// $Revision:: 8109                                                                           $://
-// $Author:: kopal                                                                            $://
-// $Date:: 2019-05-13 12:33:48 +0200 (Mo, 13 Mai 2019)                                        $://
-//////////////////////////////////////////////////////////////////////////////////////////////////
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PKCS5;
 
-namespace Tests
+namespace UnitTests
 {
     /// <summary>
     /// test methods for PKCS#5 Plugin

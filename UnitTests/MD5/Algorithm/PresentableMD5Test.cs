@@ -3,7 +3,7 @@ using CrypTool.PluginBase.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Test.CrypTool.MD5.Algorithm
+namespace UnitTests
 {
     [TestClass]
     public class PresentableMD5Test

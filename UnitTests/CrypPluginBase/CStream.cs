@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace Tests.CrypPluginBase
+namespace UnitTests
 {
     /// <summary>
     /// Summary description for CStreamTest
@@ -178,76 +178,91 @@ namespace Tests.CrypPluginBase
         [TestMethod]
         public void TestDestructor()
         {
-            CStreamWriter writer = new CStreamWriter();
-
-            Assert.IsFalse(writer.IsSwapped);
-            writer.Write(LongData);
-            Assert.IsFalse(writer.IsSwapped);
-            writer.Write(LongData);
-
-            Assert.IsTrue(writer.IsSwapped);
-
-            string filePath = writer.FilePath;
-            Assert.IsTrue(File.Exists(filePath));
+            string filePath;
+            DoTestDestructor();
 
             // force GC
-            writer = null;
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
             // tempfile deleted
             Assert.IsFalse(File.Exists(filePath));
+
+            //by using a method, the writer is garbace collected
+            //and so the temp file should also be deleted after that
+            void DoTestDestructor()
+            {
+                CStreamWriter writer = new CStreamWriter();
+
+                Assert.IsFalse(writer.IsSwapped);
+                writer.Write(LongData);
+                Assert.IsFalse(writer.IsSwapped);
+                writer.Write(LongData);
+
+                Assert.IsTrue(writer.IsSwapped);
+
+                filePath = writer.FilePath;
+                Assert.IsTrue(File.Exists(filePath));
+            }
         }
 
         [TestMethod]
         public void TestDestructorWithReader()
         {
-            CStreamWriter writer = new CStreamWriter();
-
-            // write, not swapped
-            writer.Write(LongData);
-
-            // read something and assert there's more
-            CStreamReader reader = writer.CreateReader();
-            byte[] buf = new byte[ShortData.Length];
-            reader.Read(buf);
-            Assert.IsTrue(reader.Position > 0);
-            Assert.IsTrue(reader.Length > reader.Position);
-            Assert.IsFalse(reader.IsSwapped);
-
-            // write more, assert swap
-            writer.Write(LongData);
-            writer.Write(LongData);
-            Assert.IsTrue(reader.IsSwapped);
-
-            string filePath = writer.FilePath;
-
-            // destroy ref to writer
-            writer.Close();
-            writer = null;
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            Assert.IsNull(writer);
-
-            // assert reading still works
-            Assert.IsTrue(File.Exists(filePath));
-            Assert.IsNotNull(reader);
-            int sum = 0;
-            while (sum < LongData.Length * 2)
-            {
-                int read = reader.Read(buf);
-                Assert.IsTrue(read > 0);
-                sum += read;
-            }
-
-            // destroy reader
-            reader = null;
+            string filePath;
+            DoTestDestructorWithReader();
 
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
             // deleted tempfile
             Assert.IsFalse(File.Exists(filePath));
+
+            //by using a method, the writer is garbace collected
+            //and so the temp file should also be deleted after that
+            void DoTestDestructorWithReader()
+            {
+                CStreamWriter writer = new CStreamWriter();
+
+                // write, not swapped
+                writer.Write(LongData);
+
+                // read something and assert there's more
+                CStreamReader reader = writer.CreateReader();
+                byte[] buf = new byte[ShortData.Length];
+                reader.Read(buf);
+                Assert.IsTrue(reader.Position > 0);
+                Assert.IsTrue(reader.Length > reader.Position);
+                Assert.IsFalse(reader.IsSwapped);
+
+                // write more, assert swap
+                writer.Write(LongData);
+                writer.Write(LongData);
+                Assert.IsTrue(reader.IsSwapped);
+
+                filePath = writer.FilePath;
+
+                // destroy ref to writer
+                writer.Close();
+                writer = null;
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                Assert.IsNull(writer);
+
+                // assert reading still works
+                Assert.IsTrue(File.Exists(filePath));
+                Assert.IsNotNull(reader);
+                int sum = 0;
+                while (sum < LongData.Length * 2)
+                {
+                    int read = reader.Read(buf);
+                    Assert.IsTrue(read > 0);
+                    sum += read;
+                }
+
+                // destroy reader
+                reader = null;
+            }
         }
 
         [TestMethod]
@@ -346,29 +361,38 @@ namespace Tests.CrypPluginBase
         [TestMethod]
         public void TestExistingFileReader()
         {
-            string tempFile = DirectoryHelper.GetNewTempFilePath();
-            FileStream tempWriter = new FileStream(tempFile, FileMode.CreateNew);
-            tempWriter.Write(ShortData, 0, ShortData.Length);
-            tempWriter.Write(LongData, 0, LongData.Length);
-            tempWriter.Close();
+            string tempFile;
+            DoTestExistingFileReader();
 
-            CStreamWriter cstream = new CStreamWriter(tempFile);
-            CStreamReader reader = cstream.CreateReader();
-            byte[] buf = new byte[ShortData.Length];
-            reader.ReadFully(buf);
-            Assert.IsTrue(buf.SequenceEqual(ShortData));
-
-            buf = new byte[LongData.Length];
-            reader.ReadFully(buf);
-            Assert.IsTrue(buf.SequenceEqual(LongData));
-
-            // force gc
-            reader = null;
-            cstream = null;
+            // force gc            
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
             File.Delete(tempFile);
+
+            //by using a method, the writer is garbace collected
+            //and so the temp file should also be deleted after that
+            void DoTestExistingFileReader()
+            {
+                tempFile = DirectoryHelper.GetNewTempFilePath();
+                FileStream tempWriter = new FileStream(tempFile, FileMode.CreateNew);
+                tempWriter.Write(ShortData, 0, ShortData.Length);
+                tempWriter.Write(LongData, 0, LongData.Length);
+                tempWriter.Close();
+
+                CStreamWriter cstream = new CStreamWriter(tempFile);
+                CStreamReader reader = cstream.CreateReader();
+                byte[] buf = new byte[ShortData.Length];
+                reader.ReadFully(buf);
+                Assert.IsTrue(buf.SequenceEqual(ShortData));
+
+                buf = new byte[LongData.Length];
+                reader.ReadFully(buf);
+                Assert.IsTrue(buf.SequenceEqual(LongData));
+
+                reader = null;
+                cstream = null;
+            }
         }
     }
 }

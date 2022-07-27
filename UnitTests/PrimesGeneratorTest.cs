@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Numerics;
 
-namespace Tests.TemplateAndPluginTests
+namespace UnitTests
 {
     [TestClass]
     public class PrimesGeneratorTest

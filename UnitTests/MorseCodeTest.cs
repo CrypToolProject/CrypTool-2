@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
-namespace Tests.TemplateAndPluginTests
+namespace UnitTests
 {
     [TestClass]
     public class MorseCodeTest

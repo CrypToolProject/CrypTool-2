@@ -1,7 +1,7 @@
 ﻿using CrypTool.MD5.Presentation.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Test.CrypTool.MD5.Presentation.Helpers
+namespace UnitTests
 {
     [TestClass]
     public class PresentationControlFactoryTest

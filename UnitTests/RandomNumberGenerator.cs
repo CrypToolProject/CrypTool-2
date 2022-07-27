@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Tests.TemplateAndPluginTests
+namespace UnitTests
 {
 
     /// <summary>

@@ -2,7 +2,7 @@ using CrypTool.PluginBase;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Tests.TemplateAndPluginTests
+namespace UnitTests
 {
     internal class PluginTestScenario : TestScenario
     {

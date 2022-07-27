@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
-namespace Tests.TemplateAndPluginTests
+namespace UnitTests
 {
     [TestClass]
     public class M209Test

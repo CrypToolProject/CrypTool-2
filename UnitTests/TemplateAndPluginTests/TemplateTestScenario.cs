@@ -4,7 +4,7 @@ using System.Threading;
 using WorkspaceManager.Execution;
 using WorkspaceManager.Model;
 
-namespace Tests.TemplateAndPluginTests
+namespace UnitTests
 {
     internal class TemplateTestScenario : TestScenario
     {
