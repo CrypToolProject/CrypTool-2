@@ -6,6 +6,11 @@ namespace UnitTests
     [TestClass]
     public class FialkaTest
     {
+        static FialkaTest()
+        {
+            //make sure, that the test environment finds the Fialka.dll
+            TestHelpers.SetAssemblyPaths();
+        }
 
         #region Data structures
 
@@ -19,11 +24,11 @@ namespace UnitTests
         {
             public int testCase;
             public string input, output;
-            public FialkaEnums.machineModel model;
-            public FialkaEnums.countryLayout layout;
-            public FialkaEnums.rotorTypes rTypes;
-            public FialkaEnums.rotorSeries rSeries;
-            public FialkaEnums.numLockType numLock;
+            public object model;
+            public object layout;
+            public object rTypes;
+            public object rSeries;
+            public object numLock;
             public int[] PunchCard, RotorOrder, RotorOffset, RingOffset, CoreOrder, CoreOrientation, CoreOffset;
         }
 

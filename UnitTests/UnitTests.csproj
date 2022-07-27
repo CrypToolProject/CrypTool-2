@@ -79,10 +79,6 @@
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
-    <Reference Include="NativeCryptography">
-      <HintPath>..\Lib\NativeCryptography.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
       <Private>False</Private>
@@ -195,7 +191,7 @@
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\ADFGVX\ADFGVX.csproj">
-      <Project>{9B9CD0E9-D048-45FD-BF0F-7C5A8E714AA2}</Project>
+      <Project>{9b9cd0e9-d048-45fd-bf0f-7c5a8e714aa2}</Project>
       <Name>ADFGVX</Name>
       <Private>False</Private>
     </ProjectReference>
@@ -237,11 +233,6 @@
     <ProjectReference Include="..\CrypPlugins\RandomNumberGenerator\RandomNumberGenerator.csproj">
       <Project>{179e9abf-34fa-4dc5-b8ce-72b9bd090deb}</Project>
       <Name>RandomNumberGenerator</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\CrypPlugins\Speck\Speck.csproj">
-      <Project>{f9d9db59-177c-43b5-891a-55ede1c4403c}</Project>
-      <Name>Speck</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\Wizard\Wizard.csproj">
