@@ -32,11 +32,11 @@
     Wählt man die Methode 'Primzahl mit höchstens n Bits', so kann man als Parameter die maximale Bitgröße der zu erzeugenden Zahl angeben
     (d.h. die Anzahl der Bits, die für die Binärdarstellung der Primzahl höchstens benötigt werden). Die erzeugte Primzahl ist dann
     eine zufällige Primzahl, die größer oder gleich 2 und kleiner als 2^n ist, d.h. eine Primzahl aus dem Intervall [ 2, 2^n [.
-    Die Bitgröße muss größer als 1 Bit sein.
+    Die Bitgröße muss größer als 1 bit sein.
     <newline /><newline />
     Wählt man die Methode 'Primzahl mit genau n Bits', so wird eine Primzahl erzeugt, deren Binärdarstellung genau n Bits benötigt und die
     damit größer oder gleich 2^(n-1) und kleiner als 2^n ist, d.h. im Intervall [ 2^(n-1), 2^n [ liegt.
-    Die Bitgröße muss größer als 1 Bit sein.
+    Die Bitgröße muss größer als 1 bit sein.
     <newline /><newline />
     Wählt man die Methode 'Primzahl kleiner oder gleich n', so stellt der Parameter n eine obere Schranke für die zu erzeugende
     Primzahl dar. Die resultierende Primzahl ist dann eine zufällige Primzahl, die höchstens gleich n ist und somit im Intervall [ 2, n ] liegt.

@@ -11,7 +11,7 @@
   <introduction lang="de-DE">
     Camellia ist eine symmetrische Blockchiffre, die im Jahr 2000 in Zusammenarbeit von Mitsubishi und NTT entwickelt wurde.
     Sie wurde vom europäischen NESSIE-Projekt und dem japanischen CRYPTREC-Projekt als einer ihrer empfohlenen Algorithmen ausgewählt.
-    Camellia verwendet die gleichen Parameter wie der Advanced Encryption Standard: eine Blockgröße von 128 Bit und Schlüssellängen von 128, 192 oder 256 Bit.
+    Camellia verwendet die gleichen Parameter wie der Advanced Encryption Standard: eine Blockgröße von 128 bit und Schlüssellängen von 128, 192 oder 256 bit.
     Die Blockchiffre wurde so konzipiert, dass sie sowohl für Software- als auch für Hardware-Implementierungen geeignet ist.
     Sie kommt in einfachen SmartCards ebenso zum Einsatz wie in Hochleistungs-Netzwerken.
   </introduction>

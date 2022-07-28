@@ -37,7 +37,7 @@
     solution to the generated instance.
   </introduction>
   <introduction lang="de">
-    ISAP-CS ist ein uneingeschränkt bindendes und inhaltsverbergendes Bit-Commitment-Verfahren, das von
+    ISAP-CS ist ein uneingeschränkt bindendes und inhaltsverbergendes bit-Commitment-Verfahren, das von
     Frederik Armknecht, Carsten Elsner und Martin Schmidt als Machbarkeitsstudie für die
     Anwendbarkeit der analytischen Zahlentheorie (insbesondere der diophantischen Approximation) beim
     Entwurf kryptografischer Systeme entwickelt wurde.
@@ -48,9 +48,9 @@
     Finde $p_i (i=1,...,n)$ und $q$, für die für ein gegebenes $\alpha_i$, $\eta_i$ mit $(i=1,...,n)$ und $\epsilon$ gilt:
     <![CDATA[$$| \alpha_i - p_i/q - \eta_i | < \epsilon $$]]><newline /><newline />
     Die zugrunde liegende Idee ist grob gesagt die folgende:
-    Wenn man sich auf ein einzelnes Bit $m$ festlegen will, erzeugt der Algorithmus
+    Wenn man sich auf ein einzelnes bit $m$ festlegen will, erzeugt der Algorithmus
     eine Instanz des ISAP, das die eindeutige Lösung $(p_1,...,p_n,q)$ hat und bei dem
-    $m$ durch das niedrigstwertige Bit von $q$ dargestellt wird.
+    $m$ durch das niedrigstwertige bit von $q$ dargestellt wird.
     Diese ISAP-Instanz wird als die Commitment-Information veröffentlicht, wobei die Lösung
     des Problems noch geheim gehalten wird und erst später zur Bestätigung des Commitments
     bekanntgegeben wird.
@@ -61,25 +61,25 @@
     eindeutige Lösung der generierten Probleminstanz ist.
   </introduction>
   <usage lang="en">
-    Simply drag the <i>ISAP Bit Commitment Scheme</i> component to your workspace and connect a component, that outputs a boolean
+    Simply drag the <i>ISAP bit Commitment Scheme</i> component to your workspace and connect a component, that outputs a boolean
     (for instance the <docRef item="CrypTool.Plugins.BooleanOperators.BooleanInput" /> component), to the <i>InputBit</i> input connector.
     A value of <i>true</i> means $m=1$ and <i>false</i> means $m=0$. <newline />
     Optionally, you can connect to the <i>Dimension</i> and the <i>S</i> input connectors to define these integer
     values (By default, <i>Dimension</i> is 7 and <i>S</i> is 128).
     <newline /><newline />
-    The <i>ISAP Bit Commitment Scheme</i> component has a lot of output connectors (see below), which allow you to obtain the results of
+    The <i>ISAP bit Commitment Scheme</i> component has a lot of output connectors (see below), which allow you to obtain the results of
     the algorithm.<newline />
     The <i>Log message</i> output gives a lot of informations about the intermediate steps of the used algorithm and
     its results.
   </usage>
   <usage lang="de">
-    Ziehen Sie einfach die <i>ISAP Bit-Commitment-Verfahren</i>-Komponente auf den Arbeitsbereich und verbinden den Eingang <i>Eingabe-Bit</i> mit
+    Ziehen Sie einfach die <i>ISAP bit-Commitment-Verfahren</i>-Komponente auf den Arbeitsbereich und verbinden den Eingang <i>Eingabe-bit</i> mit
     einer Komponente, die einen booleschen Wert generiert (zum Beispiel mit der <docRef item="CrypTool.Plugins.BooleanOperators.BooleanInput" />-Komponente).
     Hierbei bedeutet der Wert <i>wahr</i>, dass $m=1$ und <i>falsch</i>, dass $m=0$.<newline />
     Optional kann man an den Eingängen <i>Dimension</i> und <i>S</i> Werte für diese Parameter angeben, ansonsten werden die voreingestellten Werte
     <i>Dimension</i>=7 und <i>S</i>=128 verwendet.
     <newline /><newline />
-    Die <i>ISAP Bit-Commitment-Verfahren</i>-Komponente hat viele Ausgänge, an denen die Ergebnisse der Berechnungen zur Verfügung gestellt werden.<newline />
+    Die <i>ISAP bit-Commitment-Verfahren</i>-Komponente hat viele Ausgänge, an denen die Ergebnisse der Berechnungen zur Verfügung gestellt werden.<newline />
     Am Ausgang <i>Ereignisprotokoll</i> werden einige zusätzliche Informationen über den Ablauf des Algorithmus und Zwischenresultate ausgegeben.
   </usage>
   <references>

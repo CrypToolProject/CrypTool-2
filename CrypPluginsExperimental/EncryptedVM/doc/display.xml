@@ -38,7 +38,7 @@
 	  Durch die Methode <i>SubMemory(data, index, length)</i> kann ein Teil des Speichers ausgewählt werden und mittels <i>Decode(values)</i> in eine natürliche Zahl überführt werden. Die erwünschte Ausgabe muss in die Variable <i>output</i> vom Typ String geschrieben werden.<newline />
 	  Beispiel:<newline />
 	  output += Decode(SubMemory(memory, 0, 8));<newline /><newline />
-	  Das Beispiel gibt die ersten acht Bit des Speichers als natürliche Zahl aus.
+	  Das Beispiel gibt die ersten acht bit des Speichers als natürliche Zahl aus.
 	</section></introduction>
   <usage lang="en">
     <section headline="Input">

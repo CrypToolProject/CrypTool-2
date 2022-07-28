@@ -20,8 +20,8 @@
     Algorithmus abgeleitet, der einer Blockchiffre gleicht. Im Gegensatz zu elektromechanischen Maschinen (wie der Enigma) wird
     die Verschlüsselungsfunktion der T-310/50 alleine durch elektronische Bauteile realisiert.
     <newline />
-    Die Maschine verwendet zwei Schlüssel. Einen 240 Bit langen Hauptschlüssel (30 Bytes), der in zwei Teilschlüssel à 120 Bit (15 Bytes) unterteilt ist.
-    Beide Teilschlüssel müssen eine ungerade Parität haben. Daher hat der Gesamtschlüssel eine Entropie (Informationsgehalt) von 10 mal 23 = 230 Bit.
+    Die Maschine verwendet zwei Schlüssel. Einen 240 bit langen Hauptschlüssel (30 Bytes), der in zwei Teilschlüssel à 120 bit (15 Bytes) unterteilt ist.
+    Beide Teilschlüssel müssen eine ungerade Parität haben. Daher hat der Gesamtschlüssel eine Entropie (Informationsgehalt) von 10 mal 23 = 230 bit.
     Der zweite Schlüssel heißt Langzeitschlüssel und besteht aus verschiedenen Permutationen, die fest auf der Maschine installiert sind. Der Langzeitschlüssel
     konnte als zusätzliche Sicherheitsoption getauscht werden.
     
@@ -37,7 +37,7 @@
     <section headline="Action">
       Choose if you want to encrypt or decrypt data
     </section>
-    <section headline="Bit selector">
+    <section headline="bit selector">
       Due to the complex structure of the T310 and its logical gates, it is not always clear which bits of a vector are used.
       This button allows you to switch between the least or most significant bits of certain vectors like the initialization vector
       and the keys.
@@ -71,9 +71,9 @@
     <section headline="Aktion">
       Es kann zwischen Ver- oder Entschlüsseln gewählt werden.
     </section>
-    <section headline="Bit-Auswahl">
+    <section headline="bit-Auswahl">
       Aufgrund der komplexen Struktur der logischen Schaltungen der T-310, ist nicht immer klar, welche Bits der (Schlüssel-)Vektoren
-      wirklich verwendet werden. Aus diesem Grund kann mit dieser Option gewählt werden, ob das höchst- oder niedrigstwertige Bit eines Vektors
+      wirklich verwendet werden. Aus diesem Grund kann mit dieser Option gewählt werden, ob das höchst- oder niedrigstwertige bit eines Vektors
       verwendet wird (zum Beispiel beim Initialisierungsvektor).
       
     </section>
@@ -86,13 +86,13 @@
     </section>
     <section headline="Version der T-310">
       Es kann zwischen der T-310/50 oder der T-310/51 gewählt werden. Die ältere T-310/50 konnte nur Zeichen nach dem Kodierungstandard
-      für Fernschreibzeichen CCITT-2 verschlüsseln. Da dieser nur 5 Bit lang ist, ist die Zahl der verfügbaren Zeichen begrenzt. Es werden
+      für Fernschreibzeichen CCITT-2 verschlüsseln. Da dieser nur 5 bit lang ist, ist die Zahl der verfügbaren Zeichen begrenzt. Es werden
       nur Großbuchstaben, Ziffern von 0 bis 9 und einige Sonderzeichen unterstützt. In diesem Modus werden alle Zeichen automatisch
-      und ohne Warnung entfernt, die nicht im 7-Bit-ASCII-Zeichensatz enthalten sind. Falls Zeichen in den Eingabedaten übergeben werden,
-      die es in 7-Bit-ASCII aber nicht in CCITT-2 gibt, wird eine Warnung ausgegeben, bevor die jeweiligen Zeichen entfernt und der Klartext
+      und ohne Warnung entfernt, die nicht im 7-bit-ASCII-Zeichensatz enthalten sind. Falls Zeichen in den Eingabedaten übergeben werden,
+      die es in 7-bit-ASCII aber nicht in CCITT-2 gibt, wird eine Warnung ausgegeben, bevor die jeweiligen Zeichen entfernt und der Klartext
       verschlüsselt wird. Kleinbuchstaben werden automatisch in Großbuchstaben umgewandelt.
       <newline /><newline />
-      Die neuere T-310/51 konnte beliebige Daten verschlüsseln. Dazu wurden Bytes vor dem Verschlüsseln auf 5-Bit-Wörter reduziert.
+      Die neuere T-310/51 konnte beliebige Daten verschlüsseln. Dazu wurden Bytes vor dem Verschlüsseln auf 5-bit-Wörter reduziert.
       Diese Implementierung teilt 5-Byte-Blöcke auf 8 Byte auf (Kleinstes gemeinsames Vielfaches: 5 * 8 = 40).
     </section>
   </usage>

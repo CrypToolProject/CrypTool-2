@@ -20,7 +20,7 @@
     <newline />
     Der Rijndael-Algorithmus besitzt eine variable Blockgröße von 128, 192 oder 256 Bits und eine variable Schlüssellänge von 128, 192 oder 256 Bits.
     Rijndael bietet ein sehr hohes Maß an Sicherheit; erst mehr als 10 Jahre nach seiner Standardisierung wurde der erste, theoretisch interessante, praktisch aber nicht relevante,
-    Angriff gefunden <ref id="RelatedKeyCrypt" />. Streng genommen ist AES nicht Rijndael, da bei AES die Blocklänge auf 128 Bit eingeschränkt wurde, während die Wahl der Schlüssellänge von 128, 192 oder 256 Bits unverändert übernommen worden ist. 
+    Angriff gefunden <ref id="RelatedKeyCrypt" />. Streng genommen ist AES nicht Rijndael, da bei AES die Blocklänge auf 128 bit eingeschränkt wurde, während die Wahl der Schlüssellänge von 128, 192 oder 256 Bits unverändert übernommen worden ist. 
     Die Bezeichnungen der drei AES-Varianten AES-128, AES-192 und AES-256 beziehen sich jeweils auf die gewählte Schlüssellänge.
     <newline />
     Der Algorithmus ist frei verfügbar und darf ohne Lizenzgebühren eingesetzt sowie in Soft- und Hardware implementiert werden. AES ist in den USA für staatliche Dokumente mit höchster Geheimhaltungsstufe zugelassen.

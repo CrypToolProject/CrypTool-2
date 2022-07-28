@@ -27,12 +27,12 @@
   <description lang="de">Durch die Komplement-Eigenschaft lässt sich mit einem Chosen-Plaintext-Angriff bei einer vollständigen Schlüsselsuche der Suchraum des DES auf 2^55 Schlüssel halbieren. Diese Vorlage zeigt diese Eigenschaft des DES.</description>
   <keywords lang="de">DES, Komplement</keywords>
   <replacements lang="de">
-    <replacement key="$P$" value="P (ein einzelner 64-Bit-Block für DES)" />
-    <replacement key="$K$" value="K (ein 56-Bit DES-Schlüssel)" />
-    <replacement key="$111$" value="111... ein 64-Bit-Block mit 111... für XOR" />
+    <replacement key="$P$" value="P (ein einzelner 64-bit-Block für DES)" />
+    <replacement key="$K$" value="K (ein 56-bit DES-Schlüssel)" />
+    <replacement key="$111$" value="111... ein 64-bit-Block mit 111... für XOR" />
     <replacement key="$equals$" value="Gleichheit?" />
     <replacement key="$memo1$" value="Durch Vergleich von C mit C' XOR 111... erkennt man, dass DES tatsächlich die &quot;Komplement-Eigenschaft&quot; hat." />
-    <replacement key="$memo2$" value="Diese Vorlage demonstriert die &quot;Komplement-Eigenschaft&quot; der DES-Chiffre .\line\line Die &quot;Komplement-Eigenschaft&quot; besagt, dass DES die folgende Gleichung erfüllt:\line\line DES(P,k) = C &lt;=&gt; DES(P',k') = C'\line\line wobei P der Klartext ist, k der Schlüssel, C der Geheimtext und P', k', C' die &quot;bitweisen Komplemente&quot; von Klartext, Schlüssel und Geheimtext.\line Beispiel k='110011000...&quot; =&gt; k'='001100111...\line\line Aus der Komplement-Eigenschaft folgt, dass der Aufwand für einen Brute-Force-Angriff bei einem Chosen-Plaintext-Angriff um den Faktor 2 (bzw. ein Bit) reduziert werden kann (Quelle: http://en.wikipedia.org/wiki/Data_Encryption_Standard#Security_and_cryptanalysis).\line\line Die Komplexität eines Chosen-Plaintext-Angriffs ist daher 2^55." />
+    <replacement key="$memo2$" value="Diese Vorlage demonstriert die &quot;Komplement-Eigenschaft&quot; der DES-Chiffre .\line\line Die &quot;Komplement-Eigenschaft&quot; besagt, dass DES die folgende Gleichung erfüllt:\line\line DES(P,k) = C &lt;=&gt; DES(P',k') = C'\line\line wobei P der Klartext ist, k der Schlüssel, C der Geheimtext und P', k', C' die &quot;bitweisen Komplemente&quot; von Klartext, Schlüssel und Geheimtext.\line Beispiel k='110011000...&quot; =&gt; k'='001100111...\line\line Aus der Komplement-Eigenschaft folgt, dass der Aufwand für einen Brute-Force-Angriff bei einem Chosen-Plaintext-Angriff um den Faktor 2 (bzw. ein bit) reduziert werden kann (Quelle: http://en.wikipedia.org/wiki/Data_Encryption_Standard#Security_and_cryptanalysis).\line\line Die Komplexität eines Chosen-Plaintext-Angriffs ist daher 2^55." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

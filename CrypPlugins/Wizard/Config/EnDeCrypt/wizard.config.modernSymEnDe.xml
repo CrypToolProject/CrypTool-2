@@ -110,7 +110,7 @@
   <input image="DES">
     <name lang="en">DES</name>
     <description lang="en">The Data Encryption Standard (DES) is a symmetric block cipher algorithm. It was selected by the National Bureau of Standards as an official Federal Information Processing Standard (FIPS) for the United States in 1976 and which has subsequently enjoyed widespread use internationally. It is based on a symmetric algorithm that uses a 56-bit key.</description>
-    <description lang="de">Der "Data Encryption Standard" (DES) ist eine symmetrische Blockchiffre. Er wurde 1976 vom "National Bureau of Standards" als offizieller "Federal Information Processing Standard" (FIPS) für die Vereinigten Staaten ausgewählt und hat daraufhin weitreichende internationale Verbreitung gefunden. Er basiert auf einem symmetrischen Algorithmus, welcher 56-Bit Schlüssel benutzt.</description>
+    <description lang="de">Der "Data Encryption Standard" (DES) ist eine symmetrische Blockchiffre. Er wurde 1976 vom "National Bureau of Standards" als offizieller "Federal Information Processing Standard" (FIPS) für die Vereinigten Staaten ausgewählt und hat daraufhin weitreichende internationale Verbreitung gefunden. Er basiert auf einem symmetrischen Algorithmus, welcher 56-bit Schlüssel benutzt.</description>
     <headline lang="en">Message Input</headline>
     <headline lang="de">Nachrichteneingabe</headline>
     <task lang="en">Here, you can input the message and the key to use.</task>
@@ -168,7 +168,7 @@
       <name lang="en">DES Output</name>
       <name lang="de">DES-Ausgabe</name>
       <description lang="en">The Data Encryption Standard (DES) is a symmetric block cipher algorithm. It was selected by the National Bureau of Standards as an official Federal Information Processing Standard (FIPS) for the United States in 1976 and which has subsequently enjoyed widespread use internationally. It is based on a symmetric algorithm that uses a 56-bit key.</description>
-      <description lang="de">Der "Data Encryption Standard" (DES) ist ein symmetrische Blockchiffre. Er wurde 1976 vom "National Bureau of Standards" als offizieller "Federal Information Processing Standard" (FIPS) für die Vereinigten Staaten ausgewählt und hat daraufhin weitreichende internationale Verbreitung gefunden. Er basiert auf einem symmetrischen Algorithmus, welcher 56-Bit Schlüssel benutzt.</description>
+      <description lang="de">Der "Data Encryption Standard" (DES) ist ein symmetrische Blockchiffre. Er wurde 1976 vom "National Bureau of Standards" als offizieller "Federal Information Processing Standard" (FIPS) für die Vereinigten Staaten ausgewählt und hat daraufhin weitreichende internationale Verbreitung gefunden. Er basiert auf einem symmetrischen Algorithmus, welcher 56-bit Schlüssel benutzt.</description>
       <headline lang="en">DES Output</headline>
       <headline lang="de">DES-Ausgabe</headline>
       <task lang="en">Here, you can change the message and view the results.</task>

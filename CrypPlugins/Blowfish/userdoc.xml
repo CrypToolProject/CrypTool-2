@@ -21,14 +21,14 @@
   <introduction lang="de-DE">
     Die Blowfish-Komponente implementiert drei von Bruce Schneier <ref id="Schneier" /> erfundene Chiffren, nämlich Blowfish, Twofish und Threefish. <newline /><newline />
     Blowfish <ref id="Blowfish" /> ist eine Blockverschlüsselung, die 1993 von Bruce Schneier entworfen und in vielen Verschlüsselungs-Suiten und Verschlüsselungs-Produkten enthalten ist.
-    Er basiert auf einem Feistel-Netzwerk, hat eine Blockgröße von 64 Bit und unterstützt Schlüsselgrößen von 32 Bit bis 448 Bit.
+    Er basiert auf einem Feistel-Netzwerk, hat eine Blockgröße von 64 bit und unterstützt Schlüsselgrößen von 32 bit bis 448 bit.
     Blowfish bietet eine gute Verschlüsselungsrate in Software, und es wurde bisher keine effektive Kryptoanalyse gefunden.
     Der Advanced Encryption Standard (AES) erhält jedoch jetzt mehr Aufmerksamkeit, und Schneier empfiehlt Twofish statt Blowfish für moderne Anwendungen. <newline /><newline />
-    Twofish <ref id="Twofish" /> ist eine symmetrische Blockverschlüsselung, die ebenfalls auf einem Feistel-Netzwerk basiert und eine Blockgröße von 128 Bit und Schlüsselgrößen von 128 Bit, 192 Bit und 256 Bit aufweist.
+    Twofish <ref id="Twofish" /> ist eine symmetrische Blockverschlüsselung, die ebenfalls auf einem Feistel-Netzwerk basiert und eine Blockgröße von 128 bit und Schlüsselgrößen von 128 bit, 192 bit und 256 bit aufweist.
     Twofish war einer der fünf Finalisten des NIST-Wettbewerbs zur Bestimmung des Advanced Encryption Standard (AES), wurde jedoch nicht für die Standardisierung ausgewählt.
     Twofish ist mit der früheren Blockchiffre Blowfish verwandt.<newline /><newline />
     Threefish <ref id="Threefish" /> ist eine Blockverschlüsselung mit symmetrischen Schlüsseln und einstellbaren Tweak-Wert, die als Teil der Skein-Hash-Funktion entwickelt wurde, einem Teilnehmer am NIST-Wettbewerb für das Hashverfahren SHA-3.
-    Es unterstützt 256-Bit-, 512-Bit- und 1024-Bit-Schlüssel. 
+    Es unterstützt 256-bit-, 512-bit- und 1024-bit-Schlüssel. 
     Die Blockgröße entspricht der ausgewählten Schlüsselgröße. 
     Um Cache-Timing-Angriffe zu vermeiden, verwendet der Threefish-Algorithmus keine S-Boxen oder Tabellen-Lookups. 
     Seine Nichtlinearität beruht auf wechselnden Additionen und exklusiven Veroderungen. 

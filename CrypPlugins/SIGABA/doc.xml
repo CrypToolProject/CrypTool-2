@@ -15,7 +15,7 @@
     SIGABA ist ein elektromechanisches Verschlüsselungsgerät, das von den USA während des Zweiten Weltkriegs und in den 1950er Jahren verwendet wurde.
     Auch bekannt als ECM Mark II, Converter M-134 sowie CSP-888/889, galt die SIGABA als sehr sicher und wurde für die strategische Kommunikation, wie zwischen Churchill und Roosevelt, eingesetzt.
     Der SIGABA verschlüsselt und entschlüsselt mit einem Satz von fünf Rotoren und implementiert unregelmäßiges Fortschalten, wofür zwei zusätzliche Sätze von Rotoren eine pseudozufällige Schrittfolge erzeugen.
-    Der vollständige Schlüsselraum, wie er während des Zweiten Weltkriegs verwendet wurde, lag in der Größenordnung von 95 Bit. Es wird vermutet, dass die deutschen Kryptoanalyse-Dienste keine Angriffsmöglichkeiten auf die SIGABA finden konnten.
+    Der vollständige Schlüsselraum, wie er während des Zweiten Weltkriegs verwendet wurde, lag in der Größenordnung von 95 bit. Es wird vermutet, dass die deutschen Kryptoanalyse-Dienste keine Angriffsmöglichkeiten auf die SIGABA finden konnten.
     Es gab zwei Modelle der SIGABA: die CSP-889 und die CSP-2900.
     <newline /><newline />
     Die SIGABA-Komponente implementiert beide SIGABA-Modelle. Über die Einstellungen kann man den Modelltyp austauschen.

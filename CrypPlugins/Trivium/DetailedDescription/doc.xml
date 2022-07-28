@@ -12,7 +12,7 @@
   <introduction lang="de-DE">
     Trivium ist eine synchrone Stromchiffre, die von den Kryptographen Bart Preneel und Christophe De Cannière entwickelt wurde.
     Trivium ist einer der drei Gewinner für das Profil 2 (Hardware-Verfahren) des eSTREAM-Wettbewerbs des ECRYPT-Netzwerkes und hat von allen eSTREAM-Kandidaten das einfachste Design.
-    Trivium erzeugt aus einem 80-Bit-Schlüssel und einem 80-Bit-Initialisierungsvektor einen Schlüsselstrom bis zu 2^64 Bits.
+    Trivium erzeugt aus einem 80-bit-Schlüssel und einem 80-bit-Initialisierungsvektor einen Schlüsselstrom bis zu 2^64 Bits.
     <newline /><newline />
     Trivium ist nicht patentiert und wurde als ISO/IEC 29192-3 standardisiert.
   </introduction>

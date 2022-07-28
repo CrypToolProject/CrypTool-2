@@ -30,7 +30,7 @@ Source: <external ref="http://en.wikipedia.org/wiki/Data_Encryption_Standard" />
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">DES-Chiffre</title>
   <summary lang="de">Benutzung der <i>DES</i>-Chiffre</summary>
-  <description lang="de">Der Data Encryption Standard (DES) ist ein weit verbreiteter symmetrischer Verschlüsselungsalgorithmus (64-Bit-Blockchiffre).<newline /><newline />
+  <description lang="de">Der Data Encryption Standard (DES) ist ein weit verbreiteter symmetrischer Verschlüsselungsalgorithmus (64-bit-Blockchiffre).<newline /><newline />
 Der DES-Algorithmus wurde als offizieller Standard für die US-Regierung (FIPS 46) im Jahr 1976 bestätigt und wird seither international vielfach eingesetzt. Seine Entstehungsgeschichte hat wegen der Beteiligung der NSA am Design des Algorithmus immer wieder Anlass zu Spekulationen über seine Sicherheit gegeben. Heute wird DES aufgrund der verwendeten Schlüssellänge von nur 56 Bits für viele Anwendungen als nicht ausreichend sicher erachtet.<newline /><newline />
 Die Schlüssellänge kann durch Mehrfachanwendung des DES jedoch auf einfache Weise vergrößert werden. Als Triple-DES, auch als TDES, 3DES oder DESede bezeichnet, wird der DES weiterhin, zum Beispiel von Banken in Chipkartenanwendungen, eingesetzt, obwohl der TDES als offizieller Standard für die USA durch den Advanced Encryption Standard (AES) abgelöst wurde.<newline /><newline />
 Quelle: <external ref="http://de.wikipedia.org/wiki/Data_Encryption_Standard" /></description>

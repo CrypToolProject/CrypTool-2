@@ -11,7 +11,7 @@
   </introduction>
   <introduction lang="de-DE">    
       SDES (Simplified Data Encryption Standard) ist ein sehr einfacher Algorithmus, der DES ähnelt. Er wurde für Lehr- und Lernzwecke entwickelt. Verglichen mit DES ist es sehr einfach, den Algorithmus zu implementieren.
-      SDES braucht einen Schlüssel der Länge 10-Bit für die Ver- und Entschlüsselung. Genau wie sein Vorbild DES ist SDES ein symmetrischer Algorithmus.
+      SDES braucht einen Schlüssel der Länge 10-bit für die Ver- und Entschlüsselung. Genau wie sein Vorbild DES ist SDES ein symmetrischer Algorithmus.
       Das bedeutet, dass derselbe Schlüssel für die Ver- und Entschlüsselung gebraucht wird.
       SDES kann, aufgrund seines geringen Schlüsselraums (2^10 = 1024 mögliche Schlüssel), sehr einfach mit Hilfe von Brute-Force-Angriffen gebrochen werden.
   </introduction>
@@ -30,8 +30,8 @@
   <usage lang="de-DE">
     Mit dieser Komponente kann man bei der Ver- und Entschlüsselung wählen, ob als Verkettungsmodus "Electronic Code Book" (ECB), "Cipher Block Chaining" (CBC), "Cipher Feedback" (CFB) oder "Output Feedback" (OFB) benutzt wird.
     SDES benötigt zwei Datenströme für die Ver- und Entschlüsselung (einen für die Eingabedaten und einen für die Ausgabedaten).
-    Außerdem wird ein 10-Bit-Schlüssel benötigt (repräsentiert durch eine Zeichenkette bestehend aus '1' und '0' Zeichen); z.B. '1110011010'.
-    Abschließend wird ein Initialisierungsvektor der Länge 8-Bit benötigt (z.B. '10010010').
+    Außerdem wird ein 10-bit-Schlüssel benötigt (repräsentiert durch eine Zeichenkette bestehend aus '1' und '0' Zeichen); z.B. '1110011010'.
+    Abschließend wird ein Initialisierungsvektor der Länge 8-bit benötigt (z.B. '10010010').
     Die Komponente funktioniert nur, falls die Längen von Schlüssel und Initialisierungsvektor korrekt sind.
     Als Schlüssel und Initialisierungsvektor werden zwei Byte-Arrays benötigt.
     <newline />

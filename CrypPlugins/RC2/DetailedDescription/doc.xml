@@ -10,7 +10,7 @@
     The 18 rounds of RC2 are arranged as a Feistel network, with 16 rounds of type MIXING and two rounds of type MASHING. A MIXING round consists of four applications of the MIX transformation.
   </introduction>
   <introduction lang="de-DE">
-    RC2 ist eine 64-Bit-Blockchiffre mit variabler Schlüssellänge, die von Ronald Rivest als möglicher Ersatz für DES im Jahr 1987 entwickelt wurde. RC steht für Rivest Cipher oder Ron’s Code. Weitere Blockchiffren,
+    RC2 ist eine 64-bit-Blockchiffre mit variabler Schlüssellänge, die von Ronald Rivest als möglicher Ersatz für DES im Jahr 1987 entwickelt wurde. RC steht für Rivest Cipher oder Ron’s Code. Weitere Blockchiffren,
     die von Ronald Rivest entwickelt worden sind: RC4, RC5 und RC6.
     <newline /><newline />
     Der RC2-Algorithmus benutzt einen Schlüssel variabler Länge. Die Geschwindigkeit der Verschlüsselung hängt dabei nicht von der Schlüssellänge ab, da aus dem Schlüssel vorab eine schlüsselabhängige Tabelle mit 128 Bytes berechnet wird.
@@ -24,7 +24,7 @@
   </usage>
   <usage lang="de-DE">
     Die RC2-Komponente besitzt drei Eingänge und einen Ausgang. Am Eingang "Schlüssel" wird der RC2-Schlüssel als Byte-Array erwartet. Der Schlüssel kann 40 bis 128 Bits lang sein, so dass das Byte-Array zwischen 5 und 16 Bytes groß sein muss.
-    Optional kann ein 64 Bit großer Initialisierungsvektor angegeben werden, der für die Blockverkettungsmodi CBC (Cipher Block Chaining), CFB (Cipher Feedback) und OFB (Output Feedback) benötigt wird. 
+    Optional kann ein 64 bit großer Initialisierungsvektor angegeben werden, der für die Blockverkettungsmodi CBC (Cipher Block Chaining), CFB (Cipher Feedback) und OFB (Output Feedback) benötigt wird. 
     Der zu ver- oder entschlüsselnde Text wird als Datenstrom übergeben. Ebenso wird der ausgehende ent- oder verschlüsselte Text als Datenstrom ausgegeben.
     RC2 arbeitet mit einer Blockgröße von 64 Bits (8 Bytes). Daher müssen Nachrichten, deren Länge kein Vielfaches von 8 Bytes ist, entsprechend aufgefüllt werden. Die Art des Paddings kann in den Einstellungen gewählt werden.
   </usage>

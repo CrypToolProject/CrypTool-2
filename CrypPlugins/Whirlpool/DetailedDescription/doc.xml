@@ -13,7 +13,7 @@
   </introduction>
   <introduction lang="de-DE">
     Whirlpool ist eine kryptografische Hash-Funktion und wurde 2000 von den Kryptographen Vincent Rijmen und Paulo S. L. M. Barreto entworfen.
-    Der Whirlpool-Algorithmus berechnet für Eingaben mit einer Länge von bis zu 2^256 Bit einen Hashwert mit einer Länge von 512 Bits (64 Bytes).
+    Der Whirlpool-Algorithmus berechnet für Eingaben mit einer Länge von bis zu 2^256 bit einen Hashwert mit einer Länge von 512 Bits (64 Bytes).
     Bislang sind keine Schwächen des Algorithmus bekannt.
     <newline />
     Whirlpool ist patentfrei und unterliegt keinen Nutzungsbeschränkungen.

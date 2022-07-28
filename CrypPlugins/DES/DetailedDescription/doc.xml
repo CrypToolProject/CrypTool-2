@@ -34,18 +34,18 @@
     Der Data Encryption Standard (DES) ist ein symmetrisches Verschlüsselungsverfahren, das von der US-Regierung 1976 als offizieller Standard (FIPS 46) <ref id="NIST" /> bekanntgegeben wurde.
     <newline /><newline />
     DES operiert auf Klartextblöcken der Länge 64 Bits (= 8 Bytes) und erzeugt Blöcke mit verschlüsseltem Text der Länge 64 Bits.
-    Die formale Länge des Schlüssels beträgt ebenfalls 64 Bits; effektiv jedoch werden nur 56 Bits benutzt, da 8 Bits als Paritätsbits verwendet werden. Deshalb spricht man von einer (effektiven) Schlüssellänge von 56 Bit.
+    Die formale Länge des Schlüssels beträgt ebenfalls 64 Bits; effektiv jedoch werden nur 56 Bits benutzt, da 8 Bits als Paritätsbits verwendet werden. Deshalb spricht man von einer (effektiven) Schlüssellänge von 56 bit.
     Allerdings kann man heutzutage mittels einer vollständigen Schlüsselraumsuche mit einigem Aufwand eine mit DES verschlüsselte Nachricht in weniger als 25 Stunden knacken (Quelle: <ref id="DESCracker" />).
     Heute wird DES schon aufgrund der kurzen Schlüssellänge von nur 56 Bits nicht mehr als ausreichend sicher erachtet.
     Auch wegen der Beteiligung der NSA am Design des Algorithmus gab es immer wieder Spekulationen über seine Sicherheit.
     <newline /><newline />
-    Durch das Hintereinanderausführen von drei DES-Verschlüsselungen unter Verwendung von zwei oder drei verschiedenen 56 Bit DES-Schlüsseln erhält man das sogenannte Triple-DES-Verfahren (zwei oder drei Schlüssel Triple-DES).
-    Durch diesen Trick erhält man eine effektive Schlüssellänge von 112 oder 168 Bit. Triple-DES ist heute weit verbreitet für die symmetrische Verschlüsselung.
+    Durch das Hintereinanderausführen von drei DES-Verschlüsselungen unter Verwendung von zwei oder drei verschiedenen 56 bit DES-Schlüsseln erhält man das sogenannte Triple-DES-Verfahren (zwei oder drei Schlüssel Triple-DES).
+    Durch diesen Trick erhält man eine effektive Schlüssellänge von 112 oder 168 bit. Triple-DES ist heute weit verbreitet für die symmetrische Verschlüsselung.
     Aufgrund seiner schlechten Performance wird Triple-DES durch das modernere <docRef item="CrypTool.Plugins.Cryptography.Encryption.AES">AES</docRef>-Verfahren ersetzt.
     <newline /><newline /><section headline="Bemerkung zu den Paritätsbits:">
-      Beim Verschlüsseln mit dem DES-Verschlüsselungsverfahren wird für die Ver-/Entschlüsselung von jedem Schlüssel-Byte das niederwertigste Bit nicht verwendet, da es als Paritätsbit genutzt wird.
+      Beim Verschlüsseln mit dem DES-Verschlüsselungsverfahren wird für die Ver-/Entschlüsselung von jedem Schlüssel-Byte das niederwertigste bit nicht verwendet, da es als Paritätsbit genutzt wird.
       Dadurch kann es bei der Brute-Force-Analyse passieren, dass ein Schlüssel gefunden wird, der nicht mit dem Schlüssel, mit dem das Dokument verschlüsselt ist, identisch ist.
-      Dennoch sind die beiden Schlüssel äquivalent, falls sie sich immer nur im niederwertigsten Bit jedes Bytes unterscheiden. Also sind die Bytes 00 und 01, 02 und 03, ..., 0C und 0D, 0E und 0F jeweils zueinander äquivalent.
+      Dennoch sind die beiden Schlüssel äquivalent, falls sie sich immer nur im niederwertigsten bit jedes Bytes unterscheiden. Also sind die Bytes 00 und 01, 02 und 03, ..., 0C und 0D, 0E und 0F jeweils zueinander äquivalent.
       Dasselbe gilt auch, wenn statt der führenden 0 ein anderes hexadezimales Zeichen 1, 2, 3, ..., 9, A, B, ..., F vorhanden ist.
       <newline /><newline /><b>Beispiel:</b> Die beiden folgenden DES-Schlüssel
       <newline /><newline />

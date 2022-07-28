@@ -28,8 +28,8 @@
     mit der Blockchiffre AES betrieben, entsprechen deren Implementierungen exakt den Vorgaben, die auch an die offizielle Verwendung der Betriebsmodi gestellt werden. Um jedoch 
     dem didaktischen Nutzen einer E-Learning-Software gerecht zu werden, sind die Algorithmen für CrypTool 2 dahingehend verallgemeinert worden, dass auch Blockchiffren 
     verwendet werden können, die sich insbesondere hinsichtlich ihrer Blockgröße von AES unterscheiden. Im GCM-Modus beispielsweise werden vom Initialisierungsvektor nur die 
-    letzten 32 Bit für den Zähler verwendet. Bei einer Blockgröße von 128 Bit entspricht das genau 25%. Würde GCM stattdessen mit DES benutzt werden, würden entsprechend nur
-    25% von 64 Bit - die letzten 16 Bit - für den Zähler verwendet werden. Analog würden die arithmetischen Funktionen nicht mehr im Galoiskörper GF(2^128) sondern 
+    letzten 32 bit für den Zähler verwendet. Bei einer Blockgröße von 128 bit entspricht das genau 25%. Würde GCM stattdessen mit DES benutzt werden, würden entsprechend nur
+    25% von 64 bit - die letzten 16 bit - für den Zähler verwendet werden. Analog würden die arithmetischen Funktionen nicht mehr im Galoiskörper GF(2^128) sondern 
     stattdessen in GF(2^64) operieren.
   </introduction>
   <introduction lang="en">

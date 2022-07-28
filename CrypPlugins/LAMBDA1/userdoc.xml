@@ -54,7 +54,7 @@
   <usage lang="de-DE">
     Schließen Sie die Konnektoren für die Eingabedaten, den Schlüssel und die Ausgabedaten an. Der Schlüssel muss 32 Bytes (256 Bits) lang sein.
     An den weiteren Eingabe-Konnektor kann der Initialisierungsvektor angegeben werden.
-    Dieser muss der Blockgröße von 8 Bytes (64 Bit) entsprechen. Falls optional keiner angegeben wird,
+    Dieser muss der Blockgröße von 8 Bytes (64 bit) entsprechen. Falls optional keiner angegeben wird,
     werden Nullen verwendet.
     Es kann zwischen den Modi Ver- und Entschlüsselung gewählt werden.
     <newline />

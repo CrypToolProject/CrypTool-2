@@ -28,7 +28,7 @@ Source: <external ref="http://en.wikipedia.org/wiki/RC2" /></description>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">RC2-Chiffre</title>
   <summary lang="de">Benutzung der <i>RC2</i>-Chiffre</summary>
-  <description lang="de">RC2 ist eine 64-Bit-Blockchiffre mit variabler Schlüssellänge, die von Ronald Rivest als möglicher Ersatz für DES im Jahr 1987 entwickelt wurde. RC steht für Rivest Cipher oder Ron’s Code, weitere Blockchiffren die von Ronald Rivest entwickelt worden sind: RC4, RC5, und RC6.<newline /><newline />
+  <description lang="de">RC2 ist eine 64-bit-Blockchiffre mit variabler Schlüssellänge, die von Ronald Rivest als möglicher Ersatz für DES im Jahr 1987 entwickelt wurde. RC steht für Rivest Cipher oder Ron’s Code, weitere Blockchiffren die von Ronald Rivest entwickelt worden sind: RC4, RC5, und RC6.<newline /><newline />
 Quelle: <external ref="http://de.wikipedia.org/wiki/RC2_%28Verschl%C3%BCsselungsverfahren%29" /></description>
   <keywords lang="de">Blockchiffre, symmetrisch</keywords>
   <replacements lang="de">

@@ -13,7 +13,7 @@
   <introduction lang="de-DE">
     Achterbahn ist eine synchrone Stromchiffre und war ein Phase-2-Kandidat beim eSTREAM-Projekt des ECRYPT-Netzwerkes.
     Die Chiffre wurde von Berndt Gammel, Rainer Göttfert und Oliver Kniffler entwickelt.
-    Die beiden Chiffre-Varianten Achterbahn-80 und Achterbahn-128 unterstützen Schlüssellängen von jeweils bis zu 80 Bit und 128 Bit.
+    Die beiden Chiffre-Varianten Achterbahn-80 und Achterbahn-128 unterstützen Schlüssellängen von jeweils bis zu 80 bit und 128 bit.
     <newline />
     Achterbahn ist für Hardware-Anwendungen mit beschränkten Ressourcen optimiert.
   </introduction>

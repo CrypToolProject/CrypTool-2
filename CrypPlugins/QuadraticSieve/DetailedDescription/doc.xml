@@ -39,7 +39,7 @@
       Die Laufzeit des QS-Algorithmus für die Faktorisierung einer Zahl der Größe n ist (in O-Notation):
       $$O(\exp(\log(n) \cdot \log(n) \cdot \log(n))$$
     </section><section headline="Über diese Komponente">
-      Diese Komponente ist ein Wrapper für Msieve, eine Implementierung in C des quadratischen Siebs von Jason Stratos Papadopoulos. Der kompilierte C-Code liegt als 32-Bit-DLL vor.
+      Diese Komponente ist ein Wrapper für Msieve, eine Implementierung in C des quadratischen Siebs von Jason Stratos Papadopoulos. Der kompilierte C-Code liegt als 32-bit-DLL vor.
       Beim Start wird diese von CrypTool 2 geladen. Die DLL erweitert die Funktionalität von Msieve um Multithreading. Msieve ist ursprünglich eine Konsolenanwendung.
       Für weitere Informationen über Msieve gehen Sie bitte auf die Website des Autors auf SourceForge: <ref id="msieve" />.
     </section></introduction>

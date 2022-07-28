@@ -17,12 +17,12 @@
     Der Data Encryption Standard (DES) ist ein symmetrisches Verschlüsselungsverfahren, das von der US-Regierung in Zusammenarbeit mit dem National Bureau of Standards (NBS) 1976 als 
     offizieller Standard (FIPS 46) <ref id="NIST" /> bekanntgegeben wurde.
     <newline /><newline />
-    Der DES ist eine Blockchiffre, genauer eine leicht modifizierte Feistelchiffre, mit einer Blocklänge von 64 Bit. Der Algorithmus ver- und entschlüsselt folglich einen 64 Bit Datenblock
-    unter Berücksichtigung eines 64 Bit Schlüssels. Die Entschlüsselung eines Geheimtextes erfolgt mit demselben Schlüssel, der für die Verschlüsselung verwendet wurde.
-    Die formale Länge des Schlüssels beträgt ebenfalls 64 Bits. Jedes achte Bit ist allerdings ein sogenanntes Paritätsbit und ermöglicht eine Korrektur von Speicher- und Übertragungsfehlern.
-    Daraus folgt, dass die ersten sieben Bits eines Bytes laut Definition das achte Bit festlegen. Da der FIPS-Standard es nicht verlangte, wurde das Paritätsbit jedoch in fast keiner realen Implementierung überprüft, es wurde einfach ignoriert. 
+    Der DES ist eine Blockchiffre, genauer eine leicht modifizierte Feistelchiffre, mit einer Blocklänge von 64 bit. Der Algorithmus ver- und entschlüsselt folglich einen 64 bit Datenblock
+    unter Berücksichtigung eines 64 bit Schlüssels. Die Entschlüsselung eines Geheimtextes erfolgt mit demselben Schlüssel, der für die Verschlüsselung verwendet wurde.
+    Die formale Länge des Schlüssels beträgt ebenfalls 64 Bits. Jedes achte bit ist allerdings ein sogenanntes Paritätsbit und ermöglicht eine Korrektur von Speicher- und Übertragungsfehlern.
+    Daraus folgt, dass die ersten sieben Bits eines Bytes laut Definition das achte bit festlegen. Da der FIPS-Standard es nicht verlangte, wurde das Paritätsbit jedoch in fast keiner realen Implementierung überprüft, es wurde einfach ignoriert. 
     Innerhalb eines DES-Schlüssels sind also nur 56 der 64 Bits frei wählbar.
-    Deshalb spricht man von einer (effektiven) Schlüssellänge von 56 Bit.
+    Deshalb spricht man von einer (effektiven) Schlüssellänge von 56 bit.
     Heute wird der DES schon aufgrund der kurzen Schlüssellänge von nur 56 Bits nicht mehr als ausreichend sicher erachtet.
     Auch wegen der Beteiligung der NSA am Design des Algorithmus gab es immer wieder Spekulationen über seine Sicherheit.
   </introduction>

@@ -77,7 +77,7 @@ Klicken Sie auf 'Weiter', um eine große Zahl in ihre Faktoren zu zerlegen.
     <input image="MD5">
       <name lang="en">MD5</name>
       <description lang="en">MD5 (Message-Digest algorithm 5) is a widely used cryptographic hash function with a 128-bit (16-byte) hash value.</description>
-      <description lang="de">MD5 (Message-Digest algorithm 5) ist eine weit verbreitete kryptografische Hash-Funktion mit einem 128-Bit-Hashwert (16 Bytes).</description>
+      <description lang="de">MD5 (Message-Digest algorithm 5) ist eine weit verbreitete kryptografische Hash-Funktion mit einem 128-bit-Hashwert (16 Bytes).</description>
       <headline lang="en">MD5</headline>
       <task lang="en">Select if you want to create an MD5 collision.</task>
       <task lang="de">Wählen Sie dies, wenn Sie eine MD5 Kollision erzeugen wollen.</task>

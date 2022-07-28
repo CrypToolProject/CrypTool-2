@@ -9,8 +9,8 @@
   </introduction>
   <introduction lang="de-DE">
     Rabbit ist eine softwareeffiziente, synchrone Stromchiffre. Rabbit ist ein Teil des eSTREAM Portfolio des ECRYPT Stream Cipher Projektes.
-    Die Chiffre hat eine Schlüssellänge von 128 Bit und benötigt einen Initialisierungsvektor (IV), der 64 Bit lang sein muss.
-    Ein Satz von acht 32-Bit-Zustandsregister und acht 32-Bit-Zähler wird verwendet, um effiziente Verschlüsselungsmechanismen
+    Die Chiffre hat eine Schlüssellänge von 128 bit und benötigt einen Initialisierungsvektor (IV), der 64 bit lang sein muss.
+    Ein Satz von acht 32-bit-Zustandsregister und acht 32-bit-Zähler wird verwendet, um effiziente Verschlüsselungsmechanismen
     durch einfache arithmetische und andere grundlegende Funktionen wie der Rotation bereitzustellen.
   </introduction>
   <usage lang="en">

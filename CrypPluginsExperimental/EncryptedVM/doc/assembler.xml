@@ -44,7 +44,7 @@
 	
 	<section headline="Assembler">
 	  Dieses Plugin assembliert einen gegebenen Assembler in verschlüsselten Maschinencode.
-	  Der Speicher der Maschine hält 52 Bit in 4 Reihen a 13 Bit. Der Inhalt besteht nur aus Instruktionen, deren untere 8 Bit Daten und deren obere 5 Bit Kommandos sind. Beim Überschreiben einer Zeile wird nur der Datenteil überschrieben.<newline />
+	  Der Speicher der Maschine hält 52 bit in 4 Reihen a 13 bit. Der Inhalt besteht nur aus Instruktionen, deren untere 8 bit Daten und deren obere 5 bit Kommandos sind. Beim Überschreiben einer Zeile wird nur der Datenteil überschrieben.<newline />
 	  Die einzigen verwendbaren Register der Maschine sind der Akkumulator sowie der Programmzähler. Die Maschine hat eine RISC- bzw. Load/Store-Architektur.<newline />
 	  Es ist nicht möglich ein Programm zu beenden. Um ein Programm implizit zu beenden wird der <i>Maschine</i> die maximale Anzahl an Zyklen mitgeteilt.<newline />
 	  Der Assembler überprüft nicht die Validität der Speicheradressen. Neben diesen können auch natürliche Zahlen zwischen 0 und 255 als Operand verwendet werden.<newline />

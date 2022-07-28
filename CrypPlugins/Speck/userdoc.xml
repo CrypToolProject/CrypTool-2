@@ -31,9 +31,9 @@
 		benötigen im Vergleich zu gewöhnlichen Blockchiffren weniger Rechenkapazität. Neben Speck gehört die Chiffre Simon zur selben Familie von Chiffren. Speck ist optimiert für Software-Implementierungen und Simon für Hardware-Implementierungen. Speck ist eine ARX-Chiffre (add-rotate-xor). <newline /><newline />
 		Speck besteht aus einer großen Anzahl von verschiedenen Varianten. Diese unterscheiden sich in der Block- und Schlüssellänge. So kann Speck auf einer Vielzahl von verschiedenen Geräten (in verschiedenen Leistungskategorien) eingesetzt werden.
 		Die verschiedenen Varianten bieten unterschiedliche Sicherheitslevel. Speck kann auch auf Geräten und Umgebungen eingesetzt werden, wo beispielsweise ein AES ungeeignet wäre (z.B. eine Insulinpumpe). <newline /><newline />
-		Als Blocklänge sind 32, 48, 64, 96 und 128 Bit möglich, wobei die Varianten mit 64 und 128 Bit die gängigsten Blocklängen sind <ref id="SpeckImplGuide" />. Je nach Blocklänge sind verschiedene Schlüssellängen möglich. So arbeitet die 32 Bit Variante mit 64 Bit Schlüssellänge;
-		bei der Variante mit 128 Bit Blocklänge sind 128, 192 und 256 Bit lange Schlüssel wählbar. <newline /><newline />
-		Innerhalb von Speck wird ein Eingabeblock in Worte aufgeteilt, die immer halb so lang wie ein Block sind. Der Schlüssel wird ebenfalls in Worte aufgeteilt. Je nach gewählter Parametrisierung von Speck wird dieser in 2-4 Schlüsselworte geteilt. Die Basisoperationen sind Addition, (Bit-)Rotation (= zyklischer Bitshift) und XOR.
+		Als Blocklänge sind 32, 48, 64, 96 und 128 bit möglich, wobei die Varianten mit 64 und 128 bit die gängigsten Blocklängen sind <ref id="SpeckImplGuide" />. Je nach Blocklänge sind verschiedene Schlüssellängen möglich. So arbeitet die 32 bit Variante mit 64 bit Schlüssellänge;
+		bei der Variante mit 128 bit Blocklänge sind 128, 192 und 256 bit lange Schlüssel wählbar. <newline /><newline />
+		Innerhalb von Speck wird ein Eingabeblock in Worte aufgeteilt, die immer halb so lang wie ein Block sind. Der Schlüssel wird ebenfalls in Worte aufgeteilt. Je nach gewählter Parametrisierung von Speck wird dieser in 2-4 Schlüsselworte geteilt. Die Basisoperationen sind Addition, (bit-)Rotation (= zyklischer Bitshift) und XOR.
 	</introduction>
   <usage lang="de-DE">
     <section headline="Speck-Parametrisierung">

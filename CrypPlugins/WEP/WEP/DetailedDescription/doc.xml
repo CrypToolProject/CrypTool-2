@@ -31,7 +31,7 @@
     Die Pakete werden mit dem RC4-Algorithmus ver-/entschlüsselt. RC4 ist ein einfacher Stromverschlüsselungs-Algorithmus.<newline /><newline />
     Der Benutzer kann auswählen, ob die Komponente ver- oder entschlüsseln soll.<newline /><newline />
     Wenn die Pakete verschlüsselt werden, wird ein individueller ICV für jedes Paket berechnet. Der ICV ("Integrity Check Value") wird auch als "Cyclic Redundancy Check" (CRC) bezeichnet
-    und basiert auf einer Polynomdivision mit einem definierten 32-Bit-Polynom. Das Ergebnis ist eine Prüfsumme von 32 Bit (4 Byte) Länge, die das Paket zwar vor Übertragungsfehlern schützt, aber nicht vor Manipulation. Diese Checksumme wird dem Paket angehängt und anschließend wird alles verschlüsselt. Dieser
+    und basiert auf einer Polynomdivision mit einem definierten 32-bit-Polynom. Das Ergebnis ist eine Prüfsumme von 32 bit (4 Byte) Länge, die das Paket zwar vor Übertragungsfehlern schützt, aber nicht vor Manipulation. Diese Checksumme wird dem Paket angehängt und anschließend wird alles verschlüsselt. Dieser
     Schritt wird in der Implementierung dieser Komponente bei der Entschlüsselung nicht durchgeführt. Stattdessen wird der ICV einfach vom Paket entfernt. In realen Applikationen bestimmt der Empfänger
     den ICV ebenfalls und vergleicht ihn mit dem empfangenen ICV. Sind die beiden ICVs nicht gleich, wird das Paket verworfen und neu vom Sender angefordert.
   </introduction>
@@ -41,7 +41,7 @@
     on the users choice to encrypt or to decrypt the WEP component delivers encrypted or decrypted packets using the provided key.
   </usage>
   <usage lang="de-DE">
-    Um die WEP-Komponente zu verwenden, muss der Benutzer diese auf den Arbeitsplatz ziehen. Als Input werden benötigt: Erstens ein 40-Bit-Schlüssel, und zweitens Pakete in Form eines CrypToolStream. WEP-Pakete können mit dem IFRame-Generator erzeugt werden.
+    Um die WEP-Komponente zu verwenden, muss der Benutzer diese auf den Arbeitsplatz ziehen. Als Input werden benötigt: Erstens ein 40-bit-Schlüssel, und zweitens Pakete in Form eines CrypToolStream. WEP-Pakete können mit dem IFRame-Generator erzeugt werden.
     Je nach Wahl des Benutzers liefert die WEP-Komponente aus dem Input ver- oder entschlüsselte WEP-Pakete unter Nutzung des angegebenen Schlüssels.
   </usage>
   <presentation lang="en"></presentation>

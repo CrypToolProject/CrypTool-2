@@ -40,7 +40,7 @@
       Der Tiny Encryption Algorithm (TEA) ist eine Blockchiffre, die besonders einfach zu beschreiben und implementieren ist (einige wenige Codezeilen genügen).
       TEA wurde von David Wheeler und Roger Needham vom Cambridge Computer Laboratory entworfen und erstmals 1994 beim Fast Software Encryption-Workshop vorgestellt.
       <newline />
-      TEA arbeitet auf 64-Bit-Blöcken und verwendet einen 128-Bit-Schlüssel. Er stellt eine Feistelchiffre mit einer vorgeschlagenen Rundenanzahl von 64 dar. Normalerweise wird er so implementiert, dass zwei Runden einen Zyklus darstellen.
+      TEA arbeitet auf 64-bit-Blöcken und verwendet einen 128-bit-Schlüssel. Er stellt eine Feistelchiffre mit einer vorgeschlagenen Rundenanzahl von 64 dar. Normalerweise wird er so implementiert, dass zwei Runden einen Zyklus darstellen.
       Er hat einen sehr einfachen Mechanismus zur Erzeugung des jeweiligen Rundenschlüssels. Das Einbringen eines sogenannten Deltas verhindert einen Angriff, der die Symmetrie der einzelnen Runden ausnutzt.
       Der Wert von Delta ist definiert als 2^32 / phi, wobei phi der goldene Schnitt ist, und beträgt 2654435769 (Dezimal) bzw. 9E3779B9 (Hexadezimal).
     </section>
@@ -49,7 +49,7 @@
       und wurde ebenfalls von David Wheeler und Roger Needham entworfen.
       Der Algorithmus wurde 1997 vorgestellt (Needham and Wheeler, 1997).
       <newline />
-      XTEA ist ebenfalls eine Feistelchiffre mit 64-Bit-Blöcken, einem 128-Bit-Schlüssel und einer vorgeschlagenen Rundenanzahl von 64.
+      XTEA ist ebenfalls eine Feistelchiffre mit 64-bit-Blöcken, einem 128-bit-Schlüssel und einer vorgeschlagenen Rundenanzahl von 64.
       XTEA unterscheidet sich von TEA unter anderem durch eine komplexere Erzeugung des Rundenschlüssels und eine Umordnung der Shifts, XORs und Additionen.
     </section>
     <section headline="XXTEA (Corrected Block TEA)">

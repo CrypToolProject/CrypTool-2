@@ -21,7 +21,7 @@
     <headline lang="en">Message Input</headline>
     <headline lang="de">Nachrichteneingabe</headline>
     <task lang="en">Here, you can enter your message and the password to use. The password is converted to a 256-bit AES key by using PKCS5. The entered message is then encrypted or decrypted using AES-256.</task>
-    <task lang="de">Hier können Sie Ihre Nachricht und das Passwort eingeben. Das Passwort wird mittels PKCS5 zu einem 256-Bit AES-Schlüssel umgewandelt. Ihre Nachricht wird danach mit AES-256 ver- oder entschlüsselt.</task>
+    <task lang="de">Hier können Sie Ihre Nachricht und das Passwort eingeben. Das Passwort wird mittels PKCS5 zu einem 256-bit AES-Schlüssel umgewandelt. Ihre Nachricht wird danach mit AES-256 ver- oder entschlüsselt.</task>
     <comboBox plugin="AES;$Switch$" property="Action" alignment="Left" width="20%" group="1">
       <description lang="en">Encrypt or Decrypt:</description>
       <description lang="de">Verschlüsseln oder Entschlüsseln:</description>

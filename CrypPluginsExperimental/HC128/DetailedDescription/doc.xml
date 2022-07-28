@@ -18,7 +18,7 @@
   <introduction lang="de">
     HC128 ist eine von sieben symmetrischen Stromchiffren, die für das finale eSTREAM Portfolio des
     ECRYPT Stream Cipher Project gewählt wurden. HC128 ist eine vereinfachte Ausführung der HC256 Stromchiffre mit einem Schlüssel und
-    Initialisierungsvektor der Länge 128 Bits. Die Chiffre basiert auf zwei geheimen Tabellen mit je 512 32-Bit Elementen und einer
+    Initialisierungsvektor der Länge 128 Bits. Die Chiffre basiert auf zwei geheimen Tabellen mit je 512 32-bit Elementen und einer
     nicht-linearen Feedback Function. Jedes Schlüssel/IV-Paar produziert bis zu 2^64 Schlüsselstrombits, aber in der Praxis ist es nicht
     notwendig die Länge zu begrenzen, da die Auswirkungen eines längeren Schlüsselstroms für die Sicherheit der Nachricht vernachlässigbar sind.
     Es wurde bisher kein Angriff gefunden, der schneller als Brute-Force ist.

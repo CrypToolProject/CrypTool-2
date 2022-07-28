@@ -24,7 +24,7 @@
       There are four possible "F"-functions. A different one is used in each round:
       <newline /><img src="MD5/DetailedDescription/Images/MD5.png" /></section></introduction>
   <introduction lang="de-DE">
-    MD5 (Message-Digest Algorithm 5) ist eine weit verbreitete kryptografische Hash-Funktion, die einen 128-Bit-Hashwert erzeugt. MD5 wurde 1991 von Ronald L. Rivest entwickelt.
+    MD5 (Message-Digest Algorithm 5) ist eine weit verbreitete kryptografische Hash-Funktion, die einen 128-bit-Hashwert erzeugt. MD5 wurde 1991 von Ronald L. Rivest entwickelt.
     Die errechneten MD5-Summen (kurz md5sum) werden zum Beispiel zur Integritätsprüfung von Dateien eingesetzt.
     <section headline="Geschichte">
       MD5 ist ein Vertreter aus einer Reihe von (kryptografischen) Hash-Funktionen, die von Ronald L. Rivest am Massachusetts Institute of Technology entwickelt wurden.
@@ -33,11 +33,11 @@
       auf sicherere Algorithmen wie SHA-256 oder RIPEMD-160 umzusteigen. Im August 2004 fanden chinesische Forscher Kollisionen für die vollständige MD5-Funktion.
       Diese Attacken wirken sich allerdings nur auf Kollisionsangriffe aus, Preimage-Angriffe können auch mit diesen Methoden nicht in sinnvoller Zeit durchgeführt werden.
     </section><section headline="Algorithmus">
-      MD5 erzeugt aus einer Nachricht variabler Länge eine Ausgabe fester Länge (128 Bit). Die Ausgangsnachricht wird zunächst so aufgefüllt, dass ihre Länge 64 Bits davon entfernt ist, durch 512 teilbar zu sein.
+      MD5 erzeugt aus einer Nachricht variabler Länge eine Ausgabe fester Länge (128 bit). Die Ausgangsnachricht wird zunächst so aufgefüllt, dass ihre Länge 64 Bits davon entfernt ist, durch 512 teilbar zu sein.
       Als erstes wird eine Eins angehängt, dann so viele Nullen wie nötig. Bei dem unwahrscheinlichen Fall, dass die Ausgangsnachricht schon die gewünschte Länge besitzt, wird trotzdem eine Eins angehängt.
-      Nun wird eine 64-Bit-Zahl, die die Länge der Ausgangsnachricht repräsentiert, angehängt. Die Nachrichtenlänge ist jetzt durch 512 teilbar.
-      Der Hauptalgorithmus von MD5 arbeitet mit einem 128-Bit-Puffer, der in vier 32-Bit-Wörter A, B, C und D unterteilt ist. Diese werden mit bestimmten Konstanten initialisiert.
-      Auf diesen Puffer wird nun die Verschlüsselungsfunktion (häufig auch Komprimierungsfunktion genannt) mit dem ersten 512-Bit-Block als Schlüsselparameter aufgerufen.
+      Nun wird eine 64-bit-Zahl, die die Länge der Ausgangsnachricht repräsentiert, angehängt. Die Nachrichtenlänge ist jetzt durch 512 teilbar.
+      Der Hauptalgorithmus von MD5 arbeitet mit einem 128-bit-Puffer, der in vier 32-bit-Wörter A, B, C und D unterteilt ist. Diese werden mit bestimmten Konstanten initialisiert.
+      Auf diesen Puffer wird nun die Verschlüsselungsfunktion (häufig auch Komprimierungsfunktion genannt) mit dem ersten 512-bit-Block als Schlüsselparameter aufgerufen.
       Die Behandlung eines Nachrichtenblocks geschieht in vier einander ähnlichen Stufen, von Kryptographen „Runden“ genannt. Jede Runde besteht aus 16 Operationen, basierend auf einer nichtlinearen Funktion „F“,
       modularer Addition und Linksrotation. Es gibt vier mögliche „F“-Funktionen, in jeder Runde wird davon eine andere verwendet:
       <newline /><img src="MD5/DetailedDescription/Images/MD5.png" /></section></introduction>
