@@ -151,13 +151,13 @@
     <value>aktiv</value>
   </data>
   <data name="Bit32" xml:space="preserve">
-    <value>32 Bit</value>
+    <value>32 bit</value>
   </data>
   <data name="Bit48" xml:space="preserve">
-    <value>48 Bit</value>
+    <value>48 bit</value>
   </data>
   <data name="Bit6" xml:space="preserve">
-    <value>6 Bit</value>
+    <value>6 bit</value>
   </data>
   <data name="Ciphertext" xml:space="preserve">
     <value>Geheimtext</value>
@@ -172,10 +172,10 @@
     <value>Daten</value>
   </data>
   <data name="DataKey" xml:space="preserve">
-    <value>Schlüssel (64 Bit):</value>
+    <value>Schlüssel (64 bit):</value>
   </data>
   <data name="DataMessage" xml:space="preserve">
-    <value>Nachricht (64 Bit):</value>
+    <value>Nachricht (64 bit):</value>
   </data>
   <data name="DiffInfo" xml:space="preserve">
     <value>Klick Ok zum Flippen markierter Bits</value>
@@ -184,7 +184,7 @@
     <value>Zeige Diffusionsanzeige</value>
   </data>
   <data name="FinalCiphertext" xml:space="preserve">
-    <value>Geheimtext (64  Bit):</value>
+    <value>Geheimtext (64  bit):</value>
   </data>
   <data name="FunctionLabel" xml:space="preserve">
     <value>Funktion f(K  ,R  )
@@ -205,11 +205,11 @@ Runde      /16</value>
   "Rijndael" ersetzt, der den AES (Advanced Encryption Standard) darstellt.</value>
   </data>
   <data name="InfoText" xml:space="preserve">
-    <value>DES ist ein Blockchiffrieralgorithmus, der 64 Bit-Klartextblöcke mit einem
-64 Bit-Schlüssel ver- bzw. entschlüsselt.
-Jedes 8. Bit (least significant bit) im Schlüssel wird als Paritätsbit genutzt.
+    <value>DES ist ein Blockchiffrieralgorithmus, der 64 bit-Klartextblöcke mit einem
+64 bit-Schlüssel ver- bzw. entschlüsselt.
+Jedes 8. bit (least significant bit) im Schlüssel wird als Paritätsbit genutzt.
 Diese acht Bits werden vom Algorithmus nicht verwendet. Daraus ergibt sich
-eine effektive Schlüssellänge von nur 56 Bit. 
+eine effektive Schlüssellänge von nur 56 bit. 
 
 Der Algorithmus besteht nur aus Permutationen und Substitutionen. Der
 gesamte Ablauf benötigt insgesamt 16 Runden, die in einem Feistel-Netzwerk

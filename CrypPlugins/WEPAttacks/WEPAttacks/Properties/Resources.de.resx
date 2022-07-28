@@ -184,7 +184,7 @@
     <value>Schlüssel nicht gefunden.</value>
   </data>
   <data name="FMS_more_packets" xml:space="preserve">
-    <value>Für einen 104-Bit-Schlüssel und einen FMS-Angriff brauchen
+    <value>Für einen 104-bit-Schlüssel und einen FMS-Angriff brauchen
 Sie normalerweise 3 - 4 Mio. verschlüsselte Pakete.</value>
   </data>
   <data name="KoreK_more_packets" xml:space="preserve">
@@ -197,7 +197,7 @@ für einen erfolgreichen Angriff.</value>
   </data>
   <data name="Maybe_you_need_more_packets_104" xml:space="preserve">
     <value>Vielleicht brauchen Sie mehr Pakete.
-Für einen 104-Bit-Schlüssel brauchen Sie
+Für einen 104-bit-Schlüssel brauchen Sie
 normalerweise 100.000 ARP- oder etwas
 mehr IP-Pakete.</value>
   </data>

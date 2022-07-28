@@ -133,7 +133,7 @@
     <value>Teilschlüssel 1</value>
   </data>
   <data name="InputKeyTooltip1" xml:space="preserve">
-    <value>Geben Sie den T-310-Teilschlüssel 1 als Byte-Array ein. Dieser muss eine Länge von 120 Bit (15 Byte) und eine ungerade Parität haben.</value>
+    <value>Geben Sie den T-310-Teilschlüssel 1 als Byte-Array ein. Dieser muss eine Länge von 120 bit (15 Byte) und eine ungerade Parität haben.</value>
   </data>
   <data name="OutputDataCaption" xml:space="preserve">
     <value>Ausgabedaten</value>
@@ -166,7 +166,7 @@
     <value>Die T-310 gibt es in den Ausführungen T-310/50 und T-310/51. Die Version 50 kann nur Fernschreibzeichen nach CCITT-2 konvertieren. Die Version 51 beliebige Daten.</value>
   </data>
   <data name="BitSelectorCaption" xml:space="preserve">
-    <value>Bit-Auswahl</value>
+    <value>bit-Auswahl</value>
   </data>
   <data name="BitSelectorList1" xml:space="preserve">
     <value>Höchstwertige Bits</value>
@@ -175,7 +175,7 @@
     <value>Niedrigstwertige Bits</value>
   </data>
   <data name="BitSelectorTooltip" xml:space="preserve">
-    <value>Bestimmt, ob bei bestimmten Vektoren das höchst- oder niedrigstwertige Bit verwendet werden soll.</value>
+    <value>Bestimmt, ob bei bestimmten Vektoren das höchst- oder niedrigstwertige bit verwendet werden soll.</value>
   </data>
   <data name="Key14" xml:space="preserve">
     <value>Langzeitschlüssel 14</value>
@@ -220,7 +220,7 @@
     <value>Teilschlüssel 2</value>
   </data>
   <data name="InputKeyTooltip2" xml:space="preserve">
-    <value>Geben Sie den T-310-Teilschlüssel 2 als Byte-Array ein. Dieser muss eine Länge von 120 Bit (15 Byte) und eine ungerade Parität haben.</value>
+    <value>Geben Sie den T-310-Teilschlüssel 2 als Byte-Array ein. Dieser muss eine Länge von 120 bit (15 Byte) und eine ungerade Parität haben.</value>
   </data>
   <data name="ErrorBothKeysEvenParity" xml:space="preserve">
     <value>Beide Teilschlüssel sind gerade. Ungerade Schlüssel werden benötigt. Die Dokumentation bietet dazu zusätzliche Informationen.</value>

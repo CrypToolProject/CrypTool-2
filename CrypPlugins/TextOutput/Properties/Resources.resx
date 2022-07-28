@@ -154,7 +154,7 @@
     <value>byte</value>
   </data>
   <data name="Bytes" xml:space="preserve">
-    <value>bytes</value>
+    <value>byte</value>
   </data>
   <data name="Char" xml:space="preserve">
     <value>character</value>
@@ -187,7 +187,7 @@
     <value>bit</value>
   </data>
   <data name="Bits" xml:space="preserve">
-    <value>bits</value>
+    <value>bit</value>
   </data>
   <data name="Digit" xml:space="preserve">
     <value>decimal digit</value>

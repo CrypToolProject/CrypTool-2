@@ -263,7 +263,7 @@ Eine Schlüsselgenerierungs-Funktion mit erweiterbarer Ausgabelänge
     <value>Implementierung an RFC 5869 orientieren</value>
   </data>
   <data name="ConfigInfinityOutputTooltip" xml:space="preserve">
-    <value>Implementierung orientiert sich am RFC 5869. Das heißt, es wird ein 8-Bit-Zähler (Counter) verwendet und die Länge der Ausgabebytes ist auf 8192 beschränkt. Weitere Informationen sind in der Hilfe zu finden.</value>
+    <value>Implementierung orientiert sich am RFC 5869. Das heißt, es wird ein 8-bit-Zähler (Counter) verwendet und die Länge der Ausgabebytes ist auf 8192 beschränkt. Weitere Informationen sind in der Hilfe zu finden.</value>
   </data>
   <data name="PresConstructionSectionHeadingNum" xml:space="preserve">
     <value>2. Konstruktion KKDF SHA-256</value>

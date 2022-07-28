@@ -166,28 +166,28 @@
     <value>Bestimmt die Anzahl der zu generierenden Nachrichten-Paare</value>
   </data>
   <data name="Cipher1" xml:space="preserve">
-    <value>Tutorial 1: Chiffre 1 (16 Bit Blockgröße, 2 Rundenschlüssel, 32 Bit Schlüssellänge)</value>
+    <value>Tutorial 1: Chiffre 1 (16 bit Blockgröße, 2 Rundenschlüssel, 32 bit Schlüssellänge)</value>
   </data>
   <data name="Cipher2" xml:space="preserve">
-    <value>Tutorial 2: Chiffre 2 (16 Bit Blockgröße, 4 Rundenschlüssel, 64 Bit Schlüssellänge)</value>
+    <value>Tutorial 2: Chiffre 2 (16 bit Blockgröße, 4 Rundenschlüssel, 64 bit Schlüssellänge)</value>
   </data>
   <data name="Cipher3" xml:space="preserve">
-    <value>Tutorial 3: Chiffre 3 (16 Bit Blockgröße, 6 Rundenschlüssel, 96 Bit Schlüssellänge)</value>
+    <value>Tutorial 3: Chiffre 3 (16 bit Blockgröße, 6 Rundenschlüssel, 96 bit Schlüssellänge)</value>
   </data>
   <data name="Cipher4" xml:space="preserve">
-    <value>Tutorial 4: Chiffre 4 (4 Bit Blockgröße , 4 Rundenschlüssel, 16 Bit Schlüssellänge)</value>
+    <value>Tutorial 4: Chiffre 4 (4 bit Blockgröße , 4 Rundenschlüssel, 16 bit Schlüssellänge)</value>
   </data>
   <data name="DCAOptions" xml:space="preserve">
     <value>Differenzielle Kryptoanalyse Optionen</value>
   </data>
   <data name="DescriptionContent2" xml:space="preserve">
-    <value>Tutorial 1 verwendet Chiffre 1 der DKA-ToyCipher-Komponente. Diese Chiffre arbeitet auf 16 Bit Blöcken und verwendet zwei je 16 Bit lange Rundenschlüssel. Es wird eine Verschlüsselungsrunde ausgeführt. In diesem Tutorial werden beide unbekannte Rundenschlüssel wiederhergestellt.</value>
+    <value>Tutorial 1 verwendet Chiffre 1 der DKA-ToyCipher-Komponente. Diese Chiffre arbeitet auf 16 bit Blöcken und verwendet zwei je 16 bit lange Rundenschlüssel. Es wird eine Verschlüsselungsrunde ausgeführt. In diesem Tutorial werden beide unbekannte Rundenschlüssel wiederhergestellt.</value>
   </data>
   <data name="DescriptionContent3" xml:space="preserve">
-    <value>Tutorial 2 verwendet Chiffre 2 der DKA-ToyCipher-Komponente. Diese Chiffre arbeitet auf 16 Bit Blöcken und verwendet vier je 16 Bit lange Rundenschlüssel. Es werden drei Verschlüsselungsrunden ausgeführt. In diesem Tutorial werden alle unbekannte Rundenschlüssel wiederhergestellt.</value>
+    <value>Tutorial 2 verwendet Chiffre 2 der DKA-ToyCipher-Komponente. Diese Chiffre arbeitet auf 16 bit Blöcken und verwendet vier je 16 bit lange Rundenschlüssel. Es werden drei Verschlüsselungsrunden ausgeführt. In diesem Tutorial werden alle unbekannte Rundenschlüssel wiederhergestellt.</value>
   </data>
   <data name="DescriptionContent4" xml:space="preserve">
-    <value>Tutorial 3 verwendet Chiffre 3 der DKA-ToyCipher-Komponente. Diese Chiffre arbeitet auf 16 Bit Blöcken und verwendet sechs je 16 Bit lange Rundenschlüssel. Es werden fünf Verschlüsselungsrunden ausgeführt. In diesem Tutorial werden alle unbekannte Rundenschlüssel wiederhergestellt.</value>
+    <value>Tutorial 3 verwendet Chiffre 3 der DKA-ToyCipher-Komponente. Diese Chiffre arbeitet auf 16 bit Blöcken und verwendet sechs je 16 bit lange Rundenschlüssel. Es werden fünf Verschlüsselungsrunden ausgeführt. In diesem Tutorial werden alle unbekannte Rundenschlüssel wiederhergestellt.</value>
   </data>
   <data name="DescriptionHeader" xml:space="preserve">
     <value>Beschreibung der Tutorials</value>
@@ -577,7 +577,7 @@
     <value>Die Ein- und Ausgabe-Differenzen sowie die Einträge der Differenzverteilungs-Tabelle sind hexadezimal.</value>
   </data>
   <data name="Tutorial2AnalysisOfSBoxSlide3Content2" xml:space="preserve">
-    <value>Bei einer 4 Bit S-Box gibt es je 16 verschiedene Eingaben und Ausgaben. Kombiniert man 2 Nachrichten zu einem Nachrichten-Paar mit je disjunkten Differenzen, können 256 verschiedene Übergänge von Differenzen beobachtet werden.</value>
+    <value>Bei einer 4 bit S-Box gibt es je 16 verschiedene Eingaben und Ausgaben. Kombiniert man 2 Nachrichten zu einem Nachrichten-Paar mit je disjunkten Differenzen, können 256 verschiedene Übergänge von Differenzen beobachtet werden.</value>
   </data>
   <data name="Tutorial2AnalysisOfSBoxSlide3Content3" xml:space="preserve">
     <value>Eine wichtige Beobachtung ist, dass es Differenzen gibt, die häufiger vorkommen als andere. Es gibt auch Differenzen, die gar nicht auftreten. Zum Beispiel wird die Eingabe-Differenz 8 insgesamt 8 mal auf die Ausgabe-Differenz D abgebildet.</value>
@@ -709,7 +709,7 @@
     <value>Charakteristiken</value>
   </data>
   <data name="Tutorial2CharacteristicSlide2Content1" xml:space="preserve">
-    <value>Eine Verschlüsselungsrunde besteht bei Chiffre 2 aus Schlüsseladdition, Substitution und Permutation. Die Chiffre arbeitet auf 16 Bit Blöcken. Die vorige Notation wird wie folgt erweitert, um eine differenzielle Charakteristik einer S-Box für 16 Bit Blöcke zu bezeichnen</value>
+    <value>Eine Verschlüsselungsrunde besteht bei Chiffre 2 aus Schlüsseladdition, Substitution und Permutation. Die Chiffre arbeitet auf 16 bit Blöcken. Die vorige Notation wird wie folgt erweitert, um eine differenzielle Charakteristik einer S-Box für 16 bit Blöcke zu bezeichnen</value>
   </data>
   <data name="Tutorial2CharacteristicSlide2Content2" xml:space="preserve">
     <value>Nach der Substitution werden die Bits in Chiffre 2 permutiert. Die Permutation der Chiffre ist bekannt und daher kann die differenzielle Charakteristik der Permutation wie folgt bezeichnet werden</value>

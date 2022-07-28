@@ -121,7 +121,7 @@
     <value>Capacity</value>
   </data>
   <data name="CapacityTooltip" xml:space="preserve">
-    <value>Größe der Capacity in Bit</value>
+    <value>Größe der Capacity in bit</value>
   </data>
   <data name="DebugDataStreamTooltip" xml:space="preserve">
     <value>Ausgabestrom für Debuginformationen</value>
@@ -169,7 +169,7 @@
     <value>Ausgabelänge</value>
   </data>
   <data name="OutputLengthTooltip" xml:space="preserve">
-    <value>Ausgabelänge in Bit (muss durch 8 teilbar sein)</value>
+    <value>Ausgabelänge in bit (muss durch 8 teilbar sein)</value>
   </data>
   <data name="OutputStreamCaption" xml:space="preserve">
     <value>Ausgabestrom</value>
@@ -184,46 +184,46 @@
     <value>Keccak-Algorithmus</value>
   </data>
   <data name="RateCaption" xml:space="preserve">
-    <value>Bit-Rate</value>
+    <value>bit-Rate</value>
   </data>
   <data name="SelectedStateSizeCaption" xml:space="preserve">
     <value>State-Größe</value>
   </data>
   <data name="SelectedStateSizeTooltip" xml:space="preserve">
-    <value>Größe des States in Bit festlegen (muss mit der Summe von Bitrate und Kapazität übereinstimmen)</value>
+    <value>Größe des States in bit festlegen (muss mit der Summe von Bitrate und Kapazität übereinstimmen)</value>
   </data>
   <data name="StateSize0" xml:space="preserve">
-    <value>25 Bit</value>
+    <value>25 bit</value>
   </data>
   <data name="StateSize1" xml:space="preserve">
-    <value>50 Bit</value>
+    <value>50 bit</value>
   </data>
   <data name="StateSize2" xml:space="preserve">
-    <value>100 Bit</value>
+    <value>100 bit</value>
   </data>
   <data name="StateSize3" xml:space="preserve">
-    <value>200 Bit</value>
+    <value>200 bit</value>
   </data>
   <data name="StateSize4" xml:space="preserve">
-    <value>400 Bit</value>
+    <value>400 bit</value>
   </data>
   <data name="StateSize5" xml:space="preserve">
-    <value>800 Bit</value>
+    <value>800 bit</value>
   </data>
   <data name="StateSize6" xml:space="preserve">
-    <value>1600 Bit</value>
+    <value>1600 bit</value>
   </data>
   <data name="OutputMatchError" xml:space="preserve">
     <value>Ausgabelänge muss durch 8 teilbar sein.</value>
   </data>
   <data name="OutputTooLongWarning" xml:space="preserve">
-    <value>Die Ausgabe ist zu lang. Sie wird auf 174.760 Bit gekürzt.</value>
+    <value>Die Ausgabe ist zu lang. Sie wird auf 174.760 bit gekürzt.</value>
   </data>
   <data name="RateTooltip" xml:space="preserve">
-    <value>Größe der Bit-Rate in Bit festlegen (muss durch 8 teilbar sein)</value>
+    <value>Größe der bit-Rate in bit festlegen (muss durch 8 teilbar sein)</value>
   </data>
   <data name="StateSizeMatchError" xml:space="preserve">
-    <value>Die Summe aus Bit-Rate und Capacity muss mit der Größe des States übereinstimmen.</value>
+    <value>Die Summe aus bit-Rate und Capacity muss mit der Größe des States übereinstimmen.</value>
   </data>
   <data name="PresentationCaption" xml:space="preserve">
     <value>Präsentation einschalten</value>
@@ -244,7 +244,7 @@
     <value>Absorbing-Phase</value>
   </data>
   <data name="PresAbsorbingPhaseExplanation" xml:space="preserve">
-    <value>Eingabeblock #{0} wird auf den r-Bit-Anteil des States geXORed. Bei genauerer Betrachtung des States kann man sehen, dass der Capacity-Anteil (unterer Teil des States) nicht verändert wird.</value>
+    <value>Eingabeblock #{0} wird auf den r-bit-Anteil des States geXORed. Bei genauerer Betrachtung des States kann man sehen, dass der Capacity-Anteil (unterer Teil des States) nicht verändert wird.</value>
   </data>
   <data name="PresAbsorbingPhaseText" xml:space="preserve">
     <value>Jeder Block p der gepaddeten Eingabedaten wird mit einer XOR-Operation von dem Sponge-State "aufgesaugt". Die Eingabeblöcke betreffen die {0} bit des r-bit-Anteils. Der c-bit-Anteil wird nicht beeinflusst. Nach dem Aufsaugen wird die Keccak-Permutation (Keccak-f) ausgeführt, um die State-Bits zu vermischen.</value>
@@ -253,31 +253,31 @@
     <value>Chi iteriert über jede Zeile des States.</value>
   </data>
   <data name="PresChiStepText" xml:space="preserve">
-    <value>Jedes Bit einer Zeile wird XOR-verknüpft mit der Konjunktion der beiden Bits zur Rechten des betrachteten Bits. Das erste von den beiden Bits wird vor der Konjunktion invertiert.</value>
+    <value>Jedes bit einer Zeile wird XOR-verknüpft mit der Konjunktion der beiden Bits zur Rechten des betrachteten Bits. Das erste von den beiden Bits wird vor der Konjunktion invertiert.</value>
   </data>
   <data name="PresExecution" xml:space="preserve">
     <value>Ausführung</value>
   </data>
   <data name="PresExecutionInfoBitRateSize" xml:space="preserve">
-    <value>Größe der Bit-Rate: {0} Bit</value>
+    <value>Größe der bit-Rate: {0} bit</value>
   </data>
   <data name="PresExecutionInfoCapacitySize" xml:space="preserve">
-    <value>Größe der Capacity: {0} Bit</value>
+    <value>Größe der Capacity: {0} bit</value>
   </data>
   <data name="PresExecutionInfoStateSize" xml:space="preserve">
-    <value>Größe des State: {0} Bit</value>
+    <value>Größe des State: {0} bit</value>
   </data>
   <data name="PresExecutionMessageLength" xml:space="preserve">
-    <value>Länge der Eingabedaten: {0} Bit = {1} Byte</value>
+    <value>Länge der Eingabedaten: {0} bit = {1} Byte</value>
   </data>
   <data name="PresExecutionNumberOfBlocks" xml:space="preserve">
-    <value>Anzahl Eingabeblöcke (Länge der gepaddeten Eingabe / Bit-Rate-Größe): {0}</value>
+    <value>Anzahl Eingabeblöcke (Länge der gepaddeten Eingabe / bit-Rate-Größe): {0}</value>
   </data>
   <data name="PresExecutionPaddedMessageLength" xml:space="preserve">
-    <value>Länge der gepaddeten Eingabe: {0} Bit = {1} Byte</value>
+    <value>Länge der gepaddeten Eingabe: {0} bit = {1} Byte</value>
   </data>
   <data name="PresInitializationText" xml:space="preserve">
-    <value>Der Zustand (State) der Sponge-Konstruktion wird initialisiert. Jedes der {0} State-Bits wird mit dem Wert 0 initialisiert. Der State ist in zwei Teile geteilt: Capacity ({1} bit) und Bit-Rate ({2} bit). Sie können diese Parameter frei anpassen, wenn Sie als Keccak-Version in den Einstellungen die Option "Keccak" auswählen.</value>
+    <value>Der Zustand (State) der Sponge-Konstruktion wird initialisiert. Jedes der {0} State-Bits wird mit dem Wert 0 initialisiert. Der State ist in zwei Teile geteilt: Capacity ({1} bit) und bit-Rate ({2} bit). Sie können diese Parameter frei anpassen, wenn Sie als Keccak-Version in den Einstellungen die Option "Keccak" auswählen.</value>
   </data>
   <data name="PresInputInformation" xml:space="preserve">
     <value>Eingabe-Information</value>
@@ -298,7 +298,7 @@
     <value>Keccak-f besteht aus 12 + 2 * l Runden. Bei der eingestellten State-Größe entspricht l dem Wert {0} und die Gesamtanzahl an Runden beträgt 24. In jeder Runde werden fünf "Step-Mappings" ausgeführt, die den State auf unterschiedliche Weise permutieren. </value>
   </data>
   <data name="PresKeccakFStateMapping" xml:space="preserve">
-    <value>Damit die Step-Mappings einfacher dargestellt werden können, wird der State durch einen dreidimensionalen Würfel repräsentiert. Die Länge der Reihen (row) und Spalten (column) ist jeweils 5 Bit. Die Länge der Lanes hängt von der State-Größe ab (bei der ausgewählten State-Größe beträgt die Länge der Lanes {1} bit).</value>
+    <value>Damit die Step-Mappings einfacher dargestellt werden können, wird der State durch einen dreidimensionalen Würfel repräsentiert. Die Länge der Reihen (row) und Spalten (column) ist jeweils 5 bit. Die Länge der Lanes hängt von der State-Größe ab (bei der ausgewählten State-Größe beträgt die Länge der Lanes {1} bit).</value>
     <comment>für lane fällt mir keine gute Übersetzung ein... (Linie, Spur, Weg klingt alles nicht gut)</comment>
   </data>
   <data name="PresOverview" xml:space="preserve">
@@ -326,7 +326,7 @@
     <value>Squeezing-Phase</value>
   </data>
   <data name="PresSqueezingPhaseExplanation" xml:space="preserve">
-    <value>Der {0}-bit Hashwert wird aus dem Bit-Rate-Anteil (oberer Teil des States) extrahiert.</value>
+    <value>Der {0}-bit Hashwert wird aus dem bit-Rate-Anteil (oberer Teil des States) extrahiert.</value>
   </data>
   <data name="PresSqueezingPhaseText" xml:space="preserve">
     <value>Der Hashwert wird aus dem r-bit Anteil des States extrahiert (z). Sofern die angeforderte Ausgabelänge größer ist als r, wird der State mehrfach permutiert und zwischen den Permutationen werden weitere Ausgaben extrahiert, bis die gewünschte Ausgabelänge erreicht ist.</value>
@@ -335,7 +335,7 @@
     <value>Theta iteriert über jede Spalte des States.</value>
   </data>
   <data name="PresThetaStepText" xml:space="preserve">
-    <value>Die Paritäten zweier benachbarter Spalten (türkis und hellgrün) werden XOR-verknüpft. Das Ergebnis wird XOR-verknüpft mit jedem Bit der betrachteten Spalte (grün).</value>
+    <value>Die Paritäten zweier benachbarter Spalten (türkis und hellgrün) werden XOR-verknüpft. Das Ergebnis wird XOR-verknüpft mit jedem bit der betrachteten Spalte (grün).</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="firstPage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -671,13 +671,13 @@
     <value>State</value>
   </data>
   <data name="PresOutputLengthError" xml:space="preserve">
-    <value>Die angegebene Ausgabelänge wird nicht von der Präsentation unterstützt. Bitte eine Ausgabelänge wählen, die kleiner oder gleich der ausgewählten Bit Rate ist.</value>
+    <value>Die angegebene Ausgabelänge wird nicht von der Präsentation unterstützt. Bitte eine Ausgabelänge wählen, die kleiner oder gleich der ausgewählten bit Rate ist.</value>
   </data>
   <data name="PresStateSizeError" xml:space="preserve">
-    <value>Die ausgewählte Größe für den State wird nicht von der Präsentation unterstützt. Bitte eine State Größe von mindestens 200 Bit auswählen.</value>
+    <value>Die ausgewählte Größe für den State wird nicht von der Präsentation unterstützt. Bitte eine State Größe von mindestens 200 bit auswählen.</value>
   </data>
   <data name="PresStepPresentationNotAvailable" xml:space="preserve">
-    <value>Die Präsentation von {0} ist nur bei einer State Größe von 1600 Bit möglich.</value>
+    <value>Die Präsentation von {0} ist nur bei einer State Größe von 1600 bit möglich.</value>
   </data>
   <data name="PresRotationOffset" xml:space="preserve">
     <value>Rotations-Offset:</value>
@@ -695,15 +695,15 @@
     <value>Domain-Separation Bits</value>
   </data>
   <data name="SuffixBitsInvalidError" xml:space="preserve">
-    <value>Der Domain-Separation Bit-String enthält ungültige Zeichen. Es sind nur binäre Zeichen (0 und 1) erlaubt.</value>
+    <value>Der Domain-Separation bit-String enthält ungültige Zeichen. Es sind nur binäre Zeichen (0 und 1) erlaubt.</value>
   </data>
   <data name="SuffixBitsTooLongError" xml:space="preserve">
-    <value>Die maximale Länge des Domain-Separation Bit-Strings beträgt 8 Bit.</value>
+    <value>Die maximale Länge des Domain-Separation bit-Strings beträgt 8 bit.</value>
   </data>
   <data name="SuffixBitsTooltip" xml:space="preserve">
-    <value>Festlegen eines bis zu 8 Bit langen Bit-Strings, welcher hinter die Eingabe angehängt wird und zur Domänen-Trennung verwendet wird.</value>
+    <value>Festlegen eines bis zu 8 bit langen bit-Strings, welcher hinter die Eingabe angehängt wird und zur Domänen-Trennung verwendet wird.</value>
   </data>
-  <data name="Bit" xml:space="preserve">
-    <value>Bit</value>
+  <data name="bit" xml:space="preserve">
+    <value>bit</value>
   </data>
 </root>

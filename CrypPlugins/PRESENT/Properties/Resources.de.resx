@@ -292,7 +292,7 @@
     <value>S-Box</value>
   </data>
   <data name="The_PRESENT_cipher_is_an_example" xml:space="preserve">
-    <value>Die PRESENT-Chiffre ist ein Beispiel für ein SP-Netzwerk und besteht aus 31 Runden. Die Blockgröße beträgt 64 Bits und Schlüssel mit 80 und 128 Bits werden unterstützt (in dieser Implementierung wird allerdings nur die 80-Bit-Version unterstützt).</value>
+    <value>Die PRESENT-Chiffre ist ein Beispiel für ein SP-Netzwerk und besteht aus 31 Runden. Die Blockgröße beträgt 64 Bits und Schlüssel mit 80 und 128 Bits werden unterstützt (in dieser Implementierung wird allerdings nur die 80-bit-Version unterstützt).</value>
   </data>
   <data name="Trace" xml:space="preserve">
     <value>Protokoll</value>

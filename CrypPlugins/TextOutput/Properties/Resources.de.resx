@@ -151,10 +151,10 @@
     <value>Zeichen</value>
   </data>
   <data name="Byte" xml:space="preserve">
-    <value>Byte</value>
+    <value>byte</value>
   </data>
   <data name="Bytes" xml:space="preserve">
-    <value>Bytes</value>
+    <value>byte</value>
   </data>
   <data name="Chars" xml:space="preserve">
     <value>Zeichen</value>
@@ -181,10 +181,10 @@
     <value>Statuszeile</value>
   </data>
   <data name="Bit" xml:space="preserve">
-    <value>Bit</value>
+    <value>bit</value>
   </data>
   <data name="Bits" xml:space="preserve">
-    <value>Bits</value>
+    <value>bit</value>
   </data>
   <data name="Digit" xml:space="preserve">
     <value>Dezimalziffer</value>

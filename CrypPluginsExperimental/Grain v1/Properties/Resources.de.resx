@@ -127,13 +127,13 @@
     <value>Initialisierungsvektor</value>
   </data>
   <data name="IVTooltip" xml:space="preserve">
-    <value>Hexadezimaldarstellung des 64 Bit Initialisierungsvektors.</value>
+    <value>Hexadezimaldarstellung des 64 bit Initialisierungsvektors.</value>
   </data>
   <data name="KeyDataCaption" xml:space="preserve">
     <value>Schlüssel</value>
   </data>
   <data name="KeyDataTooltip" xml:space="preserve">
-    <value>Hexadezimaldarstellung des 80 Bit Schlüssels.</value>
+    <value>Hexadezimaldarstellung des 80 bit Schlüssels.</value>
   </data>
   <data name="OutputStreamCaption" xml:space="preserve">
     <value>Ausgabedatenstrom</value>

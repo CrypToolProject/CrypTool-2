@@ -124,13 +124,13 @@
     <value>An dieser Stelle kann eine der in der Liste enthaltenen Chiffren ausgewählt werden. Diese wird verwendet, um das Differenzial anzuzeigen.</value>
   </data>
   <data name="Cipher1" xml:space="preserve">
-    <value>Chiffre 1 (16 Bit Blockgröße, 2 Rundenschlüssel, 32 Bit Schlüssellänge)</value>
+    <value>Chiffre 1 (16 bit Blockgröße, 2 Rundenschlüssel, 32 bit Schlüssellänge)</value>
   </data>
   <data name="Cipher2" xml:space="preserve">
-    <value>Chiffre 2 (16 Bit Blockgröße, 4 Rundenschlüssel, 64 Bit Schlüssellänge)</value>
+    <value>Chiffre 2 (16 bit Blockgröße, 4 Rundenschlüssel, 64 bit Schlüssellänge)</value>
   </data>
   <data name="Cipher3" xml:space="preserve">
-    <value>Chiffre 3 (16 Bit Blockgröße, 6 Rundenschlüssel, 96 Bit Schlüssellänge)</value>
+    <value>Chiffre 3 (16 bit Blockgröße, 6 Rundenschlüssel, 96 bit Schlüssellänge)</value>
   </data>
   <data name="CountOfDifferentials" xml:space="preserve">
     <value>#Charakteristiken:</value>

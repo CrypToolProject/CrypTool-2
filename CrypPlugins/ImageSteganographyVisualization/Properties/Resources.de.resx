@@ -298,13 +298,13 @@
     <value>Der BPCS-Algorithmus wurde eingeführt, um die Mängel traditioneller Steganografietechniken mit begrenzter Kapazität zum Verstecken von Daten zu überwinden. Diese Technik kann bis zu 50% der Datenmenge von dem Coverbild verstecken, ohne dass die visuelle Erscheinung des Originalbilds stark verzerrt wird.</value>
   </data>
   <data name="Intro2BPCSText2" xml:space="preserve">
-    <value>In BPCS kann ein mehrwertiges Bild, das aus 24-Bit-Pixeln besteht, in einen Satz von 24 Binärbildern (Bitebenen) zerlegt werden.</value>
+    <value>In BPCS kann ein mehrwertiges Bild, das aus 24-bit-Pixeln besteht, in einen Satz von 24 Binärbildern (Bitebenen) zerlegt werden.</value>
   </data>
   <data name="Intro2BPCSText3" xml:space="preserve">
     <value>Diese Ebenen sind in 8 × 8-Pixelblöcke unterteilt, die Blöcke werden dann in Noise-like Regionen und informative Regionen klassifiziert, </value>
   </data>
   <data name="Intro2BPCSText4" xml:space="preserve">
-    <value>Noise-like Regionen (komplexe Regionen) können durch 8 x 8-Bit-Blöcke der geheimen Nachricht ersetzt werden, die ebenfalls komplex sein sollten. Wenn der Nachrichtenblock nicht komplex ist, sollte er konjugiert werden, um den Komplexitätsgrad des Bildblocks beizubehalten, </value>
+    <value>Noise-like Regionen (komplexe Regionen) können durch 8 x 8-bit-Blöcke der geheimen Nachricht ersetzt werden, die ebenfalls komplex sein sollten. Wenn der Nachrichtenblock nicht komplex ist, sollte er konjugiert werden, um den Komplexitätsgrad des Bildblocks beizubehalten, </value>
   </data>
   <data name="Intro2BPCSTitle" xml:space="preserve">
     <value>BPCS-Algorithmus</value>

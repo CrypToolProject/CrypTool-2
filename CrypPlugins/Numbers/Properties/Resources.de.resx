@@ -223,10 +223,10 @@
     <value>Dezimalziffern</value>
   </data>
   <data name="Bit" xml:space="preserve">
-    <value>Bit</value>
+    <value>bit</value>
   </data>
   <data name="Bits" xml:space="preserve">
-    <value>Bits</value>
+    <value>bit</value>
   </data>
   <data name="FontCaption" xml:space="preserve">
     <value>Schriftart</value>

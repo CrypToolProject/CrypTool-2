@@ -133,7 +133,7 @@
     <value>Je nach gewählter Betriebsoption werden Daten verschlüsselt oder entschlüsselt</value>
   </data>
   <data name="Cipher1" xml:space="preserve">
-    <value>Chiffre 1: 16 Bit Blockgröße, 2 Rundenschlüssel, 32 Bit Schlüssellänge</value>
+    <value>Chiffre 1: 16 bit Blockgröße, 2 Rundenschlüssel, 32 bit Schlüssellänge</value>
   </data>
   <data name="Cipher1LblHeading" xml:space="preserve">
     <value>Chiffre 1</value>
@@ -145,10 +145,10 @@
     <value>Ausgabeblock</value>
   </data>
   <data name="Cipher1LblText" xml:space="preserve">
-    <value>Diese Blockchiffre arbeitet auf 16 Bit großen Blöcken. Es wird eine Verschlüsselungsrunde ausgeführt, wobei insgesamt zwei Rundenschlüssel verwendet werden. In der Verschlüsselungsrunde werden folgende Schritte durchgeführt: Schlüsseladdidtion, Substitution und Schlüsseladdition. Die Rundenschlüssel sind 16 Bit lang, die S-Boxen verarbeiten jeweils 4 Bit. Die Schlüssellänge beträgt damit 32 Bit.</value>
+    <value>Diese Blockchiffre arbeitet auf 16 bit großen Blöcken. Es wird eine Verschlüsselungsrunde ausgeführt, wobei insgesamt zwei Rundenschlüssel verwendet werden. In der Verschlüsselungsrunde werden folgende Schritte durchgeführt: Schlüsseladdidtion, Substitution und Schlüsseladdition. Die Rundenschlüssel sind 16 bit lang, die S-Boxen verarbeiten jeweils 4 bit. Die Schlüssellänge beträgt damit 32 bit.</value>
   </data>
   <data name="Cipher2" xml:space="preserve">
-    <value>Chiffre 2: 16 Bit Blockgröße, 4 Rundenschlüssel, 64 Bit Schlüssellänge</value>
+    <value>Chiffre 2: 16 bit Blockgröße, 4 Rundenschlüssel, 64 bit Schlüssellänge</value>
   </data>
   <data name="Cipher2LblHeading" xml:space="preserve">
     <value>Chiffre 2</value>
@@ -160,10 +160,10 @@
     <value>Ausgabeblock</value>
   </data>
   <data name="Cipher2LblText" xml:space="preserve">
-    <value>Diese Blockchiffre arbeitet auf 16 Bit großen Blöcken. Es werden drei Verschlüsselungsrunden durchgeführt, wobei insgesamt vier Rundenschlüssel verwendet werden. In der letzten Verschlüsselungsrunde werden zwei Rundenschlüssel angewandt. Jede Runde besteht aus drei Teilschritten: Schlüsseladdition, Substitution und Permutation – in der letzten Runde entfällt die Permutation und es wird der letzte Rundenschlüssel addiert. Die Rundenschlüssel sind 16 Bit lang, die S-Boxen verarbeiten jeweils 4 Bit. Die Schlüssellänge beträgt damit 64 Bit.</value>
+    <value>Diese Blockchiffre arbeitet auf 16 bit großen Blöcken. Es werden drei Verschlüsselungsrunden durchgeführt, wobei insgesamt vier Rundenschlüssel verwendet werden. In der letzten Verschlüsselungsrunde werden zwei Rundenschlüssel angewandt. Jede Runde besteht aus drei Teilschritten: Schlüsseladdition, Substitution und Permutation – in der letzten Runde entfällt die Permutation und es wird der letzte Rundenschlüssel addiert. Die Rundenschlüssel sind 16 bit lang, die S-Boxen verarbeiten jeweils 4 bit. Die Schlüssellänge beträgt damit 64 bit.</value>
   </data>
   <data name="Cipher3" xml:space="preserve">
-    <value>Chiffre 3: 16 Bit Blockgröße, 6 Rundenschlüssel, 96 Bit Schlüssellänge</value>
+    <value>Chiffre 3: 16 bit Blockgröße, 6 Rundenschlüssel, 96 bit Schlüssellänge</value>
   </data>
   <data name="Cipher3LblHeading" xml:space="preserve">
     <value>Chiffre 3</value>
@@ -175,10 +175,10 @@
     <value>Ausgabeblock</value>
   </data>
   <data name="Cipher3LblText" xml:space="preserve">
-    <value>Diese Blockchiffre arbeitet auf 16 Bit großen Blöcken. Es werden 5 Verschlüsselungsrunden durchgeführt, wobei insgesamt sechs Rundenschlüssel verwendet werden. In der letzten Verschlüsselungsrunde werden zwei Rundenschlüssel angewandt. Jede Runde besteht aus drei Teilschritten: Schlüsseladdition, Substitution und Permutation – in der letzten Runde entfält die Permutation und es wird der letzte Rundenschlüssel addiert. Die Rundenschlüssel sind 16 Bit lang, die S-Boxen verarbeiten jeweils 4 Bit. Die Schlüssellänge beträgt damit 96 Bit.</value>
+    <value>Diese Blockchiffre arbeitet auf 16 bit großen Blöcken. Es werden 5 Verschlüsselungsrunden durchgeführt, wobei insgesamt sechs Rundenschlüssel verwendet werden. In der letzten Verschlüsselungsrunde werden zwei Rundenschlüssel angewandt. Jede Runde besteht aus drei Teilschritten: Schlüsseladdition, Substitution und Permutation – in der letzten Runde entfält die Permutation und es wird der letzte Rundenschlüssel addiert. Die Rundenschlüssel sind 16 bit lang, die S-Boxen verarbeiten jeweils 4 bit. Die Schlüssellänge beträgt damit 96 bit.</value>
   </data>
   <data name="Cipher4" xml:space="preserve">
-    <value>Chiffre 4: 4 Bit Blockgröße , 4 Rundenschlüssel, 16 Bit Schlüssellänge</value>
+    <value>Chiffre 4: 4 bit Blockgröße , 4 Rundenschlüssel, 16 bit Schlüssellänge</value>
   </data>
   <data name="Cipher4LblHeading" xml:space="preserve">
     <value>Chiffre 4</value>
@@ -190,7 +190,7 @@
     <value>Ausgabeblock</value>
   </data>
   <data name="Cipher4LblText" xml:space="preserve">
-    <value>Diese Blockchiffre arbeitet auf 4 Bit großen Blöcken. Es werden drei Verschlüsselungsrunden durchgeführt, wobei insgesamt vier Rundenschlüssel verwendet werden. In der letzten Verschlüsselungsrunde werden zwei Rundenschlüssel angewandt. Jede Runde besteht aus zwei Teilschritten: Schlüsseladdition und Substitution. In der letzten Runde wird anschließend der letzte Rundenschlüssel noch addiert. Die Rundenschlüssel sind 4 Bit lang und die S-Boxen arbeiten auf jeweils 4 Bit. Die Schlüssellänge beträgt damit 16 Bit.</value>
+    <value>Diese Blockchiffre arbeitet auf 4 bit großen Blöcken. Es werden drei Verschlüsselungsrunden durchgeführt, wobei insgesamt vier Rundenschlüssel verwendet werden. In der letzten Verschlüsselungsrunde werden zwei Rundenschlüssel angewandt. Jede Runde besteht aus zwei Teilschritten: Schlüsseladdition und Substitution. In der letzten Runde wird anschließend der letzte Rundenschlüssel noch addiert. Die Rundenschlüssel sind 4 bit lang und die S-Boxen arbeiten auf jeweils 4 bit. Die Schlüssellänge beträgt damit 16 bit.</value>
   </data>
   <data name="Cipher5" xml:space="preserve">
     <value>Feal-4</value>

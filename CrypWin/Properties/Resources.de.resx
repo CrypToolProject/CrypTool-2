@@ -932,10 +932,10 @@
     <value>Systemtyp</value>
   </data>
   <data name="SI_System_Type_32" xml:space="preserve">
-    <value>32 Bit-Betriebssystem</value>
+    <value>32 bit-Betriebssystem</value>
   </data>
   <data name="SI_System_Type_64" xml:space="preserve">
-    <value>64 Bit-Betriebssystem</value>
+    <value>64 bit-Betriebssystem</value>
   </data>
   <data name="GeneratingFunctionListWaitMessage" xml:space="preserve">
     <value>Bitte warten... Funktionsliste wird erzeugt.</value>
