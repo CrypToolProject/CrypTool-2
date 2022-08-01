@@ -21,8 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Image Source="pack://application:,,,/Startcenter;component/images/header_logo.png" />
@@ -109,7 +108,5 @@
                 <Startcenter:Panels/>
             </Grid>
         </Grid>
-
-        <CheckBox Name="StartupCheckbox"  Content="{Loc Show_this_welcome_screen_at_CrypTool_2_0_startup_}" Margin="5" VerticalAlignment="Center" Grid.Row="3" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" />
     </Grid>
 </UserControl>

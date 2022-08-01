@@ -37,7 +37,6 @@ namespace Startcenter
 
         public event OpenEditorHandler OnOpenEditor;
         public event OpenTabHandler OnOpenTab;
-        public event StartcenterEditor.StartupBehaviourChangedHandler StartupBehaviourChanged;
         public event EventHandler<TemplateOpenEventArgs> TemplateLoaded;
 
         public Startcenter()
@@ -55,14 +54,6 @@ namespace Startcenter
             if (TemplateLoaded != null)
             {
                 TemplateLoaded.Invoke(sender, e);
-            }
-        }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            if (StartupBehaviourChanged != null && StartupCheckbox.IsChecked.HasValue)
-            {
-                StartupBehaviourChanged(StartupCheckbox.IsChecked.Value);
             }
         }
 

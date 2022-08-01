@@ -101,9 +101,6 @@
     <Setting Name="useLastPath" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="ShowStartcenter" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="SamplesDir" Type="System.String" Scope="User">
       <Value Profile="(Default)">Templates</Value>
     </Setting>

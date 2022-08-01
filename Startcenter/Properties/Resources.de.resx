@@ -171,9 +171,6 @@
   <data name="Search" xml:space="preserve">
     <value>Geben Sie einen oder mehrere Suchbegriffe ein. Drücken Sie Strg + R, um die Vorlagenliste zu aktualisieren</value>
   </data>
-  <data name="Show_this_welcome_screen_at_CrypTool_2_0_startup_" xml:space="preserve">
-    <value>Diese Begrüßungsseite beim Start von CrypTool 2 anzeigen</value>
-  </data>
   <data name="Use_the_wizard_to_easily_try_some_CrypTool_2_0_features_" xml:space="preserve">
     <value>Erkunden Sie CrypTool 2 mit dem Wizard</value>
   </data>

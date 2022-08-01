@@ -17,15 +17,7 @@ namespace StartCenter
         private string _samplesDir;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
-
-        public delegate void StartupBehaviourChangedHandler(bool showOnStartup);
-        public static event StartupBehaviourChangedHandler StartupBehaviourChanged;
-
-        public bool ShowOnStartup
-        {
-            set => _startcenter.StartupCheckbox.IsChecked = value;
-        }
+        public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;      
 
         public ISettings Settings => null;
 
@@ -44,7 +36,6 @@ namespace StartCenter
 
         public void Initialize()
         {
-            _startcenter.StartupBehaviourChanged += (showOnStartup) => StartupBehaviourChanged(showOnStartup);
             _startcenter.OnOpenEditor += (content, info) => OnOpenEditor(content, info);
             _startcenter.OnOpenTab += (content, title, parent) => OnOpenTab(content, title, parent);
             _startcenter.TemplatesDir = _samplesDir;

@@ -349,15 +349,6 @@ namespace Startcenter.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show this welcome screen at startup ähnelt.
-        /// </summary>
-        internal static string Show_this_welcome_screen_at_CrypTool_2_0_startup_ {
-            get {
-                return ResourceManager.GetString("Show_this_welcome_screen_at_CrypTool_2_0_startup_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Start this entry ähnelt.
         /// </summary>
         internal static string StartTemplate {

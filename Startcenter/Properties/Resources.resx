@@ -171,9 +171,6 @@
   <data name="Search" xml:space="preserve">
     <value>Enter one or more search terms. Press Ctrl + R to update the template list</value>
   </data>
-  <data name="Show_this_welcome_screen_at_CrypTool_2_0_startup_" xml:space="preserve">
-    <value>Show this welcome screen at startup</value>
-  </data>
   <data name="Use_the_wizard_to_easily_try_some_CrypTool_2_0_features_" xml:space="preserve">
     <value>Use the wizard to easily try some CrypTool 2 features</value>
   </data>

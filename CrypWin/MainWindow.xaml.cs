@@ -338,8 +338,6 @@ namespace CrypTool.CrypWin
 
             UpgradeConfig();
 
-            SetStartcenterStartupBehaviourEventHandler();
-
             CreateAndSetPersonalProjectsDirectory();
 
             SaveSettingsSavely();
@@ -703,30 +701,6 @@ namespace CrypTool.CrypWin
             }
         }
 
-        /// <summary>
-        /// Sets an event handler for the StartCenter.StartcenterEditor.StartupBehaviourChanged
-        /// </summary>
-        private void SetStartcenterStartupBehaviourEventHandler()
-        {
-            try
-            {
-                StartCenter.StartcenterEditor.StartupBehaviourChanged += (showOnStartup) =>
-                {
-                    try
-                    {
-                        Properties.Settings.Default.ShowStartcenter = showOnStartup;
-                    }
-                    catch (Exception ex)
-                    {
-                        GuiLogMessage(string.Format("Exception occured during setting of Properties.Settings.Default.ShowStartcenter: {0}", ex.Message), NotificationLevel.Error);
-                    }
-                };
-            }
-            catch (Exception ex)
-            {
-                GuiLogMessage(string.Format("Exception occured during SetStartcenterStartupBehaviourEventHandler: {0}", ex.Message), NotificationLevel.Error);
-            }
-        }
 
         /// <summary>
         /// Updgrades the config
@@ -1952,16 +1926,9 @@ namespace CrypTool.CrypWin
                         LoadIndividualComponentConnectionStatistics();
 
                         // open projects at startup if necessary, return whether any project has been opened
-                        bool hasOpenedProject = CheckCommandOpenProject();
-
-                        if (Properties.Settings.Default.ShowStartcenter && CheckCommandProjectFileGiven().Count == 0)
-                        {
-                            AddEditorDispatched(typeof(StartCenter.StartcenterEditor));
-                        }
-                        else if (!hasOpenedProject) // neither startcenter shown nor any project opened
-                        {
-                            ProjectTitleChanged(); // init window title in order to avoid being empty
-                        }
+                        CheckCommandOpenProject();
+                       
+                        AddEditorDispatched(typeof(StartCenter.StartcenterEditor));                       
 
                         if (IsCommandParameterGiven("-silent"))
                         {
@@ -2052,28 +2019,26 @@ namespace CrypTool.CrypWin
         /// Open projects at startup.
         /// </summary>
         /// <returns>true if at least one project has been opened</returns>
-        private bool CheckCommandOpenProject()
+        private void CheckCommandOpenProject()
         {
-            bool hasOpenedProject = false;
 
             try
             {
                 List<string> filesPath = CheckCommandProjectFileGiven();
-
-                if (filesPath.Count == 0)
+                foreach (string filePath in filesPath)
                 {
-                    if (Settings.Default.ReopenLastTabs && Settings.Default.LastOpenedTabs != null)
+                    GuiLogMessage(string.Format(Resource.workspace_loading, filePath), NotificationLevel.Info);
+                    try
                     {
-                        hasOpenedProject = ReopenLastTabs(Settings.Default.LastOpenedTabs);
-                    }
-                }
-                else
-                {
-                    foreach (string filePath in filesPath)
-                    {
-                        GuiLogMessage(string.Format(Resource.workspace_loading, filePath), NotificationLevel.Info);
                         OpenProject(filePath, FileLoadedOnStartup);
-                        hasOpenedProject = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        GuiLogMessage(ex.Message, NotificationLevel.Error);
+                        if (ex.InnerException != null)
+                        {
+                            GuiLogMessage(ex.InnerException.Message, NotificationLevel.Error);
+                        }
                     }
                 }
             }
@@ -2085,8 +2050,6 @@ namespace CrypTool.CrypWin
                     GuiLogMessage(ex.InnerException.Message, NotificationLevel.Error);
                 }
             }
-
-            return hasOpenedProject;
         }
 
 
@@ -2278,7 +2241,6 @@ namespace CrypTool.CrypWin
 
             if (editor is StartCenter.StartcenterEditor)
             {
-                ((StartCenter.StartcenterEditor)editor).ShowOnStartup = Properties.Settings.Default.ShowStartcenter;
                 ((Startcenter.Startcenter)((StartCenter.StartcenterEditor)editor).Presentation).TemplateLoaded += new EventHandler<Startcenter.TemplateOpenEventArgs>(MainWindow_TemplateLoaded);
             }
 
