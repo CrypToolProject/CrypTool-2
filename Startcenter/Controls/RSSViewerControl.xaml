@@ -16,12 +16,13 @@
                 <SolidColorBrush>#00000000</SolidColorBrush>
                 <SolidColorBrush>#FFEBEFF6</SolidColorBrush>
             </AlternationConverter>
-              
+
             <Style x:Key="alternatingWithBinding" TargetType="{x:Type ListBoxItem}">
                 <Setter Property="Background" 
-              Value="{Binding RelativeSource={RelativeSource Self},
-                     Path=(ItemsControl.AlternationIndex),
-                     Converter={StaticResource BackgroundConverter}}"/>
+                        Value="{Binding RelativeSource={RelativeSource Self},
+                        Path=(ItemsControl.AlternationIndex),
+                        Converter={StaticResource BackgroundConverter}}"/>
+                <EventSetter Event="MouseDoubleClick" Handler="MouseDoubleClick"/>
             </Style>
         </Grid.Resources>
         
@@ -47,7 +48,7 @@
         <ListBox Name="rssListBox" ItemsSource="{Binding}" Background="#00000000" Visibility="{Binding Converter={StaticResource FalseToVisibleConverter}, Path=IsUpdating, RelativeSource={RelativeSource FindAncestor, AncestorType=StartcenterControls:RSSViewerControl, AncestorLevel=1}}" AlternationCount="2" ItemContainerStyle="{StaticResource alternatingWithBinding}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Margin="0,0,0,0" MouseDoubleClick="RSSItem_MouseDoubleClick" Tag="{Binding Path=URL}" ToolTipService.ShowDuration="{x:Static sys:Int32.MaxValue}">
+                    <Label Margin="0,0,0,0" Tag="{Binding Path=URL}" ToolTipService.ShowDuration="{x:Static sys:Int32.MaxValue}">
                         <Label.ToolTip>                            
                             <Grid Width="400">
                                 <Grid.RowDefinitions>

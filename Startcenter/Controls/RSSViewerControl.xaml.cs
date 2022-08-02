@@ -121,9 +121,13 @@ namespace Startcenter.Controls
             }
         }
 
-        private void RSSItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            System.Diagnostics.Process.Start((string)((FrameworkElement)sender).Tag);
+            RssItem rssItem = (RssItem)rssListBox.SelectedItem;
+            if (rssItem != null)
+            {
+                System.Diagnostics.Process.Start((string)(rssItem.URL));
+            }            
         }
     }
 
