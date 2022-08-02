@@ -17,11 +17,16 @@
                     <MenuItem Header="{Loc Delete}" Click="MenuItem_Click_1" />
                 </ContextMenu>
             </ListBox.ContextMenu>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="MouseDoubleClick"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" ToolTip="{Binding Path=Description}">
                         <Image Source="{Binding Path=Icon}" Width="32" Height="32"/>
-                        <Label Content="{Binding Path=Title}" MouseDoubleClick="Label_MouseDoubleClick" />
+                        <Label Content="{Binding Path=Title}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

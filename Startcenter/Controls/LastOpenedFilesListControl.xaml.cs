@@ -161,7 +161,7 @@ namespace Startcenter.Controls
             _recentFileInfos.Reverse();
         }
 
-        private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             OpenSelectedTemplate();
         }
