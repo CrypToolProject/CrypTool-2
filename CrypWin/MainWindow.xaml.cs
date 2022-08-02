@@ -2236,7 +2236,6 @@ namespace CrypTool.CrypWin
             if (editor.Presentation != null)
             {
                 ToolTipService.SetIsEnabled(editor.Presentation, false);
-                //editor.Presentation.Tag = type.GetImage(0).Source;   
             }
             editor.SamplesDir = defaultTemplatesDirectory;
 
@@ -2263,7 +2262,13 @@ namespace CrypTool.CrypWin
         {
             IEditor editor = OpenEditor(e.Type, e.Info);
             editor.Open(e.Info.Filename.FullName);
-            OpenTab(editor, e.Info, null);
+            OpenTab(editor, e.Info, null);           
+
+            //update project title to template name:
+            if (contentToTabMap.ContainsKey(ActivePlugin))
+            {
+                ProjectTitleChanged((string)contentToTabMap[ActivePlugin].Header);
+            }
         }
 
         private void AddEditor(IEditor editor)
@@ -2384,20 +2389,6 @@ namespace CrypTool.CrypWin
                 }
             }
 
-            //Create the tab header:
-            //StackPanel tabheader = new StackPanel();
-            //tabheader.Orientation = Orientation.Horizontal;
-            //TextBlock tablabel = new TextBlock();
-            //tablabel.Text = title.Replace("_", "__");
-            //tablabel.Name = "Text";
-            //tabheader.Children.Add(tablabel);
-
-            //Binding bind = new Binding();
-            //bind.Source = tabitem.Content;
-            //bind.Path = new PropertyPath("Tag");
-            //tabitem.SetBinding(CTTabItem.IconProperty, bind);
-            //tabitem.Header = tablabel.Text;
-
             //give the tab header his individual color:
             Attribute colorAttr = Attribute.GetCustomAttribute(content.GetType(), typeof(TabColorAttribute));
             if (colorAttr != null)
@@ -2419,22 +2410,7 @@ namespace CrypTool.CrypWin
             if (parent != null)
             {
                 contentToParentMap.Add(content, parent);
-            }
-
-            //bind content tooltip to tabitem header tooltip:
-            //var headerTooltip = new ToolTip();
-            //tabitem.Tag = headerTooltip;
-            //if (content is ICrypTutorial)
-            //{
-            //    headerTooltip.Content = ((ICrypTutorial)content).GetPluginInfoAttribute().ToolTip;
-            //}
-            //else
-            //{
-            //    Binding tooltipBinding = new Binding("ToolTip");
-            //    tooltipBinding.Source = tabitem.Content;
-            //    tooltipBinding.Mode = BindingMode.OneWay;
-            //    headerTooltip.SetBinding(ContentProperty, tooltipBinding);
-            //}
+            }          
 
             tabs.SelectedItem = tabitem;
 
@@ -2823,7 +2799,7 @@ namespace CrypTool.CrypWin
             return editorToFileMap.Keys.Where(e => e.CanStop).Count();
         }
 
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
         {
             if (ActiveEditor == lastEditor)
             {

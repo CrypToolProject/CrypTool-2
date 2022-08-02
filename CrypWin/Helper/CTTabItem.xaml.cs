@@ -104,8 +104,6 @@ namespace CrypTool.CrypWin.Helper
 
         public CTTabItem(TabInfo info)
         {
-            // TODO: Complete member initialization
-            Info = null;
             Info = info;
             InitializeComponent();
         }
@@ -171,9 +169,9 @@ namespace CrypTool.CrypWin.Helper
                 editor = value;
                 if (editor is WorkspaceManager.WorkspaceManagerClass)
                 {
-                    WorkspaceManager.WorkspaceManagerClass x = editor as WorkspaceManager.WorkspaceManagerClass;
+                    WorkspaceManager.WorkspaceManagerClass workspaceManagerClass = editor as WorkspaceManager.WorkspaceManagerClass;
                     IsExecuting = false;
-                    WorkspaceManager.View.Visuals.EditorVisual y = (WorkspaceManager.View.Visuals.EditorVisual)x.Presentation;
+                    WorkspaceManager.View.Visuals.EditorVisual y = (WorkspaceManager.View.Visuals.EditorVisual)workspaceManagerClass.Presentation;
 
                     Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
@@ -185,17 +183,17 @@ namespace CrypTool.CrypWin.Helper
                         SetBinding(CTTabItem.ProgressProperty, bind);
                     }, null);
 
-                    x.executeEvent += new EventHandler(x_executeEvent);
+                    workspaceManagerClass.executeEvent += new EventHandler(workspaceManager_executeEvent);
                 }
             }
         }
 
-        private void x_executeEvent(object sender, EventArgs e)
+        private void workspaceManager_executeEvent(object sender, EventArgs e)
         {
-            WorkspaceManager.WorkspaceManagerClass x = editor as WorkspaceManager.WorkspaceManagerClass;
+            WorkspaceManager.WorkspaceManagerClass workspaceManagerClass = editor as WorkspaceManager.WorkspaceManagerClass;
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                IsExecuting = x.isExecuting();
+                IsExecuting = workspaceManagerClass.isExecuting();
             }, null);
         }
 
