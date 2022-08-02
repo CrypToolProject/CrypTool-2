@@ -18,7 +18,7 @@ using CrypTool.CrypWin.Helper;
 using CrypTool.CrypWin.Properties;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Editor;
-using StartCenter;
+using Startcenter;
 using System;
 using System.Linq;
 using System.Threading;

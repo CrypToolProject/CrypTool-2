@@ -142,7 +142,7 @@ namespace Startcenter.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die CT-Book-en.pdf ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die CrypToolBook\\CT-Book-en.pdf ähnelt.
         /// </summary>
         internal static string CTBookFilename {
             get {

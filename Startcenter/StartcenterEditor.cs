@@ -1,12 +1,28 @@
-﻿using CrypTool.Core;
+﻿/*
+   Copyright 2008-2022 CrypTool Team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using CrypTool.Core;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.Editor;
+using Startcenter.Controls;
 using System;
 using System.ComponentModel;
 using System.Windows.Controls;
 
-namespace StartCenter
+namespace Startcenter
 {
     [TabColor("LightSkyBlue")]
     [EditorInfo("startcenter", false, true, false, true, false, false)]
@@ -17,11 +33,11 @@ namespace StartCenter
         private string _samplesDir;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;      
+        public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
         public ISettings Settings => null;
 
-        private readonly Startcenter.Startcenter _startcenter = new Startcenter.Startcenter();
+        private readonly StartcenterControl _startcenter = new StartcenterControl();
         public UserControl Presentation => _startcenter;
 
         public void Execute()
@@ -65,10 +81,7 @@ namespace StartCenter
 
         public void Open(string fileName)
         {
-            if (OnFileLoaded != null)
-            {
-                OnFileLoaded(this, fileName);
-            }
+            OnFileLoaded?.Invoke(this, fileName);
         }
 
         public void Save(string fileName)
@@ -150,15 +163,14 @@ namespace StartCenter
 
         public bool ReadOnly { get; set; }
 
-
         public void AddText()
         {
-            throw new NotImplementedException();
+            //do nothing
         }
 
         public void AddImage()
         {
-            throw new NotImplementedException();
+            //do nothing
         }
     }
 }

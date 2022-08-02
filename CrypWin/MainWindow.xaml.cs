@@ -31,6 +31,7 @@ using Microsoft.Win32;
 using OnlineDocumentationGenerator.Generators.FunctionListGenerator;
 using OnlineDocumentationGenerator.Generators.HtmlGenerator;
 using OnlineDocumentationGenerator.Generators.LaTeXGenerator;
+using Startcenter.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -1928,7 +1929,7 @@ namespace CrypTool.CrypWin
                         // open projects at startup if necessary, return whether any project has been opened
                         CheckCommandOpenProject();
                        
-                        AddEditorDispatched(typeof(StartCenter.StartcenterEditor));                       
+                        AddEditorDispatched(typeof(Startcenter.StartcenterEditor));                       
 
                         if (IsCommandParameterGiven("-silent"))
                         {
@@ -2239,9 +2240,9 @@ namespace CrypTool.CrypWin
             }
             editor.SamplesDir = defaultTemplatesDirectory;
 
-            if (editor is StartCenter.StartcenterEditor)
+            if (editor is Startcenter.StartcenterEditor)
             {
-                ((Startcenter.Startcenter)((StartCenter.StartcenterEditor)editor).Presentation).TemplateLoaded += new EventHandler<Startcenter.TemplateOpenEventArgs>(MainWindow_TemplateLoaded);
+                ((Startcenter.Controls.StartcenterControl)((Startcenter.StartcenterEditor)editor).Presentation).TemplateLoaded += new EventHandler<Startcenter.Util.TemplateOpenEventArgs>(MainWindow_TemplateLoaded);
             }
 
             if (Dispatcher.CheckAccess())
@@ -2258,7 +2259,7 @@ namespace CrypTool.CrypWin
             return editor;
         }
 
-        private void MainWindow_TemplateLoaded(object sender, Startcenter.TemplateOpenEventArgs e)
+        private void MainWindow_TemplateLoaded(object sender, TemplateOpenEventArgs e)
         {
             IEditor editor = OpenEditor(e.Type, e.Info);
             editor.Open(e.Info.Filename.FullName);
@@ -2516,7 +2517,7 @@ namespace CrypTool.CrypWin
             //Open Startcenter if tabcontrol is empty now:
             if (tabs.Items.Count == 0)
             {
-                AddEditorDispatched(typeof(StartCenter.StartcenterEditor));
+                AddEditorDispatched(typeof(Startcenter.StartcenterEditor));
             }
         }
 

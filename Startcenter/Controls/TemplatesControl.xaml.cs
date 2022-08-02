@@ -1,7 +1,23 @@
-﻿using CrypTool.Core;
+﻿/*
+   Copyright 2008-2022 CrypTool Team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using CrypTool.Core;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using OnlineDocumentationGenerator.Generators.HtmlGenerator;
+using Startcenter.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,13 +33,13 @@ using System.Windows.Media;
 using System.Xml.Linq;
 using Path = System.IO.Path;
 
-namespace Startcenter
+namespace Startcenter.Controls
 {
     /// <summary>
     /// Interaction logic for Templates.xaml
     /// </summary>
     [CrypTool.PluginBase.Attributes.Localization("Startcenter.Properties.Resources")]
-    public partial class Templates : UserControl
+    public partial class TemplatesControl : UserControl
     {
         private readonly RecentFileList _recentFileList = RecentFileList.GetSingleton();
         private int TemplateCount = 0;
@@ -31,7 +47,7 @@ namespace Startcenter
         public event OpenEditorHandler OnOpenEditor;
         public event OpenTabHandler OnOpenTab;
 
-        public Templates()
+        public TemplatesControl()
         {
             InitializeComponent();
         }
@@ -263,7 +279,7 @@ namespace Startcenter
                     }
                 }
 
-                if ((title == null) || (title.Trim() == ""))
+                if (string.IsNullOrWhiteSpace(title))
                 {
                     title = Path.GetFileNameWithoutExtension(file.Name).Replace("-", " ").Replace("_", " ");
                 }
@@ -760,11 +776,5 @@ namespace Startcenter
                 }
             }
         }
-    }
-
-    public class TemplateOpenEventArgs : EventArgs
-    {
-        public TabInfo Info { get; set; }
-        public Type Type { get; set; }
     }
 }

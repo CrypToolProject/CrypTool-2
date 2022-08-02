@@ -199,7 +199,7 @@
     <value>Schauen Sie sich Videos über CrypTool 2 an</value>
   </data>
   <data name="CTBookFilename" xml:space="preserve">
-    <value>CT-Book-de.pdf</value>
+    <value>CrypToolBook\\CT-Book-de.pdf</value>
   </data>
   <data name="Open_the_ct_book_" xml:space="preserve">
     <value>Öffnen Sie das CrypTool-Buch</value>

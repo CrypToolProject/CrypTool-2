@@ -1,6 +1,22 @@
-﻿using CrypTool.Core;
+﻿/*
+   Copyright 2008-2022 CrypTool Team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using CrypTool.Core;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using Startcenter.Util;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,13 +28,13 @@ using System.Windows.Media;
 using System.Xml.Linq;
 using Path = System.IO.Path;
 
-namespace Startcenter
+namespace Startcenter.Controls
 {
     /// <summary>
     /// Interaction logic for LastOpenedFilesList.xaml
     /// </summary>
     [CrypTool.PluginBase.Attributes.Localization("Startcenter.Properties.Resources")]
-    public partial class LastOpenedFilesList : UserControl
+    public partial class LastOpenedFilesListControl : UserControl
     {
         public event OpenEditorHandler OnOpenEditor;
         public event OpenTabHandler OnOpenTab;
@@ -26,7 +42,7 @@ namespace Startcenter
         private readonly RecentFileList _recentFileList = RecentFileList.GetSingleton();
         public event EventHandler<TemplateOpenEventArgs> TemplateLoaded;
 
-        public LastOpenedFilesList()
+        public LastOpenedFilesListControl()
         {
             ReadRecentFileList();
             InitializeComponent();
