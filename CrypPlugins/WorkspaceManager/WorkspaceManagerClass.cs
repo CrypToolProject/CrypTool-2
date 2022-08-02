@@ -1098,18 +1098,25 @@ namespace WorkspaceManager
 
         public BinEditorState State { get; set; }
 
-
         public void AddText()
         {
-            ((EditorVisual)Presentation).AddText();
+            if (WorkspaceModel != null && !((WorkspaceManagerClass)WorkspaceModel.MyEditor).isExecuting())
+            {
+                return;
+            }
+            ((EditorVisual)Presentation).AddText();            
         }
 
         public void AddImage()
         {
-            System.Windows.Forms.OpenFileDialog diag = new System.Windows.Forms.OpenFileDialog();
-            if (diag.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (WorkspaceModel != null && !((WorkspaceManagerClass)WorkspaceModel.MyEditor).isExecuting())
             {
-                Uri uriLocal = new Uri(diag.FileName);
+                return;
+            }
+            System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Uri uriLocal = new Uri(openFileDialog.FileName);
                 ((EditorVisual)Presentation).AddImage(uriLocal);
             }
         }
