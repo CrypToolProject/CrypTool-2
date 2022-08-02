@@ -975,10 +975,6 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
         {
             ComponentVisual bin = (ComponentVisual)d;
             bin.Model.WorkspaceModel.ModifyModel(new RenameModelElementOperation(bin.Model, (string)e.NewValue));
-            /*if (bin.Model.WorkspaceModel.MyEditor != null)
-            {
-                ((WorkspaceManagerClass)bin.Model.WorkspaceModel.MyEditor).HasChanges = true;
-            }*/
         }
 
         private void CloseClick(object sender, RoutedEventArgs e)
@@ -1020,23 +1016,6 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
             Repeat = (bool)b.Content;
         }
         #endregion
-
-        private void PreviewDragEnterHandler(object sender, DragEventArgs e)
-        {
-            //if (e.Data.GetDataPresent("BinConnector"))
-            //{
-            //    return;
-            //}
-            //else
-            //{
-            //    Mouse.OverrideCursor = Cursors.No;
-            //}
-        }
-
-        private void PreviewDragLeaveHandler(object sender, DragEventArgs e)
-        {
-            //Mouse.OverrideCursor = null;
-        }
 
         private void OpenClickHandler(object sender, RoutedEventArgs e)
         {

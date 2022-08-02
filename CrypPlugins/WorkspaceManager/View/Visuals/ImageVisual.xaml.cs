@@ -127,7 +127,10 @@ namespace WorkspaceManager.View.Visuals
 
         protected virtual void CloseClick(object sender, RoutedEventArgs e)
         {
-            Model.WorkspaceModel.ModifyModel(new DeleteImageModelOperation(Model));
+            if (Model != null && !((WorkspaceManagerClass)Model.WorkspaceModel.MyEditor).isExecuting())
+            {
+                Model.WorkspaceModel.ModifyModel(new DeleteImageModelOperation(Model));
+            }
         }
 
         private void LockHandler(object sender, RoutedEventArgs e)
