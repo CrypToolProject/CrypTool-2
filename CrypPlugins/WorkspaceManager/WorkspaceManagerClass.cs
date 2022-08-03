@@ -1100,7 +1100,7 @@ namespace WorkspaceManager
 
         public void AddText()
         {
-            if (WorkspaceModel != null && !((WorkspaceManagerClass)WorkspaceModel.MyEditor).isExecuting())
+            if (WorkspaceModel != null && ((WorkspaceManagerClass)WorkspaceModel.MyEditor).isExecuting())
             {
                 return;
             }
@@ -1109,7 +1109,7 @@ namespace WorkspaceManager
 
         public void AddImage()
         {
-            if (WorkspaceModel != null && !((WorkspaceManagerClass)WorkspaceModel.MyEditor).isExecuting())
+            if (WorkspaceModel != null && ((WorkspaceManagerClass)WorkspaceModel.MyEditor).isExecuting())
             {
                 return;
             }
