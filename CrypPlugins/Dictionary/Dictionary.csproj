@@ -218,9 +218,6 @@
     <None Include="Data\wordlists\tr.txt.metainfo">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\wordlists\ur.txt.metainfo">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Data\wordlists\zh.txt.metainfo">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -359,9 +356,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\wordlists\tr.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\wordlists\ur.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\wordlists\zh.txt">
