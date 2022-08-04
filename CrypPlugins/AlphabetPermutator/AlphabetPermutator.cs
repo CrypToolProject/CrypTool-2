@@ -83,9 +83,9 @@ namespace AlphabetPermutator
         {
             SourceAlphabet = string.Empty;
             Keyword = string.Empty;
-            Shift = 0;                       
+            Shift = -1;                     
             Keyword2 = string.Empty;
-            Shift2 = 0;
+            Shift2 = -1;
         }
 
         public void PostExecution()
@@ -193,8 +193,10 @@ namespace AlphabetPermutator
         private void GenerateK1Alphabets()
         {
             string plaintextAlphabetKeyword = !string.IsNullOrEmpty(Keyword) ? Keyword : _settings.Keyword;
-            PlaintextAlphabet = GenerateAlphabet(SourceAlphabet, _settings.Shift, plaintextAlphabetKeyword, _settings.PlaintextAlphabetOrder);
-            CiphertextAlphabet = GenerateAlphabet(SourceAlphabet, 0, string.Empty, _settings.CiphertextAlphabetOrder);
+            int shift = Shift != -1 ? Shift : _settings.Shift;
+            int shift2 = Shift2 != -1 ? Shift2 : _settings.Shift2;
+            PlaintextAlphabet = GenerateAlphabet(SourceAlphabet, shift, plaintextAlphabetKeyword, _settings.PlaintextAlphabetOrder);
+            CiphertextAlphabet = GenerateAlphabet(SourceAlphabet, shift2, string.Empty, _settings.CiphertextAlphabetOrder);
         }
 
         /// <summary>
@@ -203,8 +205,10 @@ namespace AlphabetPermutator
         private void GenerateK2Alphabets()
         {
             string ciphertextAlphabetKeyword = !string.IsNullOrEmpty(Keyword2) ? Keyword2 : _settings.Keyword2;
-            PlaintextAlphabet = GenerateAlphabet(SourceAlphabet, _settings.Shift, string.Empty, _settings.PlaintextAlphabetOrder);
-            CiphertextAlphabet = GenerateAlphabet(SourceAlphabet, 0, ciphertextAlphabetKeyword, _settings.CiphertextAlphabetOrder);
+            int shift = Shift != -1 ? Shift : _settings.Shift;
+            int shift2 = Shift2 != -1 ? Shift2 : _settings.Shift2;
+            PlaintextAlphabet = GenerateAlphabet(SourceAlphabet, shift, string.Empty, _settings.PlaintextAlphabetOrder);
+            CiphertextAlphabet = GenerateAlphabet(SourceAlphabet, shift2, ciphertextAlphabetKeyword, _settings.CiphertextAlphabetOrder);
         }
 
         /// <summary>
@@ -214,8 +218,10 @@ namespace AlphabetPermutator
         {
             string plaintextAlphabetKeyword = !string.IsNullOrEmpty(Keyword) ? Keyword : _settings.Keyword;
             string ciphertextAlphabetKeyword = plaintextAlphabetKeyword;
-            PlaintextAlphabet = GenerateAlphabet(SourceAlphabet, _settings.Shift, plaintextAlphabetKeyword, _settings.PlaintextAlphabetOrder);
-            CiphertextAlphabet = GenerateAlphabet(SourceAlphabet, 0, ciphertextAlphabetKeyword, _settings.CiphertextAlphabetOrder);
+            int shift = Shift != -1 ? Shift : _settings.Shift;
+            int shift2 = Shift2 != -1 ? Shift2 : _settings.Shift2;
+            PlaintextAlphabet = GenerateAlphabet(SourceAlphabet, shift, plaintextAlphabetKeyword, _settings.PlaintextAlphabetOrder);
+            CiphertextAlphabet = GenerateAlphabet(SourceAlphabet, shift2, ciphertextAlphabetKeyword, _settings.CiphertextAlphabetOrder);
         }
 
         /// <summary>
@@ -225,8 +231,10 @@ namespace AlphabetPermutator
         {
             string plaintextAlphabetKeyword = !string.IsNullOrEmpty(Keyword) ? Keyword : _settings.Keyword;
             string ciphertextAlphabetKeyword = !string.IsNullOrEmpty(Keyword2) ? Keyword2 : _settings.Keyword2;
-            PlaintextAlphabet = GenerateAlphabet(SourceAlphabet, _settings.Shift, plaintextAlphabetKeyword, _settings.PlaintextAlphabetOrder);
-            CiphertextAlphabet = GenerateAlphabet(SourceAlphabet, _settings.Shift2, ciphertextAlphabetKeyword, _settings.CiphertextAlphabetOrder);
+            int shift = Shift != -1 ? Shift : _settings.Shift;
+            int shift2 = Shift2 != -1 ? Shift2 : _settings.Shift2;
+            PlaintextAlphabet = GenerateAlphabet(SourceAlphabet, shift, plaintextAlphabetKeyword, _settings.PlaintextAlphabetOrder);
+            CiphertextAlphabet = GenerateAlphabet(SourceAlphabet, shift2, ciphertextAlphabetKeyword, _settings.CiphertextAlphabetOrder);
         }
 
         public void OnPropertyChanged(string name)
