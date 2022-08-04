@@ -1,5 +1,5 @@
 ﻿/*                              
-   Copyright 2013 Nils Kopal, Universität Kassel
+   Copyright 2022 Nils Kopal, CrypTool Project
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
@@ -24,37 +23,57 @@ using System.Text.RegularExpressions;
 
 namespace AlphabetPermutator
 {
-    [Author("Nils Kopal", "Nils.Kopal@Uni-Kassel.de", "Universität Kassel", "http://www.uni-kassel.de")]
+    [Author("Nils Kopal", "Nils.Kopal@cryptool.org", "CrypTool Project", "http://www.cryptool.org")]
     [PluginInfo("AlphabetPermutator.Properties.Resources", "PluginCaption", "PluginTooltip", "AlphabetPermutator/DetailedDescription/doc.xml", "AlphabetPermutator/icon.png")]
     [ComponentCategory(ComponentCategory.ToolsDataflow)]
     public class AlphabetPermutator : ICrypComponent
     {
-        private readonly AlphabetPermutatorSettings _alphabetPermutatorSettings = new AlphabetPermutatorSettings();
+        private readonly AlphabetPermutatorSettings _settings = new AlphabetPermutatorSettings();
+        private const string LATIN_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-
-        [PropertyInfo(Direction.InputData, "SourceAlphabetCaption", "SourceAlphabetTooltip", true)]
+        [PropertyInfo(Direction.InputData, "SourceAlphabetCaption", "SourceAlphabetTooltip", false)]
         public string SourceAlphabet
         {
             get;
             set;
         }
 
-        [PropertyInfo(Direction.InputData, "PasswordCaption", "PasswordTooltip", false)]
-        public string Password
+        [PropertyInfo(Direction.InputData, "KeywordCaption", "KeywordTooltip", false)]
+        public string Keyword
+        {
+            get;
+            set;
+        }
+        [PropertyInfo(Direction.InputData, "ShiftCaption", "ShiftTooltip", false)]
+        public int Shift
         {
             get;
             set;
         }
 
-        [PropertyInfo(Direction.InputData, "OffsetCaption", "OffsetTooltip", false)]
-        public int Offset
+        [PropertyInfo(Direction.InputData, "Keyword2Caption", "Keyword2Tooltip", false)]
+        public string Keyword2
         {
             get;
             set;
         }
 
-        [PropertyInfo(Direction.OutputData, "DestinationAlphabetCaption", "DestinationAlphabetTooltip", true)]
-        public string DestinationAlphabet
+        [PropertyInfo(Direction.InputData, "Shift2Caption", "Shift2Tooltip", false)]
+        public int Shift2
+        {
+            get;
+            set;
+        }
+
+        [PropertyInfo(Direction.OutputData, "PlaintextAlphabetCaption", "PlaintextAlphabetTooltip")]
+        public string PlaintextAlphabet
+        {
+            get;
+            set;
+        }
+
+        [PropertyInfo(Direction.OutputData, "CiphertextAlphabetCaption", "CiphertextAlphabetTooltip")]
+        public string CiphertextAlphabet
         {
             get;
             set;
@@ -62,8 +81,11 @@ namespace AlphabetPermutator
 
         public void PreExecution()
         {
-            Offset = int.MaxValue;
-            Password = null;
+            SourceAlphabet = string.Empty;
+            Keyword = string.Empty;
+            Shift = 0;                       
+            Keyword2 = string.Empty;
+            Shift2 = 0;
         }
 
         public void PostExecution()
@@ -77,42 +99,134 @@ namespace AlphabetPermutator
 
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
-        public ISettings Settings => _alphabetPermutatorSettings;
+        public ISettings Settings => _settings;
 
         public System.Windows.Controls.UserControl Presentation => null;
 
         public void Execute()
         {
-
-            if (string.IsNullOrEmpty(Password) && string.IsNullOrEmpty(_alphabetPermutatorSettings.Password))
+            if (string.IsNullOrEmpty(SourceAlphabet))
             {
-                Password = "";
+                SourceAlphabet = LATIN_ALPHABET;
+            }
+
+            try
+            {
+                //apply keying schemes based on ACA definitions:
+                switch (_settings.ACAKeyingScheme)
+                {
+                    case ACAKeyingScheme.K1:
+                        GenerateK1Alphabets();
+                        break;
+                    case ACAKeyingScheme.K2:
+                        GenerateK2Alphabets();
+                        break;
+                    case ACAKeyingScheme.K3:
+                        GenerateK3Alphabets();
+                        break;
+                    case ACAKeyingScheme.K4:
+                        GenerateK4Alphabets();
+                        break;
+                    default:
+                        throw new NotImplementedException(string.Format("KeyingScheme {0} not implemented", _settings.ACAKeyingScheme));
+                }
+            }
+            catch(Exception ex)
+            {
+                GuiLogMessage(string.Format("Exception occured while applying key schemes: {0}", ex.Message), NotificationLevel.Error);
                 return;
             }
+            
+            //no error occured; so we can forward the resulting alphabets
+            OnPropertyChanged("PlaintextAlphabet");
+            OnPropertyChanged("CiphertextAlphabet");
+        }
 
+        /// <summary>
+        /// Generates a new alphabet based on the source alphabet, the Shift, the keyword, and the order
+        /// </summary>
+        /// <param name="sourceAlphabet"></param>
+        /// <param name="shift"></param>
+        /// <param name="keyword"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public string GenerateAlphabet(string sourceAlphabet, int shift, string keyword, AlphabetOrder order)
+        {
             StringBuilder builder = new StringBuilder();
 
-            string distinctSourceAlphabet = Distinct(SourceAlphabet);
-            string distinctPassword = Distinct(!string.IsNullOrEmpty(Password) ? Password : _alphabetPermutatorSettings.Password);
-
-            if (_alphabetPermutatorSettings.Order < 2)
+            string distinctSourceAlphabet = Distinct(sourceAlphabet);
+            if ((int)order < 2)
             {
-                distinctSourceAlphabet = Sort(distinctSourceAlphabet, _alphabetPermutatorSettings.Order);
+                distinctSourceAlphabet = Sort(distinctSourceAlphabet, (int)order);
             }
 
-            distinctSourceAlphabet = Regex.Replace(distinctSourceAlphabet, "[" + distinctPassword + "]", "");
+            string distinctPassword = string.Empty;
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                distinctPassword = Distinct(keyword);
+                distinctSourceAlphabet = Regex.Replace(distinctSourceAlphabet, "[" + distinctPassword + "]", "");
+            }            
 
-            int offset = (Offset != int.MaxValue ? Offset % (distinctSourceAlphabet.Length + 1) : _alphabetPermutatorSettings.Offset % (distinctSourceAlphabet.Length + 1));
-
-            string left = distinctSourceAlphabet.Substring(0, offset);
-            string right = distinctSourceAlphabet.Substring(offset, distinctSourceAlphabet.Length - offset);
-
-            builder.Append(left);
             builder.Append(distinctPassword);
-            builder.Append(right);
+            builder.Append(distinctSourceAlphabet);
 
-            DestinationAlphabet = builder.ToString();
-            OnPropertyChanged("DestinationAlphabet");
+            string generatedAlphabet = RightCircularShift(builder.ToString(), shift);
+
+            return generatedAlphabet;
+        }
+
+        /// <summary>
+        /// Circular right shifts a given string by shift positions
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="shift"></param>
+        /// <returns></returns>
+        private string RightCircularShift(string str, int shift)
+        {
+            shift %= str.Length;
+            return str.Substring(str.Length - shift) + str.Substring(0, str.Length - shift);
+        }
+
+        /// <summary>
+        /// The plaintext alphabet is keyed, the ciphertext alphabet is not
+        /// </summary>
+        private void GenerateK1Alphabets()
+        {
+            string plaintextAlphabetKeyword = !string.IsNullOrEmpty(Keyword) ? Keyword : _settings.Keyword;
+            PlaintextAlphabet = GenerateAlphabet(SourceAlphabet, _settings.Shift, plaintextAlphabetKeyword, _settings.PlaintextAlphabetOrder);
+            CiphertextAlphabet = GenerateAlphabet(SourceAlphabet, 0, string.Empty, _settings.CiphertextAlphabetOrder);
+        }
+
+        /// <summary>
+        /// The plaintext alphabet is not keyed, the ciphertext alphabet is
+        /// </summary>
+        private void GenerateK2Alphabets()
+        {
+            string ciphertextAlphabetKeyword = !string.IsNullOrEmpty(Keyword2) ? Keyword2 : _settings.Keyword2;
+            PlaintextAlphabet = GenerateAlphabet(SourceAlphabet, _settings.Shift, string.Empty, _settings.PlaintextAlphabetOrder);
+            CiphertextAlphabet = GenerateAlphabet(SourceAlphabet, 0, ciphertextAlphabetKeyword, _settings.CiphertextAlphabetOrder);
+        }
+
+        /// <summary>
+        /// Both alphabets are keyed using the same keyword
+        /// </summary>
+        private void GenerateK3Alphabets()
+        {
+            string plaintextAlphabetKeyword = !string.IsNullOrEmpty(Keyword) ? Keyword : _settings.Keyword;
+            string ciphertextAlphabetKeyword = plaintextAlphabetKeyword;
+            PlaintextAlphabet = GenerateAlphabet(SourceAlphabet, _settings.Shift, plaintextAlphabetKeyword, _settings.PlaintextAlphabetOrder);
+            CiphertextAlphabet = GenerateAlphabet(SourceAlphabet, 0, ciphertextAlphabetKeyword, _settings.CiphertextAlphabetOrder);
+        }
+
+        /// <summary>
+        /// Both alphabets are keyed using different keywords
+        /// </summary>
+        private void GenerateK4Alphabets()
+        {
+            string plaintextAlphabetKeyword = !string.IsNullOrEmpty(Keyword) ? Keyword : _settings.Keyword;
+            string ciphertextAlphabetKeyword = !string.IsNullOrEmpty(Keyword2) ? Keyword2 : _settings.Keyword2;
+            PlaintextAlphabet = GenerateAlphabet(SourceAlphabet, _settings.Shift, plaintextAlphabetKeyword, _settings.PlaintextAlphabetOrder);
+            CiphertextAlphabet = GenerateAlphabet(SourceAlphabet, _settings.Shift2, ciphertextAlphabetKeyword, _settings.CiphertextAlphabetOrder);
         }
 
         public void OnPropertyChanged(string name)
@@ -137,13 +251,12 @@ namespace AlphabetPermutator
 
         }
 
-        private string Reverse(string str)
-        {
-            char[] arr = str.ToCharArray();
-            Array.Reverse(arr);
-            return new string(arr);
-        }
-
+        /// <summary>
+        /// Sorts the given string
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="direction"></param>
+        /// <returns></returns>
         private string Sort(string str, int direction)
         {
             char[] sortarr = str.ToCharArray();
@@ -155,6 +268,11 @@ namespace AlphabetPermutator
             return new string(sortarr);
         }
 
+        /// <summary>
+        /// "Distincts" the given string
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         private string Distinct(string str)
         {
             StringBuilder builder = new StringBuilder();
@@ -173,10 +291,7 @@ namespace AlphabetPermutator
 
         private void GuiLogMessage(string message, NotificationLevel logLevel)
         {
-            if (OnGuiLogNotificationOccured != null)
-            {
-                OnGuiLogNotificationOccured(this, new GuiLogEventArgs(message, this, logLevel));
-            }
+            OnGuiLogNotificationOccured?.Invoke(this, new GuiLogEventArgs(message, this, logLevel));
         }
 
     }

@@ -1,5 +1,5 @@
 /*                              
-   Copyright 2013 Nils Kopal, Universität Kassel
+   Copyright 2022 Nils Kopal, CrypTool Project
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -13,17 +13,54 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
 using CrypTool.PluginBase;
+using System;
 using System.ComponentModel;
+using System.Windows;
 
 namespace AlphabetPermutator
 {
+    public enum ACAKeyingScheme
+    {
+        /// <summary>
+        /// The plaintext alphabet is keyed, the ciphertext alphabet is not
+        /// </summary>
+        K1,
+        /// <summary>
+        /// The plaintext alphabet is not keyed, the ciphertext alphabet is
+        /// </summary>
+        K2,
+        /// <summary>
+        /// Both alphabets are keyed using the same keyword
+        /// </summary>
+        K3,
+        /// <summary>
+        /// Both alphabets are keyed using different keywords
+        /// </summary>
+        K4
+    }
+
+    public enum AlphabetOrder
+    {
+        Ascending,
+        Descending,
+        LeaveAsIs
+    }
+
     public class AlphabetPermutatorSettings : ISettings
     {
-        private int _order = 0;
-        private int _offset = 0;
-        private string _password = null;
+        private ACAKeyingScheme _ACAKeyingScheme = ACAKeyingScheme.K1;
+        private AlphabetOrder _plaintextAlphabetOrder = AlphabetOrder.Ascending;
+        private AlphabetOrder _ciphertextAlphabetOrder = AlphabetOrder.Ascending;
+        private int _Shift = 0;
+        private int _Shift2 = 0;
+        private string _Keyword = string.Empty;
+        private string _Keyword2 = string.Empty;
+
+        /// <summary>
+        /// This event is needed in order to render settings elements visible/invisible
+        /// </summary>
+        public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
 
         public AlphabetPermutatorSettings()
         {
@@ -32,52 +69,127 @@ namespace AlphabetPermutator
 
         #region INotifyPropertyChanged Members
 
-
-        [TaskPane("OrderCaption", "OrderTooltip", null, 1, false, ControlType.ComboBox, new[] { "Ascending", "Descending", "LeaveAsIs" })]
-        public int Order
+        [TaskPane("ACAKeyingSchemeCaption", "ACAKeyingSchemeTooltip", null, 0, false, ControlType.ComboBox, new[] { "K1", "K2", "K3", "K4" })]
+        public ACAKeyingScheme ACAKeyingScheme
         {
-            get => _order;
+            get => _ACAKeyingScheme;
             set
             {
-                _order = value;
-                OnPropertyChanged("Order");
+                _ACAKeyingScheme = value;                
+                OnPropertyChanged("ACAKeyingScheme");
+                UpdateSettingsVisibility();
             }
         }
 
-        [TaskPane("OffsetCaption", "OffsetCaption", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue - 1)]
-        public int Offset
+        [TaskPane("PlaintextAlphabetOrderCaption", "PlaintextAlphabetTooltip", "PlaintextAlphabetGroup", 1, false, ControlType.ComboBox, new[] { "Ascending", "Descending", "LeaveAsIs" })]
+        public AlphabetOrder PlaintextAlphabetOrder
         {
-            get => _offset;
+            get => _plaintextAlphabetOrder;
             set
             {
-                _offset = value;
-                OnPropertyChanged("Offset");
+                _plaintextAlphabetOrder = value;
+                OnPropertyChanged("PlaintextAlphabetOrder");
             }
         }
 
-        [TaskPane("PasswordCaption", "PasswordTooltip", null, 3, false, ControlType.TextBox)]
-        public string Password
+        [TaskPane("ShiftCaption", "ShiftTooltip", "PlaintextAlphabetGroup", 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue - 1)]
+        public int Shift
         {
-            get => _password;
+            get => _Shift;
             set
             {
-                _password = value;
-                OnPropertyChanged("Password");
+                _Shift = value;
+                OnPropertyChanged("Shift");
+            }
+        }
+
+        [TaskPane("KeywordCaption", "KeywordTooltip", "PlaintextAlphabetGroup", 3, false, ControlType.TextBox)]
+        public string Keyword
+        {
+            get => _Keyword;
+            set
+            {
+                _Keyword = value;
+                OnPropertyChanged("Keyword");
+            }
+        }
+
+        [TaskPane("CiphertextAlphabetOrderCaption", "CiphertextAlphabetOrderTooltip", "CiphertextAlphabetGroup", 4, false, ControlType.ComboBox, new[] { "Ascending", "Descending", "LeaveAsIs" })]
+        public AlphabetOrder CiphertextAlphabetOrder
+        {
+            get => _ciphertextAlphabetOrder;
+            set
+            {
+                _ciphertextAlphabetOrder = value;
+                OnPropertyChanged("CiphertextAlphabetOrder");
+            }
+        }     
+
+        [TaskPane("Shift2Caption", "Shift2Tooltip", "CiphertextAlphabetGroup", 5, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue - 1)]
+        public int Shift2
+        {
+            get => _Shift2;
+            set
+            {
+                _Shift2 = value;
+                OnPropertyChanged("Shift2");
+            }
+        }       
+
+        [TaskPane("Keyword2Caption", "Keyword2Tooltip", "CiphertextAlphabetGroup", 6, false, ControlType.TextBox)]
+        public string Keyword2
+        { 
+            get => _Keyword2;
+            set
+            {
+                _Keyword2 = value;
+                OnPropertyChanged("Keyword2");
             }
         }
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
         public void Initialize()
         {
+            UpdateSettingsVisibility();
+        }
 
+        private void UpdateSettingsVisibility()
+        {           
+            switch (_ACAKeyingScheme)
+            {
+                case ACAKeyingScheme.K1:
+                    ShowSettingsElement("Keyword");
+                    HideSettingsElement("Keyword2");
+                    break;
+                case ACAKeyingScheme.K2:
+                    HideSettingsElement("Keyword");
+                    ShowSettingsElement("Keyword2");
+                    break;
+                case ACAKeyingScheme.K3:
+                    ShowSettingsElement("Keyword");
+                    HideSettingsElement("Keyword2");
+                    break;
+                case ACAKeyingScheme.K4:
+                    ShowSettingsElement("Keyword");
+                    ShowSettingsElement("Keyword2");
+                    break;
+            }
+        }
+
+        private void ShowSettingsElement(string element)
+        {
+            TaskPaneAttributeChanged?.Invoke(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer(element, Visibility.Visible)));
+        }
+
+        private void HideSettingsElement(string element)
+        {
+            TaskPaneAttributeChanged?.Invoke(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer(element, Visibility.Collapsed)));
         }
 
         protected void OnPropertyChanged(string name)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
         #endregion
     }

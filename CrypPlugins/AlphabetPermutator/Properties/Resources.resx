@@ -120,40 +120,82 @@
   <data name="Ascending" xml:space="preserve">
     <value>Ascending</value>
   </data>
+  <data name="CiphertextAlphabetCaption" xml:space="preserve">
+    <value>Ciphertext Alphabet</value>
+  </data>
+  <data name="CiphertextAlphabetTooltip" xml:space="preserve">
+    <value>The generated ciphertext alphabet</value>
+  </data>
   <data name="Descending" xml:space="preserve">
     <value>Descending</value>
+  </data>
+  <data name="KeywordCaption" xml:space="preserve">
+    <value>Keyword</value>
+  </data>
+  <data name="KeywordTooltip" xml:space="preserve">
+    <value>The first keyword</value>
   </data>
   <data name="LeaveAsIs" xml:space="preserve">
     <value>Leave as is</value>
   </data>
-  <data name="OffsetCaption" xml:space="preserve">
-    <value>Offset</value>
+  <data name="ShiftCaption" xml:space="preserve">
+    <value>Shift</value>
   </data>
-  <data name="OffsetTooltip" xml:space="preserve">
-    <value>The offset at which to put the password in the destination alphabet</value>
+  <data name="Shift2Caption" xml:space="preserve">
+    <value>Shift 2</value>
   </data>
-  <data name="OrderCaption" xml:space="preserve">
+  <data name="ShiftTooltip" xml:space="preserve">
+    <value>The number of characters the plaintext alphabet is shifted</value>
+  </data>
+  <data name="Shift2Tooltip" xml:space="preserve">
+    <value>The number of characters the ciphertext alphabet is shifted</value>
+  </data>
+  <data name="PlaintextAlphabetOrderCaption" xml:space="preserve">
     <value>Order</value>
   </data>
-  <data name="OrderTooltip" xml:space="preserve">
-    <value>The sorting order for the destination alphabet</value>
+  <data name="PlaintextAlphabetTooltip" xml:space="preserve">
+    <value>The generated plaintext alphabet</value>
   </data>
-  <data name="PasswordCaption" xml:space="preserve">
-    <value>Keyword</value>
-  </data>
-  <data name="PasswordTooltip" xml:space="preserve">
-    <value>The keyword, which should be used for the permutation</value>
+  <data name="PlaintextAlphabetCaption" xml:space="preserve">
+    <value>Plaintext Alphabet</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>Alphabet Permutator</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>Permutes an alphabet using a keyword</value>
+    <value>Permutes plaintext and ciphertext alphabets based on keywords</value>
   </data>
   <data name="SourceAlphabetCaption" xml:space="preserve">
     <value>Source Alphabet</value>
   </data>
   <data name="SourceAlphabetTooltip" xml:space="preserve">
     <value>The source alphabet which should be permutated</value>
+  </data>
+  <data name="CiphertextAlphabetGroup" xml:space="preserve">
+    <value>Ciphertext Alphabet</value>
+  </data>
+  <data name="PlaintextAlphabetGroup" xml:space="preserve">
+    <value>Plaintext Alphabet</value>
+  </data>
+  <data name="ACAKeyingSchemeCaption" xml:space="preserve">
+    <value>ACA Keying Scheme</value>
+  </data>
+  <data name="ACAKeyingSchemeTooltip" xml:space="preserve">
+    <value>Alphabets are generated using selected ACA keying scheme</value>
+  </data>
+  <data name="CiphertextAlphabetOrderCaption" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="CiphertextAlphabetOrderTooltip" xml:space="preserve">
+    <value>Order of the ciphertext alphabet</value>
+  </data>
+  <data name="Keyword2Caption" xml:space="preserve">
+    <value>Keyword 2</value>
+  </data>
+  <data name="Keyword2Tooltip" xml:space="preserve">
+    <value>The second keyword</value>
+  </data>
+  <data name="PlaintextAlphabetOrderTooltip" xml:space="preserve">
+    <value>Order of the plaintext alphabet</value>
   </data>
 </root>

@@ -19,7 +19,7 @@ namespace AlphabetPermutator.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -61,11 +61,74 @@ namespace AlphabetPermutator.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ACA Keying Scheme ähnelt.
+        /// </summary>
+        internal static string ACAKeyingSchemeCaption {
+            get {
+                return ResourceManager.GetString("ACAKeyingSchemeCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Alphabets are generated using selected ACA keying scheme ähnelt.
+        /// </summary>
+        internal static string ACAKeyingSchemeTooltip {
+            get {
+                return ResourceManager.GetString("ACAKeyingSchemeTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Ascending ähnelt.
         /// </summary>
         internal static string Ascending {
             get {
                 return ResourceManager.GetString("Ascending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ciphertext Alphabet ähnelt.
+        /// </summary>
+        internal static string CiphertextAlphabetCaption {
+            get {
+                return ResourceManager.GetString("CiphertextAlphabetCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ciphertext Alphabet ähnelt.
+        /// </summary>
+        internal static string CiphertextAlphabetGroup {
+            get {
+                return ResourceManager.GetString("CiphertextAlphabetGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Order ähnelt.
+        /// </summary>
+        internal static string CiphertextAlphabetOrderCaption {
+            get {
+                return ResourceManager.GetString("CiphertextAlphabetOrderCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Order of the ciphertext alphabet ähnelt.
+        /// </summary>
+        internal static string CiphertextAlphabetOrderTooltip {
+            get {
+                return ResourceManager.GetString("CiphertextAlphabetOrderTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The generated ciphertext alphabet ähnelt.
+        /// </summary>
+        internal static string CiphertextAlphabetTooltip {
+            get {
+                return ResourceManager.GetString("CiphertextAlphabetTooltip", resourceCulture);
             }
         }
         
@@ -79,6 +142,42 @@ namespace AlphabetPermutator.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Keyword 2 ähnelt.
+        /// </summary>
+        internal static string Keyword2Caption {
+            get {
+                return ResourceManager.GetString("Keyword2Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The second keyword ähnelt.
+        /// </summary>
+        internal static string Keyword2Tooltip {
+            get {
+                return ResourceManager.GetString("Keyword2Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Keyword ähnelt.
+        /// </summary>
+        internal static string KeywordCaption {
+            get {
+                return ResourceManager.GetString("KeywordCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The first keyword ähnelt.
+        /// </summary>
+        internal static string KeywordTooltip {
+            get {
+                return ResourceManager.GetString("KeywordTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Leave as is ähnelt.
         /// </summary>
         internal static string LeaveAsIs {
@@ -88,56 +187,47 @@ namespace AlphabetPermutator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Offset ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Plaintext Alphabet ähnelt.
         /// </summary>
-        internal static string OffsetCaption {
+        internal static string PlaintextAlphabetCaption {
             get {
-                return ResourceManager.GetString("OffsetCaption", resourceCulture);
+                return ResourceManager.GetString("PlaintextAlphabetCaption", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The offset at which to put the password in the destination alphabet ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Plaintext Alphabet ähnelt.
         /// </summary>
-        internal static string OffsetTooltip {
+        internal static string PlaintextAlphabetGroup {
             get {
-                return ResourceManager.GetString("OffsetTooltip", resourceCulture);
+                return ResourceManager.GetString("PlaintextAlphabetGroup", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Order ähnelt.
         /// </summary>
-        internal static string OrderCaption {
+        internal static string PlaintextAlphabetOrderCaption {
             get {
-                return ResourceManager.GetString("OrderCaption", resourceCulture);
+                return ResourceManager.GetString("PlaintextAlphabetOrderCaption", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The sorting order for the destination alphabet ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Order of the plaintext alphabet ähnelt.
         /// </summary>
-        internal static string OrderTooltip {
+        internal static string PlaintextAlphabetOrderTooltip {
             get {
-                return ResourceManager.GetString("OrderTooltip", resourceCulture);
+                return ResourceManager.GetString("PlaintextAlphabetOrderTooltip", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Keyword ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The generated plaintext alphabet ähnelt.
         /// </summary>
-        internal static string PasswordCaption {
+        internal static string PlaintextAlphabetTooltip {
             get {
-                return ResourceManager.GetString("PasswordCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The keyword, which should be used for the permutation ähnelt.
-        /// </summary>
-        internal static string PasswordTooltip {
-            get {
-                return ResourceManager.GetString("PasswordTooltip", resourceCulture);
+                return ResourceManager.GetString("PlaintextAlphabetTooltip", resourceCulture);
             }
         }
         
@@ -151,11 +241,47 @@ namespace AlphabetPermutator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Permutes an alphabet using a keyword ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Permutes plaintext and ciphertext alphabets based on keywords ähnelt.
         /// </summary>
         internal static string PluginTooltip {
             get {
                 return ResourceManager.GetString("PluginTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Shift 2 ähnelt.
+        /// </summary>
+        internal static string Shift2Caption {
+            get {
+                return ResourceManager.GetString("Shift2Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The number of characters the ciphertext alphabet is shifted ähnelt.
+        /// </summary>
+        internal static string Shift2Tooltip {
+            get {
+                return ResourceManager.GetString("Shift2Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Shift ähnelt.
+        /// </summary>
+        internal static string ShiftCaption {
+            get {
+                return ResourceManager.GetString("ShiftCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The number of characters the plaintext alphabet is shifted ähnelt.
+        /// </summary>
+        internal static string ShiftTooltip {
+            get {
+                return ResourceManager.GetString("ShiftTooltip", resourceCulture);
             }
         }
         

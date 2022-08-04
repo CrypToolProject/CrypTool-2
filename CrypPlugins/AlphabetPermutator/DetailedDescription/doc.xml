@@ -3,32 +3,32 @@
   <language culture="en" />
   <language culture="de-DE" />
   <introduction lang="en">
-    The alphabet permutator can be used to permutate an input alphabet, e.g. the Latin alphabet, based on a given keyword and an offset value.
-    To do so, the permutator first removes all occurences of all letters of the keyword from a new alphabet.
-    Then, the keyword is put into the new alphabet at the position defined by the offset value. If a letter is repeated in the keyword, the repeated letter is omitted in the new alphabet.
-    Then, the rest of the alphabet is put before and after the keyword into the new alphabet.
+    The alphabet permutator can be used to generate plain and ciphertext alphabets based on an input alphabet, e.g. the Latin alphabet. Furthermore, the sort order of the resulting alphabets and a shift value on each alphabet can be applied.
   </introduction>
   <introduction lang="de-DE">
-    Der Alphabet-Permutator kann verwendet werden, um ein Eingabealphabet zu permutieren, z.b. das lateinische Alphabet, basierend auf einem bestimmten Schlüsselwort und einem Offset.
-    Dazu entfernt der Permutator zunächst alle Vorkommen aller Buchstaben des Schlüsselworts aus dem Alphabet.
-    Anschließend wird das Schlüsselwort an der durch den Offset definierten Position in das neue Alphabet eingefügt. Wenn ein Buchstabe im Schlüsselwort wiederholt wird, wird der wiederholte Buchstabe im neuen Alphabet weggelassen.
-    Dann wird der Rest des Alphabets vor und nach dem Schlüsselwort in das neue Alphabet eingefügt.
+    Der Alphabetpermutierer kann verwendet werden, um Klartext- und Chiffretextalphabete auf der Grundlage eines Eingabealphabets, z. B. des lateinischen Alphabets, zu erzeugen. Außerdem können die Sortierreihenfolge der resultierenden Alphabete und ein Verschiebungswert auf jedes Alphabet angewendet werden.
   </introduction>
   <usage lang="en">
-    The input "Source Alphabet" is used to provide an input alphabet to the permutator.
-    In the settings, you can determine whether the component should use the ascending or descending sorted alphabet as base alphabet, or whether the alphabet should be used unchanged.
-    The keyword must be entered as a string on the input labeled "Keyword".
-    The keyword does not have to be put at the beginning of the alphabet, but can be inserted at any position. This is based on the value of the "Offset" input.
-    <newline /><newline />
-    Keyword and offset can also be specified in the settings of the component, if the respective inputs are left unconnected.
+    The generation of the output alphabets its based on the American Cryptogram Association's (ACA) definitions. The following keying schemes may be used:<newline/>
+    K1: The plaintext alphabet is keyed, the ciphertext alphabet is not<newline/>
+    K2: The plaintext alphabet is not keyed, the ciphertext alphabet is<newline/>
+    K3: Both alphabets are keyed using the same keyword<newline/>
+    K4: Both alphabets are keyed using different keywords<newline/>
+    <newline/>
+    The keyword is used at the beginning of the alphabet, followed by the remaining letters.<newline/>
+    The order value defines, how the remaining letters should be ordered.<newline/>
+    The shift value of each alphabet defines, how many letters the alphabet should be shifted to the right.        
   </usage>
   <usage lang="de-DE">
-    Der Eingang "Quellalphabet" wird verwendet, um dem Permutator ein Eingabealphabet bereitzustellen.
-    In den Einstellungen können Sie festlegen, ob die Komponente das aufsteigende oder absteigende sortierte Alphabet als Basisalphabet verwenden soll oder ob das Alphabet unverändert verwendet werden soll.
-    Der Wert des Eingangs mit der Bezeichnung "Schlüsselwort" wird als Schlüsselwort für verwendet.
-    Das Schlüsselwort muss nicht am Anfang des Alphabets stehen, sondern kann an einer beliebigen Stelle eingefügt werden. Die Position basiert auf dem Wert des Eingangs "Offset".
-    <newline /><newline />
-    Schlüsselwort und Offset können auch in den Einstellungen der Komponente angegeben werden, wenn die jeweiligen Eingänge nicht verbunden sind.
+    Die Generierung der Ausgabealphabete erfolgt auf der Grundlage der Definitionen der American Cryptogram Association (ACA). Die folgenden Generierungsschemata können verwendet werden:<newline/>
+    K1: Das Klartextalphabet nutzt ein Schlüsselwort, das Chiffretextalphabet nicht<newline/>
+    K2: Das Klartextalphabet nutzt kein Schlüsselwort, das Geheimtextalphabet schon<newline/>
+    K3: Beide Alphabete werden mit demselben Schlüsselwort generiert<newline/>
+    K4: Beide Alphabete werden mit unterschiedlichen Schlüsselwörtern generiert
+    <Neuzeilen/>
+    Das Schlüsselwort wird am Anfang des Alphabets verwendet, gefolgt von den restlichen Buchstaben.<newline/>
+    Der Sortier-Wert legt fest, wie die restlichen Buchstaben angeordnet werden sollen.<newline/>
+    Der Verschiebungswert jedes Alphabets legt fest, um wie viele Buchstaben das Alphabet nach rechts verschoben werden soll.
   </usage>
   <references></references>
 </documentation>
