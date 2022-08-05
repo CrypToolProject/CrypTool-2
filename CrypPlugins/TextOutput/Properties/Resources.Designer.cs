@@ -19,7 +19,7 @@ namespace TextOutput.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -106,7 +106,7 @@ namespace TextOutput.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die bits ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die bit ähnelt.
         /// </summary>
         internal static string Bits {
             get {
@@ -124,7 +124,7 @@ namespace TextOutput.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die bytes ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die byte ähnelt.
         /// </summary>
         internal static string Bytes {
             get {
@@ -174,6 +174,15 @@ namespace TextOutput.Properties {
         internal static string Digits {
             get {
                 return ResourceManager.GetString("Digits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Don&apos;t change ähnelt.
+        /// </summary>
+        internal static string DontChange {
+            get {
+                return ResourceManager.GetString("DontChange", resourceCulture);
             }
         }
         

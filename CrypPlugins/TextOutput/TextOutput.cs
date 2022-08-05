@@ -32,6 +32,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+using static TextOutput.TextOutputSettings;
 
 namespace TextOutput
 {
@@ -78,10 +79,19 @@ namespace TextOutput
                     input = value;
 
                     string fillValue = ObjectToString(value);
-                    if (settings.LineBreaks == TextOutputSettings.LineBreaksEnum.UNIX)
+                    switch (settings.LineBreaks)
                     {
-                        //convert from Windows line breaks to UNIX line breaks:
-                        fillValue = fillValue.Replace("\r\n", "\n");
+                        case LineBreaksEnum.UNIX:                        
+                            fillValue = fillValue.Replace("\r\n", "\n");
+                            break;
+                        case LineBreaksEnum.Windows:
+                            fillValue = fillValue.Replace("\r\n", "\n");
+                            fillValue = fillValue.Replace("\n", "\r\n");
+                            break;
+                        default:
+                        case LineBreaksEnum.DontChange:
+                            //Do nothing here
+                            break;
                     }
                     
                     if (input != null)

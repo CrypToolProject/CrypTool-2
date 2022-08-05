@@ -29,6 +29,7 @@ namespace TextOutput
 
         public enum LineBreaksEnum
         {
+            DontChange,
             Windows,
             UNIX
         }
@@ -132,8 +133,8 @@ namespace TextOutput
             }
         }
 
-        private LineBreaksEnum linebreaks = LineBreaksEnum.Windows;
-        [TaskPane("LineBreaksCaption", "LineBreaksTooltip", null, 3, false, ControlType.ComboBox, new string[] { "Windows", "Unix" })]
+        private LineBreaksEnum linebreaks = LineBreaksEnum.DontChange;
+        [TaskPane("LineBreaksCaption", "LineBreaksTooltip", null, 3, false, ControlType.ComboBox, new string[] { "DontChange", "Windows", "Unix" })]
         public LineBreaksEnum LineBreaks
         {
             get => linebreaks;

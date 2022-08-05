@@ -246,4 +246,7 @@
   <data name="LineBreaksTooltip" xml:space="preserve">
     <value>Legt fest, ob Zeilenumbrüche von Windows (LF + CR) oder von Unix (LF) verwendet werden.</value>
   </data>
+  <data name="DontChange" xml:space="preserve">
+    <value>Nicht ändern</value>
+  </data>
 </root>

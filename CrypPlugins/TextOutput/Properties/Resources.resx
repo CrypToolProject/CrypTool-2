@@ -249,4 +249,7 @@
   <data name="LineBreaksTooltip" xml:space="preserve">
     <value>Sets if Windows (LF +CR) or Unix (LF) line breaks are used.</value>
   </data>
+  <data name="DontChange" xml:space="preserve">
+    <value>Don't change</value>
+  </data>
 </root>
