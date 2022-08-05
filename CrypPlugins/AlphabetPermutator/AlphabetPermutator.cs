@@ -136,10 +136,42 @@ namespace AlphabetPermutator
                 GuiLogMessage(string.Format("Exception occured while applying key schemes: {0}", ex.Message), NotificationLevel.Error);
                 return;
             }
-            
+
+            try
+            {
+                if(_settings.AlphabetsOutputFormat == AlphabetsOutputFormat.Normalized)
+                {
+                    NormalizeAlphabets();
+                }
+            }
+            catch (Exception ex)
+            {
+                GuiLogMessage(string.Format("Exception occured while normalizing alphabets: {0}", ex.Message), NotificationLevel.Error);
+                return;
+            }
+
             //no error occured; so we can forward the resulting alphabets
             OnPropertyChanged("PlaintextAlphabet");
             OnPropertyChanged("CiphertextAlphabet");
+        }
+
+        /// <summary>
+        /// Normalizes plaintext and ciphertext alphabets, meaning that the plaintext alphabet is sorted 
+        /// alphabetically and the ciphertext alphabet is sorted accordingly
+        /// </summary>
+        private void NormalizeAlphabets()
+        {
+            string sortedPlaintextAlphabet = Sort(PlaintextAlphabet, 0);
+            StringBuilder sortedCiphertextAlphabetStringBuilder = new StringBuilder();
+
+            foreach(char letter in sortedPlaintextAlphabet)
+            {
+                int index = PlaintextAlphabet.IndexOf(letter);
+                sortedCiphertextAlphabetStringBuilder.Append(CiphertextAlphabet[index]);
+            }
+
+            PlaintextAlphabet = sortedPlaintextAlphabet;
+            CiphertextAlphabet = sortedCiphertextAlphabetStringBuilder.ToString();
         }
 
         /// <summary>
@@ -160,14 +192,14 @@ namespace AlphabetPermutator
                 distinctSourceAlphabet = Sort(distinctSourceAlphabet, (int)order);
             }
 
-            string distinctPassword = string.Empty;
+            string distinctKeyword = string.Empty;
             if (!string.IsNullOrEmpty(keyword))
             {
-                distinctPassword = Distinct(keyword);
-                distinctSourceAlphabet = Regex.Replace(distinctSourceAlphabet, "[" + distinctPassword + "]", "");
+                distinctKeyword = Distinct(keyword);
+                distinctSourceAlphabet = Regex.Replace(distinctSourceAlphabet, "[" + distinctKeyword + "]", "");
             }            
 
-            builder.Append(distinctPassword);
+            builder.Append(distinctKeyword);
             builder.Append(distinctSourceAlphabet);
 
             string generatedAlphabet = RightCircularShift(builder.ToString(), shift);

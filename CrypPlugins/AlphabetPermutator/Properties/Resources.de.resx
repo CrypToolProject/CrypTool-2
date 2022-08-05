@@ -123,6 +123,15 @@
   <data name="ACAKeyingSchemeTooltip" xml:space="preserve">
     <value>Alphabete werden mittels ausgewählten ACA-Schlüsselschema generiert</value>
   </data>
+  <data name="ACAStyle" xml:space="preserve">
+    <value>ACA-Stil</value>
+  </data>
+  <data name="AlphabetsOutputFormatCaption" xml:space="preserve">
+    <value>Alphabet-Ausgabeformat</value>
+  </data>
+  <data name="AlphabetsOutputFormatTooltip" xml:space="preserve">
+    <value>Ausgabeformat der erzeugten Klartext- und Geheimtext-Alphabete</value>
+  </data>
   <data name="Ascending" xml:space="preserve">
     <value>Aufsteigend</value>
   </data>
@@ -133,7 +142,7 @@
     <value>Geheimtextalphabet</value>
   </data>
   <data name="CiphertextAlphabetOrderCaption" xml:space="preserve">
-    <value>Sortierung</value>
+    <value>Geheimtextalphabet-Sortierung</value>
   </data>
   <data name="CiphertextAlphabetOrderTooltip" xml:space="preserve">
     <value>Sortierung des Geheimtextalphabets</value>
@@ -159,6 +168,9 @@
   <data name="LeaveAsIs" xml:space="preserve">
     <value>So lassen wie es ist</value>
   </data>
+  <data name="Normalized" xml:space="preserve">
+    <value>Normalisiert</value>
+  </data>
   <data name="PlaintextAlphabetCaption" xml:space="preserve">
     <value>Klartextalphabet</value>
   </data>
@@ -166,7 +178,7 @@
     <value>Klartextalphabet</value>
   </data>
   <data name="PlaintextAlphabetOrderCaption" xml:space="preserve">
-    <value>Sortierung</value>
+    <value>Klartextalphabet-Sortierung</value>
   </data>
   <data name="PlaintextAlphabetOrderTooltip" xml:space="preserve">
     <value>Sortierung des Klartextalphabets</value>
@@ -178,13 +190,13 @@
     <value>Alphabetpermutatierer</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>Permutiert Klartext und Geheimtextalphabete basierend auf Schlüsselwörtern</value>
+    <value>Generiert verwürfelte Klartext und verwürfelte Geheimtextalphabete basierend auf Schlüsselwörtern</value>
   </data>
   <data name="Shift2Caption" xml:space="preserve">
     <value>Shift 2</value>
   </data>
   <data name="Shift2Tooltip" xml:space="preserve">
-    <value>Die Anzahl der Zeichen, um die das Alphabet des Geheimtextes verschoben wird</value>
+    <value>Die Anzahl der Zeichen, um die das Geheimtextalphabet verschoben wird</value>
   </data>
   <data name="ShiftCaption" xml:space="preserve">
     <value>Shift</value>
@@ -196,6 +208,6 @@
     <value>Quellalphabet</value>
   </data>
   <data name="SourceAlphabetTooltip" xml:space="preserve">
-    <value>Das Quellalphabet, das permutiert werden soll</value>
+    <value>Das Quellalphabet, das für die Generierung genutzt werden soll</value>
   </data>
 </root>

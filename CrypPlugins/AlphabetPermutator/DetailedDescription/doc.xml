@@ -3,32 +3,36 @@
   <language culture="en" />
   <language culture="de-DE" />
   <introduction lang="en">
-    The alphabet permutator can be used to generate plain and ciphertext alphabets based on an input alphabet, e.g. the Latin alphabet. Furthermore, the sort order of the resulting alphabets and a shift value on each alphabet can be applied.
+    The alphabet permutator can be used to generate plaintext and ciphertext alphabets based on an input alphabet, e.g. the Latin alphabet, and one or two keywords. Furthermore, the sort order of the resulting alphabets and a shift value on each alphabet can be applied.
   </introduction>
   <introduction lang="de-DE">
-    Der Alphabetpermutierer kann verwendet werden, um Klartext- und Chiffretextalphabete auf der Grundlage eines Eingabealphabets, z. B. des lateinischen Alphabets, zu erzeugen. Außerdem können die Sortierreihenfolge der resultierenden Alphabete und ein Verschiebungswert auf jedes Alphabet angewendet werden.
+    Der Alphabetpermutierer kann verwendet werden, um Klartext- und Geheimtextalphabete auf der Grundlage eines Eingabealphabets, z.B. des lateinischen Alphabets, und ein bis zwei Schlüsselwörtern zu erzeugen. Außerdem können die Sortierreihenfolge der resultierenden Alphabete und ein Verschiebungswert auf jedes Alphabet angewendet werden.
   </introduction>
   <usage lang="en">
-    The generation of the output alphabets its based on the American Cryptogram Association's (ACA) definitions. The following keying schemes may be used:<newline/>
-    K1: The plaintext alphabet is keyed, the ciphertext alphabet is not<newline/>
-    K2: The plaintext alphabet is not keyed, the ciphertext alphabet is<newline/>
-    K3: Both alphabets are keyed using the same keyword<newline/>
-    K4: Both alphabets are keyed using different keywords<newline/>
+    The generation of the output alphabets is based on the American Cryptogram Association's (ACA) definitions. The following keying schemes may be used:<newline/>
+    K1: The plaintext alphabet is keyed, the ciphertext alphabet is not.<newline/>
+    K2: The plaintext alphabet is not keyed, the ciphertext alphabet is.<newline/>
+    K3: Both alphabets are keyed using the same keyword.<newline/>
+    K4: Both alphabets are keyed using different keywords.<newline/>
     <newline/>
-    The keyword is used at the beginning of the alphabet, followed by the remaining letters.<newline/>
-    The order value defines, how the remaining letters should be ordered.<newline/>
-    The shift value of each alphabet defines, how many letters the alphabet should be shifted to the right.        
+    The keyword is always used at the beginning of the alphabet, followed by the remaining letters.<newline/>
+    The order values define, how the remaining letters are ordered.<newline/>
+    The shift value of each alphabet defines, how many letters the alphabet is shifted to the right after generation.<newline/>
+    <newline/>
+    The output format of the alphabets is either &quot;ACA style&quot; (alphabets are output as generated) or &quot;Normalized&quot; (plaintext alphabet is sorted alphabetically; ciphertext alphabet is sorted accordingly).
   </usage>
   <usage lang="de-DE">
     Die Generierung der Ausgabealphabete erfolgt auf der Grundlage der Definitionen der American Cryptogram Association (ACA). Die folgenden Generierungsschemata können verwendet werden:<newline/>
-    K1: Das Klartextalphabet nutzt ein Schlüsselwort, das Chiffretextalphabet nicht<newline/>
-    K2: Das Klartextalphabet nutzt kein Schlüsselwort, das Geheimtextalphabet schon<newline/>
-    K3: Beide Alphabete werden mit demselben Schlüsselwort generiert<newline/>
-    K4: Beide Alphabete werden mit unterschiedlichen Schlüsselwörtern generiert
-    <Neuzeilen/>
-    Das Schlüsselwort wird am Anfang des Alphabets verwendet, gefolgt von den restlichen Buchstaben.<newline/>
-    Der Sortier-Wert legt fest, wie die restlichen Buchstaben angeordnet werden sollen.<newline/>
-    Der Verschiebungswert jedes Alphabets legt fest, um wie viele Buchstaben das Alphabet nach rechts verschoben werden soll.
+    K1: Das Klartextalphabet nutzt ein Schlüsselwort, das Geheimtextalphabet nicht.<newline/>
+    K2: Das Klartextalphabet nutzt kein Schlüsselwort, das Geheimtextalphabet schon.<newline/>
+    K3: Beide Alphabete werden mit demselben Schlüsselwort generiert.<newline/>
+    K4: Beide Alphabete werden mit unterschiedlichen Schlüsselwörtern generiert.<newline/>
+    <newline/>
+    Das Schlüsselwort wird immer am Anfang des Alphabets verwendet, gefolgt von den restlichen Buchstaben.<newline/>
+    Die Sortier-Werte legen fest, wie die restlichen Buchstaben der Alphabete angeordnet werden.<newline/>
+    Der Verschiebungswert jedes Alphabets legt fest, um wie viele Buchstaben das Alphabet nach der Generierung nach rechts verschoben wird.<newline/>
+    <newline/>
+    Das Ausgabeformat der Alphabete ist entweder &quot;ACA-Stil&quot; (Alphabete werden so ausgegeben, wie sie generiert wurden) oder &quot;Normalisiert&quot; (Klartextalphabet ist alphabetisch sortiert; Geheimtextalphabet ist entsprechend sortiert).
   </usage>
   <references></references>
 </documentation>

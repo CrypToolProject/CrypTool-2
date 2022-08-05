@@ -121,7 +121,7 @@
     <value>Ascending</value>
   </data>
   <data name="CiphertextAlphabetCaption" xml:space="preserve">
-    <value>Ciphertext Alphabet</value>
+    <value>Ciphertext alphabet</value>
   </data>
   <data name="CiphertextAlphabetTooltip" xml:space="preserve">
     <value>The generated ciphertext alphabet</value>
@@ -151,40 +151,40 @@
     <value>The number of characters the ciphertext alphabet is shifted</value>
   </data>
   <data name="PlaintextAlphabetOrderCaption" xml:space="preserve">
-    <value>Order</value>
+    <value>Plaintext alphabet order</value>
   </data>
   <data name="PlaintextAlphabetTooltip" xml:space="preserve">
     <value>The generated plaintext alphabet</value>
   </data>
   <data name="PlaintextAlphabetCaption" xml:space="preserve">
-    <value>Plaintext Alphabet</value>
+    <value>Plaintext alphabet</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>Alphabet Permutator</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>Permutes plaintext and ciphertext alphabets based on keywords</value>
+    <value>Generates mixed plaintext and mixed ciphertext alphabets based on keywords</value>
   </data>
   <data name="SourceAlphabetCaption" xml:space="preserve">
-    <value>Source Alphabet</value>
+    <value>Source alphabet</value>
   </data>
   <data name="SourceAlphabetTooltip" xml:space="preserve">
-    <value>The source alphabet which should be permutated</value>
+    <value>The source alphabet which should be used for generation</value>
   </data>
   <data name="CiphertextAlphabetGroup" xml:space="preserve">
-    <value>Ciphertext Alphabet</value>
+    <value>Ciphertext alphabet</value>
   </data>
   <data name="PlaintextAlphabetGroup" xml:space="preserve">
-    <value>Plaintext Alphabet</value>
+    <value>Plaintext alphabet</value>
   </data>
   <data name="ACAKeyingSchemeCaption" xml:space="preserve">
-    <value>ACA Keying Scheme</value>
+    <value>ACA keying scheme</value>
   </data>
   <data name="ACAKeyingSchemeTooltip" xml:space="preserve">
     <value>Alphabets are generated using selected ACA keying scheme</value>
   </data>
   <data name="CiphertextAlphabetOrderCaption" xml:space="preserve">
-    <value>Order</value>
+    <value>Ciphertext alphabet order</value>
   </data>
   <data name="CiphertextAlphabetOrderTooltip" xml:space="preserve">
     <value>Order of the ciphertext alphabet</value>
@@ -197,5 +197,17 @@
   </data>
   <data name="PlaintextAlphabetOrderTooltip" xml:space="preserve">
     <value>Order of the plaintext alphabet</value>
+  </data>
+  <data name="ACAStyle" xml:space="preserve">
+    <value>ACA style</value>
+  </data>
+  <data name="AlphabetsOutputFormatCaption" xml:space="preserve">
+    <value>Alphabets output format</value>
+  </data>
+  <data name="AlphabetsOutputFormatTooltip" xml:space="preserve">
+    <value>Output format of the generated plaintext and ciphertext alphabets</value>
+  </data>
+  <data name="Normalized" xml:space="preserve">
+    <value>Normalized</value>
   </data>
 </root>

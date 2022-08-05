@@ -61,7 +61,7 @@ namespace AlphabetPermutator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ACA Keying Scheme ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die ACA keying scheme ähnelt.
         /// </summary>
         internal static string ACAKeyingSchemeCaption {
             get {
@@ -79,6 +79,33 @@ namespace AlphabetPermutator.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ACA style ähnelt.
+        /// </summary>
+        internal static string ACAStyle {
+            get {
+                return ResourceManager.GetString("ACAStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Alphabets output format ähnelt.
+        /// </summary>
+        internal static string AlphabetsOutputFormatCaption {
+            get {
+                return ResourceManager.GetString("AlphabetsOutputFormatCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Output format of the generated plaintext and ciphertext alphabets ähnelt.
+        /// </summary>
+        internal static string AlphabetsOutputFormatTooltip {
+            get {
+                return ResourceManager.GetString("AlphabetsOutputFormatTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Ascending ähnelt.
         /// </summary>
         internal static string Ascending {
@@ -88,7 +115,7 @@ namespace AlphabetPermutator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Ciphertext Alphabet ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ciphertext alphabet ähnelt.
         /// </summary>
         internal static string CiphertextAlphabetCaption {
             get {
@@ -97,7 +124,7 @@ namespace AlphabetPermutator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Ciphertext Alphabet ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ciphertext alphabet ähnelt.
         /// </summary>
         internal static string CiphertextAlphabetGroup {
             get {
@@ -106,7 +133,7 @@ namespace AlphabetPermutator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Order ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ciphertext alphabet order ähnelt.
         /// </summary>
         internal static string CiphertextAlphabetOrderCaption {
             get {
@@ -187,7 +214,16 @@ namespace AlphabetPermutator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Plaintext Alphabet ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Normalized ähnelt.
+        /// </summary>
+        internal static string Normalized {
+            get {
+                return ResourceManager.GetString("Normalized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Plaintext alphabet ähnelt.
         /// </summary>
         internal static string PlaintextAlphabetCaption {
             get {
@@ -196,7 +232,7 @@ namespace AlphabetPermutator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Plaintext Alphabet ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Plaintext alphabet ähnelt.
         /// </summary>
         internal static string PlaintextAlphabetGroup {
             get {
@@ -205,7 +241,7 @@ namespace AlphabetPermutator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Order ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Plaintext alphabet order ähnelt.
         /// </summary>
         internal static string PlaintextAlphabetOrderCaption {
             get {
@@ -241,7 +277,7 @@ namespace AlphabetPermutator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Permutes plaintext and ciphertext alphabets based on keywords ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Generates mixed plaintext and mixed ciphertext alphabets based on keywords ähnelt.
         /// </summary>
         internal static string PluginTooltip {
             get {
@@ -286,7 +322,7 @@ namespace AlphabetPermutator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Source Alphabet ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Source alphabet ähnelt.
         /// </summary>
         internal static string SourceAlphabetCaption {
             get {
@@ -295,7 +331,7 @@ namespace AlphabetPermutator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The source alphabet which should be permutated ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The source alphabet which should be used for generation ähnelt.
         /// </summary>
         internal static string SourceAlphabetTooltip {
             get {

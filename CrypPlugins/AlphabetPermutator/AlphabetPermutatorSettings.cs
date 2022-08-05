@@ -40,6 +40,18 @@ namespace AlphabetPermutator
         K4
     }
 
+    public enum AlphabetsOutputFormat
+    {
+        /// <summary>
+        /// Alphabets are output in the format they were generated
+        /// </summary>
+        ACAStyle,
+        /// <summary>
+        /// Alphabets are normalized, meaning that the plaintext alphabet is sorted alphabetically and the ciphertext alphabet is sorted accordingly
+        /// </summary>
+        Normalized        
+    }
+
     public enum AlphabetOrder
     {
         Ascending,
@@ -50,6 +62,7 @@ namespace AlphabetPermutator
     public class AlphabetPermutatorSettings : ISettings
     {
         private ACAKeyingScheme _ACAKeyingScheme = ACAKeyingScheme.K1;
+        private AlphabetsOutputFormat _AlphabetsOutputFormat = AlphabetsOutputFormat.ACAStyle;
         private AlphabetOrder _plaintextAlphabetOrder = AlphabetOrder.Ascending;
         private AlphabetOrder _ciphertextAlphabetOrder = AlphabetOrder.Ascending;
         private int _Shift = 0;
@@ -81,7 +94,18 @@ namespace AlphabetPermutator
             }
         }
 
-        [TaskPane("PlaintextAlphabetOrderCaption", "PlaintextAlphabetTooltip", "PlaintextAlphabetGroup", 1, false, ControlType.ComboBox, new[] { "Ascending", "Descending", "LeaveAsIs" })]
+        [TaskPane("AlphabetsOutputFormatCaption", "AlphabetsOutputFormatTooltip", null, 1, false, ControlType.ComboBox, new[] { "ACAStyle", "Normalized" })]
+        public AlphabetsOutputFormat AlphabetsOutputFormat
+        {
+            get => _AlphabetsOutputFormat;
+            set
+            {
+                _AlphabetsOutputFormat = value;
+                OnPropertyChanged("AlphabetsOutputFormat");
+            }
+        }
+
+        [TaskPane("PlaintextAlphabetOrderCaption", "PlaintextAlphabetOrderTooltip", "PlaintextAlphabetGroup", 2, false, ControlType.ComboBox, new[] { "Ascending", "Descending", "LeaveAsIs" })]
         public AlphabetOrder PlaintextAlphabetOrder
         {
             get => _plaintextAlphabetOrder;
@@ -92,7 +116,7 @@ namespace AlphabetPermutator
             }
         }
 
-        [TaskPane("ShiftCaption", "ShiftTooltip", "PlaintextAlphabetGroup", 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue - 1)]
+        [TaskPane("ShiftCaption", "ShiftTooltip", "PlaintextAlphabetGroup", 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue - 1)]
         public int Shift
         {
             get => _Shift;
@@ -103,7 +127,7 @@ namespace AlphabetPermutator
             }
         }
 
-        [TaskPane("KeywordCaption", "KeywordTooltip", "PlaintextAlphabetGroup", 3, false, ControlType.TextBox)]
+        [TaskPane("KeywordCaption", "KeywordTooltip", "PlaintextAlphabetGroup", 4, false, ControlType.TextBox)]
         public string Keyword
         {
             get => _Keyword;
@@ -114,7 +138,7 @@ namespace AlphabetPermutator
             }
         }
 
-        [TaskPane("CiphertextAlphabetOrderCaption", "CiphertextAlphabetOrderTooltip", "CiphertextAlphabetGroup", 4, false, ControlType.ComboBox, new[] { "Ascending", "Descending", "LeaveAsIs" })]
+        [TaskPane("CiphertextAlphabetOrderCaption", "CiphertextAlphabetOrderTooltip", "CiphertextAlphabetGroup", 5, false, ControlType.ComboBox, new[] { "Ascending", "Descending", "LeaveAsIs" })]
         public AlphabetOrder CiphertextAlphabetOrder
         {
             get => _ciphertextAlphabetOrder;
@@ -125,7 +149,7 @@ namespace AlphabetPermutator
             }
         }     
 
-        [TaskPane("Shift2Caption", "Shift2Tooltip", "CiphertextAlphabetGroup", 5, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue - 1)]
+        [TaskPane("Shift2Caption", "Shift2Tooltip", "CiphertextAlphabetGroup", 6, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue - 1)]
         public int Shift2
         {
             get => _Shift2;
@@ -136,7 +160,7 @@ namespace AlphabetPermutator
             }
         }       
 
-        [TaskPane("Keyword2Caption", "Keyword2Tooltip", "CiphertextAlphabetGroup", 6, false, ControlType.TextBox)]
+        [TaskPane("Keyword2Caption", "Keyword2Tooltip", "CiphertextAlphabetGroup", 7, false, ControlType.TextBox)]
         public string Keyword2
         { 
             get => _Keyword2;
