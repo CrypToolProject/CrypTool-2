@@ -201,7 +201,7 @@ namespace CrypTool.Substitution
                             {
                                 Text = displayFrom.Length >= 8 ? displayFrom.Substring(0, 5 % displayFrom.Length) + "..." : displayFrom,
                                 ToolTip = displayFrom,
-                                FontSize = 11,
+                                FontSize = displayFrom.Length > 4 ? 12 : 20,
                                 VerticalAlignment = VerticalAlignment.Center,
                                 HorizontalAlignment = HorizontalAlignment.Center
                             };
@@ -237,7 +237,7 @@ namespace CrypTool.Substitution
                             {
                                 Text = displayTo.Length >= 8 ? displayTo.Substring(0, 5 % displayTo.Length) + "..." : displayTo,
                                 ToolTip = displayTo,
-                                FontSize = 11,
+                                FontSize = displayTo.Length > 4 ? 12 : 20,
                                 VerticalAlignment = VerticalAlignment.Center,
                                 HorizontalAlignment = HorizontalAlignment.Center
                             };
