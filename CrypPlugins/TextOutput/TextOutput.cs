@@ -1,5 +1,5 @@
 /*
-   Copyright 2008-2011 CrypTool 2 Team <ct2contact@CrypTool.org>
+   Copyright 2008-2022 CrypTool 2 Team <ct2contact@CrypTool.org>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -78,14 +78,12 @@ namespace TextOutput
                     input = value;
 
                     string fillValue = ObjectToString(value);
-                    if (settings.LineBreaks == TextOutputSettings.LineBreaksEnum.Windows)
+                    if (settings.LineBreaks == TextOutputSettings.LineBreaksEnum.UNIX)
                     {
-                        fillValue = fillValue.Replace("\n", "");
+                        //convert from Windows line breaks to UNIX line breaks:
+                        fillValue = fillValue.Replace("\r\n", "\n");
                     }
-                    else
-                    {
-                        fillValue = fillValue.Replace("\n", "\r");
-                    }
+                    
                     if (input != null)
                     {
                         ShowInPresentation(fillValue);
@@ -398,40 +396,63 @@ namespace TextOutput
 
             newtext += fillValue;
 
-            if (settings.Append)
+            if (settings.ShowChanges == 0)
             {
-                // append line breaks only if not first line
-                if (!string.IsNullOrEmpty(oldtext))
+                textOutputPresentation.richTextBox.Visibility = Visibility.Hidden;
+                textOutputPresentation.textBox.Visibility = Visibility.Visible;
+
+                if (settings.Append)
                 {
-                    textOutputPresentation.textBox.AppendText(new string('\r', settings.AppendBreaks));
+                    // append line breaks only if not first line
+                    if (!string.IsNullOrEmpty(oldtext))
+                    {
+                        textOutputPresentation.textBox.Text = new string('\r', settings.AppendBreaks);
+                    }
+                    textOutputPresentation.textBox.Text += fillValue;
+                    textOutputPresentation.textBox.ScrollToEnd();
+                }
+                else
+                {
+                    textOutputPresentation.textBox.Text = fillValue;
+                }
+            }
+            else if (settings.ShowChanges == 1 || settings.ShowChanges == 2)
+            {
+                textOutputPresentation.richTextBox.Visibility = Visibility.Visible;
+                textOutputPresentation.textBox.Visibility = Visibility.Hidden;
+
+                if (settings.Append)
+                {
+                    // append line breaks only if not first line
+                    if (!string.IsNullOrEmpty(oldtext))
+                    {
+                        textOutputPresentation.richTextBox.AppendText(new string('\r', settings.AppendBreaks));
+                    }
+
+                    if (maximized)
+                    {
+                        textOutputPresentation.richTextBox.Document.Blocks.Clear();
+                    }
+                    textOutputPresentation.richTextBox.AppendText(fillValue);
+                    textOutputPresentation.richTextBox.ScrollToEnd();
+                }
+                else
+                {
+                    textOutputPresentation.richTextBox.Document.Blocks.Clear();
+                    textOutputPresentation.richTextBox.AppendText(fillValue);
                 }
 
-                if (maximized)
-                {
-                    textOutputPresentation.textBox.Document.Blocks.Clear();
-                }
-                textOutputPresentation.textBox.AppendText(fillValue);
-                textOutputPresentation.textBox.ScrollToEnd();
-            }
-            else
-            {
-                textOutputPresentation.textBox.Document.Blocks.Clear();
-                textOutputPresentation.textBox.AppendText(fillValue);
-            }
-
-            if (settings.ShowChanges == 1 || settings.ShowChanges == 2)
-            {
                 diff_match_patch diff = new diff_match_patch();
                 List<Diff> diffs = diff.diff_main(oldtext, newtext, true);
                 diff.diff_cleanupSemanticLossless(diffs);
 
-                if (textOutputPresentation.textBox.Document == null)
+                if (textOutputPresentation.richTextBox.Document == null)
                 {
-                    textOutputPresentation.textBox.Document = new FlowDocument();
+                    textOutputPresentation.richTextBox.Document = new FlowDocument();
                 }
                 else
                 {
-                    textOutputPresentation.textBox.Document.Blocks.Clear();
+                    textOutputPresentation.richTextBox.Document.Blocks.Clear();
                 }
 
                 Paragraph para = new Paragraph();
@@ -472,23 +493,47 @@ namespace TextOutput
                             break;
                     }
                 }
-                textOutputPresentation.textBox.Document.Blocks.Add(para);
+                textOutputPresentation.richTextBox.Document.Blocks.Add(para);
             }
             else if (settings.ShowChanges == 3)
             {
-                if (textOutputPresentation.textBox.Document == null)
+                textOutputPresentation.richTextBox.Visibility = Visibility.Visible;
+                textOutputPresentation.textBox.Visibility = Visibility.Hidden;
+
+                if (settings.Append)
                 {
-                    textOutputPresentation.textBox.Document = new FlowDocument();
+                    // append line breaks only if not first line
+                    if (!string.IsNullOrEmpty(oldtext))
+                    {
+                        textOutputPresentation.richTextBox.AppendText(new string('\r', settings.AppendBreaks));
+                    }
+
+                    if (maximized)
+                    {
+                        textOutputPresentation.richTextBox.Document.Blocks.Clear();
+                    }
+                    textOutputPresentation.richTextBox.AppendText(fillValue);
+                    textOutputPresentation.richTextBox.ScrollToEnd();
                 }
                 else
                 {
-                    textOutputPresentation.textBox.Document.Blocks.Clear();
+                    textOutputPresentation.richTextBox.Document.Blocks.Clear();
+                    textOutputPresentation.richTextBox.AppendText(fillValue);
+                }
+
+                if (textOutputPresentation.richTextBox.Document == null)
+                {
+                    textOutputPresentation.richTextBox.Document = new FlowDocument();
+                }
+                else
+                {
+                    textOutputPresentation.richTextBox.Document.Blocks.Clear();
                 }
                 Paragraph para = new Paragraph();
                 int position = 0;
                 while (position < newtext.Length)
                 {
-                    Run run = new Run("" + newtext[position]);
+                    Run run = new Run(string.Empty + newtext[position]);
                     if (oldtext.Length == 0 || position > oldtext.Length || (position < oldtext.Length && oldtext[position] != newtext[position]))
                     {
                         run.Background = new SolidColorBrush(Colors.LightBlue);
@@ -496,7 +541,7 @@ namespace TextOutput
                     para.Inlines.Add(run);
                     position++;
                 }
-                textOutputPresentation.textBox.Document.Blocks.Add(para);
+                textOutputPresentation.richTextBox.Document.Blocks.Add(para);
             }
 
             setStatusBar();
@@ -504,7 +549,7 @@ namespace TextOutput
 
         private void clearStatusBar()
         {
-            textOutputPresentation.labelBytes.Content = "";
+            textOutputPresentation.labelBytes.Content = string.Empty;
         }
 
         private void setStatusBar_orig()
@@ -512,8 +557,17 @@ namespace TextOutput
             // create status line string
             textOutputPresentation.labelBytes.Content = "...";
 
-            string currentText = new TextRange(textOutputPresentation.textBox.Document.ContentStart, textOutputPresentation.textBox.Document.ContentEnd).Text;
-            string label = "";
+            string currentText;
+
+            if (settings.ShowChanges == 0)
+            {
+                currentText = textOutputPresentation.textBox.Text;
+            }
+            else 
+            {
+                currentText = new TextRange(textOutputPresentation.richTextBox.Document.ContentStart, textOutputPresentation.richTextBox.Document.ContentEnd).Text;
+            }
+            string label = string.Empty;
 
             if (settings.ShowDigits)
             {
@@ -561,9 +615,6 @@ namespace TextOutput
                         else
                         {
                             bits = (int)System.Math.Ceiling(log2);
-                            //bits = (int)(System.Math.Ceiling(log / System.Math.Log(2, 10)));
-                            //digits = (int)(System.Math.Ceiling(log) + 0.5);
-                            //digits = BigInteger.Abs(number).ToString().Length;
                         }
                         digits = currentText.Length;
                         if (number < 0)
@@ -590,7 +641,7 @@ namespace TextOutput
                 if (currentText != null)
                 {
                     currentText = Regex.Replace(currentText, @"\r(?!\n)", "\r\n");  // replace single \r with \r\n
-                    currentText = Regex.Replace(currentText, @"\r\n$", "");         // ignore trailing \r\n
+                    currentText = Regex.Replace(currentText, @"\r\n$", string.Empty);         // ignore trailing \r\n
                     chars = currentText.Length;
                 }
                 string entity = (chars == 1) ? Properties.Resources.Char : Properties.Resources.Chars;
@@ -609,7 +660,7 @@ namespace TextOutput
                     }
                 }
                 string entity = (lines == 1) ? Properties.Resources.Line : Properties.Resources.Lines;
-                if (label != "")
+                if (label != string.Empty)
                 {
                     label += ", ";
                 }
@@ -654,8 +705,8 @@ namespace TextOutput
         {
             textOutputPresentation.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                textOutputPresentation.textBox.Document = new FlowDocument();
-                _currentValue = "";
+                textOutputPresentation.richTextBox.Document = new FlowDocument();
+                _currentValue = string.Empty;
                 Input = null;
                 clearStatusBar();
             }, null);

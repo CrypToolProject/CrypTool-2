@@ -4,16 +4,33 @@
     xmlns:Properties="clr-namespace:CrypTool.PluginBase.Properties;assembly=CrypPluginBase"
     Height="Auto" Width="Auto" Margin="0" MinHeight="30" MinWidth="100">
     <Grid IsVisibleChanged="UserControl_IsVisibleChanged">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="*" />
-      <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
-    <!--<Label Padding="0" Grid.Row="0" Name="labelString" VerticalAlignment="Top" Background="#DFDFDF">Input</Label>-->
-    <RichTextBox Name="textBox" Grid.Row="1" Margin="0" IsEnabled="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True" 
-             FontFamily="{Binding MyFontFamily}" 
-               FontSize="{Binding MyFontSize}" KeyDown="TextOutput_KeyDown" />
-        
-    <Label Padding="0" Grid.Row="2" Name="labelBytes" VerticalAlignment="Top" Background="#DFDFDF">0 Bytes</Label>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBox Name="textBox" 
+                 Grid.Row="1" 
+                 Margin="0" 
+                 IsEnabled="True" 
+                 VerticalScrollBarVisibility="Auto" 
+                 IsReadOnly="True"
+                 TextWrapping="Wrap"
+                 FontFamily="{Binding MyFontFamily}"
+                 FontSize="{Binding MyFontSize}" 
+                 KeyDown="TextOutput_KeyDown"/>
+
+        <RichTextBox Name="richTextBox" 
+                 Grid.Row="1" 
+                 Margin="0" 
+                 IsEnabled="True" 
+                 VerticalScrollBarVisibility="Auto" 
+                 IsReadOnly="True"
+                 FontFamily="{Binding MyFontFamily}"
+                 FontSize="{Binding MyFontSize}" 
+                 KeyDown="TextOutput_KeyDown"/>
+
+        <Label Padding="0" Grid.Row="2" Name="labelBytes" VerticalAlignment="Top" Background="#DFDFDF">0 Bytes</Label>
     </Grid>
 </UserControl>
