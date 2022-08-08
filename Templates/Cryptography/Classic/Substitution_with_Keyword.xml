@@ -19,7 +19,7 @@ Source: <external ref="http://en.wikipedia.org/wiki/Substitution_cipher" /></des
     <replacement key="$Decrypted Ciphertext$" value="Decrypted Ciphertext" />
     <replacement key="$Decrypt$" value="Decrypt" />
     <replacement key="$Encrypt$" value="Encrypt" />
-    <replacement key="$Password$" value="Password" />
+    <replacement key="$Keyword$" value="Keyword" />
     <replacement key="$Source Alphabet$" value="Source Alphabet" />
     <replacement key="$Plaintext Alphabet$" value="Plaintext alphabet" />
     <replacement key="$Ciphertext Alphabet$" value="Ciphertext alphabet" />
@@ -49,7 +49,7 @@ Quelle: <external ref="http://de.wikipedia.org/wiki/Monoalphabetische_Substituti
     <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
     <replacement key="$Decrypt$" value="Entschlüsseln" />
     <replacement key="$Encrypt$" value="Verschlüsseln" />
-    <replacement key="$Password$" value="Passwort" />
+    <replacement key="$Keyword$" value="Schlüsselwort" />
     <replacement key="$Source Alphabet$" value="Quellalphabet" />
     <replacement key="$Plaintext Alphabet$" value="Klartextalphabet" />
     <replacement key="$Ciphertext Alphabet$" value="Geheimtextalphabet" />
