@@ -1,4 +1,18 @@
-﻿
+﻿/*                              
+   Copyright 2010-2022 Nils Kopal, Viktor M.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,41 +42,40 @@ namespace WorkspaceManager.View.Visuals
         private readonly Thickness CONTROL_DEFAULT_MARGIN = new Thickness(4, 0, 0, 0);
         private readonly Dictionary<ISettings, Dictionary<string, List<RadioButton>>> dicRadioButtons = new Dictionary<ISettings, Dictionary<string, List<RadioButton>>>();
         private readonly IPlugin plugin;
-        private readonly EntryGroup entgrou;
-        private readonly ComponentVisual bcv;
-        private readonly TabControl tbC;
+        private readonly EntryGroup entryGroup;
+        private readonly ComponentVisual _componentVisual;
+        private readonly TabControl tabControl;
         public string myConnectorName;
         public bool noSettings;
-        private readonly bool isSideBar;
+        private readonly bool _isSideBar;
 
-        public SettingsVisual(PluginSettingsContainer pluginSettingsContainer, ComponentVisual bcv, bool isMaster, bool isSideBar)
+        public SettingsVisual(PluginSettingsContainer pluginSettingsContainer, ComponentVisual componentVisual, bool isMaster, bool isSideBar)
         {
-            bcv.Model.ConnectorPlugstateChanged += new EventHandler<Model.ConnectorPlugstateChangedEventArgs>(Model_ConnectorPlugstateChanged);
+            componentVisual.Model.ConnectorPlugstateChanged += new EventHandler<Model.ConnectorPlugstateChangedEventArgs>(Model_ConnectorPlugstateChanged);
             Loaded += new RoutedEventHandler(BinSettingsVisual_Loaded);
 
             noSettings = false;
-            this.isSideBar = isSideBar;
-            Resources.Add("isSideBarResource", this.isSideBar);
+            _isSideBar = isSideBar;
+            Resources.Add("isSideBarResource", _isSideBar);
 
-            this.bcv = bcv;
+            _componentVisual = componentVisual;
             plugin = pluginSettingsContainer.Plugin;
-            entgrou = new EntryGroup();
-            entgrou = createContentSettings(plugin);
+            entryGroup = new EntryGroup();
+            entryGroup = createContentSettings(plugin);
 
-            if (entgrou.entryList.Count != 0)
+            if (entryGroup.entryList.Count != 0)
             {
-                ((WorkspaceManagerClass)bcv.Model.WorkspaceModel.MyEditor).executeEvent += new EventHandler(excuteEventHandler);
+                ((WorkspaceManagerClass)componentVisual.Model.WorkspaceModel.MyEditor).executeEvent += new EventHandler(excuteEventHandler);
 
                 InitializeComponent();
 
                 if (isMaster)
                 {
-                    bcv.IControlCollection.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChangedHandler);
+                    componentVisual.IControlCollection.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChangedHandler);
 
-                    tbC = new TabControl
+                    tabControl = new TabControl
                     {
                         Name = "TabControl",
-
                         Background = Brushes.Transparent,
                         BorderBrush = Brushes.Transparent
                     };
@@ -85,49 +98,48 @@ namespace WorkspaceManager.View.Visuals
                     };
                     dt.Setters.Add(sett);
 
-                    Style stu = new Style
+                    Style style = new Style
                     {
                         TargetType = typeof(TabItem)
                     };
-                    stu.Triggers.Add(dt);
+                    style.Triggers.Add(dt);
 
-                    tbC.ItemContainerStyle = stu;
+                    tabControl.ItemContainerStyle = style;
 
                     myGrid.Children.Remove(MyScrollViewer);
 
-                    myGrid.Children.Add(tbC);
-                    TabItem tbI = new TabItem
+                    myGrid.Children.Add(tabControl);
+                    TabItem tabItem = new TabItem
                     {
-                        Header = bcv.Model.Plugin.GetPluginInfoAttribute().Caption,
+                        Header = componentVisual.Model.Plugin.GetPluginInfoAttribute().Caption,
                         Content = MyScrollViewer
                     };
 
-                    tbC.Items.Add(tbI);
+                    tabControl.Items.Add(tabItem);
 
                     myConnectorName = "None, I'm the master!";
 
-                    foreach (IControlMasterElement control in bcv.IControlCollection)
+                    foreach (IControlMasterElement control in componentVisual.IControlCollection)
                     {
                         control.PluginModelChanged += new EventHandler(icm_PluginModelChanged);
                         HandleControlMasterElementChange(control);
                     }
                 }
 
-                drawList(entgrou);
+                drawList(entryGroup);
 
                 pluginSettingsContainer.TaskPaneAttributeChanged += HandleTaskPaneAttributeChanges;
-                //"Replay" all current task pane attributes:
                 DispatchTaskPaneAttributeChanges(pluginSettingsContainer.CurrentTaskPaneAttributes);
                 SetExecutionMode();
             }
             else
             {
                 InitializeComponent();
-                TextBlock tb = new TextBlock
+                TextBlock textBlock = new TextBlock
                 {
                     Text = Properties.Resources.BinSettingsVisual_BinSettingsVisual_No_Settings_available_
                 };
-                MyScrollViewer.Content = tb;
+                MyScrollViewer.Content = textBlock;
                 noSettings = true;
             }
         }
@@ -155,13 +167,13 @@ namespace WorkspaceManager.View.Visuals
             if (master.PluginModel != null)
             {
                 bool b = true;
-                foreach (TabItem vtbI in tbC.Items)
+                foreach (TabItem tabIem in tabControl.Items)
                 {
-                    if (vtbI.Uid == master.ConnectorModel.PropertyName)
+                    if (tabIem.Uid == master.ConnectorModel.PropertyName)
                     {
 
-                        vtbI.Content = new SettingsVisual(master.PluginSettingsContainer, bcv, false, isSideBar);
-                        vtbI.Header = master.PluginModel.GetName();
+                        tabIem.Content = new SettingsVisual(master.PluginSettingsContainer, _componentVisual, false, _isSideBar);
+                        tabIem.Header = master.PluginModel.GetName();
                         b = false;
                     }
                 }
@@ -171,16 +183,16 @@ namespace WorkspaceManager.View.Visuals
                     TabItem tbI = new TabItem
                     {
                         Uid = master.ConnectorModel.PropertyName,
-                        Content = new SettingsVisual(master.PluginSettingsContainer, bcv, false, isSideBar),
+                        Content = new SettingsVisual(master.PluginSettingsContainer, _componentVisual, false, _isSideBar),
                         Header = master.PluginModel.Plugin.GetPluginInfoAttribute().Caption
                     };
-                    tbC.Items.Add(tbI);
+                    tabControl.Items.Add(tbI);
                 }
             }
             else
             {
                 TabItem tbI = null;
-                foreach (TabItem vtbI in tbC.Items)
+                foreach (TabItem vtbI in tabControl.Items)
                 {
                     if (vtbI.Uid == master.ConnectorModel.PropertyName)
                     {
@@ -189,7 +201,7 @@ namespace WorkspaceManager.View.Visuals
                 }
                 if (tbI != null)
                 {
-                    tbC.Items.Remove(tbI);
+                    tabControl.Items.Remove(tbI);
                 }
             }
         }
@@ -222,27 +234,44 @@ namespace WorkspaceManager.View.Visuals
                 return;
             }
 
-            foreach (List<ControlEntry> cel in entgrou.entryList)
+            foreach (List<ControlEntry> cel in entryGroup.entryList)
             {
-                entgrou.groupPanel[entgrou.entryList.IndexOf(cel)].Visibility = Visibility.Visible;
+                entryGroup.groupPanel[entryGroup.entryList.IndexOf(cel)].Visibility = Visibility.Visible;
                 bool allInGroupInvisible = true;
 
-                foreach (ControlEntry ce in cel)
+                foreach (ControlEntry controlEntry in cel)
                 {
-                    if (attributeChangesDict.TryGetValue(ce.tpa.PropertyName, out TaskPaneAttribteContainer tpac))
+                    if (attributeChangesDict.TryGetValue(controlEntry.taskPaneAttribute.PropertyName, out TaskPaneAttribteContainer taskPaneAttribteContainer))
                     {
-                        ce.element.Visibility = tpac.Visibility;
-                        ce.caption.Visibility = tpac.Visibility;
+                        //search if we find a connector with the same name as this setting
+                        //if it is connected, meaning there are input connections, we do nothing
+                        ReadOnlyCollection<Model.ConnectorModel> connectors = _componentVisual.Model.GetInputConnectors();
+                        bool hasInputConnections = false;
+                        foreach(Model.ConnectorModel connector in connectors)
+                        {
+                            if(connector.PropertyName.Equals(controlEntry.taskPaneAttribute.PropertyName) && connector.GetInputConnections().Count > 0)
+                            {
+                                hasInputConnections = true;
+                                break;
+                            }
+                        }
+
+                        //only update, if a corresponding Connector has no input connections
+                        if (!hasInputConnections)
+                        {
+                            controlEntry.element.Visibility = taskPaneAttribteContainer.Visibility;
+                            controlEntry.caption.Visibility = taskPaneAttribteContainer.Visibility;
+                        }
                     }
-                    if (ce.element.Visibility == Visibility.Visible)
-                    {
+                    if (controlEntry.element.Visibility == Visibility.Visible)
+                    {                        
                         allInGroupInvisible = false;
                     }
                 }
 
                 if (allInGroupInvisible)
                 {
-                    entgrou.groupPanel[entgrou.entryList.IndexOf(cel)].Visibility = Visibility.Collapsed;
+                    entryGroup.groupPanel[entryGroup.entryList.IndexOf(cel)].Visibility = Visibility.Collapsed;
                 }
             }
         }
@@ -257,13 +286,13 @@ namespace WorkspaceManager.View.Visuals
 
         private void SetExecutionMode()
         {
-            foreach (List<ControlEntry> cel in entgrou.entryList)
+            foreach (List<ControlEntry> cel in entryGroup.entryList)
             {
                 foreach (ControlEntry ce in cel)
                 {
-                    if (((WorkspaceManagerClass)bcv.Model.WorkspaceModel.MyEditor).isExecuting())
+                    if (((WorkspaceManagerClass)_componentVisual.Model.WorkspaceModel.MyEditor).isExecuting())
                     {
-                        if (!ce.tpa.ChangeableWhileExecuting)
+                        if (!ce.taskPaneAttribute.ChangeableWhileExecuting)
                         {
                             ce.element.IsEnabled = false;
                             if (ce.element is IntegerUpDown)
@@ -282,7 +311,7 @@ namespace WorkspaceManager.View.Visuals
                     }
                     else
                     {
-                        if (!ce.tpa.ChangeableWhileExecuting)
+                        if (!ce.taskPaneAttribute.ChangeableWhileExecuting)
                         {
                             ce.element.IsEnabled = true;
                             if (ce.element is IntegerUpDown)
@@ -338,7 +367,7 @@ namespace WorkspaceManager.View.Visuals
 
                 Expander noverticalgroupexpander = new Expander();
 
-                noVerticalGroupParameterPanel = new ParameterPanel(isSideBar);
+                noVerticalGroupParameterPanel = new ParameterPanel(_isSideBar);
 
                 Border noVerticalGroupBodi = new Border
                 {
@@ -353,7 +382,7 @@ namespace WorkspaceManager.View.Visuals
 
                 testexpander.IsExpanded = true;
 
-                parameterPanel = new ParameterPanel(isSideBar);
+                parameterPanel = new ParameterPanel(_isSideBar);
 
                 entgrou.groupPanel.Add(testexpander);
 
@@ -368,9 +397,9 @@ namespace WorkspaceManager.View.Visuals
                     Source = parameterPanel
                 };
 
-                if (!string.IsNullOrEmpty(cel[0].tpa.groupName))
+                if (!string.IsNullOrEmpty(cel[0].taskPaneAttribute.groupName))
                 {
-                    testexpander.Header = cel[0].tpa.GroupName;
+                    testexpander.Header = cel[0].taskPaneAttribute.GroupName;
                 }
 
                 StackPanel contentPanel = new StackPanel();
@@ -384,11 +413,9 @@ namespace WorkspaceManager.View.Visuals
                     TextBlock title = new TextBlock();
                     ce.caption = title;
 
-
-                    if (ce.sfa == null)
+                    if (ce.settingsFormatAttribute == null)
                     {
-
-                        title.Text = ce.tpa.Caption;
+                        title.Text = ce.taskPaneAttribute.Caption;
                         title.TextWrapping = TextWrapping.Wrap;
 
                         if (ce.element is CheckBox || ce.element is Button)
@@ -400,7 +427,6 @@ namespace WorkspaceManager.View.Visuals
                             parameterPanel.Children.Add(ce.element);
                             parameterPanel.Children.Add(l);
                         }
-
                         else
                         {
                             parameterPanel.Children.Add(title);
@@ -409,7 +435,6 @@ namespace WorkspaceManager.View.Visuals
                                 ComboBox cb = ce.element as ComboBox;
                                 cb.MaxWidth = getComboBoxMaxSize(cb);
                                 parameterPanel.Children.Add(cb);
-
                             }
                             else
                             {
@@ -419,24 +444,24 @@ namespace WorkspaceManager.View.Visuals
                     }
                     else
                     {
-                        if (ce.sfa.VerticalGroup != null)
+                        if (ce.settingsFormatAttribute.VerticalGroup != null)
                         {
-                            bool groupExists = grouplist.Contains(ce.sfa.VerticalGroup);
-                            Grid controlGrid = groupExists ? gridlist[grouplist.IndexOf(ce.sfa.VerticalGroup)] : new Grid();
+                            bool groupExists = grouplist.Contains(ce.settingsFormatAttribute.VerticalGroup);
+                            Grid controlGrid = groupExists ? gridlist[grouplist.IndexOf(ce.settingsFormatAttribute.VerticalGroup)] : new Grid();
 
                             ColumnDefinition coldef1 = new ColumnDefinition
                             {
-                                Width = ce.sfa.WidthCol1
+                                Width = ce.settingsFormatAttribute.WidthCol1
                             };
                             controlGrid.ColumnDefinitions.Add(coldef1);
 
                             ColumnDefinition coldef2 = new ColumnDefinition
                             {
-                                Width = ce.sfa.WidthCol2
+                                Width = ce.settingsFormatAttribute.WidthCol2
                             };
                             controlGrid.ColumnDefinitions.Add(coldef2);
 
-                            title.Text = ce.tpa.Caption;
+                            title.Text = ce.taskPaneAttribute.Caption;
                             ce.caption = title;
                             title.HorizontalAlignment = HorizontalAlignment.Center;
                             title.VerticalAlignment = VerticalAlignment.Center;
@@ -461,7 +486,7 @@ namespace WorkspaceManager.View.Visuals
 
                             if (!groupExists)
                             {
-                                grouplist.Add(ce.sfa.VerticalGroup);
+                                grouplist.Add(ce.settingsFormatAttribute.VerticalGroup);
                                 controlGrid.HorizontalAlignment = HorizontalAlignment.Stretch;
 
                                 Label dummy = new Label
@@ -491,9 +516,7 @@ namespace WorkspaceManager.View.Visuals
                                 parameterPanel.Children.Add(noverticalgroupexpander);
                                 parameterPanel.Children.Add(l);
                             }
-
-
-                            title.Text = ce.tpa.Caption;
+                            title.Text = ce.taskPaneAttribute.Caption;
                             ce.caption = title;
                             title.TextWrapping = TextWrapping.Wrap;
 
@@ -535,7 +558,7 @@ namespace WorkspaceManager.View.Visuals
                     testexpander.Margin = new Thickness(0, 15, 0, 0);
                 }
 
-                if (isSideBar)
+                if (_isSideBar)
                 {
                     myStack.Children.Add(testexpander);
                 }
@@ -575,7 +598,7 @@ namespace WorkspaceManager.View.Visuals
                     Source = plugin.Settings
                 };
 
-                bool b = (bcv.Model.GetOutputConnectors().Union(bcv.Model.GetInputConnectors())).Any(x => tpa.PropertyName == x.GetName());
+                bool b = (_componentVisual.Model.GetOutputConnectors().Union(_componentVisual.Model.GetInputConnectors())).Any(x => tpa.PropertyName == x.GetName());
                 switch (tpa.ControlType)
                 {
                     #region TextBox
@@ -600,7 +623,7 @@ namespace WorkspaceManager.View.Visuals
                         }
                         textbox.SetBinding(TextBox.TextProperty, dataBinding);
                         textbox.TextWrapping = TextWrapping.Wrap;
-                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(textbox, tpa, sfa, b, bcv.Model));
+                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(textbox, tpa, sfa, b, _componentVisual.Model));
                         break;
 
                     #endregion TextBox
@@ -623,7 +646,7 @@ namespace WorkspaceManager.View.Visuals
                             intInput.MaxWidth = ft.WidthIncludingTrailingWhitespace + 30;
                             intInput.Width = ft.WidthIncludingTrailingWhitespace + 30;
                             intInput.SetBinding(IntegerUpDown.ValueProperty, dataBinding);
-                            entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(intInput, tpa, sfa, b, bcv.Model));
+                            entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(intInput, tpa, sfa, b, _componentVisual.Model));
                             intInput.IsEnabled = true;
                         }
                         else if (tpa.ValidationType == ValidationType.RangeDouble)
@@ -643,7 +666,7 @@ namespace WorkspaceManager.View.Visuals
                             doubleInput.MaxWidth = ft.WidthIncludingTrailingWhitespace + 30;
                             doubleInput.Width = ft.WidthIncludingTrailingWhitespace + 30;
                             doubleInput.SetBinding(DoubleUpDown.ValueProperty, dataBinding);
-                            entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(doubleInput, tpa, sfa, b, bcv.Model));
+                            entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(doubleInput, tpa, sfa, b, _componentVisual.Model));
                             doubleInput.IsEnabled = true;
                         }
                         break;
@@ -680,7 +703,7 @@ namespace WorkspaceManager.View.Visuals
                         comboBox.ToolTip = tpa.ToolTip;
                         comboBox.SetBinding(ComboBox.SelectedIndexProperty, dataBinding);
                         //controlList.Add(new ControlEntry(comboBox, tpa, sfa));
-                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(comboBox, tpa, sfa, b, bcv.Model));
+                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(comboBox, tpa, sfa, b, _componentVisual.Model));
                         break;
 
                     #endregion ComboBox
@@ -695,7 +718,7 @@ namespace WorkspaceManager.View.Visuals
                         comboBox1.ItemsSource = CrypTool.PluginBase.Utils.LanguageStatistics.SupportedLanguages;
                         comboBox1.ToolTip = tpa.ToolTip;
                         comboBox1.SetBinding(ComboBox.SelectedIndexProperty, dataBinding);
-                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(comboBox1, tpa, sfa, b, bcv.Model));
+                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(comboBox1, tpa, sfa, b, _componentVisual.Model));
                         break;
                     #endregion LanguageSelector
 
@@ -742,7 +765,7 @@ namespace WorkspaceManager.View.Visuals
                             list.Add(radio);
                         }
                         dicRadioButtons[plugin.Settings].Add(tpa.PropertyName, list);
-                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(panelRadioButtons, tpa, sfa, b, bcv.Model));
+                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(panelRadioButtons, tpa, sfa, b, _componentVisual.Model));
 
                         break;
                     #endregion RadioButton
@@ -763,7 +786,7 @@ namespace WorkspaceManager.View.Visuals
                         checkBox.ToolTip = tpa.ToolTip;
                         checkBox.MouseEnter += Control_MouseEnter;
                         checkBox.SetBinding(CheckBox.IsCheckedProperty, dataBinding);
-                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(checkBox, tpa, sfa, b, bcv.Model));
+                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(checkBox, tpa, sfa, b, _componentVisual.Model));
 
                         break;
                     #endregion CheckBox
@@ -788,7 +811,7 @@ namespace WorkspaceManager.View.Visuals
                             //bInfo.CaptionGUIElement = comboBoxDyn;
 
                             //controlList.Add(new ControlEntry(comboBoxDyn, tpa, sfa));
-                            entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(comboBoxDyn, tpa, sfa, b, bcv.Model));
+                            entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(comboBoxDyn, tpa, sfa, b, _componentVisual.Model));
                         }
                         break;
                     #endregion DynamicComboBox
@@ -836,7 +859,7 @@ namespace WorkspaceManager.View.Visuals
 
                         btn.Click += FileDialogClick;
                         sp.Children.Add(btn);
-                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(sp, tpa, sfa, b, bcv.Model));
+                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(sp, tpa, sfa, b, _componentVisual.Model));
 
                         break;
                     #endregion FileDialog
@@ -859,7 +882,7 @@ namespace WorkspaceManager.View.Visuals
                         taskPaneButton.Content = contentBlock;
                         taskPaneButton.Click += TaskPaneButton_Click;
 
-                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(taskPaneButton, tpa, sfa, b, bcv.Model));
+                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(taskPaneButton, tpa, sfa, b, _componentVisual.Model));
                         break;
                     #endregion Button
 
@@ -881,7 +904,7 @@ namespace WorkspaceManager.View.Visuals
 
                         slider.MinWidth = 0;
 
-                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(slider, tpa, sfa, b, bcv.Model));
+                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(slider, tpa, sfa, b, _componentVisual.Model));
                         break;
                     #endregion Slider
 
@@ -900,7 +923,7 @@ namespace WorkspaceManager.View.Visuals
                         textBoxReadOnly.MouseEnter += Control_MouseEnter;
                         dataBinding.Mode = BindingMode.OneWay; // read-only strings do not need a setter
                         textBoxReadOnly.SetBinding(TextBox.TextProperty, dataBinding);
-                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(textBoxReadOnly, tpa, sfa, b, bcv.Model));
+                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(textBoxReadOnly, tpa, sfa, b, _componentVisual.Model));
                         break;
                     #endregion TextBoxReadOnly
 
@@ -917,7 +940,7 @@ namespace WorkspaceManager.View.Visuals
                         passwordBox.Password = plugin.Settings.GetType().GetProperty(tpa.PropertyName).GetValue(plugin.Settings, null) as string;
                         //textBoxReadOnly.SetBinding(PasswordBox.property , dataBinding);
                         passwordBox.PasswordChanged += TextBoxHidden_Changed;
-                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(passwordBox, tpa, sfa, b, bcv.Model));
+                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(passwordBox, tpa, sfa, b, _componentVisual.Model));
                         break;
                     #endregion TextBoxHidden
 
@@ -931,7 +954,7 @@ namespace WorkspaceManager.View.Visuals
                         keyTextBox.ToolTip = tpa.ToolTip;
                         keyTextBox.MouseEnter += Control_MouseEnter;
                         keyTextBox.SetBinding(KeyTextBox.KeyTextBox.CurrentKeyProperty, dataBinding);
-                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(keyTextBox, tpa, sfa, b, bcv.Model));
+                        entgrou.AddNewEntry(tpa.GroupName, new ControlEntry(keyTextBox, tpa, sfa, b, _componentVisual.Model));
                         break;
                         #endregion KeyTextBox
 
@@ -942,53 +965,33 @@ namespace WorkspaceManager.View.Visuals
             return entgrou;
         }
 
-        private void checkIfPlugged(Model.PlugState state, Model.ConnectorModel model)
+        private void UpdateSettingVisibilityIfPlugged(Model.PlugState state, Model.ConnectorModel model)
         {
-            connectorSettingElements.TryGetValue(model.GetName(), out ControlEntry ele);
+            connectorSettingElements.TryGetValue(model.GetName(), out ControlEntry controlEntry);
+            if (controlEntry == null)
+            {
+                return;
+            }
             if (state == Model.PlugState.Plugged)
             {
-                if (ele != null)
-                {
-                    ele.Visibility = System.Windows.Visibility.Collapsed;
-
-                    foreach (Expander expander in myStack.Children)
-                    {
-                        ((expander.Content as Border).Child as ParameterPanel).setMaxSizes(false);
-                    }
-                    foreach (Expander expander in myWrap.Children)
-                    {
-                        ((expander.Content as Border).Child as ParameterPanel).setMaxSizes(false);
-                    }
-                }
+                controlEntry.Visibility = Visibility.Collapsed;                
             }
             if (state == Model.PlugState.Unplugged && model.GetInputConnections().Count == 0)
             {
-                if (ele != null)
-                {
-                    ele.Visibility = System.Windows.Visibility.Visible;
-
-                    foreach (Expander expander in myStack.Children)
-                    {
-                        ((expander.Content as Border).Child as ParameterPanel).setMaxSizes(true);
-                    }
-                    foreach (Expander expander in myWrap.Children)
-                    {
-                        ((expander.Content as Border).Child as ParameterPanel).setMaxSizes(true);
-                    }
-                }
+                controlEntry.Visibility = Visibility.Visible;               
             }
         }
 
         private void Model_ConnectorPlugstateChanged(object sender, Model.ConnectorPlugstateChangedEventArgs e)
         {
-            checkIfPlugged(e.PlugState, e.ConnectorModel);
+            UpdateSettingVisibilityIfPlugged(e.PlugState, e.ConnectorModel);
         }
 
         private void addToConnectorSettingsHide(ControlEntry element)
         {
             if (element.hide)
             {
-                connectorSettingElements.Add(element.tpa.PropertyName, element);
+                connectorSettingElements.Add(element.taskPaneAttribute.PropertyName, element);
             }
         }
 
@@ -1236,8 +1239,8 @@ namespace WorkspaceManager.View.Visuals
     public class ControlEntry
     {
         public UIElement element;
-        public TaskPaneAttribute tpa;
-        public SettingsFormatAttribute sfa;
+        public TaskPaneAttribute taskPaneAttribute;
+        public SettingsFormatAttribute settingsFormatAttribute;
         public bool hide;
 
         private FrameworkElement captionx;
@@ -1270,16 +1273,16 @@ namespace WorkspaceManager.View.Visuals
         public ControlEntry(UIElement element, TaskPaneAttribute tpa, SettingsFormatAttribute sfa)
         {
             this.element = element;
-            this.sfa = sfa;
-            this.tpa = tpa;
+            this.settingsFormatAttribute = sfa;
+            this.taskPaneAttribute = tpa;
 
         }
 
         public ControlEntry(UIElement element, TaskPaneAttribute tpa, SettingsFormatAttribute sfa, bool hide, Model.PluginModel model)
         {
             this.element = element;
-            this.sfa = sfa;
-            this.tpa = tpa;
+            this.settingsFormatAttribute = sfa;
+            this.taskPaneAttribute = tpa;
             this.hide = hide;
             if (hide)
             {
@@ -1367,13 +1370,11 @@ namespace WorkspaceManager.View.Visuals
                 }
                 else if (child is Grid)
                 {
-
                     if (maxGrid.Width < (child as Grid).DesiredSize.Width)
                     {
                         maxGrid = child as Grid;
 
                     }
-
                 }
                 else if (child is CheckBox)
                 {
@@ -1397,7 +1398,6 @@ namespace WorkspaceManager.View.Visuals
                         }
                     }
                 }
-
                 else if (child is IntegerUpDown)
                 {
                     IntegerUpDown intUD = child as IntegerUpDown;
@@ -1439,7 +1439,6 @@ namespace WorkspaceManager.View.Visuals
                 maxSizeContent = maxSizeCB - maxSizeCaption - 1;
             }
 
-
             if (maxSize < maxGrid.DesiredSize.Width)
             {
                 maxSize = maxGrid.DesiredSize.Width;
@@ -1457,15 +1456,13 @@ namespace WorkspaceManager.View.Visuals
                     dummyTextBox.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                     dummyTextBox.Arrange(new Rect(dummyTextBox.DesiredSize));
                 }
-
-                if (child is ComboBox)
+                else if (child is ComboBox)
                 {
                     ComboBox dummyTextBox = child as ComboBox;
                     dummyTextBox.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                     dummyTextBox.Arrange(new Rect(dummyTextBox.DesiredSize));
                 }
-
-                if (child is TextBox)
+                else if (child is TextBox)
                 {
                     TextBox dummyTextBox = child as TextBox;
                     dummyTextBox.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -1473,8 +1470,7 @@ namespace WorkspaceManager.View.Visuals
                     dummyTextBox.MaxWidth = maxSizeContent;
 
                 }
-
-                if (child is PasswordBox)
+                else if (child is PasswordBox)
                 {
                     PasswordBox dummyTextBox = child as PasswordBox;
                     dummyTextBox.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -1482,8 +1478,7 @@ namespace WorkspaceManager.View.Visuals
                     dummyTextBox.MaxWidth = maxSizeContent;
 
                 }
-
-                if (child is KeyTextBox.KeyTextBox)
+                else if (child is KeyTextBox.KeyTextBox)
                 {
                     KeyTextBox.KeyTextBox dummyKeyTextBox = child as KeyTextBox.KeyTextBox;
                     dummyKeyTextBox.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -1491,8 +1486,7 @@ namespace WorkspaceManager.View.Visuals
                     dummyKeyTextBox.MaxWidth = maxSizeContent;
 
                 }
-
-                if (child is TextBlock)
+                else if (child is TextBlock)
                 {
                     TextBlock dummyTextBox = child as TextBlock;
                     dummyTextBox.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -1500,8 +1494,7 @@ namespace WorkspaceManager.View.Visuals
                     dummyTextBox.MaxWidth = maxSizeCaption;
 
                 }
-
-                if (child is Button)
+                else if (child is Button)
                 {
                     Button dummyTextBox = child as Button;
                     dummyTextBox.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -1509,8 +1502,7 @@ namespace WorkspaceManager.View.Visuals
                     dummyTextBox.MaxWidth = maxSize;
 
                 }
-
-                if (child is CheckBox)
+                else if (child is CheckBox)
                 {
                     CheckBox dummyTextBox = child as CheckBox;
                     dummyTextBox.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -1518,8 +1510,7 @@ namespace WorkspaceManager.View.Visuals
                     dummyTextBox.MaxWidth = maxSize;
 
                 }
-
-                if (child is StackPanel)
+                else if (child is StackPanel)
                 {
                     StackPanel dummyTextBox = child as StackPanel;
                     dummyTextBox.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -1533,14 +1524,12 @@ namespace WorkspaceManager.View.Visuals
                         dummyTextBox.MaxWidth = dummyTextBox.DesiredSize.Width;
                     }
                 }
-
-                if (child is Slider)
+                else if (child is Slider)
                 {
                     Slider dummyTextBox = child as Slider;
                     dummyTextBox.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                     dummyTextBox.Arrange(new Rect(dummyTextBox.DesiredSize));
                     dummyTextBox.MaxWidth = maxSizeContent;
-
                 }
             }
         }
@@ -1655,17 +1644,16 @@ namespace WorkspaceManager.View.Visuals
     {
         public int Compare(ControlEntry x, ControlEntry y)
         {
-            if (x.tpa.Order != y.tpa.Order)
+            if (x.taskPaneAttribute.Order != y.taskPaneAttribute.Order)
             {
-                return x.tpa.Order.CompareTo(y.tpa.Order);
+                return x.taskPaneAttribute.Order.CompareTo(y.taskPaneAttribute.Order);
             }
             else
             {
-                return x.tpa.Caption.CompareTo(y.tpa.Caption);
+                return x.taskPaneAttribute.Caption.CompareTo(y.taskPaneAttribute.Caption);
             }
         }
     }
-
 
     public class RadioBoolToIntConverter : IValueConverter
     {
@@ -1697,7 +1685,6 @@ namespace WorkspaceManager.View.Visuals
                 {
                     return parameter;
                 }
-
             }
             else
             {
@@ -1739,7 +1726,6 @@ namespace WorkspaceManager.View.Visuals
 
     public class EnumBooleanConverter : IValueConverter
     {
-        #region IValueConverter Members
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             string parameterString = parameter as string;
@@ -1768,9 +1754,6 @@ namespace WorkspaceManager.View.Visuals
 
             return Enum.Parse(targetType, parameterString);
         }
-        #endregion
     }
-
-
 }
 
