@@ -241,8 +241,6 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 string mode = action == 0 ? "encryption" : "decryption";
                 long inbytes, outbytes;
 
-                //GuiLogMessage("Starting " + mode + " [Keysize=" + p_alg.KeySize.ToString() + " Bits, Blocksize=" + p_alg.BlockSize.ToString() + " Bits]", NotificationLevel.Info);
-
                 DateTime startTime = DateTime.Now;
 
                 // special handling of OFB mode, as it's not available for AES in .Net
@@ -313,9 +311,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 else
                 {
                     // append 1-0 padding (special handling, as it's not present in System.Security.Cryptography.PaddingMode)
-                    if (action == 0 && settings.Padding == 5)
+                    if (action == 0 )
                     {
-                        inputdata = BlockCipherHelper.AppendPadding(InputStream, BlockCipherHelper.PaddingType.OneZeros, p_alg.BlockSize / 8);
+                        inputdata = BlockCipherHelper.AppendPadding(InputStream, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
                     }
 
                     CStreamReader reader = inputdata.CreateReader();
@@ -328,9 +326,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     while ((bytesRead = p_crypto_stream.Read(buffer, 0, buffer.Length)) > 0 && !stop)
                     {
                         // remove 1-0 padding (special handling, as it's not present in System.Security.Cryptography.PaddingMode)
-                        if (action == 1 && settings.Padding == 5 && reader.Position == reader.Length)
+                        if (action == 1 && reader.Position == reader.Length)
                         {
-                            bytesRead = BlockCipherHelper.StripPadding(buffer, bytesRead, BlockCipherHelper.PaddingType.OneZeros, buffer.Length);
+                            bytesRead = BlockCipherHelper.StripPadding(buffer, bytesRead, settings.padmap[settings.Padding], buffer.Length);
                         }
 
                         outputStreamWriter.Write(buffer, 0, bytesRead);
@@ -355,8 +353,6 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 if (!stop)
                 {
                     mode = action == 0 ? "Encryption" : "Decryption";
-                    //GuiLogMessage(mode + " complete! (in: " + inbytes + " bytes, out: " + outbytes + " bytes)", NotificationLevel.Info);
-                    //GuiLogMessage("Time used: " + duration.ToString(), NotificationLevel.Debug);
                     outputStreamWriter.Close();
                     OnPropertyChanged("OutputStream");
                 }
