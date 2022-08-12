@@ -621,7 +621,7 @@ namespace WorkspaceManager
         /// <summary>
         /// Can the ExecutionEngine be started?
         /// </summary>
-        public bool CanExecute => ((EditorVisual)Presentation).IsLoading == true || executing ? false : true;
+        public bool CanExecute => !executing;
 
         /// <summary>
         /// Can the ExecutionEngine be stopped?
