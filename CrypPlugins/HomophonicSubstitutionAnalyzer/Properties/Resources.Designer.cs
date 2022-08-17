@@ -19,7 +19,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -331,6 +331,24 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Homophonicity ähnelt.
+        /// </summary>
+        internal static string HomophonicityCaption {
+            get {
+                return ResourceManager.GetString("HomophonicityCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die What homophonicity number should be used in the generated keys? ähnelt.
+        /// </summary>
+        internal static string HomophonicityTooltip {
+            get {
+                return ResourceManager.GetString("HomophonicityTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Keep linebreaks ähnelt.
         /// </summary>
         internal static string KeepLinebreaksCaption {
@@ -376,11 +394,47 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Key letter distribution ähnelt.
+        /// </summary>
+        internal static string KeyLetterDistributionGroup {
+            get {
+                return ResourceManager.GetString("KeyLetterDistributionGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type of key letter distribution ähnelt.
+        /// </summary>
+        internal static string KeyLetterDistributionTypeCaption {
+            get {
+                return ResourceManager.GetString("KeyLetterDistributionTypeCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die How should letters in the key be distributed? ähnelt.
+        /// </summary>
+        internal static string KeyLetterDistributionTypeTooltip {
+            get {
+                return ResourceManager.GetString("KeyLetterDistributionTypeTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die New key candidates with higher scores are shown here ähnelt.
         /// </summary>
         internal static string KeyTooltip {
             get {
                 return ResourceManager.GetString("KeyTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Language-based ähnelt.
+        /// </summary>
+        internal static string LanguageBased {
+            get {
+                return ResourceManager.GetString("LanguageBased", resourceCulture);
             }
         }
         
@@ -660,6 +714,15 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer.Properties {
         internal static string TopTenLabel {
             get {
                 return ResourceManager.GetString("TopTenLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Uniform ähnelt.
+        /// </summary>
+        internal static string Uniform {
+            get {
+                return ResourceManager.GetString("Uniform", resourceCulture);
             }
         }
         

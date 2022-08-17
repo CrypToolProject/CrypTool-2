@@ -342,4 +342,25 @@
   <data name="KeepLinebreaksTooltip" xml:space="preserve">
     <value>If activated, the analyzer keeps the original linebreaks of the given text</value>
   </data>
+  <data name="HomophonicityCaption" xml:space="preserve">
+    <value>Homophonicity</value>
+  </data>
+  <data name="HomophonicityTooltip" xml:space="preserve">
+    <value>What homophonicity number should be used in the generated keys?</value>
+  </data>
+  <data name="KeyLetterDistributionGroup" xml:space="preserve">
+    <value>Key letter distribution</value>
+  </data>
+  <data name="KeyLetterDistributionTypeCaption" xml:space="preserve">
+    <value>Type of key letter distribution</value>
+  </data>
+  <data name="KeyLetterDistributionTypeTooltip" xml:space="preserve">
+    <value>How should letters in the key be distributed?</value>
+  </data>
+  <data name="LanguageBased" xml:space="preserve">
+    <value>Language-based</value>
+  </data>
+  <data name="Uniform" xml:space="preserve">
+    <value>Uniform</value>
+  </data>
 </root>

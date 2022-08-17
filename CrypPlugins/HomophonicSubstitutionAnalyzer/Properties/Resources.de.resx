@@ -342,4 +342,25 @@
   <data name="KeepLinebreaksTooltip" xml:space="preserve">
     <value>Wenn aktiviert, behält die Analyse die ursprünglichen Zeilenumbrüche des angegebenen Textes bei</value>
   </data>
+  <data name="HomophonicityCaption" xml:space="preserve">
+    <value>Homophonie</value>
+  </data>
+  <data name="HomophonicityTooltip" xml:space="preserve">
+    <value>Welche Homophoniezahl sollte in den generierten Schlüsseln verwendet werden?</value>
+  </data>
+  <data name="KeyLetterDistributionGroup" xml:space="preserve">
+    <value>Verteilung der Schlüsselbuchstaben</value>
+  </data>
+  <data name="KeyLetterDistributionTypeCaption" xml:space="preserve">
+    <value>Art der Verteilung von Schlüsselbuchstaben</value>
+  </data>
+  <data name="KeyLetterDistributionTypeTooltip" xml:space="preserve">
+    <value>Wie sollen die Buchstaben des Schlüssels verteilt werden?</value>
+  </data>
+  <data name="LanguageBased" xml:space="preserve">
+    <value>Sprachbasiert</value>
+  </data>
+  <data name="Uniform" xml:space="preserve">
+    <value>Gleichverteilt</value>
+  </data>
 </root>

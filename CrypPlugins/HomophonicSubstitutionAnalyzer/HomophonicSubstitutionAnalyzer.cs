@@ -286,31 +286,44 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             string alphabet = LanguageStatistics.Alphabets[languageCode];
 
             double[] unigrams;
-            if (LanguageStatistics.Unigrams.ContainsKey(languageCode))
+
+            if (_settings.KeyLetterDistributionType == KeyLetterDistributionType.LanguageBasted)
             {
-                unigrams = LanguageStatistics.Unigrams[languageCode];
-            }
-            else
-            {
-                //if we have no unigram stats, we just equally distribute the letters 
-                unigrams = new double[alphabet.Length];
+                if (LanguageStatistics.Unigrams.ContainsKey(languageCode))
+                {
+                    unigrams = LanguageStatistics.Unigrams[languageCode];
+                }
+                else
+                {
+                    //if we have no unigram stats, we just equally distribute the letters 
+                    unigrams = new double[alphabet.Length];
+                    for (int i = 0; i < alphabet.Length; i++)
+                    {
+                        unigrams[i] = 1.0 / alphabet.Length;
+                    }
+                }
                 for (int i = 0; i < alphabet.Length; i++)
                 {
-                    unigrams[i] = 1.0 / alphabet.Length;
+                    int minvalue = 1;
+                    int maxvalue = 2;
+                    if (i < unigrams.Length)
+                    {
+                        minvalue = (int)Math.Ceiling(unigrams[i] * alphabet.Length);
+                        maxvalue = minvalue * 2;
+                    }
+                    _presentation.AnalyzerConfiguration.KeyLetterLimits.Add(new LetterLimits() { Letter = i, MinValue = minvalue, MaxValue = maxvalue });
+                }
+            }
+            else //here we just have uniformly distributed min and max values equal to set homophonicity
+            {
+                for (int i = 0; i < alphabet.Length; i++)
+                {
+                    int minvalue = _settings.Homophononicity;
+                    int maxvalue = _settings.Homophononicity;                    
+                    _presentation.AnalyzerConfiguration.KeyLetterLimits.Add(new LetterLimits() { Letter = i, MinValue = minvalue, MaxValue = maxvalue });
                 }
             }
 
-            for (int i = 0; i < alphabet.Length; i++)
-            {
-                int minvalue = 1;
-                int maxvalue = 2;
-                if (i < unigrams.Length)
-                {
-                    minvalue = (int)Math.Ceiling(unigrams[i] * alphabet.Length);
-                    maxvalue = minvalue * 2;
-                }
-                _presentation.AnalyzerConfiguration.KeyLetterLimits.Add(new LetterLimits() { Letter = i, MinValue = minvalue, MaxValue = maxvalue });
-            }
             if (_settings.UseSpaces)
             {
                 _presentation.AnalyzerConfiguration.KeyLetterLimits.Add(new LetterLimits() { Letter = Tools.MapIntoNumberSpace(" ", _presentation.AnalyzerConfiguration.PlaintextAlphabet)[0], MinValue = 2, MaxValue = 3 });   //SPACE
@@ -425,7 +438,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         private void SettingsOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (_presentation.AnalyzerConfiguration != null &&
-               (e.PropertyName.Equals("Language") || e.PropertyName.Equals("UseSpaces") || e.PropertyName.Equals("UseNulls")))
+               (e.PropertyName.Equals("Language") || 
+               e.PropertyName.Equals("UseSpaces") || 
+               e.PropertyName.Equals("UseNulls") ||
+               e.PropertyName.Equals("KeyLetterDistributionType") ||
+               e.PropertyName.Equals("Homophononicity")))
             {
                 _presentation.AnalyzerConfiguration.PlaintextAlphabet = LanguageStatistics.Alphabet(LanguageStatistics.LanguageCode(_settings.Language), _settings.UseSpaces);
                 if (_settings.UseNulls)

@@ -17,6 +17,7 @@
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
 {
@@ -52,6 +53,12 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         FullAutomatic
     }
 
+    public enum KeyLetterDistributionType
+    {
+        Uniform,
+        LanguageBasted
+    }
+
     /// <summary>
     /// Settings class for Homophonic Substitution Analyzer
     /// </summary>
@@ -63,6 +70,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         private bool _useSpaces;
         private CiphertextFormat _ciphertextFormat = CiphertextFormat.SingleLetters;
         private Separator _separator = Separator.Space;
+        private KeyLetterDistributionType _keyLetterDistributionType = KeyLetterDistributionType.LanguageBasted;
+        private int _homophonicity = 2;
         private int _wordCountToFind = 5;
         private int _minWordLength = 8;
         private int _maxWordLength = 10;
@@ -73,7 +82,13 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         private bool _useNulls = false;
         private bool _keepLinebreaks = false;
         private string _letterLimits = string.Empty;
+
         #endregion
+
+        /// <summary>
+        /// This event is needed in order to render settings elements visible/invisible
+        /// </summary>
+        public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
 
         #region TaskPane Settings      
 
@@ -140,49 +155,67 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             set => _separator = value;
         }
 
-        [TaskPane("WordCountToFindCaption", "WordCountToFindTooltip", "WordLockerGroup", 6, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
+        [TaskPane("KeyLetterDistributionTypeCaption", "KeyLetterDistributionTypeTooltip", "KeyLetterDistributionGroup", 6, false, ControlType.ComboBox, new[] { "Uniform", "LanguageBased" })]
+        public KeyLetterDistributionType KeyLetterDistributionType
+        {
+            get => _keyLetterDistributionType;
+            set
+            {
+                _keyLetterDistributionType = value;
+                UpdateSettingsVisibilities();
+            }
+        }
+
+        [TaskPane("HomophonicityCaption", "HomophonicityTooltip", "KeyLetterDistributionGroup", 7, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100 )]
+        public int Homophononicity
+        {
+            get => _homophonicity;
+            set => _homophonicity = value;
+        }
+
+        [TaskPane("WordCountToFindCaption", "WordCountToFindTooltip", "WordLockerGroup", 8, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
         public int WordCountToFind
         {
             get => _wordCountToFind;
             set => _wordCountToFind = value;
         }
 
-        [TaskPane("MinWordLengthCaption", "MinWordLengthTooltip", "WordLockerGroup", 7, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
+        [TaskPane("MinWordLengthCaption", "MinWordLengthTooltip", "WordLockerGroup", 9, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
         public int MinWordLength
         {
             get => _minWordLength;
             set => _minWordLength = value;
         }
 
-        [TaskPane("MaxWordLengthCaption", "MaxWordLengthTooltip", "WordLockerGroup", 8, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
+        [TaskPane("MaxWordLengthCaption", "MaxWordLengthTooltip", "WordLockerGroup", 10, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
         public int MaxWordLength
         {
             get => _maxWordLength;
             set => _maxWordLength = value;
         }
 
-        [TaskPane("AnalysisModeCaption", "AnalaysisModeTooltip", "AlgorithmSettingsGroup", 9, false, ControlType.ComboBox, new string[] { "SemiAutomatic", "FullAutomatic" })]
+        [TaskPane("AnalysisModeCaption", "AnalaysisModeTooltip", "AlgorithmSettingsGroup", 11, false, ControlType.ComboBox, new string[] { "SemiAutomatic", "FullAutomatic" })]
         public AnalysisMode AnalysisMode
         {
             get => _analysisMode;
             set => _analysisMode = value;
         }
 
-        [TaskPane("CyclesCaption", "CyclesTooltip", "AlgorithmSettingsGroup", 10, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
+        [TaskPane("CyclesCaption", "CyclesTooltip", "AlgorithmSettingsGroup", 12, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int Cycles
         {
             get => _cycles;
             set => _cycles = value;
         }
 
-        [TaskPane("RestartsCaption", "RestartsTooltip", "AlgorithmSettingsGroup", 11, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
+        [TaskPane("RestartsCaption", "RestartsTooltip", "AlgorithmSettingsGroup", 13, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int Restarts
         {
             get => _restarts;
             set => _restarts = value;
         }
 
-        [TaskPane("FixedTemperatureCaption", "FixedTemperatureTooltip", "AlgorithmSettingsGroup", 13, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
+        [TaskPane("FixedTemperatureCaption", "FixedTemperatureTooltip", "AlgorithmSettingsGroup", 14, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int Temperature
         {
             get => _temperature;
@@ -215,9 +248,31 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(name));
         }
 
+        private void ShowSettingsElement(string element)
+        {
+            TaskPaneAttributeChanged?.Invoke(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer(element, Visibility.Visible)));
+        }
+
+        private void HideSettingsElement(string element)
+        {
+            TaskPaneAttributeChanged?.Invoke(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer(element, Visibility.Collapsed)));
+        }
+
+        private void UpdateSettingsVisibilities()
+        {
+            if (_keyLetterDistributionType == KeyLetterDistributionType.Uniform)
+            {
+                ShowSettingsElement("Homophononicity");
+            }
+            else
+            {
+                HideSettingsElement("Homophononicity");
+            }
+        }
+
         public void Initialize()
         {
-
+            UpdateSettingsVisibilities();
         }
     }
 }
