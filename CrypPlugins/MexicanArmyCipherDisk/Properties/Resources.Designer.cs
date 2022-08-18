@@ -70,7 +70,7 @@ namespace CrypTool.MexicanArmyCipherDisk.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Select the Algorithm action ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Select the component&apos;s action ähnelt.
         /// </summary>
         internal static string ActionTooltip {
             get {
@@ -133,7 +133,7 @@ namespace CrypTool.MexicanArmyCipherDisk.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Invalid Key given. Expect 4 elements but only got {0} ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invalid key given. Expect 4 elements but only got {0} ähnelt.
         /// </summary>
         internal static string InvalidKeyGiven {
             get {
@@ -160,7 +160,7 @@ namespace CrypTool.MexicanArmyCipherDisk.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Output contains Source Case ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Output contains source case ähnelt.
         /// </summary>
         internal static string MemorizeCaseCaption {
             get {

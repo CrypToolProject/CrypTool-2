@@ -121,7 +121,7 @@
     <value>Action</value>
   </data>
   <data name="ActionTooltip" xml:space="preserve">
-    <value>Select the Algorithm action</value>
+    <value>Select the component's action</value>
   </data>
   <data name="Decrypt" xml:space="preserve">
     <value>Decrypt</value>
@@ -142,7 +142,7 @@
     <value>Text input</value>
   </data>
   <data name="InvalidKeyGiven" xml:space="preserve">
-    <value>Invalid Key given. Expect 4 elements but only got {0}</value>
+    <value>Invalid key given. Expect 4 elements but only got {0}</value>
   </data>
   <data name="KeyCaption" xml:space="preserve">
     <value>Key</value>
@@ -151,7 +151,7 @@
     <value>Key settings of the four disks</value>
   </data>
   <data name="MemorizeCaseCaption" xml:space="preserve">
-    <value>Output contains Source Case</value>
+    <value>Output contains source case</value>
   </data>
   <data name="MemorizeCaseTooltip" xml:space="preserve">
     <value>Even the lowercase letters where mapped to uppercase letters (so that an "a" is processed like an "A") the old spelling of the letters remains</value>

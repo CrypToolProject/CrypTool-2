@@ -202,10 +202,14 @@ namespace CrypTool.MexicanArmyCipherDisk
             StringBuilder ciphertextBuilder = new StringBuilder();
             Random random = new Random();
 
+            //step 1: create lookup array for encryption
+
             for (int i = 0; i < offsets.Length; i++)
             {
                 offsets[i] = (key[i] - 1) % 26;
             }
+
+            //step 2: encrypt plaintext
 
             for (int i = 0; i < plaintext.Length; i++)
             {
@@ -220,7 +224,7 @@ namespace CrypTool.MexicanArmyCipherDisk
                             ciphertextBuilder.Append(plaintext[i]);
                             break;
                         case UnknownSymbolHandlingMode.Remove:
-                            //do nothign;
+                            //do nothing;
                             break;
                         case UnknownSymbolHandlingMode.Replace:
                             ciphertextBuilder.Append("?");
@@ -229,6 +233,7 @@ namespace CrypTool.MexicanArmyCipherDisk
                     continue;
                 }
 
+                //disk 3 has 4 null values, so homophone count can be either 3 or 4                
                 int numberOfHomophones = DISKS[3, (letter + offsets[3]) % 26] == null ? 3 : 4;
                 int diskid = random.Next(numberOfHomophones);
                 ciphertextBuilder.Append(DISKS[diskid, (letter + offsets[diskid]) % 26]);
