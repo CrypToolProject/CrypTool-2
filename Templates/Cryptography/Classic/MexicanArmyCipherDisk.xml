@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: MexicanArmyCipherDisk.xml-->
+  <!--Last edited: 2022.08.18-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Mexican Army Cipher Disk</title>
+  <summary lang="en">This template shows how the<i>Mexican Army Cipher Disk</i> encryption tool of the Mexican army can be used to encrypt and decrypt text.</summary>
+  <description lang="en">With this template we illustrate the encryption of a plaintext by means of a <b>Mexican Army Cipher Disk</b>. The device consists of four rotable disks, which contain digits for encryption. The cipher is a (weak) homophonic substitution cipher.</description>
+  <keywords>Mexican, cipher, disk, homophonic, substitution</keywords>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$plaintext$" value = "Hello world! This is a test of the Mexican Army Cipher Disk."/>
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$Decrypted plaintext$" value="Decrypted plaintext" />
+    <replacement key="$memo$" value="The &quot;Mexican Army Cipher Disk&quot; is an encryption tool (see hand-made disk in the shown image of the right side of this workspace) used by the Mexican army at the beginning of the 20th century. It is a homophonic substitution cipher.\line
+\line
+The tool consists of five discs, where the outer disk contains the plaintext alphabet and the four inner disks contain numbers and can be rotatet:\line
+- The first disk contains numbers from 01 to 26.\line
+- The second disk contains numbers from 27 to 52.\line
+- The third disk contains numbers from 53 to 78.\line
+- And the fourth most inner disk contains numbers from 79 to 00.\line
+\line
+The key are all rotations of the disks. Usually, the numbers below the letter &quot;A&quot; are given, e.g. 12,42,69,00 as shown in this template.\line
+\line
+The cipher has a small keyspace size of only 26^4 = 456,976 keys (these are all possible rotation combinations of all four disks)" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <title lang="de">Mexican Army Cipher Disk</title>
+  <summary lang="de">Diese Vorlage zeigt, wie das<i>Mexican Army Cipher Disk</i>-Verschlüsselungswerkzeug der mexikanischen Armee zum Ver- und Entschlüsseln von Text verwendet werden kann.</summary>
+  <description lang="de">Mit dieser Vorlage veranschaulichen wir die Verschlüsselung eines Klartextes mit Hilfe einer <b>Mexican Army Cipher Disk</b>. Das Gerät besteht aus vier drehbaren Scheiben, die Ziffern zur Verschlüsselung enthalten. Die Chiffre ist eine (schwache) homophone Substitutions-Chiffre.</description>
+  <keywords>Mexikanische, chiffre, disk, homophone, substitution</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$plaintext$" value = "Hallo Welt! Dies ist ein Test der Mexican Army Cipher Disk."/>
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$memo$" value="Die &quot;Mexican Army Cipher Disk&quot; ist ein Verschlüsselungwerkzeug (siehe handgefertigte Scheibe in der Abbildung auf der rechten Seite dieses Arbeitsbereichs), das von der mexikanischen Armee zu Beginn des 20. Jahrhunderts verwendet wurde. Es handelt sich um eine homophone Substitutions-Chiffre.\line
+\line
+Das Werkzeug besteht aus fünf Scheiben, wobei die äußere Scheibe das Klartextalphabet enthält und die vier inneren Scheiben Zahlen enthalten und gedreht werden können:\line
+- Die erste Scheibe enthält Zahlen von 01 bis 26.\line
+- Die zweite Scheibe enthält Zahlen von 27 bis 52.\line
+- Die dritte Scheibe enthält Zahlen von 53 bis 78.\line
+- Und die vierte, innerste Scheibe enthält Zahlen von 79 bis 00.\line
+\line
+Der Schlüssel sind alle Drehungen der Scheiben. Normalerweise werden die Zahlen unter dem Buchstaben &quot;A&quot; angegeben, z.B. 12,42,69,00 wie in dieser Vorlage gezeigt.\line
+\line
+Die Chiffre hat eine kleine Schlüsselraumgröße von nur 26^4 = 456.976 Schlüsseln (dies sind alle möglichen Drehkombinationen aller vier Scheiben)" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="MexicanArmyCipherDisk.png" />
+  <relevantPlugins>
+    <plugin name="MexicanArmyCipherDisk" />
+  </relevantPlugins>
+</sample>
