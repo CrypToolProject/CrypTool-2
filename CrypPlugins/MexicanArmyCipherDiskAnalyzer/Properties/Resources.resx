@@ -120,6 +120,12 @@
   <data name="Bigrams" xml:space="preserve">
     <value>Bigramme</value>
   </data>
+  <data name="CiphertextCaption" xml:space="preserve">
+    <value>Ciphertext</value>
+  </data>
+  <data name="CiphertextTooltip" xml:space="preserve">
+    <value>The ciphertext that will be cryptanalyzed</value>
+  </data>
   <data name="Copy_all" xml:space="preserve">
     <value>Copy all lines</value>
   </data>

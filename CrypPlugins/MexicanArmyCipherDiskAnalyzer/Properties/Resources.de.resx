@@ -213,4 +213,10 @@
   <data name="ValueHeader" xml:space="preserve">
     <value>Wert</value>
   </data>
+  <data name="CiphertextCaption" xml:space="preserve">
+    <value>Geheimtext</value>
+  </data>
+  <data name="CiphertextTooltip" xml:space="preserve">
+    <value>Der zu analysierende Geheimtext</value>
+  </data>
 </root>

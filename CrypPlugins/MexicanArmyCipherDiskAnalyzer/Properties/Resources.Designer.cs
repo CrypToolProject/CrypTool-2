@@ -70,6 +70,24 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ciphertext ähnelt.
+        /// </summary>
+        internal static string CiphertextCaption {
+            get {
+                return ResourceManager.GetString("CiphertextCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The ciphertext that will be cryptanalyzed ähnelt.
+        /// </summary>
+        internal static string CiphertextTooltip {
+            get {
+                return ResourceManager.GetString("CiphertextTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Copy all lines ähnelt.
         /// </summary>
         internal static string Copy_all {

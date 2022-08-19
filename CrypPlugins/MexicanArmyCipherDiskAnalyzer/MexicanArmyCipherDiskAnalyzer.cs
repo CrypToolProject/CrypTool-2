@@ -74,7 +74,7 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer
             set;
         }
 
-        [PropertyInfo(Direction.OutputData, "KeyCaption", "Key", false)]
+        [PropertyInfo(Direction.OutputData, "KeyCaption", "KeyTooltip", false)]
         public string Key
         {
             get;
