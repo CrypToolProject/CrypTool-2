@@ -8,7 +8,7 @@
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Mexican Army Cipher Disk</title>
-  <summary lang="en">This template shows how the<i>Mexican Army Cipher Disk</i> encryption tool of the Mexican army can be used to encrypt and decrypt text.</summary>
+  <summary lang="en">This template shows how the <i>Mexican Army Cipher Disk</i> encryption tool of the Mexican army can be used to encrypt and decrypt text.</summary>
   <description lang="en">With this template we illustrate the encryption of a plaintext by means of a <b>Mexican Army Cipher Disk</b>. The device consists of four rotable disks, which contain digits for encryption. The cipher is a (weak) homophonic substitution cipher.</description>
   <keywords>Mexican, cipher, disk, homophonic, substitution</keywords>
   <replacements lang="en">
@@ -33,7 +33,7 @@ The cipher has a small keyspace size of only 26^4 = 456,976 keys (these are all 
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <title lang="de">Mexican Army Cipher Disk</title>
-  <summary lang="de">Diese Vorlage zeigt, wie das<i>Mexican Army Cipher Disk</i>-Verschlüsselungswerkzeug der mexikanischen Armee zum Ver- und Entschlüsseln von Text verwendet werden kann.</summary>
+  <summary lang="de">Diese Vorlage zeigt, wie das <i>Mexican Army Cipher Disk</i>-Verschlüsselungswerkzeug der mexikanischen Armee zum Ver- und Entschlüsseln von Text verwendet werden kann.</summary>
   <description lang="de">Mit dieser Vorlage veranschaulichen wir die Verschlüsselung eines Klartextes mit Hilfe einer <b>Mexican Army Cipher Disk</b>. Das Gerät besteht aus vier drehbaren Scheiben, die Ziffern zur Verschlüsselung enthalten. Die Chiffre ist eine (schwache) homophone Substitutions-Chiffre.</description>
   <keywords>Mexikanische, chiffre, disk, homophone, substitution</keywords>
   <replacements lang="de">

@@ -8,7 +8,7 @@
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Brute-force attack on the Mexican Army Cipher Disk</title>
-  <summary lang="en">This template shows how the<i>Mexican Army Cipher Disk</i> encryption tool of the Mexican army can be attacked using brute-force.</summary>
+  <summary lang="en">This template shows how the <i>Mexican Army Cipher Disk</i> encryption tool of the Mexican army can be attacked using brute-force.</summary>
   <description lang="en">With this template we illustrate a brute-force attack on a ciphertext encrypted by the <b>Mexican Army Cipher Disk</b>. The used analyzer searches through all possible rotations of all wheels.</description>
   <keywords>cryptanalysis, Mexican, cipher, disk, homophonic, substitution, brute-force</keywords>
   <replacements lang="en">
@@ -27,7 +27,7 @@ The correct key should at the end of the cryptanalysis be on the first position 
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Brute-Force-Angriff auf die Mexican Army Cipher Disk</title>
-  <summary lang="de">Diese Vorlage zeigt, wie das<i>Mexican Army Cipher Disk</i>-Verschlüsselungswerkzeug der mexikanischen Armee mit Brute-Force angegriffen werden kann.</summary>
+  <summary lang="de">Diese Vorlage zeigt, wie das <i>Mexican Army Cipher Disk</i>-Verschlüsselungswerkzeug der mexikanischen Armee mit Brute-Force angegriffen werden kann.</summary>
   <description lang="de">Mit dieser Vorlage illustrieren wir einen Brute-Force-Angriff auf einen mit der <b>Mexican Army Cipher Disk</b> verschlüsselten Geheimtext. Der verwendete Analysator durchsucht alle möglichen Stellungen aller Scheiben.</description>
   <keywords>Kryptoanalyse, Mexican, cipher, disk, homophonic, substitution</keywords>
   <replacements lang="de">
