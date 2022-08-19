@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: MexicanArmyCipherDiskBruteForce.xml-->
+  <!--Last edited: 2022.08.19-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Brute-force attack on the Mexican Army Cipher Disk</title>
+  <summary lang="en">This template shows how the<i>Mexican Army Cipher Disk</i> encryption tool of the Mexican army can be attacked using brute-force.</summary>
+  <description lang="en">With this template we illustrate a brute-force attack on a ciphertext encrypted by the <b>Mexican Army Cipher Disk</b>. The used analyzer searches through all possible rotations of all wheels.</description>
+  <keywords>cryptanalysis, Mexican, cipher, disk, homophonic, substitution, brute-force</keywords>
+  <replacements lang="en">
+    <replacement key="$Mexican Army Cipher Disk Analyzer$" value="Mexican Army Cipher Disk Analyzer" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$ciphertext$" value = "649794247568534912259003578892293628750350983955298247251634140369010520595805265923"/>
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$memo$" value="The analyzer brute-force searches through all possible key (26*26*26*22 = 386,672) of the &quot;Mexican Army Cipher Disk&quot;.\line
+    \line
+In every step, it changes the rotation of a single wheel, then decrypts the given ciphertext using the current key, and then rates the resulting plaintext using a n-gram cost function.\line
+It further keeps track of the 100 &quot;best&quot; plaintexts with respect to the cost function and shows these in the presentation of the component.\line
+The correct key should at the end of the cryptanalysis be on the first position of the bestlist and output by the analyzer." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Brute-Force-Angriff auf die Mexican Army Cipher Disk</title>
+  <summary lang="de">Diese Vorlage zeigt, wie das<i>Mexican Army Cipher Disk</i>-Verschlüsselungswerkzeug der mexikanischen Armee mit Brute-Force angegriffen werden kann.</summary>
+  <description lang="de">Mit dieser Vorlage illustrieren wir einen Brute-Force-Angriff auf einen mit der <b>Mexican Army Cipher Disk</b> verschlüsselten Geheimtext. Der verwendete Analysator durchsucht alle möglichen Stellungen aller Scheiben.</description>
+  <keywords>Kryptoanalyse, Mexican, cipher, disk, homophonic, substitution</keywords>
+  <replacements lang="de">
+    <replacement key="$Mexican Army Cipher Disk Analyzer$" value="Mexican Army Cipher Disk-Analyse" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$ciphertext$" value = "649794247568534912259003578892293628750350983955298247251634140369010520595805265923"/>
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$memo$" value="Der Analysator durchsucht mittels Brute-Force alle möglichen Schlüssel (26*26*26*22 = 386.672) der &quot;Mexican Army Cipher Disk&quot;.\line
+    \line
+In jedem Schritt wird die Drehung einer einzelnen Scheibe geändert, dann der gegebene Geheimtext mit dem aktuellen Schlüssel entschlüsselt und anschließend der resultierende Klartext mit einer n-gram Kostenfunktion bewertet.\line
+Er merkt sich ferner die 100 &quot;besten&quot; Klartexte in Bezug auf die Kostenfunktion und zeigt diese in der Präsentation der Komponente.\line
+Der richtige Schlüssel sollte am Ende der Kryptoanalyse auf der ersten Position der Bestenliste stehen." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="MexicanArmyCipherDiskBruteForce.png" />
+  <relevantPlugins>
+    <plugin name="MexicanArmyCipherDiskAnalyzer" />
+  </relevantPlugins>
+</sample>
