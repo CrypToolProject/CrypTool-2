@@ -442,7 +442,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                e.PropertyName.Equals("UseSpaces") || 
                e.PropertyName.Equals("UseNulls") ||
                e.PropertyName.Equals("KeyLetterDistributionType") ||
-               e.PropertyName.Equals("Homophononicity")))
+               e.PropertyName.Equals("Homophonicity")))
             {
                 _presentation.AnalyzerConfiguration.PlaintextAlphabet = LanguageStatistics.Alphabet(LanguageStatistics.LanguageCode(_settings.Language), _settings.UseSpaces);
                 if (_settings.UseNulls)
