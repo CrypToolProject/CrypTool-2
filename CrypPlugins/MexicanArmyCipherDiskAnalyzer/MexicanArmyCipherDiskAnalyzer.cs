@@ -142,13 +142,17 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer
 
             _running = true;
 
+            DateTime lastUpdateTime = DateTime.Now;
+
+            int[] key = new int[4];
+
             int count = 0;
             //brute-force test all keys
             for (int disk_offset0 = 1; disk_offset0 < 27; disk_offset0++)
                 for (int disk_offset1 = 27; disk_offset1 < 53; disk_offset1++)
                     for (int disk_offset2 = 53; disk_offset2 < 79; disk_offset2++)
                     {
-                        int[] key = new int[4];
+                        
                         for (int disk_offset3 = 79; disk_offset3 <= 100; disk_offset3++)
                         {
                             //create key
@@ -175,9 +179,14 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer
                             }                            
                         }
                         count += 22;
-                        ProgressChanged(count, 26 * 26 * 26 * 22);
-                        UpdateDisplay(key);
+                        if (DateTime.Now > lastUpdateTime.AddMilliseconds(250))
+                        {
+                            ProgressChanged(count, 26 * 26 * 26 * 22);
+                            UpdateDisplay(key);
+                            lastUpdateTime = DateTime.Now;
+                        }
                     }
+            UpdateDisplay(key);
             ProgressChanged(1, 1);
         }
 
