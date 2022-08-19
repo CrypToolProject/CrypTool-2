@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The &quot;Mexican Army Cipher Disk&quot; is an encryption device used by the Mexican Army at the beginning of the 20th century. It is a homophonic substitution cipher.<newline/>
+    <newline/>
+    The device consists of five discs, where the outer disk contains the plaintext alphabet and the four inner disks contain numbers and can be rotatet:
+    <newline/>
+    - The first disk contains numbers from 01 to 26.<newline/>
+    - The second disk contains numbers from 27 to 52.<newline/>
+    - The third disk contains numbers from 53 to 78.<newline/>
+    - And the fourth most inner disk contains numbers from 79 to 00.<newline/>
+    <newline/>
+    The key are all rotations of the disks. Usually, the numbers below the letter k&quot;Ak&quot; are given, e.g. 12,42,69,00.<newline/>
+    <newline/>
+    The cipher has a small keyspace size of only 26^4 = 456,976 keys (these are all possible rotation combinations of all four disks).<newline/>
+  </introduction>
+  <introduction lang="de-DE">
+     Die &quot;Mexican Army Cipher Disk&quot; ist ein Verschlüsselungswerkzeug, das von der mexikanischen Armee zu Beginn des 20. Jahrhunderts verwendet wurde. Es handelt sich um eine homophone Substitutions-Chiffre.<newline/>
+    <newline/>
+    Die Chiffre besteht aus fünf Scheiben, wobei die äußere Scheibe das Klartextalphabet enthält und die vier inneren Scheiben Zahlen enthalten und gedreht werden können.
+    <newline/>
+    - Die erste Scheibe enthält Zahlen von 01 bis 26.<newline/>
+    - Die zweite Scheibe enthält Zahlen von 27 bis 52.<newline/>
+    - Die dritte Scheibe enthält Zahlen von 53 bis 78.<newline/>
+    - Und die vierte, innerste Scheibe enthält Zahlen von 79 bis 00.<newline/>
+    <newline/>
+    Der Schlüssel sind alle Drehungen der Scheiben. In der Regel werden die Zahlen unter dem Buchstaben k&quot;Ak&quot; angegeben, z.B. 12,42,69,00.<newline/>
+    <newline/>
+    Die Chiffre hat eine kleine Schlüsselraumgröße von nur 26^4 = 456.976 Schlüsseln (das sind alle möglichen Rotationskombinationen aller vier Scheiben).<newline/>
+  </introduction>
+  <usage lang="en">
+  </usage>
+  <usage lang="de-DE">
+  </usage>
+  <presentation lang="en">
+  </presentation>
+  <presentation lang="de-DE">
+  </presentation>
+  <references>
+  </references>
+</documentation>

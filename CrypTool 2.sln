@@ -504,6 +504,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymbolCipher", "CrypPlugins
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MexicanArmyCipherDisk", "CrypPlugins\MexicanArmyCipherDisk\MexicanArmyCipherDisk.csproj", "{9EBA6DE4-9768-4A1F-9DBF-EC6CEA6AD5B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MexicanArmyCipherDiskAnalyzer", "CrypPlugins\MexicanArmyCipherDiskAnalyzer\MexicanArmyCipherDiskAnalyzer.csproj", "{C270CC39-73CD-47E6-BB6A-1B520068611D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1490,6 +1492,10 @@ Global
 		{9EBA6DE4-9768-4A1F-9DBF-EC6CEA6AD5B4}.Debug|x64.Build.0 = Debug|x64
 		{9EBA6DE4-9768-4A1F-9DBF-EC6CEA6AD5B4}.Release|x64.ActiveCfg = Release|x64
 		{9EBA6DE4-9768-4A1F-9DBF-EC6CEA6AD5B4}.Release|x64.Build.0 = Release|x64
+		{C270CC39-73CD-47E6-BB6A-1B520068611D}.Debug|x64.ActiveCfg = Debug|x64
+		{C270CC39-73CD-47E6-BB6A-1B520068611D}.Debug|x64.Build.0 = Debug|x64
+		{C270CC39-73CD-47E6-BB6A-1B520068611D}.Release|x64.ActiveCfg = Release|x64
+		{C270CC39-73CD-47E6-BB6A-1B520068611D}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1730,6 +1736,7 @@ Global
 		{FF92F9A6-3530-4891-AB75-553343D87630} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{A5FBDA55-D3DB-4F60-8B8D-E703679D24B5} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{9EBA6DE4-9768-4A1F-9DBF-EC6CEA6AD5B4} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
+		{C270CC39-73CD-47E6-BB6A-1B520068611D} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92042D62-2CDA-4393-9D74-4FB5AC571A2D}
