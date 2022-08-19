@@ -25,9 +25,9 @@ The tool consists of five discs, where the outer disk contains the plaintext alp
 - The third disk contains numbers from 53 to 78.\line
 - And the fourth most inner disk contains numbers from 79 to 00.\line
 \line
-The key are all rotations of the disks. Usually, the numbers below the letter &quot;A&quot; are given, e.g. 12,42,69,00 as shown in this template.\line
+The key are all rotations of the disks. Usually, the numbers below the letter &quot;A&quot; are given, e.g. 12,47,71,90 as shown in this template.\line
 \line
-The cipher has a small keyspace size of only 26^4 = 456,976 keys (these are all possible rotation combinations of all four disks)" />
+The cipher has a small keyspace size of only 26^4 = 456,976 keys (these are all possible rotation combinations of all four disks)." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -50,9 +50,9 @@ Das Werkzeug besteht aus fünf Scheiben, wobei die äußere Scheibe das Klartext
 - Die dritte Scheibe enthält Zahlen von 53 bis 78.\line
 - Und die vierte, innerste Scheibe enthält Zahlen von 79 bis 00.\line
 \line
-Der Schlüssel sind alle Drehungen der Scheiben. Normalerweise werden die Zahlen unter dem Buchstaben &quot;A&quot; angegeben, z.B. 12,42,69,00 wie in dieser Vorlage gezeigt.\line
+Der Schlüssel sind alle Drehungen der Scheiben. Normalerweise werden die Zahlen unter dem Buchstaben &quot;A&quot; angegeben, z.B. 12,47,71,90 wie in dieser Vorlage gezeigt.\line
 \line
-Die Chiffre hat eine kleine Schlüsselraumgröße von nur 26^4 = 456.976 Schlüsseln (dies sind alle möglichen Drehkombinationen aller vier Scheiben)" />
+Die Chiffre hat eine kleine Schlüsselraumgröße von nur 26^4 = 456.976 Schlüsseln (dies sind alle möglichen Drehkombinationen aller vier Scheiben)." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
