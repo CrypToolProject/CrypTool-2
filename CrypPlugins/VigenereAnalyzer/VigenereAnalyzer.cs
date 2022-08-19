@@ -411,6 +411,11 @@ namespace CrypTool.VigenereAnalyzer
         /// <param name="ciphertext"></param>
         private void AddNewBestListEntry(int[] key, double value, int[] ciphertext)
         {
+            if (_presentation.BestList.Count > 0 && value <= _presentation.BestList.Last().Value)
+            {
+                return;
+            }
+
             int[] text = null;
 
             switch (_settings.Mode)
@@ -435,7 +440,7 @@ namespace CrypTool.VigenereAnalyzer
                 Key = MapNumbersIntoTextSpace(key, Alphabet),
                 Text = MapNumbersIntoTextSpace(text, Alphabet),
                 Value = value
-            };
+            };           
 
             if (_presentation.BestList.Count == 0)
             {
@@ -451,11 +456,7 @@ namespace CrypTool.VigenereAnalyzer
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 try
-                {
-                    if (_presentation.BestList.Count > 0 && entry.Value <= _presentation.BestList.Last().Value)
-                    {
-                        return;
-                    }
+                {                   
                     //Insert new entry at correct place to sustain order of list:
                     int insertIndex = _presentation.BestList.TakeWhile(e => e.Value > entry.Value).Count();
                     _presentation.BestList.Insert(insertIndex, entry);
