@@ -61,7 +61,7 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Bigramme ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bigrams ähnelt.
         /// </summary>
         internal static string Bigrams {
             get {
