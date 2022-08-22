@@ -26,10 +26,17 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer
         Replace = 2
     }
 
+    public enum KeyFormat
+    {
+        Digits,
+        LatinLetters
+    }
+
     public class MexicanArmyCipherDiskSettings : ISettings
     {
         private string _languageCode = "en";
         private int _gramsType = 4;
+        private KeyFormat _keyFormat = KeyFormat.Digits;
 
         public MexicanArmyCipherDiskSettings()
         {
@@ -61,6 +68,21 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer
                 {
                     _gramsType = value;
                     OnPropertyChanged("GramsType");
+                }
+            }
+        }
+
+        [TaskPane("KeyFormatCaption", "KeyFormatTooltip", null, 2, false, ControlType.ComboBox,
+          new string[] { "Digits", "LatinLetters" })]
+        public KeyFormat KeyFormat
+        {
+            get => _keyFormat;
+            set
+            {
+                if (value != _keyFormat)
+                {
+                    _keyFormat = value;
+                    OnPropertyChanged("KeyFormat");
                 }
             }
         }

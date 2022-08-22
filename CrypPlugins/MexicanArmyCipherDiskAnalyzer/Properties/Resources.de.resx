@@ -219,4 +219,16 @@
   <data name="CiphertextTooltip" xml:space="preserve">
     <value>Der zu analysierende Geheimtext</value>
   </data>
+  <data name="Digits" xml:space="preserve">
+    <value>Ziffern</value>
+  </data>
+  <data name="KeyFormatCaption" xml:space="preserve">
+    <value>Schlüsselformat</value>
+  </data>
+  <data name="KeyFormatTooltip" xml:space="preserve">
+    <value>Das während der Analyse benutzte Schlüsselformat</value>
+  </data>
+  <data name="LatinLetters" xml:space="preserve">
+    <value>Lateinische Buchstaben</value>
+  </data>
 </root>

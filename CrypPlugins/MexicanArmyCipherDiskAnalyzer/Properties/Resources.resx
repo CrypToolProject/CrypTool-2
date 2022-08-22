@@ -150,6 +150,9 @@
   <data name="CurrentlyAnalyzedKeyLabel" xml:space="preserve">
     <value>Currently analyzed key:</value>
   </data>
+  <data name="Digits" xml:space="preserve">
+    <value>Digits</value>
+  </data>
   <data name="ElapsedLabel" xml:space="preserve">
     <value>Elapsed Time:</value>
   </data>
@@ -165,6 +168,12 @@
   <data name="KeyCaption" xml:space="preserve">
     <value>Key</value>
   </data>
+  <data name="KeyFormatCaption" xml:space="preserve">
+    <value>Key format</value>
+  </data>
+  <data name="KeyFormatTooltip" xml:space="preserve">
+    <value>The used key format during analysis</value>
+  </data>
   <data name="KeyHeader" xml:space="preserve">
     <value>Key</value>
   </data>
@@ -176,6 +185,9 @@
   </data>
   <data name="LanguageTooltip" xml:space="preserve">
     <value>Use this language for the costfunction.</value>
+  </data>
+  <data name="LatinLetters" xml:space="preserve">
+    <value>Latin letters</value>
   </data>
   <data name="LocalLabel" xml:space="preserve">
     <value>Analysis</value>

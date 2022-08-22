@@ -260,6 +260,18 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer
         /// <param name="text"></param>
         private void AddNewBestListEntry(int[] key, double value, string text)
         {
+            string strkey;
+            switch (_settings.KeyFormat)
+            {
+                default:
+                case KeyFormat.Digits:
+                    strkey = string.Format("{0},{1},{2},{3}", key[0].ToString("D2"), key[1].ToString("D2"), key[2].ToString("D2"), key[3].ToString("D2"));
+                    break;
+                case KeyFormat.LatinLetters:
+                    strkey = GenerateTextKey(key);
+                    break;
+            }
+
             //if we have a worse value than the last one, skip
             if (_presentation.BestList.Count > 0 && value <= _presentation.BestList.Last().Value)
             {
@@ -268,7 +280,7 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer
 
             ResultEntry entry = new ResultEntry
             {
-                Key = string.Format("{0},{1},{2},{3}", key[0].ToString("D2"), key[1].ToString("D2"), key[2].ToString("D2"), key[3].ToString("D2")),
+                Key = strkey,
                 Text = text,
                 Value = value
             };          
@@ -328,6 +340,18 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer
         /// <param name="key"></param>
         private void UpdateDisplay(int[] key)
         {
+            string strkey;
+            switch (_settings.KeyFormat)
+            {
+                default:
+                case KeyFormat.Digits:
+                    strkey = string.Format("{0},{1},{2},{3}", key[0].ToString("D2"), key[1].ToString("D2"), key[2].ToString("D2"), key[3].ToString("D2"));
+                    break;
+                case KeyFormat.LatinLetters:
+                    strkey = GenerateTextKey(key);
+                    break;
+            }
+
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 _endTime = DateTime.Now;
@@ -335,9 +359,29 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer
                 TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
                 _presentation.EndTime.Value = _endTime.ToString();
                 _presentation.ElapsedTime.Value = elapsedspan.ToString();
-                _presentation.CurrentlyAnalyzedKey.Value = string.Format("{0},{1},{2},{3}", key[0].ToString("D2"), key[1].ToString("D2"), key[2].ToString("D2"), key[3].ToString("D2"));
+                _presentation.CurrentlyAnalyzedKey.Value = strkey;
             }                
             , null);
+        }
+
+        /// <summary>
+        /// Creates a text key out of a numeric key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        private string GenerateTextKey(int[] key)
+        {
+            StringBuilder keybuilder = new StringBuilder();
+            for(int diskId = 0; diskId < 4; diskId++)
+            {
+                keybuilder.Append(ALPHABET[(((diskId + 1) * 26) - (key[diskId] == 0 ? 100 : (key[diskId]) - 1)) % 26]);
+                if(diskId != 3)
+                {
+                    keybuilder.Append(",");
+                }
+            }
+
+            return keybuilder.ToString();
         }
 
         /// <summary>

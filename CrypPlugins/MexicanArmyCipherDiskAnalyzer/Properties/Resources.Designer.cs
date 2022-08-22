@@ -160,6 +160,15 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Digits ähnelt.
+        /// </summary>
+        internal static string Digits {
+            get {
+                return ResourceManager.GetString("Digits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Elapsed Time: ähnelt.
         /// </summary>
         internal static string ElapsedLabel {
@@ -205,6 +214,24 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Key format ähnelt.
+        /// </summary>
+        internal static string KeyFormatCaption {
+            get {
+                return ResourceManager.GetString("KeyFormatCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The used key format during analysis ähnelt.
+        /// </summary>
+        internal static string KeyFormatTooltip {
+            get {
+                return ResourceManager.GetString("KeyFormatTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Key ähnelt.
         /// </summary>
         internal static string KeyHeader {
@@ -237,6 +264,15 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer.Properties {
         internal static string LanguageTooltip {
             get {
                 return ResourceManager.GetString("LanguageTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Latin letters ähnelt.
+        /// </summary>
+        internal static string LatinLetters {
+            get {
+                return ResourceManager.GetString("LatinLetters", resourceCulture);
             }
         }
         

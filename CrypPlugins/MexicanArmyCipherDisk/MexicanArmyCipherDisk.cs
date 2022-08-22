@@ -174,7 +174,7 @@ namespace CrypTool.MexicanArmyCipherDisk
                         if ((symbol = IndexOfChar(ALPHABET, tokens[diskId][0])) != -1)
                         {
                             //key element is a single alphabet letter
-                            keySettings[diskId] = ((diskId + 1) * 26) - (symbol + 1);
+                            keySettings[diskId] = (((diskId + 1) * 26) - ((symbol - 1) + 26) % 26);
                         }
                         else if ((symbol = IndexOfChar(DIGITS, tokens[diskId][0])) != -1)
                         {
