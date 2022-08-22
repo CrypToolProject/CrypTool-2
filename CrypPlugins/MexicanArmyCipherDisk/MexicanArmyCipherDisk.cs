@@ -150,7 +150,7 @@ namespace CrypTool.MexicanArmyCipherDisk
                 throw new ArgumentException(Properties.Resources.NoKeyGiven);
             }
 
-            string[] tokens = Key.Split(',', '.', ' ', '/', ';', ':', '-');
+            string[] tokens = Key.ToUpper().Split(',', '.', ' ', '/', ';', ':', '-');
             if (tokens.Length != 4)
             {
                 throw new ArgumentException(string.Format(Properties.Resources.InvalidKeyGiven, tokens.Length));
@@ -168,24 +168,52 @@ namespace CrypTool.MexicanArmyCipherDisk
             {
                 try
                 {
-                    keySettings[diskId] = int.Parse(tokens[diskId]);
-
-                    if (tokens[diskId].Length > 2)
+                    if (tokens[diskId].Length == 1)
+                    {                        
+                        int symbol;
+                        if ((symbol = IndexOfChar(ALPHABET, tokens[diskId][0])) != -1)
+                        {
+                            //key element is a single alphabet letter
+                            keySettings[diskId] = ((diskId + 1) * 26) - (symbol - 1);
+                        }
+                        else if ((symbol = IndexOfChar(DIGITS, tokens[diskId][0])) != -1)
+                        {
+                            //key element is a single digit
+                            keySettings[diskId] = symbol;
+                        }
+                        else
+                        {
+                            //key element is something different
+                            throw new ArgumentException(string.Format(Properties.Resources.DiskKeySettingInvalid, diskId + 1, tokens[diskId]));
+                        }
+                    }
+                    else if (tokens[diskId].Length > 2)
                     {
                         throw new ArgumentException(string.Format(Properties.Resources.DiskKeySettingInvalid, diskId + 1, tokens[diskId]));
                     }
-                    if (keySettings[diskId] == 0) // 00 is 100
-                    {
-                        keySettings[diskId] = 100;
+                    else
+                    {                        
+                        keySettings[diskId] = int.Parse(tokens[diskId]);
+                        //key element is number
+                        if (keySettings[diskId] == 0) // 00 is 100
+                        {
+                            keySettings[diskId] = 100;
+                        }
                     }
                 }
                 catch (Exception)
                 {
                     throw new ArgumentException(string.Format(Properties.Resources.DiskKeySettingInvalid, diskId + 1, tokens[diskId]));
                 }
+
                 if (keySettings[diskId] < diskId * 26 + 1 || keySettings[diskId] > (diskId + 1) * 26)
                 {
                     throw new ArgumentException(string.Format(Properties.Resources.DiskKeysSettingInvalidHasToBe, diskId + 1, tokens[diskId], diskId * 26 + 1, (diskId + 1) * 26));
+                }
+                //third disk has only 22 numbers
+                else if ((diskId == 3 && keySettings[diskId] > diskId * 26 + 22))
+                {                    
+                    throw new ArgumentException(string.Format(Properties.Resources.DiskKeysSettingInvalidHasToBe, diskId + 1, tokens[diskId], diskId * 26 + 1, diskId * 26 + 22));
                 }
             }
         }
