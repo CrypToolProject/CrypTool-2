@@ -17,9 +17,9 @@
     <replacement key="$ciphertext$" value = "649794247568534912259003578892293628750350983955298247251634140369010520595805265923"/>
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Key$" value="Key" />
-    <replacement key="$memo$" value="The analyzer brute-force searches through all possible key (26*26*26*22 = 386,672) of the &quot;Mexican Army Cipher Disk&quot;.\line
+    <replacement key="$memo$" value="The analyzer brute-force searches through all possible keys (26*26*26*22 = 386,672) of the &quot;Mexican Army Cipher Disk&quot;.\line
     \line
-In every step, it changes the rotation of a single wheel, then decrypts the given ciphertext using the current key, and then rates the resulting plaintext using a n-gram cost function.\line
+In every step, it changes the rotation of a single disk, then decrypts the given ciphertext using the current key, and then rates the resulting plaintext using a n-gram cost function.\line
 It further keeps track of the 100 &quot;best&quot; plaintexts with respect to the cost function and shows these in the presentation of the component.\line
 The correct key should at the end of the cryptanalysis be on the first position of the bestlist and output by the analyzer." />
   </replacements>
