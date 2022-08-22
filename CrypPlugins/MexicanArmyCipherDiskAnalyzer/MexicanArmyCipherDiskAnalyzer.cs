@@ -56,6 +56,7 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer
         public MexicanArmyCipherDiskAnalyzer()
         {
             _settings = new MexicanArmyCipherDiskSettings();
+            _presentation.UpdateOutputFromUserChoice += UpdateOutputFromUserChoice;
         }
 
         public ISettings Settings => _settings;
@@ -403,6 +404,19 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer
                 index++;
             }
             return -1;
+        }
+
+        /// <summary>
+        /// User wants to output a selected key and text
+        /// </summary>
+        /// <param name="keyString"></param>
+        /// <param name="plaintextString"></param>
+        private void UpdateOutputFromUserChoice(string keyString, string plaintextString)
+        {           
+            Key = keyString;
+            Plaintext = plaintextString;            
+            OnPropertyChanged("Key");
+            OnPropertyChanged("Plaintext");
         }
     }
 
