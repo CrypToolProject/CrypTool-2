@@ -33,8 +33,8 @@ namespace StringOperations
         private string _string1 = string.Empty;
         private string _string2 = string.Empty;
         private string _string3 = string.Empty;
-        private int _value1 = int.MinValue;
-        private int _value2 = int.MinValue;
+        private int _value1 = 0;
+        private int _value2 = 0;
 
         #region INotifyPropertyChanged Members
 
@@ -122,7 +122,7 @@ namespace StringOperations
             }
         }
 
-        [TaskPane("Value1Caption", "Value1Tooltip", null, 5, false, ControlType.NumericUpDown)]
+        [TaskPane("Value1Caption", "Value1Tooltip", null, 5, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int Value1
         {
             get => _value1;
@@ -133,7 +133,7 @@ namespace StringOperations
             }
         }
 
-        [TaskPane("Value2Caption", "Value2Tooltip", null, 6, false, ControlType.NumericUpDown)]
+        [TaskPane("Value2Caption", "Value2Tooltip", null, 6, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int Value2
         {
             get => _value2;

@@ -153,18 +153,6 @@
   <data name="String2Tooltip" xml:space="preserve">
     <value>Second input string</value>
   </data>
-  <data name="Value1Caption" xml:space="preserve">
-    <value>OperationParameter-One</value>
-  </data>
-  <data name="Value1Tooltip" xml:space="preserve">
-    <value>First operation parameter</value>
-  </data>
-  <data name="Value2Caption" xml:space="preserve">
-    <value>OperationParameter-Two</value>
-  </data>
-  <data name="Value2Tooltip" xml:space="preserve">
-    <value>Second operation parameter</value>
-  </data>
   <data name="StringOperations_Execute_Could_not_execute_operation___0______1_" xml:space="preserve">
     <value>Could not execute operation '{0}' : {1}</value>
   </data>
@@ -248,5 +236,17 @@
   </data>
   <data name="OperationList17" xml:space="preserve">
     <value>Levenshtein Distance</value>
+  </data>
+  <data name="Value1Caption" xml:space="preserve">
+    <value>Operation parameter 1</value>
+  </data>
+  <data name="Value1Tooltip" xml:space="preserve">
+    <value>First operation parameter</value>
+  </data>
+  <data name="Value2Caption" xml:space="preserve">
+    <value>Operation parameter 2</value>
+  </data>
+  <data name="Value2Tooltip" xml:space="preserve">
+    <value>Second operation parameter</value>
   </data>
 </root>

@@ -217,19 +217,19 @@
     <value>Funktionen für die Modifikation von Zeichenketten</value>
   </data>
   <data name="String1Caption" xml:space="preserve">
-    <value>erste Zeichenkette</value>
+    <value>Erste Zeichenkette</value>
   </data>
   <data name="String1Tooltip" xml:space="preserve">
     <value>Eingabe der ersten Zeichenkette</value>
   </data>
   <data name="String2Caption" xml:space="preserve">
-    <value>zweite Zeichenkette</value>
+    <value>Zweite Zeichenkette</value>
   </data>
   <data name="String2Tooltip" xml:space="preserve">
     <value>Eingabe der zweiten Zeichenkette</value>
   </data>
   <data name="String3Caption" xml:space="preserve">
-    <value>dritte Zeichenkette</value>
+    <value>Dritte Zeichenkette</value>
   </data>
   <data name="String3Tooltip" xml:space="preserve">
     <value>Eingabe der dritten Zeichenkette</value>
@@ -238,13 +238,13 @@
     <value>Konnte Operation '{0}' nicht ausführen: {1}</value>
   </data>
   <data name="Value1Caption" xml:space="preserve">
-    <value>erster Funktionsparameter</value>
+    <value>Erster Funktionsparameter</value>
   </data>
   <data name="Value1Tooltip" xml:space="preserve">
     <value>Eingabe des ersten Funktionsparameters</value>
   </data>
   <data name="Value2Caption" xml:space="preserve">
-    <value>zweiter Funktionsparameter</value>
+    <value>Zweiter Funktionsparameter</value>
   </data>
   <data name="Value2Tooltip" xml:space="preserve">
     <value>Eingabe des zweiten Funktionsparameters</value>
