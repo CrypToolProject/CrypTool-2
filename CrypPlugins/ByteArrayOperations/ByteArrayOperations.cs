@@ -58,8 +58,8 @@ namespace ByteArrayOperations
             _array1 = null;
             _array2 = null;
             _array3 = null;
-            _value1 = int.MinValue;
-            _value2 = int.MinValue;
+            _value1 = -1;
+            _value2 = -1;
         }
 
         public void Execute()
@@ -78,11 +78,11 @@ namespace ByteArrayOperations
                 _array3 = new byte[0];
             }
 
-            if (_value1 == int.MaxValue)
+            if (_value1 == -1)
             {
                 _value1 = _settings.Value1;
             }
-            if (_value2 == int.MaxValue)
+            if (_value2 == -1)
             {
                 _value2 = _settings.Value2;
             }
