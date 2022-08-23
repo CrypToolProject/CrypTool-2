@@ -61,8 +61,8 @@ namespace StringOperations
             _string1 = null;
             _string2 = null;
             _string3 = null;
-            _value1 = int.MinValue;
-            _value2 = int.MinValue;
+            _value1 = -1;
+            _value2 = -1;
 
         }
 
@@ -83,11 +83,11 @@ namespace StringOperations
             {
                 _string3 = _settings.String3;
             }
-            if (_value1 == int.MaxValue)
+            if (_value1 == -1)
             {
                 _value1 = _settings.Value1;
             }
-            if (_value2 == int.MaxValue)
+            if (_value2 == -1)
             {
                 _value2 = _settings.Value2;
             }
