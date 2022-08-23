@@ -47,8 +47,8 @@ namespace ByteArrayOperations
         private ByteArrayOperation _stringOperationType;
         private readonly Dictionary<ByteArrayOperation, List<string>> _operationVisibility = new Dictionary<ByteArrayOperation, List<string>>();
         private readonly List<string> _operationList = new List<string>();
-        private int _value1 = int.MinValue;
-        private int _value2 = int.MinValue;
+        private int _value1 = 0;
+        private int _value2 = 0;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -92,7 +92,7 @@ namespace ByteArrayOperations
             }
         }
 
-        [TaskPane("Value1Caption", "Value1Tooltip", null, 2, false, ControlType.NumericUpDown)]
+        [TaskPane("Value1Caption", "Value1Tooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int Value1
         {
             get => _value1;
@@ -103,7 +103,7 @@ namespace ByteArrayOperations
             }
         }
 
-        [TaskPane("Value2Caption", "Value2Tooltip", null, 3, false, ControlType.NumericUpDown)]
+        [TaskPane("Value2Caption", "Value2Tooltip", null, 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int Value2
         {
             get => _value2;
