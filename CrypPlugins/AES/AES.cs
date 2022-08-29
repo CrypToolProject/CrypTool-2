@@ -246,7 +246,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 // special handling of OFB mode, as it's not available for AES in .Net
                 if (settings.Mode == 3)    // OFB - bei OFB ist encrypt = decrypt, daher keine Fallunterscheidung
                 {
-                    if (action == 0)
+                    if (action == 0 && settings.Padding == 5)
                     {
                         inputdata = BlockCipherHelper.AppendPadding(InputStream, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
                     }
@@ -271,7 +271,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
                     int validBytes = (int)inputdata.Length;
 
-                    if (action == 1)
+                    if (action == 1 && settings.Padding == 5)
                     {
                         validBytes = BlockCipherHelper.StripPadding(outputData, validBytes, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
                     }
@@ -282,7 +282,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 }
                 else if (settings.Mode == 4)
                 {
-                    if (action == 0)
+                    if (action == 0 && settings.Padding == 5)
                     {
                         inputdata = BlockCipherHelper.AppendPadding(InputStream, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
                     }
@@ -300,7 +300,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     outOff += eaxCipher.DoFinal(datOut, outOff);
 
                     int validBytes = eaxCipher.GetOutputSize(tmpInput.Length);
-                    if (action == 1)
+                    if (action == 1 && settings.Padding == 5)
                     {
                         validBytes = BlockCipherHelper.StripPadding(datOut, validBytes, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
                     }
@@ -311,7 +311,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 else
                 {
                     // append 1-0 padding (special handling, as it's not present in System.Security.Cryptography.PaddingMode)
-                    if (action == 0 )
+                    if (action == 0 && settings.Padding == 5)
                     {
                         inputdata = BlockCipherHelper.AppendPadding(InputStream, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
                     }
@@ -326,7 +326,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     while ((bytesRead = p_crypto_stream.Read(buffer, 0, buffer.Length)) > 0 && !stop)
                     {
                         // remove 1-0 padding (special handling, as it's not present in System.Security.Cryptography.PaddingMode)
-                        if (action == 1 && reader.Position == reader.Length)
+                        if (action == 1 && settings.Padding == 5 && reader.Position == reader.Length)
                         {
                             bytesRead = BlockCipherHelper.StripPadding(buffer, bytesRead, settings.padmap[settings.Padding], buffer.Length);
                         }
