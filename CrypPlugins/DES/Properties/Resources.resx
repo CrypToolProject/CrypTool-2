@@ -224,7 +224,7 @@
     <value>PKCS7</value>
   </data>
   <data name="PaddingList4" xml:space="preserve">
-    <value>ANSIX923</value>
+    <value>ANSIX9.23</value>
   </data>
   <data name="PaddingList5" xml:space="preserve">
     <value>ISO10126</value>
