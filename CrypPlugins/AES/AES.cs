@@ -271,7 +271,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
                     int validBytes = (int)inputdata.Length;
 
-                    if (action == 1 && settings.Padding == 5)
+                    if (action == 1 && (settings.Padding == 5 || settings.Padding == 1))
                     {
                         validBytes = BlockCipherHelper.StripPadding(outputData, validBytes, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
                     }
@@ -300,7 +300,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     outOff += eaxCipher.DoFinal(datOut, outOff);
 
                     int validBytes = eaxCipher.GetOutputSize(tmpInput.Length);
-                    if (action == 1 && settings.Padding == 5)
+                    if (action == 1 && (settings.Padding == 5 || settings.Padding == 1))
                     {
                         validBytes = BlockCipherHelper.StripPadding(datOut, validBytes, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
                     }
@@ -326,7 +326,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     while ((bytesRead = p_crypto_stream.Read(buffer, 0, buffer.Length)) > 0 && !stop)
                     {
                         // remove 1-0 padding (special handling, as it's not present in System.Security.Cryptography.PaddingMode)
-                        if (action == 1 && settings.Padding == 5 && reader.Position == reader.Length)
+                        if (action == 1 && (settings.Padding == 5 || settings.Padding == 1) && reader.Position == reader.Length)
                         {
                             bytesRead = BlockCipherHelper.StripPadding(buffer, bytesRead, settings.padmap[settings.Padding], buffer.Length);
                         }
