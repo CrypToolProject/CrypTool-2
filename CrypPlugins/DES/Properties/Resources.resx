@@ -214,6 +214,9 @@
   <data name="TripleDESTooltip" xml:space="preserve">
     <value>Use TripleDES</value>
   </data>
+  <data name="ModeList4" xml:space="preserve">
+    <value>Output Feedback (OFB)</value>
+  </data>
   <data name="PaddingList1" xml:space="preserve">
     <value>None</value>
   </data>
@@ -221,18 +224,15 @@
     <value>Zeros</value>
   </data>
   <data name="PaddingList3" xml:space="preserve">
-    <value>PKCS7</value>
+    <value>PKCS#7</value>
   </data>
   <data name="PaddingList4" xml:space="preserve">
-    <value>ANSIX9.23</value>
+    <value>ANSI X9.23</value>
   </data>
   <data name="PaddingList5" xml:space="preserve">
-    <value>ISO10126</value>
+    <value>ISO 10126</value>
   </data>
   <data name="PaddingList6" xml:space="preserve">
-    <value>1-0 padding</value>
-  </data>
-  <data name="ModeList4" xml:space="preserve">
-    <value>Output Feedback (OFB)</value>
+    <value>1-0</value>
   </data>
 </root>

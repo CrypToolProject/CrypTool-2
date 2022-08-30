@@ -327,7 +327,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die PKCS7 ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die PKCS#7 ähnelt.
         /// </summary>
         internal static string PaddingList3 {
             get {
@@ -336,7 +336,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ANSIX9.23 ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die ANSI X9.23 ähnelt.
         /// </summary>
         internal static string PaddingList4 {
             get {
@@ -345,7 +345,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ISO10126 ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die ISO 10126 ähnelt.
         /// </summary>
         internal static string PaddingList5 {
             get {
@@ -354,7 +354,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die 1-0 padding ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die 1-0 ähnelt.
         /// </summary>
         internal static string PaddingList6 {
             get {

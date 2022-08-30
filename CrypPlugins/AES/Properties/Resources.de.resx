@@ -232,6 +232,12 @@
   <data name="ModeList3" xml:space="preserve">
     <value>Cipher Feedback (CFB)</value>
   </data>
+  <data name="ModeList4" xml:space="preserve">
+    <value>Output Feedback (OFB)</value>
+  </data>
+  <data name="ModeList5" xml:space="preserve">
+    <value>EAX</value>
+  </data>
   <data name="PaddingList1" xml:space="preserve">
     <value>Keine</value>
   </data>
@@ -239,21 +245,15 @@
     <value>Nullen</value>
   </data>
   <data name="PaddingList3" xml:space="preserve">
-    <value>PKCS7</value>
+    <value>PKCS#7</value>
   </data>
   <data name="PaddingList4" xml:space="preserve">
-    <value>ANSIX9.23</value>
+    <value>ANSI X9.23</value>
   </data>
   <data name="PaddingList5" xml:space="preserve">
-    <value>ISO10126</value>
+    <value>ISO 10126</value>
   </data>
   <data name="PaddingList6" xml:space="preserve">
-    <value>1-0-Padding</value>
-  </data>
-  <data name="ModeList4" xml:space="preserve">
-    <value>Output Feedback (OFB)</value>
-  </data>
-  <data name="ModeList5" xml:space="preserve">
-    <value>EAX</value>
+    <value>1-0</value>
   </data>
 </root>
