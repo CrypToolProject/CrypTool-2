@@ -44,7 +44,11 @@ CrypTool 2 is built every night and released in the so-called "nightly build". A
 
 ## Building CrypTool 2
 
-* [Build instructions](https://github.com/CrypToolProject/CrypTool-2/wiki/Build-Instructions) how to clone and build your own CT2.
+* [Build instructions](https://github.com/CrypToolProject/CrypTool-2/wiki/Build-Instructions): how to clone and build your own CT2.
+
+## CrypTool 2 Developer HowTo
+
+* [Developer HowTo](https://github.com/CrypToolProject/CrypTool-2/wiki/Developer-HowTo): how to develop your own CrypTool 2 components.
 
 ## Get in Touch
 
