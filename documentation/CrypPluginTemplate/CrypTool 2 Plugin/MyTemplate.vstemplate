@@ -16,12 +16,12 @@
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="CrypPluginTemplate.csproj" File="CrypPluginTemplate.csproj" ReplaceParameters="true">
-      <ProjectItem ReplaceParameters="true" TargetFileName="ExamplePluginCT2.cs">ExamplePluginCT2.cs</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="ExamplePluginCT2Settings.cs">ExamplePluginCT2Settings.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.cs" OpenInEditor="true">ExamplePluginCT2.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$Settings.cs">ExamplePluginCT2Settings.cs</ProjectItem>
       <Folder Name="Properties" TargetFolderName="Properties">
         <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
       </Folder>
-      <ProjectItem ReplaceParameters="true" TargetFileName="userdoc.xml">userdoc.xml</ProjectItem>
+      <ProjectItem TargetFileName="userdoc.xml">userdoc.xml</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>

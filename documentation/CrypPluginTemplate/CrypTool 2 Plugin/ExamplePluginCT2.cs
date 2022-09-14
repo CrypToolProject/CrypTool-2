@@ -19,7 +19,7 @@ using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.$safeprojectname$
-{
+{   
     // HOWTO: Plugin developer HowTo can be found here: https://github.com/CrypToolProject/CrypTool-2/wiki/Developer-HowTo
 
     // HOWTO: Change author name, email address, organization and URL.
@@ -34,7 +34,7 @@ namespace CrypTool.Plugins.$safeprojectname$
         #region Private Variables
 
         // HOWTO: You need to adapt the settings class as well, see the corresponding file.
-        private readonly ExamplePluginCT2Settings _settings = new ExamplePluginCT2Settings();
+        private readonly $safeprojectname$Settings _settings = new $safeprojectname$Settings();
 
         #endregion
 
