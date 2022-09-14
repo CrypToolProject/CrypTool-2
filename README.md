@@ -48,6 +48,7 @@ The build system is located and executed on a private server maintained by the C
 
 * [Build instructions](https://github.com/CrypToolProject/CrypTool-2/wiki/Build-Instructions): how to clone and build your own CT2.
 * [Developer HowTo](https://github.com/CrypToolProject/CrypTool-2/wiki/Developer-HowTo): how to develop your own CrypTool 2 components.
+* [Development YouTube videos](https://www.youtube.com/playlist?list=PLMuvAbyIl0PTTfPE2VhJ9PZ6qlOG0MMaX): this video series shows how to develop your own CT2 components.
 
 ## Get in touch
 
