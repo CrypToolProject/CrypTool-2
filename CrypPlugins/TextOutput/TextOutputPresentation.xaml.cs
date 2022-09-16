@@ -30,15 +30,20 @@ namespace TextOutput
     [TabColor("pink")]
     public partial class TextOutputPresentation : UserControl, INotifyPropertyChanged
     {
+        private FontFamily _fontFamily;
+        private double _fontSize;
+
         public TextOutput _textOutput = null;
         public event KeyEventHandler UserKeyDown;
 
-        public TextOutputPresentation()
+        public TextOutputPresentation(FontFamily defaultFontFamily, double defaultFontSize)
         {
             InitializeComponent();
             Width = double.NaN;
             Height = double.NaN;
             DataContext = this;
+            _fontFamily = defaultFontFamily;
+            _fontSize = defaultFontSize;
         }
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs args)
@@ -54,26 +59,22 @@ namespace TextOutput
             EventsHelper.PropertyChanged(PropertyChanged, this, propertyName);
         }
 
-        private FontFamily fontFamily;
-
         public FontFamily MyFontFamily
         {
-            get => fontFamily;
+            get => _fontFamily;
             set
             {
-                fontFamily = value;
+                _fontFamily = value;
                 OnPropertyChanged("MyFontFamily");
             }
         }
 
-        private double fontsize;
-
         public double MyFontSize
         {
-            get => fontsize;
+            get => _fontSize;
             set
             {
-                fontsize = value;
+                _fontSize = value;
                 OnPropertyChanged("MyFontSize");
             }
         }

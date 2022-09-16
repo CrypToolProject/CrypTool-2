@@ -161,7 +161,7 @@ namespace TextOutput
             settings = new TextOutputSettings(this);
             settings.PropertyChanged += settings_OnPropertyChanged;
 
-            textOutputPresentation = new TextOutputPresentation
+            textOutputPresentation = new TextOutputPresentation(CrypTool.PluginBase.Properties.Settings.Default.FontFamily, CrypTool.PluginBase.Properties.Settings.Default.FontSize)
             {
                 _textOutput = this
             };

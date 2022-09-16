@@ -30,41 +30,42 @@ namespace CrypTool.TextInput
     [TabColor("red")]
     public partial class TextInputPresentation : UserControl, INotifyPropertyChanged
     {
+        private FontFamily _fontFamily;
+        private double _fontSize;
+
         public event KeyEventHandler UserKeyDown;
 
-        public TextInputPresentation()
+        public TextInputPresentation(FontFamily defaultFontFamily, double defaultFontSize)
         {
             InitializeComponent();
             Height = double.NaN;
             Width = double.NaN;
             DataContext = this;
+            _fontFamily = defaultFontFamily;
+            _fontSize = defaultFontSize;
         }
 
         private void OnPropertyChanged(string propertyName)
         {
             EventsHelper.PropertyChanged(PropertyChanged, this, propertyName);
-        }
-
-        private FontFamily fontFamily;
+        }        
 
         public FontFamily MyFontFamily
         {
-            get => fontFamily;
+            get => _fontFamily;
             set
             {
-                fontFamily = value;
+                _fontFamily = value;
                 OnPropertyChanged("MyFontFamily");
             }
-        }
-
-        private double fontsize;
+        }        
 
         public double MyFontSize
         {
-            get => fontsize;
+            get => _fontSize;
             set
             {
-                fontsize = value;
+                _fontSize = value;
                 OnPropertyChanged("MyFontSize");
             }
         }
