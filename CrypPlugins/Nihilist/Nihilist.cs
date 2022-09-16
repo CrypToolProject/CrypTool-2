@@ -25,7 +25,7 @@ using System.Windows.Controls;
 namespace CrypTool.Nihilist
 {
     [Author("Nils Kopal", "kopal@CrypTool.org", "CrypTool 2 Team", "https://www.CrypTool.org")]
-    [PluginInfo("CrypTool.Nihilist.Properties.Resources", "PluginCaption", "PluginTooltip", "Nihilist/DetailedDescription/doc.xml", new[] { "Nihilist/Images/icon3.png" })]
+    [PluginInfo("CrypTool.Nihilist.Properties.Resources", "PluginCaption", "PluginTooltip", "Nihilist/DetailedDescription/doc.xml", new[] { "Nihilist/Images/icon.png" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class Nihilist : ICrypComponent
     {
