@@ -1,5 +1,5 @@
-﻿/*                              
-   Copyright 2009 Fabian Enkler
+﻿/*
+   Copyright 2022 Nils Kopal <Nils.Kopal<at>CrypTool.org
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -13,54 +13,80 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
 using CrypTool.PluginBase;
 using System.ComponentModel;
 
-namespace Nihilist
+namespace CrypTool.Nihilist
 {
-    internal class NihilistSettings : ISettings
+    public enum Action
     {
-        private enum Actions
+        Encrypt = 0,
+        Decrypt = 1
+    }
+
+    public enum AlphabetVersion
+    {
+        Twentyfive,
+        Thirtysix
+    }
+
+    public enum UnknownSymbolHandlingMode
+    {
+        Ignore = 0,
+        Remove = 1,
+        Replace = 2
+    }
+
+    public class NihilistSettings : ISettings
+    {
+        private Action _action = Action.Encrypt;
+        private AlphabetVersion _alphabetVersion = AlphabetVersion.Twentyfive;
+        private UnknownSymbolHandlingMode unknownSymbolHandling = UnknownSymbolHandlingMode.Ignore;
+
+        public NihilistSettings()
         {
-            Encrypt,
-            Decrypt
+
         }
 
-        private Actions action = Actions.Encrypt;
-        [ContextMenu("ActionCaption", "ActionTooltip", 0, ContextMenuControlType.ComboBox, null, new[] { "ActionList1", "ActionList2" })]
-        [TaskPane("ActionCaption", "ActionTooltip", null, 0, false, ControlType.ComboBox, new[] { "ActionList1", "ActionList2" })]
-        public int Action
+        [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "Encrypt", "Decrypt" })]
+        public Action Action
         {
-            get => (int)action;
+            get => _action;
             set
             {
-                action = (Actions)value;
-                OnPropertyChanged("Action");
+                if (value != _action)
+                {
+                    _action = value;
+                    OnPropertyChanged(nameof(Action));
+                }
             }
         }
 
-        private string keyWord = string.Empty;
-        [TaskPane("KeyWordCaption", "KeyWordTooltip", null, 0, false, ControlType.TextBox)]
-        public string KeyWord
+        [TaskPane("AlphabetVersionCaption", "AlphabetVersionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "Twentyfive", "Thirtysix" })]
+        public AlphabetVersion AlphabetVersion
         {
-            get => keyWord;
+            get => _alphabetVersion;
             set
             {
-                keyWord = value;
-                OnPropertyChanged("KeyWord");
+                if (value != _alphabetVersion)
+                {
+                    _alphabetVersion = value;
+                    OnPropertyChanged(nameof(AlphabetVersion));
+                }
             }
         }
 
-        private string secondKeyWord = string.Empty;
-        [TaskPane("SecondKeyWordCaption", "SecondKeyWordTooltip", null, 0, false, ControlType.TextBox)]
-        public string SecondKeyWord
+        [TaskPane("UnknownSymbolHandlingCaption", "UnknownSymbolHandlingTooltip", null, 3, false, ControlType.ComboBox, new string[] { "UnknownSymbolHandlingList1", "UnknownSymbolHandlingList2", "UnknownSymbolHandlingList3" })]
+        public UnknownSymbolHandlingMode UnknownSymbolHandling
         {
-            get => secondKeyWord;
+            get => unknownSymbolHandling;
             set
             {
-                secondKeyWord = value;
-                OnPropertyChanged("SecondKeyWord");
+                if (value != unknownSymbolHandling)
+                {
+                    unknownSymbolHandling = value;
+                    OnPropertyChanged(nameof(UnknownSymbolHandling));
+                }
             }
         }
 

@@ -1,5 +1,5 @@
-﻿/*                              
-   Copyright 2009-2010 Fabian Enkler, Matthäus Wander
+﻿/*
+   Copyright 2022 Nils Kopal <Nils.Kopal<at>CrypTool.org
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -13,254 +13,303 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
-
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Resources;
+using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 
-namespace Nihilist
+namespace CrypTool.Nihilist
 {
-    [Author("Fabian Enkler", "enkler@CrypTool.org", "", "")]
-    [PluginInfo("Nihilist.Properties.Resources", "PluginCaption", "PluginTooltip", "Nihilist/DetailedDescription/doc.xml", "Nihilist/Images/icon3.png")]
+    [Author("Nils Kopal", "kopal@CrypTool.org", "CrypTool 2 Team", "https://www.CrypTool.org")]
+    [PluginInfo("CrypTool.Nihilist.Properties.Resources", "PluginCaption", "PluginTooltip", "Nihilist/DetailedDescription/doc.xml", new[] { "Nihilist/Images/icon3.png" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class Nihilist : ICrypComponent
     {
-        public const string ALPHABET = "abcdefghiklmnopqrstuvwxyz";
+        private readonly NihilistSettings _settings = new NihilistSettings();
 
-        private readonly NihilistSettings settings = new NihilistSettings();
+        private const string ALPHABET25 = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
+        private const string ALPHABET36 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        private const string DIGITS = "0123456789";
+        public ISettings Settings => _settings;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-#pragma warning disable 67
+        public UserControl Presentation => null;        
+
         public event StatusChangedEventHandler OnPluginStatusChanged;
-#pragma warning restore
-        public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
+        public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public ISettings Settings => settings;
-
-        public UserControl Presentation => null;
-
-        private byte[] input = new byte[] { };
-        [PropertyInfo(Direction.InputData, "InputCaption", "InputTooltip", true)]
-        public byte[] Input
+        [PropertyInfo(Direction.InputData, "InputTextCaption", "InputStringTooltip", true)]
+        public string InputText
         {
-            get => input;
-            set
-            {
-                input = value;
-                OnPropertyChanged("Input");
-            }
+            get;
+            set;
         }
 
-        private byte[] output = new byte[] { };
-        [PropertyInfo(Direction.OutputData, "OutputCaption", "OutputTooltip", true)]
-        public byte[] Output
+        [PropertyInfo(Direction.InputData, "Key1Caption", "Key1Tooltip", true)]
+        public string Key1
         {
-            get => output;
-            set
-            {
-                output = value;
-                OnPropertyChanged("Output");
-            }
+            get;
+            set;
         }
 
-        public void PreExecution()
+        [PropertyInfo(Direction.InputData, "Key2Caption", "Key2Tooltip", true)]
+        public string Key2
         {
-
+            get;
+            set;
         }
 
-        // Convert byte[] indexes (0..4, 0..4) to two-digit number (11..55)
-        // 0, 0 -> 11
-        // 4, 1 -> 52
-        private byte ConvertIndexesToTwoDigit(byte[] arr)
+        [PropertyInfo(Direction.OutputData, "OutputTextCaption", "OutputStringTooltip", false)]
+        public string OutputText
         {
-            Debug.Assert(arr.Length == 2);
-            return ConvertToDimensionOne(arr[0], arr[1]);
-        }
-
-        private byte ConvertToDimensionOne(byte x, byte y)
-        {
-            Debug.Assert(0 <= x && x <= 4);
-            Debug.Assert(0 <= y && y <= 4);
-
-            x++;
-            y++;
-            return (byte)(x * 10 + y);
-        }
-
-        // Convert two-digit number (11..55) to byte[] indexes (0..4, 0..4)
-        // 11 -> 0, 0
-        // 52 -> 4, 1
-        private byte[] ConvertTwoDigitToIndexes(byte z)
-        {
-            Debug.Assert(11 <= z && z <= 55, "Expected 11..55, got: " + z);
-
-            byte x = (byte)(z / 10);
-            byte y = (byte)(z % 10);
-            x--;
-            y--;
-
-            return new byte[] { x, y };
-        }
-
-        public void Execute()
-        {
-            // this is for localization
-            ResourceManager resourceManager = new ResourceManager("Nihilist.Properties.Resources", GetType().Assembly);
-
-            // flomar, 09/23/2011: make sure we have two valid keywords (plugin would crash without two valid keywords)
-            if (settings.KeyWord.Length == 0 || settings.SecondKeyWord.Length == 0)
-            {
-                GuiLogMessage(resourceManager.GetString("ErrorInputKeywordsNotProvided"), NotificationLevel.Error);
-                return;
-            }
-
-            // flomar, 09/23/2011: proceed with the old code as usual...
-            Dictionary<char, byte[]> CryptMatrix = CreateCryptMatrix(out char[,] KeyArray);
-
-            string secondKeyWord = settings.SecondKeyWord.ToLower();
-            byte[] secondKeyNumbers = new byte[secondKeyWord.Length];
-            for (int i = 0; i < secondKeyWord.Length; i++)
-            {
-                char c = secondKeyWord[i];
-                secondKeyNumbers[i] = ConvertIndexesToTwoDigit(CryptMatrix[c]);
-            }
-            if (settings.Action == 0)
-            {
-                string rawInputString = ByteArrayToString(input).ToLower();
-                string inputString = StringUtil.StripUnknownSymbols(ALPHABET, rawInputString);
-                byte[] outputBytes = new byte[inputString.Length];
-                for (int i = 0; i < inputString.Length; i++)
-                {
-                    // convert character -> two-digit number
-                    char plainChar = inputString[i];
-                    byte plainNumber = ConvertIndexesToTwoDigit(CryptMatrix[plainChar]);
-
-                    // calculate cipher number
-                    outputBytes[i] = (byte)(plainNumber + secondKeyNumbers[i % secondKeyNumbers.Length]);
-
-                    OnProgressChanged(i + 1, inputString.Length);
-                }
-                output = outputBytes;
-            }
-            else
-            {
-                char[] outputChars = new char[input.Length];
-                for (int i = 0; i < input.Length; i++)
-                {
-                    // calculate plain number
-                    byte plainNumber = (byte)(input[i] - secondKeyNumbers[i % secondKeyNumbers.Length]);
-                    if (plainNumber < 11 || plainNumber > 55)
-                    {
-                        GuiLogMessage("Plaintext two-digit-number out of range, expected 11 <= x <= 55, got: " + plainNumber + ". Wrong key?", NotificationLevel.Error);
-                        break;
-                    }
-                    byte[] indexes = ConvertTwoDigitToIndexes(plainNumber);
-
-                    // convert two-digit number -> character
-                    outputChars[i] = KeyArray[indexes[0], indexes[1]];
-
-                    OnProgressChanged(i + 1, input.Length);
-                }
-                output = CharArrayToByteArray(outputChars);
-            }
-            OnPropertyChanged("Output");
-        }
-
-        private static string ByteArrayToString(byte[] arr)
-        {
-            return Encoding.UTF8.GetString(arr);
-        }
-
-        private static byte[] CharArrayToByteArray(char[] arr)
-        {
-            return Encoding.UTF8.GetBytes(arr);
-        }
-
-        private Dictionary<char, byte[]> CreateCryptMatrix(out char[,] KeyArr)
-        {
-            char[,] KeyArray = new char[5, 5];
-            HashSet<char> CharDic = new HashSet<char>();
-            int Row = 0;
-            int Col = 0;
-            foreach (char c in settings.KeyWord.ToLower() + ALPHABET)
-            {
-                if (!CharDic.Contains(c))
-                {
-                    if (Row < KeyArray.GetLength(1))
-                    {
-                        KeyArray[Row, Col] = c;
-                    }
-
-                    CharDic.Add(c);
-                    Col++;
-                    if (Col >= KeyArray.GetLength(0))
-                    {
-                        Col = 0;
-                        Row++;
-                    }
-                }
-            }
-            KeyArr = KeyArray;
-            Dictionary<char, byte[]> CharPosDic = new Dictionary<char, byte[]>();
-            for (byte i = 0; i < KeyArray.GetLength(0); i++)
-            {
-                for (byte j = 0; j < KeyArray.GetLength(1); j++)
-                {
-                    CharPosDic.Add(KeyArray[i, j], new byte[] { i, j });
-                }
-            }
-            return CharPosDic;
-        }
-
-        public void PostExecution()
-        {
-
-        }
-
-        public void Stop()
-        {
-
-        }
-
-        public void Initialize()
-        {
-
+            get;
+            set;
         }
 
         public void Dispose()
         {
-
+            
         }
 
-        private void OnPropertyChanged(string name)
+        public void Execute()
         {
-            if (PropertyChanged != null)
+            switch (_settings.Action)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
+                case Action.Encrypt:
+                    OutputText = EncryptText(Key1.ToUpper(), Key2.ToUpper(), InputText.ToUpper());
+                    break;
+                case Action.Decrypt:
+                    OutputText = DecryptText(Key1.ToUpper(), Key2.ToUpper(), InputText);
+                    break;
             }
+            OnPropertyChanged("OutputText");
         }
 
-        private void OnProgressChanged(int value, int max)
-        {
-            if (OnPluginProgressChanged != null)
+        /// <summary>
+        /// Encrypts the input text using the Nihilist cipher
+        /// See https://en.wikipedia.org/wiki/Nihilist_cipher
+        /// </summary>
+        /// <param name="key1"></param>
+        /// <param name="key2"></param>
+        /// <param name="plaintext"></param>
+        /// <returns></returns>
+        private string EncryptText(string key1, string key2, string plaintext)
+        {            
+            //Step 1: Setup our alphabet for the polybius square
+            string alphabet = _settings.AlphabetVersion == AlphabetVersion.Twentyfive ? ALPHABET25 : ALPHABET36;
+            int sqrtAlphabetLength = (int)Math.Sqrt(alphabet.Length);
+
+            //Step 2: Generate polybiusSquareMapping from character to numbers based on key1            
+            StringBuilder keyBuilder = new StringBuilder();
+            foreach(char symbol in key1)
             {
-                OnPluginProgressChanged(this, new PluginProgressEventArgs(value, max));
+                if (alphabet.Contains(symbol))
+                {
+                    keyBuilder.Append(symbol);
+                }
             }
+            keyBuilder.Append(alphabet);
+            string keyalphabet = string.Concat(keyBuilder.ToString().Distinct());
+            Dictionary<char, int> polybiusSquareMapping = new Dictionary<char, int>();
+            int x = 1;
+            int y = 10;
+            foreach(char symbol in keyalphabet)
+            {
+                polybiusSquareMapping[symbol] = x + y;
+                x++;
+                if (x == sqrtAlphabetLength + 1)
+                {
+                    x = 1;
+                    y += 10;
+                }
+            }
+           
+            //Step 3: Encrypt plaintext
+            StringBuilder ciphertextBuilder = new StringBuilder();
+            int keyOffset = 0;
+            for (int i = 0; i < plaintext.Length; i++)
+            {
+                if (!polybiusSquareMapping.ContainsKey(plaintext[i]))
+                {
+                    switch (_settings.UnknownSymbolHandling)
+                    {
+                        case UnknownSymbolHandlingMode.Ignore:
+                            ciphertextBuilder.Append(plaintext[i]);
+                            break;                       
+                        case UnknownSymbolHandlingMode.Replace:
+                            ciphertextBuilder.Append("?");
+                            break;
+                        case UnknownSymbolHandlingMode.Remove:
+                        default:
+                            continue;
+                    }
+                    if (i != plaintext.Length - 1)
+                    {
+                        ciphertextBuilder.Append(" ");
+                    }
+                    continue;
+                }
+
+                //we encrypt by adding the current key 2 number to the current plaintext number
+                int plaintextnumber = polybiusSquareMapping[plaintext[i]];
+                int keyNumber = 0;
+                if (key2.Length > 0) 
+                {
+                    keyNumber = polybiusSquareMapping[key2[keyOffset % key2.Length]];                    
+                }
+                ciphertextBuilder.Append(plaintextnumber + keyNumber);
+
+                if (i != plaintext.Length - 1)
+                {
+                    ciphertextBuilder.Append(" ");
+                }
+
+                keyOffset++;
+            }
+
+            return ciphertextBuilder.ToString();
         }
 
-        private void GuiLogMessage(string message, NotificationLevel logLevel)
+        /// <summary>
+        /// Decrypt the input text using the Nihilist cipher
+        /// </summary>
+        /// <param name="key1"></param>
+        /// <param name="key2"></param>
+        /// <param name="ciphertext"></param>
+        /// <returns></returns>
+        private string DecryptText(string key1, string key2, string ciphertext)
         {
-            if (OnGuiLogNotificationOccured != null)
+            //Step 1: Setup our alphabet for the polybius square
+            string alphabet = _settings.AlphabetVersion == AlphabetVersion.Twentyfive ? ALPHABET25 : ALPHABET36;
+            int sqrtAlphabetLength = (int)Math.Sqrt(alphabet.Length);
+
+            //Step 2: Generate polybiusSquareMapping from character to numbers based on key1
+            StringBuilder keyBuilder = new StringBuilder();
+            foreach (char symbol in key1)
             {
-                OnGuiLogNotificationOccured(this, new GuiLogEventArgs(message, this, logLevel));
+                if (alphabet.Contains(symbol))
+                {
+                    keyBuilder.Append(symbol);
+                }
             }
+            keyBuilder.Append(alphabet);
+            string keyalphabet = string.Concat(keyBuilder.ToString().Distinct());
+            Dictionary<char, int> polybiusSquareMapping = new Dictionary<char, int>();
+            Dictionary<int, char> polybiusSquareMappingInverse = new Dictionary<int, char>();
+            int x = 1;
+            int y = 10;
+            foreach (char symbol in keyalphabet)
+            {
+                polybiusSquareMapping[symbol] = x + y;
+                polybiusSquareMappingInverse[x + y] = symbol;
+                x++;
+                if (x == sqrtAlphabetLength + 1)
+                {
+                    x = 1;
+                    y += 10;
+                }
+            }
+
+            //Step 3: Decrypt ciphertext
+            StringBuilder plaintextBuilder = new StringBuilder();
+            int textOffset = 0;
+            int keyOffset = 0;
+            while (textOffset < ciphertext.Length)
+            {
+                //collect number to decrypt
+                int ciphertextNumber = 0;
+                bool numberCollected = false;
+                while (textOffset < ciphertext.Length && DIGITS.Contains(ciphertext[textOffset]))
+                {
+                    ciphertextNumber = ciphertextNumber * 10;
+                    ciphertextNumber += DIGITS.IndexOf(ciphertext[textOffset]);
+                    textOffset++;
+                    numberCollected = true;
+                }
+
+                //try to decrypt the collected number
+                if (numberCollected)
+                {
+                    int keyNumber = 0;
+                    if (key2.Length > 0)
+                    {
+                        keyNumber = polybiusSquareMapping[key2[keyOffset % key2.Length]];
+                    }
+                    int plaintextNumber = ciphertextNumber - keyNumber;
+
+                    if (polybiusSquareMappingInverse.ContainsKey(plaintextNumber))
+                    {
+                        plaintextBuilder.Append(polybiusSquareMappingInverse[plaintextNumber]);
+                    }
+                    else
+                    {
+                        switch (_settings.UnknownSymbolHandling)
+                        {
+                            case UnknownSymbolHandlingMode.Ignore:
+                                plaintextBuilder.Append(keyNumber);
+                                break;
+                            case UnknownSymbolHandlingMode.Replace:
+                                plaintextBuilder.Append("?");
+                                break;
+                            case UnknownSymbolHandlingMode.Remove:
+                            default:
+                                break;
+                        }
+                    }
+                    keyOffset++;
+                }
+
+                //collect non digit symbols
+                while (textOffset < ciphertext.Length && !DIGITS.Contains(ciphertext[textOffset]))
+                {
+                    switch (_settings.UnknownSymbolHandling)
+                    {
+                        case UnknownSymbolHandlingMode.Ignore:
+                            plaintextBuilder.Append(ciphertext[textOffset]);
+                            break;
+                        case UnknownSymbolHandlingMode.Replace:
+                            plaintextBuilder.Append("?");
+                            break;
+                        case UnknownSymbolHandlingMode.Remove:
+                        default:
+                            break;
+                    }
+                    textOffset++;
+                }                
+            }
+
+            return plaintextBuilder.ToString();
+        }
+
+
+        public void Initialize()
+        {
+            
+        }
+
+        public void PostExecution()
+        {
+            
+        }
+
+        public void PreExecution()
+        {
+            
+        }
+
+        public void Stop()
+        {
+            
+        }
+
+        public void OnPropertyChanged(string name)
+        {
+            EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(name));
         }
     }
 }
