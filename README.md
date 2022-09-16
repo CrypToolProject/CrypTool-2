@@ -36,21 +36,21 @@ A template showing two different modes of operation (ECB and CBC) for AES
 * Developer documentation is available in the GitHub project's [wiki](https://github.com/CrypToolProject/CrypTool-2/wiki).
 * Additional infos and videos on the ["Cryptography for everybody" - YouTube channel](https://www.youtube.com/c/CrypTool2).
 
-## Releases and Nightly Builds
+## Releases and nightly builds
 
 CrypTool 2 is built every night and released in the so-called "nightly build". Also, stable versions are published regularly. Both versions can be downloaded either as a Windows installer and installed or as a zip installation with no need of installation. Finally, nightly builds and stable releases can be updated using the updater shipped within CT2.
 
+The build system is located and executed on a private server maintained by the CrypTool 2 team. All released CrypTool 2 builds are digitally signed using a software signing certificate.
+
 * Download nightly builds and stable versions from our [website](https://www.cryptool.org/en/ct2/downloads).
 
-## Building CrypTool 2
+## Building and developing CrypTool 2
 
 * [Build instructions](https://github.com/CrypToolProject/CrypTool-2/wiki/Build-Instructions): how to clone and build your own CT2.
-
-## CrypTool 2 Developer HowTo
-
 * [Developer HowTo](https://github.com/CrypToolProject/CrypTool-2/wiki/Developer-HowTo): how to develop your own CrypTool 2 components.
+* [Development YouTube videos](https://www.youtube.com/playlist?list=PLMuvAbyIl0PTTfPE2VhJ9PZ6qlOG0MMaX): this video series shows how to develop your own CT2 components.
 
-## Get in Touch
+## Get in touch
 
 * [Contact us](https://www.cryptool.org/en/contact)
 
