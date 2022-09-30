@@ -7,7 +7,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Syllabary-Cipher</title>
+  <title lang="en">Syllabary Cipher</title>
   <summary lang="en">This template shows how the <i>Syllabary cipher</i> can be used to encrypt and decrypt text.</summary>
   <description lang="en">With this template we illustrate the encryption of a plaintext by means of a <b>Syllabary cipher</b>. The monoalphabetic cipher uses a table consisting of letters, digits, and syllables. The cipher was described in Military Cryptanalytics Part 1 Chapter XI, April 1956 by William F. Friedman and Lambros D.</description>
   <keywords>syllables, monoalphabetic, substitution, Friedman</keywords>
