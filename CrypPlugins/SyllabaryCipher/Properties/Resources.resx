@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Select the algorithm action (encryption or decryption)</value>
+  </data>
+  <data name="CiphertextNotDivisibleByTwo" xml:space="preserve">
+    <value>Input ciphertext length is not divisable by two. Append a '0' to the ciphertext</value>
+  </data>
+  <data name="CrypToolSubstitutionKey" xml:space="preserve">
+    <value>CrypTool substitution key</value>
+  </data>
+  <data name="Decrypt" xml:space="preserve">
+    <value>Decrypt</value>
+  </data>
+  <data name="DigitKeyCaption" xml:space="preserve">
+    <value>Digit key</value>
+  </data>
+  <data name="DigitKeyTooltip" xml:space="preserve">
+    <value>Input a 20-digit key that is used by the cipher for en- and decryption</value>
+  </data>
+  <data name="DuplicateColumnKeyElement" xml:space="preserve">
+    <value>Invalid key entered: Column index contains digit '{0}' more than once</value>
+  </data>
+  <data name="DuplicateRowKeyElement" xml:space="preserve">
+    <value>Invalid key entered: Row index contains digit '{0}' more than once</value>
+  </data>
+  <data name="Encrypt" xml:space="preserve">
+    <value>Encrypt</value>
+  </data>
+  <data name="EncryptionStrategyCaption" xml:space="preserve">
+    <value>Encryption strategy</value>
+  </data>
+  <data name="EncryptionStrategyTolltip" xml:space="preserve">
+    <value>Which encryption strategy is used during encryption. Largest means, the largest n-gram is always used for encryption</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="ExceptionWhileGuiCreation" xml:space="preserve">
+    <value>Exception occured during creation of table: {0}</value>
+  </data>
+  <data name="Formatted" xml:space="preserve">
+    <value>Formatted</value>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>French</value>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>German</value>
+  </data>
+  <data name="InputTextCaption" xml:space="preserve">
+    <value>Text input</value>
+  </data>
+  <data name="InputTextTooltip" xml:space="preserve">
+    <value>Input a string to be processed by the cipher</value>
+  </data>
+  <data name="InvalidKeyElement" xml:space="preserve">
+    <value>Invalid key entered: '{0}' is not a valid key element</value>
+  </data>
+  <data name="InvalidKeyLength" xml:space="preserve">
+    <value>Invalid key entered: Key length is not 20</value>
+  </data>
+  <data name="Italian" xml:space="preserve">
+    <value>Italian</value>
+  </data>
+  <data name="KeywordCaption" xml:space="preserve">
+    <value>Keyword</value>
+  </data>
+  <data name="KeywordTooltip" xml:space="preserve">
+    <value>A keyword that is used by the cipher for en- and decryption</value>
+  </data>
+  <data name="Latin" xml:space="preserve">
+    <value>Latin</value>
+  </data>
+  <data name="Longest" xml:space="preserve">
+    <value>Longest n-gram</value>
+  </data>
+  <data name="MissingColumnKeyElement" xml:space="preserve">
+    <value>Invalid key entered: Column index does not contain digit '{0}'</value>
+  </data>
+  <data name="MissingRowKeyElement" xml:space="preserve">
+    <value>Invalid key entered: Row index does not contain digit '{0}'</value>
+  </data>
+  <data name="OutputTextCaption" xml:space="preserve">
+    <value>Text output</value>
+  </data>
+  <data name="OutputTextTooltip" xml:space="preserve">
+    <value>The string after processing with the cipher</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Syllabary Cipher</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Component implementing the "Syllabary Cipher"</value>
+  </data>
+  <data name="Random" xml:space="preserve">
+    <value>Random</value>
+  </data>
+  <data name="Spanish" xml:space="preserve">
+    <value>Spanish</value>
+  </data>
+  <data name="TableLanguageCaption" xml:space="preserve">
+    <value>Table language</value>
+  </data>
+  <data name="TableLanguageTooltip" xml:space="preserve">
+    <value>Language which is used to created the table</value>
+  </data>
+  <data name="TableOutputCaption" xml:space="preserve">
+    <value>Table output</value>
+  </data>
+  <data name="TableOutputFormatCaption" xml:space="preserve">
+    <value>Table output format</value>
+  </data>
+  <data name="TableOutputFormatTooltip" xml:space="preserve">
+    <value>Format of the table output</value>
+  </data>
+  <data name="TableOutputTooltip" xml:space="preserve">
+    <value>Output of a formatted version of the table or a CrypTool substitution key</value>
+  </data>
+  <data name="UnknownSymbolHandlingCaption" xml:space="preserve">
+    <value>Unknown symbol handling</value>
+  </data>
+  <data name="UnknownSymbolHandlingList1" xml:space="preserve">
+    <value>Ignore (leave unmodified)</value>
+  </data>
+  <data name="UnknownSymbolHandlingList2" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="UnknownSymbolHandlingList3" xml:space="preserve">
+    <value>Replace with '?'</value>
+  </data>
+  <data name="UnknownSymbolHandlingTooltip" xml:space="preserve">
+    <value>What should be done with encountered characters at the input which are not in the alphabet?</value>
+  </data>
+</root>
