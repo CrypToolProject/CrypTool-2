@@ -391,7 +391,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                         label.Symbol = "?";
                     }
                     _ciphertextLabels[x, y] = label;
-                    label.Width = 30;//  + (_originalCiphertextSymbols[offset].Length  - 1) * 5;
+                    label.Width = 30 + (_originalCiphertextSymbols[offset].Length  - 1) * 5;
                     label.Height = 30;
                     label.FontSize = 20;
                     label.FontFamily = new FontFamily("Courier New");
@@ -474,7 +474,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                         label.Symbol = "?";
                     }
                     _ciphertextLabels[x, y] = label;
-                    label.Width = 30;// + (_originalCiphertextSymbols[offset].Length - 1) * 5;
+                    label.Width = 30 + (_originalCiphertextSymbols[offset].Length - 1) * 5;
                     label.Height = 30;
                     label.FontSize = 20;
                     label.FontFamily = new FontFamily("Courier New");
@@ -537,7 +537,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     label.Y = y;
                     label.SymbolOffset = offset;
                     label.Symbol = text.Substring(offset, 1);
-                    label.Width = 30;// + (_originalCiphertextSymbols[offset].Length - 1) * 5;
+                    label.Width = 30 + (_originalCiphertextSymbols[offset].Length - 1) * 5;
                     label.Height = 30;
                     label.FontSize = 20;
                     label.FontFamily = new FontFamily("Courier New");
@@ -614,7 +614,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     label.Y = y;
                     label.SymbolOffset = offset;
                     label.Symbol = text.Substring(offset, 1);
-                    label.Width = 30;// + (_originalCiphertextSymbols[offset].Length - 1) * 5;
+                    label.Width = 30 + (_originalCiphertextSymbols[offset].Length - 1) * 5;
                     label.Height = 30;
                     label.FontSize = 20;
                     label.FontFamily = new FontFamily("Courier New");
@@ -1111,7 +1111,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     int offset = 0;
                     foreach (char letter in _ciphertext)
                     {
-                        plaintextBuilder.Append(_plaintextLabels[column, row].Symbol);
+                        plaintextBuilder.Append(_plaintextLabels[column, row] != null ? _plaintextLabels[column, row].Symbol : " ");
                         column++;
                         offset++;
                         if ((AnalyzerConfiguration.KeepLinebreaks && AnalyzerConfiguration.LinebreakPositions.Contains(offset)) ||
@@ -1119,7 +1119,10 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                         {
                             column = 0;
                             row++;
-                            plaintextBuilder.AppendLine();
+                            if (AnalyzerConfiguration.KeepLinebreaks)
+                            {
+                                plaintextBuilder.AppendLine();
+                            }
                         }
                     }
                     //Fire event that the user changed the plaintext

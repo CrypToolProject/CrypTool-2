@@ -25,9 +25,9 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
     {
         private bool _stop = false;
 
-        private HomophoneMapping[] globalbestkey;
-        private Text globalbestplaintext;
-        private double globalbestkeycost;
+        private HomophoneMapping[] _globalbestkey;
+        private Text _globalbestplaintext;
+        private double _globalbestkeycost;
 
         public event EventHandler<ProgressChangedEventArgs> Progress;
         public event EventHandler<NewBestValueEventArgs> NewBestValue;
@@ -54,11 +54,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             KeyLetterDistributor keyLetterDistributor = new KeyLetterDistributor();
             HomophoneMapping[] bestkey = new HomophoneMapping[AnalyzerConfiguration.Keylength];
             double bestkeycost = double.MinValue;
-            globalbestkey = new HomophoneMapping[AnalyzerConfiguration.Keylength];
-            globalbestkeycost = double.MinValue;
+            _globalbestkey = new HomophoneMapping[AnalyzerConfiguration.Keylength];
+            _globalbestkeycost = double.MinValue;
             _stop = false;
 
-            DateTime lastUpdateTime = DateTime.Now;
+            DateTime nextUpdateTime = DateTime.Now.AddSeconds(1);
 
             //1) generate start key
             List<int> numbers = new List<int>();
@@ -148,34 +148,20 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
 
                     if (_stop)
                     {
-                        return;
+                        break;
                     }
                 }
 
                 //3.2) Check, if we have a new global best one
-                if (bestkeycost > globalbestkeycost)
+                if (bestkeycost > _globalbestkeycost)
                 {
-                    globalbestkeycost = bestkeycost;
-                    globalbestkey = CreateDeepKeyCopy(bestkey);
-                    globalbestplaintext = DecryptHomophonicSubstitution(globalbestkey);
+                    _globalbestkeycost = bestkeycost;
+                    _globalbestkey = CreateDeepKeyCopy(bestkey);
+                    _globalbestplaintext = DecryptHomophonicSubstitution(_globalbestkey);
 
                     if (NewBestValue != null)
                     {
-                        int[] globalbestplaintextNumbers = globalbestplaintext.ToIntegerArray();
-                        string strplaintext = Tools.MapNumbersIntoTextSpace(globalbestplaintextNumbers, AnalyzerConfiguration.PlaintextMapping);
-                        string strPlaintextMapping = CreateKeyString(globalbestkey, AnalyzerConfiguration.PlaintextMapping);
-                        string strciphertextalphabet = AnalyzerConfiguration.CiphertextAlphabet.Substring(0, globalbestkey.Length);
-                        double costvalue = globalbestkeycost;
-
-                        NewBestValue.Invoke(this,
-                            new NewBestValueEventArgs()
-                            {
-                                Plaintext = strplaintext,
-                                PlaintextAsNumbers = globalbestplaintextNumbers,
-                                PlaintextMapping = strPlaintextMapping,
-                                CiphertextAlphabet = strciphertextalphabet,
-                                CostValue = costvalue
-                            });
+                        OnNewBestValue();
                     }
                     noglobalbestcounter = 0;
                 }
@@ -191,25 +177,51 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     }
                 }
 
-
                 //3.3) update progress in ui
-                if (DateTime.Now > lastUpdateTime.AddSeconds(1))
+                if (DateTime.Now > nextUpdateTime)
                 {
                     if (Progress != null && !_stop)
                     {
                         Progress.Invoke(this, new ProgressChangedEventArgs() { Percentage = simulatedAnnealing.GetProgress() });
                     }
-                    lastUpdateTime = DateTime.Now;
+                    nextUpdateTime = DateTime.Now.AddSeconds(1);
                 }
 
-            } while (simulatedAnnealing.IsHot());
+            } while (!_stop && simulatedAnnealing.IsHot());
 
             //set final progress to 1.0
             if (Progress != null && !_stop)
             {
                 Progress.Invoke(this, new ProgressChangedEventArgs() { Percentage = 1, Terminated = true });
             }
+
+            //force current value as output
+            OnNewBestValue(true);
             _stop = true;
+        }
+
+        /// <summary>
+        /// Notifies the component that we have a new global new best value
+        /// </summary>
+        /// <param name="forceOutput"></param>
+        private void OnNewBestValue(bool forceOutput = false)
+        {
+            int[] globalbestplaintextNumbers = _globalbestplaintext.ToIntegerArray();
+            string strplaintext = Tools.MapNumbersIntoTextSpace(globalbestplaintextNumbers, AnalyzerConfiguration.PlaintextMapping);
+            string strPlaintextMapping = CreateKeyString(_globalbestkey, AnalyzerConfiguration.PlaintextMapping);
+            string strciphertextalphabet = AnalyzerConfiguration.CiphertextAlphabet.Substring(0, _globalbestkey.Length);
+            double costvalue = _globalbestkeycost;
+
+            NewBestValue.Invoke(this,
+                new NewBestValueEventArgs()
+                {
+                    Plaintext = strplaintext,
+                    PlaintextAsNumbers = globalbestplaintextNumbers,
+                    PlaintextMapping = strPlaintextMapping,
+                    CiphertextAlphabet = strciphertextalphabet,
+                    CostValue = costvalue,
+                    ForceOutput = forceOutput
+                });
         }
 
         /// <summary>
@@ -333,6 +345,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         public double CostValue { get; set; }
         public List<string> FoundWords { get; set; }
         public string SubstitutionKey { get; set; }
+        public bool ForceOutput { get; set; }
     }
 
     /// <summary>

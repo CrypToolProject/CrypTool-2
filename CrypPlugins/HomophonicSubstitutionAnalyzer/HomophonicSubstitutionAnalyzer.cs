@@ -362,11 +362,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <param name="newBestValueEventArgs"></param>
         private void PresentationOnNewBestValue(object sender, NewBestValueEventArgs newBestValueEventArgs)
         {
-            if (!_running)
+            if (!_running && !newBestValueEventArgs.ForceOutput)
             {
                 return;
             }
-            if (newBestValueEventArgs.NewTopEntry)
+            if (newBestValueEventArgs.NewTopEntry || newBestValueEventArgs.ForceOutput)
             {
                 Plaintext = AddLinebreaksToPlaintext(newBestValueEventArgs.Plaintext);
                 OnPropertyChanged("Plaintext");
@@ -377,7 +377,6 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     {
                         wordBuilder.AppendLine(word);
                     }
-
                     FoundWords = wordBuilder.ToString();
                     OnPropertyChanged("FoundWords");
                 }
