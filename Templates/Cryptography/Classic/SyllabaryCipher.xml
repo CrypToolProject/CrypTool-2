@@ -13,7 +13,7 @@
   <keywords>syllables, monoalphabetic, substitution, Friedman</keywords>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
-    <replacement key="$plaintext$" value = "This is a test of the syllabary cipher which was described in Military Cryptanalytics Part 1 Chapter XI, April 1956 by Friedman and Lambros"/>
+    <replacement key="$plaintext$" value = "This is a test of the syllabary cipher which was described in Military Cryptanalytics Part 1 Chapter XI, April 1956 by Friedman and Lambros Callimahos"/>
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$DigitKey$" value="Digit key" />
     <replacement key="$Keyword$" value="Keyword" />
@@ -25,7 +25,7 @@ There are three types of this cipher, which you can also create here: \line
 (2) Only a keyword is used to permute the table, but the digit key is known. \line
 (3) Both, digit key and keyword are unknown (as in this template here).\line
 \line
-The cipher was described in Military Cryptanalytics Part 1 Chapter XI, April 1956 by William F. Friedman and Lambros D." />
+The cipher was described in Military Cryptanalytics Part 1 Chapter XI, April 1956 by William Friedman and Lambros Callimahos" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -36,7 +36,7 @@ The cipher was described in Military Cryptanalytics Part 1 Chapter XI, April 195
   <keywords>Silben, monoalphabetisch, Substitution, Friedman</keywords>
   <replacements lang="de">
     <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$plaintext$" value = "This is a test of the syllabary cipher which was described in Military Cryptanalytics Part 1 Chapter XI, April 1956 by Friedman and Lambros"/>
+    <replacement key="$plaintext$" value = "This is a test of the syllabary cipher which was described in Military Cryptanalytics Part 1 Chapter XI, April 1956 by Friedman and Lambros Callimahos"/>
     <replacement key="$Ciphertext$" value="Geheimtext" />
     <replacement key="$DigitKey$" value="Ziffernschlüssel" />
     <replacement key="$Keyword$" value="Schlüsselwort" />
@@ -48,7 +48,7 @@ Es gibt drei Arten dieser Chiffre, die Sie auch hier erstellen können: \line
 (2) Es wird nur ein Schlüsselwort verwendet, aber der Ziffernschlüssel ist bekannt. \line
 (3) Sowohl Ziffernschlüssel als auch Schlüsselwort sind unbekannt (wie hier gezeigt).\line
 \line
-Die Chiffre wurde beschrieben in Military Cryptanalytics Part 1 Chapter XI, April 1956 von William F. Friedman und Lambros D." />
+Die Chiffre wurde beschrieben in Military Cryptanalytics Part 1 Chapter XI, April 1956 von William Friedman und Lambros Callimahos" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
