@@ -763,8 +763,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     Dispatcher.Invoke(DispatcherPriority.Normal,
                     (SendOrPostCallback)delegate
                    {
-                        //reset all locked letters
-                        for (int i = 0; i < _hillClimber.AnalyzerConfiguration.LockedHomophoneMappings.Length; i++)
+                       //reset all locked letters
+                       for (int i = 0; i < _hillClimber.AnalyzerConfiguration.LockedHomophoneMappings.Length; i++)
                        {
                            _hillClimber.AnalyzerConfiguration.LockedHomophoneMappings[i] = -1;
                        }
@@ -1108,12 +1108,10 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     StringBuilder plaintextBuilder = new StringBuilder();
                     int column = 0;
                     int row = 0;
-                    int offset = 0;
-                    foreach (char letter in _ciphertext)
+                    for (int offset = 0; offset < _ciphertextLabels.Length; offset++)
                     {
                         plaintextBuilder.Append(_plaintextLabels[column, row] != null ? _plaintextLabels[column, row].Symbol : " ");
                         column++;
-                        offset++;
                         if ((AnalyzerConfiguration.KeepLinebreaks && AnalyzerConfiguration.LinebreakPositions.Contains(offset)) ||
                             (!AnalyzerConfiguration.KeepLinebreaks && column == AnalyzerConfiguration.TextColumns))
                         {
