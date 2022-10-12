@@ -43,8 +43,12 @@ namespace CrypTool.Plugins.DECRYPTTools
             {
                 try
                 {
-                    byte[] iv = Convert.FromBase64String(Properties.Settings.Default.PasswordIV);
-                    PasswordTextbox.Password = UTF8Encoding.UTF8.GetString(ProtectedData.Unprotect(Convert.FromBase64String(Properties.Settings.Default.Password), iv, DataProtectionScope.CurrentUser));
+                    if(!string.IsNullOrEmpty(Properties.Settings.Default.Password) && 
+                       !string.IsNullOrEmpty(Properties.Settings.Default.PasswordIV))
+                    {
+                        byte[] iv = Convert.FromBase64String(Properties.Settings.Default.PasswordIV);
+                        PasswordTextbox.Password = UTF8Encoding.UTF8.GetString(ProtectedData.Unprotect(Convert.FromBase64String(Properties.Settings.Default.Password), iv, DataProtectionScope.CurrentUser));
+                    }                                        
                 }
                 catch (Exception)
                 {
