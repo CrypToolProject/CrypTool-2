@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="CrypTool.Plugins.Magma.MagmaPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="5700" d:DesignWidth="500"
+             xmlns:controls="clr-namespace:CrypTool.Plugins.Magma.Controls"
+             Background="White" VerticalContentAlignment="Center">
+    <ScrollViewer Name="ScrollViewer" VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" HorizontalScrollBarVisibility="Auto" Background="White">
+        <Grid>
+            <Grid Width="350" Height="5700" Margin="-200,5,5,5" Visibility="Hidden" Name="EncryptGrid">
+                <controls:EncryptRound x:Name="EncryptRound1" RoundName="{Loc Round1}" Margin="100,10,0,0"      RoundKey="Key0=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound2" RoundName="{Loc Round2}" Margin="100,185,0,0"     RoundKey="Key1=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound3" RoundName="{Loc Round3}" Margin="100,360,0,0"     RoundKey="Key2=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound4" RoundName="{Loc Round4}" Margin="100,535,0,0"     RoundKey="Key3=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound5" RoundName="{Loc Round5}" Margin="100,710,0,0"     RoundKey="Key4=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound6" RoundName="{Loc Round6}" Margin="100,885,0,0"     RoundKey="Key5=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound7" RoundName="{Loc Round7}" Margin="100,1060,0,0"    RoundKey="Key6=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound8" RoundName="{Loc Round8}" Margin="100,1235,0,0"    RoundKey="Key7=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound9" RoundName="{Loc Round9}"  Margin="100,1410,0,0"   RoundKey="Key0=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound10" RoundName="{Loc Round10}" Margin="100,1585,0,0"  RoundKey="Key1=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound11" RoundName="{Loc Round11}" Margin="100,1760,0,0"  RoundKey="Key2=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound12" RoundName="{Loc Round12}" Margin="100,1935,0,0"  RoundKey="Key3=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound13" RoundName="{Loc Round13}" Margin="100,2110,0,0"  RoundKey="Key4=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound14" RoundName="{Loc Round14}" Margin="100,2285,0,0"  RoundKey="Key5=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound15" RoundName="{Loc Round15}" Margin="100,2460,0,0"  RoundKey="Key6=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound16" RoundName="{Loc Round16}" Margin="100,2635,0,0"  RoundKey="Key7=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound17" RoundName="{Loc Round17}" Margin="100,2810,0,0"  RoundKey="Key0=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound18" RoundName="{Loc Round18}" Margin="100,2985,0,0"  RoundKey="Key1=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound19" RoundName="{Loc Round19}" Margin="100,3160,0,0"  RoundKey="Key2=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound20" RoundName="{Loc Round20}" Margin="100,3335,0,0"  RoundKey="Key3=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound21" RoundName="{Loc Round21}" Margin="100,3510,0,0"  RoundKey="Key4=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound22" RoundName="{Loc Round22}" Margin="100,3685,0,0"  RoundKey="Key5=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound23" RoundName="{Loc Round23}" Margin="100,3860,0,0"  RoundKey="Key6=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound24" RoundName="{Loc Round24}" Margin="100,4035,0,0"  RoundKey="Key7=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound25" RoundName="{Loc Round25}" Margin="100,4210,0,0" RoundKey="Key7=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound26" RoundName="{Loc Round26}" Margin="100,4385,0,0" RoundKey="Key6=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound27" RoundName="{Loc Round27}" Margin="100,4560,0,0" RoundKey="Key5=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound28" RoundName="{Loc Round28}" Margin="100,4735,0,0" RoundKey="Key4=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound29" RoundName="{Loc Round29}" Margin="100,4910,0,0"  RoundKey="Key3=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound30" RoundName="{Loc Round30}" Margin="100,5085,0,0"  RoundKey="Key2=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound31" RoundName="{Loc Round31}" Margin="100,5260,0,0"  RoundKey="Key1=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="False"/>
+                <controls:EncryptRound x:Name="EncryptRound32" RoundName="{Loc Round32}" Margin="100,5435,0,0"  RoundKey="Key0=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" LastRound="True"/>
+            </Grid>
+
+            <Grid Width="350" Height="5700" Margin="-200,5,5,5" Visibility="Visible" Name="DecryptGrid">
+                <controls:DecryptRound x:Name="DecryptRound1" RoundName="{Loc Round1}" Margin="100,-50,0,0"      RoundKey="Key0=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="True"/>
+                <controls:DecryptRound x:Name="DecryptRound2" RoundName="{Loc Round2}" Margin="100,125,0,0"     RoundKey="Key1=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound3" RoundName="{Loc Round3}" Margin="100,300,0,0"     RoundKey="Key2=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound4" RoundName="{Loc Round4}" Margin="100,475,0,0"     RoundKey="Key3=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound5" RoundName="{Loc Round5}" Margin="100,650,0,0"     RoundKey="Key4=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound6" RoundName="{Loc Round6}" Margin="100,825,0,0"     RoundKey="Key5=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound7" RoundName="{Loc Round7}" Margin="100,1000,0,0"    RoundKey="Key6=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound8" RoundName="{Loc Round8}" Margin="100,1175,0,0"    RoundKey="Key7=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound9" RoundName="{Loc Round9}"  Margin="100,1350,0,0"   RoundKey="Key0=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound10" RoundName="{Loc Round10}" Margin="100,1525,0,0"  RoundKey="Key1=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound11" RoundName="{Loc Round11}" Margin="100,1700,0,0"  RoundKey="Key2=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound12" RoundName="{Loc Round12}" Margin="100,1875,0,0"  RoundKey="Key3=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound13" RoundName="{Loc Round13}" Margin="100,2050,0,0"  RoundKey="Key4=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound14" RoundName="{Loc Round14}" Margin="100,2225,0,0"  RoundKey="Key5=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound15" RoundName="{Loc Round15}" Margin="100,2400,0,0"  RoundKey="Key6=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound16" RoundName="{Loc Round16}" Margin="100,2575,0,0"  RoundKey="Key7=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound17" RoundName="{Loc Round17}" Margin="100,2750,0,0"  RoundKey="Key0=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound18" RoundName="{Loc Round18}" Margin="100,2925,0,0"  RoundKey="Key1=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound19" RoundName="{Loc Round19}" Margin="100,3100,0,0"  RoundKey="Key2=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound20" RoundName="{Loc Round20}" Margin="100,3275,0,0"  RoundKey="Key3=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound21" RoundName="{Loc Round21}" Margin="100,3450,0,0"  RoundKey="Key4=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound22" RoundName="{Loc Round22}" Margin="100,3625,0,0"  RoundKey="Key5=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound23" RoundName="{Loc Round23}" Margin="100,3800,0,0"  RoundKey="Key6=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound24" RoundName="{Loc Round24}" Margin="100,3975,0,0"  RoundKey="Key7=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound25" RoundName="{Loc Round25}" Margin="100,4150,0,0"  RoundKey="Key7=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound26" RoundName="{Loc Round26}" Margin="100,4325,0,0"  RoundKey="Key6=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound27" RoundName="{Loc Round27}" Margin="100,4500,0,0"  RoundKey="Key5=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound28" RoundName="{Loc Round28}" Margin="100,4675,0,0"  RoundKey="Key4=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound29" RoundName="{Loc Round29}" Margin="100,4850,0,0"  RoundKey="Key3=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound30" RoundName="{Loc Round30}" Margin="100,5025,0,0"  RoundKey="Key2=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound31" RoundName="{Loc Round31}" Margin="100,5200,0,0"  RoundKey="Key1=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+                <controls:DecryptRound x:Name="DecryptRound32" RoundName="{Loc Round32}" Margin="100,5375,0,0"  RoundKey="Key0=00000000" LeftIn="00000000" LeftOut="00000000" RightIn="00000000" RightOut="00000000" FirstRound="False"/>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

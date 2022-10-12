@@ -508,6 +508,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MexicanArmyCipherDiskAnalyz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyllabaryCipher", "CrypPlugins\SyllabaryCipher\SyllabaryCipher.csproj", "{82C29FAF-0D0C-4296-B79C-1A4190D5C6D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magma", "CrypPlugins\Magma\Magma.csproj", "{3E5935B8-B968-4BDE-8F32-AE86AAA8EBF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1502,6 +1504,10 @@ Global
 		{82C29FAF-0D0C-4296-B79C-1A4190D5C6D1}.Debug|x64.Build.0 = Debug|x64
 		{82C29FAF-0D0C-4296-B79C-1A4190D5C6D1}.Release|x64.ActiveCfg = Release|x64
 		{82C29FAF-0D0C-4296-B79C-1A4190D5C6D1}.Release|x64.Build.0 = Release|x64
+		{3E5935B8-B968-4BDE-8F32-AE86AAA8EBF4}.Debug|x64.ActiveCfg = Debug|x64
+		{3E5935B8-B968-4BDE-8F32-AE86AAA8EBF4}.Debug|x64.Build.0 = Debug|x64
+		{3E5935B8-B968-4BDE-8F32-AE86AAA8EBF4}.Release|x64.ActiveCfg = Release|x64
+		{3E5935B8-B968-4BDE-8F32-AE86AAA8EBF4}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1744,6 +1750,7 @@ Global
 		{9EBA6DE4-9768-4A1F-9DBF-EC6CEA6AD5B4} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{C270CC39-73CD-47E6-BB6A-1B520068611D} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{82C29FAF-0D0C-4296-B79C-1A4190D5C6D1} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
+		{3E5935B8-B968-4BDE-8F32-AE86AAA8EBF4} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92042D62-2CDA-4393-9D74-4FB5AC571A2D}
