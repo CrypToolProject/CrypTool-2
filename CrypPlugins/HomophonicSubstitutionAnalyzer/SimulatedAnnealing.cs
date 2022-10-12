@@ -23,14 +23,15 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         private readonly Random _random = new Random();
         private readonly double _startTemperature = 0;
         private double _currentTemperature = 0;
-        private readonly double _reductionFactor = 0.0000001;
-        private readonly double _stepSize = 0;
+        private readonly double _steps;
+        private readonly double _stepSize;
 
-        public SimulatedAnnealing(double temperature)
+        public SimulatedAnnealing(double temperature, double steps)
         {
             _currentTemperature = temperature;
             _startTemperature = temperature;
-            _stepSize = _startTemperature * _reductionFactor;
+            _steps = steps;
+            _stepSize = _startTemperature / _steps;
         }
 
         /// <summary>
@@ -41,7 +42,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <returns></returns>
         public bool AcceptWithTemperature(double newKeyScore, double currentKeyScore)
         {
-            _currentTemperature = _currentTemperature - _stepSize;
+            _currentTemperature = _currentTemperature - _stepSize;            
             // Always accept better keys
             if (newKeyScore >= currentKeyScore)
             {

@@ -84,8 +84,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <param name="ciphertext"></param>
         /// <param name="ciphertextFormat"></param>
         /// <param name="separator"></param>
-        /// <param name="temperature"></param>
-        public void AddCiphertext(string ciphertext, CiphertextFormat ciphertextFormat, char separator, int temperature, bool useNulls)
+        /// <param name="startTemperature"></param>
+        public void AddCiphertext(string ciphertext, CiphertextFormat ciphertextFormat, char separator, int startTemperature, bool useNulls)
         {
             _ciphertext = ciphertext;
             _separator = separator;
@@ -99,13 +99,13 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 PlaintextMapping = PlainAlphabetText,
                 CiphertextAlphabet = CipherAlphabetText,
                 TextColumns = 60,
-                Cycles = 50000,
+                Steps = 50000,
                 KeyLetterLimits = new List<LetterLimits>(),
                 MinWordLength = 8,
                 MaxWordLength = 10,
                 WordCountToFind = 3,
                 Separator = separator,
-                FixedTemperature = temperature,
+                StartTemperature = startTemperature,
                 UseNulls = useNulls
             };
             _hillClimber = new HillClimber(AnalyzerConfiguration)

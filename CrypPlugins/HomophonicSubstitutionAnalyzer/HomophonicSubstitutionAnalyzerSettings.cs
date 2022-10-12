@@ -76,9 +76,9 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         private int _minWordLength = 8;
         private int _maxWordLength = 10;
         private AnalysisMode _analysisMode;
-        private int _cycles = 50000;
+        private int _steps = 10_000_000;
         private int _restarts = 1000;
-        private int _temperature = 15000;
+        private int _startTemperature = 15_000;
         private bool _useNulls = false;
         private bool _keepLinebreaks = false;
         private string _letterLimits = string.Empty;
@@ -201,11 +201,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             set => _analysisMode = value;
         }
 
-        [TaskPane("CyclesCaption", "CyclesTooltip", "AlgorithmSettingsGroup", 12, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
-        public int Cycles
+        [TaskPane("StepsCaption", "StepsTooltip", "AlgorithmSettingsGroup", 12, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
+        public int Steps
         {
-            get => _cycles;
-            set => _cycles = value;
+            get => _steps;
+            set => _steps = value;
         }
 
         [TaskPane("RestartsCaption", "RestartsTooltip", "AlgorithmSettingsGroup", 13, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
@@ -215,11 +215,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             set => _restarts = value;
         }
 
-        [TaskPane("FixedTemperatureCaption", "FixedTemperatureTooltip", "AlgorithmSettingsGroup", 14, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
-        public int Temperature
+        [TaskPane("StartTemperatureCaption", "StartTemperatureTooltip", "AlgorithmSettingsGroup", 14, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
+        public int StartTemperature
         {
-            get => _temperature;
-            set => _temperature = value;
+            get => _startTemperature;
+            set => _startTemperature = value;
         }
 
         public string LetterLimits

@@ -144,7 +144,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             }
             string ciphertext = HandleLinebreaks(Ciphertext, out List<int> linebreakPositions);
             _presentation.LoadLangStatistics(_settings.Language, _settings.UseSpaces, _settings.UseNulls);
-            _presentation.AddCiphertext(ciphertext, _settings.CiphertextFormat, separator, _settings.Temperature, _settings.UseNulls);
+            _presentation.AddCiphertext(ciphertext, _settings.CiphertextFormat, separator, _settings.StartTemperature, _settings.UseNulls);
             _presentation.AnalyzerConfiguration.PlaintextAlphabet = LanguageStatistics.Alphabet(LanguageStatistics.LanguageCode(_settings.Language), _settings.UseSpaces);
             if (_settings.UseNulls)
             {
@@ -154,7 +154,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             _presentation.AnalyzerConfiguration.WordCountToFind = _settings.WordCountToFind;
             _presentation.AnalyzerConfiguration.MinWordLength = _settings.MinWordLength;
             _presentation.AnalyzerConfiguration.MaxWordLength = _settings.MaxWordLength;
-            _presentation.AnalyzerConfiguration.Cycles = _settings.Cycles;
+            _presentation.AnalyzerConfiguration.Steps = _settings.Steps;
             _presentation.AnalyzerConfiguration.AnalysisMode = _settings.AnalysisMode;
             _presentation.AnalyzerConfiguration.Restarts = _settings.Restarts;
             _presentation.AnalyzerConfiguration.UseNulls = _settings.UseNulls;

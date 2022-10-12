@@ -50,7 +50,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         {
             //0) initialize everything            
             Random random = new Random(Guid.NewGuid().GetHashCode());
-            SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(AnalyzerConfiguration.FixedTemperature);
+            SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(AnalyzerConfiguration.StartTemperature, AnalyzerConfiguration.Steps);
             KeyLetterDistributor keyLetterDistributor = new KeyLetterDistributor();
             HomophoneMapping[] bestkey = new HomophoneMapping[AnalyzerConfiguration.Keylength];
             double bestkeycost = double.MinValue;
@@ -501,7 +501,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         public string PlaintextAlphabet { get; set; }
         public string CiphertextAlphabet { get; set; }
         public int TextColumns { get; set; }
-        public int Cycles { get; set; }
+        public int Steps { get; set; }
         public int Restarts { get; set; }
         public int MinWordLength { get; set; }
         public int MaxWordLength { get; set; }
@@ -509,7 +509,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         public List<LetterLimits> KeyLetterLimits { get; set; }
         public int[] LockedHomophoneMappings { get; set; }
         public Text Ciphertext { get; private set; }
-        public double FixedTemperature { get; set; }
+        public double StartTemperature { get; set; }
         public char Separator { get; set; }
         public bool UseNulls { get; set; }
         public List<int> LinebreakPositions { get; set; }

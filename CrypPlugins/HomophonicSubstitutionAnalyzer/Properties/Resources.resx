@@ -171,11 +171,11 @@
   <data name="CostValue_0" xml:space="preserve">
     <value>Cost value: {0}</value>
   </data>
-  <data name="CyclesCaption" xml:space="preserve">
-    <value>Cycles</value>
+  <data name="StepsCaption" xml:space="preserve">
+    <value>Steps</value>
   </data>
-  <data name="CyclesTooltip" xml:space="preserve">
-    <value>Maximum number of analysis cycles to be performed</value>
+  <data name="StepsTooltip" xml:space="preserve">
+    <value>Number of steps performed by the hillclimber</value>
   </data>
   <data name="DictionaryCaption" xml:space="preserve">
     <value>Dictionary</value>
@@ -189,8 +189,8 @@
   <data name="FindLockWords" xml:space="preserve">
     <value>Find/Lock words</value>
   </data>
-  <data name="FixedTemperatureCaption" xml:space="preserve">
-    <value>Temperature</value>
+  <data name="StartTemperatureCaption" xml:space="preserve">
+    <value>Start temperature</value>
   </data>
   <data name="FullAutomatic" xml:space="preserve">
     <value>Automatic</value>
@@ -362,5 +362,8 @@
   </data>
   <data name="Uniform" xml:space="preserve">
     <value>Uniform</value>
+  </data>
+  <data name="StartTemperatureTooltip" xml:space="preserve">
+    <value>Start temperature of the simulated annealing algorithm</value>
   </data>
 </root>
