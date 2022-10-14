@@ -17,7 +17,7 @@
         <Line X1="68" Y1="100" X2="85" Y2="100" Stroke="Black" StrokeThickness="1.5" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="125" Canvas.Top="50"/>
         <!-- S-box -->
         <Rectangle Width="42" Height="20" Stroke="Black" StrokeThickness="1.5" Canvas.Left="138" Canvas.Top="140" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Width="42" Height="25" Canvas.Left="138" Canvas.Top="136"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top">S-Box</Label>
+        <Label Width="42" Height="25" Canvas.Left="138" Canvas.Top="136"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top">S-box</Label>
         <!-- left arrow -->
         <Line X1="50" Y1="92" X2="50" Y2="25" Stroke="Black" StrokeThickness="1.5" HorizontalAlignment="Center" Canvas.Top="50" VerticalAlignment="Top"/>
         <Line X1="50" Y1="92" X2="45" Y2="87" Stroke="Black" StrokeThickness="1.5" HorizontalAlignment="Center" Canvas.Top="50" VerticalAlignment="Top"/>
@@ -30,7 +30,7 @@
         <Line X1="210" Y1="100" X2="250" Y2="100" Stroke="Black" StrokeThickness="1.5" HorizontalAlignment="Center" Canvas.Top="50" VerticalAlignment="Top"/>
         <Line X1="200" Y1="100" X2="205" Y2="95" Stroke="Black" StrokeThickness="1.5" HorizontalAlignment="Center" Canvas.Left="10" VerticalAlignment="Top" Canvas.Top="50"/>
         <Line X1="200" Y1="100" X2="205" Y2="105" Stroke="Black" StrokeThickness="1.5" HorizontalAlignment="Center" Canvas.Left="10" VerticalAlignment="Top" Canvas.Top="50"/>
-        <!-- s-box arrow -->
+        <!-- S-box arrow -->
         <Line X1="65" Y1="100" X2="76" Y2="100" Stroke="Black" StrokeThickness="1.5" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="116" Canvas.Top="50"/>
         <Line X1="58" Y1="100" X2="63" Y2="95" Stroke="Black" StrokeThickness="1.5" HorizontalAlignment="Center" Canvas.Left="122" VerticalAlignment="Top" Canvas.Top="50"/>
         <Line X1="58" Y1="100" X2="63" Y2="105" Stroke="Black" StrokeThickness="1.5" HorizontalAlignment="Center" Canvas.Left="122" VerticalAlignment="Top" Canvas.Top="50"/>

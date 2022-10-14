@@ -223,12 +223,12 @@
     <value>Implementation of the Soviet/Russian block cipher GOST Magma</value>
   </data>
   <data name="SBoxesCaption" xml:space="preserve">
-    <value>S-Boxes</value>
+    <value>S-boxes</value>
   </data>
   <data name="SBoxesTooltip" xml:space="preserve">
-    <value>Select the s-boxes, which should be used by the algorithm.</value>
+    <value>Select the S-boxes, which should be used by the algorithm.</value>
   </data>
   <data name="WrongSBoxesLength" xml:space="preserve">
-    <value>Input s-boxes definition is wrong. Length has to be 128 bytes, but got {0} bytes.</value>
+    <value>Input S-boxes definition is wrong. Length has to be 128 bytes, but got {0} bytes.</value>
   </data>
 </root>

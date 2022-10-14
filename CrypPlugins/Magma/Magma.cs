@@ -172,7 +172,7 @@ namespace CrypTool.Plugins.Magma
 
             //creates the Magma algorithm with the selected or provided x-boxes
             MagmaAlgorithm magma;
-            if (_sboxes == null) //no s-boxes given by the user
+            if (_sboxes == null) //no S-boxes given by the user
             {
                 switch (_settings.SBoxes)
                 {
@@ -187,7 +187,7 @@ namespace CrypTool.Plugins.Magma
                         break;
                 }
             }
-            else // s-boxes provided by the user
+            else // S-boxes provided by the user
             {                   
                 magma = new MagmaAlgorithm(_sboxes, keyArray);
             }

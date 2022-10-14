@@ -17,7 +17,7 @@
         <Line X1="68" Y1="100" X2="85" Y2="100" Stroke="Black" StrokeThickness="1.5" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="125"/>
         <!-- S-box -->
         <Rectangle Width="42" Height="20" Stroke="Black" StrokeThickness="1.5" Canvas.Left="138" Canvas.Top="90" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Width="42" Height="25" Canvas.Left="138" Canvas.Top="86"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center">S-Box</Label>
+        <Label Width="42" Height="25" Canvas.Left="138" Canvas.Top="86"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center">S-box</Label>
         <!-- left arrow -->
         <Line X1="50" Y1="92" X2="50" Y2="25" Stroke="Black" StrokeThickness="1.5"/>
         <Line X1="50" Y1="92" X2="45" Y2="87" Stroke="Black" StrokeThickness="1.5"/>
@@ -30,7 +30,7 @@
         <Line X1="210" Y1="100" X2="250" Y2="100" Stroke="Black" StrokeThickness="1.5"/>
         <Line X1="200" Y1="100" X2="205" Y2="95" Stroke="Black" StrokeThickness="1.5" HorizontalAlignment="Left" Canvas.Left="10" VerticalAlignment="Center"/>
         <Line X1="200" Y1="100" X2="205" Y2="105" Stroke="Black" StrokeThickness="1.5" HorizontalAlignment="Left" Canvas.Left="10" VerticalAlignment="Center"/>
-        <!-- s-box arrow -->
+        <!-- S-box arrow -->
         <Line X1="65" Y1="100" X2="76" Y2="100" Stroke="Black" StrokeThickness="1.5" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="116"/>
         <Line X1="58" Y1="100" X2="63" Y2="95" Stroke="Black" StrokeThickness="1.5" HorizontalAlignment="Left" Canvas.Left="122" VerticalAlignment="Center"/>
         <Line X1="58" Y1="100" X2="63" Y2="105" Stroke="Black" StrokeThickness="1.5" HorizontalAlignment="Left" Canvas.Left="122" VerticalAlignment="Center"/>

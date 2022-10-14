@@ -20,7 +20,7 @@
     One GOST chip manufacturer reported that he generated S-boxes himself using a pseudorandom number generator.<newline/>
     <newline/>
     The CT2 component Magma allows to define your own set of S-boxes by providing a byte array of length 128 bytes to the component.
-    In the settings, the user can choose between two variants of pre-defined S-boxes: One set of s-boxes is from the standard GOST R 34.12-2015 and the other one is from the &quot;Central Bank of Russian Federation&quot;.<newline/>
+    In the settings, the user can choose between two variants of pre-defined S-boxes: One set of S-boxes is from the standard GOST R 34.12-2015 and the other one is from the &quot;Central Bank of Russian Federation&quot;.<newline/>
     <newline/>
     The introduction has been mostly copied from the English Wikipedia article. For more details read <ref id="wikipedia"/>.
   </introduction>

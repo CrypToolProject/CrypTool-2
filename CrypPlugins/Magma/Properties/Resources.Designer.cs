@@ -376,7 +376,7 @@ namespace CrypTool.Plugins.Magma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to S-Boxes.
+        ///   Looks up a localized string similar to S-boxes.
         /// </summary>
         internal static string SBoxesCaption {
             get {
@@ -385,7 +385,7 @@ namespace CrypTool.Plugins.Magma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the s-boxes, which should be used by the algorithm..
+        ///   Looks up a localized string similar to Select the S-boxes, which should be used by the algorithm..
         /// </summary>
         internal static string SBoxesTooltip {
             get {
@@ -394,7 +394,7 @@ namespace CrypTool.Plugins.Magma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Input s-boxes definition is wrong. Length has to be 128 bytes, but got {0} bytes..
+        ///   Looks up a localized string similar to Input S-boxes definition is wrong. Length has to be 128 bytes, but got {0} bytes..
         /// </summary>
         internal static string WrongSBoxesLength {
             get {
