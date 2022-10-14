@@ -163,7 +163,7 @@
     <value>Schlüssel</value>
   </data>
   <data name="InputKeyTooltip" xml:space="preserve">
-    <value>Der angegebene Schlüssel muss 8 Bytes lang sein. Zu kurze oder zu lange Schlüssel werden verlängert oder abgeschnitten.</value>
+    <value>Der angegebene Schlüssel muss 32 Bytes lang sein. Zu kurze oder zu lange Schlüssel werden verlängert oder abgeschnitten.</value>
   </data>
   <data name="InputSBoxesTooltip" xml:space="preserve">
     <value>Geben Sie 128 Bytes ein, um Ihre eigenen acht Vier-Bit-S-Boxen zu definieren</value>

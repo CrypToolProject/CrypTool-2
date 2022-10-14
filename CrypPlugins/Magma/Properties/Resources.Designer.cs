@@ -196,7 +196,7 @@ namespace CrypTool.Plugins.Magma.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The provided key must be 8 bytes. Too short or too long keys will be extended or truncated..
+        ///   Looks up a localized string similar to The provided key must be 32 bytes long. Too short or too long keys will be extended or truncated..
         /// </summary>
         internal static string InputKeyTooltip {
             get {

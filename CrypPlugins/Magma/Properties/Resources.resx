@@ -163,7 +163,7 @@
     <value>Key</value>
   </data>
   <data name="InputKeyTooltip" xml:space="preserve">
-    <value>The provided key must be 8 bytes. Too short or too long keys will be extended or truncated.</value>
+    <value>The provided key must be 32 bytes long. Too short or too long keys will be extended or truncated.</value>
   </data>
   <data name="InputSBoxesTooltip" xml:space="preserve">
     <value>Enter 128 bytes to define your own eight four-bit S-boxes</value>
