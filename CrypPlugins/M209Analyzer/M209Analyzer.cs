@@ -19,6 +19,7 @@ using CrypTool.PluginBase.Miscellaneous;
 using System.ComponentModel;
 using System;
 using System.Windows.Controls;
+using M209Analyzer;
 
 namespace CrypTool.Plugins.M209Analyzer
 {
@@ -36,6 +37,9 @@ namespace CrypTool.Plugins.M209Analyzer
         // HOWTO: You need to adapt the settings class as well, see the corresponding file.
         private readonly M209AnalyzerSettings settings = new M209AnalyzerSettings();
         private const string ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWKXY";
+
+        private PinSetting BestPins = new PinSetting();
+        private LugSetting BestLugs = new LugSetting();
 
         #endregion
 
@@ -130,18 +134,22 @@ namespace CrypTool.Plugins.M209Analyzer
             do
             {
                 stuck = true;
-                for (int i = 0; i < NeighborLugs(BestLugs, V); i++)
-                {
 
+                LugSetting[] candidateLugs = BestLugs.GetNeighborLugs("V");
+                PinSetting[] candidatePins;
+
+                for (int i = 0; i < candidateLugs.Length; i++)
+                {
+                    candidatePins = SAInner(ciphertext, candidateLugs[i], "V");
                 }
 
             } while (stuck == true);
             return "BestLugs, BestPins";
         }
 
-        private string SAInner(string chiphertext, string lugs, string versionOfInstruction)
+        private PinSetting[] SAInner(string chiphertext, LugSetting lug, string versionOfInstruction)
         {
-            return "BestPins";
+            return new PinSetting[] { new PinSetting()};
         }
 
         private double LogMonograms(string P)
