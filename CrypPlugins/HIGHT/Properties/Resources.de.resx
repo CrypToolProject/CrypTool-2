@@ -121,57 +121,111 @@
     <value>HIGHT</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>HIGHT is a HIgh security and liGHT weight block cipher</value>
+    <value>HIGHT ist eine Block-Chiffre mit hoher Sicherheit (HIgh security) und geringem Ressourcenbedarf (liGHT weight)</value>
   </data>
   <data name="InputStreamCaption" xml:space="preserve">
-    <value>Input</value>
+    <value>Eingabedatenstrom</value>
   </data>
   <data name="InputStreamTooltip" xml:space="preserve">
-    <value>Data to be encrypted or decrypted.</value>
+    <value>zu ver-/entschlüsselnde Daten</value>
   </data>
   <data name="InputKeyCaption" xml:space="preserve">
-    <value>Key</value>
+    <value>Schlüssel</value>
   </data>
   <data name="InputKeyTooltip" xml:space="preserve">
-    <value>Must be 16 bytes (128 bit).</value>
+    <value>Der Schlüssel muss 16 Bytes (128 Bits) lang sein.</value>
   </data>
   <data name="OutputStreamCaption" xml:space="preserve">
-    <value>Output stream</value>
+    <value>Ausgabedatenstrom</value>
   </data>
   <data name="OutputStreamTooltip" xml:space="preserve">
-    <value>Encrypted or decrypted output data</value>
+    <value>Ver- bzw. entschlüsselter Ausgabedatenstrom</value>
   </data>
   <data name="ActionCaption" xml:space="preserve">
-    <value>Action</value>
+    <value>Aktion</value>
   </data>
   <data name="ActionTooltip" xml:space="preserve">
-    <value>Do you want the input data to be encrypted or decrypted?</value>
+    <value>Soll die Eingabe ver- oder entschlüsselt werden?</value>
   </data>
   <data name="PaddingCaption" xml:space="preserve">
-    <value>Padding mode</value>
+    <value>Auffüll-Methode (Padding)</value>
   </data>
   <data name="PaddingTooltip" xml:space="preserve">
-    <value>Select a mode to fill partial data blocks.</value>
+    <value>Wählen Sie die Methode, wie zu kurze Blöcke zur Blockgröße aufgefüllt werden.</value>
   </data>
   <data name="PaddingTPCaption" xml:space="preserve">
-    <value>Padding Mode</value>
+    <value>Auffüll-Methode (Padding)</value>
   </data>
   <data name="PaddingTPTooltip" xml:space="preserve">
-    <value>Select a mode to fill partial data blocks.</value>
+    <value>Wählen Sie die Methode, wie zu kurze Blöcke zur Blockgröße aufgefüllt werden.</value>
   </data>
   <data name="ActionList1" xml:space="preserve">
-    <value>Encrypt</value>
+    <value>Verschlüsseln</value>
   </data>
   <data name="ActionList2" xml:space="preserve">
-    <value>Decrypt</value>
+    <value>Entschlüsseln</value>
+  </data>
+  <data name="ActionTooltip1" xml:space="preserve">
+    <value>Stellt ein, ob die Daten ver- oder entschlüsselt werden sollen.</value>
+  </data>
+  <data name="BlockModeCaption" xml:space="preserve">
+    <value>Blockverkettungsmodus</value>
+  </data>
+  <data name="BlockModeList1" xml:space="preserve">
+    <value>Electronic Code Book (ECB)</value>
+  </data>
+  <data name="BlockModeList2" xml:space="preserve">
+    <value>Cipher Block Chaining (CBC)</value>
+  </data>
+  <data name="BlockModeList3" xml:space="preserve">
+    <value>Cipher Feedback (CFB)</value>
+  </data>
+  <data name="BlockModeList4" xml:space="preserve">
+    <value>Output Feedback (OFB)</value>
+  </data>
+  <data name="BlockModeTooltip" xml:space="preserve">
+    <value>Stellt die Art der Blockverkettung ein.</value>
+  </data>
+  <data name="CENTRAL_BANK_OF_RUSSIAN_FEDERATION" xml:space="preserve">
+    <value>Zentralbank der Russischen Föderation</value>
+  </data>
+  <data name="GOST_R_34_12_2015N" xml:space="preserve">
+    <value>GOST R 34.12-2015</value>
+  </data>
+  <data name="InputIVCaption" xml:space="preserve">
+    <value>Initialisierungsvektor</value>
+  </data>
+  <data name="InputIVTooltip" xml:space="preserve">
+    <value>Der Initialisierungsvektor (IV) der in den Blockmodi verwendet wird. Er muss die selbe größe wie die Blockgröße haben.</value>
+  </data>
+  <data name="IVTooLong" xml:space="preserve">
+    <value>Inititalisierungsvektor zu lang: {0}. Auf 8 Byte kürzen.</value>
+  </data>
+  <data name="IVTooShort" xml:space="preserve">
+    <value>Inititalisierungsvektor zu kurz: {0}. Erweitern Sie auf 8 Byte.</value>
+  </data>
+  <data name="KeyTooLong" xml:space="preserve">
+    <value>Eingabetaste zu lang: {0}. Benötigt einen 32-Byte-Schlüssel. Kürze Schlüssel auf Länge.</value>
+  </data>
+  <data name="KeyTooShort" xml:space="preserve">
+    <value>Eingabeschlüssel zu kurz: {0}. Benötigt einen 32 Byte langen Schlüssel. Erweitere mit Nullen.</value>
   </data>
   <data name="PaddingList1" xml:space="preserve">
-    <value>Zeros</value>
+    <value>Kein Padding</value>
   </data>
   <data name="PaddingList2" xml:space="preserve">
-    <value>None</value>
+    <value>Nullen</value>
   </data>
   <data name="PaddingList3" xml:space="preserve">
     <value>PKCS7</value>
+  </data>
+  <data name="PaddingList4" xml:space="preserve">
+    <value>ANSIX923</value>
+  </data>
+  <data name="PaddingList5" xml:space="preserve">
+    <value>ISO10126</value>
+  </data>
+  <data name="PaddingList6" xml:space="preserve">
+    <value>1-0 Padding</value>
   </data>
 </root>

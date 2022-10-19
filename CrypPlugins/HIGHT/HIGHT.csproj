@@ -8,7 +8,7 @@
     <ProjectGuid>{62296CE7-A264-497A-A63A-F7B517F4A0CC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HIGHT</RootNamespace>
+    <RootNamespace>CrypTool.Plugins.HIGHT</RootNamespace>
     <AssemblyName>HIGHT</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -90,6 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HIGHTAlgorithm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HIGHT.cs" />
     <Compile Include="HIGHTSettings.cs" />
@@ -105,14 +106,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\decrypt.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\encrypt.png" />
-    <Resource Include="Images\HIGHT.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="icon.png" />
+    <Resource Include="images\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrypPluginBase\CrypPluginBase.csproj">
@@ -120,9 +114,6 @@
       <Name>CrypPluginBase</Name>
       <Private>False</Private>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="DetailedDescription\Images\HIGHT.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -155,6 +146,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="DetailedDescription\doc.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\HIGHT.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
