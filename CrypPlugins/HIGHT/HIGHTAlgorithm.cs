@@ -15,13 +15,20 @@
 */
 
 using System;
+using System.Runtime.CompilerServices;
 
 namespace CrypTool.Plugins.HIGHT
 {
+    /// <summary>
+    /// Implementation of the HIGHT encryption algorithm as specified in:
+    /// "The HIGHT Encryption Algorithm"
+    /// "draft-kisa-hight-00"
+    /// see: https://datatracker.ietf.org/doc/html/draft-kisa-hight-00
+    /// </summary>
     public class HIGHTAlgorithm
     {
         /// <summary>
-        /// Table for function F0
+        /// Pre-calculated table for function F0
         /// </summary>
         private readonly byte[] _F0 = new byte[256]
         {
@@ -44,7 +51,7 @@ namespace CrypTool.Plugins.HIGHT
         };
 
         /// <summary>
-        /// Table for function F1
+        /// Pre-calculated table for function F1
         /// </summary>
         public readonly byte[] _F1 = new byte[256]
         {
@@ -99,16 +106,16 @@ namespace CrypTool.Plugins.HIGHT
         {
             //states in encryption
             byte[] X = new byte[8];
-            byte[] X_old = new byte[8];
+            byte[] X_old = new byte[8]; //state of previous round
 
             //whitening
             X[0] = (byte)(Mod(P[7] + _WK[0], 256));
-            X[2] = (byte)(P[5] ^ _WK[1]);
-            X[4] = (byte)(Mod(P[3] + _WK[2], 256));
-            X[6] = (byte)(P[1] ^ _WK[3]);
             X[1] = P[6];
+            X[2] = (byte)(P[5] ^ _WK[1]);
             X[3] = P[4];
+            X[4] = (byte)(Mod(P[3] + _WK[2], 256));
             X[5] = P[2];
+            X[6] = (byte)(P[1] ^ _WK[3]);            
             X[7] = P[0];
 
             for (int i = 0; i < 31; i++)
@@ -141,16 +148,16 @@ namespace CrypTool.Plugins.HIGHT
 #if DEBUG
             Console.WriteLine("32: {7:x} {6:x} {5:x} {4:x} {3:x} {2:x} {1:x} {0:x}", X[0], X[1], X[2], X[3], X[4], X[5], X[6], X[7]);
 #endif
+            //whitening
             byte[] C = new byte[8];
-            C[7] = (byte)Mod(X[0] + _WK[4], 256);
-            C[6] = X[1];
-            C[5] = (byte)(X[2] ^ _WK[5]);
-            C[4] = X[3];
-            C[3] = (byte)Mod(X[4] + _WK[6], 256);
-            C[2] = X[5];
-            C[1] = (byte)(X[6] ^ _WK[7]);
             C[0] = X[7];
-
+            C[1] = (byte)(X[6] ^ _WK[7]);
+            C[2] = X[5];
+            C[3] = (byte)Mod(X[4] + _WK[6], 256);
+            C[4] = X[3];
+            C[5] = (byte)(X[2] ^ _WK[5]);
+            C[6] = X[1];
+            C[7] = (byte)Mod(X[0] + _WK[4], 256);            
             return C;
         }
 
@@ -164,21 +171,20 @@ namespace CrypTool.Plugins.HIGHT
         {
             //states in encryption
             byte[] X = new byte[8];
-            byte[] X_old = new byte[8];
+            byte[] X_old = new byte[8]; //state of previous round
 
             //whitening
             X[0] = (byte)(Mod(C[7] - _WK[4], 256));
-            X[2] = (byte)(C[5] ^ _WK[5]);
-            X[4] = (byte)(Mod(C[3] - _WK[6], 256));
-            X[6] = (byte)(C[1] ^ _WK[7]);
             X[1] = C[6];
+            X[2] = (byte)(C[5] ^ _WK[5]);
             X[3] = C[4];
+            X[4] = (byte)(Mod(C[3] - _WK[6], 256));
             X[5] = C[2];
+            X[6] = (byte)(C[1] ^ _WK[7]);            
             X[7] = C[0];
 #if DEBUG
             Console.WriteLine("32: {7:x} {6:x} {5:x} {4:x} {3:x} {2:x} {1:x} {0:x}", X[0], X[1], X[2], X[3], X[4], X[5], X[6], X[7]);
 #endif
-
             Array.Copy(X, X_old, 8);
             X[0] = X_old[0];
             X[1] = (byte)Mod(X_old[1] - (_F1[X_old[0]] ^ _SK[124]), 256);
@@ -207,16 +213,16 @@ namespace CrypTool.Plugins.HIGHT
 #endif
             }
 
+            //whitening
             byte[] P = new byte[8];
-            P[7] = (byte)Mod(X[0] - _WK[0], 256);
-            P[6] = X[1];
-            P[5] = (byte)(X[2] ^ _WK[1]);
-            P[4] = X[3];
-            P[3] = (byte)Mod(X[4] - _WK[2], 256);
-            P[2] = X[5];
-            P[1] = (byte)(X[6] ^ _WK[3]);
             P[0] = X[7];
-
+            P[1] = (byte)(X[6] ^ _WK[3]);
+            P[2] = X[5];
+            P[3] = (byte)Mod(X[4] - _WK[2], 256);
+            P[4] = X[3];
+            P[5] = (byte)(X[2] ^ _WK[1]);
+            P[6] = X[1];
+            P[7] = (byte)Mod(X[0] - _WK[0], 256);            
             return P;
         }
 
@@ -224,10 +230,10 @@ namespace CrypTool.Plugins.HIGHT
         /// <summary>
         /// Performs the key schedule to create whitening keys and round keys
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="inputKey"></param>
         public void KeySchedule(byte[] inputKey)
         {
-            //copy and reverse key
+            //copy and reverse input key
             byte[] key = new byte[16];
             for (int i = 0; i < 16; i++)
             {
@@ -244,10 +250,9 @@ namespace CrypTool.Plugins.HIGHT
                 _WK[i] = key[i - 4];
             }
 
-            //constant generation
+            //constants generation
             byte[] delta = new byte[128];
             delta[0] = 0b1011010;
-
             for (int i = 1; i < 128; i++)
             {
                 delta[i] = LFSR_h(delta[i - 1]);
@@ -269,10 +274,11 @@ namespace CrypTool.Plugins.HIGHT
 
         /// <summary>
         /// Implementation of the LFSR "h"
-        /// Computes the next state based on the current
+        /// Computes the next state based on the given state
         /// </summary>
         /// <param name="state"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private byte LFSR_h(byte state)
         {
             byte bits = (byte)(state & 0b0001001);
@@ -290,11 +296,12 @@ namespace CrypTool.Plugins.HIGHT
         #region Helper methods
 
         /// <summary>
-        /// Computesa a number mod modulus
+        /// Computes a number mod modulus
         /// </summary>
         /// <param name="number"></param>
         /// <param name="modulus"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private int Mod(int number, int modulus)
         {
             return ((number % modulus) + modulus) % modulus;
