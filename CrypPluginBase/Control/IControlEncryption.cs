@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2009 Thomas Schmid
+   Copyright 2008 - 2022 CrypTool Team
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -13,14 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
 using System;
 
 namespace CrypTool.PluginBase.Control
 {
     public interface IControlEncryption : IControl, IDisposable
     {
-
         byte[] Encrypt(byte[] plaintext, byte[] key);
         byte[] Encrypt(byte[] plaintext, byte[] key, byte[] iv);
         byte[] Encrypt(byte[] plaintext, byte[] key, byte[] iv, int bytesToUse);

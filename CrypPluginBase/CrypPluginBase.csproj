@@ -112,7 +112,6 @@
     <Compile Include="Attributes\TabColorAttribute.cs" />
     <Compile Include="ComponentInformations.cs" />
     <Compile Include="Control\IControlCubeAttack.cs" />
-    <Compile Include="Control\IControlSigabaEncryption.cs" />
     <Compile Include="Control\IControlTranspoEncryption.cs" />
     <Compile Include="Control\IControlCost.cs" />
     <Compile Include="Control\IControlEncryption.cs" />
@@ -134,7 +133,6 @@
     <Compile Include="Miscellaneous\DescriptionHyperlink.cs" />
     <Compile Include="Miscellaneous\EventsHelper.cs" />
     <Compile Include="Attributes\PropertySaveOrderAttribute.cs" />
-    <Compile Include="Attributes\IntegerRangeAttribute.cs" />
     <Compile Include="Editor\DragDropDataObject.cs" />
     <Compile Include="Editor\EditorExtension.cs" />
     <Compile Include="Editor\EditorInfoAttribute.cs" />
