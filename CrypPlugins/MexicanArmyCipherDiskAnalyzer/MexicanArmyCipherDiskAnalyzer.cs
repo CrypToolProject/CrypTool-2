@@ -35,14 +35,15 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer
     public class MexicanArmyCipherDiskAnalyzer : ICrypComponent
     {
         private readonly MexicanArmyCipherDiskSettings _settings;
-        private readonly AssignmentPresentation _presentation = new AssignmentPresentation();
-        private const int MaxBestListEntries = 100;
+        private readonly AssignmentPresentation _presentation = new AssignmentPresentation();        
         private bool _running = false;
         private DateTime _startTime;
         private DateTime _endTime;
 
         private const string ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private const string DIGITS = "0123456789";
+        private const int MAXBESTLISTENTRIES = 100;
+
         private readonly string[,] DISKS = new string[,]
         {
             { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26" },
@@ -302,9 +303,9 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer
                 {                   
                     //insert new entry at correct place to sustain order of list:                    
                     _presentation.BestList.Insert(insertIndex, entry);
-                    if (_presentation.BestList.Count > MaxBestListEntries)
+                    if (_presentation.BestList.Count > MAXBESTLISTENTRIES)
                     {
-                        _presentation.BestList.RemoveAt(MaxBestListEntries);
+                        _presentation.BestList.RemoveAt(MAXBESTLISTENTRIES);
                     }
                     int ranking = 1;
                     foreach (ResultEntry e in _presentation.BestList)
