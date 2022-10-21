@@ -14,16 +14,13 @@
    limitations under the License.
 */
 
-// using CrypTool.PluginBase.Miscellaneous; // for [MethodImpl(MethodImplOptions.Synchronized)]
 using CrypTool.LFSR.Implementation;
 using CrypTool.PluginBase;
-using CrypTool.PluginBase.Utils;
-using CrypTool.PluginBase.Utils.Datatypes;
-using CrypTool.PluginBase.Utils.StandaloneComponent.Compat;
+using CrypTool.LFSR.Utils;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Controls;
-using static CrypTool.PluginBase.Utils.Datatypes.Datatypes;
+using static CrypTool.LFSR.Utils.Datatypes;
 
 namespace CrypTool.LFSR
 {

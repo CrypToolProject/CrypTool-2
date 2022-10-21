@@ -108,6 +108,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Datatypes.cs" />
+    <Compile Include="Utils\Logging.cs" />
+    <Compile Include="Utils\ObjectDeconstruct.cs" />
+    <Compile Include="Utils\StandaloneComponentCompat.cs" />
+    <Compile Include="Utils\StandaloneComponents.cs" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\decrypt.png" />

@@ -179,17 +179,12 @@
     <Compile Include="Miscellaneous\Hex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TabInfo.cs" />
-    <Compile Include="Utils\Datatypes.cs" />
     <Compile Include="Utils\Graphics\Diagrams\Histogram\HistogramChart.xaml.cs">
       <DependentUpon>HistogramChart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Graphics\Diagrams\Histogram\HistogramDataSource.cs" />
     <Compile Include="Utils\Graphics\Diagrams\Histogram\HistogramElement.cs" />
     <Compile Include="Utils\LanguageStatistics.cs" />
-    <Compile Include="Utils\Logging.cs" />
-    <Compile Include="Utils\ObjectDeconstruct.cs" />
-    <Compile Include="Utils\StandaloneComponent\StandaloneComponentCompat.cs" />
-    <Compile Include="Utils\StandaloneComponent\StandaloneComponents.cs" />
     <Compile Include="Utils\UnicodeHelper.cs" />
     <Compile Include="Validation\IntegerRule.cs" />
     <Compile Include="Validation\RegExRule.cs" />

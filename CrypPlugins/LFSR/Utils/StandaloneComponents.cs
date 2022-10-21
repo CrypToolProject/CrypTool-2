@@ -14,14 +14,11 @@
    limitations under the License.
 */
 
-using CrypTool.PluginBase.Utils.Datatypes;
 using System;
-namespace CrypTool.PluginBase.Utils.StandaloneComponent
-{
-    using CrypTool.PluginBase.Utils.Logging;
-    using CrypTool.PluginBase.Utils.StandaloneComponent.Common;
-    using System.Windows.Controls;
+using System.Windows.Controls;
 
+namespace CrypTool.LFSR.Utils
+{
     // Parameters (Settings) (perfunctory, for easier adaption of tighter modeling later)
     public interface IParameters
     {
@@ -138,10 +135,7 @@ namespace CrypTool.PluginBase.Utils.StandaloneComponent
         }
 
     }
-}
 
-namespace CrypTool.PluginBase.Utils.StandaloneComponent.Common
-{
     public class ComponentProgress
     {
         public enum Kinds { Pending, Finished, Wontfinish }

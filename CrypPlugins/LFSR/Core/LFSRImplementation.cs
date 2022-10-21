@@ -13,21 +13,18 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using CrypTool.PluginBase.Utils.Datatypes;
-using CrypTool.PluginBase.Utils.ObjectDeconstruct;
+using CrypTool.LFSR.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using static CrypTool.LFSR.LFSRErrors;
-using static CrypTool.PluginBase.Utils.Datatypes.Datatypes;
+using static CrypTool.LFSR.Utils.Datatypes;
 
 namespace CrypTool.LFSR
 {
     using CrypTool.LFSR.Implementation;
-    using CrypTool.PluginBase.Utils;
-    using CrypTool.PluginBase.Utils.Logging;
-    using CrypTool.PluginBase.Utils.StandaloneComponent;
-    using CrypTool.PluginBase.Utils.StandaloneComponent.Common;
+    using CrypTool.LFSR.Utils;
+
 
     public class LFSRAPI : AbstractComponentAPI<LFSRParameters>
     {

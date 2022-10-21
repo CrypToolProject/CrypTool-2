@@ -13,24 +13,23 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.Utils.Logging;
-using CrypTool.PluginBase.Utils.StandaloneComponent.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using LogLevel = CrypTool.LFSR.Utils.LogLevel;
 
-namespace CrypTool.PluginBase.Utils.StandaloneComponent.Compat
+namespace CrypTool.LFSR.Utils
 {
-
     public static class Compat
     {
         public static dynamic ThrowCompatIncomplete(string msg)
         {
             throw new Exception($"CT2 component compat (CrypTool.Component.StandaloneCompat) has a bug: {msg}");
         }
-        public static NotificationLevel ConvertNotificationLevel(LogLevel level)
+        public static NotificationLevel ConvertNotificationLevel(Utils.LogLevel level)
         {
             switch (level)
             {
