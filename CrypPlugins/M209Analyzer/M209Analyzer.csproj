@@ -76,8 +76,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enum\PinSettingTransformation.cs" />
+    <Compile Include="LugSetting.cs" />
     <Compile Include="M209Analyzer.cs" />
     <Compile Include="M209AnalyzerSettings.cs" />
+    <Compile Include="PinSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
