@@ -100,9 +100,9 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
             //Take input and prepare
             //int[] ciphertext = MapTextIntoNumberSpace(RemoveInvalidChars(ciphertextString.ToLower(), ciphertextalphabet), ciphertextalphabet);
-            PluginBase.Utils.Alphabet ciphertextAlphabet = new PluginBase.Utils.Alphabet(ciphertextalphabet);
-            PluginBase.Utils.Alphabet plaintextAlphabet = new PluginBase.Utils.Alphabet(plaintextalphabet);
-            PluginBase.Utils.Text cipherText = new PluginBase.Utils.Text(ciphertextString, ciphertextAlphabet);
+            CrypTool.AnalysisMonoalphabeticSubstitution.Utils.Alphabet ciphertextAlphabet = new CrypTool.AnalysisMonoalphabeticSubstitution.Utils.Alphabet(ciphertextalphabet);
+            CrypTool.AnalysisMonoalphabeticSubstitution.Utils.Alphabet plaintextAlphabet = new CrypTool.AnalysisMonoalphabeticSubstitution.Utils.Alphabet(plaintextalphabet);
+            CrypTool.AnalysisMonoalphabeticSubstitution.Utils.Text cipherText = new CrypTool.AnalysisMonoalphabeticSubstitution.Utils.Text(ciphertextString, ciphertextAlphabet);
             int[] ciphertext = cipherText.ValidLetterArray;
 
             int length = ciphertext.Length;

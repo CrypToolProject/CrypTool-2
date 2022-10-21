@@ -114,6 +114,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Alphabet.cs" />
+    <Compile Include="Utils\Text.cs" />
     <Compile Include="Word.cs" />
   </ItemGroup>
   <ItemGroup>

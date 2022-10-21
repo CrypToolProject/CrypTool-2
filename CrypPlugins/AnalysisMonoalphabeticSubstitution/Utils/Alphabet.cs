@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CrypTool.PluginBase.Utils
+namespace CrypTool.AnalysisMonoalphabeticSubstitution.Utils
 {
     public class Alphabet
     {

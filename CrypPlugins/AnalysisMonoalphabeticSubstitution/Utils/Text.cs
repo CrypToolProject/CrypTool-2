@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Text;
 
-namespace CrypTool.PluginBase.Utils
+namespace CrypTool.AnalysisMonoalphabeticSubstitution.Utils
 {
     public class Text
     {
