@@ -23,7 +23,7 @@ In this template, the plaintext is encrypted by replacing complete words by the 
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">Buch-Cchiffre mit vollständiger Wortverschlüsselung</title>
+  <title lang="de">Buch-Chiffre mit vollständiger Wortverschlüsselung</title>
   <summary lang="de">Diese Vorlage zeigt, wie die <i>Buch-Chiffre</i> mit vollständigen Wörtern verwendet werden kann.</summary>
   <description lang="de">Mit dieser Vorlage veranschaulichen wir die Verschlüsselung anhand einer Buch-Chiffre mit vollständigen Wörtern.</description>
   <keywords>book, code, homophonic, substitution</keywords>
