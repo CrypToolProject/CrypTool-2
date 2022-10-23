@@ -186,4 +186,58 @@
   <data name="NoKeyGiven" xml:space="preserve">
     <value>Kein Schlüssel angegeben</value>
   </data>
+  <data name="AlphabetCaption" xml:space="preserve">
+    <value>Alphabet</value>
+  </data>
+  <data name="AlphabetTooltip" xml:space="preserve">
+    <value>Geben Sie ein Alphabet mit gültigen Buchstaben für die Ver- und Entschlüsselung ein.</value>
+  </data>
+  <data name="CompleteWord" xml:space="preserve">
+    <value>Vollständiges Wort</value>
+  </data>
+  <data name="EncodeLinesCaption" xml:space="preserve">
+    <value>Zeilen kodieren</value>
+  </data>
+  <data name="EncodeLinesTooltip" xml:space="preserve">
+    <value>Sollen Zeilen im Code kodiert werden?</value>
+  </data>
+  <data name="EncodePagesCaption" xml:space="preserve">
+    <value>Seiten kodieren</value>
+  </data>
+  <data name="EncodePagesTooltip" xml:space="preserve">
+    <value>Sollen Seiten im Code kodiert werden?</value>
+  </data>
+  <data name="EncodingModeCaption" xml:space="preserve">
+    <value>Kodierungsmodus</value>
+  </data>
+  <data name="EncodingModeTooltip" xml:space="preserve">
+    <value>Welcher Modus sollte für die Kodierung verwendet werden?</value>
+  </data>
+  <data name="FirstLetter" xml:space="preserve">
+    <value>Erster Buchstabe</value>
+  </data>
+  <data name="LineDigitsCaption" xml:space="preserve">
+    <value>Zeilen-Ziffern</value>
+  </data>
+  <data name="LineDigitsTooltip" xml:space="preserve">
+    <value>Wie viele Ziffern sollten für die Zeilenkodierung verwendet werden?</value>
+  </data>
+  <data name="PageDigitsCaption" xml:space="preserve">
+    <value>Seiten-Ziffern</value>
+  </data>
+  <data name="PageDigitsTooltip" xml:space="preserve">
+    <value>Wie viele Ziffern sollten für die Seitenkodierung verwendet werden?</value>
+  </data>
+  <data name="PageSeparatorCaption" xml:space="preserve">
+    <value>Seitentrenner</value>
+  </data>
+  <data name="PageSeparatorTooltip" xml:space="preserve">
+    <value>Geben Sie eine Zeichenkette als Seitentrennzeichen ein (Hinweis: Groß- und Kleinschreibung wird nicht beachtet)</value>
+  </data>
+  <data name="WordDigitsCaption" xml:space="preserve">
+    <value>Wort-Ziffern</value>
+  </data>
+  <data name="WordDigitsTooltip" xml:space="preserve">
+    <value>Wie viele Ziffern sollten für die Wortkodierung verwendet werden?</value>
+  </data>
 </root>

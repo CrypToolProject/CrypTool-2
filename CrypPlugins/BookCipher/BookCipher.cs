@@ -30,9 +30,14 @@ namespace CrypTool.BookCipher
     {
         private readonly BookCipherSettings _settings = new BookCipherSettings();
         private const string DEFAULT_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        
-        private readonly char[] LINE_SEPARATORS = new char[] { '\r', '\n' };
-        private readonly char[] WORD_SEPARATORS = new char[] { ' ', ',', '.', ':', ';', '\t' };
+        private readonly char[] LINE_SEPARATORS = new char[]
+        { 
+            '\r', '\n'
+        };
+        private readonly char[] WORD_SEPARATORS = new char[] 
+        {
+            ' ', ',', '.', ':', ';', '?', '!', '\t', '"', '“', '”', '„', '»', '«', '‚', '‘', '‹', '›' 
+        };
 
         public ISettings Settings => _settings;
 
@@ -140,7 +145,7 @@ namespace CrypTool.BookCipher
                 string[] words = line.Split(WORD_SEPARATORS);
                 foreach (string word in words)
                 {
-                    if (string.IsNullOrEmpty(word))
+                    if (string.IsNullOrEmpty(word) || string.IsNullOrWhiteSpace(word))
                     {
                         continue;
                     }                   
