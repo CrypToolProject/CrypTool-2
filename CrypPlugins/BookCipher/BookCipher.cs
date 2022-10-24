@@ -463,7 +463,7 @@ namespace CrypTool.BookCipher
             }
             else if(!encodePage && encodeLine)
             {
-                return string.Format("{0}{1}", GlobalLineNumber.ToString(string.Format("D{0}", lineDigits)), WordInLineNumber.ToString(string.Format("D{0}", pageDigits)));
+                return string.Format("{0}{1}", GlobalLineNumber.ToString(string.Format("D{0}", lineDigits)), WordInLineNumber.ToString(string.Format("D{0}", wordDigits)));
             }
             else //if(encodePage && encodeLine)
             {
