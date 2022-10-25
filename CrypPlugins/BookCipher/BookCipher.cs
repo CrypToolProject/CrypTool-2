@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Windows.Controls;
+using System.Windows.Media.Media3D;
 
 namespace CrypTool.BookCipher
 {
@@ -450,6 +451,9 @@ namespace CrypTool.BookCipher
         /// </summary>
         /// <param name="encodePage"></param>
         /// <param name="encodeLine"></param>
+        /// <param name="pageDigits"></param>
+        /// <param name="lineDigits"></param>
+        /// <param name="wordDigits"></param>
         /// <returns></returns>
         public string GetPosition(bool encodePage, bool encodeLine, int pageDigits, int lineDigits, int wordDigits)
         {
