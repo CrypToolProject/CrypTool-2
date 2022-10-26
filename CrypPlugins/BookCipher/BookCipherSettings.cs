@@ -15,6 +15,7 @@
 */
 using CrypTool.PluginBase;
 using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.BookCipher
 {
@@ -30,18 +31,41 @@ namespace CrypTool.BookCipher
         CompleteWord = 1
     }
 
+    public enum EncodingStyle
+    {
+        Digits,
+        SymbolSeparatedNumbers
+    }
+
+    public enum NumberSeparator
+    {
+        Fullstop,
+        Comma,   
+        Colon,
+        Semicolon,
+        Dash,
+        Slash,
+        Backslash,
+        Plus,
+        Asterisk
+    }
+
     public class BookCipherSettings : ISettings
     {
         private const string DEFAULT_PAGE_SEPARATOR = "<newpage>";
+
         private Action _action = Action.Encrypt;
         private EncodingMode _encodingMode = EncodingMode.FirstLetter;
+        private EncodingStyle _encodingStyle = EncodingStyle.Digits;
+        private NumberSeparator _numberSeparator = NumberSeparator.Fullstop;
         private bool _encodePages = false;
         private bool _encodeLines = false;
-        private string _pageSeparator = DEFAULT_PAGE_SEPARATOR;
-
+        private string _pageSeparator = DEFAULT_PAGE_SEPARATOR;        
         private int _pageDigits = 2;
-        private int _lineDigits = 2;        
+        private int _lineDigits = 2;
         private int _wordDigits = 3;
+
+        public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
 
         public BookCipherSettings()
         {
@@ -60,7 +84,7 @@ namespace CrypTool.BookCipher
                     OnPropertyChanged("Action");
                 }
             }
-        }       
+        }
 
         [TaskPane("EncodingModeCaption", "EncodingModeTooltip", null, 2, false, ControlType.ComboBox, new string[] { "FirstLetter", "CompleteWord" })]
         public EncodingMode EncodingMode
@@ -76,7 +100,39 @@ namespace CrypTool.BookCipher
             }
         }
 
-        [TaskPane("EncodePagesCaption", "EncodePagesTooltip", null, 3, false, ControlType.CheckBox)]
+        [TaskPane("EncodingStyleCaption", "EncodingStyleTooltip", null, 3, false, ControlType.ComboBox, new string[] { "Digits", "SymbolSeparatedNumbers" })]
+        public EncodingStyle EncodingStyle
+        {
+            get => _encodingStyle;
+            set
+            {
+                if (value != _encodingStyle)
+                {
+                    _encodingStyle = value;
+                    OnPropertyChanged(nameof(EncodingStyle));
+                    UpdateSettingsVisibility();
+                }
+            }
+        }
+
+        [TaskPane("NumberSeparatorCaption", "NumberSeparatorTooltip", null, 4, false, ControlType.ComboBox, new string[] { "Fullstop", "Comma", "Colon", "Semicolon", "Dash", "Slash", "Backslash", "Plus", "Asterisk" })]
+        public NumberSeparator NumberSeparator
+        {
+            get
+            {               
+                    return _numberSeparator;               
+            }
+            set
+            {
+                if (value != _numberSeparator)
+                {
+                    _numberSeparator = value;
+                    OnPropertyChanged(nameof(NumberSeparator));
+                }
+            }
+        }
+
+        [TaskPane("EncodePagesCaption", "EncodePagesTooltip", null, 5, false, ControlType.CheckBox)]
         public bool EncodePages
         {
             get => _encodePages;
@@ -86,11 +142,12 @@ namespace CrypTool.BookCipher
                 {
                     _encodePages = value;
                     OnPropertyChanged(nameof(EncodePages));
+                    UpdateSettingsVisibility();
                 }
             }
         }
 
-        [TaskPane("EncodeLinesCaption", "EncodeLinesTooltip", null, 4, false, ControlType.CheckBox)]
+        [TaskPane("EncodeLinesCaption", "EncodeLinesTooltip", null, 6, false, ControlType.CheckBox)]
         public bool EncodeLines
         {
             get => _encodeLines;
@@ -100,11 +157,12 @@ namespace CrypTool.BookCipher
                 {
                     _encodeLines = value;
                     OnPropertyChanged(nameof(EncodeLines));
+                    UpdateSettingsVisibility();
                 }
             }
         }
 
-        [TaskPane("PageSeparatorCaption", "PageSeparatorTooltip", null, 5, false, ControlType.TextBox,ValidationType.RegEx, "^(?!\\s*$).+")]
+        [TaskPane("PageSeparatorCaption", "PageSeparatorTooltip", null, 7, false, ControlType.TextBox,ValidationType.RegEx, "^(?!\\s*$).+")]
         public string PageSeparator
         {
             get
@@ -125,7 +183,7 @@ namespace CrypTool.BookCipher
             }
         }
 
-        [TaskPane("PageDigitsCaption", "PageDigitsTooltip", null, 6, false, ControlType.NumericUpDown, ValidationType.RangeInteger,1,10)]
+        [TaskPane("PageDigitsCaption", "PageDigitsTooltip", null, 8, false, ControlType.NumericUpDown, ValidationType.RangeInteger,1,10)]
         public int PageDigits
         {
             get
@@ -142,7 +200,7 @@ namespace CrypTool.BookCipher
             }
         }
 
-        [TaskPane("LineDigitsCaption", "LineDigitsTooltip", null, 7, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 10)]
+        [TaskPane("LineDigitsCaption", "LineDigitsTooltip", null, 9, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 10)]
         public int LineDigits
         {
             get
@@ -159,7 +217,7 @@ namespace CrypTool.BookCipher
             }
         }
 
-        [TaskPane("WordDigitsCaption", "WordDigitsTooltip", null, 8, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 10)]
+        [TaskPane("WordDigitsCaption", "WordDigitsTooltip", null, 10, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 10)]
         public int WordDigits
         {
             get
@@ -180,7 +238,36 @@ namespace CrypTool.BookCipher
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
+            UpdateSettingsVisibility();
+        }
 
+        private void UpdateSettingsVisibility()
+        {            
+            ShowHideSetting(nameof(PageSeparator), false); 
+            ShowHideSetting(nameof(NumberSeparator), false);
+            ShowHideSetting(nameof(PageDigits), false);
+            ShowHideSetting(nameof(LineDigits), false);
+            ShowHideSetting(nameof(WordDigits), false);
+
+            if(_encodingStyle == EncodingStyle.Digits)
+            {
+                if (EncodePages)
+                {
+                    ShowHideSetting(nameof(PageDigits), true);
+                }
+                if (EncodeLines)
+                {
+                    ShowHideSetting(nameof(LineDigits), true);
+                }
+                if (EncodePages || EncodeLines)
+                {
+                    ShowHideSetting(nameof(WordDigits), true);
+                }                
+            }
+            if(_encodingStyle == EncodingStyle.SymbolSeparatedNumbers)
+            {
+                ShowHideSetting(nameof(NumberSeparator), true);
+            }
         }
 
         private void OnPropertyChanged(string name)
@@ -189,6 +276,17 @@ namespace CrypTool.BookCipher
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
+        }
+
+        private void ShowHideSetting(string propertyName, bool show)
+        {
+            if (TaskPaneAttributeChanged == null)
+            {
+                return;
+            }
+
+            TaskPaneAttribteContainer container = new TaskPaneAttribteContainer(propertyName, show == true ? Visibility.Visible : Visibility.Collapsed);
+            TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(container));
         }
     }
 }

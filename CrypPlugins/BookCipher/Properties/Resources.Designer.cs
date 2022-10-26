@@ -97,6 +97,42 @@ namespace CrypTool.BookCipher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Asterisk.
+        /// </summary>
+        internal static string Asterisk {
+            get {
+                return ResourceManager.GetString("Asterisk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backslash.
+        /// </summary>
+        internal static string Backslash {
+            get {
+                return ResourceManager.GetString("Backslash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Colon.
+        /// </summary>
+        internal static string Colon {
+            get {
+                return ResourceManager.GetString("Colon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comma.
+        /// </summary>
+        internal static string Comma {
+            get {
+                return ResourceManager.GetString("Comma", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Complete word.
         /// </summary>
         internal static string CompleteWord {
@@ -106,11 +142,29 @@ namespace CrypTool.BookCipher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dash.
+        /// </summary>
+        internal static string Dash {
+            get {
+                return ResourceManager.GetString("Dash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Decrypt.
         /// </summary>
         internal static string Decrypt {
             get {
                 return ResourceManager.GetString("Decrypt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Digits.
+        /// </summary>
+        internal static string Digits {
+            get {
+                return ResourceManager.GetString("Digits", resourceCulture);
             }
         }
         
@@ -169,6 +223,24 @@ namespace CrypTool.BookCipher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Encoding style.
+        /// </summary>
+        internal static string EncodingStyleCaption {
+            get {
+                return ResourceManager.GetString("EncodingStyleCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Which style of encoding should be used?.
+        /// </summary>
+        internal static string EncodingStyleTooltip {
+            get {
+                return ResourceManager.GetString("EncodingStyleTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Encrypt.
         /// </summary>
         internal static string Encrypt {
@@ -183,6 +255,15 @@ namespace CrypTool.BookCipher.Properties {
         internal static string FirstLetter {
             get {
                 return ResourceManager.GetString("FirstLetter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fullstop.
+        /// </summary>
+        internal static string Fullstop {
+            get {
+                return ResourceManager.GetString("Fullstop", resourceCulture);
             }
         }
         
@@ -246,6 +327,24 @@ namespace CrypTool.BookCipher.Properties {
         internal static string NoKeyGiven {
             get {
                 return ResourceManager.GetString("NoKeyGiven", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number separator.
+        /// </summary>
+        internal static string NumberSeparatorCaption {
+            get {
+                return ResourceManager.GetString("NumberSeparatorCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Which number separator should be used?.
+        /// </summary>
+        internal static string NumberSeparatorTooltip {
+            get {
+                return ResourceManager.GetString("NumberSeparatorTooltip", resourceCulture);
             }
         }
         
@@ -318,6 +417,42 @@ namespace CrypTool.BookCipher.Properties {
         internal static string PluginTooltip {
             get {
                 return ResourceManager.GetString("PluginTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plus.
+        /// </summary>
+        internal static string Plus {
+            get {
+                return ResourceManager.GetString("Plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Semicolon.
+        /// </summary>
+        internal static string Semicolon {
+            get {
+                return ResourceManager.GetString("Semicolon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slash.
+        /// </summary>
+        internal static string Slash {
+            get {
+                return ResourceManager.GetString("Slash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Symbol-separated numbers.
+        /// </summary>
+        internal static string SymbolSeparatedNumbers {
+            get {
+                return ResourceManager.GetString("SymbolSeparatedNumbers", resourceCulture);
             }
         }
         

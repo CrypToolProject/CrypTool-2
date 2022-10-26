@@ -18,6 +18,7 @@ using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Security.Policy;
 using System.Text;
 using System.Windows.Controls;
 
@@ -31,12 +32,12 @@ namespace CrypTool.BookCipher
         private readonly BookCipherSettings _settings = new BookCipherSettings();
         private const string DEFAULT_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private readonly char[] LINE_SEPARATORS = new char[]
-        { 
+        {
             '\r', '\n'
         };
-        private readonly char[] WORD_SEPARATORS = new char[] 
+        private readonly char[] WORD_SEPARATORS = new char[]
         {
-            ' ', ',', '.', ':', ';', '?', '!', '\t', '"', '“', '”', '„', '»', '«', '‚', '‘', '‹', '›' 
+            ' ', ',', '.', ':', ';', '?', '!', '\t', '"', '“', '”', '„', '»', '«', '‚', '‘', '‹', '›'
         };
 
         public ISettings Settings => _settings;
@@ -83,7 +84,7 @@ namespace CrypTool.BookCipher
         public void Execute()
         {
             //If the user did not provide an alphabet, we set it to the default Latin alphabet here:
-            if(string.IsNullOrEmpty(Alphabet) || string.IsNullOrWhiteSpace(Alphabet))
+            if (string.IsNullOrEmpty(Alphabet) || string.IsNullOrWhiteSpace(Alphabet))
             {
                 Alphabet = DEFAULT_ALPHABET;
             }
@@ -134,7 +135,7 @@ namespace CrypTool.BookCipher
 
             string[] lines = Key.ToUpper().Split(LINE_SEPARATORS);
 
-            foreach(string line in lines)
+            foreach (string line in lines)
             {
                 wordInLineNumber = 1;
                 if (string.IsNullOrEmpty(line) || string.IsNullOrWhiteSpace(line))
@@ -148,20 +149,20 @@ namespace CrypTool.BookCipher
                     if (string.IsNullOrEmpty(word) || string.IsNullOrWhiteSpace(word))
                     {
                         continue;
-                    }                   
+                    }
                     if (word.Equals(pageSeparator))
                     {
-                        globalPageNumber++;                        
+                        globalPageNumber++;
                         wordInPageNumber = 1;
                         wordInLineNumber = 1;
                         lineInPageNumber = 1;
                         continue;
                     }
-                    if(IndexOfChar(Alphabet, word[0]) == -1)
+                    if (IndexOfChar(Alphabet, word[0]) == -1)
                     {
                         continue;
                     }
-                    
+
                     string key;
                     if (letters)
                     {
@@ -190,11 +191,11 @@ namespace CrypTool.BookCipher
 
                     globalWordNumber++;
                     wordInPageNumber++;
-                    wordInLineNumber++;                    
+                    wordInLineNumber++;
                 }
                 globalLineNumber++;
-                lineInPageNumber++;                
-            }                            
+                lineInPageNumber++;
+            }
             return dictionary;
         }
 
@@ -205,7 +206,8 @@ namespace CrypTool.BookCipher
         {
             Random random = new Random();
             Dictionary<string, List<WordPositions>> dictionary = CreateLookupDictionary(true);
-            StringBuilder ciphertextBuilder = new StringBuilder();
+            StringBuilder ciphertextBuilder = new StringBuilder();           
+
             foreach (char c in InputText.ToUpper())
             {
                 if (IndexOfChar(Alphabet, c) == -1)
@@ -216,11 +218,13 @@ namespace CrypTool.BookCipher
                 if (dictionary.ContainsKey(character))
                 {
                     ciphertextBuilder.Append(string.Format("{0} ", dictionary[character][random.Next(0, dictionary[character].Count - 1)].GetPosition(
-                        _settings.EncodePages, 
+                        _settings.EncodePages,
                         _settings.EncodeLines,
                         _settings.PageDigits,
                         _settings.LineDigits,
-                        _settings.WordDigits)));
+                        _settings.WordDigits,
+                        _settings.EncodingStyle,
+                        GetNumberSeparator())));
                 }
                 else
                 {
@@ -228,6 +232,46 @@ namespace CrypTool.BookCipher
                 }
             }
             OutputText = ciphertextBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Get the selected number separator
+        /// </summary>
+        /// <returns></returns>
+        private string GetNumberSeparator()
+        {
+            string separator = ".";
+            switch (_settings.NumberSeparator)
+            {
+                case NumberSeparator.Fullstop:
+                    separator = ".";
+                    break;
+                case NumberSeparator.Comma:
+                    separator = ",";
+                    break;
+                case NumberSeparator.Colon:
+                    separator = ";";
+                    break;
+                case NumberSeparator.Semicolon:
+                    separator = ":";
+                    break;
+                case NumberSeparator.Dash:
+                    separator = "-";
+                    break;
+                case NumberSeparator.Slash:
+                    separator = "/";
+                    break;
+                case NumberSeparator.Backslash:
+                    separator = "\\";
+                    break;
+                case NumberSeparator.Plus:
+                    separator = "+";
+                    break;
+                case NumberSeparator.Asterisk:
+                    separator = "*";
+                    break;
+            }
+            return separator;
         }
 
         /// <summary>
@@ -253,7 +297,9 @@ namespace CrypTool.BookCipher
                         _settings.EncodeLines,
                         _settings.PageDigits,
                         _settings.LineDigits,
-                        _settings.WordDigits)));
+                        _settings.WordDigits,
+                        _settings.EncodingStyle,
+                        GetNumberSeparator())));
                 }
                 else
                 {
@@ -272,26 +318,36 @@ namespace CrypTool.BookCipher
 
             //create reverse lookup dictionary for decryption:
             Dictionary<string, string> reverseLookupDictionary = new Dictionary<string, string>();
-            foreach(string key in dictionary.Keys)
+            foreach (string key in dictionary.Keys)
             {
-                foreach(WordPositions positions in dictionary[key])
+                foreach (WordPositions positions in dictionary[key])
                 {
                     string inverseKey = positions.GetPosition(
-                        _settings.EncodePages, 
+                        _settings.EncodePages,
                         _settings.EncodeLines,
                         _settings.PageDigits,
                         _settings.LineDigits,
-                        _settings.WordDigits);
+                        _settings.WordDigits,
+                        _settings.EncodingStyle,
+                        GetNumberSeparator());
                     if (!reverseLookupDictionary.ContainsKey(inverseKey))
                     {
                         reverseLookupDictionary.Add(inverseKey, key);
                     }
                 }
             }
-            
+
             //decrypt the ciphertext
             StringBuilder plaintextBuilder = new StringBuilder();
-            string[] codeWords = InputText.ToUpper().Split(Concat(WORD_SEPARATORS, LINE_SEPARATORS));
+
+            char[] splitValus = Concat(WORD_SEPARATORS, LINE_SEPARATORS);
+            if(_settings.EncodingStyle == EncodingStyle.SymbolSeparatedNumbers)
+            {
+                splitValus = Remove(splitValus, GetNumberSeparator()[0]);
+            }
+
+            string[] codeWords = InputText.ToUpper().Split(splitValus);
+
             foreach (string codeWord in codeWords)
             {
                 if (string.IsNullOrEmpty(codeWord))
@@ -319,7 +375,7 @@ namespace CrypTool.BookCipher
                 }
             }
             OutputText = plaintextBuilder.ToString();
-        }             
+        }      
 
         public void Initialize()
         {
@@ -377,6 +433,42 @@ namespace CrypTool.BookCipher
                 concat_array[array1.Length + i] = array2[i];
             }
             return concat_array;
+        }
+
+        /// <summary>
+        /// Removes the occurence of the character from the char array 
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="findValue"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        private char[] Remove(char[] values, char findValue)
+        {
+            bool contains = false;
+            foreach(char c in values)
+            {
+                if (c == findValue)
+                {
+                    contains = true;
+                    break;
+                }                
+            }
+            if (!contains)
+            {
+                return values;
+            }
+            char[] newValues = new char[values.Length - 1];
+            int i = 0;
+            foreach (char c in values)
+            {
+                if (!(c == findValue))
+                {
+                    newValues[i] = c;
+                    i++;
+                }
+                
+            }
+            return newValues;
         }
 
         public void OnPropertyChanged(string name)
@@ -454,24 +546,46 @@ namespace CrypTool.BookCipher
         /// <param name="lineDigits"></param>
         /// <param name="wordDigits"></param>
         /// <returns></returns>
-        public string GetPosition(bool encodePage, bool encodeLine, int pageDigits, int lineDigits, int wordDigits)
+        public string GetPosition(bool encodePage, bool encodeLine, int pageDigits, int lineDigits, int wordDigits, EncodingStyle style, string numberSeparator)
         {
-            if(!encodePage && !encodeLine)
+            if (style == EncodingStyle.Digits)
             {
-                return string.Format("{0}", GlobalWordNumber);
+                if (!encodePage && !encodeLine)
+                {
+                    return string.Format("{0}", GlobalWordNumber);
+                }
+                else if (encodePage && !encodeLine)
+                {
+                    return string.Format("{0}{1}", GlobalPageNumber.ToString(string.Format("D{0}", pageDigits)), WordInPageNumber.ToString(string.Format("D{0}", wordDigits)));
+                }
+                else if (!encodePage && encodeLine)
+                {
+                    return string.Format("{0}{1}", GlobalLineNumber.ToString(string.Format("D{0}", lineDigits)), WordInLineNumber.ToString(string.Format("D{0}", wordDigits)));
+                }
+                else //if(encodePage && encodeLine)
+                {
+                    return string.Format("{0}{1}{2}", GlobalPageNumber.ToString(string.Format("D{0}", pageDigits)), LineInPageNumber.ToString(string.Format("D{0}", lineDigits)), WordInLineNumber.ToString(string.Format("D{0}", wordDigits)));
+                }
             }
-            else if(encodePage && !encodeLine)
-            {
-                return string.Format("{0}{1}", GlobalPageNumber.ToString(string.Format("D{0}", pageDigits)), WordInPageNumber.ToString(string.Format("D{0}", wordDigits)));
+            else
+            {               
+                if (!encodePage && !encodeLine)
+                {
+                    return string.Format("{0}", GlobalWordNumber);
+                }
+                else if (encodePage && !encodeLine)
+                {
+                    return string.Format("{0}{2}{1}", GlobalPageNumber.ToString(), WordInPageNumber.ToString(), numberSeparator);
+                }
+                else if (!encodePage && encodeLine)
+                {
+                    return string.Format("{0}{2}{1}", GlobalLineNumber.ToString(), WordInLineNumber.ToString(), numberSeparator);
+                }
+                else //if(encodePage && encodeLine)
+                {
+                    return string.Format("{0}{3}{1}{3}{2}", GlobalPageNumber.ToString(), LineInPageNumber.ToString(), WordInLineNumber.ToString(), numberSeparator);
+                }
             }
-            else if(!encodePage && encodeLine)
-            {
-                return string.Format("{0}{1}", GlobalLineNumber.ToString(string.Format("D{0}", lineDigits)), WordInLineNumber.ToString(string.Format("D{0}", wordDigits)));
-            }
-            else //if(encodePage && encodeLine)
-            {
-                return string.Format("{0}{1}{2}", GlobalPageNumber.ToString(string.Format("D{0}", pageDigits)), LineInPageNumber.ToString(string.Format("D{0}", lineDigits)), WordInLineNumber.ToString(string.Format("D{0}", wordDigits)));
-            }
-        }        
+        }
     }
 }

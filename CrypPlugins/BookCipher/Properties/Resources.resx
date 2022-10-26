@@ -129,11 +129,29 @@
   <data name="AlphabetTooltip" xml:space="preserve">
     <value>Enter an alphabet of valid letters used during en- and decryption</value>
   </data>
+  <data name="Asterisk" xml:space="preserve">
+    <value>Asterisk</value>
+  </data>
+  <data name="Backslash" xml:space="preserve">
+    <value>Backslash</value>
+  </data>
+  <data name="Colon" xml:space="preserve">
+    <value>Colon</value>
+  </data>
+  <data name="Comma" xml:space="preserve">
+    <value>Comma</value>
+  </data>
   <data name="CompleteWord" xml:space="preserve">
     <value>Complete word</value>
   </data>
+  <data name="Dash" xml:space="preserve">
+    <value>Dash</value>
+  </data>
   <data name="Decrypt" xml:space="preserve">
     <value>Decrypt</value>
+  </data>
+  <data name="Digits" xml:space="preserve">
+    <value>Digits</value>
   </data>
   <data name="EncodeLinesCaption" xml:space="preserve">
     <value>Encode lines</value>
@@ -153,11 +171,20 @@
   <data name="EncodingModeTooltip" xml:space="preserve">
     <value>Which mode should be used for encoding?</value>
   </data>
+  <data name="EncodingStyleCaption" xml:space="preserve">
+    <value>Encoding style</value>
+  </data>
+  <data name="EncodingStyleTooltip" xml:space="preserve">
+    <value>Which style of encoding should be used?</value>
+  </data>
   <data name="Encrypt" xml:space="preserve">
     <value>Encrypt</value>
   </data>
   <data name="FirstLetter" xml:space="preserve">
     <value>First letter</value>
+  </data>
+  <data name="Fullstop" xml:space="preserve">
+    <value>Fullstop</value>
   </data>
   <data name="InputStringTooltip" xml:space="preserve">
     <value>Input a string to be processed by the cipher</value>
@@ -179,6 +206,12 @@
   </data>
   <data name="NoKeyGiven" xml:space="preserve">
     <value>No key given</value>
+  </data>
+  <data name="NumberSeparatorCaption" xml:space="preserve">
+    <value>Number separator</value>
+  </data>
+  <data name="NumberSeparatorTooltip" xml:space="preserve">
+    <value>Which number separator should be used?</value>
   </data>
   <data name="OutputStringTooltip" xml:space="preserve">
     <value>The string after processing with the cipher</value>
@@ -203,6 +236,18 @@
   </data>
   <data name="PluginTooltip" xml:space="preserve">
     <value>Implementation of a book cipher</value>
+  </data>
+  <data name="Plus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+  <data name="Semicolon" xml:space="preserve">
+    <value>Semicolon</value>
+  </data>
+  <data name="Slash" xml:space="preserve">
+    <value>Slash</value>
+  </data>
+  <data name="SymbolSeparatedNumbers" xml:space="preserve">
+    <value>Symbol-separated numbers</value>
   </data>
   <data name="WordDigitsCaption" xml:space="preserve">
     <value>Word digits</value>
