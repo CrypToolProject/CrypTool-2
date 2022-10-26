@@ -242,19 +242,19 @@ namespace CrypTool.BookCipher
         }
 
         private void UpdateSettingsVisibility()
-        {            
-            ShowHideSetting(nameof(PageSeparator), false); 
+        {
+            ShowHideSetting(nameof(PageSeparator), false);
             ShowHideSetting(nameof(NumberSeparator), false);
             ShowHideSetting(nameof(PageDigits), false);
             ShowHideSetting(nameof(LineDigits), false);
             ShowHideSetting(nameof(WordDigits), false);
 
-            if(_encodingStyle == EncodingStyle.Digits)
+            if (_encodingStyle == EncodingStyle.Digits)
             {
                 if (EncodePages)
                 {
                     ShowHideSetting(nameof(PageDigits), true);
-                    ShowHideSetting(nameof(PageSeparator), true);
+
                 }
                 if (EncodeLines)
                 {
@@ -262,15 +262,20 @@ namespace CrypTool.BookCipher
                 }
                 if (EncodePages || EncodeLines)
                 {
-                    ShowHideSetting(nameof(WordDigits), true);                    
-                }                
+                    ShowHideSetting(nameof(WordDigits), true);
+                }
             }
-            if(_encodingStyle == EncodingStyle.SymbolSeparatedNumbers)
+
+            if (_encodingStyle == EncodingStyle.SymbolSeparatedNumbers)
             {
                 ShowHideSetting(nameof(NumberSeparator), true);
             }
-        }
 
+            if (EncodePages)
+            {
+                ShowHideSetting(nameof(PageSeparator), true);
+            }
+        }
         private void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
