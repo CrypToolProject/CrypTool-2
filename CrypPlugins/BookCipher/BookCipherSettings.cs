@@ -254,6 +254,7 @@ namespace CrypTool.BookCipher
                 if (EncodePages)
                 {
                     ShowHideSetting(nameof(PageDigits), true);
+                    ShowHideSetting(nameof(PageSeparator), true);
                 }
                 if (EncodeLines)
                 {
@@ -261,7 +262,7 @@ namespace CrypTool.BookCipher
                 }
                 if (EncodePages || EncodeLines)
                 {
-                    ShowHideSetting(nameof(WordDigits), true);
+                    ShowHideSetting(nameof(WordDigits), true);                    
                 }                
             }
             if(_encodingStyle == EncodingStyle.SymbolSeparatedNumbers)
