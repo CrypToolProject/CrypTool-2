@@ -102,7 +102,7 @@ namespace CrypTool.Substitution
         {
             ProgressChanged(0, 1);
 
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            Dictionary<string, string> dict;
             if (_settings.Action == 0) // Encrypt
             {
                 dict = GenerateSubstitutionDictionary(SourceAlphabet.Replace(Environment.NewLine, string.Empty), DestinationAlphabet.Replace(Environment.NewLine, string.Empty));
@@ -541,8 +541,7 @@ namespace CrypTool.Substitution
                             {
                                 if (polyCounterDictionary.ContainsKey(currentCharacter))
                                 {
-                                    polyCounterDictionary[currentCharacter] = (polyCounterDictionary[currentCharacter] + 1) %
-                                                                             substitutionCharacters.Length;
+                                    polyCounterDictionary[currentCharacter] = (polyCounterDictionary[currentCharacter] + 1) % substitutionCharacters.Length;
                                 }
                                 else
                                 {
