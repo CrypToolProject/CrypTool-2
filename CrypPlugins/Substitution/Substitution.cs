@@ -31,12 +31,13 @@ using System.Windows.Threading;
 namespace CrypTool.Substitution
 {
     [Author("Nils Kopal", "Nils.Kopal@cryptool.org", "CrypTool Team", "http://www.cryptool.org")]
-    [PluginInfo("Substitution.Properties.Resources", "PluginCaption", "PluginTooltip", "Substitution/DetailedDescription/doc.xml",
+    [PluginInfo("CrypTool.Substitution.Properties.Resources", "PluginCaption", "PluginTooltip", "Substitution/DetailedDescription/doc.xml",
       new[] { "Substitution/Images/icon.png", "Substitution/Images/encrypt.png", "Substitution/Images/decrypt.png" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class Substitution : ICrypComponent
     {
         private readonly SubstitutionPresentation _presentation = new SubstitutionPresentation();
+        private readonly SubstitutionSettings _settings = new SubstitutionSettings();
         private bool _stopped;
 
         [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", true)]
@@ -66,9 +67,6 @@ namespace CrypTool.Substitution
             get;
             set;
         }
-
-
-        private readonly SubstitutionSettings _settings = new SubstitutionSettings();
 
         public void PreExecution()
         {
@@ -391,18 +389,20 @@ namespace CrypTool.Substitution
         {
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
 
-            for (int si = 0, di = 0; si < sourceAlphabet.Length && di < destinationAlphabet.Length; si++)
+            int duplicateSubstitution = 0;
+
+            for (int sourceIndex = 0, destinationIndex = 0; sourceIndex < sourceAlphabet.Length && destinationIndex < destinationAlphabet.Length; sourceIndex++)
             {
                 string sourceCharacter = "";
                 string destinationCharacter = "";
                 //1. Find next source character (a "character" may be one or more chars in the string)
-                if (sourceAlphabet[si] == '[')
+                if (sourceAlphabet[sourceIndex] == '[')
                 {
-                    for (si++; si < sourceAlphabet.Length; si++)
+                    for (sourceIndex++; sourceIndex < sourceAlphabet.Length; sourceIndex++)
                     {
-                        if (sourceAlphabet[si] != ']')
+                        if (sourceAlphabet[sourceIndex] != ']')
                         {
-                            sourceCharacter += sourceAlphabet[si];
+                            sourceCharacter += sourceAlphabet[sourceIndex];
                         }
                         else
                         {
@@ -412,16 +412,16 @@ namespace CrypTool.Substitution
                 }
                 else
                 {
-                    sourceCharacter = new string(sourceAlphabet[si], 1);
+                    sourceCharacter = new string(sourceAlphabet[sourceIndex], 1);
                 }
                 //2. Find next destination character (a "character" may be one or more chars in the string)
-                if (destinationAlphabet[di] == '[')
+                if (destinationAlphabet[destinationIndex] == '[')
                 {
-                    for (di++; di < destinationAlphabet.Length; di++)
+                    for (destinationIndex++; destinationIndex < destinationAlphabet.Length; destinationIndex++)
                     {
-                        if (destinationAlphabet[di] != ']')
+                        if (destinationAlphabet[destinationIndex] != ']')
                         {
-                            destinationCharacter += destinationAlphabet[di];
+                            destinationCharacter += destinationAlphabet[destinationIndex];
                         }
                         else
                         {
@@ -431,9 +431,9 @@ namespace CrypTool.Substitution
                 }
                 else
                 {
-                    destinationCharacter = new string(destinationAlphabet[di], 1);
+                    destinationCharacter = new string(destinationAlphabet[destinationIndex], 1);
                 }
-                di++;
+                destinationIndex++;
 
                 //3. Add Substitution rule to our dictionary
                 if (!dictionary.ContainsKey(sourceCharacter))
@@ -452,9 +452,19 @@ namespace CrypTool.Substitution
                 }
                 else
                 {
-                    GuiLogMessage(string.Format("A substitution for '{0}' already exsists ('{0}'->'{2}'). Ignore the new one ('{0}'->'{1}').", sourceCharacter, destinationCharacter, dictionary[sourceCharacter]), NotificationLevel.Warning);
+                    if (duplicateSubstitution < 10)
+                    {
+                        GuiLogMessage(string.Format(Properties.Resources.SubstitutionAlreadyExists, sourceCharacter, destinationCharacter, dictionary[sourceCharacter]), NotificationLevel.Warning);                        
+                    }
+                    duplicateSubstitution++;
                 }
             }
+
+            if (duplicateSubstitution >= 10)
+            {
+                GuiLogMessage(String.Format(Properties.Resources.TooManyDuplicateSubstitutions, duplicateSubstitution), NotificationLevel.Warning);
+            }
+
             return dictionary;
         }
 

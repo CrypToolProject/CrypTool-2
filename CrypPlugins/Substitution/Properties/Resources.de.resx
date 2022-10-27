@@ -189,6 +189,9 @@
   <data name="SourceAlphabetTooltip" xml:space="preserve">
     <value>Das Alphabet des Eingabetextes</value>
   </data>
+  <data name="SubstitutionAlreadyExists" xml:space="preserve">
+    <value>Es gibt bereits eine Ersetzung für "{0}" ("{0}"-&gt;"{2}"). Ignoriere die neue Ersetzung ("{0}"-&gt;"{1}").</value>
+  </data>
   <data name="SymbolChoiceCaption" xml:space="preserve">
     <value>Symbol Auswahl</value>
   </data>
@@ -200,6 +203,9 @@
   </data>
   <data name="SymbolChoiceTooltip" xml:space="preserve">
     <value>Die Methode um Symbole bei homophen Substitutionen auszuwählen</value>
+  </data>
+  <data name="TooManyDuplicateSubstitutions" xml:space="preserve">
+    <value>Es gibt {0} doppelte Ersetzungen. Nach der 10. Logmeldung wurden keine weiteren Logmeldungen mehr ausgegeben.</value>
   </data>
   <data name="UnknownSymbolHandlingCaption" xml:space="preserve">
     <value>Behandlung unbekannter Symbole</value>

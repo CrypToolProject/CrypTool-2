@@ -216,4 +216,10 @@
   <data name="MaxMappingsShownInPresentationTooltip" xml:space="preserve">
     <value>Maximum number of substitution mappings that are shown in the presentation</value>
   </data>
+  <data name="SubstitutionAlreadyExists" xml:space="preserve">
+    <value>A substitution for "{0}" already exsists ("{0}"-&gt;"{2}"). Ignore the new one ("{0}"-&gt;"{1}").</value>
+  </data>
+  <data name="TooManyDuplicateSubstitutions" xml:space="preserve">
+    <value>There are {0} duplicate subsitutions. Stopped showing log messages after the 10th log message.</value>
+  </data>
 </root>
