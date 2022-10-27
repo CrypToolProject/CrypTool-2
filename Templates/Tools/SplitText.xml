@@ -10,7 +10,7 @@
   <title lang="en">Split a Text</title>
   <summary lang="en">Splits a text using a dictionary</summary>
   <description lang="en">This template shows how to split a text having no whitespaces using a dictionary and the substitution component.</description>
-  <keywords>Text, Substitution, Split</keywords>
+  <keywords>text, substitution, split</keywords>
   <replacements lang="en">
     <replacement key="$Uppercase$" value="Uppercase" />
     <replacement key="$Replace$" value="Replace" />
@@ -33,7 +33,7 @@ As a result, the tokenized text appears in the TextOutput component." />
   <title lang="de">Text zerlegen</title>
   <summary lang="de">Zerlegt einen Text mit Hilfe eines Wörterbuchs</summary>
   <description lang="de">Diese Vorlage zeigt, wie man einen Text, welcher keine Leerzeichen beinhaltet, mit Hilfe der Substitution und eines Wörterbuchs wieder in einzelne Wörter zerlegen kann.</description>
-  <keywords lang="de">kamera, foto</keywords>
+  <keywords lang="de">Text, Substitution, Zerlegen</keywords>
   <replacements lang="de">
     <replacement key="$Uppercase$" value="Großbuchstaben" />
     <replacement key="$Replace$" value="Ersetzen" />
