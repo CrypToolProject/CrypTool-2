@@ -7,9 +7,9 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">Bacon Chiffre</title>
-  <summary lang="de">Einfache Ver- und Entschlüsselung mit der <i>Bacon Chiffre</i></summary>
-  <description lang="de">Diese Vorlage zeigt einen einfachen Codierungs- und Decodierungsungsprozess mit der Bacon-Cipher. Das Verfahren bildet Buchstaben auf einen Code aus zwei Zeichen ab. Dieser Code kann dann beispielsweise in Texte eingebettet werden.</description>
+  <title lang="de">Bacon-Chiffre</title>
+  <summary lang="de">Ver- und Entschlüsselung mit der <i>Bacon-Chiffre</i></summary>
+  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels Bacon-Chiffre. Das Verfahren bildet Buchstaben auf einen Code aus zwei Zeichen ab. Dieser Code kann dann beispielsweise in Texte eingebettet werden.</description>
   <keywords lang="de">Bacon, chiffre, einfach</keywords>
   <replacements lang="de">
     <replacement key="$BaconCipher$" value="Bacon-Chiffre" />
@@ -18,14 +18,14 @@
     <replacement key="$encipheredPlaintext$" value="Entschlüsselter Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />
     <replacement key="$Key$" value="Schlüssel" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise der Bacon Chiffre. Die Komponente wurde nach dem Vorbild der ACA (American Cipher association) entwickelt und unterstützt die Ver- und Entschlüsselung verschiedener Texte mittels eins biliteralen Alphabetes. Über die Einstellungen der Komponente können verschieden Modi der Komponente eingestellt werden. Das biliterale Alphabet kann über die Texteingabe (Schlüssel) durch ein Trennzeichen bestimmt werden." />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise der Bacon.Chiffre. Die Komponente wurde nach der Definition der ACA (American Cipher association) entwickelt und unterstützt die Ver- und Entschlüsselung verschiedener Texte mittels eins biliteralen Alphabetes. Über die Einstellungen der Komponente können verschieden Modi der Komponente eingestellt werden. Das biliterale Alphabet kann über die Texteingabe (Schlüssel) durch ein Trennzeichen bestimmt werden." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Bacon cipher</title>
-  <summary lang="en">Easy encryption and decryption with the<i>Bacon cipher</i>.</summary>
-  <description lang="en">This template shows a simple encoding and decoding process using the Bacon cipher. The process maps letters to a code of two characters. This code can then be embedded in texts, for example.</description>
+  <summary lang="en">Encryption and decryption with the<i>Bacon cipher</i>.</summary>
+  <description lang="en">This template shows en- and decryption using a Bacon cipher. The process maps letters to a code of two characters. This code can then be embedded in texts, for example.</description>
   <keywords>Bacon, Cipher, simple</keywords>
   <replacements lang="en">
     <replacement key="$BaconCipher$" value="Baco Cipher" />
@@ -34,7 +34,7 @@
     <replacement key="$encipheredPlaintext$" value="Decrypted plain text" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Key$" value="Key" />
-    <replacement key="$memo$" value="This template demonstrates how the Bacon cipher works. The component was developed after the model of the ACA (American Cipher association) and supports the encryption and decryption of different texts by means of a biliteral alphabet. Different modes of the component can be set via the component settings. The biliteral alphabet can be determined via the text input (Key) by a separator character." />
+    <replacement key="$memo$" value="This template demonstrates how the Bacon cipher works. The component was developed based on the definition of the ACA (American Cipher association) and supports the encryption and decryption of different texts by means of a biliteral alphabet. Different modes of the component can be set via the component's settings. The biliteral alphabet can be determined via the text input (Key) using a separator character." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
