@@ -96,9 +96,23 @@ namespace CrypTool.Plugins.BifidCipher
 
             //initialize everything needed for en- and decryption
             (_alphabet, _squareWidth) = GetAlphabetAndSquareWidth();
+
+            //remove all non-alphabet letters from the keyword
             Key = CleanInputString(Key.ToUpper());
             _polybiusSquare = GeneratePolybiusSquare();
-            InputText = CleanInputString(InputText.ToUpper());
+
+            //we only work with uppercase letters
+            InputText = InputText.ToUpper();
+
+            //with the 25-letter alphabet, J == I            
+            if (_settings.AlphabetVersion == AlphabetVersion.Twentyfive)
+            {
+                //thus, we replace J with I here:
+                InputText = InputText.Replace('J', 'I');
+            }
+
+            //remove all non-alphabet letters from the input text
+            InputText = CleanInputString(InputText);
 
             //perform en- or decryption
             switch (_settings.Action)
