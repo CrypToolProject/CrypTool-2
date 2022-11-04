@@ -14,10 +14,9 @@
   <replacements lang="de">
     <replacement key="$Bifid Cipher$" value="Bifid-Chiffre" />
     <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$Keyword$" value="Schlüssekwirt" />
+    <replacement key="$Keyword$" value="Schlüsselwort" />
     <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$Key$" value="Schlüssel" />
     <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise der {\b Bifid-Chiffre}. Die Komponente wurde nach der Definition der ACA (American Cipher association) entwickelt und unterstützt die Ver- und Entschlüsselung von Texten.\line\line
 In den Einstellungen der Komponente kann zwischen einem 25-Buchstaben-Alphabet und einem 36-Zeichen-Alphabet (Buchstaben + Ziffern) umgeschalten werden. Außerdem kann festgelegt werden, ob der vollständige Text im gesamten Verschlüsselt oder periodisch in Blöcken fester Größe verschlüsselt werden soll." />
   </replacements>
