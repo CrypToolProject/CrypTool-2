@@ -15,12 +15,11 @@
 */
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using System;
 using System.ComponentModel;
 using System.Windows;
 
 namespace CrypTool.Plugins.BifidCipher
-{    
+{
     public enum Action
     {
         Encrypt,

@@ -32,8 +32,8 @@ namespace CrypTool.Plugins.BifidCipher
         #region Private Variables
 
         private const string ALPHABET25 = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
-        private const string ALPHABET36 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";        
-        private char[,] _polybiusSquare;        
+        private const string ALPHABET36 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        private char[,] _polybiusSquare;
         private readonly BifidCipherSettings _settings = new BifidCipherSettings();
         private string _alphabet = ALPHABET25;
         private int _squareWidth = 5;
@@ -67,15 +67,9 @@ namespace CrypTool.Plugins.BifidCipher
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -152,13 +146,13 @@ namespace CrypTool.Plugins.BifidCipher
         /// <summary>
         /// Return the alphabet and square width based on the selected alphabet in the settings
         /// </summary>
-        private (string alphabet,int squareWidth) GetAlphabetAndSquareWidth()
+        private (string alphabet, int squareWidth) GetAlphabetAndSquareWidth()
         {
             switch (_settings.AlphabetVersion)
             {
                 default:
                 case AlphabetVersion.Twentyfive:
-                    return (ALPHABET25, 5);                    
+                    return (ALPHABET25, 5);
                 case AlphabetVersion.Thirtysix:
                     return (ALPHABET36, 6);
             }
@@ -170,7 +164,7 @@ namespace CrypTool.Plugins.BifidCipher
         private string CleanInputString(string key)
         {
             StringBuilder keyBuilder = new StringBuilder();
-            foreach(char c in key)
+            foreach (char c in key)
             {
                 if (_alphabet.Contains(c.ToString()))
                 {
@@ -193,11 +187,11 @@ namespace CrypTool.Plugins.BifidCipher
             HashSet<char> usedSymbols = new HashSet<char>();
 
             //add key to polybius square
-            foreach(char c in Key)
+            foreach (char c in Key)
             {
                 if (!usedSymbols.Contains(c))
                 {
-                    polybiusSquare[y,x] = c;
+                    polybiusSquare[y, x] = c;
                     usedSymbols.Add(c);
                     x++;
                     if (x == _squareWidth)
@@ -250,7 +244,7 @@ namespace CrypTool.Plugins.BifidCipher
         /// Encrypts plaintext
         /// </summary>
         private string Encrypt(string plaintext)
-        {            
+        {
             //Step 1: substitute letters to coordinates using polybius square
 
             int[,] intermediateCiphertext = new int[2, plaintext.Length];
@@ -259,7 +253,7 @@ namespace CrypTool.Plugins.BifidCipher
             foreach (char c in plaintext)
             {
                 (int x, int y) coordinates = GetCharacterCoordinates(c);
-                if(coordinates != (-1, -1))
+                if (coordinates != (-1, -1))
                 {
                     intermediateCiphertext[0, position] = coordinates.y;
                     intermediateCiphertext[1, position] = coordinates.x;
@@ -281,13 +275,13 @@ namespace CrypTool.Plugins.BifidCipher
             //step 3: substitute coordinates using polybius square
 
             StringBuilder ciphertextBuilder = new StringBuilder();
-            for(int x = 0; x < intermediateCiphertext2.Length - 1; x += 2)
+            for (int x = 0; x < intermediateCiphertext2.Length - 1; x += 2)
             {
                 ciphertextBuilder.Append(_polybiusSquare[intermediateCiphertext2[x], intermediateCiphertext2[x + 1]]);
             }
 
             return ciphertextBuilder.ToString();
-        }       
+        }
 
         private string Decrypt(string ciphertext)
         {
@@ -309,7 +303,7 @@ namespace CrypTool.Plugins.BifidCipher
 
             //Step 2: decrypt using coordinates (left half for x and right half for y)
             StringBuilder plaintextBuilder = new StringBuilder();
-            for(int x = 0; x < ciphertext.Length; x++)
+            for (int x = 0; x < ciphertext.Length; x++)
             {
                 (int x, int y) coordinates = (intermediateCiphertext[x], intermediateCiphertext[x + ciphertext.Length]);
                 plaintextBuilder.Append(_polybiusSquare[coordinates.x, coordinates.y]);
@@ -337,7 +331,7 @@ namespace CrypTool.Plugins.BifidCipher
         /// Called once when plugin is loaded into editor workspace.
         /// </summary>
         public void Initialize()
-        {            
+        {
         }
 
         /// <summary>
