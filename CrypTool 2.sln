@@ -512,6 +512,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIGHT", "CrypPlugins\HIGHT\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCipher", "CrypPlugins\BookCipher\BookCipher.csproj", "{ECB9C475-5EED-4BEE-AD8A-47FD1B7C418E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BifidCipher", "CrypPlugins\BifidCipher\BifidCipher.csproj", "{457039C0-CA33-4A0A-8F3E-D2571873E0DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1514,6 +1516,10 @@ Global
 		{ECB9C475-5EED-4BEE-AD8A-47FD1B7C418E}.Debug|x64.Build.0 = Debug|x64
 		{ECB9C475-5EED-4BEE-AD8A-47FD1B7C418E}.Release|x64.ActiveCfg = Release|x64
 		{ECB9C475-5EED-4BEE-AD8A-47FD1B7C418E}.Release|x64.Build.0 = Release|x64
+		{457039C0-CA33-4A0A-8F3E-D2571873E0DF}.Debug|x64.ActiveCfg = Debug|x64
+		{457039C0-CA33-4A0A-8F3E-D2571873E0DF}.Debug|x64.Build.0 = Debug|x64
+		{457039C0-CA33-4A0A-8F3E-D2571873E0DF}.Release|x64.ActiveCfg = Release|x64
+		{457039C0-CA33-4A0A-8F3E-D2571873E0DF}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1758,6 +1764,7 @@ Global
 		{3E5935B8-B968-4BDE-8F32-AE86AAA8EBF4} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{62296CE7-A264-497A-A63A-F7B517F4A0CC} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{ECB9C475-5EED-4BEE-AD8A-47FD1B7C418E} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
+		{457039C0-CA33-4A0A-8F3E-D2571873E0DF} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92042D62-2CDA-4393-9D74-4FB5AC571A2D}
