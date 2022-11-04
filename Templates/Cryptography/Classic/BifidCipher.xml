@@ -9,7 +9,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Bifid-Chiffre</title>
   <summary lang="de">Ver- und Entschlüsselung mit der <i>Bifid-Chiffre</i></summary>
-  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels Bifid-Chiffre. In der klassischen Kryptographie ist die Bifid-Chiffre eine Chiffre, die ein Polybius-Quadrat mit Transposition kombiniert und somit eine Fraktionierung erzeugt. Sie wurde um 1901 von Felix Delastelle erfunden..</description>
+  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels Bifid-Chiffre. In der klassischen Kryptographie ist die Bifid-Chiffre eine Chiffre, die ein Polybius-Quadrat mit Transposition kombiniert und somit eine Fraktionierung erzeugt. Sie wurde um 1901 von Felix Delastelle erfunden.</description>
   <keywords lang="de">Bifid, chiffre</keywords>
   <replacements lang="de">
     <replacement key="$Bifid Cipher$" value="Bifid-Chiffre" />
@@ -18,7 +18,7 @@
     <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />
     <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise der {\b Bifid-Chiffre}. Die Komponente wurde nach der Definition der ACA (American Cipher association) entwickelt und unterstützt die Ver- und Entschlüsselung von Texten.\line\line
-In den Einstellungen der Komponente kann zwischen einem 25-Buchstaben-Alphabet und einem 36-Zeichen-Alphabet (Buchstaben + Ziffern) umgeschalten werden. Außerdem kann festgelegt werden, ob der vollständige Text im gesamten Verschlüsselt oder periodisch in Blöcken fester Größe verschlüsselt werden soll." />
+In den Einstellungen der Komponente kann zwischen einem 25-Buchstaben-Alphabet (J = I) und einem 36-Zeichen-Alphabet (Buchstaben + Ziffern) umgeschalten werden. Außerdem kann festgelegt werden, ob der Klartext insgesamt an einem Stück oder periodisch in Blöcken fester Größe verschlüsselt werden soll." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -34,7 +34,7 @@ In den Einstellungen der Komponente kann zwischen einem 25-Buchstaben-Alphabet u
     <replacement key="$Decrypted plaintext$" value="Decrypted plain text" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$memo$" value="This template demonstrates how the {\b Bifid cipher} works. The component was developed based on the definition of the ACA (American Cipher association) and supports the encryption and decryption of texts.\line\line
-In the component settings it is possible to switch between a 25-letter alphabet and a 36-character alphabet (letters + digits). It is also possible to specify whether the complete text should be encrypted in its entirety or periodically in blocks of the same size." />
+In the component settings it is possible to switch between a 25-letter alphabet (J = I) and a 36-character alphabet (letters + digits). It is also possible to specify whether the plaintext should be encrypted all at once or periodically in blocks of a fixed size." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
