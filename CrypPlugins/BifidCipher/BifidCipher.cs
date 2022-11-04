@@ -25,7 +25,7 @@ namespace CrypTool.Plugins.BifidCipher
 {
 
     [Author("Nils Kopal", "kopal@CrypTool.org", "CrypTool 2 Team", "https://www.CrypTool.org")]
-    [PluginInfo("CrypTool.Plugins.BifidCipher.Properties.Resources", "PluginCaption", "PluginTooltip", "BifidCipher/DetailedDescription/doc.xml", new[] { "BifidCipher/Images/icon.png" })]
+    [PluginInfo("CrypTool.Plugins.BifidCipher.Properties.Resources", "PluginCaption", "PluginTooltip", "BifidCipher/userdoc.xml", new[] { "BifidCipher/Images/icon.png" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class BifidCipher : ICrypComponent
     {
