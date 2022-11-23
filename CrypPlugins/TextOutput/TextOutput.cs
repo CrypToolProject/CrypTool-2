@@ -716,6 +716,7 @@ namespace TextOutput
             textOutputPresentation.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 textOutputPresentation.richTextBox.Document = new FlowDocument();
+                textOutputPresentation.textBox.Text = string.Empty;
                 _currentValue = string.Empty;
                 Input = null;
                 clearStatusBar();
