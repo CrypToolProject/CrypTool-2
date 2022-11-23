@@ -106,32 +106,27 @@ namespace CrypTool.Trivium
         {
             if (_inputData == null)
             {
-                GuiLogMessage("No data provided", NotificationLevel.Error);
+                GuiLogMessage(Properties.Resources.NoDataProvided, NotificationLevel.Error);
                 return;
             }
             if (_inputKey == null)
             {
-                GuiLogMessage("No key provided", NotificationLevel.Error);
+                GuiLogMessage(Properties.Resources.NoKeyProvided, NotificationLevel.Error);
                 return;
             }
-
             if (_inputIV == null)
             {
-                GuiLogMessage("No initilization vector provided", NotificationLevel.Error);
+                GuiLogMessage(Properties.Resources.NoIVProvided, NotificationLevel.Error);
                 return;
             }
-
-            // make sure we have a valid key input
             if (_inputKey.Length != 10)
             {
-                GuiLogMessage("The key has to be exactly 10 bytes (= 80 bits) long", NotificationLevel.Error);
+                GuiLogMessage(Properties.Resources.WrongKeySizeProvided, NotificationLevel.Error);
                 return;
             }
-
-            // make sure we have a valid key input
             if (_inputIV.Length != 10)
             {
-                GuiLogMessage("The initilization vector has to be exactly 10 bytes (= 80 bits) long", NotificationLevel.Error);
+                GuiLogMessage(Properties.Resources.WrongIVSizeProvided, NotificationLevel.Error);
                 return;
             }
 
@@ -164,7 +159,6 @@ namespace CrypTool.Trivium
                 }
             }
         }
-
 
         public void Initialize()
         {

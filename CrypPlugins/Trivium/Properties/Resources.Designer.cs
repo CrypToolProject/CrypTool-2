@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Trivium.Properties {
+namespace CrypTool.Trivium.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Trivium.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Trivium.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CrypTool.Trivium.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -133,6 +133,33 @@ namespace Trivium.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No data provided.
+        /// </summary>
+        internal static string NoDataProvided {
+            get {
+                return ResourceManager.GetString("NoDataProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No initilization vector provided.
+        /// </summary>
+        internal static string NoIVProvided {
+            get {
+                return ResourceManager.GetString("NoIVProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No key provided.
+        /// </summary>
+        internal static string NoKeyProvided {
+            get {
+                return ResourceManager.GetString("NoKeyProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Output data.
         /// </summary>
         internal static string OutputDataCaption {
@@ -165,6 +192,24 @@ namespace Trivium.Properties {
         internal static string PluginTooltip {
             get {
                 return ResourceManager.GetString("PluginTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The initilization vector has to be exactly 10 bytes (= 80 bits) long.
+        /// </summary>
+        internal static string WrongIVSizeProvided {
+            get {
+                return ResourceManager.GetString("WrongIVSizeProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The key has to be exactly 10 bytes (= 80 bits) long.
+        /// </summary>
+        internal static string WrongKeySizeProvided {
+            get {
+                return ResourceManager.GetString("WrongKeySizeProvided", resourceCulture);
             }
         }
     }

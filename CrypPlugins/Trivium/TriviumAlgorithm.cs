@@ -83,7 +83,6 @@ public class TriviumAlgorithm
             SetBit(_state, 000, t3);
             SetBit(_state, 093, t1);
             SetBit(_state, 177, t2);
-
         }
         return result;
     }

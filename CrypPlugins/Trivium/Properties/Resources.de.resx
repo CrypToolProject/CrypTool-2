@@ -153,4 +153,19 @@
   <data name="PluginTooltip" xml:space="preserve">
     <value>Stromchiffre aus dem eSTREAM-Projekt</value>
   </data>
+  <data name="NoDataProvided" xml:space="preserve">
+    <value>Keine Daten übergeben</value>
+  </data>
+  <data name="NoIVProvided" xml:space="preserve">
+    <value>Kein Initialisierungsvektor übergeben</value>
+  </data>
+  <data name="NoKeyProvided" xml:space="preserve">
+    <value>Kein Schlüssel übergeben</value>
+  </data>
+  <data name="WrongIVSizeProvided" xml:space="preserve">
+    <value>Der Initialisierungsvektor muss genau 10 Byte (= 80 Bit) lang sein</value>
+  </data>
+  <data name="WrongKeySizeProvided" xml:space="preserve">
+    <value>Der Schlüssel muss genau 10 Bytes (= 80 Bits) lang sein</value>
+  </data>
 </root>

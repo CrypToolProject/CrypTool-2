@@ -141,6 +141,15 @@
   <data name="InputKeyTooltip" xml:space="preserve">
     <value>10 bytes (80 bits) long (in hex).</value>
   </data>
+  <data name="NoDataProvided" xml:space="preserve">
+    <value>No data provided</value>
+  </data>
+  <data name="NoIVProvided" xml:space="preserve">
+    <value>No initilization vector provided</value>
+  </data>
+  <data name="NoKeyProvided" xml:space="preserve">
+    <value>No key provided</value>
+  </data>
   <data name="OutputDataCaption" xml:space="preserve">
     <value>Output data</value>
   </data>
@@ -152,5 +161,11 @@
   </data>
   <data name="PluginTooltip" xml:space="preserve">
     <value>Current cipher from the eSTREAM project</value>
+  </data>
+  <data name="WrongIVSizeProvided" xml:space="preserve">
+    <value>The initilization vector has to be exactly 10 bytes (= 80 bits) long</value>
+  </data>
+  <data name="WrongKeySizeProvided" xml:space="preserve">
+    <value>The key has to be exactly 10 bytes (= 80 bits) long</value>
   </data>
 </root>
