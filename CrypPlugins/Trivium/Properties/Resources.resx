@@ -117,82 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="HexOutputContextTooltip" xml:space="preserve">
-    <value>Display as hex?</value>
-  </data>
-  <data name="HexOutputTooltip" xml:space="preserve">
-    <value>With this checkbox enabled, output bytes will be displayed in hex.</value>
-  </data>
-  <data name="HexOutputCaption" xml:space="preserve">
-    <value>Generate hex output</value>
-  </data>
-  <data name="InitRoundsTooltip" xml:space="preserve">
-    <value>How many init rounds should be done? Default is 1152.</value>
-  </data>
   <data name="InitRoundsCaption" xml:space="preserve">
     <value>Initialization rounds</value>
   </data>
-  <data name="InputIVTooltip" xml:space="preserve">
-    <value>Up to 10 bytes (80 bit) in hex.</value>
+  <data name="InitRoundsTooltip" xml:space="preserve">
+    <value>How many initialization rounds should be performed? Default is 1152</value>
+  </data>
+  <data name="InputDataCaption" xml:space="preserve">
+    <value>Input data</value>
+  </data>
+  <data name="InputDataTooltip" xml:space="preserve">
+    <value>Data to be encrypted/decrypted</value>
   </data>
   <data name="InputIVCaption" xml:space="preserve">
-    <value>IV</value>
+    <value>Initialization vector</value>
   </data>
-  <data name="InputKeySettingsTooltip" xml:space="preserve">
-    <value>10 bytes (80 bit) in hex.</value>
-  </data>
-  <data name="InputKeySettingsCaption" xml:space="preserve">
-    <value>Key (Input for Cube Attack)</value>
-  </data>
-  <data name="InputKeyTooltip" xml:space="preserve">
-    <value>10 bytes (80 bit) in hex.</value>
+  <data name="InputIVTooltip" xml:space="preserve">
+    <value>Up to 10 bytes (80 bit) long</value>
   </data>
   <data name="InputKeyCaption" xml:space="preserve">
     <value>Key</value>
   </data>
-  <data name="InputStringTooltip" xml:space="preserve">
-    <value>Data to be encrypted or decrypted.</value>
+  <data name="InputKeyTooltip" xml:space="preserve">
+    <value>10 bytes (80 bits) long (in hex).</value>
   </data>
-  <data name="InputStringCaption" xml:space="preserve">
-    <value>Input</value>
+  <data name="OutputDataCaption" xml:space="preserve">
+    <value>Output data</value>
   </data>
-  <data name="KeystreamLengthTooltip" xml:space="preserve">
-    <value>How many bits of keystream should be generated? Must be a multiple of 32.</value>
-  </data>
-  <data name="KeystreamLengthCaption" xml:space="preserve">
-    <value>Length of keystream</value>
-  </data>
-  <data name="OutputStringTooltip" xml:space="preserve">
-    <value>Encrypted or decrypted output data.</value>
-  </data>
-  <data name="OutputStringCaption" xml:space="preserve">
-    <value>Output stream</value>
+  <data name="OutputDataTooltip" xml:space="preserve">
+    <value>Encrypted or decrypted output</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>Trivium</value>
   </data>
-  <data name="TriviumSlaveTooltip" xml:space="preserve">
-    <value>Direct access to Trivium.</value>
-  </data>
-  <data name="TriviumSlaveCaption" xml:space="preserve">
-    <value>Trivium Slave</value>
-  </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>Stream cipher from the eSTREAM project</value>
-  </data>
-  <data name="UseByteSwappingContextTooltip" xml:space="preserve">
-    <value>Use byte swapping?</value>
-  </data>
-  <data name="UseByteSwappingTooltip" xml:space="preserve">
-    <value>With this checkbox enabled, output bytes will be swapped.</value>
-  </data>
-  <data name="UseByteSwappingCaption" xml:space="preserve">
-    <value>Use byte swapping</value>
-  </data>
-  <data name="HexOutputList1" xml:space="preserve">
-    <value>With this checkbox enabled, output bytes will be displayed in hex.</value>
-  </data>
-  <data name="UseByteSwappingList1" xml:space="preserve">
-    <value>With this checkbox enabled, output bytes will be swapped.</value>
+    <value>Current cipher from the eSTREAM project</value>
   </data>
 </root>
