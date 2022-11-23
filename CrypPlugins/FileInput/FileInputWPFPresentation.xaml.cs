@@ -3,7 +3,6 @@ using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.IO;
 using System.Threading;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
@@ -16,7 +15,6 @@ namespace FileInput
     {
         private readonly FileInputClass exp;
         public HexBox.HexBox hexBox;
-        private readonly Window window;
 
         public FileInputWPFPresentation(FileInputClass exp)
         {
@@ -31,20 +29,17 @@ namespace FileInput
 
         private void hexBox_ErrorOccured(object sender, HexBox.GUIErrorEventArgs ge)
         {
-            exp.getMessage(ge.message);
+            exp.getMessage(ge.Message);
         }
 
         public void makeUnaccesAble(bool b)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                                                                                      {
-                                                                                          hexBox.makeUnAccesable(b);
-                                                                                          hexBox.IsEnabled = b;
-                                                                                          hexBox.
-                                                                                              IsManipulationEnabled
-                                                                                              = b;
-                                                                                      }, null
-        );
+            {
+                hexBox.makeUnAccesable(b);
+                hexBox.IsEnabled = b;
+                hexBox.IsManipulationEnabled^= b;
+            }, null);
         }
 
         public void CloseFileToGetFileStreamForExecution()
@@ -54,7 +49,6 @@ namespace FileInput
                 hexBox.saveData(true, false);
                 hexBox.closeFile(false);
                 hexBox.openFile((exp.Settings as FileInputSettings).OpenFilename, true);
-                //hexBox.IsEnabled = false;
             }
             catch (Exception ex)
             {
@@ -64,22 +58,10 @@ namespace FileInput
 
         public void ReopenClosedFile()
         {
-            //closedForExecution = false;
-
             if (File.Exists((exp.Settings as FileInputSettings).OpenFilename))
             {
-                // tbFileClosedWhileRunning.Visibility = Visibility.Collapsed;
-                // windowsFormsHost.Visibility = Visibility.Visible;
                 hexBox.closeFile(false);
                 hexBox.openFile((exp.Settings as FileInputSettings).OpenFilename, false);
-            }
-            //hexBox.IsEnabled = true;
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                GuiLogMessage(string.Format("Error trying to reopen file: {0}", ex), NotificationLevel.Error);
             }
         }
 
@@ -106,7 +88,7 @@ namespace FileInput
 
         private void fileChanged(object sender, EventArgs eventArgs)
         {
-            (exp.Settings as FileInputSettings).OpenFilename = hexBox.Pfad;
+            (exp.Settings as FileInputSettings).OpenFilename = hexBox.Path;
         }
 
         private void sizeChanged(object sender, EventArgs eventArgs)
@@ -117,8 +99,10 @@ namespace FileInput
 
         internal void CloseFile()
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate { hexBox.closeFile(true); },
-                                   null);
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                hexBox.closeFile(true);
+            }, null);
         }
 
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;

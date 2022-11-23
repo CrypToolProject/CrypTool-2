@@ -35,8 +35,7 @@ namespace FileInput
             }
         }
 
-        [TaskPane("OpenFilenameCaption", "OpenFilenameTooltip", null, 1, false, ControlType.OpenFileDialog,
-            FileExtension = "All Files (*.*)|*.*")]
+        [TaskPane("OpenFilenameCaption", "OpenFilenameTooltip", null, 1, false, ControlType.OpenFileDialog, FileExtension = "All Files (*.*)|*.*")]
         public string OpenFilename
         {
             get => openFilename;
