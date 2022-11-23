@@ -102,7 +102,6 @@ namespace TextOutput
                     CurrentValue = getNewValue(fillValue);
 
                     Progress(1, 1);
-                    OnPropertyChanged("Input");
                 }
                 catch (Exception ex)
                 {
@@ -118,7 +117,6 @@ namespace TextOutput
             private set
             {
                 _currentValue = value;
-                OnPropertyChanged("CurrentValue");
             }
         }
 

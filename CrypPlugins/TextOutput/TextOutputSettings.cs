@@ -113,7 +113,6 @@ namespace TextOutput
                 if (value != append)
                 {
                     append = value;
-                    //OnPropertyChanged("Append");
                 }
             }
         }
@@ -128,7 +127,6 @@ namespace TextOutput
                 if (value != appendBreaks)
                 {
                     appendBreaks = value;
-                    //OnPropertyChanged("AppendBreaks");
                 }
             }
         }
@@ -143,7 +141,6 @@ namespace TextOutput
                 if (value != linebreaks)
                 {
                     linebreaks = value;
-                    //OnPropertyChanged("AppendBreaks");
                 }
             }
         }

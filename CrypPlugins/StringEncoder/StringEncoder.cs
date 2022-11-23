@@ -61,7 +61,6 @@ namespace CrypTool.Plugins.Convertor
                 if (inputStream != value)
                 {
                     inputStream = value;
-                    OnPropertyChanged("InputStream");
                 }
             }
         }
@@ -75,7 +74,6 @@ namespace CrypTool.Plugins.Convertor
                 if (inputBytes != value)
                 {
                     inputBytes = value;
-                    OnPropertyChanged("InputBytes");
                 }
             }
         }
@@ -213,13 +211,7 @@ namespace CrypTool.Plugins.Convertor
         private void processInput(byte[] buffer)
         {
             ShowProgress(50, 100);
-
-            //ShowStatusBarMessage("Converting input ...", NotificationLevel.Debug);
-
             OutputString = GetPresentation(buffer, settings.PresentationFormatSetting);
-
-            //ShowStatusBarMessage("Input converted.", NotificationLevel.Debug);
-
             ShowProgress(100, 100);
         }
 

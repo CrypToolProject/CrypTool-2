@@ -217,42 +217,34 @@ namespace WorkspaceManager.Model
         public void PropertyChangedOnPlugin(object sender, PropertyChangedEventArgs args)
         {
             try
-            {
-                if (!WorkspaceModel.IsBeingExecuted)
+            {             
+                if (!WorkspaceModel.IsBeingExecuted || !Outgoing || sender != PluginModel.Plugin || !args.PropertyName.Equals(PropertyName))
+                {
+                    return;
+                }
+                
+                if (property == null)
+                {
+                    property = sender.GetType().GetProperty(args.PropertyName);
+                }
+                object data = property.GetValue(sender, null);
+                if (data == null)
                 {
                     return;
                 }
 
-                if (sender != PluginModel.Plugin ||
-                    !args.PropertyName.Equals(PropertyName))
+                LastData = data;
+
+                List<ConnectionModel> outputConnections = OutputConnections;
+                foreach (ConnectionModel connectionModel in outputConnections)
                 {
-                    return;
+                    connectionModel.To.DataQueue.Enqueue(data);
+                    connectionModel.To.LastData = data;
+                    connectionModel.Active = true;
+                    connectionModel.GuiNeedsUpdate = true;
+                    connectionModel.To.PluginModel.resetEvent.Set();
                 }
-
-                if (Outgoing)
-                {
-                    if (property == null)
-                    {
-                        property = sender.GetType().GetProperty(args.PropertyName);
-                    }
-                    object data = property.GetValue(sender, null);
-                    if (data == null)
-                    {
-                        return;
-                    }
-
-                    LastData = data;
-
-                    List<ConnectionModel> outputConnections = OutputConnections;
-                    foreach (ConnectionModel connectionModel in outputConnections)
-                    {
-                        connectionModel.To.DataQueue.Enqueue(data);
-                        connectionModel.To.LastData = data;
-                        connectionModel.Active = true;
-                        connectionModel.GuiNeedsUpdate = true;
-                        connectionModel.To.PluginModel.resetEvent.Set();
-                    }
-                }
+                
             }
             catch (Exception ex)
             {
