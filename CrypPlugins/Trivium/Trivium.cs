@@ -23,7 +23,7 @@ using System.Windows.Controls;
 namespace CrypTool.Trivium
 {
     [Author("Nils Kopal", "nils.kopal@CrypTool.org", "CrypToolTeam", "http://www.cryptool.org/")]
-    [PluginInfo("Trivium.Properties.Resources", "PluginCaption", "PluginTooltip", "Trivium/DetailedDescription/doc.xml", "Trivium/icon.png")]
+    [PluginInfo("CrypTool.Trivium.Properties.Resources", "PluginCaption", "PluginTooltip", "Trivium/DetailedDescription/doc.xml", "Trivium/icon.png")]
     [ComponentCategory(ComponentCategory.CiphersModernSymmetric)]
     public class Trivium : ICrypComponent
     {
