@@ -151,11 +151,7 @@ namespace CrypTool.Trivium
                         writer.Write(buffer, 0, bytesRead);
                         writer.Flush();
                         ProgressChanged(reader.Position, reader.Length);
-                    }
-                    if (_stopped)
-                    {
-                        return;
-                    }
+                    }                   
                 }
             }
         }
