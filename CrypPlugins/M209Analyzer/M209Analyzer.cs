@@ -20,16 +20,30 @@ using System.ComponentModel;
 using System;
 using System.Windows.Controls;
 using M209Analyzer;
+using CrypTool.PluginBase.Utils;
 
 namespace CrypTool.Plugins.M209Analyzer
 {
+    public enum UnknownSymbolHandlingMode
+    {
+        Ignore = 0,
+        Remove = 1,
+        Replace = 2
+    }
+
+    public enum KeyFormat
+    {
+        Digits,
+        LatinLetters
+    }
+
     // HOWTO: Change author name, email address, organization and URL.
     [Author("Josef Matwich", "josef.matwich@student.uni-siegen.de", "CrypTool 2 Team", "https://www.cryptool.org")]
     // HOWTO: Change plugin caption (title to appear in CT2) and tooltip.
     // You can (and should) provide a user documentation as XML file and an own icon.
     [PluginInfo("M209 Analyzer", "Analyze the Hagelin M209", "M209Analyzer/userdoc.xml", new[] { "CrypWin/images/default.png" })]
     // HOWTO: Change category to one that fits to your plugin. Multiple categories are allowed.
-    [ComponentCategory(ComponentCategory.ToolsMisc)]
+    [ComponentCategory(ComponentCategory.CryptanalysisGeneric)]
     public class M209Analyzer : ICrypComponent
     {
         #region Private Variables
@@ -39,7 +53,11 @@ namespace CrypTool.Plugins.M209Analyzer
         private const string ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWKXY";
 
         private PinSetting BestPins = new PinSetting();
-        private LugSetting BestLugs = new LugSetting();
+        private LugSettings BestLugs = new LugSettings(new string[27] {
+            "36","06","16","15","45","04","04","04","04",
+            "20","20","20","20","20","20","20","20","20",
+            "20","25","25","05","05","05","05","05","05"
+        });
 
         #endregion
 
@@ -65,17 +83,6 @@ namespace CrypTool.Plugins.M209Analyzer
 
         [PropertyInfo(Direction.InputData, "P", "Putative decryption")]
         public string P
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// HOWTO: Output interface to write the output data.
-        /// You can add more output properties ot other type if needed.
-        /// </summary>
-        [PropertyInfo(Direction.InputData, "AttackMode", "Output tooltip description")]
-        public int AttackMode
         {
             get;
             set;
@@ -113,12 +120,25 @@ namespace CrypTool.Plugins.M209Analyzer
         /// </summary>
         public void Execute()
         {
+            //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
+            Grams grams = LanguageStatistics.CreateGrams(settings.Language, (LanguageStatistics.GramsType)(settings.GramsType + 1), false);
+            grams.Normalize(10_000_000);
+
             // HOWTO: Use this to show the progress of a plugin algorithm execution in the editor.
             ProgressChanged(0, 1);
             try
             {
                 // HC - Hill climb
                 // SA - Simulated Anealing
+                switch (settings.AttackMode)
+                {
+                    case AttackMode.CiphertextOnly:
+                        break;
+                    case AttackMode.KnownPlaintext:
+                        break;
+                    default:
+                        break;
+                }
             }
             catch(Exception ex)
             {
@@ -130,6 +150,9 @@ namespace CrypTool.Plugins.M209Analyzer
 
         private string HCOuter(string ciphertext, string VersionOfInstruction)
         {
+            BestLugs.Randomize();
+            BestPins.Randomize();
+
             bool stuck = false;
             do
             {

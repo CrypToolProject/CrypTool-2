@@ -78,10 +78,13 @@
   <ItemGroup>
     <Compile Include="Enum\PinSettingTransformation.cs" />
     <Compile Include="LugSetting.cs" />
+    <Compile Include="LugSettings.cs" />
     <Compile Include="M209Analyzer.cs" />
     <Compile Include="M209AnalyzerSettings.cs" />
+    <Compile Include="M209CipherMachine.cs" />
     <Compile Include="PinSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wheel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrypPluginBase\CrypPluginBase.csproj">

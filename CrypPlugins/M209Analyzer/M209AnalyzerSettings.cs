@@ -15,6 +15,7 @@
 */
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.PluginBase.Utils;
 using System;
 using System.ComponentModel;
 
@@ -30,6 +31,9 @@ namespace CrypTool.Plugins.M209Analyzer
         #region Private Variables
 
         private AttackMode _attackMode = AttackMode.CiphertextOnly;
+        private string _languageCode = "en";
+        private int _gramsType = 4;
+        private KeyFormat _keyFormat = KeyFormat.Digits;
 
         // number of possible monograms, with c = 26 for English
         private int _c = 26;
@@ -74,6 +78,50 @@ namespace CrypTool.Plugins.M209Analyzer
                     _c = value;
                     // HOWTO: MUST be called every time a property value changes with correct parameter name
                     OnPropertyChanged("c");
+                }
+            }
+        }
+
+        [TaskPane("LanguageCaption", "LanguageTooltip", null, 0, false, ControlType.LanguageSelector)]
+        public int Language
+        {
+            get => LanguageStatistics.LanguageId(_languageCode);
+            set
+            {
+                if (value != LanguageStatistics.LanguageId(_languageCode))
+                {
+                    _languageCode = LanguageStatistics.LanguageCode(value);
+                    OnPropertyChanged("Language");
+                }
+            }
+        }
+
+        [TaskPane("GramsTypeCaption", "GramsTypeTooltip", null, 1, false, ControlType.ComboBox,
+            new string[] { "Unigrams", "Bigrams", "Trigrams", "Tetragrams", "Pentagrams" })]
+        public int GramsType
+        {
+            get => _gramsType;
+            set
+            {
+                if (value != _gramsType)
+                {
+                    _gramsType = value;
+                    OnPropertyChanged("GramsType");
+                }
+            }
+        }
+
+        [TaskPane("KeyFormatCaption", "KeyFormatTooltip", null, 2, false, ControlType.ComboBox,
+          new string[] { "Digits", "LatinLetters" })]
+        public KeyFormat KeyFormat
+        {
+            get => _keyFormat;
+            set
+            {
+                if (value != _keyFormat)
+                {
+                    _keyFormat = value;
+                    OnPropertyChanged("KeyFormat");
                 }
             }
         }
