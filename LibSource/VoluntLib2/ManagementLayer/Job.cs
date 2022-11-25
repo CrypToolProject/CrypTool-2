@@ -678,7 +678,7 @@ namespace VoluntLib2.ManagementLayer
                         //check, if the certificate is an admin certificate
                         if (!CertificateService.GetCertificateService().IsAdminCertificate(adminCertificate))
                         {
-                            Logger.LogText(string.Format("Job {0} was deleted by a non-admin user", ConvertJobId(JobId)), this, Logtype.Debug);
+                            Logger.LogText(string.Format("Job {0} was deleted by a non-admin user: {1}", ConvertJobId(JobId), CertificateService.GetCertificateService().GetSubjectNameFromCertificate(adminCertificate)), this, Logtype.Debug);
                             return false;
                         }
 
