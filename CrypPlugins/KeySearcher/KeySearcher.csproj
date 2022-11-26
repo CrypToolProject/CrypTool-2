@@ -111,7 +111,6 @@
     <Compile Include="CrypCloud\model\KeyResultEntry.cs" />
     <Compile Include="CrypCloud\model\P2PPresentationVM.cs" />
     <Compile Include="CrypCloud\statistics\BigIntExtensions.cs" />
-    <Compile Include="CrypCloud\statistics\CricularBuffer.cs" />
     <Compile Include="CrypCloud\statistics\SpeedStatistics.cs" />
     <Compile Include="Helper\BigIntExtensions.cs" />
     <Compile Include="Helper\KeyQualityHelper.cs" />
