@@ -8,8 +8,8 @@
     <ProjectGuid>{6FF5C29A-1B85-4313-BA62-961CDF17A899}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CrypTool.M_138</RootNamespace>
-    <AssemblyName>M-138</AssemblyName>
+    <RootNamespace>CrypTool.M138</RootNamespace>
+    <AssemblyName>M138</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -95,8 +95,8 @@
     <Compile Include="M138Visualisation.xaml.cs">
       <DependentUpon>M138Visualisation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="M_138.cs" />
-    <Compile Include="M_138Settings.cs" />
+    <Compile Include="M138.cs" />
+    <Compile Include="M138Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.de.Designer.cs">
       <DependentUpon>Resources.de.resx</DependentUpon>

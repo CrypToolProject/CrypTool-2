@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CrypTool.M_138
+namespace CrypTool.M138
 {
     /// <summary>
     /// Interaktionslogik für M138Visualisation.xaml

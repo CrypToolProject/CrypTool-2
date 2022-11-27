@@ -29,16 +29,16 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace CrypTool.M_138
+namespace CrypTool.M138
 {
     [Author("Nils Rehwald", "nilsrehwald@gmail.com", "Uni Kassel", "https://www.ais.uni-kassel.de")]
-    [PluginInfo("CrypTool.M_138.Properties.Resources", "PluginCaption", "PluginTooltip", "M-138/userdoc.xml", "M-138/icon.png")]
+    [PluginInfo("CrypTool.M138.Properties.Resources", "PluginCaption", "PluginTooltip", "M-138/userdoc.xml", "M-138/icon.png")]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
-    public class M_138 : ICrypComponent
+    public class M138 : ICrypComponent
     {
         #region Private Variables
 
-        private readonly M_138Settings settings = new M_138Settings();
+        private readonly M138Settings settings = new M138Settings();
         private readonly M138Visualisation visualisation = new M138Visualisation();
 
         private enum Commands { Encrypt, Decrypt };

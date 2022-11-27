@@ -355,10 +355,10 @@
     <value>Text output</value>
   </data>
   <data name="OutputStringTooltip" xml:space="preserve">
-    <value>The string after processing with the M209 cipher</value>
+    <value>The string after processing with the M-209 cipher</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
-    <value>M209</value>
+    <value>M-209</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
     <value>Classic Cipher Machine from the 2nd World War (USA)</value>

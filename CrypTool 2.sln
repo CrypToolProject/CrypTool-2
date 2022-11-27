@@ -348,7 +348,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACloudTest", "CrypPluginsEx
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CramerShoup", "CrypPluginsExperimental\CramerShoup\CramerShoup.csproj", "{DC26D21A-8C92-4E88-881E-54892415835D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M_138", "CrypPlugins\M-138\M_138.csproj", "{6FF5C29A-1B85-4313-BA62-961CDF17A899}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M138", "CrypPlugins\M138\M138.csproj", "{6FF5C29A-1B85-4313-BA62-961CDF17A899}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M138Analyzer", "CrypPlugins\M138Analyzer\M138Analyzer.csproj", "{C3A0BF12-DEBA-4C21-B118-A340502AD937}"
 EndProject

@@ -18,9 +18,9 @@ using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System.ComponentModel;
 
-namespace CrypTool.M_138
+namespace CrypTool.M138
 {
-    public class M_138Settings : ISettings
+    public class M138Settings : ISettings
     {
         #region Private Variables
 
