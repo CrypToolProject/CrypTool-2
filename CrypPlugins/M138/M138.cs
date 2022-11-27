@@ -32,7 +32,7 @@ using System.Windows.Threading;
 namespace CrypTool.M138
 {
     [Author("Nils Rehwald", "nilsrehwald@gmail.com", "Uni Kassel", "https://www.ais.uni-kassel.de")]
-    [PluginInfo("CrypTool.M138.Properties.Resources", "PluginCaption", "PluginTooltip", "M-138/userdoc.xml", "M-138/icon.png")]
+    [PluginInfo("CrypTool.M138.Properties.Resources", "PluginCaption", "PluginTooltip", "M138/userdoc.xml", "M138/icon.png")]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class M138 : ICrypComponent
     {
