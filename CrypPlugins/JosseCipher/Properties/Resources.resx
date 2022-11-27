@@ -171,9 +171,6 @@
   <data name="CalculationStepOutputTooltip" xml:space="preserve">
     <value>Output for the calculation steps of the cipher</value>
   </data>
-  <data name="DuplicateCharsRemoved" xml:space="preserve">
-    <value>Duplicate characters in the keyword have been removed</value>
-  </data>
   <data name="Char" xml:space="preserve">
     <value>Character</value>
   </data>

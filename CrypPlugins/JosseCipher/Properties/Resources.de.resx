@@ -201,9 +201,6 @@
   <data name="Char" xml:space="preserve">
     <value>Zeichen</value>
   </data>
-  <data name="DuplicateCharsRemoved" xml:space="preserve">
-    <value>Doppelte Zeichen im Schlüssel wurden entfernt</value>
-  </data>
   <data name="ReplacementTableTab" xml:space="preserve">
     <value>Ersetzungstabelle</value>
   </data>

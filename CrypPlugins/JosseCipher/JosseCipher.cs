@@ -188,14 +188,8 @@ namespace CrypTool.JosseCipher
             }
             else
             {
-                keyLength = keyChars.Count;
-                if (keyLength != key.Length)
-                {
-                    GuiLogMessage(Resources.DuplicateCharsRemoved, NotificationLevel.Warning);
-                }
+                keyLength = keyChars.Count;                
             }
-
-
 
             // Remove chars in key from alphabet and add key at the beginning
             alphabet = string.Concat(keyChars) + string.Concat(alphabet.Where(c => !keyChars.Contains(c)));
