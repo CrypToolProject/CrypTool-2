@@ -47,6 +47,8 @@ namespace WorkspaceManager.Model
         {
             PersistantModel persistantModel = (PersistantModel)XMLSerialization.XMLSerialization.Deserialize(filename, true);
             WorkspaceModel workspacemodel = persistantModel.WorkspaceModel;
+            ValidateAndFixConnectionModels(workspacemodel);
+
             restoreSettings(persistantModel, workspacemodel);
 
             workspacemodel.AllConnectionModels = CheckModelListForCorruption(workspacemodel.AllConnectionModels, filename);
@@ -82,10 +84,41 @@ namespace WorkspaceManager.Model
             return modelList;
         }
 
+        /// <summary>
+        /// Validates and fixes connection models
+        /// </summary>
+        /// <param name="workspaceModel"></param>
+        public void ValidateAndFixConnectionModels(WorkspaceModel workspaceModel)
+        {
+            List<ConnectorModel> froms = new List<ConnectorModel>();
+            List<ConnectorModel> tos = new List<ConnectorModel>();
+            List<ConnectionModel> deleteConnections = new List<ConnectionModel>();
+
+            foreach (ConnectionModel connectionModel in workspaceModel.AllConnectionModels)
+            {
+                if (froms.Contains(connectionModel.From) && tos.Contains(connectionModel.To))
+                {
+                    GuiLogMessage(String.Format("Found duplicate ConnectorModel between {0} and {1}. Remove it.", connectionModel.From.PluginModel.Name, connectionModel.To.PluginModel.Name), NotificationLevel.Warning);
+                    deleteConnections.Add(connectionModel);
+                }
+                else
+                {
+                    froms.Add(connectionModel.From);
+                    tos.Add(connectionModel.To);
+                }
+
+            }
+            foreach (ConnectionModel connectionModel in deleteConnections)
+            {
+                workspaceModel.deleteConnectionModel(connectionModel);
+            }
+        }
+
         public WorkspaceModel loadModel(StreamWriter writer)
         {
-            PersistantModel persistantModel = (PersistantModel)XMLSerialization.XMLSerialization.Deserialize(writer);
+            PersistantModel persistantModel = (PersistantModel)XMLSerialization.XMLSerialization.Deserialize(writer);            
             WorkspaceModel workspacemodel = persistantModel.WorkspaceModel;
+            ValidateAndFixConnectionModels(workspacemodel);
             restoreSettings(persistantModel, workspacemodel);
             return workspacemodel;
         }
@@ -94,6 +127,7 @@ namespace WorkspaceManager.Model
         {
             PersistantModel persistantModel = (PersistantModel)XMLSerialization.XMLSerialization.Deserialize(filename);
             WorkspaceModel workspacemodel = persistantModel.WorkspaceModel;
+            ValidateAndFixConnectionModels(workspacemodel);
             restoreSettings(persistantModel, workspacemodel);
             return workspacemodel;
         }
@@ -128,7 +162,6 @@ namespace WorkspaceManager.Model
                     string value = (string)plugin.Plugin.Settings.GetType().GetProperty("Text").GetValue(plugin.Plugin.Settings, null);
                     if (replacements.ContainsKey(value))
                     {
-                        GuiLogMessage("Replacing " + value, NotificationLevel.Debug);
                         plugin.Plugin.Settings.GetType().GetProperty("Text").SetValue(plugin.Plugin.Settings, replacements[value], null);
                         plugin.Plugin.GetType().GetMethod("Initialize").Invoke(plugin.Plugin, null);
                     }
