@@ -19,8 +19,8 @@
     Thus, a three-digit ciphertext element is always written below a single plaintext letter. 
     Then the encrypted intermediate ciphertext is decrypted (back to letters) using the Polybius squares. 
     However, instead of reading the digits column by column, they are read row by row. 
-    This transposes and fractionalizes the resulting three-digit ciphertext elements. 
-    Instead of completely writing the intermedia ciphertext in three lines in one go below the full plaintext, only n-letter blocks (e.g., n=3) of the ciphertext can be encoded inividually. 
+    In the process, the resulting three-digit ciphertext elements are transposed and fractionated.
+    Instead of completely writing the intermediate ciphertext in three lines in one go below the full plaintext, only n-letter blocks (e.g., n=3) of the ciphertext can be encoded inividually. 
     The n is then called the "period" of the cipher. 
     To decrypt a given ciphertext, the procedure is performed in the reverse direction.
   </usage>
