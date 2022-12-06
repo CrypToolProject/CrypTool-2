@@ -24,7 +24,7 @@
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Bacon cipher</title>
-  <summary lang="en">Encryption and decryption with the<i>Bacon cipher</i>.</summary>
+  <summary lang="en">Encryption and decryption with the <i>Bacon cipher</i>.</summary>
   <description lang="en">This template shows en- and decryption using a Bacon cipher. The process maps letters to a code of two characters. This code can then be embedded in texts, for example.</description>
   <keywords>Bacon, Cipher, simple</keywords>
   <replacements lang="en">
