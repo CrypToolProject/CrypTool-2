@@ -22,7 +22,8 @@ namespace M209Analyzer
         public readonly string ALPHABETH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public readonly string BEAUFORTCIPHER = "ZYXWVUTSRQPONMLKJIHGFEDCBA";
 
-        private LugSettings _lugSettings;
+        public LugSettings LugSettings;
+        public PinSetting PinSetting;
 
         /// <summary>
         /// The six wheels and their alphabets
@@ -56,9 +57,9 @@ namespace M209Analyzer
             string usedAlphabeth = "";
             if (alphabeth == Alphabeth.Default)
             { 
-                usedAlphabeth = ALPHABETH; 
+                usedAlphabeth = this.ALPHABETH; 
             } else { 
-                usedAlphabeth = BEAUFORTCIPHER;
+                usedAlphabeth = this.BEAUFORTCIPHER;
             }
 
             for (int i = 0; i < usedAlphabeth.Length; i++)
@@ -77,11 +78,11 @@ namespace M209Analyzer
             string usedAlphabeth = "";
             if (alphabeth == Alphabeth.Default)
             {
-                usedAlphabeth = ALPHABETH;
+                usedAlphabeth = this.ALPHABETH;
             }
             else
             {
-                usedAlphabeth = BEAUFORTCIPHER;
+                usedAlphabeth = this.BEAUFORTCIPHER;
             }
 
             
@@ -115,27 +116,27 @@ namespace M209Analyzer
         {
             int displacement = 0;
 
-            for (int i = 0; i < _lugSettings.Bar.Length; i++)
+            for (int i = 0; i < this.LugSettings.Bar.Length; i++)
             {
-                int lug1Position = _lugSettings.Bar[i].Value[0];
-                int lug2Position = _lugSettings.Bar[i].Value[1];
+                int lug1Position = this.LugSettings.Bar[i].Value[0];
+                int lug2Position = this.LugSettings.Bar[i].Value[1];
 
-                if (lug1Position >= 0 && this._wheels[lug1Position].EvaluateCurrentPin())
+                if (lug1Position >= 0 && this.PinSetting.Wheels[lug1Position].EvaluateCurrentPin())
                 {
                     displacement++;
                     continue;
                 }
 
-                if (lug2Position >= 0 && this._wheels[lug2Position].EvaluateCurrentPin())
+                if (lug2Position >= 0 && this.PinSetting.Wheels[lug2Position].EvaluateCurrentPin())
                 {
                     displacement++;
                     continue;
                 }
             }                       
 
-            for (int i = 0; i < this._wheels.Length; i++)
+            for (int i = 0; i < this.PinSetting.Wheels.Length; i++)
             {
-                this._wheels[i].Rotate();
+                this.PinSetting.Wheels[i].Rotate();
             }
             
             return displacement;
@@ -148,19 +149,19 @@ namespace M209Analyzer
         /// <param name="wheelSetting">The settings of the pins on the wheel</param>
         public void SetWheelSettings(int wheelNr, string wheelSetting)
         {
-            _wheels[wheelNr].SetAllPinValuesUsingString(wheelSetting);
+            this.PinSetting.Wheels[wheelNr].SetAllPinValuesUsingString(wheelSetting);
         }
 
         public void SetLugSettings(string[] lugSettingString)
         {
-            _lugSettings = new LugSettings(lugSettingString);
+            LugSettings = new LugSettings(lugSettingString);
         }
 
         public void RandomizePinSettings()
         {
-            for (int i = 0; i < _wheels.Length; i++)
+            for (int i = 0; i < this.PinSetting.Wheels.Length; i++)
             {
-                _wheels[i].RandomizeAllPinValues();
+                this.PinSetting.Wheels[i].RandomizeAllPinValues();
             }
         }
     }

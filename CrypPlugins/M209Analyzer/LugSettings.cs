@@ -27,8 +27,7 @@ namespace M209Analyzer
                     lug2Position = tmpLug;
                 }
 
-                Bar[i].Value = new int[] { lug1Position, lug2Position };
-                Console.WriteLine($"{lugSettingString[i][0]}-{lugSettingString[i][1]} => {Bar[i].Value[0]}-{Bar[i].Value[1]}");
+                this.Bar[i].Value = new int[] { lug1Position, lug2Position };
             }
 
         }
@@ -162,11 +161,11 @@ namespace M209Analyzer
                 lugSetting[0] = -1;
             }
 
-            for (int i = 0; i < _possibleLugSettings.Length; i++)
+            for (int i = 0; i < this._possibleLugSettings.Length; i++)
             {
-                if (lugSetting[0] == _possibleLugSettings[i][0] && lugSetting[1] == _possibleLugSettings[i][1])
+                if (lugSetting[0] == this._possibleLugSettings[i][0] && lugSetting[1] == this._possibleLugSettings[i][1])
                 {
-                    _count = i;
+                    this._count = i;
                 }
             }
         }
@@ -175,7 +174,7 @@ namespace M209Analyzer
         {
             get
             {
-                return _possibleLugSettings[_count];
+                return this._possibleLugSettings[_count];
             }
             set 
             { 
@@ -185,29 +184,29 @@ namespace M209Analyzer
 
         public void Increase()
         {
-            if(_count < _possibleLugSettings.Length - 1)
+            if(this._count < this._possibleLugSettings.Length - 1)
             {
-                _count++;
+                this._count++;
             } else
             {
-                _count = 0;
+                this._count = 0;
             }
         }
 
         public void Decrease()
         {
-            if (_count > 0)
+            if (this._count > 0)
             {
-                _count--;
+                this._count--;
             } else
             {
-                _count = 20;
+                this._count = 20;
             }
         }
 
         public void Randomize()
         {
-            _count = this.Randomizer.Next(0, 20);
+            this._count = this.Randomizer.Next(0, 20);
         }
     }
 }

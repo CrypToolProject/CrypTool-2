@@ -52,12 +52,16 @@ namespace CrypTool.Plugins.M209Analyzer
         private readonly M209AnalyzerSettings settings = new M209AnalyzerSettings();
         private const string ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWKXY";
 
-        private PinSetting BestPins = new PinSetting();
-        private LugSettings BestLugs = new LugSettings(new string[27] {
+        //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
+        private Grams grams;
+
+        private Random Randomizer = new Random();
+
+        private M209CipherMachine _m209 = new M209CipherMachine(new string[27] {
             "36","06","16","15","45","04","04","04","04",
             "20","20","20","20","20","20","20","20","20",
             "20","25","25","05","05","05","05","05","05"
-        });
+        });       
 
         #endregion
 
@@ -121,18 +125,20 @@ namespace CrypTool.Plugins.M209Analyzer
         public void Execute()
         {
             //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
-            Grams grams = LanguageStatistics.CreateGrams(settings.Language, (LanguageStatistics.GramsType)(settings.GramsType + 1), false);
-            grams.Normalize(10_000_000);
+            this.grams = LanguageStatistics.CreateGrams(settings.Language, (LanguageStatistics.GramsType)(settings.GramsType + 1), false);
+            this.grams.Normalize(10_000_000);
 
             // HOWTO: Use this to show the progress of a plugin algorithm execution in the editor.
             ProgressChanged(0, 1);
             try
             {
+                GuiLogMessage($"Execute: AttackMode is {settings.AttackMode}", NotificationLevel.Info);
                 // HC - Hill climb
                 // SA - Simulated Anealing
                 switch (settings.AttackMode)
                 {
                     case AttackMode.CiphertextOnly:
+                        this.HCOuter("\"YURAF CBDZA YIWSD YTNGD LICEY BPRBW JHJAH SMBVA POMJN LINVD WIMKG OMWIP GOCFT YZYPB XFQPP FGQZO VXOOF ZAJYL LHZBR VGFNM SSERY OBJFT XBCEK UWRFV ABFRN DTVQL FVBJQ ZSHCE YSOKR XLUBL SBHOM JGGJY TPGCV QTFHM NZAKA OTUKN XGEKT JKYUO RBORF JWGTF BSZTR BSLDD WLSMV TIWXF XOGSP ZBLJL AMCDB OYRAB\"", "Version 1");
                         break;
                     case AttackMode.KnownPlaintext:
                         break;
@@ -149,30 +155,103 @@ namespace CrypTool.Plugins.M209Analyzer
         }
 
         private string HCOuter(string ciphertext, string VersionOfInstruction)
-        {
+        {            
+
+            PinSetting BestPins = new PinSetting();
+            LugSettings BestLugs = new LugSettings(new string[27] {
+                "36","06","16","15","45","04","04","04","04",
+                "20","20","20","20","20","20","20","20","20",
+                "20","25","25","05","05","05","05","05","05"
+            });
+
             BestLugs.Randomize();
             BestPins.Randomize();
 
+            this._m209.LugSettings = BestLugs;
+            this._m209.PinSetting = BestPins;
+
+            double bestScore = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
+
             bool stuck = false;
+            int localCounter = 100;
             do
             {
                 stuck = true;
 
-                LugSetting[] candidateLugs = BestLugs.GetNeighborLugs("V");
-                PinSetting[] candidatePins;
-
-                for (int i = 0; i < candidateLugs.Length; i++)
+                if (localCounter > 0)
                 {
-                    candidatePins = SAInner(ciphertext, candidateLugs[i], "V");
+                    this._m209.LugSettings.ApplyTransformationSimple();
+                } else
+                {
+                    this._m209.LugSettings.ApplyTransformationComplex();
+                }
+                this._m209.PinSetting = SAInner(ciphertext, this._m209.LugSettings, "V");
+
+                double score = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
+
+                if(score > bestScore)
+                {
+                    GuiLogMessage($"Improved: bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
+                    bestScore = score;
+                    BestPins = this._m209.PinSetting;
+                    BestLugs = this._m209.LugSettings;
+                    stuck = false;
+                }
+                else
+                {
+                    GuiLogMessage($"No improvement ({localCounter}): bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
+                    localCounter--;
                 }
 
             } while (stuck == true);
             return "BestLugs, BestPins";
         }
 
-        private PinSetting[] SAInner(string chiphertext, LugSetting lug, string versionOfInstruction)
+        private PinSetting SAInner(string ciphertext, LugSettings lugSetting, string versionOfInstruction)
         {
-            return new PinSetting[] { new PinSetting()};
+            GuiLogMessage($"SAInner \n", NotificationLevel.Info);
+            double T = 0;
+            double alpha = 0.9;
+
+            PinSetting BestPins = new PinSetting();
+            BestPins.Randomize();
+
+            PinSetting CurrentPins = BestPins;
+
+            PinSetting[] neighbourPinSettings = BestPins.GetNeighborPins();
+
+            this._m209.PinSetting = BestPins;
+            this._m209.LugSettings = lugSetting;
+            double bestScore = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int k = 0; k < neighbourPinSettings.Length; k++)
+                {
+                    this._m209.PinSetting = neighbourPinSettings[k];
+                    this._m209.LugSettings = lugSetting;
+                    double score = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
+
+                    this._m209.PinSetting = CurrentPins;
+                    this._m209.LugSettings = lugSetting;
+                    double currentScore = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
+
+                    GuiLogMessage($"SA: currentScore = {bestScore}, score = {score}", NotificationLevel.Info);
+
+                    double D = score - currentScore;
+                    if(D > 0 || this.Randomizer.NextDouble() < Math.Exp(-(Math.Abs(D)/T)))
+                    {
+                        CurrentPins = neighbourPinSettings[k];
+                        if (score > bestScore)
+                        {
+                            BestPins = neighbourPinSettings[k];
+                        }
+                        break;
+                    }
+                }
+                T = alpha * T;
+            }
+            return BestPins;
         }
 
         private double LogMonograms(string P)

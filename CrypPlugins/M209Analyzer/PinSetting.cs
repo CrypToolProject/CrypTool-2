@@ -9,7 +9,7 @@ namespace M209Analyzer
 {
     internal class PinSetting
     {
-        private Wheel[] _wheels = new Wheel[6]
+        public Wheel[] Wheels = new Wheel[6]
         {
             new Wheel("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 15),
             new Wheel("ABCDEFGHIJKLMNOPQRSTUVXYZ", 14),      // no W
@@ -23,15 +23,24 @@ namespace M209Analyzer
 
         public void Randomize()
         {
-            for (int i = 0; i < _wheels.Length; i++)
+            for (int i = 0; i < Wheels.Length; i++)
             {
-                _wheels[i].RandomizeAllPinValues();
+                Wheels[i].RandomizeAllPinValues();
             }
         }
 
-        public void GetNeighborPins()
+        public PinSetting[] GetNeighborPins()
         {
+            PinSetting[] pins = new PinSetting[] { 
+                this, this, this, this
+            };
 
+            pins[0].ToggleSingleWheelSinglePinTransformation();
+            pins[1].ToggleSingleWheelTwoPinsTransformation();
+            pins[2].ToggleTwoWheelsTwoPinsTransformation();
+            pins[3].ToggleSingleWheelAllPinsTransformation();
+
+            return pins;
         }
 
         public void ApplyTransformation(PinSettingTransformation pinSettingTransformation)
@@ -61,8 +70,8 @@ namespace M209Analyzer
         public void ToggleSingleWheelSinglePinTransformation()
         {
             int randomWheel = this.Randomizer.Next(0, 5);
-            int randomPin = _wheels[randomWheel].GetRandomPinPosition();
-            _wheels[randomWheel].TogglePinValue(randomPin);
+            int randomPin = this.Wheels[randomWheel].GetRandomPinPosition();
+            this.Wheels[randomWheel].TogglePinValue(randomPin);
         }
 
         /// <summary>
@@ -72,16 +81,24 @@ namespace M209Analyzer
         public void ToggleSingleWheelTwoPinsTransformation()
         {
             int randomWheel = this.Randomizer.Next(0, 5);
-            int randomPin1 = _wheels[randomWheel].GetRandomPinPosition();
-            _wheels[randomWheel].TogglePinValue(randomPin1);
+            int randomPin1 = this.Wheels[randomWheel].GetRandomPinPosition();
+            this.Wheels[randomWheel].TogglePinValue(randomPin1);
 
-            int randomPin2 = _wheels[randomWheel].GetRandomPinPosition();
+            int randomPin2 = 0;
             // Maybe it could be better to run systematically throug the pins...
-            while (_wheels[randomWheel].EvaluatePinAtPosition(randomPin1) != _wheels[randomWheel].EvaluatePinAtPosition(randomPin2))
+            //while (this.Wheels[randomWheel].EvaluatePinAtPosition(randomPin1) != this.Wheels[randomWheel].EvaluatePinAtPosition(randomPin2))
+            //{
+            //    randomPin2 = this.Wheels[randomWheel].GetRandomPinPosition();
+            //}
+            for (int i = 0; i < this.Wheels[randomWheel].Length; i++)
             {
-                randomPin2 = _wheels[randomWheel].GetRandomPinPosition();
+                if (this.Wheels[randomWheel].EvaluatePinAtPosition(randomPin1) != this.Wheels[randomWheel].EvaluatePinAtPosition(randomPin2))
+                {
+                    randomPin2 = i;
+                    break;
+                }
             }
-            _wheels[randomWheel].TogglePinValue(randomPin2);
+            this.Wheels[randomWheel].TogglePinValue(randomPin2);
         }
 
         /// <summary>
@@ -90,8 +107,8 @@ namespace M209Analyzer
         public void ToggleTwoWheelsTwoPinsTransformation()
         {
             int randomWheel1 = this.Randomizer.Next(0, 5);
-            int randomPin1 = _wheels[randomWheel1].GetRandomPinPosition();
-            _wheels[randomWheel1].TogglePinValue(randomPin1);
+            int randomPin1 = this.Wheels[randomWheel1].GetRandomPinPosition();
+            this.Wheels[randomWheel1].TogglePinValue(randomPin1);
 
             int randomWheel2 = this.Randomizer.Next(0, 5);
             while (randomWheel2 == randomWheel1)
@@ -99,12 +116,20 @@ namespace M209Analyzer
                 randomWheel2 = this.Randomizer.Next(0, 5);
             }
 
-            int randomPin2 = _wheels[randomWheel2].GetRandomPinPosition();
-            while (_wheels[randomWheel1].EvaluatePinAtPosition(randomPin1) != _wheels[randomWheel2].EvaluatePinAtPosition(randomPin2))
+            int randomPin2 = this.Wheels[randomWheel2].GetRandomPinPosition();
+            //while (this.Wheels[randomWheel1].EvaluatePinAtPosition(randomPin1) != this.Wheels[randomWheel2].EvaluatePinAtPosition(randomPin2))
+            //{
+            //    randomPin2 = this.Wheels[randomWheel2].GetRandomPinPosition();
+            //}
+            for (int i = 0; i < this.Wheels[randomWheel2].Length; i++)
             {
-                randomPin2 = _wheels[randomWheel2].GetRandomPinPosition();
+                if (this.Wheels[randomWheel1].EvaluatePinAtPosition(randomPin1) != this.Wheels[randomWheel2].EvaluatePinAtPosition(randomPin2))
+                {
+                    randomPin2 = i;
+                    break;
+                }
             }
-            _wheels[randomWheel2].TogglePinValue(randomPin2);
+            this.Wheels[randomWheel2].TogglePinValue(randomPin2);
 
         }
 
@@ -113,9 +138,9 @@ namespace M209Analyzer
         /// </summary>
         public void ToggleSingleWheelAllPinsTransformation()
         {
-            for (int i = 0; i < _wheels.Length; i++)
+            for (int i = 0; i < this.Wheels.Length; i++)
             {
-                _wheels[i].ToggleAllPinValues();
+                this.Wheels[i].ToggleAllPinValues();
             }
         }
     }

@@ -14,6 +14,7 @@ namespace M209Analyzer
             _letters = letters;
             _pinSettings = new bool[letters.Length];
             _position = initialPosition;
+            Length = letters.Length;
         }
 
         private string _letters;
@@ -21,42 +22,44 @@ namespace M209Analyzer
         private bool[] _pinSettings;
         private Random _randomizer = new Random();
 
+        public int Length = 0;
+
         public void Rotate()
         {
-            if (_position < _letters.Length - 1)
+            if (this._position < this._letters.Length - 1)
             {
-                _position++;
+                this._position++;
             }
-            else if (_position == _letters.Length - 1)
+            else if (this._position == this._letters.Length - 1)
             {
-                _position = 0;
+                this._position = 0;
             }
         }
 
         public bool EvaluateCurrentPin()
         {
-            return _pinSettings[_position];
+            return this._pinSettings[this._position];
         }
 
         public bool EvaluatePinAtPosition(int position)
         {
-            return _pinSettings[position];
+            return this._pinSettings[position];
         }
 
         public char GetCurrentLetter()
         {
-            return _letters[_position];
+            return this._letters[this._position];
         }
 
         public string GetEffectiveLetters()
         {
             string effectiveLetters = "";
 
-            for (int i = 0; i < _letters.Length; i++)
+            for (int i = 0; i < this._letters.Length; i++)
             {
-                if (_pinSettings[i])
+                if (this._pinSettings[i])
                 {
-                    effectiveLetters += _letters[i];
+                    effectiveLetters += this._letters[i];
                 }
             }
             return effectiveLetters;
@@ -64,14 +67,14 @@ namespace M209Analyzer
 
         public void SetPinValue(int position, bool value)
         {
-            _pinSettings[position] = value;
+            this._pinSettings[position] = value;
         }
 
         public void SetAllPinValuesUsingString(string pinSetting)
         {
             int shift = 0;
             int length = pinSetting.Length;
-            for (int i = 0; i < _pinSettings.Length; i++)
+            for (int i = 0; i < this._pinSettings.Length; i++)
             {
                 if ((i - shift) == pinSetting.Length)
                 {
@@ -84,11 +87,11 @@ namespace M209Analyzer
                         Console.WriteLine("ERROR");
                     }
                 }
-                char c = _letters[i];
+                char c = this._letters[i];
                 char p = pinSetting[i - shift];
-                if (pinSetting[i - shift] == _letters[i])
+                if (pinSetting[i - shift] == this._letters[i])
                 {
-                    _pinSettings[i] = true;
+                    this._pinSettings[i] = true;
                 }
                 else
                 {
@@ -100,12 +103,12 @@ namespace M209Analyzer
 
         public void TogglePinValue(int position)
         {
-            _pinSettings[position] = !_pinSettings[position];
+            this._pinSettings[position] = !this._pinSettings[position];
         }
 
         public void ToggleAllPinValues()
         {
-            for (int i = 0; i < _pinSettings.Length; i++)
+            for (int i = 0; i < this._pinSettings.Length; i++)
             {
                 this.TogglePinValue(i);
             }
@@ -113,14 +116,14 @@ namespace M209Analyzer
 
         public int GetRandomPinPosition()
         {
-            return _randomizer.Next(0, _pinSettings.Length - 1);
+            return this._randomizer.Next(0, this._pinSettings.Length - 1);
         }
 
         public void RandomizeAllPinValues()
         {
-            for (int i = 0; i < _pinSettings.Length; i++)
+            for (int i = 0; i < this._pinSettings.Length; i++)
             {
-                _pinSettings[i] = _randomizer.Next(0, 1) == 1;
+                this._pinSettings[i] = this._randomizer.Next(0, 1) == 1;
             }
         }
     }
