@@ -58,7 +58,7 @@ namespace CrypTool.LFSR
 
         private void OnInputClock(bool inputClk)
         {
-            if (Parameters.UseClock && inputClk != internalClk.Value)
+            if (Parameters.UseClock)
             {
                 internalClk.Value = inputClk;
             }
@@ -66,30 +66,44 @@ namespace CrypTool.LFSR
 
         private void OnInternalClock(bool oldVal, bool newVal)
         {
-            // after the predefined amount of rounds, the component is inactive
-            if (currentRound != null && currentRound.RoundNumber > Parameters.Rounds)
+            try
             {
-                return;
-            }
-
-            // Is the component still busy? Then, we can do nothing and it is an error from the clock input.
-            if (isAlreadyBusy)
-            {
-                throw new LFSRInputInvalidException(InputInvalidReason.ClockTooFast);
-            }
-
-            if (!oldVal && newVal) // on rising edge of CLK
-            {
-                // Be patient (no error) when it's just about establishing inputs at the start. Clock cycle gets lost, tho.
-                // TODO: may not be necessary; test!
-                if (currentRound == null && (InputPoly.Value == null || InputSeed.Value == null))
+                // after the predefined amount of rounds, the component is inactive
+                if (currentRound != null && currentRound.RoundNumber > Parameters.Rounds)
                 {
                     return;
                 }
 
-                Fun.InitialValidation(InputPoly.Value, InputSeed.Value); // throws Exceptions or logs warnings
+                // Is the component still busy? Then, we can do nothing and it is an error from the clock input.
+                if (isAlreadyBusy)
+                {
+                    throw new LFSRInputInvalidException(InputInvalidReason.ClockTooFast);
+                }
 
-                PerformRound();
+                if (!oldVal && newVal) // on rising edge of CLK
+                {
+                    // Be patient (no error) when it's just about establishing inputs at the start. Clock cycle gets lost, tho.
+                    // TODO: may not be necessary; test!
+                    if (currentRound == null && (InputPoly.Value == null || InputSeed.Value == null))
+                    {
+                        return;
+                    }
+
+                    Fun.InitialValidation(InputPoly.Value, InputSeed.Value); // throws Exceptions or logs warnings
+
+                    PerformRound();
+                }
+            }
+            catch(LFSRException ex)
+            {
+                if (ex.Kind == ErrorKinds.Unexpected)
+                {
+                    Log(CrypTool.LFSR.ConvertTo.String(ex), LogLevels.Error);
+                }
+                else
+                {
+                    Log(ConvertTo.InputErrorToString(ex), LogLevels.Warning);
+                }
             }
         }
 
