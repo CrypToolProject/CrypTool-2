@@ -90,23 +90,20 @@ namespace WorkspaceManager.Model
         /// <param name="workspaceModel"></param>
         public void ValidateAndFixConnectionModels(WorkspaceModel workspaceModel)
         {
-            List<ConnectorModel> froms = new List<ConnectorModel>();
-            List<ConnectorModel> tos = new List<ConnectorModel>();
+            List<(ConnectorModel,ConnectorModel)> fromsTos = new List<(ConnectorModel, ConnectorModel)>();
             List<ConnectionModel> deleteConnections = new List<ConnectionModel>();
 
             foreach (ConnectionModel connectionModel in workspaceModel.AllConnectionModels)
             {
-                if (froms.Contains(connectionModel.From) && tos.Contains(connectionModel.To))
+                if (fromsTos.Contains((connectionModel.From, connectionModel.To)))
                 {
                     GuiLogMessage(String.Format("Found duplicate ConnectorModel between {0} and {1}. Remove it.", connectionModel.From.PluginModel.Name, connectionModel.To.PluginModel.Name), NotificationLevel.Warning);
                     deleteConnections.Add(connectionModel);
                 }
                 else
                 {
-                    froms.Add(connectionModel.From);
-                    tos.Add(connectionModel.To);
+                    fromsTos.Add((connectionModel.From, connectionModel.To));
                 }
-
             }
             foreach (ConnectionModel connectionModel in deleteConnections)
             {
