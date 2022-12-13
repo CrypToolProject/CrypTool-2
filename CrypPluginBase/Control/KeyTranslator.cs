@@ -19,7 +19,6 @@ namespace CrypTool.PluginBase.Control
 {
     /// <summary>
     /// This interface defines the method needed for mapping an abstract key representation to the corresponding concrete key data.
-    /// It also defines methods to generate pieces of OpenCL code, which contain the bruteforcing movement of the key, which were obtained
     /// by the abstract key pattern.
     /// </summary>
     public interface IKeyTranslator
@@ -67,28 +66,6 @@ namespace CrypTool.PluginBase.Control
         /// This is important, because the synchronization is necessary for splitting the keypattern.
         /// </summary>
         /// <returns>The progress</returns>
-        int GetProgress();
-
-        /// <summary>
-        /// This method modifies the given OpenCL code, so that the returning code includes
-        /// the key movement stuff.
-        /// </summary>
-        /// <param name="code"></param>
-        /// <param name="approximateNumberOfKeys"></param>
-        /// <returns></returns>
-        string ModifyOpenCLCode(string code, int approximateNumberOfKeys);
-
-        /// <summary>
-        /// Like "NextKey()", but jumps over a whole key batch that can be processed by the generated OpenCL code
-        /// in one step.
-        /// </summary>
-        /// <returns></returns>
-        bool NextOpenCLBatch();
-
-        /// <summary>
-        /// Gets the opencl batch size.
-        /// </summary>
-        /// <returns></returns>
-        int GetOpenCLBatchSize();
+        int GetProgress();      
     }
 }

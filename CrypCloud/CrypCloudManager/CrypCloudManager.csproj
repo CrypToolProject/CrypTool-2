@@ -175,11 +175,6 @@
       <Name>CertificateLibrary</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\LibSource\OpenCLNet\OpenCLNet.csproj">
-      <Project>{0946e1a6-5488-4711-ad10-d54d6a5d2f32}</Project>
-      <Name>OpenCLNet</Name>
-      <Private>False</Private>
-    </ProjectReference>
     <ProjectReference Include="..\..\LibSource\VoluntLib2\VoluntLib2.csproj">
       <Project>{1b68fdaa-c5a7-4f8a-bd5b-5876e8ac1879}</Project>
       <Name>VoluntLib2</Name>

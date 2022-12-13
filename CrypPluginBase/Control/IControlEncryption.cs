@@ -57,14 +57,6 @@ namespace CrypTool.PluginBase.Control
         /// <returns>An implementation of IKeyTranslator.</returns>
         IKeyTranslator GetKeyTranslator();
 
-        /// <summary>
-        /// Returns OpenCL code for this encryption plugin.
-        /// </summary>
-        /// <param name="decryptionLength">Indicates how many bytes should be decrypted. Important for speed.</param>
-        /// <param name="iv">The IV vector (for CBC)</param>
-        /// <returns>The OpenCL code.</returns>
-        string GetOpenCLCode(int decryptionLength, byte[] iv);
-
         void ChangeSettings(string setting, object value);
 
         IControlEncryption Clone();

@@ -39,14 +39,6 @@ namespace CrypTool.PluginBase.Control
         /// <returns>cost</returns>
         double CalculateCost(byte[] text);
 
-        /// <summary>
-        /// This method modifies the given OpenCL code, so that the returning code includes
-        /// the costfunction calculations.
-        /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        string ModifyOpenCLCode(string code);
-
         int GetBytesToUse();
 
         int GetBytesOffset();

@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="An_error_occured_when_trying_to_compile_OpenCL_code__" xml:space="preserve">
-    <value>An error occured when trying to compile OpenCL code: </value>
-  </data>
   <data name="Assigning_new_job_with_Guid__0__to_client_" xml:space="preserve">
     <value>Assigning new job with Guid {0} to client!</value>
   </data>
@@ -306,9 +303,6 @@
   <data name="GroupExternalClient" xml:space="preserve">
     <value>External Client</value>
   </data>
-  <data name="GroupOpenCL" xml:space="preserve">
-    <value>OpenCL</value>
-  </data>
   <data name="GroupPeerToPeer" xml:space="preserve">
     <value>Peer-to-Peer network</value>
   </data>
@@ -363,9 +357,6 @@
   <data name="Keys_sec_CPU_" xml:space="preserve">
     <value>Keys/sec (CPU):</value>
   </data>
-  <data name="Keys_sec_OpenCL_" xml:space="preserve">
-    <value>Keys/sec (OpenCL):</value>
-  </data>
   <data name="Launching_p2p_based_bruteforce_logic___" xml:space="preserve">
     <value>Launching p2p based bruteforce logic...</value>
   </data>
@@ -378,29 +369,11 @@
   <data name="Node_was_already_calculated_" xml:space="preserve">
     <value>Chunk was already calculated.</value>
   </data>
-  <data name="NoOpenCLCaption" xml:space="preserve">
-    <value>No OpenCL available</value>
-  </data>
-  <data name="NoOpenCLTooltip" xml:space="preserve">
-    <value>No OpenCL device available!</value>
-  </data>
   <data name="No_ressources_to_BruteForce_available__Check_the_KeySearcher_settings_" xml:space="preserve">
     <value>No ressources assigned for brute force. Please check the KeySearcher parameters.</value>
   </data>
   <data name="Only_using_external_client_to_bruteforce_" xml:space="preserve">
     <value>Only using external client to brute force!</value>
-  </data>
-  <data name="OpenCLDeviceCaption" xml:space="preserve">
-    <value>OpenCL Device</value>
-  </data>
-  <data name="OpenCLDeviceTooltip" xml:space="preserve">
-    <value>Choose the OpenCL device you want to use.</value>
-  </data>
-  <data name="OpenCLModeCaption" xml:space="preserve">
-    <value>OpenCL Mode</value>
-  </data>
-  <data name="OpenCLModeTooltip" xml:space="preserve">
-    <value>Choose the OpenCL mode you want to use.</value>
   </data>
   <data name="Overhead_Abs_" xml:space="preserve">
     <value>Overhead (abs):</value>
@@ -615,12 +588,6 @@
   <data name="EvaluationUserTooltip" xml:space="preserve">
     <value>Username for evaluation database</value>
   </data>
-  <data name="UseOpenCLCaption" xml:space="preserve">
-    <value>Use selected device</value>
-  </data>
-  <data name="UseOpenCLTooltip" xml:space="preserve">
-    <value>If checked, the selected OpenCL device is used for brute-force attack.</value>
-  </data>
   <data name="Waiting_for_external_client_" xml:space="preserve">
     <value>Waiting for external client!</value>
   </data>
@@ -687,9 +654,6 @@
   <data name="HideDeadUser_" xml:space="preserve">
     <value>Hide Dead User</value>
   </data>
-  <data name="No_OpenCL_Device_available_" xml:space="preserve">
-    <value>No OpenCL Device available</value>
-  </data>
   <data name="S_t_a_t_i_s_t_i_c_s" xml:space="preserve">
     <value>S t a t i s t i c s</value>
   </data>
@@ -701,9 +665,6 @@
   </data>
   <data name="Anonymize_machine_name" xml:space="preserve">
     <value>Anonymize machine name</value>
-  </data>
-  <data name="Enable_using_OpenCL_with_high_load__not_recommended_" xml:space="preserve">
-    <value>Enable using OpenCL with high load (not recommended)</value>
   </data>
   <data name="Key" xml:space="preserve">
     <value>Key</value>
@@ -720,26 +681,11 @@
   <data name="Text" xml:space="preserve">
     <value>Text</value>
   </data>
-  <data name="Use_OpenCL_in_KeySearcher" xml:space="preserve">
-    <value>Use OpenCL in KeySearcher</value>
-  </data>
   <data name="Value" xml:space="preserve">
     <value>Value</value>
   </data>
   <data name="Combo_characters" xml:space="preserve">
     <value>{0} character(s)</value>
-  </data>
-  <data name="Use_OpenCL_in_KeySearcher_Tooltip" xml:space="preserve">
-    <value>Check this to enable the KeySearcher to make use of OpenCL for bruteforcing.</value>
-  </data>
-  <data name="OpenCLModeList1" xml:space="preserve">
-    <value>Low Load</value>
-  </data>
-  <data name="OpenCLModeList2" xml:space="preserve">
-    <value>Normal Load</value>
-  </data>
-  <data name="OpenCLModeList3" xml:space="preserve">
-    <value>High Load (use with caution)</value>
   </data>
   <data name="day" xml:space="preserve">
     <value>day</value>
