@@ -122,6 +122,7 @@
   <ItemGroup>
     <Compile Include="AchterbahnTest.cs" />
     <Compile Include="ADFGVXTest.cs" />
+    <Compile Include="TemplateAndPluginTests\EveryComponentHasATemplateTest.cs" />
     <Compile Include="VICTest.cs" />
     <Compile Include="SpeckTest.cs" />
     <Compile Include="LAMBDA1Test.cs" />
