@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: M94_Mauborgne_Testmessages.xml-->
+  <!--Last edited: 2022.12.14-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">M94 Test Messages from Joseph O. Mauborgne</title>
+  <summary lang="en">This template shows how the <i>Cylinder Cipher</i> can be used.</summary>
+  <description lang="en">It shows test messages encrypted by Joseph O. Mauborgne originally sent to William F. Friedman at the Riverbank Laboratories and to Major Herbert O. Yardley at the Cipher Bureau for cryptanalysis.</description>
+  <keywords>cylinder, Mauborgne, M94, Jefferson</keywords>
+  <replacements lang="en">
+    <replacement key="$Cylinder Cipher$" value="Cylinder Cipher" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Uppercase$" value="Uppercase" />
+    <replacement key="$To Blocks$" value="To blocks" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Decrypted Plaintext$" value="Decrypted plaintext" />
+    <replacement key="$memo$" value="The {\b M-94 cylinder cipher} is an encryption device used by U.S. Army, U.S. Navy, and U.S. Coast Guard in the time period of 1922 to 1943. It is based on the original design of Parker Hitt and was refined by Joseph O. Mauborgne. The operating principles of the M-94 are the same as of the Jefferson Cylinder developed by Thomas Jefferson in 1790 and the Bazeriers Cylinder developed by Etienne Bazeriers in 1901. See the components help page for further information on the device.\line
+\line
+This template shows 25 test messages that Joseph O. Mauborgne originally sent to William F. Friedman at the Riverbank Laboratories and to Major Herbert O. Yardley at the Cipher Bureau for cryptanalysis. Neither Friedman nor Yardley were able to decrypt the messages. After that, Mauborgne's device was ocially adopted by the U.S. Army in 1921.\line
+\line
+Here, the test messages are at first encrypted with the M-94 cylinder cipher using Mauborgne's original key. After that, they are decrypted using the same key. Furthermore, the messages are formatted to 25 letter blocks.\line
+\line
+Picture from: https://commons.wikimedia.org/wiki/File:M-94_cylinder-disk_cipher.jpg" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">M94-Testnachrichten von Joseph O. Mauborgne</title>
+  <summary lang="de">Diese Vorlage zeigt, wie die <i>Zylinderchiffre</i> verwendet werden kann.</summary>
+  <description lang="de">Es zeigt von Joseph O. Mauborgne verschlüsselte Testnachrichten, die ursprünglich an William F. Friedman in den Riverbank Laboratories und an Major Herbert O. Yardley im Cipher Bureau zur Kryptoanalyse geschickt wurden.</description>
+  <keywords>Zylinder, Mauborgne, M94, Jefferson</keywords>
+  <replacements lang="de">
+    <replacement key="$Cylinder Cipher$" value="Zylinderchiffre" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Uppercase$" value="Großbuchstaben" />
+    <replacement key="$To Blocks$" value="Zu Blöcken" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Decrypted Plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$memo$" value="Die {\b M-94-Zylinderchiffre} ist ein Verschlüsselungsgerät, das von der U.S. Army, der U.S. Navy und der U.S. Coast Guard im Zeitraum von 1922 bis 1943 verwendet wurde. Es basiert auf dem ursprünglichen Entwurf von Parker Hitt und wurde von Joseph O. Mauborgne weiterentwickelt. Das Funktionsprinzip des M-94 entspricht dem des Jefferson-Zylinders, der 1790 von Thomas Jefferson entwickelt wurde, und dem des Bazeriers-Zylinders, der 1901 von Etienne Bazeriers entwickelt wurde. Weitere Informationen über das Gerät finden Sie auf der Hilfeseite zu den Komponenten.\line
+\line
+Diese Vorlage zeigt 25 Testnachrichten, die Joseph O. Mauborgne ursprünglich an William F. Friedman in den Riverbank Laboratories und an Major Herbert O. Yardley im Cipher Bureau zur Kryptoanalyse schickte. Weder Friedman noch Yardley waren in der Lage, die Nachrichten zu entschlüsseln. Daraufhin wurde Mauborgnes Gerät 1921 von der US-Armee übernommen.\line
+\line
+Hier werden die Testnachrichten zunächst mit der M-94-Zylinderchiffre unter Verwendung des Originalschlüssels von Mauborgne verschlüsselt. Danach werden sie mit demselben Schlüssel entschlüsselt. Außerdem werden die Nachrichten zu 25-Buchstaben-Blöcken formatiert.\line
+\line
+Bild von: https://commons.wikimedia.org/wiki/File:M-94_cylinder-disk_cipher.jpg" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="M94_Mauborgne_Testmessages.png" />
+  <relevantPlugins>
+    <plugin name="CylinderCipher" />
+  </relevantPlugins>
+</sample>
