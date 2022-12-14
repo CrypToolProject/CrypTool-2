@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: HIGHT.xml-->
-  <!--Last edited: 2022.10.29-->
+  <!--Last edited: 2022.12.14-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -25,7 +25,7 @@ HIGHT was proposed at CHES '06 for use in ubiquitous computing devices such as s
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">HIGHT-Chiffre</title>
   <summary lang="de">Benutzung der <i>HIGHT</i>-Chiffre</summary>
-  <description lang="de">GOST Magma ist eine sowjetische und russische Blockchiffre nach dem GOST-Standard, die erstmals 1994 veröffentlicht wurde. Sie hat eine Blockgröße von 64 Bit und eine Schlüsselgröße von 128 Bit.</description>
+  <description lang="de">HIGHT ist eine von Deukjo Hong et al. vorgeschlagene Blockchiffre, die eine Blockgröße von 64 Bit und eine Schlüsselgröße von 128 Bit verwendet.</description>
   <keywords>koreanisch, symmetrisch, Block, Chiffre, Feistel</keywords>
   <replacements lang="de">
    <replacement key="$Plaintext$" value="Klartext" />
