@@ -324,8 +324,6 @@ namespace OnlineDocumentationGenerator.Generators.FunctionListGenerator
                     return Properties.Resources.Category_ToolsCodes;
                 case ComponentCategory.ToolsMisc:
                     return Properties.Resources.Category_FL_ToolsMisc;
-                case ComponentCategory.DECRYPTProjectComponent:
-                    return Properties.Resources.Category_FL_DECRYPT;
                 default:
                     return Properties.Resources.Category_FL_Unknown;
             }

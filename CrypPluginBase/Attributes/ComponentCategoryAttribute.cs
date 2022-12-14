@@ -33,7 +33,6 @@ namespace CrypTool.PluginBase
         ToolsRandomNumbers,
         ToolsCodes,
         ToolsMisc,
-        DECRYPTProjectComponent,
         Undefined
     }
 

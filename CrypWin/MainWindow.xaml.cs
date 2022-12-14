@@ -1479,14 +1479,6 @@ namespace CrypTool.CrypWin
                             cont = new GUIContainerElementsForPlugins(type, pia, navPaneItemTools, navListBoxToolsMisc, Properties.Resources.Misc);
                             break;
 
-                        case ComponentCategory.DECRYPTProjectComponent:
-#if SHOW_DECRYPT_COMPONENTS
-                            cont = new GUIContainerElementsForPlugins(type, pia, navPaneItemDECRYPTProject, navListBoxDECRYPTProject, Properties.Resources.DECRYPTProject);
-#else
-                            cont = null;
-#endif
-                            break;
-
                         default:
                             GuiLogMessage(string.Format("Category {0} of plugin {1} not handled in CrypWin", attr.Category, pia.Caption), NotificationLevel.Error);
                             break;
