@@ -14,13 +14,15 @@
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
-    <replacement key="$Key$" value="Key (Hex values)" />
+    <replacement key="$Key$" value="Key (hex values)" />
     <replacement key="$Decrypted plaintext$" value="Decrypted plaintext" />
-    <replacement key="$IV$" value="Initialization vector (Hex values)" />
+    <replacement key="$IV$" value="Initialization vector (hex values)" />
     <replacement key="$String Encoder$" value="String Encoder" />
     <replacement key="$String Decoder$" value="String Decoder" />
     <replacement key="$memo$" value="{\b Trivium} is a synchronous stream cipher that represents a compromise between simple and powerful implementability in hardware and efficient implementation in software.\line\line
-Trivium was developed by two Belgian cryptographers, Bart Preneel and Christophe De Cannière. The two submitted the method as a candidate for Profile II (hardware method) of the eSTREAM competition." />
+Trivium was developed by two Belgian cryptographers, Bart Preneel and Christophe De Cannière. The two submitted the method as a candidate for Profile II (hardware method) of the eSTREAM competition.\line
+\line
+Wikipedia: https://en.wikipedia.org/wiki/Trivium_(cipher)" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -38,7 +40,9 @@ Trivium was developed by two Belgian cryptographers, Bart Preneel and Christophe
     <replacement key="$String Encoder$" value="String-Codierer" />
     <replacement key="$String Decoder$" value="String-Decodierer" />
     <replacement key="$memo$" value="{\b Trivium} ist eine synchrone Stromchiffre, die einen Kompromiss zwischen einfacher und leistungsfähiger Implementierbarkeit in Hardware und effizienter Implementierung in Software darstellt. \line\line
-Trivium wurde von zwei belgischen Kryptografen, Bart Preneel und Christophe De Cannière, entwickelt. Die beiden haben das Verfahren als Kandidat für das Profil II (Hardware-Verfahren) des eSTREAM-Wettbewerbs eingereicht." />
+Trivium wurde von zwei belgischen Kryptografen, Bart Preneel und Christophe De Cannière, entwickelt. Die beiden haben das Verfahren als Kandidat für das Profil II (Hardware-Verfahren) des eSTREAM-Wettbewerbs eingereicht.\line
+\line
+Wikipedia: http://de.wikipedia.org/wiki/Trivium_(Algorithmus)" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
