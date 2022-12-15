@@ -64,8 +64,5 @@ We have six different inputs: The following four for the straddling checkerboard
   <icon file="StraddlingCheckerboard.png" />
   <relevantPlugins>
     <plugin name="StraddlingCheckerboard" />
-    <plugin name="TextInput" />
-    <plugin name="TextOutput" />
-    <plugin name="Alphabet" />
   </relevantPlugins>
 </sample>
