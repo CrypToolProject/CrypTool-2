@@ -40,7 +40,5 @@
   <icon file="T9Code.png" />
   <relevantPlugins>
     <plugin name="T9Code" />
-    <plugin name="TextInput" />
-    <plugin name="TextOutput" />
   </relevantPlugins>
 </sample>

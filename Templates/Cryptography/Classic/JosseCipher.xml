@@ -48,7 +48,5 @@
   <icon file="JosseCipher.png" />
   <relevantPlugins>
     <plugin name="JosseCipher" />
-    <plugin name="TextInput" />
-    <plugin name="TextOutput" />
   </relevantPlugins>
 </sample>

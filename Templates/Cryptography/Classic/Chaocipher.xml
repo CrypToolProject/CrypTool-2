@@ -40,7 +40,5 @@
   <icon file="Chaocipher.png" />
   <relevantPlugins>
     <plugin name="Chaocipher" />
-    <plugin name="TextInput" />
-    <plugin name="TextOutput" />
   </relevantPlugins>
 </sample>
