@@ -12,7 +12,7 @@
     longer than 25 characters, the same stips will be reused after 25 characters and the order of the strips is not changed during the encryption
     of one plaintext. Due to that, the key contains the 25 used strips in the correct order and the chosen offset. The implementation in
     CrypTool 2 features a set of strips provided by cryptologist Klaus Schmeh as the original set of strips was not published. Using
-	 a set of 100 unknown strips from where 25 are taken leads to a keyspace of 2^166 which makes a brute-force attack unpractical.<newline /><newline /><img src="M-138/603px-M-138-A_strip_cipher_2.jpg" /></introduction>
+	 a set of 100 unknown strips from where 25 are taken leads to a keyspace of 2^166 which makes a brute-force attack unpractical.<newline /><newline /><img src="M138/603px-M-138-A_strip_cipher_2.jpg" /></introduction>
   <introduction lang="de-DE">    
     Die M-138 ist ein Verschlüsselungswerkzeug, das bis in die Mitte des 20. Jahrhunderts von den amerikanischen Streitkräften eingesetzt wurde.
     Sie wurde 1916 von Colonel Parker Hitt erfunden und ist auch als CSP-845 bekannt. <newline />
@@ -23,7 +23,7 @@
     derselben Reihenfolge für die darauffolgenden Buchstaben verwendet. Der Schlüssel besteht somit aus den 25 verwendeten Streifen in der richtigen Reihenfolge
     und dem gewählten Offset. Die Implementierung in CrypTool2 verwendet einen von dem Kryptologen Klaus Schmeh entworfenen Streifensatz, da die originalen Streifen
     nicht bekannt sind. Bei 100 unbekannten Streifen, von denen 25 zufällig ausgewählt werden, ergibt sich ein Schlüsselraum von 2^166. Damit ist ein
-	 Brute-Force-Angriff auf die Verschlüsselung nicht sinnvoll.<newline /><newline /><img src="M-138/603px-M-138-A_strip_cipher_2.jpg" /></introduction>
+	 Brute-Force-Angriff auf die Verschlüsselung nicht sinnvoll.<newline /><newline /><img src="M138/603px-M-138-A_strip_cipher_2.jpg" /></introduction>
   <usage lang="en">
     The component contains 2 inputs, 1 output and 5 possibilities to adjust the component's settings. As inputs, the user has to provide the text to
     be de- or encrypted as well as the key to be used for that. The output provides the resulting plain- or ciphertext.
