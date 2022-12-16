@@ -117,109 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CalculationStepOutputExplanationEnciphering" xml:space="preserve">
-    <value>The plaintext "{0}" is encrypted to "{1}"</value>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>Action</value>
   </data>
-  <data name="CalculationStepOutputExplanationDeciphering" xml:space="preserve">
-    <value>The ciphertext "{0}" is decrypted to "{1}"</value>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Select the component's action</value>
   </data>
-  <data name="ShowPlayText" xml:space="preserve">
-    <value>Please click "Play" to show the visualization</value>
+  <data name="CharacterMapping" xml:space="preserve">
+    <value>Character mapping</value>
   </data>
-  <data name="DefaultAlphabet" xml:space="preserve">
-    <value>abcdefghijklmnopqrstuvxyz</value>
-  </data>
-  <data name="Mode" xml:space="preserve">
-    <value>Mode</value>
-  </data>
-  <data name="ModeActionDecrypt" xml:space="preserve">
+  <data name="Decrypt" xml:space="preserve">
     <value>Decrypt</value>
   </data>
-  <data name="ModeActionEncrypt" xml:space="preserve">
+  <data name="EnablePeriodCaption" xml:space="preserve">
+    <value>Enable period</value>
+  </data>
+  <data name="EnablePeriodTooltip" xml:space="preserve">
+    <value>The plaintext or ciphertext is divided into blocks of a certain length. Each block is encrypted or decrypted separately</value>
+  </data>
+  <data name="Encrypt" xml:space="preserve">
     <value>Encrypt</value>
   </data>
-  <data name="ModeTooltip" xml:space="preserve">
-    <value>Determines whether the component is in encrypt or decrypt mode</value>
-  </data>
-  <data name="OutputTextCaption" xml:space="preserve">
-    <value>Text output</value>
-  </data>
-  <data name="OutputTextTooltip" xml:space="preserve">
-    <value>Text after being processed with the Josse cipher</value>
-  </data>
-  <data name="InputTextCaption" xml:space="preserve">
-    <value>Text input</value>
-  </data>
-  <data name="InputTextTooltip" xml:space="preserve">
-    <value>Text that is processed by the Josse cipher</value>
-  </data>
-  <data name="Keyword" xml:space="preserve">
-    <value>Keyword</value>
-  </data>
-  <data name="KeywordToolTip" xml:space="preserve">
-    <value>Keyword for creating the replacement table</value>
-  </data>
   <data name="InputAlphabetCaption" xml:space="preserve">
-    <value>External alphabet</value>
+    <value>Alphabet</value>
   </data>
   <data name="InputAlphabetTooltip" xml:space="preserve">
-    <value>External input for the alphabet</value>
+    <value>Which alphabet should be used during execution?</value>
   </data>
-  <data name="CalculationStepOutputCaption" xml:space="preserve">
-    <value>Calculation steps</value>
+  <data name="InputTextCaption" xml:space="preserve">
+    <value>Input Text</value>
   </data>
-  <data name="CalculationStepOutputTooltip" xml:space="preserve">
-    <value>Output for the calculation steps of the cipher</value>
+  <data name="InputTextTooltip" xml:space="preserve">
+    <value>Input a string to be processed by the cipher</value>
   </data>
-  <data name="Char" xml:space="preserve">
-    <value>Character</value>
+  <data name="KeyCaption" xml:space="preserve">
+    <value>Keyword</value>
   </data>
-  <data name="Index" xml:space="preserve">
-    <value>Index</value>
+  <data name="KeyTooltip" xml:space="preserve">
+    <value>Keyword used for en- or decryption</value>
   </data>
-  <data name="EncipheringInputText" xml:space="preserve">
-    <value>Encrypting {0}</value>
+  <data name="OutputTextCaption" xml:space="preserve">
+    <value>Output Text</value>
   </data>
-  <data name="Plaintext" xml:space="preserve">
-    <value>Plaintext</value>
+  <data name="OutputTextTooltip" xml:space="preserve">
+    <value>Result of the cipher</value>
   </data>
-  <data name="NumericalRepresentation" xml:space="preserve">
-    <value>Numerical representation</value>
+  <data name="PeriodCaption" xml:space="preserve">
+    <value>Period</value>
   </data>
-  <data name="Calculation" xml:space="preserve">
-    <value>Calculation</value>
-  </data>
-  <data name="Result" xml:space="preserve">
-    <value>Result</value>
-  </data>
-  <data name="Ciphertext" xml:space="preserve">
-    <value>Ciphertext</value>
+  <data name="PeriodTooltip" xml:space="preserve">
+    <value>Size of blocks (period) which should be used during encryption or decryption</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>Josse Cipher</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>A French cipher from the late 19th century</value>
+    <value>Implementation of the Josse cipher</value>
   </data>
-  <data name="ReplacementTableTab" xml:space="preserve">
-    <value>Replacement table</value>
+  <data name="PolybiusSquare" xml:space="preserve">
+    <value>Polybius square</value>
   </data>
-  <data name="CharacterMappingTableTap" xml:space="preserve">
-    <value>Letter assignment</value>
-  </data>
-  <data name="Alphabet" xml:space="preserve">
-    <value>Alphabet</value>
-  </data>
-  <data name="AlphabetTooltip" xml:space="preserve">
-    <value>The alphabet used by the Josse cipher</value>
-  </data>
-  <data name="KeywordTooShort" xml:space="preserve">
-    <value>No keyword specified. A default key length of 5 characters is used</value>
-  </data>
-  <data name="UnknownChar" xml:space="preserve">
-    <value>The input text contains unknown characters ({0}). These are ignored in the further process</value>
-  </data>
-  <data name="DefaultKeyword" xml:space="preserve">
-    <value>secret</value>
+  <data name="ShowPlayText" xml:space="preserve">
+    <value>Press play to start the workspace</value>
   </data>
 </root>

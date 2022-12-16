@@ -61,133 +61,70 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Action.
+        /// </summary>
+        internal static string ActionCaption {
+            get {
+                return ResourceManager.GetString("ActionCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the component&apos;s action.
+        /// </summary>
+        internal static string ActionTooltip {
+            get {
+                return ResourceManager.GetString("ActionTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Character mapping.
+        /// </summary>
+        internal static string CharacterMapping {
+            get {
+                return ResourceManager.GetString("CharacterMapping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrypt.
+        /// </summary>
+        internal static string Decrypt {
+            get {
+                return ResourceManager.GetString("Decrypt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable period.
+        /// </summary>
+        internal static string EnablePeriodCaption {
+            get {
+                return ResourceManager.GetString("EnablePeriodCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The plaintext or ciphertext is divided into blocks of a certain length. Each block is encrypted or decrypted separately.
+        /// </summary>
+        internal static string EnablePeriodTooltip {
+            get {
+                return ResourceManager.GetString("EnablePeriodTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encrypt.
+        /// </summary>
+        internal static string Encrypt {
+            get {
+                return ResourceManager.GetString("Encrypt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alphabet.
-        /// </summary>
-        internal static string Alphabet {
-            get {
-                return ResourceManager.GetString("Alphabet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The alphabet used by the Josse cipher.
-        /// </summary>
-        internal static string AlphabetTooltip {
-            get {
-                return ResourceManager.GetString("AlphabetTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Calculation.
-        /// </summary>
-        internal static string Calculation {
-            get {
-                return ResourceManager.GetString("Calculation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Calculation steps.
-        /// </summary>
-        internal static string CalculationStepOutputCaption {
-            get {
-                return ResourceManager.GetString("CalculationStepOutputCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The ciphertext &quot;{0}&quot; is decrypted to &quot;{1}&quot;.
-        /// </summary>
-        internal static string CalculationStepOutputExplanationDeciphering {
-            get {
-                return ResourceManager.GetString("CalculationStepOutputExplanationDeciphering", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The plaintext &quot;{0}&quot; is encrypted to &quot;{1}&quot;.
-        /// </summary>
-        internal static string CalculationStepOutputExplanationEnciphering {
-            get {
-                return ResourceManager.GetString("CalculationStepOutputExplanationEnciphering", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Output for the calculation steps of the cipher.
-        /// </summary>
-        internal static string CalculationStepOutputTooltip {
-            get {
-                return ResourceManager.GetString("CalculationStepOutputTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Character.
-        /// </summary>
-        internal static string Char {
-            get {
-                return ResourceManager.GetString("Char", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Letter assignment.
-        /// </summary>
-        internal static string CharacterMappingTableTap {
-            get {
-                return ResourceManager.GetString("CharacterMappingTableTap", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ciphertext.
-        /// </summary>
-        internal static string Ciphertext {
-            get {
-                return ResourceManager.GetString("Ciphertext", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to abcdefghijklmnopqrstuvxyz.
-        /// </summary>
-        internal static string DefaultAlphabet {
-            get {
-                return ResourceManager.GetString("DefaultAlphabet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to secret.
-        /// </summary>
-        internal static string DefaultKeyword {
-            get {
-                return ResourceManager.GetString("DefaultKeyword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Encrypting {0}.
-        /// </summary>
-        internal static string EncipheringInputText {
-            get {
-                return ResourceManager.GetString("EncipheringInputText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Index.
-        /// </summary>
-        internal static string Index {
-            get {
-                return ResourceManager.GetString("Index", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to External alphabet.
         /// </summary>
         internal static string InputAlphabetCaption {
             get {
@@ -196,7 +133,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to External input for the alphabet.
+        ///   Looks up a localized string similar to Which alphabet should be used during execution?.
         /// </summary>
         internal static string InputAlphabetTooltip {
             get {
@@ -205,7 +142,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Text input.
+        ///   Looks up a localized string similar to Input Text.
         /// </summary>
         internal static string InputTextCaption {
             get {
@@ -214,7 +151,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Text that is processed by the Josse cipher.
+        ///   Looks up a localized string similar to Input a string to be processed by the cipher.
         /// </summary>
         internal static string InputTextTooltip {
             get {
@@ -225,77 +162,23 @@ namespace CrypTool.JosseCipher.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Keyword.
         /// </summary>
-        internal static string Keyword {
+        internal static string KeyCaption {
             get {
-                return ResourceManager.GetString("Keyword", resourceCulture);
+                return ResourceManager.GetString("KeyCaption", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Keyword for creating the replacement table.
+        ///   Looks up a localized string similar to Keyword used for en- or decryption.
         /// </summary>
-        internal static string KeywordToolTip {
+        internal static string KeyTooltip {
             get {
-                return ResourceManager.GetString("KeywordToolTip", resourceCulture);
+                return ResourceManager.GetString("KeyTooltip", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No keyword specified. A default key length of 5 characters is used.
-        /// </summary>
-        internal static string KeywordTooShort {
-            get {
-                return ResourceManager.GetString("KeywordTooShort", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Mode.
-        /// </summary>
-        internal static string Mode {
-            get {
-                return ResourceManager.GetString("Mode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Decrypt.
-        /// </summary>
-        internal static string ModeActionDecrypt {
-            get {
-                return ResourceManager.GetString("ModeActionDecrypt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Encrypt.
-        /// </summary>
-        internal static string ModeActionEncrypt {
-            get {
-                return ResourceManager.GetString("ModeActionEncrypt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Determines whether the component is in encrypt or decrypt mode.
-        /// </summary>
-        internal static string ModeTooltip {
-            get {
-                return ResourceManager.GetString("ModeTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Numerical representation.
-        /// </summary>
-        internal static string NumericalRepresentation {
-            get {
-                return ResourceManager.GetString("NumericalRepresentation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Text output.
+        ///   Looks up a localized string similar to Output Text.
         /// </summary>
         internal static string OutputTextCaption {
             get {
@@ -304,7 +187,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Text after being processed with the Josse cipher.
+        ///   Looks up a localized string similar to Result of the cipher.
         /// </summary>
         internal static string OutputTextTooltip {
             get {
@@ -313,11 +196,20 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plaintext.
+        ///   Looks up a localized string similar to Period.
         /// </summary>
-        internal static string Plaintext {
+        internal static string PeriodCaption {
             get {
-                return ResourceManager.GetString("Plaintext", resourceCulture);
+                return ResourceManager.GetString("PeriodCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Size of blocks (period) which should be used during encryption or decryption.
+        /// </summary>
+        internal static string PeriodTooltip {
+            get {
+                return ResourceManager.GetString("PeriodTooltip", resourceCulture);
             }
         }
         
@@ -331,7 +223,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A French cipher from the late 19th century.
+        ///   Looks up a localized string similar to Implementation of the Josse cipher.
         /// </summary>
         internal static string PluginTooltip {
             get {
@@ -340,38 +232,20 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Replacement table.
+        ///   Looks up a localized string similar to Polybius square.
         /// </summary>
-        internal static string ReplacementTableTab {
+        internal static string PolybiusSquare {
             get {
-                return ResourceManager.GetString("ReplacementTableTab", resourceCulture);
+                return ResourceManager.GetString("PolybiusSquare", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Result.
-        /// </summary>
-        internal static string Result {
-            get {
-                return ResourceManager.GetString("Result", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please click &quot;Play&quot; to show the visualization.
+        ///   Looks up a localized string similar to Press play to start the workspace.
         /// </summary>
         internal static string ShowPlayText {
             get {
                 return ResourceManager.GetString("ShowPlayText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The input text contains unknown characters ({0}). These are ignored in the further process.
-        /// </summary>
-        internal static string UnknownChar {
-            get {
-                return ResourceManager.GetString("UnknownChar", resourceCulture);
             }
         }
     }
