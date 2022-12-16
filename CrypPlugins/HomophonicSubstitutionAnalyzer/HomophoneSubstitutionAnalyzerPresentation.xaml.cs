@@ -996,6 +996,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     e.Ranking = ranking;
                     ranking++;
                 }
+                BestListView.ScrollIntoView(BestListView.Items[0]);
             }
             catch (Exception)
             {

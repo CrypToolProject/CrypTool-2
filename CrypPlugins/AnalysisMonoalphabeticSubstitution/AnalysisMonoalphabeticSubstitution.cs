@@ -491,6 +491,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                                    entry.Value = fitness;
                                    ((AssignmentPresentation)Presentation).Entries.Add(entry);
                                }
+                               ((AssignmentPresentation)Presentation).CrypAnalysisResultListView.ScrollIntoView(((AssignmentPresentation)Presentation).CrypAnalysisResultListView.Items[0]);
                            }
                            catch (Exception ex)
                            {

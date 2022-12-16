@@ -368,6 +368,8 @@ namespace CrypTool.EnigmaAnalyzer
                         Plaintext = args.ResultEntry.Text;
                         Key = args.ResultEntry.Key;
                     }
+
+                    _presentation.CrypAnalysisResultListView.ScrollIntoView(_presentation.CrypAnalysisResultListView.Items[0]);
                 }
                 catch (Exception)
                 {
