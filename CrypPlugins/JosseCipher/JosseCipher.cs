@@ -30,7 +30,7 @@ namespace CrypTool.JosseCipher
     [Author("Nils Kopal", "nils.kopal@cryptool.org", "CrypTool 2 Team", "https://www.cryptool.org")]
     [PluginInfo("CrypTool.JosseCipher.Properties.Resources", "PluginCaption", "PluginTooltip", "JosseCipher/userdoc.xml", new[] { "JosseCipher/Images/icon.png" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
-    public class TrifidCipher : ICrypComponent
+    public class JosseCipher : ICrypComponent
     {
         #region Private Variables
 

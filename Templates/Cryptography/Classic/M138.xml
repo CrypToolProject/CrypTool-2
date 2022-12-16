@@ -39,6 +39,6 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <icon file="M138.png" />
   <relevantPlugins>
-    <plugin name="M_138" />
+    <plugin name="M138" />
   </relevantPlugins>
 </sample>
