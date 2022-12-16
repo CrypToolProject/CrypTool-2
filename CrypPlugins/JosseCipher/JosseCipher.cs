@@ -37,13 +37,12 @@ namespace CrypTool.JosseCipher
         private const string JOSSE_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVXYZ";        
         private readonly JosseCipherSettings _settings = new JosseCipherSettings();
         private readonly JosseCipherPresentation _josseCipherPresentation = new JosseCipherPresentation();
+        private readonly Dictionary<char, int> _charToIntDictionary = new Dictionary<char, int>();
+        private readonly Dictionary<int, char> _intToCharDictionary = new Dictionary<int, char>();
         private char[,] _polybiusSquare;
         private int _polybiusSquareWidth;
         private int _polybiusSquareHeight;
-
-        private string _alphabet;
-        private Dictionary<char, int> _charToIntDictionary = new Dictionary<char, int>();
-        private Dictionary<int, char> _intToCharDictionary = new Dictionary<int, char>();
+        private string _alphabet;        
 
         #endregion
 
