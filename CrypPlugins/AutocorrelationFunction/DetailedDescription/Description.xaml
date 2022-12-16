@@ -36,7 +36,7 @@
         <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
     <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
         <InlineUIContainer>
-            <Image Source="/AutokorrelationFunction;Component/DetailedDescription/Images/pic1.jpg" Height="150" Width="150"/>
+            <Image Source="/AutocorrelationFunction;Component/DetailedDescription/Images/pic1.jpg" Height="150" Width="150"/>
         </InlineUIContainer>
     </Paragraph>
     
@@ -70,7 +70,7 @@
     <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
     <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
         <InlineUIContainer>
-            <Image Source="/AutokorrelationFunction;Component/DetailedDescription/Images/pic2.jpg" />
+            <Image Source="/AutocorrelationFunction;Component/DetailedDescription/Images/pic2.jpg" />
         </InlineUIContainer>
     </Paragraph>
 

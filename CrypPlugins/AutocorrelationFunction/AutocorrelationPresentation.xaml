@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="CrypTool.Plugins.AutokorrelationFunction.AutocorrelationPresentation"
+﻿<UserControl x:Class="CrypTool.Plugins.AutocorrelationFunction.AutocorrelationPresentation"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

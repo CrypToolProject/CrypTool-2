@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AutokorrelationFunction")]
+[assembly: AssemblyTitle("AutocorrelationFunction")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CrypTool 2 Team")]
-[assembly: AssemblyProduct("AutokorrelationFunction")]
+[assembly: AssemblyProduct("AutocorrelationFunction")]
 [assembly: AssemblyCopyright("Copyright © CrypTool 2 Team")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
