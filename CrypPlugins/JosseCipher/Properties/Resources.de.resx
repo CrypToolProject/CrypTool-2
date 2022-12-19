@@ -174,8 +174,8 @@
   <data name="PluginTooltip" xml:space="preserve">
     <value>Implementierung der Josse-Chiffre</value>
   </data>
-  <data name="PolybiusSquare" xml:space="preserve">
-    <value>Polybius-Quadrat</value>
+  <data name="Rectangle" xml:space="preserve">
+    <value>Quadrat</value>
   </data>
   <data name="ShowPlayText" xml:space="preserve">
     <value>Drücken Sie Start um die Arbeitsfläche zu starten</value>

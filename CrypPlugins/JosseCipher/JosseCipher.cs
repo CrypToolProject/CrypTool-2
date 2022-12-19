@@ -39,9 +39,9 @@ namespace CrypTool.JosseCipher
         private readonly JosseCipherPresentation _josseCipherPresentation = new JosseCipherPresentation();
         private readonly Dictionary<char, int> _charToIntDictionary = new Dictionary<char, int>();
         private readonly Dictionary<int, char> _intToCharDictionary = new Dictionary<int, char>();
-        private char[,] _polybiusSquare;
-        private int _polybiusSquareWidth;
-        private int _polybiusSquareHeight;
+        private char[,] _rectangle;
+        private int _rectangleWidth;
+        private int _rectangleHeight;
         private string _alphabet;        
 
         #endregion
@@ -125,17 +125,17 @@ namespace CrypTool.JosseCipher
             //remove all non-alphabet letters from the keyword
             Key = CleanInputString(Key.ToUpper());
 
-            if (!GeneratePolybiusSquareAndDictionaries())
+            if (!GeneraterectangleAndDictionaries())
             {
                 return;
             }
 
             DataTable characterMappingTable = BuildCharacterMappingTable();
-            DataTable polybiusSquareTable = BuildPolybiusSquareTable();
+            DataTable rectangleTable = BuildRectangleTable();
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate 
             {
                 _josseCipherPresentation.BuildCharacterMappingTable(characterMappingTable);
-                _josseCipherPresentation.BuildPolybiusSquareTable(polybiusSquareTable);
+                _josseCipherPresentation.BuildRectangleTable(rectangleTable);
             }, null);
 
             //we only work with uppercase letters
@@ -188,34 +188,34 @@ namespace CrypTool.JosseCipher
         }
 
         /// <summary>
-        /// Generates the Polybius Square and the two lookup dictionaries using the given key
+        /// Generates the Polybius Rectangle and the two lookup dictionaries using the given key
         /// </summary>
         /// <returns></returns>
-        private bool GeneratePolybiusSquareAndDictionaries()
+        private bool GeneraterectangleAndDictionaries()
         {
             _intToCharDictionary.Clear();
             _charToIntDictionary.Clear();
 
             char[] keyArray = Key.Distinct().ToArray();
-            _polybiusSquareWidth = keyArray.Length;
-            _polybiusSquareHeight = _alphabet.Length / _polybiusSquareWidth + (_alphabet.Length % _polybiusSquareWidth > 0 ? 1 : 0);
+            _rectangleWidth = keyArray.Length;
+            _rectangleHeight = _alphabet.Length / _rectangleWidth + (_alphabet.Length % _rectangleWidth > 0 ? 1 : 0);
 
             int x = 0;
             int y = 0;
 
-            _polybiusSquare = new char[_polybiusSquareHeight, _polybiusSquareWidth];
+            _rectangle = new char[_rectangleHeight, _rectangleWidth];
 
             HashSet<char> usedSymbols = new HashSet<char>();
 
-            //add key to polybius square
+            //add key to polybius rectangle
             foreach (char c in keyArray)
             {
                 if (!usedSymbols.Contains(c))
                 {
-                    _polybiusSquare[y, x] = c;
+                    _rectangle[y, x] = c;
                     usedSymbols.Add(c);
                     x++;
-                    if (x == _polybiusSquareWidth)
+                    if (x == _rectangleWidth)
                     {
                         x = 0;
                         y++;
@@ -223,15 +223,15 @@ namespace CrypTool.JosseCipher
                 }
             }
 
-            //add remaining alphabet letters to polybius square
+            //add remaining alphabet letters to polybius rectangle
             foreach (char c in _alphabet)
             {
                 if (!usedSymbols.Contains(c))
                 {
-                    _polybiusSquare[y, x] = c;
+                    _rectangle[y, x] = c;
                     usedSymbols.Add(c);
                     x++;
-                    if (x == _polybiusSquareWidth)
+                    if (x == _rectangleWidth)
                     {
                         x = 0;
                         y++;
@@ -240,14 +240,14 @@ namespace CrypTool.JosseCipher
             }
 
             int number = 1;
-            for (x = 0; x < _polybiusSquareWidth; x++)
+            for (x = 0; x < _rectangleWidth; x++)
             {
-                for (y = 0; y < _polybiusSquareHeight; y++)
+                for (y = 0; y < _rectangleHeight; y++)
                 {
-                    if(_polybiusSquare[y, x] != 0)
+                    if(_rectangle[y, x] != 0)
                     {
-                        _intToCharDictionary.Add(number, _polybiusSquare[y, x]);
-                        _charToIntDictionary.Add(_polybiusSquare[y, x], number);
+                        _intToCharDictionary.Add(number, _rectangle[y, x]);
+                        _charToIntDictionary.Add(_rectangle[y, x], number);
                         number++;
                     }
                     
@@ -372,20 +372,20 @@ namespace CrypTool.JosseCipher
         /// Builds a table for showing the mapping of numbers to alphabet elements
         /// </summary>
         /// <returns></returns>
-        private DataTable BuildPolybiusSquareTable()
+        private DataTable BuildRectangleTable()
         {
             DataTable dataTable = new DataTable();
 
-            for (int x = 0; x < _polybiusSquareWidth; x++)
+            for (int x = 0; x < _rectangleWidth; x++)
             {
                 dataTable.Columns.Add(string.Empty);
             }
-            for (int y = 0; y < _polybiusSquareHeight; y++)
+            for (int y = 0; y < _rectangleHeight; y++)
             {
                 DataRow row = dataTable.Rows.Add(string.Empty);
-                for (int x = 0; x < _polybiusSquareWidth; x++)
+                for (int x = 0; x < _rectangleWidth; x++)
                 {
-                    row[x] = _polybiusSquare[y, x];
+                    row[x] = _rectangle[y, x];
 
                 }
             }

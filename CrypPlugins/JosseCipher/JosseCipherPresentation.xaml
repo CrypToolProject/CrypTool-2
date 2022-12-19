@@ -6,9 +6,9 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="450">
     <TabControl>
-        <TabItem Header="Replacement" Name="PolybiusSquareTableTab">
-            <Viewbox Name="PolybiusSquareTableViewBox">
-                <DataGrid Name="PolybiusSquareTable" ItemsSource="{Binding}" HeadersVisibility="None" GridLinesVisibility="None" BorderThickness="0.5" BorderBrush="Black" IsHitTestVisible="False">
+        <TabItem Header="Replacement" Name="RectangleTableTab">
+            <Viewbox Name="RectangleTableViewBox">
+                <DataGrid Name="RectangleTable" ItemsSource="{Binding}" HeadersVisibility="None" GridLinesVisibility="None" BorderThickness="0.5" BorderBrush="Black" IsHitTestVisible="False">
                     <DataGrid.Resources>
                         <Style TargetType="DataGridCell">
                             <Setter Property="Margin" Value="0"/>

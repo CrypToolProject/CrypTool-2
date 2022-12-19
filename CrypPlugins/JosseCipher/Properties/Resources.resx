@@ -174,8 +174,8 @@
   <data name="PluginTooltip" xml:space="preserve">
     <value>Implementation of the Josse cipher</value>
   </data>
-  <data name="PolybiusSquare" xml:space="preserve">
-    <value>Polybius square</value>
+  <data name="Rectangle" xml:space="preserve">
+    <value>Rectangle</value>
   </data>
   <data name="ShowPlayText" xml:space="preserve">
     <value>Press play to start the workspace</value>

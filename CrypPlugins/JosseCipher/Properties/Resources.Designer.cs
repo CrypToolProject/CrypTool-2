@@ -232,11 +232,11 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Polybius square.
+        ///   Looks up a localized string similar to Rectangle.
         /// </summary>
-        internal static string PolybiusSquare {
+        internal static string Rectangle {
             get {
-                return ResourceManager.GetString("PolybiusSquare", resourceCulture);
+                return ResourceManager.GetString("Rectangle", resourceCulture);
             }
         }
         

@@ -26,9 +26,9 @@ namespace CrypTool.JosseCipher
         public JosseCipherPresentation()
         {
             InitializeComponent();
-            PolybiusSquareTableViewBox.Child = ShowPlayText();
+            RectangleTableViewBox.Child = ShowPlayText();
             CharacterMappingViewBox.Child = ShowPlayText();
-            PolybiusSquareTableTab.Header = Properties.Resources.PolybiusSquare;
+            RectangleTableTab.Header = Properties.Resources.Rectangle;
             CharacterMappingTableTap.Header = Properties.Resources.CharacterMapping;
         }
 
@@ -38,17 +38,17 @@ namespace CrypTool.JosseCipher
             return label;
         }
 
-        public void BuildPolybiusSquareTable(DataTable dataTable)
+        public void BuildRectangleTable(DataTable dataTable)
         {
-            PolybiusSquareTable.DataContext = dataTable.DefaultView;
-            PolybiusSquareTable.CanUserAddRows = false;
-            PolybiusSquareTable.CanUserDeleteRows = false;
-            PolybiusSquareTable.CanUserReorderColumns = false;
-            PolybiusSquareTable.CanUserResizeColumns = false;
-            PolybiusSquareTable.CanUserResizeRows = false;
-            PolybiusSquareTable.CanUserSortColumns = false;
-            PolybiusSquareTable.IsReadOnly = true;
-            PolybiusSquareTableViewBox.Child = PolybiusSquareTable;
+            RectangleTable.DataContext = dataTable.DefaultView;
+            RectangleTable.CanUserAddRows = false;
+            RectangleTable.CanUserDeleteRows = false;
+            RectangleTable.CanUserReorderColumns = false;
+            RectangleTable.CanUserResizeColumns = false;
+            RectangleTable.CanUserResizeRows = false;
+            RectangleTable.CanUserSortColumns = false;
+            RectangleTable.IsReadOnly = true;
+            RectangleTableViewBox.Child = RectangleTable;
         }
 
         public void BuildCharacterMappingTable(DataTable dataTable)
