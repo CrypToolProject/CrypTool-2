@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Kasiskis Test and Autocorrelation.xml-->
+  <!--Last edited: 2022.12.20-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Kasiski's Test and Autocorrelation</title>
+  <summary lang="en">Usage of the <i>Kasiski's Test</i> and the <i>Autocorrelation</i></summary>
+  <description lang="en">This template shows the usage of the <i>Kasiski's Test</i> component and the <i>Autocorrelation</i> component.</description>
+  <keywords>keylength, Kasiski, autocorrelation</keywords>
+  <replacements lang="en">
+    <replacement key="$Text$" value="Text" />
+    <replacement key="$memo$" value="This template demonstrates the usage of the {\b Kasiski's Test component} and the {\b Autocorrelation component}.\line
+\line
+Both components can be used to determine the (probably) used key length of a polyalphabetic cipher. In this case, we have a text encrypted using the Vigenère cipher. \line
+\line
+As can be seen in both components, the bars of the graphs above the value 11 are the hightest bars of all. This is a strong indication, that the used key length was 11. In fact, the ciphertext was encrypted using the keyword &quot;VIGENEREKEY&quot;, which has a length of 11.\line
+\line
+The {\b Kasiki's Test component} implements the Kasiski's test which involves looking for strings of characters that are repeated in the ciphertext. The values below the bars show how many times strings (here we use trigrams) are repeated within the shown distance. \line
+\line
+The {\b Autocorrelation component} autocorrelates a given text with itself. It shifts the text by one, then counts the occurences of matching letters in the shifted and unshifted versions. Then it shifts by two, counts the occurences, and so on. The graph shows the number of matching letters for each shift value (from 1 to 30)." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Kasiski-Test und Autokorrelation</title>
+  <summary lang="de">Benutzung des <i>Kasiski-Tests</i> und der <i>Autokorrelation</i></summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>Kasiski-Test</i>-Komponente und der <i>Autokorrelation</i>-Komponente.</description>
+  <keywords lang="de">Schlüssellänge, Kasiski, Autokorrelation</keywords>
+  <replacements lang="de">
+    <replacement key="$Text$" value="Text" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verwendung der Komponente {\b Kasiski's Test} und der Komponente {\b Autokorrelation}.\line
+\line
+Beide Komponenten können verwendet werden, um die (wahrscheinlich) verwendete Schlüssellänge einer polyalphabetischen Chiffre zu bestimmen. In diesem Fall handelt es sich um einen Text, der mit der Vigenère-Chiffre verschlüsselt wurde. \line
+\line
+Wie in beiden Komponenten zu sehen ist, sind die Balken der Diagramme oberhalb des Wertes 11 die höchsten Balken von allen. Dies ist ein starker Hinweis darauf, dass die verwendete Schlüssellänge 11 war. In der Tat wurde der Chiffriertext mit dem Schlüsselwort &quot;VIGENEREKEY&quot; verschlüsselt, das eine Länge von 11 hat.\line
+\line
+Die Komponente {\b Kasiki's Test} implementiert den Kasiski-Test, bei dem nach Zeichenketten gesucht wird, die sich im Chiffriertext wiederholen. Die Werte unter den Balken zeigen an, wie oft sich Zeichenketten (hier verwenden wir Trigramme) innerhalb des angegebenen Abstands wiederholen. \line
+\line
+Die {\b Autokorrelationskomponente} führt eine Autokorrelation eines gegebenen Textes mit sich selbst durch. Sie verschiebt den Text um eins und zählt dann das Auftreten übereinstimmender Buchstaben in der verschobenen und der nicht verschobenen Version. Dann verschiebt sie den Text um zwei, zählt die Übereinstimmungen und so weiter. Die Grafik zeigt die Anzahl der übereinstimmenden Buchstaben für jeden Verschiebungswert (von 1 bis 30)." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Kasiskis Test and Autocorrelation.png" />
+  <relevantPlugins>
+    <plugin name="KasiskiTest" />
+    <plugin name="Autocorrelation" />
+  </relevantPlugins>
+</sample>
