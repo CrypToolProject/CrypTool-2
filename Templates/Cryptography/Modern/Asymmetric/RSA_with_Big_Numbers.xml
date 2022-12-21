@@ -17,7 +17,7 @@
     <replacement key="$Alice's private key (only known to Alice)$" value="Alice's private key (only known to Alice)" />
     <replacement key="$Message m$" value="Message m" />
     <replacement key="$Ciphertext c (sent to Alice)$" value="Ciphertext c (sent to Alice)" />
-    <replacement key="$Alice decrypted message m$" value="Alice decrypted message m" />
+    <replacement key="$Alice decrypted message m$" value="Alice's decrypted message m" />
     <replacement key="$Private exponent d$" value="Private exponent d" />
     <replacement key="$Public exponent e$" value="Public exponent e" />
     <replacement key="$Modulo N$" value="Modulo N" />
@@ -38,17 +38,17 @@ The d is the multiplicative inverse of e mod φ(N) where φ(N) = (p-1)(q-1). The
   <description lang="de">Diese Vorlage zeigt die Implementierung von <i>RSA</i> mit mathematischen Komponenten.</description>
   <keywords>große Zahl, RSA, textbook</keywords>
   <replacements lang="de">
-    <replacement key="$Bob's message m to Alice$" value="Bob's Nachricht m an Alice" />
-    <replacement key="$Alice's public key (known to everyone)$" value="Alice öffentlicher Schlüssel (Jedem bekannt)" />
-    <replacement key="$Alice's private key (only known to Alice)$" value="Alice privater Schlüssel (Nur Alice bekannt)" />
+    <replacement key="$Bob's message m to Alice$" value="Bobs Nachricht m an Alice" />
+    <replacement key="$Alice's public key (known to everyone)$" value="Alices öffentlicher Schlüssel (jedem bekannt)" />
+    <replacement key="$Alice's private key (only known to Alice)$" value="Alices privater Schlüssel (nur Alice bekannt)" />
     <replacement key="$Message m$" value="Nachricht m" />
     <replacement key="$Ciphertext c (sent to Alice)$" value="Geheimtext c (gesendet an Alice)" />
-    <replacement key="$Alice decrypted message m$" value="Alice entschlüsselte Nachricht m" />
+    <replacement key="$Alice decrypted message m$" value="Alices entschlüsselte Nachricht m" />
     <replacement key="$Private exponent d$" value="Privater Exponent d" />
     <replacement key="$Public exponent e$" value="Öffentlicher Exponent e" />
     <replacement key="$Modulo N$" value="Modulo N" />
     <replacement key="$Modulo N = p * q$" value="Modulo N = p * q" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert (textbook-) {\b RSA}, das mit einfachen mathematischen Komponenten aufgebaut ist. Hier sendet Bob eine geheime Nachricht m an Alice. Alice entschlüsselt dann die Nachricht.\line
+    <replacement key="$memo$" value="Diese Vorlage demonstriert (Textbook-){\b RSA}, das mit einfachen mathematischen Komponenten aufgebaut ist. Hier sendet Bob eine geheime Nachricht m an Alice. Alice entschlüsselt dann die Nachricht.\line
 \line
 RSA verwendet einen öffentlichen Exponenten e und einen privaten Exponenten d. Der Exponent e ist Teil des öffentlichen Schlüssels (e, N), der jedem bekannt sein kann. Nachrichten, die mit dem öffentlichen Schlüssel e verschlüsselt wurden, können nur mit dem Exponenten d entschlüsselt werden, der Teil des privaten Schlüssels (d, N) ist.\line
 \line
