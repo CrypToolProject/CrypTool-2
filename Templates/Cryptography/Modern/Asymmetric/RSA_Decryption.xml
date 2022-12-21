@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--File name: RSA_Encryption.xml-->
-  <!--Last edited: 2022.12.20-->
+  <!--File name: RSA_Decryption.xml-->
+  <!--Last edited: 2022.12.21-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">RSA Encryption</title>
-  <summary lang="en">Usage of the <i>RSA</i> cipher for encryption</summary>
+  <title lang="en">RSA Decryption</title>
+  <summary lang="en">Usage of the <i>RSA</i> cipher for decryption</summary>
   <description lang="en">In cryptography, RSA (which stands for Rivest, Shamir and Adleman who first publicly described it) is an algorithm for public-key cryptography. It is the first algorithm known to be suitable for signing as well as encryption, and was one of the first great advances in public key cryptography. RSA is widely used in electronic commerce protocols, and is believed to be sufficiently secure given sufficiently long keys and the use of up-to-date implementations.<newline /><newline />
 Source: <external ref="http://en.wikipedia.org/wiki/RSA" /></description>
   <keywords>Shamir, Rivest, asymmetric, Adleman, PKI, public key</keywords>
@@ -32,8 +32,8 @@ The RSA performed here is (still) textbook RSA, since it does not use padding. I
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">RSA-Verschlüsselung</title>
-  <summary lang="de">Benutzung der <i>RSA</i>-Chiffre für die Verschlüsselung</summary>
+  <title lang="de">RSA-Entschlüsselung</title>
+  <summary lang="de">Benutzung der <i>RSA</i>-Chiffre für die Entschlüsselung</summary>
   <description lang="de">RSA ist ein asymmetrisches Kryptosystem. Es verwendet ein Schlüsselpaar, bestehend aus einem privaten Schlüssel, der zum Entschlüsseln von Daten verwendet wird, und einem öffentlichen Schlüssel, mit dem man verschlüsselt.<newline /><newline />
 Quelle: <external ref="http://de.wikipedia.org/wiki/RSA-Kryptosystem" /></description>
   <keywords lang="de">Shamir, Rivest, asymmetrisch, Adleman, PKI, public key</keywords>
