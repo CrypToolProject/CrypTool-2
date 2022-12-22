@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--File name: M209_EncryptDecrypt.xml-->
-  <!--Last edited: 2022.02.08-->
+  <!--File name: Hagelin_Machine.xml-->
+  <!--Last edited: 2022.12.22-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -65,7 +65,7 @@ Weitere Informationen zu den Hagelin Maschinenmodellen finden Sie hier: https://
 <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <!--The general section starts here:-->
 <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<icon file="CX52aEncryptDecrypt.png"/>
+<icon file="Hagelin_Machine.png"/>
  <relevantPlugins>
 	<plugin name="HagelinMachine" />
 </relevantPlugins>  

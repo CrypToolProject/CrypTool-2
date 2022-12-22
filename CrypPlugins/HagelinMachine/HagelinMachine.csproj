@@ -8,7 +8,7 @@
     <ProjectGuid>{1D61FD6A-8553-47D3-BC60-62CF105DDCC7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cryptool.Plugins.HagelinMachine</RootNamespace>
+    <RootNamespace>CrypTool.Plugins.HagelinMachine</RootNamespace>
     <AssemblyName>HagelinMachine</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

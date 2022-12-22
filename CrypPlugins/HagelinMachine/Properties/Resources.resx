@@ -626,4 +626,16 @@ Bar</value>
   <data name="WheelStateNotValid" xml:space="preserve">
     <value>The wheel state is not valid.</value>
   </data>
+  <data name="PositionCurrentlyDisplayedToUser" xml:space="preserve">
+    <value>Position currently displayed to user</value>
+  </data>
+  <data name="PositionCurrentlyActive" xml:space="preserve">
+    <value>Position currently active</value>
+  </data>
+  <data name="WheelsAdvancementsAtThisStep" xml:space="preserve">
+    <value>Wheels advancements at this step</value>
+  </data>
+  <data name="WheelsWithActivePins" xml:space="preserve">
+    <value>Wheels with active pins</value>
+  </data>
 </root>

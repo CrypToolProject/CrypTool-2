@@ -30,7 +30,7 @@ using static HagelinMachine.HagelinEnums;
 namespace CrypTool.Plugins.HagelinMachine
 {
     [Author("Vasily Mikhalev", "vasily.mikhalev@uni-siegen.de", "CrypTool 2 Team", "https://www.cryptool.org")]
-    [PluginInfo("Cryptool.Plugins.HagelinMachine.Properties.Resources", "HagelinMachineCaption", "HagelinMachineTooltip", "HagelinMachine/userdoc.xml", new[] { "HagelinMachine/icon.jpg" })]
+    [PluginInfo("CrypTool.Plugins.HagelinMachine.Properties.Resources", "HagelinMachineCaption", "HagelinMachineTooltip", "HagelinMachine/userdoc.xml", new[] { "HagelinMachine/icon.jpg" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class HagelinMachine : ICrypComponent
     {
@@ -171,7 +171,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
                 if (wheelsStates == null)
                 {
-                    GuiLogMessage(string.Format(Cryptool.Plugins.HagelinMachine.Properties.Resources.ErrorInvalidState, inputWheelPositions), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(CrypTool.Plugins.HagelinMachine.Properties.Resources.ErrorInvalidState, inputWheelPositions), NotificationLevel.Error);
                     return;
                 }
             }
@@ -181,7 +181,7 @@ namespace CrypTool.Plugins.HagelinMachine
                 wheelsPins = GetWheelPinsFromInput(InputWheelPins, wheelsStates);
                 if (wheelsPins == null)
                 {
-                    GuiLogMessage(string.Format(Cryptool.Plugins.HagelinMachine.Properties.Resources.ErrorInvalidPins, InputWheelPins), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(CrypTool.Plugins.HagelinMachine.Properties.Resources.ErrorInvalidPins, InputWheelPins), NotificationLevel.Error);
                     return;
                 }
             }
@@ -195,7 +195,7 @@ namespace CrypTool.Plugins.HagelinMachine
                 barLugs = GetBarLugsInput(InputBarLugs, barHasLugs);
                 if (barLugs == null)
                 {
-                    GuiLogMessage(string.Format(Cryptool.Plugins.HagelinMachine.Properties.Resources.ErrorInvalidLugs, InputBarLugs), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(CrypTool.Plugins.HagelinMachine.Properties.Resources.ErrorInvalidLugs, InputBarLugs), NotificationLevel.Error);
                     return;
                 }
 
@@ -216,7 +216,7 @@ namespace CrypTool.Plugins.HagelinMachine
                 _executing = true;
                 string input = InputText.ToUpper();
 
-                //reportBuilder.Append(string.Format(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportInputText + input + "\r"));
+                //reportBuilder.Append(string.Format(CrypTool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportInputText + input + "\r"));
 
                 if (_settings.UseZAsSpace && _settings.Mode == ModeType.Encrypt)
                 {
@@ -276,7 +276,7 @@ namespace CrypTool.Plugins.HagelinMachine
                         return;
                     }
 
-                    //reportBuilder.Append(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportInputCharacter + input[offset] + " \r");
+                    //reportBuilder.Append(CrypTool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportInputCharacter + input[offset] + " \r");
                     char outputChar = hagelinImplementation.EncryptDecryptOneCharacter(input[offset]);
 
                     output.Append(outputChar);
@@ -334,7 +334,7 @@ namespace CrypTool.Plugins.HagelinMachine
             }
             catch (Exception ex)
             {
-                GuiLogMessage(string.Format(Cryptool.Plugins.HagelinMachine.Properties.Resources.ErrorGeneral, ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format(CrypTool.Plugins.HagelinMachine.Properties.Resources.ErrorGeneral, ex.Message), NotificationLevel.Error);
             }
             _executing = false;
             
@@ -411,7 +411,7 @@ namespace CrypTool.Plugins.HagelinMachine
                 string[] s = InputWheelPositions.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 if (s.Length != _settings.NumberOfWheels)
                 {
-                    GuiLogMessage(Cryptool.Plugins.HagelinMachine.Properties.Resources.ErrorInvalidSettingsWheelPositions, NotificationLevel.Error);
+                    GuiLogMessage(CrypTool.Plugins.HagelinMachine.Properties.Resources.ErrorInvalidSettingsWheelPositions, NotificationLevel.Error);
                     return null;
                 }
 
@@ -492,7 +492,7 @@ namespace CrypTool.Plugins.HagelinMachine
                 string[] s = value.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                 if (s.Length != _settings.NumberOfBars)
                 {
-                    GuiLogMessage(Cryptool.Plugins.HagelinMachine.Properties.Resources.ErrorInvalidSettingsBarLugs, NotificationLevel.Error);
+                    GuiLogMessage(CrypTool.Plugins.HagelinMachine.Properties.Resources.ErrorInvalidSettingsBarLugs, NotificationLevel.Error);
                     return null;
                 }
 

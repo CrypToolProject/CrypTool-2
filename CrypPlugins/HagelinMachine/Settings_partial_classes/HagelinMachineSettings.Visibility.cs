@@ -30,7 +30,7 @@ namespace CrypTool.Plugins.HagelinMachine
             switch (value)
             {
                 case PluginStates.ModelSelection:
-                    _hintMessage = Cryptool.Plugins.HagelinMachine.Properties.Resources.Step11Caption;
+                    _hintMessage = CrypTool.Plugins.HagelinMachine.Properties.Resources.Step11Caption;
                     OnPropertyChanged("HintMessage");
                     HideAll();
                     ShowModelGroup();
@@ -38,7 +38,7 @@ namespace CrypTool.Plugins.HagelinMachine
                     break;
 
                 case PluginStates.WheelsSelection:
-                    _hintMessage = Cryptool.Plugins.HagelinMachine.Properties.Resources.Step12Caption;
+                    _hintMessage = CrypTool.Plugins.HagelinMachine.Properties.Resources.Step12Caption;
                     OnPropertyChanged("HintMessage");
                     HideAll();
                     ShowWheelsGroup();
@@ -48,7 +48,7 @@ namespace CrypTool.Plugins.HagelinMachine
                     break;
 
                 case PluginStates.BarsSelection:
-                    _hintMessage = Cryptool.Plugins.HagelinMachine.Properties.Resources.Step13Caption;
+                    _hintMessage = CrypTool.Plugins.HagelinMachine.Properties.Resources.Step13Caption;
                     OnPropertyChanged("HintMessage");
                     HideAll();
                     ShowModelBars();
@@ -58,7 +58,7 @@ namespace CrypTool.Plugins.HagelinMachine
                     break;
 
                 case PluginStates.InnerKeySetupPins:
-                    _hintMessage = Cryptool.Plugins.HagelinMachine.Properties.Resources.Step21Caption;
+                    _hintMessage = CrypTool.Plugins.HagelinMachine.Properties.Resources.Step21Caption;
                     HideAll();
                     ShowModelWheels();
                     OnPropertyChanged("HintMessage");
@@ -69,7 +69,7 @@ namespace CrypTool.Plugins.HagelinMachine
                     break;
 
                 case PluginStates.InnerKeySetupLugs:
-                    _hintMessage = Cryptool.Plugins.HagelinMachine.Properties.Resources.Step22Caption;
+                    _hintMessage = CrypTool.Plugins.HagelinMachine.Properties.Resources.Step22Caption;
                     OnPropertyChanged("HintMessage");
                     HideAll();
                     ShowModelLugs();
@@ -79,7 +79,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
                     break;
                 case PluginStates.ExternalKeySetup:
-                    _hintMessage = Cryptool.Plugins.HagelinMachine.Properties.Resources.Step3Caption;
+                    _hintMessage = CrypTool.Plugins.HagelinMachine.Properties.Resources.Step3Caption;
                     OnPropertyChanged("HintMessage");
                     HideAll();
                     ShowExternalKeyGroup();
@@ -90,7 +90,7 @@ namespace CrypTool.Plugins.HagelinMachine
                     break;
 
                 case PluginStates.ModeOpGroup:
-                    _hintMessage = Cryptool.Plugins.HagelinMachine.Properties.Resources.Step4Caption;
+                    _hintMessage = CrypTool.Plugins.HagelinMachine.Properties.Resources.Step4Caption;
                     OnPropertyChanged("HintMessage");
                     HideAll();
                     ShowOtherOptionsGroup();
@@ -103,7 +103,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
                 case PluginStates.Encryption:
                     HideAll();
-                    _hintMessage = Cryptool.Plugins.HagelinMachine.Properties.Resources.ReadyToCaption + _mode.ToString() + Cryptool.Plugins.HagelinMachine.Properties.Resources.CanStartCaption;
+                    _hintMessage = CrypTool.Plugins.HagelinMachine.Properties.Resources.ReadyToCaption + _mode.ToString() + CrypTool.Plugins.HagelinMachine.Properties.Resources.CanStartCaption;
                     OnPropertyChanged("HintMessage");
                     ShowSettingsElement("SelectedModel");
                     ShowSettingsElement("SelectedWheels");

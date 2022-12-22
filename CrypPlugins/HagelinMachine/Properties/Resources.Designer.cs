@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Cryptool.Plugins.HagelinMachine.Properties {
+namespace CrypTool.Plugins.HagelinMachine.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Cryptool.Plugins.HagelinMachine.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Cryptool.Plugins.HagelinMachine.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CrypTool.Plugins.HagelinMachine.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -953,6 +953,24 @@ namespace Cryptool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Position currently active.
+        /// </summary>
+        internal static string PositionCurrentlyActive {
+            get {
+                return ResourceManager.GetString("PositionCurrentlyActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position currently displayed to user.
+        /// </summary>
+        internal static string PositionCurrentlyDisplayedToUser {
+            get {
+                return ResourceManager.GetString("PositionCurrentlyDisplayedToUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
         internal static string PresentatinCol1Label {
@@ -1418,6 +1436,15 @@ namespace Cryptool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wheels advancements at this step.
+        /// </summary>
+        internal static string WheelsAdvancementsAtThisStep {
+            get {
+                return ResourceManager.GetString("WheelsAdvancementsAtThisStep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wheels state.
         /// </summary>
         internal static string WheelsStateCaption {
@@ -1441,6 +1468,15 @@ namespace Cryptool.Plugins.HagelinMachine.Properties {
         internal static string WheelStateNotValid {
             get {
                 return ResourceManager.GetString("WheelStateNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheels with active pins.
+        /// </summary>
+        internal static string WheelsWithActivePins {
+            get {
+                return ResourceManager.GetString("WheelsWithActivePins", resourceCulture);
             }
         }
         

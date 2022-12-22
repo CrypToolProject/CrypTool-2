@@ -14,13 +14,14 @@
    limitations under the License.
 */
 using System.Windows.Controls;
+using CrypTool.Plugins.HagelinMachine.Properties;
 
-namespace HagelinMachine
+namespace CrypTool.Plugins.HagelinMachine
 {
     /// <summary>
     /// Interaction logic for HagelinMachinePresentation.xaml
     /// </summary>
-    [CrypTool.PluginBase.Attributes.Localization("Cryptool.Plugins.HagelinMachine.Properties.Resources")]
+    [CrypTool.PluginBase.Attributes.Localization("CrypTool.Plugins.HagelinMachine.Properties.Resources")]
     public partial class HagelinMachinePresentation : UserControl
     {
         public struct DynamicGridRowValue
@@ -52,7 +53,7 @@ namespace HagelinMachine
         {
             DataGridDynamicInformation.Items[0] = (new DynamicGridRowValue
             {
-                Title = "Position currently displayed to user",
+                Title = Properties.Resources.PositionCurrentlyDisplayedToUser,
                 W1_value = wheelValues[0, 2],
                 W2_value = wheelValues[1, 2],
                 W3_value = wheelValues[2, 2],
@@ -66,7 +67,7 @@ namespace HagelinMachine
         {
             DataGridDynamicInformation.Items[1] = (new DynamicGridRowValue
             {
-                Title = "Position currently active",
+                Title = Properties.Resources.PositionCurrentlyActive,
                 W1_value = wheelValues[0],
                 W2_value = wheelValues[1],
                 W3_value = wheelValues[2],
@@ -80,7 +81,7 @@ namespace HagelinMachine
         {
             DataGridDynamicInformation.Items[2] = (new DynamicGridRowValue
             {
-                Title = "Wheels advancements at this step",
+                Title = Properties.Resources.WheelsAdvancementsAtThisStep,
                 W1_value = wheelValues[0].ToString(),
                 W2_value = wheelValues[1].ToString(),
                 W3_value = wheelValues[2].ToString(),
@@ -93,7 +94,7 @@ namespace HagelinMachine
         {
             DataGridDynamicInformation.Items[3] = (new DynamicGridRowValue
             {
-                Title = "Wheels with active pins",
+                Title = Properties.Resources.WheelsWithActivePins,
                 W1_value = wheelValues[0] ? "+" : string.Empty,
                 W2_value = wheelValues[1] ? "+" : string.Empty,
                 W3_value = wheelValues[2] ? "+" : string.Empty,
@@ -107,7 +108,7 @@ namespace HagelinMachine
         {
             DataGridDynamicInformation.Items.Add(new DynamicGridRowValue
             {
-                Title = "Position currently displayed to user",
+                Title = Properties.Resources.PositionCurrentlyDisplayedToUser,
                 W1_value = string.Empty,
                 W2_value = string.Empty,
                 W3_value = string.Empty,
@@ -118,7 +119,7 @@ namespace HagelinMachine
 
             DataGridDynamicInformation.Items.Add(new DynamicGridRowValue
             {
-                Title = "Position currently active",
+                Title = Properties.Resources.PositionCurrentlyActive,
                 W1_value = string.Empty,
                 W2_value = string.Empty,
                 W3_value = string.Empty,
@@ -129,7 +130,7 @@ namespace HagelinMachine
 
             DataGridDynamicInformation.Items.Add(new DynamicGridRowValue
             {
-                Title = "Wheels advancements at this step",
+                Title = Properties.Resources.WheelsAdvancementsAtThisStep,
                 W1_value = string.Empty,
                 W2_value = string.Empty,
                 W3_value = string.Empty,
@@ -145,7 +146,6 @@ namespace HagelinMachine
             {
                 dataGridWheel1.Items.Add(new PositionWheelGridRawValue
                 {
-                    //   dataGridWheel1.CellStyle
                     W1_position = string.Empty,
                 }); ;
 
@@ -205,7 +205,6 @@ namespace HagelinMachine
                 {
                     W6_position = wheelValues[5, i],
                 });
-
             }
         }
     }
