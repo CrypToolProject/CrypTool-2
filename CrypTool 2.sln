@@ -437,6 +437,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CramerShoup", "CrypPlugins\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutocorrelationFunction", "CrypPlugins\AutocorrelationFunction\AutocorrelationFunction.csproj", "{7D4A4CE5-7E4F-480B-BC8F-E1FEBE558B8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HagelinMachine", "CrypPlugins\HagelinMachine\HagelinMachine.csproj", "{1D61FD6A-8553-47D3-BC60-62CF105DDCC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1299,6 +1301,10 @@ Global
 		{7D4A4CE5-7E4F-480B-BC8F-E1FEBE558B8B}.Debug|x64.Build.0 = Debug|x64
 		{7D4A4CE5-7E4F-480B-BC8F-E1FEBE558B8B}.Release|x64.ActiveCfg = Release|x64
 		{7D4A4CE5-7E4F-480B-BC8F-E1FEBE558B8B}.Release|x64.Build.0 = Release|x64
+		{1D61FD6A-8553-47D3-BC60-62CF105DDCC7}.Debug|x64.ActiveCfg = Debug|x64
+		{1D61FD6A-8553-47D3-BC60-62CF105DDCC7}.Debug|x64.Build.0 = Debug|x64
+		{1D61FD6A-8553-47D3-BC60-62CF105DDCC7}.Release|x64.ActiveCfg = Release|x64
+		{1D61FD6A-8553-47D3-BC60-62CF105DDCC7}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1508,6 +1514,7 @@ Global
 		{CCAA9B85-4AD0-43A4-8CEA-EED96907073C} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{DC26D21A-8C92-4E88-881E-54892415835D} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{7D4A4CE5-7E4F-480B-BC8F-E1FEBE558B8B} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
+		{1D61FD6A-8553-47D3-BC60-62CF105DDCC7} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92042D62-2CDA-4393-9D74-4FB5AC571A2D}
