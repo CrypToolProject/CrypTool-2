@@ -15,6 +15,7 @@
 */
 using System;
 using System.Linq;
+using System.Text;
 using static HagelinMachine.HagelinConstants;
 using static HagelinMachine.HagelinEnums;
 
@@ -36,7 +37,7 @@ namespace HagelinMachine
         public string[,] _shownWheelPositions = new string[maxNumberOfWheels, 5];
         public string[] _activeWheelPositions = new string[maxNumberOfWheels];
         public int _curOffsetOfPrintWheel;
-        public string _report;
+        //public StringBuilder _reportStringBuilder = new StringBuilder();
         public bool[] _wheelsWithActivePin = new bool[HagelinConstants.maxNumberOfWheels];
         public int[] _advancementsToShow = new int[maxNumberOfWheels];
 
@@ -120,7 +121,6 @@ namespace HagelinMachine
         public void UpdateWheelPositions()
         {
             for (int i = 0; i < _numberOfWheels; i++)
-
             {
                 string[] WheelPositionsArray = _wheels[i]._initialState.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 _shownWheelPositions[i, 0] = WheelPositionsArray[Mod((_wheels[i]._position - 2), _wheels[i]._size)];
@@ -144,7 +144,8 @@ namespace HagelinMachine
             }
         }
 
-        public string ComputeDisplacementAndAdvancement()
+        //public string ComputeDisplacementAndAdvancement()
+        public void ComputeDisplacementAndAdvancement()
         {
             for (int i = 0; i < _numberOfWheels; i++)
             {
@@ -155,7 +156,8 @@ namespace HagelinMachine
                 int offset = int.Parse(curWheelTypeSpittedToArray[1]);
                 if (WheelPositionsArray.Length != _wheels[i]._size)
                 {
-                    return Cryptool.Plugins.HagelinMachine.Properties.Resources.WheelStateNotValid;
+                    //return Cryptool.Plugins.HagelinMachine.Properties.Resources.WheelStateNotValid;
+                    return;
                 }
 
                 string curPosition = WheelPositionsArray[(_wheels[i]._position + offset) % _wheels[i]._size];
@@ -165,7 +167,7 @@ namespace HagelinMachine
 
             _displacement = 0;
 
-            _report += Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportSteps;
+            //_reportStringBuilder.Append(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportSteps);
 
             for (int i = 0; i < _numberOfBars; i++)
             {
@@ -192,16 +194,16 @@ namespace HagelinMachine
                             if (barActive)
                             {
                                 _wheels[j]._advancement++;
-                                _report += Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportBar + (i + 1).ToString() + Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportActiveAgainst + (j + 1).ToString() + Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportCamTypeA + "\r";
-                                _report += Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportWheel + (j + 1).ToString() + Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportIsFurtherAdvanced + _wheels[j]._advancement + "\r";
+                                //_reportStringBuilder.Append(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportBar + (i + 1).ToString() + Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportActiveAgainst + (j + 1).ToString() + Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportCamTypeA + "\r");
+                                //_reportStringBuilder.Append(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportWheel + (j + 1).ToString() + Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportIsFurtherAdvanced + _wheels[j]._advancement + "\r");
                             }
                             break;
                         case 'B':
                             if (!barActive)
                             {
                                 _wheels[j]._advancement++;
-                                _report += Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportBar + (i + 1).ToString() + Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportNotActiveAgainst + (j + 1).ToString() + Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportCamTypeB + "\r";
-                                _report += Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportWheel + (j + 1).ToString() + "" + _wheels[j]._advancement + "\r";
+                                //_reportStringBuilder.Append(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportBar + (i + 1).ToString() + Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportNotActiveAgainst + (j + 1).ToString() + Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportCamTypeB + "\r");
+                                //_reportStringBuilder.Append(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportWheel + (j + 1).ToString() + "" + _wheels[j]._advancement + "\r");
                             }
                             break;
                         case 'C':
@@ -219,7 +221,7 @@ namespace HagelinMachine
                         if (barActive)
                         {
                             _displacement++;
-                            _report += Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportBar + (i + 1).ToString() + Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportShifted + _displacement.ToString() + "\r"; ;
+                            //_reportStringBuilder.Append(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportBar + (i + 1).ToString() + Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportShifted + _displacement.ToString() + "\r");
                         }
                         break;
                     case HagelinEnums.ToothType.NeverDisplace:
@@ -228,7 +230,7 @@ namespace HagelinMachine
                         if (!barActive)
                         {
                             _displacement++;
-                            _report += Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportBar + (i + 1).ToString() + Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportNotShifted + _displacement.ToString() + "\r"; ;
+                            //_reportStringBuilder.Append(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportBar + (i + 1).ToString() + Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportNotShifted + _displacement.ToString() + "\r");
                         }
                         break;
                     default:
@@ -242,7 +244,7 @@ namespace HagelinMachine
                 _displacement -= 26;
             }
 
-            return _report;
+            //return _reportStringBuilder.ToString();
         }
 
         public char EncryptDecryptOneCharacter(char symbol)
@@ -274,27 +276,25 @@ namespace HagelinMachine
                     break;
             }
 
-            _report += Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportOffset + _curOffsetOfPrintWheel.ToString();
-            _report += Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportCoputedDisplacement + _displacement.ToString();
-            _report += Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportInputCharacter + symbol;
-            _report += Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportOutputCharacter + " (\'Z\' - \'" + symbol + "\' + D + O ) mod 26 = \'" + _alphabet[j].ToString() + "\'\r";
-            _report += "\rModel: " + _model.ToString();
+            //_reportStringBuilder.Append(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportOffset + _curOffsetOfPrintWheel.ToString());
+            //_reportStringBuilder.Append(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportCoputedDisplacement + _displacement.ToString());
+            //_reportStringBuilder.Append(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportInputCharacter + symbol);
+            //_reportStringBuilder.Append(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportOutputCharacter + " (\'Z\' - \'" + symbol + "\' + D + O ) mod 26 = \'" + _alphabet[j].ToString() + "\'\r");
+            //_reportStringBuilder.Append("\rModel: " + _model.ToString());
 
             for (int ii = 0; ii < _numberOfWheels; ii++)
             {
-
                 for (int jj = 0; jj < _wheels[ii]._advancement; jj++)
                 {
                     _wheels[ii].Advance();
                 }
                 _advancementsToShow[ii] = _wheels[ii]._advancement;
-
             }
 
             if (_fVFeatureIsActive)
             {
                 _curOffsetOfPrintWheel += _displacement;
-                _report += Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportFVFeatureActive + _curOffsetOfPrintWheel.ToString() + "\r";
+                //_reportStringBuilder.Append(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportFVFeatureActive + _curOffsetOfPrintWheel.ToString() + "\r");
             }
 
             return _alphabet[j];

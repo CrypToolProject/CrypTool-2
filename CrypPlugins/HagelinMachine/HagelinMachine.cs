@@ -83,18 +83,18 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [PropertyInfo(Direction.OutputData, "OutputTextCaption", "OutputTextTip", false)]
-        public String OutputText
+        public string OutputText
         {
             get;
             set;
         }
 
-        [PropertyInfo(Direction.OutputData, "OutputReportCaption", "OutputReportTip", false)]
-        public String Report
+        /*[PropertyInfo(Direction.OutputData, "OutputReportCaption", "OutputReportTip", false)]
+        public string Report
         {
             get;
             set;
-        }
+        }*/
 
         [PropertyInfo(Direction.OutputData, "OutputKeystreamCaption", "OutputKeystreamTip", false)]
         public int[] Keystream
@@ -192,7 +192,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
             if (InputBarLugs != null)
             {
-                barLugs = getBarLugsInput(InputBarLugs, barHasLugs);
+                barLugs = GetBarLugsInput(InputBarLugs, barHasLugs);
                 if (barLugs == null)
                 {
                     GuiLogMessage(string.Format(Cryptool.Plugins.HagelinMachine.Properties.Resources.ErrorInvalidLugs, InputBarLugs), NotificationLevel.Error);
@@ -208,11 +208,15 @@ namespace CrypTool.Plugins.HagelinMachine
             ProgressChanged(0, 1);
 
             //execution:
+
+            //StringBuilder reportBuilder = new StringBuilder();
+
             try
             {
                 _executing = true;
                 string input = InputText.ToUpper();
-                Report = string.Format(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportInputText + input + "\r");
+
+                //reportBuilder.Append(string.Format(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportInputText + input + "\r"));
 
                 if (_settings.UseZAsSpace && _settings.Mode == ModeType.Encrypt)
                 {
@@ -250,7 +254,7 @@ namespace CrypTool.Plugins.HagelinMachine
                     }, null);
                 }
 
-                Report = string.Empty;
+                //reportBuilder.Clear();
                 var keystreamList = new List<int>();
 
                 hagelinImplementation.UpdateWheelPositions();
@@ -265,41 +269,40 @@ namespace CrypTool.Plugins.HagelinMachine
                     _presentation.labelOutput.Content = string.Empty;
                 }, null);
 
-                for (int i = 0; i < input.Length; i++)
+                for (int offset = 0; offset < input.Length; offset++)
                 {
                     if (!_executing)
                     {
                         return;
                     }
 
-                    Report += Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportInputCharacter + input[i] + " \r";
-                    char outputChar = hagelinImplementation.EncryptDecryptOneCharacter(input[i]);
+                    //reportBuilder.Append(Cryptool.Plugins.HagelinMachine.Properties.Resources.PhraseInReportInputCharacter + input[offset] + " \r");
+                    char outputChar = hagelinImplementation.EncryptDecryptOneCharacter(input[offset]);
 
                     output.Append(outputChar);
-                    Report += hagelinImplementation._report;
+                    //reportBuilder.Append(hagelinImplementation._reportStringBuilder);
                     keystreamList.Add(hagelinImplementation._displacement);
 
                     hagelinImplementation.UpdateWheelPositions();
-                    Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                    if (offset == input.Length - 1) // only show
                     {
-                        _presentation.ShowDisplayedPositionsInGrid(hagelinImplementation._shownWheelPositions);
-                        _presentation.ShowActivePositionsInGrid(hagelinImplementation._activeWheelPositions);
-                        _presentation.ShowWheelsAdvancementsInGrid(hagelinImplementation._advancementsToShow);
-
-                        _presentation.ShowWheelPinActivityInGrid(hagelinImplementation._wheelsWithActivePin);
-
-                        _presentation.ShowWheelPositionsinGrid(hagelinImplementation._shownWheelPositions);
-
-
-                        _presentation.labelInput.Content = input[i];
-                        _presentation.labelOutput.Content = outputChar;
-                        _presentation.LabelModel.Content = _settings.Model.ToString();
-
-
-                    }, null);
-
-                    ProgressChanged(i, _inputText.Length);
-                    Report += "\r\r========================================== \r";
+                        Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                        {
+                            _presentation.ShowDisplayedPositionsInGrid(hagelinImplementation._shownWheelPositions);
+                            _presentation.ShowActivePositionsInGrid(hagelinImplementation._activeWheelPositions);
+                            _presentation.ShowWheelsAdvancementsInGrid(hagelinImplementation._advancementsToShow);
+                            _presentation.ShowWheelPinActivityInGrid(hagelinImplementation._wheelsWithActivePin);
+                            _presentation.ShowWheelPositionsinGrid(hagelinImplementation._shownWheelPositions);
+                            _presentation.labelInput.Content = input[offset];
+                            _presentation.labelOutput.Content = outputChar;
+                            _presentation.LabelModel.Content = _settings.Model.ToString();
+                        }, null);
+                    }
+                    if (offset % 10 == 0) //only fire progress changed every 10th letter
+                    {
+                        ProgressChanged(offset, _inputText.Length);
+                    }
+                    //reportBuilder.Append("\r\r========================================== \r");
                 }
                 string outputText = string.Empty;
                 switch (_settings.UnknownSymbolHandling)
@@ -313,7 +316,6 @@ namespace CrypTool.Plugins.HagelinMachine
                     case UnknownSymbolHandling.Remove:
                         outputText = output.ToString();
                         break;
-
                 }
 
                 if (_settings.UseZAsSpace && _settings.Mode == ModeType.Decrypt)
@@ -322,19 +324,20 @@ namespace CrypTool.Plugins.HagelinMachine
                 }
 
                 OutputText = outputText;
-
                 OnPropertyChanged("OutputText");
-                OnPropertyChanged("Report");
+                //Report = reportBuilder.ToString();
+                //OnPropertyChanged("Report");
                 Keystream = keystreamList.ToArray();
                 OnPropertyChanged("Keystream");
-            }
 
+                ProgressChanged(1, 1);
+            }
             catch (Exception ex)
             {
                 GuiLogMessage(string.Format(Cryptool.Plugins.HagelinMachine.Properties.Resources.ErrorGeneral, ex.Message), NotificationLevel.Error);
             }
             _executing = false;
-            ProgressChanged(1, 1);
+            
         }
 
         /// <summary>
@@ -479,8 +482,7 @@ namespace CrypTool.Plugins.HagelinMachine
             return null;
         }
 
-
-        private string[] getBarLugsInput(string barLugsFromInput, bool[] barHasLugs)
+        private string[] GetBarLugsInput(string barLugsFromInput, bool[] barHasLugs)
         {
             try
             {
@@ -497,7 +499,7 @@ namespace CrypTool.Plugins.HagelinMachine
                 for (int i = 0; i < _settings.NumberOfBars; i++)
                 {
                     s[i] = Regex.Replace(s[i], @"\.| |;|\s", ","); //we accept other separators, such as ; , etc.. and replace them by ,
-                    s[i] = Regex.Replace(s[i], @"[^1-6,]", ""); // we filter all characters despite wheel numbers and ","
+                    s[i] = Regex.Replace(s[i], @"[^1-6,]", string.Empty); // we filter all characters despite wheel numbers and ","
                     if (barHasLugs[i])
                     {
                         barLugs[i] = s[i];
@@ -535,7 +537,7 @@ namespace CrypTool.Plugins.HagelinMachine
             }
             foreach (var unkownSymbol in unknownSymbolList)
             {
-                text = text.Replace(unkownSymbol.Symbol, "");
+                text = text.Replace(unkownSymbol.Symbol, string.Empty);
             }
             return text;
         }
