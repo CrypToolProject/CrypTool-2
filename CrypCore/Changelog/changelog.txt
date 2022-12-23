@@ -4,11 +4,11 @@ Dear CrypTool 2 users,
 
 CrypTool 2 (CT2) is a free, open-source e-learning software about cryptography and cryptanalysis with a visual user interface. CT2 is used in schools, universities, companies, and administrations all over the world since more than 10 years.
 
-In December 2022, we published the release "2022.1", which is the first release this year. The previous CT2 release was published in December 2021.
+In December 2022, we published the release "2022.1" which is the first release this year. The previous CT2 release was published in December 2021.
 
-Over the year, we implemented several new classical cipher components (e.g. the Mexican Army cipher disk or the Bifid cipher and Trifid cipher), machine cipher components (all mechanical Hagelin ciphers in one component), as well as (re-)implemented modern cipher components (GOST Magma, HIGHT, and Trivium). Additionally, we updated and fixed many existing components, templates, etc. Furthermore, we aligned our language model handling across all cryptanalysis components. Also, the Syllabary cipher component is a new component and the actual cipher got a lot of attention on MysteryTwister C3 (https://www.mysterytwister.org) as we published several Syllabary cipher challenges. Finally, the RAPPOR (Randomized Aggregatable Privacy-Preserving Ordinal Response) component, which visualizes the RAPPOR privacy technology from Google, was implemented in a bachelor's thesis and added to CrypTool 2.
+Over the year, we implemented several new classical cipher components (e.g. the Mexican Army cipher disk or the Bifid and Trifid cipher), machine cipher components (all mechanical Hagelin ciphers in one component), as well as (re-)implemented modern cipher components (GOST Magma, HIGHT, and Trivium). Furthermore, we aligned our language model handling across most of all cryptanalysis components. Also, the Syllabary cipher component is a new component and the actual cipher got a lot of attention on MysteryTwister (https://www.mysterytwister.org) as we published several Syllabary cipher challenges. Finally, the RAPPOR (Randomized Aggregatable Privacy-Preserving Ordinal Response) component, which visualizes the RAPPOR privacy technology from Google, was implemented in a bachelor's thesis and added to CrypTool 2.
 
-Another interesting thing worth mentioning is the official CrypTool 2 YouTube channel "Cryptography for everybody", which reached a 4500 subscriber count in December 2022. Thank you! For those who did not have a look at the channel: We discuss and explain cryptologic topics and show many examples using CrypTool 2 and the other CrypTool implementations of the project (see https://www.youtube.com/c/CrypTool2/).
+Another interesting thing worth mentioning is the official CrypTool 2 YouTube channel "Cryptography for everybody", which reached a 4600 subscriber count in December 2022. Thank you! For those who did not have a look at the channel: We discuss and explain cryptologic topics and show many examples using CrypTool 2 and the other implementations of the CrypTool project  (see https://www.youtube.com/c/CrypTool2/).
 
 Thanks for the many users who sent feedback, requests, laud, and criticism.
 
@@ -24,15 +24,15 @@ Changelog summary
 ------------------------
 Here is a more detailed summary of the updates and additions.
 
-Language Support:
+Language Support
 We had to remove the Chinese and Russian language due to a lack of support of native speakers. Maintaining already two languages (English and German) is a lot of work, so we decided to remove the (poorly and automatic translated) two other languages.
 
 ------------------------
 New components
 ------------------------
 Hagelin Machine
-- created a component implementing many different Hagelin machines, including e.g. the CX52a, CX52b, and the M209
-- hint: in this release version, component is only available in English language (template and online help are also available in German)
+- a new component which implements many different Hagelin machines, including e.g. the CX52a, CX52b, and the M209 
+- remark: In this release version, the component itself is only available in English language (template and online help are also available in German too)
 
 Mexican Army Cipher Disk
 
@@ -56,20 +56,20 @@ RAPPOR
 ------------------------
 Existing components
 ------------------------
-Vigenerè cipher
+Vigenère cipher
 - added Beaufort and Beaufort autokey mode
 
 Playfair analyzer
 - changed to standard CT2 language models. This allows to analyze Playfair ciphers using all implemented languages and no need for downloading an additional file via CrypToolStore
 
-Vigenerè analyzer
+Vigenère analyzer
 - cost function values are now normalized (between 0 and 10 million)
 
 Monoalphabetic Substitution Analyzer
 - cost function values are now normalized (between 0 and 10 million)
 
 FEAL cipher
-- fixed FEAL-4 implementation. Last round(s) were handled incorrectly. Since we do not have any official test vectors for FEAL-4, we are not 100% sure if FEAL-4 is now correctly implemented
+- fixed FEAL-4 implementation. Last round(s) were handled incorrectly. Since we do not have any official test vectors for FEAL-4, we are still not 100% sure whether FEAL-4 is now correctly implemented
 
 Byte Array Operations
 - a new component offering functions to work with byte arrays, e.g. concatenate, sub array, etc.
@@ -88,19 +88,19 @@ PKCS5 and PBKDF
 - added null check for key and salt
 
 Transposition Analyzer and Transposition component
-- Transposition analysis now supports ranges of key sizes (min and max). Thus, the user does not have to restart the analysis when he wants to test different ranges in a row
+- Transposition analysis now supports ranges of key sizes (min and max). Thus, the user does not have to restart the analysis when he wants to test different key lengths in a row 
 - cost function values are now normalized (between 0 and 10 million)
 - some small fixes
 
 RSA Key Generator
 - now also supports generating of safe primes
-- now also has output connectors providing p and q
+- added additional output connectors providing p and q 
 
 Random Number Generator
 - completely reworked internal architecture of RandomNumberGenerator component
-- each rng now outputs its "original" values instead of generating single bits to generate new values (which was very slow)
+- each RNG now outputs its "original" values instead of generating single bits to generate new values (which was very slow)
 - the above mentioned changes increase performance of random number generation significantly
-- implemented four versions of XORShift
+- implemented four versions of XOR-shift
 
 Webcam
 - changed method for enumerating webcams (should work now)
@@ -118,7 +118,7 @@ Startcenter/CrypWin
 WorkspaceManager
 - fixed a logic error which allowed to add images and memo fields while workspace is executed
 - memo fields and images cannot be deleted any more while workspace is executed
-- when settings are shown/hidden, they now don't appear shortened in the ui
+- when settings are shown/hidden, the UI elements are now resized correctly
 - removed possibility to execute workspace while it is being loaded
 - some small fixes
 
@@ -169,7 +169,7 @@ Wizard
 - some small fixes
 
 Various analysis components
-- top list are now auto scrolled to the beginning when new entries are added
+- top of list is now auto scrolled to the beginning when new entries are added
 
 ------------------------
 Templates
@@ -182,9 +182,9 @@ Templates
 - Trifid cipher component: new template
 - IDP analyzer template: small fixes
 - Kasiski's test and Autocorrelation: new template showing both
-- Spanish Strip Cipher (SSC) template: reworked memo fields of template and improved template layout and added references to online documentation
+- Spanish Strip Cipher (SSC) template: reworked memo fields of template, improved template layout, and added references to online documentation
 - Straddling Checkerboard template: small layout changes in the template
-- Che Guevara template: some text changes and some layout updates in template
+- Ché Guevara template: some text changes and some layout updates in template
 - Transposition templates: updated the templates so that they work well with the introduced changes in transposition analyzer component and transposition component
 - RSA KeyGenerator template: updated template based on changes in RSA KeyGenerator component
 - Webcam template: small fixes
