@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: BifidCipher.xml-->
-  <!--Last edited: 2022.12.06-->
+  <!--Last edited: 2022.12.23-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -23,7 +23,7 @@ In den Einstellungen der Komponente kann zwischen einem 25-Buchstaben-Alphabet (
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Bifid cipher</title>
+  <title lang="en">Bifid Cipher</title>
   <summary lang="en">Encryption and decryption with the <i>Bifid cipher</i>.</summary>
   <description lang="en">This template shows en- and decryption using a Bifid cipher. In classical cryptography, the bifid cipher is a cipher that combines a Polybius square with transposition and uses fractionation. It was invented around 1901 by Felix Delastelle.</description>
   <keywords>Bifid, Cipher</keywords>

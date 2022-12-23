@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: BaconCipher.xml-->
-  <!--Last edited: 2022.02.08-->
+  <!--Last edited: 2022.12.23-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -23,7 +23,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Bacon cipher</title>
+  <title lang="en">Bacon Cipher</title>
   <summary lang="en">Encryption and decryption with the <i>Bacon cipher</i>.</summary>
   <description lang="en">This template shows en- and decryption using a Bacon cipher. The process maps letters to a code of two characters. This code can then be embedded in texts, for example.</description>
   <keywords>Bacon, Cipher, simple</keywords>

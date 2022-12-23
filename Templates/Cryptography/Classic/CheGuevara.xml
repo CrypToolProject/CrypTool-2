@@ -7,7 +7,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">Ché Guevara</title>
+  <title lang="de">Ché Guevara Cipher</title>
   <summary lang="de">Ché Guevaras straddling checkerboard</summary>
   <description lang="de">Diese Vorlage zeigt einen einfachen Ver- und Entschlüsselungsprozess mit dem Straddling-Checkerboard von Ché Guevara. Ché Guevara ergänzte das Straddling-Checkerboard um ein One-Time-Pad, wodurch seine Chiffre theoretisch nicht gebrochen werden konnte. Jedoch verwendete er das One-Time-Pad mehrfach, wodurch sein Verfahren gebrochen werden konnte.</description>
   <keywords lang="de">Straddling, Checkerboard, Ché Guevara</keywords>
@@ -34,7 +34,7 @@ Wir haben sechs verschiedene Eingaben: Die folgenden drei für das Straddling-Ch
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Ché Guevara</title>
+  <title lang="en">Ché Guevara-Chiffre</title>
   <summary lang="en">Ché Guevara's straddling checkerboard</summary>
   <description lang="en">This template shows a simple encryption and decryption process using Ché Guevara's straddling checkerboard. Ché Guevara added a one-time pad to the straddling checkerboard, making his cipher theoretically unbreakable. However, he used the one-time pad multiple times, which allowed his method to be broken.</description>
   <keywords>Straddling, Checkerboard, Cold War, Vatican, Ché Guevara</keywords>

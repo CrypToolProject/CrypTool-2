@@ -2,12 +2,12 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: MarkingLettersBinarySteg.xml-->
-  <!--Last edited: 2022.02.08-->
+  <!--Last edited: 2022.12.23-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Text Steganography with Letter Marking (binary mode)</title>
+  <title lang="en">Text Steganography with Letter Marking (Binary Mode)</title>
   <summary lang="en">Hide and extract a message in and from another text</summary>
   <description lang="en">This is a text steganography technique where the bits of a secret message are hidden by marking the letters of the message in the cover text.</description>
   <keywords>Steganography, Text Steganography, Marking letters</keywords>

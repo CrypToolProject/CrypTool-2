@@ -2,13 +2,13 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: BookCipherWithCompleteWordEncoding.xml-->
-  <!--Last edited: 2022.10.23-->
+  <!--Last edited: 2022.12.23-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Book cipher with complete word encoding</title>
-  <summary lang="en">This template shows how the <i>Book Cipher</i> can be used with complete words.</summary>
+  <title lang="en">Book Cipher with Complete Word Encoding</title>
+  <summary lang="en">This template shows how the <i>Book cipher</i> can be used with complete words.</summary>
   <description lang="en">With this template we illustrate the encryption using a book cipher with complete words.</description>
   <keywords>book, code, homophonic, substitution</keywords>
   <replacements lang="en">

@@ -2,12 +2,12 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: MexicanArmyCipherDiskBruteForce.xml-->
-  <!--Last edited: 2022.08.19-->
+  <!--Last edited: 2022.12.23-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Brute-force attack on the Mexican Army Cipher Disk</title>
+  <title lang="en">Brute-Force Attack on the Mexican Army Cipher Disk</title>
   <summary lang="en">This template shows how the <i>Mexican Army Cipher Disk</i> encryption tool of the Mexican army can be attacked using brute-force.</summary>
   <description lang="en">With this template we illustrate a brute-force attack on a ciphertext encrypted by the <b>Mexican Army Cipher Disk</b>. The used analyzer searches through all possible rotations of all wheels.</description>
   <keywords>cryptanalysis, Mexican, cipher, disk, homophonic, substitution, brute-force</keywords>
