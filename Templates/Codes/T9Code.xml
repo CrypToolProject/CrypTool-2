@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: T9Code.xml-->
-  <!--Last edited: 2022.02.08-->
+  <!--Last edited: 2022.12.23-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -22,8 +22,8 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">T9 code</title>
-  <summary lang="en">Easy encryption and decryption using the <i>T9-code</i></summary>
+  <title lang="en">T9 Code</title>
+  <summary lang="en">Easy encryption and decryption using the <i>T9 code</i></summary>
   <description lang="en">This template shows a simple encryption and decryption process using the T9 code. The T9 code process is based on the input method used on older cell phones, which allowed words to be entered by pressing a key once instead of having to change letters by pressing it multiple times.</description>
   <keywords>mobile phone, mobile code, </keywords>
   <replacements lang="en">
