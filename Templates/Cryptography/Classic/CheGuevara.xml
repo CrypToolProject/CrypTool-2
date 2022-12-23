@@ -39,11 +39,11 @@ Wir haben sechs verschiedene Eingaben: Die folgenden vier für das Straddling-Ch
   <description lang="en">This template shows a simple encryption and decryption process using Ché Guevara's straddling checkerboard. Ché Guevara added a one-time pad to the straddling checkerboard, making his cipher theoretically unbreakable. However, he used the one-time pad multiple times, which allowed his method to be broken.</description>
   <keywords>Straddling, Checkerboard, Cold War, Vatican, Ché Guevara</keywords>
   <replacements lang="en">
-    <replacement key="$Plaintext$" value="Plain text" />
+    <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$RowsAndColumns$" value="Rows and columns" />
     <replacement key="$Alphabet$" value="Alphabet" />
     <replacement key="$key$" value="Key" />
-    <replacement key="$encipheredPlaintext$" value="Decrypted plain text" />
+    <replacement key="$encipheredPlaintext$" value="Decrypted plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$One time pad$" value="One-Time-Pad" />
     <replacement key="$StringDecoder$" value="String-Decoder" />

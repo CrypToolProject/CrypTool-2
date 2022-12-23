@@ -31,7 +31,7 @@
     <replacement key="$BaconCipher$" value="Baco Cipher" />
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Alphabet$" value="Alphabet" />
-    <replacement key="$encipheredPlaintext$" value="Decrypted plain text" />
+    <replacement key="$encipheredPlaintext$" value="Decrypted plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Key$" value="Key" />
     <replacement key="$memo$" value="This template demonstrates how the {\b Bacon cipher} works. The component was developed based on the definition of the ACA (American Cipher association) and supports the encryption and decryption of different texts by means of a biliteral alphabet. Different modes of the component can be set via the component's settings. The biliteral alphabet can be determined via the text input (Key) using a separator character." />

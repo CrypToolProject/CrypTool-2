@@ -27,9 +27,9 @@
   <description lang="en">This template shows a simple encryption and decryption process with the Chaocipher. The process is based on two disks that, connected by gears, rotate in opposite directions. The arrangement of letters on the disks is reversed after each character.</description>
   <keywords>Chaocipher, John F. Byrne, slices, substitution</keywords>
   <replacements lang="en">
-    <replacement key="$Plaintext$" value="Plain text" />
+    <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$key$" value="Key" />
-    <replacement key="$encipheredPlaintext$" value="Decrypted plain text" />
+    <replacement key="$encipheredPlaintext$" value="Decrypted plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$example$" value="cryptool" />
     <replacement key="$memo$" value="This template demonstrates how the Chaocipher process works.\line\line This method was developed in the 20th century, but it was only made publicly available in 2010 by the inventor's heirs.\line\line The procedure is based on two slices, which are shown in the visualization of the component. On the right side of the visualization the performed steps are described. The character arrangements on the slices can be determined via the key." />
