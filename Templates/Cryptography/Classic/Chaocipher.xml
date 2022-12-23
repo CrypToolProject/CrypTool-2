@@ -23,7 +23,7 @@
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Chaocipher</title>
-  <summary lang="en">Simple encryption and decryption with the<i>Chaocipher</i> method</summary>
+  <summary lang="en">Simple encryption and decryption with the <i>Chaocipher</i> method</summary>
   <description lang="en">This template shows a simple encryption and decryption process with the Chaocipher. The process is based on two disks that, connected by gears, rotate in opposite directions. The arrangement of letters on the disks is reversed after each character.</description>
   <keywords>Chaocipher, John F. Byrne, slices, substitution</keywords>
   <replacements lang="en">
