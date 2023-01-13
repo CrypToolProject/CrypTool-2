@@ -15,12 +15,16 @@
 */
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-
 using System.ComponentModel;
 using System;
 using System.Windows.Controls;
 using M209Analyzer;
 using CrypTool.PluginBase.Utils;
+using CrypTool.CrypAnalysisViewControl;
+using System.Threading;
+using System.Windows.Threading;
+using Cryptool.Plugins.M209Analyzer;
+using System.CodeDom;
 
 namespace CrypTool.Plugins.M209Analyzer
 {
@@ -37,11 +41,11 @@ namespace CrypTool.Plugins.M209Analyzer
         LatinLetters
     }
 
-    // HOWTO: Change author name, email address, organization and URL.
+    public delegate void UpdateOutput(string keyString, string plaintextString);
+
     [Author("Josef Matwich", "josef.matwich@student.uni-siegen.de", "CrypTool 2 Team", "https://www.cryptool.org")]
-    // HOWTO: Change plugin caption (title to appear in CT2) and tooltip.
     // You can (and should) provide a user documentation as XML file and an own icon.
-    [PluginInfo("M209 Analyzer", "Analyze the Hagelin M209", "M209Analyzer/userdoc.xml", new[] { "CrypWin/images/default.png" })]
+    [PluginInfo("CrypTool.M209Analyzer.Properties.Resources", "M209AnalyzerCaption", "M209AnalyzerTooltip", "M209Analyzer/userdoc.xml", new[] { "CrypWin/images/default.png" })]
     // HOWTO: Change category to one that fits to your plugin. Multiple categories are allowed.
     [ComponentCategory(ComponentCategory.CryptanalysisGeneric)]
     public class M209Analyzer : ICrypComponent
@@ -49,19 +53,22 @@ namespace CrypTool.Plugins.M209Analyzer
         #region Private Variables
 
         // HOWTO: You need to adapt the settings class as well, see the corresponding file.
-        private readonly M209AnalyzerSettings settings = new M209AnalyzerSettings();
+        private readonly M209AnalyzerSettings _settings;
+        private readonly M209AnalyzerPresentation _presentation = new M209AnalyzerPresentation();
         private const string ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWKXY";
+        private DateTime _startTime;
+        private DateTime _endTime;
 
         //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
         private Grams grams;
 
-        private Random Randomizer = new Random();
+        private CiphertextOnly ciphertextOnly;
 
-        private M209CipherMachine _m209 = new M209CipherMachine(new string[27] {
-            "36","06","16","15","45","04","04","04","04",
-            "20","20","20","20","20","20","20","20","20",
-            "20","25","25","05","05","05","05","05","05"
-        });       
+        public M209Analyzer()
+        {
+            _settings = new M209AnalyzerSettings();
+            _presentation.UpdateOutputFromUserChoice += UpdateOutputFromUserChoice;
+        } 
 
         #endregion
 
@@ -92,6 +99,20 @@ namespace CrypTool.Plugins.M209Analyzer
             set;
         }
 
+        [PropertyInfo(Direction.OutputData, "PlaintextCaption", "PlaintextTooltip", false)]
+        public string Plaintext
+        {
+            get;
+            set;
+        }
+
+        [PropertyInfo(Direction.OutputData, "KeyCaption", "KeyTooltip", false)]
+        public string Key
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region IPlugin Members
@@ -101,7 +122,7 @@ namespace CrypTool.Plugins.M209Analyzer
         /// </summary>
         public ISettings Settings
         {
-            get { return settings; }
+            get { return _settings; }
         }
 
         /// <summary>
@@ -109,7 +130,7 @@ namespace CrypTool.Plugins.M209Analyzer
         /// </summary>
         public UserControl Presentation
         {
-            get { return null; }
+            get { return _presentation; }
         }
 
         /// <summary>
@@ -124,21 +145,37 @@ namespace CrypTool.Plugins.M209Analyzer
         /// </summary>
         public void Execute()
         {
+            this.UpdateDisplayStart();
+
+            // Clear presentation
+            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                ((M209AnalyzerPresentation)Presentation).BestList.Clear();
+            }, null);
+
+            if (string.IsNullOrWhiteSpace(Ciphertext) || string.IsNullOrWhiteSpace(Ciphertext))
+            {
+                throw new ArgumentException("Properties.Resources.NoCiphertextGiven");
+            }
+
             //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
-            this.grams = LanguageStatistics.CreateGrams(settings.Language, (LanguageStatistics.GramsType)(settings.GramsType + 1), false);
+            this.grams = LanguageStatistics.CreateGrams(_settings.Language, (LanguageStatistics.GramsType)(_settings.GramsType + 1), false);
             this.grams.Normalize(10_000_000);
+
+            this.ciphertextOnly = new CiphertextOnly(grams);
 
             // HOWTO: Use this to show the progress of a plugin algorithm execution in the editor.
             ProgressChanged(0, 1);
             try
             {
-                GuiLogMessage($"Execute: AttackMode is {settings.AttackMode}", NotificationLevel.Info);
+                GuiLogMessage($"Execute: AttackMode is {_settings.AttackMode}", NotificationLevel.Info);
                 // HC - Hill climb
                 // SA - Simulated Anealing
-                switch (settings.AttackMode)
+                switch (_settings.AttackMode)
                 {
                     case AttackMode.CiphertextOnly:
-                        this.HCOuter("\"YURAF CBDZA YIWSD YTNGD LICEY BPRBW JHJAH SMBVA POMJN LINVD WIMKG OMWIP GOCFT YZYPB XFQPP FGQZO VXOOF ZAJYL LHZBR VGFNM SSERY OBJFT XBCEK UWRFV ABFRN DTVQL FVBJQ ZSHCE YSOKR XLUBL SBHOM JGGJY TPGCV QTFHM NZAKA OTUKN XGEKT JKYUO RBORF JWGTF BSZTR BSLDD WLSMV TIWXF XOGSP ZBLJL AMCDB OYRAB\"", "Version 1");
+                        int[] roundLayers = new int[4];
+                        this.ciphertextOnly.Solve(roundLayers, 0, "\"YURAF CBDZA YIWSD YTNGD LICEY BPRBW JHJAH SMBVA POMJN LINVD WIMKG OMWIP GOCFT YZYPB XFQPP FGQZO VXOOF ZAJYL LHZBR VGFNM SSERY OBJFT XBCEK UWRFV ABFRN DTVQL FVBJQ ZSHCE YSOKR XLUBL SBHOM JGGJY TPGCV QTFHM NZAKA OTUKN XGEKT JKYUO RBORF JWGTF BSZTR BSLDD WLSMV TIWXF XOGSP ZBLJL AMCDB OYRAB\"", 4, "Version 1");
                         break;
                     case AttackMode.KnownPlaintext:
                         break;
@@ -152,112 +189,12 @@ namespace CrypTool.Plugins.M209Analyzer
             }
 
             ProgressChanged(1, 1);
-        }
-
-        private string HCOuter(string ciphertext, string VersionOfInstruction)
-        {            
-
-            PinSetting BestPins = new PinSetting();
-            LugSettings BestLugs = new LugSettings(new string[27] {
-                "36","06","16","15","45","04","04","04","04",
-                "20","20","20","20","20","20","20","20","20",
-                "20","25","25","05","05","05","05","05","05"
-            });
-
-            BestLugs.Randomize();
-            BestPins.Randomize();
-
-            this._m209.LugSettings = BestLugs;
-            this._m209.PinSetting = BestPins;
-
-            double bestScore = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
-
-            bool stuck = false;
-            int localCounter = 100;
-            do
-            {
-                stuck = true;
-
-                if (localCounter > 0)
-                {
-                    this._m209.LugSettings.ApplyTransformationSimple();
-                } else
-                {
-                    this._m209.LugSettings.ApplyTransformationComplex();
-                }
-                this._m209.PinSetting = SAInner(ciphertext, this._m209.LugSettings, "V");
-
-                double score = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
-
-                if(score > bestScore)
-                {
-                    GuiLogMessage($"Improved: bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
-                    bestScore = score;
-                    BestPins = this._m209.PinSetting;
-                    BestLugs = this._m209.LugSettings;
-                    stuck = false;
-                }
-                else
-                {
-                    GuiLogMessage($"No improvement ({localCounter}): bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
-                    localCounter--;
-                }
-
-            } while (stuck == true);
-            return "BestLugs, BestPins";
-        }
-
-        private PinSetting SAInner(string ciphertext, LugSettings lugSetting, string versionOfInstruction)
-        {
-            GuiLogMessage($"SAInner \n", NotificationLevel.Info);
-            double T = 0;
-            double alpha = 0.9;
-
-            PinSetting BestPins = new PinSetting();
-            BestPins.Randomize();
-
-            PinSetting CurrentPins = BestPins;
-
-            PinSetting[] neighbourPinSettings = BestPins.GetNeighborPins();
-
-            this._m209.PinSetting = BestPins;
-            this._m209.LugSettings = lugSetting;
-            double bestScore = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
-
-            for (int i = 0; i < 5; i++)
-            {
-                for (int k = 0; k < neighbourPinSettings.Length; k++)
-                {
-                    this._m209.PinSetting = neighbourPinSettings[k];
-                    this._m209.LugSettings = lugSetting;
-                    double score = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
-
-                    this._m209.PinSetting = CurrentPins;
-                    this._m209.LugSettings = lugSetting;
-                    double currentScore = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
-
-                    GuiLogMessage($"SA: currentScore = {bestScore}, score = {score}", NotificationLevel.Info);
-
-                    double D = score - currentScore;
-                    if(D > 0 || this.Randomizer.NextDouble() < Math.Exp(-(Math.Abs(D)/T)))
-                    {
-                        CurrentPins = neighbourPinSettings[k];
-                        if (score > bestScore)
-                        {
-                            BestPins = neighbourPinSettings[k];
-                        }
-                        break;
-                    }
-                }
-                T = alpha * T;
-            }
-            return BestPins;
-        }
+        }        
 
         private double LogMonograms(string P)
         {
             double result = 0.0;
-            for (int i = 0; i < settings.c; i++)
+            for (int i = 0; i < _settings.c; i++)
             {
                 result += FrequencyOfCharInP(ALPHABET[i], P) * Math.Log(GetPropabilityOfCharInLanguage(ALPHABET[i]));
             }
@@ -331,5 +268,104 @@ namespace CrypTool.Plugins.M209Analyzer
         }
 
         #endregion
+
+        /// <summary>
+        /// User wants to output a selected key and text
+        /// </summary>
+        /// <param name="keyString"></param>
+        /// <param name="plaintextString"></param>
+        private void UpdateOutputFromUserChoice(string keyString, string plaintextString)
+        {
+            Key = keyString;
+            Plaintext = plaintextString;
+            OnPropertyChanged("Key");
+            OnPropertyChanged("Plaintext");
+        }
+
+        /// <summary>
+        /// Resets presentation at startup
+        /// </summary>
+        private void UpdateDisplayStart()
+        {
+            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                _startTime = DateTime.Now;
+                _presentation.StartTime.Value = _startTime.ToString();
+                _presentation.EndTime.Value = string.Empty;
+                _presentation.ElapsedTime.Value = string.Empty;
+                _presentation.CurrentlyAnalyzedKey.Value = string.Empty;
+            }, null);
+        }
+
+        /// <summary>
+        /// Updates presentation during cryptanalysis
+        /// </summary>
+        /// <param name="key"></param>
+        private void UpdateDisplay(int[] key)
+        {
+            string strkey;
+            switch (_settings.KeyFormat)
+            {
+                default:
+                case KeyFormat.Digits:
+                    strkey = string.Format("{0},{1},{2},{3}", key[0].ToString("D2"), key[1].ToString("D2"), key[2].ToString("D2"), key[3].ToString("D2"));
+                    break;
+                case KeyFormat.LatinLetters:
+                    strkey = "TODO: GenerateTextKey(key);";
+                    break;
+            }
+
+            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                _endTime = DateTime.Now;
+                TimeSpan elapsedtime = _endTime.Subtract(_startTime);
+                TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
+                _presentation.EndTime.Value = _endTime.ToString();
+                _presentation.ElapsedTime.Value = elapsedspan.ToString();
+                _presentation.CurrentlyAnalyzedKey.Value = strkey;
+            }
+            , null);
+        }
+    }
+
+    /// <summary>
+    /// A single entry of the best list presentation
+    /// </summary>
+    public class ResultEntry : ICrypAnalysisResultListEntry, INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private int ranking;
+        public int Ranking
+        {
+            get => ranking;
+            set
+            {
+                ranking = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Ranking)));
+            }
+        }
+
+        public double Value { get; set; }
+
+        public string DisplayValue
+        {
+            get
+            {
+                return $"{Value:N0}";
+            }
+        }
+
+        public string Key { get; set; }
+        public string Text { get; set; }
+
+        public string ClipboardValue => Value.ToString();
+        public string ClipboardKey => Key;
+        public string ClipboardText => Text;
+        public string ClipboardEntry =>
+            "Rank: " + Ranking + Environment.NewLine +
+            "Value: " + Value + Environment.NewLine +
+            "Key: " + Key + Environment.NewLine +
+            "Text: " + Text;
     }
 }

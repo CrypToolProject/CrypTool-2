@@ -23,7 +23,7 @@ namespace M209Analyzer
         public readonly string BEAUFORTCIPHER = "ZYXWVUTSRQPONMLKJIHGFEDCBA";
 
         public LugSettings LugSettings;
-        public PinSetting PinSetting;
+        public PinSettings PinSetting;
 
         /// <summary>
         /// The six wheels and their alphabets
@@ -46,7 +46,7 @@ namespace M209Analyzer
         /// <param name="letter"></param>
         /// <param name="alphabeth"></param>
         /// <returns></returns>
-        public int LetterToInt(char letter, Alphabeth alphabeth)
+        public int LetterToInt(char letter, Alphabeth alphabeth = Alphabeth.Default)
         {
             // For Spaces
             if(letter == ' ') 
@@ -103,7 +103,7 @@ namespace M209Analyzer
                 int displacement = this.GetDisplacement();
                 int cipherLetter = (25 - this.LetterToInt(plainText[i], Alphabeth.Default) + displacement) % 26;
 
-                cipherText += this.IntToLetter((25 - this.LetterToInt(plainText[i], Alphabeth.Default) + displacement) % 26, Alphabeth.Default);
+                cipherText += this.IntToLetter((cipherLetter) % 26, Alphabeth.Default);
             }
             return cipherText;
         }

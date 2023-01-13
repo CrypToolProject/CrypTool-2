@@ -126,5 +126,18 @@ namespace M209Analyzer
                 this._pinSettings[i] = this._randomizer.Next(0, 1) == 1;
             }
         }
+
+        public int CountOfPositivePins()
+        {
+            int count = 0;
+            for (int i = 0; i < this._pinSettings.Length; i++)
+            {
+                if (EvaluatePinAtPosition(i))
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
     }
 }

@@ -55,17 +55,6 @@ namespace M209Analyzer
         }
 
         /// <summary>
-        /// Get neighbor lug settings.
-        /// </summary>
-        /// <param name="V">Operation instruction version</param>
-        /// <returns></returns>
-        public LugSetting[] GetNeighborLugs(string V)
-        {
-            // variable neighborhood approach
-            return new LugSetting[] { new LugSetting() };
-        }
-
-        /// <summary>
         /// These simple transformations consist of reducing the count of one type of bars, and increasing the count of another type.
         /// On on bar a lug position gets increased on another bar a lug position gets decreased.
         /// </summary>
