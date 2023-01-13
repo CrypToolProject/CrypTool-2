@@ -8,9 +8,9 @@ The basic idea is that you can execute your cwm files in the windows console wit
 CrypConsole allows to input data (by filling TextInput components and NumberInputs components) and to retrieve outputs (from TextOutput components).
 CrypConsole is loaded and executed much faster then CrypTool 2. Also it allows to use CrypTool 2 workspaces in scripts.
 
-### Set Windows PATH Variable for CrypConsole
+### Set Windows PATH variable for CrypConsole
 
-To allow CrypConsole being executed in any windows command prompt, without the need to be in the CrypTool 2 directory, you should add it to the PATH variable of Windows. If your CrypTool 2 is installed in e.g. ''C:\program files\CrypTool 2'' you have to add this to your PATH variable. To edit your PATH go to system settings ans search for environment. Then edit your system PATH variable and add the path of CrypTool 2.
+To allow CrypConsole being executed in any windows command prompt, without the need to be in the CrypTool 2 directory, you should add it to the PATH variable of Windows. If your CrypTool 2 is installed in e.g. ''C:\program files\CrypTool 2'' you have to add this to your PATH variable. To edit your PATH go to system settings and search for environment. Then edit your system PATH variable and add the path of CrypTool 2.
 
 ### Usage of CrypConsole
 
