@@ -678,6 +678,8 @@ namespace WorkspaceManager.Model
                         if (plugin.GetAutoAssumeZeroBeginProgressAttributeValue())
                         {
                             PercentageFinished = 0;
+                            //Raise progress changed event after plugin has been executed
+                            Plugin.RaiseEvent("OnPluginProgressChanged", new PluginProgressEventArgs(0, 1));
                             GuiNeedsUpdate = true;
                         }
 
@@ -688,6 +690,8 @@ namespace WorkspaceManager.Model
                         if (plugin.GetAutoAssumeFullEndProgressAttributeValue())
                         {
                             PercentageFinished = 1;
+                            //Raise progress changed event after plugin has been executed
+                            Plugin.RaiseEvent("OnPluginProgressChanged", new PluginProgressEventArgs(1, 1));
                             GuiNeedsUpdate = true;
                         }
                     }
