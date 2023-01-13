@@ -100,6 +100,9 @@ namespace TextOutput
                     CurrentValue = getNewValue(fillValue);
 
                     Progress(1, 1);
+
+                    //needed by CrypConsole; so it can catch the values which the TextOutput obtains
+                    OnPropertyChanged(nameof(Input));
                 }
                 catch (Exception ex)
                 {
