@@ -32,11 +32,11 @@ namespace M209Analyzer
 
         }
 
-        public LugCount[] Bar = new LugCount[27]
+        public LugType[] Bar = new LugType[27]
         {
-            new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), 
-            new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), 
-            new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0), new LugCount(0)
+            new LugType(0), new LugType(0), new LugType(0), new LugType(0), new LugType(0), new LugType(0), new LugType(0), new LugType(0), new LugType(0), 
+            new LugType(0), new LugType(0), new LugType(0), new LugType(0), new LugType(0), new LugType(0), new LugType(0), new LugType(0), new LugType(0), 
+            new LugType(0), new LugType(0), new LugType(0), new LugType(0), new LugType(0), new LugType(0), new LugType(0), new LugType(0), new LugType(0)
         };
 
         public int Length { get { return Bar.Length; }}
@@ -52,6 +52,26 @@ namespace M209Analyzer
             {
                 this.Bar[i].Randomize();
             }
+        }
+
+        /// <summary>
+        /// LugCount of w is the number of lugs set in front of wheel w. Wheels are numbered 1 to 6
+        /// </summary>
+        public int GetLugCount(int w)
+        {
+            int lugCount = 0;
+            
+            // Because we want to address the wheel on position 0 with 1.
+            w = w - 1;
+
+            for (int i = 0; i < this.Bar.Length; i++)
+            {
+                if (this.Bar[i].Value[0] == w | this.Bar[i].Value[1] == w)
+                {
+                    lugCount++;
+                }                                   
+            }
+            return lugCount;
         }
 
         /// <summary>
@@ -108,15 +128,15 @@ namespace M209Analyzer
         }
     }
 
-    internal class LugCount
+    internal class LugType
     {
-        public LugCount(int count)
+        public LugType(int pos)
         {
-            _count = count;
+            _pos = pos;
         }
         private Random Randomizer = new Random();
 
-        private int _count = 0;
+        private int _pos = 0;
 
         private int[][] _possibleLugSettings = new int[21][]
         {
@@ -154,7 +174,7 @@ namespace M209Analyzer
             {
                 if (lugSetting[0] == this._possibleLugSettings[i][0] && lugSetting[1] == this._possibleLugSettings[i][1])
                 {
-                    this._count = i;
+                    this._pos = i;
                 }
             }
         }
@@ -163,7 +183,7 @@ namespace M209Analyzer
         {
             get
             {
-                return this._possibleLugSettings[_count];
+                return this._possibleLugSettings[_pos];
             }
             set 
             { 
@@ -173,29 +193,29 @@ namespace M209Analyzer
 
         public void Increase()
         {
-            if(this._count < this._possibleLugSettings.Length - 1)
+            if(this._pos < this._possibleLugSettings.Length - 1)
             {
-                this._count++;
+                this._pos++;
             } else
             {
-                this._count = 0;
+                this._pos = 0;
             }
         }
 
         public void Decrease()
         {
-            if (this._count > 0)
+            if (this._pos > 0)
             {
-                this._count--;
+                this._pos--;
             } else
             {
-                this._count = 20;
+                this._pos = 20;
             }
         }
 
         public void Randomize()
         {
-            this._count = this.Randomizer.Next(0, 20);
+            this._pos = this.Randomizer.Next(0, 20);
         }
     }
 }
