@@ -4,7 +4,7 @@ The ''CrypConsole'' application allows the execution of CrypTool 2 workspace man
 
 ## Basic idea
 
-The basic idea is that you can execute your cwm files in the windows console without need of starting CrypTool 2. 
+The basic idea is that you can execute your cwm files in the windows console without a need of starting CrypTool 2.
 CrypConsole allows to input data (by filling TextInput components and NumberInputs components) and to retrieve outputs (from TextOutput components).
 CrypConsole is loaded and executed much faster then CrypTool 2. Also it allows to use CrypTool 2 workspaces in scripts.
 
@@ -17,8 +17,8 @@ To allow CrypConsole being executed in any windows command prompt, without the n
 When you open a new command prompt and just type "CrypConsole" you should see the following output:
 
 ```
- -= CrypConsole -- a CrypTool 2 console for executing CrypTool 2 workspaces in the Windows console =-
- (C) 2020 by Nils Kopal, kopal<at>CrypTool.org
+ CrypConsole -- a CrypTool 2 console for executing CrypTool 2 workspaces in the Windows console 
+ (C) 2023 cryptool.org; author: Nils Kopal, kopal<at>CrypTool.org 
  Usage:
  CrypConsole.exe -cwm=path/to/cwm/file -input=<input param definition> -output=<output param definition>
  All arguments:
@@ -34,7 +34,7 @@ When you open a new command prompt and just type "CrypConsole" you should see th
   -loglevel=info/debug/warning/error  -> changes the log level; default is "warning"
 ```
 
-#### Discover a cwm-file
+#### Discover a cwm file
 
 CrypConsole allows to "discover" a cwm (CrypTool WorkspaceManager) file. Just enter
 ```
@@ -61,9 +61,9 @@ Discovery of cwm_file "caesar.cwm"
 
 The discover option allows to analyze a cwm file in the console. It shows the components and their input connectors, output connectors, and settings.
 
-### Execute a cwm-File
+### Execute a cwm file
 
-When you don't discover a file, it is automatically executed by CrypConsole. CrypConsole terminates when the workspace reaches 100%, so cwm-files that do not reach 100% will cause CrypConsole to stay in an infinite execution loop. To avoid that you can (and should) always specify a timeout (defined in seconds):
+When you don't discover a file, it is automatically executed by CrypConsole. CrypConsole terminates when the workspace reaches 100%, so cwm files that do not reach 100% will cause CrypConsole to stay in an infinite execution loop. To avoid that you can (and should) always specify a timeout (defined in seconds):
 
 ```
 CrypConsole -cwm=caesar.cwm -timeout=1
@@ -71,7 +71,7 @@ CrypConsole -cwm=caesar.cwm -timeout=1
 
 ### Defining inputs to and obaining outputs from CrypConsole
 
-When you execute a cwm-file wihtout specifying any input and output, the program will execute and terminate. There will be no result at all displayed. To define inputs, you can use the -input option:
+When you execute a cwm file wihtout specifying any input and output, the program will execute and terminate. There will be no result at all displayed. To define inputs, you can use the -input option:
 
 ```
 CrypConsole -cwm=caesar.cwm -timeout=1 -input="text,plaintext, Hello world"
@@ -79,7 +79,7 @@ CrypConsole -cwm=caesar.cwm -timeout=1 -input="text,plaintext, Hello world"
 CrypConsole will now try to change the content of a TextInput component with name "plaintext". Here, the first argument defines the type of input ("text"), the second argument the component's name ("plaintext"), and the third argument the text. When you enclose everything in quotation marks, you can also enter spaces in your text.
 Instead of providing text, you can also input a text file. To do so, use "file,plaintext,FILENAME", where FILENAME is the name of the file that should be used.
 
-Still, we wont receive any output, since we did not define what output we expect. To do so, the -output option has to be used:
+Still, we won't receive any output, since we did not define what output we expect. To do so, the -output option has to be used:
 ```
 CrypConsole -cwm=caesar.cwm -timeout=1 -input="text,plaintext, Hello world" -output=ciphertext
 ```
@@ -89,11 +89,11 @@ Here, we defined that we want to obtain the output of a TextOutput component nam
 ciphertext=URYYB JBEYQ
 ```
 
-The cwm-file we used in this example contained three components: (1) a TextInput component named "plaintext", connected to a (2) Caesar component, connected to a (3) TextOutput component named "ciphertext".
+The cwm file we used in this example contained three components: (1) a TextInput component named "plaintext", connected to a (2) Caesar component, connected to a (3) TextOutput component named "ciphertext".
 
 ### Some more options
 
-With -verbose CrypConsole shows debug messages. 
+With -verbose, CrypConsole shows debug messages. 
 
 ```
 Input parameter given: Text,plaintext,Hello world
@@ -119,7 +119,7 @@ Execution engine stopped. Terminate now
 Total execution took: 00:00:00.3133994
 ```
 
-With -jsonoutput CrypConsole outputs the results using json. Also, the current workspace execution progress is shown:
+With -jsonoutput, CrypConsole outputs the results in a json structure. Also, the current workspace execution progress is shown:
 
 ```
 {"progress":{"value":"25"}}
