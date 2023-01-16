@@ -76,7 +76,7 @@ CrypConsole -cwm=caesar.cwm -timeout=1
 
 ### Defining inputs to and obaining outputs from CrypConsole
 
-When you execute a cwm file wihtout specifying any input and output, the program will execute and terminate. There will be no result at all displayed. To define inputs, you can use the -input option:
+When you execute a cwm file without specifying any input and output, the program will execute and terminate. There will be no result at all displayed. To define inputs, you can use the -input option:
 
 ```
 CrypConsole -cwm=caesar.cwm -timeout=1 -input="text,plaintext, Hello world"
