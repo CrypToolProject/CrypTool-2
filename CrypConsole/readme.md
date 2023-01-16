@@ -94,7 +94,7 @@ Here, and in the rest of this documentation, we defined that we want to obtain t
 ciphertext=URYYB JBEYQ
 ```
 
-The cwm file we used in this example contained three components: (1) a TextInput component named "plaintext", connected to a (2) Caesar component, connected to a (3) TextOutput component named "ciphertext".
+The cwm file we used in this example contained four components: (1) a TextInput component named "plaintext", connected to a (2) Caesar component, connected to a (3) TextOutput component named "ciphertext", and (4) a NumberInput component named "key".
 
 ### Some more options
 
