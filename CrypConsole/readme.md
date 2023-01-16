@@ -44,6 +44,8 @@ Here, for demonstration we use a simple workspace containing a Caesar cipher com
 
 ![Caesar workspace used for demonstration](https://github.com/CrypToolProject/CrypTool-2/blob/main/documentation/images/Caesar_CrypConsole.png)
 
+Here, you can download a "caesar.cwm" for testing: ![caesar.cwm](https://github.com/CrypToolProject/CrypTool-2/blob/main/documentation/images/caesar.cwm?raw=true)
+
 Then, when you discover the caesar.cwm file, your output should look like:
 ```
 Discovery of cwm_file "caesar.cwm"
