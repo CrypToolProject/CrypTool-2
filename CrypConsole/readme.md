@@ -18,15 +18,15 @@ When you open a new command prompt and just type "CrypConsole" you should see th
 
 ```
  CrypConsole -- a CrypTool 2 console for executing CrypTool 2 workspaces in the Windows console 
- (C) 2023 cryptool.org; author: Nils Kopal, kopal<at>CrypTool.org 
+ (C) 2023 cryptool.org; author: Nils Kopal, kopal<at>CrypTool.org
  Usage:
- CrypConsole.exe -cwm=path/to/cwm/file -input=<input param definition> -output=<output param definition>
+ CrypConsole.exe -cwm=path\to\file.cwm -input=type,name,data -output=name
  All arguments:
   -help                               -> shows this help page
   -discover                           -> discovers the given cwm file: returns all possible inputs and outputs
-  -cwm=path/to/cwm/file               -> specifies a path to a cwm file that should be executed
+  -cwm=path\to\file.cwm               -> specifies a path to a cwm file that should be executed
   -input=type,name,data               -> specifies an input parameter
-                                         type can be number,text,file
+                                        type can be number,text,file
   -output=name                        -> specifies an output parameter
   -timeout=duration                   -> specifies a timeout in seconds. If timeout is reached, the process is killed
   -jsonoutput                         -> enables the json output
