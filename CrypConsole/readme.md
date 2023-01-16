@@ -40,8 +40,11 @@ CrypConsole allows to "discover" a cwm (CrypTool WorkspaceManager) file. Just en
 ```
 CrypConsole -cwm=caesar.cwm -discover
 ```
+Here, for demonstration we use a simple workspace containing a Caesar cipher component, a TextInput component ("plaintext"), a TextOutput component ("ciphertext"), and a NumberInput component ("key"). You can create such a cwm file using CrypTool 2 and save it as "caesar.cwm":
 
-Then, your output should look like:
+![Caesar workspace used for demonstration](https://github.com/CrypToolProject/CrypTool-2/blob/main/documentation/images/Caesar_CrypConsole.png)
+
+Then, when you discover the caesar.cwm file, your output should look like:
 ```
 Discovery of cwm_file "caesar.cwm"
 
@@ -84,7 +87,7 @@ Still, we won't receive any output, since we did not define what output we expec
 CrypConsole -cwm=caesar.cwm -timeout=1 -input="text,plaintext, Hello world" -output=ciphertext
 ```
 
-Here, we defined that we want to obtain the output of a TextOutput component named "ciphertext". When we execute CrypConsole using the above shown command, we should get this:
+Here, and the rest of this documentation, we defined that we want to obtain the output of a TextOutput component named "ciphertext". When we execute CrypConsole using the above shown command, we should get this:
 ```
 ciphertext=URYYB JBEYQ
 ```
