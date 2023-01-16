@@ -89,7 +89,7 @@ Still, we won't receive any output, since we did not define what output we expec
 CrypConsole -cwm=caesar.cwm -timeout=1 -input="text,plaintext, Hello world" -output=ciphertext
 ```
 
-Here, and the rest of this documentation, we defined that we want to obtain the output of a TextOutput component named "ciphertext". When we execute CrypConsole using the above shown command, we should get this:
+Here, and in the rest of this documentation, we defined that we want to obtain the output of a TextOutput component named "ciphertext". When we execute CrypConsole using the above shown command, we should get this:
 ```
 ciphertext=URYYB JBEYQ
 ```
