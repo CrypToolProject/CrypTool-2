@@ -72,7 +72,7 @@ namespace Cryptool.Plugins.M209Analyzer
                 // key.lugs.set(bestLocalTypeCount, false);
                 //key.pins.set(bestLocalPins);
                 //bestLocal = bestRandom;
-
+                
                 int round = 0;
                 bool improved;
                 do
@@ -80,6 +80,31 @@ namespace Cryptool.Plugins.M209Analyzer
                     roundLayers[layers + 1] = round;
                     round++;
                     improved = false;
+                    int[] types = new int[4];
+
+                    int newEval;
+
+                    LugType lugTypeC1 = new LugType(0);
+                    LugType lugTypeC2 = new LugType(0);
+
+                    for (int c1 = 0; c1 < 21; c1++)
+                    {
+                        for (int c2 = 0; c2 < 21; c2++)
+                        {
+                            if (c1 >= c2)
+                            {
+                                continue;
+                            }
+
+                            types[0] = c1;
+                            types[1] = c2;
+
+                            
+
+
+                        }
+                    }
+
 
                 } while (improved);
 
@@ -96,7 +121,7 @@ namespace Cryptool.Plugins.M209Analyzer
             return cipherArray;
         }
 
-        private string HCOuter(string ciphertext, string versionOfInstruction)
+        public string HCOuter(string ciphertext, string versionOfInstruction)
         {
 
             PinSettings BestPins = new PinSettings(versionOfInstruction);
@@ -113,40 +138,95 @@ namespace Cryptool.Plugins.M209Analyzer
             this._m209.PinSetting = BestPins;
 
             double bestScore = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
+            double score = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
 
-            bool stuck = false;
+            bool improved = true;
             int localCounter = 100;
             do
             {
-                stuck = true;
+                improved = false;
 
-                if (localCounter > 0)
-                {
-                    this._m209.LugSettings.ApplyTransformationSimple();
-                }
-                else
-                {
-                    this._m209.LugSettings.ApplyTransformationComplex();
-                }
-                this._m209.PinSetting = SAInner(ciphertext, this._m209.LugSettings, "V");
 
-                double score = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
-
-                if (score > bestScore)
+                // Simple transformations
+                for (int bar1 = 0; bar1 < 6; bar1++)
                 {
-                    //GuiLogMessage($"Improved: bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
-                    bestScore = score;
-                    BestPins = this._m209.PinSetting;
-                    BestLugs = this._m209.LugSettings;
-                    stuck = false;
-                }
-                else
-                {
-                    //GuiLogMessage($"No improvement ({localCounter}): bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
-                    localCounter--;
+                    for (int bar2 = 0; bar2 < 6; bar2++)
+                    {
+                        if ((bar1 < bar2) && (bar1 != bar2))
+                        {
+                            for (int i = 0; i < 2; i++)
+                            {   
+                                if(i == 0)
+                                {
+                                    this._m209.LugSettings.ApplyTransformationSimple(bar1, bar2);
+                                } else
+                                {
+                                    this._m209.LugSettings.ApplyTransformationSimple(bar2, bar1);
+                                }
+
+                                this._m209.PinSetting = SAInner(ciphertext, this._m209.LugSettings, "V");
+
+                                score = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
+
+                                if (score > bestScore)
+                                {
+                                    GuiLogMessage($"Improved: bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
+                                    bestScore = score;
+                                    BestPins = this._m209.PinSetting;
+                                    BestLugs = this._m209.LugSettings;
+                                    improved = true;
+                                }
+                                else
+                                {
+                                    GuiLogMessage($"No improvement ({localCounter}): bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
+                                    localCounter--;
+                                }
+                            }
+                        }
+
+                    }
                 }
 
-            } while (stuck == true);
+                // Complex transformations
+                if (!improved)
+                {
+                    for (int bar1 = 0; bar1 < 6 && !improved; bar1++)
+                    {
+                        for (int bar2 = bar1 + 1; bar2 < 6 && !improved; bar2++)
+                        {
+                            for (int bar3 = bar2 + 1; bar3 < 6 && !improved; bar3++)
+                            {
+                                for (int bar4 = bar3 + 1; bar4 < 6 && !improved; bar4++)
+                                {
+                                    for (int i = 0; i < 6; i++)
+                                    {
+                                        this._m209.LugSettings.ApplyTransformationComplex(bar1, bar2, bar3, bar4, i);
+
+                                        this._m209.PinSetting = SAInner(ciphertext, this._m209.LugSettings, "V");
+
+                                        score = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
+
+                                        if (score > bestScore)
+                                        {
+                                            GuiLogMessage($"Improved: bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
+                                            bestScore = score;
+                                            BestPins = this._m209.PinSetting;
+                                            BestLugs = this._m209.LugSettings;
+                                            improved = true;
+                                        }
+                                        else
+                                        {
+                                            GuiLogMessage($"No improvement ({localCounter}): bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
+                                            localCounter--;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            } while (!improved);
             return "BestLugs, BestPins";
         }
 

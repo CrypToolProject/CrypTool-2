@@ -74,60 +74,79 @@ namespace M209Analyzer
             return lugCount;
         }
 
+        public bool IsValid()
+        {
+            return true;
+        }
+
         /// <summary>
         /// These simple transformations consist of reducing the count of one type of bars, and increasing the count of another type.
         /// On on bar a lug position gets increased on another bar a lug position gets decreased.
         /// </summary>
-        public void ApplyTransformationSimple()
+        public void ApplyTransformationSimple(int bar1 = 0, int bar2 = 0)
         {
-            // Choose random bar and increase lug count
-            int ChoosenBar1 = this.Randomizer.Next(0, 26);
-            this.Bar[ChoosenBar1].Increase();
-
-            // Choose random but different bar and increase lug count
-            int ChoosenBar2 = this.Randomizer.Next(0, 26);
-            while (ChoosenBar1 == ChoosenBar2)
+            // the changes have to be on different bars
+            if (bar1 == bar2)
             {
-                ChoosenBar2 = this.Randomizer.Next(0, 26);
+                return;
             }
-            this.Bar[ChoosenBar2].Decrease();
+            // increase lug type
+            this.Bar[bar1].Increase();
+            this.Bar[bar2].Decrease();
         }
 
         /// <summary>
         /// Those consist of reducing the count of two types of bar, and increasing the counts of two other types.
         /// </summary>
-        public void ApplyTransformationComplex()
+        public void ApplyTransformationComplex(int bar1, int bar2, int bar3, int bar4, int nr)
         {
-            // Choose random bar and increase lug count
-            int ChoosenBar1 = this.Randomizer.Next(0, 26);
-            this.Bar[ChoosenBar1].Increase();
-
-            // Choose random but different bar and increase lug count
-            int ChoosenBar2 = this.Randomizer.Next(0, 26);
-            while (ChoosenBar1 == ChoosenBar2)
+            switch (nr)
             {
-                ChoosenBar2 = this.Randomizer.Next(0, 26);
+                case 0:
+                    this.Bar[bar1].Increase();
+                    this.Bar[bar2].Increase();
+                    this.Bar[bar3].Decrease();
+                    this.Bar[bar4].Decrease();
+                    break;
+                case 1:
+                    this.Bar[bar1].Increase();
+                    this.Bar[bar2].Decrease();
+                    this.Bar[bar3].Increase();
+                    this.Bar[bar4].Decrease();
+                    break;
+                case 2:
+                    this.Bar[bar1].Increase();
+                    this.Bar[bar2].Decrease();
+                    this.Bar[bar3].Decrease();
+                    this.Bar[bar4].Increase();
+                    break;
+                case 3:
+                    this.Bar[bar1].Decrease();
+                    this.Bar[bar2].Increase();
+                    this.Bar[bar3].Increase();
+                    this.Bar[bar4].Decrease();
+                    break;
+                case 4:
+                    this.Bar[bar1].Decrease();
+                    this.Bar[bar2].Increase();
+                    this.Bar[bar3].Decrease();
+                    this.Bar[bar4].Increase();
+                    break;
+                case 5:
+                    this.Bar[bar1].Decrease();
+                    this.Bar[bar2].Decrease();
+                    this.Bar[bar3].Increase();
+                    this.Bar[bar4].Increase();
+                    break;
+                default:
+                    break;
             }
-            this.Bar[ChoosenBar2].Increase();
-
-            // Choose random but different bar and decrease lug count
-            int ChoosenBar3 = this.Randomizer.Next(0, 26);
-            while (ChoosenBar1 == ChoosenBar3 || ChoosenBar2 == ChoosenBar3)
-            {
-                ChoosenBar3 = this.Randomizer.Next(0, 26);
-            }
-            this.Bar[ChoosenBar3].Decrease();
-
-            // Choose random but different bar and decrease lug count
-            int ChoosenBar4 = this.Randomizer.Next(0, 26);
-            while (ChoosenBar1 == ChoosenBar4 || ChoosenBar2 == ChoosenBar4 || ChoosenBar3 == ChoosenBar4)
-            {
-                ChoosenBar4 = this.Randomizer.Next(0, 26);
-            }
-            this.Bar[ChoosenBar4].Decrease();
         }
     }
 
+    /// <summary>
+    /// There are only 21 possible settings for the lugs on a bar. They are called LugTypes.
+    /// </summary>
     internal class LugType
     {
         public LugType(int pos)
@@ -161,12 +180,17 @@ namespace M209Analyzer
             new int[]{3, 4},
             new int[]{3, 5},
             new int[]{4, 5}
-        };
+        };     
 
+        /// <summary>
+        /// Parse an arbitrary lug setting into an unique lugType
+        /// </summary>
+        /// <param name="lugSetting">Arbitrary lug setting</param>
         private void parseLugSetting(int[] lugSetting)
         {
             if (lugSetting[0] == lugSetting[1])
             {
+                // -1 means ineffective 
                 lugSetting[0] = -1;
             }
 
@@ -189,6 +213,11 @@ namespace M209Analyzer
             { 
                 parseLugSetting(value); 
             }
+        }
+
+        public void SetPosition(int pos)
+        {
+            this._pos = pos;
         }
 
         public void Increase()
