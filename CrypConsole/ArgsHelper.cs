@@ -301,14 +301,14 @@ namespace CrypTool.CrypConsole
         public static void ShowHelp()
         {
             Console.WriteLine("");
-            Console.WriteLine("-= CrypConsole -- a CrypTool 2 console for executing CrypTool 2 workspaces in the Windows console =- ");
-            Console.WriteLine("(C) 2020 by Nils Kopal, kopal<at>CrypTool.org");
+            Console.WriteLine("CrypConsole -- a CrypTool 2 console for executing CrypTool 2 workspaces in the Windows console\r\n");
+            Console.WriteLine("(C) 2023 cryptool.org; author: Nils Kopal, kopal<at>CrypTool.org ");
             Console.WriteLine("Usage:");
-            Console.WriteLine("CrypConsole.exe -cwm=path/to/cwm/file -input=<input param definition> -output=<output param definition>");
+            Console.WriteLine("CrypConsole.exe -cwm=path\\to\\file.cwm -input=type,name,data -output=name");
             Console.WriteLine("All arguments:");
             Console.WriteLine(" -help                               -> shows this help page");
             Console.WriteLine(" -discover                           -> discovers the given cwm file: returns all possible inputs and outputs");
-            Console.WriteLine(" -cwm=path/to/cwm/file               -> specifies a path to a cwm file that should be executed");
+            Console.WriteLine(" -cwm=path\\to\\file.cwm               -> specifies a path to a cwm file that should be executed");
             Console.WriteLine(" -input=type,name,data               -> specifies an input parameter");
             Console.WriteLine("                                        type can be number,text,file");
             Console.WriteLine(" -output=name                        -> specifies an output parameter");
