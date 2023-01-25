@@ -14,8 +14,24 @@ namespace Cryptool.Plugins.M209Analyzer
 {
     internal class CiphertextOnly
     {
+        public event EventHandler<OnLogEventEventArgs> OnLogEvent;
+        public class OnLogEventEventArgs : EventArgs {
+            public string Message;
+            public NotificationLevel LogLevel;
+            public OnLogEventEventArgs(string message, NotificationLevel logLevel)
+            {
+                Message = message;
+                LogLevel = logLevel;
+            }
+        }
+        private void LogMessage(string message, NotificationLevel logLevel)
+        { 
+            OnLogEvent?.Invoke(this, new OnLogEventEventArgs(message, logLevel));
+        }
         //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
         private Grams grams;
+
+        public bool Running = false;
 
         private Random Randomizer = new Random();
 
@@ -28,87 +44,6 @@ namespace Cryptool.Plugins.M209Analyzer
         public CiphertextOnly(Grams grams)
         {
             this.grams = grams;
-        }
-
-        public void Solve(int[] roundLayers, int layers, string ciphertext, int cycles, string versionOfInstruction)
-        {
-            LugSettings BestLugs = new LugSettings(new string[27] {
-                "36","06","16","15","45","04","04","04","04",
-                "20","20","20","20","20","20","20","20","20",
-                "20","25","25","05","05","05","05","05","05"
-            });
-            LugSettings BestLocalLugs = BestLugs;
-
-            PinSettings BestPins = new PinSettings(versionOfInstruction);
-            PinSettings BestLocalPins = BestPins;
-
-            for (int i = 0; i < cycles; i++)
-            {
-                roundLayers[layers] = cycles;
-                double bestRandom = double.MinValue;
-                double bestLocal = 0.0;
-
-                int[] cipherArray = this.GetCipherArray(ciphertext);
-                int phase1Trials = 200000 / cipherArray.Length;
-
-                for (int r = 0; r < phase1Trials; r++)
-                {
-                    roundLayers[layers + 1] = r;
-                    BestLugs.Randomize();
-
-                    double newEval = SA(roundLayers, layers + 2, ciphertext, BestLugs, BestPins, versionOfInstruction, 1);
-                    if (newEval > bestRandom)
-                    {
-                        bestRandom = newEval;
-                        BestLocalLugs = BestLugs;
-                        BestLocalPins = BestPins;
-                    }
-                    if (bestRandom > bestLocal)
-                    {
-                        bestLocal = bestRandom;
-                        // ReportResult ...
-                    }
-                }
-                // key.lugs.set(bestLocalTypeCount, false);
-                //key.pins.set(bestLocalPins);
-                //bestLocal = bestRandom;
-                
-                int round = 0;
-                bool improved;
-                do
-                {
-                    roundLayers[layers + 1] = round;
-                    round++;
-                    improved = false;
-                    int[] types = new int[4];
-
-                    int newEval;
-
-                    LugType lugTypeC1 = new LugType(0);
-                    LugType lugTypeC2 = new LugType(0);
-
-                    for (int c1 = 0; c1 < 21; c1++)
-                    {
-                        for (int c2 = 0; c2 < 21; c2++)
-                        {
-                            if (c1 >= c2)
-                            {
-                                continue;
-                            }
-
-                            types[0] = c1;
-                            types[1] = c2;
-
-                            
-
-
-                        }
-                    }
-
-
-                } while (improved);
-
-            }
         }
 
         public int [] GetCipherArray(string ciphertext)
@@ -164,13 +99,14 @@ namespace Cryptool.Plugins.M209Analyzer
                                     this._m209.LugSettings.ApplyTransformationSimple(bar2, bar1);
                                 }
 
-                                this._m209.PinSetting = SAInner(ciphertext, this._m209.LugSettings, "V");
+                                //this._m209.PinSetting = SAInner(ciphertext, this._m209.LugSettings, "V");
+                                this._m209.PinSetting = SA(ciphertext, this._m209.LugSettings, this._m209.PinSetting, "V", 1);
 
                                 score = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
 
                                 if (score > bestScore)
                                 {
-                                    GuiLogMessage($"Improved: bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
+                                    LogMessage($"Improved: bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
                                     bestScore = score;
                                     BestPins = this._m209.PinSetting;
                                     BestLugs = this._m209.LugSettings;
@@ -178,9 +114,11 @@ namespace Cryptool.Plugins.M209Analyzer
                                 }
                                 else
                                 {
-                                    GuiLogMessage($"No improvement ({localCounter}): bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
+                                    LogMessage($"No improvement ({localCounter}): bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
                                     localCounter--;
                                 }
+
+                                if (!Running) return "Exit";
                             }
                         }
 
@@ -202,13 +140,14 @@ namespace Cryptool.Plugins.M209Analyzer
                                     {
                                         this._m209.LugSettings.ApplyTransformationComplex(bar1, bar2, bar3, bar4, i);
 
-                                        this._m209.PinSetting = SAInner(ciphertext, this._m209.LugSettings, "V");
+                                        //this._m209.PinSetting = SAInner(ciphertext, this._m209.LugSettings, "V");
+                                        this._m209.PinSetting = SA(ciphertext, this._m209.LugSettings, this._m209.PinSetting, "V", 1);
 
                                         score = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
 
                                         if (score > bestScore)
                                         {
-                                            GuiLogMessage($"Improved: bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
+                                            LogMessage($"Improved: bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
                                             bestScore = score;
                                             BestPins = this._m209.PinSetting;
                                             BestLugs = this._m209.LugSettings;
@@ -216,9 +155,11 @@ namespace Cryptool.Plugins.M209Analyzer
                                         }
                                         else
                                         {
-                                            GuiLogMessage($"No improvement ({localCounter}): bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
+                                            LogMessage($"No improvement ({localCounter}): bestScore = {bestScore}, score = {score}", NotificationLevel.Info);
                                             localCounter--;
                                         }
+
+                                        if (!Running) return "Exit";
                                     }
                                 }
                             }
@@ -230,32 +171,59 @@ namespace Cryptool.Plugins.M209Analyzer
             return "BestLugs, BestPins";
         }
 
-        private double SA(int[] roundLayers, int layers, string ciphertext, LugSettings lugSettings, PinSettings pinSetting, string versionOfInstruction, int cycles)
+        /// <summary>
+        /// From the java project
+        /// </summary>
+        /// <param name="roundLayers"></param>
+        /// <param name="layers"></param>
+        /// <param name="ciphertext"></param>
+        /// <param name="lugSettings"></param>
+        /// <param name="pinSetting"></param>
+        /// <param name="versionOfInstruction"></param>
+        /// <param name="cycles"></param>
+        /// <returns></returns>
+        /// private double SA(int[] roundLayers, int layers, string ciphertext, LugSettings lugSettings, PinSettings pinSetting, string versionOfInstruction, int cycles)
+        private PinSettings SA(string ciphertext, LugSettings lugSettings, PinSettings pinSetting, string versionOfInstruction, int cycles)
         {
             double bestSAScore = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
 
             for (int i = 0; i < cycles; i++)
             {
-                roundLayers[layers] = cycles;
+                //roundLayers[layers] = cycles;
                 pinSetting.Randomize();
 
-                roundLayers[layers + 1] = 0;
+                //roundLayers[layers + 1] = 0;
                 for (double temperature = 1000.0; temperature >= 1.0; temperature /= 1.1)
                 {
-                    bestSAScore = step(ciphertext, roundLayers, layers + 2, lugSettings, pinSetting, bestSAScore, temperature);
+                    //bestSAScore = step(ciphertext, roundLayers, layers + 2, lugSettings, pinSetting, bestSAScore, temperature);
+                    bestSAScore = step(ciphertext, lugSettings, pinSetting, bestSAScore, temperature);
                 }
                 double previous;
                 do
                 {
                     previous = bestSAScore;
-                    bestSAScore = step(ciphertext, roundLayers, layers + 2, lugSettings, pinSetting, bestSAScore, 0.0);
+                    //bestSAScore = step(ciphertext, roundLayers, layers + 2, lugSettings, pinSetting, bestSAScore, 0.0);
+                    bestSAScore = step(ciphertext, lugSettings, pinSetting, bestSAScore, 0.0);
                 } while (bestSAScore > previous);
             }
 
-            return bestSAScore;
+            //return bestSAScore;
+            return pinSetting;
         }
 
-        private double step(string ciphertext, int[] roundLayers, int layers, LugSettings lugSettings, PinSettings pinSettings, double bestSAScore, double temperature)
+        /// <summary>
+        /// From the java project.
+        /// </summary>
+        /// <param name="ciphertext"></param>
+        /// <param name="roundLayers"></param>
+        /// <param name="layers"></param>
+        /// <param name="lugSettings"></param>
+        /// <param name="pinSettings"></param>
+        /// <param name="bestSAScore"></param>
+        /// <param name="temperature"></param>
+        /// <returns></returns>
+        /// private double step(string ciphertext, int[] roundLayers, int layers, LugSettings lugSettings, PinSettings pinSettings, double bestSAScore, double temperature)
+        private double step(string ciphertext, LugSettings lugSettings, PinSettings pinSettings, double bestSAScore, double temperature)
         {
             double currLocalScore = 0;
 
@@ -272,6 +240,8 @@ namespace Cryptool.Plugins.M209Analyzer
             {
                 for (int p = 0; p < pinSettings.Wheels[w].Length; p++)
                 {
+                    if(!Running) return 0.0;
+
                     pinSettings.Wheels[w].TogglePinValue(p);
                     count = pinSettings.count();
                     if (count < MIN_COUNT || count > MAX_COUNT) // TODO: Add longSeq
@@ -298,6 +268,7 @@ namespace Cryptool.Plugins.M209Analyzer
                         pinSettings.Wheels[w].TogglePinValue(p);
                     }
 
+
                 }
             }
             return 0.0;
@@ -305,7 +276,7 @@ namespace Cryptool.Plugins.M209Analyzer
 
         private PinSettings SAInner(string ciphertext, LugSettings lugSetting, string versionOfInstruction)
         {
-            //GuiLogMessage($"SAInner \n", NotificationLevel.Info);
+            LogMessage($"SAInner \n", NotificationLevel.Info);
             double T = 0;
             double alpha = 0.9;
 
@@ -332,7 +303,7 @@ namespace Cryptool.Plugins.M209Analyzer
                     this._m209.LugSettings = lugSetting;
                     double currentScore = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
 
-                    //GuiLogMessage($"SA: currentScore = {bestScore}, score = {score}", NotificationLevel.Info);
+                    LogMessage($"SA: currentScore = {bestScore}, score = {score}", NotificationLevel.Info);
 
                     double D = score - currentScore;
                     if (D > 0 || this.Randomizer.NextDouble() < Math.Exp(-(Math.Abs(D) / T)))

@@ -25,6 +25,9 @@ using System.Threading;
 using System.Windows.Threading;
 using Cryptool.Plugins.M209Analyzer;
 using System.CodeDom;
+using CrypTool.PluginBase.Utils.Logging;
+using System.Diagnostics;
+using static Cryptool.Plugins.M209Analyzer.CiphertextOnly;
 
 namespace CrypTool.Plugins.M209Analyzer
 {
@@ -59,15 +62,18 @@ namespace CrypTool.Plugins.M209Analyzer
         private DateTime _startTime;
         private DateTime _endTime;
 
+        private bool _running = false;
+
         //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
         private Grams grams;
+
 
         private CiphertextOnly ciphertextOnly;
 
         public M209Analyzer()
         {
             _settings = new M209AnalyzerSettings();
-            _presentation.UpdateOutputFromUserChoice += UpdateOutputFromUserChoice;
+            _presentation.UpdateOutputFromUserChoice += UpdateOutputFromUserChoice;            
         } 
 
         #endregion
@@ -162,7 +168,12 @@ namespace CrypTool.Plugins.M209Analyzer
             this.grams = LanguageStatistics.CreateGrams(_settings.Language, (LanguageStatistics.GramsType)(_settings.GramsType + 1), false);
             this.grams.Normalize(10_000_000);
 
+            _running = true;
+
             this.ciphertextOnly = new CiphertextOnly(grams);
+            ciphertextOnly.OnLogEvent += GetMessageFromChild;
+
+            this.ciphertextOnly.Running = _running;
 
             // HOWTO: Use this to show the progress of a plugin algorithm execution in the editor.
             ProgressChanged(0, 1);
@@ -175,7 +186,7 @@ namespace CrypTool.Plugins.M209Analyzer
                 {
                     case AttackMode.CiphertextOnly:
                         int[] roundLayers = new int[4];
-                        this.ciphertextOnly.HCOuter("YURAF CBDZA YIWSD YTNGD LICEY BPRBW JHJAH SMBVA POMJN LINVD WIMKG OMWIP GOCFT YZYPB XFQPP FGQZO VXOOF ZAJYL LHZBR VGFNM SSERY OBJFT XBCEK UWRFV ABFRN DTVQL FVBJQ ZSHCE YSOKR XLUBL SBHOM JGGJY TPGCV QTFHM NZAKA OTUKN XGEKT JKYUO RBORF JWGTF BSZTR BSLDD WLSMV TIWXF XOGSP ZBLJL AMCDB OYRAB", "V");
+                        this.ciphertextOnly.HCOuter(Ciphertext, "V");
                         //this.ciphertextOnly.Solve(roundLayers, 0, "\"YURAF CBDZA YIWSD YTNGD LICEY BPRBW JHJAH SMBVA POMJN LINVD WIMKG OMWIP GOCFT YZYPB XFQPP FGQZO VXOOF ZAJYL LHZBR VGFNM SSERY OBJFT XBCEK UWRFV ABFRN DTVQL FVBJQ ZSHCE YSOKR XLUBL SBHOM JGGJY TPGCV QTFHM NZAKA OTUKN XGEKT JKYUO RBORF JWGTF BSZTR BSLDD WLSMV TIWXF XOGSP ZBLJL AMCDB OYRAB\"", 4, "Version 1");
                         break;
                     case AttackMode.KnownPlaintext:
@@ -225,6 +236,8 @@ namespace CrypTool.Plugins.M209Analyzer
         /// </summary>
         public void Stop()
         {
+            _running = false;
+            this.ciphertextOnly.Running = false;
         }
 
         /// <summary>
@@ -266,6 +279,11 @@ namespace CrypTool.Plugins.M209Analyzer
         private void ProgressChanged(double value, double max)
         {
             EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
+        }
+
+        private void GetMessageFromChild(object sender, OnLogEventEventArgs e)
+        {
+            GuiLogMessage(e.Message, e.LogLevel);
         }
 
         #endregion
