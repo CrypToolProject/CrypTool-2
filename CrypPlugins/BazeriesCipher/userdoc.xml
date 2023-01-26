@@ -8,7 +8,7 @@
   </introduction>
 
   <introduction lang="de-DE">
-    In der klassischen Kryptographie ist die Bazeries-Chiffre eine Chiffre, die von Étienne Bazeries, einem französischen Offizier, erfunden wurde. Sie kombiniert Substitution und Transposition.
+    In der klassischen Kryptografie ist die Bazeries-Chiffre eine Chiffre, die von Étienne Bazeries, einem französischen Offizier, erfunden wurde. Sie kombiniert Substitution und Transposition.
   </introduction>
 
   <usage lang="en">
@@ -19,7 +19,10 @@
     Each block's text is then reversed and written in the final ciphertext.
     To decrypt a given ciphertext, the procedure is performed in the reverse direction.
     Bazeries based the keyword of the Polybius square on the number key.
-    For example, the number key 123 would result in the keyword  &quot;ONEHUNDREDTWENTYTHREE&quot;.
+    For example, the number key 123 would result in the keyword  &quot;ONEHUNDREDTWENTYTHREE&quot;.<newline/>
+    <newline/>
+    In contast to the original cipher, the component allows to use keyword and number key independently. 
+    Also, the component supports a 36-character Polybius square, which contains all Latin letters as well as all digits from 0 to 9.    
   </usage>
 
   <usage lang="de-DE">
@@ -30,7 +33,10 @@
     Der Text jedes Blocks wird dann umgedreht und in den endgültigen Geheimtext geschrieben.
     Um einen gegebenen Geheimtext zu entschlüsseln, wird das Verfahren in umgekehrter Richtung durchgeführt.
     Bazeries hat das Schlüsselwort des Polybius-Quadrats auf dem Zahlenschlüssel basieren lassen.
-    Zum Beispiel würde der Zahlenschlüssel 123 das Schlüsselwort &quot;HUNDERTDREIUNDZWANZIG&quot; ergeben.
+    Zum Beispiel würde der Zahlenschlüssel 123 das Schlüsselwort &quot;HUNDERTDREIUNDZWANZIG&quot; ergeben.<newline/>
+    <newline/>
+    Im Gegensatz zur ursprünglichen Chiffre ermöglicht die Komponente die unabhängige Verwendung von Schlüsselwort und Zahlenschlüssel.
+    Außerdem unterstützt die Komponente ein 36-stelliges Polybius-Quadrat, das alle lateinischen Buchstaben sowie alle Ziffern von 0 bis 9 enthält.
   </usage>
   
   <presentation lang="en">

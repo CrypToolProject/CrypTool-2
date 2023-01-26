@@ -9,7 +9,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Bazeries-Chiffre</title>
   <summary lang="de">Ver- und Entschlüsselung mit der <i>Bazeries-Chiffre</i></summary>
-  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels Bazeries-Chiffre. In der klassischen Kryptographie ist die Bazeries-Chiffre eine Chiffre, die von Étienne Bazeries, einem französischen Offizier, erfunden wurde. Sie kombiniert Substitution und Transposition.</description>
+  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels Bazeries-Chiffre. In der klassischen Kryptografie ist die Bazeries-Chiffre eine Chiffre, die von Étienne Bazeries, einem französischen Offizier, erfunden wurde. Sie kombiniert Substitution und Transposition.</description>
   <keywords lang="de">Bazeries, chiffre</keywords>
   <replacements lang="de">
     <replacement key="$Bazeries Cipher$" value="Bazeries-Chiffre" />
