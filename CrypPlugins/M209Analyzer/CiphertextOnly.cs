@@ -93,10 +93,10 @@ namespace Cryptool.Plugins.M209Analyzer
                             {   
                                 if(i == 0)
                                 {
-                                    this._m209.LugSettings.ApplyTransformationSimple(bar1, bar2);
+                                    this._m209.LugSettings.ApplySimpleTransformation(bar1, bar2);
                                 } else
                                 {
-                                    this._m209.LugSettings.ApplyTransformationSimple(bar2, bar1);
+                                    this._m209.LugSettings.ApplySimpleTransformation(bar2, bar1);
                                 }
 
                                 //this._m209.PinSetting = SAInner(ciphertext, this._m209.LugSettings, "V");
@@ -285,7 +285,7 @@ namespace Cryptool.Plugins.M209Analyzer
 
             PinSettings CurrentPins = BestPins;
 
-            PinSettings[] neighbourPinSettings = BestPins.GetNeighborPins();
+            PinSettings[] neighbourPinSettings = new PinSettings[] { BestPins };
 
             this._m209.PinSetting = BestPins;
             this._m209.LugSettings = lugSetting;
