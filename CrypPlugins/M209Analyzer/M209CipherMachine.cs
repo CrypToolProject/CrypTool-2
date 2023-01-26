@@ -26,21 +26,6 @@ namespace M209Analyzer
         public PinSettings PinSetting;
 
         /// <summary>
-        /// The six wheels and their alphabets
-        /// </summary>
-        private Wheel[] _wheels = new Wheel[6]
-        {
-            new Wheel("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 15),
-            new Wheel("ABCDEFGHIJKLMNOPQRSTUVXYZ", 14),      // no W
-            new Wheel("ABCDEFGHIJKLMNOPQRSTUVX", 13),        // no WYZ
-            new Wheel("ABCDEFGHIJKLMNOPQRSTU", 12),          // no V-Z
-            new Wheel("ABCDEFGHIJKLMNOPQRS", 11),            // no T-Z
-            new Wheel("ABCDEFGHIJKLMNOPQ", 10)               // no R-Z
-        };
-
-        private Random _randomizer = new Random();
-
-        /// <summary>
         /// Convert letter (char) into an int of the number this letter have in the alphabeth
         /// </summary>
         /// <param name="letter"></param>

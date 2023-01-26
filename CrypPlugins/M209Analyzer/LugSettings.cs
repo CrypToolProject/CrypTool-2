@@ -41,8 +41,6 @@ namespace M209Analyzer
 
         public int Length { get { return Bar.Length; }}
 
-        private Random Randomizer = new Random();
-
         /// <summary>
         /// Generate a random setting for the lugs.
         /// </summary>
@@ -76,6 +74,7 @@ namespace M209Analyzer
 
         public bool IsValid()
         {
+            // TODO
             return true;
         }
 
@@ -83,7 +82,7 @@ namespace M209Analyzer
         /// These simple transformations consist of reducing the count of one type of bars, and increasing the count of another type.
         /// On on bar a lug position gets increased on another bar a lug position gets decreased.
         /// </summary>
-        public void ApplyTransformationSimple(int bar1 = 0, int bar2 = 0)
+        public void ApplySimpleTransformation(int bar1 = 0, int bar2 = 0)
         {
             // the changes have to be on different bars
             if (bar1 == bar2)
