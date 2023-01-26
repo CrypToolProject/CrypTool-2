@@ -441,6 +441,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HagelinMachine", "CrypPlugi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourSquareCipher", "CrypPlugins\FourSquareCipher\FourSquareCipher.csproj", "{919341CD-CC7B-462F-9C3D-8A9103CEBEF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BazeriesCipher", "CrypPlugins\BazeriesCipher\BazeriesCipher.csproj", "{9711483C-F35F-4185-AF5B-B25D6B82D288}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1311,6 +1313,10 @@ Global
 		{919341CD-CC7B-462F-9C3D-8A9103CEBEF3}.Debug|x64.Build.0 = Debug|x64
 		{919341CD-CC7B-462F-9C3D-8A9103CEBEF3}.Release|x64.ActiveCfg = Release|x64
 		{919341CD-CC7B-462F-9C3D-8A9103CEBEF3}.Release|x64.Build.0 = Release|x64
+		{9711483C-F35F-4185-AF5B-B25D6B82D288}.Debug|x64.ActiveCfg = Debug|x64
+		{9711483C-F35F-4185-AF5B-B25D6B82D288}.Debug|x64.Build.0 = Debug|x64
+		{9711483C-F35F-4185-AF5B-B25D6B82D288}.Release|x64.ActiveCfg = Release|x64
+		{9711483C-F35F-4185-AF5B-B25D6B82D288}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1522,6 +1528,7 @@ Global
 		{7D4A4CE5-7E4F-480B-BC8F-E1FEBE558B8B} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{1D61FD6A-8553-47D3-BC60-62CF105DDCC7} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{919341CD-CC7B-462F-9C3D-8A9103CEBEF3} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
+		{9711483C-F35F-4185-AF5B-B25D6B82D288} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92042D62-2CDA-4393-9D74-4FB5AC571A2D}
