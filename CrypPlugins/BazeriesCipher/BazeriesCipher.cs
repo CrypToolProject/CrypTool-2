@@ -329,13 +329,20 @@ namespace CrypTool.Plugins.BazeriesCipher
         /// <returns></returns>
         private int[] GenerateDigitPattern(BigInteger number)
         {
+            if (number == 0)
+            {
+                throw new Exception("Invalid key; number was zero");
+            }
             List<int> digits = new List<int>();
             while(number > 0)
             {
                 int digit = (int)(number % 10);
                 number = number / 10;
-                digits.Add(digit > 0 ? digit : 1);                
-            }
+                if (digit != 0)
+                {
+                    digits.Add(digit);
+                }
+            }            
             digits.Reverse();
             return digits.ToArray();
         }
