@@ -12,14 +12,14 @@ namespace M209Analyzer
         public Wheel(string letters, int initialPosition)
         {
             _letters = letters;
-            _pinSettings = new bool[letters.Length];
+            _pinEffectiveStates = new bool[letters.Length];
             _position = initialPosition;
             Length = letters.Length;
         }
 
         private string _letters;
         private int _position = 0;
-        private bool[] _pinSettings;
+        private bool[] _pinEffectiveStates;
         private Random _randomizer = new Random();
 
         public int Length = 0;
@@ -45,7 +45,7 @@ namespace M209Analyzer
         /// <returns></returns>
         public bool EvaluateCurrentPin()
         {
-            return this._pinSettings[this._position];
+            return this._pinEffectiveStates[this._position];
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace M209Analyzer
         /// <returns></returns>
         public bool EvaluatePinAtPosition(int position)
         {
-            return this._pinSettings[position];
+            return this._pinEffectiveStates[position];
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace M209Analyzer
 
             for (int i = 0; i < this._letters.Length; i++)
             {
-                if (this._pinSettings[i])
+                if (this._pinEffectiveStates[i])
                 {
                     effectiveLetters += this._letters[i];
                 }
@@ -87,7 +87,7 @@ namespace M209Analyzer
 
         public void SetPinValue(int position, bool value)
         {
-            this._pinSettings[position] = value;
+            this._pinEffectiveStates[position] = value;
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace M209Analyzer
         {
             int shift = 0;
             int length = pinSetting.Length;
-            for (int i = 0; i < this._pinSettings.Length; i++)
+            for (int i = 0; i < this._pinEffectiveStates.Length; i++)
             {
                 if ((i - shift) == pinSetting.Length)
                 {
@@ -115,7 +115,7 @@ namespace M209Analyzer
                 char p = pinSetting[i - shift];
                 if (pinSetting[i - shift] == this._letters[i])
                 {
-                    this._pinSettings[i] = true;
+                    this._pinEffectiveStates[i] = true;
                 }
                 else
                 {
@@ -131,7 +131,7 @@ namespace M209Analyzer
         /// <param name="position"></param>
         public void TogglePinValue(int position)
         {
-            this._pinSettings[position] = !this._pinSettings[position];
+            this._pinEffectiveStates[position] = !this._pinEffectiveStates[position];
         }
 
         /// <summary>
@@ -139,10 +139,66 @@ namespace M209Analyzer
         /// </summary>
         public void ToggleAllPinValues()
         {
-            for (int i = 0; i < this._pinSettings.Length; i++)
+            for (int i = 0; i < this._pinEffectiveStates.Length; i++)
             {
                 this.TogglePinValue(i);
             }
+        }
+
+        /// <summary>
+        /// Toggle the effective state of pins of position p1 and p2
+        /// </summary>
+        /// <param name="p1"></param>
+        /// <param name="p2"></param>
+        public void ToggleTwoPins(int p1, int p2)
+        {
+            this._pinEffectiveStates[p1] = !this._pinEffectiveStates[p1];
+            this._pinEffectiveStates[p2] = !this._pinEffectiveStates[p2];
+        }
+
+        public bool longSeq(int centerPos1, int centerPos2)
+        {
+            return longSeq(centerPos1) || longSeq(centerPos2);
+        }
+
+        public bool longSeq(int centerPos)
+        {
+            long maxSame = 6; // MAX_CONSECUTIVE_SAME_PINS
+            int total = this._pinEffectiveStates.Length;
+
+            if ( maxSame > total)
+            {
+                return false;
+            }
+            maxSame++; // Not strict.
+            bool centerVal = this.EvaluatePinAtPosition(centerPos);
+
+            int same;
+            int pos;
+            for (same = 1, pos = centerPos + 1; same <= maxSame; same++, pos++)
+            {
+                if (pos == total)
+                {
+                    pos = 0;
+                }
+                if (this.EvaluatePinAtPosition(pos) != centerVal)
+                {
+                    break;
+                }
+            }
+
+            for (pos = centerPos - 1; same <= maxSame; same++, pos--)
+            {
+                if (pos < 0)
+                {
+                    pos = total - 1;
+                }
+                if (this.EvaluatePinAtPosition(pos) != centerVal)
+                {
+                    break;
+                }
+            }
+            return same > maxSame;
         }
 
         /// <summary>
@@ -151,7 +207,7 @@ namespace M209Analyzer
         /// <returns></returns>
         public int GetRandomPinPosition()
         {
-            return this._randomizer.Next(0, this._pinSettings.Length - 1);
+            return this._randomizer.Next(0, this._pinEffectiveStates.Length - 1);
         }
 
         /// <summary>
@@ -159,9 +215,9 @@ namespace M209Analyzer
         /// </summary>
         public void RandomizeAllPinValues()
         {
-            for (int i = 0; i < this._pinSettings.Length; i++)
+            for (int i = 0; i < this._pinEffectiveStates.Length; i++)
             {
-                this._pinSettings[i] = this._randomizer.Next(0, 1) == 1;
+                this._pinEffectiveStates[i] = (this._randomizer.Next(0, 2) == 1);
             }
         }
 
@@ -172,7 +228,7 @@ namespace M209Analyzer
         public int CountOfEffectivePins()
         {
             int count = 0;
-            for (int i = 0; i < this._pinSettings.Length; i++)
+            for (int i = 0; i < this._pinEffectiveStates.Length; i++)
             {
                 if (EvaluatePinAtPosition(i))
                 {

@@ -97,7 +97,7 @@ namespace M209Analyzer
         /// <summary>
         /// Those consist of reducing the count of two types of bar, and increasing the counts of two other types.
         /// </summary>
-        public void ApplyTransformationComplex(int bar1, int bar2, int bar3, int bar4, int nr)
+        public void ApplyComplexTransformation(int bar1, int bar2, int bar3, int bar4, int nr)
         {
             switch (nr)
             {

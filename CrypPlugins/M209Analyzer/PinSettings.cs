@@ -68,5 +68,26 @@ namespace M209Analyzer
             }
             return count;
         }
+
+        public void InverseWheelBitmap(int v)
+        {
+            for (int w = 0; w < Wheels.Length; w++)
+            {
+                if(GetWheelBit(v, w))
+                {
+                    InverseWheel(w);
+                }
+            }
+        }
+
+        public bool GetWheelBit(int v, int w)
+        {
+            return ((v >> (w - 1)) & 0x1) == 0x1;
+        }
+
+        public void InverseWheel(int w)
+        {
+            Wheels[w].ToggleAllPinValues();
+        }
     }
 }
