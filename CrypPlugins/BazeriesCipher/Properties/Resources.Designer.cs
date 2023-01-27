@@ -223,7 +223,7 @@ namespace CrypTool.Plugins.BazeriesCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BazeriesCipher.
+        ///   Looks up a localized string similar to Bazeries Cipher.
         /// </summary>
         internal static string PluginCaption {
             get {

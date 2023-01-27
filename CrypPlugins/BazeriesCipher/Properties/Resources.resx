@@ -172,7 +172,7 @@
     <value>Size of blocks (period) which should be used during encryption or decryption</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
-    <value>BazeriesCipher</value>
+    <value>Bazeries Cipher</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
     <value>Implementation of the bifid cipher</value>
