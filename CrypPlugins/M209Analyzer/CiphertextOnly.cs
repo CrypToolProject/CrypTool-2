@@ -463,51 +463,52 @@ namespace Cryptool.Plugins.M209Analyzer
             return bestSAScore;
         }
 
-        private PinSettings SAInner(string ciphertext, LugSettings lugSetting, string versionOfInstruction)
+        public void Solve(string cipherText, int cycles, string instructionVersion)
         {
-            LogMessage($"SAInner \n", NotificationLevel.Info);
-            double T = 0;
-            double alpha = 0.9;
+            LugSettings bestLocalLugSettings = this._m209.LugSettings;
+            PinSettings bestLocalPinSettings = this._m209.PinSetting;
 
-            PinSettings BestPins = new PinSettings(versionOfInstruction);
-            BestPins.Randomize();
-
-            PinSettings CurrentPins = BestPins;
-
-            PinSettings[] neighbourPinSettings = new PinSettings[] { BestPins };
-
-            this._m209.PinSetting = BestPins;
-            this._m209.LugSettings = lugSetting;
-            double bestScore = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
-
-            for (int i = 0; i < 5; i++)
+            if (cycles == 0)
             {
-                for (int k = 0; k < neighbourPinSettings.Length; k++)
+                cycles = int.MaxValue;
+            }
+
+            for (int cycle = 0; cycle < cycles; cycle++)
+            {
+                double bestRandom = double.MinValue;
+                double bestLocal = 0;
+
+                int phase1Trials = 200000 / cipherText.Length;
+                for (int r = 0; r < phase1Trials; r++)
                 {
-                    this._m209.PinSetting = neighbourPinSettings[k];
-                    this._m209.LugSettings = lugSetting;
-                    double score = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
+                    this._m209.LugSettings.Randomize();
 
-                    this._m209.PinSetting = CurrentPins;
-                    this._m209.LugSettings = lugSetting;
-                    double currentScore = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
-
-                    LogMessage($"SA: currentScore = {bestScore}, score = {score}", NotificationLevel.Info);
-
-                    double D = score - currentScore;
-                    if (D > 0 || this.Randomizer.NextDouble() < Math.Exp(-(Math.Abs(D) / T)))
+                    double newEval = SA(cipherText, this._m209.LugSettings, this._m209.PinSetting, instructionVersion, cycles);
+                    if (newEval > bestRandom)
                     {
-                        CurrentPins = neighbourPinSettings[k];
-                        if (score > bestScore)
-                        {
-                            BestPins = neighbourPinSettings[k];
-                        }
-                        break;
+                        bestRandom = newEval;
+                        bestLocalLugSettings = this._m209.LugSettings;
+                        bestLocalPinSettings = this._m209.PinSetting;
+                    }
+                    if (bestRandom > bestLocal)
+                    {
+                        bestLocal = bestRandom;
                     }
                 }
-                T = alpha * T;
+                this._m209.LugSettings = bestLocalLugSettings;
+                this._m209.PinSetting = bestLocalPinSettings;
+
+                bestLocal = bestRandom;
+
+                int round = 0;
+                bool improved = false;
+
+                do
+                {
+
+                } while (improved);
             }
-            return BestPins;
+
         }
     }
 }

@@ -186,8 +186,20 @@ namespace CrypTool.Plugins.M209Analyzer
                 {
                     case AttackMode.CiphertextOnly:
                         int[] roundLayers = new int[4];
-                        this.ciphertextOnly.HCOuter(Ciphertext, "V");
-                        //this.ciphertextOnly.Solve(roundLayers, 0, "\"YURAF CBDZA YIWSD YTNGD LICEY BPRBW JHJAH SMBVA POMJN LINVD WIMKG OMWIP GOCFT YZYPB XFQPP FGQZO VXOOF ZAJYL LHZBR VGFNM SSERY OBJFT XBCEK UWRFV ABFRN DTVQL FVBJQ ZSHCE YSOKR XLUBL SBHOM JGGJY TPGCV QTFHM NZAKA OTUKN XGEKT JKYUO RBORF JWGTF BSZTR BSLDD WLSMV TIWXF XOGSP ZBLJL AMCDB OYRAB\"", 4, "Version 1");
+                        double bestScore = 0.0;
+
+                        for (int i = 0; i < 100; i++)
+                        {
+                            double currentScore = this.ciphertextOnly.HCOuter(Ciphertext, "V");
+                            GuiLogMessage($"BestScore: {bestScore}", NotificationLevel.Info);
+
+                            if(bestScore < currentScore)
+                            {
+                                bestScore = currentScore;
+                            }
+                        }
+
+                        this.ciphertextOnly.Solve(Ciphertext, 0, "V");
                         break;
                     case AttackMode.KnownPlaintext:
                         break;
