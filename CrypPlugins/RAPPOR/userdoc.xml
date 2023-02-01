@@ -1,0 +1,280 @@
+<documentation>
+	<language culture="en" />
+	<language culture="de-DE" />
+	<introduction lang="en">
+		Randomized Aggregatable Privacy-Preserving Ordinal Response, or RAPPOR for short, is a technology that is utilized to crowdsource statistics from the users of software applications anonymously while ensuring stong privacy guarantees. This mechanism was first introduced in the paper "RAPPOR: Randomized Aggregatable Privacy-Preserving Ordinal Response" by Úlfar Erlingsson, Vasyl Pihur and Aleksandra Korolova in 2014 <ref id="RAPPORPaper" />.<newline />
+		It adds the initial dataset of collected user data into a Bloom filter data structure <ref id="BloomFilterPaper" />. This Boolean array is then partly falsified through the application of the randomized response methodology <ref id="RandomizedResponsePaper" /> that is being applied twice in form of a permanent randomized response and multiple instantaneous randomized responses.  This process adds noise to the collected data, ensuring a calculable level of differential privacy for the individual user included in the sample. <newline />
+		It is a highly versatile and tunable mechanism that is, among other applications, used for the collection of statistics in the chrome browser.
+		Easily accessible sources on Randomized Response <ref id="RandomizedResponse" />, Differential Privacy <ref id="DifferentialPrivacy" /> and the Implementation of Differentially Private Analyses <ref id="ImplementationDifferentialPrivacy" /> can be found on Wikipedia.
+	</introduction>
+	<usage lang="en">
+		<img src="RAPPOR/Images/RapporOverviewAndParametersEN_650x350.png" caption="Figure 1: Overview and Parameter window. 1: The selected view of the component. 2: The taskbar of the component. 3:The parameter window of the component." />
+		<section headline="Inputs and Output">
+			The RAPPOR component contains one <i>string</i> input option and one <i>string</i> output option. <newline />
+			The input represents the initial data set that is to be processed by the RAPPOR mechanism. Every <i>string</i> input, sentences, words or single <i>chars</i>. is accepted. Every entry of the input string has to be separated by a comma char ','. This has to be done so that a string array, with the ',' as the dividing <i>char</i> can be created.  It is highly recommended to use the RAPPOR plugin with an input, ordinarily a text input component, to be able to use the <i>Overview</i>, <i>Bloom Filter</i> and <i>Heat Maps</i> views to their full extend. <newline />
+			The output represents the resulting steps of the RAPPOR mechanism. The first line of the output string is the Boolean array of the Bloom filter data structure after the initial data set of the input string has been added. The second line represents the Boolean array after the permanent randomized response has been applied. Every line after that represents one of the instantaneous randomized responses, the amount of that can be selected in the "Amount of IRR" entry of the components settings.
+		</section>
+		<newline />
+		<section headline="Settings">
+			The RAPPOR mechanism is a highly tunable CrypTool 2 component. The user interface of the component as well as the levels of differential privacy that are achieved by the procedure done by the RAPPOR mechanism can be altered in the settings of the component. To open the settings of the component you can either click on the gear on the RAPPOR component, click on the gear in the top right of your workspace or press the keys <i>ctrl</i> and <i>i</i> on your keyboard at the same time.  Note that you are able to change the setting of the component at runtime by using the last two options.
+			<list>
+				<item>The option "Amount of hash functions" decides the amount of hash functions that are being used in the RAPPOR mechanism. The Bloom filter data structure uses the amount of hash functions specified  to add the entities  on the input data set into the Boolean array. Every entry of the Bloom filter is added to the Boolean array by every hash function. The minimal entry for "Amount of Hash functions is 0. The maximal entry for "Amount of Hash functions is 64.</item>
+				<item>
+					The option "Bloom Filter Size" decides the size of the Boolean array that is being used by the RAPPOR component. The component utilizes a Boolean array to add the initial data set to this array is then falsified by the permanent randomized response and the initial randomized response to create the output of the RAPPOR component.
+					The minimal entry for "Bloom Filter Size" is 0. The maximal entry for "Bloom Filter Size" is 256.
+				</item>
+				<item>The option "f percentage" decides the value of the user tunable parameter f. The parameter f is an internal parameter of the RAPPOR component that is required to decide the differential privacy level of the permanent randomized response as well the differential privacy level of the instantaneous randomized response.  Please note that the value entered will be divided by 100 for the internal calculation of the component. The minimal entry for the "f percentage" is 0. The maximal entry for the "f percentage" is 100.</item>
+				<item>
+					"The option "p percentage" decides the value of the user tunable parameter p. The parameter P is an internal parameter of the RAPPOR component that is required to decide the differential privacy level of the instantaneous randomized response.  Please note that the value entered will be divided by 100 for the internal calculation of the component. The minimal entry for the "p percentage" is 0. The maximal entry for the "p percentage" is 100.
+				</item>
+				<item>
+					The option "q percentage" decides the value of the user tunable parameter q. The parameter q is an internal parameter of the RAPPOR component that is required to decide the differential privacy level of the permanent randomized response as well the differential privacy level of the instantaneous randomized response.  Please note that the value entered will be divided by 100 for the internal calculation of the component. The minimal entry for the "q percentage" is 0. The maximal entry for the "q percentage" is 100.
+				</item>
+				<item>
+					The option "Amount of IRR" decides the amount of instantaneous randomized responses that are being created by the RAPPOR component. This option is only relevant for the View "Overview" and has no effect on the other views, except of refreshing the PRR and the IRR. The amount of IRR that are chosen in this option will be displayed in this view. The minimal entry for the "Amount of IRR" is 0. The maximum entry for the "Amount of IRR" is 128.
+				</item>
+				<item>
+					The option "Iterations" decides the amount of iterations that  is used for the creation of the heat maps. This option is only relevant for the View "Heat Maps" and has no effect on the other views, except of refreshing the PRR and the IRR. The  minimal entry for the "Iterations" is 0. the maximum entry for the "Iteration" is 1024.
+				</item>
+			</list>
+		</section>
+	</usage>
+	<presentation lang="en">
+		The RAPPOR component consists of five different views. Each view offers different information to the user of the component. To switch between the views of the component please be sure to click the view you want to switch to in the Buttons above the view. The view that is displayed at the moment is marked by the according button being highlighted in green and obtaining a larger border.
+		<newline /><newline /><u>Short description</u><enum>
+			<item>
+				<b>Start</b> The start view is the title slide of the component and contains a short tutorial for the component.
+			</item>
+			<item>
+				<b>Overview</b> The overview view gives a broad visual overview about the inner workings of the RAPPOR component. It shows the impact that each relevant parameter can have on the result of the RAPPOR process.
+			</item>
+			<item>
+				<b>Bloom Filter</b> The Bloom filter view allows the user to experience the process of the addition of data to the Bloom filter data structure.
+			</item>
+			<item>
+				<b>Randomized Response</b> The randomized response view displays all relevant information concerning the levels of differential privacy that are enabled by the RAPPOR mechanism in on place.
+			</item>
+			<item>
+				<b> Heat Maps </b> The heat maps view visualizes the effect the amount of collected data can have on the readability of the collected data.
+			</item>
+		</enum><u>Detailed description</u><enum>
+			<item>
+				<b>Start</b> The start view is the first view that is displayed when opening up the presentation of the component. The start view serves as an introductory  slide for the component: presenting the title and abbreviation of the component while also displaying a short tutorial on how to use the component to its full extend. The start view does not present any data of the RAPPOR component nor is it reactive to user inputs in any way.
+			</item>
+			<item>
+				<b>Overview</b>The overview view displays the Boolean array of the Bloom filter data structure in its initial state, once after being altered by the permanent randomized response and zero to multiple times after being altered by the instantaneous randomized responses. Every Boolean array is labeled  as BF for Bloom filter, PRR for permanent randomized response or IRR for instantaneous randomized response on the left side of the view. Please note that a larger red entry in the Boolean array means that the cell of the array is set to true, where as a shorter black entry shows that the cell of the array is set to false.  An auxiliary  pink striped line is added from every true entry of the initial array of the Bloom filter, this enables the user to see the effect of the falsification of the randomized responses. The output of the component will be equivalent to the data displayed in this view.
+				<newline />
+				The user of the component is able to fully control the displayed data. The data that is being processed by the RAPPOR component into the Boolean Array is inserted through the input of the component.  The settings of the component are able to control all tunable aspects of the RAPPOR mechanism. By altering the <i>Amount of hash functions </i> option the amount of hash functions used by the Bloom filter data structure is changed. Altering the <i>Bloom Filter Size</i> option changes the size of all used Boolean arrays of the component. The <i>f percentage</i> option decides the amount of noise that is added by the permanent randomized response where as the <i>q percentage</i> and <i>p percentage</i> options control the amount of noise that is added by the instantaneous randomized response. The option <i>Amount of IRR</i> controls the amount of instantaneous randomized responses that are being displayed.
+			</item>
+			<item>
+				<b>Bloom Filter</b> The Bloom filter view displays an animation of the process in that the Bloom filter data structure adds the initial dataset into its Boolean array. This view consists of a taskbar in the top, that allows the user to control the animation.  and the animation area below.  In the top left of the animation area the data set rectangle is placed. In this data set the input of the component is displayed. In the middle of the animation there is an arrow placed that shows the current input being processed.  In the top right of the animation the hash function rectangle is placed. This rectangle shows the calculated value by every hash function that is being used.  In the bottom of the animation area a visualization of the Boolean array from the Bloom filter data structure is placed.  Cells that are set to true are marked by large red lines where as cells that are set to false are marked by short black lines. In the process of the animation the cells that will be set from the current input will be marked by dynamic arrows from the hash functions rectangle to the cell of the Bloom filter that is being set.
+				<newline />
+				The animation is controlled by the taskbar in the top of the view. The user is able to control the speed of the animation by moving the slider. The maximum speed is 0.1 seconds per animation slide while the minimal speed is 5.0 seconds per animation slide. The start button starts the animation. The reset button resets the animation to its initial state. The pause button pauses the animation. Once the animation has been paused the button changes to the resume button. The resume button resumes the animation and changes the button back to the pause button. The previous button pauses the animation in case it was not paused and restores the previous slide. The next button pauses the animation, in case it was not paused and moves on to the next step of the animation.
+				<newline />
+				The user of the component is able to fully control the relevant data of the Bloom filter data structure. The data that is being processed by the RAPPOR component into the Boolean Array is inserted through the input of the component.  By altering the <i>Amount of hash functions </i> option the amount of hash functions used by the Bloom filter data structure is changed. Altering the <i>Bloom Filter Size</i> option changes the size of all used Boolean arrays of the component.
+			</item>
+			<item>
+				<b>Randomized Response</b> The randomized response view enables the user to see all relevant information about the level of differential privacy provided by the RAPPOR mechanism. The view consists of a probability tree in the center surrounded by four rectangles containing relevant information about the levels of differential privacy provided through the randomized response methodology.  The probability tree shows the likelihood that an initial entry to the Bloom filter Boolean array will be falsified by one or both randomized responses. The formulas showing the transition from the Boolean array of the Bloom filter B to the Boolean array manipulated from the permanent randomized response B' and the transition from the Boolean array B' to the Boolean array S through the manipulation from the instantaneous randomized response are shown in the rectangle in the top left. The rectangle in the bottom left shows the values of <i>q*</i> and <i>p*</i>. <i>q*</i> is the probability that if a cell was set to true in the initial Bloom filter Boolean array it will also be set in the boolean array altered by the instantaneous randomized response. <i>p*</i> is the probability that even though cell was set to false in the initial Bloom filter Boolean array it will be set to true in the Boolean array altered by the instantaneous randomized response.  The top right rectangle shows the level of differential privacy "epsilon infinity" provided by the permanent randomized response. The bottom right rectangle shows the level of differential privacy "epsilon one" provided by the instantaneous randomized response.  To get more information about the concept of differential privacy consult the RAPPOR paper<ref id="RAPPORPaper" />.
+				<newline />
+				The level of differential privacy that is provided by the RAPPOR mechanism is depends  on the amount of hash functions used in the Bloom filter and the internal parameters of the randomized responses <i>f</i>, <i>q</i> and <i>p</i>.  These values can be changed in the settings of the component. The option <i>Amount of hash functions</i> controls  the amount of hash functions that is being used by the Bloom filter data structure where as the <i>q percentage</i> and <i>p percentage</i> options control the amount of noise that is added by the instantaneous randomized response. Note that the level of differential privacy of <i>epsilon infinity</i> depends on the parameters <i>Amount of hash functions</i> and <i>f percentage </i> where as the level of differential privacy of <i>epsilon one</i> depends on all four parameters.
+
+				<img src="RAPPOR/Images/RAPPORRandomizedResponseEN_600x350.png" caption="Figure 2: The randomized response view of the component." /><newline />
+			</item>
+			<item>
+				<b> Heat Maps </b> The Heat maps view enables the user to see multiple iterations of the RAPPOR mechanism displayed as heatmaps. This visualizes the the effect that the randomized responses have on the initial Boolean array and makes the effect of the parameters <i>f</i>, <i>q</i> and <i>p</i> on the Boolean array easily identifiable. Furthermore it shows the difference between large amount of data samples and small amount of data samples, especially for the instantaneous randomized response. The top rectangle of the view contains the Bloom filter Boolean array from that the heat maps are created. This Boolean array is equivalent to the Boolean arrays that can be found in the overview view of this component. Below are two heat maps created by counting the set cells of the Boolean array of the permanent and the instantaneous randomized response a specific amount of times.  The color of the lines, that represent the cells of the array, as well as their length show the amount of times the cell was counted  as set. This value can be seen in the heat map legend on the left side of the view.  The heat map legend also contains the maximum amount a cell was set in the top, the minimum amount a cell was set in the bottom and the median amount a cell was set in the middle of the legend.
+				<newline />
+				The user of the component is able to fully control the displayed data. The data that is being processed by the RAPPOR component into the Boolean Array is inserted through the input of the component.  The settings of the component are able to control all tunable aspects of the RAPPOR mechanism. By altering the <i>Amount of hash functions </i> option the amount of hash functions used by the Bloom filter data structure is changed. Altering the <i>Bloom Filter Size</i> option changes the size of all used Boolean arrays of the component. The <i>f percentage</i> option decides the amount of noise that is added by the permanent randomized response where as the <i>q percentage</i> and <i>p percentage</i> options control the amount of noise that is added by the instantaneous randomized response. By changing the <i>Iterations</i> option the user is able to change the amount of times the permanent randomized response and the instantaneous randomized response are created for the making of the heat maps.
+				<img src="RAPPOR/Images/RAPPORHeatMapsEN_600x350.png" caption="Figure 3: The heat maps view of the component." />
+			</item>
+		</enum>
+		<u>Abbreviations</u><newline />The RAPPOR component uses the following abbreviations: <enum>
+			<item>
+				BF: Bloom filter
+			</item>
+			<item>
+				RR: Randomized response
+			</item>
+			<item>
+				PRR: Permanent randomized response
+			</item>
+			<item>
+				IRR: Instantaneous randomized response
+			</item>
+			<item>
+				h: hash function
+			</item>
+		</enum>
+		<newline />
+		<newline />
+		<u>Why use RAPPOR</u>
+		<newline />
+		The Randomized Aggregatable Privacy-Preserving Ordinal Response (RAPPOR) technique has characteristics that make it preferable to other differential privacy techniques. It delinks the supplied data from the data subject. By using randomization to obscure individual data it can provide a stronger guarantee of differential privacy than other differential privacy methods. RAPPOR also does not require a trusted third party and allows the fine tuning of data accuracy and subject privacy according to the needs of the current project.
+		<newline />
+		The level of differential privacy guaranteed by RAPPOR is mainly dependent on the following parameters. The size of the Bloom filter used, the amount of hash functions used for the Bloom filter and the internal setting for the randomized responses: f, q and p. The way these parameters calculate the guaranteed privacy can be found in the randomized response tab of the component. It is important to state that the exact meaning of the guaranteed privacy depends on the implementation and the use case of the RAPPOR technique. In general it holds that a given epsilon value of x will guarantee that no more than a certain amount of information about a data subject is leaked, with a confidence level of 1 - e^(x). With this in mind the parameters chosen for RAPPOR depend on the before mentioned trade off of data accuracy and subject privacy. If data accuracy is important and a low level of subject privacy is acceptable the parameters can be chosen in a way that leads  to a large epsilon value. On the other hand if data accuracy is not as important and a high level of subject privacy is required the parameters should be chosen in a way that leads to a small epsilon value. In general an epsilon value of under 1 is required for strong privacy protection.
+		<newline />
+		RAPPOR has the constraint that it can only be used for data that can be represented by boolean values, or for data that can be transformed to be represented by boolean values, for example ordinal values.
+		<newline />
+		For example, if a hospital wants to collect data on the frequency of patients admitted to the hospital with different lung diseases. For this case RAPPOR might present a good choice to protect the privacy of the patients willing to surrender their information and to inform these data subjects about the level of privacy guaranteed to them. If patient A chooses to participate in the study and RAPPOR uses the original parameters given in the component the risk can be approximated as follows: The epsilon 1 value of ~1.55 describes the risk for patient A that their privacy can be compromised by participating in the study. An epsilon infinity value of ~4.39 describes the risks for patient A privacy in the worst case scenario where the database with the data of all participants  after the permanent randomized response becomes compromised. This example is inspired by the paper "Methods To Ensure Privacy Regarding Medical Data"<ref id="Wo22" /> written by ms Wölk. The paper also contains further information on RAPPOR and other privacy preserving methods.
+
+	</presentation>
+	<introduction lang="de-DE">
+		Randomized Aggregatable Privacy-Preserving Ordinal Response, kurz RAPPOR, ist eine Technologie, die verwendet wird, um Statistiken von den Nutzern von Software-Anwendungen anonym zu sammeln und gleichzeitig starke Datenschutzgarantien zu gewährleisten. Dieser Mechanismus wurde erstmals in dem Papier "RAPPOR: Randomized Aggregatable Privacy-Preserving Ordinal Response" von Úlfar Erlingsson, Vasyl Pihur und Aleksandra Korolova im Jahr 2014 veröffentlicht<ref id="RAPPORPaper" />.<newline />
+		Es fügt den anfänglichen Datensatz der gesammelten Nutzerdaten in eine Bloomfilter-Datenstruktur<ref id="BloomFilterPaper" /> ein. Dieses boolesche Array wird dann teilweise durch die Anwendung der Randomized-Response-Methode <ref id="RandomizedResponsePaper" /> verfälscht, die zweimal in Form einer permanenten randomisierten Antwort und mehrerer momentaner randomisierter Antworten angewendet wird.  Dieses Verfahren fügt den gesammelten Daten ein Rauschen hinzu, das ein kalkulierbares Maß an unterschiedlicher Privatsphäre für den einzelnen Nutzer in der Stichprobe gewährleistet. <newline />
+		Es handelt sich um einen äußerst vielseitigen und abstimmbaren Mechanismus, der unter anderem für die Erhebung von Statistiken im Chrome-Browser verwendet wird. Leicht zugängliche Quellen zu Randomized Response<ref id="RandomizedResponse" />, Differential Privacy<ref id="DifferentialPrivacy" /> und der Implementation of Differentially Private Analyses (Auf Englisch)<ref id="ImplementationDifferentialPrivacy" /> findet sich auf Wikipedia.
+	</introduction>
+	<usage lang="de-DE">
+		<img src="RAPPOR/Images/RapporOverviewAndParametersEN_650x350.png" caption="Abbildung 1: Übersicht und Parameterfenster. 1: Die ausgewählte Ansicht der Komponente. 2: Die Taskleiste der Komponente. 3:Das Parameterfenster der Komponente." />
+		<section headline="Inputs and Output">
+			Die RAPPOR-Komponente enthält eine <i>String</i>-Eingabeoption und eine <i>String</i>-Ausgabeoption. <newline />
+			Die Eingabe stellt den Ausgangsdatensatz dar, der durch den RAPPOR-Mechanismus verarbeitet werden soll. Jede <i>String</i>-Eingabe, Sätze, Wörter oder einzelne <i>Zeichen</i>, wird akzeptiert. Jeder Eintrag der Eingabezeichenkette muss durch ein Kommazeichen ',' getrennt werden. Dies muss geschehen, damit ein String-Array, mit dem ',' als trennendem <i>Zeichen</i>, erstellt werden kann.  Es wird dringend empfohlen, das RAPPOR-Plugin mit einer Eingabe, normalerweise einer Texteingabekomponente, zu verwenden, um die Ansichten <i>Übersicht</i>, <i>Bloom Filter</i> und <i>Heat Maps</i> in vollem Umfang nutzen zu können. <newline />
+			Die Ausgabe stellt die resultierenden Schritte des RAPPOR-Mechanismus dar. Die erste Zeile der Ausgabe ist das Boolesche Array der Bloom-Filter-Datenstruktur, nachdem der anfängliche Datensatz des Eingabestrings hinzugefügt worden ist. Die zweite Zeile stellt das Boolesche Array dar, nachdem die permanente randomisierte Antwort angewendet wurde. Jede weitere Zeile steht für eine der momentanen Zufallsantworten, deren Höhe in den Komponenteneinstellungen unter "Höhe der IRR" ausgewählt werden kann.
+		</section>
+		<newline />
+		<section headline="Settings">
+			Der RAPPOR-Mechanismus ist eine hochgradig anpassbare Komponente von CrypTool 2. Sowohl die Benutzeroberfläche der Komponente als auch der Grad der Vertraulichkeit, der durch das Verfahren des RAPPOR-Mechanismus erreicht wird, kann in den Einstellungen der Komponente geändert werden. Um die Einstellungen der Komponente zu öffnen, können Sie entweder auf das Zahnrad an der RAPPOR-Komponente klicken, auf das Zahnrad oben rechts in Ihrem Arbeitsbereich klicken oder die Tasten <i>ctrl</i> und <i>i</i> auf Ihrer Tastatur gleichzeitig drücken.  Beachten Sie, dass Sie die Einstellungen der Komponente zur Laufzeit ändern können, indem Sie die letzten beiden Optionen verwenden.
+			<list>
+				<item>
+					Der minimale Eintrag für "Bloom Filter Size" ist 0. Der maximale Eintrag für "Bloom Filter Size" ist 256.
+				</item>
+				<item>Die Option "f percentage" bestimmt den Wert des vom Benutzer einstellbaren Parameters f. Der Parameter f ist ein interner Parameter der RAPPOR-Komponente, der benötigt wird, um den differentiellen Geheimhaltungsgrad der permanenten randomisierten Antwort sowie den differentiellen Geheimhaltungsgrad der momentanen randomisierten Antwort zu bestimmen.  Bitte beachten Sie, dass der eingegebene Wert für die interne Berechnung der Komponente durch 100 geteilt wird. Der minimale Eintrag für "f percentage" ist 0, der maximale Eintrag für "f percentage" ist 100.</item>
+				<item>
+					"Die Option "p percentage" bestimmt den Wert des vom Benutzer einstellbaren Parameters p. Der Parameter P ist ein interner Parameter der RAPPOR-Komponente, der benötigt wird, um den differentiellen Geheimhaltungsgrad der momentanen randomisierten Antwort zu bestimmen.  Bitte beachten Sie, dass der eingegebene Wert für die interne Berechnung der Komponente durch 100 geteilt wird. Der minimale Eintrag für "p percentage" ist 0, der maximale Eintrag für "p percentage" ist 100.
+				</item>
+				<item>
+					Die Option "q percentage" bestimmt den Wert des vom Benutzer einstellbaren Parameters q. Der Parameter q ist ein interner Parameter der RAPPOR-Komponente, der benötigt wird, um den differentiellen Geheimhaltungsgrad der permanenten randomisierten Antwort sowie den differentiellen Geheimhaltungsgrad der momentanen randomisierten Antwort zu bestimmen.  Bitte beachten Sie, dass der eingegebene Wert für die interne Berechnung der Komponente durch 100 geteilt wird. Die minimale Eingabe für "q percentage" ist 0, die maximale Eingabe für "q percentage" ist 100.
+				</item>
+				<item>
+					Die Option "Amount of IRR" bestimmt die Anzahl der momentanen randomisierten Antworten, die von der RAPPOR-Komponente erzeugt werden. Diese Option ist nur für die Ansicht "Übersicht" relevant und hat keinen Einfluss auf die anderen Ansichten, mit Ausnahme der Aktualisierung der PRR und der IRR. Der Betrag der IRR, der in dieser Option ausgewählt wurde, wird in dieser Ansicht angezeigt. Der minimale Eintrag für den "Betrag der IRR" ist 0. Der maximale Eintrag für den "Betrag der IRR" ist 128.
+				</item>
+				<item>
+					Die Option "Iterationen" bestimmt die Anzahl der Iterationen, die für die Erstellung der Heatmaps verwendet werden. Diese Option ist nur für die Ansicht "Heat Maps" relevant und hat keine Auswirkung auf die anderen Ansichten, außer auf die Aktualisierung der PRR und der IRR. Der minimale Eintrag für "Iterationen" ist 0. Der maximale Eintrag für "Iteration" ist 1024.
+				</item>
+			</list>
+		</section>
+	</usage>
+	<presentation lang="de-DE">
+		Die RAPPOR-Komponente besteht aus fünf verschiedenen Ansichten. Jede Ansicht bietet dem Benutzer der Komponente unterschiedliche Informationen. Um zwischen den Ansichten der Komponente zu wechseln, klicken Sie bitte auf die gewünschte Ansicht in den Buttons oberhalb der Ansicht. Die Ansicht, die gerade angezeigt wird, ist dadurch gekennzeichnet, dass die entsprechende Schaltfläche grün hinterlegt ist und einen größeren Rahmen erhält.
+		<newline /><newline /><u>Kurzbeschreibung</u><enum>
+			<item>
+				<b>Start</b> Die Startansicht ist die Titelfolie der Komponente und enthält ein kurzes Tutorial zur Komponente.
+			</item>
+			<item>
+				<b>Übersicht</b> Die Übersichtsansicht gibt einen umfassenden visuellen Überblick über das Innenleben der RAPPOR-Komponente. Sie zeigt die Auswirkungen, die jeder relevante Parameter auf das Ergebnis des RAPPOR-Prozesses haben kann.
+			</item>
+			<item>
+				<b>Bloom-Filter</b> Die Bloom-Filter-Ansicht ermöglicht es dem Benutzer, den Prozess der Bloom-Filter-Datenstruktur in einer dynamischen Animation zu erleben.
+			</item>
+			<item>
+				<b>Randomized Response</b> Die Randomized-Response-Ansicht zeigt alle relevanten Informationen über die verschiedenen Stufen des Datenschutzes, die durch den RAPPOR-Mechanismus an Ort und Stelle aktiviert werden.
+			</item>
+			<item>
+				<b>Heatmaps</b> Die Heatmaps-Ansicht visualisiert den Effekt, den die Menge der erfassten Daten auf die Lesbarkeit der erfassten Daten haben kann.
+			</item>
+		</enum><u>Detaillierte Beschreibung</u><enum>
+			<item>
+				<b>Start</b> Die Startansicht ist die erste Ansicht, die beim Öffnen der Präsentation der Komponente angezeigt wird. Die Startansicht dient als Einführungsfolie für die Komponente: Sie zeigt den Titel und die Abkürzung der Komponente sowie eine kurze Anleitung, wie man die Komponente in vollem Umfang nutzen kann. Die Startansicht zeigt keine Daten der RAPPOR-Komponente an und reagiert auch nicht auf Benutzereingaben in irgendeiner Weise.
+			</item>
+			<item>
+				<b>Übersicht</b>Die Übersichtsansicht zeigt das boolesche Array der Bloom-Filter-Datenstruktur in seinem Ausgangszustand, einmal nach der Veränderung durch die permanente Zufallsantwort und null bis mehrmals nach der Veränderung durch die momentanen Zufallsantworten. Jedes boolesche Array ist auf der linken Seite der Ansicht mit BF für Bloom-Filter, PRR für permanente randomisierte Antwort oder IRR für sofortige randomisierte Antwort gekennzeichnet. Bitte beachten Sie, dass ein größerer roter Eintrag im booleschen Array bedeutet, dass die Zelle des Arrays auf wahr gesetzt ist, während ein kürzerer schwarzer Eintrag anzeigt, dass die Zelle des Arrays auf falsch gesetzt ist.  Eine zusätzliche rosa gestreifte Linie wird von jedem wahren Eintrag des anfänglichen Arrays des Bloom-Filters hinzugefügt, so dass der Benutzer die Auswirkungen der Fälschung der zufälligen Antworten sehen kann. Die Ausgabe der Komponente entspricht den Daten, die in dieser Ansicht angezeigt werden.
+				<newline />
+				Der Benutzer der Komponente hat die volle Kontrolle über die angezeigten Daten. Die Daten, die von der RAPPOR-Komponente in das Boolesche Array verarbeitet werden, werden über die Eingabe der Komponente eingefügt.  Die Einstellungen der Komponente können alle einstellbaren Aspekte des RAPPOR-Mechanismus steuern. Durch Ändern der Option <i>Anzahl der Hash-Funktionen </i> wird die Anzahl der von der Bloom-Filter-Datenstruktur verwendeten Hash-Funktionen geändert. Durch die Änderung der Option <i>Bloom Filter Size</i> wird die Größe aller verwendeten booleschen Arrays der Komponente verändert. Die Option <i>f percentage</i> bestimmt die Menge des Rauschens, die durch die permanente Zufallsantwort hinzugefügt wird, während die Optionen <i>q percentage</i> und <i>p percentage</i> die Menge des Rauschens steuern, die durch die momentane Zufallsantwort hinzugefügt wird. Die Option <i>Amount of IRR</i> steuert die Menge der momentanen zufälligen Antworten, die angezeigt werden.
+			</item>
+			<item>
+				<b>Bloom Filter</b> Die Bloom-Filter-Ansicht zeigt eine Animation des Prozesses, bei dem die Bloom-Filter-Datenstruktur den anfänglichen Datensatz in ihr boolesches Array einfügt. Diese Ansicht besteht aus einer Taskleiste im oberen Bereich, über die der Benutzer die Animation steuern kann, und dem Animationsbereich darunter.  Oben links im Animationsbereich befindet sich das Datensatzrechteck. In diesem Datensatz wird die Eingabe der Komponente angezeigt. In der Mitte der Animation befindet sich ein Pfeil, der anzeigt, welche Eingabe gerade verarbeitet wird.  Oben rechts in der Animation befindet sich das Rechteck der Hash-Funktion. Dieses Rechteck zeigt den berechneten Wert jeder Hash-Funktion, die gerade verwendet wird.  Unten im Animationsbereich befindet sich eine Visualisierung des booleschen Arrays aus der Bloom-Filter-Datenstruktur.  Zellen, die auf wahr gesetzt sind, sind durch große rote Linien gekennzeichnet, während Zellen, die auf falsch gesetzt sind, durch kurze schwarze Linien gekennzeichnet sind. Im Verlauf der Animation werden die Zellen, die durch die aktuelle Eingabe gesetzt werden, durch dynamische Pfeile vom Hash-Funktions-Rechteck zur Zelle des Bloom-Filters, die gerade gesetzt wird, markiert.
+				<newline />
+				Die Animation wird über die Taskleiste im oberen Teil der Ansicht gesteuert. Der Benutzer kann die Geschwindigkeit der Animation durch Verschieben des Schiebereglers steuern. Die maximale Geschwindigkeit beträgt 0,1 Sekunden pro Animationsfolie, während die minimale Geschwindigkeit 5,0 Sekunden pro Animationsfolie beträgt. Mit der Schaltfläche "Start" wird die Animation gestartet. Die Schaltfläche "Zurücksetzen" setzt die Animation auf ihren Ausgangszustand zurück. Die Schaltfläche "Pause" hält die Animation an. Sobald die Animation angehalten wurde, wird die Schaltfläche zur Schaltfläche "Fortsetzen". Die Schaltfläche "Fortsetzen" setzt die Animation fort und verwandelt die Schaltfläche wieder in die Schaltfläche "Anhalten". Die Schaltfläche Zurück hält die Animation an, falls sie nicht angehalten wurde, und stellt das vorherige Dia wieder her. Die Schaltfläche next hält die Animation an, falls sie nicht angehalten wurde, und geht zum nächsten Schritt der Animation über.
+				<newline />
+				Der Benutzer der Komponente kann die relevanten Daten der Bloom-Filter-Datenstruktur vollständig kontrollieren. Die Daten, die von der RAPPOR-Komponente in das Boolesche Array verarbeitet werden, werden über den Eingang der Komponente eingefügt.  Durch Ändern der Option <i>Anzahl der Hash-Funktionen</i> wird die Anzahl der von der Bloom-Filter-Datenstruktur verwendeten Hash-Funktionen verändert. Durch Ändern der Option <i>Bloom Filter Size</i> wird die Größe aller verwendeten Booleschen Arrays der Komponente verändert.
+			</item>
+			<item>
+				<b>Randomisierte Antwort</b> Die Ansicht "Randomisierte Antwort" ermöglicht es dem Benutzer, alle relevanten Informationen über den Grad der differenzierten Privatsphäre, die der RAPPOR-Mechanismus bietet, zu sehen. Die Ansicht besteht aus einem Wahrscheinlichkeitsbaum in der Mitte, der von vier Rechtecken umgeben ist, die relevante Informationen über den Grad des Datenschutzes enthalten, der durch die randomisierte Antwortmethode gewährleistet wird.  Der Wahrscheinlichkeitsbaum zeigt die Wahrscheinlichkeit, dass ein anfänglicher Eintrag in das boolesche Bloom-Filter-Array durch eine oder beide zufälligen Antworten verfälscht wird. Die Formeln, die den Übergang vom Booleschen Array des Bloom-Filters B zum Booleschen Array, das durch die permanente randomisierte Antwort B' manipuliert wird, und den Übergang vom Booleschen Array B' zum Booleschen Array S durch die Manipulation der momentanen randomisierten Antwort zeigen, sind im Rechteck oben links dargestellt. Das Rechteck unten links zeigt die Werte von <i>q*</i> und <i>p*</i>. <i>q*</i> ist die Wahrscheinlichkeit, dass eine Zelle, die im anfänglichen booleschen Array des Bloom-Filters auf "wahr" gesetzt wurde, auch im booleschen Array, das durch die augenblickliche randomisierte Antwort verändert wurde, gesetzt wird. <i>p*</i> ist die Wahrscheinlichkeit, dass eine Zelle, die im ursprünglichen Bloom-Filter-Bolean-Array auf false gesetzt wurde, auch in dem durch die momentane randomisierte Antwort veränderten Booleschen Array auf true gesetzt wird.  Das obere rechte Rechteck zeigt den Grad der differentiellen Privatsphäre "epsilon unendlich", der durch die permanente zufällige Antwort bereitgestellt wird. Das untere rechte Rechteck zeigt den Grad der differentiellen Privatsphäre "epsilon eins", der durch die momentane zufällige Antwort bereitgestellt wird.  Weitere Informationen über das Konzept der differentiellen Privatsphäre finden Sie im RAPPOR-Papier<ref id="RAPPORPaper" />.
+				<newline />
+				Der Grad der differentiellen Privatsphäre, den der RAPPOR-Mechanismus bietet, hängt von der Anzahl der im Bloom-Filter verwendeten Hash-Funktionen und den internen Parametern der randomisierten Antworten <i>f</i>, <i>q</i> und <i>p</i> ab.  Diese Werte können in den Einstellungen der Komponente geändert werden. Die Option <i>Anzahl der Hash-Funktionen</i> steuert die Anzahl der Hash-Funktionen, die von der Bloom-Filter-Datenstruktur verwendet werden, während die Optionen <i>q-Prozent</i> und <i>p-Prozent</i> die Menge des Rauschens steuern, das durch die momentane randomisierte Antwort hinzugefügt wird. Man beachte, dass der Grad der differentiellen Privatsphäre von <i>Epsilon unendlich</i> von den Parametern <i>Anzahl der Hash-Funktionen</i> und <i>f Prozent</i> abhängt, während der Grad der differentiellen Privatsphäre von <i>Epsilon eins</i> von allen vier Parametern abhängt.
+				<img src="RAPPOR/Images/RAPPORRandomizedResponseEN_600x350.png" caption="Abbildung 2: Die randomisierte Antwortansicht der Komponente." /><newline />
+			</item>
+			<item>
+				<b> Heatmaps </b> Die Heatmaps-Ansicht ermöglicht es dem Benutzer, mehrere Iterationen des RAPPOR-Mechanismus als Heatmaps darzustellen. Dies visualisiert den Effekt, den die randomisierten Antworten auf das anfängliche boolesche Array haben und macht den Effekt der Parameter <i>f</i>, <i>q</i> und <i>p</i> auf das boolesche Array leicht identifizierbar. Außerdem zeigt es den Unterschied zwischen einer großen Anzahl von Datenproben und einer kleinen Anzahl von Datenproben, insbesondere für die momentane randomisierte Antwort. Das obere Rechteck der Ansicht enthält das boolesche Bloom-Filter-Array, aus dem die Heatmaps erstellt werden. Dieses boolesche Array ist äquivalent zu den booleschen Arrays, die in der Übersichtsansicht dieser Komponente zu finden sind. Nachfolgend sehen Sie zwei Heatmaps, die durch Zählen der Zellen des Booleschen Arrays der permanenten und der momentanen zufälligen Reaktion nach einer bestimmten Anzahl von Malen erstellt wurden.  Die Farbe der Linien, die die Zellen des Arrays darstellen, sowie ihre Länge zeigen, wie oft die Zelle als gesetzt gezählt wurde. Dieser Wert ist in der Heatmap-Legende auf der linken Seite der Ansicht zu sehen.  Die Heatmap-Legende enthält außerdem oben den maximalen Wert, den eine Zelle gesetzt wurde, unten den minimalen Wert und in der Mitte der Legende den mittleren Wert, den eine Zelle gesetzt wurde.
+				<newline />
+				Der Benutzer der Komponente hat die volle Kontrolle über die angezeigten Daten. Die Daten, die von der RAPPOR-Komponente in das Boolesche Array verarbeitet werden, werden über den Eingang der Komponente eingefügt.  Die Einstellungen der Komponente können alle einstellbaren Aspekte des RAPPOR-Mechanismus steuern. Durch Ändern der Option <i>Anzahl der Hash-Funktionen </i> wird die Anzahl der von der Bloom-Filter-Datenstruktur verwendeten Hash-Funktionen geändert. Durch die Änderung der Option <i>Bloom Filter Size</i> wird die Größe aller verwendeten booleschen Arrays der Komponente verändert. Die Option <i>f percentage</i> bestimmt die Menge des Rauschens, die durch die permanente Zufallsantwort hinzugefügt wird, während die Optionen <i>q percentage</i> und <i>p percentage</i> die Menge des Rauschens steuern, die durch die momentane Zufallsantwort hinzugefügt wird. Durch Ändern der Option <i>Iterationen</i> kann der Benutzer die Anzahl der Wiederholungen der permanenten randomisierten Antwort und der momentanen randomisierten Antwort für die Erstellung der Wärmekarten ändern.
+				<img src="RAPPOR/Images/RAPPORHeatMapsEN_600x350.png" caption="Abbildung 3: Die Heatmap-Ansicht der Komponente." />
+			</item>
+		</enum>
+		<u>Abkürzungen</u><newline />Die Komponente RAPPOR verwendet die folgenden Abkürzungen: <enum>
+			<item>
+				BF: Bloom-Filter
+			</item>
+			<item>
+				RR: Randomisierte Antwort
+			</item>
+			<item>
+				PRR: Permanente randomisierte Antwort
+			</item>
+			<item>
+				IRR: Unmittelbare randomisierte Antwort
+			</item>
+			<item>
+				h: Hash-Funktion
+			</item>
+		</enum>
+
+		<newline />
+		<newline />
+		<u>Warum sollte man RAPPOR benutzen</u>
+		<newline />
+		Die Randomized Aggregatable Privacy-Preserving Ordinal Response (RAPPOR) Technik hat Eigenschaften, die sie anderen differentiellen Datenschutztechniken vorziehen. Sie entkoppelt die gelieferten Daten vom Datensubjekt. Durch die Verwendung der Randomisierung zur Unkenntlichmachung einzelner Daten kann sie eine stärkere Garantie für den differenzierten Datenschutz bieten als andere differenzierte Datenschutzmethoden. RAPPOR erfordert auch keine vertrauenswürdige dritte Partei und ermöglicht die Feinabstimmung der Datengenauigkeit und des Datenschutzes der betroffenen Person entsprechend den Anforderungen des aktuellen Projekts.
+		<newline />
+		Der Grad der von RAPPOR garantierten differentiellen Privatsphäre hängt hauptsächlich von den folgenden Parametern ab. Die Größe des verwendeten Bloom-Filters, die Anzahl der für den Bloom-Filter verwendeten Hash-Funktionen und die internen Einstellungen für die randomisierten Antworten: f, q und p. Die Art und Weise, wie diese Parameter die garantierte Privatsphäre berechnen, ist auf der Registerkarte "Randomisierte Antworten" der Komponente zu finden. Es ist wichtig, darauf hinzuweisen, dass die genaue Bedeutung der garantierten Vertraulichkeit von der Implementierung und dem Anwendungsfall der RAPPOR-Technik abhängt. Im Allgemeinen gilt, dass ein gegebener Epsilon-Wert von x garantiert, dass nicht mehr als eine bestimmte Menge an Informationen über ein Datensubjekt mit einem Konfidenzniveau von 1 - e^(x) durchgesickert ist. Vor diesem Hintergrund hängen die für RAPPOR gewählten Parameter von der zuvor erwähnten Abwägung zwischen Datengenauigkeit und Datenschutz ab. Wenn die Datengenauigkeit wichtig ist und ein geringes Maß an Privatsphäre akzeptabel ist, können die Parameter so gewählt werden, dass sie zu einem großen Epsilon-Wert führen. Ist hingegen die Datengenauigkeit nicht so wichtig und ist ein hohes Maß an Datenschutz erforderlich, sollten die Parameter so gewählt werden, dass sie einen kleinen Epsilon-Wert ergeben. Im Allgemeinen ist für einen starken Schutz der Privatsphäre ein Epsilonwert von unter 1 erforderlich.
+		<newline />
+		RAPPOR kann nur für Daten verwendet werden, die durch boolesche Werte dargestellt werden können, oder für Daten, die so transformiert werden können, dass sie durch boolesche Werte dargestellt werden können, z. B. Ordinalwerte.
+		<newline />
+		Ein Beispiel: Ein Krankenhaus möchte Daten über die Häufigkeit von Patienten sammeln, die mit verschiedenen Lungenkrankheiten in das Krankenhaus eingeliefert werden. In diesem Fall könnte RAPPOR eine gute Wahl sein, um die Privatsphäre der Patienten zu schützen, die bereit sind, ihre Daten preiszugeben, und um diese Personen über den Grad der ihnen garantierten Privatsphäre zu informieren. Wenn sich Patient A für die Teilnahme an der Studie entscheidet und RAPPOR die in der Komponente angegebenen Originalparameter verwendet, kann das Risiko wie folgt approximiert werden: Der Epsilon-1-Wert von ~1,55 beschreibt das Risiko für Patient A, dass seine Privatsphäre durch die Teilnahme an der Studie beeinträchtigt werden kann. Ein Epsilon-Unendlichkeitswert von ~4,39 beschreibt das Risiko für die Privatsphäre von Patient A im schlimmsten Fall, wenn die Datenbank mit den Daten aller Teilnehmer nach der permanenten randomisierten Antwort kompromittiert wird. Dieses Beispiel ist inspiriert von dem Papier "Methods To Ensure Privacy Regarding Medical Data"<ref id="Wo22" /> von Wölk. Das Papier enthält auch weitere Informationen über RAPPOR und andere Methoden zur Wahrung der Privatsphäre.
+	</presentation>
+	<references>
+		<linkReference id="RAPPORPaper">
+			<link url="http://dx.doi.org/10.1145/2660267.2660348" lang="en" />
+			<caption lang="en">Title: RAPPOR: Randomized Aggregatable Privacy-Preserving Ordinal Response, Author: Úlfar Erlingsson, Vasyl Pihur and Aleksandra Korolova</caption>
+			<link url="http://dx.doi.org/10.1145/2660267.2660348" lang="de-DE" />
+			<caption lang="de-DE">Titel: RAPPOR: Randomized Aggregatable Privacy-Preserving Ordinal Response, Autor: Úlfar Erlingsson, Vasyl Pihur und Aleksandra Korolova</caption>
+		</linkReference>
+		<linkReference id="BloomFilterPaper">
+			<link url="https://doi.org/10.1145/362686.362692" lang="en" />
+			<caption lang="en">Title: Space/Time Trade-Offs in Hash Coding with Allowable Errors, Author: Bloom, Burton H.</caption>
+			<link url="https://doi.org/10.1145/362686.362692" lang="de-DE" />
+			<caption lang="de-DE">Titel: Space/Time Trade-Offs in Hash Coding with Allowable Errors, Autor: Bloom, Burton H.</caption>
+		</linkReference>
+		<linkReference id="RandomizedResponsePaper">
+			<link url="https://www.jstor.org/stable/2283137" lang="en" />
+			<caption lang="en">Title: Randomized Response: A Survey Technique for Eliminating Evasive Answer Bias, Author: Warner, Stanley L.</caption>
+			<link url="https://www.jstor.org/stable/2283137" lang="de-DE" />
+			<caption lang="de-DE">Titel: Randomized Response: A Survey Technique for Eliminating Evasive Answer Bias, Autor: Warner, Stanley L.</caption>
+		</linkReference>
+	<linkReference id="RandomizedResponse">
+		<link url="https://en.wikipedia.org/wiki/Randomized_response" lang="en" />
+		<caption lang="en">The Wikipedia article for the Randomized Response methodology.</caption>
+		<link url="https://de.wikipedia.org/wiki/Randomized-Response-Technik" lang="de-DE" />
+		<caption lang="de-DE">Der Wikipedia Eintrag für die Randomized Response Methode</caption>
+	</linkReference>
+	<linkReference id="DifferentialPrivacy">
+		<link url="https://en.wikipedia.org/wiki/Differential_privacy" lang="en" />
+		<caption lang="en">The Wikipedia article for the Differential Privacy technology.</caption>
+		<link url="https://de.wikipedia.org/wiki/Differential_Privacy" lang="de-DE" />
+		<caption lang="de-DE">Der Wikipedia Eintrag für die Differential Privacy Technologie.</caption>
+	</linkReference>
+	<linkReference id="ImplementationDifferentialPrivacy">
+		<link url="https://en.wikipedia.org/wiki/Implementations_of_differentially_private_analyses" lang="en" />
+		<caption lang="en">The Wikipedia article for implementations of the Differential Privacy technology.</caption>
+		<link url="https://en.wikipedia.org/wiki/Implementations_of_differentially_private_analyses" lang="de-DE" />
+		<caption lang="de-DE">Der Wikipedia Eintrag für die Implementation der Differential Privacy Technologie.</caption>
+	</linkReference>
+	<linkReference id="Wo22">
+		<link url="https://www.researchgate.net/publication/364439879_Methods_To_Ensure_Privacy_Regarding_Medical_Data_--_Including_an_examination_of_the_differential_privacy_algorithm_RAPPOR_and_its_implementation_in_Cryptool_2" lang="en" />
+		<caption lang="en">
+			Christina M. Wölk. Methods To Ensure Privacy Regarding Medical Data – Including an examination of the differential privacy algorithm RAPPOR and its implementation in "Cryptool 2". arXiv:2210.09963 [cs]. Oct. 2022. doi: 10.48550/arXiv.2210.09963. url: http://arxiv.org/abs/2210.09963 (visited on 01/31/2023).
+		</caption>
+		<link url="https://www.researchgate.net/publication/364439879_Methods_To_Ensure_Privacy_Regarding_Medical_Data_--_Including_an_examination_of_the_differential_privacy_algorithm_RAPPOR_and_its_implementation_in_Cryptool_2" lang="de-DE" />
+		<caption lang="de-DE">
+			Christina M. Wölk. Methods To Ensure Privacy Regarding Medical Data – Including an examination of the differential privacy algorithm RAPPOR and its implementation in "Cryptool 2". arXiv:2210.09963 [cs]. Oct. 2022. doi: 10.48550/arXiv.2210.09963. url: http://arxiv.org/abs/2210.09963 (visited on 01/31/2023).
+		</caption>
+	</linkReference>
+	</references>
+</documentation>

@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AmountOfHashFunctionCaption" xml:space="preserve">
+    <value>Amount of hash functions</value>
+  </data>
+  <data name="AmountOfHashFunctionToolTip" xml:space="preserve">
+    <value>This is the amount of hash functions which are being used for the creation of the Bloom filter. The amount of hash functions is also relevant for the differential privacy levels of the RAPPOR mechanism</value>
+  </data>
+  <data name="AmountOfInstantaneousRandomizedResponsesCaption" xml:space="preserve">
+    <value>Amount of IRR</value>
+  </data>
+  <data name="AmountOfInstantaneousRandomizedResponsesToolTip" xml:space="preserve">
+    <value>This is the amount of instantaneous randomized responses which are being used by the RAPPOR mechanism.</value>
+  </data>
+  <data name="BF" xml:space="preserve">
+    <value>BF</value>
+    <comment>Abbrevation for Bloom Filter</comment>
+  </data>
+  <data name="BloomFilter" xml:space="preserve">
+    <value>Bloom filter</value>
+  </data>
+  <data name="BloomFilterSizeCaption" xml:space="preserve">
+    <value>Bloom filter size</value>
+  </data>
+  <data name="BloomFilterSizeToolTip" xml:space="preserve">
+    <value>This is the size of the Boolean array which is being used for the Bloom filter data structure.</value>
+  </data>
+  <data name="DifferentialPrivacyLevel" xml:space="preserve">
+    <value>Differential privacy level</value>
+  </data>
+  <data name="FPercentageCaption" xml:space="preserve">
+    <value>f percentage</value>
+  </data>
+  <data name="FPercentageToolTip" xml:space="preserve">
+    <value>This is the value of the f percentage. Please note that the value entered will be divided by 100 for internal calculations.</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>General</value>
+    <comment>Meaning "for all"</comment>
+  </data>
+  <data name="h" xml:space="preserve">
+    <value>h</value>
+    <comment>Abbreviation for hash function</comment>
+  </data>
+  <data name="Hashfunctions" xml:space="preserve">
+    <value>Hash functions</value>
+  </data>
+  <data name="HeatMaps" xml:space="preserve">
+    <value>Heat map</value>
+  </data>
+  <data name="HeatMapViewText1" xml:space="preserve">
+    <value>This page provides a heat map that visualizes how often a cell of the Boolean array has been set. Every cell of the Boolean
+array represent a bit in the 0-1 sequence. The color of the legend shows how often the bit was set to 1 in all iterations.
+The first row shows the distribution of the Bloom filter over all iterations. It is visible that the Bloom filter always sets the 
+same cells in every iterations as these are shown in red where as cells that have not been set are shown in black.
+The second row shows the distribution of the permanent randomized response over all </value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Input</value>
+  </data>
+  <data name="InputCaption" xml:space="preserve">
+    <value>Input</value>
+  </data>
+  <data name="InputToolTip" xml:space="preserve">
+    <value>The input of the RAPPOR mechanism</value>
+  </data>
+  <data name="IRR" xml:space="preserve">
+    <value>IRR</value>
+    <comment>ABBreveation for Instantaneous Randomized Response</comment>
+  </data>
+  <data name="IterationsCaption" xml:space="preserve">
+    <value>Iterations</value>
+  </data>
+  <data name="IterationToolTip" xml:space="preserve">
+    <value>This is the amount of iterations which is used for the creation of the heat map.</value>
+  </data>
+  <data name="Key" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="NextStep" xml:space="preserve">
+    <value>Next step</value>
+  </data>
+  <data name="OutputCaption" xml:space="preserve">
+    <value>Output</value>
+  </data>
+  <data name="OutputToolTip" xml:space="preserve">
+    <value>The output of the RAPPOR mechanism</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="PauseAnimation" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="PPercentageCaption" xml:space="preserve">
+    <value>p percentage</value>
+  </data>
+  <data name="PPercentageToolTip" xml:space="preserve">
+    <value>This is the value of the p percentage. Please note that the value entered will be divided by 100 for internal calculations.</value>
+  </data>
+  <data name="PreviousStep" xml:space="preserve">
+    <value>Previous step</value>
+  </data>
+  <data name="PRR" xml:space="preserve">
+    <value>PRR</value>
+    <comment>Abbreveation for Permanent Randomized Response</comment>
+  </data>
+  <data name="pStarText" xml:space="preserve">
+    <value>The likelihood of the i cell of
+S being set, given that the
+underlying cell of i was not set:</value>
+  </data>
+  <data name="QPercentageCaption" xml:space="preserve">
+    <value>q percentage</value>
+  </data>
+  <data name="QPercentageToolTip" xml:space="preserve">
+    <value>This is the value of the q percentage. Please note that the value entered will be divided by 100 for internal calculations.</value>
+  </data>
+  <data name="qStarText" xml:space="preserve">
+    <value>The likelihood of the i cell of
+S being set, given that the
+underlying cell of i was set:</value>
+  </data>
+  <data name="RandomizedResponse" xml:space="preserve">
+    <value>Randomized response</value>
+  </data>
+  <data name="RAPPOR" xml:space="preserve">
+    <value>RAPPOR</value>
+  </data>
+  <data name="RAPPORCaption" xml:space="preserve">
+    <value>RAPPOR</value>
+    <comment>Name of the component</comment>
+  </data>
+  <data name="RAPPORElaboration" xml:space="preserve">
+    <value>Randomized Aggregatable Privacy-Preserving Ordinal Response</value>
+    <comment>Elaboration of the abbrevation RAPPOR</comment>
+  </data>
+  <data name="RAPPORToolTip" xml:space="preserve">
+    <value>Implements the RAPPOR mechanism. It allows for anonymously data collection with tunable privacy gurantees. The RAPPOR mechanism was first published in the paper "RAPPOR: Randomized Aggregatable Privacy-Preserving Ordinal Response" by Úlfar Erlingsson, Vasyl Pihur and Aleksandra Korolova in 2014.</value>
+    <comment>Tooltip of the component</comment>
+  </data>
+  <data name="ResetAnimation" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="ResumeAnimation" xml:space="preserve">
+    <value>Resume</value>
+  </data>
+  <data name="ShortTutorial" xml:space="preserve">
+    <value>To start the RAPPOR component
+ press the "Play" button on the toolbar above the CT2 workspace
+
+You can then navigate through the component using the 5 tabs above.
+The component settings can be accessed in 3 different ways: 
+by clicking on the gear icon in the upper left corner of the component; 
+or by clicking on the gear icon in the upper right corner of the workspace when the component is selected
+or simply by pressing the key combination Ctrl + I .
+You can find much more information in the online help.
+Now click on the "Overview" tab.</value>
+    <comment>Short tutorial on how to use the RAPPOR component. Be sure to conserve the linebreaks in translation</comment>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="StartAnimation" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="timerInput" xml:space="preserve">
+    <value>Animation speed</value>
+    <comment>The speed of the animation</comment>
+  </data>
+  <data name="DataSet" xml:space="preserve">
+    <value>Data set</value>
+  </data>
+  <data name="OverviewViewText" xml:space="preserve">
+    <value>This page provides an overview of the Boolean arrays created by  the RAPPOR mechanism. The first row
+shows the original Boolean array of the Bloom filter. The second row shows the Boolean array after it has been
+processed by the PRR. Every following row shows the altered Boolean array after being processed by an IRR.
+In the graphic, the red line stands for an boolean value in the array that is set to true.
+The black line stands for an boolean value in the arrays that is set to false.</value>
+    <comment>Be sure to keep the line breaks</comment>
+  </data>
+  <data name="BloomFilterText" xml:space="preserve">
+    <value>On this page there is an animation of the insertion process for the Bloom filter data structure. 
+The animation can be controlled via the buttons in the top bar. To start the tool please click the play button 
+in the top area of the CT2 software. The execution of the tool can then be contolled through the animation 
+speed slider and the five buttons in the top area of the Bloom filter tool. To find further instructions on the
+usage of this tool please consult the RAPPOR online help.</value>
+  </data>
+  <data name="RandomizedResponseText" xml:space="preserve">
+    <value>This page contains information about the level of privacy guaranteed by RAPPOR. The values are generated 
+from the component settings. The level of privacy created by RAPPOR is measured by the epsilon parameter, 
+it defines the privacy budget for the data collection process. Epsilon infinity is generated by RAPPOR after the
+permanent randomized response has been engaged and represents the privacy guaranteed by RAPPOR in 
+the worst case case. Epsilon one is generated by RAPPOR after the instantaneous randomized response has
+been engaged and represents the privacy guaranteed by RAPPOR in a general case. It holds that the lower the 
+value assigned to epsilon is, the stronger is the provided privacy protection.</value>
+  </data>
+  <data name="variablevalues" xml:space="preserve">
+    <value>Variables:</value>
+  </data>
+  <data name="RAPPORElaborationGerman" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BloomFilterInformation" xml:space="preserve">
+    <value>The input {1} sets the cells {2} in step {3} of the algorithm.</value>
+  </data>
+  <data name="BloomFilterInformation1" xml:space="preserve">
+    <value>Algorithm step </value>
+  </data>
+  <data name="BloomFilterInformation2" xml:space="preserve">
+    <value>: The </value>
+  </data>
+  <data name="BloomFilterInformation3" xml:space="preserve">
+    <value>input sets the cell (</value>
+  </data>
+  <data name="BloomFilterInformation4" xml:space="preserve">
+    <value>).</value>
+  </data>
+  <data name="ordinalOne" xml:space="preserve">
+    <value>st </value>
+  </data>
+  <data name="ordinalRest" xml:space="preserve">
+    <value>th </value>
+  </data>
+  <data name="ordinalThree" xml:space="preserve">
+    <value>rd </value>
+  </data>
+  <data name="ordinalTwo" xml:space="preserve">
+    <value>nd </value>
+  </data>
+  <data name="HeatMapViewText2" xml:space="preserve">
+    <value> Iterations. 
+The legend to the left of the rows shows that cells that habe been set in close to </value>
+  </data>
+  <data name="HeatMapViewText3" xml:space="preserve">
+    <value> times throughout the
+ iterations are colored red. Cells that have been set close to 0 times throught the iterations are colored blued. 
+Cells that have been set around </value>
+  </data>
+  <data name="HeatMapViewText4" xml:space="preserve">
+    <value> throughout the iterations are colored yellow  to green.
+The third row shows the distribution of the instantaneous randomized response over the iterations.</value>
+  </data>
+  <data name="k" xml:space="preserve">
+    <value />
+  </data>
+</root>
