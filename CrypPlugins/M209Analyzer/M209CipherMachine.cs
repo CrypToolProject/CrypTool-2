@@ -19,11 +19,11 @@ namespace M209Analyzer
             SetLugSettings(lugSettingString);
         }
 
-        public readonly string ALPHABETH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public readonly string ALPHABETH = "ABCDEFGHIJKLMNOPQRSTUVWXY ";
         public readonly string BEAUFORTCIPHER = "ZYXWVUTSRQPONMLKJIHGFEDCBA";
 
         public LugSettings LugSettings;
-        public PinSettings PinSetting;
+        public PinSettings PinSetting = new PinSettings("1947");
 
         /// <summary>
         /// Convert letter (char) into an int of the number this letter have in the alphabeth

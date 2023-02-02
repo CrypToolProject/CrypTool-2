@@ -28,6 +28,7 @@ using System.CodeDom;
 using CrypTool.PluginBase.Utils.Logging;
 using System.Diagnostics;
 using static Cryptool.Plugins.M209Analyzer.CiphertextOnly;
+using System.Linq;
 
 namespace CrypTool.Plugins.M209Analyzer
 {
@@ -58,6 +59,7 @@ namespace CrypTool.Plugins.M209Analyzer
         // HOWTO: You need to adapt the settings class as well, see the corresponding file.
         private readonly M209AnalyzerSettings _settings;
         private readonly M209AnalyzerPresentation _presentation = new M209AnalyzerPresentation();
+        private const int MaxBestListEntries = 100;
         private const string ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWKXY";
         private DateTime _startTime;
         private DateTime _endTime;
@@ -172,8 +174,12 @@ namespace CrypTool.Plugins.M209Analyzer
 
             this.ciphertextOnly = new CiphertextOnly(grams);
             ciphertextOnly.OnLogEvent += GetMessageFromChild;
+            ciphertextOnly.OnAddBestListEntry += HandleNewBestListEntry;
 
             this.ciphertextOnly.Running = _running;
+
+            //this.ciphertextOnly.Encrypt("WINDOW AT THE SAME INSTANT I SAW HIM RAISE HIS HAND AND AT THE SIGNAL I TOSSED MY ROCKET INTO THE ROOM WITH A CRY OF FIRE THE WORD WAS NO SOONER OUT OF MY MOUTH THAN THE WHOLE CROWD OF SPECTATORS WELL DRESSED AND ILL GENTLEMEN OSTLERS AND SERVANT MAIDS JOINED IN A GENERAL SHRIEK OF FIRE THICK CLOUDS OF SMOKE CURLED THROUGH THE ROOM AND OUT AT THE OPEN WINDOW I CAUGHT A GLIMPSE OF RUSHING FIGURES AND A MOMENT LATER THE VOICE OF HOLMES FROM WITHIN ASSURING THEM THAT IT WAS A FALSE ALARM SLIPPING THROUGH THE SHOUTING CROWD I MADE MY WAY TO THE CORNER OF THE STREET AND IN TEN MINUTES WAS REJOICED TO FIND MY FRIEND S ARM IN MINE AND TO GET AWAY FROM THE SCENE OF UPROAR HE WALKED SWIFTLY AND IN SILENCE FOR SOME FEW MINUTES UNTIL WE HAD TURNED DOWN ONE OF THE QUIET STREETS WHICH LEAD TOWARDS THE EDGEWARE ROAD YOU DID IT VERY NICELY DOCTOR HE REMARKED NOTHING COULD HAVE BEEN BETTER IT IS ALL RIGHT YOU HAVE THE PHOTOGRAPH I KNOW WHERE IT IS AND HOW DID YOU FIND OUT SHE SHOWED ME AS I TOLD YOU SHE WOULD I AM STILL IN THE DARK I DO NOT WISH TO MAKE A MYSTERY SAID HE LAUGHING THE MATTER WAS PERFECTLY SIMPLE YOU OF COURSE SAW THAT EVERYONE IN THE STREET WAS AN ACCOMPLICE THEY WERE ALL ENGAGED FOR THE EVENING I GUESSED AS MUCH THEN WHEN THE ROW BROKE OUT I HAD A LITTLE MOIST RED PAINT IN THE PALM OF MY HAND I RUSHED FORWARD FELL DOWN CLAPPED MY HAND TO MY FACE AND BECAME A PITEOUS SPECTACLE IT IS AN OLD TRICK THAT ALSO I COULD FATHOM THEN THEY CARRIED ME IN SHE WAS BOUND TO HAVE ME IN WHAT");
+
 
             // HOWTO: Use this to show the progress of a plugin algorithm execution in the editor.
             ProgressChanged(0, 1);
@@ -293,7 +299,7 @@ namespace CrypTool.Plugins.M209Analyzer
             EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
         }
 
-        private void GetMessageFromChild(object sender, OnLogEventEventArgs e)
+        private void GetMessageFromChild(object sender, OnLogEventArgs e)
         {
             GuiLogMessage(e.Message, e.LogLevel);
         }
@@ -311,6 +317,67 @@ namespace CrypTool.Plugins.M209Analyzer
             Plaintext = plaintextString;
             OnPropertyChanged("Key");
             OnPropertyChanged("Plaintext");
+        }
+
+        private void HandleNewBestListEntry(object sender, OnAddBestListEntryEventArgs e)
+        {
+            this.AddNewBestListEntry(e.Key, e.Costvalue, e.Plaintext);
+        }
+
+            /// <summary>
+            /// Adds an entry to the BestList
+            /// </summary>
+            /// <param name="key"></param>
+            /// <param name="value"></param>
+            /// <param name="text"></param>
+            private void AddNewBestListEntry(string key, double value, string text)
+        {
+
+            //if we have a worse value than the last one, skip
+            if (_presentation.BestList.Count > 0 && value <= _presentation.BestList.Last().Value)
+            {
+                return;
+            }
+
+            ResultEntry entry = new ResultEntry
+            {
+                Key = "",
+                Text = text,
+                Value = value
+            };
+
+            //if we have a better value than the first one, also output it
+            if (_presentation.BestList.Count == 0 || value > _presentation.BestList.First().Value)
+            {
+                Plaintext = entry.Text;
+                Key = entry.Key;
+                OnPropertyChanged("Plaintext");
+                OnPropertyChanged("Key");
+            }
+
+            int insertIndex = _presentation.BestList.TakeWhile(e => e.Value > entry.Value).Count();
+            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                try
+                {
+                    //insert new entry at correct place to sustain order of list:                    
+                    _presentation.BestList.Insert(insertIndex, entry);
+                    if (_presentation.BestList.Count > MaxBestListEntries)
+                    {
+                        _presentation.BestList.RemoveAt(MaxBestListEntries);
+                    }
+                    int ranking = 1;
+                    foreach (ResultEntry e in _presentation.BestList)
+                    {
+                        e.Ranking = ranking;
+                        ranking++;
+                    }
+                }
+                catch (Exception)
+                {
+                    //do nothing
+                }
+            }, null);
         }
 
         /// <summary>
