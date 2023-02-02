@@ -31,6 +31,7 @@ namespace M209Analyzer
             }
 
         }
+        private Random Randomizer = new Random();
 
         public LugType[] Bar = new LugType[27]
         {
@@ -48,8 +49,18 @@ namespace M209Analyzer
         {
             for (int i = 0; i < this.Bar.Length; i++)
             {
-                this.Bar[i].Randomize();
+                this.Bar[i].SetPosition(this.Randomizer.Next(0, 20));
             }
+        }
+
+        public string ToStringRepresentation()
+        {
+            string stringRepresentation = "";
+            for (int i = 0; i < Bar.Length; i++)
+            {
+                stringRepresentation += (Bar[i].Value[0] + 1).ToString() + "-" + (Bar[i].Value[1] + 1).ToString() + ";";
+            }
+            return stringRepresentation;
         }
 
         /// <summary>
@@ -152,7 +163,6 @@ namespace M209Analyzer
         {
             _pos = pos;
         }
-        private Random Randomizer = new Random();
 
         private int _pos = 0;
 
@@ -239,11 +249,6 @@ namespace M209Analyzer
             {
                 this._pos = 20;
             }
-        }
-
-        public void Randomize()
-        {
-            this._pos = this.Randomizer.Next(0, 20);
         }
     }
 }
