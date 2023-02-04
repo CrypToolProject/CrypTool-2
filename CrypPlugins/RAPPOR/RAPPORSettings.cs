@@ -288,6 +288,7 @@ namespace CrypTool.Plugins.RAPPOR
                     OnPropertyChanged("iterations");
                     UpdateCurrentView();
                 }
+                rappor.GetRAPPORPresentation().GetRapporPresentationViewModel().GetViewArray()[4].CreateHeatMapViewText(value);
             }
         }
 

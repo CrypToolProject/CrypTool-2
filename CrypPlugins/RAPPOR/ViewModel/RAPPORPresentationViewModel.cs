@@ -1,5 +1,6 @@
 ﻿using RAPPOR;
 using RAPPOR.ViewModel;
+using System;
 
 namespace CrypTool.Plugins.RAPPOR.ViewModel
 {
@@ -13,6 +14,7 @@ namespace CrypTool.Plugins.RAPPOR.ViewModel
         /// An array of all views which are placed in the content type.
         /// </summary>
         public IViewModelBase[] viewArray;
+
         /// <summary>
         /// Instance of the RAPPOR class.
         /// </summary>
@@ -127,5 +129,10 @@ namespace CrypTool.Plugins.RAPPOR.ViewModel
         public RAPPORSettings Settings => (RAPPORSettings)RAPPOR.Settings;
 
         #endregion IRAPPOR
+
+        public IViewModelBase[] GetviewArray()
+        {
+            return viewArray;
+        }
     }
 }

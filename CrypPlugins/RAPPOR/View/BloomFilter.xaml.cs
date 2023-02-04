@@ -23,6 +23,7 @@ namespace CrypTool.Plugins.RAPPOR.View
             //This might lead to a crash if not probably initialized
             slValueChanged();
             //DataContex = new BloomFilterViewModel();
+            //CrypTool.Plugins.RAPPOR.RAPPOR
         }
         /// <summary>
         /// This method is used to validate the input of the textboxes, insuring that only strings 
@@ -122,5 +123,23 @@ namespace CrypTool.Plugins.RAPPOR.View
         private void NextStep_Click(object sender, RoutedEventArgs e)
         {
         }
+
+        private void Activate()
+        {
+            StartButton.IsEnabled = true;
+            ResetButton.IsEnabled = true;
+            PauseButton.IsEnabled = true;
+            PreviousStepButton.IsEnabled = true;
+            NextStepButton.IsEnabled = true;
+        }
+        private void Deactivate() 
+        {
+            StartButton.IsEnabled = false;
+            ResetButton.IsEnabled = false;
+            PauseButton.IsEnabled = false;
+            PreviousStepButton.IsEnabled = false;
+            NextStepButton.IsEnabled = false;
+        }
+
     }
 }

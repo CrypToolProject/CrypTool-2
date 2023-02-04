@@ -117,20 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Abbreveations" xml:space="preserve">
-    <value>Abkürzungen</value>
-  </data>
-  <data name="AbbreveationsBottom" xml:space="preserve">
-    <value>Maus hier platzieren</value>
-  </data>
-  <data name="AbbreveationsToolTip" xml:space="preserve">
-    <value>BF: Bloom filter
-PRR: Permanente randomisierte response
-SRR: Sofortige randomisierte response
-h: Hashfunktion
-Ws: Wahrscheinlichkeit
-Vss: Voraussetzung</value>
-  </data>
   <data name="AmountOfHashFunctionCaption" xml:space="preserve">
     <value>Anzahl der Hash-Funktionen</value>
   </data>
@@ -154,16 +140,16 @@ Vss: Voraussetzung</value>
     <value>Der Input {1} setzt die Zellen {2} in Schritt {3} des Algorithmus.</value>
   </data>
   <data name="BloomFilterInformation1" xml:space="preserve">
-    <value>Der Input </value>
+    <value>Algorithmus Schritt </value>
   </data>
   <data name="BloomFilterInformation2" xml:space="preserve">
-    <value> setzt die Zelle/Zellen </value>
+    <value>: Die </value>
   </data>
   <data name="BloomFilterInformation3" xml:space="preserve">
-    <value> im Schritt </value>
+    <value>Eingabe setzt die Zelle (</value>
   </data>
   <data name="BloomFilterInformation4" xml:space="preserve">
-    <value> des Algorithmus.</value>
+    <value>).</value>
   </data>
   <data name="BloomFilterSizeCaption" xml:space="preserve">
     <value>Größe des Bloom-Filters</value>
@@ -172,8 +158,15 @@ Vss: Voraussetzung</value>
     <value>Dies ist die Größe des booleschen Arrays, das für die Datenstruktur des Bloom-Filters verwendet wird.</value>
   </data>
   <data name="BloomFilterText" xml:space="preserve">
-    <value>Auf dieser Seite ist eine Animation des Einfügevorgangs für die Bloom-Filter-Datenstruktur zu sehen. 
-Die Animation kann über die Schaltflächen in der oberen Leiste gesteuert werden.</value>
+    <value>Diese Seite enthält Informationen über den von RAPPOR garantierten Datenschutz. Die Werte werden
+generiert aus den Komponenteneinstellungen generiert. Das von RAPPOR erzeugte Maß an Privatsphäre wird 
+durch den Parameter epsilon gemessen, Er definiert das Datenschutzbudget für den Datenerfassungsprozess. 
+Epsilon unendlich wird von RAPPOR erzeugt, nachdem die RAPPOR erzeugt, nachdem die permanente 
+Zufallsantwort aktiviert wurde, und stellt die von RAPPOR im dem schlimmsten Fall. Epsilon Eins wird von 
+RAPPOR erzeugt, nachdem die sofortige zufällige Antwort Epsilon 1 wird von RAPPOR erzeugt, nachdem die 
+sofortige zufällige Antwort eingesetzt wurde, und steht für die von RAPPOR im allgemeinen Fall garantierte 
+Privatsphäre. Es gilt: Je niedriger der Wert, der epsilon zugewiesen wird, desto stärker ist der Schutz der 
+Privatsphäre gewährleistet.</value>
   </data>
   <data name="DataSet" xml:space="preserve">
     <value>Datensatz</value>
@@ -201,11 +194,29 @@ Die Animation kann über die Schaltflächen in der oberen Leiste gesteuert werde
   <data name="HeatMaps" xml:space="preserve">
     <value>Heatmap</value>
   </data>
-  <data name="HeatMapViewText" xml:space="preserve">
-    <value>Diese Seite zeigt eine Heatmap, die visualisiert, wie oft 
-eine Zelle des Booleschen Arrays gesetzt wurde.
-Zellen des Boolschen Arrays stellen hierbei ein Bit in der 0-1 Sequenz da.
-Die Farbe der Legende zeigt wie häufig das Bit auf 1 gesetzt wurde.</value>
+  <data name="HeatMapViewText1" xml:space="preserve">
+    <value>Diese Seite bietet eine Heatmap, die visualisiert, wie oft eine Zelle des Boolean-Arrays gesetzt wurde. Die Zellen des booleschen
+
+Arrays stellen ein Bit in der 0-1-Sequenz dar. Die Farbe der Legende zeigt, wie oft das Bit in allen Iterationen auf 1 gesetzt wurde.
+
+Die erste Zeile zeigt die Verteilung des Bloom-Filters über alle Iterationen. Es ist zu erkennen, dass der Bloom-Filter in jeder Iteration immer die 
+gleichen Zellen setzt, da diese in rot dargestellt sind, während Zellen, die nicht gesetzt wurden, in schwarz dargestellt sind.
+
+Die zweite Zeile zeigt die Verteilung der permanenten randomisierten Antwort über alle 
+</value>
+  </data>
+  <data name="HeatMapViewText2" xml:space="preserve">
+    <value>Iterationen. 
+Die Legende auf der linken Seite der Zeilen zeigt, dass Zellen, die in der Nähe von</value>
+  </data>
+  <data name="HeatMapViewText3" xml:space="preserve">
+    <value>Zeiten während der
+ Iterationen sind rot gefärbt. Zellen, die in den Iterationen nahe 0 gesetzt wurden, sind blau eingefärbt. 
+Zellen, die im Laufe der Iterationen</value>
+  </data>
+  <data name="HeatMapViewText4" xml:space="preserve">
+    <value>während der Iterationen sind gelb bis grün gefärbt.
+Die dritte Zeile zeigt die Verteilung der momentanen zufälligen Reaktion über die Iterationen.</value>
   </data>
   <data name="Input" xml:space="preserve">
     <value>Eingabe</value>
@@ -232,6 +243,18 @@ Die Farbe der Legende zeigt wie häufig das Bit auf 1 gesetzt wurde.</value>
   <data name="NextStep" xml:space="preserve">
     <value>Nächster Schritt</value>
   </data>
+  <data name="ordinalOne" xml:space="preserve">
+    <value>te </value>
+  </data>
+  <data name="ordinalRest" xml:space="preserve">
+    <value>te </value>
+  </data>
+  <data name="ordinalThree" xml:space="preserve">
+    <value>te </value>
+  </data>
+  <data name="ordinalTwo" xml:space="preserve">
+    <value>te </value>
+  </data>
   <data name="OutputCaption" xml:space="preserve">
     <value>Ausgabe</value>
   </data>
@@ -245,8 +268,8 @@ Die Farbe der Legende zeigt wie häufig das Bit auf 1 gesetzt wurde.</value>
     <value>Diese Seite bietet einen Überblick über die Boolesche Arrays, das durch den RAPPOR-Mechanismus erstellt wurde. Die erste Zeile
 zeigt das ursprüngliche Boolesche Array des Bloom-Filters. Die zweite Zeile zeigt das Boolesche Array 
 nach der Verarbeitung durch das PRR. Jede folgende Zeile zeigt das geänderte Boolesche Array nach der Verarbeitung durch eine SRR.
-In der Grafik steht der rote Strich für einen Eintrag in den Arrays der gesetzt ist.
-Der Schwarze Strich steht für einen Eintrag in den Arrays der nicht gesetzt ist.
+In der Grafik steht die rote Linie für einen booleschen Wert im Array, der auf true gesetzt ist.
+Die schwarze Linie steht für einen booleschen Wert in den Arrays, der auf false gesetzt ist.
 </value>
     <comment>s</comment>
   </data>

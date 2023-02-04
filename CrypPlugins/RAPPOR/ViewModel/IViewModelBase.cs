@@ -1,4 +1,6 @@
-﻿namespace CrypTool.Plugins.RAPPOR.ViewModel
+﻿using System;
+
+namespace CrypTool.Plugins.RAPPOR.ViewModel
 {
     /// <summary>
     /// Base class for all view models.
@@ -12,7 +14,10 @@
         /// Interface method for DrawCanvas which has to be be implemented by every view model class.
         /// </summary>
         void DrawCanvas();
-
+        //void Activate();
+        //void Deactivate();
+        void ChangeButton(Boolean ru);
+        void CreateHeatMapViewText(int it);
 
     }
 }

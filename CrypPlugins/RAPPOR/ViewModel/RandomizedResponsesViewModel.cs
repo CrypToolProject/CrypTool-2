@@ -107,45 +107,47 @@ namespace RAPPOR.ViewModel
             RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(202, 252, 20, "B'"));
             RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(202, 368, 20, "S"));
 
+
             //Adding text to tree //Right side
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(405, 38, 10, "B", "#000000"));//400,50
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(413, 44, 4, "i", "#000000"));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(365, 215, 10, "B", "#000000"));//360,227
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(373, 221, 4, "i", "#000000"));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(377, 215, 10, "= 1", "#000000"));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(445, 215, 10, "0", "#000000"));//440,227
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(525, 215, 10, "1", "#000000"));//520,227
+            //20230122 Increased size by 50%
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(403, 38, 15, "B", "#000000"));//400,50//400
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(414, 44, 6, "i", "#000000"));
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(362, 215, 15, "B", "#000000"));//360,227//365
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(373, 221, 6, "i", "#000000"));
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(377, 215, 15, "= 1", "#000000"));
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(445, 215, 15, "0", "#000000"));//440,227//445
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(525, 215, 15, "1", "#000000"));//520,227
 
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(295, 338, 10, "1", "#000000"));//290,350
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(385, 338, 10, "B", "#000000"));//380,350
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(393, 344, 4, "i", "#000000"));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(475, 338, 10, "1", "#000000"));//470,350
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(565, 338, 10, "1", "#000000"));//560,350
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(295, 338, 15, "1", "#000000"));//290,350
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(383, 338, 15, "B", "#000000"));//380,350//380
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(394, 344, 6, "i", "#000000"));//393
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(475, 338, 15, "1", "#000000"));//470,350
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(565, 338, 15, "1", "#000000"));//560,350
 
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(425, 138, 10, "f / 2", "#000000"));//420,139
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(475, 138, 10, "f / 2", "#000000"));//470,139
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(290, 287, 10, "p", "#000000"));//285,289
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(375, 287, 10, "q", "#000000"));//370,289
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(460, 287, 10, "p", "#000000"));//455,289
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(545, 287, 10, "q", "#000000"));//540,289
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(425, 138, 15, "f / 2", "#000000"));//420,139
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(475, 138, 15, "f / 2", "#000000"));//470,139
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(290, 287, 15, "p", "#000000"));//285,289
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(375, 287, 15, "q", "#000000"));//370,289
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(460, 287, 15, "p", "#000000"));//455,289
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(545, 287, 15, "q", "#000000"));//540,289
 
             //Left side
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(303, 170, 10, "B", "#000000"));//320,182
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(311, 176, 4, "i", "#000000"));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(260, 215, 10, "= 0", "#000000"));//280,227
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(256, 221, 4, "i", "#000000"));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(248, 215, 10, "B", "#000000"));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(237, 344, 10, "i", "#000000"));//245,350
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(229, 338, 10, "B", "#000000"));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(325, 338, 10, "0", "#000000"));//335,350
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(415, 338, 10, "0", "#000000"));//425,350
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(505, 338, 10, "0", "#000000"));//515,350
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(300, 170, 15, "B", "#000000"));//320,182//305
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(311, 176, 6, "i", "#000000"));
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(259, 215, 15, "=0", "#000000"));//280,227//260
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(256, 221, 6, "i", "#000000"));
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(245, 215, 15, "B", "#000000"));//248
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(237, 344, 6, "i", "#000000"));//245,350
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(226, 338, 15, "B", "#000000"));//229
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(324, 338, 15, "0", "#000000"));//335,350//325
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(414, 338, 15, "0", "#000000"));//425,350//415
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(504, 338, 15, "0", "#000000"));//515,350//505
 
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(320, 138, 10, "1 - f", "#000000"));//360,116
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(233, 287, 10, "1 - p", "#000000"));//263,289
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(318, 287, 10, "1 - q", "#000000"));//348,289
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(403, 287, 10, "1 - p", "#000000"));//433,289
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(488, 287, 10, "1 - q", "#000000"));//518,289
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(313, 138, 15, "1 - f", "#000000"));//360,116//320
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(231, 287, 15, "1 - p", "#000000"));//263,289//233
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(316, 287, 15, "1 - q", "#000000"));//348,289//318
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(401, 287, 15, "1 - p", "#000000"));//433,289//403
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(486, 287, 15, "1 - q", "#000000"));//518,289//488
 
             //Adding Images
             //Better quality with this perhaps: https://stackoverflow.com/questions/87753/resizing-an-image-without-losing-any-quality
@@ -184,11 +186,11 @@ namespace RAPPOR.ViewModel
 
             RandomizedResponsesCanvas.Children.Add(arrayDrawerRR.AddRectangle(615, 36 + y, 170, 74 + 4 + 4, "#FFFFFF"));//image rectangle
             RandomizedResponsesCanvas.Children.Add(eInfImage);
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 16 + y, 14, CrypTool.Plugins.RAPPOR.Properties.Resources.DifferentialPrivacyLevel + "\u03B5")); //top text
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(765, 22 + y, 10, "\u221E")); //top text infinity symbol
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 16 + y, 14, CrypTool.Plugins.RAPPOR.Properties.Resources.DifferentialPrivacyLevel + " " + "\u03B5")); //top text
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(765, 22 + y, 10, " \u221E")); //top text infinity symbol #20230122 Added blanks after epsilon and after infinity
 
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 123 + y, 20, "\u03B5  = " + string.Format("{0:0.##########}", calculateEpsilonInfinity(rappor.GetRAPPORSettings().GetAmountOfHashFunctions(), (double)rappor.GetRAPPORSettings().GetFVariable() / 100))));//bottom calc
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(623, 130 + y, 14, "\u221E"));//bottom epsilon
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 123 + y, 20, "\u03B5   =  " + string.Format("{0:0.##########}", calculateEpsilonInfinity(rappor.GetRAPPORSettings().GetAmountOfHashFunctions(), (double)rappor.GetRAPPORSettings().GetFVariable() / 100))));//bottom calc
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(623, 130 + y, 14, " \u221E "));//bottom epsilon
 
 
             y = y - 45;
@@ -205,15 +207,15 @@ namespace RAPPOR.ViewModel
             RandomizedResponsesCanvas.Children.Add(epsilonOne);
             RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 212 + y, 14, CrypTool.Plugins.RAPPOR.Properties.Resources.DifferentialPrivacyLevel + " \u03B5\u2081"));//top text
             //RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 306, 20, "\u03B5\u2081: " + calculateEpsilonOne((double)rappor.GetRAPPORSettings().GetAmountOfHashFunctions(), (double)rappor.GetRAPPORSettings().GetFVariable() / 100, (double)rappor.GetRAPPORSettings().GetQVariable() / 100, (double)rappor.GetRAPPORSettings().GetPVariable() / 100)));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 306 + y, 20, "\u03B5\u2081= " + string.Format("{0:0.##########}", calculateEpsilonOne(rappor.GetRAPPORSettings().GetAmountOfHashFunctions(), (double)rappor.GetRAPPORSettings().GetFVariable() / 100, (double)rappor.GetRAPPORSettings().GetQVariable() / 100, (double)rappor.GetRAPPORSettings().GetPVariable() / 100)))); //bottom text
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 306 + y, 20, "\u03B5\u2081 = " + string.Format("{0:0.##########}", calculateEpsilonOne(rappor.GetRAPPORSettings().GetAmountOfHashFunctions(), (double)rappor.GetRAPPORSettings().GetFVariable() / 100, (double)rappor.GetRAPPORSettings().GetQVariable() / 100, (double)rappor.GetRAPPORSettings().GetPVariable() / 100)))); //bottom text
 
 
 
             //10, 205, 180, 185,
             RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(15, 210, 14, CrypTool.Plugins.RAPPOR.Properties.Resources.qStarText));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(15, 272, 14, "q*= " + string.Format("{0:0.##########}", calculateQStar((double)rappor.GetRAPPORSettings().GetFVariable() / 100, (double)rappor.GetRAPPORSettings().GetQVariable() / 100, (double)rappor.GetRAPPORSettings().GetPVariable() / 100))));
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(15, 272, 14, "q* = " + string.Format("{0:0.##########}", calculateQStar((double)rappor.GetRAPPORSettings().GetFVariable() / 100, (double)rappor.GetRAPPORSettings().GetQVariable() / 100, (double)rappor.GetRAPPORSettings().GetPVariable() / 100))));
             RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(15, 300, 14, CrypTool.Plugins.RAPPOR.Properties.Resources.pStarText));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(15, 362, 14, "p*= " + string.Format("{0:0.##########}", calculatePStar((double)rappor.GetRAPPORSettings().GetFVariable() / 100, (double)rappor.GetRAPPORSettings().GetQVariable() / 100, (double)rappor.GetRAPPORSettings().GetPVariable() / 100))));
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(15, 362, 14, "p* = " + string.Format("{0:0.##########}", calculatePStar((double)rappor.GetRAPPORSettings().GetFVariable() / 100, (double)rappor.GetRAPPORSettings().GetQVariable() / 100, (double)rappor.GetRAPPORSettings().GetPVariable() / 100))));
 
             OnPropertyChanged("RandomizedResponsesCanvas");
         }
@@ -293,6 +295,12 @@ namespace RAPPOR.ViewModel
                 _randomizedResponsesCanvas = value;
                 OnPropertyChanged("RandomizedResponsesCanvas");
             }
+        }
+        public new void ChangeButton(Boolean ru)
+        {
+        }
+        public void CreateHeatMapViewText(int a)
+        {
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,7 +18,7 @@ namespace CrypTool.Plugins.RAPPOR.ViewModel
     /// This class represents the binding part between the Bloom filter class and the Bloom filter
     /// view. It is used for the ui logic, displaying the bloom filter in the component.
     /// </summary>
-    public class BloomFilterViewModel : ObservableObject, IViewModelBase
+    public class BloomFilterViewModel : ObservableObject, IViewModelBase, INotifyPropertyChanged
     {
         /// <summary>
         /// The used instance of the rappor class.
@@ -54,6 +55,8 @@ namespace CrypTool.Plugins.RAPPOR.ViewModel
         /// </summary>
         private bool pause;
 
+
+
         /// <summary>
         /// Initializes the Bloom filter view model. This is then used to create the Bloom filter 
         /// content part of the RAPPOR component
@@ -76,6 +79,9 @@ namespace CrypTool.Plugins.RAPPOR.ViewModel
             rappor.PropertyChanged += BloomFilterCanvas_PropertyChanged;
             //slValue = "1";
             //OnPropertyChanged("slValue");
+
+            IsButtonEnabled = rappor.GetRunning();
+            IsActionPossible = rappor.GetRunning();
         }
 
         /// <summary>
@@ -144,6 +150,7 @@ namespace CrypTool.Plugins.RAPPOR.ViewModel
         /// The binding start button variable, it is used to start the bloom filter animation.
         /// </summary>
         private ICommand _startButtonCommand;
+        
 
         /// <summary>
         /// Gets the start button command.
@@ -156,7 +163,7 @@ namespace CrypTool.Plugins.RAPPOR.ViewModel
         /// executed.
         /// </summary>
         public bool CanExecuteStartButtonCommand =>
-                // check if executing is allowed, i.e., validate, check if a process is running, etc. 
+                // check if executing is allowed, i.e., validate, check if a process is running, etc.
                 true;
 
 
@@ -176,7 +183,6 @@ namespace CrypTool.Plugins.RAPPOR.ViewModel
             BloomFilterCanvas.Background = Brushes.Red;
 
             OnPropertyChanged("BloomFilterCanvas");
-            //TODO: Create a working try catch here.
             try
             {
                 dispatcherTimer.Start();
@@ -579,6 +585,28 @@ namespace CrypTool.Plugins.RAPPOR.ViewModel
                     }
                 }
             }
+        }
+
+        private Boolean IsActionPossible;
+
+        //Button infrastructure
+        private bool _isButtonEnabled;
+        public bool IsButtonEnabled
+        {
+            get { return _isButtonEnabled; }
+            set
+            {
+                _isButtonEnabled = value;
+                OnPropertyChanged("IsButtonEnabled");
+            }
+        }
+
+        public new void ChangeButton(Boolean ru)
+        {
+            IsButtonEnabled = ru;
+        }
+        public void CreateHeatMapViewText(int a)
+        {
         }
     }
 }

@@ -173,7 +173,7 @@ namespace RAPPOR.Helper.ArrayDrawer
 
             topRightCorner.Freeze();
 
-            //Creating the title text of the data set box, the calculation arrow strucutre and the hash function box.
+            //Creating the title text of the data set box, the calculation arrow structure and the hash function box.
             FormattedText formattedTextDataset = new FormattedText(CrypTool.Plugins.RAPPOR.Properties.Resources.DataSet,
                 Thread.CurrentThread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Times New Roman"), 16,
                 Brushes.Black, VisualTreeHelper.GetDpi(this).PixelsPerDip);
@@ -319,8 +319,28 @@ namespace RAPPOR.Helper.ArrayDrawer
 
             if (roundVar >= 0)
             {
+                //Determining the word end of the ordinal number in the following sentence.
+                string ordinalWordEnd;
+
+                switch(roundVar + 1)
+                {
+                    case 1:
+                        ordinalWordEnd = CrypTool.Plugins.RAPPOR.Properties.Resources.ordinalOne;
+                        break;
+                    case 2:
+                        ordinalWordEnd = CrypTool.Plugins.RAPPOR.Properties.Resources.ordinalTwo;
+                        break;
+                    case 3:
+                        ordinalWordEnd = CrypTool.Plugins.RAPPOR.Properties.Resources.ordinalThree;
+                        break;
+                    default:
+                        ordinalWordEnd = CrypTool.Plugins.RAPPOR.Properties.Resources.ordinalRest;
+                        break;
+                }
+
                 //Bottom line describing what is happening rn:
-                string infoTextCombination = CrypTool.Plugins.RAPPOR.Properties.Resources.BloomFilterInformation1 + input.Split(',')[(roundVar)] + CrypTool.Plugins.RAPPOR.Properties.Resources.BloomFilterInformation2 + infoString + CrypTool.Plugins.RAPPOR.Properties.Resources.BloomFilterInformation3 + (roundVar + 1) + CrypTool.Plugins.RAPPOR.Properties.Resources.BloomFilterInformation4;
+                //Old Structure: //string infoTextCombination = CrypTool.Plugins.RAPPOR.Properties.Resources.BloomFilterInformation1 + input.Split(',')[(roundVar)] + CrypTool.Plugins.RAPPOR.Properties.Resources.BloomFilterInformation2 + infoString + CrypTool.Plugins.RAPPOR.Properties.Resources.BloomFilterInformation3 + (roundVar + 1) + CrypTool.Plugins.RAPPOR.Properties.Resources.BloomFilterInformation4;
+                string infoTextCombination = CrypTool.Plugins.RAPPOR.Properties.Resources.BloomFilterInformation1 + input.Split(',')[(roundVar)] + CrypTool.Plugins.RAPPOR.Properties.Resources.BloomFilterInformation2 + input.Split(',')[(roundVar)] + ordinalWordEnd + CrypTool.Plugins.RAPPOR.Properties.Resources.BloomFilterInformation3 + infoString + CrypTool.Plugins.RAPPOR.Properties.Resources.BloomFilterInformation4;
                 FormattedText formattedTextInformation = new FormattedText(infoTextCombination,
         Thread.CurrentThread.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Times New Roman"), 16,
         Brushes.Black, VisualTreeHelper.GetDpi(this).PixelsPerDip)

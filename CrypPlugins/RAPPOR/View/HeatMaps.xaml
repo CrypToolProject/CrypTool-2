@@ -31,7 +31,7 @@
                 <!-- This text contains a short introduction for the heat maps view. -->
                 <Grid Grid.Row="1" Background="White">
                     <Border BorderThickness="2" BorderBrush="#8abc94" CornerRadius="5" />
-                    <TextBox TextAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Times New Roman" Margin="3" Text="{Loc HeatMapViewText}" IsReadOnly="True" BorderBrush="Transparent" BorderThickness="0">
+                    <TextBox TextAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Times New Roman" Margin="3" Text="{Binding HeatMapViewText}" IsReadOnly="True" BorderBrush="Transparent" BorderThickness="0">
                     </TextBox>
                 </Grid>
             </Grid>
