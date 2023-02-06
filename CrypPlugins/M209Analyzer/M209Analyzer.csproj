@@ -93,6 +93,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SimulatedAnnealing.cs" />
     <Compile Include="Wheel.cs" />
   </ItemGroup>
   <ItemGroup>
