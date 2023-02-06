@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<documentation>
+  <language culture="en"/>    
+  <language culture="de-DE"/>    
+  
+  <introduction lang="en">
+    The GRANIT/160 cipher is a manual cipher invented for spies of the GDR. It uses a substitution cipher and a double columnar transposition cipher. GRANIT/160 was used by Günter Guillaume, a Stasi spy who became personal assistant to chancellor Willy Brandt.
+  </introduction>
+
+  <introduction lang="de-DE">
+    Die GRANIT/160-Chiffre ist eine manuelle Chiffre, die für Spione der DDR erfunden wurde. Sie verwendet eine Substitutions-Chiffre und eine zweispaltige Transpositions-Chiffre. GRANIT/160 wurde von Günter Guillaume verwendet, einem Stasi-Spion, der persönlicher Assistent von Bundeskanzler Willy Brandt wurde.
+  </introduction>
+
+  <usage lang="en">
+    The cipher uses a first keyword and encrypts the plaintext using a straddling checkerboard. Then, two transposition ciphers based on two additional keywords are applied (= double columnar transposition cipher). The cipher uses an alphabet where I=J. Also, umlauts are changed, e.g. Ä becomes AE and ß becomes SS. Digits of numbers are not substituted but repeated three times prior encryption.
+  </usage>
+
+  <usage lang="de-DE">
+    Die Chiffre verwendet ein erstes Schlüsselwort und verschlüsselt den Klartext mit Hilfe eines Straddling-Checkerboards. Dann werden zwei Transpositions-Chiffren auf der Grundlage von zwei weiteren Schlüsselwörtern angewendet (= doppelspaltige Transpositions-Chiffre). Die Chiffre verwendet ein Alphabet mit I=J. Außerdem werden die Umlaute geändert, z. B. wird Ä zu AE und ß zu SS. Die Ziffern von Zahlen werden nicht ersetzt, sondern vor der Verschlüsselung dreimal wiederholt.
+  </usage>
+  
+  <presentation lang="en">
+  </presentation>
+  
+  <presentation lang="de-DE">
+  </presentation>
+
+  <references>
+    <linkReference>
+      <link url="http://scz.bplaced.net/m.html#granit" />
+      <caption lang="en">Jörg Drobick's Homepage: (Detailed) Instructions for use for the GRANIT / 160 ciphering method (German)</caption>
+      <caption lang="de">Jörg Drobicks Homepage: (Detaillierte) Gebrauchsanweisung für das Chiffrierverfahren GRANIT / 160</caption>
+    </linkReference>   
+  </references>
+</documentation>
