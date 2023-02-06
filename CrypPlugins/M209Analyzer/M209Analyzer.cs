@@ -194,15 +194,16 @@ namespace CrypTool.Plugins.M209Analyzer
                         int[] roundLayers = new int[4];
                         double bestScore = 0.0;
 
-                        for (int i = 0; i < 100; i++)
+                        for (int i = 0; i < 100 && this._running; i++)
                         {
-                            double currentScore = this.ciphertextOnly.HCOuter(Ciphertext, "V");
+                            //double currentScore = this.ciphertextOnly.HCOuter(Ciphertext, "V");
+                            this.ciphertextOnly.Solve(Ciphertext, 0,"V");
                             GuiLogMessage($"BestScore: {bestScore}", NotificationLevel.Info);
 
-                            if(bestScore < currentScore)
-                            {
-                                bestScore = currentScore;
-                            }
+                            //if(bestScore < currentScore)
+                            //{
+                            //    bestScore = currentScore;
+                            //}
                         }
 
                         this.ciphertextOnly.Solve(Ciphertext, 0, "V");
@@ -341,7 +342,7 @@ namespace CrypTool.Plugins.M209Analyzer
 
             ResultEntry entry = new ResultEntry
             {
-                Key = "",
+                Key = key,
                 Text = text,
                 Value = value
             };

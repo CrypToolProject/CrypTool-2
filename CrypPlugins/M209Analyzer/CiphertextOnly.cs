@@ -143,7 +143,7 @@ namespace Cryptool.Plugins.M209Analyzer
                                 }
                                 LogMessage($"\t ApplySimpleTransformation", NotificationLevel.Info);
 
-                                score = SAInner(ciphertext, this._m209.LugSettings, this._m209.PinSetting, "V", 1);                                
+                                score = SAInner(ciphertext,"V", 1);                                
                                 if (score > bestScore)
                                 {
                                     LogMessage($"Improved: bestScore = {bestScore}, score = {score} <{this._m209.Encrypt(ciphertext)}", NotificationLevel.Info);
@@ -191,7 +191,7 @@ namespace Cryptool.Plugins.M209Analyzer
                                         this._m209.LugSettings.ApplyComplexTransformation(bar1, bar2, bar3, bar4, i);
                                         LogMessage($"\t ApplyComplexTransformation", NotificationLevel.Info);
 
-                                        score = SAInner(ciphertext, this._m209.LugSettings, this._m209.PinSetting, "V", 1);
+                                        score = SAInner(ciphertext, "V", 1);
                                         if (score > bestScore)
                                         {
                                             LogMessage($"Improved: bestScore = {bestScore}, score = {score} {this._m209.Encrypt(ciphertext)}", NotificationLevel.Info);
@@ -233,18 +233,20 @@ namespace Cryptool.Plugins.M209Analyzer
         /// <param name="cycles"></param>
         /// <returns></returns>
         /// private double SA(int[] roundLayers, int layers, string ciphertext, LugSettings lugSettings, PinSettings pinSetting, string versionOfInstruction, int cycles)
-        private double SAInner(string ciphertext, LugSettings lugSettings, PinSettings pinSetting, string versionOfInstruction, int cycles)
+        private double SAInner(string ciphertext, string versionOfInstruction, int cycles)
         {
+            LogMessage($"SAInner", NotificationLevel.Info);
             double bestSAScore = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
-            PinSettings bestSAPins = pinSetting;
+            PinSettings bestSAPins = this._m209.PinSetting;
             
-            for (int i = 0; i < cycles; i++)
+            for (int cycle = 0; cycle < cycles && this.Running; cycle++)
             {
-                pinSetting.Randomize();
+                this._m209.PinSetting.Randomize();
+                LogMessage($"Random pinsetting: {this._m209.PinSetting.ToStringRepresentation()}", NotificationLevel.Info);
 
-                for (double temperature = 1000.0; temperature >= 1.0; temperature /= 1.1)
+                for (double temperature = 1000.0; temperature >= 1.0 && this.Running; temperature /= 1.1)
                 {
-                    bestSAScore = step(ciphertext, lugSettings, pinSetting, bestSAScore, temperature);
+                    bestSAScore = step(ciphertext, bestSAScore, temperature);
                     
                     if (!Running)
                     {
@@ -256,17 +258,16 @@ namespace Cryptool.Plugins.M209Analyzer
                 {
                     previous = bestSAScore;
  
-                    bestSAScore = step(ciphertext, lugSettings, pinSetting, bestSAScore, 0.0);
+                    bestSAScore = step(ciphertext, bestSAScore, 0.0);
                     
                     if (!Running)
                     {
                         return bestSAScore;
                     }
-                } while (bestSAScore > previous);
+                } while (bestSAScore > previous && this.Running);
             }
-
+            this._m209.PinSetting = bestSAPins;
             return bestSAScore;
-            //return pinSetting;
         }
 
         /// <summary>
@@ -281,12 +282,14 @@ namespace Cryptool.Plugins.M209Analyzer
         /// <param name="temperature"></param>
         /// <returns></returns>
         /// private double step(string ciphertext, int[] roundLayers, int layers, LugSettings lugSettings, PinSettings pinSettings, double bestSAScore, double temperature)
-        private double step(string ciphertext, LugSettings lugSettings, PinSettings pinSettings, double bestSAScore, double temperature)
+        private double step(string ciphertext, double bestSAScore, double temperature)
         {
+            LogMessage($"step(..., {bestSAScore}, {temperature}", NotificationLevel.Info);
             double currLocalScore = 0;
 
-            int MAX_COUNT = pinSettings.maxCount();
-            int MIN_COUNT = pinSettings.minCount();
+            int MAX_COUNT = this._m209.PinSetting.maxCount();
+            int MIN_COUNT = this._m209.PinSetting.minCount();
+            PinSettings bestSAPins = this._m209.PinSetting;
 
             double newScore;
             int count;
@@ -296,39 +299,38 @@ namespace Cryptool.Plugins.M209Analyzer
 
             // Transformation 1
             // toggle state of single pin on one wheel
-            for (int w = 0; w < pinSettings.Wheels.Length; w++)
+            LogMessage($"step \t before Transformation 1", NotificationLevel.Info);
+            for (int w = 0; w < this._m209.PinSetting.Wheels.Length && this.Running; w++)
             {
-                for (int p = 0; p < pinSettings.Wheels[w].Length; p++)
+                for (int p = 0; p < this._m209.PinSetting.Wheels[w].Length && this.Running; p++)
                 {
                     if (!Running) return 0.0;
 
-                    pinSettings.Wheels[w].TogglePinValue(p);
+                    this._m209.PinSetting.Wheels[w].TogglePinValue(p);
 
-                    count = pinSettings.count();
+                    count = this._m209.PinSetting.count();
                     if (count < MIN_COUNT || count > MAX_COUNT) // TODO: Add longSeq
                     {
-                        pinSettings.Wheels[w].TogglePinValue(p);
+                        this._m209.PinSetting.Wheels[w].TogglePinValue(p);
                         continue;
                     }
 
-                    this._m209.PinSetting = pinSettings;
-                    this._m209.LugSettings = lugSettings;
                     newScore = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
-                    AddNewBestListEntry(this._m209.LugSettings.ToString() + this._m209.PinSetting.ToString(), newScore, this._m209.Encrypt(ciphertext));
+                    AddNewBestListEntry(this._m209.LugSettings.ToStringRepresentation() + this._m209.PinSetting.ToString(), newScore, this._m209.Encrypt(ciphertext));
                     //LogMessage($"[SA-step] -> newScore:{newScore} \n", NotificationLevel.Info);
 
-                    double D = newScore - currLocalScore;
-                    if (D > 0 || this.Randomizer.NextDouble() < Math.Exp(-(Math.Abs(D) / temperature)))
+                    if (SimulatedAnnealing.accept(newScore, currLocalScore, temperature))
                     {
                         currLocalScore = newScore;
                         changeAccepted = true;
                         if(newScore > bestSAScore)
                         {
+                            bestSAPins = this._m209.PinSetting;
                             bestSAScore = newScore;
                         }
                     } else
                     {
-                        pinSettings.Wheels[w].TogglePinValue(p);
+                        this._m209.PinSetting.Wheels[w].TogglePinValue(p);
                     }
 
                     if (!Running)
@@ -340,35 +342,33 @@ namespace Cryptool.Plugins.M209Analyzer
 
             // Transformation 4
             // toggle all pins on one wheel
-            for (int w = 0; w < pinSettings.Wheels.Length; w++)
+            LogMessage($"step \t before Transformation 4", NotificationLevel.Info);
+            for (int w = 0; w < this._m209.PinSetting.Wheels.Length && this.Running; w++)
             {
-                pinSettings.Wheels[w].ToggleAllPinValues();
+                this._m209.PinSetting.Wheels[w].ToggleAllPinValues();
 
-                count = pinSettings.count();
+                count = this._m209.PinSetting.count();
                 if (count < MIN_COUNT || count > MAX_COUNT) // TODO: Add longSeq
                 {
-                    pinSettings.Wheels[w].ToggleAllPinValues();
+                    this._m209.PinSetting.Wheels[w].ToggleAllPinValues();
                     continue;
                 }
 
-                this._m209.PinSetting = pinSettings;
-                this._m209.LugSettings = lugSettings;
                 newScore = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
-                AddNewBestListEntry(this._m209.LugSettings.ToString() + this._m209.PinSetting.ToString(), newScore, this._m209.Encrypt(ciphertext));
-
-                double D = newScore - currLocalScore;
-                if (D > 0 || this.Randomizer.NextDouble() < Math.Exp(-(Math.Abs(D) / temperature)))
+                AddNewBestListEntry(this._m209.LugSettings.ToStringRepresentation() + this._m209.PinSetting.ToString(), newScore, this._m209.Encrypt(ciphertext));
+                if (SimulatedAnnealing.accept(newScore, currLocalScore, temperature))
                 {
                     currLocalScore = newScore;
                     changeAccepted = true;
                     if (newScore > bestSAScore)
                     {
+                        bestSAPins = this._m209.PinSetting;
                         bestSAScore = newScore;
                     }
                 }
                 else
                 {
-                    pinSettings.Wheels[w].ToggleAllPinValues();
+                    this._m209.PinSetting.Wheels[w].ToggleAllPinValues();
                 }
 
                 if (!Running)
@@ -379,49 +379,49 @@ namespace Cryptool.Plugins.M209Analyzer
 
             if (changeAccepted)
             {
+                this._m209.PinSetting = bestSAPins;
                 return bestSAScore;
             }
 
             // Transformation 2
             // toggle 2 pins on one wheel having different states
-            for (int w = 0; w < pinSettings.Wheels.Length; w++)
+            LogMessage($"step \t before Transformation 2", NotificationLevel.Info);
+            for (int w = 0; w < this._m209.PinSetting.Wheels.Length && this.Running; w++)
             {
-                for (int p1 = 0; p1 < pinSettings.Wheels[w].Length; p1++)
+                for (int p1 = 0; p1 < this._m209.PinSetting.Wheels[w].Length && this.Running; p1++)
                 {
-                    for (int p2 = p1 + 1; p2 < pinSettings.Wheels[w].Length; p2++)
+                    for (int p2 = p1 + 1; p2 < this._m209.PinSetting.Wheels[w].Length && this.Running; p2++)
                     {
-                        if (pinSettings.Wheels[w].EvaluatePinAtPosition(p1) == pinSettings.Wheels[w].EvaluatePinAtPosition(p2))
+                        if (this._m209.PinSetting.Wheels[w].EvaluatePinAtPosition(p1) == this._m209.PinSetting.Wheels[w].EvaluatePinAtPosition(p2))
                         {
                             continue;
                         }
 
-                        pinSettings.Wheels[w].ToggleTwoPins(p1, p2);
+                        this._m209.PinSetting.Wheels[w].ToggleTwoPins(p1, p2);
 
-                        count = pinSettings.count();
-                        if (count < MIN_COUNT || count > MAX_COUNT || pinSettings.Wheels[w].longSeq(p1, p2))
+                        count = this._m209.PinSetting.count();
+                        if (count < MIN_COUNT || count > MAX_COUNT || this._m209.PinSetting.Wheels[w].longSeq(p1, p2))
                         {
-                            pinSettings.Wheels[w].ToggleTwoPins(p1, p2);
+                            this._m209.PinSetting.Wheels[w].ToggleTwoPins(p1, p2);
                             continue;
                         }
 
-                        this._m209.PinSetting = pinSettings;
-                        this._m209.LugSettings = lugSettings;
                         newScore = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
-                        AddNewBestListEntry(this._m209.LugSettings.ToString() + this._m209.PinSetting.ToString(), newScore, this._m209.Encrypt(ciphertext));
+                        AddNewBestListEntry(this._m209.LugSettings.ToStringRepresentation() + this._m209.PinSetting.ToString(), newScore, this._m209.Encrypt(ciphertext));
 
-                        double D = newScore - currLocalScore;
-                        if (D > 0 || this.Randomizer.NextDouble() < Math.Exp(-(Math.Abs(D) / temperature)))
+                        if (SimulatedAnnealing.accept(newScore, currLocalScore, temperature))
                         {
                             currLocalScore = newScore;
                             changeAccepted = true;
                             if (newScore > bestSAScore)
                             {
+                                bestSAPins = this._m209.PinSetting;
                                 bestSAScore = newScore;
                             }
                         }
                         else
                         {
-                            pinSettings.Wheels[w].ToggleTwoPins(p1, p2);
+                            this._m209.PinSetting.Wheels[w].ToggleTwoPins(p1, p2);
                         }
 
                         if (!Running)
@@ -434,6 +434,7 @@ namespace Cryptool.Plugins.M209Analyzer
 
             if (changeAccepted)
             {
+                this._m209.PinSetting = bestSAPins;
                 return bestSAScore;
             }
 
@@ -499,14 +500,12 @@ namespace Cryptool.Plugins.M209Analyzer
 
 
             // inverseWheelBitmap Transformation from java application
+            LogMessage($"step \t before Transformation inverseWheelBitmap", NotificationLevel.Info);
             int bestV = -1;
             double bestVscore = 0;
-            for (int v = 0; v < 64; v++)
+            for (int v = 0; v < 64 && this.Running; v++)
             {
-                pinSettings.InverseWheelBitmap(v);
-
-                this._m209.PinSetting = pinSettings;
-                this._m209.LugSettings = lugSettings;
+                this._m209.PinSetting.InverseWheelBitmap(v);
 
                 double score = this.grams.CalculateCost(this._m209.Encrypt(ciphertext));
                 if (score > bestVscore)
@@ -514,18 +513,18 @@ namespace Cryptool.Plugins.M209Analyzer
                     bestVscore = score;
                     bestV = v;
                 }
-                pinSettings.InverseWheelBitmap(v);
+                this._m209.PinSetting.InverseWheelBitmap(v);
 
                 newScore = bestVscore;
-                AddNewBestListEntry(this._m209.LugSettings.ToString() + this._m209.PinSetting.ToString(), newScore, this._m209.Encrypt(ciphertext));
-                double D = newScore - currLocalScore;
-                if (D > 0 || this.Randomizer.NextDouble() < Math.Exp(-(Math.Abs(D) / temperature)))
+                AddNewBestListEntry(this._m209.LugSettings.ToStringRepresentation() + this._m209.PinSetting.ToString(), newScore, this._m209.Encrypt(ciphertext));
+                if (SimulatedAnnealing.accept(newScore, currLocalScore, temperature))
                 {
                     currLocalScore = newScore;
-                    pinSettings.InverseWheelBitmap(bestV);
+                    this._m209.PinSetting.InverseWheelBitmap(bestV);
                     changeAccepted = true;
                     if (newScore > bestSAScore)
                     {
+                        bestSAPins = this._m209.PinSetting;
                         bestSAScore = newScore;
                     }
                 }
@@ -549,17 +548,19 @@ namespace Cryptool.Plugins.M209Analyzer
                 cycles = int.MaxValue;
             }
 
-            for (int cycle = 0; cycle < cycles; cycle++)
+            for (int cycle = 0; cycle < cycles && this.Running; cycle++)
             {
                 double bestRandom = double.MinValue;
                 double bestLocal = 0;
 
                 int phase1Trials = 200000 / cipherText.Length;
-                for (int r = 0; r < phase1Trials; r++)
+                phase1Trials = 133;
+                for (int r = 0; r < phase1Trials && this.Running; r++)
                 {
                     this._m209.LugSettings.Randomize();
+                    LogMessage($"Random lugsetting: {this._m209.LugSettings.ToStringRepresentation()}", NotificationLevel.Info);
 
-                    double newEval = SAInner(cipherText, this._m209.LugSettings, this._m209.PinSetting, instructionVersion, cycles);
+                    double newEval = SAInner(cipherText, instructionVersion, 1);
                     if (newEval > bestRandom)
                     {
                         bestRandom = newEval;
@@ -581,8 +582,116 @@ namespace Cryptool.Plugins.M209Analyzer
 
                 do
                 {
+                    improved = false;
+                    double newEval;
 
-                } while (improved);
+                    //LugType lugType1 = new LugType(0);
+                    //LugType lugType2 = new LugType(0);
+
+                    //for (int c1 = 0; c1 < lugType1.Length; c1++)
+                    //{
+                    //    for (int c2 = 0; c2 < lugType2.Length; c2++)
+                    //    {
+                    //        if( c1 >= c2)
+                    //        {
+                    //            continue;
+                    //        }
+
+
+                    //    }
+
+                    //}
+
+                    // Simple transformations like in the paper
+                    for (int bar1 = 0; bar1 < 6 && this.Running; bar1++)
+                    {
+                        for (int bar2 = 0; bar2 < 6 && this.Running; bar2++)
+                        {
+                            if ((bar1 < bar2) && (bar1 != bar2))
+                            {
+                                for (int i = 0; i < 2 && this.Running; i++)
+                                {
+                                    if (i == 0)
+                                    {
+                                        this._m209.LugSettings.ApplySimpleTransformation(bar1, bar2);
+                                    }
+                                    else
+                                    {
+                                        this._m209.LugSettings.ApplySimpleTransformation(bar2, bar1);
+                                    }
+                                    LogMessage($"\t ApplySimpleTransformation", NotificationLevel.Info);
+
+                                    newEval = SAInner(cipherText, "V", 1);
+                                    if (newEval > bestLocal)
+                                    {
+                                        improved = true;
+                                        bestLocal = newEval;
+                                        LogMessage($"Improved: bestScore = {bestLocal}, score = {newEval}", NotificationLevel.Info);
+                                        bestLocalPinSettings = this._m209.PinSetting;
+                                        bestLocalLugSettings = this._m209.LugSettings;
+                                    }
+                                    else
+                                    {
+                                        LogMessage($"No improvement : bestScore = {bestLocal}, score = {newEval}", NotificationLevel.Info);
+                                        //localCounter--;
+
+                                        // Undo changes
+                                        this._m209.LugSettings.ApplySimpleTransformation(bar1, bar2);
+                                        this._m209.LugSettings.ApplySimpleTransformation(bar2, bar1);
+
+                                        this._m209.PinSetting = bestLocalPinSettings;
+                                        this._m209.LugSettings = bestLocalLugSettings;
+                                    }
+
+
+                                }
+                            }
+
+                        }
+                    }
+
+                    // Complex transformations
+                    if (!improved && this.Running)
+                    {
+                        for (int bar1 = 0; bar1 < 6 && !improved && this.Running; bar1++)
+                        {
+                            for (int bar2 = bar1 + 1; bar2 < 6 && !improved && this.Running; bar2++)
+                            {
+                                for (int bar3 = bar2 + 1; bar3 < 6 && !improved && this.Running; bar3++)
+                                {
+                                    for (int bar4 = bar3 + 1; bar4 < 6 && !improved && this.Running; bar4++)
+                                    {
+                                        for (int i = 0; i < 6 && this.Running; i++)
+                                        {
+                                            this._m209.LugSettings.ApplyComplexTransformation(bar1, bar2, bar3, bar4, i);
+                                            LogMessage($"\t ApplyComplexTransformation", NotificationLevel.Info);
+
+                                            //newEval = SAInner(cipherText, "V", 1);
+                                            newEval = this.grams.CalculateCost(this._m209.Encrypt(cipherText));
+                                            if (newEval > bestLocal)
+                                            {
+                                                improved = true;
+                                                bestLocal = newEval;
+                                                LogMessage($"Improved: bestScore = {bestLocal}, score = {newEval} {this._m209.Encrypt(cipherText)}", NotificationLevel.Info);
+                                                bestLocalPinSettings = this._m209.PinSetting;
+                                                bestLocalLugSettings = this._m209.LugSettings;
+                                            }
+                                            else
+                                            {
+                                                LogMessage($"No improvement (): bestScore = {bestLocal}, score = {newEval} {this._m209.Encrypt(cipherText)}", NotificationLevel.Info);
+                                                //localCounter--;
+                                                this._m209.PinSetting = bestLocalPinSettings;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
+
+                } while (improved && this.Running);
             }
 
         }

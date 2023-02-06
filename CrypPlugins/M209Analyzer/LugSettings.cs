@@ -212,6 +212,11 @@ namespace M209Analyzer
             }
         }
 
+        public int Length
+        {
+            get { return this._possibleLugSettings.Length; }
+        }
+
         public int[] Value
         {
             get

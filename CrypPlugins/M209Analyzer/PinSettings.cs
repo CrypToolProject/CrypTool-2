@@ -34,6 +34,16 @@ namespace M209Analyzer
             }
         }
 
+        public string ToStringRepresentation()
+        {
+            string stringRepresentation = "";
+            for (int i = 0; i < Wheels.Length; i++)
+            {
+                stringRepresentation += Wheels[i].GetEffectiveLetters() + "; ";
+            }
+            return stringRepresentation;
+        }
+
         public void SetPinValueOfWheel(int wheel, int pin, bool value)
         {
             this.Wheels[wheel].SetPinValue(pin, value);
