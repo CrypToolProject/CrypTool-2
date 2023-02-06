@@ -31,9 +31,9 @@ Die Chiffre verwendet ein erstes Schlüsselwort und verschlüsselt den Klartext 
   <keywords>Bazeries, Cipher</keywords>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
-    <replacement key="$Keyword1$" value="Keyword 1" />
-    <replacement key="$Keyword2$" value="Keyword 2" />
-    <replacement key="$Keyword3$" value="Keyword 3" />
+    <replacement key="$Keyword 1$" value="Keyword 1" />
+    <replacement key="$Keyword 2$" value="Keyword 2" />
+    <replacement key="$Keyword 3$" value="Keyword 3" />
     <replacement key="$Decrypted Plaintext$" value="Decrypted plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$memo$" value="The {\b GRANIT/160} cipher is a manual cipher invented for spies of the GDR. It uses a substitution and a double columnar transposition cipher. GRANIT/160 was used by Günter Guillaume, a Stasi spy who became personal assistant to chancellor Willy Brandt.\line
