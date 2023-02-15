@@ -259,6 +259,15 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Find/Lock Nomenclature Elements.
+        /// </summary>
+        internal static string FindLockNomenclatureElements {
+            get {
+                return ResourceManager.GetString("FindLockNomenclatureElements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Find/Lock words.
         /// </summary>
         internal static string FindLockWords {
@@ -498,6 +507,33 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer.Properties {
         internal static string MinWordLengthTooltip {
             get {
                 return ResourceManager.GetString("MinWordLengthTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max threshold.
+        /// </summary>
+        internal static string NomenclatureElementsThresholdCaption {
+            get {
+                return ResourceManager.GetString("NomenclatureElementsThresholdCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nomenclature element locking.
+        /// </summary>
+        internal static string NomenclatureElementsThresholdGroup {
+            get {
+                return ResourceManager.GetString("NomenclatureElementsThresholdGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum number of identical symbols occurring in the text to be marked as nomenclature elements.
+        /// </summary>
+        internal static string NomenclatureElementsThresholdTooltip {
+            get {
+                return ResourceManager.GetString("NomenclatureElementsThresholdTooltip", resourceCulture);
             }
         }
         

@@ -366,4 +366,16 @@
   <data name="StartTemperatureTooltip" xml:space="preserve">
     <value>Start temperature of the simulated annealing algorithm</value>
   </data>
+  <data name="FindLockNomenclatureElements" xml:space="preserve">
+    <value>Find/Lock Nomenclature Elements</value>
+  </data>
+  <data name="NomenclatureElementsThresholdCaption" xml:space="preserve">
+    <value>Max threshold</value>
+  </data>
+  <data name="NomenclatureElementsThresholdGroup" xml:space="preserve">
+    <value>Nomenclature element locking</value>
+  </data>
+  <data name="NomenclatureElementsThresholdTooltip" xml:space="preserve">
+    <value>Maximum number of identical symbols occurring in the text to be marked as nomenclature elements</value>
+  </data>
 </root>

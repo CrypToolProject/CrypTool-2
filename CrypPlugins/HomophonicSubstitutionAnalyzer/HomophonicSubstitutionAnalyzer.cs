@@ -154,6 +154,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             _presentation.AnalyzerConfiguration.WordCountToFind = _settings.WordCountToFind;
             _presentation.AnalyzerConfiguration.MinWordLength = _settings.MinWordLength;
             _presentation.AnalyzerConfiguration.MaxWordLength = _settings.MaxWordLength;
+            _presentation.AnalyzerConfiguration.NomenclatureElementsThreshold = _settings.NomenclatureElementsThreshold;
             _presentation.AnalyzerConfiguration.Steps = _settings.Steps;
             _presentation.AnalyzerConfiguration.AnalysisMode = _settings.AnalysisMode;
             _presentation.AnalyzerConfiguration.Restarts = _settings.Restarts;

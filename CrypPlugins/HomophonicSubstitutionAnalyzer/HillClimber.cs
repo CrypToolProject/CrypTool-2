@@ -504,8 +504,9 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         public int Steps { get; set; }
         public int Restarts { get; set; }
         public int MinWordLength { get; set; }
-        public int MaxWordLength { get; set; }
+        public int MaxWordLength { get; set; }        
         public int WordCountToFind { get; set; }
+        public int NomenclatureElementsThreshold { get; set; }
         public List<LetterLimits> KeyLetterLimits { get; set; }
         public int[] LockedHomophoneMappings { get; set; }
         public Text Ciphertext { get; private set; }

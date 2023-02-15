@@ -49,16 +49,18 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="150"/>
-                        <ColumnDefinition Width="210"/>
-                        <ColumnDefinition Width="210"/>
-                        <ColumnDefinition Width="210"/>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="220"/>
                     </Grid.ColumnDefinitions>
                     <ProgressBar Name="ProgressBar" Grid.Column="0"/>
                     <Label Name="ProgressText" Grid.Column="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="25"/>
                     <TextBox Name="CostTextBox" Grid.Column="1" IsEnabled="False"/>
-                    <Button Name="AnalyzeButton" Grid.Column="2" Content="{Loc Analyze}" Click="Analyze_Click" Width="200"/>
-                    <Button Name="ResetLockedLettersButton" Grid.Column="3" Content="{Loc ResetLockedLetters}" Click="ResetLockedLettersButton_Click" Width="200" />
-                    <Button Name="FindLockWordsButton" Grid.Column="4" Content="{Loc FindLockWords}" Click="FindLockWordsButton_OnClick" Width="200"/>
+                    <Button Name="AnalyzeButton" Grid.Column="2" Content="{Loc Analyze}" Click="Analyze_Click" Width="215"/>
+                    <Button Name="ResetLockedLettersButton" Grid.Column="3" Content="{Loc ResetLockedLetters}" Click="ResetLockedLettersButton_Click" Width="215" />
+                    <Button Name="FindLockWordsButton" Grid.Column="4" Content="{Loc FindLockWords}" Click="FindLockWordsButton_OnClick" Width="215"/>
+                    <Button Name="FindLockWordNomenclatureElementsButton" Grid.Column="5" Content="{Loc FindLockNomenclatureElements}" Click="FindLockNomenclatureElements_OnClick" Width="215"/>
                 </Grid>
                 <Label Grid.Row="4" Grid.ColumnSpan="6" Content="{Loc Ciphertext}"/>
                 <ScrollViewer Grid.Row="5" VerticalScrollBarVisibility="Auto" Name="CiphertextScrollViewer" ScrollChanged="CiphertextScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" Width="Auto" Height="Auto" Grid.ColumnSpan="6">

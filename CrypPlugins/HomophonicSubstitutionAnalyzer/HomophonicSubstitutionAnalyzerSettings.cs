@@ -75,6 +75,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         private int _wordCountToFind = 5;
         private int _minWordLength = 8;
         private int _maxWordLength = 10;
+        private int _nomenclatureElementsThreshold = 1;
         private AnalysisMode _analysisMode;
         private int _steps = 10_000_000;
         private int _restarts = 1000;
@@ -194,28 +195,35 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             set => _maxWordLength = value;
         }
 
-        [TaskPane("AnalysisModeCaption", "AnalaysisModeTooltip", "AlgorithmSettingsGroup", 11, false, ControlType.ComboBox, new string[] { "SemiAutomatic", "FullAutomatic" })]
+        [TaskPane("NomenclatureElementsThresholdCaption", "NomenclatureElementsThresholdTooltip", "NomenclatureElementsThresholdGroup", 11, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
+        public int NomenclatureElementsThreshold
+        {
+            get => _nomenclatureElementsThreshold;
+            set => _nomenclatureElementsThreshold = value;
+        }
+
+        [TaskPane("AnalysisModeCaption", "AnalaysisModeTooltip", "AlgorithmSettingsGroup", 12, false, ControlType.ComboBox, new string[] { "SemiAutomatic", "FullAutomatic" })]
         public AnalysisMode AnalysisMode
         {
             get => _analysisMode;
             set => _analysisMode = value;
         }
 
-        [TaskPane("StepsCaption", "StepsTooltip", "AlgorithmSettingsGroup", 12, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
+        [TaskPane("StepsCaption", "StepsTooltip", "AlgorithmSettingsGroup", 13, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int Steps
         {
             get => _steps;
             set => _steps = value;
         }
 
-        [TaskPane("RestartsCaption", "RestartsTooltip", "AlgorithmSettingsGroup", 13, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
+        [TaskPane("RestartsCaption", "RestartsTooltip", "AlgorithmSettingsGroup", 14, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int Restarts
         {
             get => _restarts;
             set => _restarts = value;
         }
 
-        [TaskPane("StartTemperatureCaption", "StartTemperatureTooltip", "AlgorithmSettingsGroup", 14, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
+        [TaskPane("StartTemperatureCaption", "StartTemperatureTooltip", "AlgorithmSettingsGroup", 15, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int StartTemperature
         {
             get => _startTemperature;
