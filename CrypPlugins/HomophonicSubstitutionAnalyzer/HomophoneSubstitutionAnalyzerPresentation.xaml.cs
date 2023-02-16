@@ -387,6 +387,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                         Y = y,
                         SymbolOffset = offset
                     };
+                    label.MouseLeftButtonDown += CiphertextLabelOnMouseLeftButtonDown;
+                    label.MouseRightButtonDown += CiphertextLabelOnMouseRightButtonDown;
                     if (offset < text.Length)
                     {
                         label.Symbol = text.Substring(offset, 1);
@@ -469,6 +471,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                         Y = y,
                         SymbolOffset = offset
                     };
+                    label.MouseLeftButtonDown += CiphertextLabelOnMouseLeftButtonDown;
+                    label.MouseRightButtonDown += CiphertextLabelOnMouseRightButtonDown;
                     if (offset < text.Length)
                     {
                         label.Symbol = text.Substring(offset, 1);
@@ -533,8 +537,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                         break;
                     }
                     SymbolLabel label = new SymbolLabel();
-                    label.MouseLeftButtonDown += LabelOnMouseLeftButtonDown;
-                    label.MouseRightButtonDown += LabelOnMouseRightButtonDown;
+                    label.MouseLeftButtonDown += PlaintextLabelOnMouseLeftButtonDown;
+                    label.MouseRightButtonDown += PlaintextLabelOnMouseRightButtonDown;
                     _plaintextLabels[x, y] = label;
                     label.X = x;
                     label.Y = y;
@@ -610,8 +614,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                         break;
                     }
                     SymbolLabel label = new SymbolLabel();
-                    label.MouseLeftButtonDown += LabelOnMouseLeftButtonDown;
-                    label.MouseRightButtonDown += LabelOnMouseRightButtonDown;
+                    label.MouseLeftButtonDown += PlaintextLabelOnMouseLeftButtonDown;
+                    label.MouseRightButtonDown += PlaintextLabelOnMouseRightButtonDown;
                     _plaintextLabels[x, y] = label;
                     label.X = x;
                     label.Y = y;
@@ -896,20 +900,25 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 }
             }
             StringBuilder builder = new StringBuilder();
-            foreach (KeyValuePair<string, List<string>> keyValuePair in keyDictionary)
-            {
-                builder.Append(string.Format("[{0}];", keyValuePair.Key));
-                List<string> list = keyValuePair.Value;
-                list.Sort();
-                for (int i = 0; i < list.Count; i++)
+            
+            List<string> plaintextElements = keyDictionary.Keys.ToList();
+            plaintextElements.Sort(); // sort alphabetically
+
+            foreach (string plaintextElement in plaintextElements)
+            {                
+                builder.Append(string.Format("[{0}];", plaintextElement));
+                List<string> ciphertextElements = keyDictionary[plaintextElement];
+                ciphertextElements.Sort(); // sort alphabetically
+
+                for (int i = 0; i < ciphertextElements.Count; i++)
                 {
-                    string symbol = list[i];
+                    string symbol = ciphertextElements[i];
                     if (i == 0)
                     {
                         builder.Append("[");
                         builder.Append(symbol);
                     }
-                    else if (i < list.Count - 1)
+                    else if (i < ciphertextElements.Count - 1)
                     {
                         builder.Append("|");
                         builder.Append(symbol);
@@ -921,7 +930,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                         builder.AppendLine("]");
                     }
                 }
-                if (list.Count == 1)
+                if (ciphertextElements.Count == 1)
                 {
                     //if we have only one element, we have to close the tag
                     builder.AppendLine("]");
@@ -1009,15 +1018,14 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 //wtf?
             }
             return newTopEntry;
-        }
-
+        }       
 
         /// <summary>
         /// Left mouse button down
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="mouseButtonEventArgs"></param>
-        private void LabelOnMouseLeftButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        private void PlaintextLabelOnMouseLeftButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
         {
             if (_running)
             {
@@ -1037,11 +1045,29 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         }
 
         /// <summary>
+        /// Left mouse button down
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="mouseButtonEventArgs"></param>
+        private void CiphertextLabelOnMouseLeftButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        {
+            if (_running)
+            {
+                return;
+            }
+            SymbolLabel label = (SymbolLabel)sender;
+            if (_plaintextLabels[label.X, label.Y] != null)
+            {
+                PlaintextLabelOnMouseLeftButtonDown(_plaintextLabels[label.X, label.Y], mouseButtonEventArgs);
+            }
+        }
+
+        /// <summary>
         /// Right mouse button down
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="mouseButtonEventArgs"></param>
-        private void LabelOnMouseRightButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        private void PlaintextLabelOnMouseRightButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
         {
             if (_running)
             {
@@ -1065,6 +1091,24 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 //do nothing here
             }
             mouseButtonEventArgs.Handled = true;            
+        }
+
+        /// <summary>
+        /// Right mouse button down
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="mouseButtonEventArgs"></param>
+        private void CiphertextLabelOnMouseRightButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        {
+            if (_running)
+            {
+                return;
+            }
+            SymbolLabel label = (SymbolLabel)sender;
+            if (_plaintextLabels[label.X, label.Y] != null)
+            {
+                PlaintextLabelOnMouseRightButtonDown(_plaintextLabels[label.X, label.Y], mouseButtonEventArgs);
+            }
         }
 
         /// <summary>

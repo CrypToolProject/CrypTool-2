@@ -119,10 +119,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                             continue;
                         }
 
-                        // change the i-th element with the j-th element
-                        int swap = runkey[i].PlainLetter;
-                        runkey[i].PlainLetter = runkey[j].PlainLetter;
-                        runkey[j].PlainLetter = swap;
+                        // swap the i-th element with the j-th element
+                        (runkey[i].PlainLetter, runkey[j].PlainLetter) = (runkey[j].PlainLetter, runkey[i].PlainLetter);
 
                         // decrypt the ciphertext inplace
                         DecryptHomophonicSubstitutionInPlace(plaintext, runkey, i, j);
@@ -137,9 +135,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                         }
                         else
                         {
-                            //revert the key to the old one
-                            runkey[j].PlainLetter = runkey[i].PlainLetter;
-                            runkey[i].PlainLetter = swap;
+                            //revert the key to the old one by swapping
+                            (runkey[i].PlainLetter, runkey[j].PlainLetter) = (runkey[j].PlainLetter, runkey[i].PlainLetter);
                             DecryptHomophonicSubstitutionInPlace(plaintext, runkey, i, j);
                         }
                     }
@@ -299,8 +296,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 }
                 catch (IndexOutOfRangeException)
                 {
-                    //if the letter is not in alphabet, we just add an X
-                    builder.Append("X");
+                    //if the letter is not in alphabet, we just add the last 
+                    builder.Append(Alphabet[Alphabet.Length - 1]);
                 }
             }
             return builder.ToString();
