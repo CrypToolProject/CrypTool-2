@@ -105,8 +105,6 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             Text plaintext = DecryptHomophonicSubstitution(runkey);
             do
             {
-
-
                 //3.1) permutate key                
                 for (int i = 0; i < AnalyzerConfiguration.Keylength - 1; i++)
                 {
