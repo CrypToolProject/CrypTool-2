@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2020 Nils Kopal <Nils.Kopal<at>CrypTool.org
+   Copyright 2023 Nils Kopal <Nils.Kopal<at>CrypTool.org
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -89,7 +89,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <summary>
         /// This event is needed in order to render settings elements visible/invisible
         /// </summary>
-        public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
+        public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;        
 
         #region TaskPane Settings      
 
@@ -164,14 +164,19 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             {
                 _keyLetterDistributionType = value;
                 UpdateSettingsVisibilities();
+                OnPropertyChanged(nameof(KeyLetterDistributionType));
             }
         }
 
         [TaskPane("HomophonicityCaption", "HomophonicityTooltip", "KeyLetterDistributionGroup", 7, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100 )]
-        public int Homophononicity
+        public int Homophonicity
         {
             get => _homophonicity;
-            set => _homophonicity = value;
+            set
+            {
+                _homophonicity = value;
+                OnPropertyChanged(nameof(Homophonicity));
+            }
         }
 
         [TaskPane("WordCountToFindCaption", "WordCountToFindTooltip", "WordLockerGroup", 8, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
@@ -270,11 +275,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         {
             if (_keyLetterDistributionType == KeyLetterDistributionType.Uniform)
             {
-                ShowSettingsElement("Homophononicity");
+                ShowSettingsElement(nameof(Homophonicity));
             }
             else
             {
-                HideSettingsElement("Homophononicity");
+                HideSettingsElement(nameof(Homophonicity));
             }
         }
 
