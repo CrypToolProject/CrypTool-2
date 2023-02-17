@@ -30,6 +30,7 @@ namespace CrypTool.Plugins.GRANIT160Cipher
         #region Private Variables
 
         private Action _action = Action.Encrypt;
+        private bool _addNullsIfNeeded = false;
 
         #endregion
 
@@ -50,6 +51,23 @@ namespace CrypTool.Plugins.GRANIT160Cipher
                 {
                     _action = value;
                     OnPropertyChanged(nameof(Action));
+                }
+            }
+        }
+
+        [TaskPane("AddNullsIfNeededCaption", "AddNullsIfNeededTooltip", null, 2, false, ControlType.CheckBox)]
+        public bool AddNullsIfNeeded
+        {
+            get
+            {
+                return _addNullsIfNeeded;
+            }
+            set
+            {
+                if (_addNullsIfNeeded != value)
+                {
+                    _addNullsIfNeeded = value;
+                    OnPropertyChanged(nameof(AddNullsIfNeeded));
                 }
             }
         }

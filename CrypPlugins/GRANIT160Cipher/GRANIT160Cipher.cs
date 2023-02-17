@@ -20,7 +20,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace CrypTool.Plugins.GRANIT160Cipher
 {
@@ -370,6 +372,16 @@ namespace CrypTool.Plugins.GRANIT160Cipher
                 }
                 offset++;
             }
+
+            if (_settings.AddNullsIfNeeded)
+            {
+                Random random = new Random();
+                while(ciphertextBuilder.Length % 5 != 0)
+                {
+                    ciphertextBuilder.Append(random.Next(0, 9));
+                }
+            }
+
             return ciphertextBuilder.ToString();
         }
 

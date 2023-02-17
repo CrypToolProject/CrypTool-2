@@ -123,6 +123,12 @@
   <data name="ActionTooltip" xml:space="preserve">
     <value>Select the component's action</value>
   </data>
+  <data name="AddNullsIfNeededCaption" xml:space="preserve">
+    <value>Add nulls</value>
+  </data>
+  <data name="AddNullsIfNeededTooltip" xml:space="preserve">
+    <value>Should nulls be added if message is not divisible by 5?</value>
+  </data>
   <data name="Decrypt" xml:space="preserve">
     <value>Decrypt</value>
   </data>

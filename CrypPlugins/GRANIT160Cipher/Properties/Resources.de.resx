@@ -123,6 +123,12 @@
   <data name="ActionTooltip" xml:space="preserve">
     <value>Wählen Sie die Aktion der Komponente</value>
   </data>
+  <data name="AddNullsIfNeededCaption" xml:space="preserve">
+    <value>Nullen hinzufügen</value>
+  </data>
+  <data name="AddNullsIfNeededTooltip" xml:space="preserve">
+    <value>Sollten Nullen hinzugefügt werden, wenn Nachricht nicht durch 5 teilbar ist?</value>
+  </data>
   <data name="Decrypt" xml:space="preserve">
     <value>Entschlüsseln</value>
   </data>

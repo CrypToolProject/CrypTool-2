@@ -79,6 +79,24 @@ namespace CrypTool.Plugins.GRANIT160Cipher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add nulls.
+        /// </summary>
+        internal static string AddNullsIfNeededCaption {
+            get {
+                return ResourceManager.GetString("AddNullsIfNeededCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Should nulls be added if message is not divisible by 5?.
+        /// </summary>
+        internal static string AddNullsIfNeededTooltip {
+            get {
+                return ResourceManager.GetString("AddNullsIfNeededTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Decrypt.
         /// </summary>
         internal static string Decrypt {
