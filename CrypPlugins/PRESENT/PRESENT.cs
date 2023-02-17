@@ -23,18 +23,15 @@ using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.ComponentModel;
-using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography;
 using System.Text;
-
 
 namespace CrypTool.PRESENT
 {
     [Author("Timm Korte", "CrypTool@easycrypt.de", "Uni Bochum", "http://www.ruhr-uni-bochum.de")]
     [PluginInfo("CrypTool.PRESENT.Properties.Resources", "PluginCaption", "PluginTooltip", "PRESENT/DetailedDescription/doc.xml", "PRESENT/icon.png", "PRESENT/Images/encrypt.png", "PRESENT/Images/decrypt.png")]
-    [ComponentCategory(ComponentCategory.CiphersModernSymmetric)]
-    [Synchronization(SynchronizationAttribute.REQUIRES_NEW)]
-    public class PRESENT : ContextBoundObject, ICrypComponent
+    [ComponentCategory(ComponentCategory.CiphersModernSymmetric)]    
+    public class PRESENT : ICrypComponent
     {
         #region Private variables
         private PRESENTSettings settings;
