@@ -1713,13 +1713,6 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             }
         }
 
-        private void HandleResultItemAction(ICrypAnalysisResultListEntry item)
-        {
-            if (item is ResultEntry resultItem)
-            {
-            }
-        }
-
         /// <summary>
         /// When ciphertext scroll viewer is scrolled, plaintext scroll viewer is adapted accordingly
         /// </summary>

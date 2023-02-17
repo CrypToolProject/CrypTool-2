@@ -77,7 +77,7 @@
         </TabItem>
         <TabItem Header="{Loc BestList}">
             <crypanalysisviewcontrol:CrypAnalysisViewControl ResultListCaption="{Loc TopTenLabel}">
-                <crypanalysisviewcontrol:CrypAnalysisResultListView Name="BestListView" ItemsSource="{Binding}" ResultItemAction="HandleResultItemAction" Height="330">
+                <crypanalysisviewcontrol:CrypAnalysisResultListView Name="BestListView" ItemsSource="{Binding}" Height="330">
                     <crypanalysisviewcontrol:CrypAnalysisResultListView.View>
                         <GridView>
                             <GridViewColumn Header="#" DisplayMemberBinding="{Binding Path=Ranking}" Width="30">
