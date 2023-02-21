@@ -93,7 +93,7 @@ namespace ByteArrayOperations
                 {
                     case ByteArrayOperation.Concatenate:
                         _outputArray = Concat(_array1, _array2);
-                        OnPropertyChanged("OutputArray");
+                        OnPropertyChanged(nameof(OutputArray));
                         break;
                     case ByteArrayOperation.Subarray:
                         if (_array1.Length > 0 && _value1 < 0 && _value1 >= -_array1.Length)
@@ -101,61 +101,64 @@ namespace ByteArrayOperations
                             _value1 = (_value1 + _array1.Length) % _array1.Length;
                         }
                         _outputArray = Subarray(_array1, _value1, _value2);
-                        OnPropertyChanged("OutputArray");
+                        OnPropertyChanged(nameof(OutputArray));
                         break;
                     case ByteArrayOperation.Length:
                         _outputValue = _array1.Length;
-                        OnPropertyChanged("OutputValue");
+                        OnPropertyChanged(nameof(OutputValue));
                         break;
                     case ByteArrayOperation.IndexOf:
                         _outputValue = IndexOf(_array1, _array2);
-                        OnPropertyChanged("OutputValue");
+                        OnPropertyChanged(nameof(OutputValue));
                         break;
                     case ByteArrayOperation.Equals:
                         _outputValue = Equals(_array1, _array2) ? 1 : 0;
-                        OnPropertyChanged("OutputValue");
+                        OnPropertyChanged(nameof(OutputValue));
                         break;
                     case ByteArrayOperation.Replace:
                         _outputArray = Replace(_array1, _array2, _array3);
-                        OnPropertyChanged("OutputArray");
+                        OnPropertyChanged(nameof(OutputArray));
                         break;
                     case ByteArrayOperation.Reverse:
                         _outputArray = Reverse(_array1);
-                        OnPropertyChanged("OutputArray");
+                        OnPropertyChanged(nameof(OutputArray));
                         break;
                     case ByteArrayOperation.And:
                         _outputArray = And(_array1, _array2);
-                        OnPropertyChanged("OutputArray");
+                        OnPropertyChanged(nameof(OutputArray));
                         break;
                     case ByteArrayOperation.Or:
                         _outputArray = Or(_array1, _array2);
-                        OnPropertyChanged("OutputArray");
+                        OnPropertyChanged(nameof(OutputArray));
                         break;
                     case ByteArrayOperation.ExclusiveOr:
                         _outputArray = ExclusiveOr(_array1, _array2);
-                        OnPropertyChanged("OutputArray");
+                        OnPropertyChanged(nameof(OutputArray));
                         break;
                     case ByteArrayOperation.Not:
                         _outputArray = Not(_array1);
-                        OnPropertyChanged("OutputArray");
+                        OnPropertyChanged(nameof(OutputArray));
                         break;
                     case ByteArrayOperation.LeftShift:
                         _outputArray = LeftShift(_array1, _value1);
-                        OnPropertyChanged("OutputArray");
+                        OnPropertyChanged(nameof(OutputArray));
                         break;
                     case ByteArrayOperation.RightShift:
                         _outputArray = RightShift(_array1, _value1);
-                        OnPropertyChanged("OutputArray");
+                        OnPropertyChanged(nameof(OutputArray));
                         break;
                     case ByteArrayOperation.LeftCircularShift:
                         _outputArray = LeftCircularShift(_array1, _value1);
-                        OnPropertyChanged("OutputArray");
+                        OnPropertyChanged(nameof(OutputArray));
                         break;
                     case ByteArrayOperation.RightCircularShift:
                         _outputArray = RightCircularShift(_array1, _value1);
-                        OnPropertyChanged("OutputArray");
+                        OnPropertyChanged(nameof(OutputArray));
                         break;
-
+                    case ByteArrayOperation.Shuffle:
+                        _outputArray = Shuffle(_array1);
+                        OnPropertyChanged(nameof(OutputArray));
+                        break;
                 }
                 ProgressChanged(1, 1);
             }
@@ -163,6 +166,31 @@ namespace ByteArrayOperations
             {
                 GuiLogMessage(string.Format(Resources.ByteArrayOperations_Execute_Could_not_execute_operation___0______1_, (_settings).Operation, ex.Message), NotificationLevel.Error);
             }
+        }
+
+
+        /// <summary>
+        /// Shuffles the given byte array using Fisher–Yates_shuffle
+        /// See https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
+        private byte[] Shuffle(byte[] array)
+        {
+            if (array == null)
+            {
+                return new byte[0];
+            }
+            byte[] result = new byte[array.Length];
+            Array.Copy(array, 0, result, 0, array.Length);
+
+            Random random = new Random();
+            for (int i = result.Length - 1; i >= 0; i--)
+            {
+                int j = random.Next(0, i);
+                (result[i], result[j]) = (result[j], result[i]);
+            }
+            return result;
         }
 
         /// <summary>
