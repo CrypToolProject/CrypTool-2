@@ -159,6 +159,9 @@
   <data name="OperationList17" xml:space="preserve">
     <value>Levenshtein-Distanz</value>
   </data>
+  <data name="OperationList18" xml:space="preserve">
+    <value>Mischen</value>
+  </data>
   <data name="OperationList2" xml:space="preserve">
     <value>Teilstring</value>
   </data>
