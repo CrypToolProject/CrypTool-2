@@ -26,6 +26,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media;
 using System.Xml;
+using WorkspaceManagerModel.Model.Tools;
 using WorkspaceManagerModel.Properties;
 
 namespace XMLSerialization
@@ -120,7 +121,8 @@ namespace XMLSerialization
         /// <param name="writer"></param>
         public static void Serialize(object obj, StreamWriter writer, bool compress = false)
         {
-            HashSet<object> alreadySerializedObjects = new HashSet<object>();
+            HashSet<long> alreadySerializedObjects = new HashSet<long>();
+            ObjectIDGenerator objectIDGenerator = new ObjectIDGenerator();
             writer.WriteLine("<?xml version=\"1.0\" encoding=\"" + writer.Encoding.HeaderName + "\"?>");
             writer.WriteLine("<!--");
             writer.WriteLine("     XML serialized C# Objects");
@@ -130,7 +132,7 @@ namespace XMLSerialization
             writer.WriteLine("     mailto: kopal(AT)cryptool.org");
             writer.WriteLine("-->");
             writer.WriteLine("<objects>");
-            SerializeIt(obj, writer, alreadySerializedObjects);
+            SerializeIt(obj, writer, alreadySerializedObjects, objectIDGenerator);
             writer.WriteLine("</objects>");
             writer.Flush();
         }
@@ -141,13 +143,13 @@ namespace XMLSerialization
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="writer"></param>
-        private static void SerializeIt(object obj, StreamWriter writer, HashSet<object> alreadySerializedObjects)
+        private static void SerializeIt(object obj, StreamWriter writer, HashSet<long> alreadySerializedObjects, ObjectIDGenerator objectIDGenerator)
         {
             //we only work on complex objects which are serializable and we did not see before
             if (obj == null ||
                 isPrimitive(obj) ||
                 !obj.GetType().IsSerializable ||
-                alreadySerializedObjects.Contains(obj) ||
+                alreadySerializedObjects.Contains(objectIDGenerator.GetID(obj)) ||
                 obj is Delegate)
             {
                 return;
@@ -158,7 +160,7 @@ namespace XMLSerialization
 
             writer.WriteLine("<object>");
             writer.WriteLine("<type>" + obj.GetType().FullName + "</type>");
-            writer.WriteLine("<id>" + obj.GetHashCode() + "</id>");
+            writer.WriteLine("<id>" + objectIDGenerator.GetID(obj) + "</id>");
 
             writer.WriteLine("<members>");
 
@@ -218,7 +220,7 @@ namespace XMLSerialization
                                 }
                                 else
                                 {
-                                    writer.WriteLine("<reference>" + o.GetHashCode() + "</reference>");
+                                    writer.WriteLine("<reference>" + objectIDGenerator.GetID(o) + "</reference>");
                                 }
                                 writer.WriteLine("</entry>");
                             }
@@ -258,7 +260,7 @@ namespace XMLSerialization
                     }
                     else
                     {
-                        writer.WriteLine("<reference>" + value.GetHashCode() + "</reference>");
+                        writer.WriteLine("<reference>" + objectIDGenerator.GetID(value) + "</reference>");
                     }
                     writer.WriteLine("</member>");
                 }
@@ -268,7 +270,7 @@ namespace XMLSerialization
             writer.Flush();
 
             //Save obj so that we will not work on it again
-            alreadySerializedObjects.Add(obj);
+            alreadySerializedObjects.Add(objectIDGenerator.GetID(obj));
 
             foreach (MemberInfo memberInfo in memberInfos)
             {
@@ -281,12 +283,12 @@ namespace XMLSerialization
                     {
                         foreach (object o in (System.Collections.IList)value)
                         {
-                            SerializeIt(o, writer, alreadySerializedObjects);
+                            SerializeIt(o, writer, alreadySerializedObjects, objectIDGenerator);
                         }
                     }
                     else
                     {
-                        SerializeIt(value, writer, alreadySerializedObjects);
+                        SerializeIt(value, writer, alreadySerializedObjects, objectIDGenerator);
                     }
 
                 }
