@@ -634,15 +634,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To start the RAPPOR component
-        /// press the &quot;Play&quot; button on the toolbar above the CT2 workspace
-        ///
-        ///You can then navigate through the component using the 5 tabs above.
-        ///The component settings can be accessed in 3 different ways: 
-        ///by clicking on the gear icon in the upper left corner of the component; 
-        ///or by clicking on the gear icon in the upper right corner of the workspace when the component is selected
-        ///or simply by pressing the key combination Ctrl + I .
-        ///You can find much more information in the online [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to To start the RAPPOR component press the &quot;Play&quot; button on the toolbar above the CT2 workspace. You can navigate through the component using the five tabs above. The component settings can be accessed in three different ways: (1) by clicking on the gear icon in the upper left corner of the component; or (2) by clicking on the gear icon in the upper right corner of the workspace when the component is selected or (3) simply by pressing the key combination Ctrl + i. You can find more information in the online he [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ShortTutorial {
             get {

@@ -340,18 +340,7 @@ Die Werte werden aus den ausgewählten Einstellungen der Komponente generiert.</
     <value>Fortfahren</value>
   </data>
   <data name="ShortTutorial" xml:space="preserve">
-    <value>Um die RAPPOR-Komponente zu starten, drücken Sie die Schaltfläche
-"Starten" in der Symbolleiste oberhalb des Arbeitsbereichs.
-Sie können dann mit den 5 obigen Registerkarten durch die Komponente
-navigieren.
-Die Einstellungen der Komponente können Sie auf 3 verschiedene Arten
-aufrufen: durch Klick auf das Zahnrad-Symbol oben links in der
-Komponente; oder bei markierter Komponente durch Klick auf das
-Zahnrad-Symbol oben rechts im Arbeitsbereich oder einfach durch die
-Tastenkombination Strg + i.
-Viele weitere Informationen finden Sie in der Onlinehilfe.
-Klicken Sie nun auf "Übersicht".
-</value>
+    <value>Um die RAPPOR-Komponente zu starten, drücken Sie die Schaltfläche "Starten" in der Symbolleiste oberhalb des Arbeitsbereichs. Mit den fünf obigen Registerkarten können Sie durch diese Komponente navigieren. Die Einstellungen der Komponente können Sie auf drei verschiedene Arten aufrufen: (1) durch Klicken auf das Zahnrad-Symbol oben links in der Komponente; oder (2) bei markierter Komponente durch Klicken auf das Zahnrad-Symbol oben rechts im Arbeitsbereich oder (3) einfach durch die Tastenkombination Strg + i. Weitere Informationen finden Sie in der Onlinehilfe. Klicken Sie auf Starten und dann auf die Registerkarte "Übersicht".</value>
     <comment>Short tutorial on how to use the RAPPOR component. Be sure to conserve the linebreaks in translation</comment>
   </data>
   <data name="Start" xml:space="preserve">

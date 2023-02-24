@@ -23,7 +23,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Border BorderThickness="2" BorderBrush="#8ABC94" MinHeight="300" MinWidth="400" Grid.RowSpan="4" />
+                    <Border BorderThickness="2" BorderBrush="#8ABC94" MinHeight="320" MinWidth="400" Grid.RowSpan="4" />
                     <!-- This view contains the basic information for the component as well as a short tutorial on how to use it. -->
                     <Grid Grid.Row="0" Background="GhostWhite" Margin="20,20,20,0">
                         <Border BorderThickness="1" BorderBrush="Black" CornerRadius="1">
@@ -32,18 +32,17 @@
                         </Border>
                     </Grid>
                     <Grid Grid.Row="1" Background="White" Margin="10,10,10,0">
-                        <TextBox TextAlignment="Center" VerticalAlignment="Center" FontSize="20" FontFamily="Times New Roman" Text="{Loc RAPPORElaboration}" IsReadOnly="True" BorderBrush="Transparent" BorderThickness="0">
+                        <TextBox TextAlignment="Center" VerticalAlignment="Center" FontSize="20" FontFamily="Times New Roman" Text="{Loc RAPPORElaboration}" IsReadOnly="True" BorderBrush="Transparent" BorderThickness="0"  MaxWidth="750" TextWrapping="Wrap">
                         </TextBox>
                     </Grid>
                     <Grid Grid.Row="2" Background="White" Margin="10,0,10,10">
-                        <TextBox TextAlignment="Center" VerticalAlignment="Center" FontSize="18" FontFamily="Times New Roman" Text="{Loc RAPPORElaborationGerman}" IsReadOnly="True" BorderBrush="Transparent" BorderThickness="0">
+                        <TextBox TextAlignment="Center" VerticalAlignment="Center" FontSize="18" FontFamily="Times New Roman" Text="{Loc RAPPORElaborationGerman}" IsReadOnly="True" BorderBrush="Transparent" BorderThickness="0" MaxWidth="750" TextWrapping="Wrap">
                         </TextBox>
                     </Grid>
-                    <Grid Grid.Row="3" Background="White" Margin="10,10,10,0">
-                        <TextBox TextAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Times New Roman" Text="{Loc ShortTutorial}" IsReadOnly="True" BorderBrush="Transparent" BorderThickness="0">
+                    <Grid Grid.Row="3" Background="White" Margin="10,10,10,5">
+                        <TextBox TextAlignment="Justify" VerticalAlignment="Center" FontSize="16" FontFamily="Times New Roman" Text="{Loc ShortTutorial}" IsReadOnly="True" BorderBrush="Transparent" BorderThickness="0"  MaxWidth="750" TextWrapping="Wrap">
                         </TextBox>
                     </Grid>
-
                 </Grid>
             </Grid>
         </ContentControl>
