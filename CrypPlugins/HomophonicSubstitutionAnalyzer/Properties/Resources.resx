@@ -367,7 +367,7 @@
     <value>Start temperature of the simulated annealing algorithm</value>
   </data>
   <data name="FindLockNomenclatureElements" xml:space="preserve">
-    <value>Find/Lock Nomenclature Elements</value>
+    <value>Find/Lock nomenclature elements</value>
   </data>
   <data name="NomenclatureElementsThresholdCaption" xml:space="preserve">
     <value>Max threshold</value>

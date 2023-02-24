@@ -259,7 +259,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find/Lock Nomenclature Elements.
+        ///   Looks up a localized string similar to Find/Lock nomenclature elements.
         /// </summary>
         internal static string FindLockNomenclatureElements {
             get {
