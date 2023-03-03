@@ -16,27 +16,23 @@ namespace RAPPOR.ViewModel
         /// <summary>
         /// The different array drawers which are being utilized.
         /// </summary>
-        private readonly ArrayDrawer arrayDrawer;
         private readonly ArrayDrawerRR arrayDrawerRR;
         private readonly ArrayDrawerHeatMaps arrayDrawerHM;
         /// <summary>
         /// Instance of the current rappor class.
         /// </summary>
-        public CrypTool.Plugins.RAPPOR.RAPPOR rappor;
+        public CrypTool.Plugins.RAPPOR.RAPPOR _rappor;
 
         /// <summary>
         /// Sets up the current RandomizedResponseViewModel. 
         /// </summary>
-        /// <param name="rAPPOR">The current rappor instance</param>
-        public RandomizedResponsesViewModel(CrypTool.Plugins.RAPPOR.RAPPOR rAPPOR)
+        /// <param name="rappor">The current rappor instance</param>
+        public RandomizedResponsesViewModel(CrypTool.Plugins.RAPPOR.RAPPOR rappor)
         {
-            rappor = rAPPOR;
-
-            arrayDrawer = new ArrayDrawer();
+            _rappor = rappor;
             arrayDrawerRR = new ArrayDrawerRR();
             arrayDrawerHM = new ArrayDrawerHeatMaps();
-            Canvas canvas = new Canvas();
-            RandomizedResponsesCanvas = canvas;
+            RandomizedResponsesCanvas = new Canvas();
             DrawCanvas();
             OnPropertyChanged("RandomizedResponsesCanvas");
         }
@@ -46,7 +42,7 @@ namespace RAPPOR.ViewModel
         public void DrawCanvas()
         {
             RandomizedResponsesCanvas.Children.Clear();
-            rappor.RunRappor();
+            _rappor.RunRappor();
             //Drawing boxes
             RandomizedResponsesCanvas.Children.Add(arrayDrawerRR.AddRectangle(10, 10, 180, 185, "#F2F2F2"));
             RandomizedResponsesCanvas.Children.Add(arrayDrawerRR.AddRectangle(10, 205, 180, 185, "#F2F2F2"));
@@ -60,10 +56,10 @@ namespace RAPPOR.ViewModel
             RandomizedResponsesCanvas.Children.Add(arrayDrawerRR.AddRectangle(705, 55, 85, 35, "#F2F2F2"));
 
             //Text for the variables
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 15, 17, "h: " + rappor.GetRAPPORSettings().GetAmountOfHashFunctions(), "#000000"));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(710, 15, 17, "f: " + rappor.GetRAPPORSettings().GetFVariable() + " %", "#000000"));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 60, 17, "q: " + rappor.GetRAPPORSettings().GetQVariable() + " %", "#000000"));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(710, 60, 17, "p: " + rappor.GetRAPPORSettings().GetPVariable() + " %", "#000000"));
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 15, 17, "h: " + _rappor.GetRAPPORSettings().GetAmountOfHashFunctions(), "#000000"));
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(710, 15, 17, "f: " + _rappor.GetRAPPORSettings().GetFVariable() + " %", "#000000"));
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 60, 17, "q: " + _rappor.GetRAPPORSettings().GetQVariable() + " %", "#000000"));
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(710, 60, 17, "p: " + _rappor.GetRAPPORSettings().GetPVariable() + " %", "#000000"));
 
 
             //Drawing divider lines
@@ -189,9 +185,8 @@ namespace RAPPOR.ViewModel
             RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 16 + y, 14, CrypTool.Plugins.RAPPOR.Properties.Resources.DifferentialPrivacyLevel + " " + "\u03B5")); //top text
             RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(765, 22 + y, 10, " \u221E")); //top text infinity symbol #20230122 Added blanks after epsilon and after infinity
 
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 123 + y, 20, "\u03B5   =  " + string.Format("{0:0.##########}", calculateEpsilonInfinity(rappor.GetRAPPORSettings().GetAmountOfHashFunctions(), (double)rappor.GetRAPPORSettings().GetFVariable() / 100))));//bottom calc
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 123 + y, 20, "\u03B5   =  " + string.Format("{0:0.##########}", CalculateEpsilonInfinity(_rappor.GetRAPPORSettings().GetAmountOfHashFunctions(), (double)_rappor.GetRAPPORSettings().GetFVariable() / 100))));//bottom calc
             RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(623, 130 + y, 14, " \u221E "));//bottom epsilon
-
 
             y = y - 45;
 
@@ -207,15 +202,13 @@ namespace RAPPOR.ViewModel
             RandomizedResponsesCanvas.Children.Add(epsilonOne);
             RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 212 + y, 14, CrypTool.Plugins.RAPPOR.Properties.Resources.DifferentialPrivacyLevel + " \u03B5\u2081"));//top text
             //RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 306, 20, "\u03B5\u2081: " + calculateEpsilonOne((double)rappor.GetRAPPORSettings().GetAmountOfHashFunctions(), (double)rappor.GetRAPPORSettings().GetFVariable() / 100, (double)rappor.GetRAPPORSettings().GetQVariable() / 100, (double)rappor.GetRAPPORSettings().GetPVariable() / 100)));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 306 + y, 20, "\u03B5\u2081 = " + string.Format("{0:0.##########}", calculateEpsilonOne(rappor.GetRAPPORSettings().GetAmountOfHashFunctions(), (double)rappor.GetRAPPORSettings().GetFVariable() / 100, (double)rappor.GetRAPPORSettings().GetQVariable() / 100, (double)rappor.GetRAPPORSettings().GetPVariable() / 100)))); //bottom text
-
-
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(615, 306 + y, 20, "\u03B5\u2081 = " + string.Format("{0:0.##########}", CalculateEpsilonOne(_rappor.GetRAPPORSettings().GetAmountOfHashFunctions(), (double)_rappor.GetRAPPORSettings().GetFVariable() / 100, (double)_rappor.GetRAPPORSettings().GetQVariable() / 100, (double)_rappor.GetRAPPORSettings().GetPVariable() / 100)))); //bottom text
 
             //10, 205, 180, 185,
             RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(15, 210, 14, CrypTool.Plugins.RAPPOR.Properties.Resources.qStarText));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(15, 272, 14, "q* = " + string.Format("{0:0.##########}", calculateQStar((double)rappor.GetRAPPORSettings().GetFVariable() / 100, (double)rappor.GetRAPPORSettings().GetQVariable() / 100, (double)rappor.GetRAPPORSettings().GetPVariable() / 100))));
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(15, 272, 14, "q* = " + string.Format("{0:0.##########}", CalculateQStar((double)_rappor.GetRAPPORSettings().GetFVariable() / 100, (double)_rappor.GetRAPPORSettings().GetQVariable() / 100, (double)_rappor.GetRAPPORSettings().GetPVariable() / 100))));
             RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(15, 300, 14, CrypTool.Plugins.RAPPOR.Properties.Resources.pStarText));
-            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(15, 362, 14, "p* = " + string.Format("{0:0.##########}", calculatePStar((double)rappor.GetRAPPORSettings().GetFVariable() / 100, (double)rappor.GetRAPPORSettings().GetQVariable() / 100, (double)rappor.GetRAPPORSettings().GetPVariable() / 100))));
+            RandomizedResponsesCanvas.Children.Add(arrayDrawerHM.AddText(15, 362, 14, "p* = " + string.Format("{0:0.##########}", CalculatePStar((double)_rappor.GetRAPPORSettings().GetFVariable() / 100, (double)_rappor.GetRAPPORSettings().GetQVariable() / 100, (double)_rappor.GetRAPPORSettings().GetPVariable() / 100))));
 
             OnPropertyChanged("RandomizedResponsesCanvas");
         }
@@ -226,7 +219,7 @@ namespace RAPPOR.ViewModel
         /// <param name="q"></param>
         /// <param name="p"></param>
         /// <returns>The q star value</returns>
-        public double calculateQStar(double f, double q, double p)
+        public double CalculateQStar(double f, double q, double p)
         {
             return 0.5 * f * (p + q) + (1 - f) * q;
         }
@@ -237,7 +230,7 @@ namespace RAPPOR.ViewModel
         /// <param name="q">User tunable parameter q</param>
         /// <param name="p">User tunable parameter p</param>
         /// <returns>The p star value</returns>
-        public double calculatePStar(double f, double q, double p)
+        public double CalculatePStar(double f, double q, double p)
         {
             return 0.5 * f * (p + q) + (1 - f) * p;
         }
@@ -247,7 +240,7 @@ namespace RAPPOR.ViewModel
         /// <param name="h">User tunable parameter h</param>
         /// <param name="f">User tunable parameter f</param>
         /// <returns>Epsilon infinity value</returns>
-        public double calculateEpsilonInfinity(double h, double f)
+        public double CalculateEpsilonInfinity(double h, double f)
         {
             if (f == 0)
             {
@@ -264,10 +257,10 @@ namespace RAPPOR.ViewModel
         /// <param name="q">User tunable parameter  q</param>
         /// <param name="p">User tunable parameter  p</param>
         /// <returns>epsilon one value</returns>
-        public double calculateEpsilonOne(double h, double f, double q, double p)
+        public double CalculateEpsilonOne(double h, double f, double q, double p)
         {
-            double qStar = calculateQStar(f, q, p);
-            double pStar = calculatePStar(f, q, p);
+            double qStar = CalculateQStar(f, q, p);
+            double pStar = CalculatePStar(f, q, p);
             return Math.Abs(h * Math.Log(qStar * (1 - pStar) / (pStar * (1 - qStar)), 2));
         }
 

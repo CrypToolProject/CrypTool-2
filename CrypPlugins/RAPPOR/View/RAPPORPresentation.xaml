@@ -96,33 +96,33 @@
                 <RowDefinition/>
                 <RowDefinition Height="0.5*"/>
             </Grid.RowDefinitions>
-            <DockPanel Name="dockPanel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" MinWidth="1000">
-                <Button Name="Button0" Style="{StaticResource HeaderButtonStyle}" DockPanel.Dock="Left" Width="Auto" Click="StartButton_Click" MinWidth="200">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Name="dockPanel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
+                <Button Name="Button0" Style="{StaticResource HeaderButtonStyle}" DockPanel.Dock="Left" Click="StartButton_Click" MinWidth="190">
                     <TextBlock Name="Textblock0">
                         <Run Text="{Loc Start}"/>
                     </TextBlock>
                 </Button>
-                <Button Name="Button1"  Style="{StaticResource HeaderButtonStyle}" DockPanel.Dock="Left" Width="Auto" Click="OvewviewButton_Click" MinWidth="200">
+                <Button Name="Button1"  Style="{StaticResource HeaderButtonStyle}" DockPanel.Dock="Left" Click="OvewviewButton_Click" MinWidth="190">
                     <TextBlock Name="Textblock1">
                         <Run Text="{Loc Overview}"/>
                     </TextBlock>
                 </Button>
-                <Button Name="Button2" Style="{StaticResource HeaderButtonStyle}" DockPanel.Dock="Left" Width="Auto" Click="BloomFilterButton_Click" MinWidth="200">
+                <Button Name="Button2" Style="{StaticResource HeaderButtonStyle}" DockPanel.Dock="Left" Click="BloomFilterButton_Click" MinWidth="190">
                     <TextBlock Name="Textblock2">
                           <Run Text="{Loc BloomFilter}"/>
                     </TextBlock>
                 </Button>
-                <Button Name="Button3" Style="{StaticResource HeaderButtonStyle}" DockPanel.Dock="Left" Width="Auto" Click="RandomizedResponseButton_Click" MinWidth="200">
+                <Button Name="Button3" Style="{StaticResource HeaderButtonStyle}" DockPanel.Dock="Left" Click="RandomizedResponseButton_Click" MinWidth="190">
                     <TextBlock Name="Textblock3">
                           <Run Text="{Loc RandomizedResponse}"/>
                     </TextBlock>
                 </Button>
-                <Button Name="Button4" Style="{StaticResource HeaderButtonStyle}" DockPanel.Dock="Left" Width="Auto" Click="HeatMapsButton_Click" MinWidth="200">
+                <Button Name="Button4" Style="{StaticResource HeaderButtonStyle}" DockPanel.Dock="Left" Click="HeatMapsButton_Click" MinWidth="190">
                     <TextBlock Name="Textblock4" >
                           <Run Text="{Loc HeatMaps}"/>
                     </TextBlock>
                 </Button>
-            </DockPanel>
+            </StackPanel>
             <ContentControl Grid.Row ="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="5" Content="{Binding}"/>
         </Grid>
 

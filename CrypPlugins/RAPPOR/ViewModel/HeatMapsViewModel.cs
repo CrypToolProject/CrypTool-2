@@ -238,7 +238,8 @@ namespace RAPPOR.ViewModel
 
         public void CreateHeatMapViewText(int it)
         {
-            HeatMapViewText =  CrypTool.Plugins.RAPPOR.Properties.Resources.HeatMapViewText1 + it + CrypTool.Plugins.RAPPOR.Properties.Resources.HeatMapViewText2 + it + CrypTool.Plugins.RAPPOR.Properties.Resources.HeatMapViewText3 + it/2 + CrypTool.Plugins.RAPPOR.Properties.Resources.HeatMapViewText4;
+            //HeatMapViewText =  CrypTool.Plugins.RAPPOR.Properties.Resources.HeatMapViewText1 + it + CrypTool.Plugins.RAPPOR.Properties.Resources.HeatMapViewText2 + it + CrypTool.Plugins.RAPPOR.Properties.Resources.HeatMapViewText3 + it/2 + CrypTool.Plugins.RAPPOR.Properties.Resources.HeatMapViewText4;
+            HeatMapViewText = String.Format(CrypTool.Plugins.RAPPOR.Properties.Resources.HeatMapViewText, it, it, it / 2);
         }
 
         private string _heatMapViewText;

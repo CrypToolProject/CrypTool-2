@@ -158,15 +158,7 @@
     <value>Dies ist die Größe des booleschen Arrays, das für die Datenstruktur des Bloom-Filters verwendet wird.</value>
   </data>
   <data name="BloomFilterText" xml:space="preserve">
-    <value>Diese Seite enthält Informationen über den von RAPPOR garantierten Datenschutz. Die Werte werden
-generiert aus den Komponenteneinstellungen generiert. Das von RAPPOR erzeugte Maß an Privatsphäre wird 
-durch den Parameter epsilon gemessen, Er definiert das Datenschutzbudget für den Datenerfassungsprozess. 
-Epsilon unendlich wird von RAPPOR erzeugt, nachdem die RAPPOR erzeugt, nachdem die permanente 
-Zufallsantwort aktiviert wurde, und stellt die von RAPPOR im dem schlimmsten Fall. Epsilon Eins wird von 
-RAPPOR erzeugt, nachdem die sofortige zufällige Antwort Epsilon 1 wird von RAPPOR erzeugt, nachdem die 
-sofortige zufällige Antwort eingesetzt wurde, und steht für die von RAPPOR im allgemeinen Fall garantierte 
-Privatsphäre. Es gilt: Je niedriger der Wert, der epsilon zugewiesen wird, desto stärker ist der Schutz der 
-Privatsphäre gewährleistet.</value>
+    <value>Auf dieser Seite ist eine Animation des Einfügevorgangs für die Bloom-Filter-Datenstruktur zu sehen. Die Animation kann über die Schaltflächen in der oberen Leiste gesteuert werden. Um das Tool zu starten, klicken Sie bitte auf den Starten-Button im oberen Bereich von CT2. Die Ausführung des Tools kann dann über den Schieberegler für die Animationsgeschwindigkeit und die fünf Schaltflächen im oberen Bereich des Bloom-Filter-Tools gesteuert werden. Weitere Anleitungen zur Nutzung des Tools finden Sie in der RAPPOR-Online-Hilfe.</value>
   </data>
   <data name="DataSet" xml:space="preserve">
     <value>Datensatz</value>
@@ -194,29 +186,8 @@ Privatsphäre gewährleistet.</value>
   <data name="HeatMaps" xml:space="preserve">
     <value>Heatmap</value>
   </data>
-  <data name="HeatMapViewText1" xml:space="preserve">
-    <value>Diese Seite bietet eine Heatmap, die visualisiert, wie oft eine Zelle des Boolean-Arrays gesetzt wurde. Die Zellen des booleschen
-
-Arrays stellen ein Bit in der 0-1-Sequenz dar. Die Farbe der Legende zeigt, wie oft das Bit in allen Iterationen auf 1 gesetzt wurde.
-
-Die erste Zeile zeigt die Verteilung des Bloom-Filters über alle Iterationen. Es ist zu erkennen, dass der Bloom-Filter in jeder Iteration immer die 
-gleichen Zellen setzt, da diese in rot dargestellt sind, während Zellen, die nicht gesetzt wurden, in schwarz dargestellt sind.
-
-Die zweite Zeile zeigt die Verteilung der permanenten randomisierten Antwort über alle 
-</value>
-  </data>
-  <data name="HeatMapViewText2" xml:space="preserve">
-    <value>Iterationen. 
-Die Legende auf der linken Seite der Zeilen zeigt, dass Zellen, die in der Nähe von</value>
-  </data>
-  <data name="HeatMapViewText3" xml:space="preserve">
-    <value>Zeiten während der
- Iterationen sind rot gefärbt. Zellen, die in den Iterationen nahe 0 gesetzt wurden, sind blau eingefärbt. 
-Zellen, die im Laufe der Iterationen</value>
-  </data>
-  <data name="HeatMapViewText4" xml:space="preserve">
-    <value>während der Iterationen sind gelb bis grün gefärbt.
-Die dritte Zeile zeigt die Verteilung der momentanen zufälligen Reaktion über die Iterationen.</value>
+  <data name="HeatMapViewText" xml:space="preserve">
+    <value>Diese Seite bietet eine Heatmap, die veranschaulicht, wie oft eine Zelle des booleschen Arrays gesetzt wurde. Jede Zelle des booleschen Arrays stellt ein Bit in der 0-1-Sequenz dar. Die Farbe der Legende zeigt an, wie oft das Bit in allen Iterationen auf 1 gesetzt wurde. Die erste Zeile zeigt die Verteilung des Bloom-Filters über alle Iterationen. Es ist zu erkennen, dass der Bloom-Filter in jeder Iteration immer die gleichen Zellen setzt, da diese in rot dargestellt sind, während Zellen, die nicht gesetzt wurden, in schwarz dargestellt sind. Die zweite Zeile zeigt die Verteilung der PRR über alle {0} Iterationen. Die Legende auf der linken Seite der Zeilen zeigt, dass Zellen, die während der Iterationen ca. {1} Mal gesetzt wurden, rot eingefärbt sind. Zellen, die im Verlauf der Iterationen ca. 0 Mal gesetzt wurden, sind blau gefärbt. Zellen, die während der Iterationen etwa {2} mal gesetzt wurden, sind gelb bis grün gefärbt. Die dritte Zeile zeigt die Verteilung der momentanen randomisierten Reaktion über die Iterationen.</value>
   </data>
   <data name="Input" xml:space="preserve">
     <value>Eingabe</value>
@@ -265,12 +236,7 @@ Die dritte Zeile zeigt die Verteilung der momentanen zufälligen Reaktion über 
     <value>Übersicht</value>
   </data>
   <data name="OverviewViewText" xml:space="preserve">
-    <value>Diese Seite bietet einen Überblick über die Boolesche Arrays, das durch den RAPPOR-Mechanismus erstellt wurde. Die erste Zeile
-zeigt das ursprüngliche Boolesche Array des Bloom-Filters. Die zweite Zeile zeigt das Boolesche Array 
-nach der Verarbeitung durch das PRR. Jede folgende Zeile zeigt das geänderte Boolesche Array nach der Verarbeitung durch eine SRR.
-In der Grafik steht die rote Linie für einen booleschen Wert im Array, der auf true gesetzt ist.
-Die schwarze Linie steht für einen booleschen Wert in den Arrays, der auf false gesetzt ist.
-</value>
+    <value>Diese Seite bietet einen Überblick über die booleschen Arrays, welche durch RAPPOR erzeugt wurden. Die erste Zeile zeigt das ursprüngliche boolesche Array des Bloom-Filters. Die zweite Zeile zeigt das boolesche Array nach der Verarbeitung durch das PRR. Jede folgende Zeile zeigt das geänderte boolesche Array nach der Verarbeitung durch eine SRR. In der Grafik steht die rote Linie für einen booleschen Wert im Array, der auf "wahr" gesetzt ist. Die schwarze Linie steht für einen booleschen Wert in dem Array, der auf "falsch" gesetzt ist.</value>
     <comment>s</comment>
   </data>
   <data name="PauseAnimation" xml:space="preserve">
@@ -311,9 +277,7 @@ Zelle von i gesetzt wurde:</value>
     <value>Randomisierte Antwort</value>
   </data>
   <data name="RandomizedResponseText" xml:space="preserve">
-    <value>Diese Seite veranschaulicht wie das Level der Privatsphäre, welches von RAPPOR garantiert wird,
-anhand der Parameter h, f, q und p berechnet wird.
-Die Werte werden aus den ausgewählten Einstellungen der Komponente generiert.</value>
+    <value>Diese Seite veranschaulicht wie das von RAPPOR garantierte Privacy-Level epsilon (= Datenschutzbudget) anhand der Parameter h, f, q und p berechnet wird. Epsilon gleich unendlich wird von RAPPOR erzeugt, nachdem die PRR aktiviert wurde, und ist der schlimmste Fall. Epsilon gleich Eins wird von RAPPOR erzeugt, nachdem die IRR aktiviert wurde, und steht für die im allgemeinen Fall garantierte Privatsphäre. Je niedriger der epsilon-Wert ist, desto stärker ist der Schutz der Privatsphäre gewährleistet.</value>
   </data>
   <data name="RAPPOR" xml:space="preserve">
     <value>RAPPOR</value>

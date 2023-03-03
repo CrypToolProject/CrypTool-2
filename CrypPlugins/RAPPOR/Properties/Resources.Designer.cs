@@ -178,11 +178,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to On this page there is an animation of the insertion process for the Bloom filter data structure. 
-        ///The animation can be controlled via the buttons in the top bar. To start the tool please click the play button 
-        ///in the top area of the CT2 software. The execution of the tool can then be contolled through the animation 
-        ///speed slider and the five buttons in the top area of the Bloom filter tool. To find further instructions on the
-        ///usage of this tool please consult the RAPPOR online help..
+        ///   Looks up a localized string similar to On this page there is an animation of the insertion process for the Bloom filter data structure. The animation can be controlled via the buttons in the top bar. To start the tool please click the play button in the top area of CT2. The execution of the tool can then be controlled through the animation speed slider and the five buttons in the top area of the Bloom filter tool. To find further instructions on the usage of this tool please consult the RAPPOR online help..
         /// </summary>
         internal static string BloomFilterText {
             get {
@@ -263,46 +259,11 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This page provides a heat map that visualizes how often a cell of the Boolean array has been set. Every cell of the Boolean
-        ///array represent a bit in the 0-1 sequence. The color of the legend shows how often the bit was set to 1 in all iterations.
-        ///The first row shows the distribution of the Bloom filter over all iterations. It is visible that the Bloom filter always sets the 
-        ///same cells in every iterations as these are shown in red where as cells that have not been set are shown in black.
-        ///The second row  [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to This page provides a heat map that visualizes how often a cell of the Boolean array has been set. Every cell of the Boolean array represent a bit in the 0-1 sequence. The color of the legend shows how often the bit was set to 1 in all iterations. The first row shows the distribution of the Bloom filter over all iterations. It is visible that the Bloom filter always sets the same cells in every iterations as these are shown in red where as cells that have not been set are shown in black. The second row shows [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string HeatMapViewText1 {
+        internal static string HeatMapViewText {
             get {
-                return ResourceManager.GetString("HeatMapViewText1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  Iterations. 
-        ///The legend to the left of the rows shows that cells that habe been set in close to .
-        /// </summary>
-        internal static string HeatMapViewText2 {
-            get {
-                return ResourceManager.GetString("HeatMapViewText2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  times throughout the
-        /// iterations are colored red. Cells that have been set close to 0 times throught the iterations are colored blued. 
-        ///Cells that have been set around .
-        /// </summary>
-        internal static string HeatMapViewText3 {
-            get {
-                return ResourceManager.GetString("HeatMapViewText3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  throughout the iterations are colored yellow  to green.
-        ///The third row shows the distribution of the instantaneous randomized response over the iterations..
-        /// </summary>
-        internal static string HeatMapViewText4 {
-            get {
-                return ResourceManager.GetString("HeatMapViewText4", resourceCulture);
+                return ResourceManager.GetString("HeatMapViewText", resourceCulture);
             }
         }
         
@@ -451,11 +412,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This page provides an overview of the Boolean arrays created by  the RAPPOR mechanism. The first row
-        ///shows the original Boolean array of the Bloom filter. The second row shows the Boolean array after it has been
-        ///processed by the PRR. Every following row shows the altered Boolean array after being processed by an IRR.
-        ///In the graphic, the red line stands for an boolean value in the array that is set to true.
-        ///The black line stands for an boolean value in the arrays that is set to false..
+        ///   Looks up a localized string similar to This page provides an overview of the Boolean arrays created by the RAPPOR mechanism. The first row shows the original Boolean array of the Bloom filter. The second row shows the Boolean array after it has been processed by the PRR. Every following row shows the altered Boolean array after being processed by an IRR. In the graphic, the red line stands for a boolean value in the array that is set to &quot;true&quot;. The black line stands for a boolean value in the array that is set to &quot;false&quot;..
         /// </summary>
         internal static string OverviewViewText {
             get {
@@ -558,11 +515,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This page contains information about the level of privacy guaranteed by RAPPOR. The values are generated 
-        ///from the component settings. The level of privacy created by RAPPOR is measured by the epsilon parameter, 
-        ///it defines the privacy budget for the data collection process. Epsilon infinity is generated by RAPPOR after the
-        ///permanent randomized response has been engaged and represents the privacy guaranteed by RAPPOR in 
-        ///the worst case case. Epsilon one is generated by RAPPOR after the instantaneous ran [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to This page illustrates how the privacy level epsilon (= privacy budget) guaranteed by RAPPOR is calculated using the parameters h, f, q, and p. Epsilon equal to infinity is generated by RAPPOR after PRR is enabled and is the worst case. Epsilon equal to one is generated by RAPPOR after IRR is activated, and represents privacy guaranteed in the general case. The lower the epsilon value, the more privacy is guaranteed..
         /// </summary>
         internal static string RandomizedResponseText {
             get {

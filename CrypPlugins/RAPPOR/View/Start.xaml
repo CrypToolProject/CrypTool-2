@@ -40,8 +40,8 @@
                         </TextBox>
                     </Grid>
                     <Grid Grid.Row="3" Background="White" Margin="10,10,10,5">
-                        <TextBox TextAlignment="Justify" VerticalAlignment="Center" FontSize="16" FontFamily="Times New Roman" Text="{Loc ShortTutorial}" IsReadOnly="True" BorderBrush="Transparent" BorderThickness="0"  MaxWidth="750" TextWrapping="Wrap">
-                        </TextBox>
+                        <TextBox TextAlignment="Justify" VerticalAlignment="Center" FontSize="16" FontFamily="Times New Roman" Text="{Loc ShortTutorial}" IsReadOnly="True" BorderBrush="Transparent" BorderThickness="0"  MaxWidth="750" TextWrapping="Wrap"/>
+
                     </Grid>
                 </Grid>
             </Grid>

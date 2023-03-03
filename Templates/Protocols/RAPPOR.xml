@@ -17,7 +17,7 @@
 	<replacement key="$input$" value="Common cold, Covid-19, Flu, Nothing" />
 	<replacement key="$Memo$" value="This template shows how the {\b RAPPOR component} can be used. RAPPOR enables applications to anonymously and locally collect user data and still maintain strong data protection. RAPPOR thus belongs to the area of differential privacy. 
 \line \line The used data set consists of the user data to be processed by the RAPPOR mechanism. Each entry of the data set is separated by a comma.
-\line \line All parameters of the RAPPORT mechanism can be configured in the component settings.
+\line \line All parameters of the RAPPOR mechanism can be configured in the component settings.
 \line \line The output of the RAPPOR component consists of three 0-1 sequences, each separated by an empty line. The first sequence is the Bloom filter, the next two sequences are modified by RAPPOR." />
 <replacement key="$abbreviations$" value="The RAPPOR component uses the following abbreviations: 
 \line \line BF: bloom filter
@@ -39,7 +39,7 @@
 	<replacement key="$input$" value="Erkältung, Covid-19, Grippe, Nichts" />
 	<replacement key="$Memo$" value="Diese Vorlage zeigt, wie die {\b RAPPOR-Komponente} verwendet werden kann. RAPPOR ermöglicht es Anwendungen, anonym und lokal Benutzerdaten zu sammeln und trotzdem starken Datenschutz einzuhalten. Damit gehört RAPPOR zum Bereich der Differential Privacy.
 \line \line Der verwendete Datensatz besteht aus den Benutzerdaten, die durch den RAPPOR-Mechanismus verarbeitet werden sollen. Jeder Eintrag des Datensatzes wird durch ein Komma getrennt.
-\line \line Alle Parameter der RAPPORT-Mechanismus können in den Einstellungen der Komponente konfiguriert werden.
+\line \line Alle Parameter des RAPPOR-Mechanismus können in den Einstellungen der Komponente konfiguriert werden.
 \line \line Die Ausgabe der RAPPOR-Komponente besteht aus drei 0-1-Sequenzen, die jeweils durch eine Leerzeile getrennt sind. Die erste Sequenz ist der Bloom-Filter, die nächsten beiden Sequenzen werden von RAPPOR verändert." />
 <replacement key="$abbreviations$" value="Die Komponente RAPPOR verwendet die folgenden Abkürzungen: 
 \line \line BF: Bloom-Filter
