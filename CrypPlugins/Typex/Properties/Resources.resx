@@ -156,6 +156,12 @@
   <data name="PlugSettingsTooltip" xml:space="preserve">
     <value>Sets the plug settings</value>
   </data>
+  <data name="RingPositionsCaption" xml:space="preserve">
+    <value>Ring positions</value>
+  </data>
+  <data name="RingPositionsTooltip" xml:space="preserve">
+    <value>Sets the position of the rings of the rotors</value>
+  </data>
   <data name="Rotor1Caption" xml:space="preserve">
     <value>Rotor 1</value>
   </data>

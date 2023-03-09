@@ -93,7 +93,7 @@ namespace CrypTool.Typex
         private Rotor[] CreateRotorArray()
         {
             //entry stator reverses the alphabet
-            Stator entry = new Stator(MapTextIntoNumberSpace(Entry, Alphabet), null, 0, false);
+            Stator entry = new Stator(MapTextIntoNumberSpace(Entry, Alphabet), null, 0, 0, false);
 
             //Typex has two stators
             Stator stator1;
@@ -107,46 +107,46 @@ namespace CrypTool.Typex
             switch (_settings.TypexMachineType)
             {
                 case TypexMachineType.CyberChef:
-                    stator1 = new Stator(MapTextIntoNumberSpace(Typex_CyberChef.Rotors[_settings.Stator1], Alphabet), Typex_CyberChef.Notches[_settings.Stator1], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[4]), _settings.Stator1IsReversed);
-                    stator2 = new Stator(MapTextIntoNumberSpace(Typex_CyberChef.Rotors[_settings.Stator2], Alphabet), Typex_CyberChef.Notches[_settings.Stator2], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[3]), _settings.Stator2IsReversed);
-                    rotor1 = new Rotor(MapTextIntoNumberSpace(Typex_CyberChef.Rotors[_settings.Rotor1], Alphabet), Typex_CyberChef.Notches[_settings.Rotor1], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[2]), false, _settings.Rotor1IsReversed);
-                    rotor2 = new Rotor(MapTextIntoNumberSpace(Typex_CyberChef.Rotors[_settings.Rotor2], Alphabet), Typex_CyberChef.Notches[_settings.Rotor2], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[1]), true, _settings.Rotor2IsReversed);
-                    rotor3 = new Rotor(MapTextIntoNumberSpace(Typex_CyberChef.Rotors[_settings.Rotor3], Alphabet), Typex_CyberChef.Notches[_settings.Rotor3], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[0]), false, _settings.Rotor3IsReversed);
+                    stator1 = new Stator(MapTextIntoNumberSpace(Typex_CyberChef.Rotors[_settings.Stator1], Alphabet), Typex_CyberChef.Notches[_settings.Stator1], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[4]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[4]), _settings.Stator1IsReversed);
+                    stator2 = new Stator(MapTextIntoNumberSpace(Typex_CyberChef.Rotors[_settings.Stator2], Alphabet), Typex_CyberChef.Notches[_settings.Stator2], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[3]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[3]), _settings.Stator2IsReversed);
+                    rotor1 = new Rotor(MapTextIntoNumberSpace(Typex_CyberChef.Rotors[_settings.Rotor1], Alphabet), Typex_CyberChef.Notches[_settings.Rotor1], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[2]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[2]), false, _settings.Rotor1IsReversed);
+                    rotor2 = new Rotor(MapTextIntoNumberSpace(Typex_CyberChef.Rotors[_settings.Rotor2], Alphabet), Typex_CyberChef.Notches[_settings.Rotor2], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[1]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[1]), true, _settings.Rotor2IsReversed);
+                    rotor3 = new Rotor(MapTextIntoNumberSpace(Typex_CyberChef.Rotors[_settings.Rotor3], Alphabet), Typex_CyberChef.Notches[_settings.Rotor3], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[0]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[0]), false, _settings.Rotor3IsReversed);
                     break;
                 case TypexMachineType.TestRotors:
-                    stator1 = new Stator(MapTextIntoNumberSpace(Typex_TestRotors.Rotors[_settings.Stator1], Alphabet), Typex_TestRotors.Notches[_settings.Stator1], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[4]), _settings.Stator1IsReversed);
-                    stator2 = new Stator(MapTextIntoNumberSpace(Typex_TestRotors.Rotors[_settings.Stator2], Alphabet), Typex_TestRotors.Notches[_settings.Stator2], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[3]), _settings.Stator2IsReversed);
-                    rotor1 = new Rotor(MapTextIntoNumberSpace(Typex_TestRotors.Rotors[_settings.Rotor1], Alphabet), Typex_TestRotors.Notches[_settings.Rotor1], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[2]), false, _settings.Rotor1IsReversed);
-                    rotor2 = new Rotor(MapTextIntoNumberSpace(Typex_TestRotors.Rotors[_settings.Rotor2], Alphabet), Typex_TestRotors.Notches[_settings.Rotor2], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[1]), true, _settings.Rotor2IsReversed);
-                    rotor3 = new Rotor(MapTextIntoNumberSpace(Typex_TestRotors.Rotors[_settings.Rotor3], Alphabet), Typex_TestRotors.Notches[_settings.Rotor3], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[0]), false, _settings.Rotor3IsReversed);
+                    stator1 = new Stator(MapTextIntoNumberSpace(Typex_TestRotors.Rotors[_settings.Stator1], Alphabet), Typex_TestRotors.Notches[_settings.Stator1], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[4]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[4]), _settings.Stator1IsReversed);
+                    stator2 = new Stator(MapTextIntoNumberSpace(Typex_TestRotors.Rotors[_settings.Stator2], Alphabet), Typex_TestRotors.Notches[_settings.Stator2], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[3]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[3]), _settings.Stator2IsReversed);
+                    rotor1 = new Rotor(MapTextIntoNumberSpace(Typex_TestRotors.Rotors[_settings.Rotor1], Alphabet), Typex_TestRotors.Notches[_settings.Rotor1], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[2]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[2]), false, _settings.Rotor1IsReversed);
+                    rotor2 = new Rotor(MapTextIntoNumberSpace(Typex_TestRotors.Rotors[_settings.Rotor2], Alphabet), Typex_TestRotors.Notches[_settings.Rotor2], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[1]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[1]), true, _settings.Rotor2IsReversed);
+                    rotor3 = new Rotor(MapTextIntoNumberSpace(Typex_TestRotors.Rotors[_settings.Rotor3], Alphabet), Typex_TestRotors.Notches[_settings.Rotor3], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[0]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[0]), false, _settings.Rotor3IsReversed);
                     break;
                 case TypexMachineType.EnigmaI:
-                    stator1 = new Stator(MapTextIntoNumberSpace(Typex_EnigmaI.Rotors[_settings.Stator1], Alphabet), Typex_EnigmaI.Notches[_settings.Stator1], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[4]), _settings.Stator1IsReversed);
-                    stator2 = new Stator(MapTextIntoNumberSpace(Typex_EnigmaI.Rotors[_settings.Stator2], Alphabet), Typex_EnigmaI.Notches[_settings.Stator2], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[3]), _settings.Stator2IsReversed);
-                    rotor1 = new Rotor(MapTextIntoNumberSpace(Typex_EnigmaI.Rotors[_settings.Rotor1], Alphabet), Typex_EnigmaI.Notches[_settings.Rotor1], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[2]), false, _settings.Rotor1IsReversed);
-                    rotor2 = new Rotor(MapTextIntoNumberSpace(Typex_EnigmaI.Rotors[_settings.Rotor2], Alphabet), Typex_EnigmaI.Notches[_settings.Rotor2], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[1]), true, _settings.Rotor2IsReversed);
-                    rotor3 = new Rotor(MapTextIntoNumberSpace(Typex_EnigmaI.Rotors[_settings.Rotor3], Alphabet), Typex_EnigmaI.Notches[_settings.Rotor3], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[0]), false, _settings.Rotor3IsReversed);
+                    stator1 = new Stator(MapTextIntoNumberSpace(Typex_EnigmaI.Rotors[_settings.Stator1], Alphabet), Typex_EnigmaI.Notches[_settings.Stator1], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[4]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[4]), _settings.Stator1IsReversed);
+                    stator2 = new Stator(MapTextIntoNumberSpace(Typex_EnigmaI.Rotors[_settings.Stator2], Alphabet), Typex_EnigmaI.Notches[_settings.Stator2], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[3]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[3]), _settings.Stator2IsReversed);
+                    rotor1 = new Rotor(MapTextIntoNumberSpace(Typex_EnigmaI.Rotors[_settings.Rotor1], Alphabet), Typex_EnigmaI.Notches[_settings.Rotor1], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[2]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[2]), false, _settings.Rotor1IsReversed);
+                    rotor2 = new Rotor(MapTextIntoNumberSpace(Typex_EnigmaI.Rotors[_settings.Rotor2], Alphabet), Typex_EnigmaI.Notches[_settings.Rotor2], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[1]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[1]), true, _settings.Rotor2IsReversed);
+                    rotor3 = new Rotor(MapTextIntoNumberSpace(Typex_EnigmaI.Rotors[_settings.Rotor3], Alphabet), Typex_EnigmaI.Notches[_settings.Rotor3], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[0]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[0]), false, _settings.Rotor3IsReversed);
                     break;
                 case TypexMachineType.Y296:
-                    stator1 = new Stator(MapTextIntoNumberSpace(Typex_Y296.Rotors[_settings.Stator1], Alphabet), Typex_Y296.Notches[_settings.Stator1], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[4]), _settings.Stator1IsReversed);
-                    stator2 = new Stator(MapTextIntoNumberSpace(Typex_Y296.Rotors[_settings.Stator2], Alphabet), Typex_Y296.Notches[_settings.Stator2], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[3]), _settings.Stator2IsReversed);
-                    rotor1 = new Rotor(MapTextIntoNumberSpace(Typex_Y296.Rotors[_settings.Rotor1], Alphabet), Typex_Y296.Notches[_settings.Rotor1], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[2]), false, _settings.Rotor1IsReversed);
-                    rotor2 = new Rotor(MapTextIntoNumberSpace(Typex_Y296.Rotors[_settings.Rotor2], Alphabet), Typex_Y296.Notches[_settings.Rotor2], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[1]), true, _settings.Rotor2IsReversed);
-                    rotor3 = new Rotor(MapTextIntoNumberSpace(Typex_Y296.Rotors[_settings.Rotor3], Alphabet), Typex_Y296.Notches[_settings.Rotor3], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[0]), false, _settings.Rotor3IsReversed);
+                    stator1 = new Stator(MapTextIntoNumberSpace(Typex_Y296.Rotors[_settings.Stator1], Alphabet), Typex_Y296.Notches[_settings.Stator1], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[4]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[4]), _settings.Stator1IsReversed);
+                    stator2 = new Stator(MapTextIntoNumberSpace(Typex_Y296.Rotors[_settings.Stator2], Alphabet), Typex_Y296.Notches[_settings.Stator2], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[3]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[3]), _settings.Stator2IsReversed);
+                    rotor1 = new Rotor(MapTextIntoNumberSpace(Typex_Y296.Rotors[_settings.Rotor1], Alphabet), Typex_Y296.Notches[_settings.Rotor1], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[2]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[2]), false, _settings.Rotor1IsReversed);
+                    rotor2 = new Rotor(MapTextIntoNumberSpace(Typex_Y296.Rotors[_settings.Rotor2], Alphabet), Typex_Y296.Notches[_settings.Rotor2], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[1]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[1]), true, _settings.Rotor2IsReversed);
+                    rotor3 = new Rotor(MapTextIntoNumberSpace(Typex_Y296.Rotors[_settings.Rotor3], Alphabet), Typex_Y296.Notches[_settings.Rotor3], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[0]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[0]), false, _settings.Rotor3IsReversed);
                     break;
                 case TypexMachineType.SP02390:
-                    stator1 = new Stator(MapTextIntoNumberSpace(Typex_SP02390.Rotors[_settings.Stator1], Alphabet), Typex_SP02390.Notches[_settings.Stator1], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[4]), _settings.Stator1IsReversed);
-                    stator2 = new Stator(MapTextIntoNumberSpace(Typex_SP02390.Rotors[_settings.Stator2], Alphabet), Typex_SP02390.Notches[_settings.Stator2], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[3]), _settings.Stator2IsReversed);
-                    rotor1 = new Rotor(MapTextIntoNumberSpace(Typex_SP02390.Rotors[_settings.Rotor1], Alphabet), Typex_SP02390.Notches[_settings.Rotor1], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[2]), false, _settings.Rotor1IsReversed);
-                    rotor2 = new Rotor(MapTextIntoNumberSpace(Typex_SP02390.Rotors[_settings.Rotor2], Alphabet), Typex_SP02390.Notches[_settings.Rotor2], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[1]), true, _settings.Rotor2IsReversed);
-                    rotor3 = new Rotor(MapTextIntoNumberSpace(Typex_SP02390.Rotors[_settings.Rotor3], Alphabet), Typex_SP02390.Notches[_settings.Rotor3], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[0]), false, _settings.Rotor3IsReversed);
+                    stator1 = new Stator(MapTextIntoNumberSpace(Typex_SP02390.Rotors[_settings.Stator1], Alphabet), Typex_SP02390.Notches[_settings.Stator1], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[4]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[4]), _settings.Stator1IsReversed);
+                    stator2 = new Stator(MapTextIntoNumberSpace(Typex_SP02390.Rotors[_settings.Stator2], Alphabet), Typex_SP02390.Notches[_settings.Stator2], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[3]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[3]), _settings.Stator2IsReversed);
+                    rotor1 = new Rotor(MapTextIntoNumberSpace(Typex_SP02390.Rotors[_settings.Rotor1], Alphabet), Typex_SP02390.Notches[_settings.Rotor1], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[2]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[2]), false, _settings.Rotor1IsReversed);
+                    rotor2 = new Rotor(MapTextIntoNumberSpace(Typex_SP02390.Rotors[_settings.Rotor2], Alphabet), Typex_SP02390.Notches[_settings.Rotor2], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[1]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[1]), true, _settings.Rotor2IsReversed);
+                    rotor3 = new Rotor(MapTextIntoNumberSpace(Typex_SP02390.Rotors[_settings.Rotor3], Alphabet), Typex_SP02390.Notches[_settings.Rotor3], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[0]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[0]), false, _settings.Rotor3IsReversed);
                     break;
                 case TypexMachineType.SP02391:
-                    stator1 = new Stator(MapTextIntoNumberSpace(Typex_SP02391.Rotors[_settings.Stator1], Alphabet), Typex_SP02391.Notches[_settings.Stator1], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[4]), _settings.Stator1IsReversed);
-                    stator2 = new Stator(MapTextIntoNumberSpace(Typex_SP02391.Rotors[_settings.Stator2], Alphabet), Typex_SP02391.Notches[_settings.Stator2], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[3]), _settings.Stator2IsReversed);
-                    rotor1 = new Rotor(MapTextIntoNumberSpace(Typex_SP02391.Rotors[_settings.Rotor1], Alphabet), Typex_SP02391.Notches[_settings.Rotor1], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[2]), false, _settings.Rotor1IsReversed);
-                    rotor2 = new Rotor(MapTextIntoNumberSpace(Typex_SP02391.Rotors[_settings.Rotor2], Alphabet), Typex_SP02391.Notches[_settings.Rotor2], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[1]), true, _settings.Rotor2IsReversed);
-                    rotor3 = new Rotor(MapTextIntoNumberSpace(Typex_SP02391.Rotors[_settings.Rotor3], Alphabet), Typex_SP02391.Notches[_settings.Rotor3], Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[0]), false, _settings.Rotor3IsReversed);
+                    stator1 = new Stator(MapTextIntoNumberSpace(Typex_SP02391.Rotors[_settings.Stator1], Alphabet), Typex_SP02391.Notches[_settings.Stator1], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[4]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[4]), _settings.Stator1IsReversed);
+                    stator2 = new Stator(MapTextIntoNumberSpace(Typex_SP02391.Rotors[_settings.Stator2], Alphabet), Typex_SP02391.Notches[_settings.Stator2], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[3]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[3]), _settings.Stator2IsReversed);
+                    rotor1 = new Rotor(MapTextIntoNumberSpace(Typex_SP02391.Rotors[_settings.Rotor1], Alphabet), Typex_SP02391.Notches[_settings.Rotor1], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[2]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[2]), false, _settings.Rotor1IsReversed);
+                    rotor2 = new Rotor(MapTextIntoNumberSpace(Typex_SP02391.Rotors[_settings.Rotor2], Alphabet), Typex_SP02391.Notches[_settings.Rotor2], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[1]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[1]), true, _settings.Rotor2IsReversed);
+                    rotor3 = new Rotor(MapTextIntoNumberSpace(Typex_SP02391.Rotors[_settings.Rotor3], Alphabet), Typex_SP02391.Notches[_settings.Rotor3], Alphabet.IndexOf(_settings.RingPositions.ToUpper()[0]), Alphabet.IndexOf(_settings.RotorPositions.ToUpper()[0]), false, _settings.Rotor3IsReversed);
                     break;
                 default:
                     throw new Exception(string.Format("Invalid Typex machine type: {0}", _settings.TypexMachineType));
@@ -164,17 +164,17 @@ namespace CrypTool.Typex
             switch (_settings.TypexReflector)
             {
                 case TypexReflector.CyberChef:
-                    return new Reflector(MapTextIntoNumberSpace(Typex_CyberChef.Reflector, Alphabet), null, 0);
+                    return new Reflector(MapTextIntoNumberSpace(Typex_CyberChef.Reflector, Alphabet), null, 0, 0);
                 case TypexReflector.TestReflector:
-                    return new Reflector(MapTextIntoNumberSpace(Typex_TestRotors.Reflector, Alphabet), null, 0);
+                    return new Reflector(MapTextIntoNumberSpace(Typex_TestRotors.Reflector, Alphabet), null, 0, 0);
                 case TypexReflector.EnigmaI_A:
-                    return new Reflector(MapTextIntoNumberSpace(Typex_EnigmaI.UKWA, Alphabet), null, 0);
+                    return new Reflector(MapTextIntoNumberSpace(Typex_EnigmaI.UKWA, Alphabet), null, 0, 0);
                 case TypexReflector.EnigmaI_B:
-                    return new Reflector(MapTextIntoNumberSpace(Typex_EnigmaI.UKWA, Alphabet), null, 0);
+                    return new Reflector(MapTextIntoNumberSpace(Typex_EnigmaI.UKWA, Alphabet), null, 0, 0);
                 case TypexReflector.EnigmaI_C:
-                    return new Reflector(MapTextIntoNumberSpace(Typex_EnigmaI.UKWA, Alphabet), null, 0);
+                    return new Reflector(MapTextIntoNumberSpace(Typex_EnigmaI.UKWA, Alphabet), null, 0, 0);
                 case TypexReflector.Custom:
-                    return new Reflector(MapTextIntoNumberSpace(_settings.CustomReflector, Alphabet), null, 0);
+                    return new Reflector(MapTextIntoNumberSpace(_settings.CustomReflector, Alphabet), null, 0, 0);
                 default:
                     throw new Exception(string.Format("Invalid reflector type: {0}", _settings.TypexMachineType));
             }

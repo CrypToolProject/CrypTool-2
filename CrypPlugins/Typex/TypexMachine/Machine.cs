@@ -41,7 +41,7 @@ namespace CrypTool.Typex.TypexMachine
             if (reflector is null)
             {
                 //default reflector is just the reversed alphabet
-                _reflector = new Reflector(MapTextIntoNumberSpace(_alphabet, _alphabet).Reverse(), null, 0);
+                _reflector = new Reflector(MapTextIntoNumberSpace(_alphabet, _alphabet).Reverse(), null, 0, 0);
             }
             else
             {

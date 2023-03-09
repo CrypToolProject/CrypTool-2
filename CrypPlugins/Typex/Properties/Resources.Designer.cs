@@ -178,6 +178,24 @@ namespace CrypTool.Typex.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ring positions.
+        /// </summary>
+        internal static string RingPositionsCaption {
+            get {
+                return ResourceManager.GetString("RingPositionsCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sets the position of the rings of the rotors.
+        /// </summary>
+        internal static string RingPositionsTooltip {
+            get {
+                return ResourceManager.GetString("RingPositionsTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rotor 1.
         /// </summary>
         internal static string Rotor1Caption {

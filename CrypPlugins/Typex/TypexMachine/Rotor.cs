@@ -43,9 +43,10 @@ namespace CrypTool.Typex.TypexMachine
         /// </summary>
         /// <param name="rotor"></param>
         /// <param name="notches"></param>
+        /// <param name="ringPosition"></param>
         /// <param name="rotation"></param>
         /// <param name="isReversed"></param>
-        public Rotor(int[] rotor, int[] notches, int rotation, bool hasAnomaly = false, bool isReversed = false)
+        public Rotor(int[] rotor, int[] notches, int ringPosition, int rotation, bool hasAnomaly = false, bool isReversed = false)
         {
             _rotor = rotor;
             if (isReversed)
@@ -57,9 +58,17 @@ namespace CrypTool.Typex.TypexMachine
                 }
                 _rotor = reversed;
             }
-            _notches = notches;
+            if (notches != null)
+            {
+                _notches = (int[])notches.Clone();
+                for (int i = 0; i < _notches.Length; i++)
+                {
+                    _notches[i] = Mod(_notches[i] + ringPosition, _rotor.Length);
+                }
+            }
+
             _inverseRotor = GenerateInverseRotor(_rotor);
-            Rotation = Mod(rotation, _rotor.Length);
+            Rotation = Mod(rotation - ringPosition, _rotor.Length);
             HasAnomaly = hasAnomaly;
             IsReversed = isReversed;
         }

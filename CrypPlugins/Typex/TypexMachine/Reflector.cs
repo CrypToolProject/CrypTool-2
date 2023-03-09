@@ -22,8 +22,9 @@ namespace CrypTool.Typex.TypexMachine
         /// </summary>
         /// <param name="rotor"></param>
         /// <param name="notches"></param>
+        /// <param name="ringPosition"></param>
         /// <param name="rotation"></param>
-        public Reflector(int[] rotor, int[] notches, int rotation) : base(rotor, notches, rotation)
+        public Reflector(int[] rotor, int[] notches, int ringPosition, int rotation) : base(rotor, notches, ringPosition, rotation)
         {
         }
 

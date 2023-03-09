@@ -45,6 +45,9 @@ namespace CrypTool.Typex
         //Rotor start positions
         private string _rotorPositions = "AAAAA";
 
+        //Ring positions of rotors
+        private string _ringPositions = "AAAAA";
+
         //Stator rotor selections
         private int _stator1 = 4;
         private int _stator2 = 3;
@@ -303,7 +306,21 @@ namespace CrypTool.Typex
             }
         }
 
-        [TaskPane("Rotor3Caption", "Rotor3Tooltip", "RotorSelectionGroupName", 4, false, ControlType.DynamicComboBox, new string[] { "Rotors3" })]
+        [TaskPane("RingPositionsCaption", "RingPositionsTooltip", "RotorPositionsGroupName", 4, false, ControlType.TextBox, ValidationType.RegEx, "[A-Za-z]{5}$")]
+        public string RingPositions
+        {
+            get => _ringPositions;
+            set
+            {
+                if (value != _ringPositions)
+                {
+                    _ringPositions = value;
+                    OnPropertyChanged(nameof(RingPositions));
+                }
+            }
+        }
+
+        [TaskPane("Rotor3Caption", "Rotor3Tooltip", "RotorSelectionGroupName", 5, false, ControlType.DynamicComboBox, new string[] { "Rotors3" })]
         public int Rotor3
         {
             get
@@ -320,7 +337,7 @@ namespace CrypTool.Typex
             }
         }
 
-        [TaskPane("IsReversedCaption", "IsReversedTooltip", "RotorSelectionGroupName", 5, false, ControlType.CheckBox)]
+        [TaskPane("IsReversedCaption", "IsReversedTooltip", "RotorSelectionGroupName", 6, false, ControlType.CheckBox)]
         public bool Rotor3IsReversed
         {
             get
@@ -337,7 +354,7 @@ namespace CrypTool.Typex
             }
         }
 
-        [TaskPane("Rotor2Caption", "Rotor2Tooltip", "RotorSelectionGroupName", 6, false, ControlType.DynamicComboBox, new string[] { "Rotors2" })]
+        [TaskPane("Rotor2Caption", "Rotor2Tooltip", "RotorSelectionGroupName", 7, false, ControlType.DynamicComboBox, new string[] { "Rotors2" })]
         public int Rotor2
         {
             get
@@ -354,7 +371,7 @@ namespace CrypTool.Typex
             }
         }
 
-        [TaskPane("IsReversedCaption", "IsReversedTooltip", "RotorSelectionGroupName", 7, false, ControlType.CheckBox)]
+        [TaskPane("IsReversedCaption", "IsReversedTooltip", "RotorSelectionGroupName", 8, false, ControlType.CheckBox)]
         public bool Rotor2IsReversed
         {
             get
@@ -371,7 +388,7 @@ namespace CrypTool.Typex
             }
         }
 
-        [TaskPane("Rotor1Caption", "Rotor1Tooltip", "RotorSelectionGroupName", 8, false, ControlType.DynamicComboBox, new string[] { "Rotors1" })]
+        [TaskPane("Rotor1Caption", "Rotor1Tooltip", "RotorSelectionGroupName", 9, false, ControlType.DynamicComboBox, new string[] { "Rotors1" })]
         public int Rotor1
         {
             get
@@ -388,7 +405,7 @@ namespace CrypTool.Typex
             }
         }
 
-        [TaskPane("IsReversedCaption", "IsReversedTooltip", "RotorSelectionGroupName", 9, false, ControlType.CheckBox)]
+        [TaskPane("IsReversedCaption", "IsReversedTooltip", "RotorSelectionGroupName", 10, false, ControlType.CheckBox)]
         public bool Rotor1IsReversed
         {
             get
@@ -405,7 +422,7 @@ namespace CrypTool.Typex
             }
         }
 
-        [TaskPane("Stator2Caption", "Stator2Tooltip", "RotorSelectionGroupName", 10, false, ControlType.DynamicComboBox, new string[] { "Stators2" })]
+        [TaskPane("Stator2Caption", "Stator2Tooltip", "RotorSelectionGroupName", 11, false, ControlType.DynamicComboBox, new string[] { "Stators2" })]
         public int Stator2
         {
             get
@@ -422,7 +439,7 @@ namespace CrypTool.Typex
             }
         }
 
-        [TaskPane("IsReversedCaption", "IsReversedTooltip", "RotorSelectionGroupName", 11, false, ControlType.CheckBox)]
+        [TaskPane("IsReversedCaption", "IsReversedTooltip", "RotorSelectionGroupName", 12, false, ControlType.CheckBox)]
         public bool Stator2IsReversed
         {
             get
@@ -439,7 +456,7 @@ namespace CrypTool.Typex
             }
         }
 
-        [TaskPane("Stator1Caption", "Stator1Tooltip", "RotorSelectionGroupName", 12, false, ControlType.DynamicComboBox, new string[] { "Stators1" })]
+        [TaskPane("Stator1Caption", "Stator1Tooltip", "RotorSelectionGroupName", 13, false, ControlType.DynamicComboBox, new string[] { "Stators1" })]
         public int Stator1
         {
             get
@@ -456,7 +473,7 @@ namespace CrypTool.Typex
             }
         }
 
-        [TaskPane("IsReversedCaption", "IsReversedTooltip", "RotorSelectionGroupName", 13, false, ControlType.CheckBox)]
+        [TaskPane("IsReversedCaption", "IsReversedTooltip", "RotorSelectionGroupName", 14, false, ControlType.CheckBox)]
         public bool Stator1IsReversed
         {
             get
@@ -473,7 +490,7 @@ namespace CrypTool.Typex
             }
         }
 
-        [TaskPane("TypexReflectorCaption", "TypexReflectorTooltip", "TypexReflectorGroupName", 14, false, ControlType.ComboBox, new string[] { "CyberChef", "Test Reflector", "Enigma I UKWA", "Enigma I UKWB", "Enigma I UKWC", "Custom" })]
+        [TaskPane("TypexReflectorCaption", "TypexReflectorTooltip", "TypexReflectorGroupName", 15, false, ControlType.ComboBox, new string[] { "CyberChef", "Test Reflector", "Enigma I UKWA", "Enigma I UKWB", "Enigma I UKWC", "Custom" })]
         public TypexReflector TypexReflector
         {
             get
@@ -491,7 +508,7 @@ namespace CrypTool.Typex
             }
         }
 
-        [TaskPane("CustomReflectorCaption", "CustomReflectorTooltip", "TypexReflectorGroupName", 15, false, ControlType.TextBox, ValidationType.RegEx, "[A-Za-z]{26}$")]
+        [TaskPane("CustomReflectorCaption", "CustomReflectorTooltip", "TypexReflectorGroupName", 16, false, ControlType.TextBox, ValidationType.RegEx, "[A-Za-z]{26}$")]
         public string CustomReflector
         {
             get
@@ -508,7 +525,7 @@ namespace CrypTool.Typex
             }
         }
 
-        [TaskPane("PlugSettingsCaption", "PlugSettingsToolip", "PlugSettingsGroupName", 16, false, ControlType.TextBox, ValidationType.RegEx, "[A-Za-z]{26}$")]
+        [TaskPane("PlugSettingsCaption", "PlugSettingsToolip", "PlugSettingsGroupName", 17, false, ControlType.TextBox, ValidationType.RegEx, "[A-Za-z]{26}$")]
         public string PlugSettings
         {
             get => _plugSettings;

@@ -22,9 +22,10 @@ namespace CrypTool.Typex.TypexMachine
         /// </summary>
         /// <param name="rotor"></param>
         /// <param name="notches"></param>
+        /// <param name="ringPosition"></param>
         /// <param name="rotation"></param>
         /// <param name="isReversed"></param>
-        public Stator(int[] rotor, int[] notches, int rotation, bool isReversed) : base(rotor, notches, rotation, false, isReversed)
+        public Stator(int[] rotor, int[] notches, int ringPosition, int rotation, bool isReversed) : base(rotor, notches, ringPosition, rotation, false, isReversed)
         {
         }
 
