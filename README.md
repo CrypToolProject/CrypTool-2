@@ -53,6 +53,7 @@ The build system is located and executed on a private server maintained by the C
 ## Get in touch
 
 * [Contact us](https://www.cryptool.org/en/contact)
+* [Discord Server "Cryptography for everybody"](https://discord.gg/vHQJTtWe)
 
 ## License
 
