@@ -82,9 +82,14 @@ namespace CrypTool.CrypWin
                 int currentMajorVersionNumber = (int)reg.GetValue("CurrentMajorVersionNumber");
                 int currentMinorVersionNumber = (int)reg.GetValue("CurrentMinorVersionNumber");
                 string currentBuildNumber = (string)reg.GetValue("CurrentBuildNumber");
-                if (currentBuildNumber.Equals("22000"))
+                //hack, to replace Windows 10 with Windows 11 in the display
+                if (int.Parse(currentBuildNumber) >= 22621)
                 {
-                    //hack, to replace Windows 10 with Windows 11 in the display
+                    
+                    productName = "Windows 11 (2022 Update)";
+                }
+                else if (int.Parse(currentBuildNumber) >= 22000)
+                {
                     productName = "Windows 11";
                 }
                 string windowsVersionString = string.Format("{0} ({1}.{2}.{3})", productName, currentMajorVersionNumber, currentMinorVersionNumber, currentBuildNumber);
