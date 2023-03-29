@@ -1,6 +1,22 @@
-﻿using CrypTool.CrypAnalysisViewControl;
+﻿/*
+   Copyright 2023 CrypTool 2 Team <ct2contact@CrypTool.org>
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using CrypTool.CrypAnalysisViewControl;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.PluginBase.Utils;
 using System;
 using System.ComponentModel;
 using System.Text;
@@ -20,11 +36,12 @@ namespace IDPAnalyser
         private string[] _keywords;
         private HighscoreList _highscoreList;
         private ValueKeyComparer _valueKeyComparer;
-        private readonly Random _random = new Random(DateTime.Now.Millisecond);
+        private readonly Random _random = new Random();
         private readonly AutoResetEvent _autoResetEvent;
         private readonly IDPAnalyserSettings _settings;
         private readonly IDPAnalyserQuickWatchPresentation _presentation;
-        private int[] Key1MinColEnd, Key1MaxColEnd;
+        private int[] _key1MinColEnd, _key1MaxColEnd;
+        private Grams _grams = null;
 
         #region Properties
 
@@ -118,7 +135,8 @@ namespace IDPAnalyser
 
         public void Execute()
         {
-            Bigrams.InitLanguage(_settings.Language);
+            _grams = LanguageStatistics.CreateGrams(_settings.Language, (LanguageStatistics.GramsType)2, false);
+            _grams.Normalize(10_000_000);
 
             if (_input == null)
             {
@@ -139,7 +157,7 @@ namespace IDPAnalyser
 
             if (_highscoreList.Count > 0)
             {
-                Output = UTF8Encoding.UTF8.GetString(_highscoreList[0].plaintext);
+                Output = MapNumbersIntoTextSpace(_highscoreList[0].plaintext, LATIN_ALPHABET);
             }
             else
             {
@@ -162,7 +180,6 @@ namespace IDPAnalyser
 
         public void Initialize()
         {
-            _settings.UpdateTaskPaneVisibility();
         }
 
         public void Dispose()
@@ -190,7 +207,7 @@ namespace IDPAnalyser
             }
         }
 
-        private void showProgress(DateTime startTime, ulong totalKeys, ulong doneKeys)
+        private void ShowProgress(DateTime startTime, ulong totalKeys, ulong doneKeys)
         {
             if (!Presentation.IsVisible || stop)
             {
@@ -230,14 +247,14 @@ namespace IDPAnalyser
             {
                 System.Globalization.CultureInfo culture = System.Threading.Thread.CurrentThread.CurrentUICulture;
 
-                _presentation.StartTime.Value = "" + startTime;
+                _presentation.StartTime.Value = string.Empty + startTime;
                 _presentation.KeysPerSecond.Value = string.Format(culture, "{0:##,#}", (ulong)keysPerSec);
 
                 if (keysPerSec > 0)
                 {
-                    _presentation.TimeLeft.Value = "" + timeleft;
-                    _presentation.ElapsedTime.Value = "" + elapsedtime;
-                    _presentation.EndTime.Value = "" + endTime;
+                    _presentation.TimeLeft.Value = string.Empty + timeleft;
+                    _presentation.ElapsedTime.Value = string.Empty + elapsedtime;
+                    _presentation.EndTime.Value = string.Empty + endTime;
                 }
                 else
                 {
@@ -253,11 +270,11 @@ namespace IDPAnalyser
                     ResultEntry entry = new ResultEntry
                     {
                         Ranking = i + 1,
-                        Value = string.Format("{0:0.00000}", v.score),
+                        Value = v.score,
                         KeyArray = v.key,
                         KeyPhrase = v.keyphrase,
                         Key = "[" + string.Join(",", v.key) + "]",
-                        Text = Encoding.GetEncoding(1252).GetString(v.plaintext)
+                        Text = MapNumbersIntoTextSpace(v.plaintext, LATIN_ALPHABET)
                     };
 
                     _presentation.Entries.Add(entry);
@@ -268,7 +285,7 @@ namespace IDPAnalyser
 
         private void UpdatePresentationList(ulong totalKeys, ulong doneKeys, DateTime starttime)
         {
-            showProgress(starttime, totalKeys, doneKeys);
+            ShowProgress(starttime, totalKeys, doneKeys);
             ProgressChanged(doneKeys, totalKeys);
         }
 
@@ -310,12 +327,13 @@ namespace IDPAnalyser
             }
         }
 
+        private const string LATIN_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private const string alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";   // used for converting the numeric key to a keyword
 
         // Convert the numeric key to a keyword based upon the alphabet string
         private string getKeywordFromKey(byte[] key)
         {
-            string keyword = "";
+            string keyword = string.Empty;
             foreach (byte i in key)
             {
                 keyword += alphabet[i];
@@ -375,13 +393,14 @@ namespace IDPAnalyser
 
             stop = false;
 
-            byte[] mybuffer = new byte[_input.Length];
+            int[] mybuffer = new int[_input.Length];
 
-            byte[] ciphertext = UTF8Encoding.UTF8.GetBytes(_input);
+            //byte[] ciphertext = UTF8Encoding.UTF8.GetBytes(_input);
+            int[] ciphertext = MapTextIntoNumberSpace(_input, LATIN_ALPHABET);
 
             for (int key1size = _settings.Key1Min; key1size <= _settings.Key1Max; key1size++)
             {
-                computeKey1MinMaxColEnding(_input.Length, key1size);
+                ComputeKey1MinMaxColEnding(_input.Length, key1size);
 
                 for (int key2size = _settings.Key2Min; key2size <= _settings.Key2Max; key2size++)
                 {
@@ -404,9 +423,9 @@ namespace IDPAnalyser
                         //decrypt(vk, key);
                         vk.key = key2;
                         vk.keyphrase = keyword;
-                        decrypt2(vk.key, vk.key.Length, ciphertext, _input.Length, mybuffer);
+                        Decrypt2(vk.key, vk.key.Length, ciphertext, _input.Length, mybuffer);
                         vk.plaintext = mybuffer;
-                        vk.score = evalIDPKey2(vk.plaintext, key1size);
+                        vk.score = EvalIDPKey2(vk.plaintext, key1size);
 
                         _highscoreList.Add(vk);
 
@@ -436,160 +455,157 @@ namespace IDPAnalyser
                 return;
             }
 
-            if (_settings.Key1Size < 2)
-            {
-                GuiLogMessage("The minimum size for key 1 is 2.", NotificationLevel.Error);
-                return;
-            }
-
-            if (_settings.Key2Size < 2)
-            {
-                GuiLogMessage("The minimum size for key 2 is 2.", NotificationLevel.Error);
-                return;
-            }
-
-            computeKey1MinMaxColEnding(_input.Length, _settings.Key1Size);
-            byte[] mybuffer = new byte[_input.Length];
-
             DateTime startTime = DateTime.Now;
             DateTime nextUpdate = DateTime.Now.AddMilliseconds(100);
 
-            HighscoreList ROUNDLIST = new HighscoreList(_valueKeyComparer, 10);
-
-            ValueKey vk = new ValueKey();
-
-            ulong totalKeys = (ulong)_settings.Repeatings * (ulong)_settings.Iterations;
+            ulong keycombinations = (ulong)((_settings.Key1Max - _settings.Key1Min + 1) * (_settings.Key2Max - _settings.Key2Min + 1));
+            ulong totalKeys = (ulong)_settings.Repeatings * (ulong)_settings.Iterations * keycombinations;
             ulong doneKeys = 0;
-
+            HighscoreList ROUNDLIST = new HighscoreList(_valueKeyComparer, 10);
             stop = false;
 
-            byte[] ciphertext = UTF8Encoding.UTF8.GetBytes(_input);
-
-            for (int repeating = 0; repeating < _settings.Repeatings; repeating++)
+            for (int key1size = _settings.Key1Min; key1size <= _settings.Key1Max; key1size++)
             {
-                if (stop)
+                ComputeKey1MinMaxColEnding(_input.Length, key1size);
+
+                for (int key2size = _settings.Key2Min; key2size <= _settings.Key2Max; key2size++)
                 {
-                    break;
-                }
 
-                ROUNDLIST.Clear();
+                    ComputeKey1MinMaxColEnding(_input.Length, key1size);
+                    int[] mybuffer = new int[_input.Length];
+                    ValueKey vk = new ValueKey();
+                    int[] ciphertext = MapTextIntoNumberSpace(_input, LATIN_ALPHABET);
 
-                byte[] key = randomArray(_settings.Key2Size);
-                byte[] oldkey = new byte[_settings.Key2Size];
-
-                for (int iteration = 0; iteration < _settings.Iterations; iteration++)
-                {
-                    if (stop)
+                    for (int repeating = 0; repeating < _settings.Repeatings; repeating++)
                     {
-                        break;
-                    }
-
-                    Array.Copy(key, oldkey, key.Length);
-
-                    int r = _random.Next(100);
-                    if (r < 50)
-                    {
-                        for (int i = 0; i < _random.Next(10); i++)
+                        if (stop)
                         {
-                            swap(key, _random.Next(key.Length), _random.Next(key.Length));
+                            break;
+                        }
+
+                        ROUNDLIST.Clear();
+
+                        byte[] key = RandomArray(key2size);
+                        byte[] oldkey = new byte[key2size];
+
+                        for (int iteration = 0; iteration < _settings.Iterations; iteration++)
+                        {
+                            if (stop)
+                            {
+                                break;
+                            }
+
+                            Array.Copy(key, oldkey, key.Length);
+
+                            int r = _random.Next(100);
+                            if (r < 50)
+                            {
+                                for (int i = 0; i < _random.Next(10); i++)
+                                {
+                                    Swap(key, _random.Next(key.Length), _random.Next(key.Length));
+                                }
+                            }
+                            else if (r < 70)
+                            {
+                                for (int i = 0; i < _random.Next(3); i++)
+                                {
+                                    int l = _random.Next(key.Length - 1) + 1;
+                                    int f = _random.Next(key.Length);
+                                    int t = (f + l + _random.Next(key.Length - l)) % key.Length;
+                                    BlockSwap(key, f, t, l);
+                                }
+                            }
+                            else if (r < 90)
+                            {
+                                int l = 1 + _random.Next(key.Length - 1);
+                                int f = _random.Next(key.Length);
+                                int t = (f + 1 + _random.Next(key.Length - 1)) % key.Length;
+                                Blockshift(key, f, t, l);
+                            }
+                            else
+                            {
+                                Pivot(key, _random.Next(key.Length - 1) + 1);
+                            }
+
+                            vk.key = key;
+                            Decrypt2(vk.key, vk.key.Length, ciphertext, _input.Length, mybuffer);
+                            vk.plaintext = mybuffer;
+                            vk.score = EvalIDPKey2(vk.plaintext, key1size);
+                            vk.keyphrase = getKeywordFromKey(vk.key);
+
+                            if (ROUNDLIST.Add(vk))
+                            {
+                                if (_highscoreList.isBetter(vk))
+                                {
+                                    _highscoreList.Add(vk);
+                                }
+                            }
+                            else
+                            {
+                                Array.Copy(oldkey, key, key.Length);
+                            }
+
+                            doneKeys++;
+
+                            if (DateTime.Now >= nextUpdate)
+                            {
+                                _highscoreList.Merge(ROUNDLIST);
+                                UpdatePresentationList(totalKeys, doneKeys, startTime);
+                                nextUpdate = DateTime.Now.AddMilliseconds(1000);
+                            }
                         }
                     }
-                    else if (r < 70)
-                    {
-                        for (int i = 0; i < _random.Next(3); i++)
-                        {
-                            int l = _random.Next(key.Length - 1) + 1;
-                            int f = _random.Next(key.Length);
-                            int t = (f + l + _random.Next(key.Length - l)) % key.Length;
-                            blockswap(key, f, t, l);
-                        }
-                    }
-                    else if (r < 90)
-                    {
-                        int l = 1 + _random.Next(key.Length - 1);
-                        int f = _random.Next(key.Length);
-                        int t = (f + 1 + _random.Next(key.Length - 1)) % key.Length;
-                        blockshift(key, f, t, l);
-                    }
-                    else
-                    {
-                        pivot(key, _random.Next(key.Length - 1) + 1);
-                    }
-
-                    vk.key = key;
-                    decrypt2(vk.key, vk.key.Length, ciphertext, _input.Length, mybuffer);
-                    vk.plaintext = mybuffer;
-                    vk.score = evalIDPKey2(vk.plaintext, _settings.Key1Size);
-                    vk.keyphrase = getKeywordFromKey(vk.key);
-
-                    if (ROUNDLIST.Add(vk))
-                    {
-                        if (_highscoreList.isBetter(vk))
-                        {
-                            _highscoreList.Add(vk);
-                            //Output = vk.plaintext;
-                        }
-                    }
-                    else
-                    {
-                        Array.Copy(oldkey, key, key.Length);
-                    }
-
-                    doneKeys++;
-
-                    if (DateTime.Now >= nextUpdate)
-                    {
-                        _highscoreList.Merge(ROUNDLIST);
-                        UpdatePresentationList(totalKeys, doneKeys, startTime);
-                        nextUpdate = DateTime.Now.AddMilliseconds(1000);
-                    }
+                    _highscoreList.Merge(ROUNDLIST);
+                    UpdatePresentationList(totalKeys, doneKeys, startTime);
                 }
             }
-
-            _highscoreList.Merge(ROUNDLIST);
-            UpdatePresentationList(totalKeys, doneKeys, startTime);
         }
 
-        private void computeKey1MinMaxColEnding(int ciphertextLength, int keylength)
+        private void ComputeKey1MinMaxColEnding(int ciphertextLength, int keylength)
         {
-            Key1MinColEnd = new int[keylength];
-            Key1MaxColEnd = new int[keylength];
+            _key1MinColEnd = new int[keylength];
+            _key1MaxColEnd = new int[keylength];
 
             int fullRows = ciphertextLength / keylength;
             int numberOfLongColumns = ciphertextLength % keylength;
 
             for (int i = 0; i < keylength; i++)
             {
-                Key1MinColEnd[i] = fullRows * (i + 1) - 1;
+                _key1MinColEnd[i] = fullRows * (i + 1) - 1;
                 if (i < numberOfLongColumns)
                 {
-                    Key1MaxColEnd[i] = fullRows * (i + 1) + i;
+                    _key1MaxColEnd[i] = fullRows * (i + 1) + i;
                 }
                 else
                 {
-                    Key1MaxColEnd[i] = Key1MinColEnd[i] + numberOfLongColumns;
+                    _key1MaxColEnd[i] = _key1MinColEnd[i] + numberOfLongColumns;
                 }
             }
 
             for (int i = 0; i < keylength; i++)
             {
                 int index = keylength - 1 - i;
-                Key1MaxColEnd[index] = Math.Min(Key1MaxColEnd[index], ciphertextLength - 1 - fullRows * i);
+                _key1MaxColEnd[index] = Math.Min(_key1MaxColEnd[index], ciphertextLength - 1 - fullRows * i);
                 if (i < numberOfLongColumns)
                 {
-                    Key1MinColEnd[index] = Math.Max(Key1MinColEnd[index], ciphertextLength - 1 - fullRows * i - i);
+                    _key1MinColEnd[index] = Math.Max(_key1MinColEnd[index], ciphertextLength - 1 - fullRows * i - i);
                 }
                 else
                 {
-                    Key1MinColEnd[index] = Math.Max(Key1MinColEnd[index], Key1MaxColEnd[index] - numberOfLongColumns);
+                    _key1MinColEnd[index] = Math.Max(_key1MinColEnd[index], _key1MaxColEnd[index] - numberOfLongColumns);
                 }
             }
         }
 
-        // The core algorithm for IDP (index of Digraphic Potential)
-        public long evalIDPKey2(byte[] ciphertext, int keylen)
+        /// <summary>
+        /// The core algorithm for IDP (index of Digraphic Potential)
+        /// </summary>
+        /// <param name="ciphertext"></param>
+        /// <param name="keylen"></param>
+        /// <returns></returns>
+        public double EvalIDPKey2(int[] ciphertext, int keylen)
         {
-            long[,] p1p2Best = new long[keylen, keylen];
+            double[,] p1p2Best = new double[keylen, keylen];
 
             // CCT: All columns always start at multiples of nrows. No need to sweep for different
             // ending positions
@@ -606,14 +622,14 @@ namespace IDPAnalyser
                             continue;
                         }
 
-                        int p1 = Key1MinColEnd[c1];
-                        int p2 = Key1MinColEnd[c2];
+                        int p1 = _key1MinColEnd[c1];
+                        int p2 = _key1MinColEnd[c2];
 
-                        long sum = 0;
+                        double sum = 0;
 
                         for (int l = 0; l < fullRows; l++)
                         {
-                            sum += Bigrams.FlatList2[(ciphertext[p1 - l] << 8) + ciphertext[p2 - l]];
+                            sum += ((Bigrams)_grams).Frequencies[ciphertext[p1 - l], ciphertext[p2 - l]];
                         }
 
                         p1p2Best[c1, c2] = sum / fullRows;
@@ -626,12 +642,12 @@ namespace IDPAnalyser
                 // as all posible ending positions (P1, P2, P3).
 
                 int fullRows = ciphertext.Length / keylen;
-                long[] base_ = new long[fullRows + keylen];
+                double[] base_ = new double[fullRows + keylen];
 
                 for (int c1 = 0; c1 < keylen; c1++)
                 {
-                    int minP1 = Key1MinColEnd[c1];
-                    int maxP1 = Key1MaxColEnd[c1];
+                    int minP1 = _key1MinColEnd[c1];
+                    int maxP1 = _key1MaxColEnd[c1];
 
                     for (int c2 = 0; c2 < keylen; c2++)
                     {
@@ -640,26 +656,26 @@ namespace IDPAnalyser
                             continue;
                         }
 
-                        int minP2 = Key1MinColEnd[c2];
-                        int maxP2 = Key1MaxColEnd[c2];
+                        int minP2 = _key1MinColEnd[c2];
+                        int maxP2 = _key1MaxColEnd[c2];
 
                         int offset1 = maxP1 - minP1;
                         int offset2 = maxP2 - minP2;
 
                         int start1 = minP1 - fullRows + 1;
                         int start2 = minP2 - fullRows + 1;
-                        long best = 0;
+                        double best = 0;
 
                         for (int offset = 0; offset <= offset2; offset++)
                         {
-                            long sum = 0;
+                            double sum = 0;
 
                             int p1 = start1;
                             int p2 = start2 + offset;
 
                             for (int i = 0; i < fullRows; i++)
                             {
-                                long val = base_[i] = Bigrams.FlatList2[(ciphertext[p1++] << 8) + ciphertext[p2++]];
+                                double val = base_[i] = ((Bigrams)_grams).Frequencies[ciphertext[p1++], ciphertext[p2++]];
                                 sum += val;
                             }
 
@@ -672,7 +688,7 @@ namespace IDPAnalyser
                             while ((p1 <= maxP1) && (p2 <= maxP2))
                             {
                                 sum -= base_[iMinusFullRows++];
-                                sum += Bigrams.FlatList2[(ciphertext[p1++] << 8) + ciphertext[p2++]];
+                                sum += ((Bigrams)_grams).Frequencies[ciphertext[p1++], ciphertext[p2++]];
                                 if (best < sum)
                                 {
                                     best = sum;
@@ -683,14 +699,14 @@ namespace IDPAnalyser
                         // we test only once with offset = 0;
                         for (int offset = 1; offset <= offset1; offset++)
                         {
-                            long sum = 0;
+                            double sum = 0;
 
                             int p1 = start1 + offset;
                             int p2 = start2;
 
                             for (int i = 0; i < fullRows; i++)
                             {
-                                long val = base_[i] = Bigrams.FlatList2[(ciphertext[p1++] << 8) + ciphertext[p2++]];
+                                double val = base_[i] = ((Bigrams)_grams).Frequencies[ciphertext[p1++], ciphertext[p2++]];
                                 sum += val;
                             }
 
@@ -703,7 +719,7 @@ namespace IDPAnalyser
                             while ((p1 <= maxP1) && (p2 <= maxP2))
                             {
                                 sum -= base_[iMinusFullRows++];
-                                sum += Bigrams.FlatList2[(ciphertext[p1++] << 8) + ciphertext[p2++]];
+                                sum += ((Bigrams)_grams).Frequencies[ciphertext[p1++], ciphertext[p2++]];
                                 if (best < sum)
                                 {
                                     best = sum;
@@ -716,10 +732,10 @@ namespace IDPAnalyser
                 }
             }
 
-            return getMatrixScore(p1p2Best);
+            return GetMatrixScore(p1p2Best);
         }
 
-        private static long getMatrixScore(long[,] matrix)
+        private static double GetMatrixScore(double[,] matrix)
         {
             int dimension = matrix.GetLength(0);
 
@@ -731,11 +747,11 @@ namespace IDPAnalyser
                 left[i] = right[i] = -1;
             }
 
-            long sum = 0;
+            double sum = 0;
 
             for (int i = 1; i <= dimension; i++)
             {
-                long best = 0;
+                double best = 0;
                 int bestP1 = -1;
                 int bestP2 = -1;
 
@@ -785,11 +801,7 @@ namespace IDPAnalyser
                 }
 
                 sum += best;
-                if (bestP1 == -1)
-                {
-                    Console.Write("-1\n");
-                }
-                else
+                if (bestP1 != -1)
                 {
                     left[bestP2] = bestP1;
                     right[bestP1] = bestP2;
@@ -799,7 +811,7 @@ namespace IDPAnalyser
             return sum / dimension;
         }
 
-        public static void decrypt2(byte[] key, int keylen, byte[] ciphertext, int ciphertextLength, byte[] plaintext)
+        public static void Decrypt2(byte[] key, int keylen, int[] ciphertext, int ciphertextLength, int[] plaintext)
         {
             int[] invkey = new int[keylen];
 
@@ -820,29 +832,28 @@ namespace IDPAnalyser
 
         #endregion
 
-        private void swap(byte[] arr, int i, int j)
+        private void Swap(byte[] arr, int i, int j)
         {
             byte tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
         }
 
-        private void blockswap(byte[] arr, int f, int t, int l)
+        private void BlockSwap(byte[] arr, int f, int t, int l)
         {
             for (int i = 0; i < l; i++)
             {
-                swap(arr, (f + i) % arr.Length, (t + i) % arr.Length);
+                Swap(arr, (f + i) % arr.Length, (t + i) % arr.Length);
             }
         }
 
-        private void pivot(byte[] arr, int p)
+        private void Pivot(byte[] arr, int p)
         {
             byte[] tmp = new byte[arr.Length];
             Array.Copy(arr, tmp, arr.Length);
-
             Array.Copy(tmp, p, arr, 0, arr.Length - p);
             Array.Copy(tmp, 0, arr, arr.Length - p, p);
         }
 
-        private void blockshift(byte[] arr, int f, int t, int l)
+        private void Blockshift(byte[] arr, int f, int t, int l)
         {
             byte[] tmp = new byte[arr.Length];
             Array.Copy(arr, tmp, arr.Length);
@@ -858,7 +869,7 @@ namespace IDPAnalyser
             }
         }
 
-        private byte[] randomArray(int length)
+        private byte[] RandomArray(int length)
         {
             byte[] result = new byte[length];
             for (int i = 0; i < length; i++)
@@ -868,10 +879,44 @@ namespace IDPAnalyser
 
             for (int i = 0; i < length; i++)
             {
-                swap(result, _random.Next(length), _random.Next(length));
+                Swap(result, _random.Next(length), _random.Next(length));
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Maps a given array of numbers into the "textspace" defined by the alphabet
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <param name="alphabet"></param>
+        /// <returns></returns>
+        public static string MapNumbersIntoTextSpace(int[] numbers, string alphabet)
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (int i in numbers)
+            {
+                builder.Append(alphabet[i]);
+            }
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Maps a given string into the "numberspace" defined by the alphabet
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="alphabet"></param>
+        /// <returns></returns>
+        public static int[] MapTextIntoNumberSpace(string text, string alphabet)
+        {
+            int[] numbers = new int[text.Length];
+            int position = 0;
+            foreach (char c in text)
+            {
+                numbers[position] = alphabet.IndexOf(c);
+                position++;
+            }
+            return numbers;
         }
     }
 
@@ -890,13 +935,21 @@ namespace IDPAnalyser
             }
         }
 
-        public string Value { get; set; }
+        public double Value { get; set; }
+        public string DisplayValue
+        {
+            get
+            {
+                return $"{Value:N0}";
+            }
+
+        }
         public string Key { get; set; }
         public string KeyPhrase { get; set; }
         public byte[] KeyArray { get; set; }
         public string Text { get; set; }
 
-        public string ClipboardValue => Value;
+        public string ClipboardValue => DisplayValue;
         public string ClipboardKey => Key;
         public string ClipboardText => Text;
         public string ClipboardEntry =>

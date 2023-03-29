@@ -1,114 +1,62 @@
-﻿using CrypTool.PluginBase;
+﻿/*
+   Copyright 2023 CrypTool 2 Team <ct2contact@CrypTool.org>
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Utils;
 using System.ComponentModel;
-using System.Windows;
 
 namespace IDPAnalyser
 {
     internal class IDPAnalyserSettings : ISettings
     {
         #region settings
-        private int selected_method = 0;
+        private int _selected_method = 0;
+        private string _languageCode = "en"; //default language is English
 
-        internal void UpdateTaskPaneVisibility()
-        {
-            if (TaskPaneAttributeChanged == null)
-            {
-                return;
-            }
-
-            switch (selected_method)
-            {
-                case 0:
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Key1Min", Visibility.Visible)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Key1Max", Visibility.Visible)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Key2Min", Visibility.Visible)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Key2Max", Visibility.Visible)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Key1Size", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Key2Size", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Repeatings", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Iterations", Visibility.Collapsed)));
-                    break;
-                case 1:
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Key1Min", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Key1Max", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Key2Min", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Key2Max", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Key1Size", Visibility.Visible)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Key2Size", Visibility.Visible)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Repeatings", Visibility.Visible)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Iterations", Visibility.Visible)));
-                    break;
-            }
-        }
-
-        //[PropertySaveOrder(1)]
         [TaskPane("Analysis_methodCaption", "Analysis_methodTooltip", null, 1, false, ControlType.ComboBox, new string[] { "Analysis_methodList1", "Analysis_methodList2" })]
         public int Analysis_method
         {
-            get => selected_method;
+            get => _selected_method;
 
             set
             {
-                if (value != selected_method)
+                if (value != _selected_method)
                 {
-                    selected_method = value;
-                    UpdateTaskPaneVisibility();
+                    _selected_method = value;
                     OnPropertyChanged("Analysis_method");
                 }
             }
         }
 
-        private int language = 0;
-        [TaskPane("LanguageCaption", "LanguageTooltip", null, 2, false, ControlType.ComboBox, new string[] { "LanguageList1", "LanguageList2", "LanguageList3", "LanguageList4" })]
+        [TaskPane("LanguageCaption", "LanguageTooltip", null, 2, false, ControlType.LanguageSelector)]
         public int Language
         {
-            get => language;
-
+            get => LanguageStatistics.LanguageId(_languageCode);
             set
             {
-                if (value != language)
+                if (value != LanguageStatistics.LanguageId(_languageCode))
                 {
-                    language = value;
+                    _languageCode = LanguageStatistics.LanguageCode(value);
                     OnPropertyChanged("Language");
-                }
-            }
-        }
-
-        private int key1Size = 8;
-        [PropertySaveOrder(3)]
-        [TaskPaneAttribute("Key1SizeCaption", "Key1SizeTooltip", "KeyGroup", 3, false, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
-        public int Key1Size
-        {
-            get => key1Size;
-            set
-            {
-                if (value != key1Size)
-                {
-                    key1Size = value;
-                    OnPropertyChanged("Key1Size");
-                }
-            }
-        }
-
-        private int key2Size = 8;
-        [PropertySaveOrder(3)]
-        [TaskPaneAttribute("Key2SizeCaption", "Key2SizeTooltip", "KeyGroup", 4, false, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
-        public int Key2Size
-        {
-            get => key2Size;
-            set
-            {
-                if (value != key2Size)
-                {
-                    key2Size = value;
-                    OnPropertyChanged("Key2Size");
                 }
             }
         }
 
         private int key1Min = 8;
         [PropertySaveOrder(3)]
-        [TaskPaneAttribute("Key1MinCaption", "Key1MinTooltip", "KeyGroup", 5, false, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
+        [TaskPaneAttribute("Key1MinCaption", "Key1MinTooltip", "KeyGroup", 5, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 2, 500)]
         public int Key1Min
         {
             get => key1Min;
@@ -124,7 +72,7 @@ namespace IDPAnalyser
 
         private int key1Max = 10;
         [PropertySaveOrder(3)]
-        [TaskPaneAttribute("Key1MaxCaption", "Key1MaxTooltip", "KeyGroup", 6, false, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
+        [TaskPaneAttribute("Key1MaxCaption", "Key1MaxTooltip", "KeyGroup", 6, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 2, 500)]
         public int Key1Max
         {
             get => key1Max;
@@ -140,7 +88,7 @@ namespace IDPAnalyser
 
         private int key2Min = 8;
         [PropertySaveOrder(3)]
-        [TaskPaneAttribute("Key2MinCaption", "Key2MinTooltip", "KeyGroup", 7, false, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
+        [TaskPaneAttribute("Key2MinCaption", "Key2MinTooltip", "KeyGroup", 7, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 2, 500)]
         public int Key2Min
         {
             get => key2Min;
@@ -156,7 +104,7 @@ namespace IDPAnalyser
 
         private int key2Max = 10;
         [PropertySaveOrder(3)]
-        [TaskPaneAttribute("Key2MaxCaption", "Key2MaxTooltip", "KeyGroup", 8, false, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
+        [TaskPaneAttribute("Key2MaxCaption", "Key2MaxTooltip", "KeyGroup", 8, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 2, 500)]
         public int Key2Max
         {
             get => key2Max;
@@ -211,7 +159,6 @@ namespace IDPAnalyser
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            UpdateTaskPaneVisibility();
         }
 
         private void OnPropertyChanged(string name)
