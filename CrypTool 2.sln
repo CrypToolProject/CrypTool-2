@@ -447,6 +447,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GRANIT160Cipher", "CrypPlug
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Typex", "CrypPlugins\Typex\Typex.csproj", "{8FBAC349-9D21-4EBA-9B50-82802B93A620}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElsieFourCipher", "CrypPlugins\ElsieFourCipher\ElsieFourCipher.csproj", "{51A7D194-7F3C-4E5C-AF4F-6BE39E3DC8AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1329,6 +1331,10 @@ Global
 		{8FBAC349-9D21-4EBA-9B50-82802B93A620}.Debug|x64.Build.0 = Debug|x64
 		{8FBAC349-9D21-4EBA-9B50-82802B93A620}.Release|x64.ActiveCfg = Release|x64
 		{8FBAC349-9D21-4EBA-9B50-82802B93A620}.Release|x64.Build.0 = Release|x64
+		{51A7D194-7F3C-4E5C-AF4F-6BE39E3DC8AA}.Debug|x64.ActiveCfg = Debug|x64
+		{51A7D194-7F3C-4E5C-AF4F-6BE39E3DC8AA}.Debug|x64.Build.0 = Debug|x64
+		{51A7D194-7F3C-4E5C-AF4F-6BE39E3DC8AA}.Release|x64.ActiveCfg = Release|x64
+		{51A7D194-7F3C-4E5C-AF4F-6BE39E3DC8AA}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1543,6 +1549,7 @@ Global
 		{9711483C-F35F-4185-AF5B-B25D6B82D288} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{84251E43-DB08-45C5-B2A9-CB32FEDDA5C0} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{8FBAC349-9D21-4EBA-9B50-82802B93A620} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
+		{51A7D194-7F3C-4E5C-AF4F-6BE39E3DC8AA} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92042D62-2CDA-4393-9D74-4FB5AC571A2D}
