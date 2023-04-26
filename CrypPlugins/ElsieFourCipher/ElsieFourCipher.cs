@@ -45,7 +45,7 @@ namespace CrypTool.Plugins.ElsieFourCipher
             set;
         }
 
-        [PropertyInfo(Direction.InputData, "Key1Caption", "Key1Tooltip", false)]
+        [PropertyInfo(Direction.InputData, "KeyCaption", "KeyTooltip", false)]
         public string Key
         {
             get;
@@ -293,8 +293,8 @@ namespace CrypTool.Plugins.ElsieFourCipher
         {
             (stateMatrix[0, y], stateMatrix[1, y], stateMatrix[2, y], stateMatrix[3, y], stateMatrix[4, y], stateMatrix[5, y]) =
                 (stateMatrix[5, y], stateMatrix[0, y], stateMatrix[1, y], stateMatrix[2, y], stateMatrix[3, y], stateMatrix[4, y]);
-            //the following two lines make now sense, since x and row are overwritten at beginning of main loop
-            //but they are part of the original specification of the cipher
+            //The following two lines make no sense, since values of x and row are overwritten at the beginning of the main loop.
+            //But these lines are part of the original specification of the cipher:
             //x = (x + 1) % 6;
             //if(column == y) row = (row + 1) % 6;
             if (j == y) i = (i + 1) % 6;

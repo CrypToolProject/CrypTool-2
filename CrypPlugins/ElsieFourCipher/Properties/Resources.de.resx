@@ -135,10 +135,10 @@
   <data name="InputTextTooltip" xml:space="preserve">
     <value>Eingabe einer Zeichenkette, die von der Chiffre verarbeitet werden soll</value>
   </data>
-  <data name="Key1Caption" xml:space="preserve">
+  <data name="KeyCaption" xml:space="preserve">
     <value>Schlüssel</value>
   </data>
-  <data name="Key1Tooltip" xml:space="preserve">
+  <data name="KeyTooltip" xml:space="preserve">
     <value>Für die Ver- oder Entschlüsselung verwendeter Schlüssel</value>
   </data>
   <data name="OutputTextCaption" xml:space="preserve">
