@@ -1,4 +1,4 @@
-# CrypTool 2
+# <img src="https://github.com/CrypToolProject/CrypTool-2/blob/main/documentation/images/ct2_banner.png" width="500">
 
 Open-source e-learning Windows application for cryptography and cryptanalysis. Part of the [CrypTool project](https://www.cryptool.org).
 
