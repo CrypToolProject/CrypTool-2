@@ -1187,8 +1187,11 @@ namespace CrypTool.Plugins.Keccak
                     pres.labelRotationOffset.Content = rotationOffset.ToString();
                 }, null);
 
-                int recVariableOffset = (rotationOffset % 16 <= 4) ? 0 : (rotationOffset % 16 <= 10) ? 1 : 2;
-                int recLeft, recTop;
+                // 2023-05-08: kopal, esslinger: we changed the datatypes in the following lines from int
+                //                               to double, since we got a runtime error, when the values
+                //                               were assigned to Canvas.TopProperty and Canvas.LeftProperty
+                double recVariableOffset = (rotationOffset % 16 <= 4) ? 0 : (rotationOffset % 16 <= 10) ? 1 : 2;
+                double recLeft, recTop;
                 recLeft = 8 + (rotationOffset % 16) * 14 + recVariableOffset;
                 recTop = 122 + rotationOffset / 16 * 14;
 
