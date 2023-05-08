@@ -32,9 +32,9 @@ A template showing two different modes of operation (ECB and CBC) for AES
 
 ## 📚 Documentation
 
-* Introductions, manuals, workshops, and more documentations are available in the [resources](https://www.cryptool.org/en/ct2/resources).
-* Developer documentation is available in the GitHub project's [wiki](https://github.com/CrypToolProject/CrypTool-2/wiki).
-* Additional infos and videos on the ["Cryptography for everybody" - YouTube channel](https://www.youtube.com/c/CrypTool2).
+* 👩‍🏫 Introductions, manuals, workshops, and more documentations are [available in the resources](https://www.cryptool.org/en/ct2/resources).
+* 📖 Developer documentation is available in the [GitHub project's wiki](https://github.com/CrypToolProject/CrypTool-2/wiki).
+* 🎞️ Additional infos and videos on the ["Cryptography for everybody" - YouTube channel](https://www.youtube.com/c/CrypTool2).
 
 ## 👑 Releases and 🌓 nightly builds
 
@@ -42,7 +42,7 @@ CrypTool 2 is built every night and released in the so-called "nightly build". A
 
 The build system is located and executed on a private server maintained by the CrypTool 2 team. All released CrypTool 2 builds are digitally signed using a software signing certificate.
 
-* Download nightly builds and stable versions from our [website](https://www.cryptool.org/en/ct2/downloads).
+* 💾 Download nightly builds and stable versions from our [website (https://www.cryptool.org/en/ct2/downloads)](https://www.cryptool.org/en/ct2/downloads).
 
 ## 👷 Building and developing CrypTool 2
 
@@ -53,7 +53,7 @@ The build system is located and executed on a private server maintained by the C
 ## 📞 Get in touch
 
 * [Contact us](https://www.cryptool.org/en/contact)
-* [Discord Server "Cryptography for everybody"](https://discord.gg/vHQJTtWe)
+* [Discord Server "Cryptography for everybody"](https://discord.gg/Kz3NaXeb)
 
 ## 📜 License
 
