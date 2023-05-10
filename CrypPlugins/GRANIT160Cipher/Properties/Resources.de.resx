@@ -177,4 +177,16 @@
   <data name="PluginTooltip" xml:space="preserve">
     <value>Implementierung der GRANIT160-Chiffre</value>
   </data>
+  <data name="ReplaceLetterJCaption" xml:space="preserve">
+    <value>Ersetze Buchstabe J</value>
+  </data>
+  <data name="ReplaceLetterJTooltip" xml:space="preserve">
+    <value>Entfernt den Buchstaben J aus dem verwendeten Alphabet und ersetzt ihn im Klartext durch II</value>
+  </data>
+  <data name="ReplaceUmlautsCaption" xml:space="preserve">
+    <value>Ersetze Umlaute (und ß)</value>
+  </data>
+  <data name="ReplaceUmlautsTooltip" xml:space="preserve">
+    <value>Wenn aktiviert, werden Umlaute (Ä, Ö und Ü) sowie ß durch AE, OE, UE und SS ersetzt.</value>
+  </data>
 </root>

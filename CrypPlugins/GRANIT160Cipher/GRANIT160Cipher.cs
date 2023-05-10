@@ -34,8 +34,9 @@ namespace CrypTool.Plugins.GRANIT160Cipher
     {
         #region Private Variables
 
-        private const string alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
-        private const string alphabetWithJ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string Alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
+        private const string AlphabetWithJ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
         private const string digits = "0123456789";
 
         private readonly GRANIT160CipherSettings _settings = new GRANIT160CipherSettings();
@@ -102,21 +103,28 @@ namespace CrypTool.Plugins.GRANIT160Cipher
         {
             ProgressChanged(0, 1);
 
+            //set used alphabet (including J or not)
+            string alphabet = AlphabetWithJ;
+            if (_settings.ReplaceLetterJ)
+            {
+                alphabet = Alphabet;
+            }
+
             string keyword1 = Keyword1;
-            string keyword2 = CleanTranspositionKeyword(Keyword2);
-            string keyword3 = CleanTranspositionKeyword(Keyword3);
+            string keyword2 = CleanTranspositionKeyword(Keyword2, alphabet);
+            string keyword3 = CleanTranspositionKeyword(Keyword3, alphabet);
 
             switch (_settings.Action)
             {
                 case Action.Encrypt:
                     //format plaintext according to rules
-                    string plaintext = FormatPlaintextBeforeEncryption(InputText);
-                    OutputText = EncryptGRANIT160(plaintext, keyword1, keyword2, keyword3);
+                    string plaintext = FormatPlaintextBeforeEncryption(InputText, alphabet);
+                    OutputText = EncryptGRANIT160(plaintext, keyword1, keyword2, keyword3, alphabet);
                     break;
 
                 case Action.Decrypt:
 
-                    OutputText = DecryptGRANIT160(InputText, keyword1, keyword2, keyword3);
+                    OutputText = DecryptGRANIT160(InputText, keyword1, keyword2, keyword3, alphabet);
                     //format plaintext according to rules
                     OutputText = FormatPlaintextAfterDecryption(OutputText);
                     break;
@@ -135,13 +143,14 @@ namespace CrypTool.Plugins.GRANIT160Cipher
         /// <param name="keyword1"></param>
         /// <param name="keyword2"></param>
         /// <param name="keyword3"></param>
+        /// <param name="alphabet"></param>
         /// <returns></returns>
-        public string EncryptGRANIT160(string plaintext, string keyword1, string keyword2, string keyword3)
+        public string EncryptGRANIT160(string plaintext, string keyword1, string keyword2, string keyword3, string alphabet)
         {
             //prepare keys
-            Dictionary<string, string> encryptionDictionary = GenerateStraddlingCheckerboardKey(keyword1, true);
-            keyword2 = CleanTranspositionKeyword(keyword2);
-            keyword3 = CleanTranspositionKeyword(keyword3);
+            Dictionary<string, string> encryptionDictionary = GenerateStraddlingCheckerboardKey(keyword1, true, alphabet);
+            keyword2 = CleanTranspositionKeyword(keyword2, alphabet);
+            keyword3 = CleanTranspositionKeyword(keyword3, alphabet);
 
             //encrypt
             string ciphertext = EncryptStraddlingCheckerboard(plaintext, encryptionDictionary);
@@ -158,13 +167,14 @@ namespace CrypTool.Plugins.GRANIT160Cipher
         /// <param name="keyword1"></param>
         /// <param name="keyword2"></param>
         /// <param name="keyword3"></param>
+        /// <param name="alphabet"></param>
         /// <returns></returns>
-        public string DecryptGRANIT160(string ciphertext, string keyword1, string keyword2, string keyword3)
+        public string DecryptGRANIT160(string ciphertext, string keyword1, string keyword2, string keyword3, string alphabet)
         {
             //prepare keys
-            Dictionary<string, string> decryptionDictionary = GenerateStraddlingCheckerboardKey(keyword1, false);
-            keyword2 = CleanTranspositionKeyword(keyword2);
-            keyword3 = CleanTranspositionKeyword(keyword3);
+            Dictionary<string, string> decryptionDictionary = GenerateStraddlingCheckerboardKey(keyword1, false, alphabet);
+            keyword2 = CleanTranspositionKeyword(keyword2, alphabet);
+            keyword3 = CleanTranspositionKeyword(keyword3, alphabet);
 
             //decrypt
             string plaintext = DecryptTransposition(ciphertext, keyword3);
@@ -184,18 +194,24 @@ namespace CrypTool.Plugins.GRANIT160Cipher
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public string FormatPlaintextBeforeEncryption(string text)
+        public string FormatPlaintextBeforeEncryption(string text, string alphabet)
         {
             text = text.ToUpper();
 
             //for J they used two I
-            text = text.Replace("J", "II");
+            if (_settings.ReplaceLetterJ)
+            {
+                text = text.Replace("J", "II");
+            }
 
             //replace umlauts and ß
-            text = text.Replace("Ä", "AE");
-            text = text.Replace("Ü", "UE");
-            text = text.Replace("Ö", "OE");
-            text = text.Replace("ß", "SS");
+            if (_settings.ReplaceUmlauts)
+            {                
+                text = text.Replace("Ä", "AE");
+                text = text.Replace("Ü", "UE");
+                text = text.Replace("Ö", "OE");
+                text = text.Replace("ß", "SS");                
+            }
 
             text = text.Replace("?", "..");
 
@@ -250,13 +266,19 @@ namespace CrypTool.Plugins.GRANIT160Cipher
             StringBuilder builder = new StringBuilder(text);
 
             //for J they used two I
-            builder.Replace("II", "J");
+            if (_settings.ReplaceLetterJ)
+            {
+                builder.Replace("II", "J");
+            }
 
             //replace umlauts and ß
-            builder.Replace("AE", "Ä");
-            builder.Replace("UE", "Ü");
-            builder.Replace("OE", "Ö");
-            builder.Replace("SS", "ß");
+            if (_settings.ReplaceUmlauts)
+            {                               
+                builder.Replace("AE", "Ä");
+                builder.Replace("UE", "Ü");
+                builder.Replace("OE", "Ö");
+                builder.Replace("SS", "ß");
+            }
 
             //remove number signal (Ger. "Zahlensignal")
             builder.Replace("zs", string.Empty);
@@ -278,8 +300,9 @@ namespace CrypTool.Plugins.GRANIT160Cipher
         /// </summary>
         /// <param name="keyword"></param>
         /// <param name="forEncryption"></param>
+        /// <param name="alphabet"></param>
         /// <returns></returns>
-        public Dictionary<string, string> GenerateStraddlingCheckerboardKey(string keyword, bool forEncryption)
+        public Dictionary<string, string> GenerateStraddlingCheckerboardKey(string keyword, bool forEncryption, string alphabet)
         {
             keyword = keyword.ToUpper();
             Dictionary<string, string> key = new Dictionary<string, string>();
@@ -438,14 +461,15 @@ namespace CrypTool.Plugins.GRANIT160Cipher
         /// Cleans a given keyword by only using letters from A to Z (including J)
         /// </summary>
         /// <param name="keyword"></param>
+        /// <param name="alphabet"></param>
         /// <returns></returns>
-        public string CleanTranspositionKeyword(string keyword)
+        public string CleanTranspositionKeyword(string keyword, string alphabet)
         {
             StringBuilder builder = new StringBuilder();
             keyword = keyword.ToUpper();
             foreach (char letter in keyword)
             {
-                if (alphabetWithJ.Contains(letter))
+                if (alphabet.Contains(letter))
                 {
                     builder.Append(letter);
                 }

@@ -221,5 +221,41 @@ namespace CrypTool.Plugins.GRANIT160Cipher.Properties {
                 return ResourceManager.GetString("PluginTooltip", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace letter J.
+        /// </summary>
+        internal static string ReplaceLetterJCaption {
+            get {
+                return ResourceManager.GetString("ReplaceLetterJCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removes letter J from the used alphabet and replaces it in the plaintext with II.
+        /// </summary>
+        internal static string ReplaceLetterJTooltip {
+            get {
+                return ResourceManager.GetString("ReplaceLetterJTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace umlauts (and ß).
+        /// </summary>
+        internal static string ReplaceUmlautsCaption {
+            get {
+                return ResourceManager.GetString("ReplaceUmlautsCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If enabled, umlauts (Ä,Ö, and Ü) as well as ß are replaced by AE, OE, UE, and SS.
+        /// </summary>
+        internal static string ReplaceUmlautsTooltip {
+            get {
+                return ResourceManager.GetString("ReplaceUmlautsTooltip", resourceCulture);
+            }
+        }
     }
 }

@@ -31,6 +31,8 @@ namespace CrypTool.Plugins.GRANIT160Cipher
 
         private Action _action = Action.Encrypt;
         private bool _addNullsIfNeeded = false;
+        private bool _replaceUmlauts = true;
+        private bool _replaceLetterJ = true;
 
         #endregion
 
@@ -68,6 +70,40 @@ namespace CrypTool.Plugins.GRANIT160Cipher
                 {
                     _addNullsIfNeeded = value;
                     OnPropertyChanged(nameof(AddNullsIfNeeded));
+                }
+            }
+        }
+
+        [TaskPane("ReplaceUmlautsCaption", "ReplaceUmlautsTooltip", null, 3, false, ControlType.CheckBox)]
+        public bool ReplaceUmlauts
+        {
+            get
+            {
+                return _replaceUmlauts;
+            }
+            set
+            {
+                if (_replaceUmlauts != value)
+                {
+                    _replaceUmlauts = value;
+                    OnPropertyChanged(nameof(ReplaceUmlauts));
+                }
+            }
+        }
+
+        [TaskPane("ReplaceLetterJCaption", "ReplaceLetterJTooltip", null, 4, false, ControlType.CheckBox)]
+        public bool ReplaceLetterJ
+        {
+            get
+            {
+                return _replaceLetterJ;
+            }
+            set
+            {
+                if (_replaceLetterJ != value)
+                {
+                    _replaceLetterJ = value;
+                    OnPropertyChanged(nameof(ReplaceLetterJ));
                 }
             }
         }

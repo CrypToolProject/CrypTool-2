@@ -171,4 +171,16 @@
   <data name="PluginTooltip" xml:space="preserve">
     <value>Implementation of the bifid cipher</value>
   </data>
+  <data name="ReplaceLetterJCaption" xml:space="preserve">
+    <value>Replace letter J</value>
+  </data>
+  <data name="ReplaceLetterJTooltip" xml:space="preserve">
+    <value>Removes letter J from the used alphabet and replaces it in the plaintext with II</value>
+  </data>
+  <data name="ReplaceUmlautsCaption" xml:space="preserve">
+    <value>Replace umlauts (and ß)</value>
+  </data>
+  <data name="ReplaceUmlautsTooltip" xml:space="preserve">
+    <value>If enabled, umlauts (Ä,Ö, and Ü) as well as ß are replaced by AE, OE, UE, and SS</value>
+  </data>
 </root>
