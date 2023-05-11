@@ -135,6 +135,12 @@
   <data name="Encrypt" xml:space="preserve">
     <value>Verschlüsseln</value>
   </data>
+  <data name="EncryptSpaceCaption" xml:space="preserve">
+    <value>Leerzeichen verschlüsseln</value>
+  </data>
+  <data name="EncryptSpaceTooltip" xml:space="preserve">
+    <value>Wenn aktiviert, wird auch das Leerzeichen verschlüsselt.</value>
+  </data>
   <data name="InputTextCaption" xml:space="preserve">
     <value>Eingabe-Text</value>
   </data>

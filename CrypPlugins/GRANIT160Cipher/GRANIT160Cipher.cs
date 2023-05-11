@@ -109,6 +109,10 @@ namespace CrypTool.Plugins.GRANIT160Cipher
             {
                 alphabet = Alphabet;
             }
+            if (_settings.EncryptSpace)
+            {
+                alphabet += " ";
+            }
 
             string keyword1 = Keyword1;
             string keyword2 = CleanTranspositionKeyword(Keyword2, alphabet);

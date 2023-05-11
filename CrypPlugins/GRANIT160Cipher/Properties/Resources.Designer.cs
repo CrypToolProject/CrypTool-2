@@ -115,6 +115,24 @@ namespace CrypTool.Plugins.GRANIT160Cipher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Encrypt space symbol.
+        /// </summary>
+        internal static string EncryptSpaceCaption {
+            get {
+                return ResourceManager.GetString("EncryptSpaceCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If enabled, the space symbol is also encrypted.
+        /// </summary>
+        internal static string EncryptSpaceTooltip {
+            get {
+                return ResourceManager.GetString("EncryptSpaceTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Input Text.
         /// </summary>
         internal static string InputTextCaption {

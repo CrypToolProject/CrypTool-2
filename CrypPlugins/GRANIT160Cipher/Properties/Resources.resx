@@ -135,6 +135,12 @@
   <data name="Encrypt" xml:space="preserve">
     <value>Encrypt</value>
   </data>
+  <data name="EncryptSpaceCaption" xml:space="preserve">
+    <value>Encrypt space symbol</value>
+  </data>
+  <data name="EncryptSpaceTooltip" xml:space="preserve">
+    <value>If enabled, the space symbol is also encrypted</value>
+  </data>
   <data name="InputTextCaption" xml:space="preserve">
     <value>Input Text</value>
   </data>

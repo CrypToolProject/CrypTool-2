@@ -33,6 +33,7 @@ namespace CrypTool.Plugins.GRANIT160Cipher
         private bool _addNullsIfNeeded = false;
         private bool _replaceUmlauts = true;
         private bool _replaceLetterJ = true;
+        private bool _encryptSpace = false;
 
         #endregion
 
@@ -104,6 +105,23 @@ namespace CrypTool.Plugins.GRANIT160Cipher
                 {
                     _replaceLetterJ = value;
                     OnPropertyChanged(nameof(ReplaceLetterJ));
+                }
+            }
+        }
+
+        [TaskPane("EncryptSpaceCaption", "EncryptSpaceTooltip", null, 5, false, ControlType.CheckBox)]
+        public bool EncryptSpace
+        {
+            get
+            {
+                return _encryptSpace;
+            }
+            set
+            {
+                if (_encryptSpace != value)
+                {
+                    _encryptSpace = value;
+                    OnPropertyChanged(nameof(EncryptSpace));
                 }
             }
         }
