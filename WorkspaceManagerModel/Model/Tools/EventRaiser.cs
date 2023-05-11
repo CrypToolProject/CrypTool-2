@@ -18,24 +18,30 @@ using System.Reflection;
 
 namespace WorkspaceManagerModel.Model.Tools
 {
-    public static class PropertyRaiser
+    public static class EventRaiser
     {
         /// <summary>
         /// Raises an event defined by the eventName 
+        /// Searches for the event in the given type and all of its base types
         /// 
         /// Source found at statckoverflow
         /// see https://stackoverflow.com/questions/198543/how-do-i-raise-an-event-via-reflection-in-net-c
         /// </summary>
         /// <param name="instance"></param>
         /// <param name="eventName"></param>
-        /// <param name="e"></param>
-        public static void RaiseEvent(this object instance, string eventName, EventArgs e)
+        /// <param name="eventArgs"></param>
+        public static void RaiseEvent(this object instance, string eventName, EventArgs eventArgs)
         {
             Type type = instance.GetType();
-            FieldInfo eventField = type.GetField(eventName, BindingFlags.Instance | BindingFlags.NonPublic);
-            if (eventField == null)
+            FieldInfo eventField = null;
+            while (eventField == null)
             {
-                throw new Exception(string.Format("Event with name {0} could not be found", eventName));
+                eventField = type.GetField(eventName, BindingFlags.Instance | BindingFlags.NonPublic);
+                if (type.BaseType == null)
+                {
+                    return; //we did not find the event field, so we just return
+                }
+                type = type.BaseType; //search base type              
             }
             MulticastDelegate multicastDelegate = eventField.GetValue(instance) as MulticastDelegate;
             if (multicastDelegate == null)
@@ -45,7 +51,7 @@ namespace WorkspaceManagerModel.Model.Tools
             Delegate[] invocationList = multicastDelegate.GetInvocationList();
             foreach (Delegate invocationMethod in invocationList)
             {
-                invocationMethod.DynamicInvoke(new[] { instance, e });
+                invocationMethod.DynamicInvoke(new[] { instance, eventArgs });
             }
         }
     }
