@@ -9,6 +9,8 @@
 
     <crypanalysisviewcontrol:CrypAnalysisViewControl ResultHeaderCaption="{Loc LocalLabel}" ResultListCaption="{Loc TopTenLabel}">
         <crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc AnalysisMode}" x:Name="AnalysisMode"  />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc AnalysisStep}" x:Name="AnalysisStep" />
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc StartLabel}" x:Name="StartTime" />
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc EndLabel}" x:Name="EndTime" />
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc ElapsedLabel}" x:Name="ElapsedTime" />

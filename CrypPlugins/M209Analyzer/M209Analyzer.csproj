@@ -76,27 +76,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CiphertextOnly.cs" />
-    <Compile Include="Enum\VersionOfInstruction.cs" />
     <Compile Include="M209AnalyzerPresentation.xaml.cs">
       <DependentUpon>M209AnalyzerPresentation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Enum\PinSettingTransformation.cs" />
-    <Compile Include="LugSettings.cs" />
     <Compile Include="M209Analyzer.cs" />
     <Compile Include="M209AnalyzerSettings.cs" />
-    <Compile Include="M209CipherMachine.cs" />
-    <Compile Include="PinSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SimulatedAnnealing.cs" />
-    <Compile Include="Wheel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\source\repos\M209Analyzer\M209Analyzer\M209AnalyzerLib.csproj">
+      <Project>{bc60da91-4135-4cfb-b0f4-2b250d435c73}</Project>
+      <Name>M209AnalyzerLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CrypPluginBase\CrypPluginBase.csproj">
       <Project>{25DB2B47-A457-4EC2-960B-395CE07AE093}</Project>
       <Name>CrypPluginBase</Name>

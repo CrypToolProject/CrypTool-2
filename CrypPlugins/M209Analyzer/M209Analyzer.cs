@@ -13,22 +13,19 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.CrypAnalysisViewControl;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using System.ComponentModel;
-using System;
-using System.Windows.Controls;
-using M209Analyzer;
 using CrypTool.PluginBase.Utils;
-using CrypTool.CrypAnalysisViewControl;
-using System.Threading;
-using System.Windows.Threading;
-using Cryptool.Plugins.M209Analyzer;
-using System.CodeDom;
-using CrypTool.PluginBase.Utils.Logging;
-using System.Diagnostics;
-using static Cryptool.Plugins.M209Analyzer.CiphertextOnly;
+using M209AnalyzerLib;
+using M209AnalyzerLib.Common;
+using M209AnalyzerLib.M209;
+using System;
+using System.ComponentModel;
 using System.Linq;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.M209Analyzer
 {
@@ -59,6 +56,7 @@ namespace CrypTool.Plugins.M209Analyzer
         // HOWTO: You need to adapt the settings class as well, see the corresponding file.
         private readonly M209AnalyzerSettings _settings;
         private readonly M209AnalyzerPresentation _presentation = new M209AnalyzerPresentation();
+        private M209AttackManager _m209AttackManager;
         private const int MaxBestListEntries = 100;
         private const string ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWKXY";
         private DateTime _startTime;
@@ -69,14 +67,11 @@ namespace CrypTool.Plugins.M209Analyzer
         //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
         private Grams grams;
 
-
-        private CiphertextOnly ciphertextOnly;
-
         public M209Analyzer()
         {
             _settings = new M209AnalyzerSettings();
-            _presentation.UpdateOutputFromUserChoice += UpdateOutputFromUserChoice;            
-        } 
+            _presentation.UpdateOutputFromUserChoice += UpdateOutputFromUserChoice;
+        }
 
         #endregion
 
@@ -93,8 +88,8 @@ namespace CrypTool.Plugins.M209Analyzer
             set;
         }
 
-        [PropertyInfo(Direction.InputData, "Knowntext", "")]
-        public string Knowntext
+        [PropertyInfo(Direction.InputData, "KnownPlaintext", "")]
+        public string KnownPlaintext
         {
             get;
             set;
@@ -172,11 +167,15 @@ namespace CrypTool.Plugins.M209Analyzer
 
             _running = true;
 
-            this.ciphertextOnly = new CiphertextOnly(grams);
-            ciphertextOnly.OnLogEvent += GetMessageFromChild;
-            ciphertextOnly.OnAddBestListEntry += HandleNewBestListEntry;
+            _m209AttackManager = new M209AttackManager(new M209Scoring());
+            _m209AttackManager.OnNewBestListEntry += HandleNewBestListEntry;
+            _m209AttackManager.OnProgressStatusChanged += _m209AttackManager_OnProgressStatusChanged;
+            _m209AttackManager.ShouldStop = !_running;
 
-            this.ciphertextOnly.Running = _running;
+            //this.ciphertextOnly = new CiphertextOnly(grams);
+            //ciphertextOnly.OnLogEvent += GetMessageFromChild;
+
+            //this.ciphertextOnly.Running = _running;
 
             //this.ciphertextOnly.Encrypt("WINDOW AT THE SAME INSTANT I SAW HIM RAISE HIS HAND AND AT THE SIGNAL I TOSSED MY ROCKET INTO THE ROOM WITH A CRY OF FIRE THE WORD WAS NO SOONER OUT OF MY MOUTH THAN THE WHOLE CROWD OF SPECTATORS WELL DRESSED AND ILL GENTLEMEN OSTLERS AND SERVANT MAIDS JOINED IN A GENERAL SHRIEK OF FIRE THICK CLOUDS OF SMOKE CURLED THROUGH THE ROOM AND OUT AT THE OPEN WINDOW I CAUGHT A GLIMPSE OF RUSHING FIGURES AND A MOMENT LATER THE VOICE OF HOLMES FROM WITHIN ASSURING THEM THAT IT WAS A FALSE ALARM SLIPPING THROUGH THE SHOUTING CROWD I MADE MY WAY TO THE CORNER OF THE STREET AND IN TEN MINUTES WAS REJOICED TO FIND MY FRIEND S ARM IN MINE AND TO GET AWAY FROM THE SCENE OF UPROAR HE WALKED SWIFTLY AND IN SILENCE FOR SOME FEW MINUTES UNTIL WE HAD TURNED DOWN ONE OF THE QUIET STREETS WHICH LEAD TOWARDS THE EDGEWARE ROAD YOU DID IT VERY NICELY DOCTOR HE REMARKED NOTHING COULD HAVE BEEN BETTER IT IS ALL RIGHT YOU HAVE THE PHOTOGRAPH I KNOW WHERE IT IS AND HOW DID YOU FIND OUT SHE SHOWED ME AS I TOLD YOU SHE WOULD I AM STILL IN THE DARK I DO NOT WISH TO MAKE A MYSTERY SAID HE LAUGHING THE MATTER WAS PERFECTLY SIMPLE YOU OF COURSE SAW THAT EVERYONE IN THE STREET WAS AN ACCOMPLICE THEY WERE ALL ENGAGED FOR THE EVENING I GUESSED AS MUCH THEN WHEN THE ROW BROKE OUT I HAD A LITTLE MOIST RED PAINT IN THE PALM OF MY HAND I RUSHED FORWARD FELL DOWN CLAPPED MY HAND TO MY FACE AND BECAME A PITEOUS SPECTACLE IT IS AN OLD TRICK THAT ALSO I COULD FATHOM THEN THEY CARRIED ME IN SHE WAS BOUND TO HAVE ME IN WHAT");
 
@@ -191,36 +190,27 @@ namespace CrypTool.Plugins.M209Analyzer
                 switch (_settings.AttackMode)
                 {
                     case AttackMode.CiphertextOnly:
-                        int[] roundLayers = new int[4];
-                        double bestScore = 0.0;
-
-                        for (int i = 0; i < 100 && this._running; i++)
-                        {
-                            //double currentScore = this.ciphertextOnly.HCOuter(Ciphertext, "V");
-                            this.ciphertextOnly.Solve(Ciphertext, 0,"V");
-                            GuiLogMessage($"BestScore: {bestScore}", NotificationLevel.Info);
-
-                            //if(bestScore < currentScore)
-                            //{
-                            //    bestScore = currentScore;
-                            //}
-                        }
-
-                        this.ciphertextOnly.Solve(Ciphertext, 0, "V");
+                        _m209AttackManager.CipherTextOnlyAttack(Ciphertext);
                         break;
                     case AttackMode.KnownPlaintext:
+                        _m209AttackManager.KnownPlainTextAttack(Ciphertext, KnownPlaintext);
                         break;
                     default:
                         break;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 GuiLogMessage(string.Format("Exception occured: {0}", ex.Message), NotificationLevel.Error);
             }
 
             ProgressChanged(1, 1);
-        }        
+        }
+
+        private void _m209AttackManager_OnProgressStatusChanged(object sender, M209AttackManager.OnProgressStatusChangedEventArgs e)
+        {
+            ProgressChanged(e.Counter, e.TargetValue);
+        }
 
         private double LogMonograms(string P)
         {
@@ -256,7 +246,7 @@ namespace CrypTool.Plugins.M209Analyzer
         public void Stop()
         {
             _running = false;
-            this.ciphertextOnly.Running = false;
+            _m209AttackManager.ShouldStop = true;
         }
 
         /// <summary>
@@ -300,11 +290,6 @@ namespace CrypTool.Plugins.M209Analyzer
             EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
         }
 
-        private void GetMessageFromChild(object sender, OnLogEventArgs e)
-        {
-            GuiLogMessage(e.Message, e.LogLevel);
-        }
-
         #endregion
 
         /// <summary>
@@ -320,18 +305,18 @@ namespace CrypTool.Plugins.M209Analyzer
             OnPropertyChanged("Plaintext");
         }
 
-        private void HandleNewBestListEntry(object sender, OnAddBestListEntryEventArgs e)
+        private void HandleNewBestListEntry(object sender, M209AttackManager.OnNewBestListEntryEventArgs args)
         {
-            this.AddNewBestListEntry(e.Key, e.Costvalue, e.Plaintext);
+            this.AddNewBestListEntry(args.Key.ToString(), args.Score, args.Decryption);
         }
 
-            /// <summary>
-            /// Adds an entry to the BestList
-            /// </summary>
-            /// <param name="key"></param>
-            /// <param name="value"></param>
-            /// <param name="text"></param>
-            private void AddNewBestListEntry(string key, double value, string text)
+        /// <summary>
+        /// Adds an entry to the BestList
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <param name="text"></param>
+        private void AddNewBestListEntry(string key, double value, int[] text)
         {
 
             //if we have a worse value than the last one, skip
@@ -343,7 +328,7 @@ namespace CrypTool.Plugins.M209Analyzer
             ResultEntry entry = new ResultEntry
             {
                 Key = key,
-                Text = text,
+                Text = Utils.GetString(text),
                 Value = value
             };
 
