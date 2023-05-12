@@ -95,13 +95,6 @@ namespace CrypTool.Plugins.M209Analyzer
             set;
         }
 
-        [PropertyInfo(Direction.InputData, "P", "Putative decryption")]
-        public string P
-        {
-            get;
-            set;
-        }
-
         [PropertyInfo(Direction.OutputData, "PlaintextCaption", "PlaintextTooltip", false)]
         public string Plaintext
         {
@@ -172,21 +165,13 @@ namespace CrypTool.Plugins.M209Analyzer
             _m209AttackManager.OnProgressStatusChanged += _m209AttackManager_OnProgressStatusChanged;
             _m209AttackManager.ShouldStop = !_running;
 
-            //this.ciphertextOnly = new CiphertextOnly(grams);
-            //ciphertextOnly.OnLogEvent += GetMessageFromChild;
-
-            //this.ciphertextOnly.Running = _running;
-
-            //this.ciphertextOnly.Encrypt("WINDOW AT THE SAME INSTANT I SAW HIM RAISE HIS HAND AND AT THE SIGNAL I TOSSED MY ROCKET INTO THE ROOM WITH A CRY OF FIRE THE WORD WAS NO SOONER OUT OF MY MOUTH THAN THE WHOLE CROWD OF SPECTATORS WELL DRESSED AND ILL GENTLEMEN OSTLERS AND SERVANT MAIDS JOINED IN A GENERAL SHRIEK OF FIRE THICK CLOUDS OF SMOKE CURLED THROUGH THE ROOM AND OUT AT THE OPEN WINDOW I CAUGHT A GLIMPSE OF RUSHING FIGURES AND A MOMENT LATER THE VOICE OF HOLMES FROM WITHIN ASSURING THEM THAT IT WAS A FALSE ALARM SLIPPING THROUGH THE SHOUTING CROWD I MADE MY WAY TO THE CORNER OF THE STREET AND IN TEN MINUTES WAS REJOICED TO FIND MY FRIEND S ARM IN MINE AND TO GET AWAY FROM THE SCENE OF UPROAR HE WALKED SWIFTLY AND IN SILENCE FOR SOME FEW MINUTES UNTIL WE HAD TURNED DOWN ONE OF THE QUIET STREETS WHICH LEAD TOWARDS THE EDGEWARE ROAD YOU DID IT VERY NICELY DOCTOR HE REMARKED NOTHING COULD HAVE BEEN BETTER IT IS ALL RIGHT YOU HAVE THE PHOTOGRAPH I KNOW WHERE IT IS AND HOW DID YOU FIND OUT SHE SHOWED ME AS I TOLD YOU SHE WOULD I AM STILL IN THE DARK I DO NOT WISH TO MAKE A MYSTERY SAID HE LAUGHING THE MATTER WAS PERFECTLY SIMPLE YOU OF COURSE SAW THAT EVERYONE IN THE STREET WAS AN ACCOMPLICE THEY WERE ALL ENGAGED FOR THE EVENING I GUESSED AS MUCH THEN WHEN THE ROW BROKE OUT I HAD A LITTLE MOIST RED PAINT IN THE PALM OF MY HAND I RUSHED FORWARD FELL DOWN CLAPPED MY HAND TO MY FACE AND BECAME A PITEOUS SPECTACLE IT IS AN OLD TRICK THAT ALSO I COULD FATHOM THEN THEY CARRIED ME IN SHE WAS BOUND TO HAVE ME IN WHAT");
-
-
-            // HOWTO: Use this to show the progress of a plugin algorithm execution in the editor.
             ProgressChanged(0, 1);
             try
             {
-                GuiLogMessage($"Execute: AttackMode is {_settings.AttackMode}", NotificationLevel.Info);
-                // HC - Hill climb
-                // SA - Simulated Anealing
+                //Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                //{
+                //    _presentation.AnalysisMode.Value = _settings.AttackMode.ToString();
+                //});
                 switch (_settings.AttackMode)
                 {
                     case AttackMode.CiphertextOnly:
@@ -209,27 +194,18 @@ namespace CrypTool.Plugins.M209Analyzer
 
         private void _m209AttackManager_OnProgressStatusChanged(object sender, M209AttackManager.OnProgressStatusChangedEventArgs e)
         {
-            ProgressChanged(e.Counter, e.TargetValue);
-        }
 
-        private double LogMonograms(string P)
-        {
-            double result = 0.0;
-            for (int i = 0; i < _settings.c; i++)
+            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                result += FrequencyOfCharInP(ALPHABET[i], P) * Math.Log(GetPropabilityOfCharInLanguage(ALPHABET[i]));
+                _endTime = DateTime.Now;
+                TimeSpan elapsedtime = _m209AttackManager.ElapsedTime;
+                TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
+                _presentation.EndTime.Value = _endTime.ToString();
+                _presentation.ElapsedTime.Value = elapsedspan.ToString();
+                _presentation.AnalysisStep.Value = e.Phase;
             }
-            return result;
-        }
-
-        private double GetPropabilityOfCharInLanguage(char character)
-        {
-            return 0.0;
-        }
-
-        private int FrequencyOfCharInP(char character, string P)
-        {
-            return 0;
+            , null);
+            ProgressChanged(e.Counter, e.TargetValue);
         }
 
         /// <summary>
@@ -307,7 +283,7 @@ namespace CrypTool.Plugins.M209Analyzer
 
         private void HandleNewBestListEntry(object sender, M209AttackManager.OnNewBestListEntryEventArgs args)
         {
-            this.AddNewBestListEntry(args.Key.ToString(), args.Score, args.Decryption);
+            AddNewBestListEntry(args.Key.ToString(), args.Score, args.Decryption);
         }
 
         /// <summary>
@@ -378,6 +354,7 @@ namespace CrypTool.Plugins.M209Analyzer
                 _presentation.EndTime.Value = string.Empty;
                 _presentation.ElapsedTime.Value = string.Empty;
                 _presentation.CurrentlyAnalyzedKey.Value = string.Empty;
+                _presentation.AnalysisMode.Value = _settings.AttackMode.ToString();
             }, null);
         }
 
@@ -385,28 +362,27 @@ namespace CrypTool.Plugins.M209Analyzer
         /// Updates presentation during cryptanalysis
         /// </summary>
         /// <param name="key"></param>
-        private void UpdateDisplay(int[] key)
+        private void UpdateDisplay()
         {
-            string strkey;
-            switch (_settings.KeyFormat)
-            {
-                default:
-                case KeyFormat.Digits:
-                    strkey = string.Format("{0},{1},{2},{3}", key[0].ToString("D2"), key[1].ToString("D2"), key[2].ToString("D2"), key[3].ToString("D2"));
-                    break;
-                case KeyFormat.LatinLetters:
-                    strkey = "TODO: GenerateTextKey(key);";
-                    break;
-            }
+            //string strkey;
+            //switch (_settings.KeyFormat)
+            //{
+            //    default:
+            //    case KeyFormat.Digits:
+            //        strkey = string.Format("{0},{1},{2},{3}", key[0].ToString("D2"), key[1].ToString("D2"), key[2].ToString("D2"), key[3].ToString("D2"));
+            //        break;
+            //    case KeyFormat.LatinLetters:
+            //        strkey = "TODO: GenerateTextKey(key);";
+            //        break;
+            //}
 
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 _endTime = DateTime.Now;
-                TimeSpan elapsedtime = _endTime.Subtract(_startTime);
+                TimeSpan elapsedtime = _m209AttackManager.ElapsedTime;
                 TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
                 _presentation.EndTime.Value = _endTime.ToString();
                 _presentation.ElapsedTime.Value = elapsedspan.ToString();
-                _presentation.CurrentlyAnalyzedKey.Value = strkey;
             }
             , null);
         }
