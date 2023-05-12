@@ -38,6 +38,11 @@ namespace CrypTool.Plugins.M209Analyzer
         // number of possible monograms, with c = 26 for English
         private int _c = 26;
 
+        private double _minRatio = Math.Log(0.0085);
+        private double _startTemperature = 1000.0;
+        private double _endTemperature = 1.0;
+        private double _decrement = 1.1;
+
         #endregion
 
         #region TaskPane Settings
@@ -46,7 +51,7 @@ namespace CrypTool.Plugins.M209Analyzer
         /// HOWTO: This is an example for a setting entity shown in the settings pane on the right of the CT2 main window.
         /// This example setting uses a number field input, but there are many more input types available, see ControlType enumeration.
         /// </summary>
-        [TaskPane("AttackMode", "Change the attack mode", null, 0, false, ControlType.ComboBox, new string[] {"CiphertextOnly", "KnownPlaintext" })]
+        [TaskPane("AttackMode", "Change the attack mode", null, 0, false, ControlType.ComboBox, new string[] { "CiphertextOnly", "KnownPlaintext" })]
         public AttackMode AttackMode
         {
             get
@@ -122,6 +127,74 @@ namespace CrypTool.Plugins.M209Analyzer
                 {
                     _keyFormat = value;
                     OnPropertyChanged("KeyFormat");
+                }
+            }
+        }
+
+        [TaskPane("SA MinRatio", "Simulated Annealing - MinRatio", null, 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 50)]
+        public double MinRatio
+        {
+            get
+            {
+                return _minRatio;
+            }
+            set
+            {
+                if (_minRatio != value)
+                {
+                    _minRatio = Math.Log(value);
+                    OnPropertyChanged("MinRatio");
+                }
+            }
+        }
+
+        [TaskPane("SA StartTemperature", "Simulated Annealing - StartTemperature", null, 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 1000000)]
+        public double StartTemperature
+        {
+            get
+            {
+                return _startTemperature;
+            }
+            set
+            {
+                if (_startTemperature != value)
+                {
+                    _startTemperature = value;
+                    OnPropertyChanged("StartTemperature");
+                }
+            }
+        }
+
+        [TaskPane("SA EndTemperature", "Simulated Annealing - EndTemperature", null, 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 1000000)]
+        public double EndTemperature
+        {
+            get
+            {
+                return _endTemperature;
+            }
+            set
+            {
+                if (_endTemperature != value)
+                {
+                    _endTemperature = value;
+                    OnPropertyChanged("EndTemperature");
+                }
+            }
+        }
+
+        [TaskPane("SA Decrement", "Simulated Annealing - Decrement", null, 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 1000000)]
+        public double Decrement
+        {
+            get
+            {
+                return _decrement;
+            }
+            set
+            {
+                if (_decrement != value)
+                {
+                    _decrement = value;
+                    OnPropertyChanged("Decrement");
                 }
             }
         }

@@ -16,7 +16,6 @@
 using CrypTool.CrypAnalysisViewControl;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.Utils;
 using M209AnalyzerLib;
 using M209AnalyzerLib.Common;
 using M209AnalyzerLib.M209;
@@ -63,9 +62,6 @@ namespace CrypTool.Plugins.M209Analyzer
         private DateTime _endTime;
 
         private bool _running = false;
-
-        //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
-        private Grams grams;
 
         public M209Analyzer()
         {
@@ -154,24 +150,24 @@ namespace CrypTool.Plugins.M209Analyzer
                 throw new ArgumentException("Properties.Resources.NoCiphertextGiven");
             }
 
-            //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
-            this.grams = LanguageStatistics.CreateGrams(_settings.Language, (LanguageStatistics.GramsType)(_settings.GramsType + 1), false);
-            this.grams.Normalize(10_000_000);
-
             _running = true;
 
             _m209AttackManager = new M209AttackManager(new M209Scoring());
+
+            //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
+            //_m209AttackManager = new M209AttackManager(new ScoringFunction(_settings.Language, _settings.GramsType, 10_000_000));
             _m209AttackManager.OnNewBestListEntry += HandleNewBestListEntry;
             _m209AttackManager.OnProgressStatusChanged += _m209AttackManager_OnProgressStatusChanged;
             _m209AttackManager.ShouldStop = !_running;
 
+            _m209AttackManager.SAParameters.MinRatio = _settings.MinRatio;
+            _m209AttackManager.SAParameters.StartTemperature = _settings.StartTemperature;
+            _m209AttackManager.SAParameters.EndTemperature = _settings.EndTemperature;
+            _m209AttackManager.SAParameters.Decrement = _settings.Decrement;
+
             ProgressChanged(0, 1);
             try
             {
-                //Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                //{
-                //    _presentation.AnalysisMode.Value = _settings.AttackMode.ToString();
-                //});
                 switch (_settings.AttackMode)
                 {
                     case AttackMode.CiphertextOnly:
@@ -339,6 +335,12 @@ namespace CrypTool.Plugins.M209Analyzer
                 {
                     //do nothing
                 }
+                _endTime = DateTime.Now;
+                TimeSpan elapsedtime = _m209AttackManager.ElapsedTime;
+                TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
+                _presentation.EndTime.Value = _endTime.ToString();
+                _presentation.ElapsedTime.Value = elapsedspan.ToString();
+
             }, null);
         }
 
