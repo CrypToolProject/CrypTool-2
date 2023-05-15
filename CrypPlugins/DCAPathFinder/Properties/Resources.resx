@@ -208,7 +208,7 @@
     <value>Tutorial 2 uses cipher 2 of the DCA ToyCipher component. This cipher works on 16 bit blocks and uses four 16 bit round keys. Three encryption rounds are executed. In this tutorial all unknown round keys are restored.</value>
   </data>
   <data name="DescriptionContent4" xml:space="preserve">
-    <value>Tutorial 3 uses cipher 3 of the DKA ToyCipher component. This cipher works on 16 bit blocks and uses six 16 bit round keys. Five encryption rounds are executed. In this tutorial all unknown round keys are restored.</value>
+    <value>Tutorial 3 uses cipher 3 of the DCA ToyCipher component. This cipher works on 16 bit blocks and uses six 16 bit round keys. Five encryption rounds are executed. In this tutorial all unknown round keys are restored.</value>
   </data>
   <data name="DescriptionHeader" xml:space="preserve">
     <value>Description of the tutorials</value>
@@ -304,7 +304,7 @@
     <value>Welcome to the differential cryptanalysis (DCA) tutorial. This method for the analysis of round-based symmetric block ciphers aims at recovering single bits up to complete round keys. This procedure was published in 1991 by the two Israeli researchers Eli Biham and Adi Shamir.</value>
   </data>
   <data name="OverviewContent2" xml:space="preserve">
-    <value>This tutorial covers the DCA in three parts. Part 1 conveys the basic idea of the DCA by means of a cipher with an encryption round. Part 2 deepens this idea using a cipher with three encryption rounds. Part 3 deepens the knowledge by increasing the complexity of the cipher to five encryption rounds.</value>
+    <value>This tutorial covers the DCA in three parts. Part 1 conveys the basic idea of the DCA by means of a cipher with only a single encryption round. Part 2 deepens this idea using a cipher with three encryption rounds. Part 3 deepens the knowledge by increasing the complexity of the cipher to five encryption rounds.</value>
   </data>
   <data name="OverviewContent3" xml:space="preserve">
     <value>In the configuration of this component the number of the tutorial and the tutorial mode can be selected.</value>
@@ -1182,7 +1182,7 @@
     <value>Tutorial 3 on differential cryptanalysis in the DCA PathFinder component is finished.</value>
   </data>
   <data name="Tutorial3AttackFinishedContent2Run1" xml:space="preserve">
-    <value>A last click on "Start" in the DKA KeyRecovery component will attempt to recover the last two round keys k</value>
+    <value>A last click on "Start" in the DCA KeyRecovery component will attempt to recover the last two round keys k</value>
   </data>
   <data name="Tutorial3AttackFinishedContent2Run2" xml:space="preserve">
     <value>1</value>

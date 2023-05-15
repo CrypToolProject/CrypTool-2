@@ -331,7 +331,7 @@ namespace DCAPathFinder.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tutorial 3 uses cipher 3 of the DKA ToyCipher component. This cipher works on 16 bit blocks and uses six 16 bit round keys. Five encryption rounds are executed. In this tutorial all unknown round keys are restored..
+        ///   Looks up a localized string similar to Tutorial 3 uses cipher 3 of the DCA ToyCipher component. This cipher works on 16 bit blocks and uses six 16 bit round keys. Five encryption rounds are executed. In this tutorial all unknown round keys are restored..
         /// </summary>
         public static string DescriptionContent4 {
             get {
@@ -619,7 +619,7 @@ namespace DCAPathFinder.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This tutorial covers the DCA in three parts. Part 1 conveys the basic idea of the DCA by means of a cipher with an encryption round. Part 2 deepens this idea using a cipher with three encryption rounds. Part 3 deepens the knowledge by increasing the complexity of the cipher to five encryption rounds..
+        ///   Looks up a localized string similar to This tutorial covers the DCA in three parts. Part 1 conveys the basic idea of the DCA by means of a cipher with only a single encryption round. Part 2 deepens this idea using a cipher with three encryption rounds. Part 3 deepens the knowledge by increasing the complexity of the cipher to five encryption rounds..
         /// </summary>
         public static string OverviewContent2 {
             get {
@@ -3249,7 +3249,7 @@ namespace DCAPathFinder.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A last click on &quot;Start&quot; in the DKA KeyRecovery component will attempt to recover the last two round keys k.
+        ///   Looks up a localized string similar to A last click on &quot;Start&quot; in the DCA KeyRecovery component will attempt to recover the last two round keys k.
         /// </summary>
         public static string Tutorial3AttackFinishedContent2Run1 {
             get {
