@@ -49,7 +49,7 @@ namespace WorkspaceManager.Model
             WorkspaceModel workspacemodel = persistantModel.WorkspaceModel;
             ValidateAndFixConnectionModels(workspacemodel);
 
-            restoreSettings(persistantModel, workspacemodel);
+            RestorePersistantSettings(persistantModel, workspacemodel);
 
             workspacemodel.AllConnectionModels = CheckModelListForCorruption(workspacemodel.AllConnectionModels, filename);
             workspacemodel.AllConnectorModels = CheckModelListForCorruption(workspacemodel.AllConnectorModels, filename);
@@ -116,7 +116,7 @@ namespace WorkspaceManager.Model
             PersistantModel persistantModel = (PersistantModel)XMLSerialization.XMLSerialization.Deserialize(writer);            
             WorkspaceModel workspacemodel = persistantModel.WorkspaceModel;
             ValidateAndFixConnectionModels(workspacemodel);
-            restoreSettings(persistantModel, workspacemodel);
+            RestorePersistantSettings(persistantModel, workspacemodel);
             return workspacemodel;
         }
 
@@ -125,7 +125,7 @@ namespace WorkspaceManager.Model
             PersistantModel persistantModel = (PersistantModel)XMLSerialization.XMLSerialization.Deserialize(filename);
             WorkspaceModel workspacemodel = persistantModel.WorkspaceModel;
             ValidateAndFixConnectionModels(workspacemodel);
-            restoreSettings(persistantModel, workspacemodel);
+            RestorePersistantSettings(persistantModel, workspacemodel);
             return workspacemodel;
         }
 
@@ -226,8 +226,13 @@ namespace WorkspaceManager.Model
             return sb.ToString();
         }
 
-
-        private void restoreSettings(PersistantModel persistantModel, WorkspaceModel workspacemodel)
+        /// <summary>
+        /// Restores the stored settings
+        /// </summary>
+        /// <param name="persistantModel"></param>
+        /// <param name="workspacemodel"></param>
+        /// <exception cref="Exception"></exception>
+        private void RestorePersistantSettings(PersistantModel persistantModel, WorkspaceModel workspacemodel)
         {
             //restore all settings of each plugin
             foreach (PersistantPlugin persistantPlugin in persistantModel.PersistantPluginList)
@@ -240,70 +245,82 @@ namespace WorkspaceManager.Model
                 foreach (PersistantSetting persistantSetting in persistantPlugin.PersistantSettingsList)
                 {
 
-                    PropertyInfo[] arrpInfo = persistantPlugin.PluginModel.Plugin.Settings.GetType().GetProperties();
-                    foreach (PropertyInfo pInfo in arrpInfo)
+                    PropertyInfo[] propertyInfos = persistantPlugin.PluginModel.Plugin.Settings.GetType().GetProperties();
+                    foreach (PropertyInfo propertyInfo in propertyInfos)
                     {
                         try
                         {
                             DontSaveAttribute[] dontSave =
-                                (DontSaveAttribute[])pInfo.GetCustomAttributes(typeof(DontSaveAttribute), false);
+                                (DontSaveAttribute[])propertyInfo.GetCustomAttributes(typeof(DontSaveAttribute), false);
                             if (dontSave.Length == 0)
                             {
-                                if (pInfo.Name.Equals(persistantSetting.Name))
+                                if (propertyInfo.Name.Equals(persistantSetting.Name))
                                 {
-                                    if (persistantSetting.Type.Equals("System.String"))
+                                    if (persistantSetting.Type.Equals("System.String") && propertyInfo.PropertyType.FullName.Equals("System.String"))
                                     {
-                                        pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
+                                        propertyInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
                                                        persistantSetting.Value, null);
                                     }
-                                    else if (persistantSetting.Type.Equals("System.Int16"))
+                                    else if (persistantSetting.Type.Equals("System.Int16") && propertyInfo.PropertyType.FullName.Equals("System.Int16"))
                                     {
-                                        pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
+                                        propertyInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
                                                        short.Parse(persistantSetting.Value), null);
                                     }
-                                    else if (persistantSetting.Type.Equals("System.Int32"))
+                                    else if (persistantSetting.Type.Equals("System.Int32") && propertyInfo.PropertyType.FullName.Equals("System.Int32"))
                                     {
-                                        pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
+                                        propertyInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
                                                        int.Parse(persistantSetting.Value), null);
                                     }
-                                    else if (persistantSetting.Type.Equals("System.Int64"))
+                                    else if (persistantSetting.Type.Equals("System.Int64") && propertyInfo.PropertyType.FullName.Equals("System.Int64"))
                                     {
-                                        pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
+                                        propertyInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
                                                        long.Parse(persistantSetting.Value), null);
                                     }
-                                    else if (persistantSetting.Type.Equals("System.Single"))
+                                    else if (persistantSetting.Type.Equals("System.Single") && propertyInfo.PropertyType.FullName.Equals("System.Single"))
                                     {
                                         float.TryParse(persistantSetting.Value.Replace(',', '.'),
                                                                                 NumberStyles.Number,
                                                                                 CultureInfo.CreateSpecificCulture("en-Us"),
                                                                                 out float result);
-                                        pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings, result, null);
+                                        propertyInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings, result, null);
                                     }
-                                    else if (persistantSetting.Type.Equals("System.Double"))
+                                    else if (persistantSetting.Type.Equals("System.Double") && propertyInfo.PropertyType.FullName.Equals("System.Double"))
                                     {
                                         double.TryParse(persistantSetting.Value.Replace(',', '.'),
                                                                                 NumberStyles.Number,
                                                                                 CultureInfo.CreateSpecificCulture("en-Us"),
                                                                                 out double result);
-                                        pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings, result, null);
+                                        propertyInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings, result, null);
                                     }
-                                    else if (persistantSetting.Type.Equals("System.Boolean"))
+                                    else if (persistantSetting.Type.Equals("System.Boolean") && propertyInfo.PropertyType.FullName.Equals("System.Boolean"))
                                     {
-                                        pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
+                                        propertyInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
                                                        bool.Parse(persistantSetting.Value), null);
                                     }
-                                    else if (pInfo.PropertyType.IsEnum)
+                                    else if (propertyInfo.PropertyType.IsEnum)
                                     {
                                         int.TryParse(persistantSetting.Value, out int result);
-                                        object newEnumValue = Enum.ToObject(pInfo.PropertyType, result);
-                                        pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings, newEnumValue, null);
+                                        object newEnumValue = Enum.ToObject(propertyInfo.PropertyType, result);
+                                        propertyInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings, newEnumValue, null);
+                                    }
+                                    else
+                                    {
+                                        OnGuiLogNotificationOccured.Invoke(persistantPlugin.PluginModel.Plugin, 
+                                            new GuiLogEventArgs(
+                                                string.Format(Resources.ModelPersistance_restoreSettings_Could_not_restore_the_setting___0___of_plugin___1__, persistantSetting.Name, persistantPlugin.PluginModel.Name), 
+                                                persistantPlugin.PluginModel.Plugin, 
+                                                NotificationLevel.Warning));
                                     }
                                 }
                             }
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
-                            throw new Exception(string.Format(Resources.ModelPersistance_restoreSettings_Could_not_restore_the_setting___0___of_plugin___1__, persistantSetting.Name, persistantPlugin.PluginModel.Name), ex);
+                            OnGuiLogNotificationOccured.Invoke(persistantPlugin.PluginModel.Plugin,
+                                           new GuiLogEventArgs(
+                                               string.Format(Resources.ModelPersistance_restoreSettings_Could_not_restore_the_setting___0___of_plugin___1__, persistantSetting.Name, persistantPlugin.PluginModel.Name),
+                                               persistantPlugin.PluginModel.Plugin,
+                                               NotificationLevel.Warning));
                         }
                     }
                 }
