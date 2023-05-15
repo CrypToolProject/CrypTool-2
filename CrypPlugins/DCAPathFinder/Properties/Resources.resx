@@ -139,7 +139,7 @@
     <value>Automatic mode</value>
   </data>
   <data name="AutomaticModeHeader" xml:space="preserve">
-    <value>DCA PfadFinder works in automatic mode.</value>
+    <value>DCA PathFinder works in automatic mode.</value>
   </data>
   <data name="AutomaticModeToolTip" xml:space="preserve">
     <value>No user input required in automatic mode</value>
@@ -1068,7 +1068,7 @@
     <value> a differential characteristic under the operation of the S-box. As seen before, a differential characteristic has a fixed probability.</value>
   </data>
   <data name="Tutorial2CharacteristicSlide1Content3" xml:space="preserve">
-    <value>Ziel bei der Suche ist es einen Weg zu finden, der eine möglichst hohe Wahrscheinlichkeit aufweist. Diese Wege können in der DKA-PfadVisualisierer-Komponente graphisch dargestellt werden.</value>
+    <value>The goal of the search is to find a path that has the highest possible probability. These paths can be displayed graphically in the DCA PathVisualizer component.</value>
   </data>
   <data name="Tutorial2CharacteristicSlide1Header" xml:space="preserve">
     <value>Characteristics</value>
