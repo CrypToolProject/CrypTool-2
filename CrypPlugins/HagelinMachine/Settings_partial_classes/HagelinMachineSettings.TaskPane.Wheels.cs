@@ -29,7 +29,8 @@ namespace CrypTool.Plugins.HagelinMachine
 
         private ObservableCollection<string> supportedWheelTypeNames = new ObservableCollection<string>(KNOWN_WheelTYPES);
         private int a = 12;
-     
+
+        [DontSave]
         public ObservableCollection<string> SupportedWheelTypeNames
         {
             get { return supportedWheelTypeNames; }

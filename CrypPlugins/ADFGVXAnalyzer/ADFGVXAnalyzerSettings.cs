@@ -53,6 +53,7 @@ namespace ADFGVXAnalyzer
         /// <summary>
         /// Get the number of cores in a collection, used for the selection of cores
         /// </summary>
+        [DontSave]
         public ObservableCollection<string> CoresAvailable
         {
             get => coresAvailable;

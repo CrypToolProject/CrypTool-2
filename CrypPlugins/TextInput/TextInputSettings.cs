@@ -35,6 +35,7 @@ namespace CrypTool.TextInput
         private string _font;
         private double fontsize;
 
+        [DontSave]
         public ObservableCollection<string> Fonts
         {
             get => fonts;

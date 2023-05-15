@@ -44,6 +44,7 @@ namespace CrypTool.Plugins.AudioOutput
         private int device = 0;
         private int buffersize = 500;
 
+        [DontSave]
         public ObservableCollection<string> Devices
         {
             get => devices;

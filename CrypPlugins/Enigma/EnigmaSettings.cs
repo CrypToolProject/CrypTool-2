@@ -613,6 +613,7 @@ namespace CrypTool.Enigma
         /// <summary>
         /// This collection contains the values for the Rotor 1-3 comboboxes.
         /// </summary>
+        [DontSave]
         public ObservableCollection<string> RotorAStrings
         {
             get => rotorAStrings;
@@ -629,6 +630,7 @@ namespace CrypTool.Enigma
         /// <summary>
         /// This collection contains the values for the Rotor 4 combobox.
         /// </summary>
+        [DontSave]
         public ObservableCollection<string> RotorBStrings
         {
             get => rotorBStrings;
@@ -645,6 +647,7 @@ namespace CrypTool.Enigma
         /// <summary>
         /// This collection contains the values for the Rotor 1-3 comboboxes.
         /// </summary>
+        [DontSave]
         public ObservableCollection<string> ReflectorStrings
         {
             get => reflectorStrings;

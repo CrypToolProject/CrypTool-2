@@ -34,6 +34,7 @@ namespace TextOutput
             UNIX
         }
 
+        [DontSave]
         public ObservableCollection<string> Fonts
         {
             get => fonts;
