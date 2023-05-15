@@ -305,22 +305,28 @@ namespace WorkspaceManager.Model
                                     }
                                     else
                                     {
-                                        OnGuiLogNotificationOccured.Invoke(persistantPlugin.PluginModel.Plugin, 
+                                        if (OnGuiLogNotificationOccured != null)
+                                        {
+                                            OnGuiLogNotificationOccured.Invoke(persistantPlugin.PluginModel.Plugin,
                                             new GuiLogEventArgs(
-                                                string.Format(Resources.ModelPersistance_restoreSettings_Could_not_restore_the_setting___0___of_plugin___1__, persistantSetting.Name, persistantPlugin.PluginModel.Name), 
-                                                persistantPlugin.PluginModel.Plugin, 
+                                                string.Format(Resources.ModelPersistance_restoreSettings_Could_not_restore_the_setting___0___of_plugin___1__, persistantSetting.Name, persistantPlugin.PluginModel.Name),
+                                                persistantPlugin.PluginModel.Plugin,
                                                 NotificationLevel.Warning));
+                                        }
                                     }
                                 }
                             }
                         }
                         catch (Exception)
                         {
-                            OnGuiLogNotificationOccured.Invoke(persistantPlugin.PluginModel.Plugin,
+                            if (OnGuiLogNotificationOccured != null)
+                            {
+                                OnGuiLogNotificationOccured.Invoke(persistantPlugin.PluginModel.Plugin,
                                            new GuiLogEventArgs(
                                                string.Format(Resources.ModelPersistance_restoreSettings_Could_not_restore_the_setting___0___of_plugin___1__, persistantSetting.Name, persistantPlugin.PluginModel.Name),
                                                persistantPlugin.PluginModel.Plugin,
                                                NotificationLevel.Warning));
+                            }
                         }
                     }
                 }
