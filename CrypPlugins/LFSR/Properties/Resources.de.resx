@@ -289,7 +289,7 @@
     <value>Runde: </value>
   </data>
   <data name="SeedFlippedCaption" xml:space="preserve">
-    <value>Seed: Linked Bit zuerst</value>
+    <value>Seed: Linkes Bit zuerst</value>
   </data>
   <data name="SeedFlippedTooltip" xml:space="preserve">
     <value>Gibt an, ob der Seed mit dem linken Bit zuerst in das Register eingeschoben wird. Dies führt dazu, dass die Eingabezeichenfolge dieselbe Reihenfolge wie die Bits im Shiftregister haben.</value>
