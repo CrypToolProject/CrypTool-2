@@ -19,7 +19,13 @@
     value="Linear Feedback Shift Register" />
     <replacement key="$Output Stream$" value="Output Stream" />
     <replacement key="$memo$"
-    value="A {\b linear feedback shift register (LFSR)} is a shift register whose input bit is the result of a linear function on parts of the previous state.\line\line The most commonly used linear function of single bits is XOR. Thus, an LFSR is most often a shift register whose input bit is driven by the exclusive-or (XOR) of some bits of the overall shift register value. The generator polynom is defined via the {\b tap sequence}.\line\line The initial value of the LFSR is called the {\b seed}, and because the operation of the register is deterministic, the stream of values produced by the register is completely determined by its current (or previous) state. Likewise, because the register has a finite number of possible states, it must eventually enter a repeating cycle. However, an LFSR with a well-chosen feedback function can produce a sequence of bits which appears random and which has a very long cycle.\line\line http://en.wikipedia.org/wiki/Linear_feedback_shift_register\line http://de.wikipedia.org/wiki/Linear_r%C3%BCckgekoppeltes_Schieberegister\line\line You may also want to take a look at the NLFSR template included in CrypTool 2." />
+    value="A {\b linear feedback shift register (LFSR)} is a shift register whose input bit is the result of a linear function on parts of the previous state.\line\line
+The most commonly used linear function of single bits is XOR. Thus, an LFSR is most often a shift register whose input bit is driven by the exclusive-or (XOR) of some bits of the overall shift register value.
+The generator polynom is defined via the {\b tap sequence} (which is used here from right left to create the polynom). Also, +1 is always added to the polynom.\line\line
+The initial value of the LFSR is called the {\b seed}, and because the operation of the register is deterministic, the stream of values produced by the register is completely determined by its current (or previous) state.
+Likewise, because the register has a finite number of possible states, it must eventually enter a repeating cycle. However, an LFSR with a well-chosen feedback function can produce a sequence of bits which appears random and which has a very long cycle.\line\line 
+http://en.wikipedia.org/wiki/Linear_feedback_shift_register\line http://de.wikipedia.org/wiki/Linear_r%C3%BCckgekoppeltes_Schieberegister\line\line 
+You may also want to take a look at the NLFSR template included in CrypTool 2." />
   </replacements>
   <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -37,7 +43,13 @@
     <replacement key="$Output Stream$"
     value="Ausgabe-Datenstrom" />
     <replacement key="$memo$"
-    value="Ein {\b linear rückgekoppeltes Schieberegister (engl. linear feedback shift register (LFSR))} ist ein Schieberegister, dessen Eingangsbit das Ergebnis einer linearen Funktion auf Teilen des vorherigen Zustands ist.\line\line Die üblicherweise verwendete lineare Funktion auf einzelnen Bits ist die XOR-Verknüpfung. Daher ist ein LFSR meistens ein Schieberegister, dessen Eingabebit durch die XOR-Verknüpfung einiger seiner Schieberegister-Bits berechnet wird. Das Generatorpolynom wird durch die {\b Tap-Sequenz} definiert.\line\line Der Startwert eines LFSR wird {\b Seed} genannt, und da die Operationen des Schieberegisters deterministisch sind, wird der Strom der Ausgabebits, das das LFSR generiert, eindeutig durch den momentanen (bzw. vorherigen) Zustand festgelegt. Da ein LFSR nur eine endliche Anzahl an Zuständen annehmen kann, muss die Ausgabesequenz außerdem irgendwann in einen sich wiederholenden Zyklus eintreten. Mit einer gut gewählten Rückkopplungsfunktion kann das LFSR jedoch eine Ausgabesequenz generieren, die zufällig erscheint und deren Zyklenlänge sehr groß ist.\line\line http://en.wikipedia.org/wiki/Linear_feedback_shift_register\line http://de.wikipedia.org/wiki/Linear_r%C3%BCckgekoppeltes_Schieberegister\line\line Werfen Sie auch einen Blick auf die NLFSR-Vorlage in CrypTool 2." />
+    value="Ein {\b linear rückgekoppeltes Schieberegister (engl. linear feedback shift register (LFSR))} ist ein Schieberegister, dessen Eingangsbit das Ergebnis einer linearen Funktion auf Teilen des vorherigen Zustands ist.\line\line
+Die üblicherweise verwendete lineare Funktion auf einzelnen Bits ist die XOR-Verknüpfung. Daher ist ein LFSR meistens ein Schieberegister, dessen Eingabebit durch die XOR-Verknüpfung einiger seiner Schieberegister-Bits berechnet wird.
+Das Generatorpolynom wird durch die {\b Tap-Sequenz} (die hier von rechts nach links verwendet wird, um das Polynom zu erstellen) definiert. Außerdem wird immer +1 zum Polynom addiert.\line\line
+Der Startwert eines LFSR wird {\b Seed} genannt, und da die Operationen des Schieberegisters deterministisch sind, wird der Strom der Ausgabebits, den das LFSR generiert, eindeutig durch den momentanen (bzw. vorherigen) Zustand festgelegt.
+Da ein LFSR nur eine endliche Anzahl an Zuständen annehmen kann, muss die Ausgabesequenz außerdem irgendwann in einen sich wiederholenden Zyklus eintreten. Mit einer gut gewählten Rückkopplungsfunktion kann das LFSR jedoch eine Ausgabesequenz generieren, die zufällig erscheint und deren Zyklenlänge sehr groß ist.\line\line
+http://en.wikipedia.org/wiki/Linear_feedback_shift_register\line http://de.wikipedia.org/wiki/Linear_r%C3%BCckgekoppeltes_Schieberegister\line\line
+Werfen Sie auch einen Blick auf die NLFSR-Vorlage in CrypTool 2." />
   </replacements>
   <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
