@@ -31,6 +31,8 @@ namespace CrypTool.PlayfairAnalyzer
         private int _cycles;
         private bool _discardSamePlaintexts = true;
         private bool _advancedBestListView = false;
+        private int _minCribOffset = 0;
+        private int _maxCribOffset = 0;
 
         public PlayfairAnalyzerSettings()
         {
@@ -113,6 +115,44 @@ namespace CrypTool.PlayfairAnalyzer
                 {
                     _advancedBestListView = value;
                     OnPropertyChanged(nameof(AdvancedBestListView));
+                }
+            }
+        }
+
+        [TaskPane("MinCribOffsetCaption", "MinCribOffsetTooltip", null, 7, true, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
+        public int MinCribOffset
+        {
+            get => _minCribOffset;
+            set
+            {
+                if (value != _minCribOffset)
+                {
+                    _minCribOffset = value;
+                    if (_minCribOffset > _maxCribOffset)
+                    {
+                        _maxCribOffset = _minCribOffset;
+                        OnPropertyChanged(nameof(MaxCribOffset));
+                    }
+                    OnPropertyChanged(nameof(MinCribOffset));
+                }
+            }
+        }
+
+        [TaskPane("MaxCribOffsetCaption", "MaxCribOffsetTooltip", null, 8, true, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
+        public int MaxCribOffset
+        {
+            get => _maxCribOffset;
+            set
+            {
+                if (value != _maxCribOffset)
+                {
+                    _maxCribOffset = value;
+                    if (_minCribOffset > _maxCribOffset)
+                    {
+                        _minCribOffset = _maxCribOffset;
+                        OnPropertyChanged(nameof(MinCribOffset));
+                    }                    
+                    OnPropertyChanged(nameof(MaxCribOffset));
                 }
             }
         }

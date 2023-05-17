@@ -169,6 +169,15 @@ namespace CrypTool.PlayfairAnalyzer
                 return;
             }
 
+            if (!string.IsNullOrEmpty(_Crib))
+            {
+                if(_settings.MaxCribOffset + _Crib.Length > Ciphertext.Length)
+                {
+                    GuiLogMessage(string.Format("Crib cannot be placed at the given max offset (={0}) since the crib is too long (={1})", _settings.MaxCribOffset, Crib.Length), NotificationLevel.Error);
+                    return;
+                }
+            }
+
             _alreadyExecuted = true;           
 
             try
@@ -236,7 +245,7 @@ namespace CrypTool.PlayfairAnalyzer
             try
             {
                 CancellationToken ct = analysisInstance.CancellationToken;
-                int[] cipherText = Utils.getText(Ciphertext);
+                int[] cipherText = Utils.GetText(Ciphertext);
                 if (cipherText.Length < 6)
                 {
                     throw new Exception($"Ciphertext length must have at least six characters - found {cipherText.Length} characters.");
@@ -247,7 +256,7 @@ namespace CrypTool.PlayfairAnalyzer
                 }
 
                 int threads = (_settings.Threads + 1);  //index starts at 0; thus +1
-                long maxKeys = SolvePlayfair.solveMultithreaded(cipherText, Crib ?? "", threads, _settings.Cycles, null, analysisInstance);
+                long maxKeys = SolvePlayfair.SolveMultithreaded(cipherText, Crib ?? string.Empty, _settings.MinCribOffset, _settings.MaxCribOffset, threads, _settings.Cycles, null, analysisInstance); ;
                 GuiLogMessage("Starting analysis now.", NotificationLevel.Debug);
                 BigInteger keySpace = GetKeyspaceSize();
                 GuiLogMessage($"Size of key space is {keySpace:N0}.", NotificationLevel.Debug);

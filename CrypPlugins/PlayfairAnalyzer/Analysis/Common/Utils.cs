@@ -28,12 +28,12 @@ namespace PlayfairAnalysis.Common
         public static string NGRAMS8_FILE = "english_8grams.bin";
         public static string BOOK_FILE = "book.txt";
 
-        public static int A = getTextSymbol('A');
-        public static int X = getTextSymbol('X');
-        public static int Z = getTextSymbol('Z');
-        public static int J = getTextSymbol('J');
-        public static int I = getTextSymbol('I');
-        public static int K = getTextSymbol('K');
+        public static int A = GetTextSymbol('A');
+        public static int X = GetTextSymbol('X');
+        public static int Z = GetTextSymbol('Z');
+        public static int J = GetTextSymbol('J');
+        public static int I = GetTextSymbol('I');
+        public static int K = GetTextSymbol('K');
 
         public static string TEXT_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public static int TEXT_ALPHABET_SIZE = TEXT_ALPHABET.Length;
@@ -43,7 +43,7 @@ namespace PlayfairAnalysis.Common
             random = new Random(seed);
         }
 
-        public static int getTextSymbol(char c)
+        public static int GetTextSymbol(char c)
         {
 
             if (c >= 'a' && c <= 'z')
@@ -57,7 +57,7 @@ namespace PlayfairAnalysis.Common
             return -1;
         }
 
-        public static char getTextChar(int symbol)
+        public static char GetTextChar(int symbol)
         {
 
             if ((symbol >= 0) && (symbol <= (TEXT_ALPHABET_SIZE - 1)))
@@ -70,59 +70,58 @@ namespace PlayfairAnalysis.Common
             }
         }
 
-        public static int[] getText(string textString)
+        public static int[] GetText(string textString)
         {
             int[] text = new int[textString.Length];
             int len = 0;
             for (int i = 0; i < textString.Length; i++)
             {
-                int c = getTextSymbol(textString[i]);
+                int c = GetTextSymbol(textString[i]);
                 if (c == -1)
                 {
                     //continue;
                 }
                 text[len++] = c;
             }
-            return Arrays.copyOf(text, len);
+            return Arrays.CopyOf(text, len);
         }
 
-        private static readonly string from = "èéìùòàëáöæëüãþôâäíûóšøůěňïçñíàçèìåáßŕúµýˆ^άλêéąîőčžâªªºžńάλληφοράθęźðöżõřáěšďťˇי".ToUpper();
-        private static readonly string to = "eeiuoaeaoaeuapoaaiuosouenicniaceiaasrupyxxageeaioczaaaoznxxxxxxxxxxzoozoraesdtxe".ToUpper();
-
-        public static string getString(int[] text)
+        public static string GetString(int[] text)
         {
-            return getString(text, text.Length);
+            return GetString(text, text.Length);
         }
 
-        public static string getString(int[] text, int length)
+        public static string GetString(int[] text, int length)
         {
             StringBuilder m = new StringBuilder();
             for (int i = 0; i < Math.Min(text.Length, length); i++)
             {
-                m.Append(getTextChar(text[i]));
+                m.Append(GetTextChar(text[i]));
             }
             return m.ToString();
         }
 
-        public TimeSpan getElapsed()
+        public TimeSpan GetElapsed()
         {
             return new TimeSpan(DateTime.Now.Ticks - startTime + 1);
         }
 
-        public int randomNextInt(int range)
+        public int RandomNextInt(int range)
         {
             return random.Next(range);
         }
-        public int randomNextInt()
+
+        public int RandomNextInt()
         {
             return random.Next();
         }
-        public double randomNextDouble()
+
+        public double RandomNextDouble()
         {
             return random.NextDouble();
         }
 
-        public static int sum(int[] a)
+        public static int Sum(int[] a)
         {
             int sum = 0;
             foreach (int i in a)
@@ -132,7 +131,7 @@ namespace PlayfairAnalysis.Common
             return sum;
         }
 
-        public static long sum(long[] a)
+        public static long Sum(long[] a)
         {
             long sum = 0;
             foreach (long i in a)

@@ -28,6 +28,7 @@ namespace PlayfairAnalysis
         internal int[] inverseKey;
         private int[] cipher;
         private int[] crib;
+        private int _cribOffset;
         internal int[] decryptionRemoveNulls;
         internal int decryptionRemoveNullsLength;
         internal int[] fullDecryption;
@@ -44,20 +45,20 @@ namespace PlayfairAnalysis
             fullDecryption = null;
             decryptionRemoveNulls = null;
             score = 0;
-            keyword = "";
+            keyword = string.Empty;
             this.instance = instance;
             this.utils = utils;
         }
 
 
-        public void copy(Key key)
+        public void Copy(Key key)
         {
-            Arrays.arraycopy(key.key, 0, this.key, 0, Playfair.SQUARE);
+            Arrays.Arraycopy(key.key, 0, this.key, 0, Playfair.SQUARE);
         }
 
-        public long eval()
+        public long Eval()
         {
-            decrypt();
+            Decrypt();
 
             long ngrams = instance.Stats.EvalPlaintext(decryptionRemoveNulls, decryptionRemoveNullsLength);
             if (crib == null)
@@ -69,7 +70,7 @@ namespace PlayfairAnalysis
                 long cribMatch = 0;
                 for (int i = 0; i < crib.Length; i++)
                 {
-                    if (crib[i] == fullDecryption[i])
+                    if (crib[i] == fullDecryption[i + _cribOffset])
                     {
                         cribMatch++;
                     }
@@ -86,9 +87,9 @@ namespace PlayfairAnalysis
             return score;
         }
 
-        public bool matchesFullCrib()
+        public bool MatchesFullCrib()
         {
-            decrypt();
+            Decrypt();
             if (crib == null || crib.Length != cipher.Length)
             {
                 return false;
@@ -103,25 +104,26 @@ namespace PlayfairAnalysis
             return true;
         }
 
-        public void setCipher(int[] c)
+        public void SetCipher(int[] c)
         {
-            cipher = Arrays.copyOf(c, c.Length);
+            cipher = Arrays.CopyOf(c, c.Length);
             decryptionRemoveNulls = new int[c.Length];
             fullDecryption = new int[c.Length];
             decryptionRemoveNullsLength = 0;
         }
 
-        public void setCrib(string cribS)
+        public void SetCrib(string cribS, int cribOffset)
         {
             if (cribS != null && cribS.Length > 1)
             {
-                crib = Utils.getText(cribS);
+                crib = Utils.GetText(cribS);
+                _cribOffset = cribOffset;
             }
         }
 
-        public void computeInverse()
+        public void ComputeInverse()
         {
-            Arrays.fill(inverseKey, -1);
+            Arrays.Fill(inverseKey, -1);
             bool good = true;
             for (int position = 0; position < Playfair.SQUARE; position++)
             {
@@ -135,11 +137,11 @@ namespace PlayfairAnalysis
             }
             if (!good)
             {
-                instance.CtAPI.goodbyeFatalError("Invalid key " + ToString());
+                instance.CtAPI.GoodbyeFatalError("Invalid key " + ToString());
             }
         }
 
-        public void random()
+        public void Random()
         {
             if (Playfair.DIM == 6)
             {
@@ -161,34 +163,27 @@ namespace PlayfairAnalysis
             }
             for (int i = 0; i < Playfair.SQUARE - 1; i++)
             {
-                int j = i + utils.randomNextInt(Playfair.SQUARE - i);
-                swap(i, j);
+                int j = i + utils.RandomNextInt(Playfair.SQUARE - i);
+                Swap(i, j);
             }
-            computeInverse();
+            ComputeInverse();
         }
 
-        public int encrypt(int[] plain, int[] cipher)
+        public int Encrypt(int[] plain, int[] cipher)
         {
-            return Playfair.encrypt(this, plain, cipher);
+            return Playfair.Encrypt(this, plain, cipher);
         }
-        public int decrypt(int[] cipher, int[] plainRemoveNulls, int[] plain)
+        public int Decrypt(int[] cipher, int[] plainRemoveNulls, int[] plain)
         {
-            return Playfair.decrypt(this, cipher, plain, plainRemoveNulls);
+            return Playfair.Decrypt(this, cipher, plain, plainRemoveNulls);
         }
 
         public override string ToString()
         {
-            string s = Utils.getString(key);
+            string s = Utils.GetString(key);
             StringBuilder ps = new StringBuilder();
             for (int i = 0; i < Playfair.SQUARE; i += Playfair.DIM)
-            {
-                //Do not append | character here, because CT2 uses "flat" notation for keys
-                /*
-                if (i != 0)
-                {
-                    ps.Append("|");
-                }
-                */
+            {               
                 ps.Append(s.Substring(i, Playfair.DIM));
             }
             if (keyword.Length == 0)
@@ -201,12 +196,12 @@ namespace PlayfairAnalysis
             }
         }
 
-        public void decrypt()
+        public void Decrypt()
         {
-            decryptionRemoveNullsLength = Playfair.decrypt(this, cipher, fullDecryption, decryptionRemoveNulls);
+            decryptionRemoveNullsLength = Playfair.Decrypt(this, cipher, fullDecryption, decryptionRemoveNulls);
         }
 
-        private void swap(int p1, int p2)
+        private void Swap(int p1, int p2)
         {
             if (p1 == p2)
             {
@@ -217,7 +212,7 @@ namespace PlayfairAnalysis
             key[p2] = keep;
         }
 
-        private void swap(int p1, int p2, int p3)
+        private void Swap(int p1, int p2, int p3)
         {
             int keep = key[p1];
             key[p1] = key[p2];
@@ -225,41 +220,41 @@ namespace PlayfairAnalysis
             key[p3] = keep;
         }
 
-        public void swap(Key parent, int p1, int p2)
+        public void Swap(Key parent, int p1, int p2)
         {
-            copy(parent);
-            swap(p1, p2);
+            Copy(parent);
+            Swap(p1, p2);
         }
 
-        public void swap(Key parent, int p1, int p2, int p3)
+        public void Swap(Key parent, int p1, int p2, int p3)
         {
-            copy(parent);
-            swap(p1, p2, p3);
+            Copy(parent);
+            Swap(p1, p2, p3);
         }
 
-        public void swapRows(Key parent, int r1, int r2)
+        public void SwapRows(Key parent, int r1, int r2)
         {
-            copy(parent);
+            Copy(parent);
             int start1 = r1 * Playfair.DIM;
             int start2 = r2 * Playfair.DIM;
             for (int m = 0; m < Playfair.DIM; m++)
             {
-                swap(start1 + m, start2 + m);
+                Swap(start1 + m, start2 + m);
             }
         }
 
-        public void swapCols(Key parent, int c1, int c2)
+        public void SwapColumns(Key parent, int c1, int c2)
         {
-            copy(parent);
+            Copy(parent);
             for (int m = 0; m < Playfair.DIM; m++)
             {
-                swap(c1 + m * Playfair.DIM, c2 + m * Playfair.DIM);
+                Swap(c1 + m * Playfair.DIM, c2 + m * Playfair.DIM);
             }
         }
 
-        public void permuteCols(Key parent, int perm)
+        public void OermuteColumns(Key parent, int perm)
         {
-            copy(parent);
+            Copy(parent);
             for (int r = 0; r < Playfair.DIM; r++)
             {
                 for (int c = 0; c < Playfair.DIM; c++)
@@ -269,27 +264,27 @@ namespace PlayfairAnalysis
             }
         }
 
-        public void permuteRowCols(Key parent, int r, int perm)
+        public void PermuteRowColumns(Key parent, int r, int perm)
         {
-            copy(parent);
+            Copy(parent);
             for (int c = 0; c < Playfair.DIM; c++)
             {
                 key[r * Playfair.DIM + c] = parent.key[r * Playfair.DIM + Playfair.PERMUTATIONS[perm, c]];
             }
         }
 
-        public void permuteRows(Key parent, int perm)
+        public void PermuteRows(Key parent, int perm)
         {
-            copy(parent);
+            Copy(parent);
             for (int r = 0; r < Playfair.DIM; r++)
             {
-                Arrays.arraycopy(parent.key, Playfair.PERMUTATIONS[perm, r] * Playfair.DIM, key, r * Playfair.DIM, Playfair.DIM);
+                Arrays.Arraycopy(parent.key, Playfair.PERMUTATIONS[perm, r] * Playfair.DIM, key, r * Playfair.DIM, Playfair.DIM);
             }
         }
 
-        public void permuteColRows(Key parent, int c, int perm)
+        public void PermuteColumnsRows(Key parent, int c, int perm)
         {
-            copy(parent);
+            Copy(parent);
             for (int r = 0; r < Playfair.DIM; r++)
             {
                 key[r * Playfair.DIM + c] = parent.key[Playfair.PERMUTATIONS[perm, r] * Playfair.DIM + c];
@@ -298,7 +293,7 @@ namespace PlayfairAnalysis
 
         private readonly int[] buffer = new int[Playfair.SQUARE];
 
-        private (int bestR, int bestC) getBestRC()
+        private (int bestR, int bestC) GetBestRC()
         {
             int bestR = -1;
             int bestC = -1;
@@ -323,7 +318,6 @@ namespace PlayfairAnalysis
                             }
                             last = previous;
                             count++;
-                            //Console.Out.WriteLine("%2d %2d = %3d\n", r, c, count);
                             if (count > bestCount)
                             {
                                 bestCount = count;
@@ -339,10 +333,10 @@ namespace PlayfairAnalysis
             return (bestR, bestC);
         }
 
-        public void alignAlphabet()
+        public void AlignAlphabet()
         {
-            (int bestR, int bestC) = getBestRC();
-            Arrays.arraycopy(key, 0, buffer, 0, Playfair.SQUARE);
+            (int bestR, int bestC) = GetBestRC();
+            Arrays.Arraycopy(key, 0, buffer, 0, Playfair.SQUARE);
             for (int r = 0; r < Playfair.DIM; r++)
             {
                 for (int c = 0; c < Playfair.DIM; c++)
@@ -353,35 +347,6 @@ namespace PlayfairAnalysis
                 }
             }
 
-        }
-
-        private bool keyFromSentence(int[] phrase)
-        {
-
-            bool[] used = new bool[26];
-            int length = 0;
-
-            foreach (int symbol in phrase)
-            {
-                if (used[symbol])
-                {
-                    continue;
-                }
-                key[length++] = symbol;
-                used[symbol] = true;
-            }
-
-            for (int symbol = 0; symbol < 26; symbol++)
-            {
-                if (used[symbol] || symbol == Utils.getTextSymbol('J'))
-                {
-                    continue;
-                }
-                key[length++] = symbol;
-            }
-            computeInverse();
-            keyword = Utils.getString(phrase);
-            return length == 25;
-        }
+        }        
     }
 }

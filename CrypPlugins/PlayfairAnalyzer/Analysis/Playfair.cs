@@ -26,58 +26,58 @@ namespace PlayfairAnalysis
         internal static int ALPHABET_SIZE = DIM == 5 ? 26 : 36;
         internal static int SQUARE = DIM * DIM;
 
-        private static readonly int[][] POSITIONS_OF_PLAINTEXT_SYMBOL_1 = positionsOfPlainTextSymbol1();
-        private static readonly int[][] POSITIONS_OF_PLAINTEXT_SYMBOL_2 = positionsOfPlainTextSymbol2();
-        private static readonly int[][] POSITIONS_OF_CIPHERTEXT_SYMBOL_1 = positionsOfCipherTextSymbol1();
-        private static readonly int[][] POSITIONS_OF_CIPHERTEXT_SYMBOL_2 = positionsOfCipherTextSymbol2();
+        private static readonly int[][] POSITIONS_OF_PLAINTEXT_SYMBOL_1 = PositionsOfPlainTextSymbol1();
+        private static readonly int[][] POSITIONS_OF_PLAINTEXT_SYMBOL_2 = PositionsOfPlainTextSymbol2();
+        private static readonly int[][] POSITIONS_OF_CIPHERTEXT_SYMBOL_1 = PositionsOfCipherTextSymbol1();
+        private static readonly int[][] POSITIONS_OF_CIPHERTEXT_SYMBOL_2 = PositionsOfCipherTextSymbol2();
 
-        private static int row(int pos)
+        private static int Row(int position)
         {
-            return pos / DIM;
+            return position / DIM;
         }
-        private static int col(int pos)
+        private static int Column(int position)
         {
-            return pos % DIM;
+            return position % DIM;
         }
-        private static int pos(int r, int c)
+        private static int Position(int row, int column)
         {
-            if (r >= DIM)
+            if (row >= DIM)
             {
-                r -= DIM;
+                row -= DIM;
             }
-            else if (r < 0)
+            else if (row < 0)
             {
-                r += DIM;
+                row += DIM;
             }
-            if (c >= DIM)
+            if (column >= DIM)
             {
-                c -= DIM;
+                column -= DIM;
             }
-            else if (c < 0)
+            else if (column < 0)
             {
-                c += DIM;
+                column += DIM;
             }
-            return DIM * r + c;
+            return DIM * row + column;
         }
-        private static int positionOfPlainTextSymbol1(int cipherPositionOfSymbol1, int cipherPositionOfSymbol2)
+        private static int PositionOfPlainTextSymbol1(int cipherPositionOfSymbol1, int cipherPositionOfSymbol2)
         {
-            int c1 = col(cipherPositionOfSymbol1);
-            int r1 = row(cipherPositionOfSymbol1);
-            int c2 = col(cipherPositionOfSymbol2);
-            int r2 = row(cipherPositionOfSymbol2);
+            int c1 = Column(cipherPositionOfSymbol1);
+            int r1 = Row(cipherPositionOfSymbol1);
+            int c2 = Column(cipherPositionOfSymbol2);
+            int r2 = Row(cipherPositionOfSymbol2);
 
             if (r1 == r2)
             {
-                return pos(r1, c1 - 1);
+                return Position(r1, c1 - 1);
             }
             else if (c1 == c2)
             {
-                return pos(r1 - 1, c1);
+                return Position(r1 - 1, c1);
             }
-            return pos(r1, c2);
+            return Position(r1, c2);
         }
 
-        private static int[][] positionsOfPlainTextSymbol1()
+        private static int[][] PositionsOfPlainTextSymbol1()
         {
             int[][] positions = new int[SQUARE][];
             for (int p1 = 0; p1 < SQUARE; p1++)
@@ -85,31 +85,31 @@ namespace PlayfairAnalysis
                 positions[p1] = new int[SQUARE];
                 for (int p2 = 0; p2 < SQUARE; p2++)
                 {
-                    positions[p1][p2] = positionOfPlainTextSymbol1(p1, p2);
+                    positions[p1][p2] = PositionOfPlainTextSymbol1(p1, p2);
                 }
             }
             return positions;
         }
 
-        private static int positionOfPlainTextSymbol2(int cipherPositionOfSymbol1, int cipherPositionOfSymbol2)
+        private static int PositionOfPlainTextSymbol2(int cipherPositionOfSymbol1, int cipherPositionOfSymbol2)
         {
-            int c1 = col(cipherPositionOfSymbol1);
-            int r1 = row(cipherPositionOfSymbol1);
-            int c2 = col(cipherPositionOfSymbol2);
-            int r2 = row(cipherPositionOfSymbol2);
+            int c1 = Column(cipherPositionOfSymbol1);
+            int r1 = Row(cipherPositionOfSymbol1);
+            int c2 = Column(cipherPositionOfSymbol2);
+            int r2 = Row(cipherPositionOfSymbol2);
 
             if (r1 == r2)
             {
-                return pos(r2, c2 - 1);
+                return Position(r2, c2 - 1);
             }
             else if (c1 == c2)
             {
-                return pos(r2 - 1, c1);
+                return Position(r2 - 1, c1);
             }
-            return pos(r2, c1);
+            return Position(r2, c1);
         }
 
-        private static int[][] positionsOfPlainTextSymbol2()
+        private static int[][] PositionsOfPlainTextSymbol2()
         {
             int[][] positions = new int[SQUARE][];
             for (int p1 = 0; p1 < SQUARE; p1++)
@@ -117,31 +117,31 @@ namespace PlayfairAnalysis
                 positions[p1] = new int[SQUARE];
                 for (int p2 = 0; p2 < SQUARE; p2++)
                 {
-                    positions[p1][p2] = positionOfPlainTextSymbol2(p1, p2);
+                    positions[p1][p2] = PositionOfPlainTextSymbol2(p1, p2);
                 }
             }
             return positions;
         }
 
-        private static int positionOfCipherTextSymbol1(int plainTextPositionOfSymbol1, int plainTextPositionOfSymbol2)
+        private static int PositionOfCipherTextSymbol1(int plainTextPositionOfSymbol1, int plainTextPositionOfSymbol2)
         {
-            int c1 = col(plainTextPositionOfSymbol1);
-            int r1 = row(plainTextPositionOfSymbol1);
-            int c2 = col(plainTextPositionOfSymbol2);
-            int r2 = row(plainTextPositionOfSymbol2);
+            int c1 = Column(plainTextPositionOfSymbol1);
+            int r1 = Row(plainTextPositionOfSymbol1);
+            int c2 = Column(plainTextPositionOfSymbol2);
+            int r2 = Row(plainTextPositionOfSymbol2);
 
             if (r1 == r2)
             {
-                return pos(r1, c1 + 1);
+                return Position(r1, c1 + 1);
             }
             else if (c1 == c2)
             {
-                return pos(r1 + 1, c1);
+                return Position(r1 + 1, c1);
             }
-            return pos(r1, c2);
+            return Position(r1, c2);
         }
 
-        private static int[][] positionsOfCipherTextSymbol1()
+        private static int[][] PositionsOfCipherTextSymbol1()
         {
             int[][] positions = new int[SQUARE][];
             for (int p1 = 0; p1 < SQUARE; p1++)
@@ -149,31 +149,31 @@ namespace PlayfairAnalysis
                 positions[p1] = new int[SQUARE];
                 for (int p2 = 0; p2 < SQUARE; p2++)
                 {
-                    positions[p1][p2] = positionOfCipherTextSymbol1(p1, p2);
+                    positions[p1][p2] = PositionOfCipherTextSymbol1(p1, p2);
                 }
             }
             return positions;
         }
 
-        private static int positionOfCipherTextSymbol2(int plainTextPositionOfSymbol1, int plainTextPositionOfSymbol2)
+        private static int PositionOfCipherTextSymbol2(int plainTextPositionOfSymbol1, int plainTextPositionOfSymbol2)
         {
-            int c1 = col(plainTextPositionOfSymbol1);
-            int r1 = row(plainTextPositionOfSymbol1);
-            int c2 = col(plainTextPositionOfSymbol2);
-            int r2 = row(plainTextPositionOfSymbol2);
+            int c1 = Column(plainTextPositionOfSymbol1);
+            int r1 = Row(plainTextPositionOfSymbol1);
+            int c2 = Column(plainTextPositionOfSymbol2);
+            int r2 = Row(plainTextPositionOfSymbol2);
 
             if (r1 == r2)
             {
-                return pos(r2, c2 + 1);
+                return Position(r2, c2 + 1);
             }
             else if (c1 == c2)
             {
-                return pos(r2 + 1, c1);
+                return Position(r2 + 1, c1);
             }
-            return pos(r2, c1);
+            return Position(r2, c1);
         }
 
-        private static int[][] positionsOfCipherTextSymbol2()
+        private static int[][] PositionsOfCipherTextSymbol2()
         {
             int[][] positions = new int[SQUARE][];
             for (int p1 = 0; p1 < SQUARE; p1++)
@@ -181,63 +181,15 @@ namespace PlayfairAnalysis
                 positions[p1] = new int[SQUARE];
                 for (int p2 = 0; p2 < SQUARE; p2++)
                 {
-                    positions[p1][p2] = positionOfCipherTextSymbol2(p1, p2);
+                    positions[p1][p2] = PositionOfCipherTextSymbol2(p1, p2);
                 }
             }
             return positions;
         }
-
-        private static int decrypt(Key key, int[] cipherText, int[] plainText, bool removeXZ)
+     
+        public static int Decrypt(Key key, int[] cipherText, int[] plainText, int[] plainTextRemoveNulls)
         {
-
-            key.computeInverse();
-
-            int plainTextLength = 0;
-
-            int lastPlainTextSymbol1 = 100;
-            int lastPlainTextSymbol2 = 100;
-            int plainTextSymbol1, plainTextSymbol2;
-            int cipherPositionOfSymbol1, cipherPositionOfSymbol2;
-
-            for (int n = 0; n < cipherText.Length; n += 2)
-            {
-
-                cipherPositionOfSymbol1 = key.inverseKey[cipherText[n]];
-                cipherPositionOfSymbol2 = key.inverseKey[cipherText[n + 1]];
-
-                plainTextSymbol1 = key.key[POSITIONS_OF_PLAINTEXT_SYMBOL_1[cipherPositionOfSymbol1][cipherPositionOfSymbol2]];
-                plainTextSymbol2 = key.key[POSITIONS_OF_PLAINTEXT_SYMBOL_2[cipherPositionOfSymbol1][cipherPositionOfSymbol2]];
-
-                if (removeXZ && (lastPlainTextSymbol1 == plainTextSymbol1 && (lastPlainTextSymbol2 == Utils.X || lastPlainTextSymbol2 == Utils.Z) && plainTextLength > 0))
-                {
-                    plainText[plainTextLength - 1] = plainTextSymbol1;
-                }
-                else
-                {
-                    plainText[plainTextLength++] = plainTextSymbol1;
-                }
-
-                plainText[plainTextLength++] = plainTextSymbol2;
-
-                lastPlainTextSymbol1 = plainTextSymbol1;
-                lastPlainTextSymbol2 = plainTextSymbol2;
-            }
-
-            if (removeXZ)
-            {
-                while (plainText[plainTextLength - 1] == Utils.X || plainText[plainTextLength - 1] == Utils.Z)
-                {
-                    plainTextLength--;
-                }
-            }
-            return plainTextLength;
-        }
-
-        public static int decrypt(Key key, int[] cipherText, int[] plainText, int[] plainTextRemoveNulls)
-        {
-
-
-            key.computeInverse();
+            key.ComputeInverse();
 
             int plainTextLength = 0;
             int plainTextRemoveNullsLength = 0;
@@ -249,7 +201,6 @@ namespace PlayfairAnalysis
 
             for (int n = 0; n < cipherText.Length; n += 2)
             {
-
                 cipherPositionOfSymbol1 = key.inverseKey[cipherText[n]];
                 cipherPositionOfSymbol2 = key.inverseKey[cipherText[n + 1]];
 
@@ -278,10 +229,9 @@ namespace PlayfairAnalysis
             return plainTextRemoveNullsLength;
         }
 
-        public static int encrypt(Key key, int[] plainText, int[] cipherText)
+        public static int Encrypt(Key key, int[] plainText, int[] cipherText)
         {
-
-            key.computeInverse();
+            key.ComputeInverse();
 
             int cipherTextLength = 0;
 
@@ -318,47 +268,5 @@ namespace PlayfairAnalysis
 
             return cipherTextLength;
         }
-
-        public static void preparePlainText(int[] plaintext)
-        {
-            if (DIM == 6)
-            {
-                return;
-            }
-            for (int i = 0; i < plaintext.Length; i++)
-            {
-                if (plaintext[i] == Utils.J)
-                {
-                    plaintext[i] = Utils.I;
-                }
-            }
-        }
-
-        private static string preparePlainText(string p)
-        {
-            StringBuilder sb = new StringBuilder();
-            if (DIM == 6)
-            {
-                p = p.ToUpper().Replace("[^A-Z0-9]*", "");
-            }
-            else
-            {
-                p = p.ToUpper().Replace("[^A-Z]*", "").Replace("J", "I");
-            }
-            for (int i = 0; i < p.Length; i += 2)
-            {
-                sb.Append(p[i]);
-                if (i + 1 < p.Length)
-                {
-                    if (p[i] == p[i + 1])
-                    {
-                        sb.Append("X");
-                    }
-                    sb.Append(p[i + 1]);
-                }
-            }
-            return sb.ToString();
-        }
     }
-
 }

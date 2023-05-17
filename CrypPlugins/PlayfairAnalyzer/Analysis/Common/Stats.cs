@@ -36,17 +36,15 @@ namespace PlayfairAnalysis.Common
 
         public long EvalPlaintext(int[] plaintext, int plaintextLength)
         {
-            _instance.CtAPI.shutdownIfNeeded();
+            _instance.CtAPI.ShutdownIfNeeded();
             Evaluations++;
             return (long)Grams.CalculateCost(plaintext);                        
         }
 
         public (TimeSpan elapsed, long evaluations) EvaluationsSummary()
         {
-            TimeSpan elapsed = _utils.getElapsed();
+            TimeSpan elapsed = _utils.GetElapsed();
             return (elapsed, Evaluations);            
         }
-
     }
-
 }

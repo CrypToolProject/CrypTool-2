@@ -39,11 +39,11 @@ namespace PlayfairAnalysis.Common
                 cts?.Cancel();
             };
 
-            CtBestList.clear();
-            CtBestList.setScoreThreshold(0);
-            CtBestList.setDiscardSamePlaintexts(discardSamePlaintexts);
-            CtBestList.setSize(10);
-            CtBestList.setThrottle(false);
+            CtBestList.ClearBestList();
+            CtBestList.SetScoreThreshold(0);
+            CtBestList.SetDiscardSamePlaintexts(discardSamePlaintexts);
+            CtBestList.SetBestListSize(10);
+            CtBestList.SetThrottle(false);
         }
 
         public void Cancel()
