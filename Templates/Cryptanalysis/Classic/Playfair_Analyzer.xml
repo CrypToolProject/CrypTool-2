@@ -38,7 +38,7 @@ To try different crib offsets you can change the range of analyzed offsets in th
     <replacement key="$Revealed Key$" value="Gefundener Schlüssel" />
     <replacement key="$PlayfairAnalyzer$" value="Playfair-Analyse" />
     <replacement key="$memo$" value="Diese Vorlage demonstriert einen Ciphertext-only-Angriff auf die {\b Playfair-Chiffre}.
-Der Geheimtext wird vom Playfair Analyzer verwendet, der mit Hilfe eines heuristischen Ansatzes (simulated annealing) nach dem wahrscheinlichsten Klartext sucht.\line\line 
+Der Geheimtext wird vom Playfair Analyzer verwendet, der mit Hilfe eines heuristischen Ansatzes (simulated annealing) nach dem wahrscheinlichsten Klartext sucht.\line\line
 Der entsprechende Klartext ist in englischer Sprache. Bitte beachten Sie, dass es bei der Playfair-Chiffre für jeden Schlüssel mehrere äquivalente Schlüssel gibt, die den gleichen Geheimtext bzw. Klartext erzeugen.\line\line
 In der Einstellungsleiste der Analyzer-Komponente können Sie die Anzahl der zu verwendenden CPUs (Threads) einstellen.\line\line Der aufgedeckte Klartext sollte mit &quot;THE PLAYFAIR CIPHER ...&quot; beginnen.\line\line
 Die Komponente erlaubt es auch, einen Crib (teilweise bekannter Klartext) bereitzustellen. Verbinden Sie dazu eine Texteingabe-Komponente mit dem Crib-Konnektor der Analyse-Komponente.
