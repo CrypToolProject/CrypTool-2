@@ -306,8 +306,8 @@ namespace CrypTool.LFSR
 
         private static string BuildPolynomialFromBinary(char[] tapSequence, int roundNumber)
         {
-            string polyDescription = CrypTool.LFSR.Properties.Resources.RoundNumber + " " + roundNumber + "; ";
-            polyDescription += CrypTool.LFSR.Properties.Resources.Feedback_polynomial + ": \n";
+            string polyDescription = CrypTool.LFSR.Properties.Resources.RoundNumber + " " + roundNumber + "  ";
+            polyDescription += CrypTool.LFSR.Properties.Resources.Feedback_polynomial + ": ";
 
             StringBuilder polynomialBuilder = new StringBuilder();
             polynomialBuilder.Append(polyDescription);

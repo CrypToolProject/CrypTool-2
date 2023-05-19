@@ -7,7 +7,7 @@
     <Viewbox Stretch="Uniform">
         <Grid Name="completeGrid">
             <Ellipse Name="innercircle" Height="10" Width="10" StrokeThickness="0" Fill="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5" />
-            <Grid Height="50" Width="Auto" Margin="5,0,0,60" Name="polynomialGrid" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Grid Height="25" Width="Auto" Margin="5,0,0,60" Name="polynomialGrid" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <Label Name="polynomialText" />
             </Grid>
             <Grid Height="Auto" Width="Auto" Margin="0,40,0,0" Name="myGrid" HorizontalAlignment="Center" VerticalAlignment="Center" />

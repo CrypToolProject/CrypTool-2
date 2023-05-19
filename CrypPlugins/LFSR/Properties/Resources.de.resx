@@ -286,7 +286,7 @@
     <value>Die Präsentation zeigt die Runde, welche so viele Runden vor der aktuellen Runde kam.</value>
   </data>
   <data name="RoundNumber" xml:space="preserve">
-    <value>Runde: </value>
+    <value>Runde:</value>
   </data>
   <data name="SeedFlippedCaption" xml:space="preserve">
     <value>Seed: Linkes Bit zuerst</value>
