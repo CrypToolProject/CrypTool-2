@@ -12,14 +12,14 @@
   <description lang="en">This template shows the usage of the <i>Non-Linear Feedback Shift Register</i>.</description>
   <keywords>shift, register, feedback</keywords>
   <replacements lang="en">
-    <replacement key="$Tap Sequence$" value="Tap Sequence" />
+    <replacement key="$Tap Sequence$" value="Tap sequence" />
     <replacement key="$NLFSR$" value="Non-Linear Feedback Shift Register" />
-    <replacement key="$Output Stream$" value="Output Stream" />
-    <replacement key="$memo$" value="A {\b NLFSR (Non-Linear Feedback Shift Register)} is a common component in modern stream ciphers, especially in RFID and smartcard applications. 
+    <replacement key="$Output Stream$" value="Output stream" />
+    <replacement key="$memo$" value="An {\b NLFSR (Non-Linear Feedback Shift Register)} is a common component in modern stream ciphers, especially in RFID and smartcard applications. 
 NLFSRs are known to be more resistant to cryptanalytic attacks than Linear Feedback Shift Registers (LFSRs), although construction of large NLFSRs with guaranteed long periods remains an open problem.\line\line
-With the NLFSR (in contrast to the LFSR) the register bits defined by the tap sequence are linked non-linearly. Here, the input &quot;Tap sequence &quot; therefore is not only a binary sequence but a non-linear polynomial: x^5*x^2 + 1.
-The NLFSR component interprets the leftmost bit in the register as the highest power and then takes here 2 bits from the register.
-http://en.wikipedia.org/wiki/NLFSR\line\line You may also want to take a look at the LFSR template included in CrypTool 2." />
+With the NLFSR (in contrast to the LFSR) the register bits defined by the {\b tap sequence} are linked non-linearly. Here, the input &quot;Tap sequence&quot; therefore is not only a binary sequence but a non-linear polynomial: x^5 * x^2 + 1.
+The NLFSR component interprets the leftmost bit in the register as the highest power and then takes here 2 bits from the register. The {\b seed} defines the initial state of the register.\line\line
+See also: http://en.wikipedia.org/wiki/NLFSR\line\line You may also want to take a look at the LFSR template included in CrypTool 2." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -34,8 +34,8 @@ http://en.wikipedia.org/wiki/NLFSR\line\line You may also want to take a look at
     <replacement key="$Output Stream$" value="Ausgabestrom" />
     <replacement key="$memo$" value="Ein {\b nichtlinear rückgekoppeltes Schieberegister (engl. Non-Linear Feedback Shift Register, NLFSR)} kommt oft in modernen Stromchiffren zum Einsatz, besonders in RFIDs und Smartcard-Anwendungen. 
 NLFSRs sind widerstandsfähiger gegen kryptoanalytische Angriffe als linear rückgekoppelte Schieberegister (LFSRs), obwohl die Konstruktion von NLFSRs mit garantiert großen Perioden weiterhin ein ungelöstes Problem ist.\line\line
-Beim NLFSR (im Gegensatz zum LFSR) werden die durch die Tap-Sequenz definierten Registerbits nicht-linear verknüpft. Hier steht in der Eingabe &quot;Tap-Sequenz &quot; deshalb nicht nur eine binäre Sequenz, sondern ein nicht-lineares Polynom: x^5*x^2 + 1. 
-Die NLFSR-Komponente interpretiert das linkeste Bit im Register als die höchste Potenz und nimmt hier dann 2 Bits aus dem Register.\line\line
+Beim NLFSR (im Gegensatz zum LFSR) werden die durch die {\b Tap-Sequenz} definierten Registerbits nicht-linear verknüpft. Hier steht in der Eingabe &quot;Tap-Sequenz&quot; deshalb nicht nur eine binäre Sequenz, sondern ein nicht-lineares Polynom: x^5 * x^2 + 1. 
+Die NLFSR-Komponente interpretiert das linkeste Bit im Register als die höchste Potenz und nimmt hier dann 2 Bits aus dem Register. Der {\b Seed} definiert die Anfangsbelegung des Registers.\line\line
 Siehe auch: http://en.wikipedia.org/wiki/NLFSR\line\line Werfen Sie auch einen Blick auf die LFSR-Vorlage in CrypTool 2." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
