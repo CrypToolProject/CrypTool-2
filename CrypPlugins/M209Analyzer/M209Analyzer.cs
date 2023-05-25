@@ -63,6 +63,8 @@ namespace CrypTool.Plugins.M209Analyzer
 
         private bool _running = false;
 
+        private readonly object lockObject = new object();
+
         public M209Analyzer()
         {
             _settings = new M209AnalyzerSettings();
@@ -279,7 +281,10 @@ namespace CrypTool.Plugins.M209Analyzer
 
         private void HandleNewBestListEntry(object sender, M209AttackManager.OnNewBestListEntryEventArgs args)
         {
+            lock (lockObject)
+            {
             AddNewBestListEntry(args.Key.ToString(), args.Score, args.Decryption);
+        }
         }
 
         /// <summary>
@@ -292,7 +297,7 @@ namespace CrypTool.Plugins.M209Analyzer
         {
 
             //if we have a worse value than the last one, skip
-            if (_presentation.BestList.Count > 0 && value <= _presentation.BestList.Last().Value)
+            if (_presentation.BestList.Count > 10 && value <= _presentation.BestList.Last().Value)
             {
                 return;
             }
@@ -313,7 +318,19 @@ namespace CrypTool.Plugins.M209Analyzer
                 OnPropertyChanged("Key");
             }
 
-            int insertIndex = _presentation.BestList.TakeWhile(e => e.Value > entry.Value).Count();
+            int insertIndex = 0;
+            for (int i = 0; i < _presentation.BestList.Count; i++)
+            {
+                if (_presentation.BestList[i].Value > entry.Value)
+                {
+                    insertIndex = i + 1;
+                }
+                if (_presentation.BestList[i].Value == entry.Value)
+                {
+                    return;
+                }
+            }
+
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 try
