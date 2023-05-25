@@ -45,7 +45,7 @@ namespace CrypTool.Plugins.M209Analyzer
 
     [Author("Josef Matwich", "josef.matwich@student.uni-siegen.de", "CrypTool 2 Team", "https://www.cryptool.org")]
     // You can (and should) provide a user documentation as XML file and an own icon.
-    [PluginInfo("CrypTool.M209Analyzer.Properties.Resources", "M209AnalyzerCaption", "M209AnalyzerTooltip", "M209Analyzer/userdoc.xml", new[] { "CrypWin/images/default.png" })]
+    [PluginInfo("CrypTool.M209Analyzer.Properties.Resources", "Hagelin M-209 Analyzer", "M209AnalyzerTooltip", "M209Analyzer/userdoc.xml", new[] { "CrypWin/images/default.png" })]
     // HOWTO: Change category to one that fits to your plugin. Multiple categories are allowed.
     [ComponentCategory(ComponentCategory.CryptanalysisGeneric)]
     public class M209Analyzer : ICrypComponent
@@ -161,6 +161,8 @@ namespace CrypTool.Plugins.M209Analyzer
             _m209AttackManager.OnNewBestListEntry += HandleNewBestListEntry;
             _m209AttackManager.OnProgressStatusChanged += _m209AttackManager_OnProgressStatusChanged;
             _m209AttackManager.ShouldStop = !_running;
+
+            _m209AttackManager.Threads = _settings.CoresUsed;
 
             _m209AttackManager.SAParameters.MinRatio = _settings.MinRatio;
             _m209AttackManager.SAParameters.StartTemperature = _settings.StartTemperature;
@@ -283,8 +285,8 @@ namespace CrypTool.Plugins.M209Analyzer
         {
             lock (lockObject)
             {
-            AddNewBestListEntry(args.Key.ToString(), args.Score, args.Decryption);
-        }
+                AddNewBestListEntry(args.Key.ToString(), args.Score, args.Decryption);
+            }
         }
 
         /// <summary>
@@ -295,7 +297,6 @@ namespace CrypTool.Plugins.M209Analyzer
         /// <param name="text"></param>
         private void AddNewBestListEntry(string key, double value, int[] text)
         {
-
             //if we have a worse value than the last one, skip
             if (_presentation.BestList.Count > 10 && value <= _presentation.BestList.Last().Value)
             {

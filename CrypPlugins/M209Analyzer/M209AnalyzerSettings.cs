@@ -36,7 +36,9 @@ namespace CrypTool.Plugins.M209Analyzer
         private KeyFormat _keyFormat = KeyFormat.Digits;
 
         // number of possible monograms, with c = 26 for English
-        private int _c = 26;
+        private int _letterCount = 26;
+
+        private int _coresUsed = 1;
 
         private double _minRatio = Math.Log(0.0085);
         private double _startTemperature = 1000.0;
@@ -51,7 +53,7 @@ namespace CrypTool.Plugins.M209Analyzer
         /// HOWTO: This is an example for a setting entity shown in the settings pane on the right of the CT2 main window.
         /// This example setting uses a number field input, but there are many more input types available, see ControlType enumeration.
         /// </summary>
-        [TaskPane("AttackMode", "Change the attack mode", null, 0, false, ControlType.ComboBox, new string[] { "CiphertextOnly", "KnownPlaintext" })]
+        [TaskPane("AttackMode", "Change the attack mode", "General", 0, false, ControlType.ComboBox, new string[] { "CiphertextOnly", "KnownPlaintext" })]
         public AttackMode AttackMode
         {
             get
@@ -69,25 +71,43 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
-        [TaskPane("c", "Change the attack mode", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 50)]
-        public int c
+        [TaskPane("LetterCount", "Letter count of alphabet", "General", 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 50)]
+        public int LetterCount
         {
             get
             {
-                return _c;
+                return _letterCount;
             }
             set
             {
-                if (_c != value)
+                if (_letterCount != value)
                 {
-                    _c = value;
+                    _letterCount = value;
                     // HOWTO: MUST be called every time a property value changes with correct parameter name
-                    OnPropertyChanged("c");
+                    OnPropertyChanged("LetterCount");
                 }
             }
         }
 
-        [TaskPane("LanguageCaption", "LanguageTooltip", null, 0, false, ControlType.LanguageSelector)]
+        [TaskPane("CoresUsed", "Cores used", "General", 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 50)]
+        public int CoresUsed
+        {
+            get
+            {
+                return _coresUsed;
+            }
+            set
+            {
+                if (_coresUsed != value)
+                {
+                    _coresUsed = value;
+                    // HOWTO: MUST be called every time a property value changes with correct parameter name
+                    OnPropertyChanged("CoresUsed");
+                }
+            }
+        }
+
+        [TaskPane("Language", "Select language of the ciphertext", "General", 0, false, ControlType.LanguageSelector)]
         public int Language
         {
             get => LanguageStatistics.LanguageId(_languageCode);
@@ -101,7 +121,7 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
-        [TaskPane("GramsTypeCaption", "GramsTypeTooltip", null, 1, false, ControlType.ComboBox,
+        [TaskPane("GramsType", "Select type of grams", "General", 1, false, ControlType.ComboBox,
             new string[] { "Unigrams", "Bigrams", "Trigrams", "Tetragrams", "Pentagrams" })]
         public int GramsType
         {
@@ -116,7 +136,7 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
-        [TaskPane("KeyFormatCaption", "KeyFormatTooltip", null, 2, false, ControlType.ComboBox,
+        [TaskPane("KeyFormat", "Select format of key", "General", 2, false, ControlType.ComboBox,
           new string[] { "Digits", "LatinLetters" })]
         public KeyFormat KeyFormat
         {
@@ -131,7 +151,7 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
-        [TaskPane("SA MinRatio", "Simulated Annealing - MinRatio", null, 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 50)]
+        [TaskPane("SA MinRatio", "Simulated Annealing - MinRatio", "Expert mode", 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 50)]
         public double MinRatio
         {
             get
@@ -148,7 +168,7 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
-        [TaskPane("SA StartTemperature", "Simulated Annealing - StartTemperature", null, 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 1000000)]
+        [TaskPane("SA StartTemperature", "Simulated Annealing - StartTemperature", "Expert mode", 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 1000000)]
         public double StartTemperature
         {
             get
@@ -165,7 +185,7 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
-        [TaskPane("SA EndTemperature", "Simulated Annealing - EndTemperature", null, 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 1000000)]
+        [TaskPane("SA EndTemperature", "Simulated Annealing - EndTemperature", "Expert mode", 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 1000000)]
         public double EndTemperature
         {
             get
@@ -182,7 +202,7 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
-        [TaskPane("SA Decrement", "Simulated Annealing - Decrement", null, 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 1000000)]
+        [TaskPane("SA Decrement", "Simulated Annealing - Decrement", "Expert mode", 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 1000000)]
         public double Decrement
         {
             get

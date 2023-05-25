@@ -13,7 +13,7 @@ namespace Cryptool.Plugins.M209Analyzer
         public ScoringFunction(int language, int gramsType, float normalizeValue)
         {
             //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
-            grams = LanguageStatistics.CreateGrams(language, (LanguageStatistics.GramsType)(gramsType + 1), false);
+            grams = LanguageStatistics.CreateGrams(language, (LanguageStatistics.GramsType)(gramsType + 1), true);
             grams.Normalize(10_000_000);
 
         }
