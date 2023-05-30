@@ -2,6 +2,10 @@
 
 Open-source e-learning Windows application for cryptography and cryptanalysis. Part of the [CrypTool project](https://www.cryptool.org).
 
+[![Discord](https://img.shields.io/discord/1057453786228076614.svg?logo=discord&logoColor=white&logoWidth=20&labelColor=7289DA&label=Discord&color=17cf48)](https://discord.gg/TAbsPRvG)
+
+[Documentation](https://github.com/CrypToolProject/CrypTool-2/wiki) | [Download CrypTool 2](https://www.cryptool.org/en/ct2/downloads)
+
 ## ℹ️ About
 
 CrypTool 2 (CT2) is a modern e-learning program for Windows, which visualizes cryptography and cryptanalysis. It includes not only the encryption and cryptanalysis of ciphers, but also their basics and the whole spectrum of modern cryptography. 
