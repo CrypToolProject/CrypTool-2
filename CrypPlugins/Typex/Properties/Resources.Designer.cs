@@ -115,6 +115,24 @@ namespace CrypTool.Typex.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Key input.
+        /// </summary>
+        internal static string KeyInputCaption {
+            get {
+                return ResourceManager.GetString("KeyInputCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input a Typex key containing the rotors to use, the rings to use, and the plugboard connections..
+        /// </summary>
+        internal static string KeyInputTooltip {
+            get {
+                return ResourceManager.GetString("KeyInputTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Text output.
         /// </summary>
         internal static string OutputTextCaption {

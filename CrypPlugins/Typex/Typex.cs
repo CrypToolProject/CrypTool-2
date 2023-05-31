@@ -18,6 +18,7 @@ using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.Typex.TypexMachine;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using static CrypTool.Typex.TypexMachine.Util;
@@ -54,8 +55,18 @@ namespace CrypTool.Typex
             set;
         }
 
+        [PropertyInfo(Direction.InputData, "KeyInputCaption", "KeyInputTooltip", false)]
+        public string KeyInput
+        {
+            get;
+            set;
+        }
+
+
         public void PreExecution()
-        {            
+        {
+            KeyInput = string.Empty;
+            InputText = string.Empty;
         }
 
         public void PostExecution()
@@ -78,11 +89,189 @@ namespace CrypTool.Typex
             ProgressChanged(0, 1);
 
             _stop = false;
-            Machine machine = new Machine(CreateRotorArray(), CreateReflector(), CreatePlugboard(), Alphabet);           
+            Machine machine;
+
+            if (KeyInput != string.Empty)
+            {
+                machine = CreateMachineUsingProvidedKeyString();                
+            }
+            else
+            {
+                machine = new Machine(CreateRotorArray(), CreateReflector(), CreatePlugboard(), Alphabet);
+            }
+
             OutputText = CryptText(machine, InputText.ToUpper());
             OnPropertyChanged(nameof(OutputText));
 
             ProgressChanged(1, 1);
+        }
+
+        /// <summary>
+        /// Creates a Typex machine using the provided input key settings
+        /// </summary>
+        /// <returns></returns>
+        private Machine CreateMachineUsingProvidedKeyString()
+        {
+            string[] keyElements = KeyInput.Split(':');
+
+            //create reflector
+            Reflector reflector = null;
+
+            string reflector_definition = keyElements[0].ToLower();
+            switch (reflector_definition)
+            {
+                case "cyberchef":
+                    reflector =  new Reflector(MapTextIntoNumberSpace(Typex_CyberChef.Reflector, Alphabet), null, 0, 0);
+                    break;
+                case "testreflector":
+                    reflector = new Reflector(MapTextIntoNumberSpace(Typex_TestRotors.Reflector, Alphabet), null, 0, 0);
+                    break;
+                case "enigmaa":
+                    reflector = new Reflector(MapTextIntoNumberSpace(Typex_EnigmaI.UKWA, Alphabet), null, 0, 0);
+                    break;
+                case "enigmab":
+                    reflector = new Reflector(MapTextIntoNumberSpace(Typex_EnigmaI.UKWB, Alphabet), null, 0, 0);
+                    break;
+                case "enigmac":
+                    reflector = new Reflector(MapTextIntoNumberSpace(Typex_EnigmaI.UKWC, Alphabet), null, 0, 0);
+                    break;               
+                default:
+                    if (!reflector_definition.StartsWith("custom"))
+                    {
+                        throw new Exception("Unknown reflector definition. Valid are: cyberchef, testreflector, enigmaa, enigmab, enigmac, custom;abc...xyz");
+                    }
+                    else
+                    {
+                        //custom reflector is separated using a semicolon
+                        string[] reflector_definition_parts = reflector_definition.Split(';');
+                        reflector = new Reflector(MapTextIntoNumberSpace(reflector_definition_parts[1].ToUpper(), Alphabet), null, 0, 0);
+                    }
+                    break;
+            }
+
+            //create rotors
+            Rotor[] rotors = new Rotor[6];
+            string rotor_definitions = keyElements[1].ToUpper();
+            
+            //rotor selection
+            if (rotor_definitions.Length != 15)
+            {
+                throw new Exception("Invalid rotor selection. A rotor is defined by two digits and a letter (n=normal, r=reversed). An example for a valid selection is : 01n02n03n04n05n");
+            }
+
+            //rotor positions
+            string rotor_positions = keyElements[2].ToUpper();            
+            if (rotor_positions.Length != 5)
+            {
+                throw new Exception("Invalid rotor-position definition. An example for a valid rotor-position definition is: AAAAA");
+            }
+
+            //ring positions
+            string ring_positions = keyElements[3].ToUpper();            
+            if (ring_positions.Length != 5)
+            {
+                throw new Exception("Invalid ring-position definition. An example for a valid ring-position definition is: AAAAA");
+            }
+
+            //create entry
+            Stator entry = new Stator(MapTextIntoNumberSpace(Entry, Alphabet), null, 0, 0, false);
+
+            rotors[0] = entry;
+            for (int i = 0; i < 5; i++)
+            {
+                rotors[i + 1] = CreateRotor(rotor_definitions.Substring(i * 3, 3), rotor_positions[4 - i].ToString(), ring_positions[4 - i].ToString(), i == 3, i < 2); // i == 3 <- only this rotor has the anomaly
+            }
+
+            //create plugboard
+            string plugboard_definition = string.Concat(keyElements[4].ToUpper().Distinct());
+            if(plugboard_definition.Length != 26)
+            {
+                throw new Exception("Invalid plugboard definition. You need to provide a permuted 26-letter alphabet");
+            }
+
+            return new Machine(rotors, reflector, new Plugboard(plugboard_definition, Alphabet));
+        }
+
+        /// <summary>
+        /// Creates a rotor for the currently selected machine based on the rotor string
+        /// </summary>
+        /// <param name="rotor"></param>
+        /// <param name="rotor_position"></param>
+        /// <param name="ring_position"></param>
+        /// <param name="stator"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        private Rotor CreateRotor(string rotor, string rotor_position, string ring_position, bool hasAnomaly, bool stator)
+        {
+            try
+            {
+                int rotor_selection = int.Parse(rotor.Substring(0, 2)) - 1;
+                bool isReversed = rotor.ToUpper()[2] == 'R';
+
+                switch (_settings.TypexMachineType)
+                {
+                    case TypexMachineType.CyberChef:
+                        if (stator)
+                        {
+                            return new Stator(MapTextIntoNumberSpace(Typex_CyberChef.Rotors[rotor_selection], Alphabet), Typex_CyberChef.Notches[rotor_selection], Alphabet.IndexOf(ring_position), Alphabet.IndexOf(rotor_position), isReversed);
+                        }
+                        else
+                        {
+                            return new Rotor(MapTextIntoNumberSpace(Typex_CyberChef.Rotors[rotor_selection], Alphabet), Typex_CyberChef.Notches[rotor_selection], Alphabet.IndexOf(ring_position), Alphabet.IndexOf(rotor_position), hasAnomaly, isReversed);
+                        }
+                    case TypexMachineType.TestRotors:
+                        if (stator)
+                        {
+                            return new Stator(MapTextIntoNumberSpace(Typex_TestRotors.Rotors[rotor_selection], Alphabet), Typex_TestRotors.Notches[rotor_selection], Alphabet.IndexOf(ring_position), Alphabet.IndexOf(rotor_position), isReversed);
+                        }
+                        else
+                        {
+                            return new Rotor(MapTextIntoNumberSpace(Typex_TestRotors.Rotors[rotor_selection], Alphabet), Typex_TestRotors.Notches[rotor_selection], Alphabet.IndexOf(ring_position), Alphabet.IndexOf(rotor_position), hasAnomaly, isReversed);
+                        }
+                    case TypexMachineType.EnigmaI:
+                        if (stator)
+                        {
+                            return new Stator(MapTextIntoNumberSpace(Typex_EnigmaI.Rotors[rotor_selection], Alphabet), Typex_EnigmaI.Notches[rotor_selection], Alphabet.IndexOf(ring_position), Alphabet.IndexOf(rotor_position), isReversed);
+                        }
+                        else
+                        {
+                            return new Rotor(MapTextIntoNumberSpace(Typex_EnigmaI.Rotors[rotor_selection], Alphabet), Typex_EnigmaI.Notches[rotor_selection], Alphabet.IndexOf(ring_position), Alphabet.IndexOf(rotor_position), hasAnomaly, isReversed);
+                        }
+                    case TypexMachineType.Y296:
+                        if (stator)
+                        {
+                            return new Stator(MapTextIntoNumberSpace(Typex_Y296.Rotors[rotor_selection], Alphabet), Typex_Y296.Notches[rotor_selection], Alphabet.IndexOf(ring_position), Alphabet.IndexOf(rotor_position), isReversed);
+                        }
+                        else
+                        {
+                            return new Rotor(MapTextIntoNumberSpace(Typex_Y296.Rotors[rotor_selection], Alphabet), Typex_Y296.Notches[rotor_selection], Alphabet.IndexOf(ring_position), Alphabet.IndexOf(rotor_position), hasAnomaly, isReversed);
+                        }                       
+                    case TypexMachineType.SP02390:
+                        if (stator)
+                        {
+                            return new Stator(MapTextIntoNumberSpace(Typex_SP02390.Rotors[rotor_selection], Alphabet), Typex_SP02390.Notches[rotor_selection], Alphabet.IndexOf(ring_position), Alphabet.IndexOf(rotor_position), isReversed);
+                        }
+                        else
+                        {
+                            return new Rotor(MapTextIntoNumberSpace(Typex_SP02390.Rotors[rotor_selection], Alphabet), Typex_SP02390.Notches[rotor_selection], Alphabet.IndexOf(ring_position), Alphabet.IndexOf(rotor_position), hasAnomaly, isReversed);
+                        }                    
+                    case TypexMachineType.SP02391:
+                        if (stator)
+                        {
+                            return new Stator(MapTextIntoNumberSpace(Typex_SP02391.Rotors[rotor_selection], Alphabet), Typex_SP02391.Notches[rotor_selection], Alphabet.IndexOf(ring_position), Alphabet.IndexOf(rotor_position), isReversed);
+                        }
+                        else
+                        {
+                            return new Rotor(MapTextIntoNumberSpace(Typex_SP02391.Rotors[rotor_selection], Alphabet), Typex_SP02391.Notches[rotor_selection], Alphabet.IndexOf(ring_position), Alphabet.IndexOf(rotor_position), hasAnomaly, isReversed);
+                        }                       
+                    default:
+                        throw new Exception(string.Format("Invalid Typex machine type: {0}", _settings.TypexMachineType));
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception(string.Format("Invalid rotor definition: {0} {1} {2}", rotor, rotor_position, ring_position));
+            }
         }
 
         /// <summary>
@@ -170,9 +359,9 @@ namespace CrypTool.Typex
                 case TypexReflector.EnigmaI_A:
                     return new Reflector(MapTextIntoNumberSpace(Typex_EnigmaI.UKWA, Alphabet), null, 0, 0);
                 case TypexReflector.EnigmaI_B:
-                    return new Reflector(MapTextIntoNumberSpace(Typex_EnigmaI.UKWA, Alphabet), null, 0, 0);
+                    return new Reflector(MapTextIntoNumberSpace(Typex_EnigmaI.UKWB, Alphabet), null, 0, 0);
                 case TypexReflector.EnigmaI_C:
-                    return new Reflector(MapTextIntoNumberSpace(Typex_EnigmaI.UKWA, Alphabet), null, 0, 0);
+                    return new Reflector(MapTextIntoNumberSpace(Typex_EnigmaI.UKWC, Alphabet), null, 0, 0);
                 case TypexReflector.Custom:
                     return new Reflector(MapTextIntoNumberSpace(_settings.CustomReflector, Alphabet), null, 0, 0);
                 default:

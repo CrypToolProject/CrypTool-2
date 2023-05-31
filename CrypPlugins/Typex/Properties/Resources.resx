@@ -135,6 +135,12 @@
   <data name="IsReversedTooltip" xml:space="preserve">
     <value>Sets if this rotor or stator is put in reversed into the machine</value>
   </data>
+  <data name="KeyInputCaption" xml:space="preserve">
+    <value>Key input</value>
+  </data>
+  <data name="KeyInputTooltip" xml:space="preserve">
+    <value>Input a Typex key containing the rotors to use, the rings to use, and the plugboard connections.</value>
+  </data>
   <data name="OutputTextCaption" xml:space="preserve">
     <value>Text output</value>
   </data>

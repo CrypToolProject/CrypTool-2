@@ -135,6 +135,12 @@
   <data name="IsReversedTooltip" xml:space="preserve">
     <value>Legt fest, ob dieser Rotor oder Stator in umgekehrter Richtung in die Maschine eingesetzt wird</value>
   </data>
+  <data name="KeyInputCaption" xml:space="preserve">
+    <value>Schlüssel-Eingabe</value>
+  </data>
+  <data name="KeyInputTooltip" xml:space="preserve">
+    <value>Eingabe eines Enigma-Schlüssels, der die zu verwendenden Rotoren, Ringe und Steckbrett-Verbindungen beinhaltet</value>
+  </data>
   <data name="OutputTextCaption" xml:space="preserve">
     <value>Textausgabe</value>
   </data>
