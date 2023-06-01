@@ -217,7 +217,7 @@
     <value>M-138 Analyzer</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>A selection of attacks on the M-138 explaining the used hillclimbing in detail</value>
+    <value>A selection of attacks on the M-138 explaining the used hill climbing in detail</value>
   </data>
   <data name="ResultTextCaption" xml:space="preserve">
     <value>Resulting plaintext</value>

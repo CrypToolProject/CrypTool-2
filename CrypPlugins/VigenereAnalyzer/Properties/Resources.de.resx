@@ -178,7 +178,7 @@
     <value>Schnelleres Konvergieren</value>
   </data>
   <data name="FastConvergeTooltip" xml:space="preserve">
-    <value>Wenn angewählt, wird beim Hillclimbing jede Verbesserung ausgewählt. Ansonsten wird die maximal mögliche Verbesserung ausgewählt.</value>
+    <value>Wenn angewählt, wird beim Hill climbing jede Verbesserung ausgewählt. Ansonsten wird die maximal mögliche Verbesserung ausgewählt.</value>
   </data>
   <data name="FromKeylengthCaption" xml:space="preserve">
     <value>Untergrenze der Schlüssellänge</value>
@@ -244,7 +244,7 @@
     <value>Vigenère-Analyse</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>Kryptoanalyse des Vigenère-Verfahrens mittels Hillclimbing.</value>
+    <value>Kryptoanalyse des Vigenère-Verfahrens mittels Hill climbing.</value>
   </data>
   <data name="Random" xml:space="preserve">
     <value>Zufällig</value>
@@ -253,7 +253,7 @@
     <value>Anzahl Neustarts</value>
   </data>
   <data name="RestartsTooltip" xml:space="preserve">
-    <value>Anzahl der Neustarts, die während des Hillclimbings durchgeführt werden sollen.</value>
+    <value>Anzahl der Neustarts, die während des Hill climbings durchgeführt werden sollen.</value>
   </data>
   <data name="Spanish" xml:space="preserve">
     <value>Spanisch</value>

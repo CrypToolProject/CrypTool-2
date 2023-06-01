@@ -26,7 +26,7 @@
     plaintext into the given ciphertext. The list of keys is ordered by their offsets. If at one position multiple strips can be used, they are separated
     by "|".
     <newline />
-    For the ciphertext-only attack, a hillclimbing algorithm was implemented. The algorithm is executed separately for every offset. In a first step,
+    For the ciphertext-only attack, a hill-climbing algorithm was implemented. The algorithm is executed separately for every offset. In a first step,
     a random key is generated. After that, two elements of the key are swapped as long as a better key can be found. If a key can't be improved by swapping
     two of its elements, it is put into a bestlist where the best keys of all offsets are stored. The keys are rated by the quality of the plaintext they
     create. This is calculated using tri- and quadgrams as well as the relative occurence of characters. The more a plaintext equals a natural language, the
@@ -43,12 +43,12 @@
     to run the attack on a different keylength.
     Regarding the key to be found, you can also set the minimal and maximal offset to be tested. This is useful in case you already know the offset but
     still need to find out the rest of the key.
-    The next setting, language, is only relevant in case of a ciphertext-only or partially-known plaintext attack. In these cases, a hillclimbing
+    The next setting, language, is only relevant in case of a ciphertext-only or partially-known plaintext attack. In these cases, a hill-climbing
     algorithm is implemented which rates the plaintext using tri- and quadgrams. The setting allows you to choose whether the plaintext is supposed to be
     German or English.
-    Restarts for Hillclimbing is only relevant for ciphertext-only and partially-known-plaintext attacks as well. This setting controls how often the
-    implemented hillclimbing algorithm tries to find the key before it proceeds with the next offset.
-    The "fast converge" option is also specific to the hillclimbing algorithm. If the option is checked, the algorithm will not try all modifications of
+    Restarts for Hill climbing is only relevant for ciphertext-only and partially-known-plaintext attacks as well. This setting controls how often the
+    implemented hill climbing algorithm tries to find the key before it proceeds with the next offset.
+    The "fast converge" option is also specific to the hill-climbing algorithm. If the option is checked, the algorithm will not try all modifications of
     a key and take the best one to further modify it, but as soon as a modification is rated better than the original key, it is taken and further modified.
     This results in the algorithm terminating faster, however it decreases the probability to find the correct key. However, it is still likely that parts of
     the key are correctly detected. This is useful e.g. to find the used offset before running the algorithm on that offset only.

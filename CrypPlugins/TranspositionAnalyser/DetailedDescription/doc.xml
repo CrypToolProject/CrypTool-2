@@ -3,7 +3,7 @@
   <language culture="en" />
   <introduction lang="en">
     The <b>Transposition Analyzer</b> component offers four different methods for the computer aided analysis of ciphertexts that were generated with the <b>Transposition</b> component:
-    the "Brute-Force Algorithm", the "Crib Analysis", the "Genetic Algorithm", and the "Hillclimbing Algorithm".
+    the "Brute-Force Algorithm", the "Crib Analysis", the "Genetic Algorithm", and the "Hill-climbing Algorithm".
     All methods offer settings for the connected <b>Transposition</b> component and list the results in a table.
     Moreover, the results are evaluated by a <b>CostFunction</b> component that can be connected to this component, and the results are then ordered according to their cost value.
     Please read the descriptions of these components for further information.
@@ -26,8 +26,8 @@
 
       Now the cost values of the child keys Child1 and Child2 are calculated and the keys are stored in MAXLIST. Again, the list is sorted according to the cost values and the N/2 worst keys are deleted.
       This is repeated until the maximum number of iterations is reached.
-    </section><section headline="Hillclimbing Algorithm">
-      The hillclimbing algorithm generates a random key and decrypts the ciphertext with this key and the resulting plaintext is evaluated with a cost function. 
+    </section><section headline="Hill-climbing Algorithm">
+      The hill-climbing algorithm generates a random key and decrypts the ciphertext with this key and the resulting plaintext is evaluated with a cost function. 
       Then a small random change is made on the key and the procedure is repeated with this new key.
       If the new plaintext has a worse value than the previous plaintext, the new key is discarded. But if the new plaintext has a better cost value, the new key is adopted as the new current key.
       This procedure is repeated many times. Thus, only changes that generate an improved key are accepted. In this respect, the algorithm reminds of a mountain climber who only takes steps that lead him upwards.
@@ -45,8 +45,8 @@
     </section><section headline="Genetic Algorithm">
       If you select the genetic algorithm, you must provide the size of the key space. Moreover, you can enter the number of iterations for the genetic algorithm.
       The field "Repetitions" determines, how often to generate new random numbers for a new evolution.
-    </section><section headline="Hillclimbing Algorithm">
-      If you select the hillclimbing algorithm, you must provide the size of the key space. In the field "Repetitions", you can enter how often the algorithm should be restarted with a new random key.
+    </section><section headline="Hill-climbing Algorithm">
+      If you select the hill-climbing algorithm, you must provide the size of the key space. In the field "Repetitions", you can enter how often the algorithm should be restarted with a new random key.
       The number of iterations that should be executed for a random key can be entered in the field "Iterations".
     </section></usage>
   <presentation lang="en">

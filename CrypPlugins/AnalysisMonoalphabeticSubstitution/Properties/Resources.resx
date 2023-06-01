@@ -352,19 +352,19 @@ Using plaintext alphabet now also as ciphertext alphabet.</value>
     <value>H</value>
   </data>
   <data name="hill_attack_finished" xml:space="preserve">
-    <value>Hillclimbing attack finished in {0:00} hours, {1:00} minutes, {2:00} seconds.</value>
+    <value>Hill climbing attack finished in {0:00} hours, {1:00} minutes, {2:00} seconds.</value>
   </data>
   <data name="hill_attack_testedkeys" xml:space="preserve">
-    <value>Number of tested keys with hillclimbing attack: {0}</value>
+    <value>Number of tested keys with hill climbing attack: {0}</value>
   </data>
   <data name="hill_attack_keyspersecond" xml:space="preserve">
-    <value>Tested keys with hillclimbing per second: {0}</value>
+    <value>Tested keys with hill climbing per second: {0}</value>
   </data>
   <data name="ChooseAlgorithmCaption" xml:space="preserve">
     <value>Algorithm</value>
   </data>
   <data name="ChooseAlgorithmList1" xml:space="preserve">
-    <value>Hillclimbing</value>
+    <value>Hill climbing</value>
   </data>
   <data name="ChooseAlgorithmList2" xml:space="preserve">
     <value>Dictionary &amp; Genetic</value>
@@ -376,7 +376,7 @@ Using plaintext alphabet now also as ciphertext alphabet.</value>
     <value>Restarts</value>
   </data>
   <data name="RestartsTooltip" xml:space="preserve">
-    <value>Choose how often the hillclimbing algorithm should start over.</value>
+    <value>Choose how often the hill climbing algorithm should start over.</value>
   </data>
   <data name="SelectAlgorithmGroup" xml:space="preserve">
     <value>Attack type</value>

@@ -358,22 +358,22 @@
     <value>H</value>
   </data>
   <data name="hill_attack_finished" xml:space="preserve">
-    <value>Hillclimbing attack finished in: </value>
+    <value>Hill climbing attack finished in: </value>
   </data>
   <data name="hill_attack_testedkeys" xml:space="preserve">
-    <value>Number of tested keys with hillclimbing attack: </value>
+    <value>Number of tested keys with hill climbing attack: </value>
   </data>
   <data name="hill_attack_keyspersecond" xml:space="preserve">
-    <value>Tested keys with hillclimbing per second: </value>
+    <value>Tested keys with hill climbing per second: </value>
   </data>
   <data name="ChooseAlgorithmCaption" xml:space="preserve">
     <value>Algorithm</value>
   </data>
   <data name="ChooseAlgorithmList1" xml:space="preserve">
-    <value>Hillclimbing CPU</value>
+    <value>Hill climbing CPU</value>
   </data>
   <data name="ChooseAlgorithmList2" xml:space="preserve">
-    <value>Hillclimbing GPU</value>
+    <value>Hill climbing GPU</value>
   </data>
   <data name="ChooseAlgorithmList3" xml:space="preserve">
     <value>Dictionary &amp; Genetic</value>
@@ -382,10 +382,10 @@
     <value>Choose the algorithm which should be used.</value>
   </data>
   <data name="RestartsCaption" xml:space="preserve">
-    <value>Amount of restarts (Hillclimbing only)</value>
+    <value>Amount of restarts (Hill climbing only)</value>
   </data>
   <data name="RestartsTooltip" xml:space="preserve">
-    <value>Choose how often the hillclimbing algorithm should start over.</value>
+    <value>Choose how often the hill climbing algorithm should start over.</value>
   </data>
   <data name="SelectAlgorithmGroup" xml:space="preserve">
     <value>Attack type</value>

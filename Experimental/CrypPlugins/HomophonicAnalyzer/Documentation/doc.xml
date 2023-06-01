@@ -23,8 +23,8 @@
       After the population evolved several generations the fitness of the fittest key does not change anymore. At this point the search is stopped and the key is reported.
       This process is conducted several times during one analysis. <newline />
       The power of this method strongly depends on the prior calculated n-gram frequencies. These have been provided by Ulrich Kunitz and are based on absolute discounting.
-    </section><section headline="Hillclimbing Attack">
-      The hillclimbing attack is based on the hillclimbing algorithm. 
+    </section><section headline="Hill-climbing Attack">
+      The hill-climbing attack is based on the hill-climbing algorithm. 
       The algorithm starts with a random key. Then it changes the key in a defined way. The new key will then be valued with a costfunction.
       If the new key is better than the old one, you will use the new key for the rest of the algorithm or until you find an even
       better one. The GPU version of this attack uses the computer's graphic board,
@@ -62,8 +62,8 @@
       Suche angehalten und der Schlüssel als Ergebnis gemeldet. Dieser Prozess wird mehrmals während eines Analysevorgangs durchgeführt.<newline />
       Die Mächtigkeit dieser Methode hängt sehr stark von vorher berechneten n-gram Wahrscheinlichkeiten ab. Die in dieser Komponente verwendeten Wahrscheinlichkeiten
       wurden von Ulrich Kunitz zur Verfügung gestellt und basieren auf dem Absolute Discounting Algorithmus.
-    </section><section headline="Hillclimbing Angriff">
-      Dieser Angriff benutzt den sogenannten Bergsteiger-Algorithmus (Hill-Climbing). Der Angriff startet mit einem zufällig gewählten Schlüssel.
+    </section><section headline="Hill-climbing Angriff">
+      Dieser Angriff benutzt den sogenannten Bergsteiger-Algorithmus (Hill climbing). Der Angriff startet mit einem zufällig gewählten Schlüssel.
       Dieser Schlüssel wird anschließend in einer definierten Vorgehensweise verändert. Der so neu erzeugte Schlüssel
       wird dann mit einer Kostenfunktion bewertet. Falls der neue Schlüssel besser bewertet wird,
       wird von nun an der neue Schlüssel verwendet. Dies geschieht so lange, bis man keinen besseren Schlüssel mehr findet.
@@ -100,7 +100,7 @@
     to show the best 20 keys that have been found during the cryptanalysis. This table shows for each found key a rank (column 0), the value of the cost function (column 1),
     the attack which found the key (column 3), the key itself (column 4), and the according plaintext (column 5). The value of the cost function is the logarithm of the arithmetic mean n-gram
     probabilities that are contained in the according plaintext. The difference of this value between two keys determines the range of how much one key is better than the other.
-    In column 3 the attack which found the key is displayed. A "G" stands for genetic attack and a "D" stands for dictionary attack. A "H" stands for hillclimbing attack.<newline />
+    In column 3 the attack which found the key is displayed. A "G" stands for genetic attack and a "D" stands for dictionary attack. A "H" stands for hill climbing attack.<newline />
     Double-clicking a row forwards the according plaintext and key to the outputs.
   </presentation>
   <presentation lang="de-DE">
@@ -110,7 +110,7 @@
     der Schlüssel selber (Spalte 4) und der zugehörige Klartext (Spalte 5) dargestellt. Der Wert der Kostenfunktion in Spalte 2 ist das logarithmierte
     arithmetische Mittel der n-gram Wahrscheinlichkeiten des Klartextes. Die Differenz dieser Werte zweier Schlüssels gibt die Spanne an, um die ein Schlüssel besser
     ist als der andere. In Spalte 3 wird der Angriff dargestellt, der den entsprechenden Schlüssel gefunden hat. "G" steht für den genetischen Angriff und "W"
-    symbolisiert den Wörterbuchangriff. Ein "H" steht für den Hillclimbing-Angriff.<newline />
+    symbolisiert den Wörterbuchangriff. Ein "H" steht für den Hill-climbing-Angriff.<newline />
     Durch einen Doppelklick auf eine Zeile wird der entsprechende Schlüssel und Klartext ausgewählt und zu den dazugehörigen Ausgängen weitergeleitet.
   </presentation>
   <references>

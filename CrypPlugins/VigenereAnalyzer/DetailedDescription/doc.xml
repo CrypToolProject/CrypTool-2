@@ -12,7 +12,7 @@
     It avoids the periodicity of the keyword by appending the plaintext to the keyword and using the resulting string as the new keyword.
     <newline /><newline />
 	The Vigenère Analyzer allows also to analyze Vigenère autokey, Beaufort, and Beaufort autokey ciphers.
-	To decipher a given encrypted text, the analyzer internally uses the hillclimbing algorithm.
+	To decipher a given encrypted text, the analyzer internally uses the hill-climbing algorithm.
   </introduction>
   <introduction lang="de-DE">
     Mit der Vigenère-Analyse können Texte analysiert werden, die mit der Vigenère-Chiffre verschlüsselt wurden.
@@ -24,19 +24,19 @@
     Es vermeidet die Periodizität des Schlüsselworts, indem es Klartext an das Schlüsselwort anhängt und somit die resultierende Zeichenfolge als neues Schlüsselwort verwendet. 
     <newline /><newline />
 	Die Vigenère-Analyse kann auch Vigenère-Selbstschlüssel-, Beaufort- und Beaufort-Selbstschlüssel-Chiffren analysieren.
-	Um einen verschlüsselten Text zu entschlüsseln, verwendet die Analyse intern den Bergsteige-Algorithmus (hillclimbing).
+	Um einen verschlüsselten Text zu entschlüsseln, verwendet die Analyse intern den Bergsteige-Algorithmus (hill climbing).
   </introduction>
   <usage lang="en">
     The Vigenère Analyzer allows to use one of the two modes: "Classic Vigenère" and "Vigenère Autokey".
     The lower and upper bound of the keylengths, which should be analyzed, can be configured.
-    The "Restarts" setting defines, how many times the hillclimbing algorithm should be restarted.
+    The "Restarts" setting defines, how many times the hill-climbing algorithm should be restarted.
     "Language" selects the language of the plaintext and the "Type of n-grams" the widths of n-grams used by the analyzer's cost function.
     Finally, the "Keystyle" defines, if the to-be-tested keys are randomly generated keys or natural language-based.
   </usage>
   <usage lang="de-DE">
     Die Vigenère-Analyse ermöglicht die Analyse in einem der beiden Modi: "Klassischer Vigenère" und "Vigenère-Selbstschlüssel-Verfahren".
     Die Unter- und Obergrenze der Schlüssellängen, die analysiert werden sollen, kann konfiguriert werden.
-    Die Einstellung "Neustarts" definiert, wie oft der Hillclimbing-Algorithmus neu gestartet werden soll.
+    Die Einstellung "Neustarts" definiert, wie oft der Hill-climbing-Algorithmus neu gestartet werden soll.
     "Sprache" wählt die Sprache des Klartextes und "Art der n-Gramme" die Breite der n-Gramme, die von der Kostenfunktion des Analysators verwendet werden.
     Der "Art des Schlüssels" definiert, ob die zu testenden Schlüssel zufällig generierte Schlüssel sind oder auf natürlicher Sprache basieren.
   </usage>

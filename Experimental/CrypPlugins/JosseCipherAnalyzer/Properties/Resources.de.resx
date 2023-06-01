@@ -172,7 +172,7 @@
     <value>Analyse-Modus</value>
   </data>
   <data name="ModeAnalyzerModeHillclimbing" xml:space="preserve">
-    <value>Hillclimbing</value>
+    <value>Hill climbing</value>
   </data>
   <data name="BaseAlphabet" xml:space="preserve">
     <value>ABCDEFGHIJKLMNOPQRSTUVXYZ</value>
