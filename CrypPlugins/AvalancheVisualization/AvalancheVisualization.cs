@@ -315,27 +315,31 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
                                 presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                                 {
-
                                     if (textChanged && presentation.canModifyOthers)
                                     {
-
-                                        string cipherB = presentation.BinaryAsString(textInput);
-
-                                        if (presentation.radioDecOthers.IsChecked == true)
+                                        bool validEntry = CheckByteArray(presentation.unchangedCipher, textInput);
+                                        if (validEntry)
                                         {
-                                            presentation.modifiedMsg.Text = presentation.DecimalAsString(textInput);
-                                        }
+                                            string cipherB = presentation.BinaryAsString(textInput);
+                                            if (presentation.radioDecOthers.IsChecked == true)
+                                            {
+                                                presentation.modifiedMsg.Text = presentation.DecimalAsString(textInput);
+                                            }
 
-                                        if (presentation.radioHexOthers.IsChecked == true)
+                                            if (presentation.radioHexOthers.IsChecked == true)
+                                            {
+                                                presentation.modifiedMsg.Text = presentation.HexaAsString(textInput);
+                                            }
+
+                                            presentation.TB2.Text = cipherB;
+                                            presentation.changedCipher = textInput;
+                                            presentation.Comparison();
+                                            OutputStream = string.Format("{0}{1}", GeneratedData(0), GeneratedData(1));
+                                        }
+                                        else
                                         {
-                                            presentation.modifiedMsg.Text = presentation.HexaAsString(textInput);
+                                            GuiLogMessage(string.Format(Resources.Warning, textInput.Length, presentation.unchangedCipher.Length), NotificationLevel.Warning);
                                         }
-
-                                        presentation.TB2.Text = cipherB;
-                                        presentation.changedCipher = textInput;
-                                        presentation.Comparison();
-                                        OutputStream = string.Format("{0}{1}", GeneratedData(0), GeneratedData(1));
-
                                     }
                                     else if (!textChanged && !presentation.canModifyOthers)
                                     {
