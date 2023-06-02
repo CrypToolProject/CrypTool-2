@@ -211,11 +211,17 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
             }
         }
 
-        private void ContextMenuClick(object sender, RoutedEventArgs e)
-        {
-            model.UpdateableView = this;
+        /// <summary>
+        /// Method is called when user clicks delete in the context menu of a connection line.
+        /// In case, the editor does not execute the workspace, the line is deleted
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ContextMenu_DeleteLineClick(object sender, RoutedEventArgs e)
+        {            
             if (model != null && !((WorkspaceManagerClass)model.WorkspaceModel.MyEditor).isExecuting())
             {
+                model.UpdateableView = this;
                 model.WorkspaceModel.ModifyModel(new DeleteConnectionModelOperation(model));
             }
         }
