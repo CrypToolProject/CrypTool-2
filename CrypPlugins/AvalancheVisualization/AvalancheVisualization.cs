@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2011 CrypTool 2 Team <ct2contact@CrypTool.org>
+   Copyright 2011-2023 CrypTool 2 Team <ct2contact@CrypTool.org>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -13,8 +13,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
-
 
 using AvalancheVisualization;
 using AvalancheVisualization.Properties;
@@ -33,21 +31,12 @@ using System.Windows.Threading;
 
 namespace CrypTool.Plugins.AvalancheVisualization
 {
-    // HOWTO: Change author name, email address, organization and URL.
     [Author("Camilo Echeverri", "caeche20@hotmail.com", "Universität Mannheim", "http://CrypTool2.vs.uni-due.de")]
-    // HOWTO: Change plugin caption (title to appear in CT2) and tooltip.
-    // You can (and should) provide a user documentation as XML file and an own icon.
     [PluginInfo("AvalancheVisualization.Properties.Resources", "PluginCaption", "AvalancheTooltip", "AvalancheVisualization/userdoc.xml", new[] { "AvalancheVisualization/Images/Avalanche.png" })]
-    // HOWTO: Change category to one that fits to your plugin. Multiple categories are allowed.
     [AutoAssumeFullEndProgress(false)]
     [ComponentCategory(ComponentCategory.ToolsMisc)]
     public class AvalancheVisualization : ICrypComponent
     {
-
-        // HOWTO: You need to adapt the settings class as well, see the corresponding file.
-
-
-
         #region Private Variables
 
         private readonly AvalancheVisualizationSettings settings = new AvalancheVisualizationSettings();
@@ -60,25 +49,18 @@ namespace CrypTool.Plugins.AvalancheVisualization
         private byte[] keyInput;
         private string msgA;
         private string msgB;
-
-
         private readonly AES aes = new AES();
         private readonly DES des = new DES();
         private bool textChanged = false;
-        private readonly AvalanchePresentation pres;
-
-
-        private readonly int count = 0;
-        private readonly bool isRunning;
+        private readonly AvalanchePresentation presentation;
         private byte[] initialDES;
         private byte[] current;
-        #endregion
 
-        //Constructor
+        #endregion
 
         public AvalancheVisualization()
         {
-            pres = new AvalanchePresentation(this);
+            presentation = new AvalanchePresentation(this);
         }
 
         #region Data Properties
@@ -105,7 +87,6 @@ namespace CrypTool.Plugins.AvalancheVisualization
             }
         }
 
-
         [PropertyInfo(Direction.OutputData, "Output", "OutputTooltip", false)]
         public string OutputStream
         {
@@ -117,332 +98,208 @@ namespace CrypTool.Plugins.AvalancheVisualization
             }
         }
 
-
         #endregion
 
         #region IPlugin Members
 
-        /// <summary>
-        /// Provide plugin-related parameters (per instance) or return null.
-        /// </summary>
         public ISettings Settings => settings;
 
-        /// <summary>
-        /// Provide custom presentation to visualize the execution or return null.
-        /// </summary>
-        public UserControl Presentation => pres;
+        public UserControl Presentation => presentation;
 
-
-        /// <summary>
-        /// Called once when workflow execution starts.
-        /// </summary>
         public void PreExecution()
         {
-
-
-
-        }
-
-
-
-
-        public static string bytesToHexString(byte[] byteArr)
-        {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            foreach (byte b in byteArr)
-            {
-                sb.Append(b.ToString("X2"));
-            }
-            return sb.ToString();
-        }
-        /// <summary>
-        /// Called every time this plugin is run in the workflow execution.
-        /// </summary>
-        /// 
-
-
+        }      
+        
         public void Execute()
         {
             ProgressChanged(0, 1);
 
-
             textInput = new byte[Text.Length];
-            running = true;
-            pres.contrast = settings.Contrast;
+            presentation.contrast = settings.Contrast;
 
             try
             {
                 switch (settings.SelectedCategory)
                 {
                     case AvalancheVisualizationSettings.Category.Prepared:
-
-
                         keyInput = new byte[Key.Length];
 
                         using (CStreamReader reader = Text.CreateReader())
                         {
                             reader.Read(textInput);
                         }
-
                         using (CStreamReader reader = Key.CreateReader())
                         {
                             reader.Read(keyInput);
                         }
-
-
-
                         if (settings.PrepSelection == 0)
                         {
-
-
-
-                            pres.mode = 0;
-
-                            bool valid = validSize();
-
+                            presentation.mode = 0;
+                            bool valid = ValidSize();
                             string inputMessage = Encoding.Default.GetString(textInput);
-
-
 
                             if (valid)
                             {
-
-
-                                if (textChanged && pres.canModify)
+                                if (textChanged && presentation.canModify)
                                 {
+                                    presentation.newText = null;
+                                    presentation.newKey = null;
+                                    presentation.newChanges = false;
 
-                                    pres.newText = null;
-                                    pres.newKey = null;
-                                    pres.newChanges = false;
-
-                                    pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                                    presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                                     {
-                                        pres.ChangesMadeButton.IsEnabled = true;
-                                        pres.ChangesMadeButton.Opacity = 1;
+                                        presentation.ChangesMadeButton.IsEnabled = true;
+                                        presentation.ChangesMadeButton.Opacity = 1;
 
                                     }, null);
 
                                     aes.text = textInput;
                                     aes.key = keyInput;
-
 
                                     byte[] temporary = aes.checkTextLength();
                                     byte[] tmpKey = aes.checkKeysize();
-                                    pres.key = tmpKey;
-                                    pres.textB = temporary;
-                                    pres.canStop = true;
+                                    presentation.key = tmpKey;
+                                    presentation.textB = temporary;
+                                    presentation.canStop = true;
                                     aes.executeAES(false);
-                                    pres.encryptionProgress(-1);
+                                    presentation.EcryptionProgress(-1);
 
-
-                                    pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                                   {
-                                       pres.setAndLoadButtons();
-                                       pres.loadChangedMsg(temporary, true);
-
-                                       pres.loadChangedKey(tmpKey);
-
-                                       pres.coloringText();
-                                       pres.coloringKey();
-                                       pres.updateDataColor();
-                                   }, null);
-
-                                    pres.statesB = aes.statesB;
-
-                                    pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                                    presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                                     {
-                                        //  pres.setAndLoadButtons();
+                                        presentation.SetAndLoadButtons();
+                                        presentation.LoadChangedMsg(temporary, true);
+                                        presentation.LoadChangedKey(tmpKey);
+                                        presentation.ColoringText();
+                                        presentation.ColoringKey();
+                                        presentation.UpdateDataColor();
                                     }, null);
 
-
-
-                                    OutputStream = string.Format("{0}{1}{2}", generatedData(0), generatedData(1), generatedData(2));
-
-
+                                    presentation.statesB = aes.statesB;
+                                    OutputStream = string.Format("{0}{1}{2}", GeneratedData(0), GeneratedData(1), GeneratedData(2));
                                 }
-                                else if (!textChanged && !pres.canModify)
+                                else if (!textChanged && !presentation.canModify)
                                 {
-
-
                                     textChanged = true;
-
                                     originalText = textInput;
-
                                     aes.text = textInput;
                                     aes.key = keyInput;
+                                    presentation.keysize = settings.KeyLength;
 
-                                    pres.keysize = settings.KeyLength;
-
-
-                                    pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                                   {
-
-
-                                       if (pres.skip.IsChecked == true)
-                                       {
-                                           pres.comparisonPane();
-                                       }
-                                       else
-                                       {
-                                           pres.instructions();
-                                       }
-                                   }, null);
-
-
+                                    presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                                    {
+                                        if (presentation.skip.IsChecked == true)
+                                        {
+                                            presentation.ComparisonPane();
+                                        }
+                                        else
+                                        {
+                                            presentation.Instructions();
+                                        }
+                                    }, null);
 
                                     AES.keysize = settings.KeyLength;
                                     byte[] tmpKey = aes.checkKeysize();
                                     originalKey = tmpKey;
-                                    pres.key = tmpKey;
-                                    pres.keyA = tmpKey;
+                                    presentation.key = tmpKey;
+                                    presentation.keyA = tmpKey;
                                     byte[] temporary = aes.checkTextLength();
-                                    pres.textA = temporary;
+                                    presentation.textA = temporary;
                                     aes.executeAES(true);
-                                    pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                                   {
+                                    presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                                    {
+                                       presentation.LoadInitialState(temporary, tmpKey);
+                                    }, null);
 
-                                       pres.loadInitialState(temporary, tmpKey);
+                                    presentation.states = aes.states;
+                                    presentation.keyList = aes.keyList;
 
-
-                                   }, null);
-
-                                    pres.states = aes.states;
-                                    pres.keyList = aes.keyList;
-
-                                }
-
-
-
-                                //  if (!running)
-                                //    return;
-
+                                };
                             }
                         }
-                        // if settings==1
                         else
                         {
+                            presentation.mode = 1;
 
-
-                            pres.mode = 1;
-
-                            bool valid = validSize();
+                            bool valid = ValidSize();
 
                             if (valid)
                             {
 
-                                if (textChanged && pres.canModifyDES)
+                                if (textChanged && presentation.canModifyDES)
                                 {
+                                    presentation.newText = null;
+                                    presentation.newKey = null;
+                                    presentation.newChanges = false;
 
-
-                                    pres.newText = null;
-                                    pres.newKey = null;
-                                    pres.newChanges = false;
-
-                                    pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                                    presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                                     {
-                                        pres.ChangesMadeButton.IsEnabled = true;
-                                        pres.ChangesMadeButton.Opacity = 1;
+                                        presentation.ChangesMadeButton.IsEnabled = true;
+                                        presentation.ChangesMadeButton.Opacity = 1;
 
                                     }, null);
 
                                     des.inputKey = keyInput;
                                     des.inputMessage = textInput;
-
                                     des.textChanged = true;
                                     des.DESProcess();
-                                    pres.key = keyInput;
-                                    pres.textB = textInput;
-                                    pres.canStop = true;
-                                    pres.encryptionProgress(-1);
+                                    presentation.key = keyInput;
+                                    presentation.textB = textInput;
+                                    presentation.canStop = true;
+                                    presentation.EcryptionProgress(-1);
 
-
-                                    pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                                   {
-
-                                       pres.setAndLoadButtons();
-                                       pres.loadChangedMsg(textInput, true);
-
-                                       pres.loadChangedKey(keyInput);
-
-                                       pres.coloringText();
-                                       pres.coloringKey();
-
-                                       pres.updateDataColor();
-                                   }, null);
-
-
-                                    pres.lrDataB = des.lrDataB;
-                                    current = des.outputCiphertext;
-
-                                    pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                                    presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                                     {
-                                        // pres.setAndLoadButtons();
+
+                                        presentation.SetAndLoadButtons();
+                                        presentation.LoadChangedMsg(textInput, true);
+                                        presentation.LoadChangedKey(keyInput);
+                                        presentation.ColoringText();
+                                        presentation.ColoringKey();
+                                        presentation.UpdateDataColor();
                                     }, null);
 
-
-
-                                    OutputStream = string.Format("{0}{1}{2}", generatedData(0), generatedData(1), generatedData(2));
+                                    presentation.lrDataB = des.lrDataB;
+                                    current = des.outputCiphertext;                                   
+                                    OutputStream = string.Format("{0}{1}{2}", GeneratedData(0), GeneratedData(1), GeneratedData(2));
                                 }
-
-                                else if (!textChanged && !pres.canModifyDES)
+                                else if (!textChanged && !presentation.canModifyDES)
                                 {
-
-
                                     des.inputKey = keyInput;
                                     des.inputMessage = textInput;
-
-
                                     byte[] tmpKey = keyInput;
                                     byte[] tmpText = textInput;
                                     originalText = tmpText;
                                     originalKey = tmpKey;
-
                                     des.textChanged = false;
-
                                     des.DESProcess();
-
-
-                                    pres.keyA = tmpKey;
+                                    presentation.keyA = tmpKey;
                                     textChanged = true;
 
-                                    pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                                   {
+                                    presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                                    {
 
-                                       if (pres.skip.IsChecked == true)
+                                       if (presentation.skip.IsChecked == true)
                                        {
-                                           pres.comparisonPane();
+                                           presentation.ComparisonPane();
                                        }
                                        else
                                        {
-                                           pres.instructions();
+                                           presentation.Instructions();
                                        }
+                                       presentation.LoadInitialState(textInput, keyInput);
 
-                                       pres.loadInitialState(textInput, keyInput);
+                                    }, null);
 
-                                   }, null);
-
-                                    pres.textA = textInput;
-                                    pres.lrData = des.lrData;
+                                    presentation.textA = textInput;
+                                    presentation.lrData = des.lrData;
                                     initialDES = des.outputCiphertext;
-
                                 }
-
-
-
-                                //if (!running)
                                 return;
                             }
                         }
-
-
-
                         break;
 
-
-
                     case AvalancheVisualizationSettings.Category.Unprepared:
-
-
 
                         using (CStreamReader reader = Text.CreateReader())
                         {
@@ -454,59 +311,50 @@ namespace CrypTool.Plugins.AvalancheVisualization
                         {
                             //Hash functions
                             case 0:
+                                presentation.mode = 2;
 
-
-                                pres.mode = 2;
-
-                                pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                                presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                                 {
 
-                                    if (textChanged && pres.canModifyOthers)
+                                    if (textChanged && presentation.canModifyOthers)
                                     {
 
-                                        string cipherB = pres.binaryAsString(textInput);
+                                        string cipherB = presentation.BinaryAsString(textInput);
 
-                                        if (pres.radioDecOthers.IsChecked == true)
+                                        if (presentation.radioDecOthers.IsChecked == true)
                                         {
-                                            pres.modifiedMsg.Text = pres.decimalAsString(textInput);
+                                            presentation.modifiedMsg.Text = presentation.DecimalAsString(textInput);
                                         }
 
-                                        if (pres.radioHexOthers.IsChecked == true)
+                                        if (presentation.radioHexOthers.IsChecked == true)
                                         {
-                                            pres.modifiedMsg.Text = pres.hexaAsString(textInput);
+                                            presentation.modifiedMsg.Text = presentation.HexaAsString(textInput);
                                         }
 
-                                        pres.TB2.Text = cipherB;
-                                        pres.changedCipher = textInput;
-
-                                        pres.comparison();
-
-
-                                        OutputStream = string.Format("{0}{1}", generatedData(0), generatedData(1));
+                                        presentation.TB2.Text = cipherB;
+                                        presentation.changedCipher = textInput;
+                                        presentation.Comparison();
+                                        OutputStream = string.Format("{0}{1}", GeneratedData(0), GeneratedData(1));
 
                                     }
-
-                                    else if (!textChanged && !pres.canModifyOthers)
+                                    else if (!textChanged && !presentation.canModifyOthers)
                                     {
-                                        if (pres.skip.IsChecked == true)
+                                        if (presentation.skip.IsChecked == true)
                                         {
-                                            pres.comparisonPane();
+                                            presentation.ComparisonPane();
                                         }
                                         else
                                         {
-                                            pres.instructions();
+                                            presentation.Instructions();
                                         }
 
                                         originalText = textInput;
-                                        string cipherA = pres.binaryAsString(textInput);
-                                        pres.originalMsg.Text = pres.hexaAsString(textInput);
-                                        pres.TB1.Text = cipherA;
-                                        pres.unchangedCipher = textInput;
-                                        pres.radioHexOthers.IsChecked = true;
-
+                                        string cipherA = presentation.BinaryAsString(textInput);
+                                        presentation.originalMsg.Text = presentation.HexaAsString(textInput);
+                                        presentation.TB1.Text = cipherA;
+                                        presentation.unchangedCipher = textInput;
+                                        presentation.radioHexOthers.IsChecked = true;
                                     }
-
-
                                 }, null);
 
                                 textChanged = true;
@@ -515,77 +363,62 @@ namespace CrypTool.Plugins.AvalancheVisualization
                             //classic
                             case 1:
 
-                                pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                                presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                                 {
-
-                                    pres.mode = 3;
-
-
+                                    presentation.mode = 3;
                                     string otherText = Encoding.Default.GetString(textInput);
 
-
-                                    if (textChanged && pres.canModifyOthers)
+                                    if (textChanged && presentation.canModifyOthers)
                                     {
                                         msgB = otherText;
-                                        bool validEntry = checkSize(msgA, msgB);
+                                        bool validEntry = CheckSize(msgA, msgB);
 
                                         if (validEntry)
                                         {
-
-                                            string cipherB = pres.binaryAsString(textInput);
-
-                                            if (pres.radioText.IsChecked == true)
+                                            string cipherB = presentation.BinaryAsString(textInput);
+                                            if (presentation.radioText.IsChecked == true)
                                             {
-                                                pres.modifiedMsg.Text = otherText;
+                                                presentation.modifiedMsg.Text = otherText;
+                                            }
+                                            if (presentation.radioDecOthers.IsChecked == true)
+                                            {
+                                                presentation.modifiedMsg.Text = presentation.DecimalAsString(textInput);
+                                            }
+                                            if (presentation.radioHexOthers.IsChecked == true)
+                                            {
+                                                presentation.modifiedMsg.Text = presentation.HexaAsString(textInput);
                                             }
 
-                                            if (pres.radioDecOthers.IsChecked == true)
-                                            {
-                                                pres.modifiedMsg.Text = pres.decimalAsString(textInput);
-                                            }
+                                            presentation.TB2.Text = cipherB;
+                                            presentation.changedCipher = textInput;
 
-                                            if (pres.radioHexOthers.IsChecked == true)
-                                            {
-                                                pres.modifiedMsg.Text = pres.hexaAsString(textInput);
-                                            }
+                                            presentation.Comparison();
 
-                                            pres.TB2.Text = cipherB;
-                                            pres.changedCipher = textInput;
-
-                                            pres.comparison();
-
-
-                                            OutputStream = string.Format("{0}{1}", generatedData(0), generatedData(1));
-
-
+                                            OutputStream = string.Format("{0}{1}", GeneratedData(0), GeneratedData(1));
                                         }
                                         else
                                         {
-                                            GuiLogMessage(string.Format(Resources.Warning, textInput.Length, pres.unchangedCipher.Length), NotificationLevel.Warning);
+                                            GuiLogMessage(string.Format(Resources.Warning, textInput.Length, presentation.unchangedCipher.Length), NotificationLevel.Warning);
                                         }
                                     }
-                                    else if (!textChanged && !pres.canModifyOthers)
+                                    else if (!textChanged && !presentation.canModifyOthers)
                                     {
-                                        if (pres.skip.IsChecked == true)
+                                        if (presentation.skip.IsChecked == true)
                                         {
-                                            pres.comparisonPane();
+                                            presentation.ComparisonPane();
                                         }
                                         else
                                         {
-                                            pres.instructions();
+                                            presentation.Instructions();
                                         }
 
-                                        string cipherA = pres.binaryAsString(textInput);
-                                        pres.originalMsg.Text = otherText;
+                                        string cipherA = presentation.BinaryAsString(textInput);
+                                        presentation.originalMsg.Text = otherText;
                                         msgA = otherText;
-                                        pres.TB1.Text = cipherA;
-                                        pres.unchangedCipher = textInput;
-                                        pres.radioText.IsChecked = true;
-
+                                        presentation.TB1.Text = cipherA;
+                                        presentation.unchangedCipher = textInput;
+                                        presentation.radioText.IsChecked = true;
                                     }
-
-
-
                                 }, null);
 
                                 textChanged = true;
@@ -593,78 +426,59 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
                             //modern
                             case 2:
-
-                                pres.mode = 4;
-
-                                pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                               {
-
-
-                                   if (textChanged && pres.canModifyOthers)
+                                presentation.mode = 4;
+                                presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                                {
+                                   if (textChanged && presentation.canModifyOthers)
                                    {
-
-                                       bool validEntry = checkByteArray(pres.unchangedCipher, textInput);
-
-
+                                       bool validEntry = CheckByteArray(presentation.unchangedCipher, textInput);
                                        if (validEntry)
                                        {
-                                           string cipherB = pres.binaryAsString(textInput);
-
-                                           if (pres.radioDecOthers.IsChecked == true)
+                                           string cipherB = presentation.BinaryAsString(textInput);
+                                           if (presentation.radioDecOthers.IsChecked == true)
                                            {
-                                               pres.modifiedMsg.Text = pres.decimalAsString(textInput);
+                                               presentation.modifiedMsg.Text = presentation.DecimalAsString(textInput);
                                            }
-
-                                           if (pres.radioHexOthers.IsChecked == true)
+                                           if (presentation.radioHexOthers.IsChecked == true)
                                            {
-                                               pres.modifiedMsg.Text = pres.hexaAsString(textInput);
+                                               presentation.modifiedMsg.Text = presentation.HexaAsString(textInput);
                                            }
-
-                                           pres.TB2.Text = cipherB;
-                                           pres.changedCipher = textInput;
-
-                                           pres.comparison();
-
-
-                                           OutputStream = string.Format("{0}{1}", generatedData(0), generatedData(1));
-
+                                           presentation.TB2.Text = cipherB;
+                                           presentation.changedCipher = textInput;
+                                           presentation.Comparison();
+                                           OutputStream = string.Format("{0}{1}", GeneratedData(0), GeneratedData(1));
                                        }
                                        else
                                        {
-                                           GuiLogMessage(string.Format(Resources.Warning, textInput.Length, pres.unchangedCipher.Length), NotificationLevel.Warning);
+                                           GuiLogMessage(string.Format(Resources.Warning, textInput.Length, presentation.unchangedCipher.Length), NotificationLevel.Warning);
                                        }
                                    }
-                                   else if (!textChanged && !pres.canModifyOthers)
+                                   else if (!textChanged && !presentation.canModifyOthers)
                                    {
-                                       if (pres.skip.IsChecked == true)
+                                       if (presentation.skip.IsChecked == true)
                                        {
-                                           pres.comparisonPane();
+                                           presentation.ComparisonPane();
                                        }
                                        else
                                        {
-                                           pres.instructions();
+                                           presentation.Instructions();
                                        }
 
                                        originalText = textInput;
-                                       string cipherA = pres.binaryAsString(textInput);
-                                       pres.originalMsg.Text = pres.hexaAsString(textInput);
-                                       pres.TB1.Text = cipherA;
-                                       pres.unchangedCipher = textInput;
-                                       pres.radioHexOthers.IsChecked = true;
+                                       string cipherA = presentation.BinaryAsString(textInput);
+                                       presentation.originalMsg.Text = presentation.HexaAsString(textInput);
+                                       presentation.TB1.Text = cipherA;
+                                       presentation.unchangedCipher = textInput;
+                                       presentation.radioHexOthers.IsChecked = true;
 
                                    }
-
-
-                               }, null);
-
+                                }, null);
                                 textChanged = true;
-
                                 break;
                             default:
                                 break;
 
                         }
-
                         break;
 
                     default:
@@ -677,11 +491,8 @@ namespace CrypTool.Plugins.AvalancheVisualization
             }
         }
 
-        private bool running;
-        private readonly bool stop = true;
         public void PostExecution()
         {
-            // running = false;
         }
 
         /// <summary>
@@ -691,15 +502,12 @@ namespace CrypTool.Plugins.AvalancheVisualization
         public void Stop()
         {
             textChanged = false;
-            running = false;
-            pres.progress = 0;
+            presentation.progress = 0;
             ProgressChanged(0, 1);
-
-
-            pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
 
-                pres.removeElements();
+                presentation.RemoveElements();
 
             }, null);
 
@@ -710,7 +518,6 @@ namespace CrypTool.Plugins.AvalancheVisualization
         /// </summary>
         public void Initialize()
         {
-            //aes.pres = this.pres;
 
         }
 
@@ -725,12 +532,9 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
         #region Methods
 
-
-
-        public string[] sequence(Tuple<string, string> strTuple)
+        public string[] Sequence(Tuple<string, string> strTuple)
         {
             string[] diffBits = new string[strTuple.Item1.Length];
-
 
             for (int i = 0; i < strTuple.Item1.Length; i++)
             {
@@ -749,28 +553,24 @@ namespace CrypTool.Plugins.AvalancheVisualization
             return differentBits;
         }
 
-        public Tuple<string, string> tupleDES(int roundDES)
+        public Tuple<string, string> TupleDES(int roundDES)
         {
-            string encryptionStateA = pres.lrData[roundDES, 0] + pres.lrData[roundDES, 1];
-            string encryptionStateB = pres.lrDataB[roundDES, 0] + pres.lrDataB[roundDES, 1];
+            string encryptionStateA = presentation.lrData[roundDES, 0] + presentation.lrData[roundDES, 1];
+            string encryptionStateB = presentation.lrDataB[roundDES, 0] + presentation.lrDataB[roundDES, 1];
 
             Tuple<string, string> tuple = new Tuple<string, string>(encryptionStateA, encryptionStateB);
 
             return tuple;
         }
 
-        public string generatedData(int pos)
+        public string GeneratedData(int position)
         {
             List<byte[]> bl = new List<byte[]>();
             List<string> sl = new List<string>();
 
             switch (settings.SelectedCategory)
-
             {
                 case AvalancheVisualizationSettings.Category.Prepared:
-
-
-
                     if (settings.PrepSelection == 0)
                     {
                         string initialtxt = string.Format(Resources.OutputInitialAESMsg, Environment.NewLine);
@@ -784,26 +584,23 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
 
                         string initial = string.Format("{0}{1}", inputMessage, Environment.NewLine);
-                        string initialk = string.Format("{0}{1}{2}", pres.hexaAsString(originalKey), Environment.NewLine, Environment.NewLine);
+                        string initialk = string.Format("{0}{1}{2}", presentation.HexaAsString(originalKey), Environment.NewLine, Environment.NewLine);
                         string modified = "";
                         string modifiedk = "";
 
-                        if (pres.newText != null && pres.newKey != null)
-
+                        if (presentation.newText != null && presentation.newKey != null)
                         {
-                            string inputMessageB = Encoding.ASCII.GetString(pres.newText);
+                            string inputMessageB = Encoding.ASCII.GetString(presentation.newText);
                             modified = string.Format("{0}{1}", inputMessageB, Environment.NewLine);
-                            modifiedk = string.Format("{0}{1}{2}", pres.hexaAsString(pres.newKey), Environment.NewLine, Environment.NewLine);
+                            modifiedk = string.Format("{0}{1}{2}", presentation.HexaAsString(presentation.newKey), Environment.NewLine, Environment.NewLine);
 
 
                         }
-
                         else
-
                         {
                             string inputMessageB = Encoding.ASCII.GetString(textInput);
                             modified = string.Format("{0}{1}", inputMessageB, Environment.NewLine);
-                            modifiedk = string.Format("{0}{1}{2}", pres.hexaAsString(keyInput), Environment.NewLine, Environment.NewLine);
+                            modifiedk = string.Format("{0}{1}{2}", presentation.HexaAsString(keyInput), Environment.NewLine, Environment.NewLine);
 
                         }
 
@@ -812,10 +609,8 @@ namespace CrypTool.Plugins.AvalancheVisualization
                         if (initial.Equals(modified))
                         {
                             modifiedtxt = string.Format(Resources.OutputNotModAESMsg, Environment.NewLine);
-
                             inputstr = string.Format("{0}{1}{2}{3}{4}{5}{6}{7}", initialtxt, initial, initialkey,
                                 initialk, modifiedtxt, Environment.NewLine, modifiedkey, modifiedk);
-
                         }
 
                         if (initialk.Equals(modifiedk))
@@ -824,7 +619,6 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
                             inputstr = string.Format("{0}{1}{2}{3}{4}{5}{6}{7}{8}", initialtxt, initial, initialkey,
                                 initialk, modifiedtxt, modified, modifiedkey, Environment.NewLine, Environment.NewLine);
-
                         }
 
                         if (initial.Equals(modified) && initialk.Equals(modifiedk))
@@ -834,11 +628,9 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
                             inputstr = string.Format("{0}{1}{2}{3}{4}{5}{6}", initialtxt, initial, initialkey,
                                initialk, modifiedtxt, modifiedkey, Environment.NewLine);
-
                         }
 
                         sl.Add(inputstr);
-
 
                         List<object> information = new List<object>();
                         List<byte> byteList = new List<byte>();
@@ -868,35 +660,34 @@ namespace CrypTool.Plugins.AvalancheVisualization
                         for (int aesRound = 0; aesRound <= number; aesRound += 4)
                         {
 
-                            strings = pres.binaryStrings(pres.states[aesRound], pres.statesB[aesRound]);
-                            int nrDiffBits = pres.nrOfBitsFlipped(pres.states[aesRound], pres.statesB[aesRound]);
-                            double avalanche = pres.calcAvalancheEffect(nrDiffBits, strings);
-                            string[] differentBits = sequence(strings);
-                            int lengthIdentSequence = pres.longestIdenticalSequence(differentBits);
-                            int lengthFlippedSequence = pres.longestFlippedSequence(differentBits);
+                            strings = presentation.BinaryStrings(presentation.states[aesRound], presentation.statesB[aesRound]);
+                            int nrDiffBits = presentation.NoOfBitsFlipped(presentation.states[aesRound], presentation.statesB[aesRound]);
+                            double avalanche = presentation.CalcAvalancheEffect(nrDiffBits, strings);
+                            string[] differentBits = Sequence(strings);
+                            int lengthIdentSequence = presentation.LongestIdenticalSequence(differentBits);
+                            int lengthFlippedSequence = presentation.LongestFlippedSequence(differentBits);
 
                             information.Add(nrDiffBits);
                             information.Add(avalanche);
                             information.Add(lengthIdentSequence);
-                            information.Add(pres.sequencePosition);
+                            information.Add(presentation.sequencePosition);
                             information.Add(lengthFlippedSequence);
-                            information.Add(pres.flippedSeqPosition);
+                            information.Add(presentation.flippedSeqPosition);
                         }
 
-
-                        strings = pres.binaryStrings(pres.states[number + 3], pres.statesB[number + 3]);
-                        int nrDiffBits2 = pres.nrOfBitsFlipped(pres.states[number + 3], pres.statesB[number + 3]);
-                        double avalanche2 = pres.calcAvalancheEffect(nrDiffBits2, strings);
-                        string[] differentBits2 = sequence(strings);
-                        int lengthIdentSequence2 = pres.longestIdenticalSequence(differentBits2);
-                        int lengthFlippedSequence2 = pres.longestFlippedSequence(differentBits2);
+                        strings = presentation.BinaryStrings(presentation.states[number + 3], presentation.statesB[number + 3]);
+                        int nrDiffBits2 = presentation.NoOfBitsFlipped(presentation.states[number + 3], presentation.statesB[number + 3]);
+                        double avalanche2 = presentation.CalcAvalancheEffect(nrDiffBits2, strings);
+                        string[] differentBits2 = Sequence(strings);
+                        int lengthIdentSequence2 = presentation.LongestIdenticalSequence(differentBits2);
+                        int lengthFlippedSequence2 = presentation.LongestFlippedSequence(differentBits2);
 
                         information.Add(nrDiffBits2);
                         information.Add(avalanche2);
                         information.Add(lengthIdentSequence2);
-                        information.Add(pres.sequencePosition);
+                        information.Add(presentation.sequencePosition);
                         information.Add(lengthFlippedSequence2);
-                        information.Add(pres.flippedSeqPosition);
+                        information.Add(presentation.flippedSeqPosition);
 
                         object[] data = information.ToArray();
 
@@ -906,24 +697,15 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
                         for (int round = 0; round < rounds; round++)
                         {
-
                             sb.AppendFormat(Resources.AfterRound, round, Environment.NewLine);
-
-                            sb.AppendFormat(Resources.OutputStats1, data[i].ToString(), data[i + 1].ToString(), Environment.NewLine);
-
+                            sb.AppendFormat(Resources.OutputStats1, data[i].ToString(), data[i+ 1].ToString(), Environment.NewLine);
                             sb.AppendFormat(Resources.OutputStats2, data[i + 2].ToString(), data[i + 3].ToString(), Environment.NewLine);
-
                             sb.AppendFormat(Resources.OutputStats3, data[i + 4].ToString(), data[i + 5].ToString(), Environment.NewLine);
-
                             sb.AppendFormat("{0}", Environment.NewLine);
-
                             i += 6;
                         }
 
-
-
                         string newString = sb.ToString();
-
 
                         sl.Add(newString);
 
@@ -932,310 +714,236 @@ namespace CrypTool.Plugins.AvalancheVisualization
                         string finalAESInitial = string.Format(Resources.AESDerivedFromInit, Environment.NewLine, Environment.NewLine);
                         string finalAESModified = string.Format(Resources.AESDerivedFromMod, Environment.NewLine);
 
-                        finalInitial = string.Format("{0}{1}", pres.hexaAsString(aes.states[number + 3]), Environment.NewLine);
+                        finalInitial = string.Format("{0}{1}", presentation.HexaAsString(aes.states[number + 3]), Environment.NewLine);
 
-                        if (pres.newKey != null)
+                        if (presentation.newKey != null)
                         {
-                            finalModified = string.Format("{0}{1}", pres.hexaAsString(pres.aesDiffusion.statesB[number + 3]), Environment.NewLine);
+                            finalModified = string.Format("{0}{1}", presentation.HexaAsString(presentation.aesDiffusion.statesB[number + 3]), Environment.NewLine);
                         }
                         else
                         {
-                            finalModified = string.Format("{0}{1}", pres.hexaAsString(pres.statesB[number + 3]), Environment.NewLine);
+                            finalModified = string.Format("{0}{1}", presentation.HexaAsString(presentation.statesB[number + 3]), Environment.NewLine);
                         }
 
                         string finalstrAES = string.Format("{0}{1}{2}{3}", finalAESInitial, finalInitial, finalAESModified, finalModified);
 
                         sl.Add(finalstrAES);
                     }
-
                     else
                     {
                         string initialtxt = string.Format(Resources.OutputInitialDESMsg, Environment.NewLine);
                         string modifiedtxt = string.Format(Resources.OutputModifiedDESMsg, Environment.NewLine);
                         string initialkey = string.Format(Resources.OutputInitialDESKey, Environment.NewLine);
                         string modifiedkey = string.Format(Resources.OutputModifiedDESKey, Environment.NewLine);
-
                         string inputMessage = Encoding.ASCII.GetString(originalText);
-
-
-
                         string initial = string.Format("{0}{1}", inputMessage, Environment.NewLine);
-                        string initialk = string.Format("{0}{1}{2}", pres.hexaAsString(originalKey), Environment.NewLine, Environment.NewLine);
+                        string initialk = string.Format("{0}{1}{2}", presentation.HexaAsString(originalKey), Environment.NewLine, Environment.NewLine);
                         string modified = "";
                         string modifiedk = "";
 
-                        if (pres.newText != null && pres.newKey != null)
-
+                        if (presentation.newText != null && presentation.newKey != null)
                         {
-                            string inputMessageB = Encoding.ASCII.GetString(pres.newText);
+                            string inputMessageB = Encoding.ASCII.GetString(presentation.newText);
                             modified = string.Format("{0}{1}", inputMessageB, Environment.NewLine);
-                            modifiedk = string.Format("{0}{1}{2}", pres.hexaAsString(pres.newKey), Environment.NewLine, Environment.NewLine);
-
-
+                            modifiedk = string.Format("{0}{1}{2}", presentation.HexaAsString(presentation.newKey), Environment.NewLine, Environment.NewLine);
                         }
-
                         else
-
                         {
                             string inputMessageB = Encoding.ASCII.GetString(textInput);
                             modified = string.Format("{0}{1}", inputMessageB, Environment.NewLine);
-                            modifiedk = string.Format("{0}{1}{2}", pres.hexaAsString(keyInput), Environment.NewLine, Environment.NewLine);
-
+                            modifiedk = string.Format("{0}{1}{2}", presentation.HexaAsString(keyInput), Environment.NewLine, Environment.NewLine);
                         }
 
-
-
                         string inputstr = string.Format("{0}{1}{2}{3}{4}{5}{6}{7}", initialtxt, initial, initialkey, initialk, modifiedtxt, modified, modifiedkey, modifiedk);
-
 
                         if (initial.Equals(modified))
                         {
                             modifiedtxt = string.Format(Resources.OutputNotModDESMsg, Environment.NewLine);
-
                             inputstr = string.Format("{0}{1}{2}{3}{4}{5}{6}{7}", initialtxt, initial, initialkey,
                                 initialk, modifiedtxt, Environment.NewLine, modifiedkey, modifiedk);
-
                         }
 
                         if (initialk.Equals(modifiedk))
                         {
                             modifiedkey = string.Format(Resources.OutputNotModDESKey, Environment.NewLine);
-
                             inputstr = string.Format("{0}{1}{2}{3}{4}{5}{6}{7}{8}", initialtxt, initial, initialkey,
                                 initialk, modifiedtxt, modified, modifiedkey, Environment.NewLine, Environment.NewLine);
-
                         }
 
                         if (initial.Equals(modified) && initialk.Equals(modifiedk))
                         {
                             modifiedtxt = string.Format("{0}{1}", Resources.OutputNotModDESMsg, Environment.NewLine);
                             modifiedkey = string.Format("{0}{1}", Resources.OutputNotModDESKey, Environment.NewLine);
-
                             inputstr = string.Format("{0}{1}{2}{3}{4}{5}{6}", initialtxt, initial, initialkey,
                                initialk, modifiedtxt, modifiedkey, Environment.NewLine);
-
                         }
 
                         sl.Add(inputstr);
-
 
                         List<object> information = new List<object>();
                         List<byte> byteList = new List<byte>();
                         byte[] dataArray = new byte[120];
                         Tuple<string, string> strings;
 
-
                         for (int desRound = 0; desRound < 17; desRound++)
                         {
-                            strings = tupleDES(desRound);
-                            pres.toStringArray(desRound);
-                            int nrDiffBits = pres.nrOfBitsFlipped(pres.seqA, pres.seqB);
-                            double avalanche = pres.calcAvalancheEffect(nrDiffBits, strings);
-                            string[] differentBits = sequence(strings);
-                            int lengthIdentSequence = pres.longestIdenticalSequence(differentBits);
-                            int lengthFlippedSequence = pres.longestFlippedSequence(differentBits);
-
+                            strings = TupleDES(desRound);
+                            presentation.ToStringArray(desRound);
+                            int nrDiffBits = presentation.NoOfBitsFlipped(presentation.seqA, presentation.seqB);
+                            double avalanche = presentation.CalcAvalancheEffect(nrDiffBits, strings);
+                            string[] differentBits = Sequence(strings);
+                            int lengthIdentSequence = presentation.LongestIdenticalSequence(differentBits);
+                            int lengthFlippedSequence = presentation.LongestFlippedSequence(differentBits);
                             information.Add(nrDiffBits);
                             information.Add(avalanche);
                             information.Add(lengthIdentSequence);
-                            information.Add(pres.sequencePosition);
+                            information.Add(presentation.sequencePosition);
                             information.Add(lengthFlippedSequence);
-                            information.Add(pres.flippedSeqPosition);
+                            information.Add(presentation.flippedSeqPosition);
                         }
 
                         object[] dat = information.ToArray();
-
                         StringBuilder sbuilder = new StringBuilder();
-
                         int j = 0;
 
                         for (int round = 0; round < 17; round++)
                         {
-
                             sbuilder.AppendFormat(Resources.AfterRound, round, Environment.NewLine);
-
                             sbuilder.AppendFormat(Resources.OutputStats1, dat[j].ToString(), dat[j + 1].ToString(), Environment.NewLine);
-
                             sbuilder.AppendFormat(Resources.OutputStats2, dat[j + 2].ToString(), dat[j + 3].ToString(), Environment.NewLine);
-
                             sbuilder.AppendFormat(Resources.OutputStats3, dat[j + 4].ToString(), dat[j + 5].ToString(), Environment.NewLine);
-
                             sbuilder.AppendFormat("{0}", Environment.NewLine);
-
                             j += 6;
                         }
 
                         string newStr = sbuilder.ToString();
-
-
-
-
                         sl.Add(newStr);
-
-
-
                         string finalModified = "";
                         string finalDESInitial = string.Format(Resources.DESderivedFromInit, Environment.NewLine, Environment.NewLine);
                         string finalDESModified = string.Format(Resources.DESderivedFromMod, Environment.NewLine);
+                        string finalInitial = string.Format("{0}{1}", presentation.HexaAsString(initialDES), Environment.NewLine);
 
-                        string finalInitial = string.Format("{0}{1}", pres.hexaAsString(initialDES), Environment.NewLine);
-
-                        if (pres.currentDES != null)
+                        if (presentation.currentDES != null)
                         {
-                            finalModified = string.Format("{0}{1}", pres.hexaAsString(pres.currentDES), Environment.NewLine);
+                            finalModified = string.Format("{0}{1}", presentation.HexaAsString(presentation.currentDES), Environment.NewLine);
                         }
                         else
                         {
-                            finalModified = string.Format("{0}{1}", pres.hexaAsString(current), Environment.NewLine);
+                            finalModified = string.Format("{0}{1}", presentation.HexaAsString(current), Environment.NewLine);
                         }
 
                         string finalstr = string.Format("{0}{1}{2}{3}", finalDESInitial, finalInitial, finalDESModified, finalModified);
 
                         sl.Add(finalstr);
                     }
-
-                    // return bl[pos].ToArray();
                     break;
 
                 case AvalancheVisualizationSettings.Category.Unprepared:
 
                     if (settings.UnprepSelection == 0 || settings.UnprepSelection == 2)
                     {
-
                         string initialCaption = "";
                         string modifiedCaption = "";
 
-                        if (pres.mode == 2)
+                        if (presentation.mode == 2)
                         {
                             initialCaption = string.Format(Resources.InitialHashOutput, Environment.NewLine);
                             modifiedCaption = string.Format(Resources.ModHashOutput, Environment.NewLine);
                         }
-
-                        if (pres.mode == 4)
+                        if (presentation.mode == 4)
                         {
                             initialCaption = string.Format(Resources.EncryptionInitialMsgOut, Environment.NewLine);
                             modifiedCaption = string.Format(Resources.EncryptionModifiedlMsgOut, Environment.NewLine);
 
                         }
 
-                        string init = string.Format("{0}{1}", pres.hexaAsString(originalText), Environment.NewLine);
-                        string mod = string.Format("{0}{1}", pres.hexaAsString(textInput), Environment.NewLine);
-
-
-
+                        string init = string.Format("{0}{1}", presentation.HexaAsString(originalText), Environment.NewLine);
+                        string mod = string.Format("{0}{1}", presentation.HexaAsString(textInput), Environment.NewLine);
                         string inputStr = string.Format("{0}{1}{2}{3}", initialCaption, init, modifiedCaption, mod);
 
                         if (init.Equals(mod))
                         {
                             modifiedCaption = string.Format("{0}{1}", Resources.OutputNotMod, Environment.NewLine);
-
                             inputStr = string.Format("{0}{1}{2}{3}", initialCaption, init, modifiedCaption, Environment.NewLine);
                         }
 
                         sl.Add(inputStr);
 
-
-                        //hash & modern
-
-                        Tuple<string, string> strings = pres.binaryStrings(pres.unchangedCipher, pres.changedCipher);
-                        int bitsFlipped = pres.nrOfBitsFlipped(pres.unchangedCipher, pres.changedCipher);
-                        double avalanche = pres.calcAvalancheEffect(bitsFlipped, strings);
-                        pres.showBitSequence(strings);
-                        int lengthIdentSequence = pres.longestIdenticalSequence(pres.differentBits);
-                        int lengthFlippedSequence = pres.longestFlippedSequence(pres.differentBits);
+                        Tuple<string, string> strings = presentation.BinaryStrings(presentation.unchangedCipher, presentation.changedCipher);
+                        int bitsFlipped = presentation.NoOfBitsFlipped(presentation.unchangedCipher, presentation.changedCipher);
+                        double avalanche = presentation.CalcAvalancheEffect(bitsFlipped, strings);
+                        presentation.ShowBitSequence(strings);
+                        int lengthIdentSequence = presentation.LongestIdenticalSequence(presentation.differentBits);
+                        int lengthFlippedSequence = presentation.LongestFlippedSequence(presentation.differentBits);
 
                         string flippedBits = string.Format(Resources.OutputStats1, bitsFlipped, avalanche, Environment.NewLine);
-                        string identSeq = string.Format(Resources.OutputStats2, lengthIdentSequence, pres.sequencePosition, Environment.NewLine);
-                        string flippedSeq = string.Format(Resources.OutputStats3, lengthFlippedSequence, pres.flippedSeqPosition, Environment.NewLine);
-
+                        string identSeq = string.Format(Resources.OutputStats2, lengthIdentSequence, presentation.sequencePosition, Environment.NewLine);
+                        string flippedSeq = string.Format(Resources.OutputStats3, lengthFlippedSequence, presentation.flippedSeqPosition, Environment.NewLine);
 
                         string statsStr = string.Format("{0}{1}{2}{3}", Environment.NewLine, flippedBits, identSeq, flippedSeq);
                         sl.Add(statsStr);
 
                     }
-
                     else
                     {
-
-
                         string initialCaption = string.Format(Resources.EncryptionInitialMsgOut, Environment.NewLine);
                         string modifiedCaption = string.Format(Resources.EncryptionModifiedlMsgOut, Environment.NewLine);
-
-
-
                         string init = string.Format("{0}{1}", msgA, Environment.NewLine);
                         string mod = string.Format("{0}{1}{2}", msgB, Environment.NewLine, Environment.NewLine);
-
-
                         string inputStr = string.Format("{0}{1}{2}{3}", initialCaption, init, modifiedCaption, mod);
 
                         if (init.Equals(mod))
                         {
                             modifiedCaption = string.Format("{0}{1}", Resources.OutputNotMod, Environment.NewLine);
-
                             inputStr = string.Format("{0}{1}{2}{3}", initialCaption, init, modifiedCaption, Environment.NewLine);
                         }
 
-
-
                         sl.Add(inputStr);
 
-
                         //classic
-
-                        Tuple<string, string> strings = pres.binaryStrings(pres.unchangedCipher, pres.changedCipher);
-                        int nrBytesFlipped = pres.bytesFlipped();
-                        double avalanche = pres.avalancheEffectBytes(nrBytesFlipped);
-                        pres.showBitSequence(strings);
-                        int lengthIdentSequence = pres.longestIdentSequenceBytes();
-                        int lengthFlippedSequence = pres.longestFlippedSequenceBytes();
-
+                        Tuple<string, string> strings = presentation.BinaryStrings(presentation.unchangedCipher, presentation.changedCipher);
+                        int nrBytesFlipped = presentation.BytesFlipped();
+                        double avalanche = presentation.AvalancheEffectBytes(nrBytesFlipped);
+                        presentation.ShowBitSequence(strings);
+                        int lengthIdentSequence = presentation.LongestIdentSequenceBytes();
+                        int lengthFlippedSequence = presentation.LongestFlippedSequenceBytes();
                         string flippedBits = string.Format(Resources.OutputStatsClassic1, nrBytesFlipped, avalanche, Environment.NewLine);
-                        string identSeq = string.Format(Resources.OutputStatsClassic2, lengthIdentSequence, pres.sequencePosition, Environment.NewLine);
-                        string flippedSeq = string.Format(Resources.OutputStatsClassic3, lengthFlippedSequence, pres.flippedSeqPosition, Environment.NewLine);
-
-
+                        string identSeq = string.Format(Resources.OutputStatsClassic2, lengthIdentSequence, presentation.sequencePosition, Environment.NewLine);
+                        string flippedSeq = string.Format(Resources.OutputStatsClassic3, lengthFlippedSequence, presentation.flippedSeqPosition, Environment.NewLine);
                         string statsStr = string.Format("{0}{1}{2}", flippedBits, identSeq, flippedSeq);
-
                         sl.Add(statsStr);
                     }
-
                     break;
 
                 default:
                     break;
             }
-
-            return sl[pos];
+            return sl[position];
 
         }
 
 
-        public bool checkSize(string A, string B)
+        public bool CheckSize(string A, string B)
         {
             if (A.Length != B.Length)
             {
                 return false;
             }
-
             return true;
         }
 
-        public bool checkByteArray(byte[] A, byte[] B)
+        public bool CheckByteArray(byte[] A, byte[] B)
         {
             if (A.Length != B.Length)
             {
                 return false;
             }
-
             return true;
         }
 
-        public bool validSize()
+        public bool ValidSize()
         {
-
-
-            if (pres.mode == 0)
+            if (presentation.mode == 0)
             {
                 switch (settings.KeyLength)
                 {
@@ -1273,12 +981,9 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
                         break;
                 }
-
-
             }
 
-
-            if (pres.mode == 1)
+            if (presentation.mode == 1)
             {
                 if (key.Length != 8)
                 {
@@ -1289,48 +994,10 @@ namespace CrypTool.Plugins.AvalancheVisualization
                     return true;
                 }
             }
-
-
-
-
             return false;
         }
 
-
-
-        public void resize()
-        {
-            List<byte> listA;
-            List<byte> listB;
-
-            listA = pres.unchangedCipher.ToList();
-            listB = pres.changedCipher.ToList();
-            int countA = listA.Count();
-            int countB = listB.Count();
-
-            if (countA < countB)
-            {
-                int arrLength = countB - countA;
-                listA.AddRange(fillArray(arrLength));
-            }
-            else
-
-
-           if (countB < countA)
-            {
-                int arrLength = countA - countB;
-                listB.AddRange(fillArray(arrLength));
-            }
-
-
-            pres.unchangedCipher = listA.ToArray();
-            pres.changedCipher = listB.ToArray();
-            pres.TB1.Text = pres.binaryAsString(pres.unchangedCipher);
-            pres.TB2.Text = pres.binaryAsString(pres.changedCipher);
-
-        }
-
-        public byte[] fillArray(int arrayLength)
+        public byte[] FllArray(int arrayLength)
         {
             byte[] byteArr = new byte[arrayLength];
             int i = 0;

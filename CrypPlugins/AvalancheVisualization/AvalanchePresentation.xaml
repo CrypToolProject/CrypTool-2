@@ -249,39 +249,39 @@
             </Canvas>
 
             <!--Buttons-->
-            <Button x:Name="doneButton" Style="{StaticResource buttonStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"   Width="62" Height="27" Content="{Loc DoneButton}" FontSize="13" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Margin="0,35,20,35" Visibility="hidden" Click="doneButton_Click"/>
-            <Button x:Name="clearButton" Style="{StaticResource buttonStyle}" Grid.Row="1" Grid.Column="2"  Width="62" Height="27" Content="{Loc ClearButton}" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="80,35,0,35" Visibility="hidden" Click="clearButton_Click"/>
-            <Button x:Name="toGeneral" Style="{StaticResource buttonStyle}" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"  Width="60" Height="30" Content="{Loc ContinueButton}"  Click="overviewButton_Click" Margin="5" Visibility="Hidden" />
+            <Button x:Name="doneButton" Style="{StaticResource buttonStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"   Width="62" Height="27" Content="{Loc DoneButton}" FontSize="13" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Margin="0,35,20,35" Visibility="hidden" Click="DoneButton_Click"/>
+            <Button x:Name="clearButton" Style="{StaticResource buttonStyle}" Grid.Row="1" Grid.Column="2"  Width="62" Height="27" Content="{Loc ClearButton}" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="80,35,0,35" Visibility="hidden" Click="ClearButton_Click"/>
+            <Button x:Name="toGeneral" Style="{StaticResource buttonStyle}" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"  Width="60" Height="30" Content="{Loc ContinueButton}"  Click="OverviewButton_Click" Margin="5" Visibility="Hidden" />
             <Button x:Name="contButton" Style="{StaticResource buttonStyle}" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"  Width="60" Height="30" Content="{Loc ContinueButton}"  Click="Cont_OnClick" Margin="5" Visibility="hidden" />
             <Button x:Name="backButton" Style="{StaticResource buttonStyle}" VerticalAlignment="Top" HorizontalAlignment="Left"  Width="63" Height="30" Content="{Loc Instructions}"  Click="BackButton_OnClick" Margin="5" Visibility="Hidden" />
             <Button x:Name="ChangesMadeButton" Style="{StaticResource buttonStyle}"  Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"  Width="64" Height="36" FontSize="9"  Content="{Loc ChangedInput}"  Click="ChangesMadeButton_OnClick" IsEnabled="false"  Margin="5" Visibility="Hidden"/>
-            <Button x:Name="inputDataButton" Style="{StaticResource buttonStyle}" VerticalAlignment="Top" HorizontalAlignment="Left"  Width="65" Height="30" FontSize="9" Content="{Loc InputData}" Click="inputDataButton_Click" Margin="5" Visibility="Hidden"/>
+            <Button x:Name="inputDataButton" Style="{StaticResource buttonStyle}" VerticalAlignment="Top" HorizontalAlignment="Left"  Width="65" Height="30" FontSize="9" Content="{Loc InputData}" Click="InputDataButton_Click" Margin="5" Visibility="Hidden"/>
 
             <StackPanel x:Name="buttonsPanel" Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3"  VerticalAlignment="Bottom" Margin="10,20" Visibility="hidden">
-                <Button x:Name="afterRound0Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="0"  Click="afterRound0Button_Click" />
-                <Button x:Name="afterRound1Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="1"  Click="afterRound1Button_Click" />
-                <Button x:Name="afterRound2Button"  Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="2"   Click="afterRound2Button_Click" />
-                <Button x:Name="afterRound3Button" Style="{StaticResource buttonStyle}"  Width="30" Height="30" Content="3" Click="afterRound3Button_Click" />
-                <Button x:Name="afterRound4Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="4"   Click="afterRound4Button_Click" />
-                <Button x:Name="afterRound5Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="5"   Click="afterRound5Button_Click" />
-                <Button x:Name="afterRound6Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="6"  Click="afterRound6Button_Click" />
-                <Button x:Name="afterRound7Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="7" Click="afterRound7Button_Click" />
-                <Button x:Name="afterRound8Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="8" Click="afterRound8Button_Click" />
-                <Button x:Name="afterRound9Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="9"  Click="afterRound9Button_Click" />
-                <Button x:Name="afterRound10Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="10"  Click="afterRound10Button_Click"></Button>
-                <Button x:Name="afterRound11Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="11"  Click="afterRound11Button_Click" Visibility="Collapsed"></Button>
-                <Button x:Name="afterRound12Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="12"  Click="afterRound12Button_Click" Visibility="Collapsed"></Button>
-                <Button x:Name="afterRound13Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="13"  Click="afterRound13Button_Click" Visibility="Collapsed"></Button>
-                <Button x:Name="afterRound14Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="14"  Click="afterRound14Button_Click" Visibility="Collapsed"></Button>
-                <Button x:Name="afterRound15Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="15"  Click="afterRound15Button_Click" Visibility="Collapsed"></Button>
-                <Button x:Name="afterRound16Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="16"  Click="afterRound16Button_Click" Visibility="Collapsed"></Button>
+                <Button x:Name="afterRound0Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="0"  Click="AfterRound0Button_Click" />
+                <Button x:Name="afterRound1Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="1"  Click="AfterRound1Button_Click" />
+                <Button x:Name="afterRound2Button"  Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="2"   Click="AfterRound2Button_Click" />
+                <Button x:Name="afterRound3Button" Style="{StaticResource buttonStyle}"  Width="30" Height="30" Content="3" Click="AfterRound3Button_Click" />
+                <Button x:Name="afterRound4Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="4"   Click="AfterRound4Button_Click" />
+                <Button x:Name="afterRound5Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="5"   Click="AfterRound5Button_Click" />
+                <Button x:Name="afterRound6Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="6"  Click="AfterRound6Button_Click" />
+                <Button x:Name="afterRound7Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="7" Click="AfterRound7Button_Click" />
+                <Button x:Name="afterRound8Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="8" Click="AfterRound8Button_Click" />
+                <Button x:Name="afterRound9Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="9"  Click="AfterRound9Button_Click" />
+                <Button x:Name="afterRound10Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="10"  Click="AfterRound10Button_Click"></Button>
+                <Button x:Name="afterRound11Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="11"  Click="AfterRound11Button_Click" Visibility="Collapsed"></Button>
+                <Button x:Name="afterRound12Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="12"  Click="AfterRound12Button_Click" Visibility="Collapsed"></Button>
+                <Button x:Name="afterRound13Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="13"  Click="AfterRound13Button_Click" Visibility="Collapsed"></Button>
+                <Button x:Name="afterRound14Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="14"  Click="AfterRound14Button_Click" Visibility="Collapsed"></Button>
+                <Button x:Name="afterRound15Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="15"  Click="AfterRound15Button_Click" Visibility="Collapsed"></Button>
+                <Button x:Name="afterRound16Button" Style="{StaticResource buttonStyle}" Width="30" Height="30" Content="16"  Click="AfterRound16Button_Click" Visibility="Collapsed"></Button>
                 <Line x:Name="line" Stroke="#008000" StrokeThickness="3" X1="0" Y1="0" X2="10" Y2="30" Visibility="Visible">
                     <Line.BitmapEffect>
                         <DropShadowBitmapEffect Color="Black" Direction="300" ShadowDepth="5" Opacity="0.8" Softness="0.4"  />
                     </Line.BitmapEffect>
                 </Line>
                 <Button x:Name="instructionsButton" Style="{StaticResource buttonStyle}"  Width="63" Height="30" Content="{Loc Instructions}"  Click="BackButton_OnClick"/>
-                <Button x:Name="overviewButton" Style="{StaticResource buttonStyle}" Width="60" Height="30" FontSize="8" Content="{Loc OverviewButton}" Click="overviewButton_Click"/>
+                <Button x:Name="overviewButton" Style="{StaticResource buttonStyle}" Width="60" Height="30" FontSize="8" Content="{Loc OverviewButton}" Click="OverviewButton_Click"/>
             </StackPanel>
 
             <!--Instructions-->
@@ -450,16 +450,16 @@
             </Polygon>
             <Polygon Name="arrow3" Grid.Row="1" Grid.ColumnSpan="2" Points="175,125 190,140, 175,155" Width="25" Height="35" StrokeThickness="3" Stroke="#4cbb17" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Hidden"  Margin="0,50,50,0">
             </Polygon>
-            <CheckBox Name="aesCheckBox" Grid.Row="1"  Foreground="#534b4f" Content="{Loc SingleBitCheckBox}"  Width="170" VerticalAlignment="Bottom" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked" Margin="20,50" Visibility="Hidden"/>
+            <CheckBox Name="aesCheckBox" Grid.Row="1"  Foreground="#534b4f" Content="{Loc SingleBitCheckBox}"  Width="170" VerticalAlignment="Bottom" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="20,50" Visibility="Hidden"/>
 
             <!--RadioButtons-->
             <StackPanel Name="radioButtons" Grid.Column="2" Grid.RowSpan="2"  VerticalAlignment="Center" HorizontalAlignment="Center"  Visibility="Hidden">
                 <TextBlock Foreground="#534b4f" FontSize="14" Padding="5" Text="{Loc DisplayInformation}">
                 </TextBlock>
                 <StackPanel Name="radioButtonPanel" Orientation="Horizontal" Margin="10,0">
-                    <RadioButton Name="radioDecimal" Foreground="#534b4f" FontSize="10"  Padding="0" Margin="10,0" Checked="radioButton2Checked" Content="{Loc Decimal}">
+                    <RadioButton Name="radioDecimal" Foreground="#534b4f" FontSize="10"  Padding="0" Margin="10,0" Checked="RadioButton2Checked" Content="{Loc Decimal}">
                     </RadioButton>
-                    <RadioButton Name="radioHexa" Foreground="#534b4f" FontSize="10" Padding="0" Margin="10,0" Checked="radioButton3Checked"  Content="{Loc Hex}">
+                    <RadioButton Name="radioHexa" Foreground="#534b4f" FontSize="10" Padding="0" Margin="10,0" Checked="RadioButton3Checked"  Content="{Loc Hex}">
                     </RadioButton>
                 </StackPanel>
             </StackPanel>
@@ -514,10 +514,10 @@
                     <TextBlock Foreground="#534b4f" FontSize="12" Padding="5" Text="{Loc DisplayInfo}">
                     </TextBlock>
                     <StackPanel >
-                        <RadioButton x:Name="radioText" Foreground="#534b4f" FontSize="10"  Padding="0" Margin="10,0" Checked="radioText_Checked" Content="{Loc Text}" Visibility="Collapsed"></RadioButton>
-                        <RadioButton x:Name="radioDecOthers" Foreground="#534b4f" FontSize="10"  Padding="0" Margin="10,0" Checked="radioButton2Checked" Content="{Loc Decimal}">
+                        <RadioButton x:Name="radioText" Foreground="#534b4f" FontSize="10"  Padding="0" Margin="10,0" Checked="RadioText_Checked" Content="{Loc Text}" Visibility="Collapsed"></RadioButton>
+                        <RadioButton x:Name="radioDecOthers" Foreground="#534b4f" FontSize="10"  Padding="0" Margin="10,0" Checked="RadioButton2Checked" Content="{Loc Decimal}">
                         </RadioButton>
-                        <RadioButton x:Name="radioHexOthers" Foreground="#534b4f" FontSize="10" Padding="0" Margin="10,0" Checked="radioButton3Checked"  Content="{Loc Hex}">
+                        <RadioButton x:Name="radioHexOthers" Foreground="#534b4f" FontSize="10" Padding="0" Margin="10,0" Checked="RadioButton3Checked"  Content="{Loc Hex}">
                         </RadioButton>
                     </StackPanel>
                 </StackPanel>
@@ -4055,7 +4055,7 @@
                     </TextBlock>
 
                     <TextBlock Grid.Row="1" Style="{StaticResource textBlockStyle}" FontWeight="DemiBold" Text="{Loc InitialMessageDES}" Height="30"  Margin="10,0"></TextBlock>
-                    <CheckBox Name="desCheckBox"  Grid.Row="5" Foreground="#534b4f" Content="{Loc SingleBitCheckBox}" Margin="20" Width="170" HorizontalAlignment="Left" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked"  >
+                    <CheckBox Name="desCheckBox"  Grid.Row="5" Foreground="#534b4f" Content="{Loc SingleBitCheckBox}" Margin="20" Width="170" HorizontalAlignment="Left" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"  >
                     </CheckBox>
                     <TextBlock Grid.Row="3" Style="{StaticResource textBlockStyle}" FontWeight="DemiBold" Text="{Loc InitialKeyDES}" Height="30"  Margin="10,0"></TextBlock>
 
@@ -4261,10 +4261,10 @@
                     <TextBlock Foreground="#534b4f" FontSize="14" Padding="5" Text="{Loc DisplayInformation}">
                     </TextBlock>
                     <StackPanel  Orientation="Horizontal" Margin="10,8">
-                        <RadioButton Name="radioBinaryDes" Foreground="#534b4f" FontSize="10"  Padding="0" Checked="radioButton1Checked" Content="{Loc Binary}"></RadioButton>
-                        <RadioButton Name="radioDecimalDes" Foreground="#534b4f" FontSize="10"  Padding="0" Margin="10,0" Checked="radioButton2Checked" Content="{Loc Decimal}">
+                        <RadioButton Name="radioBinaryDes" Foreground="#534b4f" FontSize="10"  Padding="0" Checked="RadioButton1Checked" Content="{Loc Binary}"></RadioButton>
+                        <RadioButton Name="radioDecimalDes" Foreground="#534b4f" FontSize="10"  Padding="0" Margin="10,0" Checked="RadioButton2Checked" Content="{Loc Decimal}">
                         </RadioButton>
-                        <RadioButton Name="radioHexaDes" Foreground="#534b4f" FontSize="10" Padding="0" Margin="10,0" Checked="radioButton3Checked"  Content="{Loc Hex}">
+                        <RadioButton Name="radioHexaDes" Foreground="#534b4f" FontSize="10" Padding="0" Margin="10,0" Checked="RadioButton3Checked"  Content="{Loc Hex}">
                         </RadioButton>
                     </StackPanel>
                 </StackPanel>
