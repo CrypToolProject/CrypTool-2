@@ -4,7 +4,9 @@ Dear CrypTool 2 users,
 
 CrypTool 2 (CT2) is a free, open-source e-learning software about cryptography and cryptanalysis with a visual user interface. CT2 is used in schools, universities, companies, and administrations all over the world since more than 10 years. In June 2023, we published the release "2023.1" which is the first release this year. The previous CT2 release was published in December 2022.
 
-Since our latest "Christmas release," we've introduced some captivating new ciphers, such as GRANIT 160, a hand cipher utilized by GDR spies, as well as the Typex cipher machine. Alongside these additions, we've added the RAPPOR component. RAPPOR, which stands for "Randomized Aggregatable Privacy-Preserving Ordinal Response", is "a technology for crowdsourcing statistics from end-user client software, anonymously, with strong privacy guarantees" [1]. Furthermore, we addressed various bugs, both minor and major, within CT2 and its components, resolving issues such as difficulties encountered when loading large workspace manager models. Additionally, we have enriched the functionalities of existing components, which are listed below.
+Since the December release, we've introduced some captivating new ciphers , such as GRANIT 160, a hand cipher utilized by GDR spies, as well as the Typex cipher machine. Another new component is RAPPOR. RAPPOR stands for "Randomized Aggregatable Privacy-Preserving Ordinal Response", and is "a technology for crowdsourcing statistics from end-user client software, anonymously, with strong privacy guarantees". [1] . Furthermore, we addressed various bugs, both minor and major, within CT2 and its components, resolving issues such as difficulties encountered when loading large workspace manager models. Additionally, we have enriched the functionalities of existing components, which are listed below.
+
+If you are interested in a wider overview of CrypTool 2 components, which we implemented over the last three years, you should watch the video "CrypTool 2 Highlights of the Last Three Years – CrypTool Symposium 2023 in Munich" from the "Cryptography for Everybody" YouTube channel. See https://www.youtube.com/watch?v=CWDqk0P86zY
 
 Greatly appreciate the feedback, requests, compliments, and constructive criticism from our many users. 
 We hope that you have as much fun using CT2 as we have creating it!
@@ -40,7 +42,7 @@ New components
 Existing components
 ------------------------
 - YAO1 and YAO2 (bugs fixed)
-- Playfair analyzer (added possibility to test crib offsets)
+- Playfair Analyzer (added possibility to test crib offsets)
 - IDPAnalyzer (added multiple language model support)
 - StringOperations (added possibility to randomize strings)
 - Present (bugs fixed)
@@ -66,7 +68,7 @@ We worked on the following templates
 - Avalanche effect
 - RAPPOR
 - Josse cipher
-- PDKDF1
+- PBKDF1
 - Che Guevara
 - Chaocipher
 - Bacon cipher
