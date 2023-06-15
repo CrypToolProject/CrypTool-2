@@ -449,6 +449,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Typex", "CrypPlugins\Typex\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElsieFourCipher", "CrypPlugins\ElsieFourCipher\ElsieFourCipher.csproj", "{51A7D194-7F3C-4E5C-AF4F-6BE39E3DC8AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAES", "CrypPlugins\SAES\SAES.csproj", "{6FD27DBD-6061-4DCA-8ABA-2EDCDBA467D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1335,6 +1337,10 @@ Global
 		{51A7D194-7F3C-4E5C-AF4F-6BE39E3DC8AA}.Debug|x64.Build.0 = Debug|x64
 		{51A7D194-7F3C-4E5C-AF4F-6BE39E3DC8AA}.Release|x64.ActiveCfg = Release|x64
 		{51A7D194-7F3C-4E5C-AF4F-6BE39E3DC8AA}.Release|x64.Build.0 = Release|x64
+		{6FD27DBD-6061-4DCA-8ABA-2EDCDBA467D2}.Debug|x64.ActiveCfg = Debug|x64
+		{6FD27DBD-6061-4DCA-8ABA-2EDCDBA467D2}.Debug|x64.Build.0 = Debug|x64
+		{6FD27DBD-6061-4DCA-8ABA-2EDCDBA467D2}.Release|x64.ActiveCfg = Release|x64
+		{6FD27DBD-6061-4DCA-8ABA-2EDCDBA467D2}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1550,6 +1556,7 @@ Global
 		{84251E43-DB08-45C5-B2A9-CB32FEDDA5C0} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{8FBAC349-9D21-4EBA-9B50-82802B93A620} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{51A7D194-7F3C-4E5C-AF4F-6BE39E3DC8AA} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
+		{6FD27DBD-6061-4DCA-8ABA-2EDCDBA467D2} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92042D62-2CDA-4393-9D74-4FB5AC571A2D}
