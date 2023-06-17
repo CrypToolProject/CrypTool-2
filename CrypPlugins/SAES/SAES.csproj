@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6FD27DBD-6061-4DCA-8ABA-2EDCDBA467D2}</ProjectGuid>
+    <ProjectGuid>{53FD0825-5676-40EE-8B4B-F315D358ADDA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CrypTool.Plugins.SAES</RootNamespace>
