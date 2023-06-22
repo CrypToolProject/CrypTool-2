@@ -61,9 +61,13 @@ namespace CrypTool.Plugins.M209Analyzer
         private DateTime _startTime;
         private DateTime _endTime;
 
+        private System.Timers.Timer _timer;
+
         private bool _running = false;
 
         private readonly object lockObject = new object();
+
+        private int _approximatedKeys = int.MaxValue;
 
         public M209Analyzer()
         {
@@ -141,6 +145,11 @@ namespace CrypTool.Plugins.M209Analyzer
         {
             this.UpdateDisplayStart();
 
+            _timer = new System.Timers.Timer(500);
+            _timer.Elapsed += _timer_Elapsed;
+            _timer.AutoReset = true;
+            _timer.Enabled = true;
+
             // Clear presentation
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
@@ -155,11 +164,12 @@ namespace CrypTool.Plugins.M209Analyzer
             _running = true;
 
             _m209AttackManager = new M209AttackManager(new M209Scoring());
+            _approximatedKeys = ApproximateKeyCountTarget(Ciphertext.Length);
 
             //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
             //_m209AttackManager = new M209AttackManager(new ScoringFunction(_settings.Language, _settings.GramsType, 10_000_000));
             _m209AttackManager.OnNewBestListEntry += HandleNewBestListEntry;
-            _m209AttackManager.OnProgressStatusChanged += _m209AttackManager_OnProgressStatusChanged;
+            //_m209AttackManager.OnProgressStatusChanged += _m209AttackManager_OnProgressStatusChanged;
             _m209AttackManager.ShouldStop = !_running;
 
             _m209AttackManager.Threads = _settings.CoresUsed;
@@ -192,6 +202,27 @@ namespace CrypTool.Plugins.M209Analyzer
             ProgressChanged(1, 1);
         }
 
+        private void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                _endTime = DateTime.Now;
+                TimeSpan elapsedtime = _m209AttackManager.ElapsedTime;
+                TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
+                _presentation.EndTime.Value = _endTime.ToString();
+                _presentation.ElapsedTime.Value = elapsedspan.ToString();
+                _presentation.CurrentlyAnalyzedKey.Value = $"2 ^{(long)(Math.Log(_m209AttackManager.EvaluationCount) / Math.Log(2))}";
+                _presentation.KeyPerSecond.Value = $"{(_m209AttackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : _m209AttackManager.EvaluationCount / _m209AttackManager.ElapsedTime.TotalMilliseconds).ToString("0.0#")} K/s";
+
+                if (elapsedtime >= new TimeSpan(0, 20, 0))
+                {
+                    _m209AttackManager.ShouldStop = true;
+                }
+            }
+            , null);
+            ProgressChanged(_m209AttackManager.EvaluationCount, _approximatedKeys);
+        }
+
         private void _m209AttackManager_OnProgressStatusChanged(object sender, M209AttackManager.OnProgressStatusChangedEventArgs e)
         {
 
@@ -203,9 +234,10 @@ namespace CrypTool.Plugins.M209Analyzer
                 _presentation.EndTime.Value = _endTime.ToString();
                 _presentation.ElapsedTime.Value = elapsedspan.ToString();
                 _presentation.AnalysisStep.Value = e.Phase;
+                _presentation.CurrentlyAnalyzedKey.Value = e.EvaluationCount.ToString();
             }
             , null);
-            ProgressChanged(e.Counter, e.TargetValue);
+            ProgressChanged(_m209AttackManager.EvaluationCount, _approximatedKeys);
         }
 
         /// <summary>
@@ -223,6 +255,7 @@ namespace CrypTool.Plugins.M209Analyzer
         {
             _running = false;
             _m209AttackManager.ShouldStop = true;
+            _timer.Stop();
         }
 
         /// <summary>
@@ -237,9 +270,19 @@ namespace CrypTool.Plugins.M209Analyzer
         /// </summary>
         public void Dispose()
         {
+            _timer.Dispose();
         }
 
         #endregion
+
+        private int ApproximateKeyCountTarget(int cipherTextLength)
+        {
+            if (cipherTextLength <= 1500)
+            {
+                return 133000000;
+            }
+            return 0;
+        }
 
         #region Event Handling
 
@@ -285,7 +328,7 @@ namespace CrypTool.Plugins.M209Analyzer
         {
             lock (lockObject)
             {
-                AddNewBestListEntry(args.Key.ToString(), args.Score, args.Decryption);
+                AddNewBestListEntry(args.Key.ToString(), args.Score, args.Decryption, args.Key);
             }
         }
 
@@ -295,7 +338,7 @@ namespace CrypTool.Plugins.M209Analyzer
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="text"></param>
-        private void AddNewBestListEntry(string key, double value, int[] text)
+        private void AddNewBestListEntry(string key, double value, int[] text, Key currentKey)
         {
             //if we have a worse value than the last one, skip
             if (_presentation.BestList.Count > 10 && value <= _presentation.BestList.Last().Value)
@@ -338,6 +381,10 @@ namespace CrypTool.Plugins.M209Analyzer
                 {
                     //insert new entry at correct place to sustain order of list:                    
                     _presentation.BestList.Insert(insertIndex, entry);
+                    if (currentKey.OriginalKey != null)
+                    {
+                        _presentation.WrongPinsLugs.Value = $" [{currentKey.GetCountIncorrectLugs()}L/{currentKey.GetCountIncorrectPins()}P]";
+                    }
                     if (_presentation.BestList.Count > MaxBestListEntries)
                     {
                         _presentation.BestList.RemoveAt(MaxBestListEntries);
