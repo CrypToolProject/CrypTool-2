@@ -18,6 +18,7 @@ using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.Utils;
 using System;
 using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.Plugins.M209Analyzer
 {
@@ -34,6 +35,7 @@ namespace CrypTool.Plugins.M209Analyzer
         private string _languageCode = "en";
         private int _gramsType = 4;
         private KeyFormat _keyFormat = KeyFormat.Digits;
+        private bool _expertMode = false;
 
         // number of possible monograms, with c = 26 for English
         private int _letterCount = 26;
@@ -45,7 +47,7 @@ namespace CrypTool.Plugins.M209Analyzer
         private double _endTemperature = 1.0;
         private double _decrement = 1.1;
 
-        #endregion
+        #endregion        
 
         #region TaskPane Settings
 
@@ -151,6 +153,22 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
+        [TaskPane("Expert mode", "Setting mode", "General", 2, true, ControlType.CheckBox)]
+        public bool ExpertMode
+        {
+            get => _expertMode;
+            set
+            {
+                if (_expertMode != value)
+                {
+                    _expertMode = value;
+                    OnPropertyChanged("ExpertMode");
+                    UpdateSettingsVisibility();
+                }
+            }
+        }
+
+
         [TaskPane("SA MinRatio", "Simulated Annealing - MinRatio", "Expert mode", 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 50)]
         public double MinRatio
         {
@@ -230,10 +248,33 @@ namespace CrypTool.Plugins.M209Analyzer
             EventsHelper.PropertyChanged(PropertyChanged, this, propertyName);
         }
 
+        public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
+
         #endregion
+
+        private void ShowHideSetting(string propertyName, bool show)
+        {
+            if (TaskPaneAttributeChanged == null)
+            {
+                return;
+            }
+
+            TaskPaneAttribteContainer container = new TaskPaneAttribteContainer(propertyName, show == true ? Visibility.Visible : Visibility.Collapsed);
+            TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(container));
+        }
 
         public void Initialize()
         {
+            UpdateSettingsVisibility();
+        }
+
+        private void UpdateSettingsVisibility()
+        {
+
+            ShowHideSetting("Decrement", _expertMode);
+            ShowHideSetting("EndTemperature", _expertMode);
+            ShowHideSetting("StartTemperature", _expertMode);
+            ShowHideSetting("MinRatio", _expertMode);
 
         }
     }
