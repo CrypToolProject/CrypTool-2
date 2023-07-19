@@ -79,6 +79,24 @@ namespace CrypTool.Plugins.GrandpreCipher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alphabet.
+        /// </summary>
+        internal static string AlphabetCaption {
+            get {
+                return ResourceManager.GetString("AlphabetCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The alphabet to be used during encryption and decryption.
+        /// </summary>
+        internal static string AlphabetTooltip {
+            get {
+                return ResourceManager.GetString("AlphabetTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find a word, which has not been used before, of length {0} starting with letter &quot;{1}&quot;.
         /// </summary>
         internal static string CouldNotFindAWord {
@@ -268,7 +286,7 @@ namespace CrypTool.Plugins.GrandpreCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First keyword used for en- or decryption.
+        ///   Looks up a localized string similar to Words used to create the encryption table.
         /// </summary>
         internal static string WordsTooltip {
             get {

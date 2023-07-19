@@ -23,7 +23,7 @@ using System.Text;
 using System.Windows.Controls;
 
 namespace CrypTool.Plugins.GrandpreCipher
-{
+{    
     [Author("Nils Kopal", "kopal@CrypTool.org", "CrypTool 2 Team", "https://www.CrypTool.org")]
     [PluginInfo("CrypTool.Plugins.GrandpreCipher.Properties.Resources", "PluginCaption", "PluginTooltip", "GrandpreCipher/userdoc.xml", new[] { "GrandpreCipher/Images/icon.png" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
@@ -35,6 +35,8 @@ namespace CrypTool.Plugins.GrandpreCipher
         private const string DIGITS = "0123456789";
 
         private readonly GrandpreCipherSettings _settings = new GrandpreCipherSettings();
+
+        private string _alphabet = null;
 
         #endregion
 
@@ -61,6 +63,13 @@ namespace CrypTool.Plugins.GrandpreCipher
             set;
         }
 
+        [PropertyInfo(Direction.InputData, "AlphabetCaption", "AlphabetTooltip", false)]
+        public string Alphabet
+        {
+            get;
+            set;
+        }
+
         [PropertyInfo(Direction.OutputData, "OutputTextCaption", "OutputTextTooltip", false)]
         public string OutputText
         {
@@ -81,6 +90,10 @@ namespace CrypTool.Plugins.GrandpreCipher
         /// </summary>
         public void PreExecution()
         {
+            InputText = null;
+            Keyword = null;
+            Words = null;
+            _alphabet = ALPHABET;
         }
 
         /// <summary>
@@ -110,7 +123,12 @@ namespace CrypTool.Plugins.GrandpreCipher
                 InputText = string.Empty;
             }
 
-            List<string> words = GetWordsOfSpecifiedLength(Words, Keyword.Length);
+            if(!string.IsNullOrEmpty(Alphabet))
+            {
+                _alphabet = Alphabet.ToUpper();
+            }
+
+            List<string> words = GetWordsOfSpecifiedLength(Words, Keyword.Length, _alphabet);
 
             //perform en- or decryption
             switch (_settings.Action)
@@ -246,19 +264,30 @@ namespace CrypTool.Plugins.GrandpreCipher
         }
 
         /// <summary>
-        /// Returns a list of all words with the specified length found in the given array
+        /// Returns a list of all words with the specified length found in the given array consisting only of alphabet letters
         /// </summary>
         /// <param name="words"></param>
         /// <param name="length"></param>
+        /// <param name="alphabet"></param>
         /// <returns></returns>
-        private List<string> GetWordsOfSpecifiedLength(string[] words, int length)
+        private List<string> GetWordsOfSpecifiedLength(string[] words, int length, string alphabet)
         {
             List<string> wordlist = new List<string>();
+            //only take valid letters from the alphabet
+            StringBuilder wordBilder = new StringBuilder();
             foreach (string word in words)
             {
-                if (word.Length == length)
+                wordBilder.Clear();
+                foreach (char c in word.ToUpper())
                 {
-                    wordlist.Add(word.ToUpper());
+                    if (alphabet.Contains(c))
+                    {
+                        wordBilder.Append(c);
+                    }
+                }
+                if (wordBilder.Length == length)
+                {
+                    wordlist.Add(wordBilder.ToString());
                 }
             }
             return wordlist;
