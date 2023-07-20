@@ -169,7 +169,7 @@ namespace CrypTool.Plugins.M209Analyzer
         }
 
 
-        [TaskPane("SA MinRatio", "Simulated Annealing - MinRatio", "Expert mode", 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 50)]
+        [TaskPane("Simulated Annealing - MinRatio", "Simulated Annealing - MinRatio", "Expert mode", 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 50)]
         public double MinRatio
         {
             get
@@ -180,13 +180,13 @@ namespace CrypTool.Plugins.M209Analyzer
             {
                 if (_minRatio != value)
                 {
-                    _minRatio = Math.Log(value);
+                    _minRatio = value;
                     OnPropertyChanged("MinRatio");
                 }
             }
         }
 
-        [TaskPane("SA StartTemperature", "Simulated Annealing - StartTemperature", "Expert mode", 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 1000000)]
+        [TaskPane("Simulated Annealing - StartTemperature", "Simulated Annealing - StartTemperature", "Expert mode", 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 1000000)]
         public double StartTemperature
         {
             get
@@ -203,7 +203,7 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
-        [TaskPane("SA EndTemperature", "Simulated Annealing - EndTemperature", "Expert mode", 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 1000000)]
+        [TaskPane("Simulated Annealing - EndTemperature", "Simulated Annealing - EndTemperature", "Expert mode", 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 1000000)]
         public double EndTemperature
         {
             get
@@ -220,7 +220,7 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
-        [TaskPane("SA Decrement", "Simulated Annealing - Decrement", "Expert mode", 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 1000000)]
+        [TaskPane("Simulated Annealing - Decrement", "Simulated Annealing - Decrement", "Expert mode", 0, false, ControlType.TextBox, ValidationType.RangeDouble, 0, 1000000)]
         public double Decrement
         {
             get

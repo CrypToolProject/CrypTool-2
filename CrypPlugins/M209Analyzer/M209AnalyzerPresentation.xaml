@@ -9,14 +9,13 @@
 
     <crypanalysisviewcontrol:CrypAnalysisViewControl ResultHeaderCaption="{Loc Analysis}" ResultListCaption="{Loc Best list}">
         <crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Analysis mode}" x:Name="AnalysisMode"  />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Analysis step}" x:Name="AnalysisStep" />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Start Time}" x:Name="StartTime" />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc End Time}" x:Name="EndTime" />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Elapsed Time}" x:Name="ElapsedTime" />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Currently analyzed keys}" x:Name="CurrentlyAnalyzedKey" />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Speed}" x:Name="KeyPerSecond" />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Wrong }" x:Name="WrongPinsLugs" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Analysis mode:}" x:Name="AnalysisMode"  />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Analysis step:}" x:Name="AnalysisStep" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Start time:}" x:Name="StartTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc End time:}" x:Name="EndTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Elapsed time:}" x:Name="ElapsedTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Currently analyzed keys:}" x:Name="CurrentlyAnalyzedKey" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Speed:}" x:Name="KeyPerMilliSecond" />
         </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
 
         <crypanalysisviewcontrol:CrypAnalysisResultListView ItemsSource="{Binding}" ResultItemAction="HandleResultItemAction">
