@@ -508,7 +508,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MexicanArmyCipherDiskAnalyz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M209Analyzer", "CrypPlugins\M209Analyzer\M209Analyzer.csproj", "{D9A55649-C9E2-4938-9596-EE5E06F747F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M209AnalyzerLib", "..\..\source\repos\M209Analyzer\M209Analyzer\M209AnalyzerLib.csproj", "{BC60DA91-4135-4CFB-B0F4-2B250D435C73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M209AnalyzerLib", "LibSource\M209Analyzer\M209Analyzer\M209AnalyzerLib.csproj", "{BC60DA91-4135-4CFB-B0F4-2B250D435C73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -34,7 +34,7 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>..\..\CrypBuild\Debug\Release\</OutputPath>
+    <OutputPath>..\..\CrypBuild\Release\CrypPlugins\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -90,10 +90,6 @@
     <Compile Include="ScoringFunction.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\source\repos\M209Analyzer\M209Analyzer\M209AnalyzerLib.csproj">
-      <Project>{bc60da91-4135-4cfb-b0f4-2b250d435c73}</Project>
-      <Name>M209AnalyzerLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\CrypPluginBase\CrypPluginBase.csproj">
       <Project>{25DB2B47-A457-4EC2-960B-395CE07AE093}</Project>
       <Name>CrypPluginBase</Name>
@@ -102,6 +98,10 @@
     <ProjectReference Include="..\..\LibSource\CrypAnalysisViewControl\CrypAnalysisViewControl.csproj">
       <Project>{4ab9be96-3e34-40cb-9270-a64480c851ee}</Project>
       <Name>CrypAnalysisViewControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LibSource\M209Analyzer\M209Analyzer\M209AnalyzerLib.csproj">
+      <Project>{bc60da91-4135-4cfb-b0f4-2b250d435c73}</Project>
+      <Name>M209AnalyzerLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
