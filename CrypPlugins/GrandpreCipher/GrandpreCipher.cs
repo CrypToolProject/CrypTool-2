@@ -285,7 +285,11 @@ namespace CrypTool.Plugins.GrandpreCipher
                         wordBilder.Append(c);
                     }
                 }
-                if (wordBilder.Length == length)
+                if (_settings.WordSelection == WordSelectionMode.AlsoUseLongerWords && wordBilder.Length >= length)
+                {
+                    wordlist.Add(wordBilder.ToString().Substring(0, length));
+                }
+                else if(_settings.WordSelection == WordSelectionMode.OnlyUseExactLength && wordBilder.Length == length)
                 {
                     wordlist.Add(wordBilder.ToString());
                 }
@@ -304,6 +308,9 @@ namespace CrypTool.Plugins.GrandpreCipher
             StringBuilder ciphertextBuilder = new StringBuilder();
             Random random = new Random();
 
+            //we store each warning message onces, so we later don't spam the log
+            HashSet<string> warnings = new HashSet<string>();
+
             foreach (char c in plaintext.ToUpper())
             {
                 if (ALPHABET.Contains(c))
@@ -315,7 +322,7 @@ namespace CrypTool.Plugins.GrandpreCipher
                         ciphertextBuilder.Append(digits);
                         continue;
                     }
-                    GuiLogMessage(string.Format(Properties.Resources.TableDoesNotContainPlaintextLetter, c), NotificationLevel.Warning);
+                    warnings.Add(string.Format(Properties.Resources.TableDoesNotContainPlaintextLetter, c));
                 }
 
                 //handle unknown symbol
@@ -332,6 +339,13 @@ namespace CrypTool.Plugins.GrandpreCipher
                         break;
                 }
             }
+
+            //show warning messages in log
+            foreach(string warning in warnings)
+            {
+                GuiLogMessage(warning, NotificationLevel.Warning);
+            }
+
             return ciphertextBuilder.ToString();
         }
 

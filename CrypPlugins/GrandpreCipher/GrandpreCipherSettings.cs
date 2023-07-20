@@ -32,12 +32,20 @@ namespace CrypTool.Plugins.GrandpreCipher
         Replace = 2
     }
 
+    public enum WordSelectionMode
+    {
+        AlsoUseLongerWords = 0,
+        OnlyUseExactLength = 1
+    }
+
     public class GrandpreCipherSettings : ISettings
     {
         #region Private Variables
 
         private Action _action = Action.Encrypt;
+        private WordSelectionMode _wordSelectionMode = WordSelectionMode.AlsoUseLongerWords;
         private UnknownSymbolHandlingMode _unknownSymbolHandlingMode = UnknownSymbolHandlingMode.Ignore;
+        
 
         #endregion
 
@@ -62,7 +70,21 @@ namespace CrypTool.Plugins.GrandpreCipher
             }
         }
 
-        [TaskPane("UnknownSymbolHandlingCaption", "UnknownSymbolHandlingTooltip", null, 4, false, ControlType.ComboBox, new string[] { "UnknownSymbolHandlingList1", "UnknownSymbolHandlingList2", "UnknownSymbolHandlingList3" })]
+        [TaskPane("WordSelectionCaption", "WordSelectionTooltip", null, 4, false, ControlType.ComboBox, new string[] { "AlsoUseLongerWords", "OnlyUseExactLength" })]
+        public WordSelectionMode WordSelection
+        {
+            get => _wordSelectionMode;
+            set
+            {
+                if (value != _wordSelectionMode)
+                {
+                    _wordSelectionMode = value;
+                    OnPropertyChanged(nameof(WordSelection));
+                }
+            }
+        }
+
+        [TaskPane("UnknownSymbolHandlingCaption", "UnknownSymbolHandlingTooltip", null, 5, false, ControlType.ComboBox, new string[] { "UnknownSymbolHandlingList1", "UnknownSymbolHandlingList2", "UnknownSymbolHandlingList3" })]
         public UnknownSymbolHandlingMode UnknownSymbolHandling
         {
             get => _unknownSymbolHandlingMode;

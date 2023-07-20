@@ -187,12 +187,24 @@
     <value>No words given. Please provide words for table generation</value>
   </data>
   <data name="TableDoesNotContainPlaintextLetter" xml:space="preserve">
-    <value>The table does not contain the plaintext letter "{0}". Therefore, the letter cannot be encrypted</value>
+    <value>The table does not contain the plaintext letter "{0}". The letter could therefore not be encrypted</value>
   </data>
   <data name="AlphabetCaption" xml:space="preserve">
     <value>Alphabet</value>
   </data>
   <data name="AlphabetTooltip" xml:space="preserve">
     <value>The alphabet to be used during encryption and decryption</value>
+  </data>
+  <data name="AlsoUseLongerWords" xml:space="preserve">
+    <value>Also longer words</value>
+  </data>
+  <data name="OnlyUseExactLength" xml:space="preserve">
+    <value>Only words with exact length</value>
+  </data>
+  <data name="WordSelectionCaption" xml:space="preserve">
+    <value>Word selection</value>
+  </data>
+  <data name="WordSelectionTooltip" xml:space="preserve">
+    <value>Defines how words for table generation are selected from the given array of words</value>
   </data>
 </root>

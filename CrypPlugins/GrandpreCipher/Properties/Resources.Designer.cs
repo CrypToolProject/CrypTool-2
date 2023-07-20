@@ -97,6 +97,15 @@ namespace CrypTool.Plugins.GrandpreCipher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Also longer words.
+        /// </summary>
+        internal static string AlsoUseLongerWords {
+            get {
+                return ResourceManager.GetString("AlsoUseLongerWords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find a word, which has not been used before, of length {0} starting with letter &quot;{1}&quot;.
         /// </summary>
         internal static string CouldNotFindAWord {
@@ -187,6 +196,15 @@ namespace CrypTool.Plugins.GrandpreCipher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only words with exact length.
+        /// </summary>
+        internal static string OnlyUseExactLength {
+            get {
+                return ResourceManager.GetString("OnlyUseExactLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Output Text.
         /// </summary>
         internal static string OutputTextCaption {
@@ -223,7 +241,7 @@ namespace CrypTool.Plugins.GrandpreCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The table does not contain the plaintext letter &quot;{0}&quot;. Therefore, the letter cannot be encrypted.
+        ///   Looks up a localized string similar to The table does not contain the plaintext letter &quot;{0}&quot;. The letter could therefore not be encrypted.
         /// </summary>
         internal static string TableDoesNotContainPlaintextLetter {
             get {
@@ -282,6 +300,24 @@ namespace CrypTool.Plugins.GrandpreCipher.Properties {
         internal static string WordsCaption {
             get {
                 return ResourceManager.GetString("WordsCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Word selection.
+        /// </summary>
+        internal static string WordSelectionCaption {
+            get {
+                return ResourceManager.GetString("WordSelectionCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Defines how words for table generation are selected from the given array of words.
+        /// </summary>
+        internal static string WordSelectionTooltip {
+            get {
+                return ResourceManager.GetString("WordSelectionTooltip", resourceCulture);
             }
         }
         
