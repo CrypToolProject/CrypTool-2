@@ -45,7 +45,7 @@ namespace CrypTool.Plugins.M209Analyzer
 
     [Author("Josef Matwich", "josef.matwich@student.uni-siegen.de", "CrypTool 2 Team", "https://www.cryptool.org")]
     // You can (and should) provide a user documentation as XML file and an own icon.
-    [PluginInfo("CrypTool.M209Analyzer.Properties.Resources", "Hagelin M-209 Analyzer", "M209AnalyzerTooltip", "M209Analyzer/userdoc.xml", new[] { "CrypWin/images/default.png" })]
+    [PluginInfo("CrypTool.M209Analyzer.Properties.Resources", "M209 Analyzer", "M209AnalyzerTooltip", "M209Analyzer/userdoc.xml", new[] { "CrypWin/images/default.png" })]
     // HOWTO: Change category to one that fits to your plugin. Multiple categories are allowed.
     [ComponentCategory(ComponentCategory.CryptanalysisGeneric)]
     public class M209Analyzer : ICrypComponent
@@ -145,11 +145,6 @@ namespace CrypTool.Plugins.M209Analyzer
         {
             this.UpdateDisplayStart();
 
-            _timer = new System.Timers.Timer(500);
-            _timer.Elapsed += _timer_Elapsed;
-            _timer.AutoReset = true;
-            _timer.Enabled = true;
-
             // Clear presentation
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
@@ -174,12 +169,13 @@ namespace CrypTool.Plugins.M209Analyzer
 
             _m209AttackManager.Threads = _settings.CoresUsed;
 
-            _m209AttackManager.SAParameters.MinRatio = _settings.MinRatio;
+            _m209AttackManager.SAParameters.MinRatio = Math.Log(_settings.MinRatio);
             _m209AttackManager.SAParameters.StartTemperature = _settings.StartTemperature;
             _m209AttackManager.SAParameters.EndTemperature = _settings.EndTemperature;
             _m209AttackManager.SAParameters.Decrement = _settings.Decrement;
 
             ProgressChanged(0, 1);
+            StartUpdateDisplayTimer();
             try
             {
                 switch (_settings.AttackMode)
@@ -204,6 +200,7 @@ namespace CrypTool.Plugins.M209Analyzer
 
         private void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
+            GuiLogMessage($"{DateTime.Now}", NotificationLevel.Info);
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 _endTime = DateTime.Now;
@@ -212,12 +209,7 @@ namespace CrypTool.Plugins.M209Analyzer
                 _presentation.EndTime.Value = _endTime.ToString();
                 _presentation.ElapsedTime.Value = elapsedspan.ToString();
                 _presentation.CurrentlyAnalyzedKey.Value = $"2 ^{(long)(Math.Log(_m209AttackManager.EvaluationCount) / Math.Log(2))}";
-                _presentation.KeyPerSecond.Value = $"{(_m209AttackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : _m209AttackManager.EvaluationCount / _m209AttackManager.ElapsedTime.TotalMilliseconds).ToString("0.0#")} K/s";
-
-                if (elapsedtime >= new TimeSpan(0, 20, 0))
-                {
-                    _m209AttackManager.ShouldStop = true;
-                }
+                _presentation.KeyPerMilliSecond.Value = $"{(_m209AttackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : _m209AttackManager.EvaluationCount / _m209AttackManager.ElapsedTime.TotalMilliseconds).ToString("0.0#")} Key/ms";
             }
             , null);
             ProgressChanged(_m209AttackManager.EvaluationCount, _approximatedKeys);
@@ -279,7 +271,11 @@ namespace CrypTool.Plugins.M209Analyzer
         {
             if (cipherTextLength <= 1500)
             {
-                return 133000000;
+                return 133_000_000;
+            }
+            else if (cipherTextLength > 1500)
+            {
+                return 100_000_000;
             }
             return 0;
         }
@@ -326,10 +322,7 @@ namespace CrypTool.Plugins.M209Analyzer
 
         private void HandleNewBestListEntry(object sender, M209AttackManager.OnNewBestListEntryEventArgs args)
         {
-            lock (lockObject)
-            {
-                AddNewBestListEntry(args.Key.ToString(), args.Score, args.Decryption, args.Key);
-            }
+            AddNewBestListEntry(args.Key.ToString(), args.Score, args.Decryption, args.Key);
         }
 
         /// <summary>
@@ -381,10 +374,6 @@ namespace CrypTool.Plugins.M209Analyzer
                 {
                     //insert new entry at correct place to sustain order of list:                    
                     _presentation.BestList.Insert(insertIndex, entry);
-                    if (currentKey.OriginalKey != null)
-                    {
-                        _presentation.WrongPinsLugs.Value = $" [{currentKey.GetCountIncorrectLugs()}L/{currentKey.GetCountIncorrectPins()}P]";
-                    }
                     if (_presentation.BestList.Count > MaxBestListEntries)
                     {
                         _presentation.BestList.RemoveAt(MaxBestListEntries);
@@ -425,33 +414,12 @@ namespace CrypTool.Plugins.M209Analyzer
             }, null);
         }
 
-        /// <summary>
-        /// Updates presentation during cryptanalysis
-        /// </summary>
-        /// <param name="key"></param>
-        private void UpdateDisplay()
+        private void StartUpdateDisplayTimer()
         {
-            //string strkey;
-            //switch (_settings.KeyFormat)
-            //{
-            //    default:
-            //    case KeyFormat.Digits:
-            //        strkey = string.Format("{0},{1},{2},{3}", key[0].ToString("D2"), key[1].ToString("D2"), key[2].ToString("D2"), key[3].ToString("D2"));
-            //        break;
-            //    case KeyFormat.LatinLetters:
-            //        strkey = "TODO: GenerateTextKey(key);";
-            //        break;
-            //}
-
-            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-            {
-                _endTime = DateTime.Now;
-                TimeSpan elapsedtime = _m209AttackManager.ElapsedTime;
-                TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
-                _presentation.EndTime.Value = _endTime.ToString();
-                _presentation.ElapsedTime.Value = elapsedspan.ToString();
-            }
-            , null);
+            _timer = new System.Timers.Timer(1000);
+            _timer.Elapsed += _timer_Elapsed;
+            _timer.AutoReset = true;
+            _timer.Enabled = true;
         }
     }
 

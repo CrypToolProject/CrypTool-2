@@ -1,0 +1,15 @@
+M209Analyzer/bin/
+M209Analyzer/obj/
+.vs/M209Analyzer/
+/M209Analyzer/obj/Debug/M209Analyzer.csproj.FileListAbsolute.txt
+/M209Analyzer/obj/Debug/M209Analyzer.csproj.CoreCompileInputs.cache
+/M209Analyzer/obj/Debug/M209Analyzer.csproj.AssemblyReference.cache
+/.vs/M209Analyzer/FileContentIndex/1a40c45b-a925-422b-9cd3-c9b168c4177d.vsidx
+/.vs/M209Analyzer/FileContentIndex/8fd3ae30-46ab-4982-9705-7fe9e929b25c.vsidx
+/.vs/M209Analyzer/FileContentIndex/a36ce460-06fc-4686-ae06-9fde995b6756.vsidx
+/.vs/M209Analyzer/FileContentIndex/b2d81665-064e-4579-a3df-fb31f6b51160.vsidx
+/.vs/M209Analyzer/v17/.suo
+/M209AnalyzerUI/obj/Debug
+/M209AnalyzerUI/bin
+/M209AnalyzerUI/obj/Release
+/M209Analyzer/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
