@@ -56,7 +56,7 @@ namespace CrypTool.Plugins.GrandpreCipher
             set;
         }
 
-        [PropertyInfo(Direction.InputData, "KeywordCaption", "KeywordTooltip", false)]
+        [PropertyInfo(Direction.InputData, "KeywordCaption", "KeywordTooltip", true)]
         public string Keyword
         {
             get;
