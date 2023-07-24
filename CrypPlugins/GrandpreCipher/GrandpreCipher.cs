@@ -77,6 +77,13 @@ namespace CrypTool.Plugins.GrandpreCipher
             set;
         }
 
+        [PropertyInfo(Direction.OutputData, "WordsCaption", "WordsTooltip", false)]
+        public string[] OutputWords
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region IPlugin Members
@@ -129,6 +136,9 @@ namespace CrypTool.Plugins.GrandpreCipher
             }
 
             List<string> words = GetWordsOfSpecifiedLength(Words, Keyword.Length, _alphabet);
+
+            OutputWords = words.ToArray();
+            OnPropertyChanged(nameof(OutputWords));
 
             //perform en- or decryption
             switch (_settings.Action)
