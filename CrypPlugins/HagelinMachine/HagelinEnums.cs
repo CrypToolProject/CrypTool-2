@@ -101,12 +101,12 @@ namespace HagelinMachine
 
         public enum WheelType
         { //  custom,
-            W17_0_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q,  //Size, Offset, Positions
-            W19_0_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S,
-            W21_0_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U,
-            W23_0_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_X,
-            W25_9_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_X_Y_Z,
-            W26_11_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_W_X_Y_Z,
+            W17_10_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q,  //Size, Offset, Positions
+            W19_11_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S,
+            W21_12_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U,
+            W23_13_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_X,
+            W25_9_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_X_Y_Z, //For M209 this offset is different, we manualy fix it in the implementation class
+            W26_11_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_W_X_Y_Z,//For M209 this offset is different, we manualy fix it in the implementation class
             W29_12_A_B_C_D_E_F_G_H_I_10_J_K_L_M_N_O_P_Q_R_20_S_T_U_V_W_X_Y_Z_29,
             W31_13_A_B_C_D_E_06_F_G_H_I_J_12_K_L_M_N_O_P_19_Q_R_S_T_U_25_V_W_X_Y_Z_31,
             W34_14_A_02_B_04_C_06_D_08_E_10_F_12_G_14_H_16_I_18_J_20_K_22_L_24_M_26_N_28_O_30_P_32_Q_34,

@@ -130,6 +130,15 @@ namespace HagelinMachine
                 _shownWheelPositions[i, 4] = WheelPositionsArray[Mod((_wheels[i]._position + 2), _wheels[i]._size)];
                 string[] curWheelTypeSpittedToArray = _wheels[i]._wheelType.ToString().Split('_');
                 int offset = int.Parse(curWheelTypeSpittedToArray[1]);
+
+                if (_model == ModelType.M209) // For M209 the offset in the wheels of sizes 25 and 26  between shown and active pins  are different as compared to the ones used in C52c
+                {
+                    if (_wheels[i]._wheelType == WheelType.W25_9_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_X_Y_Z)
+                        offset = 14;
+                    if (_wheels[i]._wheelType == WheelType.W26_11_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_W_X_Y_Z)
+                        offset = 15;
+                }
+
                 string curPosition = WheelPositionsArray[(_wheels[i]._position + offset) % _wheels[i]._size];
                 _activeWheelPositions[i] = curPosition;
 
@@ -154,6 +163,17 @@ namespace HagelinMachine
                 string[] WheelPositionsArray = _wheels[i]._initialState.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 string[] curWheelTypeSpittedToArray = _wheels[i]._wheelType.ToString().Split('_');
                 int offset = int.Parse(curWheelTypeSpittedToArray[1]);
+
+
+                if (_model == ModelType.M209) // For M209 the offset in the wheels of sizes 25 and 26  between shown and active pins  are different as compared to the ones used in C52c
+                {
+                    if (_wheels[i]._wheelType == WheelType.W25_9_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_X_Y_Z)
+                        offset = 14;
+                    if (_wheels[i]._wheelType == WheelType.W26_11_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_W_X_Y_Z)
+                        offset = 15;
+                }
+
+
                 if (WheelPositionsArray.Length != _wheels[i]._size)
                 {
                     //return CrypTool.Plugins.HagelinMachine.Properties.Resources.WheelStateNotValid;
