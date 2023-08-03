@@ -92,25 +92,25 @@ namespace CrypTool.Plugins.Hill
 
             if (dim < 1)
             {
-                GuiLogMessage("The dimension of the matrix must be greater than 0!", NotificationLevel.Error);
+                GuiLogMessage(Properties.Resources.MatrixDimensionMustBeGreaterThan0, NotificationLevel.Error);
                 return false;
             }
 
             if (dim * dim != matelements.Length)
             {
-                GuiLogMessage("The number of elements in the matrix definition must be a square number!", NotificationLevel.Error);
+                GuiLogMessage(Properties.Resources.NumberOfElementsInMatrixMustBeSquareNumber, NotificationLevel.Error);
                 return false;
             }
 
             if (settings.Modulus < 2)
             {
-                GuiLogMessage(string.Format("The input alphabet must contain at least 2 different characters!"), NotificationLevel.Error);
+                GuiLogMessage(Properties.Resources.InputAlphabetMustContainAtLeast2DifferentCharacters, NotificationLevel.Error);
                 return false;
             }
 
             if (Input.Length % dim != 0)
             {
-                GuiLogMessage(string.Format("The input was padded so that its length is a multiple of the matrix dimension ({0})!", dim), NotificationLevel.Warning);
+                GuiLogMessage(string.Format(Properties.Resources.InputWasPadded, dim), NotificationLevel.Warning);
                 char paddingChar = settings.Alphabet.Contains("X") ? 'X' : (settings.Alphabet.Contains("x") ? 'x' : settings.Alphabet[settings.Modulus - 1]);
                 Input += new string(paddingChar, dim - (Input.Length % dim));
             }
@@ -119,7 +119,7 @@ namespace CrypTool.Plugins.Hill
             {
                 if (settings.Alphabet.IndexOf(Input[j]) < 0)
                 {
-                    GuiLogMessage(string.Format("The input contains the illegal character '{0}' at position {1}!", Input[j], j), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(Properties.Resources.InputContainsIllegalCharacter, Input[j], j), NotificationLevel.Error);
                     return false;
                 }
             }
@@ -139,7 +139,7 @@ namespace CrypTool.Plugins.Hill
                 }
                 catch (Exception)
                 {
-                    GuiLogMessage(string.Format("Error while parsing matrix element {0}: \"{1}\"!", i, s[i]), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(Properties.Resources.ErrorWhileParsingMatrixElement, i, s[i]), NotificationLevel.Error);
                     return false;
                 }
             }
@@ -161,8 +161,7 @@ namespace CrypTool.Plugins.Hill
             }
             catch (ArithmeticException)
             {
-                GuiLogMessage("The matrix " + mat + " is not invertible.", NotificationLevel.Error);
-                return false;
+                throw new ArithmeticException(string.Format(Properties.Resources.MatrixNotInvertible, mat));
             }
 
             return true;
@@ -172,17 +171,27 @@ namespace CrypTool.Plugins.Hill
         {
             ProgressChanged(0, 1);
 
-            if (!CheckParameters())
+            try
             {
-                return;
+                if (!CheckParameters())
+                {
+                    return;
+                }
+            }
+            catch (ArithmeticException ex)
+            {
+                GuiLogMessage(ex.Message, NotificationLevel.Warning);
+                if (settings.Action)    // decrypt
+                {
+                    //we cannot decrypt, when we have an arithmetic exception, e.g. cannot compute an inverse matrix
+                    return;
+                }
             }
 
             if (settings.Action)
             {
                 mat = inv;    // decrypt
             }
-
-            GuiLogMessage("The matrix is " + mat, NotificationLevel.Debug);
 
             Output = "";
 
@@ -201,7 +210,7 @@ namespace CrypTool.Plugins.Hill
                 }
             }
 
-            OnPropertyChanged("Output");
+            OnPropertyChanged(nameof(Output));
 
             ProgressChanged(1, 1);
         }
