@@ -168,23 +168,26 @@ namespace CrypTool.PluginBase.Miscellaneous
             return mi;
         }
 
-        public static implicit operator string(ModMatrix mat)
+        public override string ToString()
         {
             List<BigInteger> lst = new List<BigInteger>();
             string s = "";
-
-            for (int y = 0; y < mat.Dimension; y++)
+            for (int y = 0; y < Dimension; y++)
             {
                 lst.Clear();
-                for (int x = 0; x < mat.Dimension; x++)
+                for (int x = 0; x < Dimension; x++)
                 {
-                    lst.Add(mat[x, y]);
+                    lst.Add(this[x, y]);
                 }
 
                 s += "[" + string.Join(",", lst) + "]";
             }
+            return "[" + s + "] (modulus=" + Modulus + ")";
+        }
 
-            return "[" + s + "] (modulus=" + mat.Modulus + ")";
+        public static implicit operator string(ModMatrix mat)
+        {
+            return mat.ToString();
         }
 
         public static ModMatrix operator *(ModMatrix matA, ModMatrix matB)
