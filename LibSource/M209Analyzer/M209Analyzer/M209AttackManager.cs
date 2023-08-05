@@ -82,7 +82,7 @@ namespace M209AnalyzerLib
         /// <summary>
         /// Set how often the main loop for the ciphertext only attack is repeated.
         /// </summary>
-        public int Cycles { get; set; } = 10_000_000;
+        public int Cycles { get; set; } = 2_147_483_647;
 
         /// <summary>
         /// Control how often the random trial phase in cipher text only attack should be repeated.
@@ -213,7 +213,6 @@ namespace M209AnalyzerLib
             lock (LOCK)
             {
                 EvaluationCount++;
-                Console.WriteLine($"EvaluationCount++  -> {EvaluationCount} [Thread {Thread.CurrentThread.ManagedThreadId}]");
             }
         }
 

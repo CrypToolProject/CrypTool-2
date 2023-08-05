@@ -91,6 +91,7 @@ namespace M209AnalyzerLib.M209
                     }
 
                     newEval = SimulatedAnnealingPins.SA(key, EvalType.CRIB, newEval > 128000 ? 20 : 5, attackManager);
+                    localState.SingleIteration = false;
                     newEval = HillClimbPins.HillClimb(key, EvalType.CRIB, false, attackManager, localState);
                     if (newEval > old)
                     {
@@ -105,6 +106,7 @@ namespace M209AnalyzerLib.M209
                     if (!localState.Improved && semiRestarts > 0)
                     {
                         double last = attackManager.Evaluate(EvalType.CRIB, key.Decryption, key.CribArray);
+
                         if (last >= 129000 && last < key.OriginalScore)
                         {
                             int deepCycles = 0;
@@ -134,12 +136,13 @@ namespace M209AnalyzerLib.M209
 
                             if ((semiRestarts % 8) != 7)
                             {
-                                RandomizePinsAndLugs(key, false, false, attackManager.SearchSlide, RANDOM_CYCLES, cycle, attackManager);
+                                RandomizePinsAndLugs(key, true, false, attackManager.SearchSlide, RANDOM_CYCLES, cycle, attackManager);
+                                localState.SingleIteration = true;
                                 newEval = HillClimbPins.HillClimb(key, EvalType.CRIB, true, attackManager, localState);
                             }
                             else
                             {
-                                RandomizePinsAndLugs(key, false, false, attackManager.SearchSlide, RANDOM_CYCLES, cycle, attackManager);
+                                RandomizePinsAndLugs(key, false, true, attackManager.SearchSlide, RANDOM_CYCLES, cycle, attackManager);
                                 localState.Restarts = cycle;
                                 localState.SingleIteration = true;
                                 localState.Quick = true;

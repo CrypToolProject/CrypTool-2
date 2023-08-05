@@ -97,9 +97,8 @@ namespace M209AnalyzerLib.M209
                     }
                     types[0] = c1;
                     types[1] = c2;
-                    for (int changesIndex = 0; changesIndex < changes2Types.Length; changesIndex++)
+                    foreach (int[] changes in changes2Types)
                     {
-                        int[] changes = changes2Types[changesIndex];
 
                         if (!DoChangesIfValid(localState.BestTypeCount, types, changes))
                         {
@@ -148,10 +147,8 @@ namespace M209AnalyzerLib.M209
                         {
                             types[3] = Lugs.TYPES[i4];
 
-                            for (int changesIndex = 0; changesIndex < changes4Types.Length; changesIndex++)
+                            foreach (var changes in changes4Types)
                             {
-                                int[] changes = changes4Types[changesIndex];
-
                                 if (!DoChangesIfValid(localState.BestTypeCount, types, changes))
                                 {
                                     continue;
@@ -200,10 +197,8 @@ namespace M209AnalyzerLib.M209
                     {
                         types[2] = Lugs.TYPES[i3];
 
-                        for (int changesIndex = 0; changesIndex < changes3Types.Length; changesIndex++)
+                        foreach (var changes in changes3Types)
                         {
-                            int[] changes = changes3Types[changesIndex];
-
                             if (!DoChangesIfValid(localState.BestTypeCount, types, changes))
                             {
                                 continue;
