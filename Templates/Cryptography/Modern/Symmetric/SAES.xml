@@ -43,8 +43,8 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <icon file="S-AES.png" />
+  <icon file="SAES.png" />
   <relevantPlugins>
-    <plugin name="S-AES" />
+    <plugin name="SAES" />
   </relevantPlugins>
 </sample>
