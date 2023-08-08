@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--File name: KeySearcher_SDES.xml-->
+  <!--File name: KeySearcher_S-DES.xml-->
   <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">SDES Brute-Force Analysis</title>
-  <summary lang="en">Cryptanalysis of the <i>SDES</i> algorithm using the <i>KeySearcher</i> component</summary>
-  <description lang="en">This template shows the cryptanalysis of the <i>SDES</i> algorithm using the <i>KeySearcher</i> component.</description>
-  <keywords>SDES, symmetric, keysearcher, Attack, Analysis</keywords>
+  <title lang="en">S-DES Brute-Force Analysis</title>
+  <summary lang="en">Cryptanalysis of the <i>S-DES</i> algorithm using the <i>KeySearcher</i> component</summary>
+  <description lang="en">This template shows the cryptanalysis of the <i>S-DES</i> algorithm using the <i>KeySearcher</i> component.</description>
+  <keywords>S-DES, symmetric, keysearcher, Attack, Analysis</keywords>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Key$" value="Key" />
@@ -20,10 +20,10 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">SDES Brute-Force-Analyse</title>
-  <summary lang="de">Kryptoanalyse der <i>SDES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente</summary>
-  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>SDES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente.</description>
-  <keywords lang="de">SDES, DES, symmetrisch, Keysearcher, Angriff, Analyse</keywords>
+  <title lang="de">S-DES Brute-Force-Analyse</title>
+  <summary lang="de">Kryptoanalyse der <i>S-DES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>S-DES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente.</description>
+  <keywords lang="de">S-DES, DES, symmetrisch, Keysearcher, Angriff, Analyse</keywords>
   <replacements lang="de">
     <replacement key="$Plaintext$" value="Klartext" />
     <replacement key="$Key$" value="Schlüssel" />
