@@ -421,7 +421,7 @@ namespace CrypTool.Plugins.SAES.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SAES.
+        ///   Looks up a localized string similar to S-AES.
         /// </summary>
         internal static string PluginCaption {
             get {
