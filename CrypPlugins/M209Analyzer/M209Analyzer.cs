@@ -61,8 +61,6 @@ namespace CrypTool.Plugins.M209Analyzer
         private DateTime _startTime;
         private DateTime _endTime;
 
-        private System.Timers.Timer _timer;
-
         private bool _running = false;
 
         private readonly object lockObject = new object();
@@ -164,7 +162,7 @@ namespace CrypTool.Plugins.M209Analyzer
             //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
             //_m209AttackManager = new M209AttackManager(new ScoringFunction(_settings.Language, _settings.GramsType, 10_000_000));
             _m209AttackManager.OnNewBestListEntry += HandleNewBestListEntry;
-            //_m209AttackManager.OnProgressStatusChanged += _m209AttackManager_OnProgressStatusChanged;
+            _m209AttackManager.OnProgressStatusChanged += _m209AttackManager_OnProgressStatusChanged;
             _m209AttackManager.ShouldStop = !_running;
 
             _m209AttackManager.Threads = _settings.CoresUsed;
@@ -175,7 +173,6 @@ namespace CrypTool.Plugins.M209Analyzer
             _m209AttackManager.SAParameters.Decrement = _settings.Decrement;
 
             ProgressChanged(0, 1);
-            StartUpdateDisplayTimer();
             try
             {
                 switch (_settings.AttackMode)
@@ -198,23 +195,6 @@ namespace CrypTool.Plugins.M209Analyzer
             ProgressChanged(1, 1);
         }
 
-        private void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            GuiLogMessage($"{DateTime.Now}", NotificationLevel.Info);
-            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-            {
-                _endTime = DateTime.Now;
-                TimeSpan elapsedtime = _m209AttackManager.ElapsedTime;
-                TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
-                _presentation.EndTime.Value = _endTime.ToString();
-                _presentation.ElapsedTime.Value = elapsedspan.ToString();
-                _presentation.CurrentlyAnalyzedKey.Value = $"2 ^{(long)(Math.Log(_m209AttackManager.EvaluationCount) / Math.Log(2))}";
-                _presentation.KeyPerMilliSecond.Value = $"{(_m209AttackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : _m209AttackManager.EvaluationCount / _m209AttackManager.ElapsedTime.TotalMilliseconds).ToString("0.0#")} Key/ms";
-            }
-            , null);
-            ProgressChanged(_m209AttackManager.EvaluationCount, _approximatedKeys);
-        }
-
         private void _m209AttackManager_OnProgressStatusChanged(object sender, M209AttackManager.OnProgressStatusChangedEventArgs e)
         {
 
@@ -225,8 +205,18 @@ namespace CrypTool.Plugins.M209Analyzer
                 TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
                 _presentation.EndTime.Value = _endTime.ToString();
                 _presentation.ElapsedTime.Value = elapsedspan.ToString();
-                _presentation.AnalysisStep.Value = e.Phase;
                 _presentation.CurrentlyAnalyzedKey.Value = e.EvaluationCount.ToString();
+                _presentation.CurrentlyAnalyzedKey.Value = $"2 ^{(long)(Math.Log(_m209AttackManager.EvaluationCount) / Math.Log(2))}";
+                _presentation.KeyPerMilliSecond.Value = $"{(_m209AttackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : _m209AttackManager.EvaluationCount / _m209AttackManager.ElapsedTime.TotalMilliseconds).ToString("0.0#")} Key/ms";
+
+                if (_m209AttackManager.Threads == 1)
+                {
+                    _presentation.AnalysisStep.Value = e.Phase;
+                }
+                else
+                {
+                    _presentation.AnalysisStep.Value = "";
+                }
             }
             , null);
             ProgressChanged(_m209AttackManager.EvaluationCount, _approximatedKeys);
@@ -247,7 +237,6 @@ namespace CrypTool.Plugins.M209Analyzer
         {
             _running = false;
             _m209AttackManager.ShouldStop = true;
-            _timer.Stop();
         }
 
         /// <summary>
@@ -262,20 +251,50 @@ namespace CrypTool.Plugins.M209Analyzer
         /// </summary>
         public void Dispose()
         {
-            _timer.Dispose();
         }
 
         #endregion
 
         private int ApproximateKeyCountTarget(int cipherTextLength)
         {
-            if (cipherTextLength <= 1500)
+            if (_settings.AttackMode == AttackMode.CiphertextOnly)
             {
-                return 133_000_000;
+
+                if (cipherTextLength < 1000)
+                {
+                    return 1_000_000_000;
+                }
+                else if (cipherTextLength >= 1000 && cipherTextLength < 1249)
+                {
+                    return 210_000_000;
+                }
+                else if (cipherTextLength >= 1250 && cipherTextLength < 1499)
+                {
+                    return 133_000_000;
+                }
+                if (cipherTextLength >= 1500 && cipherTextLength > 1499)
+                {
+                    return 100_000_000;
+                }
             }
-            else if (cipherTextLength > 1500)
+            else if (_settings.AttackMode == AttackMode.KnownPlaintext)
             {
-                return 100_000_000;
+                if (cipherTextLength < 50)
+                {
+                    return 800_000_000;
+                }
+                else if (cipherTextLength >= 50 && cipherTextLength < 74)
+                {
+                    return 100_000_000;
+                }
+                else if (cipherTextLength >= 74 && cipherTextLength < 100)
+                {
+                    return 25_000_000;
+                }
+                else if (cipherTextLength >= 100)
+                {
+                    return 17_000_000;
+                }
             }
             return 0;
         }
@@ -412,14 +431,6 @@ namespace CrypTool.Plugins.M209Analyzer
                 _presentation.CurrentlyAnalyzedKey.Value = string.Empty;
                 _presentation.AnalysisMode.Value = _settings.AttackMode.ToString();
             }, null);
-        }
-
-        private void StartUpdateDisplayTimer()
-        {
-            _timer = new System.Timers.Timer(1000);
-            _timer.Elapsed += _timer_Elapsed;
-            _timer.AutoReset = true;
-            _timer.Enabled = true;
         }
     }
 

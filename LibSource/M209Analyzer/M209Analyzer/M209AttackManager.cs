@@ -148,6 +148,9 @@ namespace M209AnalyzerLib
             }
         }
 
+        private DateTime _lastProgressUpdate = DateTime.Now;
+        private const int UPDATE_INTERVAL_SECONDS = 1;
+
         public long EvaluationCount = 0;
 
         private readonly object LOCK = new object();
@@ -204,7 +207,10 @@ namespace M209AnalyzerLib
         {
             lock (LOCK)
             {
-                OnProgressStatusChanged?.Invoke(this, new OnProgressStatusChangedEventArgs(attackType, phase, counter, targetValue, EvaluationCount, ElapsedTime));
+                if (DateTime.Now > _lastProgressUpdate.AddSeconds(UPDATE_INTERVAL_SECONDS))
+                {
+                    OnProgressStatusChanged?.Invoke(this, new OnProgressStatusChangedEventArgs(attackType, phase, counter, targetValue, EvaluationCount, ElapsedTime));
+                }
             }
         }
 
