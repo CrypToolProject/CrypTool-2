@@ -13,6 +13,8 @@ namespace M209AnalyzerLib.M209
     {
         public static void Solve(Key key, M209AttackManager attackManager, LocalState localState)
         {
+            attackManager.ProgressChanged("Ciphertext-Only", "", 1, attackManager.Phase1Trials);
+
             localState.BestTypeCount = key.Lugs.CreateTypeCountCopy();
             localState.BestPins = key.Pins.CreateCopy();
 

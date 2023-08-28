@@ -178,10 +178,16 @@ namespace CrypTool.Plugins.M209Analyzer
                 switch (_settings.AttackMode)
                 {
                     case AttackMode.CiphertextOnly:
-                        _m209AttackManager.CipherTextOnlyAttack(Ciphertext);
+                        if (Ciphertext != null)
+                        {
+                            _m209AttackManager.CipherTextOnlyAttack(Ciphertext);
+                        }
                         break;
                     case AttackMode.KnownPlaintext:
-                        _m209AttackManager.KnownPlainTextAttack(Ciphertext, KnownPlaintext);
+                        if (Ciphertext != null && KnownPlaintext != null)
+                        {
+                            _m209AttackManager.KnownPlainTextAttack(Ciphertext, KnownPlaintext);
+                        }
                         break;
                     default:
                         break;
@@ -219,7 +225,16 @@ namespace CrypTool.Plugins.M209Analyzer
                 }
             }
             , null);
-            ProgressChanged(_m209AttackManager.EvaluationCount, _approximatedKeys);
+
+            // Show never 100% if correct not found
+            if (_m209AttackManager.EvaluationCount >= _approximatedKeys)
+            {
+                ProgressChanged(0.99, 1.0);
+            }
+            else
+            {
+                ProgressChanged(_m209AttackManager.EvaluationCount, _approximatedKeys);
+            }
         }
 
         /// <summary>

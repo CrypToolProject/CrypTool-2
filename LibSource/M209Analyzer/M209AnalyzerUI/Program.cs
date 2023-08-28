@@ -1,12 +1,4 @@
-﻿using M209AnalyzerLib;
-using M209AnalyzerLib.Common;
-using M209AnalyzerLib.Enums;
-using M209AnalyzerLib.M209;
-using System;
-using System.Diagnostics;
-using System.Threading;
-
-namespace M209AnalyzerUI
+﻿namespace M209AnalyzerUI
 {
     internal class Program
     {
