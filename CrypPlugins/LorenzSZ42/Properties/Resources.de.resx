@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Wählen Sie die Aktion der Komponente aus.</value>
+  </data>
+  <data name="BaudotNotationGroup" xml:space="preserve">
+    <value>Baudot-Notation</value>
+  </data>
+  <data name="British" xml:space="preserve">
+    <value>Britische Notation</value>
+  </data>
+  <data name="CannotConvertToBritishNotation" xml:space="preserve">
+    <value>Kann nicht in britische Notation umgewandelt werden: Ungültiger Binärcode (kein Baudot-Code-Element) {0} ('{1}') an Position {2}</value>
+  </data>
+  <data name="CannotConvertToRawPlaintext" xml:space="preserve">
+    <value>Kann nicht in rohen Klartext umgewandelt werden: Ungültiger Binärcode (kein Baudot-Code-Element) {0} ('{1}') an Position {2}</value>
+  </data>
+  <data name="CannotConvertToReadableNotation" xml:space="preserve">
+    <value>Kann nicht in lesbarer Notation umgewandelt werden: Ungültiger Binärcode (kein Baudot-Code-Element) {0} ('{1}') an Position {2}</value>
+  </data>
+  <data name="CannotSelectPsiRuleBasedOnDotsOfMu2" xml:space="preserve">
+    <value>Kann keine Psi-Regel basierend auf den Punkten von Mu2 auswählen</value>
+  </data>
+  <data name="CHI2_1BACK" xml:space="preserve">
+    <value>Chi2 (1 vorher)</value>
+  </data>
+  <data name="ChiWeelPinsNotSetAccordingToRules" xml:space="preserve">
+    <value>Chi-Rotor-Stifte nicht entsprechend den Regeln gesetzt</value>
+  </data>
+  <data name="ChiWeelPinsSetAccordingToRules" xml:space="preserve">
+    <value>Chi-Rotor-Stifte entsprechend den Regeln gesetzt</value>
+  </data>
+  <data name="Decrypt" xml:space="preserve">
+    <value>Entschlüsseln</value>
+  </data>
+  <data name="Encrypt" xml:space="preserve">
+    <value>Verschlüsseln</value>
+  </data>
+  <data name="EnteredKeyDoesNotFulfillAllRules" xml:space="preserve">
+    <value>Der eingegebene Schlüssel erfüllt nicht alle Regeln:</value>
+  </data>
+  <data name="ErrorWhileMachinePerforms" xml:space="preserve">
+    <value>Fehler beim Ausführen der Aktion '{0}' der Maschine: {1}</value>
+  </data>
+  <data name="GenerateKey" xml:space="preserve">
+    <value>Schlüssel generieren</value>
+  </data>
+  <data name="InputBaudotNotationAction" xml:space="preserve">
+    <value>Eingabe-Baudot-Notation</value>
+  </data>
+  <data name="InputBaudotNotationTooltip" xml:space="preserve">
+    <value>Wählen Sie die Notation des verwendeten Baudot-Codes für die Eingabe</value>
+  </data>
+  <data name="InputTextCaption" xml:space="preserve">
+    <value>Texteingabe</value>
+  </data>
+  <data name="InputTextTooltip" xml:space="preserve">
+    <value>Eingabe einer Zeichenkette, die von der Chiffre verarbeitet werden soll</value>
+  </data>
+  <data name="InvalidKeyDefinition1" xml:space="preserve">
+    <value>Ungültige Schlüsseldefinition. Erwartet wurden 13 Zeilen, aber es wurden nur {0} erhalten</value>
+  </data>
+  <data name="InvalidKeyDefinition2" xml:space="preserve">
+    <value>Ungültige Schlüsseldefinition. Erwartet wurden 3 Startpositionsdefinitionen. Aber es wurden {0} erhalten</value>
+  </data>
+  <data name="InvalidKeyDefinition3" xml:space="preserve">
+    <value>Ungültige Schlüsseldefinition. Fehler in Zeile {0}: Das Rotor hat {1} Stifte, aber es wurden {2} erhalten</value>
+  </data>
+  <data name="InvalidKeyDefinition4" xml:space="preserve">
+    <value>Ungültige Schlüsseldefinition. Ungültiges Stiftsymbol '{0}' in Zeile {1} gefunden</value>
+  </data>
+  <data name="InvalidKeyGiven" xml:space="preserve">
+    <value>Ungültiger Schlüssel angegeben: {0}</value>
+  </data>
+  <data name="InvalidKeyStartPosition" xml:space="preserve">
+    <value>Ungültige Startpositionsdefinition für Schlüssel. '{0}' hat {1} Stifte, aber die Startposition {2} wurde erhalten (Positionen beginnen mit 0)</value>
+  </data>
+  <data name="InvalidNumberInDeltaCrossesInWheel" xml:space="preserve">
+    <value>Ungültige Anzahl im Delta-Kreuzen im Rotor '{0}': {1}</value>
+  </data>
+  <data name="InvalidNumberOfConsecutiveCrossesInWheel" xml:space="preserve">
+    <value>Ungültige Anzahl von aufeinanderfolgenden Kreuzen im Rotor '{0}': {1}</value>
+  </data>
+  <data name="InvalidNumberOfConsecutiveDotsInWheel" xml:space="preserve">
+    <value>Ungültige Anzahl von aufeinanderfolgenden Punkten im Rotor '{0}': {1}</value>
+  </data>
+  <data name="InvalidNumberOfCrossesInWheel" xml:space="preserve">
+    <value>Ungültige Anzahl von Kreuzen im Rotor '{0}': {1}</value>
+  </data>
+  <data name="InvalidNumberOfDotsInMu2" xml:space="preserve">
+    <value>Ungültige Anzahl von Punkten in Mu2: {0}</value>
+  </data>
+  <data name="InvalidNumberOfDotsInWheel" xml:space="preserve">
+    <value>Ungültige Anzahl von Punkten im Rotor '{0}': {1}</value>
+  </data>
+  <data name="InvalidTextInBritishNotation" xml:space="preserve">
+    <value>Ungültiger Text in britischer Notation: Unbekanntes Symbol '{0}' an Position {1}</value>
+  </data>
+  <data name="InvalidTextInReadableNotation" xml:space="preserve">
+    <value>Ungültiger Text in lesbarer Notation: Unbekanntes Symbol '{0}' (figureShift='{1}') an Position {2}</value>
+  </data>
+  <data name="KeyInputCaption" xml:space="preserve">
+    <value>Schlüssel-Eingabe</value>
+  </data>
+  <data name="KeyInputTooltip" xml:space="preserve">
+    <value>Eingabe des Schlüssels der Lorenz SZ42-Maschine</value>
+  </data>
+  <data name="KeyOutputCaption" xml:space="preserve">
+    <value>Schlüssel-Ausgabe</value>
+  </data>
+  <data name="KeyOutputTooltip" xml:space="preserve">
+    <value>Gibt den verwendeten oder erzeugten Lorenz SZ42-Schlüssel aus</value>
+  </data>
+  <data name="LimitationCaption" xml:space="preserve">
+    <value>Motorbeschränkung</value>
+  </data>
+  <data name="LimitationTooltip" xml:space="preserve">
+    <value>Wählen Sie eine Beschränkung für den Motor</value>
+  </data>
+  <data name="Mu1WeelPinsNotSetAccordingToRules" xml:space="preserve">
+    <value>Mu1-Rotor-Stifte nicht entsprechend den Regeln gesetzt</value>
+  </data>
+  <data name="Mu1WeelPinsSetAccordingToRules" xml:space="preserve">
+    <value>Mu1-Rotor-Stifte entsprechend den Regeln gesetzt</value>
+  </data>
+  <data name="Mu2WeelPinsNotSetAccordingToRules2" xml:space="preserve">
+    <value>Mu2-Rotor-Stifte nicht entsprechend den Regeln gesetzt</value>
+  </data>
+  <data name="Mu2WeelPinsSetAccordingToRules" xml:space="preserve">
+    <value>Mu2-Rotor-Stifte entsprechend den Regeln gesetzt</value>
+  </data>
+  <data name="NoKeyProvided" xml:space="preserve">
+    <value>Kein Schlüssel gegeben</value>
+  </data>
+  <data name="NO_LIMITATION" xml:space="preserve">
+    <value>Keine Limitierung</value>
+  </data>
+  <data name="OutputBaudotNotationAction" xml:space="preserve">
+    <value>Ausgabe-Baudot-Notation</value>
+  </data>
+  <data name="OutputBaudotNotationTooltip" xml:space="preserve">
+    <value>Wählen Sie die Notation des verwendeten Baudot-Codes für die Ausgabe</value>
+  </data>
+  <data name="OutputTextCaption" xml:space="preserve">
+    <value>Textausgabe</value>
+  </data>
+  <data name="OutputTextTooltip" xml:space="preserve">
+    <value>Der ausgegebene Text der Machine</value>
+  </data>
+  <data name="P5_2BACK" xml:space="preserve">
+    <value>Klartext Bit 5 (2 vorher)</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Lorenz SZ42</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Implementierung der Lorenz SZ42-Maschine</value>
+  </data>
+  <data name="PSI1_1BACK" xml:space="preserve">
+    <value>Psi1 (1 vorher)</value>
+  </data>
+  <data name="PSI1_1BACK_P5_2BACK" xml:space="preserve">
+    <value>Psi1 (1 vorher) und Klartext Bit 5 (2 vorher)</value>
+  </data>
+  <data name="PsiWeelPinsNotSetAccordingToRules" xml:space="preserve">
+    <value>Psi-Rotor-Stifte nicht entsprechend den Regeln gesetzt</value>
+  </data>
+  <data name="PsiWeelPinsSetAccordingToRules" xml:space="preserve">
+    <value>Psi-Rotor-Stifte entsprechend den Regeln gesetzt</value>
+  </data>
+  <data name="Raw" xml:space="preserve">
+    <value>Roher Text</value>
+  </data>
+  <data name="Readable" xml:space="preserve">
+    <value>Lesbare Notation</value>
+  </data>
+</root>

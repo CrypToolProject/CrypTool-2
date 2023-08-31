@@ -453,6 +453,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAES", "CrypPlugins\SAES\SA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrandpreCipher", "CrypPlugins\GrandpreCipher\GrandpreCipher.csproj", "{71E34A6D-66F8-4510-91FC-EE50815B657C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LorenzSZ42", "CrypPlugins\LorenzSZ42\LorenzSZ42.csproj", "{0CCB388A-69AF-462C-B8CF-E886F09FB85F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1347,6 +1349,10 @@ Global
 		{71E34A6D-66F8-4510-91FC-EE50815B657C}.Debug|x64.Build.0 = Debug|x64
 		{71E34A6D-66F8-4510-91FC-EE50815B657C}.Release|x64.ActiveCfg = Release|x64
 		{71E34A6D-66F8-4510-91FC-EE50815B657C}.Release|x64.Build.0 = Release|x64
+		{0CCB388A-69AF-462C-B8CF-E886F09FB85F}.Debug|x64.ActiveCfg = Debug|x64
+		{0CCB388A-69AF-462C-B8CF-E886F09FB85F}.Debug|x64.Build.0 = Debug|x64
+		{0CCB388A-69AF-462C-B8CF-E886F09FB85F}.Release|x64.ActiveCfg = Release|x64
+		{0CCB388A-69AF-462C-B8CF-E886F09FB85F}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1564,6 +1570,7 @@ Global
 		{51A7D194-7F3C-4E5C-AF4F-6BE39E3DC8AA} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{53FD0825-5676-40EE-8B4B-F315D358ADDA} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{71E34A6D-66F8-4510-91FC-EE50815B657C} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
+		{0CCB388A-69AF-462C-B8CF-E886F09FB85F} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92042D62-2CDA-4393-9D74-4FB5AC571A2D}
