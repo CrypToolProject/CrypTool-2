@@ -150,7 +150,7 @@ namespace CrypTool.LorenzSZ42.SZ42Machine
                     ChiWheels[1].OneBack = ChiWheels[1].PinActive();
                     break;
                 case Limitation.PSI1_1BACK:
-                    if (!(ChiWheels[1].OneBack == 0b1) ^ (PsiWheels[0].OneBack == 0b1))
+                    if (!((ChiWheels[1].OneBack == 0b1) ^ (PsiWheels[0].OneBack == 0b1)))
                     {
                         psiWheelsShouldMove = true;
                     }
