@@ -8,7 +8,7 @@
   <!--Language 'en' starts here:-->
   <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Lorenz SZ42</title>
-  <summary lang="en">This template shows how the German <i>Lorenz SZ42</i>can be used to encrypt and decrypt  text.</summary>
+  <summary lang="en">This template shows how the German <i>Lorenz SZ42</i> can be used to encrypt and decrypt  text.</summary>
   <description lang="en">With this template we illustrate the encryption of a plaintext by means of a German <b>Lorenz SZ42 cipher machine</b>. The machine was used to encrypt teletype texts and was one of the first stream ciphers.</description>
   <keywords>Schlüsselgerät, rotor, wheel, machine</keywords>
   <replacements lang="en">
@@ -17,7 +17,7 @@
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Generated key$" value="Generated key" />
     <replacement key="$Decrypted plaintext$" value="Decrypted plaintext" />
-    <replacement key="$memo$" value="The {\b Lorenz SZ42} (Schlüssel-Zusatz 42, Engl. cipher attachment) Key, often referred to simply as the &quot;Lorenz machine&quot;, is a remarkable piece of cryptographic machinery that played a crucial role in World War II. Developed by the German engineering firm C. Lorenz AG, this device is distinct from its well-known counterpart, the Enigma machine. While the Enigma was widely used by the German military to encrypt various communications, the Lorenz SZ42 was employed for encoding high-level military and diplomatic messages.\line
+    <replacement key="$memo$" value="The {\b Lorenz SZ42} (Schlüssel-Zusatz 42; English: cipher attachment 42), often referred to simply as the &quot;Lorenz machine&quot;, is a remarkable piece of cryptographic machinery that played a crucial role in World War II. Developed by the German engineering firm C. Lorenz AG, this device is distinct from its well-known counterpart, the Enigma machine. While the Enigma was widely used by the German military to encrypt various communications, the Lorenz SZ42 was employed for encoding high-level military and diplomatic messages.\line
 \line
 The Lorenz SZ42 was primarily used by the German army and government officials for highly sensitive communications. Unlike the Enigma, which used rotor-based encryption, the Lorenz SZ42 employed a completely different approach known as &quot;teleprinter ciphering.&quot; This technology involved encoding messages using the Baudot code, a five-level binary code.\line
 \line
