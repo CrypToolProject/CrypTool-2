@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2018 CrypTool 2 Team <ct2contact@CrypTool.org>
+   Copyright 2018 Dominik Vogt <ct2contact@CrypTool.org>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ using System.ComponentModel;
 
 namespace ADFGVXAnalyzer
 {
-    // HOWTO: rename class (click name, press F2)
     public class ADFGVXANalyzerSettings : ISettings
     {
         #region Private Variables

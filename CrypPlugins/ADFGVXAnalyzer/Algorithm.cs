@@ -1,4 +1,19 @@
-﻿using common;
+﻿/*
+   Copyright 2018 Dominik Vogt <ct2contact@CrypTool.org>
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using common;
 using System;
 
 namespace ADFGVXAnalyzer
@@ -18,22 +33,16 @@ namespace ADFGVXAnalyzer
             {
                 case 0:
                     return GERMAN;
-                    break;
                 case 1:
                     return ENGLISH;
-                    break;
                 case 2:
                     return FRANCE;
-                    break;
                 case 3:
                     return ITALIA;
-                    break;
                 case 4:
                     return SPAIN;
-                    break;
                 default:
                     return ENGLISH;
-                    break;
             }
         }
 
@@ -80,7 +89,6 @@ namespace ADFGVXAnalyzer
 
         private readonly int taskId;
 
-
         public Algorithm(int keyLength, string[] messages, Logger log, int taskId, ThreadingHelper threadingHelper, ADFGVXANalyzerSettings settings, ADFGVXAnalyzer analyzer)
         {
             this.analyzer = analyzer;
@@ -105,19 +113,18 @@ namespace ADFGVXAnalyzer
             interimCipher = new ADFGVXVector(maxPlainLength * 2, false);
         }
 
-        private double eval(ADFGVX key)
+        private double Eval(ADFGVX key)
         {
             threadingHelper.decryptions[taskId - 1]++;
             allPlain.length = 0;
             foreach (ADFGVXVector cipher in ciphers)
             {
-                key.decode(cipher, interimCipher, plain);
+                key.Decrypt(cipher, interimCipher, plain);
                 allPlain.append(plain);
             }
             allPlain.stats();
             return (6000.0 * allPlain.IoC1 + 180000.0 * allPlain.IoC2);
         }
-
 
         public void SANgramsIC()
         {
@@ -134,8 +141,8 @@ namespace ADFGVXAnalyzer
                 {
                     analyzer.LogText += Environment.NewLine + "Task id: " + taskId + " starting with cycle: " + cycles;
                 }
-                key.randomTranspositionKey();
-                double score = eval(key);
+                key.RandomTranspositionKey();
+                double score = Eval(key);
 
                 double startTemp = 500.0;
                 double endTemp = 20.0;
@@ -151,19 +158,19 @@ namespace ADFGVXAnalyzer
                     {
                         keepTranspositionKey.copy(key.transpositionKey);
                         transforms.transform(keepTranspositionKey.TextInInt, newTranspositionKey.TextInInt, keyLength, i);
-                        key.setTranspositionKey(newTranspositionKey);
-                        double newScore = eval(key);
-                        if (SimulatedAnnealing.accept(newScore, score, temp))
+                        key.SetTranspositionKey(newTranspositionKey);
+                        double newScore = Eval(key);
+                        if (SimulatedAnnealing.Accept(newScore, score, temp))
                         {
                             score = newScore;
                             if (score > threadingHelper.bestOverall)
                             {
-                                printIfBest(key, cycles, step, score, temp, deviation);
+                                PrintIfBest(key, cycles, step, score, temp, deviation);
                             }
                         }
                         else
                         {
-                            key.setTranspositionKey(keepTranspositionKey);
+                            key.SetTranspositionKey(keepTranspositionKey);
                         }
                     }
                     // Update PresentationView
@@ -178,17 +185,12 @@ namespace ADFGVXAnalyzer
                     }
                 }
             }
-
-            //log.LogText("Task " + taskId + " Fertig", Logtype.Info);
         }
 
-
-        private void printIfBest(ADFGVX key, int cycles, int step, double score, double temp, int deviation)
+        private void PrintIfBest(ADFGVX key, int cycles, int step, double score, double temp, int deviation)
         {
-
             lock (threadingHelper.bestOverallLock)
             {
-
                 if (score > threadingHelper.bestOverall)
                 {
                     threadingHelper.bestOverall = score;
