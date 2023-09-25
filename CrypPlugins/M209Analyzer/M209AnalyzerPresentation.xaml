@@ -7,15 +7,15 @@
     xmlns:crypanalysisviewcontrol="clr-namespace:CrypTool.CrypAnalysisViewControl;assembly=CrypAnalysisViewControl"
     d:DesignHeight="263">
 
-    <crypanalysisviewcontrol:CrypAnalysisViewControl ResultHeaderCaption="{Loc Analysis}" ResultListCaption="{Loc Best list}">
+    <crypanalysisviewcontrol:CrypAnalysisViewControl ResultHeaderCaption="{Loc LocalLabel}" ResultListCaption="{Loc BestListLabel}">
         <crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Analysis mode:}" x:Name="AnalysisMode"  />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Analysis step:}" x:Name="AnalysisStep" />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Start time:}" x:Name="StartTime" />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc End time:}" x:Name="EndTime" />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Elapsed time:}" x:Name="ElapsedTime" />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Currently analyzed keys:}" x:Name="CurrentlyAnalyzedKey" />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Speed:}" x:Name="KeyPerMilliSecond" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc AnalysisModeLabel:}" x:Name="AnalysisMode"  />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc AnalysisStepLabel:}" x:Name="AnalysisStep" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc StartTimeLabel:}" x:Name="StartTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc EndTimeLabel:}" x:Name="EndTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc ElapsedTimeLabel:}" x:Name="ElapsedTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc CurrentlyAnalyzedKeysLabel:}" x:Name="CurrentlyAnalyzedKey" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc SpeedLabel:}" x:Name="KeyPerMilliSecond" />
         </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
 
         <crypanalysisviewcontrol:CrypAnalysisResultListView ItemsSource="{Binding}" ResultItemAction="HandleResultItemAction">
@@ -28,21 +28,21 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="{Loc Score}" DisplayMemberBinding="{Binding Path=DisplayValue}" Width="100">
+                    <GridViewColumn Header="{Loc ScoreLabel}" DisplayMemberBinding="{Binding Path=DisplayValue}" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Label/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="{Loc Key}" DisplayMemberBinding="{Binding Path=Key}" Width="150">
+                    <GridViewColumn Header="{Loc KeyLabel}" DisplayMemberBinding="{Binding Path=Key}" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Label/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="{Loc Text}" DisplayMemberBinding="{Binding Path=Text}" Width="300">
+                    <GridViewColumn Header="{Loc TextLabel}" DisplayMemberBinding="{Binding Path=Text}" Width="300">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Label/>

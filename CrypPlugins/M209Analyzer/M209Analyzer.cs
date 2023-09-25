@@ -45,9 +45,8 @@ namespace CrypTool.Plugins.M209Analyzer
 
     [Author("Josef Matwich", "josef.matwich@student.uni-siegen.de", "CrypTool 2 Team", "https://www.cryptool.org")]
     // You can (and should) provide a user documentation as XML file and an own icon.
-    [PluginInfo("CrypTool.M209Analyzer.Properties.Resources", "M209 Analyzer", "M209AnalyzerTooltip", "M209Analyzer/userdoc.xml", new[] { "CrypWin/images/default.png" })]
-    // HOWTO: Change category to one that fits to your plugin. Multiple categories are allowed.
-    [ComponentCategory(ComponentCategory.CryptanalysisGeneric)]
+    [PluginInfo("CrypTool.M209Analyzer.Properties.Resources", "M209AnalyzerCaption", "M209AnalyzerTooltip", "M209Analyzer/userdoc.xml", "M209Analyzer/Images/icon.png")]
+    [ComponentCategory(ComponentCategory.CryptanalysisSpecific), ComponentCategory(ComponentCategory.CiphersClassic)]
     public class M209Analyzer : ICrypComponent
     {
         #region Private Variables
@@ -81,14 +80,14 @@ namespace CrypTool.Plugins.M209Analyzer
         /// HOWTO: Input interface to read the input data. 
         /// You can add more input properties of other type if needed.
         /// </summary>
-        [PropertyInfo(Direction.InputData, "Ciphertext", "Ciphertext only")]
+        [PropertyInfo(Direction.InputData, "CiphertextCaption", "CiphertextTooltip")]
         public string Ciphertext
         {
             get;
             set;
         }
 
-        [PropertyInfo(Direction.InputData, "KnownPlaintext", "")]
+        [PropertyInfo(Direction.InputData, "KnownPlaintextCaption", "KnownPlaintextTooltip")]
         public string KnownPlaintext
         {
             get;

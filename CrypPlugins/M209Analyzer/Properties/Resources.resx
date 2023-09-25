@@ -117,10 +117,70 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AnalysisModeLabel" xml:space="preserve">
+    <value>Analysis mode</value>
+  </data>
+  <data name="AnalysisStepLabel" xml:space="preserve">
+    <value>Analysis step</value>
+  </data>
+  <data name="BestListLabel" xml:space="preserve">
+    <value>Best list</value>
+  </data>
+  <data name="CiphertextCaption" xml:space="preserve">
+    <value>Ciphertext</value>
+  </data>
+  <data name="CiphertextTooltip" xml:space="preserve">
+    <value>Ciphertext only</value>
+  </data>
+  <data name="CurrentlyAnalyzedKeysLabel" xml:space="preserve">
+    <value>Currently analyzed keys</value>
+  </data>
+  <data name="ElapsedTimeLabel" xml:space="preserve">
+    <value>Elapsed time</value>
+  </data>
+  <data name="EndTimeLabel" xml:space="preserve">
+    <value>End time</value>
+  </data>
+  <data name="KeyCaption" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="KeyLabel" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="KeyTooltip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="KnownPlaintextCaption" xml:space="preserve">
+    <value>Known plaintext</value>
+  </data>
+  <data name="KnownPlaintextTooltip" xml:space="preserve">
+    <value>Known plaintext</value>
+  </data>
+  <data name="LocalLabel" xml:space="preserve">
+    <value>Analysis</value>
+  </data>
   <data name="M209AnalyzerCaption" xml:space="preserve">
-    <value>M209Analyzer</value>
+    <value>M-209 Analyzer</value>
   </data>
   <data name="M209AnalyzerTooltip" xml:space="preserve">
     <value>Analyze the Hagelin 209</value>
+  </data>
+  <data name="PlaintextCaption" xml:space="preserve">
+    <value>Plain text</value>
+  </data>
+  <data name="PlaintextTooltip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ScoreLabel" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="SpeedLabel" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="StartTimeLabel" xml:space="preserve">
+    <value>Start time</value>
+  </data>
+  <data name="TextLabel" xml:space="preserve">
+    <value>Text</value>
   </data>
 </root>
