@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright CrypTool 2 Team <ct2contact@cryptool.org>
+   Copyright CrypTool 2 Team josef.matwich@gmail.com
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ namespace CrypTool.Plugins.M209Analyzer
 
     public delegate void UpdateOutput(string keyString, string plaintextString);
 
-    [Author("Josef Matwich", "josef.matwich@student.uni-siegen.de", "CrypTool 2 Team", "https://www.cryptool.org")]
+    [Author("Josef Matwich", "josef.matwich@gmail.com", "CrypTool 2 Team", "https://www.cryptool.org")]
     // You can (and should) provide a user documentation as XML file and an own icon.
     [PluginInfo("CrypTool.M209Analyzer.Properties.Resources", "M209AnalyzerCaption", "M209AnalyzerTooltip", "M209Analyzer/userdoc.xml", "M209Analyzer/Images/icon.png")]
     [ComponentCategory(ComponentCategory.CryptanalysisSpecific), ComponentCategory(ComponentCategory.CiphersClassic)]
