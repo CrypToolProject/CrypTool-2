@@ -117,49 +117,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PluginCaption" xml:space="preserve">
-    <value>Nihilist</value>
-  </data>
-  <data name="PluginTooltip" xml:space="preserve">
-    <value>Classic digraphic polyalphabetic substitution cipher substituting each letter by a 2-digit-number</value>
-  </data>
-  <data name="InputCaption" xml:space="preserve">
-    <value>Input byte array</value>
-  </data>
-  <data name="InputTooltip" xml:space="preserve">
-    <value>This is the byte array to be processed by Nihilist cipher.</value>
-  </data>
-  <data name="OutputCaption" xml:space="preserve">
-    <value>Output byte array</value>
-  </data>
-  <data name="OutputTooltip" xml:space="preserve">
-    <value>This is the byte array processed by Nihilist cipher</value>
-  </data>
   <data name="ActionCaption" xml:space="preserve">
     <value>Action</value>
   </data>
   <data name="ActionTooltip" xml:space="preserve">
-    <value>Select the Algorithm action</value>
+    <value>Select the component's action</value>
   </data>
-  <data name="KeyWordCaption" xml:space="preserve">
-    <value>Keyword</value>
+  <data name="AlphabetVersionCaption" xml:space="preserve">
+    <value>Alphabet version</value>
   </data>
-  <data name="KeyWordTooltip" xml:space="preserve">
-    <value>This is the key for encryption or decryption.</value>
+  <data name="AlphabetVersionTooltip" xml:space="preserve">
+    <value>Which alphabet should be used during execution?</value>
   </data>
-  <data name="SecondKeyWordCaption" xml:space="preserve">
-    <value>Second Keyword</value>
-  </data>
-  <data name="SecondKeyWordTooltip" xml:space="preserve">
-    <value>This is the second key used to en/decrypt.</value>
-  </data>
-  <data name="ActionList1" xml:space="preserve">
-    <value>Encrypt</value>
-  </data>
-  <data name="ActionList2" xml:space="preserve">
+  <data name="Decrypt" xml:space="preserve">
     <value>Decrypt</value>
   </data>
-  <data name="ErrorInputKeywordsNotProvided" xml:space="preserve">
-    <value>Both keywords need to be defined, at least one of them is undefined.</value>
+  <data name="Encrypt" xml:space="preserve">
+    <value>Encrypt</value>
+  </data>
+  <data name="InputTextCaption" xml:space="preserve">
+    <value>Input Text</value>
+  </data>
+  <data name="InputTextTooltip" xml:space="preserve">
+    <value>Input a string to be processed by the cipher</value>
+  </data>
+  <data name="Key1Caption" xml:space="preserve">
+    <value>Keyword 1</value>
+  </data>
+  <data name="Key1Tooltip" xml:space="preserve">
+    <value>First keyword of the cipher</value>
+  </data>
+  <data name="Key2Caption" xml:space="preserve">
+    <value>Keyword 2</value>
+  </data>
+  <data name="Key2Tooltip2" xml:space="preserve">
+    <value>Second keyword of the cipher</value>
+  </data>
+  <data name="OutputTextCaption" xml:space="preserve">
+    <value>Output Text</value>
+  </data>
+  <data name="OutputTextTooltip" xml:space="preserve">
+    <value>Result of the cipher</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Nihilist Cipher</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>The Nihilist cipher is a manually operated symmetric encryption cipher, originally used by Russian Nihilists in the 1880</value>
+  </data>
+  <data name="Thirtysix" xml:space="preserve">
+    <value>Alphabet (26 letters) and digits</value>
+  </data>
+  <data name="Twentyfive" xml:space="preserve">
+    <value>Alphabet (25 letters)</value>
+  </data>
+  <data name="UnknownSymbolHandlingCaption" xml:space="preserve">
+    <value>Unknown symbol handling</value>
+  </data>
+  <data name="UnknownSymbolHandlingList1" xml:space="preserve">
+    <value>Ignore (leave unmodified)</value>
+  </data>
+  <data name="UnknownSymbolHandlingList2" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="UnknownSymbolHandlingList3" xml:space="preserve">
+    <value>Replace with '?'</value>
+  </data>
+  <data name="UnknownSymbolHandlingTooltip" xml:space="preserve">
+    <value>What should be done with encountered characters at the input which are not in the alphabet?</value>
   </data>
 </root>

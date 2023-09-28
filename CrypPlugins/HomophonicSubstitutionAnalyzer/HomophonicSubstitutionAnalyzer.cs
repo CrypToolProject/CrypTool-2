@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2020 Nils Kopal <Nils.Kopal<at>CrypTool.org
+   Copyright 2023 Nils Kopal <Nils.Kopal<at>CrypTool.org
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -144,7 +144,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             }
             string ciphertext = HandleLinebreaks(Ciphertext, out List<int> linebreakPositions);
             _presentation.LoadLangStatistics(_settings.Language, _settings.UseSpaces, _settings.UseNulls);
-            _presentation.AddCiphertext(ciphertext, _settings.CiphertextFormat, separator, _settings.Temperature, _settings.UseNulls);
+            _presentation.AddCiphertext(ciphertext, _settings.CiphertextFormat, separator, _settings.StartTemperature, _settings.UseNulls);
             _presentation.AnalyzerConfiguration.PlaintextAlphabet = LanguageStatistics.Alphabet(LanguageStatistics.LanguageCode(_settings.Language), _settings.UseSpaces);
             if (_settings.UseNulls)
             {
@@ -154,7 +154,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             _presentation.AnalyzerConfiguration.WordCountToFind = _settings.WordCountToFind;
             _presentation.AnalyzerConfiguration.MinWordLength = _settings.MinWordLength;
             _presentation.AnalyzerConfiguration.MaxWordLength = _settings.MaxWordLength;
-            _presentation.AnalyzerConfiguration.Cycles = _settings.Cycles;
+            _presentation.AnalyzerConfiguration.NomenclatureElementsThreshold = _settings.NomenclatureElementsThreshold;
+            _presentation.AnalyzerConfiguration.Steps = _settings.Steps;
             _presentation.AnalyzerConfiguration.AnalysisMode = _settings.AnalysisMode;
             _presentation.AnalyzerConfiguration.Restarts = _settings.Restarts;
             _presentation.AnalyzerConfiguration.UseNulls = _settings.UseNulls;
@@ -318,8 +319,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             {
                 for (int i = 0; i < alphabet.Length; i++)
                 {
-                    int minvalue = _settings.Homophononicity;
-                    int maxvalue = _settings.Homophononicity;                    
+                    int minvalue = _settings.Homophonicity;
+                    int maxvalue = _settings.Homophonicity;                    
                     _presentation.AnalyzerConfiguration.KeyLetterLimits.Add(new LetterLimits() { Letter = i, MinValue = minvalue, MaxValue = maxvalue });
                 }
             }
@@ -362,11 +363,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <param name="newBestValueEventArgs"></param>
         private void PresentationOnNewBestValue(object sender, NewBestValueEventArgs newBestValueEventArgs)
         {
-            if (!_running)
+            if (!_running && !newBestValueEventArgs.ForceOutput)
             {
                 return;
             }
-            if (newBestValueEventArgs.NewTopEntry)
+            if (newBestValueEventArgs.NewTopEntry || newBestValueEventArgs.ForceOutput)
             {
                 Plaintext = AddLinebreaksToPlaintext(newBestValueEventArgs.Plaintext);
                 OnPropertyChanged("Plaintext");
@@ -377,7 +378,6 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     {
                         wordBuilder.AppendLine(word);
                     }
-
                     FoundWords = wordBuilder.ToString();
                     OnPropertyChanged("FoundWords");
                 }

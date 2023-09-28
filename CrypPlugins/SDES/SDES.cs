@@ -710,12 +710,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             return execute(input, key, bytesToUse, action);
-        }
-
-        public string GetOpenCLCode(int decryptionLength, byte[] iv)
-        {
-            return null;
-        }
+        }     
 
         public void ChangeSettings(string setting, object value)
         {
@@ -793,23 +788,8 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             int result = progress;
             progress = 0;
             return result;
-        }
-
-        public string ModifyOpenCLCode(string code, int approximateNumberOfKeys)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool NextOpenCLBatch()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int GetOpenCLBatchSize()
-        {
-            throw new NotImplementedException();
-        }
-
+        }      
+     
         #endregion
     }
 

@@ -1,5 +1,19 @@
-﻿using common;
+﻿/*
+   Copyright 2018 Dominik Vogt <ct2contact@CrypTool.org>
 
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using common;
 
 namespace ADFGVXAnalyzer
 {
@@ -20,8 +34,8 @@ namespace ADFGVXAnalyzer
             substitutionInverseKey = new Alphabet36Vector();
             substitutionKey.acceptErrors = true;
             substitutionInverseKey.acceptErrors = true;
-            resetTranspositionKey();
-            resetSubstitutionKey();
+            ResetTranspositionKey();
+            ResetSubstitutionKey();
         }
 
         public ADFGVX(string name, string transpositionKeyStr, string substitutionKeyStr)
@@ -33,117 +47,124 @@ namespace ADFGVXAnalyzer
 
             : this(name, transpositionKeyStr.Length)
         {
-            setTranspositionKey(transpositionKeyStr);
+            SetTranspositionKey(transpositionKeyStr);
             if (inverseSubstitution)
             {
-                setSubstitutionInverseKey(substitutionKeyStr);
+                SetSubstitutionInverseKey(substitutionKeyStr);
             }
             else
             {
-                setSubstitutionKey(substitutionKeyStr);
+                SetSubstitutionKey(substitutionKeyStr);
             }
         }
-        public void randomTranspositionKey()
+        public void RandomTranspositionKey()
         {
             transpositionKey.randomPermutation();
-            updateTranspositionInverseKey();
+            UpdateTranspositionInverseKey();
         }
 
-        private void updateTranspositionInverseKey() { transpositionInverseKey.inverseOf(transpositionKey); }
-        private void updateTranspositionKeyFromInverse() { transpositionKey.inverseOf(transpositionInverseKey); }
-        private void updateSubstitutionInverseKey() { substitutionInverseKey.inverseOf(substitutionKey); }
-        private void updateSubstitutionKeyFromInverse() { substitutionKey.inverseOf(substitutionInverseKey); }
+        private void UpdateTranspositionInverseKey() { transpositionInverseKey.inverseOf(transpositionKey); }
+        private void UpdateTranspositionKeyFromInverse() { transpositionKey.inverseOf(transpositionInverseKey); }
+        private void UpdateSubstitutionInverseKey() { substitutionInverseKey.inverseOf(substitutionKey); }
+        private void UpdateSubstitutionKeyFromInverse() { substitutionKey.inverseOf(substitutionInverseKey); }
 
 
-        public void resetTranspositionKey()
+        public void ResetTranspositionKey()
         {
             transpositionKey.Identity();
             transpositionInverseKey.Identity();
         }
 
-        public void setTranspositionKey(string transpositionKeyStr)
+        public void SetTranspositionKey(string transpositionKeyStr)
         {
             transpositionKey.copy(transpositionKeyStr);
-            updateTranspositionInverseKey();
+            UpdateTranspositionInverseKey();
         }
 
-        public string getTranspositionKey()
+        public string GetTranspositionKey()
         {
             return transpositionKey.ToString();
         }
 
-        public void setTranspositionKey(AlphabetVector transpositionKey)
+        public void SetTranspositionKey(AlphabetVector transpositionKey)
         {
             this.transpositionKey.copy(transpositionKey);
-            updateTranspositionInverseKey();
+            UpdateTranspositionInverseKey();
         }
-        public void swapInTranspositionKey(int i, int j)
+
+        public void SwapInTranspositionKey(int i, int j)
         {
             transpositionKey.Swap(i, j);
-            updateTranspositionInverseKey();
+            UpdateTranspositionInverseKey();
         }
 
-        public void setTranspositionInverseKey(AlphabetVector transpositionInverseKey)
+        public void SetTranspositionInverseKey(AlphabetVector transpositionInverseKey)
         {
             this.transpositionInverseKey.copy(transpositionInverseKey);
-            updateTranspositionKeyFromInverse();
+            UpdateTranspositionKeyFromInverse();
         }
-        public void setTranspositionInverseKey(string transpositionInverseKeyStr)
+
+        public void SetTranspositionInverseKey(string transpositionInverseKeyStr)
         {
             transpositionInverseKey.copy(transpositionInverseKeyStr);
-            updateTranspositionKeyFromInverse();
+            UpdateTranspositionKeyFromInverse();
         }
-        public void swapInTranspositionInverseKey(int i, int j)
+
+        public void SwapInTranspositionInverseKey(int i, int j)
         {
             transpositionInverseKey.Swap(i, j);
-            updateTranspositionKeyFromInverse();
+            UpdateTranspositionKeyFromInverse();
         }
 
-        public void randomSubstitutionKey()
+        public void RandomSubstitutionKey()
         {
             substitutionKey.randomPermutation();
-            updateSubstitutionInverseKey();
+            UpdateSubstitutionInverseKey();
         }
 
-        public void resetSubstitutionKey()
+        public void ResetSubstitutionKey()
         {
             substitutionKey.Identity();
             substitutionInverseKey.Identity();
         }
 
-        public void setSubstitutionKey(string substitutionKeyStr)
+        public void SetSubstitutionKey(string substitutionKeyStr)
         {
             substitutionKey.copy(substitutionKeyStr);
-            updateSubstitutionInverseKey();
+            UpdateSubstitutionInverseKey();
         }
-        public void setSubstitutionKey(Alphabet36Vector substitutionKey)
+
+        public void SetSubstitutionKey(Alphabet36Vector substitutionKey)
         {
             this.substitutionKey.copy(substitutionKey);
-            updateSubstitutionInverseKey();
+            UpdateSubstitutionInverseKey();
         }
-        public void swapInSubstitutionKey(int i, int j)
+
+        public void SwapInSubstitutionKey(int i, int j)
         {
             substitutionKey.Swap(i, j);
-            updateSubstitutionInverseKey();
+            UpdateSubstitutionInverseKey();
         }
 
-        public void setSubstitutionInverseKey(string substitutionInverseKeyStr)
+        public void SetSubstitutionInverseKey(string substitutionInverseKeyStr)
         {
             substitutionInverseKey.copy(substitutionInverseKeyStr);
-            updateSubstitutionKeyFromInverse();
-        }
-        public void setSubstitutionInverseKey(Alphabet36Vector substitutionInverseKey)
-        {
-            this.substitutionInverseKey.copy(substitutionInverseKey);
-            updateSubstitutionKeyFromInverse();
-        }
-        public void swapInSubstitutionInverseKey(int i, int j)
-        {
-            substitutionInverseKey.Swap(i, j);
-            updateSubstitutionKeyFromInverse();
+            UpdateSubstitutionKeyFromInverse();
         }
 
-        public void decodeSubstitution(ADFGVXVector interim, Alphabet36Vector plain)
+        public void SetSubstitutionInverseKey(Alphabet36Vector substitutionInverseKey)
+        {
+            this.substitutionInverseKey.copy(substitutionInverseKey);
+            UpdateSubstitutionKeyFromInverse();
+        }
+
+        public void SwapInSubstitutionInverseKey(int i, int j)
+        {
+            substitutionInverseKey.Swap(i, j);
+            UpdateSubstitutionKeyFromInverse();
+        }
+
+        public void DecryptSubstitution(ADFGVXVector interim, Alphabet36Vector plain)
         {
             if (interim.length % 2 != 0)
             {
@@ -166,10 +187,10 @@ namespace ADFGVXAnalyzer
             }
         }
 
-        public void decode(ADFGVXVector cipher, ADFGVXVector interim, Alphabet36Vector plain)
+        public void Decrypt(ADFGVXVector cipher, ADFGVXVector interim, Alphabet36Vector plain)
         {
             Transposition.decodeWithInverseKey(transpositionInverseKey, cipher, interim);
-            decodeSubstitution(interim, plain);
+            DecryptSubstitution(interim, plain);
         }
     }
 }

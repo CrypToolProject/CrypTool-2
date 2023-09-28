@@ -256,7 +256,7 @@
     <value>Additional Output Bit</value>
   </data>
   <data name="Feedback_polynomial" xml:space="preserve">
-    <value>Feedback polynomial</value>
+    <value>Generator polynomial</value>
   </data>
   <data name="NoQuickwatchList1" xml:space="preserve">
     <value>Display presentation?</value>

@@ -44,6 +44,7 @@ namespace CrypTool.Plugins.Numbers
         }
         #endregion
 
+        [DontSave]
         public ObservableCollection<string> Fonts
         {
             get => fonts;

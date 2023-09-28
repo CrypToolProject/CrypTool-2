@@ -52,7 +52,7 @@
     </UserControl.Resources>
     <UserControl.ContextMenu>
         <ContextMenu>
-            <MenuItem Click="ContextMenuClick" Header="Delete line" 
+            <MenuItem Click="ContextMenu_DeleteLineClick" Header="Delete line" 
                       IsEnabled="{Binding Path=Editor.IsExecuting,Converter={StaticResource ResourceKey=NegateBindingConverter}}">
                 <MenuItem.Icon>
                     <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/delete.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"/>

@@ -1,1 +1,1 @@
-Copy the template folder into 'C:\Users\youruser\Documents\Visual Studio 2019\Templates\ProjectTemplates\Visual C#'
+Zip the template folder and copy the zip into '%USERPROFILE%\Documents\Visual Studio 2022\Templates\ProjectTemplates\C#'

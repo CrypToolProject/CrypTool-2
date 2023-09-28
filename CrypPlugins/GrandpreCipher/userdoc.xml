@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<documentation>
+  <language culture="en"/>    
+  <language culture="de-DE"/>    
+  
+  <introduction lang="en">
+    The Grandpré cipher is a homophonic substitution cipher. To use this cipher, you need one keyword and eight additional words, each with at least eight letters, to fill an 8 x 8 table. The collection of words should contain all 26 letters of the alphabet.<newline/>
+    <newline/>
+    The selected words are arranged systematically and horizontally in an 8 x 8 table. The first letter of each of the eight words (forming the first column) must match the first letter of the keyword.<newline/>
+    <newline/>
+    The encryption process proceeds as follows: for each letter of the plaintext, the corresponding coordinates within the table (represented by two digits, one for the row and one for the column) are determined. In some cases, there may be several valid options, so the encryptor has the freedom to choose one of them at random. Thus, the cipher is a homophonic substitution cipher. The chosen coordinates are then used to generate the ciphertext symbol. The final ciphertext is twice as long as the original plaintext and consists of digits.<newline/>
+  </introduction>
+
+  <introduction lang="de-DE">
+    Die Grandpré-Chiffre ist eine homophone Substitutions-Chiffre. Um diese Chiffre zu benutzen, benötigt man ein Schlüsselwort und acht zusätzliche Wörter mit jeweils mindestens acht Buchstaben, um eine 8 x 8 große Tabelle zu füllen. Die Sammlung von Wörtern sollte alle 26 Buchstaben des Alphabets enthalten.<newline/>
+    <newline/>
+    Die ausgewählten Wörter werden systematisch und waagerecht in einer 8 x 8-Tabelle angeordnet. Der erste Buchstabe jedes der acht Wörter (die die erste Spalte bilden) muss mit dem ersten Buchstaben des Schlüsselworts übereinstimmen.<newline/>
+    <newline/>
+    Der Verschlüsselungsprozess läuft wie folgt ab: Für jeden Buchstaben des Klartextes werden die entsprechenden Koordinaten innerhalb des Tabelle (dargestellt durch zwei Ziffern, eine für die Zeile und eine für die Spalte) ermittelt. In einigen Fällen kann es mehrere gültige Optionen geben, so dass der Verschlüsseler die Freiheit hat, eine davon zufällig zu wählen. Die Chiffre ist also eine homophone Substitutions-Chiffre. Die gewählten Koordinaten werden dann zur Generierung des Geheimtextsymbols verwendet. Der endgültige Geheimtext ist doppelt so lang wie der ursprüngliche Klartext und besteht aus Ziffern.<newline/>
+  </introduction>
+
+  <usage lang="en">
+    The component requires a keyword and a list of words as input. The list of words can be considerably larger than the number of words needed, which is determined by the number and letters of the provided keyword. For each letter in the keyword, the component selects the first appropriate word from the list, ensuring no word is used more than once. If no suitable word remains, an error message is produced. If a particular letter (for example, 'X') does not appear in any of the provided words, a warning is generated should an 'X' need to be encrypted. In such a case, the 'X' remains unencrypted in the ciphertext.<newline/>
+    <newline/>
+    In addition to 8 x 8 tables, the component supports other table sizes (6, 7, 9, and 10). The size of the table is determined by the length of the given keyword.<newline/>
+    <newline/>
+    The component allows for the alteration of the alphabet, where only uppercase letters are allowed. If lowercase letters are provided, these are automatically converted to uppercase. This also applies to the input plaintext, which is automatically transformed into uppercase letters.
+  </usage>
+
+  <usage lang="de-DE">
+    Die Komponente benötigt ein Schlüsselwort und eine Liste von Wörtern als Eingabe. Die Wortliste kann erheblich größer sein als die Anzahl der benötigten Wörter, die durch die Anzahl und die Buchstaben des bereitgestellten Schlüsselworts bestimmt wird. Für jeden Buchstaben im Schlüsselwort wählt die Komponente das erste passende Wort aus der Liste aus und stellt dabei sicher, dass kein Wort mehr als einmal verwendet wird. Wenn kein geeignetes Wort mehr übrig ist, wird eine Fehlermeldung erzeugt. Wenn ein bestimmter Buchstabe (zum Beispiel 'X') in keinem der bereitgestellten Wörter vorkommt, wird eine Warnung generiert, sollte ein 'X' verschlüsselt werden müssen. In einem solchen Fall bleibt das 'X' unverschlüsselt im Geheimtext.<newline/>
+    <newline/>
+    Zusätzlich zu 8 x 8-Tabellen unterstützt die Komponente andere Tabellengrößen (6, 7, 9 und 10). Die Größe der Tabelle wird durch die Länge des gegebenen Schlüsselworts bestimmt.<newline/>
+    <newline/>
+    Die Komponente ermöglicht die Änderung des Alphabets, wobei nur Großbuchstaben verwendet werden dürfen. Wenn Kleinbuchstaben bereitgestellt werden, werden diese automatisch in Großbuchstaben umgewandelt. Dies gilt auch für den bereitgestellten Klartext, der automatisch in Großbuchstaben umgewandelt wird.
+  </usage>
+  
+  <presentation lang="en">
+  </presentation>
+  
+  <presentation lang="de-DE">
+  </presentation>
+
+  <references>
+    <linkReference id="aca_definition">
+      <link url="https://www.cryptogram.org/downloads/aca.info/ciphers/Grandpre.pdf" lang="en" />
+      <caption lang="en">Grandpré cipher definition of the American Cryptogram Association (ACA)</caption>
+      <link url="https://www.cryptogram.org/downloads/aca.info/ciphers/Grandpre.pdf" lang="de-DE" />
+      <caption lang="de-DE">(Englische) Definition der Grandpré-Chiffre der American Cryptogram Association (ACA)</caption>
+    </linkReference>
+  </references>
+ 
+</documentation>

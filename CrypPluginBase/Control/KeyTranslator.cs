@@ -1,5 +1,5 @@
-﻿/*                              
-   Copyright 2010 Sven Rech (svenrech at googlemail dot com), Uni Duisburg-Essen
+﻿/*
+   Copyright 2008 - 2022 CrypTool Team
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -13,14 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
 using System.Runtime;
 
 namespace CrypTool.PluginBase.Control
 {
     /// <summary>
     /// This interface defines the method needed for mapping an abstract key representation to the corresponding concrete key data.
-    /// It also defines methods to generate pieces of OpenCL code, which contain the bruteforcing movement of the key, which were obtained
     /// by the abstract key pattern.
     /// </summary>
     public interface IKeyTranslator
@@ -68,28 +66,6 @@ namespace CrypTool.PluginBase.Control
         /// This is important, because the synchronization is necessary for splitting the keypattern.
         /// </summary>
         /// <returns>The progress</returns>
-        int GetProgress();
-
-        /// <summary>
-        /// This method modifies the given OpenCL code, so that the returning code includes
-        /// the key movement stuff.
-        /// </summary>
-        /// <param name="code"></param>
-        /// <param name="approximateNumberOfKeys"></param>
-        /// <returns></returns>
-        string ModifyOpenCLCode(string code, int approximateNumberOfKeys);
-
-        /// <summary>
-        /// Like "NextKey()", but jumps over a whole key batch that can be processed by the generated OpenCL code
-        /// in one step.
-        /// </summary>
-        /// <returns></returns>
-        bool NextOpenCLBatch();
-
-        /// <summary>
-        /// Gets the opencl batch size.
-        /// </summary>
-        /// <returns></returns>
-        int GetOpenCLBatchSize();
+        int GetProgress();      
     }
 }

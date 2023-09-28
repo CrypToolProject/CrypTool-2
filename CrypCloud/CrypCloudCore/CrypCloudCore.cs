@@ -36,9 +36,6 @@ namespace CrypCloud.Core
         public bool IsRunning => voluntLib.IsStarted;
 
         public int AmountOfWorker { get; set; }
-        public bool EnableOpenCL { get; set; }
-        public int OpenCLDevice { get; set; }
-
         public bool WritePerformanceLog { get; set; }
 
         #endregion

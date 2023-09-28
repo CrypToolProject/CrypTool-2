@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright CrypTool 2 Team <ct2contact@cryptool.org>
+   Copyright 2022 Nils Kopal <Nils.Kopal<at>CrypTool.org
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -13,8 +13,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
-using CrypTool.JosseCipher.Properties;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
@@ -29,109 +27,69 @@ using System.Windows.Threading;
 
 namespace CrypTool.JosseCipher
 {
-    [Author("Niklas Weimann", "niklas.weimann@student.uni-siegen.de", "CrypTool 2 Team", "https://niklas-weimann.de")]
-    [PluginInfo("CrypTool.JosseCipher.Properties.Resources", "PluginCaption", "PluginTooltip", "JosseCipher/userdoc.xml",
-        new[] { "JosseCipher/Images/icon.png" })]
+    [Author("Nils Kopal", "nils.kopal@cryptool.org", "CrypTool 2 Team", "https://www.cryptool.org")]
+    [PluginInfo("CrypTool.JosseCipher.Properties.Resources", "PluginCaption", "PluginTooltip", "JosseCipher/userdoc.xml", new[] { "JosseCipher/Images/icon.png" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class JosseCipher : ICrypComponent
     {
         #region Private Variables
 
+        private const string JOSSE_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVXYZ";        
         private readonly JosseCipherSettings _settings = new JosseCipherSettings();
-        private Dictionary<char, int> _char2Int = new Dictionary<char, int>();
-        private Dictionary<int, char> _int2Char = new Dictionary<int, char>();
-        private readonly JosseCipherPresentation _josseCipherPresentation;
-        private double _process;
-        private string _outputText;
-        private string _calculationStepOutput;
-        private bool _running;
+        private readonly JosseCipherPresentation _josseCipherPresentation = new JosseCipherPresentation();
+        private readonly Dictionary<char, int> _charToIntDictionary = new Dictionary<char, int>();
+        private readonly Dictionary<int, char> _intToCharDictionary = new Dictionary<int, char>();
+        private char[,] _rectangle;
+        private int _rectangleWidth;
+        private int _rectangleHeight;
+        private string _alphabet;        
 
         #endregion
 
         #region Data Properties
 
         [PropertyInfo(Direction.InputData, "InputTextCaption", "InputTextTooltip", true)]
-        public string InputText { get; set; }
-
-        [PropertyInfo(Direction.InputData, "Keyword", "KeywordToolTip")]
-        public string Keyword
+        public string InputText
         {
-            get => _settings.Keyword;
-            set
-            {
-                if (value == null || value == _settings.Keyword)
-                {
-                    return;
-                }
-
-                _settings.Keyword = value;
-                OnPropertyChanged(nameof(Keyword));
-            }
+            get;
+            set;
         }
 
-        [PropertyInfo(Direction.InputData, "InputAlphabetCaption", "InputAlphabetTooltip")]
+        [PropertyInfo(Direction.InputData, "KeyCaption", "KeyTooltip", false)]
+        public string Key
+        {
+            get;
+            set;
+        }
+
+        [PropertyInfo(Direction.InputData, "InputAlphabetCaption", "InputAlphabetTooltip", false)]
         public string Alphabet
         {
-            get => _settings.Alphabet;
-            set
-            {
-                if (value == null || value == _settings.Alphabet)
-                {
-                    return;
-                }
-
-                _settings.Alphabet = value;
-                OnPropertyChanged(nameof(Alphabet));
-            }
+            get;
+            set;
         }
 
-        [PropertyInfo(Direction.OutputData, "OutputTextCaption", "OutputTextTooltip")]
+        [PropertyInfo(Direction.OutputData, "OutputTextCaption", "OutputTextTooltip", false)]
         public string OutputText
         {
-            get => _outputText;
-            set
-            {
-                _outputText = value;
-                OnPropertyChanged(nameof(OutputText));
-            }
-        }
-
-        [PropertyInfo(Direction.OutputData, "CalculationStepOutputCaption", "CalculationStepOutputTooltip")]
-        public string CalculationStepOutput
-        {
-            get => _calculationStepOutput;
-            set
-            {
-                _calculationStepOutput = value;
-                OnPropertyChanged(nameof(CalculationStepOutput));
-            }
+            get;
+            set;
         }
 
         #endregion
 
         #region IPlugin Members
 
-        /// <summary>
-        /// Provide plugin-related parameters (per instance) or return null.
-        /// </summary>
         public ISettings Settings => _settings;
 
-        /// <summary>
-        /// Provide custom presentation to visualize the execution or return null.
-        /// </summary>
         public UserControl Presentation => _josseCipherPresentation;
-
-        public JosseCipher()
-        {
-            _josseCipherPresentation = new JosseCipherPresentation();
-        }
 
         /// <summary>
         /// Called once when workflow execution starts.
         /// </summary>
         public void PreExecution()
         {
-            _running = true;
+            _alphabet = JOSSE_ALPHABET;
         }
 
         /// <summary>
@@ -140,288 +98,299 @@ namespace CrypTool.JosseCipher
         public void Execute()
         {
             ProgressChanged(0, 1);
-            if (string.IsNullOrEmpty(Keyword) && Keyword.Length < 1)
+
+            if (string.IsNullOrEmpty(Key) || string.IsNullOrWhiteSpace(Key))
             {
-                GuiLogMessage(Resources.KeywordTooShort, NotificationLevel.Warning);
+                Key = string.Empty;
+            }
+            if (string.IsNullOrEmpty(InputText) || string.IsNullOrWhiteSpace(InputText))
+            {
+                InputText = string.Empty;
+            }
+            if (!string.IsNullOrEmpty(Alphabet) && !string.IsNullOrWhiteSpace(Alphabet))
+            {
+                _alphabet = Alphabet.ToUpper();
+                HashSet<char> letters = new HashSet<char>();
+                foreach(char chr in _alphabet)
+                {
+                    if (letters.Contains(chr))
+                    {
+                        GuiLogMessage("Invalid alphabet given. It contains at least one of the letters multiple times", NotificationLevel.Error);
+                        return;
+                    }
+                    letters.Add(chr);
+                }
             }
 
-            BuildDictionaries(Keyword);
-            ProgressChanged(0.5, 1);
-            string result = _settings.Cipher == JosseCipherSettings.JosseCipherMode.Encrypt
-                ? Encipher(InputText)
-                : Decipher(InputText);
+            //remove all non-alphabet letters from the keyword
+            Key = CleanInputString(Key.ToUpper());
 
-            if (_running)
+            if (!GeneraterectangleAndDictionaries())
             {
-                OutputText = result;
+                return;
             }
+
+            DataTable characterMappingTable = BuildCharacterMappingTable();
+            DataTable rectangleTable = BuildRectangleTable();
+            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate 
+            {
+                _josseCipherPresentation.BuildCharacterMappingTable(characterMappingTable);
+                _josseCipherPresentation.BuildRectangleTable(rectangleTable);
+            }, null);
+
+            //we only work with uppercase letters
+            InputText = InputText.ToUpper();
+
+            //remove all non-alphabet letters from the input text
+            InputText = CleanInputString(InputText);
+
+            //perform en- or decryption
+            switch (_settings.Action)
+            {
+                default:
+                case Action.Encrypt:
+                    if (_settings.EnablePeriod)
+                    {
+                        StringBuilder ciphertextBuilder = new StringBuilder();
+                        for (int position = 0; position < InputText.Length; position += _settings.Period)
+                        {
+                            string block = InputText.Substring(position, Math.Min(_settings.Period, InputText.Length - position));
+                            ciphertextBuilder.Append(Encrypt(block));
+                        }
+                        OutputText = ciphertextBuilder.ToString();
+                    }
+                    else
+                    {
+                        OutputText = Encrypt(InputText);
+                    }
+                    break;
+                case Action.Decrypt:
+                    if (_settings.EnablePeriod)
+                    {
+                        StringBuilder plaintextBuilder = new StringBuilder();
+                        for (int position = 0; position < InputText.Length; position += _settings.Period)
+                        {
+                            string block = InputText.Substring(position, Math.Min(_settings.Period, InputText.Length - position));
+                            plaintextBuilder.Append(Decrypt(block));
+                        }
+                        OutputText = plaintextBuilder.ToString();
+                    }
+                    else
+                    {
+                        OutputText = Decrypt(InputText);
+                    }
+                    break;
+            }
+
+            OnPropertyChanged(nameof(OutputText));
+
             ProgressChanged(1, 1);
         }
 
-        private double UpdateProcess(int cipherLength)
+        /// <summary>
+        /// Generates the Polybius Rectangle and the two lookup dictionaries using the given key
+        /// </summary>
+        /// <returns></returns>
+        private bool GeneraterectangleAndDictionaries()
         {
-            double oldProcess = _process;
-            _process += GetStepSize(cipherLength);
-            return oldProcess;
-        }
+            _intToCharDictionary.Clear();
+            _charToIntDictionary.Clear();
 
-        private double GetStepSize(int count)
-        {
-            return (1 - _process) / count;
-        }
+            char[] keyArray = Key.Distinct().ToArray();
+            _rectangleWidth = keyArray.Length;
+            _rectangleHeight = _alphabet.Length / _rectangleWidth + (_alphabet.Length % _rectangleWidth > 0 ? 1 : 0);
 
-        private void BuildDictionaries(string key)
-        {
-            _char2Int = new Dictionary<char, int>();
-            _int2Char = new Dictionary<int, char>();
+            int x = 0;
+            int y = 0;
 
-            string alphabet = Alphabet;
-            List<char> keyChars = key.ToCharArray().Where(x => !char.IsWhiteSpace(x)).Distinct().ToList();
-            int keyLength;
-            if (keyChars.Count == 0 && alphabet.Length >= 5)
+            _rectangle = new char[_rectangleHeight, _rectangleWidth];
+
+            HashSet<char> usedSymbols = new HashSet<char>();
+
+            //add key to polybius rectangle
+            foreach (char c in keyArray)
             {
-                keyLength = 5;
-            }
-            else if (keyChars.Count == 0 && alphabet.Length < 5)
-            {
-                keyLength = alphabet.Length;
-            }
-            else
-            {
-                keyLength = keyChars.Count;
-                if (keyLength != key.Length)
+                if (!usedSymbols.Contains(c))
                 {
-                    GuiLogMessage(Resources.DuplicateCharsRemoved, NotificationLevel.Warning);
+                    _rectangle[y, x] = c;
+                    usedSymbols.Add(c);
+                    x++;
+                    if (x == _rectangleWidth)
+                    {
+                        x = 0;
+                        y++;
+                    }
                 }
             }
 
-
-
-            // Remove chars in key from alphabet and add key at the beginning
-            alphabet = string.Concat(keyChars) + string.Concat(alphabet.Where(c => !keyChars.Contains(c)));
-
-            // Build internal representation
-            int count = 1;
-            List<(char, int)> charIndexList = new List<(char, int)>();
-            DataTable replacementTable = new DataTable();
-            List<(int, char)> characterMappingList = new List<(int, char)>();
-            for (int i = 0; i < keyLength && _running; i++)
+            //add remaining alphabet letters to polybius rectangle
+            foreach (char c in _alphabet)
             {
-                replacementTable.Columns.Add(i.ToString());
-                for (int index = i; index < alphabet.Length; index += keyLength)
+                if (!usedSymbols.Contains(c))
                 {
-                    characterMappingList.Add((count, alphabet[index]));
-                    _char2Int.Add(alphabet[index], count);
-                    _int2Char.Add(count, alphabet[index]);
-                    charIndexList.Add((alphabet[index], count));
-                    count++;
+                    _rectangle[y, x] = c;
+                    usedSymbols.Add(c);
+                    x++;
+                    if (x == _rectangleWidth)
+                    {
+                        x = 0;
+                        y++;
+                    }
                 }
             }
 
-            // Build replacementTable
-            int tableIndex = 0;
-            for (int i = 0; i < charIndexList.Count; i += keyLength)
+            int number = 1;
+            for (x = 0; x < _rectangleWidth; x++)
             {
-                DataRow row = replacementTable.NewRow();
-                for (int j = 0; j < keyLength && alphabet.Length > tableIndex; j++)
+                for (y = 0; y < _rectangleHeight; y++)
                 {
-                    row[j] = $"{alphabet[tableIndex]}";
-                    tableIndex++;
+                    if(_rectangle[y, x] != 0)
+                    {
+                        _intToCharDictionary.Add(number, _rectangle[y, x]);
+                        _charToIntDictionary.Add(_rectangle[y, x], number);
+                        number++;
+                    }
+                    
                 }
-
-                replacementTable.Rows.Add(row);
             }
 
-            ShowReplacementTable(replacementTable);
-            DataTable mappingTable = BuildCharacterMappingList(characterMappingList);
-            ShowCharacterMapping(mappingTable);
+            return true;
         }
 
-        private static DataTable BuildCharacterMappingList(IEnumerable<(int, char)> mappingList)
+        /// <summary>
+        /// Cleans the given string; i.e. remove all invalid letters not part of the alphabet
+        /// </summary>
+        private string CleanInputString(string text)
+        {
+
+            StringBuilder keyBuilder = new StringBuilder();
+            foreach (char c in text)
+            {
+                if (_alphabet.Contains(c.ToString()))
+                {
+                    keyBuilder.Append(c);
+                }
+            }
+            return keyBuilder.ToString();
+        }   
+
+        /// <summary>
+        /// Encrypts plaintext
+        /// </summary>
+        private string Encrypt(string plaintext)
+        {            
+            //No text given
+            if (plaintext.Length == 0)
+            {
+                return string.Empty;
+            }
+
+            StringBuilder ciphertextBuilder = new StringBuilder();
+            
+            //Encrypt first letter
+            int number = _charToIntDictionary[plaintext[0]];
+            number = Mod(_alphabet.Length - number, _alphabet.Length);
+            ciphertextBuilder.Append(_intToCharDictionary[number]);
+
+            //Encrypt remaining letters
+            for (int i = 1; i < plaintext.Length; i++)
+            {
+                number = _charToIntDictionary[plaintext[i]];
+                int previous_number = _charToIntDictionary[i == 1 ? plaintext[i - 1] : ciphertextBuilder[i - 1]];
+                number = Mod(number + previous_number, _alphabet.Length);
+                ciphertextBuilder.Append(_intToCharDictionary[number]);
+            }
+
+            return ciphertextBuilder.ToString();
+        }
+
+        private string Decrypt(string ciphertext)
+        {
+            //No text given
+            if (ciphertext.Length == 0)
+            {
+                return string.Empty;
+            }
+
+            StringBuilder plaintextBuilder = new StringBuilder();
+
+            //Decrypt first letter
+            int number = _charToIntDictionary[ciphertext[0]];
+            number = Mod(_alphabet.Length - number, _alphabet.Length);
+            plaintextBuilder.Append(_intToCharDictionary[number]);
+
+            //Decrypt remaining letters
+            for (int i = 1; i < ciphertext.Length; i++)
+            {
+                number = _charToIntDictionary[ciphertext[i]];
+                int previous_number = _charToIntDictionary[i == 1 ? plaintextBuilder[i - 1] : ciphertext[i - 1]];
+                number = Mod(number - previous_number, _alphabet.Length);
+                plaintextBuilder.Append(_intToCharDictionary[number]);
+            }
+
+            return plaintextBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Calculates number MOD module
+        /// But if the number is then 0, we add module
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="module"></param>
+        /// <returns></returns>
+        private int Mod(int number, int module)
+        {
+            number = ((number % module) + module) % module;
+            if(number == 0)
+            {
+                number = module;
+            }
+            return number;
+        }
+
+        /// <summary>
+        /// Builds a table for showing the mapping of numbers to alphabet elements
+        /// </summary>
+        /// <returns></returns>
+        private DataTable BuildCharacterMappingTable()
         {
             DataTable dataTable = new DataTable();
-            dataTable.Columns.Add(Resources.Char);
-            dataTable.Columns.Add(Resources.Index);
-            List<(int, char)> sortedMappingList = mappingList.OrderBy(x => x.Item2).ToList();
-            for (int i = 0; i < sortedMappingList.Count; i++)
+            dataTable.Columns.Add("Character");
+            dataTable.Columns.Add("Number");
+            for (int i = 1; i <= _intToCharDictionary.Count; i++)
             {
                 DataRow row = dataTable.NewRow();
-                row[0] = sortedMappingList[i].Item2;
-                row[1] = sortedMappingList[i].Item1;
+                row[0] = i;
+                row[1] = _intToCharDictionary[i];
                 dataTable.Rows.Add(row);
             }
 
             return dataTable;
         }
 
-        private void ShowCharacterMapping(DataTable dataTable)
+        /// <summary>
+        /// Builds a table for showing the mapping of numbers to alphabet elements
+        /// </summary>
+        /// <returns></returns>
+        private DataTable BuildRectangleTable()
         {
-            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal,
-                (SendOrPostCallback)delegate { _josseCipherPresentation.BuildCharacterMappingTable(dataTable); }, null);
-        }
+            DataTable dataTable = new DataTable();
 
-        private void ShowReplacementTable(DataTable tableContent)
-        {
-            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal,
-                (SendOrPostCallback)delegate { _josseCipherPresentation.BuildReplacementTable(tableContent); }, null);
-        }
-
-        public string Encipher(string unparsedPlainText)
-        {
-            string res = string.Empty;
-            int count = 0;
-            char[] plainText = unparsedPlainText.Where(x => _char2Int.ContainsKey(x)).ToArray();
-            if (plainText.Length != unparsedPlainText.Length)
+            for (int x = 0; x < _rectangleWidth; x++)
             {
-                GuiLogMessage(
-                    string.Format(Resources.UnknownChar,
-                        new string(unparsedPlainText.Where(x => !_char2Int.ContainsKey(x)).Distinct().ToArray())),
-                    NotificationLevel.Warning);
+                dataTable.Columns.Add(string.Empty);
             }
-
-            string[,] steps = new string[plainText.Length + 1, 5];
-            steps[0, 0] = Resources.Plaintext;
-            steps[0, 1] = Resources.NumericalRepresentation;
-            steps[0, 2] = Resources.Calculation;
-            steps[0, 3] = Resources.Result;
-            steps[0, 4] = Resources.Ciphertext;
-            for (int i = 0; i < plainText.Length && _running; i++)
+            for (int y = 0; y < _rectangleHeight; y++)
             {
-                if (!_char2Int.ContainsKey(plainText[i]))
+                DataRow row = dataTable.Rows.Add(string.Empty);
+                for (int x = 0; x < _rectangleWidth; x++)
                 {
-                    continue;
+                    row[x] = _rectangle[y, x];
+
                 }
-                int charToInt = _char2Int[plainText[i]];
-                steps[i + 1, 0] = char.ToString(plainText[i]);
-                steps[i + 1, 1] = charToInt.ToString();
-                if (i == 0)
-                {
-                    steps[i + 1, 2] = $"{_char2Int.Count} - {charToInt}";
-                    steps[i + 1, 3] = (_char2Int.Count - charToInt).ToString();
-                    steps[i + 1, 4] = _int2Char[_char2Int.Count - charToInt].ToString();
-
-                    res += _int2Char[_char2Int.Count - charToInt];
-                    count += _char2Int[plainText[i]];
-                    continue;
-                }
-
-                steps[i + 1, 2] = $"{count} + {charToInt} mod {_char2Int.Count}";
-                count += charToInt;
-                if (count % _char2Int.Count == 0)
-                {
-                    res += _int2Char[_char2Int.Count];
-                    steps[i + 1, 2] = $"{count} mod {_char2Int.Count}";
-                    steps[i + 1, 3] = (count % _char2Int.Count).ToString();
-                    steps[i + 1, 4] = _int2Char[_char2Int.Count].ToString();
-                }
-                else
-                {
-                    res += _int2Char[count % _char2Int.Count];
-                    steps[i + 1, 2] = $"{count} mod {_char2Int.Count}";
-                    steps[i + 1, 3] = (count % _char2Int.Count).ToString();
-                    steps[i + 1, 4] = _int2Char[count % _char2Int.Count].ToString();
-                }
-
-
-                ProgressChanged(UpdateProcess(plainText.Length), 1);
             }
 
-            BuildOutputString(steps, JosseCipherSettings.JosseCipherMode.Encrypt, new string(plainText), res);
-            return res;
-        }
-
-        public string Decipher(string unparsedCypherText)
-        {
-            char[] cypherText = unparsedCypherText.Where(x => _char2Int.ContainsKey(x)).ToArray();
-            if (cypherText.Length != unparsedCypherText.Length)
-            {
-                GuiLogMessage(
-                    string.Format(Resources.UnknownChar,
-                        new string(unparsedCypherText.Where(x => !_char2Int.ContainsKey(x)).ToArray())),
-                    NotificationLevel.Warning);
-            }
-
-            string res = string.Empty;
-            string[,] steps = new string[cypherText.Length + 1, 5];
-            steps[0, 0] = Resources.Ciphertext;
-            steps[0, 1] = Resources.NumericalRepresentation;
-            steps[0, 2] = Resources.Calculation;
-            steps[0, 3] = Resources.Result;
-            steps[0, 4] = Resources.Plaintext;
-
-            for (int i = 0; i < cypherText.Length && _running; i++)
-            {
-                int charToInt = _char2Int[cypherText[i]];
-                steps[i + 1, 0] = char.ToString(cypherText[i]);
-                steps[i + 1, 1] = charToInt.ToString();
-                switch (i)
-                {
-                    case 0:
-                        char plainText = _int2Char[_char2Int.Count - charToInt];
-                        res += plainText;
-                        steps[i + 1, 2] = $"{_char2Int.Count} - {charToInt}";
-                        steps[i + 1, 3] = (_char2Int.Count - charToInt).ToString();
-                        steps[i + 1, 4] = char.ToString(plainText);
-                        continue;
-                    case 1:
-                        int index = (charToInt + _char2Int[cypherText[i - 1]]) % _char2Int.Count;
-                        char plaintext = _int2Char[index];
-                        res += plaintext;
-                        steps[i + 1, 2] = $"{charToInt} + {_char2Int[cypherText[i - 1]]} mod {_char2Int.Count}";
-                        steps[i + 1, 3] = index.ToString();
-                        steps[i + 1, 4] = char.ToString(plaintext);
-                        break;
-                    default:
-                        int charNum = Mod(charToInt - _char2Int[cypherText[i - 1]], _char2Int.Count);
-                        if (charNum == 0)
-                        {
-                            charNum = _char2Int.Count;
-                        }
-
-                        res += _int2Char[charNum];
-                        steps[i + 1, 2] = $"{charToInt} - {_char2Int[cypherText[i - 1]]} mod {_char2Int.Count}";
-                        steps[i + 1, 3] = charNum.ToString();
-                        steps[i + 1, 4] = _int2Char[charNum].ToString();
-                        break;
-                }
-
-                ProgressChanged(UpdateProcess(cypherText.Length), 1);
-            }
-
-            BuildOutputString(steps, JosseCipherSettings.JosseCipherMode.Decrypt, new string(cypherText), res);
-
-            return res;
-        }
-
-        private void BuildOutputString(string[,] steps, JosseCipherSettings.JosseCipherMode josseCipherMode,
-            string fromText,
-            string toText)
-        {
-            StringBuilder stepOutput = new StringBuilder();
-            if (josseCipherMode == JosseCipherSettings.JosseCipherMode.Decrypt)
-            {
-                stepOutput.Append(string.Format(Resources.CalculationStepOutputExplanationDeciphering, fromText,
-                    toText));
-            }
-            else
-            {
-                stepOutput.Append(string.Format(Resources.CalculationStepOutputExplanationEnciphering, fromText,
-                    toText));
-            }
-
-            stepOutput.Append(Environment.NewLine);
-            stepOutput.Append(ArrayPrinter.PrintToConsole(steps));
-            if (string.IsNullOrEmpty(fromText) && string.IsNullOrEmpty(toText))
-            {
-                return;
-            }
-
-            CalculationStepOutput = stepOutput.ToString();
-        }
-
-        private static int Mod(int x, int m)
-        {
-            return (x % m + m) % m;
+            return dataTable;
         }
 
         /// <summary>
@@ -437,7 +406,6 @@ namespace CrypTool.JosseCipher
         /// </summary>
         public void Stop()
         {
-            _running = false;
         }
 
         /// <summary>

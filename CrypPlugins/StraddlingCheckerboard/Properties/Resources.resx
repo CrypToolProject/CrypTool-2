@@ -178,7 +178,7 @@
     <value>This component provides an implementation for the straddling checkerboard.</value>
   </data>
   <data name="ShowPlayText" xml:space="preserve">
-    <value>Execute the workspace show the visualization.</value>
+    <value>Execute the workspace to show the visualization.</value>
   </data>
   <data name="ErrorRowColumnIndexOutOfRange" xml:space="preserve">
     <value>{0} or {1} out of range.</value>

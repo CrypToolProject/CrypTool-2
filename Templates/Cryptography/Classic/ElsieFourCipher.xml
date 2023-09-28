@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: ElsieFour.xml-->
+  <!--Last edited: 2023.04.26-->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">ElsieFour</title>
+  <summary lang="en">This template shows how the <i>ElsieFour cipher</i>can be used to encrypt and decrypt  text.</summary>
+  <description lang="en">With this template we illustrate the encryption of a plaintext by means of the <b>ElsieFour cipher</b>. It is a cipher that can be computed by hand. The cipher was developed by Alan Kaminsky.</description>
+  <keywords>ElsieFour, hand cipher</keywords>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$ElsieFour Cipher$" value="ElsieFour Cipher" />
+    <replacement key="$Decrypted Plaintext$" value="Decrypted plaintext" />
+    <replacement key="$memo$" value="{\b ElsieFour} (also known as LC4) was developed by Alan Kaminsky.
+It is a cipher that can be computed by hand.
+ElsieFour is intended for encrypted communication between humans and therefore encrypts plaintexts consisting only of the English letters A to Z and some other characters.\line
+\line
+In this template, you may enter a plaintext, which is then encrypted and afterwards decrypted. The key is a permutation of (1) the alphabet ABC...Z, (2) followed by  # and _, which represent 0 and 1, and followed by (3) the remaining digits 34...9." />
+  </replacements>
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">ElsieFour</title>
+  <summary lang="de">Diese Vorlage zeigt, wie die <i>ElsieFour-Chiffre</i> zum Ver- und Entschlüsseln von Text verwendet werden kann.</summary>
+  <description lang="de">Mit dieser Vorlage veranschaulichen wir die Verschlüsselung eines Klartextes mit Hilfe der <b>ElsieFour-Chiffre</b>. Es handelt sich um eine Chiffre, die auch von Hand ausgeführt werden kann. Die Chiffre wurde von Alan Kaminsky entwickelt.</description>
+  <keywords>ElsieFour, Handchiffre</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$ElsieFour Cipher$" value="ElsieFour-Chiffre" />
+    <replacement key="$Decrypted Plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$memo$" value="{\b ElsieFour} (auch bekannt als LC4) wurde von Alan Kaminsky entwickelt.
+Es handelt sich um eine Chiffre, die von Hand durchgeführt werden kann.
+ElsieFour ist für die verschlüsselte Kommunikation zwischen Menschen gedacht und verschlüsselt daher Klartexte, die nur aus den englischen Buchstaben A bis Z und einigen anderen Zeichen bestehen.\line
+\line
+In dieser Vorlage können Sie einen Klartext eingeben, der dann verschlüsselt und anschließend entschlüsselt wird. Der Schlüssel ist eine Permutation aus (1) dem Alphabet ABC...Z, (2) gefolgt von # und _, die für 0 und 1 stehen, und gefolgt von (3) den restlichen Ziffern 34...9." />
+  </replacements>
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="ElsieFourCipher.png" />
+  <relevantPlugins>
+    <plugin name="ElsieFourCipher" />
+  </relevantPlugins>
+</sample>

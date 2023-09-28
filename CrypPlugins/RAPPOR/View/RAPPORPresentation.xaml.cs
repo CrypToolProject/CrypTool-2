@@ -214,5 +214,10 @@ namespace CrypTool.Plugins.RAPPOR.View
                     break;
             }
         }
+
+        public RAPPORPresentationViewModel GetrAPPORPresentationViewModel()
+        {
+            return rAPPORPresentationViewModel;
+        }
     }
 }

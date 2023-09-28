@@ -98,7 +98,7 @@ namespace StringOperations
                 {
                     case StringOperationType.Concatenate:
                         _outputString = string.Concat(_string1, _string2);
-                        OnPropertyChanged("OutputString");
+                        OnPropertyChanged(nameof(OutputString));
                         break;
                     case StringOperationType.Substring:
                         if (_string1.Length > 0 && _value1 < 0 && _value1 >= -_string1.Length)
@@ -107,51 +107,51 @@ namespace StringOperations
                         }
 
                         _outputString = _string1.Substring(_value1, _value2);
-                        OnPropertyChanged("OutputString");
+                        OnPropertyChanged(nameof(OutputString));
                         break;
                     case StringOperationType.ToUppercase:
                         _outputString = _string1.ToUpper();
-                        OnPropertyChanged("OutputString");
+                        OnPropertyChanged(nameof(OutputString));
                         break;
                     case StringOperationType.ToLowercase:
                         _outputString = _string1.ToLower();
-                        OnPropertyChanged("OutputString");
+                        OnPropertyChanged(nameof(OutputString));
                         break;
                     case StringOperationType.Length:
                         _outputValue = _string1.Length;
-                        OnPropertyChanged("OutputValue");
+                        OnPropertyChanged(nameof(OutputValue));
                         break;
                     case StringOperationType.CompareTo:
                         _outputValue = _string1.CompareTo(_string2);
-                        OnPropertyChanged("OutputValue");
+                        OnPropertyChanged(nameof(OutputValue));
                         break;
                     case StringOperationType.Trim:
                         _outputString = _string1.Trim();
-                        OnPropertyChanged("OutputString");
+                        OnPropertyChanged(nameof(OutputString));
                         break;
                     case StringOperationType.IndexOf:
                         _outputValue = _string1.IndexOf(_string2);
-                        OnPropertyChanged("OutputValue");
+                        OnPropertyChanged(nameof(OutputValue));
                         break;
                     case StringOperationType.Equals:
                         _outputValue = (_string1.Equals(_string2) ? 1 : 0);
-                        OnPropertyChanged("OutputValue");
+                        OnPropertyChanged(nameof(OutputValue));
                         break;
                     case StringOperationType.Replace:
                         _outputString = _string1.Replace(_string2, _string3);
-                        OnPropertyChanged("OutputString");
+                        OnPropertyChanged(nameof(OutputString));
                         break;
                     case StringOperationType.RegexReplace:
                         _outputString = Regex.Replace(_string1, _string2, _string3);
-                        OnPropertyChanged("OutputString");
+                        OnPropertyChanged(nameof(OutputString));
                         break;
                     case StringOperationType.Split:
                         _outputStringArray = _string2 != null && _string2.Length == 0
                             ? _string1.Select(c => c + "").ToArray()
                             : _string1.Split((_string2 ?? "\r\n").ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                        OnPropertyChanged("OutputStringArray");
+                        OnPropertyChanged(nameof(OutputStringArray));
                         _outputValue = _outputStringArray?.Length ?? 0;
-                        OnPropertyChanged("OutputValue");
+                        OnPropertyChanged(nameof(OutputValue));
                         break;
                     case StringOperationType.Block:
                         if (_settings.Blocksize == 0)
@@ -173,13 +173,13 @@ namespace StringOperations
                             builder.Append(str, str.Length - str.Length % _settings.Blocksize, str.Length % _settings.Blocksize);
                         }
                         _outputString = builder.ToString().Trim();
-                        OnPropertyChanged("OutputString");
+                        OnPropertyChanged(nameof(OutputString));
                         break;
                     case StringOperationType.Reverse:
                         char[] arr = _string1.ToCharArray();
                         Array.Reverse(arr);
                         _outputString = new string(arr);
-                        OnPropertyChanged("OutputString");
+                        OnPropertyChanged(nameof(OutputString));
                         break;
                     case StringOperationType.Sort:
                         char[] sortarr = _string1.ToCharArray();
@@ -189,15 +189,19 @@ namespace StringOperations
                             Array.Reverse(sortarr);
                         }
                         _outputString = new string(sortarr);
-                        OnPropertyChanged("OutputString");
+                        OnPropertyChanged(nameof(OutputString));
                         break;
                     case StringOperationType.Distinct:
                         _outputString = string.Concat(_string1.Distinct());
-                        OnPropertyChanged("OutputString");
+                        OnPropertyChanged(nameof(OutputString));
                         break;
                     case StringOperationType.LevenshteinDistance:
                         _outputValue = LevenshteinDistance(_string1, _string2);
-                        OnPropertyChanged("OutputValue");
+                        OnPropertyChanged(nameof(OutputValue));
+                        break;
+                    case StringOperationType.Shuffle:
+                        _outputString = Shuffle(_string1);
+                        OnPropertyChanged(nameof(OutputString));
                         break;
                 }
                 ProgressChanged(1, 1);
@@ -206,6 +210,28 @@ namespace StringOperations
             {
                 GuiLogMessage(string.Format(Resources.StringOperations_Execute_Could_not_execute_operation___0______1_, (_settings).Operation, ex.Message), NotificationLevel.Error);
             }
+        }
+
+        /// <summary>
+        /// Shuffles the given string using Fisher–Yates_shuffle
+        /// See https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+        /// </summary>
+        /// <param name="string"></param>
+        /// <returns></returns>
+        private string Shuffle(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return string.Empty;
+            }
+            Random random = new Random();
+            char[] array = str.ToCharArray();
+            for(int i = array.Length - 1; i >= 0; i--)
+            {
+                int j = random.Next(0, i);
+                (array[i], array[j]) = (array[j], array[i]);
+            }
+            return new string(array);
         }
 
         /// <summary>

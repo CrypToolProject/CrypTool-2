@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="CrypTool.M138.M138Visualisation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+    <Viewbox>
+        <DataGrid HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="550" MaxWidth="1500" Name="lvwArray" FontSize="18" BorderThickness="1" GridLinesVisibility="Horizontal" CanUserReorderColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" HorizontalGridLinesBrush="Black">
+            <DataGrid.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property="Background" Value="LightGray" />
+                    <Setter Property="Padding" Value="10" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                    <Setter Property="MinWidth" Value="30"/>
+                    <Setter Property="MinHeight" Value="30"/>
+                </Style>
+            </DataGrid.CellStyle>
+        </DataGrid>
+    </Viewbox>
+</UserControl>

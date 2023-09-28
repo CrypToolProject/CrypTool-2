@@ -112,7 +112,6 @@
     <Compile Include="Attributes\TabColorAttribute.cs" />
     <Compile Include="ComponentInformations.cs" />
     <Compile Include="Control\IControlCubeAttack.cs" />
-    <Compile Include="Control\IControlSigabaEncryption.cs" />
     <Compile Include="Control\IControlTranspoEncryption.cs" />
     <Compile Include="Control\IControlCost.cs" />
     <Compile Include="Control\IControlEncryption.cs" />
@@ -134,7 +133,6 @@
     <Compile Include="Miscellaneous\DescriptionHyperlink.cs" />
     <Compile Include="Miscellaneous\EventsHelper.cs" />
     <Compile Include="Attributes\PropertySaveOrderAttribute.cs" />
-    <Compile Include="Attributes\IntegerRangeAttribute.cs" />
     <Compile Include="Editor\DragDropDataObject.cs" />
     <Compile Include="Editor\EditorExtension.cs" />
     <Compile Include="Editor\EditorInfoAttribute.cs" />
@@ -179,19 +177,12 @@
     <Compile Include="Miscellaneous\Hex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TabInfo.cs" />
-    <Compile Include="Utils\Alphabet.cs" />
-    <Compile Include="Utils\Datatypes.cs" />
     <Compile Include="Utils\Graphics\Diagrams\Histogram\HistogramChart.xaml.cs">
       <DependentUpon>HistogramChart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Graphics\Diagrams\Histogram\HistogramDataSource.cs" />
     <Compile Include="Utils\Graphics\Diagrams\Histogram\HistogramElement.cs" />
     <Compile Include="Utils\LanguageStatistics.cs" />
-    <Compile Include="Utils\Logging.cs" />
-    <Compile Include="Utils\ObjectDeconstruct.cs" />
-    <Compile Include="Utils\StandaloneComponent\StandaloneComponentCompat.cs" />
-    <Compile Include="Utils\StandaloneComponent\StandaloneComponents.cs" />
-    <Compile Include="Utils\Text.cs" />
     <Compile Include="Utils\UnicodeHelper.cs" />
     <Compile Include="Validation\IntegerRule.cs" />
     <Compile Include="Validation\RegExRule.cs" />

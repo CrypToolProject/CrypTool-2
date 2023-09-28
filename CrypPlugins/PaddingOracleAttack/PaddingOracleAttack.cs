@@ -32,7 +32,7 @@ using System.Windows.Threading;
 namespace CrypTool.Plugins.PaddingOracleAttack
 {
     [Author("Alexander Juettner", "alex@juettner-online.com", "CrypTool 2 Team", "http://CrypTool2.vs.uni-due.de")]
-    [PluginInfo("PaddingOracleAttack.Properties.Resources", "PluginCaption", "PluginTooltip", "PaddingOracleAttack/Documentation/doc.xml", new[] { "CrypWin/images/default.png" })]
+    [PluginInfo("PaddingOracleAttack.Properties.Resources", "PluginCaption", "PluginTooltip", "PaddingOracleAttack/Documentation/doc.xml", new[] { "PaddingOracleAttack/img/icon.png" })]
     [ComponentCategory(ComponentCategory.CryptanalysisSpecific)]
     [ComponentVisualAppearance(ComponentVisualAppearance.VisualAppearanceEnum.Opened)]
     public class PaddingOracleAttack : ICrypComponent

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: JosseCipherAnalyzer.xml-->
+  <!--Last edited: 2022.02.08-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Josse-Chiffre-Analyse</title>
+  <summary lang="de">Verwendung der <i>Josse-Chiffre</i>-Analyse</summary>
+  <description lang="de">Diese Vorlage zeigt das Brechen der Josse-Chiffre wahlweise mittels Hill climbing oder Simulated Annealing.</description>
+  <keywords lang="de">Josse-Chiffre, Französisch, Krieg, Kryptoanalyse, Hill climbing, Simulated Annealing</keywords>
+  <replacements lang="de">
+    <replacement key="$Josse-Cipher-Analysis$" value="Josse-Chiffre-Analyse" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Alphabet$" value="Alphabet" />
+    <replacement key="$decryptedCiphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$keyword$" value="Schlüsselwort" />
+    <replacement key="$memo$" value="Diese Komponente bietet eine Analyse für die Josse-Chiffre. Dazu wird mittels Hill climbing versucht, den Text zu entschlüsseln, der in der linken oberen Texteingabe angegeben wurde.\line\line Es kann vorkommen, dass bei diesem Verfahren ein Schlüsselwort berechnet wird, das zwar die korrekten Zeichen enthält, jedoch in der falschen Reihenfolge. Das richtige Schlüsselwort ist &quot;GEHIM&quot;." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Josse Cipher Analysis</title>
+  <summary lang="en">Use of the<i>Josse Cipher Analyzer</i></summary>
+  <description lang="en">This template shows the breaking of the Josse cipher using either Hill climbing or Simulated Annealing. The procedures can be adjusted in detail to enable a better result.</description>
+  <keywords>Josse Cipher, French, war, cryptanalysis, hill climbing, Simulated annealing</keywords>
+  <replacements lang="en">
+    <replacement key="$Josse-Cipher-Analysis$" value="Josse Cipher Analyzer" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Alphabet$" value="Alphabet" />
+    <replacement key="$decryptedCiphertext$" value="Decrypted Ciphertext" />
+    <replacement key="$keyword$" value="Keyword" />
+    <replacement key="$memo$" value="This component provides an analysis for the Josse cipher. For this purpose, hill climbing is used to try to decrypt the text specified in the upper left text input.\line\line It can happen that this procedure calculates a keyword that contains the correct characters, but in the wrong order. The correct keyword is &quot;GEHIM&quot;." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="JosseCipherAnalyzer.png" />
+  <relevantPlugins>
+    <plugin name="JosseCipher" />
+    <plugin name="JosseCipherAnalyzer" />
+  </relevantPlugins>
+</sample>

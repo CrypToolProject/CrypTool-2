@@ -38,21 +38,8 @@ namespace UnitTests
         [TestMethod]
         public void TemplateLoadingTestMethod()
         {
-            string[] allTemplates = Directory.GetFiles("Templates", "*.cwm", SearchOption.AllDirectories);
-            string[] experimentalTemplates = Directory.GetFiles("Templates\\Experimental", "*.cwm", SearchOption.AllDirectories);
-
-            //we only want to test the non-experimental templates
-            //thus, we create a list without those from experimental folder
-            List<string> templates = new List<string>();
+            string[] allTemplates = Directory.GetFiles("Templates", "*.cwm", SearchOption.AllDirectories);            
             foreach (string template in allTemplates)
-            {
-                if (!experimentalTemplates.Contains(template))
-                {
-                    templates.Add(template);
-                }
-            }
-
-            foreach (string template in templates)
             {
                 try
                 {

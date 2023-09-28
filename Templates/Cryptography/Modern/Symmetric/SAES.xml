@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: S-AES.xml-->
+  <!--Last edited: 2023.08.08-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">S-AES Cipher</title>
+  <summary lang="en">Usage of the <i>S-AES</i> cipher</summary>
+  <description lang="en">This template shows the usage of the <i>S-AES</i> cipher.</description>
+  <keywords>SRTP, SDP, symmetric</keywords>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key (binary)" />
+    <replacement key="$Message Encoder$" value="Message Encoder" />
+    <replacement key="$Message Decoder$" value="Message Decoder" />
+    <replacement key="$Key Decoder$" value="Key Decoder" />
+    <replacement key="$Decrypted_Ciphertext$" value="Decrypted Ciphertext" />
+    <replacement key="$text$" value="The quick brown fox jumps over the lazy dog." />
+    <replacement key="$memo$" value="With this template you can use the {\b S-AES} component to encrypt an arbitrary text entered in the component {\b Plaintext} on the left side. The resulting encrypted text is displayed in the component {\b Ciphertext} on the right side after pressing the Play button. The {\b S-AES} component works on binary values, i.e. bytes. Thus, the input text is first converted to bytes with the component {\b Message decoder}. With the current settings, it is interpreted as ASCII. The resulting bytes are then encrypted with {\b S-AES}, yielding another sequence of bytes. These bytes are then simply printed as hexadecimal values with the help of the component {\b Message encoder}. Note that you can also decrypt messages with this template. To do so, first copy the encrypted hexadecimal values to the {\b Plaintext}. Then change the following: (1) Set Input format of the {\b Message decoder} to Hexadecimal; (2) Set Action of {\b S-AES} to Decrypt; (3) Set Format of the {\b Message encoder} to Text and the Encoding to ASCII." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">S-AES-Chiffre</title>
+  <summary lang="de">Benutzung der <i>S-AES</i>-Chiffre</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>S-AES</i>-Chiffre.</description>
+  <keywords lang="de">symmetrisch</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel (binär)" />
+    <replacement key="$Message Encoder$" value="Nachrichten-Codierer" />
+    <replacement key="$Message Decoder$" value="Nachrichten-Decodierer" />
+    <replacement key="$Key Decoder$" value="Schlüssel-Decodierer" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$text$" value="Franz jagt im komplett verwahrlosten Taxi quer durch Bayern." />
+    <replacement key="$memo$" value="Mit dieser Komponente können Sie einen beliebigen Text, der in die Komponente {\b Klartext} auf der linken Seite eingegeben werden muss, mit der {\b S-AES}-Komponente verschlüsseln. Der resultierende verschlüsselte Text wird in der Komponente {\b Geheimtext} auf der rechten Seite angezeigt, nachdem die Vorlage durch Klicken der &quot;Starten&quot;-Schaltfläche ausgeführt wurde. Die {\b S-AES}-Komponente arbeitet mit binären Werten, d.h. Bytes. Daher wird der eingegebene Text zuerst mit der Komponente {\b Nachrichten-Decodierer} in Bytes konvertiert. Mit den gegebenen Einstellungen wird der Text im ASCII-Format interpretiert. Die so erhaltenen Bytes werden mit {\b S-AES} verschlüsselt und man erhält eine weitere Bytefolge. Diese wird dann mit Hilfe der {\b Nachrichten-Codierer}-Komponente ins hexadezimale Format konvertiert und ausgegeben. Diese Vorlage kann auch zur Entschlüsselung von Nachrichten verwendet werden. Dazu müssen zuerst die verschlüsselten hexadezimalen Werte in die Komponente {\b Klartext} kopiert werden. Dann müssen folgende Anpassungen vorgenommen werden: (1) Das Eingabeformat in der Komponente {\b Nachrichten-Decodierer} muss auf &quot;Hexadezimal&quot; gesetzt werden; (2) In der {\b S-AES}-Komponente muss die Aktion auf &quot;Entschlüsselung&quot; gesetzt werden; (3) Das Format in der Komponente {\b Nachrichten-Codierer} muss auf Text und die Kodierung auf &quot;ASCII&quot; gesetzt werden." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="SAES.png" />
+  <relevantPlugins>
+    <plugin name="SAES" />
+  </relevantPlugins>
+</sample>

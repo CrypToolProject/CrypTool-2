@@ -104,7 +104,7 @@ namespace VoluntLib2.Tools
             BannedCertificateList = new List<string>();
         }
 
-        private string GetSubjectNameFromCertificate(X509Certificate2 cert)
+        public string GetSubjectNameFromCertificate(X509Certificate2 cert)
         {
             return cert.SubjectName.Name != null ? cert.SubjectName.Name.Split('=').Last() : "";
         }
@@ -210,16 +210,17 @@ namespace VoluntLib2.Tools
         {
             //by name
             string senderName = GetSubjectNameFromCertificate(certificate);
-            if (AdminCertificateList.Contains("N:" + senderName))
+            if (AdminCertificateList.Contains("N:" + senderName) || AdminCertificateList.Contains(senderName))
             {
                 return true;
             }
 
             //by serial number
-            if (AdminCertificateList.Contains("SN:" + certificate.SerialNumber))
+            if (AdminCertificateList.Contains("SN:" + certificate.SerialNumber) || AdminCertificateList.Contains(certificate.SerialNumber))
             {
                 return true;
             }
+
             return false;
         }
 
@@ -232,13 +233,13 @@ namespace VoluntLib2.Tools
         {
             //by name
             string senderName = GetSubjectNameFromCertificate(certificate);
-            if (BannedCertificateList.Contains("N:" + senderName))
+            if (BannedCertificateList.Contains("N:" + senderName) || BannedCertificateList.Contains(senderName))
             {
                 return true;
             }
 
             //by serial number
-            if (BannedCertificateList.Contains("SN:" + certificate.SerialNumber))
+            if (BannedCertificateList.Contains("SN:" + certificate.SerialNumber) || BannedCertificateList.Contains(certificate.SerialNumber))
             {
                 return true;
             }

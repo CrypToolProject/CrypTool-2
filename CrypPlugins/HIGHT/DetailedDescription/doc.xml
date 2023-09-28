@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    HIGHT is a block cipher proposed by Deukjo Hong et al. that uses a block size of 64 bits and a key size of 128 bits. It was proposed at CHES '06 for use in ubiquitous computing devices such as sensors in ubiquitous sensor networks (USN) or RFID tags. The distinctive feature of HIGHT is its use of simple operations such as exclusive-OR, addition mod 2^8, and bitwise rotation. HIGHT is designed to be implemented in hardware to have low gate cost.
+    <newline />
+    The cipher is a variant of a generalized Feistel network. It consists of an initial transformation, 32 rounds of 4 subkeys each, a final transformation, and a key schedule that generates 128 subkeys. The key schedule algorithm of HIGHT is designed to preserve the original value of the master key after the generation of all whitening keys and all subkeys. Therefore, the subkeys for encryption and decryption are generated on the fly.
+    <newline /><img src="HIGHT/Images/HIGHT.png" /></introduction>
+  <introduction lang="de-DE">
+    HIGHT ist eine von Deukjo Hong et al. vorgeschlagene Blockchiffre, die eine Blockgröße von 64 Bit und eine Schlüsselgröße von 128 Bit verwendet. Sie wurde auf der CHES '06 für den Einsatz in allgegenwärtigen Computergeräten wie Sensoren in allgegenwärtigen Sensornetzen (USN) oder RFID-Tags vorgeschlagen. Die Besonderheit von HIGHT ist die Verwendung einfacher Operationen wie Exklusiv-ODER, Addition mod 2^8 und bitweise Rotation. HIGHT ist so konzipiert, dass sie effizient in Hardware implementiert werden kann, um geringe Gatterkosten zu haben.
+    <newline />
+    Die Chiffre ist eine Variante eines verallgemeinerten Feistel-Netzwerks. Sie besteht aus einer Anfangstransformation, 32 Runden mit je 4 Unterschlüsseln, einer Endtransformation und einem Schlüssel-Schedule, der 128 Sub-Schlüssel erzeugt. Der Keyscheduling-Algorithmus von HIGHT ist so konzipiert, dass der ursprüngliche Wert des Hauptschlüssels nach der Erzeugung aller Whitening-Schlüssel und aller Unterschlüssel erhalten bleibt. Daher werden die Unterschlüssel für die Ver- und Entschlüsselung im laufenden Betrieb erzeugt.
+    <newline /><img src="HIGHT/Images/HIGHT.png" />   
+  </introduction>
+  <usage lang="en">    
+  </usage>
+  <usage lang="de-DE"></usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference id="ietf">
+      <link url="http://tools.ietf.org/html/draft-kisa-hight-00" lang="en" />
+      <caption lang="en">The HIGHT Encryption Algorithm (IETF Draft)</caption>
+      <link url="http://tools.ietf.org/html/draft-kisa-hight-00" lang="de-DE" />
+      <caption lang="de-DE">The HIGHT Encryption Algorithm (IETF Draft, Englisch)</caption>
+    </linkReference>
+    <linkReference id="ietf">
+      <link url="http://www.iacr.org/cryptodb/archive/2006/CHES/04/04.pdf" lang="en" />
+      <caption lang="en">HIGHT: A New Block Cipher Suitable for Low-Resource Device (PDF)</caption>
+      <link url="http://www.iacr.org/cryptodb/archive/2006/CHES/04/04.pdf" lang="de-DE" />
+      <caption lang="de-DE">HIGHT: A New Block Cipher Suitable for Low-Resource Device (PDF, Englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

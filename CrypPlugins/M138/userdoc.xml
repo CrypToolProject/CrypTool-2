@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The M-138 is a device used by the US military forces until the middle of the 20th century. It's also known as CSP-845 and was invented by Colonel Parker Hitt in 1916. <newline />
+    The M-138 consists of an aluminium or plastic frame, and a set of paper strips that can be put into the frame. The frame can hold 25 strips at a time.
+    Each strip contains the alphabet in a random order. The alphabet is repeated 2 times on each strip to ensure every character can be encrypted
+    using every strip. To encrypt a text, the strips are put into the frame in such an order, that the cleartext can be read in the first column.
+    After that, the user has to choose an offset which determines the corresponding column the ciphertext will read from. In case a text is
+    longer than 25 characters, the same stips will be reused after 25 characters and the order of the strips is not changed during the encryption
+    of one plaintext. Due to that, the key contains the 25 used strips in the correct order and the chosen offset. The implementation in
+    CrypTool 2 features a set of strips provided by cryptologist Klaus Schmeh as the original set of strips was not published. Using
+	 a set of 100 unknown strips from where 25 are taken leads to a keyspace of 2^166 which makes a brute-force attack unpractical.<newline /><newline /><img src="M138/603px-M-138-A_strip_cipher_2.jpg" /></introduction>
+  <introduction lang="de-DE">    
+    Die M-138 ist ein Verschlüsselungswerkzeug, das bis in die Mitte des 20. Jahrhunderts von den amerikanischen Streitkräften eingesetzt wurde.
+    Sie wurde 1916 von Colonel Parker Hitt erfunden und ist auch als CSP-845 bekannt. <newline />
+    Die M-138 besteht aus einem Aluminium- oder Plastikrahmen und einem Satz Papierstreifen, die in den
+    Rahmen eingeschoben werden können. In den Rahmen passen untereinander 25 Streifen. Jeder Streifen enthält das Alphabet, wobei die Buchstaben zufällig angeordnet
+    sind. Um einen Text zu verschlüsseln, werden die Streifen so in den Rahmen geschoben, dass man in der ersten Spalte den Klartext ablesen kann. Danach kann
+    der Benutzer einen Offset auswählen. In dieser Spalte wird dann der Geheimtext abgelesen. Ist der Text länger als 25 Buchstaben, so werden die Streifen in
+    derselben Reihenfolge für die darauffolgenden Buchstaben verwendet. Der Schlüssel besteht somit aus den 25 verwendeten Streifen in der richtigen Reihenfolge
+    und dem gewählten Offset. Die Implementierung in CrypTool2 verwendet einen von dem Kryptologen Klaus Schmeh entworfenen Streifensatz, da die originalen Streifen
+    nicht bekannt sind. Bei 100 unbekannten Streifen, von denen 25 zufällig ausgewählt werden, ergibt sich ein Schlüsselraum von 2^166. Damit ist ein
+	 Brute-Force-Angriff auf die Verschlüsselung nicht sinnvoll.<newline /><newline /><img src="M138/603px-M-138-A_strip_cipher_2.jpg" /></introduction>
+  <usage lang="en">
+    The component contains 2 inputs, 1 output and 5 possibilities to adjust the component's settings. As inputs, the user has to provide the text to
+    be de- or encrypted as well as the key to be used for that. The output provides the resulting plain- or ciphertext.
+    The key has to be in the format "strip, strip,...,strip / offset". The characters to be used to separate the offset from the list of strips as well
+    as the single strips from each other can be defined in the component's settings. The user can choose between "/", ";" and "," for those. It is important
+    not to use the same character for both, as it wouldn't be possible to correctly parse the key in that case, as it wouldn't be possible to differentiate
+    between strips and offset anymore.
+    Another setting is the handling of unknown characters. This setting defines how characters in the given text are handled, that are not supported by the
+    device's alphabet. In case the strips don't contain a given character, the user can choose whether it should simply be ignored, deleted or replaced by
+    a "?". In case the user chooses "ignore", the characters are not encrypted, but are added to the resulting text afterwards at the correct position.
+    When the M-138 was used in the field, texts were most likely modified before encryption to only contain valid characters.
+    The last setting is case sensitivity. You can choose whether case sensitivity should be kept or not via a checkbox. If case sensitivity is not selected, 
+    the whole text will be transformed into capital letters prior to encryption. This is most likely the way how it was handled when the M-138 was used in the field.
+    Finally, the user has to choose whether the given text should be encrypted or decrypted.    
+    <newline />
+    The M-138 implemented in this component does not at 100% match the original one. One reason for this is that, as of today, not all information about
+    the M-138 are known to the public. For example, the original strips used with the device are not known. Due to that, a set of strips provided by the
+    German cryptologist Klaus Schmeh was used. As no original strips are offered, an original message could be decrypted only if you also input the correct strips.
+    It's also possible to use an invalid key with this component. The first version of the M-138 used 25 strips, a later version used 30 strips. With
+    this component, it's also possible to use a key containing more or less strips. In that case, a warning will be displayed, though encryption and
+    decryption are performed using the given key. More information about the M-138 can be found in Klaus Schmeh's blog:
+    <external ref="http://scienceblogs.de/klausis-krypto-kolumne/m-138-challenge/" /></usage>
+  <usage lang="de-DE">
+    Die Komponente hat 2 Eingänge, 1 Ausgang und 5 Einstellmöglichkeiten. Als Eingänge müssen der Komponente der zu ver- oder entschlüsselnde Text
+    und der zu verwendende Schlüssel übergeben werden. Dem Ausgang übergibt die Komponente den resultierenden Klar- oder Geheimtext.
+    Der Schlüssel muss dabei im Format "Streifen, Streifen, ..., Streifen / Offset" angegeben werden. Welche Zeichen genutzt werden, um innerhalb des Schlüssels
+    die Streifen von dem Offset und die Streifen untereinander zu trennen, kann vom Benutzer in der Komponente eingestellt werden. Dazu werden die Einstellungen
+    "Offset-Trennzeichen" und "Streifen-Trennzeichen" verwendet. Der Benutzer hat die Auswahl zwischen "/", ";" und ",". Dabei muss darauf
+    geachtet werden, dass für die beiden Trennungen nicht dasselbe Zeichen verwendet wird, da die Komponente den Schlüssel ansonsten nicht
+    richtig verarbeiten kann, da es nicht möglich ist, die Streifen eindeutig von dem Offset zu trennen.
+    Eine weitere Einstellung ist die Behandlung von unbekannten Zeichen. Diese legt fest, wie die
+    Komponente beim Ver- und Entschlüsseln mit Zeichen, die nicht zum auf den Streifen verwendeten Alphabet gehören, umgehen soll. Die möglichen Einstellungen
+    sind "Löschen", "Ignorieren" und "Durch ? ersetzen". Wählt der Benutzer "Ignorieren" oder "Durch ? ersetzen", so werden die unbekannten Zeichen beim
+    Ver- und Entschlüsseln nicht beachtet. Im resultierenden Text werden diese Zeichen dann entweder wieder in den Text eingefügt, oder an ihrer Stelle werden
+    "?" in den Text eingefügt. Wählt der Benutzer "Löschen", so werden alle unbekannten Zeichen noch vor dem Verschlüsseln aus dem Text entfernt. Der resultierende Text kann in diesem
+    fall also kürzer sein als das Original. Es ist wahrscheinlich, dass zu verschlüsselnde Texte so angepasst wurden, dass sie nur auf den Streifen
+    vorhandene Buchstaben enthielten, als die M-138 im Einsatz war. Desweiteren kann der Benutzer festlegen, ob Groß- und Kleinschreibung beachtet werden
+    sollen oder nicht. Wird diese Checkbox ausgewählt, so wird die Groß- und Kleinschreibung des eingegebenen Textes auch auf den ausgegebenen Text angewendet. 
+    Wird die Option nicht ausgewählt, so wird der Text komplett in Großbuchstaben umgewandelt. Dies ist wahrscheinlich die Einstellung, die der originalen M-138 entspricht.
+    Letztendlich muss der Benutzer außerdem einstellen, ob der eingegebene Text mithilfe des gegebenen Schlüssels ver- oder entschlüsselt werden soll.
+    <newline />
+    Die Implementierung der M-138 in CrypTool entspricht nicht zu 100% dem originalen Vorbild. Dies liegt einerseits daran, dass bis heute nicht alle
+    Informationen über das Werkzeug bekannt sind. Deshalb wurde hier ein Streifensatz benutzt, den der Kryptologe Klaus Schmeh erstellt hat (die
+    originalen Streifen sind nicht bekannt). Somit ist es nicht möglich, originale Nachrichten mit Hilfe dieser Komponente zu entschlüsseln.
+    Während in der M-138 zuerst 25 und in einer späteren Version 30 Streifen als Schlüssel verwendet wurden, ist es in der Komponente
+    möglich, auch kürzere oder längere Schlüssel zu benutzen.
+    In diesem Fall wird zwar eine Warnung ausgegeben, allerdings funktioniert das Ver- und Entschlüsseln trotzdem. Mehr Informationen zur M-138 finden sich
+    unter anderem im Blog von Klaus Schmeh unter <external ref="http://scienceblogs.de/klausis-krypto-kolumne/m-138-challenge/" />.
+  </usage>
+  <presentation lang="en">
+    The component contains a presentation. The presentation helps understanding how de- and encypting texts with the M-138 works. It has the shape of a table.
+    In the first row, the meaning of the columns is described. In the first column, the position of the letter within the given text is shown. In the second
+    column, the used strip is shown. Dependent of the length of the key, the content of this column is repeating from some point on. In the following column,
+    the content of the strip used is shown per row. The content is shifted in a way, the user can read the plaintext from top to bottom in column "0". This
+    column is colored green. Dependent on the chosen offset, the matching column is colored red. Here the user can read the ciphertext from top to bottom.
+  </presentation>
+  <presentation lang="de-DE">
+    Die Komponente verfügt über eine Präsentation, die das Ver- und Entschlüsseln eines Textes visualisiert. Die Präsentation hat die Form einer Tabelle.
+    In der obersten Zeile sind die Bedeutungen der Spalten angegeben. In der ersten Spalte steht die Stelle des Buchstaben im Text. In der zweiten Spalte
+    steht der an dieser Stelle genutzte Streifen. Je nach Länge des Schlüssels wiederholen sich die Eintragungen in dieser Spalte zyklisch.
+    In den darauffolgenden Spalten stehen zeilenweise die Buchstaben, die auf den genutzten Streifen stehen. Dabei sind die Streifen jeweils so verschoben,
+    dass man in der mit "0" überschriebenen Spalte von oben nach unten den Klartext ablesen kann. Diese Spalte ist grün eingefärbt. Je nach gewähltem Offset
+    wird die entsprechende Spalte rot eingefärbt. In dieser kann man dann den Geheimtext ablesen.
+  </presentation>
+  <references>
+    <linkReference id="schmeh">
+      <link url="http://scienceblogs.de/klausis-krypto-kolumne/m-138-challenge/" lang="en" />
+      <caption lang="en">M-138 challenge in Klaus Schmeh's blog</caption>
+      <link url="http://scienceblogs.de/klausis-krypto-kolumne/m-138-challenge/" lang="de-DE" />
+      <caption lang="de-DE">M-138-Challenge in Klaus Schmehs Blog</caption>
+    </linkReference>
+  </references>
+</documentation>

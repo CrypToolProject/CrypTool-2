@@ -21,7 +21,8 @@
     <replacement key="$CS KeyGen$" value="CS Key Generator" />
     <replacement key="$CS Encaps$" value="CS Encaps" />
     <replacement key="$CS Decaps$" value="CS Decaps" />
-    <replacement key="$memo$" value="Cramer-Shoup is a public-key encryption algorithm based on ElGamal.\line\line This example shows a possible hybrid scheme for Cramer Shoup with EAX-AES." />
+    <replacement key="$text$" value="Cramer-Shoup is an asymmetric key encryption algorithm based on ElGamal. Cramer-Shoup was presented by Ronald Cramer and Victor Shoup in 1998. It was the first efficient cryptosystem against adaptive chosen ciphertext attacks. In comparison to ElGamal, Cramer-Shoup is extended to ensure non-mallebility even against a resourceful attacker. This non-malleability is achieved through the use of a universal one-way hash function and additional computations, resulting in a ciphertext which is twice as large as in ElGamal."/>
+    <replacement key="$memo$" value="{\b Cramer-Shoup} is a public-key encryption algorithm based on ElGamal.\line\line This example shows a possible hybrid scheme for Cramer-Shoup with EAX-AES." />    
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -40,7 +41,8 @@
     <replacement key="$CS KeyGen$" value="CS-Schlüsselgenerator" />
     <replacement key="$CS Encaps$" value="CS-Encaps" />
     <replacement key="$CS Decaps$" value="CS-Decaps" />
-    <replacement key="$memo$" value="Cramer-Shoup ist ein asymmetrischer Verschlüsselungsalgorithmus, der auf ElGamal basiert. \line\line Dieses Beispiel zeigt ein mögliches Hybridschema für Cramer Shoup mit EAX-AES." />
+    <replacement key="$text$" value="Cramer-Shoup ist ein asymmetrischer Verschlüsselungsalgorithmus, der auf ElGamal basiert. Cramer-Shoup wurde von Ronald Cramer und Victor Shoup im Jahr 1998 vorgestellt. Es war das erste effiziente Kryptosystem gegen adaptive chosen ciphertext attacks. Im Vergleich zu ElGamal ist Cramer-Shoup so erweitert, dass es selbst gegen einen findigen Angreifer nicht mehr angreifbar ist. Diese Nicht-Angreifbarkeit wird durch die Verwendung einer universellen Einweg-Hash-Funktion und zusätzlicher Berechnungen erreicht, die zu einem doppelt so großen Geheimtext wie bei ElGamal führen."/>
+    <replacement key="$memo$" value="{\b Cramer-Shoup} ist ein asymmetrischer Verschlüsselungsalgorithmus, der auf ElGamal basiert. \line\line Dieses Beispiel zeigt ein mögliches Hybridschema für Cramer-Shoup mit EAX-AES." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

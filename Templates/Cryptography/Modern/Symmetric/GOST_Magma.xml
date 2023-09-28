@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: GOST_Magma.xml-->
+  <!--Last edited: 2022.10.14-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">GOST Magma Cipher</title>
+  <summary lang="en">Usage of the <i>GOST Magma</i> cipher</summary>
+  <description lang="en">GOST Magma is a Soviet and Russian block cipher of the GOST standard first published in 1994. It has a blocksize of 64 bits and a keysize of 128 bits.</description>
+  <keywords>Soviet, Russian, symmetric, block, cipher, Feistel</keywords>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key (Hex values)" />
+    <replacement key="$Decrypted ciphertext$" value="Decrypted ciphertext" />
+    <replacement key="$Initialization vector$" value="Initialization vector (Hex values)" />
+    <replacement key="$memo$" value="{\b GOST Magma}, defined in the standard GOST 28147-89 (RFC 5830), is a Soviet and Russian block cipher of the GOST standard first published in 1994. It has a blocksize of 64 bits and a keysize of 128 bits.\line\line
+The original standard published in 1989 did not give a name to the cipher, but the most recent revision of the standard, GOST R 34.12-2015 (RFC 7801, RFC 8891), specifies that it may be referred to as Magma." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">GOST Magma-Chiffre</title>
+  <summary lang="de">Benutzung der <i>GOST Magma</i>-Chiffre</summary>
+  <description lang="de">GOST Magma ist eine sowjetische und russische Blockchiffre nach dem GOST-Standard, die erstmals 1994 veröffentlicht wurde. Sie hat eine Blockgröße von 64 Bit und eine Schlüsselgröße von 128 Bit.</description>
+  <keywords>sowjetisch, russisch, symmetrisch, Block, Chiffre, Feistel</keywords>
+  <replacements lang="de">
+   <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel (Hex-Werte)" />
+    <replacement key="$Decrypted ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$Initialization vector$" value="Initialisierungsvektor (Hex-Werte)" />
+    <replacement key="$memo$" value="{\b GOST Magma}, definiert im Standard GOST 28147-89 (RFC 5830), ist eine sowjetische und russische Blockchiffre des GOST-Standards, die erstmals 1994 veröffentlicht wurde. Sie hat eine Blockgröße von 64 Bit und eine Schlüsselgröße von 128 Bit.\line\line
+Der ursprüngliche, 1989 veröffentlichte Standard gab der Chiffre keinen Namen, aber die jüngste Revision des Standards, GOST R 34.12-2015 (RFC 7801, RFC 8891), legt fest, dass sie als Magma bezeichnet werden kann." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="GOST_Magma.png" />
+  <relevantPlugins>
+    <plugin name="Magma" />
+  </relevantPlugins>
+</sample>

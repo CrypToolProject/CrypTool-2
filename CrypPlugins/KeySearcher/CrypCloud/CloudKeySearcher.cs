@@ -40,7 +40,7 @@ namespace KeySearcher
             this.keySearcher = keySearcher;
 
             jobId = jobDataContainer.JobId;
-            calculationTemplate = new CalculationTemplate(jobDataContainer, pattern, SortAscending(), keySearcher, CrypCloudCore.Instance.EnableOpenCL, CrypCloudCore.Instance.OpenCLDevice);
+            calculationTemplate = new CalculationTemplate(jobDataContainer, pattern, SortAscending(), keySearcher);
 
             uiContext = presentation.UiContext;
             viewModel = presentation.ViewModel;

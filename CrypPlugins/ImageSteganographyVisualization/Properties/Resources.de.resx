@@ -391,10 +391,13 @@
     <value>Weiter</value>
   </data>
   <data name="NoImageLogMessage" xml:space="preserve">
-    <value>Laden Sie bitte ein Bild hoch</value>
+    <value>Kein Bild eingegeben</value>
   </data>
   <data name="NoPresentationPrompt" xml:space="preserve">
     <value>Keine Präsentation die angezeigt werden kann</value>
+  </data>
+  <data name="NoSecretMessageGiven" xml:space="preserve">
+    <value>Keine geheime Nachricht eingegeben</value>
   </data>
   <data name="NotEnoughHidingCapacity" xml:space="preserve">
     <value>Die Versteckkapazität ist geringer als die Größe der geheimen Nachricht, daher wurde nicht die ganze Nachricht versteckt.</value>

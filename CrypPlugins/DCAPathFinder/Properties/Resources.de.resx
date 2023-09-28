@@ -223,7 +223,7 @@
     <value>Herzlich willkommen zum Tutorial zur differenziellen Kryptoanalyse (DKA). Dieses Verfahren zur Analyse rundenbasierter symmetrischer Blockchiffren hat das Ziel, einzelne Bits bis hin zu vollständigen Rundenschlüsseln wiederherzustellen. Veröffentlicht wurde dieses Verfahren 1991 von den zwei israelischen Forschern Eli Biham und Adi Shamir. </value>
   </data>
   <data name="OverviewContent2" xml:space="preserve">
-    <value>Dieses Tutorial behandelt die DKA in drei Teilen. Teil 1 vermittelt die grundlegende Idee der DKA anhand einer Chiffre mit einer Verschlüsselungsrunde. Teil 2 vertieft diese Idee anhand einer Chiffre mit drei Verschlüsselungsrunden. In Teil 3 wird das vermittelte Wissen vertieft durch Erhöhung der Komplexität der Chiffre auf fünf Verschlüsselungsrunden.</value>
+    <value>Dieses Tutorial behandelt die DKA in drei Teilen. Teil 1 vermittelt die grundlegende Idee der DKA anhand einer Chiffre mit nur einer einzigen Verschlüsselungsrunde. Teil 2 vertieft diese Idee anhand einer Chiffre mit drei Verschlüsselungsrunden. In Teil 3 wird das vermittelte Wissen vertieft durch Erhöhung der Komplexität der Chiffre auf fünf Verschlüsselungsrunden.</value>
   </data>
   <data name="OverviewContent3" xml:space="preserve">
     <value>In der Konfiguration dieser Komponente können die Nummer des Tutorials und der Tutorial-Modus ausgewählt werden.</value>

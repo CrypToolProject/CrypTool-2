@@ -43,6 +43,7 @@ namespace CrypTool.Plugins.AudioInput
         private ObservableCollection<string> devices = new ObservableCollection<string>();
         private int device = 0;
 
+        [DontSave]
         public ObservableCollection<string> Devices
         {
             get => devices;

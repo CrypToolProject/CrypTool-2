@@ -1,4 +1,6 @@
-﻿namespace CrypTool.Plugins.RAPPOR.ViewModel
+﻿using System;
+
+namespace CrypTool.Plugins.RAPPOR.ViewModel
 {
     /// <summary>
     /// Internal class of the state view model, handling the ui logic of the start view.
@@ -31,6 +33,12 @@
         public string GetName()
         {
             return name;
+        }
+        public new void ChangeButton(Boolean ru)
+        {
+        }
+        public void CreateHeatMapViewText(int a)
+        {
         }
     }
 }

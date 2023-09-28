@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*
+   Copyright 2008 - 2022 CrypTool Team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 
@@ -153,23 +168,26 @@ namespace CrypTool.PluginBase.Miscellaneous
             return mi;
         }
 
-        public static implicit operator string(ModMatrix mat)
+        public override string ToString()
         {
             List<BigInteger> lst = new List<BigInteger>();
             string s = "";
-
-            for (int y = 0; y < mat.Dimension; y++)
+            for (int y = 0; y < Dimension; y++)
             {
                 lst.Clear();
-                for (int x = 0; x < mat.Dimension; x++)
+                for (int x = 0; x < Dimension; x++)
                 {
-                    lst.Add(mat[x, y]);
+                    lst.Add(this[x, y]);
                 }
 
                 s += "[" + string.Join(",", lst) + "]";
             }
+            return "[" + s + "] (modulus=" + Modulus + ")";
+        }
 
-            return "[" + s + "] (modulus=" + mat.Modulus + ")";
+        public static implicit operator string(ModMatrix mat)
+        {
+            return mat.ToString();
         }
 
         public static ModMatrix operator *(ModMatrix matA, ModMatrix matB)

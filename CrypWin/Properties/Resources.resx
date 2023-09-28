@@ -988,9 +988,6 @@
   <data name="SI_Or_newer" xml:space="preserve">
     <value>or newer</value>
   </data>
-  <data name="DECRYPTProject" xml:space="preserve">
-    <value>DECRYPT Project</value>
-  </data>
   <data name="Category" xml:space="preserve">
     <value>Category</value>
   </data>

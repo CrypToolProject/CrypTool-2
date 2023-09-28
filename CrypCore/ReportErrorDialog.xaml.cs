@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2022 CrypTool Team
+   Copyright 2008 - 2022 CrypTool Team
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -91,10 +91,15 @@ namespace CrypTool.Core
 
                 RegistryKey reg = localKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
                 string productName = (string)reg.GetValue("ProductName");
-                string csdVersion = (string)reg.GetValue("CSDVersion");
-                string currentVersion = (string)reg.GetValue("CurrentVersion");
+                int currentMajorVersionNumber = (int)reg.GetValue("CurrentMajorVersionNumber");
+                int currentMinorVersionNumber = (int)reg.GetValue("CurrentMinorVersionNumber");
                 string currentBuildNumber = (string)reg.GetValue("CurrentBuildNumber");
-                string windowsVersionString = productName + " " + csdVersion + " (" + currentVersion + "." + currentBuildNumber + ")";
+                if (currentBuildNumber.Equals("22000"))
+                {
+                    //hack, to replace Windows 10 with Windows 11 in the display
+                    productName = "Windows 11";
+                }
+                string windowsVersionString = string.Format("{0} ({1}.{2}.{3})", productName, currentMajorVersionNumber, currentMinorVersionNumber, currentBuildNumber);
                 sb.AppendLine(string.Format("Operating System: {0}", windowsVersionString));
             }
             catch (Exception)

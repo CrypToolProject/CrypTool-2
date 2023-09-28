@@ -36,31 +36,24 @@ namespace UnitTests
         public void TemplateXMLTestMethod()
         {
             string[] allFiles = Directory.GetFiles("Templates", "*.*", SearchOption.AllDirectories);
-            string[] experimentalFiles = Directory.GetFiles("Templates\\Experimental", "*.*", SearchOption.AllDirectories);
-
 
             HashSet<string> templates = new HashSet<string>();
             HashSet<string> xmls = new HashSet<string>();
             foreach (string file in allFiles)
-            {
-                if (!experimentalFiles.Contains(file))
+            {                
+                if (file.ToLower().EndsWith("dir.xml"))
                 {
-                    if (file.ToLower().EndsWith("dir.xml"))
-                    {
-                        //we don't need dir.xml files
-                        continue;
-                    }
-
-                    if (file.ToLower().EndsWith("cwm"))
-                    {
-                        templates.Add(file);
-                    }
-
-                    if (file.ToLower().EndsWith("xml"))
-                    {
-                        xmls.Add(file);
-                    }
+                    //we don't need dir.xml files
+                    continue;
                 }
+                if (file.ToLower().EndsWith("cwm"))
+                {
+                    templates.Add(file);
+                }
+                if (file.ToLower().EndsWith("xml"))
+                {
+                    xmls.Add(file);
+                }                
             }
 
             foreach (string template in templates)

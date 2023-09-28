@@ -1144,18 +1144,6 @@
                                             </ScrollViewer>
                                         </dc:PaneItem>
 
-                                        <dc:PaneItem Visibility="Collapsed" Name="navPaneItemDECRYPTProject" Header="{Loc DECRYPTProject}" 
-                                            ImageSmallSource="images/decrypt-logo.png"
-                                            ImageSource="images/decrypt-logo.png"
-                                            Title="{Loc DECRYPTProject}" Height="35" IsSelected="True"                                            
-                                            MouseLeftButtonDown="navPaneItem_MouseLeftButtonDown">
-                                            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                                <StackPanel CanVerticallyScroll="True">
-                                                    <ListBox Name="navListBoxDECRYPTProject" BorderThickness="0" Margin="0"/>
-                                                </StackPanel>
-                                            </ScrollViewer>
-                                        </dc:PaneItem>
-
                                         <dc:PaneItem Visibility="Collapsed" Name="navPaneItemSearch" Header="{Loc Search}" 
                     Title="{Loc Search}" Height="35" IsSelected="True"
                     ImageSource="images/08-Search-28x26.png" ImageSmallSource="images/08-Search-28x26.png"

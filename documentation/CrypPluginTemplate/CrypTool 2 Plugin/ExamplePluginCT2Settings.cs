@@ -21,7 +21,7 @@ using CrypTool.PluginBase.Miscellaneous;
 namespace CrypTool.Plugins.$safeprojectname$
 {
     // HOWTO: rename class (click name, press F2)
-    public class ExamplePluginCT2Settings : ISettings
+    public class $safeprojectname$Settings : ISettings
     {
         #region Private Variables
 

@@ -121,7 +121,7 @@
     <value>Encryption</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
-    <value>SDES</value>
+    <value>S-DES</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
     <value>Simplified Data Encryption Standard</value>
@@ -151,10 +151,10 @@
     <value>Must be 8 bytes (string containing only '1' and '0' characters).</value>
   </data>
   <data name="ControlSlaveCaption" xml:space="preserve">
-    <value>SDES Slave</value>
+    <value>S-DES Slave</value>
   </data>
   <data name="ControlSlaveTooltip" xml:space="preserve">
-    <value>Direct access to SDES.</value>
+    <value>Direct access to S-DES.</value>
   </data>
   <data name="ActionCaption" xml:space="preserve">
     <value>Action</value>

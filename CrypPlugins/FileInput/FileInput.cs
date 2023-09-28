@@ -113,7 +113,6 @@ namespace FileInput
 
             try
             {
-
                 cstreamWriter = new CStreamWriter(settings.OpenFilename, true);
                 NotifyPropertyChange();
                 fileInputPresentation.makeUnaccesAble(false);

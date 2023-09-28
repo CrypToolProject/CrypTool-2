@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2009 Thomas Schmid
+   Copyright 2008 - 2022 CrypTool Team
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
 namespace CrypTool.PluginBase.Control
 {
 
@@ -39,14 +38,6 @@ namespace CrypTool.PluginBase.Control
         /// <param name="text">Text to calculate</param>
         /// <returns>cost</returns>
         double CalculateCost(byte[] text);
-
-        /// <summary>
-        /// This method modifies the given OpenCL code, so that the returning code includes
-        /// the costfunction calculations.
-        /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        string ModifyOpenCLCode(string code);
 
         int GetBytesToUse();
 

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en"/>
+  <language culture="de-DE" />
+  
+  <introduction lang="en">
+    The Lorenz SZ42 (Schlüssel-Zusatz 42; English cipher attachment 42), often referred to simply as the "Lorenz machine", is a remarkable piece of cryptographic machinery that played a crucial role in World War II. Developed by the German engineering firm C. Lorenz AG, this device is distinct from its well-known counterpart, the Enigma machine. While the Enigma was widely used by the German military to encrypt various communications, the Lorenz SZ42 was employed for encoding high-level military and diplomatic messages.<newline/>
+    <newline/>
+    The Lorenz SZ42 was primarily used by the German army and government officials for highly sensitive communications. Unlike the Enigma, which used rotor-based encryption, the Lorenz SZ42 employed a completely different approach known as "teleprinter ciphering." This technology involved encoding messages using the Baudot code, a five-level binary code.
+  </introduction>
+
+  <introduction lang="de">
+    Die Lorenz SZ42 (Schlüssel-Zusatz 42), oft einfach als "Lorenz-Maschine" bezeichnet, ist eine bemerkenswerte kryptografische Maschine, die eine entscheidende Rolle im Zweiten Weltkrieg spielte. Entwickelt von der deutschen Ingenieursfirma C. Lorenz AG, unterscheidet sich dieses Gerät von ihrem bekannten Gegenstück, der Enigma-Maschine. Während die Enigma vom deutschen Militär weit verbreitet wurde, um verschiedene Kommunikationen zu verschlüsseln, wurde die Lorenz SZ42 zur Kodierung von hochrangigen militärischen und diplomatischen Nachrichten verwendet.<newline/>
+    <newline/>
+    Die Lorenz SZ42 wurde hauptsächlich von der deutschen Armee und Regierungsbeamten für äußerst sensible Kommunikationen genutzt. Im Gegensatz zur Enigma, die eine Rotor-basierte Verschlüsselung verwendete, verwendete die Lorenz SZ42 einen völlig anderen Ansatz namens "Fernschreiber-Verschlüsselung". Diese Technologie umfasste die Codierung von Nachrichten unter Verwendung des Baudot-Codes, eines fünfstelligen Binärcodes.
+  </introduction>
+
+  <usage lang="en">
+  </usage>
+  
+  <usage lang="de-DE">    
+  </usage>
+  
+  <presentation lang="en">    
+  </presentation>
+  
+  <presentation lang="de-DE">    
+  </presentation>
+
+  <references>
+    <linkReference id="wikipedia">
+      <link url="https://en.wikipedia.org/wiki/Lorenz_cipher" lang="en" />
+      <caption lang="en">Lorenz cipher (Wikipedia)</caption>
+      <link url="https://de.wikipedia.org/wiki/Lorenz-Schl%C3%BCsselmaschine" lang="de-DE" />
+      <caption lang="de-DE">Lorenz-Schlüsselmaschine (Wikipedia)</caption>
+    </linkReference>
+    <linkReference id="virtualLorenzSZ42">
+      <link url="https://lorenz.virtualcolossus.co.uk/" lang="en" />
+      <caption lang="en">Virtual Lorenz SZ40/42 3D (more info on the Lorenz SZ42 machine and a browser-based very detailed simulator)</caption>
+      <link url="https://lorenz.virtualcolossus.co.uk/" lang="de-DE" />
+      <caption lang="de-DE">Virtual Lorenz SZ40/42 3D (weitere Informationen (in Englisch) über die Lorenz SZ42-Maschine und ein browserbasierter, sehr detaillierter Simulator)</caption>
+    </linkReference>
+  </references>
+</documentation>

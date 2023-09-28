@@ -44,31 +44,57 @@ namespace WellKnownPeer
 
                 X509Certificate2 rootCA = new X509Certificate2(Properties.Settings.Default.RootCertificate);
                 X509Certificate2 ownKey = new X509Certificate2(Properties.Settings.Default.OwnKey, Properties.Settings.Default.OwnPassword);
-                
+
+                //we already init certificate service since it clears the lists of admin and revoced certificates
+                CertificateService.GetCertificateService().Init(rootCA, ownKey);                
+
                 _VoluntLib = new VoluntLib() { LocalStoragePath = "Jobs" };
 
                 var wellKnownPeers = Properties.Settings.Default.WellKnownPeers.Split(';');
                 if (wellKnownPeers.Length != 0)
-                {
-                    _VoluntLib.WellKnownPeers.AddRange(wellKnownPeers);
+                {                    
+                    foreach (string wellKnownPeer in wellKnownPeers)
+                    {
+                        if(string.IsNullOrEmpty(wellKnownPeer)  || string.IsNullOrWhiteSpace(wellKnownPeer))
+                        {
+                            continue;
+                        }
+                        Logger.GetLogger().LogText(string.Format("WellKnownPeer: {0}", wellKnownPeer), this, Logtype.Info);
+                        _VoluntLib.WellKnownPeers.Add(wellKnownPeer);
+                    }
                 }
-             
-                LogListView.DataContext = _Logs;
-                _VoluntLib.Start(rootCA, ownKey);
-
+                       
                 var administrators = Properties.Settings.Default.Administrators.Split(';');
                 if (administrators.Length != 0)
-                {
-                    CertificateService.GetCertificateService().AdminCertificateList.AddRange(administrators);
+                {                                        
+                    foreach(string administrator in administrators)
+                    {
+                        if (string.IsNullOrEmpty(administrator) || string.IsNullOrWhiteSpace(administrator))
+                        {
+                            continue;
+                        }
+                        Logger.GetLogger().LogText(string.Format("Administrator: {0}", administrator), this, Logtype.Info);
+                        CertificateService.GetCertificateService().AdminCertificateList.Add(administrator);
+                    }
                 }
 
                 var bannedCertificates = Properties.Settings.Default.BannedCertificates.Split(';');
                 if (bannedCertificates.Length != 0)
-                {
-                    CertificateService.GetCertificateService().BannedCertificateList.AddRange(bannedCertificates);
+                {                    
+                    foreach (string bannedCertificate in bannedCertificates)
+                    {
+                        if (string.IsNullOrEmpty(bannedCertificate) || string.IsNullOrWhiteSpace(bannedCertificate))
+                        {
+                            continue;
+                        }
+                        Logger.GetLogger().LogText(string.Format("Banned certificate: {0}", bannedCertificate), this, Logtype.Info);
+                        CertificateService.GetCertificateService().BannedCertificateList.Add(bannedCertificate);
+                    }
 
                 }
 
+                LogListView.DataContext = _Logs;
+                _VoluntLib.Start(rootCA, ownKey, 10000, false);
 
                 ContactListView.DataContext = _VoluntLib.GetContactList();
                 JobList.DataContext = _VoluntLib.GetJoblist();
@@ -92,8 +118,8 @@ namespace WellKnownPeer
                 else
                 {
                     MyPeerID.Content = "My Peer ID: " + id;
-                }            
-                
+                }
+                Logger.GetLogger().LogText(string.Format("My Peer ID:: {0}", id), this, Logtype.Info);
             }
             catch (Exception ex)
             {

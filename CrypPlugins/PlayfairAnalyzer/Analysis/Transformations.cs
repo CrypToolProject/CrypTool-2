@@ -55,33 +55,15 @@ namespace PlayfairAnalysis
 
         private static readonly int TOTAL_NUMBER_OF_TRANSFORMATIONS = T_PERM_COLS_OF_1_ROW_END;
 
-        private readonly int[] TRANSFORMATIONS = allocate();
+        private readonly int[] TRANSFORMATIONS = Allocate();
 
         public Transformations(AnalysisInstance instance, Utils utils)
         {
             this.instance = instance;
             this.utils = utils;
-        }
+        }       
 
-        public void printTransformationsCounts()
-        {
-            CtAPI CtAPI = instance.CtAPI;
-            CtAPI.print("_______________\n");
-            CtAPI.print("Transformations\n");
-            CtAPI.printf("Swap 2 positions:         {0,5}\n", T_SWAP_2_POSITIONS_END - T_SWAP_2_POSITIONS_START);
-            CtAPI.printf("Swap 3 positions:         {0,5}\n", T_SWAP_3_POSITIONS_END - T_SWAP_3_POSITIONS_START);
-            CtAPI.printf("Swap 2 rows:              {0,5}\n", T_SWAP_2_COLS_END - T_SWAP_2_COLS_START);
-            CtAPI.printf("Swap 2 columns:           {0,5}\n", T_SWAP_2_ROWS_END - T_SWAP_2_ROWS_START);
-            CtAPI.printf("Permute all rows:         {0,5}\n", T_PERM_ROWS_END - T_PERM_ROWS_START);
-            CtAPI.printf("Permute all columns:      {0,5}\n", T_PERM_COLS_END - T_PERM_COLS_START);
-            CtAPI.printf("Permute rows of 1 column: {0,5}\n", T_PERM_ROWS_OF_1_COL_END - T_PERM_ROWS_OF_1_COL_START);
-            CtAPI.printf("Permute columns of 1 row: {0,5}\n", T_PERM_COLS_OF_1_ROW_END - T_PERM_COLS_OF_1_ROW_START);
-            CtAPI.print("________________________________\n");
-            CtAPI.printf("Total:                    {0,5}\n", TOTAL_NUMBER_OF_TRANSFORMATIONS);
-            CtAPI.print("\n");
-        }
-
-        private static int[] allocate()
+        private static int[] Allocate()
         {
             int[] map = new int[TOTAL_NUMBER_OF_TRANSFORMATIONS];
             for (int i = 0; i < TOTAL_NUMBER_OF_TRANSFORMATIONS; i++)
@@ -91,20 +73,19 @@ namespace PlayfairAnalysis
             return map;
         }
 
-        public void randomize()
+        public void Randomize()
         {
             for (int i = 0; i < TOTAL_NUMBER_OF_TRANSFORMATIONS - 1; i++)
             {
-                int j = i + utils.randomNextInt(TOTAL_NUMBER_OF_TRANSFORMATIONS - i);
+                int j = i + utils.RandomNextInt(TOTAL_NUMBER_OF_TRANSFORMATIONS - i);
                 int keep = TRANSFORMATIONS[i];
                 TRANSFORMATIONS[i] = TRANSFORMATIONS[j];
                 TRANSFORMATIONS[j] = keep;
             }
         }
 
-        public void apply(Key parent, Key child, long serialFull)
+        public void Apply(Key parent, Key child, long serialFull)
         {
-
             int serial = (int)(serialFull % TOTAL_NUMBER_OF_TRANSFORMATIONS);
             if (serial < 0)
             {
@@ -112,14 +93,14 @@ namespace PlayfairAnalysis
             }
             serial = TRANSFORMATIONS[serial];
 
-            parent.computeInverse();
+            parent.ComputeInverse();
 
             if (T_PERM_1_ROW_OR_1_COL && serial >= T_PERM_COLS_OF_1_ROW_START && serial < T_PERM_COLS_OF_1_ROW_END)
             {
                 serial -= T_PERM_COLS_OF_1_ROW_START;
                 int perm = serial / Playfair.DIM;
                 int r = serial % Playfair.DIM;
-                child.permuteRowCols(parent, r, perm);
+                child.PermuteRowColumns(parent, r, perm);
                 return;
             }
             if (T_PERM_1_ROW_OR_1_COL && serial >= T_PERM_ROWS_OF_1_COL_START && serial < T_PERM_ROWS_OF_1_COL_END)
@@ -127,7 +108,7 @@ namespace PlayfairAnalysis
                 serial -= T_PERM_ROWS_OF_1_COL_START;
                 int perm = serial / Playfair.DIM;
                 int c = serial % Playfair.DIM;
-                child.permuteColRows(parent, c, perm);
+                child.PermuteColumnsRows(parent, c, perm);
                 return;
             }
             if (T_SWAP_3_POSITIONS && serial >= T_SWAP_3_POSITIONS_START && serial < T_SWAP_3_POSITIONS_END)
@@ -138,30 +119,30 @@ namespace PlayfairAnalysis
                 int p2 = serial % Playfair.SQUARE;
                 if (p1 == p2)
                 {
-                    child.copy(parent);
+                    child.Copy(parent);
                     return;
                 }
                 serial /= Playfair.SQUARE;
                 int p3 = serial % Playfair.SQUARE;
                 if (p3 == p1 || p3 == p2)
                 {
-                    child.copy(parent);
+                    child.Copy(parent);
                     return;
                 }
-                child.swap(parent, p1, p2, p3);
+                child.Swap(parent, p1, p2, p3);
                 return;
             }
 
             if (T_PERM_ALL_ROWS_OR_ALL_COLS && serial >= T_PERM_COLS_START && serial < T_PERM_COLS_END)
             {
                 serial -= T_PERM_COLS_START;
-                child.permuteCols(parent, serial);
+                child.OermuteColumns(parent, serial);
                 return;
             }
             if (T_PERM_ALL_ROWS_OR_ALL_COLS && serial >= T_PERM_ROWS_START && serial < T_PERM_ROWS_END)
             {
                 serial -= T_PERM_ROWS_START;
-                child.permuteRows(parent, serial);
+                child.PermuteRows(parent, serial);
                 return;
             }
 
@@ -173,10 +154,10 @@ namespace PlayfairAnalysis
                 int c2 = serial % Playfair.DIM;
                 if (c1 == c2)
                 {
-                    child.copy(parent);
+                    child.Copy(parent);
                     return;
                 }
-                child.swapCols(parent, c1, c2);
+                child.SwapColumns(parent, c1, c2);
                 return;
             }
             if (T_SWAP_2_ROWS_OR_2_COLS && serial >= T_SWAP_2_ROWS_START && serial < T_SWAP_2_ROWS_END)
@@ -187,10 +168,10 @@ namespace PlayfairAnalysis
                 int r2 = serial % Playfair.DIM;
                 if (r1 == r2)
                 {
-                    child.copy(parent);
+                    child.Copy(parent);
                     return;
                 }
-                child.swapRows(parent, r1, r2);
+                child.SwapRows(parent, r1, r2);
                 return;
             }
 
@@ -202,14 +183,12 @@ namespace PlayfairAnalysis
                 int p2 = serial % Playfair.SQUARE;
                 if (p1 == p2)
                 {
-                    child.copy(parent);
+                    child.Copy(parent);
                     return;
                 }
-                child.swap(parent, p1, p2);
+                child.Swap(parent, p1, p2);
                 return;
             }
-
         }
     }
-
 }

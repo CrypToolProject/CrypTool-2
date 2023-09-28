@@ -76,8 +76,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExamplePluginCT2.cs" />
-    <Compile Include="ExamplePluginCT2Settings.cs" />
+    <Compile Include="$safeprojectname$.cs" />
+    <Compile Include="$safeprojectname$Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -121,7 +121,7 @@
     <value>Vigenère Analyzer</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>Cryptanalysis of the Vigenère cipher using hillclimbing.</value>
+    <value>Cryptanalysis of the Vigenère cipher using hill climbing.</value>
   </data>
   <data name="Copy_all" xml:space="preserve">
     <value>Copy all lines</value>
@@ -172,7 +172,7 @@
     <value>Restarts</value>
   </data>
   <data name="RestartsTooltip" xml:space="preserve">
-    <value>Amount of restarts of the hillclimbing algorithm.</value>
+    <value>Amount of restarts of the hill climbing algorithm.</value>
   </data>
   <data name="ToKeylengthCaption" xml:space="preserve">
     <value>Upper bound of keylength</value>
@@ -238,7 +238,7 @@
     <value>Fast converge</value>
   </data>
   <data name="FastConvergeTooltip" xml:space="preserve">
-    <value>If selected, the hillclimbing algorithm jumps to every improvement. Otherwise it jumps to the best possible improvement.</value>
+    <value>If selected, the hill climbing algorithm jumps to every improvement. Otherwise it jumps to the best possible improvement.</value>
   </data>
   <data name="LocalLabel" xml:space="preserve">
     <value>Analysis</value>

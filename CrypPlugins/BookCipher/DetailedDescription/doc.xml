@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    A book cipher is a cipher in which the key is some aspect of a book or other piece of text. Books, being common and widely available in modern times, are more convenient for this use than objects made specifically for cryptographic purposes. It is typically essential that both correspondents not only have the same book, but the same edition.<newline/>
+    <newline/>
+    Traditionally, book ciphers work by replacing words in the plaintext of a message with the location of words from the book being used. In this mode, book ciphers are more properly called codes. This can have problems; if a word appears in the plaintext but not in the book, it cannot be encoded. An alternative approach which gets around this problem is to replace individual letters rather than words. One such method, used in the second Beale cipher, replaces the first letter of a word in the book with that word's position. In this case, the book cipher is properly a cipher — specifically, a homophonic substitution cipher. However, if used often, this technique has the side effect of creating a larger ciphertext (typically 4 to 6 digits being required to encipher each letter or syllable) and increases the time and effort required to decode the message.
+  </introduction>
+  <introduction lang="de-DE">
+    Eine Buch-Chiffre ist eine Chiffre, bei der der Schlüssel ein Teil eines Buches oder eines anderen Textes ist. Da Bücher in der heutigen Zeit weit verbreitet und verfügbar sind, eignen sie sich besser für diesen Zweck als Objekte, die speziell für kryptografische Zwecke hergestellt wurden. In der Regel ist es unerlässlich, dass beide Korrespondenten nicht nur dasselbe Buch, sondern auch dieselbe Ausgabe besitzen.<newline/>
+    <newline/>
+    Traditionell funktionieren Buch-Chiffren so, dass sie Wörter im Klartext einer Nachricht durch die Position von Wörtern aus dem verwendeten Buch ersetzen. In diesem Modus sollten Buch-Chiffren eher als Codes bezeichnet werden. Wenn ein Wort des Klartexts aber nicht im Buch vorkommt, kann es nicht verschlüsselt werden. Ein alternativer Ansatz, der dieses Problem umgeht, ist das Ersetzen einzelner Buchstaben anstelle von ganzen Wörtern. Bei einer solchen Methode, die z.B. in der zweiten Beale-Chiffre verwendet wird, wird der erste Buchstabe eines Wortes im Buch durch die Position des Wortes ersetzt. In diesem Fall ist die Buch-Chiffre wirklich eine Chiffre - genau genommen eine homophone Substitutionschiffre. Wird dieser Modus jedoch angewandt, hat er den Nebeneffekt, dass der Geheimtext größer wird (in der Regel sind 4 bis 6 Ziffern erforderlich, um jeden Buchstaben oder jede Silbe zu verschlüsseln) und der Zeit- und Arbeitsaufwand für die Entschlüsselung der Nachricht steigt ebenso.
+  </introduction>
+  <usage lang="en">
+    This component allows to encrypt texts using arbitrary text documents. It supports two different encoding modes: "single letter" and "complete word". With "single letter", it uses the first letter of a word for encryption. With "complete word" it uses a complete word for encryption. Furthermore, the component allows to define wheter pages and lines should also be encoded in the generated code words. If you want to enter a document with several pages as a key, the pages have to be separated. The pages are then automatically separated using the "page seperator" setting of the component.
+  </usage>
+  <usage lang="de-DE">
+    Diese Komponente ermöglicht die Verschlüsselung von Texten unter Verwendung beliebiger Textdokumente. Sie unterstützt zwei verschiedene Verschlüsselungsmodi: "einzelner Buchstabe" und "komplettes Wort". Bei "Einzelner Buchstabe" wird der erste Buchstabe eines Wortes zur Verschlüsselung verwendet. Bei "komplettes Wort" wird ein komplettes Wort zur Verschlüsselung verwendet. Darüber hinaus kann man in der Komponente festlegen, ob auch Seiten und Zeilen in den erzeugten Codewörtern kodiert werden sollen. Wenn Sie ein Dokument mit mehreren Seiten als Schlüssel eingeben wollen, müssen die Seiten getrennt werden. Die Trennung der Seiten erfolgt dann automatisch über die Einstellung "Seitentrenner" der Komponente.
+  </usage>
+  <presentation lang="en">
+  </presentation>
+  <presentation lang="de-DE">
+  </presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link lang="en" url="https://en.wikipedia.org/wiki/Book_cipher"/>
+      <caption lang="en">Book cipher on Wikipedia</caption>
+      <link lang="de-DE" url="https://de.wikipedia.org/wiki/Buch-Verschl%C3%BCsselung"/>
+      <caption lang="de-DE">Buch-Verschlüsselung in der Wikipedia</caption>
+    </linkReference>
+  </references>
+</documentation>

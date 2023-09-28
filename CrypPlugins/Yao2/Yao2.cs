@@ -31,6 +31,7 @@ namespace CrypTool.Plugins.Yao2
 
         private List<BigInteger> Ys = new List<BigInteger>();
         private bool messageflag = false;
+        private bool _stopped = false;
 
         [PropertyInfo(Direction.InputData, "YCaption", "YTooltip")]
         public BigInteger Y
@@ -85,6 +86,7 @@ namespace CrypTool.Plugins.Yao2
         public void Execute()
         {
             ProgressChanged(0, maxMoney);
+            _stopped = false;
 
             if (A >= maxMoney)
             {
@@ -105,6 +107,10 @@ namespace CrypTool.Plugins.Yao2
                 {
                     BigInteger z = Ys[i] % p;
                     Zs.Add(i <= A ? z : z + 1);
+                    if (_stopped)
+                    {
+                        return;
+                    }
                 }
 
                 OnPropertyChanged("Zs");
@@ -119,6 +125,7 @@ namespace CrypTool.Plugins.Yao2
 
         public void Stop()
         {
+            _stopped = true;
         }
 
         public void Initialize()

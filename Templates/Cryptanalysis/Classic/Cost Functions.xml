@@ -18,7 +18,8 @@
     <replacement key="$ioc$" value="IoC" />
     <replacement key="$entropy$" value="Entropy" />
     <replacement key="$n-grams$" value="n-gram score" />
-    <replacement key="$memo$" value="This template shows how the cost function component can be used to compute different cost functions.\line \line First, the index of coincedence (IoC) is calculated. Second, the Shannon entropy is calculated. Finally, the sum of n-grams, in this case bigrams, is computed." />
+    <replacement key="$memo$" value="This template shows how the {\b cost function} component can be used to compute different cost functions for the given text.\line \line First, the index of coincedence (IoC) is calculated. Second, the Shannon entropy is calculated. Finally, the sum of log n-grams, in this case bigrams, is computed.\line\line
+Cost functions are used in heuristic algorithms like hill climbing and simulated annealing to rate a given key during the analysis. The closer the decrypted text comes to a real text, the &quot;higher&quot; the cost value is." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -34,7 +35,8 @@
     <replacement key="$ioc$" value="IoC" />
     <replacement key="$entropy$" value="Entropie" />
     <replacement key="$n-grams$" value="n-Gramm-Summe" />
-    <replacement key="$memo$" value="Diese Vorlage zeigt, wie mit der Kostenfunktionskomponente verschiedene Kostenfunktionen berechnet werden können.\line \line Zunächst wird der Koinzidenzindex  (IoC) berechnet. Zweitens wird die Shannon-Entropie berechnet. Schließlich wird die Summe von n-Grammen, in diesem Fall Bigrammen, berechnet." />
+    <replacement key="$memo$" value="Diese Vorlage zeigt, wie mit der {\b Kostenfunktionskomponente} verschiedene Kostenfunktionen für den gegebenen Text berechnet werden können.\line \line Zunächst wird der Koinzidenzindex  (IoC) berechnet. Zweitens wird die Shannon-Entropie berechnet. Schließlich wird die Summe von log-n-Grammen, in diesem Fall Bigrammen, berechnet.\line\line
+Kostenfunktionen werden in heuristischen Algorithmen wie Hill Climbing und Simulated Annealing verwendet, um einen bestimmten Schlüssel während der Analyse zu bewerten. Je näher der entschlüsselte Text an einen echten Text herankommt, desto höher ist der Kostenwert." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

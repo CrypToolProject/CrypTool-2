@@ -273,7 +273,7 @@ namespace CrypTool.Plugins.RAPPOR
             {
                 if (value < 0)
                 {
-                    OnLogMessage("Negative Values are not possible for the amount of iterations, changing the value to 0.", NotificationLevel.Info);
+                    OnLogMessage("Negative values are not possible for the amount of iterations, changing the value to 0.", NotificationLevel.Info);
                     value = 0;
                 }
                 else if (value > 1024)
@@ -288,6 +288,7 @@ namespace CrypTool.Plugins.RAPPOR
                     OnPropertyChanged("iterations");
                     UpdateCurrentView();
                 }
+                rappor.GetRAPPORPresentation().GetRapporPresentationViewModel().GetViewArray()[4].CreateHeatMapViewText(value);
             }
         }
 

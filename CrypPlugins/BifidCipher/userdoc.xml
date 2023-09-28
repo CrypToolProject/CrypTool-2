@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<documentation>
+  <language culture="en"/>    
+  <language culture="de-DE"/>    
+  
+  <introduction lang="en">
+    In classical cryptography, the bifid cipher is a cipher that combines a Polybius square with transposition and uses fractionation.
+    It was invented around 1901 by Felix Delastelle.
+  </introduction>
+
+  <introduction lang="de-DE">
+    In der klassischen Kryptographie ist die Bifid-Chiffre eine Chiffre, die ein Polybius-Quadrat mit Transposition kombiniert und somit eine Fraktionierung erzeugt.
+    Sie wurde um 1901 von Felix Delastelle erfunden.
+  </introduction>
+
+  <usage lang="en">
+    First, a Polybius square is filled with a mixed alphabet, e.g. based on a keyword. 
+    The plaintext is then encrypted based on the coordinates of the plaintext letter in the Polybius square by writing the digits in two-digit columns below the plaintext. 
+    Thus, a two-digit ciphertext element is always written below a single plaintext letter. 
+    Then the encrypted intermediate ciphertext is decrypted (back to letters) using the Polybius square. 
+    However, instead of reading the digits column by column, they are read row by row. 
+    This transposes and fractionalizes the resulting two-digit ciphertext elements. 
+    Instead of completely writing the intermedia ciphertext in two lines in one go below the full plaintext, only n-letter blocks (e.g., n=3) of the ciphertext can be encoded inividually. 
+    The n is then called the "period" of the cipher. 
+    To decrypt a given ciphertext, the procedure is performed in the reverse direction.
+  </usage>
+
+  <usage lang="de-DE">
+    Zunächst wird ein Polybius-Quadrat mit einem gemischten Alphabet, z B. auf der Grundlage eines Schlüsselworts, gefüllt.
+    Der Klartext wird dann durch Koordinaten des Klartextbuchstabens im Polybius-Quadrat verschlüsselt, indem die Ziffern in zweistelligen Spalten unter den Klartext geschrieben werden.
+    Ein zweistelliges Chiffretext-Element wird also immer unter genau einen Klartextbuchstaben geschrieben.
+    Anschließend wird der verschlüsselte Zwischen-Geheimtext mit Hilfe des Polybius-Quadrats entschlüsselt (zurück in Buchstaben).
+    Allerdings werden die Ziffern dabei nicht spaltenweise, sondern zeilenweise gelesen.
+    Dadurch werden die resultierenden zweistelligen Chiffriertextelemente transponiert und fraktioniert.
+    Anstatt den Zischen-Chiffretext vollständig in zwei Zeilen unter den vollständigen Klartext zu schreiben, können auch nur n-Buchstaben-Blöcke (z.B. n=3) des Geheimtexts unabhängig verschlüsselt werden. 
+    Das n wird dann die "Periode" der Chiffre genannt. 
+    Um einen gegebenen Chiffretext zu entschlüsseln, wird das Verfahren in umgekehrter Richtung durchgeführt.
+  </usage>
+  
+  <presentation lang="en">
+  </presentation>
+  
+  <presentation lang="de-DE">
+  </presentation>
+
+  <references>
+    <linkReference id="wikipedia">
+      <link url="https://en.wikipedia.org/wiki/Bifid_cipher" lang="en" />
+      <caption lang="en">Bifid cipher (Wikipedia)</caption>
+      <link url="https://en.wikipedia.org/wiki/Bifid_cipher" lang="de-DE" />
+      <caption lang="de-DE">Bifid cipher (Englische Wikipedia)</caption>
+    </linkReference>    
+  </references>
+</documentation>

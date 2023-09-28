@@ -20,7 +20,7 @@
             <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.KeysPerSecLabel}" x:Name="KeysPerSecond" />
         </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
 
-        <crypanalysisviewcontrol:CrypAnalysisResultListView ItemsSource="{Binding}" ResultItemAction="HandleResultItemAction">
+        <crypanalysisviewcontrol:CrypAnalysisResultListView Name="CrypAnalysisResultListView" ItemsSource="{Binding}" ResultItemAction="HandleResultItemAction">
             <crypanalysisviewcontrol:CrypAnalysisResultListView.View>
                 <GridView>
                     <GridViewColumn Header="#" DisplayMemberBinding="{Binding Ranking}" Width="25">

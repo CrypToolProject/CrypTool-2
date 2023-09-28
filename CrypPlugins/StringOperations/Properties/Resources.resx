@@ -249,4 +249,7 @@
   <data name="Value2Tooltip" xml:space="preserve">
     <value>Second operation parameter</value>
   </data>
+  <data name="OperationList18" xml:space="preserve">
+    <value>Shuffle</value>
+  </data>
 </root>

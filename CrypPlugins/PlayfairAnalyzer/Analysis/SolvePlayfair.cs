@@ -24,82 +24,87 @@ namespace PlayfairAnalysis
 {
     public class SolvePlayfair
     {
-        private static void solve(int taskNumber, int saCycles, int innerRounds /* 200000 */, int multiplier/*1500*/, int[] cipherText, string crib, Key simulationKey, AnalysisInstance instance, long[] evaluationsPerThread)
+        private static void Solve(int taskNumber, int saCycles, int innerRounds /* 200000 */, int multiplier/*1500*/, int[] cipherText, string crib, int minCribOffset, int maxCribOffset, Key simulationKey, AnalysisInstance instance, long[] evaluationsPerThread)
         {
             try
             {
-                CancellationToken ct = instance.CancellationToken;
-                Utils utils = new Utils((int)DateTime.Now.Ticks + taskNumber * 100);  //Different seed for every thread
-                Transformations transformations = new Transformations(instance, utils);
-                SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(utils);
-
-                long simulationOriginalScore = (simulationKey == null) ? long.MinValue : simulationKey.score;
-                Key currentKey = new Key(instance, utils);
-                Key newKey = new Key(instance, utils);
-                Key bestKey = new Key(instance, utils);
-                currentKey.setCipher(cipherText);
-                newKey.setCipher(cipherText);
-                bestKey.setCipher(cipherText);
-                currentKey.setCrib(crib);
-                newKey.setCrib(crib);
-                bestKey.setCrib(crib);
-
-                long serialCounter = 0;
-
-                for (int cycle = 0; cycle < saCycles || saCycles == 0; cycle++)
+                long totalCycles = 0;
+                for (int cribOffset = minCribOffset; cribOffset <= maxCribOffset; cribOffset++)
                 {
-                    ct.ThrowIfCancellationRequested();
-                    if (taskNumber == 0)
+                    CancellationToken ct = instance.CancellationToken;
+                    Utils utils = new Utils((int)DateTime.Now.Ticks + taskNumber * 100);  //Different seed for every thread
+                    Transformations transformations = new Transformations(instance, utils);
+                    SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(utils);
+
+                    long simulationOriginalScore = (simulationKey == null) ? long.MinValue : simulationKey.score;
+                    Key currentKey = new Key(instance, utils);
+                    Key newKey = new Key(instance, utils);
+                    Key bestKey = new Key(instance, utils);
+                    currentKey.SetCipher(cipherText);
+                    newKey.SetCipher(cipherText);
+                    bestKey.SetCipher(cipherText);
+                    currentKey.SetCrib(crib, cribOffset);
+                    newKey.SetCrib(crib, cribOffset);
+                    bestKey.SetCrib(crib, cribOffset);
+
+                    long serialCounter = 0;                    
+
+                    for (int cycle = 0; cycle < saCycles || saCycles == 0; cycle++)
                     {
-                        instance.CtAPI.updateProgress(cycle, saCycles, evaluationsPerThread.Sum());
-                    }
-
-                    transformations.randomize();
-                    currentKey.random();
-
-                    long currentScore = currentKey.eval();
-
-                    bestKey.copy(currentKey);
-                    long bestScore = bestKey.eval();
-                    for (int innerRound = 0; innerRound < innerRounds; innerRound++)
-                    {
+                        totalCycles++;
                         ct.ThrowIfCancellationRequested();
-                        transformations.apply(currentKey, newKey, serialCounter++);
-
-                        long newScore = newKey.eval();
-                        evaluationsPerThread[taskNumber]++;
-
-                        if (simulatedAnnealing.acceptHexaScore(newScore, currentScore, multiplier))
+                        if (taskNumber == 0)
                         {
-                            currentKey.copy(newKey);
-                            currentScore = newScore;
+                            instance.CtAPI.UpdateProgress(totalCycles, saCycles * (maxCribOffset - minCribOffset + 1), evaluationsPerThread.Sum());
+                        }
 
-                            if (currentScore > bestScore)
-                            {                              
-                                bestScore = currentScore;
-                                bestKey.copy(currentKey);
-                                bestKey.decrypt();
+                        transformations.Randomize();
+                        currentKey.Random();
+
+                        long currentScore = currentKey.Eval();
+
+                        bestKey.Copy(currentKey);
+                        long bestScore = bestKey.Eval();
+                        for (int innerRound = 0; innerRound < innerRounds; innerRound++)
+                        {
+                            ct.ThrowIfCancellationRequested();
+                            transformations.Apply(currentKey, newKey, serialCounter++);
+
+                            long newScore = newKey.Eval();
+                            evaluationsPerThread[taskNumber]++;
+
+                            if (simulatedAnnealing.AcceptHexaScore(newScore, currentScore, multiplier))
+                            {
+                                currentKey.Copy(newKey);
+                                currentScore = newScore;
+
+                                if (currentScore > bestScore)
+                                {
+                                    bestScore = currentScore;
+                                    bestKey.Copy(currentKey);
+                                    bestKey.Decrypt();
+                                }
                             }
                         }
-                    }
 
-                    if (instance.CtBestList.shouldPushResult(bestScore))
-                    {
-                        bestKey.alignAlphabet();
-                        (TimeSpan elapsed, long evaluations) = instance.Stats.EvaluationsSummary();
-                        evaluations = evaluationsPerThread.Sum();
-                        instance.CtBestList.pushResult(bestScore,
-                                bestKey.ToString(),
-                                bestKey.ToString(),
-                                Utils.getString(bestKey.fullDecryption),
-                                elapsed,
-                                evaluations,
-                                instance.Stats.EvaluationsSummary() +
-                                        $"[{bestKey.decryptionRemoveNullsLength}/{cipherText.Length}][Task: {taskNumber,2}][Mult.: {multiplier:N0}]");
-                        if (currentScore == simulationOriginalScore || newKey.matchesFullCrib())
+                        if (instance.CtBestList.ShouldPushResult(bestScore))
                         {
-                            instance.CtAPI.printf("Key found");
-                            instance.CtAPI.goodbye();
+                            bestKey.AlignAlphabet();
+                            (TimeSpan elapsed, long evaluations) = instance.Stats.EvaluationsSummary();
+                            evaluations = evaluationsPerThread.Sum();
+                            instance.CtBestList.PushResult(bestScore,
+                                    bestKey.ToString(),
+                                    bestKey.ToString(),
+                                    Utils.GetString(bestKey.fullDecryption),
+                                    elapsed,
+                                    evaluations,
+                                    instance.Stats.EvaluationsSummary() +
+                                            $"[{bestKey.decryptionRemoveNullsLength}/{cipherText.Length}][Task: {taskNumber,2}][Mult.: {multiplier:N0}]");
+                            if (currentScore == simulationOriginalScore || newKey.MatchesFullCrib())
+                            {
+                                instance.CtAPI.Printf("Key found");
+                                instance.CtAPI.Goodbye();
+                            }
                         }
                     }
                 }
@@ -110,7 +115,7 @@ namespace PlayfairAnalysis
             }
         }
 
-        public static long solveMultithreaded(int[] cipherText, string cribString, int threads, int cycles, Key simulationKey, AnalysisInstance instance)
+        public static long SolveMultithreaded(int[] cipherText, string cribString, int minCribOffset, int maxCribOffset, int threads, int cycles, Key simulationKey, AnalysisInstance instance)
         {
             const int innerRounds = 200_000;
             List<TaskCompletionSource<bool>> threadCompletions = new List<TaskCompletionSource<bool>>();
@@ -129,7 +134,7 @@ namespace PlayfairAnalysis
                         {
                             try
                             {
-                                solve(t, cycles, innerRounds, multiplier, cipherText, cribString, simulationKey_, instance, evaluationsPerThread);
+                                Solve(t, cycles, innerRounds, multiplier, cipherText, cribString, minCribOffset, maxCribOffset, simulationKey_, instance, evaluationsPerThread);
                             }
                             finally
                             {
@@ -141,16 +146,16 @@ namespace PlayfairAnalysis
 
             WatchThreadCompletions(threadCompletions, instance, evaluationsPerThread);
 
-            return innerRounds * cycles * threads;
+            return innerRounds * cycles * threads * (maxCribOffset - minCribOffset + 1);
         }
 
         private static async void WatchThreadCompletions(List<TaskCompletionSource<bool>> threadCompletions, AnalysisInstance instance, long[] evaluationsPerThread)
         {
             await Task.WhenAll(threadCompletions.Select(t => t.Task));
 
-            instance.CtAPI.updateProgress(100, 100, evaluationsPerThread.Sum());
+            instance.CtAPI.UpdateProgress(100, 100, evaluationsPerThread.Sum());
             //call "goodbye" after all threads completed to let CT2 know about it:
-            instance.CtAPI.goodbye();
+            instance.CtAPI.Goodbye();
         }
     }
 }

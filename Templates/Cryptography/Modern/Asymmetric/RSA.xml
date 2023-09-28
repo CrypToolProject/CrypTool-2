@@ -19,8 +19,12 @@ Source: <external ref="http://en.wikipedia.org/wiki/RSA" /></description>
     <replacement key="$RSA Encryption$" value="RSA Encryption" />
     <replacement key="$RSA Decryption$" value="RSA Decryption" />
     <replacement key="$StringEncoder$" value="String Encoder" />
+    <replacement key="$StringDecoder$" value="String Decoder" />
     <replacement key="$RSAKeyGenerator$" value="RSA KeyGenerator" />
-  </replacements>
+    <replacement key="$memo$" value="In this template, a text is encrypted and decrypted using {\b RSA}. To do so, the RSA Keygenerator first generates a 1024-bit RSA key pair. The text is then converted to a binary representation (ByteArray) and encrypted by the first RSA component using the public key. The second RSA component then uses the private key to decrypt the generated ciphertext.\line
+\line
+The plaintext is automatically split into matching data blocks (rounded to whole bytes). The block size here depends on the modulus N."/>  
+</replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -36,7 +40,11 @@ Quelle: <external ref="http://de.wikipedia.org/wiki/RSA-Kryptosystem" /></descri
     <replacement key="$RSA Encryption$" value="RSA-Verschlüsselung" />
     <replacement key="$RSA Decryption$" value="RSA-Entschlüsselung" />
     <replacement key="$StringEncoder$" value="String-Codierer" />
+    <replacement key="$StringDecoder$" value="String-Dekodierer" />
     <replacement key="$RSAKeyGenerator$" value="RSA-Schlüsselgenerator" />
+    <replacement key="$memo$" value="In dieser Vorlage wird ein Text mittels {\b RSA} verschlüsselt und entschlüsselt. Dafür generiert der RSA-Schlüsselgenerator zunächst ein 1024-bit RSA-Schlüsselpaar. Der Text wird dann in eine binäre Darstellung (ByteArray) umgewandelt und von der ersten RSA-Komponente mit dem öffentlichen Schlüssel verschlüsselt. Die zweite RSA-Komponente nutzt dann den privaten Schlüssel, um den erzeugten Geheimtext wieder zu entschlüsseln.\line
+\line
+Der Klartext wird automatisch in passende Daten-Blöcke (abgerundet auf ganze Bytes) aufgeteilt. Die Blockgröße ist hier abhängig vom Modulus N."/>  
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

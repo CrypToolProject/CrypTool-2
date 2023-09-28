@@ -22,21 +22,21 @@ namespace PlayfairAnalysis
     /// </summary>
     public static class Arrays
     {
-        public static int[] copyOf(int[] original, int newLength)
+        public static int[] CopyOf(int[] original, int newLength)
         {
             int[] copy = new int[newLength];
             Array.Copy(original, 0, copy, 0, newLength);
             return copy;
         }
 
-        internal static void fill(int[] a, int val)
+        internal static void Fill(int[] a, int val)
         {
             for (int i = 0; i < a.Length; i++)
             {
                 a[i] = val;
             }
         }
-        internal static void arraycopy(Array src, int srcPos, Array dest, int destPos, int length)
+        internal static void Arraycopy(Array src, int srcPos, Array dest, int destPos, int length)
         {
             Array.Copy(src, srcPos, dest, destPos, length);
         }

@@ -163,7 +163,8 @@ namespace CrypTool.EnigmaAnalyzer
 
         /// <summary>
         /// Get the number of cores in a collection, used for the selection of cores
-        /// </summary>
+        /// </summary>        
+        [DontSave]
         public ObservableCollection<string> CoresAvailable
         {
             get => coresAvailable;

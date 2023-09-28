@@ -176,17 +176,17 @@
       <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
       <defaultvalue lang="en">A substitution cipher is a method of encryption by which units of plaintext are replaced with ciphertext according to a regular system; the "units" may be single letters (the most common), pairs of letters, triplets of letters, mixtures of the above, and so forth. The receiver deciphers the text by performing an inverse substitution.</defaultvalue>
     </inputBox>
-    <inputBox plugin="$Password$" property="Text" alignment="Right" width="20%" visibleLines="5" group="1">
-      <description lang="en">Password:</description>
-      <description lang="de">Passwort :</description>
-      <defaultvalue lang="en">Crypto</defaultvalue>
-    </inputBox>
-    <inputBox plugin="Offset" property="Number" alignment="Left" width="5%" visibleLines="1" regex="[0-9]+" group="2">
-      <description lang="en">Password-Position:</description>
-      <description lang="de">Passwort Position:</description>
+    <inputBox plugin="$Keyword$" property="Text" alignment="Right" width="20%" visibleLines="5" group="1">
+      <description lang="en">Keyword:</description>
+      <description lang="de">Password :</description>
+      <defaultvalue lang="en">KeyWord</defaultvalue>
+    </inputBox>  
+    <inputBox plugin="Shift" property="Number" alignment="Left" width="5%" visibleLines="1" regex="[0-9]+" group="2">
+      <description lang="en">Keyword Position:</description>
+      <description lang="de">Schlüsselwort-Position:</description>
       <defaultvalue>0</defaultvalue>
     </inputBox>
-    <comboBox plugin="Permutator" property="Order" alignment="Left" width="20%" group="2">
+    <comboBox plugin="Alphabet Permutator" property="CiphertextAlphabetOrder" alignment="Left" width="20%" group="2">
       <description lang="en">Order:</description>
       <description lang="de">Sortierung:</description>
       <item lang="en" content="Ascending" />
@@ -196,7 +196,7 @@
       <item lang="en" content="Leave as ist" />
       <item lang="de" content="Unverändert" />
     </comboBox>
-    <sampleViewer image="Substitution" file="Cryptography\Classic\Substitution_with_Password.cwm">
+    <sampleViewer image="Substitution" file="Cryptography\Classic\Substitution_with_Keyword.cwm">
       <name lang="en">Substitution Output</name>
       <name lang="de">Substitution-Ausgabe</name>
       <description lang="en">A substitution cipher is a method of encryption by which units of plaintext are replaced with ciphertext according to a regular system; the "units" may be single letters (the most common), pairs of letters, triplets of letters, mixtures of the above, and so forth. The receiver deciphers the text by performing an inverse substitution.</description>
@@ -209,10 +209,10 @@
         <description lang="en">Message to encrypt/decrypt:</description>
         <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
       </inputBox>
-      <inputBox plugin="$Password$" property="Text" alignment="Stretch" visibleLines="1" width="95%">
-        <description lang="en">Password:</description>
-        <description lang="de">Passwort:</description>
-      </inputBox>
+      <inputBox plugin="$Keyword$" property="Text" alignment="Stretch" visibleLines="1" width="95%">
+        <description lang="en">Keyword:</description>
+        <description lang="de">Schlüsselwort:</description>
+      </inputBox>    
       <presentation plugin="$Encrypt$" width="95%" height="200">
         <description lang="en">Substitution Mapping:</description>
         <description lang="de">Substitutions-Abbildung:</description>

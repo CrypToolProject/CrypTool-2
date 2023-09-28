@@ -1154,6 +1154,15 @@ namespace CrypTool.M138Analyzer
                         {
                             return; //All Entries in Bestlist are better than this one
                         }
+                        
+                        //no dublicate entries
+                        foreach(ResultEntry listEntry in _presentation.BestList)
+                        {
+                            if (entry.Key.Equals(listEntry.Key))
+                            {
+                                return;
+                            }
+                        }
 
                         if (value > _presentation.BestList.First().Value && beep)
                         {
@@ -1181,6 +1190,7 @@ namespace CrypTool.M138Analyzer
                     {
                         r.Ranking = z++;
                     }
+                    _presentation.CrypAnalysisResultListView.ScrollIntoView(_presentation.CrypAnalysisResultListView.Items[0]);
                 }
                 catch (Exception)
                 {

@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2018 CrypTool 2 Team <ct2contact@CrypTool.org>
+   Copyright 2018 Dominik Vogt <ct2contact@CrypTool.org>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -34,7 +34,6 @@ namespace ADFGVXAnalyzer
     {
         #region Private Variables
 
-        // HOWTO: You need to adapt the settings class as well, see the corresponding file.
         private readonly ADFGVXANalyzerSettings settings;
         private readonly ADFGVXAnalyzerPresentation myPresentation;
         private readonly Logger log;

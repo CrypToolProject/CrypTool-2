@@ -2,12 +2,12 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: CheGuevara.xml-->
-  <!--Last edited: 2022.02.08-->
+  <!--Last edited: 2022.12.23-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">Ché Guevara</title>
+  <title lang="de">Ché Guevara-Chiffre</title>
   <summary lang="de">Ché Guevaras straddling checkerboard</summary>
   <description lang="de">Diese Vorlage zeigt einen einfachen Ver- und Entschlüsselungsprozess mit dem Straddling-Checkerboard von Ché Guevara. Ché Guevara ergänzte das Straddling-Checkerboard um ein One-Time-Pad, wodurch seine Chiffre theoretisch nicht gebrochen werden konnte. Jedoch verwendete er das One-Time-Pad mehrfach, wodurch sein Verfahren gebrochen werden konnte.</description>
   <keywords lang="de">Straddling, Checkerboard, Ché Guevara</keywords>
@@ -21,7 +21,7 @@
     <replacement key="$One time pad$" value="One-Time-Pad" />
     <replacement key="$StringDecoder$" value="String-Decodierer" />
     <replacement key="$StringEncoder$" value="String-Codierer" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise der Ché Guevara-Chiffre.\line         
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise der {\b Ché Guevara-Chiffre}.\line         
 \line
 Die Chiffre besteht aus zwei Teilen:\line
 1) dem Straddling-Checkerboard\line
@@ -29,26 +29,26 @@ Die Chiffre besteht aus zwei Teilen:\line
 \line
 Das Straddling-Checkerboard wandelt einen gegebenen Klartext in eine Folge von Ziffern um. Diese Ziffern werden dann mittels Vernam verschlüsselt. Vernam arbeitet in dieser Vorlage nur auf Ziffern. Somit erhält man einen finalen Geheimtext, der auch nur aus Ziffern besteht. Das hier benutzte Pad sollte zufällig gewählt werden und auch nur genau einmal eingesetzt werden (One-Time-Pad-Anforderungen).\line
 \line
-Wir haben sechs verschiedene Eingaben: Die folgenden vier für das Straddling-Checkeroard: Klartext, Schlüssel, Alphabet, Zeilen- und Spaltenbelegung. Die folgenden zwei für Vernam: ein zusätzliches Alphabet, das nur aus Ziffern besteht, sowie ein One-Time-Pad. Eigentlich könnte man alle Eingaben für das Straddling-Checkerboard konstant halten oder sogar veröffentlichen, da die Sicherheit gegeben ist, solange das One-Time-Pad geheim gehalten wird." />
+Wir haben sechs verschiedene Eingaben: Die folgenden drei für das Straddling-Checkeroard: (1) Klartext, (2) Schlüssel, (3) Alphabet und (4) Zeilen- und Spaltenbelegung. Die folgenden zwei für Vernam: (5) ein zusätzliches Alphabet, das nur aus Ziffern besteht, sowie (6) ein One-Time-Pad. Eigentlich könnte man alle Eingaben für das Straddling-Checkerboard konstant halten oder sogar veröffentlichen, da die Sicherheit gegeben ist, solange das One-Time-Pad geheim gehalten wird." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Ché Guevara</title>
+  <title lang="en">Ché Guevara Cipher</title>
   <summary lang="en">Ché Guevara's straddling checkerboard</summary>
   <description lang="en">This template shows a simple encryption and decryption process using Ché Guevara's straddling checkerboard. Ché Guevara added a one-time pad to the straddling checkerboard, making his cipher theoretically unbreakable. However, he used the one-time pad multiple times, which allowed his method to be broken.</description>
   <keywords>Straddling, Checkerboard, Cold War, Vatican, Ché Guevara</keywords>
   <replacements lang="en">
-    <replacement key="$Plaintext$" value="Plain text" />
+    <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$RowsAndColumns$" value="Rows and columns" />
     <replacement key="$Alphabet$" value="Alphabet" />
     <replacement key="$key$" value="Key" />
-    <replacement key="$encipheredPlaintext$" value="Decrypted plain text" />
+    <replacement key="$encipheredPlaintext$" value="Decrypted plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$One time pad$" value="One-Time-Pad" />
     <replacement key="$StringDecoder$" value="String-Decoder" />
     <replacement key="$StringEncoder$" value="String-Encoder" />
-    <replacement key="$memo$" value="This template demonstrates how the Ché Guevara cipher works.\line         
+    <replacement key="$memo$" value="This template demonstrates how the {\b Ché Guevara cipher} works.\line         
 \line
 The cipher consists of two parts:\line
 1) the straddling checkerboard\line
@@ -56,7 +56,7 @@ The cipher consists of two parts:\line
 \line
 The straddling checkerboard converts a given plaintext into a sequence of digits. These digits are then encrypted using Vernam. In this template, Vernam works only on digits. Thus, you get a final ciphertext that also consists only of digits. The pad used here should be chosen randomly and should also only be used exactly once (one-time pad requirements).\line
 \line
-We have six different inputs: The following four for the straddling checkerboard: plaintext, key, alphabet, row and column assignments. The following two for Vernam: an additional alphabet consisting only of digits and a one-time pad. Actually, all inputs for the straddling checkerboard could be kept constant or even published, since security is given as long as the one-time pad is kept secret." />
+We have six different inputs: The following three for the straddling checkerboard: (1) plaintext, (2) key, (3) alphabet, and (4) row and column assignments. The following two for Vernam: (5) an additional alphabet consisting only of digits and (6) a one-time pad. Actually, all inputs for the straddling checkerboard could be kept constant or even published, since security is given as long as the one-time pad is kept secret." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
@@ -64,8 +64,5 @@ We have six different inputs: The following four for the straddling checkerboard
   <icon file="StraddlingCheckerboard.png" />
   <relevantPlugins>
     <plugin name="StraddlingCheckerboard" />
-    <plugin name="TextInput" />
-    <plugin name="TextOutput" />
-    <plugin name="Alphabet" />
   </relevantPlugins>
 </sample>

@@ -1,66 +1,78 @@
-[b]CrypTool 2 Release 2021.2[/b]
+[b]CrypTool 2 Release 2023.1[/b]
 
 Dear CrypTool 2 users,
 
-CrypTool 2 (CT2) is a free, open-source e-learning software about cryptography and cryptanalysis with a visual user interface. CT2 is used in schools, universities, companies, and administrations all over the world since more than 10 years.
+CrypTool 2 (CT2) is a free, open-source e-learning software about cryptography and cryptanalysis with a visual user interface. CT2 is used in schools, universities, companies, and administrations all over the world since more than 10 years. In June 2023, we published the release "2023.1" which is the first release this year. The previous CT2 release was published in December 2022.
 
-In December 2021, we published the release "2021.2", which is the second release this year. The last CT2 release was published in May 2021.
+Since the December release, we've introduced some captivating new ciphers , such as GRANIT 160, a hand cipher utilized by GDR spies, as well as the Typex cipher machine. Another new component is RAPPOR. RAPPOR stands for "Randomized Aggregatable Privacy-Preserving Ordinal Response", and is "a technology for crowdsourcing statistics from end-user client software, anonymously, with strong privacy guarantees". [1] . Furthermore, we addressed various bugs, both minor and major, within CT2 and its components, resolving issues such as difficulties encountered when loading large workspace manager models. Additionally, we have enriched the functionalities of existing components, which are listed below.
 
-The probably most interesting new implementation of CrypTool 2 is the blockchain simulation. Using the blockchain component and its corresponding templates, you can simulate a blockchain. The blockchain simulation allows to create blocks, transactions, addresses, and according digital signatures.
+If you are interested in a wider overview of CrypTool 2 components, which we implemented over the last three years, you should watch the video "CrypTool 2 Highlights of the Last Three Years – CrypTool Symposium 2023 in Munich" from the "Cryptography for Everybody" YouTube channel. See https://www.youtube.com/watch?v=CWDqk0P86zY
 
-Another interesting thing worth mentioning is the official CrypTool 2 YouTube channel "Cryptography for everybody", which reached a 3100 subscriber count in December 2021. Thank you! For those who did not have a look at the channel: We discuss and explain cryptologic topics and show many examples using CrypTool 2 and the other CrypTool implementations of the project (See https://www.youtube.com/c/CrypTool2/).
-
-Finally, there was a German article about CrypTool 2 in heise online and in Europe's biggest IT magazine, c't.
-- https://www.heise.de/ratgeber/Moderne-Kryptografie-ausprobieren-und-verstehen-mit-CrypTool-2-6129885.html
-- https://www.heise.de/select/ct/2021/15/2111019280858656464
-
-Thanks for the many users who sent feedback, requests, laud, and criticism.
-
+Greatly appreciate the feedback, requests, compliments, and constructive criticism from our many users. 
 We hope that you have as much fun using CT2 as we have creating it!
 
-Stay safe and healthy!
-
 Sincerely yours,
-The CrypTool 2 Developer Team, December 2021
+The CrypTool 2 Developer Team, June 2023
 
-------------------
-Changelog summary:
-------------------
-Here is a more detailed summary of the updates and additions.
+------------------------
+References:
+------------------------
 
-------------------
-General architectural changes:
-------------------
-- We moved the CrypTool 2 source from SVN to GitHub
-- We updated our build server accordingly
+[1] Erlingsson, Úlfar, Vasyl Pihur, and Aleksandra Korolova. 
+    "Rappor: Randomized aggregatable privacy-preserving ordinal response." 
+     Proceedings of the 2014 ACM SIGSAC conference on computer and communications
+     security. 2014.
 
-------------------
-Core components:
-------------------
-Workspace Manager (WSM):
-- We fixed bugs in the WorkspaceManager. This improves the general performance
+------------------------
+Changelog summary
+------------------------
 
-Startcenter:
-- Now, the user is asked if he really wants to delete the history of recently opened workspaces before performing the actual deletion
+We are excited to provide you with a comprehensive overview of the updates and additions that have been implemented:
 
-------------------
-Components:
-------------------
-We added new components to CrypTool 2:
-- Blockchain simulation (supporting: blocks, transactions, signatures, and mining)
-- PBKDF 1 und 2
-- Bacon cipher
-- Josse cipher and Josse cipher analyzer
+------------------------
+New components
+------------------------
+- GRANIT160 cipher
+- FourSquare cipher
+- ElsieFour cipher
+- Typex cipher machine
+- RAPPOR
+
+------------------------
+Existing components
+------------------------
+- YAO1 and YAO2 (bugs fixed)
+- Playfair Analyzer (added possibility to test crib offsets)
+- IDPAnalyzer (added multiple language model support)
+- StringOperations (added possibility to randomize strings)
+- Present (bugs fixed)
+- Homophonic Substitution Analyzer (added some convenient functions in UI)
+- Bazeries cipher (bugs fixed)
+
+Core components/libraries:
+- VoluntLib2 (bugs fixed)
+- ModelPersistance (bugs fixed)
+- WorkspaceManagerModel (bugs fixed)
+- CrypConsole (added more functions to CrypConsole)
+
+------------------------
+Templates
+------------------------
+We worked on the following templates 
+(and added templates for the aforementioned new components):
+- Cost function
+- Caesar analysis
+- ADFGVX dictionary attack
+- LFSR and NLFSR
+- Keccak
+- Avalanche effect
+- RAPPOR
+- Josse cipher
+- PBKDF1
+- Che Guevara
 - Chaocipher
-- T9 Code
-- Straddling Checkerboard
+- Bacon cipher
+- Straddling checkerboard
+- WEP protocol
 
-Change in existing components:
-- We removed the smartcard component since it was buggy and never used by anyone
-- We fixed some bugs in existing components
-
-------------------
-Templates:
-------------------
--- We reworked a lot of templates so that they "look nicer" 
--- We fixed many typos :-)
+... many more small updates and fixes, which are not listed here. See logs of the official CrypTool 2 GitHub repository for more information.

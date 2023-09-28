@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    Autocorrelation refers to the correlation of a signal with itself. It provides a measure of how well a signal corresponds to the same signal at a later time.
+    In cryptography, autocorrelation is used to determine whether a given text contains repeated patterns and the distance at which most of the repetitions occur.
+    To achieve this, the text is written in a single row, and again underneath it in a second row, but shifted by a certain number $n$ of places. 
+    Now, the positions at which corresponding letters in both rows are equal, are counted. Let $a(n)$ be the resulting sum. This process is repeated for all possible values of $n$.
+    If the text contains repeated patterns, $a(n)$ will be big for those values of $n$, that place the patterns underneath each other.
+    <newline /><newline />
+    The autocorrelation function can be used for an attack on the Vigenère cipher. In this cipher, a repeated keyword is added to the plaintext. 
+    If the plaintext contains many repeated patterns, the keyword will be added with high probability to those patterns at identical offsets, resulting in repeated patterns at
+    the corresponding positions of the ciphertext. The maxima of the autocorrelation function of the ciphertext can be used to recover the key length of the Vigenère cipher.
+  </introduction>
+  <introduction lang="de-DE">
+    Die Autocorrelation ist ein Begriff aus der Statistik. Sie ist ein Maß dafür, wie sehr ein Signal mit sich selbst zu einem früheren Zeitpunkt übereinstimmt.
+    In der Kryptografie wird die Autocorrelation benutzt, um festzustellen, ob ein Text sich wiederholende Muster enthält und in welchem Abstand die häufigsten Wiederholungen auftreten.
+    Dafür wird der Text in eine Zeile geschrieben, und darunter noch einmal derselbe Text, allerdings verschoben um eine gewisse Anzahl $n$ von Zeichen. Nun wird abgezählt, an wie vielen
+    Stellen die beiden Texte übereinstimmen, also an wie vielen Stellen in der oberen und der unteren Zeile derselbe Buchstabe steht, und man erhält eine Summe $a(n)$.
+    Dies führt man für alle möglichen Werte von $n$ durch. Wenn der Text sich wiederholende Muster enthält, so wird $a(n)$ für diejenigen Werte $n$ besonders groß,
+    bei denen die Verschiebung um $n$ Zeichen diese Muster gerade übereinander positioniert.
+    <newline /><newline />
+    Die Autocorrelation eignet sich besonders gut für einen Angriff auf die Vigenère-Chiffre, bei der das wiederholte Schlüsselwort zum Klartext addiert wird. Hat der Klartext viele sich wiederholende Muster,
+    so ist die Wahrscheinlichkeit groß, dass das Schlüsselwort an zwei unterschiedlichen Positionen mit demselben Offset zum selben Muster addiert wird und der Geheimtext sich an diesen Stellen somit ebenfalls wiederholt.
+    Die Maxima der Autocorrelation lassen dann Rückschlüsse über die verwendete Schlüssellänge zu.
+  </introduction>
+  <usage lang="en">
+    The component has only one input, where the text you want to examine has to be entered. Before being analyzed, the text is converted to uppercase and all non-alphabetic characters are removed.
+    The component determines the most probable Vigenère key length for the given text and provides this length as an integer on the output.
+  </usage>
+  <usage lang="de-DE">
+    Die Komponente hat nur einen Eingang, an dem der zu untersuchende Text anliegen muss. Der Text wird vor der Analyse in Großbuchstaben umgewandelt. Nicht-alphabetische Zeichen werden gelöscht.
+    Am Ausgang wird die von der Komponente errechnete wahrscheinlichste Vigenère-Schlüssellänge für den angegebenen Text als ganze Zahl ausgegeben. 
+  </usage>
+  <presentation lang="en">
+    In the presentation view, the component shows a histogram with the best possible shift values $n$ in relation to their match count $a(n)$.
+  </presentation>
+  <presentation lang="de-DE">
+    In der Präsentationsansicht zeigt die Komponente ein Histogramm, welches die besten Verschiebungswerte $n$ mit den zugehörigen Trefferzahlen $a(n)$ darstellt.  
+  </presentation>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Autocorrelation" lang="en" />
+      <caption lang="en">Autocorrelation</caption>
+      <link url="http://de.wikipedia.org/wiki/Autocorrelation" lang="de-DE" />
+      <caption lang="de-DE">Autocorrelation</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher" lang="en" />
+      <caption lang="en">Vigenère cipher</caption>
+      <link url="http://de.wikipedia.org/wiki/Vigen%C3%A8re-Chiffre" lang="de-DE" />
+      <caption lang="de-DE">Vigenère-Chiffre</caption>
+    </linkReference>
+  </references>
+</documentation>

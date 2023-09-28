@@ -26,6 +26,8 @@ namespace CrypTool.Plugins.Yao1
     [ComponentCategory(ComponentCategory.Protocols)]
     public class Yao1 : ICrypComponent
     {
+        private bool _stopped = false;
+
         #region Data Properties
 
         [PropertyInfo(Direction.InputData, "D", "D")]
@@ -64,6 +66,7 @@ namespace CrypTool.Plugins.Yao1
         public void Execute()
         {
             ProgressChanged(0, maxMoney);
+            _stopped = false;
 
             for (int i = 0; i < maxMoney; i++)
             {
@@ -74,6 +77,10 @@ namespace CrypTool.Plugins.Yao1
                 // Waiting a short time span between property changes fixes this problem.
                 System.Threading.Thread.Sleep(5);
                 ProgressChanged(i + 1, maxMoney);
+                if (_stopped)
+                {
+                    return;
+                }
             }
         }
 
@@ -83,6 +90,7 @@ namespace CrypTool.Plugins.Yao1
 
         public void Stop()
         {
+            _stopped = true;
         }
 
         public void Initialize()

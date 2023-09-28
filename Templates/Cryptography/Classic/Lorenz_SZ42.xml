@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Typex.xml-->
+  <!--Last edited: 2023.09.01-->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Lorenz SZ42</title>
+  <summary lang="en">This template shows how the German <i>Lorenz SZ42</i> can be used to encrypt and decrypt  text.</summary>
+  <description lang="en">With this template we illustrate the encryption of a plaintext by means of a German <b>Lorenz SZ42 cipher machine</b>. The machine was used to encrypt teletype texts and was one of the first stream ciphers.</description>
+  <keywords>Schlüsselgerät, rotor, wheel, machine</keywords>
+  <replacements lang="en">
+    <replacement key="$Message$" value="Hello world, this is a test of the Lorenz SZ42 cipher machine component of CrypTool 2 :-)" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Generated key$" value="Generated key" />
+    <replacement key="$Decrypted plaintext$" value="Decrypted plaintext" />
+    <replacement key="$memo$" value="The {\b Lorenz SZ42} (Schlüssel-Zusatz 42; English: cipher attachment 42), often referred to simply as the &quot;Lorenz machine&quot;, is a remarkable piece of cryptographic machinery that played a crucial role in World War II. Developed by the German engineering firm C. Lorenz AG, this device is distinct from its well-known counterpart, the Enigma machine. While the Enigma was widely used by the German military to encrypt various communications, the Lorenz SZ42 was employed for encoding high-level military and diplomatic messages.\line
+\line
+The Lorenz SZ42 was primarily used by the German army and government officials for highly sensitive communications. Unlike the Enigma, which used rotor-based encryption, the Lorenz SZ42 employed a completely different approach known as &quot;teleprinter ciphering.&quot; This technology involved encoding messages using the Baudot code, a five-level binary code.\line
+\line
+In this template, three Lorenz SZ42 components are used. The first generates a random key following the keying rules of the SZ42. The two others perform encryption and decryption.\line
+\line
+A very nice implementation and simulation of the internal workings of the machine can be found on: https://lorenz.virtualcolossus.co.uk/" />
+  </replacements>
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Lorenz SZ42</title>
+  <summary lang="de">Diese Vorlage zeigt, wie die deutsche <i>Lorenz SZ42-Chiffriermaschine</i>zum Ver- und Entschlüsseln von Text verwendet werden kann.</summary>
+  <description lang="de">Mit dieser Vorlage veranschaulichen wir die Verschlüsselung eines Klartextes mit Hilfe einer deutchen<b>Lorenz SZ42-Chiffriermaschine</b>. Die Maschine wurde zum Verschlüsseln von Fernschreibtexten verwendet und war eine der ersten Stromchiffren.</description>
+  <keywords>Schlüsselgerät, Rotor, Rad, Maschine</keywords>
+  <replacements lang="de">
+    <replacement key="$Message$" value="Hallo Welt, dies ist ein Test der Lorenz SZ42-Chiffriermaschinen-Komponente von CrypTool 2 :-)" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Generated key$" value="Generierter Schlüssel" />
+    <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$memo$" value="Die {\b Lorenz SZ42} (Schlüssel-Zusatz 42), oft einfach als Lorenz-Maschine bezeichnet, ist ein bemerkenswerter kryptografischer Apparat, der im Zweiten Weltkrieg eine entscheidende Rolle spielte. Das von der deutschen Ingenieurfirma C. Lorenz AG entwickelte Gerät unterscheidet sich von seinem bekannten Gegenstück, der Enigma-Maschine. Während die Enigma vom deutschen Militär in großem Umfang zur Verschlüsselung verschiedener Nachrichten genutzt wurde, wurde die Lorenz SZ42 zur Verschlüsselung hochrangiger militärischer und diplomatischer Nachrichten eingesetzt.\line
+\line
+Die Lorenz SZ42 wurde in erster Linie von der deutschen Armee und Regierungsbeamten für hochsensible Mitteilungen verwendet. Im Gegensatz zur Enigma, die eine rotorgestützte Verschlüsselung verwendete, setzte die Lorenz SZ42 einen völlig anderen Ansatz ein, der als &quot;Fernschreiber-Chiffrierung&quot; bekannt ist. Bei dieser Technologie wurden die Nachrichten im Baudot-Code, einem fünfstufigen Binärcode, verschlüsselt.\line
+\line
+In dieser Vorlage werden drei Lorenz SZ42-Komponenten verwendet. Die erste generiert einen zufälligen Schlüssel gemäß den Schlüssel-Generierungsregeln der SZ42. Die beiden anderen führen Ver- und Entschlüsselung durch.\line
+\line
+Eine sehr schöne (Englische) Implementierung und Simulation des Innenlebens der Maschine finden Sie unter: https://lorenz.virtualcolossus.co.uk/" />
+  </replacements>
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Lorenz_SZ42.png" />
+  <relevantPlugins>
+    <plugin name="LorenzSZ42" />
+  </relevantPlugins>
+</sample>

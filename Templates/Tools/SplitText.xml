@@ -2,41 +2,51 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: SplitText.xml-->
-  <!--Last edited: 2022.02.08-->
+  <!--Last edited: 2022.10.28-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Split a Text</title>
   <summary lang="en">Splits a text using a dictionary</summary>
-  <description lang="en">This template shows how to split a text having no whitespaces using a dictionary and the substitution component.</description>
-  <keywords>Text, Substitution, Split</keywords>
+  <description lang="en">Given a text without spaces, this template shows how to split the words using a dictionary and the substitution component.</description>
+  <keywords>text, substitution, split</keywords>
   <replacements lang="en">
     <replacement key="$Uppercase$" value="Uppercase" />
     <replacement key="$Replace$" value="Replace" />
-    <replacement key="$Concatenation$" value="Concatenation" />
-    <replacement key="$Dictionary$" value="Dictionary" />
-    <replacement key="$Text Input$" value="Text Input" />
-    <replacement key="$Cleartext without spaces$" value="Cleartext without spaces" />
-    <replacement key="$Splitted Text (Words separated with spaces)$" value="Splitted Text (Words separated with spaces)" />
-    <replacement key="$memo$" value="This template demonstrates, how a text, which has no whitespaces, can be made more readable using the Substitution component and the dictionary component. Each word, which is found in the selected dictionary, is replaced by itself and a space symbol. To do so, the text of the dictionary has to be modified. The Substitution component recognizes words which are surrounded by brackets as &quot;code words&quot;:\line [word] ----&gt;    [word ]\line \line Thus, we surround each word from he dictionary with brackets. The source-alphabet for the substitution contains all words of the dictionary, the destination-alphabet contains all words followed by the space symbol.\line \line The text, which has to be split into words (tokens), must be entered in the TextInput component. As a result, the tokenized text appears in the TextOutput component." />
+    <replacement key="$Concatenation$" value="Concatenate" />
+    <replacement key="$Dictionary$" value="Dictionary" />    
+    <replacement key="$Cleartext without spaces$" value="Text without spaces" />
+    <replacement key="$Splitted Text (Words separated with spaces)$" value="Splitted text (words separated with spaces)" />
+    <replacement key="$memo$" value="Given a text without whitespaces, this template shows how to split the words using a dictionary and the substitution component.\line
+Each word, which is found in the selected dictionary, is replaced by itself and a space symbol.
+To do so, the single words output from the dictionary are modified by surrounding them with brackets.
+So the Substitution component recognizes them as &quot;code words&quot;:\line
+[word] ----&gt; [word ]\line\line
+The source alphabet for the substitution contains all words of the dictionary; the destination alphabet contains all words followed by a space symbol.\line\line
+The text, which has to be split into words (tokens), must be entered in the upper left TextInput component.
+As a result, the tokenized text appears in the TextOutput component on the right." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Text zerlegen</title>
   <summary lang="de">Zerlegt einen Text mit Hilfe eines Wörterbuchs</summary>
-  <description lang="de">Diese Vorlage zeigt, wie man einen Text, welcher keine Leerzeichen beinhaltet, mit Hilfe der Substitution und eines Wörterbuchs wieder in einzelne Wörter zerlegen kann.</description>
-  <keywords lang="de">kamera, foto</keywords>
+  <description lang="de">Bei einem Text ohne Leerzeichen zeigt diese Vorlage, wie die Wörter mit Hilfe eines Wörterbuchs und der Ersetzungskomponente getrennt werden können. </description>
+  <keywords lang="de">Text, Substitution, Zerlegen</keywords>
   <replacements lang="de">
     <replacement key="$Uppercase$" value="Großbuchstaben" />
     <replacement key="$Replace$" value="Ersetzen" />
-    <replacement key="$Concatenation$" value="Konkatenation" />
+    <replacement key="$Concatenation$" value="Konkatenieren" />
     <replacement key="$Dictionary$" value="Wörterbuch" />
-    <replacement key="$Text Input$" value="Texteingabe" />
-    <replacement key="$Cleartext without spaces$" value="Klartext ohne Leerzeichen" />
+    <replacement key="$Cleartext without spaces$" value="Text ohne Leerzeichen" />
     <replacement key="$Splitted Text (Words separated with spaces)$" value="Getrennter Text (Worte sind duch Leerzeichen getrennt)" />
-    <replacement key="$memo$" value="Diese Vorlage zeigt, wie ein Text, der keine Leerzeichen enthält, mithilfe der Substitutionskomponente und der Wörterbuchkomponente besser lesbar gemacht werden kann. Jedes Wort, das im ausgewählten Wörterbuch enthalten ist, wird durch sich selbst und ein Leerzeichen ersetzt. Dazu muss der Text des Wörterbuchs geändert werden. Die Substitutionskomponente erkennt Wörter, die in Klammern stehen, als &quot;Codewörter&quot;:\line [Wort] ----&gt; [Wort]\line \line Daher umgeben wir jedes Wort aus dem Wörterbuch mit Klammern. Das Quellalphabet für die Ersetzung enthält alle Wörter des Wörterbuchs, das Zielalphabet enthält alle Wörter, gefolgt vom Leerzeichen.\line \line Der Text, der in einzelne Wörter (Tokens) zerlegt werden soll, muss in die TextInput-Komponente eingegeben werden. Infolgedessen wird der tokenisierte Text in der TextOutput-Komponente angezeigt." />
+    <replacement key="$memo$" value="Diese Vorlage zeigt, wie ein Text, der keine Leerzeichen enthält, mithilfe der Substitutionskomponente und der Wörterbuchkomponente besser lesbar gemacht werden kann.
+Jedes Wort, das im ausgewählten Wörterbuch enthalten ist, wird durch sich selbst und ein Leerzeichen ersetzt. Dazu muss der Text des Wörterbuchs geändert werden.
+Die Substitutionskomponente erkennt Wörter, die in Klammern stehen, als &quot;Codewörter&quot;: [Wort] ----&gt; [Wort ]\line\line
+Daher umgeben wir jedes Wort aus dem Wörterbuch mit Klammern. Das Quellalphabet für die Ersetzung enthält alle Wörter des Wörterbuchs; das Zielalphabet enthält alle Wörter, gefolgt vom Leerzeichen.\line\line
+Der Text, der in Wörter (Token) zerlegt werden soll, muss in die obere linke Texteingabe-Komponente eingegeben werden.
+Als Ergebnis erscheint der tokenisierte Text in der Textausgabe-Komponente auf der rechten Seite." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

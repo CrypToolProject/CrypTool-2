@@ -471,6 +471,7 @@ namespace CrypTool.VigenereAnalyzer
                         e.Ranking = ranking;
                         ranking++;
                     }
+                    _presentation.CrypAnalysisResultListView.ScrollIntoView(_presentation.CrypAnalysisResultListView.Items[0]);
                 }
                 catch (Exception)
                 {

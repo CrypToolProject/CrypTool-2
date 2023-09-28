@@ -11,10 +11,12 @@
         <TabItem Header="{Loc Analyzer}" Width="Auto">
             <Grid Width="Auto">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="18*"/>
-                    <ColumnDefinition Width="239*"/>
-                    <ColumnDefinition Width="257*"/>
-                    <ColumnDefinition Width="480*"/>
+                    <ColumnDefinition Width="196*"/>
+                    <ColumnDefinition Width="26*"/>
+                    <ColumnDefinition Width="170*"/>
+                    <ColumnDefinition Width="197*"/>
+                    <ColumnDefinition Width="197*"/>
+                    <ColumnDefinition Width="208*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
@@ -26,8 +28,8 @@
                     <RowDefinition Height="25" />
                     <RowDefinition Height="150*" />
                 </Grid.RowDefinitions>
-                <Label Name="InfoTextLabel" Grid.ColumnSpan="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"/>
-                <Grid Grid.Row="1"  Margin="0,0,0,0" Grid.ColumnSpan="4">
+                <Label Name="InfoTextLabel" Grid.ColumnSpan="6" VerticalContentAlignment="Center"/>
+                <Grid Grid.Row="1" Grid.ColumnSpan="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="*"/>
@@ -35,7 +37,7 @@
                     <Label Width="200" Content="{Loc CiphertextAlphabet}" Grid.Column="0" VerticalContentAlignment="Center"/>
                     <TextBox Name="CipherAlphabetTextBox" Grid.Column="1" FontSize="17" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" FontFamily="Courier New" IsEnabled="False" Margin="0,0,0,0" />
                 </Grid>
-                <Grid Grid.Row="2"  Margin="0,0,0,0" Grid.ColumnSpan="4">
+                <Grid Grid.Row="2" Grid.ColumnSpan="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="*"/>
@@ -43,27 +45,29 @@
                     <Label Width="200" Content="{Loc PlaintextMapping}" Grid.Column="0" VerticalContentAlignment="Center"/>
                     <TextBox Name="PlainAlphabetTextBox" Grid.Column="1" FontSize="17" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" FontFamily="Courier New" IsEnabled="False" Margin="0,0,0,0" />
                 </Grid>
-                <Grid Grid.Row="3" Grid.ColumnSpan="4" Margin="0,0,0.334,0">
+                <Grid Grid.Row="3" Grid.ColumnSpan="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="150"/>
-                        <ColumnDefinition Width="210"/>
-                        <ColumnDefinition Width="210"/>
-                        <ColumnDefinition Width="210"/>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="220"/>
                     </Grid.ColumnDefinitions>
                     <ProgressBar Name="ProgressBar" Grid.Column="0"/>
                     <Label Name="ProgressText" Grid.Column="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="25"/>
                     <TextBox Name="CostTextBox" Grid.Column="1" IsEnabled="False"/>
-                    <Button Name="AnalyzeButton" Grid.Column="2" Content="{Loc Analyze}" Click="Analyze_Click" Width="200"/>
-                    <Button Name="ResetLockedLettersButton" Grid.Column="3" Content="{Loc ResetLockedLetters}" Click="ResetLockedLettersButton_Click" Width="200" />
-                    <Button Name="FindLockWordsButton" Grid.Column="4" Content="{Loc FindLockWords}" Click="FindLockWordsButton_OnClick" Width="200"/>
+                    <Button Name="AnalyzeButton" Grid.Column="2" Content="{Loc Analyze}" Click="Analyze_Click" Width="215"/>
+                    <Button Name="ResetLockedLettersButton" Grid.Column="3" Content="{Loc ResetLockedLetters}" Click="ResetLockedLettersButton_Click" Width="215" />
+                    <Button Name="FindLockWordsButton" Grid.Column="4" Content="{Loc FindLockWords}" Click="FindLockWordsButton_OnClick" Width="215"/>
+                    <Button Name="FindLockWordNomenclatureElementsButton" Grid.Column="5" Content="{Loc FindLockNomenclatureElements}" Click="FindLockNomenclatureElements_OnClick" Width="215"/>
                 </Grid>
-                <Label Grid.Row="4" Grid.ColumnSpan="4" Content="{Loc Ciphertext}" Margin="0,0,0.334,0"/>
-                <ScrollViewer Grid.Row="5" VerticalScrollBarVisibility="Auto" Name="CiphertextScrollViewer" ScrollChanged="CiphertextScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" Width="Auto" Height="Auto" Grid.ColumnSpan="4" Margin="0,0,0.334,0">
+                <Label Grid.Row="4" Grid.ColumnSpan="6" Content="{Loc Ciphertext}"/>
+                <ScrollViewer Grid.Row="5" VerticalScrollBarVisibility="Auto" Name="CiphertextScrollViewer" ScrollChanged="CiphertextScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" Width="Auto" Height="Auto" Grid.ColumnSpan="6">
                     <Grid Name="CiphertextGrid" />
                 </ScrollViewer>
-                <Label Grid.Row="6" Grid.ColumnSpan="4" Content="{Loc Plaintext}" Margin="0,0,0.334,0"></Label>
-                <ScrollViewer Grid.Row="7" VerticalScrollBarVisibility="Auto" Name="PlaintextScrollViewer"  ScrollChanged="PlaintextScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" Width="Auto" Height="Auto" Grid.ColumnSpan="4" Margin="0,0,0.334,0">
+                <Label Grid.Row="6" Grid.ColumnSpan="6" Content="{Loc Plaintext}" Margin="0,38,0,0"/>
+                <ScrollViewer Grid.Row="6" VerticalScrollBarVisibility="Auto" Name="PlaintextScrollViewer"  ScrollChanged="PlaintextScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" Width="Auto" Height="Auto" Grid.ColumnSpan="6" Margin="0,25,0,0" Grid.RowSpan="2">
                     <Grid Name="PlaintextGrid" />
                 </ScrollViewer>
             </Grid>
@@ -73,7 +77,7 @@
         </TabItem>
         <TabItem Header="{Loc BestList}">
             <crypanalysisviewcontrol:CrypAnalysisViewControl ResultListCaption="{Loc TopTenLabel}">
-                <crypanalysisviewcontrol:CrypAnalysisResultListView Name="BestListView" ItemsSource="{Binding}" ResultItemAction="HandleResultItemAction" Height="330">
+                <crypanalysisviewcontrol:CrypAnalysisResultListView Name="BestListView" ItemsSource="{Binding}" Height="330">
                     <crypanalysisviewcontrol:CrypAnalysisResultListView.View>
                         <GridView>
                             <GridViewColumn Header="#" DisplayMemberBinding="{Binding Path=Ranking}" Width="30">

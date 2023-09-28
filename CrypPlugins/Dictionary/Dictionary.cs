@@ -36,20 +36,20 @@ namespace Dictionary
 
         private const string DATATYPE = "wordlists";
 
-        private readonly CrypToolDictionarySettings settings = new CrypToolDictionarySettings();
+        private readonly CrypToolDictionarySettings _settings = new CrypToolDictionarySettings();
 
         // dictionary name -> collection of words
-        private readonly Dictionary<DataFileMetaInfo, string[]> dicValues = new Dictionary<DataFileMetaInfo, string[]>();
-        private readonly Dictionary<DataFileMetaInfo, string> dicValuesOld = new Dictionary<DataFileMetaInfo, string>();
+        private readonly Dictionary<DataFileMetaInfo, string[]> _dicValues = new Dictionary<DataFileMetaInfo, string[]>();
+        private readonly Dictionary<DataFileMetaInfo, string> _dicValuesOld = new Dictionary<DataFileMetaInfo, string>();
 
         // list of dictionaries
-        private DataFileMetaInfo[] dicList;
+        private DataFileMetaInfo[] _dicList;
 
         // Manages wordlist files
-        private readonly DataManager dataMgr = new DataManager();
+        private readonly DataManager _dataMgr = new DataManager();
 
         // Flag to enable re-execution during play mode
-        private bool allowReexecution = false;
+        private bool _allowReexecution = false;
 
         # endregion private_variables
 
@@ -62,9 +62,9 @@ namespace Dictionary
         {
             get
             {
-                if (dicList != null && settings.Dictionary >= 0 && settings.Dictionary < dicList.Length)
+                if (_dicList != null && _settings.Dictionary >= 0 && _settings.Dictionary < _dicList.Length)
                 {
-                    return dicList[settings.Dictionary];
+                    return _dicList[_settings.Dictionary];
                 }
                 else
                 {
@@ -82,11 +82,11 @@ namespace Dictionary
                 if (OutputList != null)
                 {
                     Debug.Assert(CurrentDicSelection != null);
-                    if (!dicValuesOld.ContainsKey(CurrentDicSelection))
+                    if (!_dicValuesOld.ContainsKey(CurrentDicSelection))
                     {
-                        dicValuesOld.Add(CurrentDicSelection, string.Join(" ", OutputList));
+                        _dicValuesOld.Add(CurrentDicSelection, string.Join(" ", OutputList));
                     }
-                    return dicValuesOld[CurrentDicSelection];
+                    return _dicValuesOld[CurrentDicSelection];
                 }
                 return null;
             }
@@ -100,9 +100,9 @@ namespace Dictionary
             {
                 if (CurrentDicSelection != null)
                 {
-                    if (dicValues.ContainsKey(CurrentDicSelection) || LoadDictionary(CurrentDicSelection))
+                    if (_dicValues.ContainsKey(CurrentDicSelection) || LoadDictionary(CurrentDicSelection))
                     {
-                        return dicValues[CurrentDicSelection];
+                        return _dicValues[CurrentDicSelection];
                     }
                 }
                 return null;
@@ -130,7 +130,7 @@ namespace Dictionary
             EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
         }
 
-        public ISettings Settings => settings;
+        public ISettings Settings => _settings;
 
         public UserControl Presentation => null;
 
@@ -142,7 +142,7 @@ namespace Dictionary
         {
             if (CurrentDicSelection == null)
             {
-                GuiLogMessage("No dictionary chosen.", NotificationLevel.Error);
+                GuiLogMessage(Properties.Resources.NoDictChosen, NotificationLevel.Error);
                 return;
             }
 
@@ -152,13 +152,13 @@ namespace Dictionary
             Progress(100, 100);
 
             // enable re-execution after the first run
-            allowReexecution = true;
+            _allowReexecution = true;
         }
 
         public void PostExecution()
         {
             // disable re-execution when leaving play mode
-            allowReexecution = false;
+            _allowReexecution = false;
         }
 
         public void Stop()
@@ -173,7 +173,7 @@ namespace Dictionary
         private bool LoadDictionary(DataFileMetaInfo file)
         {
             // sanity check for multi-threading
-            if (dicValues.ContainsKey(file))
+            if (_dicValues.ContainsKey(file))
             {
                 return true;
             }
@@ -192,14 +192,14 @@ namespace Dictionary
                         {
                             using (StreamReader sr = new StreamReader(fs))
                             {
-                                dicValues.Add(file, sr.ReadToEnd().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
+                                _dicValues.Add(file, sr.ReadToEnd().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
                             }
                         }
                         else
                         {
                             using (StreamReader sr = new StreamReader(fs, file.TextEncoding))
                             {
-                                dicValues.Add(file, sr.ReadToEnd().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
+                                _dicValues.Add(file, sr.ReadToEnd().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
                             }
                         }
                     }
@@ -224,38 +224,38 @@ namespace Dictionary
             return false;
         }
 
-        private void setNumberOfEntires()
+        private void SetNumberOfEntires()
         {
             if (CurrentDicSelection != null)
             {
-                if (dicValues.ContainsKey(CurrentDicSelection) || LoadDictionary(CurrentDicSelection))
+                if (_dicValues.ContainsKey(CurrentDicSelection) || LoadDictionary(CurrentDicSelection))
                 {
-                    int n = dicValues[CurrentDicSelection].Length;
-                    settings.NumberEntries = (n > 0) ? n.ToString("#,#") : n.ToString();
+                    int n = _dicValues[CurrentDicSelection].Length;
+                    _settings.NumberEntries = (n > 0) ? n.ToString("#,#") : n.ToString();
                 }
                 else
                 {
-                    settings.NumberEntries = "?";
+                    _settings.NumberEntries = "?";
                 }
             }
             else
             {
-                settings.NumberEntries = "?";
+                _settings.NumberEntries = "?";
             }
         }
 
         public void Initialize()
         {
-            settings.PropertyChanged += SettingsPropertyChanged; // catch settings changes
-            setNumberOfEntires();
+            _settings.PropertyChanged += SettingsPropertyChanged; // catch settings changes
+            SetNumberOfEntires();
         }
 
         private void SettingsPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            setNumberOfEntires();
+            SetNumberOfEntires();
 
             // if user chooses another dictionary, force re-execution
-            if (allowReexecution && e.PropertyName == "Dictionary")
+            if (_allowReexecution && e.PropertyName == "Dictionary")
             {
                 Execute();
             }
@@ -264,23 +264,23 @@ namespace Dictionary
         [MethodImpl(MethodImplOptions.Synchronized)]
         private void LoadFileList()
         {
-            dicList = dataMgr.LoadDirectory(DATATYPE).Values.ToArray();
+            _dicList = _dataMgr.LoadDirectory(DATATYPE).Values.ToArray();
 
-            if (settings.Collection.Count > 0)
+            if (_settings.Collection.Count > 0)
             {
-                settings.Collection.Clear();
+                _settings.Collection.Clear();
             }
 
-            foreach (DataFileMetaInfo meta in dicList)
+            foreach (DataFileMetaInfo meta in _dicList)
             {
-                settings.Collection.Add(this.GetPluginStringResource(meta.Name));
+                _settings.Collection.Add(this.GetPluginStringResource(meta.Name));
             }
         }
 
         public void Dispose()
         {
-            dicValues.Clear();
-            dicValuesOld.Clear();
+            _dicValues.Clear();
+            _dicValuesOld.Clear();
         }
 
         #endregion

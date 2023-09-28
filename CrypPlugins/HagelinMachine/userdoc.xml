@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<documentation>
+  <language culture="en"/>
+  <language culture="de-DE"/>
+
+  <introduction lang="en">
+    This component simulates the operation of various models of cryptographic devices  manufactured by Crypto AG after the World War II, so-called Hagelin Machines.   At the moment the following  models are supported: CX52a, CX52b, CX52c, C52d, CXM, CXM late version, French, EIRE, M209.<newline/><newline/>	These are  purely mechanical rotor cipher machines which  were very flexible and easily customized according to the requirements of the customers and the desired level of security.  Within a few years, different variations of the machine were exported to more than sixty countries, which made C(X)-52 to be the most used rotor machine of its time.
+    <newline/><newline/> More information about the Hagelin Machine models can be found here:<ref id="referenceId"/>
+  </introduction>
+
+  <introduction lang="de-DE">
+    Diese Komponente simuliert den Betrieb verschiedener Modelle von kryptographischen Geräten, die von Crypto AG nach dem Zweiten Weltkrieg hergestellt wurden, sogenannte Hagelin-Maschinen.   Zur Zeit werden die folgenden Modelle unterstützt: CX52a, CX52b, CX52c, C52d, CXM, CXM late version, French, EIRE, M209.<newline/><newline/> Hierbei handelt es sich um rein mechanische Rotor-Chiffriermaschinen, die sehr flexibel und leicht an die Anforderungen der Kunden und das gewünschte Sicherheitsniveau anzupassen waren.  Innerhalb weniger Jahre wurden verschiedene Varianten der Maschine in mehr als sechzig Länder exportiert, was die C(X)-52 zur meistgenutzten Rotormaschine ihrer Zeit machte.
+    <newline/><newline/> Mehr Informationen über die Hagelin Maschinenmodelle finden Sie hier:<ref id="referenceId"/>
+  </introduction>
+
+  <usage lang="en">
+    Using the necessary settings, the component can be adjusted in such a way that it implements the machine with the needed functionality. The setting-up process is taken place step by step.
+    <newline/><newline/> The mechanism of the machine has to be defined through settings. However, the internal and external keys can be as the component inputs too. If the keys are provided through the inputs, the ones which are given through the settings are ingnored.   <newline/><newline/> To make the navigation between different steps easy, the following buttons are available: Next button is used to apply the settings at the current step and to move to the next one; whereas the Back button allows returning to the previous step.  The user can always get to the default settings by using the Reset button. With the default settings, there is no need to go over all the steps. Execution can be started every time.
+    <newline/><newline/> As the very first step the user has to select the model of the machine. By default, the model CX-52a is selected.
+    The models define the sets of the available pinwheels and which bars are used in the machine. The configuration of the bars defines how pinwheels are advanced during the encryption process.
+    Besides the predefined models, the user has an option to select the Custom model which allows for most flexible settings. Also in Step 1.1, the user can  select the mode of operation (encrypt or decrypt).
+    <newline/><newline/>After  these settings are selected, the user needs to choose the wheels  to be installed in the given machine (Step 1.2). Depending on the model, different wheel types are available. If the Custom model is selected, the user has access to all known types of the wheels and can also select the bar types Step 1.3. For the real models, the bar types are predefined and cannot be changed.
+    <newline/><newline/> By this point in time, the entire architecture of the machine has been specified and the user is ready to apply the internal key.  Step 2.1  sets up the pins for the wheels, and Step 2.2  sets the lugs of the bars. After that the user can apply the external key by choosing the initial wheel positions (Step~3). Note that if the internal or external key is provided to the component using the inputs, the corresponding settings will be ignored.
+    <newline/><newline/> At the last Step 4, the user has the possibility to choose the operation settings of the machine, which include (again) the mode (encryption or decryption), the way how Z symbols are handled, and what the component does with unknown symbols. Moreover, the user can select the initial offset between the input wheel and printwheel, and set up the F-V feature if necessary.  After all the settings are selected the component is ready for execution.
+  </usage>
+
+  <usage lang="de-DE">
+    Mit den notwendigen Einstellungen kann die Komponente so angepasst werden, dass es die Maschine mit der benötigten Funktionalität ausstattet. Der Einstellungsprozess erfolgt schrittweise.
+    <newline/><newline/> Der Mechanismus der Maschine muss durch Einstellungen definiert werden. Die internen und externen Tasten können aber auch als Komponenteneingänge dienen. Werden die Tasten über die Eingänge vorgegeben, werden die über die Einstellungen vorgegebenen Tasten ignoriert.   <newline/><newline/> Um die Navigation zwischen den verschiedenen Schritten zu erleichtern, stehen die folgenden Schaltflächen zur Verfügung: Die Schaltfläche "Weiter" dient dazu, die Einstellungen des aktuellen Schrittes zu übernehmen und zum nächsten Schritt zu gelangen, während die Schaltfläche "Zurück" die Rückkehr zum vorherigen Schritt ermöglicht.  Mit der Schaltfläche Zurücksetzen kann der Benutzer jederzeit zu den Standardeinstellungen zurückkehren. Mit den Standardeinstellungen ist es nicht notwendig, alle Schritte zu wiederholen. Die Ausführung kann jedes Mal gestartet werden.
+    <newline/><newline/> Als allerersten Schritt muss der Benutzer das Modell der Maschine auswählen. Standardmäßig ist das Modell CX-52a ausgewählt.
+    Die Modelle definieren die Sätze der verfügbaren Zahnräder und welche Stangen in der Maschine verwendet werden. Die Konfiguration der Stäbe legt fest, wie die Zahnräder während des Verschlüsselungsvorgangs vorgeschoben werden.
+    Neben den vordefinierten Modellen hat der Benutzer die Möglichkeit, das benutzerdefinierte Modell zu wählen, das die flexibelsten Einstellungen ermöglicht. Ebenfalls in Schritt 1.1 kann der Benutzer die Betriebsart (verschlüsseln oder entschlüsseln) auswählen.
+    <newline/><newline/>Nach der Auswahl dieser Einstellungen muss der Benutzer die Räder auswählen, die in der jeweiligen Maschine installiert werden sollen (Schritt 1.2). Je nach Modell sind verschiedene Radtypen verfügbar. Bei der Auswahl des benutzerdefinierten Modells hat der Benutzer Zugriff auf alle bekannten Radtypen und kann auch die Stangentypen auswählen (Schritt 1.3). Bei den echten Modellen sind die Stangentypen vordefiniert und können nicht geändert werden.
+    <newline/><newline/> Zu diesem Zeitpunkt ist die gesamte Architektur der Maschine festgelegt und der Benutzer ist bereit, den internen Schlüssel anzuwenden.  In Schritt 2.1 werden die Stifte für die Räder und in Schritt 2.2 die Stollen der Stangen festgelegt. Danach kann der Benutzer den externen Schlüssel anwenden, indem er die Anfangspositionen der Räder wählt (Schritt~3). Beachten Sie, dass die entsprechenden Einstellungen ignoriert werden, wenn der interne oder externe Schlüssel der Komponente über die Eingänge zugeführt wird.
+    <newline/><newline/> Im letzten Schritt 4 hat der Benutzer die Möglichkeit, die Betriebseinstellungen der Maschine zu wählen, zu denen (erneut) der Modus (Ver- oder Entschlüsselung), die Art und Weise, wie Z-Symbole behandelt werden, und die Vorgehensweise der Komponente bei unbekannten Symbolen gehören. Darüber hinaus kann der Benutzer den anfänglichen Versatz zwischen dem Eingaberad und dem Typenrad auswählen und bei Bedarf die F-V-Funktion einrichten.  Nachdem alle Einstellungen vorgenommen wurden, ist die Komponente zur Ausführung bereit.
+  </usage>
+
+  <presentation lang="en">
+    Presentation demonstrates advancements of the wheels after provided plaintext is encrypted. If the input text is entered character by character, the user can follow how the state of the machine is changing
+  </presentation>
+
+  <presentation lang="de-DE">
+    Die Präsentation zeigt die Fortschritte der Räder, nachdem der eingegebene Klartext verschlüsselt wurde. Wenn der Eingabetext Zeichen für Zeichen eingegeben wird, kann der Benutzer verfolgen, wie sich der Zustand der Maschine ändert
+  </presentation>
+
+  <references>
+    <linkReference id="referenceId">
+      <link url ="https://www.cryptomuseum.com/pub/files/BW_C52_CX52.pdf" lange= "en" />
+      <caption lang="en">Paper describing the mechanism of the machines</caption>
+      <link url ="https://www.cryptomuseum.com/pub/files/BW_C52_CX52.pdf" lange= "de-DE" />
+      <caption lang="de-DE">Artikel mit Beschreibung der Mechanismen der Maschinen</caption>
+    </linkReference>
+  </references>
+</documentation>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Trivium.xml-->
+  <!--Last edited: 2022.12.14-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Trivium Cipher</title>
+  <summary lang="en">Usage of the <i>Trivium</i> cipher</summary>
+  <description lang="en">Trivium is a synchronous stream cipher that represents a compromise between simple and powerful implementability in hardware and efficient implementation in software.</description>
+  <keywords>symmetric, stream, cipher</keywords>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key (hex values)" />
+    <replacement key="$Decrypted plaintext$" value="Decrypted plaintext" />
+    <replacement key="$IV$" value="Initialization vector (hex values)" />
+    <replacement key="$String Encoder$" value="String Encoder" />
+    <replacement key="$String Decoder$" value="String Decoder" />
+    <replacement key="$memo$" value="{\b Trivium} is a synchronous stream cipher that represents a compromise between simple and powerful implementability in hardware and efficient implementation in software.\line\line
+Trivium was developed by two Belgian cryptographers, Bart Preneel and Christophe De Cannière. The two submitted the method as a candidate for Profile II (hardware method) of the eSTREAM competition.\line
+\line
+Wikipedia: https://en.wikipedia.org/wiki/Trivium_(cipher)" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Trivium-Chiffre</title>
+  <summary lang="de">Benutzung der <i>Trivium</i>-Chiffre</summary>
+  <description lang="de">Trivium ist eine synchrone Stromchiffre, die einen Kompromiss zwischen einfacher und leistungsfähiger Implementierbarkeit in Hardware und effizienter Implementierung in Software darstellt.</description>
+  <keywords>symmetrisch, Strom, Chiffre</keywords>
+  <replacements lang="de">
+   <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel (Hex-Werte)" />
+    <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$IV$" value="Initialisierungsvektor (Hex-Werte)" />
+    <replacement key="$String Encoder$" value="String-Codierer" />
+    <replacement key="$String Decoder$" value="String-Decodierer" />
+    <replacement key="$memo$" value="{\b Trivium} ist eine synchrone Stromchiffre, die einen Kompromiss zwischen einfacher und leistungsfähiger Implementierbarkeit in Hardware und effizienter Implementierung in Software darstellt. \line\line
+Trivium wurde von zwei belgischen Kryptografen, Bart Preneel und Christophe De Cannière, entwickelt. Die beiden haben das Verfahren als Kandidat für das Profil II (Hardware-Verfahren) des eSTREAM-Wettbewerbs eingereicht.\line
+\line
+Wikipedia: http://de.wikipedia.org/wiki/Trivium_(Algorithmus)" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Trivium.png" />
+  <relevantPlugins>
+    <plugin name="Trivium" />
+  </relevantPlugins>
+</sample>

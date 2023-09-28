@@ -16,7 +16,7 @@
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc KeysPerSecondAverageLabel}" x:Name="KeysPerSecondAverageLabel" />
         </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
 
-        <crypanalysisviewcontrol:CrypAnalysisResultListView ItemsSource="{Binding}" ResultItemAction="HandleResultItemAction">
+        <crypanalysisviewcontrol:CrypAnalysisResultListView Name="CrypAnalysisResultListView" ItemsSource="{Binding}" ResultItemAction="HandleResultItemAction">
             <crypanalysisviewcontrol:CrypAnalysisResultListView.View>
                 <GridView>
                     <GridViewColumn Header="#" DisplayMemberBinding="{Binding Path=Ranking}" Width="25">

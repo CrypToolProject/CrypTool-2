@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright CrypTool 2 Team <ct2contact@cryptool.org>
+   Copyright 2022 Nils Kopal <Nils.Kopal<at>CrypTool.org
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -13,82 +13,83 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
 using CrypTool.JosseCipher.Properties;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.JosseCipher
 {
+    public enum Action
+    {
+        Encrypt,
+        Decrypt
+    }
+
     public class JosseCipherSettings : ISettings
     {
         #region Private Variables
 
-        private string _keyword = string.Empty;
-        private string _alphabet = Resources.DefaultAlphabet;
-
-        private JosseCipherMode _cipher;
-
-        public enum JosseCipherMode
-        {
-            Encrypt = 0,
-            Decrypt = 1
-        }
+        private Action _action = Action.Encrypt;
+        private bool _enablePeriod = false;
+        private int _period = 5;
 
         #endregion
 
+        public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
+
         #region TaskPane Settings
 
-        [PropertySaveOrder(10)]
-        [TaskPane("Keyword", "KeywordToolTip", null, 30, false, ControlType.TextBox)]
-        public string Keyword
+        [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "Encrypt", "Decrypt" })]
+        public Action Action
         {
-            get => _keyword ?? string.Empty;
+            get
+            {
+                return _action;
+            }
             set
             {
-                if (_keyword == value)
+                if (_action != value)
                 {
-                    return;
+                    _action = value;
+                    OnPropertyChanged(nameof(Action));
                 }
-
-                _keyword = value;
-                OnPropertyChanged(nameof(Keyword));
             }
         }
 
-        [PropertySaveOrder(20)]
-        [TaskPane("Alphabet", "AlphabetTooltip", null, 20, false, ControlType.TextBox)]
-        public string Alphabet
+        [TaskPane("EnablePeriodCaption", "EnablePeriodTooltip", null, 2, false, ControlType.CheckBox)]
+        public bool EnablePeriod
         {
-            get => _alphabet ?? string.Empty;
+            get
+            {
+                return _enablePeriod;
+            }
             set
             {
-                if (_alphabet == value)
+                if (_enablePeriod != value)
                 {
-                    return;
+                    _enablePeriod = value;
+                    OnPropertyChanged(nameof(EnablePeriod));
+                    UpdateSettingsVisibility();
                 }
-
-                _alphabet = value;
-                OnPropertyChanged(nameof(Alphabet));
             }
         }
 
-        [PropertySaveOrder(30)]
-        [TaskPane("Mode", "ModeTooltip", null, 10, false,
-            ControlType.ComboBox, new string[] { "ModeActionEncrypt", "ModeActionDecrypt" })]
-        public JosseCipherMode Cipher
+        [TaskPane("PeriodCaption", "PeriodTooltip", null, 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
+        public int Period
         {
-            get => _cipher;
+            get
+            {
+                return _period;
+            }
             set
             {
-                if (_cipher == value)
+                if (_period != value)
                 {
-                    return;
+                    _period = value;
+                    OnPropertyChanged(nameof(Period));
                 }
-
-                _cipher = value;
-                OnPropertyChanged(nameof(Cipher));
             }
         }
 
@@ -107,7 +108,30 @@ namespace CrypTool.JosseCipher
 
         public void Initialize()
         {
+            UpdateSettingsVisibility();
+        }
 
+        private void UpdateSettingsVisibility()
+        {
+            if (_enablePeriod == true)
+            {
+                ShowHideSetting(nameof(Period), true);
+            }
+            else
+            {
+                ShowHideSetting(nameof(Period), false);
+            }
+        }
+
+        private void ShowHideSetting(string propertyName, bool show)
+        {
+            if (TaskPaneAttributeChanged == null)
+            {
+                return;
+            }
+
+            TaskPaneAttribteContainer container = new TaskPaneAttribteContainer(propertyName, show == true ? Visibility.Visible : Visibility.Collapsed);
+            TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(container));
         }
     }
 }

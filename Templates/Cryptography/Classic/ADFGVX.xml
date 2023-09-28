@@ -18,7 +18,7 @@ Source: <external ref="http://en.wikipedia.org/wiki/ADFGVX_cipher" /></descripti
     <replacement key="$Decrypted_Ciphertext$" value="Decrypted Ciphertext" />
     <replacement key="$ADFGVX_Encrypt$" value="ADFGVX Encrypt" />
     <replacement key="$ADFGVX_Decrypt$" value="ADFGVX Decrypt" />
-    <replacement key="$memo$" value="In this template, a text is first encrypted with the ADFGVX cipher. Then the ciphertext is decrypted again. \line\line In order to be able to encrypt and decrypt correctly, both ADFGVX components must have the same substitution and transposition key set in the settings. If random keys were generated in the settings for encryption, these keys must be copied into the settings of the second ADFGVX component before decryption." />
+    <replacement key="$memo$" value="The {\b ADFGVX cipher} was used and cracked in WWI. Its special feature is that it first substitutes internally and then transposes, fractionating the substituted bigrams.\line\line In this template a text is first encrypted with the ADFGVX encryption. Then the generated ciphertext is decrypted again. This is identical to the original plaintext except for the removed non-alphabetic characters. \line\line In order to be able to encrypt and decrypt correctly, both ADFGVX components must have the same substitution and transposition key set in the settings. If random keys were generated in the settings for encryption, these keys must be copied into the settings of the second ADFGVX component before decryption." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -33,9 +33,9 @@ Quelle: <external ref="http://de.wikipedia.org/wiki/ADFGX" /></description>
     <replacement key="$Plaintext$" value="Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />
     <replacement key="$Decrypted_Ciphertext$" value="Entschlüsselter Geheimtext" />
-    <replacement key="$ADFGVX_Encrypt$" value="ADFGVX Verschlüsselung" />
-    <replacement key="$ADFGVX_Decrypt$" value="ADFGVX Entschlüsselung" />
-    <replacement key="$memo$" value="In dieser Vorlage wird ein Text zuerst mit der ADFGVX-Verschlüsselung verschlüsselt. Dann wird der Geheimtext entschlüsselt. \line\line Um korrekt verschlüsseln und entschlüsseln zu können, müssen für beide ADFGVX-Komponenten in den Einstellungen die selben Substitutions- und Transpositionsschlüssel festgelegt sein. Wenn in den Einstellungen für die Verschlüsselung zufällige Schlüssel generiert wurden, müssen diese Schlüssel vor der Entschlüsselung in die Einstellungen der zweiten ADFGVX-Komponente kopiert werden." />
+    <replacement key="$ADFGVX_Encrypt$" value="ADFGVX-Verschlüsselung" />
+    <replacement key="$ADFGVX_Decrypt$" value="ADFGVX-Entschlüsselung" />
+    <replacement key="$memo$" value="Die {\b ADFGVX-Chiffre} wurde im ersten Weltkrieg verwendet und geknackt. Das Besondere an ihr ist, dass sie intern erst substituiert und dann transponiert, wobei die substituierten Bigramme fraktioniert werden. \line\line In dieser Vorlage wird ein Text zuerst mit der ADFGVX-Verschlüsselung verschlüsselt. Dann wird der erzeugte Geheimtext wieder entschlüsselt. Dieser ist bis auf die entfernten Nichtalphabetzeichen identisch mit dem ursprünglichen Klartext.  \line\line Um korrekt verschlüsseln und entschlüsseln zu können, müssen für beide ADFGVX-Komponenten in den Einstellungen dieselben Substitutions- und Transpositionsschlüssel festgelegt sein. Wenn in den Einstellungen für die Verschlüsselung zufällige Schlüssel generiert wurden, müssen diese Schlüssel vor der Entschlüsselung in die Einstellungen der zweiten ADFGVX-Komponente kopiert werden." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

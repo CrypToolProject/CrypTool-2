@@ -79,10 +79,13 @@ namespace VoluntLib2
         /// <param name="caCertificate"></param>
         /// <param name="ownCertificate"></param>
         /// <param name="listenport"></param>
-        public void Start(X509Certificate2 caCertificate, X509Certificate2 ownCertificate, ushort listenport = 10000)
+        public void Start(X509Certificate2 caCertificate, X509Certificate2 ownCertificate, ushort listenport = 10000, bool initCertificateService = true)
         {
             //1) Init Certificate ervice
-            CertificateService.Init(caCertificate, ownCertificate);
+            if (initCertificateService)
+            {
+                CertificateService.Init(caCertificate, ownCertificate);                
+            }
             CertificateName = CertificateService.OwnName;
 
             //2) Create, initialize, and start ConnectionManager

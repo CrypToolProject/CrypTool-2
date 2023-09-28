@@ -1,0 +1,641 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ApplyButtonCaption" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="ApplyButtonTip" xml:space="preserve">
+    <value>Apply selected settings</value>
+  </data>
+  <data name="BackButtonCaption" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="BackButtonTip" xml:space="preserve">
+    <value>Return to the previous window</value>
+  </data>
+  <data name="BarCamTypesCaption" xml:space="preserve">
+    <value>Cam types of the bar </value>
+  </data>
+  <data name="BarCamTypesTip" xml:space="preserve">
+    <value>Indicates how cams influence each of the wheels by typing a string which contains following characters: 0 - never, A - when displaced, B - when not displaced,  C - always</value>
+  </data>
+  <data name="BarHasLugsCaption" xml:space="preserve">
+    <value>Bar has lugs</value>
+  </data>
+  <data name="BarHasLugsTip" xml:space="preserve">
+    <value>Set if the bar has lugs</value>
+  </data>
+  <data name="BarLugsCaption" xml:space="preserve">
+    <value>Bar lugs</value>
+  </data>
+  <data name="BarLugsTip" xml:space="preserve">
+    <value>Enumerate the indexes of the lugs of the bar which are to be set active. Indexes are to be separted by the comma sign</value>
+  </data>
+  <data name="BarToothTypeCaption" xml:space="preserve">
+    <value>Tooth type of the bar</value>
+  </data>
+  <data name="BarToothTypeTip" xml:space="preserve">
+    <value>Sets the type of the tooth of Bar</value>
+  </data>
+  <data name="BarTypeCaption" xml:space="preserve">
+    <value>Type of the bar</value>
+  </data>
+  <data name="BarTypeTip" xml:space="preserve">
+    <value>Sets the type of the bar</value>
+  </data>
+  <data name="CaptionDownWheel1" xml:space="preserve">
+    <value>↓Wheel 1</value>
+  </data>
+  <data name="CaptionDownWheel10" xml:space="preserve">
+    <value>↓Wheel 10</value>
+  </data>
+  <data name="CaptionDownWheel11" xml:space="preserve">
+    <value>↓Wheel 11</value>
+  </data>
+  <data name="CaptionDownWheel12" xml:space="preserve">
+    <value>↓Wheel 12</value>
+  </data>
+  <data name="CaptionDownWheel2" xml:space="preserve">
+    <value>↓Wheel2</value>
+  </data>
+  <data name="CaptionDownWheel3" xml:space="preserve">
+    <value>↓Wheel 3</value>
+  </data>
+  <data name="CaptionDownWheel4" xml:space="preserve">
+    <value>↓Wheel 4</value>
+  </data>
+  <data name="CaptionDownWheel5" xml:space="preserve">
+    <value>↓Wheel 5</value>
+  </data>
+  <data name="CaptionDownWheel6" xml:space="preserve">
+    <value>↓Wheel 6</value>
+  </data>
+  <data name="CaptionDownWheel7" xml:space="preserve">
+    <value>↓Wheel 7</value>
+  </data>
+  <data name="CaptionDownWheel8" xml:space="preserve">
+    <value>↓Wheel 8</value>
+  </data>
+  <data name="CaptionDownWheel9" xml:space="preserve">
+    <value>↓Wheel 9</value>
+  </data>
+  <data name="CaptionUpWheel1" xml:space="preserve">
+    <value>↑Wheel 1</value>
+  </data>
+  <data name="CaptionUpWheel10" xml:space="preserve">
+    <value>↑Wheel 10</value>
+  </data>
+  <data name="CaptionUpWheel11" xml:space="preserve">
+    <value>↑Wheel 11</value>
+  </data>
+  <data name="CaptionUpWheel12" xml:space="preserve">
+    <value>↑Wheel 12</value>
+  </data>
+  <data name="CaptionUpWheel2" xml:space="preserve">
+    <value>↑Wheel 2</value>
+  </data>
+  <data name="CaptionUpWheel3" xml:space="preserve">
+    <value>↑Wheel 3</value>
+  </data>
+  <data name="CaptionUpWheel4" xml:space="preserve">
+    <value>↑Wheel 4</value>
+  </data>
+  <data name="CaptionUpWheel5" xml:space="preserve">
+    <value>↑Wheel 5</value>
+  </data>
+  <data name="CaptionUpWheel6" xml:space="preserve">
+    <value>↑Wheel 6</value>
+  </data>
+  <data name="CaptionUpWheel7" xml:space="preserve">
+    <value>↑Wheel 7</value>
+  </data>
+  <data name="CaptionUpWheel8" xml:space="preserve">
+    <value>↑Wheel 8</value>
+  </data>
+  <data name="CaptionUpWheel9" xml:space="preserve">
+    <value>↑Wheel 9</value>
+  </data>
+  <data name="CurrentStepCaption" xml:space="preserve">
+    <value>Current step:</value>
+  </data>
+  <data name="CurrentStepTip" xml:space="preserve">
+    <value>Please follow the istructions. With the default settings, there is no need to go over all the steps. Execution can be started any time</value>
+  </data>
+  <data name="ErrorGeneral" xml:space="preserve">
+    <value>Exception occured during execution of HagelinMachine: {0}</value>
+  </data>
+  <data name="ErrorInvalidLugs" xml:space="preserve">
+    <value>Invalid Internal Key definition in bar lugs: {0}</value>
+  </data>
+  <data name="ErrorInvalidPins" xml:space="preserve">
+    <value>Invalid Internal Key definition in wheel pins: {0}</value>
+  </data>
+  <data name="ErrorInvalidSettingsBarLugs" xml:space="preserve">
+    <value>The input actve bar lugs are not valid.</value>
+  </data>
+  <data name="ErrorInvalidSettingsWheelPositions" xml:space="preserve">
+    <value>The input wheel positions are not valid.</value>
+  </data>
+  <data name="ErrorInvalidState" xml:space="preserve">
+    <value>Invalid External Key definition in Wheels Starting Positions: {0}</value>
+  </data>
+  <data name="FVFeatureCaption" xml:space="preserve">
+    <value>F-V feature</value>
+  </data>
+  <data name="FVFeatureTip" xml:space="preserve">
+    <value>The Fixed-Variable feature utilizes the ability of the input ring and the output ring to increase the offset with respect to each other after encrypting every character. When this feature is installed and activated, the relative position of the rings is changed by the current displacement value in each ciphering cycle.</value>
+  </data>
+  <data name="HagelinMachineCaption" xml:space="preserve">
+    <value>Hagelin Machine</value>
+  </data>
+  <data name="HagelinMachineTooltip" xml:space="preserve">
+    <value>Implements a selected model of a Hagelin Machine</value>
+  </data>
+  <data name="TipDownWheel" xml:space="preserve">
+    <value>Rotate the wheel down by 1 position</value>
+  </data>
+  <data name="TipUpWheel" xml:space="preserve">
+    <value>Rotate the wheel up by 1 position. The initial wheels state is shown on the panel above</value>
+  </data>
+  <data name="InfoAndControlGroup" xml:space="preserve">
+    <value>Info and Control</value>
+  </data>
+  <data name="InitialOffsetCaption" xml:space="preserve">
+    <value>Initial offset</value>
+  </data>
+  <data name="InitialOffsetTip" xml:space="preserve">
+    <value>Shows offset between initial offset input ring and output wring</value>
+  </data>
+  <data name="InputBarLugsCaption" xml:space="preserve">
+    <value>Input bar lugs</value>
+  </data>
+  <data name="InputBarLugsTip" xml:space="preserve">
+    <value>Input numbers of the weels for which lugs of each bar have to be active.  Lugs have to be separated with a comma. Active Lugs for each wheel start from a separate line</value>
+  </data>
+  <data name="InputTextCaption" xml:space="preserve">
+    <value>Input text</value>
+  </data>
+  <data name="InputTextTip" xml:space="preserve">
+    <value>Plaintext that has to be encrypted or ciphertext that has to be decrypted</value>
+  </data>
+  <data name="InputWheelPinsCaption" xml:space="preserve">
+    <value>Input wheel pins</value>
+  </data>
+  <data name="InputWheelPinsTip" xml:space="preserve">
+    <value>Input indexes (letters or numbers) of the pins activated for each wheel.  Pins have to be separated with a comma, e.g: "A, B, 11". Pins for each wheel start from a separate line</value>
+  </data>
+  <data name="InputWheelsStateCaption" xml:space="preserve">
+    <value>Input wheels initial state</value>
+  </data>
+  <data name="InputWheelsStateTip" xml:space="preserve">
+    <value>Input indexes (letters or numbers) of the initial positions of the wheel.  Indexes have to be separated with a comma, e.g: "A, B, 11". </value>
+  </data>
+  <data name="ModelCaption" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <data name="ModelTip" xml:space="preserve">
+    <value>Select the model of Hagelin Machine</value>
+  </data>
+  <data name="NumberOfBarsCaption" xml:space="preserve">
+    <value>Number of bars</value>
+  </data>
+  <data name="NumberOfBarsTip" xml:space="preserve">
+    <value>Sets up the number of slide bars</value>
+  </data>
+  <data name="NumberOfWheelsCaption" xml:space="preserve">
+    <value>Number of wheels</value>
+  </data>
+  <data name="NumberOfWheelsTip" xml:space="preserve">
+    <value>Sets up the number of wheels</value>
+  </data>
+  <data name="OutputKeystreamCaption" xml:space="preserve">
+    <value>Output keystream</value>
+  </data>
+  <data name="OutputKeystreamTip" xml:space="preserve">
+    <value>Values of displacement as a keystream</value>
+  </data>
+  <data name="OutputReportCaption" xml:space="preserve">
+    <value>Output report</value>
+  </data>
+  <data name="OutputReportTip" xml:space="preserve">
+    <value>Report explaining intermediate steps</value>
+  </data>
+  <data name="OutputTextCaption" xml:space="preserve">
+    <value>Output text</value>
+  </data>
+  <data name="OutputTextTip" xml:space="preserve">
+    <value>Result of encryption or decryption</value>
+  </data>
+  <data name="PhraseInReportCoputedDisplacement" xml:space="preserve">
+    <value>
+Cumputed displacement D =</value>
+  </data>
+  <data name="PhraseInReportFVFeatureActive" xml:space="preserve">
+    <value>FV Feature: active. 
+New offset between input ring and output ring:</value>
+  </data>
+  <data name="PhraseInReportInputCharacter" xml:space="preserve">
+    <value>
+Input character</value>
+  </data>
+  <data name="PhraseInReportInputText" xml:space="preserve">
+    <value>Input text =</value>
+  </data>
+  <data name="PhraseInReportNotShifted" xml:space="preserve">
+    <value>: not shifted and "has displace when not shifted" tooth  
+Current displacement: </value>
+  </data>
+  <data name="PhraseInReportOffset" xml:space="preserve">
+    <value>
+Offset between input ring and output ring O =</value>
+  </data>
+  <data name="PhraseInReportOutputCharacter" xml:space="preserve">
+    <value>
+Output charachter:</value>
+  </data>
+  <data name="PhraseInReportShifted" xml:space="preserve">
+    <value>: shifted and "has displace when shifted" tooth 
+Current displacement: </value>
+  </data>
+  <data name="PhraseInReportSteps" xml:space="preserve">
+    <value>-Computing the number of steps for each wheel to be advanced, and the displacement between the input and output characters.  
+-All cases when the conditions are met to increase the dispacement or when the wheels are to be advanced are reported.
+</value>
+  </data>
+  <data name="PresentatinCol1Label" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="PresentatinCol2Label" xml:space="preserve">
+    <value>Wheel 1</value>
+  </data>
+  <data name="PresentatinCol3Label" xml:space="preserve">
+    <value>Wheel 2</value>
+  </data>
+  <data name="PresentatinCol4Label" xml:space="preserve">
+    <value>Wheel 3</value>
+  </data>
+  <data name="PresentatinCol5Label" xml:space="preserve">
+    <value>Wheel 4</value>
+  </data>
+  <data name="PresentatinCol6Label" xml:space="preserve">
+    <value>Wheel 5</value>
+  </data>
+  <data name="PresentatinCol7Label" xml:space="preserve">
+    <value>Wheel 6</value>
+  </data>
+  <data name="ResetButtonCaption" xml:space="preserve">
+    <value>Reset the model and start from Step 1</value>
+  </data>
+  <data name="ResetButtonTip" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="RotateDownLabel" xml:space="preserve">
+    <value>Rotate down</value>
+  </data>
+  <data name="RotateUpLabel" xml:space="preserve">
+    <value>Rotate up</value>
+  </data>
+  <data name="SelectedBarsCaption" xml:space="preserve">
+    <value>Bars used in this machine</value>
+  </data>
+  <data name="SelectedBarsTip" xml:space="preserve">
+    <value>Information about bars:
+Type   Cams       Has lugs  Effect on the typewheel
+1         A00000      Yes       Advances if shifted
+2         B00000      Yes       Advances if shifted
+3         0A0000      Yes       Advances if shifted
+4         0B0000      Yes       Advances if shifted
+5         00A000      Yes       Advances if shifted
+6         00B000      Yes       Advances if shifted
+7         000A00      Yes       Advances if shifted
+8         000B00      Yes       Advances if shifted
+9         0000A0      Yes       Advances if shifted
+10       0000B0      Yes       Advances if shifted
+11       00000A      Yes       Advances if shifted
+12       B00000      Yes       Advances if shifted
+13       000000      Yes       Advances if shifted
+14       BBBBBB      Yes       Advances if shifted
+15       CCCCCC      Yes       Advances if shifted
+16       00CCCC      No       Advances if shifted
+17       CCCCCC      No       Advances if shifted
+18       000000      No       Advances if shifted
+35       00BBBB      Yes       Advances if shifted
+54       AAAAAA      Yes       Advances if shifted
+56       AA0000      Yes       Advances if shifted
+x57      CA0000      Yes       Advances if shifted
+60       00AA00      Yes       Advances if shifted
+64       0000AA      Yes       Advances if shifted
+68       00CCCC      Yes       Advances if shifted
+05      00A000      Yes           No effect
+106     00B000      Yes           No effect
+107     000A00      Yes           No effect
+108     000B00      Yes           No effect
+109     0000A0      Yes           No effect
+111     00000A      Yes           No effect
+157     CA0000      Yes           No effect
+
+Cam types: 0 - never, B - not displaced, A - displaced, C - always</value>
+  </data>
+  <data name="SelectedModelCaption" xml:space="preserve">
+    <value>
+
+Selected model</value>
+  </data>
+  <data name="SelectedModelTip" xml:space="preserve">
+    <value>Shows the model which was selected</value>
+  </data>
+  <data name="SelectedWheelsCaption" xml:space="preserve">
+    <value>Selected wheels</value>
+  </data>
+  <data name="SelectedWheelsTip" xml:space="preserve">
+    <value>Shows the wheel types that were selected</value>
+  </data>
+  <data name="WheelActivePinsCaption" xml:space="preserve">
+    <value>Active pins of the wheel</value>
+  </data>
+  <data name="WheelActivePinsTip" xml:space="preserve">
+    <value>Enumerate the indexes of the pins of the wheel which are to be set active.</value>
+  </data>
+  <data name="WheelLabelsCaption" xml:space="preserve">
+    <value>Wheel labels:</value>
+  </data>
+  <data name="WheelLabelsTip" xml:space="preserve">
+    <value>Shows the labels of each position of the wheel . They may include Latin letters or numbers and have to be separted by the comma sign</value>
+  </data>
+  <data name="WheelsStateCaption" xml:space="preserve">
+    <value>Wheels state</value>
+  </data>
+  <data name="WheelsStateTip" xml:space="preserve">
+    <value>Shows the indexes of the  positions of each wheel. In the beginning equal to external key. Indexes are to be separted by the comma sign</value>
+  </data>
+  <data name="WheelTypeCaption" xml:space="preserve">
+    <value>Type of the wheel</value>
+  </data>
+  <data name="WheelTypeTip" xml:space="preserve">
+    <value>Sets up the type of the wheel</value>
+  </data>
+  <data name="CanStartCaption" xml:space="preserve">
+    <value>You can start the execution now.</value>
+  </data>
+  <data name="DecryptCaption" xml:space="preserve">
+    <value>Decrypt</value>
+  </data>
+  <data name="EncryptCaption" xml:space="preserve">
+    <value>Encrypt</value>
+  </data>
+  <data name="EncryptionDoneCaption" xml:space="preserve">
+    <value>Encryption done</value>
+  </data>
+  <data name="InitialOffsetSetCaption" xml:space="preserve">
+    <value>Initial offset</value>
+  </data>
+  <data name="InitialOffsetSetTip" xml:space="preserve">
+    <value>Sets the initial offset between input ring and output ring</value>
+  </data>
+  <data name="ModeOfOperationGroup" xml:space="preserve">
+    <value>Mode of operation</value>
+  </data>
+  <data name="OperationModeCaption" xml:space="preserve">
+    <value>Operation mode</value>
+  </data>
+  <data name="OperationModeTip" xml:space="preserve">
+    <value>Changes between encryption and decryption modes. For current models, there is no difference</value>
+  </data>
+  <data name="PrinterOffsetGroup" xml:space="preserve">
+    <value>Printer offset</value>
+  </data>
+  <data name="RandomizeLugsCaption" xml:space="preserve">
+    <value>Randomize lugs</value>
+  </data>
+  <data name="RandomizeLugsTip" xml:space="preserve">
+    <value>Randomly set active lugs</value>
+  </data>
+  <data name="RandomizePinsCaption" xml:space="preserve">
+    <value>Randomize pins</value>
+  </data>
+  <data name="RandomizePinsTip" xml:space="preserve">
+    <value>Randomly set wheel pins</value>
+  </data>
+  <data name="ReadyToCaption" xml:space="preserve">
+    <value>Ready to</value>
+  </data>
+  <data name="ResetWheelsCaption" xml:space="preserve">
+    <value>Reset wheels</value>
+  </data>
+  <data name="ResetWheelsTip" xml:space="preserve">
+    <value>Set all wheels to 1st position</value>
+  </data>
+  <data name="ShowAllCaption" xml:space="preserve">
+    <value>Show all settings</value>
+  </data>
+  <data name="ShowAllTip" xml:space="preserve">
+    <value>Show all available settings (not recommended for usage before all the setting-up steps are understood)</value>
+  </data>
+  <data name="ShowBarsCaption" xml:space="preserve">
+    <value>Show bars</value>
+  </data>
+  <data name="ShowOnlyLugsCaption" xml:space="preserve">
+    <value>Show only lugs</value>
+  </data>
+  <data name="ShowOnlyLugsTip" xml:space="preserve">
+    <value>Show only lugs and hide other information about side bars</value>
+  </data>
+  <data name="ShowWheelsCaption" xml:space="preserve">
+    <value>Show wheels</value>
+  </data>
+  <data name="Step11Caption" xml:space="preserve">
+    <value>1.1 - Select the Hagelin model and the operation mode. The model defines the bars used in the machine and the compatible pin-wheels. With the default settings, there is no need to go over all the steps. Execution can be started any time.</value>
+  </data>
+  <data name="Step12Caption" xml:space="preserve">
+    <value>1.2. Selection of the wheels: If the current  model allows that, select the pin wheels. Once ready, press Next button</value>
+  </data>
+  <data name="Step13Caption" xml:space="preserve">
+    <value>1.3. Select the bars to be used in the Machine. Once ready, press Next button</value>
+  </data>
+  <data name="Step21Caption" xml:space="preserve">
+    <value>2.1. Setting up pins for the weels - part of inner key. Values added here will be ingnored if the pins are provided as an input</value>
+  </data>
+  <data name="Step22Caption" xml:space="preserve">
+    <value>2.2. Setting up lugs of the bars - part of inner key. Values added here will be ingnored if the lugs are provided as an input</value>
+  </data>
+  <data name="Step3Caption" xml:space="preserve">
+    <value>3. Setting up initial positions of the wheels - external key. The step is not necessary if the initial state is provided as an input</value>
+  </data>
+  <data name="Step4Caption" xml:space="preserve">
+    <value>4. Setting up the opeation settings: 
+4.1 Mode: Encryption/Decryption; 
+4.2 Text options; 
+4.3: Position of output ring with respect to the input ring.</value>
+  </data>
+  <data name="TextOptionsGroup" xml:space="preserve">
+    <value>Text options</value>
+  </data>
+  <data name="UnknownSymbolCaption" xml:space="preserve">
+    <value>Unknown Symbols Handling</value>
+  </data>
+  <data name="UnknownSymbolTip" xml:space="preserve">
+    <value>Set how to handle uknown Symbols</value>
+  </data>
+  <data name="UseZCaption" xml:space="preserve">
+    <value>Use Z As Space</value>
+  </data>
+  <data name="UseZTip" xml:space="preserve">
+    <value>Consider Z characters as spaces</value>
+  </data>
+  <data name="UtilitiesGroup" xml:space="preserve">
+    <value>Utilities</value>
+  </data>
+  <data name="PhraseInReportActiveAgainst" xml:space="preserve">
+    <value>: active against wheel</value>
+  </data>
+  <data name="PhraseInReportBar" xml:space="preserve">
+    <value>
+Bar</value>
+  </data>
+  <data name="PhraseInReportCamTypeA" xml:space="preserve">
+    <value>, cam type: A;</value>
+  </data>
+  <data name="PhraseInReportCamTypeB" xml:space="preserve">
+    <value>, cam type: B;</value>
+  </data>
+  <data name="PhraseInReportIsFurtherAdvanced" xml:space="preserve">
+    <value>is further advanced. Total advancement steps:</value>
+  </data>
+  <data name="PhraseInReportNotActiveAgainst" xml:space="preserve">
+    <value>: not active against wheel</value>
+  </data>
+  <data name="PhraseInReportWheel" xml:space="preserve">
+    <value>Wheel</value>
+  </data>
+  <data name="WheelStateNotValid" xml:space="preserve">
+    <value>The wheel state is not valid.</value>
+  </data>
+  <data name="PositionCurrentlyDisplayedToUser" xml:space="preserve">
+    <value>Position currently displayed to user</value>
+  </data>
+  <data name="PositionCurrentlyActive" xml:space="preserve">
+    <value>Position currently active</value>
+  </data>
+  <data name="WheelsAdvancementsAtThisStep" xml:space="preserve">
+    <value>Wheels advancements at this step</value>
+  </data>
+  <data name="WheelsWithActivePins" xml:space="preserve">
+    <value>Wheels with active pins</value>
+  </data>
+</root>

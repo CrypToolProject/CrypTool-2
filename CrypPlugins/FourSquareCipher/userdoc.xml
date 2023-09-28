@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<documentation>
+  <language culture="en"/>    
+  <language culture="de-DE"/>    
+  
+  <introduction lang="en">
+    In classical cryptography, the Four-square cipher is a cipher that is built using four polybius squares. It is a a bigraphic monoalphabetic substitution.
+    It was invented around 1901 by Felix Delastelle.
+  </introduction>
+
+  <introduction lang="de-DE">
+    In der klassischen Kryptographie ist die Four-Square-Chiffre eine Chiffre, die aus vier Polybius-Quadraten aufgebaut ist. Es handelt sich um eine bigraphische monoalphabetische Substitution.
+    Sie wurde um 1901 von Felix Delastelle erfunden.
+  </introduction>
+
+  <usage lang="en">    
+    The cipher encrypts pairs of letters (digraphs), and thus falls into a category of ciphers known as bigraphic substitution ciphers. This adds significant strength to the encryption when compared with monographic substitution ciphers which operate on single characters. The use of digraphs makes the four-square cipher less susceptible to frequency analysis attacks, as the analysis must be done on 676 possible digraphs rather than just 26 for monographic substitution. The frequency analysis of digraphs is possible, but considerably more difficult - and it generally requires a much larger ciphertext in order to be useful.<newline/>
+    <newline/>
+    The four-square cipher uses four 5 by 5 (5x5) matrices arranged in a square. Each of the 5 by 5 matrices contains the letters of the alphabet (usually omitting &quot;Q&quot; or putting both &quot;I&quot; and &quot;J&quot; in the same location to reduce the alphabet to fit; in this componentent it is &quot;I&quot;=&quot;J&quot;). In general, the upper-left and lower-right matrices are the "plaintext squares" and each contain a standard alphabet. The upper-right and lower-left squares are the &quot;ciphertext squares&quot; and contain a mixed alphabetic sequence.
+    To generate the ciphertext squares, one would first fill in the spaces in the matrix with the letters of a keyword or phrase (dropping any duplicate letters), then fill the remaining spaces with the rest of the letters of the alphabet in order. The key can be written in the top rows of the table, from left to right, or in some other pattern, such as a spiral beginning in the upper-left-hand corner and ending in the center. The keyword together with the conventions for filling in the 5 by 5 table constitute the cipher key. The four-square algorithm allows for two separate keys, one for each of the two ciphertext matrices.
+  </usage>
+
+  <usage lang="de-DE">
+    Die Chiffre verschlüsselt Buchstabenpaare (Digraphen) und fällt damit in eine Kategorie von Chiffren, die als bigraphische Substitutions-Chiffren bekannt sind. Dies verleiht der Verschlüsselung im Vergleich zu monographischen Substitutions-Chiffren, die mit einzelnen Buchstaben arbeiten, eine erhebliche Stärke. Durch die Verwendung von Digraphen ist die Four-Square-Chiffre weniger anfällig für Angriffe durch Häufigkeitsanalysen, da die Analyse für 676 mögliche Digraphen durchgeführt werden muss und nicht nur für 26 bei der monographischen Substitution. Die Häufigkeitsanalyse von Digraphen ist möglich, aber erheblich schwieriger - und sie erfordert im Allgemeinen einen viel größeren Geheimtext, um nützlich zu sein.<newline/>
+    <newline/>
+    Die Vier-Quadrate-Chiffre verwendet vier 5 mal 5 (5x5) Matrizen, die in einem Quadrat angeordnet sind. Jede der 5-mal-5-Matrizen enthält die Buchstaben des Alphabets (wobei in der Regel &quot;Q&quot; weggelassen oder sowohl &quot;I&quot; als auch &quot;J&quot; an dieselbe Stelle gesetzt werden, um das Alphabet zu verkleinern; in dieser Komponente ist es &quot;I&quot;=&quot;J&quot;). Im Allgemeinen sind die Matrizen oben links und unten rechts die "Klartextquadrate" und enthalten jeweils ein Standardalphabet. Die Quadrate oben rechts und unten links sind die "Chiffretextquadrate" und enthalten eine gemischte Buchstabenfolge.
+    Um die Geheimtext-Quadrate zu erzeugen, füllt man zunächst die Lücken in der Matrix mit den Buchstaben eines Schlüsselworts oder einer Phrase (wobei alle doppelten Buchstaben weggelassen werden), dann füllt man die verbleibenden Lücken mit den restlichen Buchstaben des Alphabets in der richtigen Reihenfolge. Der Schlüssel kann in den obersten Zeilen der Tabelle von links nach rechts oder in einem anderen Muster geschrieben werden, z. B. in Form einer Spirale, die in der oberen linken Ecke beginnt und in der Mitte endet. Das Schlüsselwort bildet zusammen mit den Konventionen für das Ausfüllen der 5x5-Tabelle den Schlüssel. Der Four-Square-Algorithmus ermöglicht zwei separate Schlüssel, einen für jede der beiden Geheimtextmatrizen.
+  </usage>
+  
+  <presentation lang="en">
+  </presentation>
+  
+  <presentation lang="de-DE">
+  </presentation>
+
+  <references>
+    <linkReference id="wikipedia">
+      <link url="https://en.wikipedia.org/wiki/Four-square_cipher" lang="en" />
+      <caption lang="en">Four-square cipher (Wikipedia)</caption>
+      <link url="https://en.wikipedia.org/wiki/Four-square_cipher" lang="de-DE" />
+      <caption lang="de-DE">Four-square cipher (Englische Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

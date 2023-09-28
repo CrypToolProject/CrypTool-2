@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: HIGHT.xml-->
+  <!--Last edited: 2022.12.14-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">HIGHT Cipher</title>
+  <summary lang="en">Usage of the <i>HIGHT</i> cipher</summary>
+  <description lang="en">HIGHT is a block cipher proposed by Deukjo Hong et al. that uses a block size of 64 bits and a key size of 128 bits.</description>
+  <keywords>Korean, symmetric, block, cipher, Feistel</keywords>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key (Hex values)" />
+    <replacement key="$Decrypted ciphertext$" value="Decrypted ciphertext" />
+    <replacement key="$Initialization vector$" value="Initialization vector (Hex values)" />
+    <replacement key="$memo$" value="{\b HIGHT} is a block cipher proposed by Deukjo Hong et al. that uses a block size of 64 bits and a key size of 128 bits.\line\line
+HIGHT was proposed at CHES '06 for use in ubiquitous computing devices such as sensors in ubiquitous sensor networks (USN) or RFID tags. The distinctive feature of HIGHT is its use of simple operations such as exclusive-OR, addition mod 2^8, and bitwise rotation. HIGHT is designed to be implemented in hardware to have low gate cost." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">HIGHT-Chiffre</title>
+  <summary lang="de">Benutzung der <i>HIGHT</i>-Chiffre</summary>
+  <description lang="de">HIGHT ist eine von Deukjo Hong et al. vorgeschlagene Blockchiffre, die eine Blockgröße von 64 Bit und eine Schlüsselgröße von 128 Bit verwendet.</description>
+  <keywords>koreanisch, symmetrisch, Block, Chiffre, Feistel</keywords>
+  <replacements lang="de">
+   <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel (Hex-Werte)" />
+    <replacement key="$Decrypted ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$Initialization vector$" value="Initialisierungsvektor (Hex-Werte)" />
+    <replacement key="$memo$" value="{\b HIGHT} ist eine von Deukjo Hong et al. vorgeschlagene Blockchiffre, die eine Blockgröße von 64 Bit und eine Schlüssellänge von 128 Bit verwendet.\line\line
+HIGHT wurde auf der CHES '06 für den Einsatz in allgegenwärtigen Computergeräten wie Sensoren in allgegenwärtigen Sensornetzen (USN) oder RFID-Tags vorgeschlagen. Die Besonderheit von HIGHT ist die Verwendung einfacher Operationen wie Exklusiv-ODER, Addition mod 2^8 und bitweise Rotation. HIGHT ist so konzipiert, dass sie in Hardware implementiert werden kann und niedrige Gatterkosten hat." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="HIGHT.png" />
+  <relevantPlugins>
+    <plugin name="HIGHT" />
+  </relevantPlugins>
+</sample>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Typex.xml-->
+  <!--Last edited: 2023.03.07-->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Typex</title>
+  <summary lang="en">This template shows how the British <i>Typex cipher machine</i>can be used to encrypt and decrypt  text.</summary>
+  <description lang="en">With this template we illustrate the encryption of a plaintext by means of a British <b>Typex cipher machine</b>. The machine consists of two stators, three rotors, a plugboard and a reflector. The cipher machine can be compared to the German Enigma.</description>
+  <keywords>Typex, cipher, machine</keywords>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Decrypted plaintext$" value="Decrypted plaintext" />
+    <replacement key="$memo$" value="The {\b Typex} is a rotor cipher machine used by British forces during World War II not only for their own secret communications, but also as an aid to deciphering German Wehrmacht message traffic encrypted with the German Enigma.\line
+\line
+The machine consists of two stators, three rotors, a plugboard, and a reflector. It can be compared to the German Enigma cipher machine.\line
+\line
+We implemented the machine based on different simulators, that can be found on the Internet: The GCHQ (https://gchq.github.io/CyberChef/) implements a Typex in their &quot;CyberChef&quot;, and &quot;Virtual Colossus&quot; (https://typex.virtualcolossus.co.uk/Typex/) hosts a very nice Typex simulator, that additionaly shows the internal workings of the Typex. The rotors used with the original Typex are not released to the public." />
+  </replacements>
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Typex</title>
+  <summary lang="de">Diese Vorlage zeigt, wie die britische <i>Typex-Chiffriermaschine</i>zum Ver- und Entschlüsseln von Text verwendet werden kann.</summary>
+  <description lang="de">Mit dieser Vorlage veranschaulichen wir die Verschlüsselung eines Klartextes mit Hilfe einer britischen<b>Typex-Chiffriermaschine</b>. Die Maschine besteht aus zwei  Statoren, drei Rotoren, einem Steckerbrett und einem Reflektor.  Die Chiffriermaschine kann mit der deutschen Enigma verglichen werden.</description>
+  <keywords>Typex, Verschlüsselungsmaschine</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$memo$" value="Die {\b Typex} ist eine Rotor-Chiffriermaschine, die von den britischen Streitkräften während des Zweiten Weltkriegs nicht nur für ihre eigene geheime Kommunikation, sondern auch als Hilfsmittel zur Entschlüsselung des mit der deutschen Enigma verschlüsselten Nachrichtenverkehrs der deutschen Wehrmacht eingesetzt wurde.\line
+\line
+Die Maschine besteht aus zwei Statoren, drei Rotoren, einer Steckplatte und einem Reflektor. Sie kann mit der deutschen Enigma-Chiffriermaschine verglichen werden.\line
+\line
+Wir haben die Maschine auf der Grundlage verschiedener Simulatoren, die im Internet zu finden sind, implementiert: Das GCHQ (https://gchq.github.io/CyberChef/) implementiert eine Typex in ihrem &quot;CyberChef&quot;, und &quot;Virtual Colossus&quot; (https://typex.virtualcolossus.co.uk/Typex/) hat einen sehr schönen Typex-Simulator, der zusätzlich die interne Funktionsweise der Typex zeigt. Die originalen Rotoren, die mit der Typex verwendet wurden, sind nicht für die Öffentlichkeit freigegeben." />
+  </replacements>
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Typex.png" />
+  <relevantPlugins>
+    <plugin name="Typex" />
+  </relevantPlugins>
+</sample>

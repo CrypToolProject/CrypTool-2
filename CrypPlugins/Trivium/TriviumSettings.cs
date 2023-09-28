@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2009 Sören Rinne, Ruhr-Universität Bochum, Germany
+   Copyright 2022 Nils Kopal, CrypTool project
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -21,67 +21,18 @@ namespace CrypTool.Trivium
 {
     public class TriviumSettings : ISettings
     {
-        #region ISettings Members
+        #region ISettings Members        
 
-        private int keystreamLength = 32;
-        [TaskPane("KeystreamLengthCaption", "KeystreamLengthTooltip", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
-        public int KeystreamLength
-        {
-            get => keystreamLength;
-            set
-            {
-                keystreamLength = value;
-                OnPropertyChanged("KeystreamLength");
-            }
-        }
+        private int _initRounds = 1152; //default value for Trivium is 1152 init rounds
 
-        private int initRounds = 1152;
-        [TaskPane("InitRoundsCaption", "InitRoundsTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
+        [TaskPane("InitRoundsCaption", "InitRoundsTooltip", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int InitRounds
         {
-            get => initRounds;
+            get => _initRounds;
             set
             {
-                initRounds = value;
+                _initRounds = value;
                 OnPropertyChanged("InitRounds");
-            }
-        }
-
-        private bool useByteSwapping = false;
-        [ContextMenu("UseByteSwappingCaption", "UseByteSwappingTooltip", 1, ContextMenuControlType.CheckBox, null, new string[] { "UseByteSwappingList1" })]
-        [TaskPane("UseByteSwappingCaption", "UseByteSwappingTooltip", null, 2, false, ControlType.CheckBox, "", null)]
-        public bool UseByteSwapping
-        {
-            get => useByteSwapping;
-            set
-            {
-                useByteSwapping = value;
-                OnPropertyChanged("UseByteSwapping");
-            }
-        }
-
-        private bool hexOutput = false;
-        [ContextMenu("HexOutputCaption", "HexOutputTooltip", 2, ContextMenuControlType.CheckBox, null, new string[] { "HexOutputList1" })]
-        [TaskPane("HexOutputCaption", "HexOutputTooltip", null, 3, false, ControlType.CheckBox, "", null)]
-        public bool HexOutput
-        {
-            get => hexOutput;
-            set
-            {
-                hexOutput = value;
-                OnPropertyChanged("HexOutput");
-            }
-        }
-
-        private string inputKey = string.Empty;
-        [TaskPane("InputKeySettingsCaption", "InputKeySettingsTooltip", null, 4, false, ControlType.TextBox, null)]
-        public string InputKey
-        {
-            get => inputKey;
-            set
-            {
-                inputKey = value;
-                OnPropertyChanged("InputKey");
             }
         }
 

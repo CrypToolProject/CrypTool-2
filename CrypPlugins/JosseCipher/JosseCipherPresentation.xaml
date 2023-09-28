@@ -4,17 +4,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="450">
     <TabControl>
-        <TabItem Header="Replacement" Name="ReplacementTableTab">
-            <Viewbox Name="ReplacementTableViewBox">
-                <DataGrid Name="ReplacementTable" ItemsSource="{Binding}" />
+        <TabItem Header="Replacement" Name="RectangleTableTab">
+            <Viewbox Name="RectangleTableViewBox">
+                <DataGrid Name="RectangleTable" ItemsSource="{Binding}" HeadersVisibility="None" GridLinesVisibility="None" BorderThickness="0.5" BorderBrush="Black" IsHitTestVisible="False">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="2"/>
+                            <Setter Property="BorderThickness" Value="0.5"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
             </Viewbox>
         </TabItem>
         <TabItem Header="CharacterMapping" Name="CharacterMappingTableTap">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" Name="CharacterMappingScrollViewer">
-                <DataGrid Name="CharacterMapping" ItemsSource="{Binding}" />
-            </ScrollViewer>
+            <Viewbox Name="CharacterMappingViewBox">
+                <DataGrid Name="CharacterMappingTable" ItemsSource="{Binding}" HeadersVisibility="Column" GridLinesVisibility="None" BorderThickness="0.5" BorderBrush="Black" IsHitTestVisible="False">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="2"/>
+                            <Setter Property="BorderThickness" Value="0.5"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                        </Style>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="2"/>
+                            <Setter Property="BorderThickness" Value="0.5"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
+            </Viewbox>
         </TabItem>
     </TabControl>
 </UserControl>

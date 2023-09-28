@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2020 Nils Kopal <kopal<AT>CrypTool.org>
+   Copyright 2023 Nils Kopal <kopal<AT>CrypTool.org>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ using System.Threading;
 using System.Windows;
 using WorkspaceManager.Execution;
 using WorkspaceManager.Model;
+using WorkspaceManagerModel.Model.Tools;
 using Path = System.IO.Path;
 
 namespace CrypTool.CrypConsole
@@ -38,9 +39,9 @@ namespace CrypTool.CrypConsole
 
         private bool _verbose = false;
         private int _timeout = int.MaxValue;
-        private TerminationType _terminationType = TerminationType.GlobalProgress;
         private readonly Dictionary<IPlugin, double> _pluginProgressValues = new Dictionary<IPlugin, double>();
         private readonly Dictionary<IPlugin, string> _pluginNames = new Dictionary<IPlugin, string>();
+        private readonly List<string> _outputValues = new List<string>();
         private WorkspaceModel _workspaceModel = null;
         private ExecutionEngine _engine = null;
         private int _globalProgress;
@@ -48,6 +49,7 @@ namespace CrypTool.CrypConsole
         private readonly object _progressLockObject = new object();
         private bool _jsonoutput = false;
         private NotificationLevel _loglevel = NotificationLevel.Warning;
+        private bool _terminate = false;
 
         /// <summary>
         /// Constructor
@@ -126,16 +128,7 @@ namespace CrypTool.CrypConsole
             {
                 Console.WriteLine(ex.Message);
                 Environment.Exit(-2);
-            }
-            try
-            {
-                _terminationType = ArgsHelper.GetTerminationType(args);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Environment.Exit(-2);
-            }
+            }           
             try
             {
                 _jsonoutput = ArgsHelper.CheckJsonOutput(args);
@@ -339,22 +332,33 @@ namespace CrypTool.CrypConsole
             {
                 Console.WriteLine("Exception occured while executing model: {0}", ex.Message);
                 Environment.Exit(-7);
-            }
+            }        
 
             //Step 13: Start execution in a dedicated thread
             DateTime endTime = DateTime.Now.AddSeconds(_timeout);
             Thread t = new Thread(() =>
             {
                 CultureInfo.CurrentCulture = new CultureInfo("en-Us", false);
-                while (_engine.IsRunning())
+                while (!_terminate)
                 {
                     Thread.Sleep(100);
-                    if (_engine.IsRunning() && _timeout < int.MaxValue && DateTime.Now >= endTime)
+                    if (_timeout < int.MaxValue && DateTime.Now >= endTime)
                     {
                         Console.WriteLine("Timeout ({0} seconds) reached. Kill process hard now", _timeout);
                         Environment.Exit(-8);
                     }
                 }
+
+                //Step 14: Output if no output was selected
+                if (!_jsonoutput)
+                {
+                    foreach (string value in _outputValues)
+                    {
+                        Console.WriteLine(value);
+                    }
+                }
+
+                _engine.Stop();
                 if (_verbose)
                 {
                     Console.WriteLine("Execution engine stopped. Terminate now");
@@ -467,15 +471,8 @@ namespace CrypTool.CrypConsole
         /// <param name="sender"></param>
         /// <param name="args"></param>
         private void OnPluginProgressChanged(IPlugin sender, PluginProgressEventArgs args)
-        {
-            if (_terminationType == TerminationType.GlobalProgress)
-            {
-                HandleGlobalProgress(sender, args);
-            }
-            if (_terminationType == TerminationType.PluginProgress)
-            {
-
-            }
+        {           
+            HandleGlobalProgress(sender, args);                        
         }
 
         /// <summary>
@@ -493,7 +490,11 @@ namespace CrypTool.CrypConsole
                 }
                 else
                 {
-                    _pluginProgressValues[sender] = args.Value / args.Max;
+                    double newValue = args.Value / args.Max;
+                    if (newValue > _pluginProgressValues[sender])
+                    {
+                        _pluginProgressValues[sender] = newValue;
+                    }
                 }
                 double numberOfPlugins = _workspaceModel.GetAllPluginModels().Count;
                 double totalProgress = 0;
@@ -501,16 +502,16 @@ namespace CrypTool.CrypConsole
                 {
                     totalProgress += value;
                 }
-                if (totalProgress == numberOfPlugins && _engine.IsRunning())
+                if (!_terminate && totalProgress == numberOfPlugins)
                 {
                     if (_verbose)
                     {
                         Console.WriteLine("Global progress reached 100%, stop execution engine now");
                     }
-                    _engine.Stop();
+                    _terminate = true;
                 }
-                int newProgress = (int)((totalProgress / numberOfPlugins) * 100);
-                if (_globalProgress < newProgress)
+                int newProgress = (int)(totalProgress / numberOfPlugins * 100);
+                if (newProgress > _globalProgress)
                 {
                     _globalProgress = newProgress;
                     if (_verbose)
@@ -538,9 +539,10 @@ namespace CrypTool.CrypConsole
             {
                 return;
             }
+            string output = string.Format("{0}={1}", _pluginNames[plugin], property.GetValue(plugin).ToString());
             if (_verbose)
             {
-                Console.WriteLine("Output:" + property.GetValue(plugin).ToString());
+                Console.WriteLine("Output: {0}", output);
             }
             if (_jsonoutput)
             {
@@ -550,6 +552,7 @@ namespace CrypTool.CrypConsole
                     Console.WriteLine(JsonHelper.GetOutputJsonString(value.ToString(), _pluginNames[plugin]));
                 }
             }
+            _outputValues.Add(output);
         }
 
         /// <summary>
