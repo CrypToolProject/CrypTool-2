@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: M209 Ciphertext-only attack.xml-->
+  <!--Last edited: 2023.09.28-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Ciphertext-only attack against the Hagelin M-209</title>
+  <summary lang="en">This template shows a ciphertext-only attack against the Hagelin M-209.</summary>
+  <description lang="en">This template shows a ciphertext-only attack against the Hagelin M-209.</description>
+  <keywords>cryptanalysis, Hagelin, cipher, M209, M-209, ciphertext, ciphertext-only</keywords>
+  <replacements lang="en">
+    <replacement key="$M209Analyzer$" value="Hagelin M-209 Analyzer" />
+    <replacement key="$text$" value = "BMLNHJEYUDFMACZZJITBBCHAVENUKZGFAMWPMUUTFYPZNZCPUBBZAAETSDDFNKJFAAKSUPKXQYVIAEPZGIBAHVOUVRULJOOJFOHMBPDMXBAQWGGVXVSWMFJUEXDLAFQLMNDHXGVHQXKQUXAXDRMJMTYFQFDOUSGLSOMJRKNTDGIDYWXRKQPPOOZNTLRMXRVGRKILEUZVOVSCQGWAJDZIBBFDVJTUGXVJUPALITHGDYAQSYZQUTHUPXRUCTQEOTDLIPBOQOVDXWESOPLSDFVUNCBGKDOBVGXMSVWBDZLBWTTPQCETNWJQKQFHUSVWDEZDTLSVBRITLOQSOJRJOQIZLUSXRXWJNVCGSRCPIKMURKOKSJHKEHTTVINWALLSBILSOREZWNJMGBKQNSBEOCOAMRGKLPEIIZHEVEALSEZODAHFBUWSHYRMIMOVXAIQXTNSYDHPDGXBWOILRYWAUDVOOTXZQKCVAYNWOHBNNDMUOVHNDVZDTQKSRRDKIRHODWJRJFNVBBQFOAENRIRMOOZCQMNTVJDBQEIZTXBWYETBSHPDIBTEHAWQHUSLVOTYHVWTLLGBVUNZBXSUQTEDITDRXDNQTNEWWGFPIDDTIHMNQEHKMDIFTDYURPTMFPDMDTUNNKSVTIUKIDFRRLXNZMPJBNZRNPQWKOZYXMNXJAKKLNFAULBTPKTZCQGTJNQSMORVTZUBHVFHLNDEGCVUSBEVMHVACCYHPOHTTRHXUTHYOESFTZKLCYOPBYMLRMNQHKHBVOIVHOUZBJBLPMCZVBHVOZUPAEPAZAMNJJSNHFYCUUSALYZVTMNLIZZXEGMBZZTRCXBQTAEODUMAJRGDVNEVGXJQSGZERFKUSDNTFCJOJEWVMTYQXPQLAOONTDPEQUNJKZXOKNPZZPYJOYUYHIOJDGVQLZRZXFDZJUQEKEIAPVHSEFMRPQDNBLULSXDMFCWZMDZZSBRQKRIHFKYMKDULUXEECCVBJZNMOCIIDGHYIVZYXJDRLQUHTTUHPSDCMCVUGCOGPUJJZZLDKLTUDVTCSKOFOVFVLNCLVGITZSOQMJUIXMMWFNTEHNSDHYRTDZEZNZNMRVSGLJSPWZRLKACDNVKZDYPUGQTGDBBSWJRTNTHTULDYJCKQHHKKWXOBKTYSWKDQXIOZBJVJSCGKREOMRMBRESHELOTXCRBHFJPPZUJMOSTWEPMNOQFBIXFHKVYVKXYICGEDORZLDHGFFCKRYOQUFZOFOVOVGMJDYFXKFIBKKHGADUNCWEQVTKDBTBLOEJCUELWDPVGBZUCATPKXTUCEWHTBHITSLSTPBUUOLGMETWULMAJTCZZIVXVKVAYXBOCAZUCUOKUBXVALOLXVCTKSKLDLKXWPHXLURFONOIVWMPGRZTSIWZCCTSPAIQIGGULLQKZACAPTAGJBPKVDPSEDKJFYIWFFPANQCMZGXWXJFUDHXIMDAQNLJLXXUIKWFRTRDXFLLTACMOYIDWERCFHTGWVE"/>
+    <replacement key="$ciphertext$" value="Ciphertext" />
+    <replacement key="$textoutput$" value="Decrypted text" />
+    <replacement key="$memo$" value="The ciphertext-only attack uses hill climbing and simulated annealing to search for optimal key settings.
+These methods are combinded using a hybrid nested approach. 
+A hill climbing process searches for optimal lug settings and an inner simulated annealing process searches for optimal pin settings for this lug setting.\line" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Ciphertext-Only Angriff gegen die Hagelin M-209 </title>
+  <summary lang="de">Diese Vorlage zeigt einen Ciphertext-Only Angriff gegen die Hagelin M-209.</summary>
+  <description lang="de">Diese Vorlage zeigt einen Ciphertext-Only Angriff gegen die Hagelin M-209.</description>
+  <keywords>Kryptoanalyse, Hagelin, cipher, M209, M-209, ciphertext, ciphertext-only</keywords>
+  <replacements lang="de">
+    <replacement key="$M209Analyzer$" value="Hagelin M-209 Analyzer" />
+    <replacement key="$text$" value = "BMLNHJEYUDFMACZZJITBBCHAVENUKZGFAMWPMUUTFYPZNZCPUBBZAAETSDDFNKJFAAKSUPKXQYVIAEPZGIBAHVOUVRULJOOJFOHMBPDMXBAQWGGVXVSWMFJUEXDLAFQLMNDHXGVHQXKQUXAXDRMJMTYFQFDOUSGLSOMJRKNTDGIDYWXRKQPPOOZNTLRMXRVGRKILEUZVOVSCQGWAJDZIBBFDVJTUGXVJUPALITHGDYAQSYZQUTHUPXRUCTQEOTDLIPBOQOVDXWESOPLSDFVUNCBGKDOBVGXMSVWBDZLBWTTPQCETNWJQKQFHUSVWDEZDTLSVBRITLOQSOJRJOQIZLUSXRXWJNVCGSRCPIKMURKOKSJHKEHTTVINWALLSBILSOREZWNJMGBKQNSBEOCOAMRGKLPEIIZHEVEALSEZODAHFBUWSHYRMIMOVXAIQXTNSYDHPDGXBWOILRYWAUDVOOTXZQKCVAYNWOHBNNDMUOVHNDVZDTQKSRRDKIRHODWJRJFNVBBQFOAENRIRMOOZCQMNTVJDBQEIZTXBWYETBSHPDIBTEHAWQHUSLVOTYHVWTLLGBVUNZBXSUQTEDITDRXDNQTNEWWGFPIDDTIHMNQEHKMDIFTDYURPTMFPDMDTUNNKSVTIUKIDFRRLXNZMPJBNZRNPQWKOZYXMNXJAKKLNFAULBTPKTZCQGTJNQSMORVTZUBHVFHLNDEGCVUSBEVMHVACCYHPOHTTRHXUTHYOESFTZKLCYOPBYMLRMNQHKHBVOIVHOUZBJBLPMCZVBHVOZUPAEPAZAMNJJSNHFYCUUSALYZVTMNLIZZXEGMBZZTRCXBQTAEODUMAJRGDVNEVGXJQSGZERFKUSDNTFCJOJEWVMTYQXPQLAOONTDPEQUNJKZXOKNPZZPYJOYUYHIOJDGVQLZRZXFDZJUQEKEIAPVHSEFMRPQDNBLULSXDMFCWZMDZZSBRQKRIHFKYMKDULUXEECCVBJZNMOCIIDGHYIVZYXJDRLQUHTTUHPSDCMCVUGCOGPUJJZZLDKLTUDVTCSKOFOVFVLNCLVGITZSOQMJUIXMMWFNTEHNSDHYRTDZEZNZNMRVSGLJSPWZRLKACDNVKZDYPUGQTGDBBSWJRTNTHTULDYJCKQHHKKWXOBKTYSWKDQXIOZBJVJSCGKREOMRMBRESHELOTXCRBHFJPPZUJMOSTWEPMNOQFBIXFHKVYVKXYICGEDORZLDHGFFCKRYOQUFZOFOVOVGMJDYFXKFIBKKHGADUNCWEQVTKDBTBLOEJCUELWDPVGBZUCATPKXTUCEWHTBHITSLSTPBUUOLGMETWULMAJTCZZIVXVKVAYXBOCAZUCUOKUBXVALOLXVCTKSKLDLKXWPHXLURFONOIVWMPGRZTSIWZCCTSPAIQIGGULLQKZACAPTAGJBPKVDPSEDKJFYIWFFPANQCMZGXWXJFUDHXIMDAQNLJLXXUIKWFRTRDXFLLTACMOYIDWERCFHTGWVE"/>
+    <replacement key="$ciphertext$" value="Ciphertext" />
+    <replacement key="$textoutput$" value="Decrypted text" />
+    <replacement key="$memo$" value="Der Ciphertext-Only Angriff verwendet Hillclimbing und Simulated Annealing um nach optimalen Schlüsseleinstellungen zu suchen.
+Diese Methoden werden in einem verschachteltem Hybrid-Ansatz verwendet.
+Ein Hillclimbing Prozess sucht nach optimalen Lug-Einstellungen und ein innerer Simulated Annealing Prozess sucht nach optimalen Pin-Einstellungen.\line" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="M209Analyzer.png" />
+  <relevantPlugins>
+    <plugin name="M209Analyzer" />
+  </relevantPlugins>
+</sample>
