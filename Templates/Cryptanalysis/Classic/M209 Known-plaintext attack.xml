@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: M209 Known-plaintext attack.xml-->
+  <!--Last edited: 2023.09.28-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Known-plaintext attack against the Hagelin M-209</title>
+  <summary lang="en">This template shows a known-plaintext attack against the Hagelin M-209.</summary>
+  <description lang="en">This template shows a known-plaintext attack against the Hagelin M-209.</description>
+  <keywords>cryptanalysis, Hagelin, cipher, M209, M-209, ciphertext, ciphertext-only</keywords>
+  <replacements lang="en">
+    <replacement key="$M209Analyzer$" value="Hagelin M-209 Analyzer" />
+    <replacement key="$Ciphertext$" value = "BMBEKMOOZNSCPEWKNNLVBZHXPCMRWMZNFBABQRJJXLIIPBXGFIMXOQEKIWSBSNKATJNKENNKUHCTREUPKAZWZQNZQJILJUGMHVSK"/>
+    <replacement key="$ciphertext$" value="Ciphertext" />
+	<replacement key="$Plaintext$" value="EQUALITYZASZTHEYZWEREZFREQUENTLYZTOGETHERZMCCARTHYZHADZONEZSONZAZLADZOFZEIGHTEENZANDZTURNERZHADZANZO" />
+	<replacement key="$plaintext$" value="Plaintext" />
+    <replacement key="$textoutput$" value="Decrypted text" />
+    <replacement key="$memo$" value="The known-plaintext attack uses hill climbing in three nested loops.
+Each loop applies different kinds of transformations on the key to get the correct key.\line" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Known-Plaintext Angriff gegen die Hagelin M-209 </title>
+  <summary lang="de">Diese Vorlage zeigt einen Known-Plaintext Angriff gegen die Hagelin M-209.</summary>
+  <description lang="de">Diese Vorlage zeigt einen Known-Plaintext Angriff gegen die Hagelin M-209.</description>
+  <keywords>Kryptoanalyse, Hagelin, cipher, M209, M-209, ciphertext, ciphertext-only</keywords>
+  <replacements lang="de">
+	<replacement key="$M209Analyzer$" value="Hagelin M-209 Analyzer" />
+    <replacement key="$Ciphertext$" value = "BMBEKMOOZNSCPEWKNNLVBZHXPCMRWMZNFBABQRJJXLIIPBXGFIMXOQEKIWSBSNKATJNKENNKUHCTREUPKAZWZQNZQJILJUGMHVSK"/>
+    <replacement key="$ciphertext$" value="Ciphertext" />
+	<replacement key="$Plaintext$" value="EQUALITYZASZTHEYZWEREZFREQUENTLYZTOGETHERZMCCARTHYZHADZONEZSONZAZLADZOFZEIGHTEENZANDZTURNERZHADZANZO" />
+	<replacement key="$plaintext$" value="Plaintext" />
+    <replacement key="$textoutput$" value="Decrypted text" />
+    <replacement key="$memo$" value="Der Known-Plaintext Angriff verwendet Hillclimbin in drei verschachtelten Schleifen.
+Jede Schleife wendet verschiedene Arten von Transformationen auf den Schlüssel an um den richtigen Schlüssel zu erhalten.\line" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="M209Analyzer.png" />
+  <relevantPlugins>
+    <plugin name="M209Analyzer" />
+  </relevantPlugins>
+</sample>

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en"/>
+  <language culture="de-DE"/>
+
+  <introduction lang="en">
+    The Hagelin M-209 is a portable cipher machine used by the U.S. Army during the World War II and until the Korean War.
+    The original M-209 is fully analog and has a larger keyspace than the Enigma, the cipher machine used by the Germans in WW2.
+    <newline/>
+    This analyzer provides two kind of attacks: ciphertext-only and known-plaintext attack.
+    <newline/>
+    The ciphertext-only attack uses hill climbing and simulated annealing to search for optimal key settings.
+    These methods are combinded using a hybrid nested approach. 
+    A hill climbing process searches for optimal lug settings and an inner simulated annealing process searches for optimal pin settings for this lug setting.
+    <newline/>
+    The known-plaintext attack uses hill climbing in three nested loops.
+    Each loop applies different kinds of transformations on the key to get the correct key.
+    
+  </introduction>
+
+  <introduction lang="de-DE">
+    Die Hagelin M-209 ist eine tragbare Chiffriemachine, welche vom US-Militär wären dem zweiten Weltkrieg und bis zum Korea Krieg verwendet wurde.
+    Die originale M-209 ist vollständig analog und hat einen größeren Schlüsselraum als die Enigma, die von den Deutschen im zweiten Weltkrieg verwendet wurde.
+    <newline/>
+    Diese Analysator stellt zwei Arten von Angriffen bereits: ciphertext-only und known-plaintext.
+    <newline/>
+    Der Ciphertext-Only Angriff verwendet Hillclimbing und Simulated Annealing um nach optimalen Schlüsseleinstellungen zu suchen.
+    Diese Methoden werden in einem verschachteltem Hybrid-Ansatz verwendet.
+    Ein Hillclimbing Prozess sucht nach optimalen Lug-Einstellungen und ein innerer Simulated Annealing Prozess sucht nach optimalen Pin-Einstellungen.
+    <newline/>
+    Der Known-Plaintext Angriff verwendet Hillclimbin in drei verschachtelten Schleifen.
+    Jede Schleife wendet verschiedene Arten von Transformationen auf den Schlüssel an um den richtigen Schlüssel zu erhalten.
+</introduction>
+
+  <usage lang="en">
+    In the general block, you can set some general and more commonly needed parameters.
+    
+    <newline/>
+    At first you can select the kind of attack, for this you can choose between the ciphertext-only and the known-plaintext attack.
+    <newline/>
+    In the 'Cores used' input field, you can set how much cores the application can use for the attack.
+    <newline/>
+    In the 'Language' menu, you have to set the language of the texts, used for the attacks.
+    <newline/>
+    In the  'Letter count' menu, you set the number of letters in the used alphabet of the language.
+    <newline/>
+    In the 'Grams type' menu, you can choose what kind of grams should be used for the scoring function.
+    <newline/>
+    Using 'Expert mode' checkbox, you can hide and show further settings and parameters for experts.
+    
+  </usage>
+
+  <usage lang="de-DE">
+    Im 'Allgemein' Block kann man allgemeine und häufig genutzte Parameter einstellen.
+
+    <newline/>
+    Als erstes kann man die Angriffsart auswählen, dazu kann man zwischen Ciphertext-only und Known-Plaintext wählen.
+    <newline/>
+    Im 'Verwendete Kerne' Eingabefeld kann man einstellen, wie viele Kerne die Anwendung für den Angriff verwenden darf.
+    <newline/>
+    Im 'Sprache' Menü kann man die Sprache der Texte angeben, die anmgegriffen werden.
+    <newline/>
+    Im 'Buchstabenanzahl des Alphabets' Menu kann man die Zahl der Buchstaben der Sprache angeben.e.
+    <newline/>
+    Im 'Typ von Grams' Menü kann man auswählen, welche Art von Grams für die Auswertungsfunktion verwendet werden soll.
+    <newline/>
+    Mittels der 'Expertenmodus' Checkbox, kann man sich weitere Einstellungen bzw. Parameter für Experten anzeigen lassen.
+  </usage>
+  
+  <presentation lang="en">
+  </presentation>
+  
+  <presentation lang="de-DE">
+  </presentation>
+  
+  <references>
+    <linkReference id="wikipedia">
+      <link url="http://en.wikipedia.org/wiki/M-209" lang="en" />
+      <caption lang="en">M209 in Wikipedia</caption>
+      <link url="http://de.wikipedia.org/wiki/M-209" lang="de-DE" />
+      <caption lang="de-DE">M209 in Wikipedia</caption>
+    </linkReference>
+  </references>
+</documentation>
