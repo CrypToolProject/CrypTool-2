@@ -76,19 +76,19 @@ namespace M209AnalyzerLib.M209
         public Pins Pins;
         public Lugs Lugs;
         public int Slide = 0;
-        private int slidePlus25 = (0 + 25) % 26;
+        private int _slidePlus25 = (0 + 25) % 26;
 
-        public int[] Decryption { get => decryption; }
+        public int[] Decryption { get => _decryption; }
 
-        private int[] decryption = null;
-        private bool decryptionValid = false;
-        private int[] decryptionFrequency = new int[26];
+        private int[] _decryption = null;
+        private bool _decryptionValid = false;
+        private int[] _decryptionFrequency = new int[26];
 
         public string CipherText
         {
-            get => cipherText; set => SetCipherText(value);
+            get => _cipherText; set => SetCipherText(value);
         }
-        private string cipherText = "";
+        private string _cipherText = "";
         public string Crib { get; set; } = "";
         public int[] CipherArray { get; set; }
         public int[] CribArray { get; set; }
@@ -119,13 +119,13 @@ namespace M209AnalyzerLib.M209
 
         public Key(Key key) : this(key.Pins.AbsolutePinsStringArray(), key.Pins.Indicator, key.Lugs.GetLugsString())
         {
-            this.CipherArray = key.CipherArray;
-            this.CribArray = key.CribArray;
-            this.Slide = key.Slide;
-            this.Crib = key.Crib;
-            this.CipherText = key.CipherText;
-            this._originalKey = key._originalKey;
-            this.OriginalScore = key.OriginalScore;
+            CipherArray = key.CipherArray;
+            CribArray = key.CribArray;
+            Slide = key.Slide;
+            Crib = key.Crib;
+            CipherText = key.CipherText;
+            _originalKey = key._originalKey;
+            OriginalScore = key.OriginalScore;
         }
 
         public string EncryptDecrypt(string In, bool encrypt)
@@ -185,7 +185,7 @@ namespace M209AnalyzerLib.M209
             int mono = 0;
             for (int i = 0; i < 26; i++)
             {
-                int f = decryptionFrequency[i];
+                int f = _decryptionFrequency[i];
                 mono += (int)Stats.MonogramStats[i] * f;
             }
             return mono / CipherArray.Length;
@@ -211,7 +211,7 @@ namespace M209AnalyzerLib.M209
                     missing++;
                     continue;
                 }
-                actual = decryption[cribIndex];
+                actual = _decryption[cribIndex];
 
                 int dist1 = Math.Abs(expected - actual);
                 int dist2 = Math.Abs(expected + 26 - actual);
@@ -257,12 +257,12 @@ namespace M209AnalyzerLib.M209
 
         public void InvalidateDecryption()
         {
-            decryptionValid = false;
+            _decryptionValid = false;
         }
 
         public void UpdateDecryptionIfInvalid()
         {
-            if (!decryptionValid)
+            if (!_decryptionValid)
             {
                 UpdateDecryption();
             }
@@ -275,9 +275,9 @@ namespace M209AnalyzerLib.M209
             {
                 return;
             }
-            if ((decryption == null) || (decryption.Length != CipherArray.Length))
+            if ((_decryption == null) || (_decryption.Length != CipherArray.Length))
             {
-                decryption = new int[CipherArray.Length];
+                _decryption = new int[CipherArray.Length];
             }
 
             int len = (CribArray != null) ? CribArray.Length : CipherArray.Length;
@@ -295,10 +295,10 @@ namespace M209AnalyzerLib.M209
                 if (Pins.WheelPins6[pos6]) vector += M6;
 
 
-                symbol = slidePlus25 - CipherArray[pos] + Lugs.DisplacementVector[vector];
+                symbol = _slidePlus25 - CipherArray[pos] + Lugs.DisplacementVector[vector];
                 symbol = symbol % 26;
 
-                decryption[pos] = symbol;
+                _decryption[pos] = symbol;
 
                 if (++pos1 == Key.S1) pos1 = 0;
                 if (++pos2 == Key.S2) pos2 = 0;
@@ -308,14 +308,14 @@ namespace M209AnalyzerLib.M209
                 if (++pos6 == Key.S6) pos6 = 0;
             }
 
-            decryptionValid = true;
+            _decryptionValid = true;
 
         }
 
         public void UpdateDecryption(int w1, int p1)
         {
 
-            if (!decryptionValid)
+            if (!_decryptionValid)
             {
                 UpdateDecryption();
                 return;
@@ -325,7 +325,7 @@ namespace M209AnalyzerLib.M209
             {
                 return;
             }
-            if ((decryption == null) || (decryption.Length != CipherArray.Length))
+            if ((_decryption == null) || (_decryption.Length != CipherArray.Length))
             {
                 UpdateDecryption();
                 return;
@@ -338,7 +338,7 @@ namespace M209AnalyzerLib.M209
         public void UpdateDecryption(int w, int p1, int p2)
         {
 
-            if (!decryptionValid)
+            if (!_decryptionValid)
             {
                 UpdateDecryption();
                 return;
@@ -348,9 +348,9 @@ namespace M209AnalyzerLib.M209
             {
                 return;
             }
-            if ((decryption == null) || (decryption.Length != CipherArray.Length))
+            if ((_decryption == null) || (_decryption.Length != CipherArray.Length))
             {
-                decryption = new int[CipherArray.Length];
+                _decryption = new int[CipherArray.Length];
             }
 
             UpdateDecryptionSelectedPin(w, p1);
@@ -411,13 +411,13 @@ namespace M209AnalyzerLib.M209
                 if (pwp5[pos5]) vector += M5;
                 if (pwp6[pos6]) vector += M6;
 
-                symbol = slidePlus25 - ca[pos] + ldv[vector];
+                symbol = _slidePlus25 - ca[pos] + ldv[vector];
                 if (symbol >= 26)
                 {
                     symbol -= 26;
                 }
 
-                decryption[pos] = symbol;
+                _decryption[pos] = symbol;
 
                 for (pos1 += wheelSize; pos1 >= Key.S1; pos1 -= Key.S1) ;
                 for (pos2 += wheelSize; pos2 >= Key.S2; pos2 -= Key.S2) ;
@@ -433,7 +433,7 @@ namespace M209AnalyzerLib.M209
             InvalidateDecryption();
             SetCipherText(cipher);
 
-            this.Crib = crib;
+            Crib = crib;
             CribArray = new int[crib.Length];
             for (int pos = 0; pos < crib.Length; pos++)
             {
@@ -449,7 +449,7 @@ namespace M209AnalyzerLib.M209
         public void SetCipherText(string cipher)
         {
             InvalidateDecryption();
-            this.cipherText = cipher;
+            _cipherText = cipher;
             CipherArray = new int[cipher.Length];
             for (int pos = 0; pos < cipher.Length; pos++)
             {

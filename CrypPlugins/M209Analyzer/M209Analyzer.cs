@@ -28,13 +28,6 @@ using System.Windows.Threading;
 
 namespace CrypTool.Plugins.M209Analyzer
 {
-    public enum UnknownSymbolHandlingMode
-    {
-        Ignore = 0,
-        Remove = 1,
-        Replace = 2
-    }
-
     public enum KeyFormat
     {
         Digits,
@@ -55,14 +48,12 @@ namespace CrypTool.Plugins.M209Analyzer
         private readonly M209AnalyzerSettings _settings;
         private readonly M209AnalyzerPresentation _presentation = new M209AnalyzerPresentation();
         private M209AttackManager _m209AttackManager;
-        private const int MaxBestListEntries = 100;
+        private const int MAXBESTLISTENTRIES = 100;
         private const string ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWKXY";
         private DateTime _startTime;
         private DateTime _endTime;
 
         private bool _running = false;
-
-        private readonly object lockObject = new object();
 
         private int _approximatedKeys = int.MaxValue;
 
@@ -405,9 +396,9 @@ namespace CrypTool.Plugins.M209Analyzer
                 {
                     //insert new entry at correct place to sustain order of list:                    
                     _presentation.BestList.Insert(insertIndex, entry);
-                    if (_presentation.BestList.Count > MaxBestListEntries)
+                    if (_presentation.BestList.Count > MAXBESTLISTENTRIES)
                     {
-                        _presentation.BestList.RemoveAt(MaxBestListEntries);
+                        _presentation.BestList.RemoveAt(MAXBESTLISTENTRIES);
                     }
                     int ranking = 1;
                     foreach (ResultEntry e in _presentation.BestList)

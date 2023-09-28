@@ -28,9 +28,7 @@ namespace M209AnalyzerLib.M209
             localState.BestScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
             localState.BestPins = key.Pins.CreateCopy();
 
-            /*final*/
             MAX_COUNT = key.Pins.MaxCount();
-            /*final*/
             MIN_COUNT = key.Pins.MinCount();
 
             int round = 0;

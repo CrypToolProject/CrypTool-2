@@ -39,7 +39,7 @@ namespace M209AnalyzerLib.Common
         public static readonly string TEXT_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public static readonly int TEXT_ALPHABET_SIZE = TEXT_ALPHABET.Length;
 
-        private static int[][] perms6 = CreatePerms6();
+        private static int[][] PERMS6 = CreatePerms6();
 
         public static int GetTextSymbol(char c)
         {
@@ -372,7 +372,7 @@ namespace M209AnalyzerLib.Common
 
         public static int[] RandomPerm6()
         {
-            return perms6[random.Next(perms6.Length)];
+            return PERMS6[random.Next(PERMS6.Length)];
         }
 
         private static int[][] CreatePerms6()

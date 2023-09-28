@@ -55,7 +55,7 @@ namespace M209AnalyzerLib.M209
             WheelPins4 = IsoPins[4];
             WheelPins5 = IsoPins[5];
             WheelPins6 = IsoPins[6];
-            this._parentKey = parentKey;
+            _parentKey = parentKey;
         }
 
         // Absolute PIN settings, as defined in the key
@@ -95,7 +95,7 @@ namespace M209AnalyzerLib.M209
             StringBuilder s = new StringBuilder();
             for (int index = 0; index < Key.WHEELS_SIZE[w]; index++)
             {
-                int isoIndex = this.IsoIndex(w, index);
+                int isoIndex = IsoIndex(w, index);
                 if (pinsW[isoIndex])
                 {
                     s.Append(Key.WHEEL_LETTERS[w][index]);
@@ -109,7 +109,7 @@ namespace M209AnalyzerLib.M209
             StringBuilder s = new StringBuilder();
             for (int index = 0; index < Key.WHEELS_SIZE[w]; index++)
             {
-                int isoIndex = this.IsoIndex(w, index);
+                int isoIndex = IsoIndex(w, index);
                 if (IsoPins[w][isoIndex])
                 {
                     s.Append("1");
@@ -267,7 +267,7 @@ namespace M209AnalyzerLib.M209
                             throw new Exception($"Invalid letter [{c}]for wheel: {w} ({absolutePinsStringArray[w]})");
                         }
 
-                        int isoIndex = this.IsoIndex(w, index);
+                        int isoIndex = IsoIndex(w, index);
 
                         if (IsoPins[w][isoIndex])
                         {

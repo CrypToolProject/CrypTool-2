@@ -121,7 +121,7 @@ namespace M209AnalyzerLib.M209
 
         public Lugs(Key parentKey)
         {
-            this._parentKey = parentKey;
+            _parentKey = parentKey;
         }
 
         public Lugs(Key parentKey, string lugsString) : this(parentKey)
@@ -250,13 +250,13 @@ namespace M209AnalyzerLib.M209
 
         public void GetTypeCount(int[] typeCount)
         {
-            Array.Copy(this.TypeCount, 0, typeCount, 0, TYPE_COUNT_ARRAY_SIZE);
+            Array.Copy(TypeCount, 0, typeCount, 0, TYPE_COUNT_ARRAY_SIZE);
         }
 
         public int[] CreateTypeCountCopy()
         {
             int[] typeCountCopy = new int[TYPE_COUNT_ARRAY_SIZE];
-            Array.Copy(this.TypeCount, typeCountCopy, TYPE_COUNT_ARRAY_SIZE);
+            Array.Copy(TypeCount, typeCountCopy, TYPE_COUNT_ARRAY_SIZE);
             return typeCountCopy;
         }
 
@@ -274,7 +274,7 @@ namespace M209AnalyzerLib.M209
                 return false;
             }
 
-            Array.Copy(typeCount, 0, this.TypeCount, 0, TYPE_COUNT_ARRAY_SIZE);
+            Array.Copy(typeCount, 0, TypeCount, 0, TYPE_COUNT_ARRAY_SIZE);
 
             ComputeVector();
 
