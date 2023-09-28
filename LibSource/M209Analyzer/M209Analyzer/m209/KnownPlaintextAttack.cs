@@ -72,8 +72,6 @@ namespace M209AnalyzerLib.M209
 
         public static void Solve(Key key, M209AttackManager attackManager, LocalState localState)
         {
-
-            /*final*/
             int RANDOM_CYCLES = 100;
 
             if (attackManager.Cycles == 0)
@@ -176,46 +174,6 @@ namespace M209AnalyzerLib.M209
                     return;
                 }
             }
-
-        }
-        public static void SolveMultithreaded(Key simulationKey, M209AttackManager attackManager)
-        {
-
-            ReportManager.knownPlaintext = true;
-
-            if (attackManager.CipherText == null || String.IsNullOrEmpty(attackManager.CipherText))
-            {
-                Console.WriteLine("cipher is empty");
-                Console.Read();
-                Environment.Exit(-1);
-            }
-            if (attackManager.Crib == null || String.IsNullOrEmpty(attackManager.Crib))
-            {
-                Console.WriteLine("crib is empty");
-                Console.Read();
-                Environment.Exit(-1);
-            }
-            ReportManager.setThreshold(EvalType.CRIB);
-
-            Runnables runnables = new Runnables();
-            for (int i = 0; i < attackManager.Threads; i++)
-            {
-                /*final*/
-                int task = i;
-                /*final*/
-                int[] roundLayers = new int[4];
-                /*final*/
-                Key key = new Key();
-                key.SetCipherTextAndCrib(attackManager.CipherText, attackManager.Crib);
-                if (simulationKey != null)
-                {
-                    key.setOriginalKey(simulationKey);
-                }
-                key.setOriginalScore(130000);
-
-                //runnables.AddRunnable(new Task(() => Solve(key, attackManager)));
-            }
-            runnables.Run();
         }
     }
 }

@@ -158,8 +158,6 @@ namespace CrypTool.Plugins.M209Analyzer
             _m209AttackManager = new M209AttackManager(new M209Scoring());
             _approximatedKeys = ApproximateKeyCountTarget(Ciphertext.Length);
 
-            //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
-            //_m209AttackManager = new M209AttackManager(new ScoringFunction(_settings.Language, _settings.GramsType, 10_000_000));
             _m209AttackManager.OnNewBestListEntry += HandleNewBestListEntry;
             _m209AttackManager.OnProgressStatusChanged += _m209AttackManager_OnProgressStatusChanged;
             _m209AttackManager.ShouldStop = !_running;

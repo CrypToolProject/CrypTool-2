@@ -48,19 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chrun\ChurnSimulatedAnnealing.cs" />
-    <Compile Include="Chrun\FixedTemperatureSimulatedAnnealing.cs" />
-    <Compile Include="Chrun\ImprovedFixedTemperatureSimulatedAnnealing.cs" />
     <Compile Include="Common\BestListResult.cs" />
-    <Compile Include="Common\CommandLine.cs" />
     <Compile Include="Common\CtBestList.cs" />
-    <Compile Include="Common\Logger.cs" />
     <Compile Include="Enums\EvalType.cs" />
     <Compile Include="Enums\Flag.cs" />
     <Compile Include="Enums\Language.cs" />
-    <Compile Include="Common\Octagrams.cs" />
-    <Compile Include="Common\Permutations.cs" />
-    <Compile Include="Common\Runnables.cs" />
     <Compile Include="Common\SimulatedAnnealing.cs" />
     <Compile Include="Common\Stats.cs" />
     <Compile Include="Common\Utils.cs" />
@@ -76,7 +68,6 @@
     <Compile Include="M209\Lugs.cs" />
     <Compile Include="M209\LugsRules.cs" />
     <Compile Include="M209\Pins.cs" />
-    <Compile Include="M209\ReportManager.cs" />
     <Compile Include="M209\SimulatedAnnealingPins.cs" />
     <Compile Include="M209\SimulatedAnnealingParameters.cs" />
     <Compile Include="M209\Simulation.cs" />

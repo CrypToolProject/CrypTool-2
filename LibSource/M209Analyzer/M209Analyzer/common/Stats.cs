@@ -239,7 +239,6 @@ namespace M209AnalyzerLib.Common
             switch (language)
             {
                 case Language.ENGLISH:
-                    //n *= readFileForStats("book.txt", m209);
                     n *= ReadBigramFile($"{dirname}/english_bigrams.txt");
                     n *= ReadMonogramFile($"{dirname}/english_monograms.txt");
                     break;
@@ -252,8 +251,6 @@ namespace M209AnalyzerLib.Common
                     break;
                 case Language.GERMAN:
                     n *= ReadFileForStats($"{dirname}/germanbook.txt", isM209);
-                    //n *= readBigramFile($"{dirname}/german_bigrams.txt");
-                    //n *= readMonogramFile($"{dirname}/german_monograms.txt", m209);
                     break;
             }
 
@@ -284,19 +281,14 @@ namespace M209AnalyzerLib.Common
             switch (language)
             {
                 case Language.ENGLISH:
-                    //n *= readFileForStats("book.txt", m209);
-                    //n *= ReadBigramFromResource($"{dirname}/english_bigrams.txt");
                     n *= ReadMonogramFromResource(Properties.Resources.english_monograms);
                     break;
                 case Language.FRENCH:
-                    //n *= ReadBigramFromResource($"{dirname}/french_bigrams.txt");
                     n *= ReadMonogramFromResource(Properties.Resources.french_monograms);
                     break;
                 case Language.ITALIAN:
-                    //n *= ReadFileForStatsFromResource($"{dirname}/italianbook.txt", isM209);
                     break;
                 case Language.GERMAN:
-                    //n *= ReadFileForStatsFromResource($"{dirname}/germanbook.txt", isM209);
                     break;
             }
 

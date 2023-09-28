@@ -131,7 +131,6 @@ namespace M209AnalyzerLib.M209
                             localState.BestScore = newEval;
                             key.Pins.Get(localState.BestPins);
                             attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
-                            //ReportManager.ReportResult(task, roundLayers, layers, key, bestLocal, $"HC L. s{changes.Length}");
                         }
                         else
                         {
@@ -180,7 +179,6 @@ namespace M209AnalyzerLib.M209
                                     localState.Improved = true;
                                     localState.BestScore = newEval;
                                     attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
-                                    //ReportManager.ReportResult(task, roundLayers, layers, key, bestLocal, $"HC L. s{changes.Length}");
                                     key.Pins.Get(localState.BestPins);
                                     break;
                                 }
@@ -230,7 +228,6 @@ namespace M209AnalyzerLib.M209
                                 localState.Improved = true;
                                 localState.BestScore = newEval;
                                 attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
-                                //ReportManager.ReportResult(attackManager.TaskNr, attackManager.RoundLayers, attackManager.Layers, key, attackManager.BestLocal, $"HC L. s{changes.Length}");
                                 key.Pins.Get(localState.BestPins);
                                 break;
                             }
@@ -245,13 +242,6 @@ namespace M209AnalyzerLib.M209
             }
         }
 
-        /**
-         *
-         * @param typeCount
-         * @param types
-         * @param changes
-         * @return
-         */
         public static bool DoChangesIfValid(int[] typeCount, int[] types, int[] changes)
         {
 

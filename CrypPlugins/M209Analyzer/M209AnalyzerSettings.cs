@@ -270,12 +270,10 @@ namespace CrypTool.Plugins.M209Analyzer
 
         private void UpdateSettingsVisibility()
         {
-
             ShowHideSetting("Decrement", _expertMode);
             ShowHideSetting("EndTemperature", _expertMode);
             ShowHideSetting("StartTemperature", _expertMode);
             ShowHideSetting("MinRatio", _expertMode);
-
         }
     }
 }

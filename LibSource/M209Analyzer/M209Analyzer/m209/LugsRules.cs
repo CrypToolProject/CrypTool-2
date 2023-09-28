@@ -24,9 +24,7 @@ namespace M209AnalyzerLib.M209
     public class LugsRules
     {
 
-
         public static bool print = false;
-
         public static List<int[]> validLugCountSequences = null;
 
         private static int sameSucc(int[] lugSeq)
@@ -53,7 +51,6 @@ namespace M209AnalyzerLib.M209
             }
             return false;
         }
-
         private static int even(int[] lugSeq)
         {
             int even = 0;
@@ -66,7 +63,6 @@ namespace M209AnalyzerLib.M209
             }
             return even;
         }
-
         private static int sum(int[] lugSeq)
         {
             int sum = 0;
@@ -105,7 +101,6 @@ namespace M209AnalyzerLib.M209
             return true;
         }
 
-
         public static void createValidLugCountSequences()
         {
             if (validLugCountSequences == null)
@@ -137,7 +132,6 @@ namespace M209AnalyzerLib.M209
 
         private static List<int[]> getValidLugCountSequences()
         {
-
             List<int[]> lugCountSequences = new List<int[]>();
 
             int[] lugSeq = new int[7]; // from 1 to 6
@@ -156,8 +150,6 @@ namespace M209AnalyzerLib.M209
                             {
                                 for (lugSeq[6] = lugSeq[5]; lugSeq[6] <= Global.MAX_KICK; lugSeq[6]++)
                                 {
-
-
                                     if (tripleSameSucc(lugSeq))
                                     {
                                         continue;
@@ -212,7 +204,6 @@ namespace M209AnalyzerLib.M209
 
                 int diff;
 
-
                 // This order is to ease the comparison to the manual
                 // First, show those like 1,2,.... before 1,1,.....
                 diff = sameSucc(o2) - sameSucc(o1);
@@ -227,7 +218,6 @@ namespace M209AnalyzerLib.M209
                 {
                     return diff;
                 }
-
 
                 // then sort by natural order
                 // first one is always 1... no need to compare
@@ -711,7 +701,6 @@ namespace M209AnalyzerLib.M209
 
         private static List<int[]> readCountsFromTable(int[][] table)
         {
-
             List<int[]> lugCountSequences = new List<int[]>();
 
             for (int seqIndex = 0; seqIndex < table.Length; seqIndex++)

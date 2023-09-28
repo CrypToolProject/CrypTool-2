@@ -20,7 +20,6 @@ namespace M209AnalyzerLib.M209
 {
     public class SimulatedAnnealingPins
     {
-
         private static double Step(Key key, EvalType evalType,
                                 bool[][] bestSAPins, double bestSAScore,
                                 double temperature, M209AttackManager attackManager)
@@ -28,10 +27,7 @@ namespace M209AnalyzerLib.M209
             SimulatedAnnealing.SAParameters = attackManager.SAParameters;
 
             double currLocalScore = 0;
-
-            /*final*/
             int MAX_COUNT = key.Pins.MaxCount();
-            /*final*/
             int MIN_COUNT = key.Pins.MinCount();
 
             double newScore;
@@ -84,8 +80,6 @@ namespace M209AnalyzerLib.M209
                     key.Pins.Inverse(w);
                     continue;
                 }
-                //key.updateDecryption();
-
                 key.UpdateDecryptionIfInvalid();
                 newScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
                 if (SimulatedAnnealing.Accept(newScore, currLocalScore, temperature))
@@ -103,7 +97,6 @@ namespace M209AnalyzerLib.M209
                 else
                 {
                     key.Pins.Inverse(w);
-                    //key.updateDecryption();
                 }
             }
 
@@ -134,7 +127,6 @@ namespace M209AnalyzerLib.M209
                         }
                         key.UpdateDecryption(w, p1, p2);
 
-                        //newScore = key.Eval(evalType);
                         newScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
                         if (SimulatedAnnealing.Accept(newScore, currLocalScore, temperature))
                         {
@@ -220,7 +212,6 @@ namespace M209AnalyzerLib.M209
 
             key.Pins.Set(bestSAPins);
             return bestSAScore;
-
         }
     }
 }

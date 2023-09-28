@@ -66,7 +66,6 @@ namespace M209AnalyzerLib.M209
 
             for (int cribIndex = 0; cribIndex < crib.Length; cribIndex++)
             {
-
                 expected = crib[cribIndex];
                 if (expected == -1)
                 {
@@ -97,7 +96,6 @@ namespace M209AnalyzerLib.M209
 
                 decryptionFrequency[symbol]++;
             }
-
             return decryptionFrequency;
         }
 

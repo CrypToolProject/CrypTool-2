@@ -29,7 +29,9 @@ namespace M209AnalyzerLib.Enums
         SIMULATION_TEXT_LENGTH = 'l',
         MODEL = 'm',
         CYCLES = 'n',
-        OFFSET = 'o' /* multiplex*/, SIMULATION_OVERLAPS = 'o' /* M209 */, MODE = 'o' /* Enigma*/,
+        OFFSET = 'o' /* multiplex*/,
+        SIMULATION_OVERLAPS = 'o' /* M209 */,
+        MODE = 'o' /* Enigma*/,
         CRIB = 'p',
         RESOURCE_PATH = 'r',
         SIMULATION = 's',
@@ -37,7 +39,8 @@ namespace M209AnalyzerLib.Enums
         VERBOSE = 'u',
         HELP = 'v',
         MESSAGE_INDICATOR = 'w',
-        VERSION = 'y' /* M209 */, MIDDLE_RING_SCOPE = 'y' /* Enigma */,
+        VERSION = 'y' /* M209 */,
+        MIDDLE_RING_SCOPE = 'y' /* Enigma */,
         RIGHT_RING_SAMPLING = 'x',
         SCENARIO = 'z'
     }

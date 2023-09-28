@@ -376,42 +376,5 @@ namespace M209AnalyzerLib
             NewKeyFound();
             return Scoring.Evaluate(evalType, decryptedText, crib);
         }
-
-        public void Attack()
-        {
-            BestList.SetDiscardSamePlaintexts(false);
-            BestList.SetThrottle(true);
-
-            if (SimulationValue != 0)
-            {
-                ReportManager.simulation = true;
-                Key simulationKey = Simulation.CreateSimulationValues(this);
-                if (SimulationValue == 2)
-                {
-                    KnownPlaintextAttack.SolveMultithreaded(simulationKey, this);
-                }
-                else
-                {
-                    CiphertextOnlyAttack.SolveMultithreaded(simulationKey, this);
-                }
-            }
-            else
-            {
-                if (CipherText == null || CipherText.Length == 0)
-                {
-                    Console.WriteLine("\"Ciphertext or ciphertext file required when not in simulation mode\"\n");
-                    Console.Read();
-                    Environment.Exit(-1);
-                }
-                if (Crib != null && Crib.Length != 0)
-                {
-                    KnownPlaintextAttack.SolveMultithreaded(null, this);
-                }
-                else
-                {
-                    CiphertextOnlyAttack.SolveMultithreaded(null, this);
-                }
-            }
-        }
     }
 }

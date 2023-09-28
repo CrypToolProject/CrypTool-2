@@ -229,9 +229,7 @@ namespace M209AnalyzerLib.Common
                         long score = Stats.EvalPlaintextHexagram(t);
                         Console.WriteLine($"{l} {str} {score}\n");
                     }
-
                 }
-
             }
             return 0;
         }
@@ -371,15 +369,6 @@ namespace M209AnalyzerLib.Common
             }
             return sum;
         }
-
-        //public static bool in(int x, int... a) {
-        //    for (int i : a) {
-        //        if (i == x) {
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
 
         public static int[] RandomPerm6()
         {

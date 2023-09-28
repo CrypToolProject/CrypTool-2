@@ -146,8 +146,6 @@ namespace M209AnalyzerLib.M209
 
         void SetLugsString(string lugsString, bool checkRules)
         {
-
-            //Arrays.fill(typeCount, 0);
             for (int i = 0; i < TypeCount.Length; i++)
             {
                 TypeCount[i] = 0;
@@ -174,11 +172,8 @@ namespace M209AnalyzerLib.M209
                     throw new Exception($"Wrong lug settings - too many lugs on one bar: {barString}");
                 }
 
-
-
                 int w1 = int.Parse(barSplit[0]);
                 int w2 = int.Parse(barSplit[1]);
-
 
                 if ((w1 > Key.WHEELS) || (w2 > Key.WHEELS))
                 {
@@ -267,11 +262,6 @@ namespace M209AnalyzerLib.M209
 
         public bool SetTypeCount(int[] typeCount, bool checkRules)
         {
-            /*
-            if (typeCount.length != TYPE_COUNT_ARRAY_SIZE) {
-                System.out.println("Invalid length of simpleCount array");
-            }
-            */
             int overLaps = GetOverlaps(typeCount);
 
             if ((overLaps > Global.MAX_OVERLAP) || (overLaps < Global.MIN_OVERLAP))
@@ -283,19 +273,6 @@ namespace M209AnalyzerLib.M209
             {
                 return false;
             }
-            /*
-            int bars = 0;
-            for (int typeCountEntry : typeCount) {
-                if ((typeCountEntry < 0) || (typeCountEntry > Global.MAX_KICK)) {
-                    System.out.println("Invalid kick in simpleCount array");
-                }
-                bars += typeCountEntry;
-            }
-            if (bars != Key.BARS) {
-                System.out.println("Wrong number of bars: " + bars);
-            }
-            */
-
 
             Array.Copy(typeCount, 0, this.TypeCount, 0, TYPE_COUNT_ARRAY_SIZE);
 
@@ -315,14 +292,16 @@ namespace M209AnalyzerLib.M209
             {
                 return Common.Utils.Sum(typeCount) == Key.BARS && GetOverlaps() <= Global.MAX_OVERLAP;
             }
-            //Arrays.fill(overlapPerW, 7);
+
             for (int i = 0; i < overlapPerW.Length; i++)
             {
                 overlapPerW[i] = 7;
             }
+
             int overLaps = 0;
             int adjacentOverlaps = 0;
             int involvedWheels = 0;
+
             for (int w1 = 1; w1 <= Key.WHEELS; w1++)
             {
                 for (int w2 = w1 + 1; w2 <= Key.WHEELS; w2++)
@@ -392,7 +371,6 @@ namespace M209AnalyzerLib.M209
             }
             if (Global.MAX_KICK_REPETITION_64 <= 64)
             {
-                //Arrays.fill(dispRepetition, 0);
                 for (int i = 0; i < dispRepetition.Length; i++)
                 {
                     dispRepetition[i] = 0;
@@ -450,24 +428,6 @@ namespace M209AnalyzerLib.M209
             {
                 RandomizePrivate(overlaps);
             } while (!CompliesWithUserManualRules(TypeCount));
-        }
-
-        public void RandomizeNoOverlap()
-        {
-            TypeCount = new int[TYPE_COUNT_ARRAY_SIZE];
-            int count = 0;
-            for (int w1 = 1; w1 <= Key.WHEELS; w1++)
-            {
-                TypeCount[GetTypeCountIndex(w1)] = 1;
-                count++;
-            }
-            while (count < Key.BARS)
-            {
-                int w1 = Common.Utils.RandomNextInt(6) + 1;
-                TypeCount[GetTypeCountIndex(w1)]++;
-                count++;
-            }
-            ComputeVector();
         }
 
         private static bool AcceptMultipleSimilarOverlaps(int same)
@@ -585,7 +545,7 @@ namespace M209AnalyzerLib.M209
             }
             // Fill the bars with overlaps.
             int barsCount = 0;
-            //Arrays.fill(actualLugsCountSeq, 0);
+
             for (int i = 0; i < actualLugsCountSeq.Length; i++)
             {
                 actualLugsCountSeq[i] = 0;
@@ -620,7 +580,6 @@ namespace M209AnalyzerLib.M209
                 lugCountSeqOverlaps--;
 
             }
-
 
             // Bars without overlaps.
             for (int w = 1; w <= Key.WHEELS; w++)

@@ -90,7 +90,6 @@ namespace M209AnalyzerLib.M209
                         key.Pins.Get(localState.BestPins);
                         localState.Improved = true;
                         attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
-                        //ReportManager.ReportResult(task, roundLayers, layers + 1, key, bestLocal, "HC P. x1");
                     }
                     else
                     {
@@ -130,7 +129,6 @@ namespace M209AnalyzerLib.M209
                     key.Pins.Get(localState.BestPins);
                     localState.Improved = true;
                     attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
-                    //ReportManager.ReportResult(task, roundLayers, layers + 1, key, bestLocal, "HC P. xw");
                 }
                 else
                 {
@@ -154,7 +152,6 @@ namespace M209AnalyzerLib.M209
                             continue;
                         }
                         // Because the two places have a different value, we do not check the count.
-
                         key.Pins.Toggle(wheel, pin1, pin2);
 
                         if (key.Pins.LongSeq(wheel, pin1, pin2))
@@ -172,7 +169,6 @@ namespace M209AnalyzerLib.M209
                             key.Pins.Get(localState.BestPins);
                             localState.Improved = true;
                             attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
-                            //ReportManager.ReportResult(task, roundLayers, layers + 1, key, bestLocal, "HC P. x2");
                         }
                         else
                         {
@@ -206,7 +202,6 @@ namespace M209AnalyzerLib.M209
                 key.Pins.Get(localState.BestPins);
                 localState.Improved = true;
                 attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
-                //ReportManager.ReportResult(attackManager.TaskNr, attackManager.RoundLayers, attackManager.Layers + 1, key, attackManager.BestLocal, "HC P. xn");
             }
         }
 

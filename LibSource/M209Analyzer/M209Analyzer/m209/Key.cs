@@ -29,18 +29,11 @@ namespace M209AnalyzerLib.M209
         public static readonly string[] WHEEL_LETTERS = {
             "????????????????????????????",
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-            //"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz",
-            //   ZYXWVUTSRQPONMLKJIHGFEDCBA
             "ABCDEFGHIJKLMNOPQRSTUVXYZ",
-            //   ZYXWVUTSRQPONMLKJIHGFEDCBA
             "ABCDEFGHIJKLMNOPQRSTUVX",
-            //   ZYXWVUTSRQPONMLKJIHGFEDCBA
             "ABCDEFGHIJKLMNOPQRSTU",
-            //   ZYXWVUTSRQPONMLKJIHGFEDCBA
             "ABCDEFGHIJKLMNOPQRS",
-            //   ZYXWVUTSRQPONMLKJIHGFEDCBA
             "ABCDEFGHIJKLMNOPQ",
-            //   ZYXWVUTSRQPONMLKJIHGFEDCBA
 
         };
 
@@ -194,7 +187,6 @@ namespace M209AnalyzerLib.M209
             {
                 int f = decryptionFrequency[i];
                 mono += (int)Stats.MonogramStats[i] * f;
-                //mono += Stats.monogramStatsLinear[i] * f;
             }
             return mono / CipherArray.Length;
         }
@@ -288,7 +280,6 @@ namespace M209AnalyzerLib.M209
                 decryption = new int[CipherArray.Length];
             }
 
-            /*final*/
             int len = (CribArray != null) ? CribArray.Length : CipherArray.Length;
             int pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0, pos5 = 0, pos6 = 0;
             int vector;
@@ -306,9 +297,6 @@ namespace M209AnalyzerLib.M209
 
                 symbol = slidePlus25 - CipherArray[pos] + Lugs.DisplacementVector[vector];
                 symbol = symbol % 26;
-
-                //displacement = lugs.displacementVector[vector];
-                //symbol = encryptSymbol(cipherArray[pos], displacement);
 
                 decryption[pos] = symbol;
 
@@ -372,7 +360,6 @@ namespace M209AnalyzerLib.M209
 
         private void UpdateDecryptionSelectedPin(int wheelNr, int p)
         {
-            /*final*/
             int len = (CribArray != null) ? CribArray.Length : CipherArray.Length;
             int wheelSize = WHEELS_SIZE[wheelNr];
             int vector;
@@ -423,9 +410,7 @@ namespace M209AnalyzerLib.M209
                 if (pwp4[pos4]) vector += M4;
                 if (pwp5[pos5]) vector += M5;
                 if (pwp6[pos6]) vector += M6;
-                //displacement = lugs.displacementVector[vector];
 
-                //symbol = encryptSymbol(cipherArray[pos], displacement);
                 symbol = slidePlus25 - ca[pos] + ldv[vector];
                 if (symbol >= 26)
                 {

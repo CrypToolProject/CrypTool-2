@@ -91,7 +91,6 @@ namespace M209AnalyzerLib.M209
 
         private string AbsolutePinString(int w)
         {
-
             bool[] pinsW = IsoPins[w];
             StringBuilder s = new StringBuilder();
             for (int index = 0; index < Key.WHEELS_SIZE[w]; index++)
@@ -107,7 +106,6 @@ namespace M209AnalyzerLib.M209
 
         private string AbsolutePinString0or1(int w)
         {
-
             StringBuilder s = new StringBuilder();
             for (int index = 0; index < Key.WHEELS_SIZE[w]; index++)
             {
@@ -153,7 +151,6 @@ namespace M209AnalyzerLib.M209
 
         public string[] AbsolutePinsStringArray()
         {
-
             string[] pins = new string[Key.WHEELS];
             for (int w = 1; w <= Key.WHEELS; w++)
             {
@@ -215,40 +212,6 @@ namespace M209AnalyzerLib.M209
             }
         }
 
-
-        public void SetIndicator(string indicator)
-        {
-            string[] pinsString = new string[Key.WHEELS];
-            for (int w = 1; w <= Key.WHEELS; w++)
-            {
-                pinsString[w - 1] = AbsolutePinString(w);
-            }
-            Set(pinsString, indicator);
-        }
-
-        public void Print()
-        {
-
-            /*
-            for (int index = 0; index < Key.WHEELS_SIZE[1]; index++) {
-                StringBuilder s = new StringBuilder();
-                for (int w = 1; w <= Key.WHEELS; w++) {
-                    if (index >= Key.WHEELS_SIZE[w]) {
-                        continue;
-                    }
-                    int isoIndex = isoIndex(w, index);
-                    if (isoPins[w][isoIndex]) {
-                        s.append(Key.WHEEL_LETTERS[w].charAt(index));
-                    } else {
-                        s.append("-");
-                    }
-                }
-                printf("\"%s\",\n", s.toString());
-            }
-            */
-            Console.WriteLine($"{AbsolutePinStringAll()}\n");
-        }
-
         private void Set(string[] absolutePinsStringArray, string indicator)
         {
             if (indicator.Length != Key.WHEELS)
@@ -278,7 +241,6 @@ namespace M209AnalyzerLib.M209
                 {
 
                     // need clean!
-                    //Arrays.fill(isoPins[w], false);
                     for (int i = 0; i < IsoPins[w].Length; i++)
                     {
                         IsoPins[w][i] = false;
@@ -320,7 +282,6 @@ namespace M209AnalyzerLib.M209
                 for (int w = 1; w <= Key.WHEELS; w++)
                 {
                     // need clean!
-                    //Arrays.fill(isoPins[w], false);
                     for (int i = 0; i < IsoPins[w].Length; i++)
                     {
                         IsoPins[w][i] = false;
@@ -386,18 +347,13 @@ namespace M209AnalyzerLib.M209
         public void Randomize(int w)
         {
 
-            /*final*/
             bool[] isoPinsW = IsoPins[w];
-            /*final*/
             int total = IsoPins[w].Length;
-            /*final*/
             int maxActive = (Global.MAX_PERCENT_ACTIVE_PINS * total) / 100;
-            /*final*/
             int maxInactive = ((100 - Global.MIN_PERCENT_ACTIVE_PINS) * total) / 100;
             bool good;
             do
             {
-                //Arrays.fill(isoPinsW, false);
                 for (int i = 0; i < isoPinsW.Length; i++)
                 {
                     isoPinsW[i] = false;
@@ -542,16 +498,13 @@ namespace M209AnalyzerLib.M209
         public bool LongSeq(int w, int centerPos)
         {
             long maxSame = Global.MAX_CONSECUTIVE_SAME_PINS;
-            /*final*/
             bool[] isoPinsW = IsoPins[w];
-            /*final*/
             int total = isoPinsW.Length;
             if (maxSame > total)
             {
                 return false;
             }
             maxSame++; // Not strict.
-            /*final*/
             bool centerVal = isoPinsW[centerPos];
 
             int same;
@@ -599,18 +552,14 @@ namespace M209AnalyzerLib.M209
                 _parentKey.InvalidateDecryption();
             }
         }
-
         public int MaxCount()
         {
             return Utils.Sum(Key.WHEELS_SIZE) * Global.MAX_PERCENT_ACTIVE_PINS / 100;
         }
-
         public int MinCount()
         {
             return Utils.Sum(Key.WHEELS_SIZE) * Global.MIN_PERCENT_ACTIVE_PINS / 100;
         }
-
-
         public void Inverse(int w)
         {
             bool[] isoPinsW = IsoPins[w];
