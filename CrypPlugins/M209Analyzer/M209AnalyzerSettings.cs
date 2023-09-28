@@ -55,7 +55,7 @@ namespace CrypTool.Plugins.M209Analyzer
         /// HOWTO: This is an example for a setting entity shown in the settings pane on the right of the CT2 main window.
         /// This example setting uses a number field input, but there are many more input types available, see ControlType enumeration.
         /// </summary>
-        [TaskPane("AttackMode", "Change the attack mode", "General", 0, false, ControlType.ComboBox, new string[] { "CiphertextOnly", "KnownPlaintext" })]
+        [TaskPane("AttackMode", "AttackModeCaption", "GeneralCaption", 0, false, ControlType.ComboBox, new string[] { "CiphertextOnly", "KnownPlaintext" })]
         public AttackMode AttackMode
         {
             get
@@ -73,7 +73,7 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
-        [TaskPane("LetterCount", "Letter count of alphabet", "General", 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 50)]
+        [TaskPane("LetterCount", "LetterCountCaption", "GeneralCaption", 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 50)]
         public int LetterCount
         {
             get
@@ -91,7 +91,7 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
-        [TaskPane("CoresUsed", "Cores used", "General", 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 50)]
+        [TaskPane("Cores used", "CoresUsedCaption", "GeneralCaption", 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 50)]
         public int CoresUsed
         {
             get
@@ -109,7 +109,7 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
-        [TaskPane("Language", "Select language of the ciphertext", "General", 0, false, ControlType.LanguageSelector)]
+        [TaskPane("Language", "LanguageCaption", "GeneralCaption", 0, false, ControlType.LanguageSelector)]
         public int Language
         {
             get => LanguageStatistics.LanguageId(_languageCode);
@@ -123,7 +123,7 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
-        [TaskPane("GramsType", "Select type of grams", "General", 1, false, ControlType.ComboBox,
+        [TaskPane("Grams type", "GramsTypeCaption", "GeneralCaption", 1, false, ControlType.ComboBox,
             new string[] { "Unigrams", "Bigrams", "Trigrams", "Tetragrams", "Pentagrams" })]
         public int GramsType
         {
@@ -138,7 +138,7 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
-        [TaskPane("KeyFormat", "Select format of key", "General", 2, false, ControlType.ComboBox,
+        [TaskPane("Key format", "KeyFormatCaption", "GeneralCaption", 2, false, ControlType.ComboBox,
           new string[] { "Digits", "LatinLetters" })]
         public KeyFormat KeyFormat
         {
@@ -153,7 +153,7 @@ namespace CrypTool.Plugins.M209Analyzer
             }
         }
 
-        [TaskPane("Expert mode", "Setting mode", "General", 2, true, ControlType.CheckBox)]
+        [TaskPane("Expert mode", "ExpertModeCaption", "GeneralCaption", 2, true, ControlType.CheckBox)]
         public bool ExpertMode
         {
             get => _expertMode;

@@ -118,97 +118,97 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AnalysisModeLabel" xml:space="preserve">
-    <value>Analysis mode</value>
+    <value>Analysis Modus</value>
   </data>
   <data name="AnalysisStepLabel" xml:space="preserve">
     <value>Analysis step</value>
   </data>
   <data name="AttackModeCaption" xml:space="preserve">
-    <value>Change the attack mode</value>
+    <value>Angriffsmodus ändern</value>
   </data>
   <data name="BestListLabel" xml:space="preserve">
-    <value>Best list</value>
+    <value>Bestenliste</value>
   </data>
   <data name="CiphertextCaption" xml:space="preserve">
-    <value>Ciphertext</value>
+    <value>Schlüsseltext</value>
   </data>
   <data name="CiphertextTooltip" xml:space="preserve">
     <value>Ciphertext only</value>
   </data>
   <data name="CoresUsedCaption" xml:space="preserve">
-    <value>Cores used</value>
+    <value>Verwendete Kerne</value>
   </data>
   <data name="CurrentlyAnalyzedKeysLabel" xml:space="preserve">
-    <value>Currently analyzed keys</value>
+    <value>Aktuell analysierte Schlüssel</value>
   </data>
   <data name="ElapsedTimeLabel" xml:space="preserve">
-    <value>Elapsed time</value>
+    <value>Verstrichene Zeit</value>
   </data>
   <data name="EndTimeLabel" xml:space="preserve">
-    <value>End time</value>
+    <value>Endzeit</value>
   </data>
   <data name="ExceptionMessage" xml:space="preserve">
-    <value>Exception occured: {0}</value>
+    <value>Es ist ein Fehler aufgetreten: {0}</value>
   </data>
   <data name="ExpertModeCaption" xml:space="preserve">
-    <value>Setting mode</value>
+    <value>Expertenmodus</value>
   </data>
   <data name="GeneralCaption" xml:space="preserve">
-    <value>General</value>
+    <value>Allgemein</value>
   </data>
   <data name="GramsTypeCaption" xml:space="preserve">
-    <value>Select type of grams</value>
+    <value>Typ von Grams auswählen</value>
   </data>
   <data name="KeyCaption" xml:space="preserve">
-    <value>Key</value>
+    <value>Schlüssel</value>
   </data>
   <data name="KeyFormatCaption" xml:space="preserve">
-    <value>Select format of key</value>
+    <value>Wähle Schlüsselformat</value>
   </data>
   <data name="KeyLabel" xml:space="preserve">
-    <value>Key</value>
+    <value>Schlüssel</value>
   </data>
   <data name="KeyTooltip" xml:space="preserve">
-    <value>Key of the M-209</value>
+    <value>Schlüssel der M-209</value>
   </data>
   <data name="KnownPlaintextCaption" xml:space="preserve">
-    <value>Known plaintext</value>
+    <value>Bekannter Klartext</value>
   </data>
   <data name="KnownPlaintextTooltip" xml:space="preserve">
-    <value>Known plaintext</value>
+    <value>Bekannter Klartext</value>
   </data>
   <data name="LanguageCaption" xml:space="preserve">
-    <value>Select language of the ciphertext</value>
+    <value>Wähle Sprache des Klartextes</value>
   </data>
   <data name="LetterCountCaption" xml:space="preserve">
-    <value>Letter count of alphabet</value>
+    <value>Buchstabenanzahl des Alphabets</value>
   </data>
   <data name="LocalLabel" xml:space="preserve">
-    <value>Analysis</value>
+    <value>Analyse</value>
   </data>
   <data name="M209AnalyzerCaption" xml:space="preserve">
-    <value>M-209 Analyzer</value>
+    <value>M-209 Analysator</value>
   </data>
   <data name="M209AnalyzerTooltip" xml:space="preserve">
-    <value>Analyze the Hagelin M-209</value>
+    <value>Analyse der Hagelin M-209</value>
   </data>
   <data name="NoCiphertextGiven" xml:space="preserve">
-    <value>No ciphertext given</value>
+    <value>Kein Schlüsseltext gegeben</value>
   </data>
   <data name="PlaintextCaption" xml:space="preserve">
-    <value>Plain text</value>
+    <value>Klartext</value>
   </data>
   <data name="PlaintextTooltip" xml:space="preserve">
-    <value>Plain text</value>
+    <value>Klartext</value>
   </data>
   <data name="ScoreLabel" xml:space="preserve">
-    <value>Score</value>
+    <value>Wert</value>
   </data>
   <data name="SpeedLabel" xml:space="preserve">
-    <value>Speed</value>
+    <value>Geschwindigkeit</value>
   </data>
   <data name="StartTimeLabel" xml:space="preserve">
-    <value>Start time</value>
+    <value>Startzeit</value>
   </data>
   <data name="TextLabel" xml:space="preserve">
     <value>Text</value>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Cryptool.M209Analyzer.Properties {
+namespace CrypTool.Plugins.M209Analyzer.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Cryptool.M209Analyzer.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Cryptool.M209Analyzer.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CrypTool.Plugins.M209Analyzer.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -79,6 +79,15 @@ namespace Cryptool.M209Analyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change the attack mode.
+        /// </summary>
+        internal static string AttackModeCaption {
+            get {
+                return ResourceManager.GetString("AttackModeCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Best list.
         /// </summary>
         internal static string BestListLabel {
@@ -102,6 +111,15 @@ namespace Cryptool.M209Analyzer.Properties {
         internal static string CiphertextTooltip {
             get {
                 return ResourceManager.GetString("CiphertextTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cores used.
+        /// </summary>
+        internal static string CoresUsedCaption {
+            get {
+                return ResourceManager.GetString("CoresUsedCaption", resourceCulture);
             }
         }
         
@@ -133,11 +151,56 @@ namespace Cryptool.M209Analyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exception occured: {0}.
+        /// </summary>
+        internal static string ExceptionMessage {
+            get {
+                return ResourceManager.GetString("ExceptionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting mode.
+        /// </summary>
+        internal static string ExpertModeCaption {
+            get {
+                return ResourceManager.GetString("ExpertModeCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        internal static string GeneralCaption {
+            get {
+                return ResourceManager.GetString("GeneralCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select type of grams.
+        /// </summary>
+        internal static string GramsTypeCaption {
+            get {
+                return ResourceManager.GetString("GramsTypeCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Key.
         /// </summary>
         internal static string KeyCaption {
             get {
                 return ResourceManager.GetString("KeyCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select format of key.
+        /// </summary>
+        internal static string KeyFormatCaption {
+            get {
+                return ResourceManager.GetString("KeyFormatCaption", resourceCulture);
             }
         }
         
@@ -151,7 +214,7 @@ namespace Cryptool.M209Analyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Key of the M-209.
         /// </summary>
         internal static string KeyTooltip {
             get {
@@ -178,6 +241,24 @@ namespace Cryptool.M209Analyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select language of the ciphertext.
+        /// </summary>
+        internal static string LanguageCaption {
+            get {
+                return ResourceManager.GetString("LanguageCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Letter count of alphabet.
+        /// </summary>
+        internal static string LetterCountCaption {
+            get {
+                return ResourceManager.GetString("LetterCountCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analysis.
         /// </summary>
         internal static string LocalLabel {
@@ -196,11 +277,20 @@ namespace Cryptool.M209Analyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Analyze the Hagelin 209.
+        ///   Looks up a localized string similar to Analyze the Hagelin M-209.
         /// </summary>
         internal static string M209AnalyzerTooltip {
             get {
                 return ResourceManager.GetString("M209AnalyzerTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No ciphertext given.
+        /// </summary>
+        internal static string NoCiphertextGiven {
+            get {
+                return ResourceManager.GetString("NoCiphertextGiven", resourceCulture);
             }
         }
         
@@ -214,7 +304,7 @@ namespace Cryptool.M209Analyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Plain text.
         /// </summary>
         internal static string PlaintextTooltip {
             get {

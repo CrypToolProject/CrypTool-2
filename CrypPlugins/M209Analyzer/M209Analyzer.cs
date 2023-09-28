@@ -38,7 +38,7 @@ namespace CrypTool.Plugins.M209Analyzer
 
     [Author("Josef Matwich", "josef.matwich@gmail.com", "CrypTool 2 Team", "https://www.cryptool.org")]
     // You can (and should) provide a user documentation as XML file and an own icon.
-    [PluginInfo("CrypTool.M209Analyzer.Properties.Resources", "M209AnalyzerCaption", "M209AnalyzerTooltip", "M209Analyzer/userdoc.xml", "M209Analyzer/Images/icon.png")]
+    [PluginInfo("CrypTool.Plugins.M209Analyzer.Properties.Resources", "M209AnalyzerCaption", "M209AnalyzerTooltip", "M209Analyzer/userdoc.xml", "M209Analyzer/Images/icon.png")]
     [ComponentCategory(ComponentCategory.CryptanalysisSpecific), ComponentCategory(ComponentCategory.CiphersClassic)]
     public class M209Analyzer : ICrypComponent
     {
@@ -141,7 +141,7 @@ namespace CrypTool.Plugins.M209Analyzer
 
             if (string.IsNullOrWhiteSpace(Ciphertext) || string.IsNullOrWhiteSpace(Ciphertext))
             {
-                throw new ArgumentException("Properties.Resources.NoCiphertextGiven");
+                throw new ArgumentException(Properties.Resources.NoCiphertextGiven);
             }
 
             _running = true;
@@ -183,7 +183,8 @@ namespace CrypTool.Plugins.M209Analyzer
             }
             catch (Exception ex)
             {
-                GuiLogMessage(string.Format("Exception occured: {0}", ex.Message), NotificationLevel.Error);
+
+                GuiLogMessage(string.Format(Properties.Resources.ExceptionMessage, ex.Message), NotificationLevel.Error);
             }
 
             ProgressChanged(1, 1);
