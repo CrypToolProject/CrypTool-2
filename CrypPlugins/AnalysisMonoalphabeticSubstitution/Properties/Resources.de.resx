@@ -349,19 +349,19 @@ Benutze Klartext-Alphabet nun auch als Geheimtext-Alphabet.</value>
     <value>H</value>
   </data>
   <data name="hill_attack_finished" xml:space="preserve">
-    <value>Der Hillclimbing-Angriff wurde beendet in {0:00} Stunden, {1:00} Minuten, {2:00} Sekunden.</value>
+    <value>Der Hill climbing-Angriff wurde beendet in {0:00} Stunden, {1:00} Minuten, {2:00} Sekunden.</value>
   </data>
   <data name="hill_attack_testedkeys" xml:space="preserve">
-    <value>Anzahl der getesteten Schlüssel durch den Hillclimbing-Angriff: {0}</value>
+    <value>Anzahl der getesteten Schlüssel durch den Hill climbing-Angriff: {0}</value>
   </data>
   <data name="hill_attack_keyspersecond" xml:space="preserve">
-    <value>Durch Hillclimbing getestete Schlüssel pro Sekunde: {0}</value>
+    <value>Durch Hill climbing getestete Schlüssel pro Sekunde: {0}</value>
   </data>
   <data name="ChooseAlgorithmCaption" xml:space="preserve">
     <value>Algorithmen</value>
   </data>
   <data name="ChooseAlgorithmList1" xml:space="preserve">
-    <value>Hillclimbing</value>
+    <value>Hill climbing</value>
   </data>
   <data name="ChooseAlgorithmList2" xml:space="preserve">
     <value>Wörterbuch &amp; Genetisch</value>
@@ -374,7 +374,7 @@ werden soll.</value>
     <value>Wiederholungen</value>
   </data>
   <data name="RestartsTooltip" xml:space="preserve">
-    <value>Wie oft soll der Hillclimbing-Algorithmus wiederholt werden?</value>
+    <value>Wie oft soll der Hill climbing-Algorithmus wiederholt werden?</value>
   </data>
   <data name="SelectAlgorithmGroup" xml:space="preserve">
     <value>Art des Angriffs</value>

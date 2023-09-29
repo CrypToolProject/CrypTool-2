@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: BifidCipher.xml-->
+  <!--Last edited: 2022.12.23-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Bifid-Chiffre</title>
+  <summary lang="de">Ver- und Entschlüsselung mit der <i>Bifid-Chiffre</i></summary>
+  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels Bifid-Chiffre. In der klassischen Kryptographie ist die Bifid-Chiffre eine Chiffre, die ein Polybius-Quadrat mit Transposition kombiniert und somit eine Fraktionierung erzeugt. Sie wurde um 1901 von Felix Delastelle erfunden.</description>
+  <keywords lang="de">Bifid, chiffre</keywords>
+  <replacements lang="de">
+    <replacement key="$Bifid Cipher$" value="Bifid-Chiffre" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Keyword$" value="Schlüsselwort" />
+    <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise der {\b Bifid-Chiffre}. Die Komponente wurde nach der Definition der American Cryptogram Association (ACA) entwickelt und unterstützt die Ver- und Entschlüsselung von Texten.\line\line
+In den Einstellungen der Komponente kann zwischen einem 25-Buchstaben-Alphabet (J = I) und einem 36-Zeichen-Alphabet (Buchstaben + Ziffern) umgeschalten werden. Außerdem kann festgelegt werden, ob der Klartext insgesamt an einem Stück oder periodisch in Blöcken fester Größe verschlüsselt werden soll." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Bifid Cipher</title>
+  <summary lang="en">Encryption and decryption with the <i>Bifid cipher</i>.</summary>
+  <description lang="en">This template shows en- and decryption using a Bifid cipher. In classical cryptography, the bifid cipher is a cipher that combines a Polybius square with transposition and uses fractionation. It was invented around 1901 by Felix Delastelle.</description>
+  <keywords>Bifid, Cipher</keywords>
+  <replacements lang="en">
+    <replacement key="$Bifid Cipher$" value="Bifid Cipher" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Keyword$" value="Keyword" />
+    <replacement key="$Decrypted plaintext$" value="Decrypted plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$memo$" value="This template demonstrates how the {\b Bifid cipher} works. The component was developed based on the definition of the American Cryptogram Association (ACA) and supports the encryption and decryption of texts.\line\line
+In the component settings it is possible to switch between a 25-letter alphabet (J = I) and a 36-character alphabet (letters + digits). It is also possible to specify whether the plaintext should be encrypted all at once or periodically in blocks of a fixed size." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="BifidCipher.png" />
+  <relevantPlugins>
+    <plugin name="BifidCipher" />
+  </relevantPlugins>
+</sample>

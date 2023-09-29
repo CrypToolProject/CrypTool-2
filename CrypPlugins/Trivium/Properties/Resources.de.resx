@@ -117,32 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="HexOutputContextTooltip" xml:space="preserve">
-    <value>Hexadezimal darstellen?</value>
-  </data>
-  <data name="HexOutputTooltip" xml:space="preserve">
-    <value>Wenn dieses Kontrollkästchen gesetzt ist, wird die Ausgabe hexadezimal ausgegeben.</value>
-  </data>
-  <data name="HexOutputCaption" xml:space="preserve">
-    <value>Erzeuge hexadezimale Ausgabe</value>
-  </data>
   <data name="InitRoundsTooltip" xml:space="preserve">
-    <value>Wie viele Initialisierungsrunden sollen durchlaufen werden? Standard ist 1152.</value>
+    <value>Wie viele Initialisierungsrunden sollen durchlaufen werden? Standard ist 1152</value>
   </data>
   <data name="InitRoundsCaption" xml:space="preserve">
     <value>Initialisierungsrunden</value>
   </data>
   <data name="InputIVTooltip" xml:space="preserve">
-    <value>Bis zu 10 Bytes (80 bit) lang (in Hex).</value>
+    <value>Bis zu 10 Bytes (80 bit) lang</value>
   </data>
   <data name="InputIVCaption" xml:space="preserve">
     <value>Initialisierungsvektor</value>
-  </data>
-  <data name="InputKeySettingsTooltip" xml:space="preserve">
-    <value>10 Bytes (80 bit) lang (in Hex).</value>
-  </data>
-  <data name="InputKeySettingsCaption" xml:space="preserve">
-    <value>Schlüssel (Eingabe für Cube Attack)</value>
   </data>
   <data name="InputKeyTooltip" xml:space="preserve">
     <value>10 Bytes (80 bit) lang (in Hex).</value>
@@ -150,49 +135,37 @@
   <data name="InputKeyCaption" xml:space="preserve">
     <value>Schlüssel</value>
   </data>
-  <data name="InputStringTooltip" xml:space="preserve">
-    <value>Zu ver-/entschlüsselnde Daten.</value>
+  <data name="InputDataTooltip" xml:space="preserve">
+    <value>Zu ver-/entschlüsselnde Daten</value>
   </data>
-  <data name="InputStringCaption" xml:space="preserve">
-    <value>Eingabe</value>
+  <data name="InputDataCaption" xml:space="preserve">
+    <value>Eingabedaten</value>
   </data>
-  <data name="KeystreamLengthTooltip" xml:space="preserve">
-    <value>Wie viele Schlüsselstrombits sollen generiert werden? Muss ein Vielfaches von 32 sein.</value>
+  <data name="OutputDataTooltip" xml:space="preserve">
+    <value>Ver- oder entschlüsselte Ausgabe</value>
   </data>
-  <data name="KeystreamLengthCaption" xml:space="preserve">
-    <value>Länge des Schlüsselstroms</value>
-  </data>
-  <data name="OutputStringTooltip" xml:space="preserve">
-    <value>Ver- oder entschlüsselte Ausgabe.</value>
-  </data>
-  <data name="OutputStringCaption" xml:space="preserve">
-    <value>Ausgabestrom</value>
+  <data name="OutputDataCaption" xml:space="preserve">
+    <value>Ausgabedaten</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>Trivium</value>
   </data>
-  <data name="TriviumSlaveTooltip" xml:space="preserve">
-    <value>Direkter Zugriff auf Trivium.</value>
-  </data>
-  <data name="TriviumSlaveCaption" xml:space="preserve">
-    <value>Trivium-Sklave</value>
-  </data>
   <data name="PluginTooltip" xml:space="preserve">
     <value>Stromchiffre aus dem eSTREAM-Projekt</value>
   </data>
-  <data name="UseByteSwappingContextTooltip" xml:space="preserve">
-    <value>Byte-swapping benutzen?</value>
+  <data name="NoDataProvided" xml:space="preserve">
+    <value>Keine Daten übergeben</value>
   </data>
-  <data name="UseByteSwappingTooltip" xml:space="preserve">
-    <value>Wenn dieses Kontrollkästchen gesetzt ist, werden die Ausgabebytes vertauscht.</value>
+  <data name="NoIVProvided" xml:space="preserve">
+    <value>Kein Initialisierungsvektor übergeben</value>
   </data>
-  <data name="UseByteSwappingCaption" xml:space="preserve">
-    <value>Byte-swapping benutzen</value>
+  <data name="NoKeyProvided" xml:space="preserve">
+    <value>Kein Schlüssel übergeben</value>
   </data>
-  <data name="HexOutputList1" xml:space="preserve">
-    <value>Wenn dieses Kontrollkästchen gesetzt ist, wird die Ausgabe hexadezimal ausgegeben.</value>
+  <data name="WrongIVSizeProvided" xml:space="preserve">
+    <value>Der Initialisierungsvektor muss genau 10 Byte (= 80 Bit) lang sein</value>
   </data>
-  <data name="UseByteSwappingList1" xml:space="preserve">
-    <value>Wenn dieses Kontrollkästchen gesetzt ist, werden die Ausgabebytes vertauscht.</value>
+  <data name="WrongKeySizeProvided" xml:space="preserve">
+    <value>Der Schlüssel muss genau 10 Bytes (= 80 Bits) lang sein</value>
   </data>
 </root>

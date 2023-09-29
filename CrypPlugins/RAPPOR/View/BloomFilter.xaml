@@ -38,24 +38,24 @@
                             <Slider Minimum="1" Maximum="5" TickPlacement="BottomRight" TickFrequency="0.1" IsSnapToTickEnabled="True" Name="slValue"  ValueChanged="slValueChanged" Foreground="Transparent"/>
                         </DockPanel>
                     </Grid>
-                    <Button Name="StartButton" Click="StartButton_Click" Grid.Column="2" Command="{Binding StartButtonCommand}" Margin="0,2,0,2">
+                    <Button Name="StartButton" Click="StartButton_Click" Grid.Column="2" Command="{Binding StartButtonCommand}" Margin="0,2,0,2" IsEnabled="{Binding IsButtonEnabled}">
                         <TextBlock>
                         <Run Text="{Loc StartAnimation}"/>
                         </TextBlock>
                     </Button>
-                    <Button Name="ResetButton" Click="ResetButton_Click" Grid.Column="3" Command="{Binding ResetButtonCommand}" Margin="0,2,0,2">
+                    <Button Name="ResetButton" Click="ResetButton_Click" Grid.Column="3" Command="{Binding ResetButtonCommand}" Margin="0,2,0,2" IsEnabled="{Binding IsButtonEnabled}">
                         <TextBlock>
                           <Run Text="{Loc ResetAnimation}"/>
                         </TextBlock>
                     </Button>
-                    <Button Content="{Loc PauseAnimation}" Name="PauseButton" Click="PauseButton_Click" Grid.Column="4" Command="{Binding PauseButtonCommand}" Margin="0,2,0,2">
+                    <Button Content="{Loc PauseAnimation}" Name="PauseButton" Click="PauseButton_Click" Grid.Column="4" Command="{Binding PauseButtonCommand}" Margin="0,2,0,2" IsEnabled="{Binding IsButtonEnabled}">
                     </Button>
-                    <Button  Name="PreviousStepButton" Click="PreviousStep_Click" Grid.Column="5" Command="{Binding PreviousStepCommand}" Margin="0,2,0,2">
+                    <Button  Name="PreviousStepButton" Click="PreviousStep_Click" Grid.Column="5" Command="{Binding PreviousStepCommand}" Margin="0,2,0,2" IsEnabled="{Binding IsButtonEnabled}">
                         <TextBlock>
                           <Run Text="{Loc PreviousStep}"/>
                         </TextBlock>
                     </Button>
-                    <Button Name="NextStepButton" Click="NextStep_Click" Grid.Column="6" Command="{Binding NextStepCommand}" Margin="0,2,2,2">
+                    <Button Name="NextStepButton" Click="NextStep_Click" Grid.Column="6" Command="{Binding NextStepCommand}" Margin="0,2,2,2" IsEnabled="{Binding IsButtonEnabled}">
                         <TextBlock>
                           <Run Text="{Loc NextStep}"/>
                         </TextBlock>
@@ -71,9 +71,7 @@
                 <!-- This text contains a short tutorial for the overview view of the component -->
                 <Grid Grid.Row="2" Background="GhostWhite">
                     <Border BorderThickness="2" BorderBrush="#8abc94" CornerRadius="5" />
-                    <TextBox TextAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Times New Roman" Margin="3" Text="{Loc BloomFilterText}" IsReadOnly="True" BorderBrush="Transparent" BorderThickness="0">
-                        
-                    </TextBox>
+                    <TextBox TextAlignment="Justify" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="16" FontFamily="Times New Roman" Text="{Loc BloomFilterText}" Margin="3" IsReadOnly="True" BorderBrush="Transparent" BorderThickness="0" MinHeight="100" MaxWidth="780" TextWrapping="Wrap"/>
                 </Grid>
             </Grid>
         </ContentControl>

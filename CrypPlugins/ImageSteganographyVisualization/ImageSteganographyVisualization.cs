@@ -110,7 +110,13 @@ namespace ImageSteganographyVisualization
 
             if (InputImage == null)
             {
-                GuiLogMessage("NoImageLogMessage", NotificationLevel.Error);
+                GuiLogMessage(Properties.Resources.NoImageLogMessage, NotificationLevel.Error);
+                return;
+            }
+
+            if (settings.Action == ActionType.Hide && InputSecretMessage == null)
+            {
+                GuiLogMessage(Properties.Resources.NoSecretMessageGiven, NotificationLevel.Error);
                 return;
             }
 
@@ -180,29 +186,29 @@ namespace ImageSteganographyVisualization
             }
         }
 
-        private void settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void settings_PropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            if (e.PropertyName == "ComplexityThreshold")
+            if (propertyChangedEventArgs.PropertyName == "ComplexityThreshold")
             {
                 complexityThreshold = settings.ComplexityThreshold;
             }
-            else if (e.PropertyName == "SelectedOrder")
+            else if (propertyChangedEventArgs.PropertyName == "SelectedOrder")
             {
                 order = settings.SelectedOrder;
             }
-            else if (e.PropertyName == "RedBitmask")
+            else if (propertyChangedEventArgs.PropertyName == "RedBitmask")
             {
                 rBitMask = GetBitmask(settings.RedBitmask);
             }
-            else if (e.PropertyName == "GreenBitmask")
+            else if (propertyChangedEventArgs.PropertyName == "GreenBitmask")
             {
                 gBitMask = GetBitmask(settings.GreenBitmask);
             }
-            else if (e.PropertyName == "BlueBitmask")
+            else if (propertyChangedEventArgs.PropertyName == "BlueBitmask")
             {
                 bBitMask = GetBitmask(settings.BlueBitmask);
             }
-            else if (e.PropertyName == "ComplexityThreshold")
+            else if (propertyChangedEventArgs.PropertyName == "ComplexityThreshold")
             {
                 if (settings.ComplexityThreshold < 0 || settings.ComplexityThreshold > 1)
                 {

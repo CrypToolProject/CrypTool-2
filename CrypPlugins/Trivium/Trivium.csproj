@@ -8,7 +8,7 @@
     <ProjectGuid>{118668D4-613C-4D27-973B-092D5B25A692}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Trivium</RootNamespace>
+    <RootNamespace>CrypTool.Trivium</RootNamespace>
     <AssemblyName>Trivium</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -102,6 +102,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Trivium.cs" />
+    <Compile Include="TriviumAlgorithm.cs" />
     <Compile Include="TriviumSettings.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -113,9 +114,6 @@
       <Name>CrypPluginBase</Name>
       <Private>False</Private>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Trivium.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

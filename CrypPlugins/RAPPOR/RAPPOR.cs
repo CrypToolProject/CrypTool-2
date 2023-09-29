@@ -41,6 +41,13 @@ namespace CrypTool.Plugins.RAPPOR
     {
         #region Private Variables
         /// <summary>
+        /// Boolean value representing if the component is running or not. Running hereby means that the play button is clicked, not running means that the stop button is clicked
+        /// or that no button is clicked.
+        /// </summary>
+        private Boolean running = false;
+
+
+        /// <summary>
         /// Instance of the Bloom filter.
         /// </summary>
         private BloomFilter bloomFilter;
@@ -84,6 +91,7 @@ namespace CrypTool.Plugins.RAPPOR
             settings = new RAPPORSettings(this);
             presentation = new RAPPORPresentation(this);
             settings.LogMessage += GuiLogMessage;
+            IsActionPossible = true;
         }
 
         #region Data Properties
@@ -153,6 +161,7 @@ namespace CrypTool.Plugins.RAPPOR
         /// </summary>
         public void Execute()
         {
+            SetRunning(true);
             ProgressChanged(0, 1);
 
             RunRappor();
@@ -177,7 +186,7 @@ namespace CrypTool.Plugins.RAPPOR
 
             //Creating the Bloom
 
-            bloomFilter = new BloomFilter(Input.Split(','), settings.SizeOfBloomFilter, settings.AmountOfHashFunctions);
+            bloomFilter = new BloomFilter(Input.Split(','), settings.SizeOfBloomFilter, settings.AmountOfHashFunctions, GetRunning());
             ProgressChanged(1, 3);
 
             stringBuilderOutput.Append(bloomFilter.ToString());
@@ -297,6 +306,7 @@ namespace CrypTool.Plugins.RAPPOR
         /// </summary>
         public void Stop()
         {
+            SetRunning(false);
         }
 
         /// <summary>
@@ -364,9 +374,40 @@ namespace CrypTool.Plugins.RAPPOR
 
         #endregion
 
+        private bool _isActionPossible;
+        public bool IsActionPossible
+        {
+            get { return _isActionPossible; }
+            set
+            {
+                _isActionPossible = value;
+                OnPropertyChanged("IsActionPossible");
+            }
+        }
+
         #region Getter and Setter methods
         //Contains getters and setters of all relevant parameters and instances of the rappor class
         //and component.
+        /// <summary>
+        /// Gets the current running instance.
+        /// </summary>
+        /// <returns>Gets the current running instance</returns>
+        public Boolean GetRunning()
+        {
+            return running;
+        }
+        /// <summary>
+        /// Sets the current running instance.
+        /// </summary>
+        /// <param name="r">the new running instance.</param>
+        public void SetRunning(Boolean ru)
+        {
+            running = ru;
+            GetBloomFilter().SetIsActionPossible(ru);
+            SetIsActionPossible(ru);
+            GetRAPPORPresentation().GetRapporPresentationViewModel().GetViewArray()[2].ChangeButton(ru);
+
+        }
         /// <summary>
         /// Gets the current Bloomfilter instance.
         /// </summary>
@@ -382,6 +423,10 @@ namespace CrypTool.Plugins.RAPPOR
         public void SetBloomFilter(BloomFilter bF)
         {
             bloomFilter = bF;
+        }
+        public void SetIsActionPossible(Boolean ru)
+        {
+            IsActionPossible = ru;
         }
         /// <summary>
         /// gets the current permantent randomized response

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: GRANIT160Cipher.xml-->
+  <!--Last edited: 2023.02.06-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">GRANIT/160-Chiffre</title>
+  <summary lang="de">Ver- und Entschlüsselung mit der <i>GRANIT/160-Chiffre</i></summary>
+  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels GRANIT/160-Chiffre. Die GRANIT/160-Chiffre ist eine manuelle Chiffre, die für Spione der DDR erfunden wurde. Sie verwendet eine Substitution und eine doppelte Spaltentransposition.</description>
+  <keywords lang="de">Bazeries, chiffre</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Keyword 1$" value="Schlüsselwort 1" />
+    <replacement key="$Keyword 2$" value="Schlüsselwort 2" />
+    <replacement key="$Keyword 3$" value="Schlüsselwort 3" />
+    <replacement key="$Decrypted Plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$memo$" value="Die {\b GRANIT/160}-Chiffre ist eine manuelle Chiffre, die für Spione der DDR erfunden wurde. Sie verwendet eine Substitution und eine doppelte Spaltentransposition. GRANIT/160 wurde von Günter Guillaume benutzt, einem Stasi-Spion, der persönlicher Assistent von Bundeskanzler Willy Brandt wurde.\line
+\line
+Die Chiffre verwendet ein erstes Schlüsselwort und verschlüsselt den Klartext mit Hilfe eines Straddling-Checkerboards. Dann werden zwei Transpositions-Chiffren auf der Grundlage von zwei weiteren Schlüsselwörtern angewendet (= doppelspaltige Transpositions-Chiffre). Die Chiffre verwendet ein Alphabet mit I=J. Außerdem werden die Umlaute geändert, z. B. wird Ä zu AE und ß zu SS. Die Ziffern von Zahlen werden nicht ersetzt, sondern vor der Verschlüsselung dreimal wiederholt." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">GRANIT/160 Cipher</title>
+  <summary lang="en">Encryption and decryption with the <i>GRANIT/160 cipher</i>.</summary>
+  <description lang="en">This template shows encryption and decryption using the GRANIT/160 cipher. The GRANIT/160 cipher is a manual cipher invented for spies of the GDR. It uses a substitution and a double columnar transposition cipher.</description>
+  <keywords>Bazeries, Cipher</keywords>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Keyword 1$" value="Keyword 1" />
+    <replacement key="$Keyword 2$" value="Keyword 2" />
+    <replacement key="$Keyword 3$" value="Keyword 3" />
+    <replacement key="$Decrypted Plaintext$" value="Decrypted plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$memo$" value="The {\b GRANIT/160} cipher is a manual cipher invented for spies of the GDR. It uses a substitution and a double columnar transposition cipher. GRANIT/160 was used by Günter Guillaume, a Stasi spy who became personal assistant to chancellor Willy Brandt.\line
+\line
+The cipher uses a first keyword and encrypts the plaintext using a straddling checkerboard. Then, two transposition ciphers based on two additional keywords are applied (= double columnar transposition cipher). The cipher uses an alphabet where I=J. Also, umlauts are changed, e.g. Ä becomes AE and ß becomes SS. Digits of numbers are not substituted but repeated three times prior encryption." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="GRANIT160Cipher.png" />
+  <relevantPlugins>
+    <plugin name="GRANIT160Cipher" />
+  </relevantPlugins>
+</sample>

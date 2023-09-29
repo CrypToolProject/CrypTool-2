@@ -90,8 +90,6 @@
   <ItemGroup>
     <Compile Include="BooleanBinaryOperators.cs" />
     <Compile Include="BooleanBinaryOperatorsSettings.cs" />
-    <Compile Include="BooleanIfElse.cs" />
-    <Compile Include="BooleanIfElseSettings.cs" />
     <Compile Include="BooleanInput.cs" />
     <Compile Include="BooleanInputSettings.cs" />
     <Compile Include="BooleanNot.cs" />

@@ -1,7 +1,7 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
     <Name>CrypTool 2 Plugin</Name>
-    <Description>Skeleton for new CrypTool 2 plugins. Please note: You must place your plugin into the CrypPluginsExperimental subfolder (see location below) or your plugin will be built into the wrong output directory.</Description>
+    <Description>Skeleton for new CrypTool 2 plugins. Please note: You must place your plugin into the CrypPlugins subfolder (see location below) or your plugin will be built into the wrong output directory.</Description>
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType>
     </ProjectSubType>
@@ -16,12 +16,12 @@
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="CrypPluginTemplate.csproj" File="CrypPluginTemplate.csproj" ReplaceParameters="true">
-      <ProjectItem ReplaceParameters="true" TargetFileName="ExamplePluginCT2.cs">ExamplePluginCT2.cs</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="ExamplePluginCT2Settings.cs">ExamplePluginCT2Settings.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.cs" OpenInEditor="true">ExamplePluginCT2.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$Settings.cs">ExamplePluginCT2Settings.cs</ProjectItem>
       <Folder Name="Properties" TargetFolderName="Properties">
         <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
       </Folder>
-      <ProjectItem ReplaceParameters="true" TargetFileName="userdoc.xml">userdoc.xml</ProjectItem>
+      <ProjectItem TargetFileName="userdoc.xml">userdoc.xml</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>

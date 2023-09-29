@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: RSA_with_Big_Numbers.xml-->
+  <!--Last edited: 2022.12.21-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">RSA with Big Numbers</title>
+  <summary lang="en">Implementation of (textbook) <i>RSA</i> using mathematical components</summary>
+  <description lang="en">This template shows the implementation of <i>RSA</i> using mathematical components.</description>
+  <keywords>bignumber, RSA, textbook</keywords>
+  <replacements lang="en">
+    <replacement key="$Bob's message m to Alice$" value="Bob's message m to Alice" />
+    <replacement key="$Alice's public key (known to everyone)$" value="Alice's public key (known to everyone)" />
+    <replacement key="$Alice's private key (only known to Alice)$" value="Alice's private key (only known to Alice)" />
+    <replacement key="$Message m$" value="Message m" />
+    <replacement key="$Ciphertext c (sent to Alice)$" value="Ciphertext c (sent to Alice)" />
+    <replacement key="$Alice decrypted message m$" value="Alice's decrypted message m" />
+    <replacement key="$Private exponent d$" value="Private exponent d" />
+    <replacement key="$Public exponent e$" value="Public exponent e" />
+    <replacement key="$Modulo N$" value="Modulo N" />
+    <replacement key="$Modulo N = p * q$" value="Modulo N = p * q" />
+    <replacement key="$memo$" value="This template demonstrates (textbook) {\b RSA} built up with simple mathematical components. Here, Bob sends a secret message m to Alice. Alice then decrypts the message.\line
+\line
+RSA uses a public exponent e and a private exponent d. The exponent e is part of the public key (e, N) which can be known to everyone. Messages encrypted with the public key e can only be decrypted using the exponent d, which is part of the private key (d, N).\line
+\line
+To encrypt a message m, the ciphertext c is calculated by c = m^e mod N where N is the product of two randomly chosen (usually very big) prime numbers (N = p * q). To decrypt a ciphertext c, the message m is calculated by m = c^d mod N.\line
+\line
+The d is the multiplicative inverse of e mod φ(N) where φ(N) = (p-1)(q-1). The primes are kept secret, so that an attacker cant compute the private key." />
+</replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">RSA mit großen Zahlen</title>
+  <summary lang="de">Implementierung von (textbook-) <i>RSA</i> mit mathematischen Komponenten</summary>
+  <description lang="de">Diese Vorlage zeigt die Implementierung von <i>RSA</i> mit mathematischen Komponenten.</description>
+  <keywords>große Zahl, RSA, textbook</keywords>
+  <replacements lang="de">
+    <replacement key="$Bob's message m to Alice$" value="Bobs Nachricht m an Alice" />
+    <replacement key="$Alice's public key (known to everyone)$" value="Alices öffentlicher Schlüssel (jedem bekannt)" />
+    <replacement key="$Alice's private key (only known to Alice)$" value="Alices privater Schlüssel (nur Alice bekannt)" />
+    <replacement key="$Message m$" value="Nachricht m" />
+    <replacement key="$Ciphertext c (sent to Alice)$" value="Geheimtext c (gesendet an Alice)" />
+    <replacement key="$Alice decrypted message m$" value="Alices entschlüsselte Nachricht m" />
+    <replacement key="$Private exponent d$" value="Privater Exponent d" />
+    <replacement key="$Public exponent e$" value="Öffentlicher Exponent e" />
+    <replacement key="$Modulo N$" value="Modulo N" />
+    <replacement key="$Modulo N = p * q$" value="Modulo N = p * q" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert (Textbook-){\b RSA}, das mit einfachen mathematischen Komponenten aufgebaut ist. Hier sendet Bob eine geheime Nachricht m an Alice. Alice entschlüsselt dann die Nachricht.\line
+\line
+RSA verwendet einen öffentlichen Exponenten e und einen privaten Exponenten d. Der Exponent e ist Teil des öffentlichen Schlüssels (e, N), der jedem bekannt sein kann. Nachrichten, die mit dem öffentlichen Schlüssel e verschlüsselt wurden, können nur mit dem Exponenten d entschlüsselt werden, der Teil des privaten Schlüssels (d, N) ist.\line
+\line
+Um eine Nachricht m zu verschlüsseln, wird der Geheimtext c durch c = m^e mod N berechnet, wobei N das Produkt zweier zufällig gewählter (normalerweiser sehr großer) Primzahlen ist (N = p * q). Um einen Geheimtext c zu entschlüsseln, wird die Nachricht m berechnet durch m = c^d mod N.\line
+\line
+Das d ist der multiplikative Kehrwert von e mod φ(N), wobei φ(N) = (p-1)(q-1). Die Primzahlen werden geheim gehalten, so dass ein Angreifer den privaten Schlüssel nicht berechnen kann." />
+</replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="RSA.png" />
+  <relevantPlugins>
+    <plugin name="NumberOperations" />
+  </relevantPlugins>
+</sample>

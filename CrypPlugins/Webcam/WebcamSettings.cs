@@ -50,6 +50,7 @@ namespace CrypTool.Plugins.Webcam
 
         }
 
+        [DontSave]
         public ObservableCollection<string> CameraDevices
         {
             get => device;

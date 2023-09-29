@@ -1,4 +1,19 @@
-﻿using CrypTool.PluginBase.Attributes;
+﻿/*
+   Copyright 2008 - 2022 CrypTool Team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.Miscellaneous;
 using Microsoft.Win32;
 using System;
@@ -64,10 +79,20 @@ namespace CrypTool.CrypWin
 
                 RegistryKey reg = localKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
                 string productName = (string)reg.GetValue("ProductName");
-                string csdVersion = (string)reg.GetValue("CSDVersion");
-                string currentVersion = (string)reg.GetValue("CurrentVersion");
+                int currentMajorVersionNumber = (int)reg.GetValue("CurrentMajorVersionNumber");
+                int currentMinorVersionNumber = (int)reg.GetValue("CurrentMinorVersionNumber");
                 string currentBuildNumber = (string)reg.GetValue("CurrentBuildNumber");
-                string windowsVersionString = productName + " " + csdVersion + " (" + currentVersion + "." + currentBuildNumber + ")";
+                //hack, to replace Windows 10 with Windows 11 in the display
+                if (int.Parse(currentBuildNumber) >= 22621)
+                {
+                    
+                    productName = "Windows 11 (2022 Update)";
+                }
+                else if (int.Parse(currentBuildNumber) >= 22000)
+                {
+                    productName = "Windows 11";
+                }
+                string windowsVersionString = string.Format("{0} ({1}.{2}.{3})", productName, currentMajorVersionNumber, currentMinorVersionNumber, currentBuildNumber);
                 informations.Add(new Info(idcounter++) { Description = Properties.Resources.SI_Operating_System, Value = windowsVersionString });
             }
             catch (Exception)

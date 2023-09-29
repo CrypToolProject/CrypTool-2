@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
   <language culture="de-DE" />
@@ -10,39 +9,25 @@
     Die Josse-Chiffre ist eine Chiffre, die von Major H. D. Josse (1852-1929) erfunden wurde. Sie wurde in Frankreich für den Deutsch-Französischen Krieg (1870-1871) entwickelt und auf dem Schlachtfeld eingesetzt, um Nachrichten sicher zu übermitteln. Die Chiffre wurde von Rémi Géraud-Stewart und David Naccache im Jahr 2020 untersucht und beschrieben. <ref id="jossecipherpaper" />. Es gibt auch eine Bachelorarbeit auf Deutsch, die die Chiffre und ihre Implementierung beschreibt <ref id="weimann_thesis" />.
   </introduction>
   <usage lang="en">
-    First, add the Josse Cipher component to your workspace. Next, connect a data source to the input 'text input' and a text output component to the output 'text output'. In the component settings, select a keyword that consists of the characters of the alphabet (note: the character 'w' is not part of the alphabet). If the keyword contains duplicate characters, the component removes the second occurrence and shows a corresponding warning.<newline /><newline />
-    If you also want so see a list of the individual calculation steps, additionally connect a text output component with the output 'Calculation steps'. In the settings of the text output component, select the option 'Manual font setting' and choose a mono-spaced font so that the output is displayed correctly. Examples for a mono-spaced font: 'Courier New', 'Consolas', or 'Lucida Console'.
   </usage>
   <usage lang="de-DE">
-    Fügen Sie zunächst die Komponente Josse-Chiffre Ihrem Arbeitsbereich hinzu. Verbinden Sie dann eine Texteingabekomponente mit dem Eingang "Texteingabe" und eine Textausgabekomponente mit dem Ausgang "Textausgabe". Wählen Sie in den Komponenteneinstellungen ein Schlüsselwort, das aus den Buchstaben des Alphabets besteht (Hinweis: Der Buchstabe 'w' ist nicht Teil des Alphabets). Enthält das Schlüsselwort doppelte Buchstaben, so entfernt die Komponente deren zweite Vorkommen und zeigt eine entsprechende Warnung an.<newline /><newline />
-    Wenn Sie auch eine Liste der einzelnen Berechnungsschritte sehen wollen, schließen Sie zusätzlich eine Textausgabekomponente an dem Ausgang 'Berechnungsschritte' an. Wählen Sie in den Einstellungen der Textausgabekomponente die Option 'Manuelle Schriftart' und wählen Sie eine Mono-Spaced-Schrift, damit die Ausgabe korrekt dargestellt wird. Beispiele für Mono-Spaced-Schriftarten: 'Courier New', 'Consolas' und 'Lucida Console'.
   </usage>
   <presentation lang="en">
-    The presentation of the component shows in two tabs on the one hand the substitution table that is generated during the execution of the procedure and on the other hand the assignment of the individual letters to the respective digits.
   </presentation>
-  <presentation lang="de-DE">
-    Die Präsentation der Komponente zeigt in zwei Registerkarten zum Einen die Ersetzungstabelle, die während der Ausführung des Verfahrens erzeugt wird und zum Anderen die Zuordnung der einzelnen Buchstaben zu den jeweiligen Ziffern.
+  <presentation lang="de-DE">    
   </presentation>
   <references>
     <linkReference id="jossecipherpaper">
       <link url="https://doi.org/10.1080/01611194.2020.1753265" lang="de-DE" />
-      <caption lang="de-DE">Rémi Géraud-Stewart, David Naccache. „A French cipher from the late 19thcentury“</caption>
-      <link url="https://doi.org/10.1080/01611194.2020.1753265" lang="ru" />
-      <caption lang="ru">Rémi Géraud-Stewart, David Naccache. „A French cipher from the late 19thcentury“</caption>
+      <caption lang="de-DE">Rémi Géraud-Stewart, David Naccache. „A French cipher from the late 19th century“</caption>
       <link url="https://doi.org/10.1080/01611194.2020.1753265" lang="en" />
-      <caption lang="en">Rémi Géraud-Stewart, David Naccache. „A French cipher from the late 19thcentury“</caption>
-      <link url="https://doi.org/10.1080/01611194.2020.1753265" lang="zh-CN" />
-      <caption lang="zh-CN">Rémi Géraud-Stewart, David Naccache. „A French cipher from the late 19thcentury“</caption>
+      <caption lang="en">Rémi Géraud-Stewart, David Naccache. „A French cipher from the late 19th century“</caption>
     </linkReference>
     <linkReference id="weimann_thesis">
       <link url="https://www.cryptool.org/assets/ctp/documents/BA_Weimann.pdf" lang="de-DE" />
       <caption lang="de-DE">Niklas Weimann. „Implementierung und Visualisierung verschiedener kryptografischer Handverfahren und Codes in CrypTool 2“. 2021</caption>
       <link url="https://www.cryptool.org/assets/ctp/documents/BA_Weimann.pdf" lang="ru" />
-      <caption lang="ru">Niklas Weimann. „Implementierung und Visualisierung verschiedener kryptografischer Handverfahren und Codes in CrypTool 2“. 2021</caption>
-      <link url="https://www.cryptool.org/assets/ctp/documents/BA_Weimann.pdf" lang="en" />
       <caption lang="en">Niklas Weimann. „Implementierung und Visualisierung verschiedener kryptografischer Handverfahren und Codes in CrypTool 2“. 2021</caption>
-      <link url="https://www.cryptool.org/assets/ctp/documents/BA_Weimann.pdf" lang="zh-CN" />
-      <caption lang="zh-CN">Niklas Weimann. „Implementierung und Visualisierung verschiedener kryptografischer Handverfahren und Codes in CrypTool 2“. 2021</caption>
     </linkReference>
   </references>
 </documentation>

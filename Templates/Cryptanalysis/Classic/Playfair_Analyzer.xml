@@ -17,7 +17,12 @@
     <replacement key="$Revealed Plaintext$" value="Decrypted plaintext" />
     <replacement key="$Revealed Key$" value="Found key" />
     <replacement key="$PlayfairAnalyzer$" value="Playfair Analyzer" />
-    <replacement key="$memo$" value="This template demonstrates a ciphertext-only attack on the Playfair cipher. The ciphertext above is sent to the Playfair Analyzer which detects the most likely plaintext using a heuristic approach (simulated annealing).\line\line The corresponding plaintext is in English language. Please note that in Playfair for every key there exist several equivalent keys that generate the same ciphertext.\line\line In the settings panel for the analyzer component, you can set the number of CPUs (threads) to be used.\line\line The revealed plaintext should start with &quot;THE PLAYFAIR CIPHER ...&quot;." />
+    <replacement key="$memo$" value="This template demonstrates a ciphertext-only attack on the {\b Playfair cipher}.
+The ciphertext used by the Playfair Analyzer which searches for the most likely plaintext using a heuristic approach (simulated annealing).\line\line
+The corresponding plaintext is in English language. Please note that in Playfair for every key there exist several equivalent keys that generate the same ciphertext or plaintext.\line\line
+In the settings panel of the analyzer component, you can set the number of CPUs (threads) to be used.\line\line The revealed plaintext should start with &quot;THE PLAYFAIR CIPHER ...&quot;.\line\line
+The component also allows to provide a crib (partially known-plaintext). To do so, connect a Text Input component to the crib input connector of the analyzer component.
+To try different crib offsets you can change the range of analyzed offsets in the component's settings." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -32,7 +37,12 @@
     <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
     <replacement key="$Revealed Key$" value="Gefundener Schlüssel" />
     <replacement key="$PlayfairAnalyzer$" value="Playfair-Analyse" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert einen Ciphertext-only-Angriff auf die Playfair-Chiffre. Der oben angegebene Geheimtext wird an die Playfair-Analyse-Komponente geschickt, welche den wahrscheinlichsten Klartext anhand eines heuristischen Ansatzes ermittelt (simulierte Abkühlung).\line\line Der zugehörige Klartext ist in englischer Sprache. Bitte beachten Sie, dass bei Playfair für jeden Schlüssel mehrere äquivalente Schlüssel existieren, die alle denselben Geheimtext erzeugen.\line\line Im Einstellungsbereich der Analyse-Komponente können Sie die Anzahl an verwendeten CPUs (&quot;Threads&quot;) setzen.\line\line Der gefundene Klartext sollte mit &quot;THE PLAYFAIR CIPHER ...&quot; beginnen." />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert einen Ciphertext-only-Angriff auf die {\b Playfair-Chiffre}.
+Der Geheimtext wird vom Playfair Analyzer verwendet, der mit Hilfe eines heuristischen Ansatzes (simulated annealing) nach dem wahrscheinlichsten Klartext sucht.\line\line
+Der entsprechende Klartext ist in englischer Sprache. Bitte beachten Sie, dass es bei der Playfair-Chiffre für jeden Schlüssel mehrere äquivalente Schlüssel gibt, die den gleichen Geheimtext bzw. Klartext erzeugen.\line\line
+In der Einstellungsleiste der Analyzer-Komponente können Sie die Anzahl der zu verwendenden CPUs (Threads) einstellen.\line\line Der aufgedeckte Klartext sollte mit &quot;THE PLAYFAIR CIPHER ...&quot; beginnen.\line\line
+Die Komponente erlaubt es auch, einen Crib (teilweise bekannter Klartext) bereitzustellen. Verbinden Sie dazu eine Texteingabe-Komponente mit dem Crib-Konnektor der Analyse-Komponente.
+Um verschiedene Crib-Offsets auszuprobieren, können Sie den Bereich der analysierten Offsets in den Einstellungen der Analyse-Komponente ändern." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

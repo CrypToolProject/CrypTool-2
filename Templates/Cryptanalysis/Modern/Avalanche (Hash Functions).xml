@@ -15,7 +15,13 @@
     <replacement key="$Avalanche Visualization$" value="Avalanche Visualization" />
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Generated Data$" value="Generated Data" />
-    <replacement key="$Memo$" value="This template helps visualize the avalanche effect on hash functions.\line\line After pressing &quot;Play&quot; the initial hash value resulting from the plaintext is shown. If you modify the plaintext you will get a new hash value. Subsequently, the two hash values obtained are compared and the corresponding avalanche effect is shown. Besides the value of the avalanche effect itself other relevant statistical data is displayed." />
+    <replacement key="$Memo$" value="This template helps to visualize the {\b avalanche effect} on hash functions.
+\line\line
+After pressing &quot;Play&quot;, the SHA component computes an initial hash value of the plaintext. 
+In the Avalanche Visualization component, press &quot;Continue&quot; to view the hash value.
+When you modify the plaintext, a new hash value is computed. 
+Subsequently, the two hash values obtained are compared and the corresponding avalanche effect is shown. 
+Besides the value of the avalanche effect itself other relevant statistical data is displayed." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -28,7 +34,13 @@
     <replacement key="$Avalanche Visualization$" value="Avalanche-Visualisierung" />
     <replacement key="$Plaintext$" value="Klartext" />
     <replacement key="$Generated Data$" value="Generierte Daten" />
-    <replacement key="$Memo$" value="Diese Vorlage veranschaulicht den Avalanche-Effekt bei Hashverfahren.\line\line Nach &quot;Starten&quot; wird der aus dem Klartext resultierende initiale Hashwert angezeigt. Verändern Sie nun den Klartext, erhalten Sie einen entsprechenden neuen Hashwert. Anschließend werden beide Hashwerte hinsichtlich des Avalanche-Effekts verglichen. Auf der Präsentation sind neben dem Wert des Avalanche-Effekts auch andere relevante statistische Daten zu finden." />
+    <replacement key="$Memo$" value="Diese Vorlage hilft, den {\b Avalanche-Effekt (Lawinen-Effekt)} bei Hash-Funktionen zu veranschaulichen.
+\line\line
+Nach dem Drücken von &quot;Play&quot; berechnet die SHA-Komponente einen initialen Hash-Wert des Klartextes. 
+Drücken Sie in der Komponente Avalanche-Visualisierung auf &quot;Weiter&quot;, um den Hash-Wert anzuzeigen.
+Wenn Sie den Klartext ändern, wird ein neuer Hash-Wert berechnet. 
+Anschließend werden die beiden ermittelten Hash-Werte verglichen und der entsprechende Avalanche-Effekt wird visualisiert. 
+Neben dem Wert des Avalanche-Effekts selbst werden weitere relevante statistische Daten angezeigt." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

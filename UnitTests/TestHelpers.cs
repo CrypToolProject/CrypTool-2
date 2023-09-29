@@ -11,6 +11,8 @@ namespace UnitTests
 {
     public static class TestHelpers
     {
+        private static bool _initialized = false;
+
         private static readonly string[] Subfolders =
         {
             "",
@@ -25,8 +27,12 @@ namespace UnitTests
 
         public static void SetAssemblyPaths()
         {
-            AppDomain currentDomain = AppDomain.CurrentDomain;
-            currentDomain.AssemblyResolve += LoadAssembly;
+            if (!_initialized)
+            {
+                AppDomain currentDomain = AppDomain.CurrentDomain;
+                currentDomain.AssemblyResolve += LoadAssembly;
+                _initialized = true;
+            }
         }
 
         public static void TestFail(int number)

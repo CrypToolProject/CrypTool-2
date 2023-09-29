@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: JosseCipher.xml-->
-  <!--Last edited: 2022.02.08-->
+  <!--Last edited: 2022.12.16-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -12,16 +12,17 @@
   <description lang="de">Diese Vorlage zeigt einen Ver- und Entschlüsselungsprozess mit der Josse-Chiffre. Das Verfahren verfügt über eine Fehlerfortpflanzung und wurde erst im Jahre 2020 in einem wissenschaftlichen Artikel beschrieben, obwohl es 1870 entwickelt wurde.</description>
   <keywords lang="de">Josse-Chiffre, Französisch, Krieg</keywords>
   <replacements lang="de">
-    <replacement key="$Josse-Cipher$" value="Josse-Chiffre" />
+<replacement key="$Josse Cipher$" value="Josse-Chiffre" />
     <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$CalculationSteps$" value="Berechnungsschritte" />
+    <replacement key="$Keyword$" value="Schlüsselwort" />
     <replacement key="$Alphabet$" value="Alphabet" />
-    <replacement key="$key$" value="Schlüsselwort" />
-    <replacement key="$keyDisplay$" value="geheim" />
-    <replacement key="$encipheredPlaintext$" value="Entschlüsselter Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$example$" value="cryptool" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise der Josse-Chiffre. Diese Chiffre wurde 1870 entwickelt, wurde aber erst 2020 öffentlich bekannt.\line\line Die Komponente &quot;Josse-Chiffre&quot; hat drei Eingänge: Klartext, Schlüsselwort und Alphabet. Dabei sind die letzten beiden Eingaben optional. Bei der Verschlüsselung wird zunächst ein Schlüsselwort in die erste Zeile einer Ersetzungstabelle geschrieben. Dann werden die restlichen Zeichen des Alphabets darunter geschrieben. Die Tabelle wird verwendet, um Klartextbuchstaben in Zahlen umzuwandeln. Diese Zahlen werden dann mit der Chiffre verschlüsselt. Die Verschlüsselung kann in der Textausgabe &quot;Berechnungsschritte&quot; nachvollzogen werden.\line\line Wenn Sie einen mit Josse verschlüsselten Chiffretext entschlüsseln wollen, dann schreiben Sie den Geheimtext in die Eingabekomponente &quot;Klartext&quot; und schalten in den Einstellungen der beiden &quot;Josse-Chiffre&quot;-Komponenten den Modus zwischen &quot;Verschlüsseln&quot; und &quot;Entschlüsseln&quot; um." />
+    <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die {\b Josse-Chiffre}. Die Josse-Chiffre wurde 1870 von Major H. D. Josse erfunden, aber erst nach ihrer Wiederentdeckung im Jahr 2020 öffentlich bekannt gemacht.\line
+\line
+Die Josse-Chiffre-Komponente hat drei Eingänge: Klartext, Schlüsselwort und Alphabet. Bei der Verschlüsselung wird zunächst ein Schlüsselwort in die erste Zeile einer Ersetzungstabelle (Rechteck; jeder Buchstabe wird nur einmal verwendet) geschrieben. Dann werden die restlichen Buchstaben des Alphabets darunter geschrieben (siehe Präsentation der Komponente). Die erzeugte Tabelle wird verwendet, um die Buchstaben des Klartextes in Zahlen umzuwandeln. Diese Zahlen werden dann mit der Gleichung C_i = (P_i + C_i-1) mod len(Alphabet) verschlüsselt. Wenn die Modulo-Funktion eine 0 zurückgibt, wird len(Alphabet) anstelle der 0 verwendet. Bei der Verschlüsselung werden zwei Ausnahmen gemacht: (1) Der erste Buchstabe wird mit len(Alphabet) - P_1 verschlüsselt und (2) der zweite Buchstabe mit C_2 = (P_1 + P_2) mod len(Alphabet) verschlüsselt. Die Zahlen werden schließlich mithilfe derselben Tabelle in die Zeichen des Geheimtextes umgewandelt.\line
+\line
+Die Entschlüsselung erfolgt in umgekehrter Weise (Verwendung von &quot;-&quot; anstelle von &quot;+&quot;)." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -31,16 +32,17 @@
   <description lang="en">This template shows how to encrypt and decrypt using the Josse cipher. The process has error propagation and was first described in a scientific article in 2020, although it was developed in 1870.</description>
   <keywords>Josse Cipher, French, War</keywords>
   <replacements lang="en">
-    <replacement key="$Josse-Cipher$" value="Josse Cipher" />
+    <replacement key="$Josse Cipher$" value="Josse Cipher" />
     <replacement key="$Plaintext$" value="Plaintext" />
-    <replacement key="$CalculationSteps$" value="Calculation steps" />
+    <replacement key="$Keyword$" value="Keyword" />
     <replacement key="$Alphabet$" value="Alphabet" />
-    <replacement key="$key$" value="Keyword" />
-    <replacement key="$keyDisplay$" value="secret" />
-    <replacement key="$encipheredPlaintext$" value="Decrypted plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
-    <replacement key="$example$" value="cryptool" />
-    <replacement key="$memo$" value="This template demonstrates the operation of the Josse cipher. This cipher was developed in 1870, but it did not become public knowledge until 2020.\line\line The &quot;Josse Cipher&quot; component has three inputs: Plaintext, Keyword and Alphabet. Here, the last two inputs are optional. During encryption, a keyword is first written in the first line of a replacement table. Then the remaining characters of the alphabet are written underneath. The table is used to convert plaintext letters into numbers. These numbers are then encrypted using the cipher. The encryption can be traced in the text output &quot;Calculation steps&quot;. Finally, the resulting numbers are converted back into letters using the table.\line\line If you want to decrypt a ciphertext encrypted with Josse, then put the ciphertext into the input component &quot;Plaintext&quot; and switch in the settings of both &quot;Josse Cipher&quot; components the algorithm mode between &quot;Encrypt&quot; and &quot;Decrypt&quot;." />
+    <replacement key="$Decrypted plaintext$" value="Decrypted plaintext" />
+    <replacement key="$memo$" value="This template demonstrates the {\b Josse cipher}. The Josse cipher was invented in 1870 by Major H. D. Josse, but it did not become publicly known until its rediscovery in 2020.\line
+\line
+The Josse cipher component has three inputs: Plaintext, Keyword, and Alphabet. During encryption, a keyword is first written in the first line of a replacement table (Rectangle; each letter only used once). Then, the remaining characters of the alphabet are written underneath (see component's presentation). The generated table is used to convert plaintext letters into numbers. These numbers are then encrypted using the equation C_i = (P_i + C_i-1) mod len(alphabet). If the modulo function returns a 0, len(alphabet) is used instead of the 0. There are two exceptions made during the encryption: (1) The first letter is encrypted by len(alphabet) - P_1 and (2) the second letter is encrypted by C_2 = (P_1 + P_2) mod len(alphabet). The numbers are finally converted to the ciphertext characters using the same table.\line
+\line
+The decryption is the inverse process (use &quot;-&quot; instead of &quot;+&quot;)." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
@@ -48,7 +50,5 @@
   <icon file="JosseCipher.png" />
   <relevantPlugins>
     <plugin name="JosseCipher" />
-    <plugin name="TextInput" />
-    <plugin name="TextOutput" />
   </relevantPlugins>
 </sample>

@@ -133,10 +133,10 @@
     <value>Reads values from a dictionary and returns all entries concatenated with a given delimiter in one string</value>
   </data>
   <data name="OutputStringCaption" xml:space="preserve">
-    <value>Dictionary output (deprecated)</value>
+    <value>Dictionary output</value>
   </data>
   <data name="OutputStringTooltip" xml:space="preserve">
-    <value>Values from dictionary as single string (deprecated)</value>
+    <value>Values from dictionary as single string</value>
   </data>
   <data name="OutputListCaption" xml:space="preserve">
     <value>Dictionary Output</value>
@@ -167,5 +167,8 @@
   </data>
   <data name="NumberEntriesTooltip" xml:space="preserve">
     <value>Number of entries in the current dictionary</value>
+  </data>
+  <data name="NoDictChosen" xml:space="preserve">
+    <value>No dictionary chosen.</value>
   </data>
 </root>

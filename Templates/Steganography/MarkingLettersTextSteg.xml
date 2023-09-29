@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: MarkingLettersTextSteg.xml-->
-  <!--Last edited: 2022.02.08-->
+  <!--Last edited: 2022.10.31-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -13,11 +13,13 @@
   <keywords>Steganography, Text Steganography, Marking letters</keywords>
   <replacements lang="en">
     <replacement key="$secretmessage$" value="Secret message" />
-    <replacement key="$covertext$" value="He ordered his regular breakfast. Two eggs sunnyside up, hash browns, and two strips of bacon. He continued to look at the menu wondering if this would be the day he added something new. This was also part of the routine. A few seconds of hesitation to see if something else would be added to the order before demuring and saying that would be all. It was the same exact meal that he had ordered every day for the past two years." />
+    <replacement key="$covertext_input$" value="He ordered his usual breakfast. Two fried eggs, hash browns and two strips of bacon. He continued to look at the menu, wondering if he would add anything new today. That, too, was part of the routine. A few seconds of hesitation to see if anything else would be added to the order before he waved it off and said that was all. It was the exact same food he had ordered every day for the past two years." />
+    <replacement key="$covertext$" value="Covertext" />
     <replacement key="$steghide$" value="Hide" />
     <replacement key="$stegextract$" value="Extract" />
     <replacement key="$extractedmessage$" value="Extracted message" />
-    <replacement key="$secretmessagetext$" value="secret message" />
+    <replacement key="$secretmessagetext$" value="Secret message" />
+    <replacement key="$secretmessagetext_input$" value="secret message" />    
     <replacement key="$memotext$" value="This mode of text steganography marks the letters of the secret message in the cover text with a little dot under or above the letter. In order to hide the whole message correctly, the cover text should contain all the letters of the secret message in the same order distributed within a longer text." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -29,11 +31,13 @@
   <keywords lang="de">Steganografie, Text-Steganografie, Buchstaben markieren</keywords>
   <replacements lang="de">
     <replacement key="$secretmessage$" value="Geheime Nachricht" />
-    <replacement key="$covertext$" value="He ordered his regular breakfast. Two eggs sunnyside up, hash browns, and two strips of bacon. He continued to look at the menu wondering if this would be the day he added something new. This was also part of the routine. A few seconds of hesitation to see if something else would be added to the order before demuring and saying that would be all. It was the same exact meal that he had ordered every day for the past two years." />
+    <replacement key="$covertext$" value="Covertext" />
+    <replacement key="$covertext_input$" value="Er bestellte sein übliches Frühstück. Zwei Spiegeleier, Kartoffelpuffer und zwei Streifen Speck. Er schaute weiter auf die Speisekarte und fragte sich, ob er heute etwas Neues hinzufügen würde. Auch das war Teil der Routine. Ein paar Sekunden des Zögerns, um zu sehen, ob noch etwas zur Bestellung hinzugefügt werden würde, bevor er abwinkte und sagte, das wäre alles. Es war genau das gleiche Essen, das er in den letzten zwei Jahren jeden Tag bestellt hatte." />
     <replacement key="$steghide$" value="Verstecken" />
     <replacement key="$stegextract$" value="Extrahieren" />
     <replacement key="$extractedmessage$" value="Extrahierte Nachricht" />
-    <replacement key="$secretmessagetext$" value="secret message" />
+    <replacement key="$secretmessagetext$" value="Geheime Nachricht" />
+    <replacement key="$secretmessagetext_input$" value="geheime nachricht" />
     <replacement key="$memotext$" value="Dieser Modus der Textsteganographie markiert die Buchstaben der geheimen Nachricht im Covertext mit einem kleinen Punkt unter oder über dem Buchstaben. Um die gesamte Nachricht korrekt zu verstecken, sollte der Covertext alle Buchstaben und Zeichen der geheimen Nachricht sortiert und verteilt enthalten." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

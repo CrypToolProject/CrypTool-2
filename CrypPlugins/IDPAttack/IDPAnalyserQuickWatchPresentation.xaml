@@ -25,7 +25,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="{x:Static properties:Resources.ValueHeader}" DisplayMemberBinding="{Binding Path=Value}">
+                    <GridViewColumn Header="{x:Static properties:Resources.ValueHeader}" DisplayMemberBinding="{Binding Path=DisplayValue}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Label/>

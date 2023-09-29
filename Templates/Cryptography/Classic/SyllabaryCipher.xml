@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: SyllabaryCipher.xml-->
+  <!--Last edited: 2022.09.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Syllabary Cipher</title>
+  <summary lang="en">This template shows how the <i>Syllabary cipher</i> can be used to encrypt and decrypt text.</summary>
+  <description lang="en">With this template we illustrate the encryption of a plaintext by means of a <b>Syllabary cipher</b>. The monoalphabetic cipher uses a table consisting of letters, digits, and syllables. The cipher was described in Military Cryptanalytics Part 1 Chapter XI, April 1956 by William F. Friedman and Lambros D.</description>
+  <keywords>syllables, monoalphabetic, substitution, Friedman</keywords>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$plaintext$" value = "This is a test of the syllabary cipher which was described in Military Cryptanalytics Part 1 Chapter XI, April 1956 by Friedman and Lambros Callimahos"/>
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$DigitKey$" value="Digit key" />
+    <replacement key="$Keyword$" value="Keyword" />
+    <replacement key="$DecryptedPlaintext$" value="Decrypted plaintext" />
+    <replacement key="$memo$" value="The {\b Syllabary cipher} is a monoalphabetic substitution cipher, which uses a 10x10 lookup table. The table consists of single letters and the most frequent syllables of the language. It also contains all digits from 0 to 9. The digits of row and columns define the ciphertext symbol. In this example here, the &quot;8&quot; is encrypted by &quot;81,&quot; the &quot;SE&quot; by &quot;80&quot;, etc.\line
+\line
+There are three types of this cipher, which you can also create here: \line
+(1) Only a digit key is used and the table is known.\line
+(2) Only a keyword is used to permute the table, but the digit key is known. \line
+(3) Both, digit key and keyword are unknown (as in this template here).\line
+\line
+The cipher was described in Military Cryptanalytics Part 1 Chapter XI, April 1956 by William Friedman and Lambros Callimahos" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Syllabar-Chiffre</title>
+  <summary lang="de">Diese Vorlage zeigt, wie die <i>Syllabar-Chiffre</i> zum Ver- und Entschlüsseln von Text verwendet werden kann.</summary>
+  <description lang="de">Mit dieser Vorlage veranschaulichen wir die Verschlüsselung eines Klartextes mit Hilfe einer <b>Syllabar-Chiffre</b>. Die monoalphabetische Chiffre verwendet eine Tabelle, die aus Buchstaben, Ziffern und Silben besteht. Die Chiffre wurde beschrieben in Military Cryptanalytics Part 1 Chapter XI, April 1956 von William F. Friedman und Lambros D.</description>
+  <keywords>Silben, monoalphabetisch, Substitution, Friedman</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$plaintext$" value = "This is a test of the syllabary cipher which was described in Military Cryptanalytics Part 1 Chapter XI, April 1956 by Friedman and Lambros Callimahos"/>
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$DigitKey$" value="Ziffernschlüssel" />
+    <replacement key="$Keyword$" value="Schlüsselwort" />
+    <replacement key="$DecryptedPlaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$memo$" value="Die {\b Syllabar-Chiffre} ist eine monoalphabetische Substitutions-Chiffre, die eine 10x10 Lookup-Tabelle verwendet. Diese beinhaltet Buchstaben und die häufigsten Silben der Sprache. Außerdem enthält sie Ziffern von 0 bis 9. Die Ziffern der Zeilen und Spalten definieren das Geheimtextzeichen. In diesem Beispiel hier wird die &quot;8&quot; durch &quot;81&quot; die &quot;SE&quot; durch &quot;80&quot; verschlüsselt, usw.\line
+\line
+Es gibt drei Arten dieser Chiffre, die Sie auch hier erstellen können: \line
+(1) Es wird nur ein Ziffernschlüssel verwendet und die Tabelle ist bekannt.\line
+(2) Es wird nur ein Schlüsselwort verwendet, aber der Ziffernschlüssel ist bekannt. \line
+(3) Sowohl Ziffernschlüssel als auch Schlüsselwort sind unbekannt (wie hier gezeigt).\line
+\line
+Die Chiffre wurde beschrieben in Military Cryptanalytics Part 1 Chapter XI, April 1956 von William Friedman und Lambros Callimahos" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="SyllabaryCipher.png" />
+  <relevantPlugins>
+    <plugin name="SyllabaryCipher" />
+  </relevantPlugins>
+</sample>

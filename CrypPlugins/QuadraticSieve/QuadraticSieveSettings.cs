@@ -82,6 +82,7 @@ namespace CrypTool.Plugins.QuadraticSieve
         /// <summary>
         /// Get the available amount of cores of this pc
         /// </summary>
+        [DontSave]
         public ObservableCollection<string> CoresAvailable
         {
             get => coresAvailable;

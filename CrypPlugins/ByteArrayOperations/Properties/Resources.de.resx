@@ -159,6 +159,9 @@
   <data name="PluginTooltip" xml:space="preserve">
     <value>Funktionen für die Modifikation von Byte-Arrays</value>
   </data>
+  <data name="Shuffle" xml:space="preserve">
+    <value>Mischen</value>
+  </data>
   <data name="Value1Caption" xml:space="preserve">
     <value>Erster Funktionsparameter</value>
   </data>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<documentation>
+  <language culture="en"/>    
+  <language culture="de-DE"/>    
+  
+  <introduction lang="en">
+    In classical cryptography, the Bazeries cipher is a cipher invented by Étienne Bazeries, a French officer. It combines substitution and transposition.
+  </introduction>
+
+  <introduction lang="de-DE">
+    In der klassischen Kryptografie ist die Bazeries-Chiffre eine Chiffre, die von Étienne Bazeries, einem französischen Offizier, erfunden wurde. Sie kombiniert Substitution und Transposition.
+  </introduction>
+
+  <usage lang="en">
+    First, a Polybius square is filled with using a keyword.
+    The square is filled column by column. Bazeries used a 25-letter alphabet where I=J.
+    Then, the plaintext is encrypted using the square.
+    After that, the text is split into blocks based on a number key.
+    Each block's text is then reversed and written in the final ciphertext.
+    To decrypt a given ciphertext, the procedure is performed in the reverse direction.
+    Bazeries based the keyword of the Polybius square on the number key.
+    For example, the number key 123 would result in the keyword  &quot;ONEHUNDREDTWENTYTHREE&quot;.<newline/>
+    <newline/>
+    In contast to the original cipher, the component allows to use keyword and number key independently. 
+    Also, the component supports a 36-character Polybius square, which contains all Latin letters as well as all digits from 0 to 9.    
+  </usage>
+
+  <usage lang="de-DE">
+    Zunächst wird ein Polybius-Quadrat mit Hilfe eines Schlüsselworts gefüllt.
+    Das Quadrat wird Spalte für Spalte ausgefüllt. Bazeries verwendete ein Alphabet mit 25 Buchstaben, wobei I=J.
+    Dann wird der Klartext mit Hilfe des Quadrats verschlüsselt.
+    Danach wird der Text anhand eines Zahlenschlüssels in Blöcke aufgeteilt.
+    Der Text jedes Blocks wird dann umgedreht und in den endgültigen Geheimtext geschrieben.
+    Um einen gegebenen Geheimtext zu entschlüsseln, wird das Verfahren in umgekehrter Richtung durchgeführt.
+    Bazeries hat das Schlüsselwort des Polybius-Quadrats auf dem Zahlenschlüssel basieren lassen.
+    Zum Beispiel würde der Zahlenschlüssel 123 das Schlüsselwort &quot;HUNDERTDREIUNDZWANZIG&quot; ergeben.<newline/>
+    <newline/>
+    Im Gegensatz zur ursprünglichen Chiffre ermöglicht die Komponente die unabhängige Verwendung von Schlüsselwort und Zahlenschlüssel.
+    Außerdem unterstützt die Komponente ein 36-stelliges Polybius-Quadrat, das alle lateinischen Buchstaben sowie alle Ziffern von 0 bis 9 enthält.
+  </usage>
+  
+  <presentation lang="en">
+  </presentation>
+  
+  <presentation lang="de-DE">
+  </presentation>
+
+  <references> 
+  </references>
+</documentation>

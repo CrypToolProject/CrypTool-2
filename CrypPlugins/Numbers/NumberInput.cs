@@ -36,12 +36,13 @@ namespace CrypTool.Plugins.Numbers
     [ComponentVisualAppearance(ComponentVisualAppearance.VisualAppearanceEnum.Opened)]
     public class NumberInput : ICrypComponent
     {
-        private readonly NumberInputPresentation _presentation = new NumberInputPresentation();
+        private readonly NumberInputPresentation _presentation;
         private bool _running = false;
 
         public NumberInput()
         {
             settings = new NumberInputSettings();
+            _presentation = new NumberInputPresentation(CrypTool.PluginBase.Properties.Settings.Default.FontFamily, CrypTool.PluginBase.Properties.Settings.Default.FontSize);
             _presentation.TextBox.TextChanged += new TextChangedEventHandler(TextBox_TextChanged);
             DataObject.AddPastingHandler(_presentation.TextBox, OnCancelCommand);
             settings.PropertyChanged += settings_OnPropertyChanged;

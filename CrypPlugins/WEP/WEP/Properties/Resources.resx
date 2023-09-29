@@ -142,10 +142,10 @@
     <value>Encrypted / decrypted data</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
-    <value>WEP protocol</value>
+    <value>WEP Protocol</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>WEP protocol</value>
+    <value>WEP Protocol</value>
   </data>
   <data name="ActionList1" xml:space="preserve">
     <value>Encrypt</value>

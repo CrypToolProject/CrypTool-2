@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Nihilist.xml-->
-  <!--Last edited: 2022.02.08-->
+  <!--Last edited: 2022.09.16-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -10,25 +10,39 @@
   <title lang="en">Nihilist Cipher</title>
   <summary lang="en">Usage of the <i>Nihilist</i> cipher</summary>
   <description lang="en">This template shows the usage of the <i>Nihilist</i> cipher.</description>
-  <keywords>symmetric</keywords>
+  <keywords>classic, hand, cipher, polybius, square</keywords>
   <replacements lang="en">
+    <replacement key="$Nihilist Cipher$" value="Nihilist Cipher" />
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
-    <replacement key="$StringEncoder$" value="StringEncoder" />
-    <replacement key="$Decrypted Ciphertext$" value="Decrypted Ciphertext" />
+    <replacement key="$Keyword 1$" value="Keyword 1" />
+    <replacement key="$Keyword 2$" value="Keyword 2" />
+    <replacement key="$Decrypted plaintext$" value="Decrypted plaintext" />
+    <replacement key="$memo$" value="In the history of cryptography, the {\b Nihilist cipher} is a manually operated encryption cipher, originally used by Russian Nihilists in the 1880s to organize terrorism against the tsarist regime.\line
+\line
+First the encipherer constructs a Polybius square using a mixed alphabet based on a keyword (here &quot;Keyword 1&quot;). This is used to convert both the plaintext and a second keyword (here &quot;Keyword 2&quot;) to a series of two digit numbers. These numbers are then added together to get the ciphertext, using the key numbers repeated as required. \line
+\line
+For details, see: https://en.wikipedia.org/wiki/Nihilist_cipher"/>
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">Nihilist-Chiffre</title>
-  <summary lang="de">Benutzung der <i>Nihilist</i>-Chiffre</summary>
+  <title lang="de">Nihilisten-Chiffre</title>
+  <summary lang="de">Benutzung der <i>Nihilisten</i>-Chiffre</summary>
   <description lang="de">Diese Vorlage zeigt die Benutzung der <i>Nihilist</i>-Chiffre.</description>
-  <keywords lang="de">symmetrisch</keywords>
+  <keywords>klassisch, Hand, Chiffre, Polybius, Quadrat</keywords>
   <replacements lang="de">
+    <replacement key="$Nihilist Cipher$" value="Nihilisten-Chiffre" />
     <replacement key="$Plaintext$" value="Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
-    <replacement key="$StringEncoder$" value="String-Codierer" />
+    <replacement key="$Keyword 1$" value="Schlüsselwort 1" />
+    <replacement key="$Keyword 2$" value="Schlüsselwort 2" />
+    <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$memo$" value="In der Geschichte der Kryptografie ist die {\b Nihilisten-Chiffre} eine manuelle Chiffre, die ursprünglich von russischen Nihilisten in den 1880er Jahren verwendet wurde, um den Terrorismus gegen das zaristische Regime zu organisieren.\line
+\line
+Zunächst konstruiert der Chiffrierer ein Polybius-Quadrat unter Verwendung eines gemischten Alphabets auf der Grundlage eines Schlüsselworts (hier &quot;Schlüsselwort 1&quot;). Dieses wird verwendet, um sowohl den Klartext als auch ein zweites Schlüsselwort (hier &quot;Schlüsselwort 2&quot;) in eine Reihe zweistelliger Zahlen umzuwandeln. Diese Zahlen werden dann addiert, um den Chiffriertext zu erhalten, wobei die Schlüsselzahlen nach Bedarf wiederholt werden. \line
+\line
+Für Einzelheiten siehe (Englisch): https://en.wikipedia.org/wiki/Nihilist_cipher"/>
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

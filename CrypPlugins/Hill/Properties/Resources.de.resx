@@ -135,14 +135,32 @@
   <data name="AlphabetTooltip" xml:space="preserve">
     <value>Zeichen, die in der Eingabe vorkommen dürfen</value>
   </data>
+  <data name="ErrorWhileParsingMatrixElement" xml:space="preserve">
+    <value>Fehler beim Parsen des Matrixelements {0}: "{1}"!</value>
+  </data>
+  <data name="InputAlphabetMustContainAtLeast2DifferentCharacters" xml:space="preserve">
+    <value>Das Eingabealphabet muss mindestens 2 verschiedene Zeichen enthalten!</value>
+  </data>
   <data name="InputCaption" xml:space="preserve">
     <value>Eingabe</value>
+  </data>
+  <data name="InputContainsIllegalCharacter" xml:space="preserve">
+    <value>Die Eingabe enthält das unzulässige Zeichen '{0}' an Position {1}!</value>
   </data>
   <data name="InputTooltip" xml:space="preserve">
     <value>Eingabe des zu verschlüsselnden/entschlüsselnden Textes</value>
   </data>
+  <data name="InputWasPadded" xml:space="preserve">
+    <value>Die Eingabe wurde so aufgefüllt, dass ihre Länge ein Vielfaches der Matrixdimension ({0}) ist!</value>
+  </data>
   <data name="MatrixCaption" xml:space="preserve">
     <value>Matrix</value>
+  </data>
+  <data name="MatrixDimensionMustBeGreaterThan0" xml:space="preserve">
+    <value>Die Dimension der Matrix muss größer als 0 sein</value>
+  </data>
+  <data name="MatrixNotInvertible" xml:space="preserve">
+    <value>Die Matrix "{0}" ist nicht invertierbar. Eine Entschlüsselung ist daher nicht möglich.</value>
   </data>
   <data name="MatrixStringCaption" xml:space="preserve">
     <value>Matrix</value>
@@ -152,6 +170,9 @@
   </data>
   <data name="MatrixTooltip" xml:space="preserve">
     <value>Definition der Hill-Matrix</value>
+  </data>
+  <data name="NumberOfElementsInMatrixMustBeSquareNumber" xml:space="preserve">
+    <value>Die Anzahl der Elemente in der Matrixdefinition muss eine Quadratzahl sein!</value>
   </data>
   <data name="OutputCaption" xml:space="preserve">
     <value>Ausgabe</value>

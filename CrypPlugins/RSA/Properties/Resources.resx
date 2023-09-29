@@ -271,7 +271,7 @@
     <value>Override the implicit block sizes and enter the values manually.</value>
   </data>
   <data name="RangeCaption" xml:space="preserve">
-    <value>Range</value>
+    <value>Range (in bit)</value>
   </data>
   <data name="RangeTooltip" xml:space="preserve">
     <value>Range parameter that indicates the size of the random prime numbers to be generated.</value>

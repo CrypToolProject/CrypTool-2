@@ -2,12 +2,12 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Transcriptor semi-automatic mode.xml-->
-  <!--Last edited: 2022.02.08-->
+  <!--Last edited: 2022.12.23-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Transcriptor – Semi-automatic Mode</title>
+  <title lang="en">Transcriptor – Semi-Automatic Mode</title>
   <summary lang="en">Transcripts an image with symbols into a Text</summary>
   <description lang="en">This template shows how to use the semi-automatic mode of the <i>Transcriptor</i> component.</description>
   <keywords>Transcriptor, Monoalphabetic, Substitution, Image, Semi-Automatic, Symbol</keywords>

@@ -39,26 +39,25 @@ namespace CrypTool.Plugins.Convertor
         /// </summary>
         public ISettings Settings
         {
-            get => settings;
-            set => settings = (StringDecoderSettings)value;
+            get => _settings;
+            set => _settings = (StringDecoderSettings)value;
         }
 
-        [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", true)]
-        public ICrypToolStream OutputStream => outputStream;
+        [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", false)]
+        public ICrypToolStream OutputStream => _outputStream;
 
-        [PropertyInfo(Direction.OutputData, "OutputBytesCaption", "OutputBytesTooltip", true)]
-        public byte[] OutputBytes => outputBytes;
+        [PropertyInfo(Direction.OutputData, "OutputBytesCaption", "OutputBytesTooltip", false)]
+        public byte[] OutputBytes => _outputBytes;
 
         [PropertyInfo(Direction.InputData, "InputTextCaption", "InputTextTooltip", true)]
         public string InputText
         {
-            get => inputString;
+            get => _inputString;
             set
             {
-                if (inputString != value)
+                if (_inputString != value)
                 {
-                    inputString = value;
-                    OnPropertyChanged("InputText");
+                    _inputString = value;
                 }
             }
         }
@@ -67,31 +66,25 @@ namespace CrypTool.Plugins.Convertor
 
         #region IPlugin Members
 
-        /// <summary>
-        /// Feuern, wenn ein neuer Text im Statusbar angezeigt werden soll.
-        /// </summary>
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
-        /// <summary>
-        /// Feuern, wenn sich sich eine Änderung des Fortschrittsbalkens ergibt 
-        /// </summary>
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
 
         public UserControl Presentation => null;
 
         public void Initialize()
         {
-            settings.SetVisibilityOfEncoding();
+            _settings.SetVisibilityOfEncoding();
         }
 
         public void Dispose()
         {
-            if (outputStream != null)
+            if (_outputStream != null)
             {
-                outputStream.Flush();
-                outputStream.Close();
-                outputStream.Dispose();
-                outputStream = null;
+                _outputStream.Flush();
+                _outputStream.Close();
+                _outputStream.Dispose();
+                _outputStream = null;
             }
         }
 
@@ -120,87 +113,83 @@ namespace CrypTool.Plugins.Convertor
         #endregion
 
         #region Private variables
-        private StringDecoderSettings settings = new StringDecoderSettings();
-        private CStreamWriter outputStream = null;
-        private byte[] outputBytes = null;
-        private string inputString;
+        private StringDecoderSettings _settings = new StringDecoderSettings();
+        private CStreamWriter _outputStream = null;
+        private byte[] _outputBytes = null;
+        private string _inputString;
         #endregion
 
         #region Private methods
 
-        private byte[] GetBytesForEncoding(string s, StringDecoderSettings.EncodingTypes encoding)
+        private byte[] GetBytesForEncoding(string str, StringDecoderSettings.EncodingTypes encoding)
         {
-            if (s == null)
+            if (str == null)
             {
-                s = "";
+                str = string.Empty;
             }
 
             switch (encoding)
             {
                 case StringDecoderSettings.EncodingTypes.UTF16:
-                    return Encoding.Unicode.GetBytes(s);
+                    return Encoding.Unicode.GetBytes(str);
 
                 case StringDecoderSettings.EncodingTypes.UTF7:
-                    return Encoding.UTF7.GetBytes(s);
+                    return Encoding.UTF7.GetBytes(str);
 
                 case StringDecoderSettings.EncodingTypes.UTF8:
-                    return Encoding.UTF8.GetBytes(s);
+                    return Encoding.UTF8.GetBytes(str);
 
                 case StringDecoderSettings.EncodingTypes.UTF32:
-                    return Encoding.UTF32.GetBytes(s);
+                    return Encoding.UTF32.GetBytes(str);
 
                 case StringDecoderSettings.EncodingTypes.ASCII:
-                    return Encoding.ASCII.GetBytes(s);
+                    return Encoding.ASCII.GetBytes(str);
 
                 case StringDecoderSettings.EncodingTypes.ISO8859_15:
-                    return Encoding.GetEncoding("iso-8859-15").GetBytes(s);
+                    return Encoding.GetEncoding("iso-8859-15").GetBytes(str);
 
                 case StringDecoderSettings.EncodingTypes.Windows1252:
-                    return Encoding.GetEncoding(1252).GetBytes(s);
+                    return Encoding.GetEncoding(1252).GetBytes(str);
 
                 default:
-                    return Encoding.Default.GetBytes(s);
+                    return Encoding.Default.GetBytes(str);
             }
         }
 
-        private void processInput(string value)
+        private void ProcessInput(string str)
         {
             ShowProgress(50, 100);
 
-            //ShowStatusBarMessage("Converting input ...", NotificationLevel.Debug);
-
-            switch (settings.PresentationFormatSetting)
+            switch (_settings.PresentationFormatSetting)
             {
                 case StringDecoderSettings.PresentationFormat.Base64:
-                    outputBytes = Convert.FromBase64String(value);
+                    _outputBytes = Convert.FromBase64String(str);
                     break;
 
                 case StringDecoderSettings.PresentationFormat.Octal:
-                    outputBytes = ToByteArray(value, 3, "[^0-7]", 8);
+                    _outputBytes = ToByteArray(str, 3, "[^0-7]", 8);
                     break;
 
                 case StringDecoderSettings.PresentationFormat.Decimal:
-                    outputBytes = ToByteArray(value, 3, "[^0-9]", 10);
+                    _outputBytes = ToByteArray(str, 3, "[^0-9]", 10);
                     break;
 
                 case StringDecoderSettings.PresentationFormat.Binary:
 
-                    outputBytes = ToByteArray(value, 8, "[^01]", 2);
+                    _outputBytes = ToByteArray(str, 8, "[^01]", 2);
                     break;
 
                 case StringDecoderSettings.PresentationFormat.Hex:
-                    outputBytes = ToByteArray(value, 2, "[^a-fA-F0-9]", 16);
+                    _outputBytes = ToByteArray(str, 2, "[^a-fA-F0-9]", 16);
                     break;
 
                 case StringDecoderSettings.PresentationFormat.Text:
                 default:
-                    outputBytes = GetBytesForEncoding(value, settings.Encoding);
+                    _outputBytes = GetBytesForEncoding(str, _settings.Encoding);
                     break;
             }
 
-            outputStream = new CStreamWriter(outputBytes);
-
-            //ShowStatusBarMessage("Input converted.", NotificationLevel.Debug);
+            _outputStream = new CStreamWriter(_outputBytes);
 
             ShowProgress(100, 100);
 
@@ -212,9 +201,9 @@ namespace CrypTool.Plugins.Convertor
         {
             string[] matches;
 
-            if (settings.UseSeparators)
+            if (_settings.UseSeparators)
             {
-                matches = input.Split((settings.Separators + "\n\r").ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                matches = input.Split((_settings.Separators + "\n\r").ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
@@ -252,7 +241,7 @@ namespace CrypTool.Plugins.Convertor
         {
             try
             {
-                processInput(InputText);
+                ProcessInput(InputText);
             }
             catch (Exception ex)
             {

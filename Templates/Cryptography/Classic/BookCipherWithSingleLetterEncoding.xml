@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: BookCipherWithSingleLetterEncoding.xml-->
+  <!--Last edited: 2022.12.23-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Book Cipher with Single Letter Encoding</title>
+  <summary lang="en">This template shows how the <i>Book cipher</i> can be used with single letters.</summary>
+  <description lang="en">With this template we illustrate the encryption using a book cipher with single letters.</description>
+  <keywords>book, code, homophonic, substitution</keywords>
+  <replacements lang="en">
+    <replacement key="$BookCipher$" value="Book Cipher" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$DecryptedPlaintext$" value="Decrypted plaintext" />
+    <replacement key="$memo$" value="A {\b book cipher} is a cipher in which the key is some aspect of a book or other piece of text. Books, being common and widely available in modern times, are more convenient for this use than objects made specifically for cryptographic purposes. It is typically essential that both correspondents not only have the same book, but the same edition.\line\line
+In this template, the plaintext is encrypted by replacing single letters of the plaintext by the position of a word in the book, which starts with the same letter. Since there are several words starting with the same letter, random choices between the different possible code words to choose from are made." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Buch-Chiffre mit Einzelbuchstaben-Verschlüsselung</title>
+  <summary lang="de">Diese Vorlage zeigt, wie die <i>Buch-Chiffre</i> mit einzelnen Buchstaben verwendet werden kann.</summary>
+  <description lang="de">Mit dieser Vorlage veranschaulichen wir die Verschlüsselung anhand einer Buch-Chiffre mit einzelnen Buchstaben.</description>
+  <keywords>Buch, Code, homophonisch, Substitution</keywords>
+  <replacements lang="de">
+    <replacement key="$BookCipher$" value="Buch-Chiffre" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$DecryptedPlaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$memo$" value="Eine {\b Buch-Chiffre} ist eine Chiffre, bei der der Schlüssel ein Teil eines Buches oder eines anderen Textes ist. Da Bücher in der heutigen Zeit weit verbreitet und verfügbar sind, eignen sie sich besser für diesen Zweck als Objekte, die speziell für kryptografische Zwecke hergestellt wurden. In der Regel ist es unerlässlich, dass beide Korrespondenten nicht nur dasselbe Buch, sondern auch dieselbe Ausgabe besitzen.\line\line
+In dieser Vorlage wird der Klartext verschlüsselt, indem einzelne Buchstaben des Klartextes durch die Position eines Wortes im Buch, das mit demselben Buchstaben beginnt, ersetzt werden. Da es mehrere Wörter gibt, die mit demselben Buchstaben beginnen, wird eine zufällige Auswahl zwischen den verschiedenen möglichen Codewörtern getroffen." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="BookCipherWithSingleLetterEncoding.png" />
+  <relevantPlugins>
+    <plugin name="BookCipher" />
+  </relevantPlugins>
+</sample>

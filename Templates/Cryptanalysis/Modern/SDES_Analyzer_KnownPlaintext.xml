@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--File name: SDES_Analyzer_KnownPlaintext.xml-->
+  <!--File name: S-DES_Analyzer_KnownPlaintext.xml-->
   <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">SDES Known-Plaintext Analysis</title>
-  <summary lang="en">Cryptanalysis of the <i>SDES</i> algorithm using the <i>KeySearcher</i> component and a known plaintext</summary>
-  <description lang="en">This template shows the cryptanalysis of the <i>SDES</i> algorithm using the <i>KeySearcher</i> component and a known plaintext.</description>
+  <title lang="en">S-DES Known-Plaintext Analysis</title>
+  <summary lang="en">Cryptanalysis of the <i>S-DES</i> algorithm using the <i>KeySearcher</i> component and a known plaintext</summary>
+  <description lang="en">This template shows the cryptanalysis of the <i>S-DES</i> algorithm using the <i>KeySearcher</i> component and a known plaintext.</description>
   <keywords>advanced, standard, NIST, Rijndael, Daemen, Rijmen, symmetric, keysearcher, Attack, Analysis</keywords>
   <replacements lang="en">
     <replacement key="$Ciphertext$" value="Ciphertext" />
@@ -22,9 +22,9 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">SDES Known-Plaintext-Analyse</title>
-  <summary lang="de">Kryptoanalyse der <i>SDES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und eines bekannten Klartextes</summary>
-  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>SDES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und eines bekannten Klartextes.</description>
+  <title lang="de">S-DES Known-Plaintext-Analyse</title>
+  <summary lang="de">Kryptoanalyse der <i>S-DES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und eines bekannten Klartextes</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>S-DES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und eines bekannten Klartextes.</description>
   <keywords lang="de">symmetrisch, NIST, Rijndael, Daemen, Rijmen, Standard, regex, regulärer Ausdruck, Keysearcher, bekannter Klartext, Angriff</keywords>
   <replacements lang="de">
     <replacement key="$Ciphertext$" value="Geheimtext" />

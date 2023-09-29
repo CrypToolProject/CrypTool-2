@@ -1,40 +1,62 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <sample>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: LFSR.xml-->
   <!--Last edited: 2022.02.08-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Linear Feedback Shift Register (LFSR)</title>
   <summary lang="en">Usage of the <i>Linear Feedback Shift Register</i></summary>
-  <description lang="en">This template shows the usage of the <i>Linear Feedback Shift Register</i>.</description>
+  <description lang="en">This template shows the usage of the 
+  <i>Linear Feedback Shift Register</i>.</description>
   <keywords>shift, register, feedback</keywords>
   <replacements lang="en">
     <replacement key="$states$" value="Internal states" />
-    <replacement key="$Tap Sequence$" value="Tap Sequence" />
+    <replacement key="$Tap Sequence$" value="Tap sequence" />
     <replacement key="$Linear Feedback Shift Register$" value="Linear Feedback Shift Register" />
-    <replacement key="$Output Stream$" value="Output Stream" />
-    <replacement key="$memo$" value="A linear feedback shift register (LFSR) is a shift register whose input bit is a linear function of its previous state.\line\line The most commonly used linear function of single bits is XOR. Thus, an LFSR is most often a shift register whose input bit is driven by the exclusive-or (XOR) of some bits of the overall shift register value. The generator polynom is defined via the {\b tap sequence}.\line\line The initial value of the LFSR is called the {\b seed}, and because the operation of the register is deterministic, the stream of values produced by the register is completely determined by its current (or previous) state. Likewise, because the register has a finite number of possible states, it must eventually enter a repeating cycle. However, an LFSR with a well-chosen feedback function can produce a sequence of bits which appears random and which has a very long cycle.\line\line http://en.wikipedia.org/wiki/Linear_feedback_shift_register\line http://de.wikipedia.org/wiki/Linear_r%C3%BCckgekoppeltes_Schieberegister\line\line You may also want to take a look at the NLFSR template included in CrypTool 2." />
+    <replacement key="$Output Stream$" value="Output stream" />
+    <replacement key="$manual clock$" value="Manual clock" />
+    <replacement key="$memo$"
+    value="A {\b linear feedback shift register (LFSR)} is a shift register whose input bit is the result of a linear function that includes parts of the previous state of the register.
+Usually the XOR function is used for the linear function. The initial state of the register is determined by the {\b seed} and the {\b linear function (generator polynomial)} is defined by the {\b tap sequence}.
+The tap sequence is used here from right to left to generate the polynomial.\line\line
+Since the operations of the shift register are deterministic, the stream of output bits is uniquely defined by the current (or previous) state.
+Furthermore, since an LFSR can only assume a finite number of states, the output sequence must enter a repeating cycle at some point. 
+However, with a well-chosen linear function, the LFSR can generate an output sequence that appears random and whose cycle length is very large (2^(register length)-1).\line\line
+The template normally performs all steps automatically. If the {\b &quot;External clock&quot;} setting of the LFSR component is active, you can also click through the {\b single steps} manually using the button on the left.\line\line
+See also: https://en.wikipedia.org/wiki/Linear-feedback_shift_register\line\line
+Also take a look at the NLFSR template in CrypTool 2." />
   </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Linear rückgekoppeltes Schieberegister (LFSR)</title>
   <summary lang="de">Benutzung des <i>Linear rückgekoppelten Schieberegisters</i></summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung des <i>Linear rückgekoppelten Schieberegisters</i>.</description>
+  <description lang="de">Diese Vorlage zeigt die Benutzung des 
+  <i>Linear rückgekoppelten Schieberegisters</i>.</description>
   <keywords lang="de">rückkopplung</keywords>
   <replacements lang="de">
     <replacement key="$states$" value="Interne Zustände" />
     <replacement key="$Tap Sequence$" value="Tap-Sequenz" />
     <replacement key="$Linear Feedback Shift Register$" value="Linear rückgekoppeltes Schieberegister" />
     <replacement key="$Output Stream$" value="Ausgabe-Datenstrom" />
-    <replacement key="$memo$" value="Ein linear rückgekoppeltes Schieberegister (engl. linear feedback shift register (LFSR)) ist ein Schieberegister, dessen Eingabebit eine lineare Funktion des vorhergehenden Zustandes ist.\line\line Die üblicherweise verwendete lineare Funktion auf einzelnen Bits ist die XOR-Verknüpgung. Daher ist ein LFSR meistens ein Schieberegister, dessen Eingabebit durch die XOR-Verknüpfung einiger seiner Schieberegister-Bits berechnet wird. Das Generatorpolynom wird durch die {\b Tap-Sequenz} definiert.\line\line Der Startwert eines LFSR wird {\b Seed} genannt, und da die Operationen des Schieberegisters deterministisch sind, wird der Strom der Ausgabebits, das das LFSR generiert, eindeutig durch den momentanen (bzw. vorherigen) Zustand festgelegt. Da ein LFSR nur eine endliche Anzahl an Zuständen annehmen kann, muss die Ausgabesequenz außerdem irgendwann in einen sich wiederholenden Zyklus eintreten. Mit einer gut gewählten Rückkopplungsfunktion kann das LFSR jedoch eine Ausgabesequenz generieren, die zufällig erscheint und dessen Zyklenlänge sehr groß ist.\line\line http://en.wikipedia.org/wiki/Linear_feedback_shift_register\line http://de.wikipedia.org/wiki/Linear_r%C3%BCckgekoppeltes_Schieberegister\line\line Werfen Sie auch einen Blick auf die NLFSR-Vorlage in CrypTool 2." />
+    <replacement key="$manual clock$" value="Manuelles Taktsignal" />
+    <replacement key="$memo$"
+    value="Ein {\b linear rückgekoppeltes Schieberegister (engl. linear feedback shift register (LFSR))} ist ein Schieberegister, dessen Eingangsbit das Ergebnis einer linearen Funktion, in die Teile des vorherigen Zustandes des Registers einfließen.\line\line
+Üblicherweise wird die XOR-Funktion für die lineare Funktion verwendet. Der initiale Zustand des Registers wird durch den {\b Seed} bestimmt und die {\b lineare Funktion (Generatorpolynom)} wird durch die {\b Tap-Sequenz} definiert. 
+Die Tap-Sequenz wird hier von rechts nach links verwendet, um das Polynom zu erstellen.\line\line
+Da die Operationen des Schieberegisters deterministisch sind, wird der Strom der Ausgabebits eindeutig durch den momentanen (bzw. vorherigen) Zustand festgelegt.
+Da ein LFSR nur eine endliche Anzahl an Zuständen annehmen kann, muss die Ausgabesequenz außerdem irgendwann in einen sich wiederholenden Zyklus eintreten. 
+Mit einer gut gewählten linearen Funktion kann das LFSR jedoch eine Ausgabesequenz generieren, die zufällig erscheint und deren Zyklenlänge sehr groß ist (2^(Registerlänge)-1).\line\line
+Die Vorlage führt normalerweise alle Schritte automatisch durch. Wenn die Einstellung {\b &quot;Externes Taktsignal&quot;} der LFSR-Komponente aktiv ist, kann man mittels des Buttons auf der linken Seite auch manuell durch die {\b Einzelschritte} durchklicken.\line\line
+Siehe auch: https://de.wikipedia.org/wiki/Linear_r%C3%BCckgekoppeltes_Schieberegister\line\line
+Werfen Sie auch einen Blick auf die NLFSR-Vorlage in CrypTool 2." />
   </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <icon file="LFSR.png" />
   <relevantPlugins>
     <plugin name="LFSRComponent" />

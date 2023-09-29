@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--File name: Enigma_Hillclimbing.xml-->
+  <!--File name: Enigma_Hill climbing.xml-->
   <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Enigma Hillclimbing Attack</title>
+  <title lang="en">Enigma Hill-climbing Attack</title>
   <summary lang="en">Cryptanalysis of the <i>Enigma</i> cipher</summary>
   <description lang="en">This template shows the cryptanalysis of the <i>Enigma</i> cipher.</description>
   <keywords>Machine, Turing, World War, Rotor, Attack, Analysis, Analyzer, Breaker</keywords>
@@ -18,13 +18,13 @@
     <replacement key="$Decrypted Ciphertext$" value="Decrypted Ciphertext" />
     <replacement key="$FriedmanTest$" value="FriedmanTest" />
     <replacement key="$Key$" value="Key Settings" />
-    <replacement key="$memo$" value="This example demonstrates a hillclimbing ciphertext-only attack, based on Geoff Sullivan &amp; Frode Weierud (2005) BREAKING GERMAN ARMY CIPHERS, Cryptologia, 29:3, 193-232, DOI: 10.1080/01611190508951299). It is an extension of Gillogly’s original attack. For each possible rotor settings (order, ring settings, and rotor starting positions), a hillclimbing algorithm is applied to recover the plugboard settings. It employs a combination of n-grams statistics and the Index of Coincidence. This attack is slower than Gillogly’s method but much more effective. The attack has been successfully applied against original WW II German Army messages, including messages with no more than 80 symbols. It is recommended to first run the attack all rings set to Z, for a fast initial run, that may succeed in case there was no middle rotor turnover, and otherwise, allow for a full search (A to Z) of the right ring settings. If neither of those runs succeeds, the attack can be run specifying a full search (A to Z) for both the right and middle rotors. If the message is short (less than 100 letters), it instead recommended using the simulated annealing ciphertext-only attack." />
+    <replacement key="$memo$" value="This example demonstrates a hill climbing ciphertext-only attack, based on Geoff Sullivan &amp; Frode Weierud (2005) BREAKING GERMAN ARMY CIPHERS, Cryptologia, 29:3, 193-232, DOI: 10.1080/01611190508951299). It is an extension of Gillogly’s original attack. For each possible rotor settings (order, ring settings, and rotor starting positions), a hill climbing algorithm is applied to recover the plugboard settings. It employs a combination of n-grams statistics and the Index of Coincidence. This attack is slower than Gillogly’s method but much more effective. The attack has been successfully applied against original WW II German Army messages, including messages with no more than 80 symbols. It is recommended to first run the attack all rings set to Z, for a fast initial run, that may succeed in case there was no middle rotor turnover, and otherwise, allow for a full search (A to Z) of the right ring settings. If neither of those runs succeeds, the attack can be run specifying a full search (A to Z) for both the right and middle rotors. If the message is short (less than 100 letters), it instead recommended using the simulated annealing ciphertext-only attack." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">Enigma Hillclimbing Angriff</title>
-  <summary lang="de">Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine mit Hillclimbing</summary>
+  <title lang="de">Enigma Hill-climbing-Angriff</title>
+  <summary lang="de">Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine mit Hill climbing</summary>
   <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine.</description>
   <keywords lang="de">Maschine, Turing, Weltkrieg, Rotor, Angriff, Analyse, Analyzer, Breaker</keywords>
   <replacements lang="de">
@@ -33,7 +33,7 @@
     <replacement key="$Crib$" value="Crib" />
     <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
     <replacement key="$Key$" value="Schlüssel Einstellungen" />
-    <replacement key="$memo$" value="Dieses Beispiel zeigt einen Ciphertext-Only-Angriff, der auf Geoff Sullivan &amp; Frode Weierud (2005) basiert. BREAKING GERMAN ARMY CIPHERS, Cryptologia, 29: 3, 193-232, DOI: 10.1080 / 01611190508951299). Es ist eine Erweiterung von Gilloglys ursprünglichem Angriff. Für jede mögliche Rotoreinstellung (Reihenfolge, Ringeinstellungen und Rotorstartpositionen) wird ein Hillclimbing-Algorithmus angewendet, um die Steckerbrett-Einstellungen wiederherzustellen. Es verwendet eine Kombination aus n-Gramm-Statistiken und dem Index of Coincidence. Dieser Angriff ist langsamer als Gilloglys Methode, aber viel effektiver. Der Angriff wurde erfolgreich gegen Originalnachrichten der Bundeswehr des Zweiten Weltkriegs angewendet, einschließlich Nachrichten mit nicht mehr als 80 Symbolen. Es wird empfohlen, zuerst den Angriff aller auf Z eingestellten Ringe auszuführen, um einen schnellen ersten Lauf zu ermöglichen, der erfolgreich sein kann, wenn kein mittlerer Rotorumsatz vorliegt, und andernfalls eine vollständige Suche (A bis Z) der richtigen Ringeinstellungen zu ermöglichen. Wenn keine dieser Analysen erfolgreich ist, kann der Angriff ausgeführt werden, wobei eine vollständige Suche (von A bis Z) sowohl für den rechten als auch für den mittleren Rotor angegeben wird. Wenn die Nachricht kurz ist (weniger als 100 Buchstaben), wird stattdessen die Verwendung des simulierten Ciphertext-Only-Angriffs empfohlen." />
+    <replacement key="$memo$" value="Dieses Beispiel zeigt einen Ciphertext-Only-Angriff, der auf Geoff Sullivan &amp; Frode Weierud (2005) basiert. BREAKING GERMAN ARMY CIPHERS, Cryptologia, 29: 3, 193-232, DOI: 10.1080 / 01611190508951299). Es ist eine Erweiterung von Gilloglys ursprünglichem Angriff. Für jede mögliche Rotoreinstellung (Reihenfolge, Ringeinstellungen und Rotorstartpositionen) wird ein Hill climbing-Algorithmus angewendet, um die Steckerbrett-Einstellungen wiederherzustellen. Es verwendet eine Kombination aus n-Gramm-Statistiken und dem Index of Coincidence. Dieser Angriff ist langsamer als Gilloglys Methode, aber viel effektiver. Der Angriff wurde erfolgreich gegen Originalnachrichten der Bundeswehr des Zweiten Weltkriegs angewendet, einschließlich Nachrichten mit nicht mehr als 80 Symbolen. Es wird empfohlen, zuerst den Angriff aller auf Z eingestellten Ringe auszuführen, um einen schnellen ersten Lauf zu ermöglichen, der erfolgreich sein kann, wenn kein mittlerer Rotorumsatz vorliegt, und andernfalls eine vollständige Suche (A bis Z) der richtigen Ringeinstellungen zu ermöglichen. Wenn keine dieser Analysen erfolgreich ist, kann der Angriff ausgeführt werden, wobei eine vollständige Suche (von A bis Z) sowohl für den rechten als auch für den mittleren Rotor angegeben wird. Wenn die Nachricht kurz ist (weniger als 100 Buchstaben), wird stattdessen die Verwendung des simulierten Ciphertext-Only-Angriffs empfohlen." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

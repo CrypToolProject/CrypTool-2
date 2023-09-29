@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en"/>
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The Syllabary cipher is a monoalphabetic substitution cipher, which uses a 10x10 lookup table.
+    The table consists of single letters and the most frequent syllables of the language, which the table is based on.
+    It also contains all digits from 0 to 9.
+    The index digits of row and columns of the table define the ciphertext symbol.
+    For example, if the letter "A" is at row 0 and column 0, the ciphertext symbol is "00".
+    The index digits can be changed using a 20-digit key.
+    The ordering of the content of the table can be changed based on a keyword.
+    <newline/>
+    <newline/>
+    There are three types of this cipher, which you can create using this component:<newline/>
+    (1) Only a digit key is used and the table order is known.<newline/>
+    (2) Only a keyword is used to permute the table, but the digit key is known.<newline/>
+    (3) Both, digit key and keyword are unknow.<newline/>
+    <newline/>
+    The cipher was described in Military Cryptanalytics Part 1 Chapter XI, April 1956 by William F. Friedman and Lambros D.
+  </introduction>
+  <introduction lang="de-DE">
+    Die Syllabar-Chiffre ist eine monoalphabetische Substitutions-Chiffre, die eine 10x10 Lookup-Tabelle verwendet.
+    Die Tabelle besteht aus einzelnen Buchstaben und den häufigsten Silben der Sprache, auf der die Tabelle basiert.
+    Außerdem enthält sie alle Ziffern von 0 bis 9.
+    Die Indexziffern der Zeilen und Spalten der Tabelle bestimmen Geheimtextsymbol.
+    Befindet sich beispielsweise der Buchstabe "A" in Zeile 0 und Spalte 0, so lautet das Geheimtextzeichen "00".
+    Die Indexziffern können mit einem 20-stelligen Schlüssel vertauscht werden.
+    Die Anordnung des Tabelleninhalts kann mit Hilfe eines Schlüsselworts geändert werden.
+    <newline/>
+    <newline/>
+    Es gibt drei Arten dieser Chiffre, die Sie mit dieser Komponente erstellen können:<newline/>
+    (1) Es wird nur ein Zahlenschlüssel verwendet und die Sortierung der Tabelle ist bekannt.<newline/>
+    (2) Es wird nur ein Schlüsselwort verwendet, um die Tabelle zu permutieren, aber der Zahlenschlüssel ist bekannt.<newline/>
+    (3) Sowohl der Zahlenschlüssel als auch das Schlüsselwort sind nicht bekannt.
+    <newline/>
+    Die Chiffre wurde beschrieben in Military Cryptanalytics Part 1 Chapter XI, April 1956 von William F. Friedman und Lambros D.    
+  </introduction>
+  <usage lang="en"></usage>
+  <usage lang="de-DE"></usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>    
+</documentation>

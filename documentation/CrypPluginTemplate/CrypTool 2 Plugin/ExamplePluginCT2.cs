@@ -19,7 +19,9 @@ using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.$safeprojectname$
-{
+{   
+    // HOWTO: Plugin developer HowTo can be found here: https://github.com/CrypToolProject/CrypTool-2/wiki/Developer-HowTo
+
     // HOWTO: Change author name, email address, organization and URL.
     [Author("Anonymous", "coredevs@cryptool.org", "CrypTool 2 Team", "https://www.cryptool.org")]
     // HOWTO: Change plugin caption (title to appear in CT2) and tooltip.
@@ -32,7 +34,7 @@ namespace CrypTool.Plugins.$safeprojectname$
         #region Private Variables
 
         // HOWTO: You need to adapt the settings class as well, see the corresponding file.
-        private readonly ExamplePluginCT2Settings settings = new ExamplePluginCT2Settings();
+        private readonly $safeprojectname$Settings _settings = new $safeprojectname$Settings();
 
         #endregion
 
@@ -69,7 +71,7 @@ namespace CrypTool.Plugins.$safeprojectname$
         /// </summary>
         public ISettings Settings
         {
-            get { return settings; }
+            get { return _settings; }
         }
 
         /// <summary>
@@ -96,11 +98,11 @@ namespace CrypTool.Plugins.$safeprojectname$
             ProgressChanged(0, 1);
 
             // HOWTO: After you have changed an output property, make sure you announce the name of the changed property to the CT2 core.
-            SomeOutput = SomeInput - settings.SomeParameter;
+            SomeOutput = SomeInput - _settings.SomeParameter;
             OnPropertyChanged("SomeOutput");
 
             // HOWTO: You can pass error, warning, info or debug messages to the CT2 main window.
-            if (settings.SomeParameter < 0)
+            if (_settings.SomeParameter < 0)
 			{
                 GuiLogMessage("SomeParameter is negative", NotificationLevel.Debug);
 			}

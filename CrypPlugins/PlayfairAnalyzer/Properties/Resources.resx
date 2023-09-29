@@ -249,4 +249,16 @@
   <data name="ValueHeader" xml:space="preserve">
     <value>Value</value>
   </data>
+  <data name="MaxCribOffsetCaption" xml:space="preserve">
+    <value>Maximum crib offset</value>
+  </data>
+  <data name="MaxCribOffsetTooltip" xml:space="preserve">
+    <value>Crib tests end with this offset in the text</value>
+  </data>
+  <data name="MinCribOffsetCaption" xml:space="preserve">
+    <value>Minimum crib offset</value>
+  </data>
+  <data name="MinCribOffsetTooltip" xml:space="preserve">
+    <value>Crib tests start with this offset in the text</value>
+  </data>
 </root>

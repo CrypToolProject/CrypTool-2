@@ -30,15 +30,7 @@
                         <RepeatButton Grid.Row="1" Grid.Column="1"  Name="NUDButtonDown" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="NUDButtonDown_Click">6</RepeatButton>
                     </Grid>
                 </Grid>
-                <CheckBox Name="EnableOpenCL" Content="{Loc EnableOpenCL}" Margin="30,5,0,10" VerticalAlignment="Center" HorizontalAlignment="Left" Click="EnableOpenCL_Click"/>
-                <Grid Margin="30,5,0,10" Width="Auto" HorizontalAlignment="Left">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Loc OpenCLDevice}" Grid.Column="0" Width="150"/>
-                    <ComboBox Width="200" Name="OpenCLDevice" Grid.Column="1" SelectionChanged="OpenCLDevice_SelectionChanged"/>
-                </Grid>
+                                
                 <Grid Margin="30,5,0,10" Width="Auto" HorizontalAlignment="Left">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>

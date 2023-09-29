@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CustomReflectorCaption" xml:space="preserve">
+    <value>Benutzerdefinierter Reflektor</value>
+  </data>
+  <data name="CustomReflectorTooltip" xml:space="preserve">
+    <value>Setzt den benutzerdefinierten Reflektor</value>
+  </data>
+  <data name="InputTextCaption" xml:space="preserve">
+    <value>Texteingabe</value>
+  </data>
+  <data name="InputTextTooltip" xml:space="preserve">
+    <value>Eingabe einer Zeichenkette, die von der Chiffre verarbeitet werden soll</value>
+  </data>
+  <data name="IsReversedCaption" xml:space="preserve">
+    <value>Ist umgekehrt</value>
+  </data>
+  <data name="IsReversedTooltip" xml:space="preserve">
+    <value>Legt fest, ob dieser Rotor oder Stator in umgekehrter Richtung in die Maschine eingesetzt wird</value>
+  </data>
+  <data name="KeyInputCaption" xml:space="preserve">
+    <value>Schlüssel-Eingabe</value>
+  </data>
+  <data name="KeyInputTooltip" xml:space="preserve">
+    <value>Eingabe eines Enigma-Schlüssels, der die zu verwendenden Rotoren, Ringe und Steckbrett-Verbindungen beinhaltet</value>
+  </data>
+  <data name="OutputTextCaption" xml:space="preserve">
+    <value>Textausgabe</value>
+  </data>
+  <data name="OutputTextTooltip" xml:space="preserve">
+    <value>Der ausgegebene Text der Machine</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Typex</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Implementierung der Typex-Maschine</value>
+  </data>
+  <data name="PlugSettingsCaption" xml:space="preserve">
+    <value>Steckereinstellungen</value>
+  </data>
+  <data name="PlugSettingsGroupName" xml:space="preserve">
+    <value>Steckereinstellungen</value>
+  </data>
+  <data name="PlugSettingsTooltip" xml:space="preserve">
+    <value>Legt die Steckereinstellungen fest</value>
+  </data>
+  <data name="RingPositionsCaption" xml:space="preserve">
+    <value>Ringpositionen</value>
+  </data>
+  <data name="RingPositionsTooltip" xml:space="preserve">
+    <value>Legt die Position der Ringe der Rotoren fest</value>
+  </data>
+  <data name="Rotor1Caption" xml:space="preserve">
+    <value>Rotor 1</value>
+  </data>
+  <data name="Rotor1Tooltip" xml:space="preserve">
+    <value>Setzt Rotor 1 (schneller Rotor, rechts)</value>
+  </data>
+  <data name="Rotor2Caption" xml:space="preserve">
+    <value>Rotor 2</value>
+  </data>
+  <data name="Rotor2Tooltip" xml:space="preserve">
+    <value>Setzt Rotor 2 (mittelschneller Rotor, Mitte)</value>
+  </data>
+  <data name="Rotor3Caption" xml:space="preserve">
+    <value>Rotor 3</value>
+  </data>
+  <data name="Rotor3Tooltip" xml:space="preserve">
+    <value>Setzt Rotor 3 (langsamer Rotor, links)</value>
+  </data>
+  <data name="RotorPositionsCaption" xml:space="preserve">
+    <value>Rotorpositionen</value>
+  </data>
+  <data name="RotorPositionsGroupName" xml:space="preserve">
+    <value>Rotorpositionen</value>
+  </data>
+  <data name="RotorPositionsTooltip" xml:space="preserve">
+    <value>Einstellen der Startpositionen der Rotoren</value>
+  </data>
+  <data name="RotorSelectionGroupName" xml:space="preserve">
+    <value>Auswahl der Rotore</value>
+  </data>
+  <data name="Stator1Caption" xml:space="preserve">
+    <value>Stator 1</value>
+  </data>
+  <data name="Stator1Tooltip" xml:space="preserve">
+    <value>Stator 1 (rechter Stator) einstellen</value>
+  </data>
+  <data name="Stator2Caption" xml:space="preserve">
+    <value>Stator 2</value>
+  </data>
+  <data name="Stator2Tooltip" xml:space="preserve">
+    <value>Stator 2 (linker Stator) einstellen</value>
+  </data>
+  <data name="TypexMachineTypeCaption" xml:space="preserve">
+    <value>Typ der Maschine</value>
+  </data>
+  <data name="TypexMachineTypeTooltip" xml:space="preserve">
+    <value>Wählt den Rotorsatz auf der Grundlage des "Maschinentyps" aus (basierend auf verschiedenen Simulatoren)</value>
+  </data>
+  <data name="TypexReflectorCaption" xml:space="preserve">
+    <value>Reflektor</value>
+  </data>
+  <data name="TypexReflectorGroupName" xml:space="preserve">
+    <value>Auswahl des Reflektors</value>
+  </data>
+  <data name="TypexReflectorTooltip" xml:space="preserve">
+    <value>Legt den verwendeten Reflektor fest</value>
+  </data>
+  <data name="UnknownSymbolHandlingCaption" xml:space="preserve">
+    <value>Behandlung ungültiger Zeichen</value>
+  </data>
+  <data name="UnknownSymbolHandlingList1" xml:space="preserve">
+    <value>Ignorieren (nicht ändern)</value>
+  </data>
+  <data name="UnknownSymbolHandlingList2" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="UnknownSymbolHandlingList3" xml:space="preserve">
+    <value>Ersetzen durch '?'</value>
+  </data>
+  <data name="UnknownSymbolHandlingTooltip" xml:space="preserve">
+    <value>Wie soll auf Zeichen in der Eingabe reagiert werden, die nicht Bestandteil des Eingabe-Alphabets sind?</value>
+  </data>
+</root>

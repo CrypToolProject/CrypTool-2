@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Grandpre.xml-->
+  <!--Last edited: 2023.07.19-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Grandpré Cipher</title>
+  <summary lang="en">Usage of the <i>Grandpré</i> cipher</summary>
+  <description lang="en">The Grandpré cipher is a homophonic substitution cipher which uses a table of words for encryption</description>
+  <keywords>one-time, pad</keywords>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Decrypted plaintext$" value="Decrypted plaintext" />
+    <replacement key="$Keyword$" value="Keyword" />
+    <replacement key="$Words$" value="Words" />
+    <replacement key="$Grandpré Cipher$" value="Grandpré Cipher" />
+    <replacement key="$Word separator$" value="Word separator" />
+    <replacement key="$String Operations$" value="String Operations" />
+    <replacement key="$memo$" value="The {\b Grandpré cipher} is a homophonic substitution cipher. To use this cipher, you need one keyword and eight additional words, each with at least eight letters, to fill an 8 x 8 table. 
+The collection of words should contain all 26 letters of the alphabet.\line
+\line
+The selected words are arranged systematically and horizontally in an 8 x 8 table. The first letter of each of the eight words (forming the first column) must match the first letter of the keyword.\line
+\line
+The encryption process proceeds as follows: for each letter of the plaintext, the corresponding coordinates within the table (represented by two digits, one for the row and one for the column) are determined. In some cases, there may be several valid options, so the encryptor has the freedom to choose one of them at random. Thus, the cipher is a homophonic substitution cipher. The chosen coordinates are then used to generate the ciphertext symbol. The final ciphertext is twice as long as the original plaintext and consists of digits." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<title lang="de">Grandpré-Chiffre</title>
+<summary lang="de">Verwendung der <i>Grandpré</i>-Chiffre</summary>
+<description lang="de">Die Grandpré-Chiffre ist eine homophone Substitutionschiffre, die eine Tabelle mit Wörtern zur Verschlüsselung verwendet</description>
+<keywords>one-time, pad</keywords>
+<replacements lang="de">
+  <replacement key="$Plaintext$" value="Klartext" />
+  <replacement key="$Ciphertext$" value="Geheimtext" />
+  <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
+  <replacement key="$Keyword$" value="Schlüsselwort" />
+  <replacement key="$Words$" value="Wörter" />
+  <replacement key="$Grandpré Cipher$" value="Grandpré-Chiffre" />
+  <replacement key="$Word separator$" value="Worttrennzeichen" />
+  <replacement key="$String Operations$" value="Zeichenkettenoperationen" />
+  <replacement key="$memo$" value="Die {\b Grandpré-Chiffre} ist eine homophone Substitutionschiffre. Zur Verwendung dieser Chiffre benötigen Sie ein Schlüsselwort und acht zusätzliche Wörter mit mindestens acht Buchstaben, um eine 8 x 8-Tabelle zu füllen. 
+Die Sammlung der Wörter sollte alle 26 Buchstaben des Alphabets enthalten.\line
+\line
+Die ausgewählten Wörter werden systematisch und waagerecht in einer 8 x 8-Tabelle angeordnet. Der erste Buchstabe jedes der acht Wörter (die die erste Spalte bilden) muss mit dem ersten Buchstaben des Schlüsselworts übereinstimmen.\line
+\line
+Der Verschlüsselungsprozess läuft wie folgt ab: Für jeden Buchstaben des Klartextes werden die entsprechenden Koordinaten innerhalb der Tabelle (dargestellt durch zwei Ziffern, eine für die Zeile und eine für die Spalte) ermittelt. In einigen Fällen kann es mehrere gültige Optionen geben, so dass der Verschlüsseler die Freiheit hat, eine davon zufällig zu wählen. Die Chiffre ist also eine homophone Substitutions-Chiffre. Die gewählten Koordinaten werden dann zur Generierung des Geheimtextsymbols verwendet. Der endgültige Geheimtext ist doppelt so lang wie der ursprüngliche Klartext und besteht aus Ziffern."/>
+</replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Grandpre.png" />
+  <relevantPlugins>
+    <plugin name="Grandpre" />
+  </relevantPlugins>
+</sample>

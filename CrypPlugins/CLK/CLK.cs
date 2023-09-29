@@ -166,8 +166,6 @@ namespace CrypTool.CLK
             }
 
             myRounds = settings.Rounds;
-            //GuiLogMessage("myRounds: " + myRounds.ToString(), NotificationLevel.Info);
-
             startTime = DateTime.Now;
         }
 
@@ -194,12 +192,8 @@ namespace CrypTool.CLK
             }
             else
             {
-                if (settings.CLKTimeout <= 499)
-                {
-                    GuiLogMessage("Are you trying to generate bulk output? Please do not use CLK plugin for this purpose. Try setting the number of rounds in the corresponding plugin settings.", NotificationLevel.Warning);
-                }
-                else
-                {
+                if (settings.CLKTimeout >= 0)
+                {                
                     process(settings.CLKTimeout);
                     //change picture
                     if (Convert.ToBoolean(settings.SetClockToTrue))

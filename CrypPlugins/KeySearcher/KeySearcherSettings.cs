@@ -1,7 +1,6 @@
 ﻿using CrypTool.PluginBase;
 using KeySearcher.Properties;
 using KeyTextBox;
-using OpenCLNet;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,44 +14,12 @@ namespace KeySearcher
         private readonly KeySearcher keysearcher;
         private int coresUsed;
         private string csvPath = "";
-
-        public class OpenCLDeviceSettings
-        {
-            private readonly KeySearcherSettings _settings;
-            internal string name;
-            internal int index;
-            internal int mode;
-            internal bool useDevice;
-
-            public bool UseDevice
-            {
-                get => useDevice;
-                set
-                {
-                    if (_settings.OpenCLDevice == index)
-                    {
-                        _settings.UseOpenCL = value;
-                    }
-
-                    useDevice = value;
-                }
-            }
-
-            public OpenCLDeviceSettings(KeySearcherSettings settings)
-            {
-                _settings = settings;
-            }
-        }
-
-        private readonly List<OpenCLDeviceSettings> deviceSettings = new List<OpenCLDeviceSettings>();
-        public List<OpenCLDeviceSettings> DeviceSettings => deviceSettings;
-
+      
         public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
 
-        public KeySearcherSettings(KeySearcher ks, OpenCLManager oclManager)
+        public KeySearcherSettings(KeySearcher ks)
         {
             keysearcher = ks;
-            RefreshDevicesList(oclManager);
 
             CoresAvailable.Clear();
             for (int i = -1; i < Environment.ProcessorCount; i++)
@@ -64,43 +31,8 @@ namespace KeySearcher
             KeyManager = new SimpleKeyManager("");
         }
 
-        private void RefreshDevicesList(OpenCLManager oclManager)
-        {
-            devicesAvailable.Clear();
-            int c = 0;
-            if (oclManager != null)
-            {
-                for (int id = 0; id < OpenCL.GetPlatforms().Length; id++)
-                {
-                    oclManager.CreateDefaultContext(id, DeviceType.ALL);
-                    foreach (Device device in oclManager.Context.Devices)
-                    {
-                        string deviceName = device.Vendor + ":" + device.Name;
-                        deviceSettings.Add(new OpenCLDeviceSettings(this) { name = deviceName, index = c, mode = 1, UseDevice = false });
-                        devicesAvailable.Add(deviceName);
-                        c++;
-                    }
-                }
-            }
-            DevicesAvailable = devicesAvailable;    //refresh list
-            if (devicesAvailable.Count > 0)
-            {
-                OpenCLDevice = 0;
-            }
-            else
-            {
-                openCLDevice = -1;
-            }
-        }
-
         public void Initialize()
-        {
-            OpenCLGroupVisiblity();
-            CrypTool.PluginBase.Properties.Settings.Default.PropertyChanged += delegate
-                                                    {
-                                                        OpenCLGroupVisiblity();
-                                                    };
-
+        {       
         }
 
         [TaskPane("KeyCaption", "KeyTooltip", null, 1, false, ControlType.KeyTextBox, true, "KeyManager")]
@@ -233,144 +165,7 @@ namespace KeySearcher
                     OnPropertyChanged("EvaluationDatabase");
                 }
             }
-        }
-
-        #region OpenCL
-
-        [TaskPane("NoOpenCLCaption", "NoOpenCLTooltip", "GroupOpenCL", 1, false, ControlType.TextBoxReadOnly)]
-        [DontSave]
-        public string NoOpenCL
-        {
-            get => Resources.No_OpenCL_Device_available_;
-            set { }
-        }
-
-        private void OpenCLGroupVisiblity()
-        {
-            if (TaskPaneAttributeChanged == null)
-            {
-                return;
-            }
-
-            if (!CrypTool.PluginBase.Properties.Settings.Default.KeySearcher_UseOpenCL)
-            {
-                TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("OpenCLDevice", Visibility.Collapsed)));
-                TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("OpenCLMode", Visibility.Collapsed)));
-                TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("UseOpenCL", Visibility.Collapsed)));
-                TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("NoOpenCL", Visibility.Collapsed)));
-            }
-            else
-            {
-                if (DevicesAvailable.Count == 0)
-                {
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("OpenCLDevice", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("OpenCLMode", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("UseOpenCL", Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("NoOpenCL", Visibility.Visible)));
-                }
-                else
-                {
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("OpenCLDevice", Visibility.Visible)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("OpenCLMode", Visibility.Visible)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("UseOpenCL", Visibility.Visible)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("NoOpenCL", Visibility.Collapsed)));
-                }
-            }
-        }
-
-        private int openCLDevice;
-        [TaskPane("OpenCLDeviceCaption", "OpenCLDeviceTooltip", "GroupOpenCL", 1, false, ControlType.DynamicComboBox, new string[] { "DevicesAvailable" })]
-        [DontSave]
-        public int OpenCLDevice
-        {
-            get => openCLDevice;
-            set
-            {
-                if (value != openCLDevice)
-                {
-                    openCLDevice = value;
-                    UseOpenCL = deviceSettings[value].UseDevice;
-                    OpenCLMode = deviceSettings[value].mode;
-                    OnPropertyChanged("OpenCLDevice");
-                }
-            }
-        }
-
-        [TaskPane("UseOpenCLCaption", "UseOpenCLTooltip", "GroupOpenCL", 2, false, ControlType.CheckBox)]
-        [DontSave]
-        public bool UseOpenCL
-        {
-            get
-            {
-                if (OpenCLDevice != -1 && deviceSettings.Count > OpenCLDevice)
-                {
-                    return deviceSettings[OpenCLDevice].UseDevice;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            set
-            {
-                if (OpenCLDevice != -1 && (deviceSettings.Count > OpenCLDevice) && (value != deviceSettings[OpenCLDevice].UseDevice))
-                {
-                    deviceSettings[OpenCLDevice].useDevice = value;
-                    OnPropertyChanged("UseOpenCL");
-                }
-            }
-        }
-
-        [TaskPane("OpenCLModeCaption", "OpenCLModeTooltip", "GroupOpenCL", 3, false, ControlType.RadioButton, new string[] { "OpenCLModeList1", "OpenCLModeList2", "OpenCLModeList3" })]
-        [DontSave]
-        public int OpenCLMode
-        {
-            get
-            {
-                if (OpenCLDevice != -1 && deviceSettings.Count > OpenCLDevice)
-                {
-                    return deviceSettings[OpenCLDevice].mode;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            set
-            {
-                if (OpenCLDevice != -1 && (deviceSettings.Count > OpenCLDevice) && (value != deviceSettings[OpenCLDevice].mode))
-                {
-                    if (CrypTool.PluginBase.Properties.Settings.Default.KeySearcher_EnableHighLoad || value != 2)
-                    {
-                        deviceSettings[OpenCLDevice].mode = value;
-                    }
-                    else
-                    {
-                        keysearcher.GuiLogMessage(
-                            "Using \"High Load\" is disabled. Please check your CrypTool 2 settings.", NotificationLevel.Error);
-                    }
-
-                    OnPropertyChanged("OpenCLMode");
-                }
-            }
-        }
-
-        private ObservableCollection<string> devicesAvailable = new ObservableCollection<string>();
-        [DontSave]
-        public ObservableCollection<string> DevicesAvailable
-        {
-            get => devicesAvailable;
-            set
-            {
-                if (value != devicesAvailable)
-                {
-                    devicesAvailable = value;
-                }
-                OnPropertyChanged("DevicesAvailable");
-            }
-        }
-
-        #endregion
+        }     
 
         #region Statistic
         /// <summary>

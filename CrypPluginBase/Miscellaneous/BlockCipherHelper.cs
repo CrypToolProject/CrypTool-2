@@ -1,6 +1,5 @@
 ﻿/*
-   Blockmodes Copyright 2020 Nils Kopal <Nils.Kopal<at>CrypTool.org
-   Padding Copyright Armin Krauss
+   Copyright 2008 - 2022 CrypTool Team
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

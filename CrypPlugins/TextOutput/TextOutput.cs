@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Numerics;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
@@ -93,22 +94,46 @@ namespace TextOutput
                             //Do nothing here
                             break;
                     }
-                    
-                    if (input != null)
-                    {
-                        ShowInPresentation(fillValue);
-                    }
+                                       
+                    ShowInPresentation(fillValue);                
 
                     CurrentValue = getNewValue(fillValue);
 
                     Progress(1, 1);
-                    OnPropertyChanged("Input");
+
+                    //needed by CrypConsole; so it can catch the values which the TextOutput obtains
+                    OnPropertyChanged(nameof(Input));
                 }
                 catch (Exception ex)
                 {
                     AddMessage(ex.Message, NotificationLevel.Error);
                 }
             }
+        }
+
+        private string GetSetLineBreak()
+        {
+            switch (settings.LineBreaks)
+            {
+                case LineBreaksEnum.UNIX:
+                    return "\n";
+                case LineBreaksEnum.Windows:
+                    return "\r\n";
+                default:
+                case LineBreaksEnum.DontChange:
+                    return Environment.NewLine;
+            }
+        }
+
+        private string GenerateLinebreaks()
+        {
+            StringBuilder builder = new StringBuilder();
+            string lineBreak = GetSetLineBreak();
+            for(int i = 0; i < settings.AppendBreaks; i++)
+            {
+                builder.Append(lineBreak);
+            }
+            return builder.ToString();
         }
 
         private string _currentValue = string.Empty;
@@ -118,7 +143,6 @@ namespace TextOutput
             private set
             {
                 _currentValue = value;
-                OnPropertyChanged("CurrentValue");
             }
         }
 
@@ -161,7 +185,7 @@ namespace TextOutput
             settings = new TextOutputSettings(this);
             settings.PropertyChanged += settings_OnPropertyChanged;
 
-            textOutputPresentation = new TextOutputPresentation
+            textOutputPresentation = new TextOutputPresentation(CrypTool.PluginBase.Properties.Settings.Default.FontFamily, CrypTool.PluginBase.Properties.Settings.Default.FontSize)
             {
                 _textOutput = this
             };
@@ -309,7 +333,7 @@ namespace TextOutput
                     s.Add((obj == null ? "null" : obj.ToString()));
                 }
 
-                result = string.Join("\r", s);
+                result = string.Join(GetSetLineBreak(), s);
             }
             else if (value is BigInteger)
             {
@@ -337,7 +361,7 @@ namespace TextOutput
                 newValue = (CurrentValue == null ? string.Empty : CurrentValue);
                 if (!string.IsNullOrEmpty(newValue))
                 {
-                    newValue += new string('\r', settings.AppendBreaks);
+                    newValue += GenerateLinebreaks();
                 }
             }
 
@@ -400,7 +424,7 @@ namespace TextOutput
                 // append line breaks only if not first line
                 if (!string.IsNullOrEmpty(oldtext))
                 {
-                    newtext += new string('\r', settings.AppendBreaks);
+                    newtext += GenerateLinebreaks();
                 }
             }
 
@@ -411,19 +435,10 @@ namespace TextOutput
                 textOutputPresentation.richTextBox.Visibility = Visibility.Hidden;
                 textOutputPresentation.textBox.Visibility = Visibility.Visible;
 
+                textOutputPresentation.textBox.Text = newtext;
                 if (settings.Append)
                 {
-                    // append line breaks only if not first line
-                    if (!string.IsNullOrEmpty(oldtext))
-                    {
-                        textOutputPresentation.textBox.Text = new string('\r', settings.AppendBreaks);
-                    }
-                    textOutputPresentation.textBox.Text += fillValue;
                     textOutputPresentation.textBox.ScrollToEnd();
-                }
-                else
-                {
-                    textOutputPresentation.textBox.Text = fillValue;
                 }
             }
             else if (settings.ShowChanges == 1 || settings.ShowChanges == 2)
@@ -436,7 +451,7 @@ namespace TextOutput
                     // append line breaks only if not first line
                     if (!string.IsNullOrEmpty(oldtext))
                     {
-                        textOutputPresentation.richTextBox.AppendText(new string('\r', settings.AppendBreaks));
+                        textOutputPresentation.richTextBox.AppendText(GenerateLinebreaks());
                     }
 
                     if (maximized)
@@ -515,7 +530,7 @@ namespace TextOutput
                     // append line breaks only if not first line
                     if (!string.IsNullOrEmpty(oldtext))
                     {
-                        textOutputPresentation.richTextBox.AppendText(new string('\r', settings.AppendBreaks));
+                        textOutputPresentation.richTextBox.AppendText(GenerateLinebreaks());
                     }
 
                     if (maximized)
@@ -716,6 +731,7 @@ namespace TextOutput
             textOutputPresentation.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 textOutputPresentation.richTextBox.Document = new FlowDocument();
+                textOutputPresentation.textBox.Text = string.Empty;
                 _currentValue = string.Empty;
                 Input = null;
                 clearStatusBar();

@@ -249,4 +249,16 @@
   <data name="ValueHeader" xml:space="preserve">
     <value>Kostenwert</value>
   </data>
+  <data name="MaxCribOffsetCaption" xml:space="preserve">
+    <value>Maximaler Crib-Offset</value>
+  </data>
+  <data name="MaxCribOffsetTooltip" xml:space="preserve">
+    <value>Crib-Tests enden mit diesem Offset im Text</value>
+  </data>
+  <data name="MinCribOffsetCaption" xml:space="preserve">
+    <value>Minimaler Crib-Offset</value>
+  </data>
+  <data name="MinCribOffsetTooltip" xml:space="preserve">
+    <value>Crib-Tests beginnen mit diesem Offset im Text</value>
+  </data>
 </root>

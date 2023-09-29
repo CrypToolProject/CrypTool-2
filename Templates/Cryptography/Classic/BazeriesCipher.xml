@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: BazeriesCipher.xml-->
+  <!--Last edited: 2023.01.26-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Bazeries-Chiffre</title>
+  <summary lang="de">Ver- und Entschlüsselung mit der <i>Bazeries-Chiffre</i></summary>
+  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels Bazeries-Chiffre. In der klassischen Kryptografie ist die Bazeries-Chiffre eine Chiffre, die von Étienne Bazeries, einem französischen Offizier, erfunden wurde. Sie kombiniert Substitution und Transposition.</description>
+  <keywords lang="de">Bazeries, chiffre</keywords>
+  <replacements lang="de">
+    <replacement key="$Bazeries Cipher$" value="Bazeries-Chiffre" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Keyword$" value="Schlüsselwort" />
+    <replacement key="$Number key$" value="Zahlenschlüssel" />
+    <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$memo$" value="Die {\b Bazeries-Chiffre} wurde von Étienne Bazeries erfunden, einem französischen Kryptoanalytiker, der zwischen 1890 und dem Ersten Weltkrieg tätig war.\line
+\line
+Bei der Chiffre wird der Klartext zunächst mit Hilfe eines Polybius-Quadrats verschlüsselt, das Spalte für Spalte ausgefüllt wird. Dann wird der Text in Blöcke unterteilt, die durch einen Zahlenschlüssel definiert sind. Der Text jedes Blocks wird dann umgedreht und in den endgültigen Geheimtext geschrieben. Bazeries verwendete ein Schlüsselwort, das auf dem Zahlenschlüssel für das Polybius-Quadrat basiert. Zum Beispiel würde der Zahlenschlüssel 123 das Schlüsselwort &quot;HUNDERTDREIUNDZWANZIG&quot; ergeben." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Bazeries Cipher</title>
+  <summary lang="en">Encryption and decryption with the <i>Bazeries cipher</i>.</summary>
+  <description lang="en">This template shows encryption and decryption using the Bazeries cipher. In classical cryptography, the Bazeries cipher is a cipher invented by Étienne Bazeries, a French officer. It combines substitution and transposition.</description>
+  <keywords>Bazeries, Cipher</keywords>
+  <replacements lang="en">
+    <replacement key="$Bazeries Cipher$" value="Bazeries Cipher" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Keyword$" value="Keyword" />
+    <replacement key="$Number key$" value="Number key" />
+    <replacement key="$Decrypted plaintext$" value="Decrypted plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$memo$" value="The {\b Bazeries cipher} was invented by Étienne Bazeries, a French military cryptanalyst, who was active between 1890 and World War I.\line
+\line
+In the cipher, the plaintext is first encrypted using a Polybius square, which is filled column by column. Then, the text is divided into blocks defined by a number key. Each block's text is then reversed and written into the final ciphertext. Bazeries used a keyword based on the number key for the Polybius square. For example, the number key 123 would result in the keyword  &quot;ONEHUNDREDTWENTYTHREE&quot;." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="BazeriesCipher.png" />
+  <relevantPlugins>
+    <plugin name="BazeriesCipher" />
+  </relevantPlugins>
+</sample>

@@ -32,8 +32,6 @@ namespace KeySearcher.KeyTranslators
         private byte[] keya;
         private int[] movementPointers;
         private IKeyMovement[] keyMovements;
-        private int openCLIndex;
-        private int openCLSize = 0;
 
         #region KeyTranslator Members
 
@@ -245,125 +243,7 @@ namespace KeySearcher.KeyTranslators
             progress = 0;
             return result;
         }
-
-        /// <summary>
-        /// Takes the skeletal OpenCL code (parameter "code"), modifies it, so that the key movement is integrated into the code, and returns the
-        /// modified code.
-        /// </summary>
-        /// <param name="code">The skeletal OpenCL code</param>
-        /// <param name="approximateNumberOfKeys">A maximum bound which indicates on how many key bruteforcing at once the OpenCL code should be layed out.</param>
-        /// <returns>The modified OpenCL code</returns>
-        public string ModifyOpenCLCode(string code, int approximateNumberOfKeys)
-        {
-            string[] byteReplaceStrings = new string[32];
-            for (int i = 0; i < 32; i++)
-            {
-                byteReplaceStrings[i] = "$$ADDKEYBYTE" + i + "$$";
-            }
-
-            //Find out how many wildcards/keys we can bruteforce at once:
-            int j = movementStatus.Length - 1;
-            long size = 1;
-            while ((j >= 0) && ((size * keyMovements[j].Count()) <= approximateNumberOfKeys) && (movementStatus[j] == 0))
-            {
-                size *= keyMovements[j--].Count();
-            }
-
-            if (size < 256)
-            {
-                throw new Exception("Amount of keys to small to process with OpenCL.");    //it's futile to use OpenCL for so few keys
-            }
-
-            //generate the key movement string:
-            string[] movementStrings = new string[32];
-            string addVariable = "add";
-            for (int x = movementStatus.Length - 1; x > j; x--)
-            {
-                string movStr = string.Format("({0}%{1})", addVariable, keyMovements[x].Count()); ;
-
-                if (keyMovements[x] is LinearKeyMovement)
-                {
-                    LinearKeyMovement lkm = keyMovements[x] as LinearKeyMovement;
-                    movStr = string.Format("({0}*{1})", lkm.A, movStr);
-                }
-                else if (keyMovements[x] is ListKeyMovement)
-                {
-                    ListKeyMovement ikm = keyMovements[x] as ListKeyMovement;
-
-                    //declare the invterval array:
-                    string s = string.Format("__constant int ikm{0}[{1}] = {{", x, ikm.Count());
-                    int smallest = ikm.KeyList[0];
-                    foreach (int c in ikm.KeyList)
-                    {
-                        s += (c - smallest) + ", ";
-                    }
-
-                    s = s.Substring(0, s.Length - 2);
-                    s += "}; \n";
-                    code = code.Replace("$$MOVEMENTDECLARATIONS$$", s + "\n$$MOVEMENTDECLARATIONS$$");
-
-                    movStr = string.Format("ikm{0}[{1}]", x, movStr);
-                }
-                else
-                {
-                    throw new Exception("Key Movement not supported for OpenCL.");
-                }
-
-                if (movementPointers[x] % 2 == 0)
-                {
-                    movStr = "(" + movStr + " << 4)";
-                }
-                else
-                {
-                    movStr = "(" + movStr + ")";
-                }
-
-                addVariable = "(" + addVariable + "/" + keyMovements[x].Count() + ")";
-
-                int keyIndex = movementPointers[x] / 2;
-                if (movementStrings[keyIndex] != null)
-                {
-                    movementStrings[keyIndex] += " | " + movStr;
-                }
-                else
-                {
-                    movementStrings[keyIndex] = movStr;
-                }
-            }
-
-            //put movement strings in code:
-            for (int y = 0; y < movementStrings.Length; y++)
-            {
-                code = code.Replace(byteReplaceStrings[y], movementStrings[y] != null ? ("(" + movementStrings[y] + ")") : "0");
-            }
-
-            code = code.Replace("$$MOVEMENTDECLARATIONS$$", "");
-
-            //progress:
-            openCLIndex = j;
-            openCLSize = (int)size;
-
-            return code;
-        }
-
-        public bool NextOpenCLBatch()
-        {
-            if (openCLSize > 0)
-            {
-                progress += openCLSize;
-                return IncrementMovementStatus(openCLIndex);
-            }
-            else
-            {
-                throw new Exception("This method can only be called if OpenCL code was generated!");
-            }
-        }
-
-        public int GetOpenCLBatchSize()
-        {
-            return openCLSize;
-        }
-
+      
         #endregion
 
     }

@@ -313,12 +313,6 @@
   <data name="_JobList_JobId" xml:space="preserve">
     <value>Job-ID:</value>
   </data>
-  <data name="EnableOpenCL" xml:space="preserve">
-    <value>Aktiviere OpenCL</value>
-  </data>
-  <data name="OpenCLDevice" xml:space="preserve">
-    <value>OpenCL Gerät:</value>
-  </data>
   <data name="WritePerformanceLog" xml:space="preserve">
     <value>Schreibe Performance-Log</value>
   </data>

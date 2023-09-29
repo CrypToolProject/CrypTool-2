@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Hagelin_Machine.xml-->
+  <!--Last edited: 2022.12.22-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Hagelin Machine</title>
+  <summary lang="en">Usage of the Hagelin Machine</summary>  
+  <description lang="en">Shows the encyption and decryption of text using Hagelin Machine component</description>  
+  <keywords>Hagelin Machine, CX52a, CX52b, CX52c, C52d, CXM, EIRE, M209</keywords>  
+  <replacements lang="en">
+    <replacement key="$plaintext$" value="Plaintext" />
+	<replacement key="$text$" value="TO BE OR NOT TO BE!" />
+    <replacement key="$encryption$" value="Encryption using Hagelin Machine"/>
+	<replacement key="$decryption$" value="Decryption with using Hagelin Machine" />
+	<replacement key="$ciphertext$" value="Encrypted text" />
+	<replacement key="$decryptedtext$" value="Decrypted text" />
+	<replacement key="$activepins$" value="Active pins on wheels 1 to 6" />
+	<replacement key="$lugpositions$" value="Lug positions on bars 1 to 32" />
+	<replacement key="$startpositions$" value="Wheel start positions" />
+	<replacement key="$report$" value="Detailed report of the state of the machine during all the steps of encryption process" />
+	<replacement key="$keystream$" value="Keystream" />				
+    <replacement key="$memo$" value="Description of the {\b Hagelin Machine} component\line
+\line
+This component simulates the operation of various models of cryptographic devices manufactured by Crypto AG after the World War II, so-called Hagelin Machines. Based on the known building blocks which were used in the real life, the user can define different variants of these machines. At the moment the following models are supported: CX52a, CX52b, CX52c, C52d, CXM, CXM late version, French, EIRE, M209. Besides the predefined models, the user has an option to select the Custom model which allows for most flexible settings.\line
+\line
+The model defines the applicable types of the wheels and the way how they are displaced during the encryption or decryption process. This is realized by setting up the configuration of the bars.  In the custom model the user cad define this by himself.\line
+\line
+The internal and external keys can be provided to the component through the seetings and as the inputs. If the keys are provided through the inputs, the ones which are given through the settings are ignored.\line
+\line
+More information about the Hagelin Machine models can be found here: https://www.cryptomuseum.com/pub/files/BW_C52_CX52.pdf"/>
+  </replacements>
+<!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!--Language 'de' starts here:-->
+<!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<title lang="de">Hagelin-Maschine</title>
+<summary lang="de">Benutzung der Hagelin-Maschinen-Komponente</summary>
+<description lang="de">Zeigt die Ver- und Entschlüsselung von Text mit der Hagelin-Maschinen-Komponente</description>
+<keywords lang="de">Hagelin Maschine, CX52a, CX52b, CX52c, C52d, CXM, EIRE, M209</keywords>
+<replacements lang="de">
+    <replacement key="$plaintext$" value="Klartext" />
+	<replacement key="$text$" value="SEIN ODER NICHT SEIN!" />
+    <replacement key="$encryption$" value="Verschlüsselung mit der Hagelin-Maschine"/>
+	<replacement key="$decryption$" value="Entschlüsselung mit der Hagelin-Maschine" />
+	<replacement key="$ciphertext$" value="Verschlüsselter Text" />
+	<replacement key="$decryptedtext$" value="Entschlüsselter Text" />
+	<replacement key="$activepins$" value="Aktive Stifte an den Rädern 1 bis 6" />
+	<replacement key="$lugpositions$" value="Laschenpositionen an den Stäben 1 bis 32" />
+	<replacement key="$startpositions$" value="Startpositionen der Räder" />
+	<replacement key="$report$" value="Detaillierter Bericht über den Zustand der Maschine während aller Schritte des Verschlüsselungsprozesses" />
+	<replacement key="$keystream$" value="Schlüsselstrom" />				
+    <replacement key="$memo$" value="Beschreibung der {\b Hagelin-Maschinen-Komponente}\line
+\line
+Diese Komponente simuliert den Betrieb verschiedener Modelle von kryptographischen Geräten, die von Crypto AG nach dem Zweiten Weltkrieg hergestellt wurden, sogenannte Hagelin-Maschinen. Basierend auf den bekannten Bausteinen, die im realen Leben verwendet wurden, kann der Benutzer verschiedene Varianten dieser Maschinen definieren. Zur Zeit werden die folgenden Modelle unterstützt: CX52a, CX52b, CX52c, C52d, CXM, CXM late version, French, EIRE, M209. Neben den vordefinierten Modellen hat der Benutzer die Möglichkeit, das benutzerdefinierte Modell zu wählen, das die flexibelsten Einstellungen ermöglicht.\line
+\line
+Das Modell definiert die anwendbaren Typen der Räder und die Art und Weise, wie sie während des Verschlüsselungs- oder Entschlüsselungsprozesses verschoben werden. Dies wird durch die Einstellung der Konfiguration der Stangen realisiert.  In dem benutzerdefinierten Modell kann der Benutzer dies selbst definieren.\line
+\line
+Die internen und externen Schlüssel können der Komponente über die Sitzungen und als Eingänge zur Verfügung gestellt werden. Wenn die Tasten über die Eingänge bereitgestellt werden, werden die Tasten, die über die Einstellungen angegeben sind, ignoriert.\line
+\line
+Weitere Informationen zu den Hagelin Maschinenmodellen finden Sie hier: https://www.cryptomuseum.com/pub/files/BW_C52_CX52.pdf"/>
+  </replacements>
+<!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!--The general section starts here:-->
+<!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<icon file="Hagelin_Machine.png"/>
+ <relevantPlugins>
+	<plugin name="HagelinMachine" />
+</relevantPlugins>  
+</sample>

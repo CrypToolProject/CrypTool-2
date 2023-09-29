@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Windows.Controls;
@@ -291,7 +292,12 @@ namespace CrypTool.Plugins.RAPPOR.ViewModel
         /// Observable collection of the irr areas.
         /// </summary>
         public ObservableCollection<string> IRRAreas => _iRRAreaHandler.IRRAreas;
-
+        public  void ChangeButton(Boolean ru)
+        {
+        }
+        public void CreateHeatMapViewText(int a)
+        {
+        }
 
 
     }

@@ -391,10 +391,13 @@
     <value>Next</value>
   </data>
   <data name="NoImageLogMessage" xml:space="preserve">
-    <value>Please upload an image</value>
+    <value>No image given</value>
   </data>
   <data name="NoPresentationPrompt" xml:space="preserve">
     <value>No presentation to be shown</value>
+  </data>
+  <data name="NoSecretMessageGiven" xml:space="preserve">
+    <value>No secret message given</value>
   </data>
   <data name="NotEnoughHidingCapacity" xml:space="preserve">
     <value>The hiding capcity is less than the size of the secret message, therefore not the whole message was hidden in the image. </value>

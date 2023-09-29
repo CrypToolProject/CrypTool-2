@@ -40,7 +40,7 @@ namespace CrypTool.TextInput
             settings = new TextInputSettings();
             settings.OnLogMessage += settings_OnLogMessage;
             settings.PropertyChanged += settings_OnPropertyChanged;
-            textInputPresentation = new TextInputPresentation();
+            textInputPresentation = new TextInputPresentation(PluginBase.Properties.Settings.Default.FontFamily, PluginBase.Properties.Settings.Default.FontSize);
             Presentation = textInputPresentation;
             textInputPresentation.UserKeyDown += textInputPresentation_UserKeyDown;
         }

@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2020 Nils Kopal <kopal<AT>CrypTool.org>
+   Copyright 2023 Nils Kopal <kopal<AT>CrypTool.org>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -141,48 +141,7 @@ namespace CrypTool.CrypConsole
                 }
             }
             return int.MaxValue;
-        }
-
-        /// <summary>
-        /// Returns the termination type, if set
-        /// </summary>
-        /// <param name="args"></param>
-        /// <returns></returns>
-        public static TerminationType GetTerminationType(string[] args)
-        {
-            IEnumerable<string> query = from str in args
-                                        where (str.Length >= 13 && str.ToLower().Substring(0, 13).Equals("-termination="))
-                                           || (str.Length >= 14 && str.ToLower().Substring(0, 14).Equals("--termination="))
-                                        select str;
-
-            if (query.Count() > 0)
-            {
-                string p = query.Last().Split('=')[1];
-                if (p.StartsWith("\""))
-                {
-                    p = p.Substring(1, p.Length - 1);
-                }
-                if (p.EndsWith("\""))
-                {
-                    p = p.Substring(0, p.Length - 1);
-                }
-
-                switch (p.ToLower())
-                {
-                    case "global":
-                        return TerminationType.GlobalProgress;
-                    case "plugin":
-                        return TerminationType.PluginProgress;
-                    case "single":
-                        return TerminationType.SingleOutput;
-                    case "all":
-                        return TerminationType.AllOutputs;
-                    default:
-                        throw new InvalidParameterException(string.Format("Invalid termination type given: {0}", p));
-                }
-            }
-            return TerminationType.GlobalProgress;
-        }
+        }        
 
         /// <summary>
         /// Returns the log level
@@ -342,21 +301,18 @@ namespace CrypTool.CrypConsole
         public static void ShowHelp()
         {
             Console.WriteLine("");
-            Console.WriteLine("-= CrypConsole -- a CrypTool 2 console for executing CrypTool 2 workspaces in the Windows console =- ");
-            Console.WriteLine("(C) 2020 by Nils Kopal, kopal<at>CrypTool.org");
+            Console.WriteLine("CrypConsole -- a CrypTool 2 console for executing CrypTool 2 workspaces in the Windows console\r\n");
+            Console.WriteLine("(C) 2023 cryptool.org; author: Nils Kopal, kopal<at>CrypTool.org ");
             Console.WriteLine("Usage:");
-            Console.WriteLine("CrypConsole.exe -cwm=path/to/cwm/file -input=<input param definition> -output=<output param definition>");
+            Console.WriteLine("CrypConsole.exe -cwm=path\\to\\file.cwm -input=type,name,data -output=name");
             Console.WriteLine("All arguments:");
             Console.WriteLine(" -help                               -> shows this help page");
             Console.WriteLine(" -discover                           -> discovers the given cwm file: returns all possible inputs and outputs");
-            Console.WriteLine(" -cwm=path/to/cwm/file               -> specifies a path to a cwm file that should be executed");
+            Console.WriteLine(" -cwm=path\\to\\file.cwm               -> specifies a path to a cwm file that should be executed");
             Console.WriteLine(" -input=type,name,data               -> specifies an input parameter");
             Console.WriteLine("                                        type can be number,text,file");
             Console.WriteLine(" -output=name                        -> specifies an output parameter");
             Console.WriteLine(" -timeout=duration                   -> specifies a timeout in seconds. If timeout is reached, the process is killed");
-            Console.WriteLine(" -termination=type                   -> specifies the termination type. Hint: timeout can be set in parallel");
-            Console.WriteLine("                                        type can be global,plugin,single,all");
-            Console.WriteLine("                                        if the termination type is not set explicitly, \"global\" is assumed");
             Console.WriteLine(" -jsonoutput                         -> enables the json output");
             Console.WriteLine(" -verbose                            -> writes logs etc to the console; for debugging");
             Console.WriteLine(" -loglevel=info/debug/warning/error  -> changes the log level; default is \"warning\"");
@@ -376,14 +332,6 @@ namespace CrypTool.CrypConsole
         Text,
         File,
         Output
-    }
-
-    public enum TerminationType
-    {
-        GlobalProgress,
-        PluginProgress,
-        SingleOutput,
-        AllOutputs
     }
 
     public class Parameter

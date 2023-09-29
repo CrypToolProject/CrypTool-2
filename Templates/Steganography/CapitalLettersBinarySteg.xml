@@ -2,12 +2,12 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: CapitalLettersBinarySteg.xml-->
-  <!--Last edited: 2022.02.08-->
+  <!--Last edited: 2022.12.23-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Text Steganography with Capital Letters (binary mode)</title>
+  <title lang="en">Text Steganography with Capital Letters (Binary Mode)</title>
   <summary lang="en">Hide and extract a message in and from another text</summary>
   <description lang="en">This is a text steganography technique where a secret message is hidden by changing the letters of the message in the cover text to uppercase.</description>
   <keywords>Steganography, Text Steganography, Capital letters</keywords>

@@ -24,9 +24,7 @@
                 </Grid>
                 <Grid Grid.Row="1" Background="GhostWhite">
                     <Border BorderThickness="2" BorderBrush="#8abc94" CornerRadius="5" />
-                    <TextBox TextAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Times New Roman" Margin="3" Text="{Loc RandomizedResponseText}" IsReadOnly="True" BorderBrush="Transparent" BorderThickness="0">
-                        
-                    </TextBox>
+                    <TextBox TextAlignment="Justify" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="16" FontFamily="Times New Roman" Text="{Loc RandomizedResponseText}" Margin="3" IsReadOnly="True" BorderBrush="Transparent" BorderThickness="0" MinHeight="100" MaxWidth="780" TextWrapping="Wrap"/>
                 </Grid>
             </Grid>
         </ContentControl>

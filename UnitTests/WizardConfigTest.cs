@@ -22,6 +22,7 @@ namespace UnitTests
         [TestMethod]
         public void TemplateConsistencyTest()
         {
+            TestHelpers.SetAssemblyPaths();
             XElement xml = GenerateXML(GetXml(configXMLPath));
 
             DirectoryInfo dir = Directory.GetParent(System.Environment.CurrentDirectory);

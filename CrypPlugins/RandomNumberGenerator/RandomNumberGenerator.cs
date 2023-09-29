@@ -240,6 +240,10 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.OutputLength), NotificationLevel.Error);
                 return;
             }
+            if (_outputlength <= 0)
+            {
+                _outputlength = 1;
+            }
 
             try
             {

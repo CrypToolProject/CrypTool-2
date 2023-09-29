@@ -272,7 +272,7 @@
 Diese werden dann anstatt der automatisch ermittelten Blockgrößen verwendet. </value>
   </data>
   <data name="RangeCaption" xml:space="preserve">
-    <value>Primzahlgröße</value>
+    <value>Primzahlgröße (in bit)</value>
   </data>
   <data name="RangeTooltip" xml:space="preserve">
     <value>Parameter, der die Anzahl der Bits oder eine obere Schranke für die zu erzeugenden Primzahlen angibt.</value>

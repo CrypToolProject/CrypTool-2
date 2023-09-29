@@ -389,6 +389,7 @@ namespace TranspositionAnalyser
 
                     _presentation.Entries.Add(entry);
                 }
+                _presentation.CrypAnalysisResultListView.ScrollIntoView(_presentation.CrypAnalysisResultListView.Items[0]);
             }
             , null);
         }

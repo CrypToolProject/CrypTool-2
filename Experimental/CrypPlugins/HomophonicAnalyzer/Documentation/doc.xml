@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The Monoalphabetic Substitution Analyzer performs a ciphertext-only attack on monoalphabetic substitution ciphers.
+    This component conducts two different approaches to find the plaintext and the corresponding key. At first a dictionary attack
+    is executed. Within the dictionary attack words of the assumed plaintext language are mapped to the words in the given ciphertext.
+    If a valid mapping is found the according key will be reported. Besides the dictionary attack, a heuristic search based on a genetic algorithm
+    and frequencies of letter groups is implemented. This approach is turn-based and creates randomly new key candidates which are evaluated according
+    to a cost function. <newline />
+    Further details on the implemented algorithms and the usage are presented in the next sections.
+
+    <section headline="Dictionary Attack">
+      The dictionary attack is implemented based on an approach of Edwin Olson and the DeCrypto project. For each word in the ciphertext a list with possible
+      candidates from the dictionary is created. The candidates are mapped to the ciphertext words according to the pattern of the words. Subsequently, for all combinations
+      of candidates it is tried to find appropriate keys. The exact approach is described in the paper of Olson listed in the Reference section below.
+    </section><section headline="Genetic Attack">
+      The genetic attack is based on a genetic algorithm which is a type of a heuristic search. A population of keys evolves over several generations. Each generation is
+      created from the previous generation where only the fittest keys are selected. Additionally, with a certain probability a key mutates, that means a randomly chosen
+      element of the key is swapped with another element. The fitness of a key is calculated with the help of letter group frequencies (n-gram frequencies) of the plaintext
+      resulting from decrypting the given ciphertext with this key. <newline />
+      After the population evolved several generations the fitness of the fittest key does not change anymore. At this point the search is stopped and the key is reported.
+      This process is conducted several times during one analysis. <newline />
+      The power of this method strongly depends on the prior calculated n-gram frequencies. These have been provided by Ulrich Kunitz and are based on absolute discounting.
+    </section><section headline="Hill-climbing Attack">
+      The hill-climbing attack is based on the hill-climbing algorithm. 
+      The algorithm starts with a random key. Then it changes the key in a defined way. The new key will then be valued with a costfunction.
+      If the new key is better than the old one, you will use the new key for the rest of the algorithm or until you find an even
+      better one. The GPU version of this attack uses the computer's graphic board,
+      if this is a NVIDIA CUDA-enabled GPU.
+    </section><section headline="Comparison of Dictionary and Genetic Attack">
+      The genetic attack and the dictionary attack have different advantages and disadvantages that complement each other for an holistic approach to analyze
+      a monoalphabetic substitution cipher.<newline />
+      The advantages of a genetic attack are that it does not need word boundaries for it's analysis, that it can take care of large ciphertext samples, and that nothing more
+      than the n-gram probabilities are needed for the analysis. Hence, the ciphertext's word boundaries can be scrambled without negative impact on the analysis. Furthermore, the larger the sample of the ciphertext
+      the better the genetic attack performs because the fingerprint according to the n-gram probabilities is better. A disadvantage of the genetic attack is
+      that it performs poorly on very short ciphertext samples, e.g. 60 characters or less.<newline />
+      The advantage of the dictionary attack is that it can cope with very short ciphertext samples in a short and efficient way. Disadvantages of this attack
+      are that a dictionary with the most common words is needed, that the words of the ciphertext have to be in the dictionary, and that the single words of the ciphertext must be identifiable.
+    </section></introduction>
+  <introduction lang="de-DE">
+    Der Monoalphabetic Substitution Analyzer entschlüsselt Geheimtexte, die durch die Anwendung der monoalphabetischen Substitution entstanden sind.
+    Die Analyse verwendet zwei Angriffe, um sowohl den Klartext als auch den dazugehörigen Schlüssel zu finden. Als erstes wird ein sogenannter Wörterbuchangriff
+    ausgeführt, der Wörter im Geheimtext zu Wörtern der angenommenen Klartextsprache zuordnet und aus dieser Zuordnung einen Schlüssel erstellt.
+    Neben dem Wörterbuchangriff wird eine heuristische Suche, die auf einem genetischen Algorithmus und Häufigkeiten von Buchstabengruppen basiert, ausgeführt.
+    Dieser Angriff erstellt rundenweise neue Schlüsselkandidaten und bewertet sie anhand einer Kostenfunktion.<newline />
+    Weitere Informationen zu den implementierten Algorithmen und der Benutzung der Komponente werden in den nachfolgenden Abschnitten dargestellt.
+
+    <section headline="Wörterbuchangriff">
+      Die Implementierung des Wörterbuchangriffs basiert auf einer Ausarbeitung von Edwin Olson und dem DeCrypto-Projekt. Für jedes Wort im Geheimtext
+      wird eine Liste mit möglichen Kandidaten aus dem Wörterbuch erstellt. Diese Kandidaten werden anhand eines Musters zu den Geheimtextwörtern zugeordnet.
+      Anschließend wird versucht für alle möglichen Kombinationen der Kandidaten entsprechende Schlüssel zu finden. Die genaue Vorgehensweise ist in der
+      Ausarbeitung von Edwin Olson, die im Abschnitt Referenzen aufgelistet ist, beschrieben.
+    </section><section headline="Genetischer Angriff">
+      Der genetische Angriff nutzt einen genetischen Algrithmus als heuristische Suche zum Auffinden des Schlüssels von dem Geheimtext. Die Population
+      der Schlüssel entwickelt sich über mehrere Generationen und in jede neue Generation werden nur die besten Schlüssel der vorherigen Generation übernommen.
+      Zusätzlich mutiert ein Schlüssel mit einer gewissen Wahrscheinlichkeit, d. h. ein zufällig ausgewähltes Element des Schlüssels wird mit einem anderen
+      Element vertauscht. Die Güte des Schlüssels wird anhand von Wahrscheinlichkeiten der Buchstabengruppen (n-gram) des Klartextes, der bei der Entschlüsselung
+      mit dem Schlüssel entstanden ist, bestimmt.<newline />
+      Nachdem sich die Population über mehrere Generationen entwickelt hat, ändert sich die Güte des besten Schlüssels nicht mehr. An diesem Punkt wird die
+      Suche angehalten und der Schlüssel als Ergebnis gemeldet. Dieser Prozess wird mehrmals während eines Analysevorgangs durchgeführt.<newline />
+      Die Mächtigkeit dieser Methode hängt sehr stark von vorher berechneten n-gram Wahrscheinlichkeiten ab. Die in dieser Komponente verwendeten Wahrscheinlichkeiten
+      wurden von Ulrich Kunitz zur Verfügung gestellt und basieren auf dem Absolute Discounting Algorithmus.
+    </section><section headline="Hill-climbing Angriff">
+      Dieser Angriff benutzt den sogenannten Bergsteiger-Algorithmus (Hill climbing). Der Angriff startet mit einem zufällig gewählten Schlüssel.
+      Dieser Schlüssel wird anschließend in einer definierten Vorgehensweise verändert. Der so neu erzeugte Schlüssel
+      wird dann mit einer Kostenfunktion bewertet. Falls der neue Schlüssel besser bewertet wird,
+      wird von nun an der neue Schlüssel verwendet. Dies geschieht so lange, bis man keinen besseren Schlüssel mehr findet.
+      Die GPU-Version dieses Angriffs verwendet die Grafikkarte des Computers, falls diese kompatibel ist mit NVIDIA-CUDA.
+    </section><section headline="Vergleich des Wörterbuch- und des genetischen Angriffs">
+      Der genetische Angriff und der Wörterbuchangriff ergänzen sich -- aufgrund verschiedener Vor- und Nachteile der einzelnen Vorgehensweisen --
+      gegenseitig sehr gut zu einer ganzheitlichen Analyse der monoalphabetische Substitution.<newline />
+      Die Vorteile des genetischen Angriffs liegen in der Unabhängigkeit von Wortgrenzen, in der Beherrschung langer Geheimtexte und darin, dass nur die n-gram Wahrscheinlichkeiten
+      für die Analyse benötigt werden. Infolgedessen können die Wortgrenzen innerhalb des Geheimtextes verwürfelt sein, ohne einen negativen Einfluss auf die
+      Analyse zu haben. Zusätzlich beeinflusst die Länge des Geheimtextes das Ergebnis der Analyse durch den genetischen Angriff. Je länger der Geheimtext ist umso
+      besser und effizienter kann der genetische Angriff seine Analyse durchführen. Dagegen führt der genetische Angriff nur zu schlechten Ergebnissen bei sehr
+      kurzen Geheimtexten, die bspw. nur aus 60 Zeichen oder weniger bestehen. Dies kann als Nachteil der Analysemethode gewertet werden.<newline />
+      Der Vorteil des Wörterbuchangriffs ist der effiziente Umgang mit sehr kurzen Geheimtexten. Nachteile sind die Abhängigkeit von einem Wörterbuch,
+      das die Wörter des Geheimtextes enthalten muss, sowie die Notwendigkeit, Wortgrenzen zu identifizieren. Können die Wortgrenzen in dem Geheimtext
+      nicht identifiziert werden oder wurden sie verwürfelt, erlaubt der Wörterbuchangriff keine Entschlüsselung des Geheimtextes.
+    </section></introduction>
+  <usage lang="en">
+    Using the Monoalphabetic Substitution Analyzer is very simple due to the few options. Currently, the component can analyze
+    ciphertexts based on English and German plaintexts. The required input is the ciphertext. Furthermore, the outputs are the plaintext and the
+    according key.<newline />
+    Within the settings section of this plugin it is possible to choose the language of the ciphertext that should be analyzed. Besides this option
+    there is an extended option section where the treatment of invalid characters can be configured. Invalid characters are characters that are not a
+    part of the chosen language's alphabet. These characters can be skipped, deleted, or replaced by a question mark.
+  </usage>
+  <usage lang="de-DE">
+    Die Benutzung des Monoalphabetic Substitution Analyzer ist sehr einfach durch die geringe Anzahl von Optionen. Gegenwärtig können
+    Geheimtexte analysiert werden, die auf einem englischen oder deutschen Klartext basieren.<newline />
+    Die Einstellungen dieser Komponente ermöglichen die Auswahl der Sprache des Geheimtextes. Neben dieser Option kann im Bereich der erweiterten Optionen
+    die Behandlung unbekannter Zeichen des Geheimtextes ausgewählt werden. Unbekannte Zeichen sind Buchstaben, die nicht Teil des Alphabets der ausgewählten
+    Sprache sind. Diese Zeichen können ausgelassen, gelöscht oder durch ein Fragezeichen ersetzt werden.
+  </usage>
+  <presentation lang="en">
+    The presentation of this component is split in an upper part that displays the start, elapsed, and end time as well as a table in the lower part
+    to show the best 20 keys that have been found during the cryptanalysis. This table shows for each found key a rank (column 0), the value of the cost function (column 1),
+    the attack which found the key (column 3), the key itself (column 4), and the according plaintext (column 5). The value of the cost function is the logarithm of the arithmetic mean n-gram
+    probabilities that are contained in the according plaintext. The difference of this value between two keys determines the range of how much one key is better than the other.
+    In column 3 the attack which found the key is displayed. A "G" stands for genetic attack and a "D" stands for dictionary attack. A "H" stands for hill climbing attack.<newline />
+    Double-clicking a row forwards the according plaintext and key to the outputs.
+  </presentation>
+  <presentation lang="de-DE">
+    Die Darstellung dieser Komponente gliedert sich in zwei Bereiche. Das obere Areal zeigt die Start- und Endzeit sowie die vergangene Zeit an.
+    Der untere Bereich enthält eine Tabelle zur Darstellung der 20 besten Schlüssel, die während der Analyse gefunden wurden. Für jeden
+    Schlüssel wird in der Tabelle ein Rang (Spalte 1), der Wert der Kostenfunktion (Spalte 2), der Angriff, der den Schlüssel gefunden hat (Spalte 3),
+    der Schlüssel selber (Spalte 4) und der zugehörige Klartext (Spalte 5) dargestellt. Der Wert der Kostenfunktion in Spalte 2 ist das logarithmierte
+    arithmetische Mittel der n-gram Wahrscheinlichkeiten des Klartextes. Die Differenz dieser Werte zweier Schlüssels gibt die Spanne an, um die ein Schlüssel besser
+    ist als der andere. In Spalte 3 wird der Angriff dargestellt, der den entsprechenden Schlüssel gefunden hat. "G" steht für den genetischen Angriff und "W"
+    symbolisiert den Wörterbuchangriff. Ein "H" steht für den Hill-climbing-Angriff.<newline />
+    Durch einen Doppelklick auf eine Zeile wird der entsprechende Schlüssel und Klartext ausgewählt und zu den dazugehörigen Ausgängen weitergeleitet.
+  </presentation>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Substitution_cipher" lang="en" />
+      <caption lang="en">Substitution Cipher (Wikipedia)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://april.eecs.umich.edu/pdfs/olson2007crypt.pdf" lang="en" />
+      <caption lang="en">Olson, E.: Robust Dictionary Attack of Short Simple Substitution Ciphers</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Genetic_algorithm" lang="en" />
+      <caption lang="en">Genetic Algorithm (Wikipedia)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://sourceforge.net/projects/decrypto/" lang="en" />
+      <caption lang="en">DeCrypto Project</caption>
+    </linkReference>
+  </references>
+</documentation>

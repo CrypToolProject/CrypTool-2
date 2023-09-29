@@ -19,7 +19,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,37 +57,6 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Abbreviations.
-        /// </summary>
-        internal static string Abbreveations {
-            get {
-                return ResourceManager.GetString("Abbreveations", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Place mouse here.
-        /// </summary>
-        internal static string AbbreveationsBottom {
-            get {
-                return ResourceManager.GetString("AbbreveationsBottom", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to BF: Bloom filter
-        ///RR: Randomized Response
-        ///PRR: Permanent randomized response
-        ///IRR: Instantaneous randomized response
-        ///h: hashfunction.
-        /// </summary>
-        internal static string AbbreveationsToolTip {
-            get {
-                return ResourceManager.GetString("AbbreveationsToolTip", resourceCulture);
             }
         }
         
@@ -137,7 +106,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bloom Filter.
+        ///   Looks up a localized string similar to Bloom filter.
         /// </summary>
         internal static string BloomFilter {
             get {
@@ -155,7 +124,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The input .
+        ///   Looks up a localized string similar to Algorithm step .
         /// </summary>
         internal static string BloomFilterInformation1 {
             get {
@@ -164,7 +133,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  sets the cells .
+        ///   Looks up a localized string similar to : The .
         /// </summary>
         internal static string BloomFilterInformation2 {
             get {
@@ -173,7 +142,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  in step .
+        ///   Looks up a localized string similar to input sets the cell (.
         /// </summary>
         internal static string BloomFilterInformation3 {
             get {
@@ -182,7 +151,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  of the algoithm. .
+        ///   Looks up a localized string similar to )..
         /// </summary>
         internal static string BloomFilterInformation4 {
             get {
@@ -191,7 +160,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bloom Filter size.
+        ///   Looks up a localized string similar to Bloom filter size.
         /// </summary>
         internal static string BloomFilterSizeCaption {
             get {
@@ -209,8 +178,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to On this page there is an animation of the insertion process for the Bloom Filter data structure. 
-        ///The animation can be controlled via the buttons in the top bar..
+        ///   Looks up a localized string similar to On this page there is an animation of the insertion process for the Bloom filter data structure. The animation can be controlled via the buttons in the top bar. To start the tool please click the play button in the top area of CT2. The execution of the tool can then be controlled through the animation speed slider and the five buttons in the top area of the Bloom filter tool. To find further instructions on the usage of this tool please consult the RAPPOR online help..
         /// </summary>
         internal static string BloomFilterText {
             get {
@@ -219,7 +187,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data Set.
+        ///   Looks up a localized string similar to Data set.
         /// </summary>
         internal static string DataSet {
             get {
@@ -282,7 +250,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Heat Map.
+        ///   Looks up a localized string similar to Heat map.
         /// </summary>
         internal static string HeatMaps {
             get {
@@ -291,10 +259,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This page provides a heat map which visualizes how often
-        /// a cell of the Boolean array has been set.
-        ///Cells of the Boolean array represent a bit in the 0-1 sequence.
-        ///The color of the legend shows how often the bit was set to 1..
+        ///   Looks up a localized string similar to This page provides a heat map that visualizes how often a cell of the Boolean array has been set. Every cell of the Boolean array represent a bit in the 0-1 sequence. The color of the legend shows how often the bit was set to 1 in all iterations. The first row shows the distribution of the Bloom filter over all iterations. It is visible that the Bloom filter always sets the same cells in every iterations as these are shown in red where as cells that have not been set are shown in black. The second row shows [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string HeatMapViewText {
             get {
@@ -357,6 +322,15 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string k {
+            get {
+                return ResourceManager.GetString("k", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Key.
         /// </summary>
         internal static string Key {
@@ -366,11 +340,47 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Next Step.
+        ///   Looks up a localized string similar to Next step.
         /// </summary>
         internal static string NextStep {
             get {
                 return ResourceManager.GetString("NextStep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to st .
+        /// </summary>
+        internal static string ordinalOne {
+            get {
+                return ResourceManager.GetString("ordinalOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to th .
+        /// </summary>
+        internal static string ordinalRest {
+            get {
+                return ResourceManager.GetString("ordinalRest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to rd .
+        /// </summary>
+        internal static string ordinalThree {
+            get {
+                return ResourceManager.GetString("ordinalThree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nd .
+        /// </summary>
+        internal static string ordinalTwo {
+            get {
+                return ResourceManager.GetString("ordinalTwo", resourceCulture);
             }
         }
         
@@ -402,11 +412,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This page provides an overview of the Boolean arrays created by  the RAPPOR mechanism. The first row
-        ///shows the orignal Boolean array of the Bloom filter. The second row shows the Boolean array after it has been
-        ///processed by the PRR. Every following row shows the altered Boolean array after being processed by an IRR.
-        ///In the graphic, the red line stands for an entry in the array that is set.
-        ///The black line stands for an entry in the arrays that is not set..
+        ///   Looks up a localized string similar to This page provides an overview of the Boolean arrays created by the RAPPOR mechanism. The first row shows the original Boolean array of the Bloom filter. The second row shows the Boolean array after it has been processed by the PRR. Every following row shows the altered Boolean array after being processed by an IRR. In the graphic, the red line stands for a boolean value in the array that is set to &quot;true&quot;. The black line stands for a boolean value in the array that is set to &quot;false&quot;..
         /// </summary>
         internal static string OverviewViewText {
             get {
@@ -442,7 +448,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Previous Step.
+        ///   Looks up a localized string similar to Previous step.
         /// </summary>
         internal static string PreviousStep {
             get {
@@ -500,7 +506,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Randomized Response.
+        ///   Looks up a localized string similar to Randomized response.
         /// </summary>
         internal static string RandomizedResponse {
             get {
@@ -509,8 +515,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This page contains information about the level of privacy guaranteed by RAPPOR. 
-        ///The values are generated from the component settings..
+        ///   Looks up a localized string similar to This page illustrates how the privacy level epsilon (= privacy budget) guaranteed by RAPPOR is calculated using the parameters h, f, q, and p. Epsilon equal to infinity is generated by RAPPOR after PRR is enabled and is the worst case. Epsilon equal to one is generated by RAPPOR after IRR is activated, and represents privacy guaranteed in the general case. The lower the epsilon value, the more privacy is guaranteed..
         /// </summary>
         internal static string RandomizedResponseText {
             get {
@@ -582,15 +587,7 @@ namespace CrypTool.Plugins.RAPPOR.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To start the RAPPOR component, press the button
-        /// &quot;Play&quot; button on the toolbar above the workspace.
-        ///
-        ///You can then navigate through the component using the 5 tabs above.
-        ///You can access the component settings in 3 different ways
-        ///by clicking on the gear icon in the upper left corner of the component; 
-        ///or by clicking on the gear icon in the upper right corner of the workspace when the component is selected
-        ///or simply by pressing the key combination Ctrl + i.
-        ///You can find much more information in the online  [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to To start the RAPPOR component press the &quot;Play&quot; button on the toolbar above the CT2 workspace. You can navigate through the component using the five tabs above. The component settings can be accessed in three different ways: (1) by clicking on the gear icon in the upper left corner of the component; or (2) by clicking on the gear icon in the upper right corner of the workspace when the component is selected or (3) simply by pressing the key combination Ctrl + i. You can find more information in the online he [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ShortTutorial {
             get {

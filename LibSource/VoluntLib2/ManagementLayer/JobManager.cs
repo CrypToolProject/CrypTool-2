@@ -355,6 +355,35 @@ namespace VoluntLib2.ManagementLayer
                     Logger.LogException(ex, this, Logtype.Error);
                 }
             }
+
+            //forces to serialize the jobs when the JobManager is closed
+            Logger.LogText("Force serialization of jobs", this, Logtype.Info);
+            bool serialized = false;
+            bool exceptionDuringSerialization = false;            
+            foreach (Operation operation in Operations)
+            {
+                if (!serialized && operation is JobsSerializationOperation)
+                {
+                    try
+                    {
+                        //we created a new job, thus, we force to serialize that immediately
+                        ((JobsSerializationOperation)operation).ForceSerialization();
+                        ((JobsSerializationOperation)operation).Execute();
+                        serialized = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogText(string.Format("Exception during serialization of jobs: {0}", ex.Message), this, Logtype.Error);
+                        Logger.LogException(ex, this, Logtype.Error);
+                        exceptionDuringSerialization = true;
+                    }
+                }
+            }
+            if (!exceptionDuringSerialization)
+            {
+                Logger.LogText("Jobs serialized", this, Logtype.Info);
+            }
+
             Logger.LogText("Terminated", this, Logtype.Info);
         }
 

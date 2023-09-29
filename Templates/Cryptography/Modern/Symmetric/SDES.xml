@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--File name: SDES.xml-->
+  <!--File name: S-DES.xml-->
   <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">SDES Cipher</title>
-  <summary lang="en">Usage of the <i>SDES</i> cipher</summary>
-  <description lang="en">This template shows the usage of the <i>SDES</i> cipher.</description>
+  <title lang="en">S-DES Cipher</title>
+  <summary lang="en">Usage of the <i>S-DES</i> cipher</summary>
+  <description lang="en">This template shows the usage of the <i>S-DES</i> cipher.</description>
   <keywords>SRTP, SDP, symmetric</keywords>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
@@ -20,14 +20,14 @@
     <replacement key="$Key Decoder$" value="Key Decoder" />
     <replacement key="$Decrypted_Ciphertext$" value="Decrypted Ciphertext" />
     <replacement key="$text$" value="The quick brown fox jumps over the lazy dog." />
-    <replacement key="$memo$" value="With this template you can use the {\b SDES} component to encrypt an arbitrary text entered in the component {\b Plaintext} on the left side. The resulting encrypted text is displayed in the component {\b Ciphertext} on the right side after pressing the Play button. The {\b SDES} component works on binary values, i.e. bytes. Thus, the input text is first converted to bytes with the component {\b Message decoder}. With the current settings, it is interpreted as ASCII. The resulting bytes are then encrypted with {\b SDES}, yielding another sequence of bytes. These bytes are then simply printed as hexadecimal values with the help of the component {\b Message encoder}. Note that you can also decrypt messages with this template. To do so, first copy the encrypted hexadecimal values to the {\b Plaintext}. Then change the following: (1) Set Input format of the {\b Message decoder} to Hexadecimal; (2) Set Action of {\b SDES} to Decrypt; (3) Set Format of the {\b Message encoder} to Text and the Encoding to ASCII." />
+    <replacement key="$memo$" value="With this template you can use the {\b S-DES} component to encrypt an arbitrary text entered in the component {\b Plaintext} on the left side. The resulting encrypted text is displayed in the component {\b Ciphertext} on the right side after pressing the Play button. The {\b S-DES} component works on binary values, i.e. bytes. Thus, the input text is first converted to bytes with the component {\b Message decoder}. With the current settings, it is interpreted as ASCII. The resulting bytes are then encrypted with {\b S-DES}, yielding another sequence of bytes. These bytes are then simply printed as hexadecimal values with the help of the component {\b Message encoder}. Note that you can also decrypt messages with this template. To do so, first copy the encrypted hexadecimal values to the {\b Plaintext}. Then change the following: (1) Set Input format of the {\b Message decoder} to Hexadecimal; (2) Set Action of {\b S-DES} to Decrypt; (3) Set Format of the {\b Message encoder} to Text and the Encoding to ASCII." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">SDES-Chiffre</title>
-  <summary lang="de">Benutzung der <i>SDES</i>-Chiffre</summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>SDES</i>-Chiffre.</description>
+  <title lang="de">S-DES-Chiffre</title>
+  <summary lang="de">Benutzung der <i>S-DES</i>-Chiffre</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>S-DES</i>-Chiffre.</description>
   <keywords lang="de">symmetrisch</keywords>
   <replacements lang="de">
     <replacement key="$Plaintext$" value="Klartext" />
@@ -38,7 +38,7 @@
     <replacement key="$Key Decoder$" value="Schlüssel-Decodierer" />
     <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
     <replacement key="$text$" value="Franz jagt im komplett verwahrlosten Taxi quer durch Bayern." />
-    <replacement key="$memo$" value="Mit dieser Komponente können Sie einen beliebigen Text, der in die Komponente {\b Klartext} auf der linken Seite eingegeben werden muss, mit der {\b SDES}-Komponente verschlüsseln. Der resultierende verschlüsselte Text wird in der Komponente {\b Geheimtext} auf der rechten Seite angezeigt, nachdem die Vorlage durch Klicken der &quot;Starten&quot;-Schaltfläche ausgeführt wurde. Die {\b SDES}-Komponente arbeitet mit binären Werten, d.h. Bytes. Daher wird der eingegebene Text zuerst mit der Komponente {\b Nachrichten-Decodierer} in Bytes konvertiert. Mit den gegebenen Einstellungen wird der Text im ASCII-Format interpretiert. Die so erhaltenen Bytes werden mit {\b SDES} verschlüsselt und man erhält eine weitere Bytefolge. Diese wird dann mit Hilfe der {\b Nachrichten-Codierer}-Komponente ins hexadezimale Format konvertiert und ausgegeben. Diese Vorlage kann auch zur Entschlüsselung von Nachrichten verwendet werden. Dazu müssen zuerst die verschlüsselten hexadezimalen Werte in die Komponente {\b Klartext} kopiert werden. Dann müssen folgende Anpassungen vorgenommen werden: (1) Das Eingabeformat in der Komponente {\b Nachrichten-Decodierer} muss auf &quot;Hexadezimal&quot; gesetzt werden; (2) In der {\b SDES}-Komponente muss die Aktion auf &quot;Entschlüsselung&quot; gesetzt werden; (3) Das Format in der Komponente {\b Nachrichten-Codierer} muss auf Text und die Kodierung auf &quot;ASCII&quot; gesetzt werden." />
+    <replacement key="$memo$" value="Mit dieser Komponente können Sie einen beliebigen Text, der in die Komponente {\b Klartext} auf der linken Seite eingegeben werden muss, mit der {\b S-DES}-Komponente verschlüsseln. Der resultierende verschlüsselte Text wird in der Komponente {\b Geheimtext} auf der rechten Seite angezeigt, nachdem die Vorlage durch Klicken der &quot;Starten&quot;-Schaltfläche ausgeführt wurde. Die {\b S-DES}-Komponente arbeitet mit binären Werten, d.h. Bytes. Daher wird der eingegebene Text zuerst mit der Komponente {\b Nachrichten-Decodierer} in Bytes konvertiert. Mit den gegebenen Einstellungen wird der Text im ASCII-Format interpretiert. Die so erhaltenen Bytes werden mit {\b S-DES} verschlüsselt und man erhält eine weitere Bytefolge. Diese wird dann mit Hilfe der {\b Nachrichten-Codierer}-Komponente ins hexadezimale Format konvertiert und ausgegeben. Diese Vorlage kann auch zur Entschlüsselung von Nachrichten verwendet werden. Dazu müssen zuerst die verschlüsselten hexadezimalen Werte in die Komponente {\b Klartext} kopiert werden. Dann müssen folgende Anpassungen vorgenommen werden: (1) Das Eingabeformat in der Komponente {\b Nachrichten-Decodierer} muss auf &quot;Hexadezimal&quot; gesetzt werden; (2) In der {\b S-DES}-Komponente muss die Aktion auf &quot;Entschlüsselung&quot; gesetzt werden; (3) Das Format in der Komponente {\b Nachrichten-Codierer} muss auf Text und die Kodierung auf &quot;ASCII&quot; gesetzt werden." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

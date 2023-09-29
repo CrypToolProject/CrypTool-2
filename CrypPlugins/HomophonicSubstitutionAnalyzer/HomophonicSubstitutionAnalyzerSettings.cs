@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2020 Nils Kopal <Nils.Kopal<at>CrypTool.org
+   Copyright 2023 Nils Kopal <Nils.Kopal<at>CrypTool.org
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -75,10 +75,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         private int _wordCountToFind = 5;
         private int _minWordLength = 8;
         private int _maxWordLength = 10;
+        private int _nomenclatureElementsThreshold = 1;
         private AnalysisMode _analysisMode;
-        private int _cycles = 50000;
+        private int _steps = 10_000_000;
         private int _restarts = 1000;
-        private int _temperature = 15000;
+        private int _startTemperature = 15_000;
         private bool _useNulls = false;
         private bool _keepLinebreaks = false;
         private string _letterLimits = string.Empty;
@@ -88,7 +89,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <summary>
         /// This event is needed in order to render settings elements visible/invisible
         /// </summary>
-        public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
+        public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;        
 
         #region TaskPane Settings      
 
@@ -163,14 +164,19 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             {
                 _keyLetterDistributionType = value;
                 UpdateSettingsVisibilities();
+                OnPropertyChanged(nameof(KeyLetterDistributionType));
             }
         }
 
         [TaskPane("HomophonicityCaption", "HomophonicityTooltip", "KeyLetterDistributionGroup", 7, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100 )]
-        public int Homophononicity
+        public int Homophonicity
         {
             get => _homophonicity;
-            set => _homophonicity = value;
+            set
+            {
+                _homophonicity = value;
+                OnPropertyChanged(nameof(Homophonicity));
+            }
         }
 
         [TaskPane("WordCountToFindCaption", "WordCountToFindTooltip", "WordLockerGroup", 8, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
@@ -194,32 +200,39 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             set => _maxWordLength = value;
         }
 
-        [TaskPane("AnalysisModeCaption", "AnalaysisModeTooltip", "AlgorithmSettingsGroup", 11, false, ControlType.ComboBox, new string[] { "SemiAutomatic", "FullAutomatic" })]
+        [TaskPane("NomenclatureElementsThresholdCaption", "NomenclatureElementsThresholdTooltip", "NomenclatureElementsThresholdGroup", 11, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
+        public int NomenclatureElementsThreshold
+        {
+            get => _nomenclatureElementsThreshold;
+            set => _nomenclatureElementsThreshold = value;
+        }
+
+        [TaskPane("AnalysisModeCaption", "AnalaysisModeTooltip", "AlgorithmSettingsGroup", 12, false, ControlType.ComboBox, new string[] { "SemiAutomatic", "FullAutomatic" })]
         public AnalysisMode AnalysisMode
         {
             get => _analysisMode;
             set => _analysisMode = value;
         }
 
-        [TaskPane("CyclesCaption", "CyclesTooltip", "AlgorithmSettingsGroup", 12, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
-        public int Cycles
+        [TaskPane("StepsCaption", "StepsTooltip", "AlgorithmSettingsGroup", 13, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
+        public int Steps
         {
-            get => _cycles;
-            set => _cycles = value;
+            get => _steps;
+            set => _steps = value;
         }
 
-        [TaskPane("RestartsCaption", "RestartsTooltip", "AlgorithmSettingsGroup", 13, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
+        [TaskPane("RestartsCaption", "RestartsTooltip", "AlgorithmSettingsGroup", 14, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int Restarts
         {
             get => _restarts;
             set => _restarts = value;
         }
 
-        [TaskPane("FixedTemperatureCaption", "FixedTemperatureTooltip", "AlgorithmSettingsGroup", 14, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
-        public int Temperature
+        [TaskPane("StartTemperatureCaption", "StartTemperatureTooltip", "AlgorithmSettingsGroup", 15, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
+        public int StartTemperature
         {
-            get => _temperature;
-            set => _temperature = value;
+            get => _startTemperature;
+            set => _startTemperature = value;
         }
 
         public string LetterLimits
@@ -262,11 +275,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         {
             if (_keyLetterDistributionType == KeyLetterDistributionType.Uniform)
             {
-                ShowSettingsElement("Homophononicity");
+                ShowSettingsElement(nameof(Homophonicity));
             }
             else
             {
-                HideSettingsElement("Homophononicity");
+                HideSettingsElement(nameof(Homophonicity));
             }
         }
 

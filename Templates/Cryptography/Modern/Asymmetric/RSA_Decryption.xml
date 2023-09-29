@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: RSA_Decryption.xml-->
-  <!--Last edited: 2022.02.08-->
+  <!--Last edited: 2022.12.21-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -11,14 +11,23 @@
   <summary lang="en">Usage of the <i>RSA</i> cipher for decryption</summary>
   <description lang="en">In cryptography, RSA (which stands for Rivest, Shamir and Adleman who first publicly described it) is an algorithm for public-key cryptography. It is the first algorithm known to be suitable for signing as well as encryption, and was one of the first great advances in public key cryptography. RSA is widely used in electronic commerce protocols, and is believed to be sufficiently secure given sufficiently long keys and the use of up-to-date implementations.<newline /><newline />
 Source: <external ref="http://en.wikipedia.org/wiki/RSA" /></description>
-  <keywords>Rivest, Shamir, Adleman, public key, PKI, asymmetric</keywords>
+  <keywords>Shamir, Rivest, asymmetric, Adleman, PKI, public key</keywords>
   <replacements lang="en">
-    <replacement key="$memo$" value="In cryptography, RSA (which stands for Rivest, Shamir and Adleman who first publicly described it) is an algorithm for public-key cryptography. It is the first algorithm known to be suitable for signing as well as encryption, and was one of the first great advances in public key cryptography. RSA is widely used in electronic commerce protocols, and is believed to be sufficiently secure given sufficiently long keys and the use of up-to-date implementations." />
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
-    <replacement key="$StringEncoder$" value="StringEncoder" />
-    <replacement key="$StringDecoder$" value="StringDecoder" />
+    <replacement key="$String Decoder$" value="String Decoder" />
+    <replacement key="$String Encoder$" value="String Encoder" />
+    <replacement key="$RSA Decryption$" value="RSA Decryption" />
     <replacement key="$RSAKeyGenerator$" value="RSA Key Generator" />
+    <replacement key="$memo$" value ="This template shows how to decrypt binary data using {\b RSA}.\line
+\line
+The RSA key generator allows to enter (different) RSA key parameters:\line
+- Always the prime numbers p and q\line
+- Either the public key e or the private key d (the other one is then calculated automatically; this works because p and q are known)\line
+\line
+The entered binary data is interpreted in the RSA component as one or more large numbers and then decrypted using RSA in each case.\line
+\line
+The RSA performed here is (still) textbook RSA, since it does not use padding. In practice, for example, the OAEP padding method is used."/>
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -27,14 +36,23 @@ Source: <external ref="http://en.wikipedia.org/wiki/RSA" /></description>
   <summary lang="de">Benutzung der <i>RSA</i>-Chiffre für die Entschlüsselung</summary>
   <description lang="de">RSA ist ein asymmetrisches Kryptosystem. Es verwendet ein Schlüsselpaar, bestehend aus einem privaten Schlüssel, der zum Entschlüsseln von Daten verwendet wird, und einem öffentlichen Schlüssel, mit dem man verschlüsselt.<newline /><newline />
 Quelle: <external ref="http://de.wikipedia.org/wiki/RSA-Kryptosystem" /></description>
-  <keywords lang="de">öffentlicher Schlüssel, asymmetrisch</keywords>
+  <keywords lang="de">Shamir, Rivest, asymmetrisch, Adleman, PKI, public key</keywords>
   <replacements lang="de">
-    <replacement key="$memo$" value="In der Kryptografie ist RSA (was für Rivest, Shamir und Adleman steht) ein Algorithmus für die Kryptografie mit öffentlichem Schlüssel (Asymmetrische Kryptografie). Es ist der erste bekannte Algorithmus, der sowohl für das Signieren als auch für die Verschlüsselung geeignet ist, und war einer der ersten großen Fortschritte in der Kryptografie mit öffentlichen Schlüsseln. RSA wird häufig in Protokollen für den elektronischen Handel verwendet und gilt bei ausreichend langen Schlüsseln und der Verwendung aktueller Implementierungen als ausreichend sicher." />
     <replacement key="$Plaintext$" value="Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$StringEncoder$" value="String-Codierer" />
-    <replacement key="$StringDecoder$" value="String-Decodierer" />
+    <replacement key="$String Decoder$" value="String Decoder" />
+    <replacement key="$String Encoder$" value="String Encoder" />
+    <replacement key="$RSA Decryption$" value="RSA-Entschlüsselung" />
     <replacement key="$RSAKeyGenerator$" value="RSA-Schlüsselgenerator" />
+     <replacement key="$memo$" value ="Diese Vorlage zeigt, wie man mittels {\b RSA} binäre Daten entschlüsseln kann.\line
+\line
+Der RSA-Schlüsselgenerator ermöglicht die Eingabe von (unterschiedlichen) RSA-Schlüsselparametern:\line
+- Immer die Primzahlen p und q\line
+- Entweder den öffentlichen Schlüssel e oder den privaten Schlüssel d (der jeweils andere wird dann automatisch berechnet; dies geht, da p und q bekannt sind)\line
+\line
+Die eingegebenen Binärdaten werden in der RSA-Komponente als eine oder mehrere große Zahlen interpretiert und dann jeweils mittels RSA entschlüsselt.\line
+\line
+Das hier durchgeführte RSA ist (immer noch) Textbook-RSA, da es kein Padding nutzt. In der Praxis wird z.B. das OAEP-Paddingverfahren genutzt."/>
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

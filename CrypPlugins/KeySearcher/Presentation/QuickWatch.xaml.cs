@@ -24,24 +24,7 @@ namespace KeySearcherPresentation
         {
             get => (bool)GetValue(IsP2PEnabledProperty);
             set => SetValue(IsP2PEnabledProperty, value);
-        }
-
-        public static readonly DependencyProperty IsOpenCLEnabledProperty =
-            DependencyProperty.Register("IsOpenCLEnabled",
-                                typeof(
-                                    bool),
-                                typeof(
-                                    QuickWatch), new PropertyMetadata(false));
-
-        public bool IsOpenCLEnabled
-        {
-            get => (bool)GetValue(IsOpenCLEnabledProperty);
-            set
-            {
-                SetValue(IsOpenCLEnabledProperty, value);
-                LocalQuickWatchPresentation.IsOpenCLEnabled = value;
-            }
-        }
+        }      
 
         public bool ShowStatistics
         {

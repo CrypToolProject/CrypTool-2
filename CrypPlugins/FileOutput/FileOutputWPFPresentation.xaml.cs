@@ -33,7 +33,7 @@ namespace FileOutputWPF
 
         private void hexBox_ErrorOccured(object sender, HexBox.GUIErrorEventArgs ge)
         {
-            exp.getMessage(ge.message);
+            exp.getMessage(ge.Message);
         }
 
         public void CloseFileToGetFileStreamForExecution()

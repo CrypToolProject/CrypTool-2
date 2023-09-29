@@ -8,7 +8,7 @@
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">PBKDF-1 (PKCS#5 2.0)</title>
-  <summary lang="en">Password Based Key Derivation Function 1</summary>
+  <summary lang="en">Password-Based Key Derivation Function 1</summary>
   <description lang="en">This template shows how to implement PBKDF-1 in CrypTool 2</description>
   <keywords>Hash, SHA-1, pkcs#5, PBKDF-1, key generation, iterations, RFC 2898</keywords>
   <replacements lang="en">
@@ -21,7 +21,12 @@
     <replacement key="$Key$" value="Key" />
     <replacement key="$Progress$" value="Progress" />
     <replacement key="$Stop at$" value="Stop at" />
-    <replacement key="$memo$" value="{\b PBKDF1 (Password based key derivation function 1):}\line This template demonstrates how to compute a key that is derived from a password. It implements PBKDF1 as described in the RFC2898 [1].\line\line The user given password is concatenated with the user given salt:\line {\b T_0 = Salt || Password}, where || means string concatenation.\line After that, the T_s are hashed in a row:\line {\b T_1 = hash(T_0)\line T_2 = hash(T_1)\line ...\line T_i = hash(T_i-1)},\line where T_1 is the SHA-1 hash of T_0, T_2 is the SHA-1 hash of T_1, and so on.\line The final key is equal to T_i and will appear in the Key TextOutput component. During the execution, the current progress is visible at the Progress component. Hint: To compute a new key, you have to restart the workspace every time. If you want to see intermediate hash values, change the Gate 3 to &quot;no trigger (always open)&quot;.\line\line [1] RFC2898: https://tools.ietf.org/html/rfc2898" />
+    <replacement key="$memo$" value="{\b PBKDF1 (Password-based key derivation function 1):}\line This template demonstrates how to compute a key that is derived from a password. The key derivation is done as described in the RFC2898 (PBKDF1) [1].
+  \line\line At first, the user-given password is concatenated with the user-given salt:\line {\b T_0 = Salt || Password}, where || means string concatenation.
+  \line After that, the T_s are hashed in a loop:\line {\b T_1 = hash(T_0)\line T_2 = hash(T_1)\line ...\line T_i = hash(T_i-1)},
+  \line where T_1 is the SHA-1 hash of T_0, T_2 is the SHA-1 hash of T_1, and so on.
+  \line The final key is equal to T_i and will appear in the Key component. During the execution, the current progress is visible at the Progress component. Hint: To compute a new key, you have to restart the workspace every time. The intermediate values are also displayed during execution. If you want to see all values, you have to select &quot;Append text input&quot; in the Key component's settings.
+  \line\line [1] RFC2898: https://tools.ietf.org/html/rfc2898" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -40,7 +45,12 @@
     <replacement key="$Key$" value="Schlüssel" />
     <replacement key="$Progress$" value="Fortschritt" />
     <replacement key="$Stop at$" value="Stop bei" />
-    <replacement key="$memo$" value="{\b PBKDF1 (Password-based key-derivation function 1):}\line Diese Vorlage demonstriert, wie ein Schlüssel von einem Passwort abgeleitet werden kann. Es implementiert das im RFC2898 [1] beschriebene PBKDF1.\line\line Das vom Benutzer gegebene Passwort wird mit dem ebenfalls vom Benutzer angegebenen Salt (Salzwert) konkateniert:\line {\b T_0 = Salt || Passwort}, wobei || für die Konkatenation steht.\line Danach werden von den T_s nacheinander die Hashwerte berechnet:\line {\b T_1 = hash(T_0)\line T_2 = hash(T_1)\line ...\line T_i = hash(T_i-1)},\line wobei T_1 der SHA-1-Hashwert von T_0 ist, T_2 der SHA-1-Hashwert von T_1, usw.\line Der endgültige Schlüssel ist dann der Wert T_i und wird in der Schlüssel-Komponente ausgegeben (i steht für Iterationszähler und wird schrittweise bis z.B. 1000 erhöht). Während der Ausführung wird der momentane Fortschritt in der Fortschritt-Komponente angezeigt. Hinweis: Um neue Schlüssel zu berechnen, muss die Vorlage jedes Mal neu gestartet werden. Um die Zwischenwerte bei der Hashwert-Berechnung zu sehen, muss im Gatter 3 das Auslöseereignis auf &quot;Pforte immer offen&quot; gesetzt werden.\line\line [1] RFC2898: https://tools.ietf.org/html/rfc2898" />
+    <replacement key="$memo$" value="{\b PBKDF1 (Password-based key-derivation function 1):}\line Diese Vorlage demonstriert die Berechnung eines Schlüssels, der aus einem Passwort abgeleitet wird. Die Schlüsselableitung erfolgt wie in RFC2898 (PBKDF1) [1] beschrieben.
+  \line\line Zuerst wird das vom Benutzer eingebene Passwort mit dem vom Benutzer eingegebenen Salt verkettet: \line {\b T_0 = Salt || Password}, wobei || die Verkettung von Strings bedeutet.
+  \line Danach werden die T_s in einer Schleife gehasht:\line {\b T_1 = hash(T_0)\line T_2 = hash(T_1)\line ...\line T_i = hash(T_i-1)},
+  \line wobei T_1 der SHA-1-Hash von T_0 ist, T_2 der SHA-1-Hash von T_1, und so weiter.
+  \line Der endgültige Schlüssel ist gleich T_i und wird in der Schlüssel-Komponente angezeigt. Während der Ausführung ist der aktuelle Fortschritt in der Komponente &quot;Fortschritt&quot; sichtbar. Hinweis: Um einen neuen Schlüssel zu berechnen, müssen Sie den Arbeitsbereich jedes Mal neu starten. Die Zwischenwerte werden auch während der Ausführung angezeigt. Wenn Sie alle Werte sehen wollen, müssen Sie in den Einstellungen der Schlüssel-Komponente &quot;Eingabetext anfügen&quot; auswählen.
+  \line\line [1] RFC2898: https://tools.ietf.org/html/rfc2898" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

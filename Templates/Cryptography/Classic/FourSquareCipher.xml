@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: FourSquareCipher.xml-->
+  <!--Last edited: 2023.01.10-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Four-Square-Chiffre</title>
+  <summary lang="de">Ver- und Entschlüsselung mit der <i>Four-Square-Chiffre</i></summary>
+  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels Four-Square-Chiffre. In der klassischen Kryptographie ist die Four-Square-Chiffre eine Chiffre, die vier Polybius-Quadrate nutzt. Sie wurde um 1901 von Felix Delastelle erfunden.</description>
+  <keywords lang="de">Bifid, chiffre</keywords>
+  <replacements lang="de">
+    <replacement key="$Four-square Cipher$" value="Four-Square-Chiffre" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Keyword 1$" value="Schlüsselwort 1" />
+    <replacement key="$Keyword 2$" value="Schlüsselwort 2" />
+    <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$memo$" value="Die {\b Four-Square-Chiffre} ist eine manuelle symmetrische Verschlüsselungstechnik. Sie wurde von dem französischen Kryptographen Felix Delastelle erfunden.\line
+\line
+Die Chiffre verschlüsselt Buchstabenpaare (Digraphen) und fällt damit in eine Kategorie von Chiffren, die als bigraphische Substitutionschiffren bekannt sind. Dies verleiht der Verschlüsselung im Vergleich zu monographischen Substitutions-Chiffren, die mit einzelnen Buchstaben arbeiten, eine erhebliche Stärke. Durch die Verwendung von Digraphen ist die Four-Square-Chiffre weniger anfällig für Angriffe durch Häufigkeitsanalysen, da die Analyse für 676 mögliche Digraphen durchgeführt werden muss und nicht nur für 26 bei der monographischen Substitution. Die Häufigkeitsanalyse von Digraphen ist möglich, aber wesentlich schwieriger - und sie erfordert im Allgemeinen einen viel größeren Geheimtext, um nützlich zu sein." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Four-square Cipher</title>
+  <summary lang="en">Encryption and decryption with the <i>Four-square Cipher</i>.</summary>
+  <description lang="en">This template shows en- and decryption using a Four-square Cipher. In classical cryptography, the Four-square Cipher is a cipher that uses four Polybius squares. It was invented around 1901 by Felix Delastelle.</description>
+  <keywords>Bifid, Cipher</keywords>
+  <replacements lang="en">
+    <replacement key="$Four-square Cipher$" value="Four-square Cipher" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Keyword 1$" value="Keyword 1" />
+    <replacement key="$Keyword 2$" value="Keyword 2" />
+    <replacement key="$Decrypted plaintext$" value="Decrypted plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$memo$" value="The {\b Four-square Cipher} is a manual symmetric encryption technique. It was invented by the French cryptographer Felix Delastelle.\line
+\line
+The cipher encrypts pairs of letters (digraphs), and thus falls into a category of ciphers known as bigraphic substitution ciphers. This adds significant strength to the encryption when compared with monographic substitution ciphers which operate on single characters. The use of digraphs makes the four-square cipher less susceptible to frequency analysis attacks, as the analysis must be done on 676 possible digraphs rather than just 26 for monographic substitution. The frequency analysis of digraphs is possible, but considerably more difficult - and it generally requires a much larger ciphertext in order to be useful." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="FourSquareCipher.png" />
+  <relevantPlugins>
+    <plugin name="FourSquareCipher" />
+  </relevantPlugins>
+</sample>

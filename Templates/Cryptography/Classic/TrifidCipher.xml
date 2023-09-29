@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: TrifidCipher.xml-->
+  <!--Last edited: 2022.12.06-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Trifid-Chiffre</title>
+  <summary lang="de">Ver- und Entschlüsselung mit der <i>Trifid-Chiffre</i></summary>
+  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels Trifid-Chiffre. In der klassischen Kryptographie ist die Trifid-Chiffre eine Chiffre, die drei Polybius-Quadrate mit Transposition kombiniert und somit eine Fraktionierung erzeugt. Sie wurde um 1901 von Felix Delastelle erfunden.</description>
+  <keywords lang="de">Trifid, chiffre</keywords>
+  <replacements lang="de">
+    <replacement key="$Trifid Cipher$" value="Trifid-Chiffre" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Keyword$" value="Schlüsselwort" />
+    <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise der {\b Trifid-Chiffre}. Die Komponente wurde auf der Grundlage der Definition der ACA (American Cryptogram Association) entwickelt und unterstützt die Ver- und Entschlüsselung von Texten.\line\
+Die Chiffre verwendet ein 27-Buchstaben-Alphabet (Buchstaben A-Z und die Raute #)." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Trifid cipher</title>
+  <summary lang="en">Encryption and decryption with the <i>Trifid cipher</i>.</summary>
+  <description lang="en">This template shows en- and decryption using a Trifid cipher. In classical cryptography, the Trifid cipher is a cipher that combines three Polybius squares with transposition and uses fractionation. It was invented around 1901 by Felix Delastelle.</description>
+  <keywords>Trifid, Cipher</keywords>
+  <replacements lang="en">
+    <replacement key="$Trifid Cipher$" value="Trifid Cipher" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Keyword$" value="Keyword" />
+    <replacement key="$Decrypted plaintext$" value="Decrypted plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$memo$" value="This template demonstrates how the {\b Trifid cipher} works. The component was developed based on the definition of the ACA (American Cryptogram Association) and supports the encryption and decryption of texts.\line\line
+The cipher uses a 27-letter alphabet (Letters A-Z and the hash #)." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="TrifidCipher.png" />
+  <relevantPlugins>
+    <plugin name="TrifidCipher" />
+  </relevantPlugins>
+</sample>

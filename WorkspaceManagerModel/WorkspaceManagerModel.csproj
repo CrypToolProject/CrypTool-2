@@ -84,6 +84,7 @@
     <Compile Include="Model\Elements\ConnectionModel.cs" />
     <Compile Include="Model\Elements\ConnectorModel.cs" />
     <Compile Include="Model\Elements\ImageModel.cs" />
+    <Compile Include="Model\Tools\ObjectIDGenerator.cs" />
     <Compile Include="Model\Elements\PluginModel.cs" />
     <Compile Include="Model\Elements\TextModel.cs" />
     <Compile Include="Model\Elements\VisualElementModel.cs" />
@@ -93,7 +94,7 @@
     <Compile Include="Model\Tools\ColorHelper.cs" />
     <Compile Include="Model\Tools\ModelPersistance.cs" />
     <Compile Include="Model\Tools\PartialCopyHelper.cs" />
-    <Compile Include="Model\Tools\PropertyRaiser.cs" />
+    <Compile Include="Model\Tools\EventRaiser.cs" />
     <Compile Include="Model\Tools\SettingsManager.cs" />
     <Compile Include="Model\Tools\UndoRedoManager.cs" />
     <Compile Include="Model\Tools\ViewHelper.cs" />

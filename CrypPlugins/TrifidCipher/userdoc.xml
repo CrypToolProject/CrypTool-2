@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<documentation>
+  <language culture="en"/>    
+  <language culture="de-DE"/>    
+  
+  <introduction lang="en">
+    In classical cryptography, the trifid cipher is a cipher that combines three Polybius squares with transposition and uses fractionation.
+    It was invented around 1901 by Felix Delastelle.
+  </introduction>
+
+  <introduction lang="de-DE">
+    In der klassischen Kryptographie ist die Trifid-Chiffre eine Chiffre, die dreu Polybius-Quadrate mit Transposition kombiniert und somit eine Fraktionierung erzeugt.
+    Sie wurde um 1901 von Felix Delastelle erfunden.
+  </introduction>
+
+  <usage lang="en">
+    First, three Polybius squares are filled with a mixed alphabet, e.g. based on a keyword. 
+    The plaintext is then encrypted based on the coordinates of the plaintext letter in the Polybius squares by writing the digits in three-digit columns below the plaintext. 
+    Thus, a three-digit ciphertext element is always written below a single plaintext letter. 
+    Then the encrypted intermediate ciphertext is decrypted (back to letters) using the Polybius squares. 
+    However, instead of reading the digits column by column, they are read row by row. 
+    In the process, the resulting three-digit ciphertext elements are transposed and fractionated.
+    Instead of completely writing the intermediate ciphertext in three lines in one go below the full plaintext, only n-letter blocks (e.g., n=3) of the ciphertext can be encoded inividually. 
+    The n is then called the "period" of the cipher. 
+    To decrypt a given ciphertext, the procedure is performed in the reverse direction.
+  </usage>
+
+  <usage lang="de-DE">
+    Zunächst werden drei Polybius-Quadrate mit einem gemischten Alphabet, z.B. auf der Grundlage eines Schlüsselworts, gefüllt.
+    Der Klartext wird dann auf der Grundlage der Koordinaten des Klartextbuchstabens in den Polybius-Quadraten verschlüsselt, indem die Ziffern in dreistelligen Spalten unter den Klartext geschrieben werden.
+    Ein dreistelliges Geheimtext-Element wird also immer unter einen einzelnen Klartextbuchstaben geschrieben.
+    Anschließend wird der verschlüsselte Zwischengeheimtext mit Hilfe der Polybius-Quadrate entschlüsselt (zurück in Buchstaben).
+    Statt die Ziffern spaltenweise zu lesen, werden sie dabei jedoch zeilenweise gelesen.
+    Dadurch werden die resultierenden dreistelligen Geheimtext-Elemente transponiert und fraktioniert.
+    Anstatt den Zwischengeheimtext komplett in drei Zeilen in einem Zug unter den vollständigen Klartext zu schreiben, können nur n-Buchstaben-Blöcke (z.B. n=3) des Geheimtexts einzeln verschlüsselt werden.
+    Das n wird dann als "Periode" der Chiffre bezeichnet.
+    Um einen gegebenen Geheimtext zu entschlüsseln, wird das Verfahren in umgekehrter Richtung durchgeführt.
+  </usage>
+  
+  <presentation lang="en">
+  </presentation>
+  
+  <presentation lang="de-DE">
+  </presentation>
+
+  <references>
+    <linkReference id="wikipedia">
+      <link url="https://en.wikipedia.org/wiki/Trifid_cipher" lang="en" />
+      <caption lang="en">Trifid cipher (Wikipedia)</caption>
+      <link url="https://en.wikipedia.org/wiki/Trifid_cipher" lang="de-DE" />
+      <caption lang="de-DE">Trifid cipher (Englische Wikipedia)</caption>
+    </linkReference>    
+  </references>
+</documentation>

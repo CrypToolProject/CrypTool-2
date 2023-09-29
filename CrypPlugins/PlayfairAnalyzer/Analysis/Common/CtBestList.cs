@@ -16,14 +16,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static PlayfairAnalysis.Common.CtBestList;
 
 namespace PlayfairAnalysis.Common
 {
     public class CtBestList
     {
-        /**
-         * Class encapulating a result in best list.
-         */
+        /// <summary>
+        /// Class encapulating a result in best list.
+        /// </summary>
         public class Result
         {
             public long score;
@@ -36,10 +37,10 @@ namespace PlayfairAnalysis.Common
 
             public Result(long score, string keyString, string keyStringShort, string plaintextString, TimeSpan elapsed, long evaluations, string commentString)
             {
-                set(score, keyString, keyStringShort, plaintextString, elapsed, evaluations, commentString);
+                Set(score, keyString, keyStringShort, plaintextString, elapsed, evaluations, commentString);
             }
 
-            public void set(long score, string keyString, string keyStringShort, string plaintextString, TimeSpan elapsed, long evaluations, string commentString)
+            public void Set(long score, string keyString, string keyStringShort, string plaintextString, TimeSpan elapsed, long evaluations, string commentString)
             {
                 this.score = score;
                 this.keyString = keyString;
@@ -74,80 +75,80 @@ namespace PlayfairAnalysis.Common
             CtAPI = instance.CtAPI;
         }
 
-        /**
-         * Set best list size.
-         * @param size - max number of elements in best list.
-         */
-        public void setSize(int size)
+        /// <summary>
+        /// Set best list size
+        /// </summary>
+        /// <param name="size"></param>
+        public void SetBestListSize(int size)
         {
             lock (mutex)
             {
                 maxNumberOfResults = size;
-                clean();
+                Clean();
             }
         }
 
-        /**
-         * Set a score threshold, below which result will not be included in best list.
-         * @param scoreThreshold - threshold value
-         */
-        public void setScoreThreshold(long scoreThreshold)
+        /// <summary>
+        /// Set a score threshold, below which result will not be included in best list.
+        /// </summary>
+        /// <param name="scoreThreshold"></param>
+        public void SetScoreThreshold(long scoreThreshold)
         {
             lock (mutex)
             {
                 this.scoreThreshold = scoreThreshold;
-                clean();
+                Clean();
             }
         }
 
-        /**
-         * If set to yes, ignore results with plaintext already seen (possibly with a different key).
-         * @param discardSamePlaintexts
-         */
-        public void setDiscardSamePlaintexts(bool discardSamePlaintexts)
+        /// <summary>
+        /// If set to yes, ignore results with plaintext already seen (possibly with a different key).
+        /// </summary>
+        /// <param name="discardSamePlaintexts"></param>
+        public void SetDiscardSamePlaintexts(bool discardSamePlaintexts)
         {
             lock (mutex)
             {
                 this.discardSamePlaintexts = discardSamePlaintexts;
-                clean();
+                Clean();
             }
         }
 
-        /**
-         * If set to true, best list will be send to CrypTool no more than once every second.
-         * This is useful in case there are many new results, in a short period of time, that would be one of the top best.
-         * This can happen very often in hillclimbing processes which slowly progress.
-         * @param throttle - if yes, throttle updates to CrypTool.
-         */
-        public void setThrottle(bool throttle)
+        /// <summary>
+        /// If set to true, best list will be send to CrypTool no more than once every second.
+        /// This is useful in case there are many new results, in a short period of time, that would be one of the top best.
+        /// This can happen very often in hillclimbing processes which slowly progress.
+        /// </summary>
+        /// <param name="throttle"></param>
+        public void SetThrottle(bool throttle)
         {
             lock (mutex)
             {
                 this.throttle = throttle;
-                clean();
+                Clean();
             }
         }
 
-        /**
-         * Resets the best list.
-         */
-        public void clear()
+        /// <summary>
+        /// Clears the best list
+        /// </summary>
+        public void ClearBestList()
         {
             lock (mutex)
             {
                 bestResults.Clear();
-                CtAPI.displayBestList(new Result[0]);
+                CtAPI.DisplayBestList(new Result[0]);
             }
         }
 
-        /**
-         * Check whether a new result has a score that would allow it to be added to the best list.
-         * Useful when some processing is required before pushing the result (e.g. formatting the key string). After formatting, then
-         * pushResult should be called to push the result.
-         * @param score - score of a new result.
-         * @return - score is higher than the lower score in the best list.
-         */
-        public bool shouldPushResult(long score)
+        /// <summary>
+        /// Check whether a new result has a score that would allow it to be added to the best list.
+        /// Useful when some processing is required before pushing the result(e.g.formatting the key string). After formatting, then
+        /// pushResult should be called to push the result.
+        /// </summary>
+        /// <param name="score"></param>
+        /// <returns></returns>
+        public bool ShouldPushResult(long score)
         {
             lock (mutex)
             {
@@ -157,7 +158,7 @@ namespace PlayfairAnalysis.Common
                     {
                         lastBestListUpdateMillis = DateTime.Now.Ticks;
                         shouldUpdateBestList = false;
-                        display();
+                        Display();
                     }
                 }
 
@@ -170,17 +171,19 @@ namespace PlayfairAnalysis.Common
             }
         }
 
-        /**
-         * Push a new result to the task list, if its score is highes that the lowest score in the best list.
-         * Discard duplicate keys (and if the relevant option is set, keyes resulting in an already seen plaintext).
-         * @param score
-         * @param keyString
-         * @param keyStringShort
-         * @param plaintextString
-         * @param commentString
-         * @return
-         */
-        public bool pushResult(long score, string keyString, string keyStringShort, string plaintextString, TimeSpan elapsed, long evaluations, string commentString)
+        /// <summary>
+        ///  Push a new result to the task list, if its score is highes that the lowest score in the best list.
+        ///  Discard duplicate keys(and if the relevant option is set, keyes resulting in an already seen plaintext).
+        /// </summary>
+        /// <param name="score"></param>
+        /// <param name="keyString"></param>
+        /// <param name="keyStringShort"></param>
+        /// <param name="plaintextString"></param>
+        /// <param name="elapsed"></param>
+        /// <param name="evaluations"></param>
+        /// <param name="commentString"></param>
+        /// <returns></returns>
+        public bool PushResult(long score, string keyString, string keyStringShort, string plaintextString, TimeSpan elapsed, long evaluations, string commentString)
         {
             lock (mutex)
             {
@@ -213,23 +216,23 @@ namespace PlayfairAnalysis.Common
                 }
                 else if (score > bestResults[size - 1].score)
                 {
-                    bestResults[size - 1].set(score, keyString, keyStringShort, plaintextString, elapsed, evaluations, commentString);
+                    bestResults[size - 1].Set(score, keyString, keyStringShort, plaintextString, elapsed, evaluations, commentString);
                 }
                 else
                 {
                     return false;
                 }
-                sort();
+                Sort();
                 if (bestChanged)
                 {
                     Result bestResult = bestResults[0];
                     if (originalResult == null)
                     {
-                        CtAPI.displayBestResult(bestResult);
+                        CtAPI.DisplayBestResult(bestResult);
                     }
                     else
                     {
-                        CtAPI.displayBestResult(bestResult, originalResult);
+                        CtAPI.DisplayBestResult(bestResult, originalResult);
                     }
                 }
                 if (throttle)
@@ -238,29 +241,27 @@ namespace PlayfairAnalysis.Common
                 }
                 else
                 {
-                    display();
+                    Display();
                 }
                 return true;
             }
         }
 
-        // Package private.
-        private void display()
+        private void Display()
         {
             lock (mutex)
             {
                 StringBuilder s = new StringBuilder();
-                sort();
-                CtAPI.displayBestList(bestResults);
+                Sort();
+                CtAPI.DisplayBestList(bestResults);
             }
         }
 
-        // Private.
-        private void clean()
+        private void Clean()
         {
             lock (mutex)
             {
-                sort();
+                Sort();
                 while (bestResults.Count > maxNumberOfResults)
                 {
                     bestResults.RemoveAt(bestResults.Count - 1);
@@ -280,7 +281,7 @@ namespace PlayfairAnalysis.Common
             }
         }
 
-        private void sort()
+        private void Sort()
         {
             lock (mutex)
             {

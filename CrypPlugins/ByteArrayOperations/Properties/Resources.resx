@@ -171,4 +171,7 @@
   <data name="Array3Tooltip" xml:space="preserve">
     <value>Third byte array</value>
   </data>
+  <data name="Shuffle" xml:space="preserve">
+    <value>Shuffle</value>
+  </data>
 </root>

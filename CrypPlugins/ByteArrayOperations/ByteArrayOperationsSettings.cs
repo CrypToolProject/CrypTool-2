@@ -40,6 +40,7 @@ namespace ByteArrayOperations
         RightShift,
         LeftCircularShift,
         RightCircularShift,
+        Shuffle
     }
 
     internal class ByteArrayOperationsSettings : ISettings
@@ -77,7 +78,7 @@ namespace ByteArrayOperations
             UpdateTaskPaneVisibility();
         }
 
-        [TaskPane("OperationCaption", "OperationTooltip", null, 1, false, ControlType.ComboBox, new[] { "Concatenate", "Subarray", "Length", "IndexOf", "Equals", "Replace", "Reverse", "And", "Or", "ExclusiveOR", "Not", "LeftShift", "RightShift", "LeftCircularShift", "RightCircularShift" })]
+        [TaskPane("OperationCaption", "OperationTooltip", null, 1, false, ControlType.ComboBox, new[] { "Concatenate", "Subarray", "Length", "IndexOf", "Equals", "Replace", "Reverse", "And", "Or", "ExclusiveOR", "Not", "LeftShift", "RightShift", "LeftCircularShift", "RightCircularShift", "Shuffle" })]
         public ByteArrayOperation Operation
         {
             get => _stringOperationType;

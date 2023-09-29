@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2008-2021 CrypTool 2 Team <ct2contact@CrypTool.org>
+   Copyright 2008 - 2022 CrypTool Team
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
 using CrypCloud.Core;
 using CrypCloud.Manager;
 using CrypTool.Core;
@@ -1478,14 +1477,6 @@ namespace CrypTool.CrypWin
                             break;
                         case ComponentCategory.ToolsMisc:
                             cont = new GUIContainerElementsForPlugins(type, pia, navPaneItemTools, navListBoxToolsMisc, Properties.Resources.Misc);
-                            break;
-
-                        case ComponentCategory.DECRYPTProjectComponent:
-#if SHOW_DECRYPT_COMPONENTS
-                            cont = new GUIContainerElementsForPlugins(type, pia, navPaneItemDECRYPTProject, navListBoxDECRYPTProject, Properties.Resources.DECRYPTProject);
-#else
-                            cont = null;
-#endif
                             break;
 
                         default:

@@ -20,19 +20,6 @@
             <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.Keys_Sec_}" x:Name="KeysPerSecond" />
         </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
 
-        <crypanalysisviewcontrol:CrypAnalysisViewControl.AdditionalSections>
-            <crypanalysisviewcontrol:SectionControl SectionHeaderCaption="OpenCL" IsSectionVisible="{Binding IsOpenCLEnabled}"
-                                                    SectionHeaderBackground="#FF3B8EA4" SectionBackground="#AF73B7A6">
-                <crypanalysisviewcontrol:SectionViewLabelsControl>
-                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc Keys_sec_OpenCL_}" x:Name="KeysPerSecondOpenCL" />
-                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc Keys_sec_CPU_}" x:Name="KeysPerSecondCPU" />
-                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc Devices_}" x:Name="Devices" />
-                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc Work_Items_}" x:Name="WorkItems" />
-                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc Ration_}" x:Name="Ratio" />
-                </crypanalysisviewcontrol:SectionViewLabelsControl>
-            </crypanalysisviewcontrol:SectionControl>
-        </crypanalysisviewcontrol:CrypAnalysisViewControl.AdditionalSections>
-
         <crypanalysisviewcontrol:CrypAnalysisResultListView ItemsSource="{Binding Entries}" ResultItemAction="HandleResultItemAction">
             <crypanalysisviewcontrol:CrypAnalysisResultListView.View>
                 <GridView>

@@ -117,20 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Abbreveations" xml:space="preserve">
-    <value>Abkürzungen</value>
-  </data>
-  <data name="AbbreveationsBottom" xml:space="preserve">
-    <value>Maus hier platzieren</value>
-  </data>
-  <data name="AbbreveationsToolTip" xml:space="preserve">
-    <value>BF: Bloom filter
-PRR: Permanente randomisierte response
-SRR: Sofortige randomisierte response
-h: Hashfunktion
-Ws: Wahrscheinlichkeit
-Vss: Voraussetzung</value>
-  </data>
   <data name="AmountOfHashFunctionCaption" xml:space="preserve">
     <value>Anzahl der Hash-Funktionen</value>
   </data>
@@ -154,16 +140,16 @@ Vss: Voraussetzung</value>
     <value>Der Input {1} setzt die Zellen {2} in Schritt {3} des Algorithmus.</value>
   </data>
   <data name="BloomFilterInformation1" xml:space="preserve">
-    <value>Der Input </value>
+    <value>Algorithmus Schritt </value>
   </data>
   <data name="BloomFilterInformation2" xml:space="preserve">
-    <value> setzt die Zelle/Zellen </value>
+    <value>: Die </value>
   </data>
   <data name="BloomFilterInformation3" xml:space="preserve">
-    <value> im Schritt </value>
+    <value>Eingabe setzt die Zelle (</value>
   </data>
   <data name="BloomFilterInformation4" xml:space="preserve">
-    <value> des Algorithmus.</value>
+    <value>).</value>
   </data>
   <data name="BloomFilterSizeCaption" xml:space="preserve">
     <value>Größe des Bloom-Filters</value>
@@ -172,8 +158,7 @@ Vss: Voraussetzung</value>
     <value>Dies ist die Größe des booleschen Arrays, das für die Datenstruktur des Bloom-Filters verwendet wird.</value>
   </data>
   <data name="BloomFilterText" xml:space="preserve">
-    <value>Auf dieser Seite ist eine Animation des Einfügevorgangs für die Bloom-Filter-Datenstruktur zu sehen. 
-Die Animation kann über die Schaltflächen in der oberen Leiste gesteuert werden.</value>
+    <value>Auf dieser Seite ist eine Animation des Einfügevorgangs für die Bloom-Filter-Datenstruktur zu sehen. Die Animation kann über die Schaltflächen in der oberen Leiste gesteuert werden. Um das Tool zu starten, klicken Sie bitte auf den Starten-Button im oberen Bereich von CT2. Die Ausführung des Tools kann dann über den Schieberegler für die Animationsgeschwindigkeit und die fünf Schaltflächen im oberen Bereich des Bloom-Filter-Tools gesteuert werden. Weitere Anleitungen zur Nutzung des Tools finden Sie in der RAPPOR-Online-Hilfe.</value>
   </data>
   <data name="DataSet" xml:space="preserve">
     <value>Datensatz</value>
@@ -202,10 +187,7 @@ Die Animation kann über die Schaltflächen in der oberen Leiste gesteuert werde
     <value>Heatmap</value>
   </data>
   <data name="HeatMapViewText" xml:space="preserve">
-    <value>Diese Seite zeigt eine Heatmap, die visualisiert, wie oft 
-eine Zelle des Booleschen Arrays gesetzt wurde.
-Zellen des Boolschen Arrays stellen hierbei ein Bit in der 0-1 Sequenz da.
-Die Farbe der Legende zeigt wie häufig das Bit auf 1 gesetzt wurde.</value>
+    <value>Diese Seite bietet eine Heatmap, die veranschaulicht, wie oft eine Zelle des booleschen Arrays gesetzt wurde. Jede Zelle des booleschen Arrays stellt ein Bit in der 0-1-Sequenz dar. Die Farbe der Legende zeigt an, wie oft das Bit in allen Iterationen auf 1 gesetzt wurde. Die erste Zeile zeigt die Verteilung des Bloom-Filters über alle Iterationen. Es ist zu erkennen, dass der Bloom-Filter in jeder Iteration immer die gleichen Zellen setzt, da diese in rot dargestellt sind, während Zellen, die nicht gesetzt wurden, in schwarz dargestellt sind. Die zweite Zeile zeigt die Verteilung der PRR über alle {0} Iterationen. Die Legende auf der linken Seite der Zeilen zeigt, dass Zellen, die während der Iterationen ca. {1} Mal gesetzt wurden, rot eingefärbt sind. Zellen, die im Verlauf der Iterationen ca. 0 Mal gesetzt wurden, sind blau gefärbt. Zellen, die während der Iterationen etwa {2} mal gesetzt wurden, sind gelb bis grün gefärbt. Die dritte Zeile zeigt die Verteilung der momentanen randomisierten Reaktion über die Iterationen.</value>
   </data>
   <data name="Input" xml:space="preserve">
     <value>Eingabe</value>
@@ -232,6 +214,18 @@ Die Farbe der Legende zeigt wie häufig das Bit auf 1 gesetzt wurde.</value>
   <data name="NextStep" xml:space="preserve">
     <value>Nächster Schritt</value>
   </data>
+  <data name="ordinalOne" xml:space="preserve">
+    <value>te </value>
+  </data>
+  <data name="ordinalRest" xml:space="preserve">
+    <value>te </value>
+  </data>
+  <data name="ordinalThree" xml:space="preserve">
+    <value>te </value>
+  </data>
+  <data name="ordinalTwo" xml:space="preserve">
+    <value>te </value>
+  </data>
   <data name="OutputCaption" xml:space="preserve">
     <value>Ausgabe</value>
   </data>
@@ -242,12 +236,7 @@ Die Farbe der Legende zeigt wie häufig das Bit auf 1 gesetzt wurde.</value>
     <value>Übersicht</value>
   </data>
   <data name="OverviewViewText" xml:space="preserve">
-    <value>Diese Seite bietet einen Überblick über die Boolesche Arrays, das durch den RAPPOR-Mechanismus erstellt wurde. Die erste Zeile
-zeigt das ursprüngliche Boolesche Array des Bloom-Filters. Die zweite Zeile zeigt das Boolesche Array 
-nach der Verarbeitung durch das PRR. Jede folgende Zeile zeigt das geänderte Boolesche Array nach der Verarbeitung durch eine SRR.
-In der Grafik steht der rote Strich für einen Eintrag in den Arrays der gesetzt ist.
-Der Schwarze Strich steht für einen Eintrag in den Arrays der nicht gesetzt ist.
-</value>
+    <value>Diese Seite bietet einen Überblick über die booleschen Arrays, welche durch RAPPOR erzeugt wurden. Die erste Zeile zeigt das ursprüngliche boolesche Array des Bloom-Filters. Die zweite Zeile zeigt das boolesche Array nach der Verarbeitung durch das PRR. Jede folgende Zeile zeigt das geänderte boolesche Array nach der Verarbeitung durch eine SRR. In der Grafik steht die rote Linie für einen booleschen Wert im Array, der auf "wahr" gesetzt ist. Die schwarze Linie steht für einen booleschen Wert in dem Array, der auf "falsch" gesetzt ist.</value>
     <comment>s</comment>
   </data>
   <data name="PauseAnimation" xml:space="preserve">
@@ -288,9 +277,7 @@ Zelle von i gesetzt wurde:</value>
     <value>Randomisierte Antwort</value>
   </data>
   <data name="RandomizedResponseText" xml:space="preserve">
-    <value>Diese Seite veranschaulicht wie das Level der Privatsphäre, welches von RAPPOR garantiert wird,
-anhand der Parameter h, f, q und p berechnet wird.
-Die Werte werden aus den ausgewählten Einstellungen der Komponente generiert.</value>
+    <value>Diese Seite veranschaulicht wie das von RAPPOR garantierte Privacy-Level epsilon (= Datenschutzbudget) anhand der Parameter h, f, q und p berechnet wird. Epsilon gleich unendlich wird von RAPPOR erzeugt, nachdem die PRR aktiviert wurde, und ist der schlimmste Fall. Epsilon gleich Eins wird von RAPPOR erzeugt, nachdem die IRR aktiviert wurde, und steht für die im allgemeinen Fall garantierte Privatsphäre. Je niedriger der epsilon-Wert ist, desto stärker ist der Schutz der Privatsphäre gewährleistet.</value>
   </data>
   <data name="RAPPOR" xml:space="preserve">
     <value>RAPPOR</value>
@@ -317,18 +304,7 @@ Die Werte werden aus den ausgewählten Einstellungen der Komponente generiert.</
     <value>Fortfahren</value>
   </data>
   <data name="ShortTutorial" xml:space="preserve">
-    <value>Um die RAPPOR-Komponente zu starten, drücken Sie die Schaltfläche
-"Starten" in der Symbolleiste oberhalb des Arbeitsbereichs.
-Sie können dann mit den 5 obigen Registerkarten durch die Komponente
-navigieren.
-Die Einstellungen der Komponente können Sie auf 3 verschiedene Arten
-aufrufen: durch Klick auf das Zahnrad-Symbol oben links in der
-Komponente; oder bei markierter Komponente durch Klick auf das
-Zahnrad-Symbol oben rechts im Arbeitsbereich oder einfach durch die
-Tastenkombination Strg + i.
-Viele weitere Informationen finden Sie in der Onlinehilfe.
-Klicken Sie nun auf "Übersicht".
-</value>
+    <value>Um die RAPPOR-Komponente zu starten, drücken Sie die Schaltfläche "Starten" in der Symbolleiste oberhalb des Arbeitsbereichs. Mit den fünf obigen Registerkarten können Sie durch diese Komponente navigieren. Die Einstellungen der Komponente können Sie auf drei verschiedene Arten aufrufen: (1) durch Klicken auf das Zahnrad-Symbol oben links in der Komponente; oder (2) bei markierter Komponente durch Klicken auf das Zahnrad-Symbol oben rechts im Arbeitsbereich oder (3) einfach durch die Tastenkombination Strg + i. Weitere Informationen finden Sie in der Onlinehilfe. Klicken Sie auf Starten und dann auf die Registerkarte "Übersicht".</value>
     <comment>Short tutorial on how to use the RAPPOR component. Be sure to conserve the linebreaks in translation</comment>
   </data>
   <data name="Start" xml:space="preserve">

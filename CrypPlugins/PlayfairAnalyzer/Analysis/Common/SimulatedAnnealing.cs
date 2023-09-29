@@ -26,19 +26,16 @@ namespace PlayfairAnalysis.Common
             this.utils = utils;
         }
 
-        public bool acceptHexaScore(long newScore, long currLocalScore, int multiplier)
+        public bool AcceptHexaScore(long newScore, long currLocalScore, int multiplier)
         {
-
-            //return accept(newScore, currLocalScore, 275.0 * multiplier / 20.0);
-            return accept(newScore, currLocalScore, 13.75 * multiplier);
+            return Accept(newScore, currLocalScore, 13.75 * multiplier);
 
         }
 
         private readonly double minRatio = Math.Log(0.0085);
 
-        public bool accept(long newScore, long currLocalScore, double temperature)
+        public bool Accept(long newScore, long currLocalScore, double temperature)
         {
-
             long diffScore = newScore - currLocalScore;
             if (diffScore > 0)
             {
@@ -49,9 +46,7 @@ namespace PlayfairAnalysis.Common
                 return false;
             }
             double ratio = diffScore / temperature;
-            return ratio > minRatio && Math.Pow(Math.E, ratio) > utils.randomNextDouble();
-
+            return ratio > minRatio && Math.Pow(Math.E, ratio) > utils.RandomNextDouble();
         }
     }
-
 }

@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<documentation>
+  <language culture="en"/>    
+  <language culture="de-DE"/>
+
+  <introduction lang="en">
+    ElsieFour (also known as LC4) was developed by Alan Kaminsky.
+    It is a cipher that can be computed by hand.
+    ElsieFour is intended for encrypted communication between humans and therefore encrypts plaintexts consisting only of the English letters A to Z and some other characters.
+    <newline/>
+    <newline/>
+    ElsieFour is based on the well-known modern stream cipher RC4 (thats why it is abbreviated LC4).
+    The RC4 cipher is probably the simplest modern encryption algorithm which was in widespread use.
+    However, since RC4 is considered insecure and broken, it is no longer used today for any security purposes.
+  </introduction>
+
+  <introduction lang="de-DE">
+    ElsieFour (auch bekannt als LC4) wurde von Alan Kaminsky entwickelt.
+    Es handelt sich um eine Chiffre, die von Hand durchgeführt werden kann.
+    ElsieFour ist für die verschlüsselte Kommunikation zwischen Menschen gedacht und verschlüsselt daher Klartexte, die nur aus den englischen Buchstaben A bis Z und einigen anderen Zeichen bestehen.
+    <newline/>
+    <newline/>
+    ElsieFour basiert auf der bekannten modernen Stromchiffre RC4 (daher auch die Abkürzung LC4).
+    Die RC4-Chiffre ist wahrscheinlich der einfachste moderne Verschlüsselungsalgorithmus, der weit verbreitet war.
+    Da RC4 jedoch als unsicher und gebrochen gilt, wird er heute nicht mehr für Sicherheitszwecke verwendet.
+  </introduction>
+
+  <usage lang="en">
+    ElsieFour encrypts plaintexts consisting of the following 36 characters:<newline/>
+    <newline/>
+    # _ 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z<newline/>
+    <newline/>
+    Internally, these characters are treated like the numbers 0 to 35. The character # is used instead of the digit 0 to avoid confusion with the capital letter O. The character _ is used instead of the digit 1 to avoid confusion with the upper case letter I and the lower case letter l. The characters # and _ can be used as separators in plain text.<newline/>
+    <newline/>
+    The key that ElsieFour uses is a permutation of the integers 0 through 35 (or the 36 characters mentioned above). Here is an example key:<newline/>
+    <newline/>
+    hwqnazb3x_ie497g5oysltcvfprd82u#6jmk<newline/>
+    <newline/>
+    The size of the key space is 36!, which corresponds to a 138-bit key.<newline/>
+    <newline/>
+    ElsieFour uses a 6×6 matrix S (&quot;state matrix&quot;), which contains a permutation of the integers 0 through 35 and two indices i and j. These indices are used to define a matrix element S[i][j] (the first index is the row, the second index is the column).
+    <newline/>
+    Before the actual encryption begins, the state matrix is initialized as follows:<newline/>
+    <newline/>
+    For k=0 to 35: S[k/6][k mod 6] = K[k]<newline/>
+    <newline/>
+    To encrypt, the following steps are performed for each plaintext character P:<newline/>
+    <newline/>
+    r = row of S in which P appears (0 ≤ r ≤ 5).<newline/>
+    c = column of S in which P appears (0 ≤ c ≤ 5)<newline/>
+    x = (r + (S[i][j] / 6)) mod 6<newline/>
+    y = (c + (S[i][j] mod 6)) mod 6<newline/>
+    C = S[x][y]<newline/>
+    Output C<newline/>
+    Right-rotate row r of S<newline/>
+    Down-rotate column y of S<newline/>
+    i = (i + (C / 6)) mod 6<newline/>
+    j = (j + (C mod 6)) mod 6<newline/>
+    <newline/>
+    C is the character of the ciphertext.<newline/>
+    <newline/>
+    The subroutine &quot;Right-rotate row r of S&quot; is:<newline/>
+    <newline/>
+    (S[r][0], S[r][1], S[r][2], S[r][3], S[r][4], S[r][5]) = (S[r][5], S[r][0], S[r][1], S[r][2], S[r][3], S[r][4])
+    c ← (c + 1) mod 6<newline/>
+    If x = r: y = (y + 1) mod 6<newline/>
+    If i = r: j = (j + 1) mod 6<newline/>
+    <newline/>
+    The &quot;Down-rotate column y of S&quot; subroutine is:<newline/>
+    <newline/>
+    (S[0][y], S[1][y], S[2][y], S[3][y], S[4][y], S[5][y]) = (S[5][y], S[0][y], S[1][y], S[2][y], S[3][y], S[4][y])x ← (x + 1) mod 6.<newline/>
+    If c = y: r = (r + 1) mod 6<newline/>
+    If j = y: i = (i + 1) mod 6
+  </usage>
+
+  <usage lang="de-DE">
+    ElsieFour verschlüsselt Klartexte, die aus den folgenden 36 Zeichen bestehen:<newline/>
+    <newline/>
+    # _ 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z<newline/>
+    <newline/>
+    Intern werden diese Zeichen wie die Zahlen 0 bis 35 behandelt. Das Zeichen # wird anstelle der Ziffer 0 verwendet, um Verwechslungen mit dem Großbuchstaben O zu vermeiden. Das Zeichen _ wird anstelle der Ziffer 1 verwendet, um Verwechslungen mit dem Großbuchstaben I und dem Kleinbuchstaben l zu vermeiden. Die Zeichen # und _ können als Trennzeichen in einfachem Text verwendet werden.<newline/>
+    <Neue Zeile=""/>
+    Der Schlüssel, den ElsieFour verwendet, ist eine Permutation der ganzen Zahlen 0 bis 35 (oder der oben genannten 36 Zeichen). Hier ist ein Beispielschlüssel:<newline/>
+    <newline/>
+    hwqnazb3x_ie497g5oysltcvfprd82u#6jmk<newline/>
+    <newline/>
+    Die Größe des Schlüsselraums beträgt 36!, was einem 138-Bit-Schlüssel entspricht.<newline/>
+    <newline/>
+    ElsieFour verwendet eine 6×6-Matrix S (&quot;Zustandsmatrix&quot;), die eine Permutation der ganzen Zahlen 0 bis 35 und zwei Indizes i und j enthält. Diese Indizes werden verwendet, um ein Matrixelement S[i][j] zu definieren (der erste Index ist die Zeile, der zweite Index ist die Spalte).<newline/>
+    <newline/>
+    Bevor die eigentliche Verschlüsselung beginnt, wird die Zustandsmatrix wie folgt initialisiert:<newline/>
+    <newline/>
+    Für k=0 bis 35: S[k/6][k mod 6] = K[k]<newline/>
+    <newline/>
+    Zum Verschlüsseln werden für jedes Klartextzeichen P die folgenden Schritte durchgeführt:<newline/>
+    <newline/>
+    r = Zeile von S, in der P erscheint (0 ≤ r ≤ 5).<newline/>
+    c = Spalte von S, in der P vorkommt (0 ≤ c ≤ 5)<newline/>
+    x = (r + (S[i][j] / 6)) mod 6<newline/>
+    y = (c + (S[i][j] mod 6)) mod 6<newline/>
+    C = S[x][y]<newline/>
+    Ausgabe C<newline/>
+    Right-rotate row r of S<newline/>
+    Down-rotate column y of S<newline/>
+    i = (i + (C / 6)) mod 6<newline/>
+    j = (j + (C mod 6)) mod 6<newline/>
+    <newline/>
+    C ist der Geheimtext.<newline/>
+    <newline/>
+    Die Unterroutine &quot;Right-rotate row r of S&quot; ist:<newline/>
+    <newline/>
+    (S[r][0], S[r][1], S[r][2], S[r][3], S[r][4], S[r][5]) = (S[r][5], S[r][0], S[r][1], S[r][2], S[r][3], S[r][4])
+    c ← (c + 1) mod 6<newline/>
+    Wenn x = r: y = (y + 1) mod 6<newline/>
+    Wenn i = r: j = (j + 1) mod 6<newline/>
+    <newline/>
+    Das Unterprogramm &quot;Down-rotate column y of S&quot; lautet:<newline/>
+    <newline/>
+    (S[0][y], S[1][y], S[2][y], S[3][y], S[4][y], S[5][y]) = (S[5][y], S[0][y], S[1][y], S[2][y], S[3][y], S[4][y])x ← (x + 1) mod 6.<newline/>
+    Wenn c = y: r = (r + 1) mod 6<newline/>
+    Wenn j = y: i = (i + 1) mod 6
+  </usage>
+  
+  <presentation lang="en">
+  </presentation>
+  
+  <presentation lang="de-DE">
+  </presentation>
+
+  <references>
+  </references>
+</documentation>

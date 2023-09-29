@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 //Extra system library for the bloom filter
 using System.Collections;
 using System.ComponentModel;
@@ -36,6 +36,8 @@ namespace RAPPOR.Model
         /// <summary>The history of the bloom filter. This represents the results of every
         /// hash function calculation for every input string.</summary>
         private readonly int[][] history;
+
+        private Boolean running;
 
         /// <summary>
         /// Initializes the instance of the Bloom filter. It initialized the given parameters of
@@ -87,6 +89,54 @@ namespace RAPPOR.Model
                     boolArray[i] = hashBits.Get(i);
                 }
             }
+
+            
+        }
+
+        public BloomFilter(string[] input, int sizeOfBloomFilter, int amountOfHashFunctions, Boolean ru)
+        {
+            _amountOfHashFunctions = amountOfHashFunctions;
+
+            _sizeOfBloomFilter = sizeOfBloomFilter;
+
+            boolArray = new bool[_sizeOfBloomFilter];
+
+            //The input is being split in an string array with the divider ','.
+            stringArray = input;
+
+            hashBits = new BitArray(_sizeOfBloomFilter);
+
+            //Creating the history for the bloom filter animation
+            history = new int[stringArray.Length][];
+            for (int i = 0; i < stringArray.Length; i++)
+            {
+                history[i] = new int[amountOfHashFunctions];
+            }
+            //Adding the input to the Bloom filter bit array
+            for (int i = 0; i < stringArray.Length; i++)
+            {
+                Add(stringArray[i], history[i]);
+            }
+
+            //Creating a boolean array and filling the bit values in there.
+            if (input[0] == "" && input.Length == 1)
+            {
+                for (int i = 0; i < _sizeOfBloomFilter; i++)
+                {
+                    boolArray[i] = false;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < _sizeOfBloomFilter; i++)
+                {
+                    boolArray[i] = hashBits.Get(i);
+                }
+            }
+
+            running = ru;
+            SetIsActionPossible(ru);
+
         }
 
         #region Internal methods of the Bloom filter
@@ -232,6 +282,23 @@ namespace RAPPOR.Model
                 _BloomFilterArray = value;
                 OnPropertyChanged("BloomFilterArray");
             }
+        }
+
+        //Disabling button infrastructure
+        private bool _isActionPossible;
+        public bool IsActionPossible
+        {
+            get { return _isActionPossible; }
+            set
+            {
+                _isActionPossible = value;
+                OnPropertyChanged("IsActionPossible");
+            }
+        }
+
+        public void SetIsActionPossible(bool isActionPossible)
+        {
+            IsActionPossible = isActionPossible;
         }
     }
 }

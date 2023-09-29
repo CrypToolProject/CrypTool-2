@@ -133,10 +133,10 @@
     <value>Liest die Einträge einer Wörterbuch-Datei und gibt sie als eine Wortliste oder als eine einzelne Zeichenfolge zurück, die aus den Wörtern mittels eines Trennzeichens zusammengefügt wird</value>
   </data>
   <data name="OutputStringCaption" xml:space="preserve">
-    <value>Wörterbuch-Ausgabe (veraltet)</value>
+    <value>Wörterbuch-Ausgabe</value>
   </data>
   <data name="OutputStringTooltip" xml:space="preserve">
-    <value>Ausgabe des Wörterbuchs als einzelne Zeichenfolge (veraltet)</value>
+    <value>Ausgabe des Wörterbuchs als einzelne Zeichenfolge</value>
   </data>
   <data name="OutputListCaption" xml:space="preserve">
     <value>Wörterbuch-Ausgabe</value>
@@ -167,5 +167,8 @@
   </data>
   <data name="NumberEntriesTooltip" xml:space="preserve">
     <value>Anzahl der Einträge im aktuellen Wörterbuch</value>
+  </data>
+  <data name="NoDictChosen" xml:space="preserve">
+    <value>Kein Wörterbuch ausgewählt.</value>
   </data>
 </root>

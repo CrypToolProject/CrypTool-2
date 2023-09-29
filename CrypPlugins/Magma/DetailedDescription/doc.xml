@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<documentation>
+  <language culture="en"/>
+  <language culture="de-DE"/>
+
+  <introduction lang="en">
+    Magma, defined in the standard GOST 28147-89 (RFC 5830), is a Soviet and Russian block cipher of the GOST standard first published in 1994. It has a blocksize of 64 bits and a keysize of 128 bits.
+    The original standard published in 1989 did not give a name to the cipher, but the most recent revision of the standard, GOST R 34.12-2015 (RFC 7801, RFC 8891), specifies that it may be referred to as Magma.
+    The GOST hash function is based on this cipher. The new standard also specifies a new 128-bit block cipher called Kuznyechik.<newline/>
+    <newline/>
+    Developed in the 1970s, the standard had been marked &quot;Top Secret&quot; and then downgraded to &quot;Secret&quot; in 1990.
+    Shortly after the dissolution of the USSR, the cipher was declassified and it was released to the public in 1994.
+    GOST 28147 was a Soviet alternative to the United States standard algorithm, the DES.
+    Thus, the two are very similar in structure.<newline/>
+    <newline/>
+    The S-boxes accept a four-bit input and produce a four-bit output. The S-box substitution in the round function consists of eight 4×4 S-boxes.
+    The S-boxes are implementation-dependent, thus parties that want to secure their communications using GOST must be using the same S-boxes.
+    For extra security, the S-boxes can be kept secret. In the original standard where GOST was specified, no S-boxes were given, but they were to be supplied somehow.
+    This led to speculation that organizations the government wished to spy on were given weak S-boxes.
+    One GOST chip manufacturer reported that he generated S-boxes himself using a pseudorandom number generator.<newline/>
+    <newline/>
+    The CT2 component Magma allows to define your own set of S-boxes by providing a byte array of length 128 bytes to the component.
+    In the settings, the user can choose between two variants of pre-defined S-boxes: One set of S-boxes is from the standard GOST R 34.12-2015 and the other one is from the &quot;Central Bank of Russian Federation&quot;.<newline/>
+    <newline/>
+    The introduction has been mostly copied from the English Wikipedia article. For more details read <ref id="wikipedia"/>.
+  </introduction>
+
+  <introduction lang="de-DE">
+    Magma, definiert in dem Standard GOST 28147-89 (RFC 5830), ist eine sowjetische und russische Blockchiffre nach dem GOST-Standard, die erstmals 1994 veröffentlicht wurde. Sie hat eine Blockgröße von 64 Bit und eine Schlüsselgröße von 128 Bit.
+    Der ursprüngliche, 1989 veröffentlichte Standard gab der Chiffre keinen Namen, aber die jüngste Revision des Standards, GOST R 34.12-2015 (RFC 7801, RFC 8891), legt fest, dass sie als Magma bezeichnet werden kann.
+    Die GOST-Hash-Funktion basiert auf dieser Chiffre. Der neue Standard spezifiziert auch eine neue 128-Bit-Blockchiffre namens Kuznyechik.<newline/>
+    <newline/>
+    Der in den 1970er Jahren entwickelte Standard war als &quot;Streng geheim&quot; gekennzeichnet worden und wurde dann 1990 auf &quot;Geheim&quot; herabgestuft.
+    Kurz nach der Auflösung der UdSSR wurde die Chiffre deklassifiziert und 1994 der Öffentlichkeit zugänglich gemacht.
+    GOST 28147 war eine sowjetische Alternative zum Standardalgorithmus der Vereinigten Staaten, dem DES.
+    Daher sind die beiden Algorithmen in ihrer Struktur sehr ähnlich.
+    <newline/>
+    Die S-Boxen erwarten eine Vier-Bit-Eingabe und erzeugen eine Vier-Bit-Ausgabe. Die S-Box-Substitution in der Runden-Funktion besteht aus acht 4×4 S-Boxen.
+    Die S-Boxen sind implementierungsabhängig, so dass die Parteien, die ihre Kommunikation mit GOST sichern wollen, dieselben S-Boxen verwenden müssen.
+    Für zusätzliche Sicherheit können die S-Boxen geheim gehalten werden. In dem ursprünglichen Standard, in dem GOST spezifiziert war, wurden keine S-Boxen angegeben, sondern sie sollten irgendwie bereitgestellt werden.
+    Dies führte zu Spekulationen, dass Organisationen, die die Regierung ausspionieren wollte, schwache S-Boxen erhielten.
+    Ein GOST-Hersteller berichtete, dass er die S-Boxen selbst mit einem Pseudozufallszahlengenerator erzeugt hat.<newline/>
+    <newline/>
+    Die CT2-Komponente Magma erlaubt es, eigene S-Boxen zu definieren, indem man der Komponente ein Byte-Array der Länge 128 Bytes zur Verfügung stellt.
+    In den Einstellungen kann der Benutzer zwischen zwei Varianten von vordefinierten S-Boxen wählen: Ein Satz von S-Boxen stammt aus dem Standard GOST R 34.12-2015 und der andere ist von der &quot;Zentralbank der Russischen Föderation&quot;.<newline/>
+    <newline/>
+    Diese Einleitung wurde größtenteils aus dem englischen Wikipedia-Artikel kopiert. Für mehr Details siehe <ref id="wikipedia"/>.
+  </introduction>
+
+  <usage lang="en">
+  </usage>
+
+  <usage lang="de-DE">
+  </usage>
+  
+  <presentation lang="en">
+  </presentation>
+  
+  <presentation lang="de-DE">
+  </presentation>
+  
+  <references>
+    <linkReference id="wikipedia">
+      <link lang="en" url="https://en.wikipedia.org/wiki/GOST_(block_cipher)"/>
+      <caption lang="en">GOST (block cipher) on Wikipedia</caption>
+      <link lang="de-DE" url="https://en.wikipedia.org/wiki/GOST_(block_cipher)"/>
+      <caption lang="de-DE">GOST (block cipher) in der Englischen Wikipedia</caption>
+    </linkReference>
+  </references>
+</documentation>

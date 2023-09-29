@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace RAPPOR
 {
@@ -22,5 +23,7 @@ namespace RAPPOR
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
+
+
     }
 }

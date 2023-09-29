@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component allows to cryptanalyze a ciphertext encrypted by the Josse cipher using hill climbing or simulated annealing. The ideas behind the implemented attacks are based on a paper written by George Lasry <ref id="lasry" />.
+  </introduction>
+  <introduction lang="de-DE">
+    Diese Komponente ermöglicht die Kryptoanalyse eines mit der Josse-Chiffre verschlüsselten Geheimtexts mittels Hill climbing oder Simulated annealing. Die Ideen hinter den implementierten Angriffen basieren auf einem Paper von George Lasry <ref id="lasry" />.
+  </introduction>
+  <usage lang="en">
+    The Josse Cipher Analyzer component has one mandatory input (Ciphertext) and one optional input (Alphabet). It performs cryptanalysis on the Josse cipher. In the component's settings, you can select between Hill climbing and Simulated Annealing. Also, you can define a range of keylengths which are used during the analysis, e.g. from length 3 to length 5. The component provides two outputs: the probable plaintext as well as the corresponding keyword. The cryptanalysis takes some time until a first result is shown.
+  </usage>
+  <usage lang="de-DE">
+    Die Komponente Josse-Chiffre-Analyse hat eine notwendige Eingabe (Geheimtext) und eine optionale Eingabe (Alphabet). Die Komponente führt eine Kryptoanalyse für die Josse-Chiffre durch. In den Einstellungen der Komponente können Sie zwischen Hill climbing und Simulated Annealing wählen. Außerdem können Sie einen Bereich von Schlüssellängen definieren, die während der Analyse verwendet werden, z.B. von Länge 3 bis Länge 5. Die Komponente besitzt zwei Ausgaben: den wahrscheinlichen Klartext sowie das entsprechende Schlüsselwort. Es dauert normalerweise einige Zeit, bis ein erstes Ergebnis der Kryptoanalyse angezeigt wird.
+  </usage>
+  <presentation lang="en">
+    The presentation shows some metadata about the cryptanalysis in its header. In the lower part of the presentation, the actual cryptanalysis results are displayed in a bestlist. By double-clicking on an entry in the list, the selected values are sent to the component's output connectors.
+  </presentation>
+  <presentation lang="de-DE">
+    Die Präsentation zeigt im Kopf einige Metadaten über die Kryptoanalyse an. Im unteren Teil der Präsentation werden die eigentlichen Kryptoanalyseergebnisse in einer Bestenliste angezeigt. Durch Doppelklick auf einen Eintrag in der Liste werden die ausgewählten Werte ausgegeben.
+  </presentation>
+  <references>
+    <linkReference id="lasry">
+      <caption lang="de-DE">George Lasry. "Analysis of a Late 19th Century French Cipher Created by Major Josse". 2021</caption>
+      <caption lang="ru">George Lasry. "Analysis of a Late 19th Century French Cipher Created by Major Josse". 2021</caption>
+      <caption lang="en">George Lasry. "Analysis of a Late 19th Century French Cipher Created by Major Josse". 2021</caption>
+      <caption lang="zh-CN">George Lasry. "Analysis of a Late 19th Century French Cipher Created by Major Josse". 2021</caption>
+    </linkReference>
+  </references>
+</documentation>

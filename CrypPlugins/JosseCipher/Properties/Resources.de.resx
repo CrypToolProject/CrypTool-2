@@ -117,112 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CalculationStepOutputExplanationDeciphering" xml:space="preserve">
-    <value>Der Geheimtext "{0}" wird zu "{1}" entschlüsselt, dazu sind die folgenden Rechenschritte notwendig:</value>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>Aktion</value>
   </data>
-  <data name="CalculationStepOutputExplanationEnciphering" xml:space="preserve">
-    <value>Der Klartext "{0}" wird zu "{1}" verschlüsselt, dazu sind die folgenden Rechenschritte notwendig:</value>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Wählen Sie die Aktion der Komponente</value>
   </data>
-  <data name="ShowPlayText" xml:space="preserve">
-    <value>Bitte klicken Sie auf "Starten", um die Visualisierung anzuzeigen</value>
+  <data name="CharacterMapping" xml:space="preserve">
+    <value>Buchstaben-Mapping</value>
   </data>
-  <data name="DefaultAlphabet" xml:space="preserve">
-    <value>abcdefghijklmnopqrstuvxyz</value>
+  <data name="Decrypt" xml:space="preserve">
+    <value>Entschlüsseln</value>
   </data>
-  <data name="Mode" xml:space="preserve">
-    <value>Modus</value>
+  <data name="EnablePeriodCaption" xml:space="preserve">
+    <value>Periode einschalten</value>
   </data>
-  <data name="ModeActionDecrypt" xml:space="preserve">
-    <value>Entschlüsselung</value>
+  <data name="EnablePeriodTooltip" xml:space="preserve">
+    <value>Der Klartext oder Chiffretext wird in Blöcke einer bestimmten Länge (der Periode) aufgeteilt. Jeder Block wird separat verschlüsselt oder entschlüsselt</value>
   </data>
-  <data name="ModeActionEncrypt" xml:space="preserve">
-    <value>Verschlüsselung</value>
+  <data name="Encrypt" xml:space="preserve">
+    <value>Verschlüsseln</value>
   </data>
-  <data name="ModeTooltip" xml:space="preserve">
-    <value>Stellt ein, ob die Komponente zum Ver- oder Entschlüsseln verwendet wird</value>
+  <data name="InputAlphabetCaption" xml:space="preserve">
+    <value>Alphabet</value>
   </data>
-  <data name="OutputTextCaption" xml:space="preserve">
-    <value>Textausgabe</value>
-  </data>
-  <data name="OutputTextTooltip" xml:space="preserve">
-    <value>Ausgabetext, nachdem er mit der Josse-Chiffre verarbeitet wurde</value>
+  <data name="InputAlphabetTooltip" xml:space="preserve">
+    <value>Welches Alphabet sollte bei der Ausführung verwendet werden?</value>
   </data>
   <data name="InputTextCaption" xml:space="preserve">
-    <value>Texteingabe</value>
+    <value>Eingabe-Text</value>
   </data>
   <data name="InputTextTooltip" xml:space="preserve">
-    <value>Text der ver- oder entschlüsselt wird</value>
+    <value>Eingabe einer Zeichenkette, die von der Chiffre verarbeitet werden soll</value>
   </data>
-  <data name="EncipheringInputText" xml:space="preserve">
-    <value>Verschlüssele {0}</value>
+  <data name="KeyCaption" xml:space="preserve">
+    <value>Schlüsselwort</value>
   </data>
-  <data name="Plaintext" xml:space="preserve">
-    <value>Klartext</value>
+  <data name="KeyTooltip" xml:space="preserve">
+    <value>Für die Ver- oder Entschlüsselung verwendetes Schlüsselwort</value>
   </data>
-  <data name="NumericalRepresentation" xml:space="preserve">
-    <value>Numerische Darstellung</value>
+  <data name="OutputTextCaption" xml:space="preserve">
+    <value>Ausgabe-Text</value>
   </data>
-  <data name="Calculation" xml:space="preserve">
-    <value>Berechnung</value>
+  <data name="OutputTextTooltip" xml:space="preserve">
+    <value>Ergebnis der Verschlüsselung</value>
   </data>
-  <data name="Result" xml:space="preserve">
-    <value>Ergebnis</value>
+  <data name="PeriodCaption" xml:space="preserve">
+    <value>Periode</value>
   </data>
-  <data name="Ciphertext" xml:space="preserve">
-    <value>Geheimtext</value>
+  <data name="PeriodTooltip" xml:space="preserve">
+    <value>Größe der Blöcke (Periode) die bei der Ver- oder Entschlüsselung verwendet werden sollen</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>Josse-Chiffre</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>Eine französische Chiffre aus dem späten 19. Jahrhundert</value>
+    <value>Implementierung der Josse-Chiffre</value>
   </data>
-  <data name="Keyword" xml:space="preserve">
-    <value>Schlüsselwort</value>
+  <data name="Rectangle" xml:space="preserve">
+    <value>Quadrat</value>
   </data>
-  <data name="KeywordToolTip" xml:space="preserve">
-    <value>Schlüsselwort für das Erstellen der Ersetzungstabelle</value>
-  </data>
-  <data name="InputAlphabetCaption" xml:space="preserve">
-    <value>Externes Alphabet</value>
-  </data>
-  <data name="InputAlphabetTooltip" xml:space="preserve">
-    <value>Eingang für das Alphabet</value>
-  </data>
-  <data name="Index" xml:space="preserve">
-    <value>Index</value>
-  </data>
-  <data name="CalculationStepOutputCaption" xml:space="preserve">
-    <value>Berechnungsschritte</value>
-  </data>
-  <data name="CalculationStepOutputTooltip" xml:space="preserve">
-    <value>Ausgabe für die Berechnungsschritte des Verfahrens</value>
-  </data>
-  <data name="Char" xml:space="preserve">
-    <value>Zeichen</value>
-  </data>
-  <data name="DuplicateCharsRemoved" xml:space="preserve">
-    <value>Doppelte Zeichen im Schlüssel wurden entfernt</value>
-  </data>
-  <data name="ReplacementTableTab" xml:space="preserve">
-    <value>Ersetzungstabelle</value>
-  </data>
-  <data name="CharacterMappingTableTap" xml:space="preserve">
-    <value>Buchstabenzuordnung</value>
-  </data>
-  <data name="Alphabet" xml:space="preserve">
-    <value>Alphabet</value>
-  </data>
-  <data name="AlphabetTooltip" xml:space="preserve">
-    <value>Das Alphabet, das von der Josse-Chiffre verwendet wird</value>
-  </data>
-  <data name="KeywordTooShort" xml:space="preserve">
-    <value>Kein Schlüsselwort angegeben. Es wird eine Standard-Schlüssellänge von 5 Zeichen genutzt</value>
-  </data>
-  <data name="UnknownChar" xml:space="preserve">
-    <value>Der eingegebene Text enthält unbekannte Zeichen ({0}). Diese werden im weiteren Prozess ignoriert</value>
-  </data>
-  <data name="DefaultKeyword" xml:space="preserve">
-    <value>geheim</value>
+  <data name="ShowPlayText" xml:space="preserve">
+    <value>Drücken Sie Start um die Arbeitsfläche zu starten</value>
   </data>
 </root>

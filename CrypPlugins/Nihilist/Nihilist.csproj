@@ -8,7 +8,7 @@
     <ProjectGuid>{FB8BAD02-DDE2-411E-A495-071232CFDE58}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nihilist</RootNamespace>
+    <RootNamespace>CrypTool.Nihilist</RootNamespace>
     <AssemblyName>Nihilist</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,7 @@
     <Resource Include="DetailedDescription\doc.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\icon3.png" />
+    <Resource Include="Images\icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -389,12 +389,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         public IKeyTranslator GetKeyTranslator()
         {
             return new KeySearcher.KeyTranslators.ByteArrayKeyTranslator();
-        }
-
-        public string GetOpenCLCode(int decryptionLength, byte[] iv)
-        {
-            throw new NotImplementedException();
-        }
+        }     
 
         public void ChangeSettings(string setting, object value)
         {

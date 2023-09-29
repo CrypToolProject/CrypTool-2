@@ -14,16 +14,13 @@
    limitations under the License.
 */
 
-// using CrypTool.PluginBase.Miscellaneous; // for [MethodImpl(MethodImplOptions.Synchronized)]
 using CrypTool.LFSR.Implementation;
 using CrypTool.PluginBase;
-using CrypTool.PluginBase.Utils;
-using CrypTool.PluginBase.Utils.Datatypes;
-using CrypTool.PluginBase.Utils.StandaloneComponent.Compat;
+using CrypTool.LFSR.Utils;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Controls;
-using static CrypTool.PluginBase.Utils.Datatypes.Datatypes;
+using static CrypTool.LFSR.Utils.Datatypes;
 
 namespace CrypTool.LFSR
 {
@@ -309,8 +306,8 @@ namespace CrypTool.LFSR
 
         private static string BuildPolynomialFromBinary(char[] tapSequence, int roundNumber)
         {
-            string polyDescription = CrypTool.LFSR.Properties.Resources.RoundNumber + " " + roundNumber + "; ";
-            polyDescription += CrypTool.LFSR.Properties.Resources.Feedback_polynomial + ": \n";
+            string polyDescription = CrypTool.LFSR.Properties.Resources.RoundNumber + " " + roundNumber + "  ";
+            polyDescription += CrypTool.LFSR.Properties.Resources.Feedback_polynomial + ": ";
 
             StringBuilder polynomialBuilder = new StringBuilder();
             polynomialBuilder.Append(polyDescription);

@@ -355,10 +355,10 @@
     <value>Textausgabe</value>
   </data>
   <data name="OutputStringTooltip" xml:space="preserve">
-    <value>Der mit der M209-Chiffre verschlüsselte oder entschlüsselte Text</value>
+    <value>Der mit der M-209-Chiffre verschlüsselte oder entschlüsselte Text</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
-    <value>M209</value>
+    <value>M-209</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
     <value>Verschlüsselungsmaschine, die vom US-Militär im Zweiten Weltkrieg benutzt wurde</value>

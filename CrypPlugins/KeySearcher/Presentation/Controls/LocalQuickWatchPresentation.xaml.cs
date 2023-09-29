@@ -17,29 +17,7 @@ namespace KeySearcherPresentation.Controls
         }
 
         public ObservableCollection<ResultEntry> Entries { get; } = new ObservableCollection<ResultEntry>();
-
-        private int amountOfDevices;
-        public int AmountOfDevices
-        {
-            get => amountOfDevices;
-            set
-            {
-                amountOfDevices = value;
-                Devices.Value = amountOfDevices.ToString();
-            }
-        }
-
-        public static readonly DependencyProperty IsOpenCLEnabledProperty =
-            DependencyProperty.Register("IsOpenCLEnabled",
-                typeof(bool),
-                typeof(LocalQuickWatchPresentation), new PropertyMetadata(false));
-
-        public bool IsOpenCLEnabled
-        {
-            get => (bool)GetValue(IsOpenCLEnabledProperty);
-            set => SetValue(IsOpenCLEnabledProperty, value);
-        }
-
+        
         public LocalQuickWatchPresentation()
         {
             InitializeComponent();

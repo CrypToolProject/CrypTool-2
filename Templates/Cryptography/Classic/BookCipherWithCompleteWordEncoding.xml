@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: BookCipherWithCompleteWordEncoding.xml-->
+  <!--Last edited: 2022.12.23-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Book Cipher with Complete Word Encoding</title>
+  <summary lang="en">This template shows how the <i>Book cipher</i> can be used with complete words.</summary>
+  <description lang="en">With this template we illustrate the encryption using a book cipher with complete words.</description>
+  <keywords>book, code, homophonic, substitution</keywords>
+  <replacements lang="en">
+    <replacement key="$BookCipher$" value="Book Cipher" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$DecryptedPlaintext$" value="Decrypted plaintext" />
+    <replacement key="$memo$" value="A {\b book cipher} is a cipher in which the key is some aspect of a book or other piece of text. Books, being common and widely available in modern times, are more convenient for this use than objects made specifically for cryptographic purposes. It is typically essential that both correspondents not only have the same book, but the same edition.\line\line
+In this template, the plaintext is encrypted by replacing complete words by the position of the word in the book. Here it uses 2 digits for the page, 3 digits for the line of the page, and 3 digits for the word position in the line. If a word occurs more than once in the key text, a random choice between the different possible code words is made." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Buch-Chiffre mit vollständiger Wortverschlüsselung</title>
+  <summary lang="de">Diese Vorlage zeigt, wie die <i>Buch-Chiffre</i> mit vollständigen Wörtern verwendet werden kann.</summary>
+  <description lang="de">Mit dieser Vorlage veranschaulichen wir die Verschlüsselung anhand einer Buch-Chiffre mit vollständigen Wörtern.</description>
+  <keywords>Buch, Code, homophonisch, Substitution</keywords>
+  <replacements lang="de">
+    <replacement key="$BookCipher$" value="Buch-Chiffre" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$DecryptedPlaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$memo$" value="Eine {\b Buch-Chiffre} ist eine Chiffre, bei der der Schlüssel ein Teil eines Buches oder eines anderen Textes ist. Da Bücher in der heutigen Zeit weit verbreitet und verfügbar sind, eignen sie sich besser für diesen Zweck als Objekte, die speziell für kryptografische Zwecke hergestellt wurden. In der Regel ist es unerlässlich, dass beide Korrespondenten nicht nur dasselbe Buch, sondern auch dieselbe Ausgabe besitzen.\line\line
+In dieser Vorlage wird der Klartext verschlüsselt, indem ganze Wörter durch die Position des Wortes im Buch ersetzt werden. Hier werden 2 Ziffern für die Seite, 3 Ziffern für die Zeile der Seite und 3 Ziffern für die Wortposition in der Zeile genutzt. Wenn ein Wort mehr als einmal im Schlüsseltext vorkommt, wird eine Zufallsauswahl zwischen den verschiedenen möglichen Codewörtern getroffen." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="BookCipherWithCompleteWordEncoding.png" />
+  <relevantPlugins>
+    <plugin name="BookCipher" />
+  </relevantPlugins>
+</sample>

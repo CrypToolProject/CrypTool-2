@@ -16,7 +16,7 @@
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Key$" value="Key" />
     <replacement key="$M-138 Analyzer$" value="M-138 Analyzer" />
-    <replacement key="$memo1$" value="This template shows a ciphertext-only attack on M-138 using a hillclimbing algorithm.\line\line Plaintext and strips are optional inputs for the M-138 Analyzer. The component &quot;Ciphertext&quot; contains a ciphertext to be analyzed. If no strips are given a default set of 25 strips is used. Each strip contains a permutation of a 26-alphabet." />
+    <replacement key="$memo1$" value="This template shows a ciphertext-only attack on M-138 using a hill-climbing algorithm.\line\line Plaintext and strips are optional inputs for the M-138 Analyzer. The component &quot;Ciphertext&quot; contains a ciphertext to be analyzed. If no strips are given a default set of 25 strips is used. Each strip contains a permutation of a 26-alphabet." />
     <replacement key="$memo2$" value="In the settings of the component &quot;M-138 Analyzer&quot;, the user can define options (parameters) like keylength and offsets to be tested and the language the plaintext is supposed to be written in. The component's output provides the found keys and their corresponding plaintext with the best values. These were evaluated using trigrams, quadgrams, and relative occurrence of characters." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
