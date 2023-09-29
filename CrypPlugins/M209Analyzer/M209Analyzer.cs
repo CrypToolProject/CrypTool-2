@@ -216,13 +216,17 @@ namespace CrypTool.Plugins.M209Analyzer
             , null);
 
             // Show never 100% if correct not found
-            if (_m209AttackManager.EvaluationCount >= _approximatedKeys)
+            if (_m209AttackManager.EvaluationCount >= _approximatedKeys && _settings.AttackMode == AttackMode.CiphertextOnly)
             {
                 ProgressChanged(0.99, 1.0);
             }
-            else
+            else if (_settings.AttackMode == AttackMode.CiphertextOnly)
             {
                 ProgressChanged(_m209AttackManager.EvaluationCount, _approximatedKeys);
+            }
+            else if (_settings.AttackMode == AttackMode.KnownPlaintext)
+            {
+                ProgressChanged(_m209AttackManager.BestList.BestResult.Score, 130_000);
             }
         }
 
