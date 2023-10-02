@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AnalysisModeLabel" xml:space="preserve">
-    <value>Analysis Modus</value>
+    <value>Analysemodus:</value>
   </data>
   <data name="AnalysisStepLabel" xml:space="preserve">
-    <value>Analysis step</value>
+    <value>Analyseschritt:</value>
   </data>
   <data name="AttackModeCaption" xml:space="preserve">
     <value>Angriffsmodus ändern</value>
@@ -139,13 +139,13 @@
     <value>Verwendete Kerne</value>
   </data>
   <data name="CurrentlyAnalyzedKeysLabel" xml:space="preserve">
-    <value>Aktuell analysierte Schlüssel</value>
+    <value>Aktuell analysierte Schlüssel:</value>
   </data>
   <data name="ElapsedTimeLabel" xml:space="preserve">
-    <value>Verstrichene Zeit</value>
+    <value>Verstrichene Zeit:</value>
   </data>
   <data name="EndTimeLabel" xml:space="preserve">
-    <value>Endzeit</value>
+    <value>Endzeit:</value>
   </data>
   <data name="ExceptionMessage" xml:space="preserve">
     <value>Es ist ein Fehler aufgetreten: {0}</value>
@@ -205,10 +205,10 @@
     <value>Wert</value>
   </data>
   <data name="SpeedLabel" xml:space="preserve">
-    <value>Geschwindigkeit</value>
+    <value>Geschwindigkeit:</value>
   </data>
   <data name="StartTimeLabel" xml:space="preserve">
-    <value>Startzeit</value>
+    <value>Startzeit:</value>
   </data>
   <data name="TextLabel" xml:space="preserve">
     <value>Text</value>
