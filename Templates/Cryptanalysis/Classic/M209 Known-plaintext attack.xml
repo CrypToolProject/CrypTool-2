@@ -18,7 +18,7 @@
 	<replacement key="$Plaintext$" value="EQUALITYZASZTHEYZWEREZFREQUENTLYZTOGETHERZMCCARTHYZHADZONEZSONZAZLADZOFZEIGHTEENZANDZTURNERZHADZANZO" />
 	<replacement key="$plaintext$" value="Plaintext" />
     <replacement key="$textoutput$" value="Decrypted text" />
-    <replacement key="$memo$" value="The known-plaintext attack uses hill climbing in three nested loops.
+    <replacement key="$memo$" value="The known-plaintext attack uses hill climbing in three nested loops.\line
 Each loop applies different kinds of transformations on the key to get the correct key.\line" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -35,7 +35,7 @@ Each loop applies different kinds of transformations on the key to get the corre
 	<replacement key="$Plaintext$" value="EQUALITYZASZTHEYZWEREZFREQUENTLYZTOGETHERZMCCARTHYZHADZONEZSONZAZLADZOFZEIGHTEENZANDZTURNERZHADZANZO" />
 	<replacement key="$plaintext$" value="Plaintext" />
     <replacement key="$textoutput$" value="Decrypted text" />
-    <replacement key="$memo$" value="Der Known-Plaintext Angriff verwendet Hillclimbin in drei verschachtelten Schleifen.
+    <replacement key="$memo$" value="Der Known-Plaintext Angriff verwendet Hillclimbin in drei verschachtelten Schleifen.\line
 Jede Schleife wendet verschiedene Arten von Transformationen auf den Schlüssel an um den richtigen Schlüssel zu erhalten.\line" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
