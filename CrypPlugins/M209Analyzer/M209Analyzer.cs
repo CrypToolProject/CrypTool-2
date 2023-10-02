@@ -226,7 +226,14 @@ namespace CrypTool.Plugins.M209Analyzer
             }
             else if (_settings.AttackMode == AttackMode.KnownPlaintext)
             {
-                ProgressChanged(_m209AttackManager.BestList.BestResult.Score, 130_000);
+                if (_presentation.BestList.Count > 0)
+                {
+                    ProgressChanged(_presentation.BestList[0].Value, 130_000);
+                }
+                else
+                {
+                    ProgressChanged(0, 130_000);
+                }
             }
         }
 
