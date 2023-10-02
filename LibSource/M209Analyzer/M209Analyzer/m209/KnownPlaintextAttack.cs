@@ -72,7 +72,8 @@ namespace M209AnalyzerLib.M209
 
         public static void Solve(Key key, M209AttackManager attackManager, LocalState localState)
         {
-            int RANDOM_CYCLES = 100;
+            int randomCycles = 100;
+            attackManager.ProgressChanged("Known-Plaintext", "", 1, randomCycles);
 
             if (attackManager.Cycles == 0)
             {
@@ -87,7 +88,7 @@ namespace M209AnalyzerLib.M209
 
                 int semiRestarts = 8;
 
-                double newEval = RandomizePinsAndLugs(key, true, true, attackManager.SearchSlide, RANDOM_CYCLES, cycle, attackManager);
+                double newEval = RandomizePinsAndLugs(key, true, true, attackManager.SearchSlide, randomCycles, cycle, attackManager);
 
                 do
                 {
@@ -97,6 +98,8 @@ namespace M209AnalyzerLib.M209
                     localState.Restarts = cycle;
                     localState.SingleIteration = false;
                     localState.Quick = false;
+
+                    attackManager.ProgressChanged("Known-Plaintext", "First hill climbing loop", 1, 1);
                     newEval = HillClimbLugs.HillClimb(key, EvalType.CRIB, attackManager, localState);
                     if (newEval > old)
                     {
@@ -105,6 +108,8 @@ namespace M209AnalyzerLib.M209
 
                     newEval = SimulatedAnnealingPins.SA(key, EvalType.CRIB, newEval > 128000 ? 20 : 5, attackManager);
                     localState.SingleIteration = false;
+
+                    attackManager.ProgressChanged("Known-Plaintext", "Second hill climbing loop", 1, 1);
                     newEval = HillClimbPins.HillClimb(key, EvalType.CRIB, false, attackManager, localState);
                     if (newEval > old)
                     {
@@ -130,6 +135,7 @@ namespace M209AnalyzerLib.M209
                                 localState.Restarts = cycle;
                                 localState.SingleIteration = true;
                                 localState.Quick = false;
+                                attackManager.ProgressChanged("Known-Plaintext", "Third hill climbing loop (last >= 129000 && last < key.OriginalScore)", 1, 1);
                                 newEval = HillClimbLugs.HillClimb(key, EvalType.PINS_SA_CRIB, attackManager, localState); // Single iteration, print
                                 if (newEval > last)
                                 {
@@ -149,16 +155,18 @@ namespace M209AnalyzerLib.M209
 
                             if ((semiRestarts % 8) != 7)
                             {
-                                RandomizePinsAndLugs(key, true, false, attackManager.SearchSlide, RANDOM_CYCLES, cycle, attackManager);
+                                RandomizePinsAndLugs(key, true, false, attackManager.SearchSlide, randomCycles, cycle, attackManager);
                                 localState.SingleIteration = true;
+                                attackManager.ProgressChanged("Known-Plaintext", "Third hill climbing loop ((semiRestarts % 8) != 7)", 1, 1);
                                 newEval = HillClimbPins.HillClimb(key, EvalType.CRIB, true, attackManager, localState);
                             }
                             else
                             {
-                                RandomizePinsAndLugs(key, false, true, attackManager.SearchSlide, RANDOM_CYCLES, cycle, attackManager);
+                                RandomizePinsAndLugs(key, false, true, attackManager.SearchSlide, randomCycles, cycle, attackManager);
                                 localState.Restarts = cycle;
                                 localState.SingleIteration = true;
                                 localState.Quick = true;
+                                attackManager.ProgressChanged("Known-Plaintext", "Third hill climbing loop", 1, 1);
                                 newEval = HillClimbLugs.HillClimb(key, EvalType.CRIB, attackManager, localState); // Single iteration, print
                             }
 

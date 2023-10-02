@@ -61,7 +61,7 @@ namespace CrypTool.Plugins.M209Analyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Analysis mode.
+        ///   Looks up a localized string similar to Analysis mode:.
         /// </summary>
         internal static string AnalysisModeLabel {
             get {
@@ -70,7 +70,7 @@ namespace CrypTool.Plugins.M209Analyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Analysis step.
+        ///   Looks up a localized string similar to Analysis step:.
         /// </summary>
         internal static string AnalysisStepLabel {
             get {
@@ -124,7 +124,7 @@ namespace CrypTool.Plugins.M209Analyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Currently analyzed keys.
+        ///   Looks up a localized string similar to Currently analyzed keys:.
         /// </summary>
         internal static string CurrentlyAnalyzedKeysLabel {
             get {
@@ -133,7 +133,7 @@ namespace CrypTool.Plugins.M209Analyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Elapsed time.
+        ///   Looks up a localized string similar to Elapsed time:.
         /// </summary>
         internal static string ElapsedTimeLabel {
             get {
@@ -142,7 +142,7 @@ namespace CrypTool.Plugins.M209Analyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to End time.
+        ///   Looks up a localized string similar to End time:.
         /// </summary>
         internal static string EndTimeLabel {
             get {
@@ -322,7 +322,7 @@ namespace CrypTool.Plugins.M209Analyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Speed.
+        ///   Looks up a localized string similar to Speed:.
         /// </summary>
         internal static string SpeedLabel {
             get {
@@ -331,7 +331,7 @@ namespace CrypTool.Plugins.M209Analyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start time.
+        ///   Looks up a localized string similar to Start time:.
         /// </summary>
         internal static string StartTimeLabel {
             get {

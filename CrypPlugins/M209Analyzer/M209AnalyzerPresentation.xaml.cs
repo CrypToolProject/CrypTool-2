@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2022 Nils Kopal <Nils.Kopal<at>CrypTool.org
+   Copyright 2023 Josef Matwich josef.matwich@gmail.com
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ namespace CrypTool.Plugins.M209Analyzer
     /// <summary>
     /// Interaktionslogik für AssignmentPresentation.xaml
     /// </summary>
-    [PluginBase.Attributes.Localization("CrypTool.M209Analyzer.Properties.Resources")]
+    [PluginBase.Attributes.Localization("CrypTool.Plugins.M209Analyzer.Properties.Resources")]
     public partial class M209AnalyzerPresentation : UserControl
     {
         public ObservableCollection<ResultEntry> BestList { get; } = new ObservableCollection<ResultEntry>();
