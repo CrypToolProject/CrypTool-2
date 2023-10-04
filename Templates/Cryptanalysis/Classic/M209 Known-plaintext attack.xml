@@ -18,6 +18,7 @@
 	<replacement key="$Plaintext$" value="EQUALITYZASZTHEYZWEREZFREQUENTLYZTOGETHERZMCCARTHYZHADZONEZSONZAZLADZOFZEIGHTEENZANDZTURNERZHADZANZO" />
 	<replacement key="$plaintext$" value="Plaintext" />
     <replacement key="$textoutput$" value="Decrypted text" />
+	<replacement key="$key$" value="Key" />
     <replacement key="$memo$" value="The known-plaintext attack uses hill climbing in three nested loops.\line
 Each loop applies different kinds of transformations on the key to get the correct key.\line" />
   </replacements>
@@ -29,14 +30,15 @@ Each loop applies different kinds of transformations on the key to get the corre
   <description lang="de">Diese Vorlage zeigt einen Known-Plaintext Angriff gegen die Hagelin M-209.</description>
   <keywords>Kryptoanalyse, Hagelin, cipher, M209, M-209, ciphertext, ciphertext-only</keywords>
   <replacements lang="de">
-	<replacement key="$M209Analyzer$" value="Hagelin M-209 Analyzer" />
+	<replacement key="$M209Analyzer$" value="Hagelin M-209 Analysator" />
     <replacement key="$Ciphertext$" value = "BMBEKMOOZNSCPEWKNNLVBZHXPCMRWMZNFBABQRJJXLIIPBXGFIMXOQEKIWSBSNKATJNKENNKUHCTREUPKAZWZQNZQJILJUGMHVSK"/>
-    <replacement key="$ciphertext$" value="Ciphertext" />
+    <replacement key="$ciphertext$" value="Verschlüsselter Text" />
 	<replacement key="$Plaintext$" value="EQUALITYZASZTHEYZWEREZFREQUENTLYZTOGETHERZMCCARTHYZHADZONEZSONZAZLADZOFZEIGHTEENZANDZTURNERZHADZANZO" />
-	<replacement key="$plaintext$" value="Plaintext" />
-    <replacement key="$textoutput$" value="Decrypted text" />
-    <replacement key="$memo$" value="Der Known-Plaintext Angriff verwendet Hillclimbin in drei verschachtelten Schleifen.\line
-Jede Schleife wendet verschiedene Arten von Transformationen auf den Schlüssel an um den richtigen Schlüssel zu erhalten.\line" />
+	<replacement key="$plaintext$" value="Klartext" />
+    <replacement key="$textoutput$" value="Entschlüsselter Text" />
+	<replacement key="$key$" value="Schlüssel" />
+    <replacement key="$memo$" value="Der Known-Plaintext (bekannter Klartext) Angriff verwendet Hillclimbing in drei verschachtelten Schleifen.\line
+Jede Schleife wendet verschiedene Arten von Transformationen auf den Schlüssel an, um den richtigen Schlüssel zu erhalten.\line" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
