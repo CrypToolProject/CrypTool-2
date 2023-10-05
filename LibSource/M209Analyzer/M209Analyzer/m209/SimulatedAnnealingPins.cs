@@ -66,6 +66,10 @@ namespace M209AnalyzerLib.M209
                         key.Pins.Toggle(w, p);
                         key.UpdateDecryption(w, p);
                     }
+                    if (attackManager.ShouldStop)
+                    {
+                        return bestSAScore;
+                    }
                 }
             }
 
@@ -98,9 +102,13 @@ namespace M209AnalyzerLib.M209
                 {
                     key.Pins.Inverse(w);
                 }
+                if (attackManager.ShouldStop)
+                {
+                    return bestSAScore;
+                }
             }
 
-            if (changeAccepted)
+            if (changeAccepted | attackManager.ShouldStop)
             {
                 return bestSAScore;
             }
@@ -145,11 +153,15 @@ namespace M209AnalyzerLib.M209
                             key.UpdateDecryption(w, p1, p2);
                         }
 
+                        if (attackManager.ShouldStop)
+                        {
+                            return bestSAScore;
+                        }
                     }
                 }
             }
 
-            if (changeAccepted)
+            if (changeAccepted | attackManager.ShouldStop)
             {
                 return bestSAScore;
             }
@@ -194,7 +206,7 @@ namespace M209AnalyzerLib.M209
             double bestSAScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
             bool[][] bestSAPins = key.Pins.CreateCopy();
 
-            for (int cycle = 0; cycle < cycles; cycle++)
+            for (int cycle = 0; cycle < cycles && !attackManager.ShouldStop; cycle++)
             {
                 key.Pins.Randomize();
 

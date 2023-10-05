@@ -17,7 +17,8 @@ using M209AnalyzerLib.Common;
 using M209AnalyzerLib.Enums;
 using M209AnalyzerLib.M209;
 using System;
-using System.Threading;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace M209AnalyzerLib
 {
@@ -170,6 +171,8 @@ namespace M209AnalyzerLib
 
         private readonly object LOCK = new object();
 
+        private int _taskCounter = 0;
+
         #endregion
 
         public M209AttackManager(IScoring scoring)
@@ -247,73 +250,53 @@ namespace M209AnalyzerLib
             CipherTextOnlyAttack();
         }
 
-        public void CipherTextOnlyAttack()
+        private void CipherTextOnlyTask()
+        {
+            try
+            {
+
+                Key key = new Key();
+                key.SetCipherText(CipherText);
+
+                if (SimulationKey != null)
+                {
+                    key.setOriginalKey(SimulationKey);
+                    key.setOriginalScore(Evaluate(EvalType.MONO, SimulationKey.CribArray, SimulationKey.CribArray));
+                }
+
+                LocalState localState = new LocalState(_taskCounter++);
+                CiphertextOnlyAttack.Solve(key, this, localState);
+                if (ShouldStop)
+                {
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                LogMessage(e.Message, "Error");
+                throw;
+            }
+        }
+
+        public async void CipherTextOnlyAttack()
         {
             StartTimeMeasurement();
 
             if (CipherText != String.Empty)
             {
-                if (Threads > 1)
+
+                List<Action> tasks = new List<Action>();
+
+                for (int i = 0; i < Threads; i++)
                 {
-                    ThreadPool.SetMinThreads(1, 1);
-                    ThreadPool.SetMaxThreads(Threads, Threads);
-
-                    CountdownEvent countdownEvent = new CountdownEvent(Threads);
-
-                    for (int i = 0; i < Threads; i++)
-                    {
-                        ThreadPool.QueueUserWorkItem(new WaitCallback(o =>
-                        {
-                            try
-                            {
-
-                                Key key = new Key();
-                                key.SetCipherText(CipherText);
-
-                                if (SimulationKey != null)
-                                {
-                                    key.setOriginalKey(SimulationKey);
-                                    key.setOriginalScore(Evaluate(EvalType.MONO, SimulationKey.CribArray, SimulationKey.CribArray));
-                                }
-
-                                LocalState localState = new LocalState(i);
-                                CiphertextOnlyAttack.Solve(key, this, localState);
-                            }
-                            catch (Exception e)
-                            {
-                                LogMessage(e.Message, "Error");
-                                throw;
-                            }
-
-                        }));
-                    }
-
-                    while (!ShouldStop)
-                    {
-                        try
-                        {
-                            countdownEvent.Wait(1000);
-                        }
-                        catch (Exception)
-                        {
-                            //do nothing
-                        }
-                    }
+                    tasks.Add(CipherTextOnlyTask);
                 }
-                else
+
+                foreach (var task in tasks)
                 {
-                    Key key = new Key();
-                    key.SetCipherText(CipherText);
-
-                    if (SimulationKey != null)
-                    {
-                        key.setOriginalKey(SimulationKey);
-                        key.setOriginalScore(Evaluate(EvalType.MONO, SimulationKey.CribArray, SimulationKey.CribArray));
-                    }
-
-                    LocalState localState = new LocalState(0);
-                    CiphertextOnlyAttack.Solve(key, this, localState);
+                    await Task.Run(task);
                 }
+
             }
             else
             {
@@ -330,58 +313,48 @@ namespace M209AnalyzerLib
             KnownPlainTextAttack();
         }
 
-        public void KnownPlainTextAttack()
+        private void KnownPlainTextTask()
+        {
+            try
+            {
+
+                Key key = new Key();
+                key.SetCipherTextAndCrib(CipherText, Crib);
+                if (SimulationKey != null)
+                {
+                    key.setOriginalKey(SimulationKey);
+                }
+                key.setOriginalScore(130000);
+
+                LocalState localState = new LocalState(_taskCounter++);
+                KnownPlaintextAttack.Solve(key, this, localState);
+                if (ShouldStop)
+                {
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                LogMessage(e.Message, "Error");
+                throw;
+            }
+        }
+
+        public async void KnownPlainTextAttack()
         {
             StartTimeMeasurement();
             if (CipherText != String.Empty && Crib != String.Empty)
             {
+                List<Action> tasks = new List<Action>();
 
-                if (Threads > 1)
+                for (int i = 0; i < Threads; i++)
                 {
-                    ThreadPool.SetMinThreads(1, 1);
-                    ThreadPool.SetMaxThreads(Threads, Threads);
-
-                    for (int i = 0; i < Threads; i++)
-                    {
-                        ThreadPool.QueueUserWorkItem(new WaitCallback(o =>
-                        {
-                            try
-                            {
-
-                                Key key = new Key();
-                                key.SetCipherTextAndCrib(CipherText, Crib);
-                                if (SimulationKey != null)
-                                {
-                                    key.setOriginalKey(SimulationKey);
-                                }
-                                key.setOriginalScore(130000);
-
-                                LocalState localState = new LocalState(i);
-                                KnownPlaintextAttack.Solve(key, this, localState);
-                            }
-                            catch (Exception e)
-                            {
-                                LogMessage(e.Message, "Error");
-                                throw;
-                            }
-
-                        }));
-                    }
+                    tasks.Add(KnownPlainTextTask);
                 }
-                else
+
+                foreach (var task in tasks)
                 {
-                    Key key = new Key();
-                    key.SetCipherText(CipherText);
-
-                    key.SetCipherTextAndCrib(CipherText, Crib);
-                    if (SimulationKey != null)
-                    {
-                        key.setOriginalKey(SimulationKey);
-                    }
-                    key.setOriginalScore(130000);
-
-                    LocalState localState = new LocalState(0);
-                    KnownPlaintextAttack.Solve(key, this, localState);
+                    await Task.Run(task);
                 }
             }
         }
