@@ -55,6 +55,11 @@ namespace M209AnalyzerLib.M209
                     key.Pins.Randomize(Utils.RandomNextInt(Key.WHEELS) + 1);
                 }
                 key.UpdateDecryptionIfInvalid();
+                if (attackManager.ShouldStop)
+                {
+                    return bestLocal;
+                }
+
                 double newEval = attackManager.Evaluate(EvalType.CRIB, key.Decryption, key.CribArray);
                 if (newEval > bestLocal)
                 {
@@ -63,10 +68,6 @@ namespace M209AnalyzerLib.M209
                     key.Pins.Get(bestLocalPins);
                 }
 
-                if (attackManager.ShouldStop)
-                {
-                    return bestLocal;
-                }
             }
 
             key.Lugs.SetTypeCount(bestLocalLugsTypeCount, false);
