@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: AffineCipher.xml-->
+  <!--Last edited: 2023.10.11-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Affine Chiffre</title>
+  <summary lang="de">Ver- und Entschlüsselung mit der <i>Affinen Chiffre</i></summary>
+  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels Affiner Chiffre. Die Affine Chiffre ist eine klassische Substitutions-Chiffre, die die Prinzipien der Caesar-Chiffre und der Multiplikations-Chiffre kombiniert.</description>
+  <keywords lang="de">affin, mathematisch, chiffre</keywords>
+  <replacements lang="de">
+    <replacement key="$AffineCipher$" value="Affine Chiffre" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Alphabet$" value="Alphabet" />
+    <replacement key="$DecryptedPlaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$memo$" value="Die {\b Affine Chiffre} ist eine Art monoalphabetische Substitutions-Chiffre, die mit einem Alphabet arbeitet. Die Buchstaben des Alphabets werden in Zahlen umgewandelt, die ihrer Position im Alphabet entsprechen. Die Chiffre verwendet ein Schlüsselpaar, das durch die Variablen A und B dargestellt wird. A muss so gewählt werden, dass es zur Länge des Alphabets koprim ist, um eine eindeutige Zuordnung für jeden Buchstaben zu gewährleisten. Die Verschlüsselungsfunktion ist gegeben durch E(x) = (Ax + B) mod M, wobei x das numerische Äquivalent des Klartextbuchstabens, M die Größe des Alphabets und mod die Modulusoperation ist. Bei der Entschlüsselung wird die modulare Umkehrung von A gefunden, die als A-¹ bezeichnet wird und die Wiederherstellung der ursprünglichen Nachricht mit D(y) = A-¹(y - B) mod M ermöglicht, wobei y das numerische Äquivalent des Klartextbuchstabens ist.\line
+\line
+Diese Vorlage verschlüsselt und entschlüsselt einen gegebenen Text unter Verwendung des festgelegten Alphabets. Die Schlüsselvariablen A und B können in den Einstellungen der &quot;Affine Cipher&quot; Komponenten geändert werden. Das verwendete Alphabet kann in der &quot;Alphabet&quot;-Texteingabekomponente geändert werden." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Affine Cipher</title>
+  <summary lang="en">Encryption and decryption with the <i>Affine cipher</i>.</summary>
+  <description lang="en">This template shows en- and decryption using a Bacon cipher. The process maps letters to a code of two characters. This code can then be embedded in texts, for example.</description>
+  <keywords>Bacon, Cipher, simple</keywords>
+  <replacements lang="en">
+    <replacement key="$AffineCipher$" value="Affine Cipher" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Alphabet$" value="Alphabet" />
+    <replacement key="$DecryptedPlaintext$" value="Decrypted plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$memo$" value="The {\b Affine Cipher} is a type of monoalphabetic substitution cipher that operates on an alphabet. Letters of the alphabet are converted to numbers corresponding to their position in the alphabet. The cipher uses a pair of keys represented by variables A and B. A must be chosen such that it is coprime to the length of the alphabet, ensuring a unique mapping for each letter. The encryption function is given by E(x) = (Ax + B) mod M, where x is the plaintext letter's numerical equivalent, M is the size of the alphabet, and mod represents the modulus operation. Decryption involves finding the modular inverse of A, denoted as A⁻¹, allowing the recovery of the original message using D(y) = A⁻¹(y - B) mod M, where y is the ciphertext letter's numerical equivalent.\line
+\line
+This template encrypts and decrypts a given text using the defined alphabet. Key variables A and B can be changed in the settings of the &quot;Affine Cipher&quot; components. The used alphabet can be changed in the &quot;Alphabet&quot; text input component."/>
+</replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="AffineCipher.png" />
+  <relevantPlugins>
+    <plugin name="AffineCipher" />
+  </relevantPlugins>
+</sample>
