@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en"/>
+  <language culture="de-DE"/>
+
+  <introduction lang="en">
+    The Affine Cipher is a classical substitution cipher that combines the principles of both the Caesar Cipher and the Multiplicative Cipher. The cipher is named for its mathematical foundation in affine transformations.<newline/>
+    <newline/>
+    How it Works:<newline/>
+    <newline/>
+    Mathematical Structure:<newline/>
+    The Affine Cipher employs a mathematical formula to encrypt and decrypt messages.<newline/>
+    Encryption: E(x)=(ax + b) mod  m <newline/>
+    Decryption: D(y)= a^−1 * (y − b) mod  m, where a^−1 is the modular multiplicative inverse of aa modulo mm.<newline/>
+    <newline/>
+    The cipher requires two key parameters: a and b, where a must be chosen such that it is coprime with the length of the alphabet (m).<newline/>
+    b represents the shift applied to each character.<newline/>
+  </introduction>
+
+  <introduction lang="de-DE">
+    Die Affine Chiffre ist eine klassische Substitutions-Chiffre, die die Prinzipien der Caesar-Chiffre und der Multiplikations-Chiffre kombiniert. Benannt ist die Chiffre nach ihrer mathematischen Grundlage, den affinen Transformationen.<newline/>
+    <newline/>
+    Wie sie funktioniert:<newline/>
+    <newline/>
+    Mathematischer Aufbau:<newline/>
+    Die Affine Chiffre verwendet eine mathematische Formel, um Nachrichten zu ver- und entschlüsseln.<newline/>
+    Verschlüsselung: E(x)=(ax + b) mod m <newline/>
+    Entschlüsselung: D(y)= a^-1 * (y - b) mod m, wobei a^-1 die Inverse von a modulo m ist.<newline/>
+    <newline/>
+    Die Chiffre erfordert zwei Schlüsselparameter: a und b, wobei a so gewählt werden muss, dass es mit der Länge des Alphabets (m) teilerfremd ist.<newline/>
+    b stellt die auf jedes Zeichen angewandte Verschiebung dar.<newline/>
+  </introduction>
+
+  <usage lang="en">
+    Users input the plaintext or ciphertext (via connector) and the key parameters (via settings or connectors) into the component.<newline/>
+    The component processes the input using the affine transformation to produce the ciphertext or plaintext.
+  </usage>
+
+  <usage lang="de-DE">
+    Der Benutzer gibt den Klartext oder Geheimtext (über einen Konnektor) und die Schlüsselparameter (über die Einstellungen oder Konnektoren) in die Komponente ein .<newline/>
+    Die Komponente verarbeitet die Eingabe unter Verwendung der affinen Transformation, um den Geheimtext oder Klartext zu erzeugen.
+  </usage>
+  
+  <presentation lang="en">
+  </presentation>
+  
+  <presentation lang="de-DE">
+  </presentation>
+  
+  <references>
+  </references>
+</documentation>

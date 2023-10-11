@@ -458,6 +458,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M209Analyzer", "CrypPlugins
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M209AnalyzerLib", "LibSource\M209Analyzer\M209Analyzer\M209AnalyzerLib.csproj", "{BC60DA91-4135-4CFB-B0F4-2B250D435C73}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AffineCipher", "CrypPlugins\AffineCipher\AffineCipher.csproj", "{B300C1F7-42CB-4668-9CCB-319D6AF8E3EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1364,6 +1366,10 @@ Global
 		{BC60DA91-4135-4CFB-B0F4-2B250D435C73}.Debug|x64.Build.0 = Debug|x64
 		{BC60DA91-4135-4CFB-B0F4-2B250D435C73}.Release|x64.ActiveCfg = Release|Any CPU
 		{BC60DA91-4135-4CFB-B0F4-2B250D435C73}.Release|x64.Build.0 = Release|Any CPU
+		{B300C1F7-42CB-4668-9CCB-319D6AF8E3EB}.Debug|x64.ActiveCfg = Debug|x64
+		{B300C1F7-42CB-4668-9CCB-319D6AF8E3EB}.Debug|x64.Build.0 = Debug|x64
+		{B300C1F7-42CB-4668-9CCB-319D6AF8E3EB}.Release|x64.ActiveCfg = Release|x64
+		{B300C1F7-42CB-4668-9CCB-319D6AF8E3EB}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1584,6 +1590,7 @@ Global
 		{0CCB388A-69AF-462C-B8CF-E886F09FB85F} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{D9A55649-C9E2-4938-9596-EE5E06F747F9} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{BC60DA91-4135-4CFB-B0F4-2B250D435C73} = {1E472920-3A9C-413A-98B2-8372F0E283C5}
+		{B300C1F7-42CB-4668-9CCB-319D6AF8E3EB} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92042D62-2CDA-4393-9D74-4FB5AC571A2D}
