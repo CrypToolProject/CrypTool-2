@@ -55,7 +55,11 @@ namespace M209AnalyzerLib.M209
                 InverseWheelBitmap(key, evalType, attackManager, localState);
 
                 round++;
-            } while (localState.Improved && !singleIteration);
+                if (attackManager.ShouldStop)
+                {
+                    return localState.BestScore;
+                }
+            } while (localState.Improved && !singleIteration && !attackManager.ShouldStop);
 
 
             key.Pins.Set(localState.BestPins);
@@ -94,6 +98,10 @@ namespace M209AnalyzerLib.M209
                         key.Pins.Toggle(wheel, pin);
                         key.UpdateDecryption(wheel, pin);
                     }
+                    if (attackManager.ShouldStop)
+                    {
+                        return;
+                    }
                 }
 
                 if (localState.Improved)
@@ -131,6 +139,11 @@ namespace M209AnalyzerLib.M209
                 else
                 {
                     key.Pins.Inverse(wheel);
+                }
+
+                if (attackManager.ShouldStop)
+                {
+                    return;
                 }
             }
         }
@@ -173,6 +186,11 @@ namespace M209AnalyzerLib.M209
                             key.Pins.Toggle(wheel, pin1, pin2);
                             key.UpdateDecryption(wheel, pin1, pin2);
                         }
+
+                        if (attackManager.ShouldStop)
+                        {
+                            return;
+                        }
                     }
                 }
             }
@@ -192,6 +210,11 @@ namespace M209AnalyzerLib.M209
                     bestV = v;
                 }
                 key.Pins.InverseWheelBitmap(v);
+
+                if (attackManager.ShouldStop)
+                {
+                    return;
+                }
             }
             if (bestVscore > localState.BestScore)
             {

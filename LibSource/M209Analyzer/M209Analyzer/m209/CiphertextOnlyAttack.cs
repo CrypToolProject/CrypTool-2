@@ -55,7 +55,12 @@ namespace M209AnalyzerLib.M209
 
                 Stopwatch watch = Stopwatch.StartNew();
                 RandomTrialPhase(key, attackManager, localState);
+                if (attackManager.ShouldStop)
+                {
+                    return;
+                }
                 watch.Stop();
+
                 Console.WriteLine($"\n -- [Thread {Thread.CurrentThread.ManagedThreadId}] After phaseTrials  [{watch.ElapsedMilliseconds}]" +
                     $"[{key.GetCountIncorrectLugs()}L/{key.GetCountIncorrectPins()}P]" +
                     $"[2**{(long)(Math.Log(attackManager.EvaluationCount) / Math.Log(2))} ({attackManager.EvaluationCount})][{(attackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : attackManager.EvaluationCount / attackManager.ElapsedTime.TotalMilliseconds)} K/s]", "info");
@@ -66,15 +71,31 @@ namespace M209AnalyzerLib.M209
                     localState.Improved = false;
 
                     HillClimbingFirstTransformation(key, attackManager, localState);
+                    if (attackManager.ShouldStop)
+                    {
+                        return;
+                    }
 
                     HillClimbingSecondTransformation(key, attackManager, localState);
+                    if (attackManager.ShouldStop)
+                    {
+                        return;
+                    }
 
                     if (!localState.Improved)
                     {
                         // Complex Transformation (?)
                         HillClimbingThirdTransformation(key, attackManager, localState);
+                        if (attackManager.ShouldStop)
+                        {
+                            return;
+                        }
 
                         HillClimbingFourthTransformation(key, attackManager, localState);
+                        if (attackManager.ShouldStop)
+                        {
+                            return;
+                        }
                     }
 
                 } while (localState.Improved && !attackManager.ShouldStop);

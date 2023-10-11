@@ -68,6 +68,10 @@ namespace M209AnalyzerLib.M209
                 localState.Improved = false;
 
                 Change2Types(key, evalType, attackManager, localState);
+                if (attackManager.ShouldStop)
+                {
+                    return localState.BestScore;
+                }
 
                 if (localState.Quick)
                 {
@@ -77,15 +81,28 @@ namespace M209AnalyzerLib.M209
                 if (!localState.Improved)
                 {
                     Changes4Types(key, evalType, attackManager, localState);
+                    if (attackManager.ShouldStop)
+                    {
+                        return localState.BestScore;
+                    }
                 }
 
                 if (!localState.Improved)
                 {
                     Change3Types(key, evalType, attackManager, localState);
+                    if (attackManager.ShouldStop)
+                    {
+                        return localState.BestScore;
+                    }
+                }
+
+                if (attackManager.ShouldStop)
+                {
+                    return localState.BestScore;
                 }
 
 
-            } while (localState.Improved && !localState.SingleIteration);
+            } while (localState.Improved && !localState.SingleIteration && !attackManager.ShouldStop);
 
             key.Pins.Set(localState.BestPins);
             return localState.BestScore;
@@ -136,6 +153,11 @@ namespace M209AnalyzerLib.M209
                         {
                             UndoChanges(localState.BestTypeCount, types, changes);
                             key.Lugs.SetTypeCount(localState.BestTypeCount, false);
+                        }
+
+                        if (attackManager.ShouldStop)
+                        {
+                            return;
                         }
                     }
                 }
@@ -188,6 +210,11 @@ namespace M209AnalyzerLib.M209
                                     key.Lugs.SetTypeCount(localState.BestTypeCount, false);
                                 }
                             }
+
+                            if (attackManager.ShouldStop)
+                            {
+                                return;
+                            }
                         }
                     }
                 }
@@ -235,6 +262,11 @@ namespace M209AnalyzerLib.M209
                             {
                                 UndoChanges(localState.BestTypeCount, types, changes);
                                 key.Lugs.SetTypeCount(localState.BestTypeCount, false);
+                            }
+
+                            if (attackManager.ShouldStop)
+                            {
+                                return;
                             }
                         }
                     }
