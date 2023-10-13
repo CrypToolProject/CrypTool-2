@@ -35,6 +35,7 @@ namespace CrypTool.Plugins.AffineCipher
         private int _b;
         private bool _AHasData = false;
         private bool _BHasData = false;
+        private bool _stop = false;
 
         #endregion
 
@@ -107,6 +108,7 @@ namespace CrypTool.Plugins.AffineCipher
         public void PreExecution()
         {
             Alphabet = LATIN_ALPHABET;
+            _stop = false;
             _AHasData = false;
             _BHasData = false;
         }
@@ -137,6 +139,7 @@ namespace CrypTool.Plugins.AffineCipher
 
             _AHasData = false;
             _BHasData = false;
+            _stop = false;
 
             ProgressChanged(1, 1);
         }
@@ -155,7 +158,13 @@ namespace CrypTool.Plugins.AffineCipher
                 return;
             }
 
-            StringBuilder builder = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder();
+
+            int percent = InputText.Length / 100;
+            if(percent == 0)
+            {
+                percent = 1;
+            }
 
             foreach (char c in InputText)
             {
@@ -169,7 +178,7 @@ namespace CrypTool.Plugins.AffineCipher
                 {
                     int plaintext_symbol = Alphabet.IndexOf(str);
                     int ciphertext_symbol = Mod(a * plaintext_symbol + b, Alphabet.Length);
-                    builder.Append(Alphabet[ciphertext_symbol]);
+                    stringBuilder.Append(Alphabet[ciphertext_symbol]);
                 }
                 else
                 {
@@ -177,18 +186,29 @@ namespace CrypTool.Plugins.AffineCipher
                     switch (_settings.UnknownSymbolHandling)
                     {
                         case UnknownSymbolHandlingMode.Ignore:
-                            builder.Append(c);
+                            stringBuilder.Append(c);
                             break;
                         case UnknownSymbolHandlingMode.Remove:
                             //do nothing;
                             break;
                         case UnknownSymbolHandlingMode.Replace:
-                            builder.Append("?");
+                            stringBuilder.Append("?");
                             break;
                     }
                 }
+
+                //plugin progress changed every "percent" iterations to update the progress of the plugin
+                //also check, if we should stop the plugin
+                if (stringBuilder.Length % percent == 0)
+                {
+                    if (_stop)
+                    {
+                        return;
+                    }
+                    ProgressChanged(stringBuilder.Length, InputText.Length);
+                }                
             }
-            OutputText = builder.ToString();
+            OutputText = stringBuilder.ToString();
             OnPropertyChanged(nameof(OutputText));
         }
 
@@ -207,6 +227,12 @@ namespace CrypTool.Plugins.AffineCipher
             }
 
             StringBuilder builder = new StringBuilder();
+
+            int percent = InputText.Length / 100;
+            if(percent == 0)
+            {
+                percent = 1;
+            }
 
             foreach (char c in InputText)
             {
@@ -238,6 +264,17 @@ namespace CrypTool.Plugins.AffineCipher
                             break;
                     }
                 }
+
+                //plugin progress changed every "percent" iterations to update the progress of the plugin
+                //also check, if we should stop the plugin
+                if (builder.Length % percent == 0)
+                {
+                    ProgressChanged(builder.Length, InputText.Length);
+                    if (_stop)
+                    {
+                        return;
+                    }
+                }
             }
             OutputText = builder.ToString();
             OnPropertyChanged(nameof(OutputText));
@@ -249,6 +286,8 @@ namespace CrypTool.Plugins.AffineCipher
 
         public void Stop()
         {
+            //set stop variable to true to stop the plugin
+            _stop = true;
         }
 
         public void Initialize()
