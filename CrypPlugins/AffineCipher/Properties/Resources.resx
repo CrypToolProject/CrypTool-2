@@ -141,6 +141,12 @@
   <data name="BTooltip" xml:space="preserve">
     <value>B-value used for encryption/decryption</value>
   </data>
+  <data name="CaseSensitiveCaption" xml:space="preserve">
+    <value>Case sensitive</value>
+  </data>
+  <data name="CaseSensitiveTooltip" xml:space="preserve">
+    <value>Distinguish between small and capital letters.</value>
+  </data>
   <data name="Decrypt" xml:space="preserve">
     <value>Decrypt</value>
   </data>

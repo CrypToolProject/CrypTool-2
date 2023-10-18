@@ -137,8 +137,6 @@ namespace CrypTool.Plugins.AffineCipher
                 Decrypt(a, b);
             }
 
-            _AHasData = false;
-            _BHasData = false;
             _stop = false;
 
             ProgressChanged(1, 1);

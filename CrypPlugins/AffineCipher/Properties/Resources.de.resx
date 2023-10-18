@@ -141,6 +141,12 @@
   <data name="BTooltip" xml:space="preserve">
     <value>B-Wert, der für die Verschlüsselung/Entschlüsselung verwendet wird</value>
   </data>
+  <data name="CaseSensitiveCaption" xml:space="preserve">
+    <value>Beachtung von Groß-/Kleinschreibung</value>
+  </data>
+  <data name="CaseSensitiveTooltip" xml:space="preserve">
+    <value>Groß- und Kleinschreibung wird unterschieden.</value>
+  </data>
   <data name="Decrypt" xml:space="preserve">
     <value>Entschlüsseln</value>
   </data>

@@ -133,6 +133,24 @@ namespace CrypTool.Plugins.AffineCipher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Case sensitive.
+        /// </summary>
+        internal static string CaseSensitiveCaption {
+            get {
+                return ResourceManager.GetString("CaseSensitiveCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distinguish between small and capital letters..
+        /// </summary>
+        internal static string CaseSensitiveTooltip {
+            get {
+                return ResourceManager.GetString("CaseSensitiveTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Decrypt.
         /// </summary>
         internal static string Decrypt {
