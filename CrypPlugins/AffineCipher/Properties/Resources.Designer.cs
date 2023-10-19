@@ -61,7 +61,7 @@ namespace CrypTool.Plugins.AffineCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A.
+        ///   Looks up a localized string similar to a.
         /// </summary>
         internal static string ACaption {
             get {
@@ -106,7 +106,7 @@ namespace CrypTool.Plugins.AffineCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A-value used for encryption/decryption.
+        ///   Looks up a localized string similar to a-value used for encryption/decryption.
         /// </summary>
         internal static string ATooltip {
             get {
@@ -115,7 +115,7 @@ namespace CrypTool.Plugins.AffineCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to B.
+        ///   Looks up a localized string similar to b.
         /// </summary>
         internal static string BCaption {
             get {
@@ -124,7 +124,7 @@ namespace CrypTool.Plugins.AffineCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to B-value used for encryption/decryption.
+        ///   Looks up a localized string similar to b-value used for encryption/decryption.
         /// </summary>
         internal static string BTooltip {
             get {
@@ -187,7 +187,7 @@ namespace CrypTool.Plugins.AffineCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number {0} has no inverse element when calculating with modulo {1}.
+        ///   Looks up a localized string similar to The number a={0} has no inverse element when calculating with modulo m={1}; either the a should be changed, or the number (m) of elements in the alphabet should be changed.
         /// </summary>
         internal static string NumberHasNoInverseElement {
             get {

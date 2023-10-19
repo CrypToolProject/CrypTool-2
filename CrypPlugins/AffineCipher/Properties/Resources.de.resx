@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACaption" xml:space="preserve">
-    <value>A</value>
+    <value>a</value>
   </data>
   <data name="ActionCaption" xml:space="preserve">
     <value>Aktion</value>
@@ -133,13 +133,13 @@
     <value>Für die Verschlüsselung verwendetes Alphabet (das erste Symbol entspricht der 0, das zweite der 1, das dritte der 2, ...)</value>
   </data>
   <data name="ATooltip" xml:space="preserve">
-    <value>A-Wert, der für die Verschlüsselung/Entschlüsselung verwendet wird</value>
+    <value>a-Wert, der für die Verschlüsselung/Entschlüsselung verwendet wird</value>
   </data>
   <data name="BCaption" xml:space="preserve">
-    <value>B</value>
+    <value>b</value>
   </data>
   <data name="BTooltip" xml:space="preserve">
-    <value>B-Wert, der für die Verschlüsselung/Entschlüsselung verwendet wird</value>
+    <value>b-Wert, der für die Verschlüsselung/Entschlüsselung verwendet wird</value>
   </data>
   <data name="CaseSensitiveCaption" xml:space="preserve">
     <value>Beachtung von Groß-/Kleinschreibung</value>
@@ -160,7 +160,7 @@
     <value>Eingabe einer Zeichenkette, die von der Chiffre verarbeitet werden soll</value>
   </data>
   <data name="NumberHasNoInverseElement" xml:space="preserve">
-    <value>Die Zahl {0} hat kein inverses Element beim Rechnen mit Modulo {1}</value>
+    <value>Die Zahl a={0} hat kein inverses Element beim Rechnen mit Modulo m={1}; entweder sollte das a geändert werden, oder die Anzahl (m) der Elemente im Alphabet</value>
   </data>
   <data name="OutputTextCaption" xml:space="preserve">
     <value>Ausgabetext</value>

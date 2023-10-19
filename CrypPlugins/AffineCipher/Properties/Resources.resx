@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACaption" xml:space="preserve">
-    <value>A</value>
+    <value>a</value>
   </data>
   <data name="ActionCaption" xml:space="preserve">
     <value>Action</value>
@@ -133,13 +133,13 @@
     <value>Alphabet used for encryption (first symbol corresponds to 0, second to 1, third to 2, ...)</value>
   </data>
   <data name="ATooltip" xml:space="preserve">
-    <value>A-value used for encryption/decryption</value>
+    <value>a-value used for encryption/decryption</value>
   </data>
   <data name="BCaption" xml:space="preserve">
-    <value>B</value>
+    <value>b</value>
   </data>
   <data name="BTooltip" xml:space="preserve">
-    <value>B-value used for encryption/decryption</value>
+    <value>b-value used for encryption/decryption</value>
   </data>
   <data name="CaseSensitiveCaption" xml:space="preserve">
     <value>Case sensitive</value>
@@ -160,7 +160,7 @@
     <value>Input a string to be processed by the cipher</value>
   </data>
   <data name="NumberHasNoInverseElement" xml:space="preserve">
-    <value>Number {0} has no inverse element when calculating with modulo {1}</value>
+    <value>The number a={0} has no inverse element when calculating with modulo m={1}; either the a should be changed, or the number (m) of elements in the alphabet should be changed</value>
   </data>
   <data name="OutputTextCaption" xml:space="preserve">
     <value>Output text</value>
