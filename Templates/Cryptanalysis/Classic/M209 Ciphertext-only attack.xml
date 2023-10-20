@@ -16,9 +16,36 @@
     <replacement key="$text$" value = "BMLNHJEYUDFMACZZJITBBCHAVENUKZGFAMWPMUUTFYPZNZCPUBBZAAETSDDFNKJFAAKSUPKXQYVIAEPZGIBAHVOUVRULJOOJFOHMBPDMXBAQWGGVXVSWMFJUEXDLAFQLMNDHXGVHQXKQUXAXDRMJMTYFQFDOUSGLSOMJRKNTDGIDYWXRKQPPOOZNTLRMXRVGRKILEUZVOVSCQGWAJDZIBBFDVJTUGXVJUPALITHGDYAQSYZQUTHUPXRUCTQEOTDLIPBOQOVDXWESOPLSDFVUNCBGKDOBVGXMSVWBDZLBWTTPQCETNWJQKQFHUSVWDEZDTLSVBRITLOQSOJRJOQIZLUSXRXWJNVCGSRCPIKMURKOKSJHKEHTTVINWALLSBILSOREZWNJMGBKQNSBEOCOAMRGKLPEIIZHEVEALSEZODAHFBUWSHYRMIMOVXAIQXTNSYDHPDGXBWOILRYWAUDVOOTXZQKCVAYNWOHBNNDMUOVHNDVZDTQKSRRDKIRHODWJRJFNVBBQFOAENRIRMOOZCQMNTVJDBQEIZTXBWYETBSHPDIBTEHAWQHUSLVOTYHVWTLLGBVUNZBXSUQTEDITDRXDNQTNEWWGFPIDDTIHMNQEHKMDIFTDYURPTMFPDMDTUNNKSVTIUKIDFRRLXNZMPJBNZRNPQWKOZYXMNXJAKKLNFAULBTPKTZCQGTJNQSMORVTZUBHVFHLNDEGCVUSBEVMHVACCYHPOHTTRHXUTHYOESFTZKLCYOPBYMLRMNQHKHBVOIVHOUZBJBLPMCZVBHVOZUPAEPAZAMNJJSNHFYCUUSALYZVTMNLIZZXEGMBZZTRCXBQTAEODUMAJRGDVNEVGXJQSGZERFKUSDNTFCJOJEWVMTYQXPQLAOONTDPEQUNJKZXOKNPZZPYJOYUYHIOJDGVQLZRZXFDZJUQEKEIAPVHSEFMRPQDNBLULSXDMFCWZMDZZSBRQKRIHFKYMKDULUXEECCVBJZNMOCIIDGHYIVZYXJDRLQUHTTUHPSDCMCVUGCOGPUJJZZLDKLTUDVTCSKOFOVFVLNCLVGITZSOQMJUIXMMWFNTEHNSDHYRTDZEZNZNMRVSGLJSPWZRLKACDNVKZDYPUGQTGDBBSWJRTNTHTULDYJCKQHHKKWXOBKTYSWKDQXIOZBJVJSCGKREOMRMBRESHELOTXCRBHFJPPZUJMOSTWEPMNOQFBIXFHKVYVKXYICGEDORZLDHGFFCKRYOQUFZOFOVOVGMJDYFXKFIBKKHGADUNCWEQVTKDBTBLOEJCUELWDPVGBZUCATPKXTUCEWHTBHITSLSTPBUUOLGMETWULMAJTCZZIVXVKVAYXBOCAZUCUOKUBXVALOLXVCTKSKLDLKXWPHXLURFONOIVWMPGRZTSIWZCCTSPAIQIGGULLQKZACAPTAGJBPKVDPSEDKJFYIWFFPANQCMZGXWXJFUDHXIMDAQNLJLXXUIKWFRTRDXFLLTACMOYIDWERCFHTGWVE"/>
     <replacement key="$ciphertext$" value="Ciphertext" />
     <replacement key="$textoutput$" value="Decrypted text" />
-    <replacement key="$memo$" value="The ciphertext-only attack uses hill climbing and simulated annealing to search for optimal key settings.\line
-These methods are combinded using a hybrid nested approach. 
-A hill climbing process searches for optimal lug settings and an inner simulated annealing process searches for optimal pin settings for this lug setting.\line" />
+    <replacement key="$memo$" value="The Hagelin M-209 is a portable rotor cipher machine that was used by the U.S. military mainly during World War II, but as late as the Korean War.\line
+Very compact and handy, it is also completely analog and has a larger key space than the Enigma used by the Germans in World War II.
+\line
+\line
+To get encrypted text for attack, you can use the M-209 component component. \line
+It should be noted that the present attack assumes that one of the known instructions for the key settings was followed when encrypting. \line
+These instructions include certain defaults to avoid creating keys that are easily cracked. The following instructions are known: \line \line
+- TM 11-380 April 27, 1942 (https://maritime.org/tech/csp1500inst.php) \line
+- TM 11-380B September 20, 1943 (http://www.jfbouch.fr/crypto/m209/TM_11-380B_20Sep1943.pdf) \line
+- TM 11-380 March 17, 1944 (http://www.jfbouch.fr/crypto/m209/manual.html) \line
+- TM 11-380 May 1947 \line
+\line
+In a ciphertext-only attack, only the encrypted text is available to the attacker. \line
+The algorithm used here, uses hill climbing and simulated annealing to search for optimal key settings. \line
+These methods are used in a nested hybrid approach, as follows: \line\line
+	{\b Hill Climbing} algorithm for the Lug settings:\line
+	1. A certain number of random keys are created. Each key is evaluated by using the key to decrypt the encrypted text. Based on the relative frequencies of the letters, in the decrypted text, an score value is calculated. \line
+	   The evaluated keys are compared and the best key is used further in the algorithm. \line
+	2. as long as there is no new best key, the following steps are performed: \line
+     a. Small changes are made to Lug settings (2 settings changed). \line
+	    Then a simulated annealing algorithm is run on the pin settings, which is described below.
+		For the current lug settings, the best pin settings are searched and the best key is kept.\line
+	 b. If a. did not lead to a better key, major changes are made to the lug settings and then the best pin settings are searched for again (analogous to a.).\line\line
+	{\b Simulated Annealing} algorithm for pin settings:\line
+	1. Random pin settings are generated:\line
+	2. As long as the temperature is greater than a certain threshold, the temperature is used for following steps, otherwise the temperature is set to 0: \line
+	 a. Various changes are made to the pin settings.\line
+	    e.g. 1 pin is flipped, all pins are inverted, 2 pins on one, or on two different rotors are flipped.\line
+	 b. The obtained key is evaluated.\line
+	 c. Depending on the value and temperature, it is decided if the key is a new best key.\line" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -32,9 +59,39 @@ A hill climbing process searches for optimal lug settings and an inner simulated
     <replacement key="$text$" value = "BMLNHJEYUDFMACZZJITBBCHAVENUKZGFAMWPMUUTFYPZNZCPUBBZAAETSDDFNKJFAAKSUPKXQYVIAEPZGIBAHVOUVRULJOOJFOHMBPDMXBAQWGGVXVSWMFJUEXDLAFQLMNDHXGVHQXKQUXAXDRMJMTYFQFDOUSGLSOMJRKNTDGIDYWXRKQPPOOZNTLRMXRVGRKILEUZVOVSCQGWAJDZIBBFDVJTUGXVJUPALITHGDYAQSYZQUTHUPXRUCTQEOTDLIPBOQOVDXWESOPLSDFVUNCBGKDOBVGXMSVWBDZLBWTTPQCETNWJQKQFHUSVWDEZDTLSVBRITLOQSOJRJOQIZLUSXRXWJNVCGSRCPIKMURKOKSJHKEHTTVINWALLSBILSOREZWNJMGBKQNSBEOCOAMRGKLPEIIZHEVEALSEZODAHFBUWSHYRMIMOVXAIQXTNSYDHPDGXBWOILRYWAUDVOOTXZQKCVAYNWOHBNNDMUOVHNDVZDTQKSRRDKIRHODWJRJFNVBBQFOAENRIRMOOZCQMNTVJDBQEIZTXBWYETBSHPDIBTEHAWQHUSLVOTYHVWTLLGBVUNZBXSUQTEDITDRXDNQTNEWWGFPIDDTIHMNQEHKMDIFTDYURPTMFPDMDTUNNKSVTIUKIDFRRLXNZMPJBNZRNPQWKOZYXMNXJAKKLNFAULBTPKTZCQGTJNQSMORVTZUBHVFHLNDEGCVUSBEVMHVACCYHPOHTTRHXUTHYOESFTZKLCYOPBYMLRMNQHKHBVOIVHOUZBJBLPMCZVBHVOZUPAEPAZAMNJJSNHFYCUUSALYZVTMNLIZZXEGMBZZTRCXBQTAEODUMAJRGDVNEVGXJQSGZERFKUSDNTFCJOJEWVMTYQXPQLAOONTDPEQUNJKZXOKNPZZPYJOYUYHIOJDGVQLZRZXFDZJUQEKEIAPVHSEFMRPQDNBLULSXDMFCWZMDZZSBRQKRIHFKYMKDULUXEECCVBJZNMOCIIDGHYIVZYXJDRLQUHTTUHPSDCMCVUGCOGPUJJZZLDKLTUDVTCSKOFOVFVLNCLVGITZSOQMJUIXMMWFNTEHNSDHYRTDZEZNZNMRVSGLJSPWZRLKACDNVKZDYPUGQTGDBBSWJRTNTHTULDYJCKQHHKKWXOBKTYSWKDQXIOZBJVJSCGKREOMRMBRESHELOTXCRBHFJPPZUJMOSTWEPMNOQFBIXFHKVYVKXYICGEDORZLDHGFFCKRYOQUFZOFOVOVGMJDYFXKFIBKKHGADUNCWEQVTKDBTBLOEJCUELWDPVGBZUCATPKXTUCEWHTBHITSLSTPBUUOLGMETWULMAJTCZZIVXVKVAYXBOCAZUCUOKUBXVALOLXVCTKSKLDLKXWPHXLURFONOIVWMPGRZTSIWZCCTSPAIQIGGULLQKZACAPTAGJBPKVDPSEDKJFYIWFFPANQCMZGXWXJFUDHXIMDAQNLJLXXUIKWFRTRDXFLLTACMOYIDWERCFHTGWVE"/>
     <replacement key="$ciphertext$" value="Verschlüsselter Text" />
     <replacement key="$textoutput$" value="Entschlüsselter Text" />
-    <replacement key="$memo$" value="Der Ciphertext-Only (nur verschlüsselter Text verfügbar) Angriff verwendet Hillclimbing und Simulated Annealing um nach optimalen Schlüsseleinstellungen zu suchen.\line
-Diese Methoden werden in einem verschachteltem Hybrid-Ansatz verwendet.
-Ein Hillclimbing Prozess sucht nach optimalen Lug-Einstellungen und ein innerer Simulated Annealing Prozess sucht nach optimalen Pin-Einstellungen.\line" />
+    <replacement key="$memo$" value="
+Die Hagelin M-209 ist eine tragbare Rotor-Chiffriermaschine, die hauptsächlich während des Zweiten Weltkriegs, aber noch bis zum Korea Krieg, vom US-Militär eingesetzt wurde.\line
+Sie ist sehr kompakt und handlich, zudem vollständig analog und hat einen größeren Schlüsselraum als die Enigma, die von den Deutschen im zweiten Weltkrieg verwendet wurde.
+\line
+\line
+Um verschlüsselten Text für den Angriff zu erhalten, kann man die M-209 Komponente Komponente verwenden. \line
+Zu beachten ist, dass der vorliegende Angriff annimmt, dass sich beim Verschlüsseln an eine der bekannten Anleitungen für die Schlüsseleinstellungen gehalten wurde. \line
+Diese Anleitungen beinhalten bestimmte Vorgaben, um keine leicht zu knackenden Schlüssel zu erzeugen. Folgende Anleitungen sind bekannt: \line \line
+- TM 11-380 27.April 1942 (https://maritime.org/tech/csp1500inst.php) \line
+- TM 11-380B 20.September 1943 (http://www.jfbouch.fr/crypto/m209/TM_11-380B_20Sep1943.pdf) \line
+- TM 11-380 17.März 1944 (http://www.jfbouch.fr/crypto/m209/manual.html) \line
+- TM 11-380 Mai 1947 \line
+\line
+Bei einem Ciphertext-Only Angriff, steht dem Angreifer nur der verschlüsselte Text zur Verfügung. \line
+Der hier verwendete Algorithmus, nutzt Hillclimbing und Simulated Annealing um nach optimalen Schlüsseleinstellungen zu suchen. \line
+Diese Methoden werden in einem verschachteltem Hybrid-Ansatz, wie folgt, verwendet: \line \line
+	{\b Hill Climbing} Algorithmus für die Lug Einstellungen:\line
+	1. Es werden eine bestimmte Anzahl an zufälligen Schlüsseln erstellt. Jeder Schlüssel wird ausgewertet, indem man mit dem Schlüssel den verschlüsselten Text entschlüsselt. Anhand der relativen Häufigkeiten der Buchstaben, im entschlüsselten Text, wird ein Bewertungswert berechnet. \line
+	   Die bewerteten Schlüssel werden verglichen und der beste Schlüssel wird weiter im Algorithmus verwendet. \line
+	2. Solange es keinen neuen besten Schlüssel gibt, werden folgende Schritte durchgeführt: \line
+     a. Es werden kleine Änderungen an Lug Einstellungen gemacht (2 Einstellungen verändert). \line
+	    Anschließend wird ein Simulated Annealing Algorithmus auf den Pin Einstellungen ausgeführt, der weiter unten beschreiben ist.
+		Es werden zu den aktuellen Lug Einstellungen, die besten Pin Einstellungen gesucht und der beste Schlüssel wir behalten.\line
+	 b. Wenn a. zu keinem besseren Schlüssel beführt hat, werden größere Veränderungen an den Lug Einstellungen gemacht und anschließend wieder nach den besten Pin Einstellungen gesucht (analog zu a.).\line\line
+	{\b Simulated Annealing} Algorithmus für die Pin Einstellungen:\line
+	1. Es werden zufällige Pin Einstellungen generiert.\line
+	2. Solange die Temperatur größer als ein bestimmter Grenzwert ist, wird die Temperatur für folgende Schritte verwendet, ansonsten wird die Temperatur auf 0 gesetzt: \line
+	 a. Es werden verschiedene Änderungen an den Pin Einstellungen vorgenommen\line
+	    z.B. 1 Pin wird geflippt, alle Pins werden invertiert, 2 Pins an einem, oder an zwei unterschiedlichen Rotoren werden geflippt.\line
+	 b. Der so erhaltene Schlüssel wird ausgewertet.\line
+	 c. Abhängig vom Wert und von der Temperatur, wird entschieden, ob der Schlüssel ein neuer bester Schlüssel ist.\line
+
+" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
