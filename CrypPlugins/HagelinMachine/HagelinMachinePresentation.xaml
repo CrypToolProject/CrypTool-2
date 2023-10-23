@@ -27,7 +27,7 @@
 
             <DataGrid x:Name="DataGridDynamicInformation" HorizontalAlignment="Left" Height="127" VerticalAlignment="Top" Width="722" Margin="0,77,0,0" FontSize="16"  AllowDrop="False" CanUserSortColumns="False"
                           CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False"
-                          IsReadOnly="True" Grid.Row="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
+                          IsReadOnly="True" Grid.Row="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" IsHitTestVisible="False">
                 <Style TargetType="DataGridCell">
                     <Setter Property="TextBlock.TextAlignment" Value="Center" />
                 </Style>
