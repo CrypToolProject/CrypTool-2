@@ -547,6 +547,15 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hagelin model.
+        /// </summary>
+        internal static string HagelinModel {
+            get {
+                return ResourceManager.GetString("HagelinModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Info and Control.
         /// </summary>
         internal static string InfoAndControlGroup {
@@ -588,6 +597,15 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         internal static string InitialOffsetTip {
             get {
                 return ResourceManager.GetString("InitialOffsetTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input.
+        /// </summary>
+        internal static string Input {
+            get {
+                return ResourceManager.GetString("Input", resourceCulture);
             }
         }
         
@@ -741,6 +759,15 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         internal static string OperationModeTip {
             get {
                 return ResourceManager.GetString("OperationModeTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output.
+        /// </summary>
+        internal static string Output {
+            get {
+                return ResourceManager.GetString("Output", resourceCulture);
             }
         }
         

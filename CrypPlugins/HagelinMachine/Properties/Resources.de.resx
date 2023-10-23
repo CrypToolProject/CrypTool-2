@@ -279,6 +279,9 @@
   <data name="HagelinMachineTooltip" xml:space="preserve">
     <value>Implements a selected model of a Hagelin Machine</value>
   </data>
+  <data name="HagelinModel" xml:space="preserve">
+    <value>Hagelin-Modell</value>
+  </data>
   <data name="InfoAndControlGroup" xml:space="preserve">
     <value>Info and Control</value>
   </data>
@@ -293,6 +296,9 @@
   </data>
   <data name="InitialOffsetTip" xml:space="preserve">
     <value>Shows offset between initial offset input ring and output wring</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Eingabe</value>
   </data>
   <data name="InputBarLugsCaption" xml:space="preserve">
     <value>Input bar lugs</value>
@@ -344,6 +350,9 @@
   </data>
   <data name="OperationModeTip" xml:space="preserve">
     <value>Changes between encryption and decryption modes. For current models, there is no difference</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Ausgabe</value>
   </data>
   <data name="OutputKeystreamCaption" xml:space="preserve">
     <value>Output keystream</value>

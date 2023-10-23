@@ -113,12 +113,11 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Label x:Name="label1" Content="Input" HorizontalAlignment="Left" Margin="26,53,0,0" VerticalAlignment="Top" Height="34" FontSize="18" Width="57"/>
-            <Label x:Name="label1_Copy" Content="Output" HorizontalAlignment="Left" Margin="627,53,0,0" VerticalAlignment="Top" Height="34" FontSize="18" Width="85"/>
+            <Label x:Name="label1" Content="{Loc Input}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Height="34" FontSize="18" Width="91"/>
+            <Label x:Name="label1_Copy" Content="{Loc Output}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="614,53,0,0" VerticalAlignment="Top" Height="34" FontSize="18" Width="98"/>
             <Label x:Name="labelInput" Content="I" HorizontalAlignment="Left" Margin="22,84,0,0" VerticalAlignment="Top" FontFamily="Courier New" FontSize="100" RenderTransformOrigin="0.213,0.537"/>
             <Label x:Name="labelOutput" Content="O" HorizontalAlignment="Left" Margin="627,84,0,0" VerticalAlignment="Top" FontFamily="Courier New" FontSize="100" RenderTransformOrigin="0.213,0.537"/>
-            <Label x:Name="label" Content="Hagelin model" HorizontalAlignment="Left" Margin="119,10,0,0" VerticalAlignment="Top" Height="41" Width="257" FontSize="24" FontWeight="Bold"/>
-            <Label x:Name="LabelModel" Content="CX52" HorizontalAlignment="Left" Margin="313,10,0,0" VerticalAlignment="Top" Height="41" Width="242" FontSize="24" FontWeight="Bold"/>
+            <Label x:Name="LabelModel" Content="Hagelin model" HorizontalAlignment="Left" Margin="119,10,0,0" VerticalAlignment="Top" Height="41" Width="257" FontSize="24" FontWeight="Bold"/>
         </Grid>
     </Viewbox>
 </UserControl>

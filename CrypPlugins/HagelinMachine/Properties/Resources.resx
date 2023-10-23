@@ -638,4 +638,13 @@ Bar</value>
   <data name="WheelsWithActivePins" xml:space="preserve">
     <value>Wheels with active pins</value>
   </data>
+  <data name="HagelinModel" xml:space="preserve">
+    <value>Hagelin model</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Input</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Output</value>
+  </data>
 </root>
