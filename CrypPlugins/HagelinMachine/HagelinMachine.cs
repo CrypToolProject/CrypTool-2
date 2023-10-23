@@ -274,7 +274,6 @@ namespace CrypTool.Plugins.HagelinMachine
                     _presentation.ShowActivePositionsInGrid(hagelinImplementation._activeWheelPositions);
                     _presentation.ShowWheelPinActivityInGrid(hagelinImplementation._wheelsWithActivePin);
                     _presentation.ShowWheelPositionsinGrid(hagelinImplementation._shownWheelPositions);
-                    _presentation.LabelModel.Content = _settings.Model.ToString();
                     _presentation.labelInput.Content = string.Empty;
                     _presentation.labelOutput.Content = string.Empty;
                 }, null);
