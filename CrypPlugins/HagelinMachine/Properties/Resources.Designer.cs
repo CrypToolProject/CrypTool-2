@@ -601,7 +601,8 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Input.
+        ///   Looks up a localized string similar to Input
+        ///letter.
         /// </summary>
         internal static string Input {
             get {
@@ -763,7 +764,8 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Output.
+        ///   Looks up a localized string similar to Output
+        ///letter.
         /// </summary>
         internal static string Output {
             get {

@@ -298,7 +298,8 @@
     <value>Shows offset between initial offset input ring and output wring</value>
   </data>
   <data name="Input" xml:space="preserve">
-    <value>Eingabe</value>
+    <value>Eingabe-
+Buchstabe</value>
   </data>
   <data name="InputBarLugsCaption" xml:space="preserve">
     <value>Input bar lugs</value>
@@ -352,7 +353,8 @@
     <value>Changes between encryption and decryption modes. For current models, there is no difference</value>
   </data>
   <data name="Output" xml:space="preserve">
-    <value>Ausgabe</value>
+    <value>Ausgabe-
+Buchstabe</value>
   </data>
   <data name="OutputKeystreamCaption" xml:space="preserve">
     <value>Output keystream</value>

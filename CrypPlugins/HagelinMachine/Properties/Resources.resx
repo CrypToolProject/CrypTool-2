@@ -642,9 +642,11 @@ Bar</value>
     <value>Hagelin model</value>
   </data>
   <data name="Input" xml:space="preserve">
-    <value>Input</value>
+    <value>Input
+letter</value>
   </data>
   <data name="Output" xml:space="preserve">
-    <value>Output</value>
+    <value>Output
+letter</value>
   </data>
 </root>
