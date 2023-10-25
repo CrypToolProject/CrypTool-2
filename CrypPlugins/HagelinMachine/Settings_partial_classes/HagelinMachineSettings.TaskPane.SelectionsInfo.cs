@@ -15,6 +15,7 @@
 */
 using CrypTool.PluginBase;
 using System.Text;
+using static HagelinMachine.HagelinEnums;
 
 namespace CrypTool.Plugins.HagelinMachine
 {
@@ -30,11 +31,30 @@ namespace CrypTool.Plugins.HagelinMachine
             }
             set
             {
-                if (_selectedModel != _model.ToString())
+                switch (_model)
                 {
-                    _selectedModel = _model.ToString();
-                    OnPropertyChanged("SelectedModel");
+                    case ModelType.CX52a:
+                        _selectedModel ="CX-52a";
+                         break;
+                    case ModelType.CX52b:
+                        _selectedModel = "CX-52b";
+                        break;
+                    case ModelType.CX52c:
+                        _selectedModel = "CX-52c";
+                        break;
+                    case ModelType.CXM:
+                        _selectedModel = "CX-M";
+                        break;
+                    case ModelType.CXM_LATE_VERSION:
+                        _selectedModel = "CX-M late version";
+                        break;
+                    case ModelType.C52d:
+                        _selectedModel = "C-52d";
+                        break;
                 }
+
+
+                OnPropertyChanged("SelectedModel");
             }
         }
 
