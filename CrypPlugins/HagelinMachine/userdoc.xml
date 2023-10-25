@@ -37,11 +37,11 @@
   </usage>
 
   <presentation lang="en">
-    Presentation demonstrates advancements of the wheels after provided plaintext is encrypted. If the input text is entered character by character, the user can follow how the state of the machine is changing
+    Presentation demonstrates advancements of the wheels after provided plaintext is encrypted. If the input text is entered character by character, the user can follow how the state of the machine is changing , as displayed in the table. Specifically, this table details the wheel positions currently visible to the user (centered in the accompanying wheel image), the active wheel positions – meaning those positions to engage with the bar lugs in the upcoming encryption cycle. The table also indicates the number of steps by which the wheels advanced last time. The final row highlights the wheels that possess active pins during the current encryption step.
   </presentation>
 
   <presentation lang="de-DE">
-    Die Präsentation zeigt die Fortschritte der Räder, nachdem der eingegebene Klartext verschlüsselt wurde. Wenn der Eingabetext Zeichen für Zeichen eingegeben wird, kann der Benutzer verfolgen, wie sich der Zustand der Maschine ändert
+    Die Präsentation zeigt die Fortschritte der Räder, nachdem der bereitgestellte Klartext verschlüsselt wurde. Wenn der Eingabetext Zeichen für Zeichen eingegeben wird, kann der Benutzer verfolgen, wie sich der Zustand der Maschine ändert, wie in der Tabelle angezeigt. Insbesondere gibt diese Tabelle die Radpositionen an, die dem Benutzer derzeit sichtbar sind (zentriert im begleitenden Radbild), die aktiven Radpositionen – also jene Positionen, die im bevorstehenden Verschlüsselungszyklus mit den Stange-Schiebern in Eingriff treten. Die Tabelle zeigt auch die Anzahl der Schritte an, um die die Räder das letzte Mal vorgerückt sind. Die letzte Zeile hebt die Räder hervor, die während des aktuellen Verschlüsselungsschritts aktive Stifte besitzen.
   </presentation>
 
   <references>
