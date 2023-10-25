@@ -117,7 +117,7 @@
             <Label x:Name="label1_Copy" Content="{Loc Output}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="614,53,0,0" VerticalAlignment="Top" Height="59" FontSize="18" Width="98"/>
             <Label x:Name="labelInput" Content="I" HorizontalAlignment="Left" Margin="22,84,0,0" VerticalAlignment="Top" FontFamily="Courier New" FontSize="100" RenderTransformOrigin="0.213,0.537"/>
             <Label x:Name="labelOutput" Content="O" HorizontalAlignment="Left" Margin="627,84,0,0" VerticalAlignment="Top" FontFamily="Courier New" FontSize="100" RenderTransformOrigin="0.213,0.537"/>
-            <Label x:Name="LabelModel" Content="Hagelin model" HorizontalAlignment="Left" Margin="119,10,0,0" VerticalAlignment="Top" Height="41" Width="257" FontSize="24" FontWeight="Bold"/>
+            <Label x:Name="LabelModel" Content="Hagelin model" HorizontalAlignment="Left" Margin="119,10,0,0" VerticalAlignment="Top" Height="41" Width="492" FontSize="24" FontWeight="Bold"/>
         </Grid>
     </Viewbox>
 </UserControl>

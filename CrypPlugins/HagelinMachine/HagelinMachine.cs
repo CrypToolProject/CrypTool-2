@@ -355,7 +355,7 @@ namespace CrypTool.Plugins.HagelinMachine
         {
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                _presentation.LabelModel.Content = string.Format("{0}: {1}", Properties.Resources.HagelinModel, _settings.Model.ToString());
+                _presentation.LabelModel.Content = string.Format("{0}: {1}", Properties.Resources.HagelinModel, _settings.SelectedModel);
             }, null);
         }
 
