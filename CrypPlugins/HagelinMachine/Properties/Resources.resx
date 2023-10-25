@@ -379,7 +379,7 @@ Current displacement: </value>
 </value>
   </data>
   <data name="PresentatinCol1Label" xml:space="preserve">
-    <value>Information</value>
+    <value>Description</value>
   </data>
   <data name="PresentatinCol2Label" xml:space="preserve">
     <value>Wheel 1</value>

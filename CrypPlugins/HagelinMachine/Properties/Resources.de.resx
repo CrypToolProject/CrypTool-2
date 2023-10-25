@@ -175,7 +175,7 @@
     <value>↓Wheel 12</value>
   </data>
   <data name="CaptionDownWheel2" xml:space="preserve">
-    <value>↓Wheel2</value>
+    <value>↓Wheel 2</value>
   </data>
   <data name="CaptionDownWheel3" xml:space="preserve">
     <value>↓Wheel 3</value>
@@ -433,7 +433,7 @@ Current displacement: </value>
     <value>Wheel</value>
   </data>
   <data name="PresentatinCol1Label" xml:space="preserve">
-    <value>Information</value>
+    <value>Beschreibung</value>
   </data>
   <data name="PresentatinCol2Label" xml:space="preserve">
     <value>Wheel 1</value>
@@ -531,15 +531,13 @@ x57      CA0000      Yes       Advances if shifted
 Cam types: 0 - never, B - not displaced, A - displaced, C - always</value>
   </data>
   <data name="SelectedModelCaption" xml:space="preserve">
-    <value>
-
-Selected model</value>
+    <value>Selected model:</value>
   </data>
   <data name="SelectedModelTip" xml:space="preserve">
     <value>Shows the model which was selected</value>
   </data>
   <data name="SelectedWheelsCaption" xml:space="preserve">
-    <value>Selected wheels</value>
+    <value>Selected wheels:</value>
   </data>
   <data name="SelectedWheelsTip" xml:space="preserve">
     <value>Shows the wheel types that were selected</value>
@@ -563,7 +561,7 @@ Selected model</value>
     <value>Show wheels</value>
   </data>
   <data name="Step11Caption" xml:space="preserve">
-    <value>1.1 - Select the Hagelin model and the operation mode. The model defines the bars used in the machine and the compatible pin-wheels. With the default settings, there is no need to go over all the steps. Execution can be started any time.</value>
+    <value>1.1. Select the Hagelin model and the operation mode. The model defines the bars used in the machine and the compatible pin-wheels. With the default settings, there is no need to go over all the steps. Execution can be started any time.</value>
   </data>
   <data name="Step12Caption" xml:space="preserve">
     <value>1.2. Selection of the wheels: If the current  model allows that, select the pin wheels. Once ready, press Next button</value>
@@ -572,13 +570,13 @@ Selected model</value>
     <value>1.3. Select the bars to be used in the Machine. Once ready, press Next button</value>
   </data>
   <data name="Step21Caption" xml:space="preserve">
-    <value>2.1. Setting up pins for the weels - part of inner key. Values added here will be ingnored if the pins are provided as an input</value>
+    <value>2.1. Setting up pins for the weels, which constitute the first part of the internal key.</value>
   </data>
   <data name="Step22Caption" xml:space="preserve">
-    <value>2.2. Setting up lugs of the bars - part of inner key. Values added here will be ingnored if the lugs are provided as an input</value>
+    <value>2.2. Setting up lugs of the bars, which constitute the second part of the internal key.</value>
   </data>
   <data name="Step3Caption" xml:space="preserve">
-    <value>3. Setting up initial positions of the wheels - external key. The step is not necessary if the initial state is provided as an input</value>
+    <value>3. Setting up initial positions of the wheels, which constitute the external key. </value>
   </data>
   <data name="Step4Caption" xml:space="preserve">
     <value>4. Setting up the opeation settings: 
@@ -587,7 +585,7 @@ Selected model</value>
 4.3: Position of output ring with respect to the input ring.</value>
   </data>
   <data name="TextOptionsGroup" xml:space="preserve">
-    <value>Text options</value>
+    <value>Text options:</value>
   </data>
   <data name="TipDownWheel" xml:space="preserve">
     <value>Rotate the wheel down by 1 position</value>
@@ -596,13 +594,13 @@ Selected model</value>
     <value>Rotate the wheel up by 1 position. The initial wheels state is shown on the panel above</value>
   </data>
   <data name="UnknownSymbolCaption" xml:space="preserve">
-    <value>Unknown Symbols Handling</value>
+    <value>Unknown symbols handling</value>
   </data>
   <data name="UnknownSymbolTip" xml:space="preserve">
     <value>Set how to handle uknown Symbols</value>
   </data>
   <data name="UseZCaption" xml:space="preserve">
-    <value>Use Z As Space</value>
+    <value>Use Z as space</value>
   </data>
   <data name="UseZTip" xml:space="preserve">
     <value>Consider Z characters as spaces</value>
@@ -611,7 +609,7 @@ Selected model</value>
     <value>Utilities</value>
   </data>
   <data name="WheelActivePinsCaption" xml:space="preserve">
-    <value>Active pins of the wheel</value>
+    <value>Active pins of the wheel:</value>
   </data>
   <data name="WheelActivePinsTip" xml:space="preserve">
     <value>Enumerate the indexes of the pins of the wheel which are to be set active.</value>
@@ -623,7 +621,7 @@ Selected model</value>
     <value>Shows the labels of each position of the wheel . They may include Latin letters or numbers and have to be separted by the comma sign</value>
   </data>
   <data name="WheelsStateCaption" xml:space="preserve">
-    <value>Wheels state</value>
+    <value>Wheels state:</value>
   </data>
   <data name="WheelsStateTip" xml:space="preserve">
     <value>Shows the indexes of the  positions of each wheel. In the beginning equal to external key. Indexes are to be separted by the comma sign</value>
@@ -632,9 +630,9 @@ Selected model</value>
     <value>The wheel state is not valid.</value>
   </data>
   <data name="WheelTypeCaption" xml:space="preserve">
-    <value>Type of the wheel</value>
+    <value>Type of the wheel:</value>
   </data>
   <data name="WheelTypeTip" xml:space="preserve">
-    <value>Sets up the type of the wheel</value>
+    <value>Sets up the type of the wheel.</value>
   </data>
 </root>
