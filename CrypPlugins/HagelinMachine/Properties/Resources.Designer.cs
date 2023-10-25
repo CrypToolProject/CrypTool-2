@@ -421,7 +421,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please follow the istructions. With the default settings, there is no need to go over all the steps. Execution can be started any time.
+        ///   Looks up a localized string similar to Please follow the instructions. With the default settings, there is no need to go over all the steps. Execution can be started any time..
         /// </summary>
         internal static string CurrentStepTip {
             get {

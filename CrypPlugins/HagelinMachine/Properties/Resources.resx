@@ -235,7 +235,7 @@
     <value>Current step:</value>
   </data>
   <data name="CurrentStepTip" xml:space="preserve">
-    <value>Please follow the istructions. With the default settings, there is no need to go over all the steps. Execution can be started any time</value>
+    <value>Please follow the instructions. With the default settings, there is no need to go over all the steps. Execution can be started any time.</value>
   </data>
   <data name="ErrorGeneral" xml:space="preserve">
     <value>Exception occured during execution of HagelinMachine: {0}</value>

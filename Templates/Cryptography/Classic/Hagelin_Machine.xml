@@ -30,7 +30,7 @@
 
 \line 
 \line 
-Additional details can be found in the online help of the component. More information about the Hagelin machines can be found here: https://www.cryptomuseum.com/pub/files/BW_C52_CX52.pdf"/>
+For additional details we refer to the online help of the component. More information about the Hagelin machines can be found here: https://www.cryptomuseum.com/pub/files/BW_C52_CX52.pdf"/>
    
    <replacement key="$memo2$" value="{\b Template usage.}\line
 \line The template contains two instances of the “Hagelin Machine” component. Both share the same settings except for the operation mode. That is, the first instance is set to “encryption” and the second one to “decryption”. After the encrypted text is processed by the second Hagelin Machine component, we can see, that the received output text is equal to the original input text.
