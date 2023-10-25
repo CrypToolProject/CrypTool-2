@@ -15,7 +15,7 @@
     <replacement key="$plaintext$" value="Plaintext" />
 	<replacement key="$text$" value="TO BE OR NOT TO BE!" />
     <replacement key="$encryption$" value="Encryption using Hagelin Machine"/>
-	<replacement key="$decryption$" value="Decryption with using Hagelin Machine" />
+	<replacement key="$decryption$" value="Decryption using Hagelin Machine" />
 	<replacement key="$ciphertext$" value="Encrypted text" />
 	<replacement key="$decryptedtext$" value="Decrypted text" />
 	<replacement key="$activepins$" value="Active pins on wheels 1 to 6" />
@@ -23,15 +23,23 @@
 	<replacement key="$startpositions$" value="Wheel start positions" />
 	<replacement key="$report$" value="Detailed report of the state of the machine during all the steps of encryption process" />
 	<replacement key="$keystream$" value="Keystream" />				
-    <replacement key="$memo$" value="Description of the {\b Hagelin Machine} component\line
-\line
-This component simulates the operation of various models of cryptographic devices manufactured by Crypto AG after the World War II, so-called Hagelin Machines. Based on the known building blocks which were used in the real life, the user can define different variants of these machines. At the moment the following models are supported: CX52a, CX52b, CX52c, C52d, CXM, CXM late version, French, EIRE, M209. Besides the predefined models, the user has an option to select the Custom model which allows for most flexible settings.\line
-\line
-The model defines the applicable types of the wheels and the way how they are displaced during the encryption or decryption process. This is realized by setting up the configuration of the bars.  In the custom model the user cad define this by himself.\line
-\line
-The internal and external keys can be provided to the component through the seetings and as the inputs. If the keys are provided through the inputs, the ones which are given through the settings are ignored.\line
-\line
-More information about the Hagelin Machine models can be found here: https://www.cryptomuseum.com/pub/files/BW_C52_CX52.pdf"/>
+    <replacement key="$memo1$" value="{\b Hagelin Machine component} .\line
+\line This component simulates the functioning of different models of cryptographic devices made by Crypto AG post World War II, commonly known as the Hagelin Machines.
+
+\line The Hagelin machine produces a sequence of pseudorandom numbers, or a keystream. This keystream is used to encrypt the plaintext characters individually using the same encoding as used in Beaufort cipher. This encoding mirrors the Caesar cipher, but with an reversed alphabet.
+
+\line While the foundational encryption principle remains consistent across all Hagelin models, each machine varies in how they produce these pseudorandom sequences. This variation is determined by the machine's architecture and it's initial state, a combination of both its internal and external keys. Specifically, the internal key is composed of wheel pins and bar lugs. In contrast, the external key refers to the initial positions of the wheels.
+
+\line Currently, the supported models include the CX-52a, CX-52b, CX-52c, C-52d, CX-M, CX-M late version, French, EIRE, and M209. Beyond these models, there's also an option for a custom model. This option offers users the most flexibility in settings.
+
+\line Each model specifies the types of wheels used and their rotation method during the encryption or decryption processes. This is achieved by configuring the bars. In the custom model, users can select the bars for each position, determining the wheel rotation mechanism.\line
+
+\line More information about the Hagelin machines can be found here: https://www.cryptomuseum.com/pub/files/BW_C52_CX52.pdf"/>
+   
+   <replacement key="$memo2$" value="{\b Template usage.}\line
+\line The template contains two instances of the “Hagelin Machine” component. Both share the same settings except for the operation mode. That is, the first instance is set to “encryption” and the second one to “decryption”. After the encrypted text is processed by the second Hagelin Machine component, we can see, that the received output text is equal to the original input text.
+\line The internal and external keys can be provided to the component through the seetings and as the inputs. If the keys are submitted directly as inputs, any provided through the settings will be disregarded.
+\line To gain a deeper insight into how the machines operate and observe the evolution of their internal state during encryption, users are advised to enter plaintext characters one by one and monitor the change of the values shown in the presentation table."/>
   </replacements>
 <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <!--Language 'de' starts here:-->
@@ -52,15 +60,24 @@ More information about the Hagelin Machine models can be found here: https://www
 	<replacement key="$startpositions$" value="Startpositionen der Räder" />
 	<replacement key="$report$" value="Detaillierter Bericht über den Zustand der Maschine während aller Schritte des Verschlüsselungsprozesses" />
 	<replacement key="$keystream$" value="Schlüsselstrom" />				
-    <replacement key="$memo$" value="Beschreibung der {\b Hagelin-Maschinen-Komponente}\line
-\line
-Diese Komponente simuliert den Betrieb verschiedener Modelle von kryptographischen Geräten, die von Crypto AG nach dem Zweiten Weltkrieg hergestellt wurden, sogenannte Hagelin-Maschinen. Basierend auf den bekannten Bausteinen, die im realen Leben verwendet wurden, kann der Benutzer verschiedene Varianten dieser Maschinen definieren. Zur Zeit werden die folgenden Modelle unterstützt: CX52a, CX52b, CX52c, C52d, CXM, CXM late version, French, EIRE, M209. Neben den vordefinierten Modellen hat der Benutzer die Möglichkeit, das benutzerdefinierte Modell zu wählen, das die flexibelsten Einstellungen ermöglicht.\line
-\line
-Das Modell definiert die anwendbaren Typen der Räder und die Art und Weise, wie sie während des Verschlüsselungs- oder Entschlüsselungsprozesses verschoben werden. Dies wird durch die Einstellung der Konfiguration der Stangen realisiert.  In dem benutzerdefinierten Modell kann der Benutzer dies selbst definieren.\line
-\line
-Die internen und externen Schlüssel können der Komponente über die Sitzungen und als Eingänge zur Verfügung gestellt werden. Wenn die Tasten über die Eingänge bereitgestellt werden, werden die Tasten, die über die Einstellungen angegeben sind, ignoriert.\line
-\line
-Weitere Informationen zu den Hagelin Maschinenmodellen finden Sie hier: https://www.cryptomuseum.com/pub/files/BW_C52_CX52.pdf"/>
+    <replacement key="$memo1$" value="{\b Hagelin Maschine Komponente} .\line
+\line Diese Komponente simuliert die Funktionsweise verschiedener Modelle von kryptografischen Geräten, die nach dem Zweiten Weltkrieg von Crypto AG hergestellt wurden, allgemein bekannt als die Hagelin Maschinen.
+
+\line Die Hagelin Maschine erzeugt eine Sequenz von pseudorandom Zahlen oder einem Schlüsselstrom. Dieser Schlüsselstrom wird verwendet, um die Klartextzeichen einzeln zu verschlüsseln, wobei die gleiche Codierung wie im Beaufort-Chiffre verwendet wird. Diese Codierung spiegelt die Caesar-Chiffre wider, jedoch mit einem umgekehrten Alphabet.
+
+\line Während das grundlegende Verschlüsselungsprinzip bei allen Hagelin-Modellen gleich bleibt, unterscheidet sich jede Maschine darin, wie sie diese pseudorandom Sequenzen erzeugt. Diese Variation wird durch die Architektur der Maschine und ihren Ausgangszustand bestimmt, eine Kombination aus internen und externen Schlüsseln. Insbesondere besteht der interne Schlüssel aus Schlüsselräder-Stiften und Stange-Schiebern. Im Gegensatz dazu bezieht sich der externe Schlüssel auf die Anfangspositionen der Räder.
+
+\line Derzeit werden die Modelle CX-52a, CX-52b, CX-52c, C-52d, CX-M, CX-M späte Version, Französisch, EIRE und M209 unterstützt. Neben diesen Modellen gibt es auch eine Option für ein benutzerdefiniertes Modell. Diese Option bietet den Benutzern die größte Flexibilität in den Einstellungen.
+
+\line Jedes Modell gibt die Arten von Rädern an, die verwendet werden, und ihre Rotationsmethode während der Verschlüsselungs- oder Entschlüsselungsprozesse. Dies wird durch Konfiguration der Stangen erreicht. Im benutzerdefinierten Modell können Benutzer die Stangen für jede Position auswählen und so den Radrotationsmechanismus bestimmen.\line
+
+\line Weitere Informationen über die Hagelin Maschinen finden Sie hier: https://www.cryptomuseum.com/pub/files/BW_C52_CX52.pdf"
+/>
+ <replacement key="$memo2$" value="{\b Verwendung der Vorlage.}\line
+\line Die Vorlage enthält zwei Instanzen der Komponente “Hagelin Maschine”. Beide haben dieselben Einstellungen, mit Ausnahme des Betriebsmodus. Das bedeutet, die erste Instanz ist auf “Verschlüsselung” eingestellt und die zweite auf “Entschlüsselung”. Nachdem der verschlüsselte Text von der zweiten Hagelin Maschine Komponente verarbeitet wurde, können wir sehen, dass der erhaltene Ausgabetext dem ursprünglichen Eingabetext entspricht.
+\line Die internen und externen Schlüssel können der Komponente über die Einstellungen und als Eingaben bereitgestellt werden. Werden die Schlüssel direkt als Eingaben übermittelt, werden alle über die Einstellungen bereitgestellten ignoriert.
+\line Um ein tieferes Verständnis dafür zu erhalten, wie die Maschinen arbeiten und die Entwicklung ihres internen Zustands während der Verschlüsselung zu beobachten, wird den Benutzern empfohlen, Klartextzeichen einzeln einzugeben und die Änderung der Werte in der Präsentationstabelle zu überwachen."/>
+
   </replacements>
 <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <!--The general section starts here:-->
