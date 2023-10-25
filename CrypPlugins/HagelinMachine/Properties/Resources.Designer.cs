@@ -97,7 +97,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cam types of the bar .
+        ///   Looks up a localized string similar to Cam types of the bar:.
         /// </summary>
         internal static string BarCamTypesCaption {
             get {
@@ -574,7 +574,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Initial offset.
+        ///   Looks up a localized string similar to Initial offset:.
         /// </summary>
         internal static string InitialOffsetSetCaption {
             get {
@@ -683,7 +683,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Model.
+        ///   Looks up a localized string similar to Model:.
         /// </summary>
         internal static string ModelCaption {
             get {
@@ -746,7 +746,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operation mode.
+        ///   Looks up a localized string similar to Operation mode:.
         /// </summary>
         internal static string OperationModeCaption {
             get {
@@ -1108,7 +1108,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ready to.
+        ///   Looks up a localized string similar to Ready to .
         /// </summary>
         internal static string ReadyToCaption {
             get {
@@ -1171,7 +1171,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bars used in this machine.
+        ///   Looks up a localized string similar to Bars used in this machine:.
         /// </summary>
         internal static string SelectedBarsCaption {
             get {
@@ -1289,7 +1289,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1.1.  Select the Hagelin model and the operation mode. The model defines the bars used in the machine and the compatible pin-wheels. With the default settings, there is no need to go over all the steps. Execution can be started any time..
+        ///   Looks up a localized string similar to 1.1.  Select the Hagelin model and the operation mode. The model defines the bars used in the machine and the compatible pin wheels. With the default settings, there is no need to go over all the steps. Execution can be started any time..
         /// </summary>
         internal static string Step11Caption {
             get {
@@ -1382,7 +1382,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unknown symbols Handling.
+        ///   Looks up a localized string similar to Unknown symbols handling:.
         /// </summary>
         internal static string UnknownSymbolCaption {
             get {

@@ -13,7 +13,7 @@
   <keywords>Hagelin Machine, CX52a, CX52b, CX52c, C52d, CXM, EIRE, M209</keywords>  
   <replacements lang="en">
     <replacement key="$plaintext$" value="Plaintext" />
-	<replacement key="$text$" value="TO BE OR NOT TO BE!" />
+	<replacement key="$text$" value="TO BE OR NOT TO BE" />
     <replacement key="$encryption$" value="Encryption using Hagelin Machine"/>
 	<replacement key="$decryption$" value="Decryption using Hagelin Machine" />
 	<replacement key="$ciphertext$" value="Encrypted text" />
@@ -24,19 +24,13 @@
 	<replacement key="$report$" value="Detailed report of the state of the machine during all the steps of encryption process" />
 	<replacement key="$keystream$" value="Keystream" />				
     <replacement key="$memo1$" value="{\b Hagelin Machine component} .\line
-\line This component simulates the functioning of different models of cryptographic devices made by Crypto AG post World War II, commonly known as the Hagelin Machines.
+\line This component simulates the functioning of different models of cryptographic devices made by Crypto AG post World War II, commonly known as the Hagelin Machines. The Hagelin machine produces a sequence of pseudorandom numbers, or a keystream. This keystream is used to encrypt the plaintext characters individually using the same encoding as used in Beaufort cipher. This encoding mirrors the Caesar cipher, but with an reversed alphabet. While the foundational encryption principle remains consistent across all Hagelin models, each machine varies in how they produce these pseudorandom sequences. This variation is determined by the machine's architecture and it's initial state, a combination of both its internal and external keys. Specifically, the internal key is composed of wheel pins and bar lugs. In contrast, the external key refers to the initial positions of the wheels.
 
-\line The Hagelin machine produces a sequence of pseudorandom numbers, or a keystream. This keystream is used to encrypt the plaintext characters individually using the same encoding as used in Beaufort cipher. This encoding mirrors the Caesar cipher, but with an reversed alphabet.
+\line \line Currently, the supported models include the CX-52a, CX-52b, CX-52c, C-52d, CX-M, CX-M late version, French, EIRE, and M209. Beyond these models, there's also an option for a custom model. This option offers users the most flexibility in settings. Each model specifies the types of wheels used and their rotation method during the encryption or decryption processes. This is achieved by configuring the bars. In the custom model, users can select the bars for each position, determining the wheel rotation mechanism.
 
-\line While the foundational encryption principle remains consistent across all Hagelin models, each machine varies in how they produce these pseudorandom sequences. This variation is determined by the machine's architecture and it's initial state, a combination of both its internal and external keys. Specifically, the internal key is composed of wheel pins and bar lugs. In contrast, the external key refers to the initial positions of the wheels.
-
-\line Currently, the supported models include the CX-52a, CX-52b, CX-52c, C-52d, CX-M, CX-M late version, French, EIRE, and M209. Beyond these models, there's also an option for a custom model. This option offers users the most flexibility in settings.
-
-\line Each model specifies the types of wheels used and their rotation method during the encryption or decryption processes. This is achieved by configuring the bars. In the custom model, users can select the bars for each position, determining the wheel rotation mechanism.\line
-
-\line Additional details can be found in the online help of the component.
-
-\line More information about the Hagelin machines can be found here: https://www.cryptomuseum.com/pub/files/BW_C52_CX52.pdf"/>
+\line 
+\line 
+Additional details can be found in the online help of the component. More information about the Hagelin machines can be found here: https://www.cryptomuseum.com/pub/files/BW_C52_CX52.pdf"/>
    
    <replacement key="$memo2$" value="{\b Template usage.}\line
 \line The template contains two instances of the “Hagelin Machine” component. Both share the same settings except for the operation mode. That is, the first instance is set to “encryption” and the second one to “decryption”. After the encrypted text is processed by the second Hagelin Machine component, we can see, that the received output text is equal to the original input text.

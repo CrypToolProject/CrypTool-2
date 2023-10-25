@@ -58,7 +58,6 @@ namespace CrypTool.Plugins.HagelinMachine
         private string _selectedBars;
         private string _selectedInitOffset;
         private string _selectedFVFeature;
-        private string _selectedFVOffset;
 
         //FV Feature
         private bool _FVfeatureIsActive = false;

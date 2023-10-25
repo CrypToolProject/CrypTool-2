@@ -130,7 +130,7 @@
     <value>Return to the previous window</value>
   </data>
   <data name="BarCamTypesCaption" xml:space="preserve">
-    <value>Cam types of the bar </value>
+    <value>Cam types of the bar:</value>
   </data>
   <data name="BarCamTypesTip" xml:space="preserve">
     <value>Indicates how cams influence each of the wheels by typing a string which contains following characters: 0 - never, A - when displaced, B - when not displaced,  C - always</value>
@@ -307,7 +307,7 @@
     <value>Input indexes (letters or numbers) of the initial positions of the wheel.  Indexes have to be separated with a comma, e.g: "A, B, 11". </value>
   </data>
   <data name="ModelCaption" xml:space="preserve">
-    <value>Model</value>
+    <value>Model:</value>
   </data>
   <data name="ModelTip" xml:space="preserve">
     <value>Select the model of Hagelin Machine</value>
@@ -412,7 +412,7 @@ Current displacement: </value>
     <value>Rotate up</value>
   </data>
   <data name="SelectedBarsCaption" xml:space="preserve">
-    <value>Bars used in this machine</value>
+    <value>Bars used in this machine:</value>
   </data>
   <data name="SelectedBarsTip" xml:space="preserve">
     <value>Information about bars:
@@ -501,7 +501,7 @@ Cam types: 0 - never, B - not displaced, A - displaced, C - always</value>
     <value>Encryption done</value>
   </data>
   <data name="InitialOffsetSetCaption" xml:space="preserve">
-    <value>Initial offset</value>
+    <value>Initial offset:</value>
   </data>
   <data name="InitialOffsetSetTip" xml:space="preserve">
     <value>Sets the initial offset between input ring and output ring</value>
@@ -510,7 +510,7 @@ Cam types: 0 - never, B - not displaced, A - displaced, C - always</value>
     <value>Mode of operation</value>
   </data>
   <data name="OperationModeCaption" xml:space="preserve">
-    <value>Operation mode</value>
+    <value>Operation mode:</value>
   </data>
   <data name="OperationModeTip" xml:space="preserve">
     <value>Changes between encryption and decryption modes. For current models, there is no difference</value>
@@ -531,7 +531,7 @@ Cam types: 0 - never, B - not displaced, A - displaced, C - always</value>
     <value>Randomly set wheel pins</value>
   </data>
   <data name="ReadyToCaption" xml:space="preserve">
-    <value>Ready to</value>
+    <value>Ready to </value>
   </data>
   <data name="ResetWheelsCaption" xml:space="preserve">
     <value>Reset wheels</value>
@@ -558,7 +558,7 @@ Cam types: 0 - never, B - not displaced, A - displaced, C - always</value>
     <value>Show wheels</value>
   </data>
   <data name="Step11Caption" xml:space="preserve">
-    <value>1.1.  Select the Hagelin model and the operation mode. The model defines the bars used in the machine and the compatible pin-wheels. With the default settings, there is no need to go over all the steps. Execution can be started any time.</value>
+    <value>1.1.  Select the Hagelin model and the operation mode. The model defines the bars used in the machine and the compatible pin wheels. With the default settings, there is no need to go over all the steps. Execution can be started any time.</value>
   </data>
   <data name="Step12Caption" xml:space="preserve">
     <value>1.2. Selection of the wheels: If the current  model allows that, select the pin wheels. Once ready, press Next button</value>
@@ -585,7 +585,7 @@ Cam types: 0 - never, B - not displaced, A - displaced, C - always</value>
     <value>Text options:</value>
   </data>
   <data name="UnknownSymbolCaption" xml:space="preserve">
-    <value>Unknown symbols Handling</value>
+    <value>Unknown symbols handling:</value>
   </data>
   <data name="UnknownSymbolTip" xml:space="preserve">
     <value>Set how to handle uknown Symbols</value>

@@ -103,7 +103,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
                 case PluginStates.Encryption:
                     HideAll();
-                    _hintMessage = CrypTool.Plugins.HagelinMachine.Properties.Resources.ReadyToCaption + _mode.ToString() + CrypTool.Plugins.HagelinMachine.Properties.Resources.CanStartCaption;
+                    _hintMessage = CrypTool.Plugins.HagelinMachine.Properties.Resources.ReadyToCaption + _mode.ToString().ToLower() + ". "+ CrypTool.Plugins.HagelinMachine.Properties.Resources.CanStartCaption;
                     OnPropertyChanged("HintMessage");
                     ShowSettingsElement("SelectedModel");
                     ShowSettingsElement("SelectedWheels");

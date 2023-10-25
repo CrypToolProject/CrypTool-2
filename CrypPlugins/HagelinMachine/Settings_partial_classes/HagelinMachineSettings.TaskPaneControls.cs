@@ -184,7 +184,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
 
-        [TaskPane("Show all settings", "ShowAllTip", "InfoAndControlGroup", 11, false, ControlType.CheckBox)]
+        [TaskPane("Show all settings", "ShowAllTip", "InfoAndControlGroup", 11, true, ControlType.CheckBox)]
         public bool ShowAllCheckBox
         {
             get

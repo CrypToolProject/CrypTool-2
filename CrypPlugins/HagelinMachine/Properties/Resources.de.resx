@@ -570,13 +570,13 @@ Cam types: 0 - never, B - not displaced, A - displaced, C - always</value>
     <value>1.3. Select the bars to be used in the Machine. Once ready, press Next button</value>
   </data>
   <data name="Step21Caption" xml:space="preserve">
-    <value>2.1. Setting up pins for the weels, which constitute the first part of the internal key.</value>
+    <value>2.1. Setting up pins for the weels, which constitute the first part of the internal key</value>
   </data>
   <data name="Step22Caption" xml:space="preserve">
-    <value>2.2. Setting up lugs of the bars, which constitute the second part of the internal key.</value>
+    <value>2.2. Setting up lugs of the bars, which constitute the second part of the internal key</value>
   </data>
   <data name="Step3Caption" xml:space="preserve">
-    <value>3. Setting up initial positions of the wheels, which constitute the external key. </value>
+    <value>3. Setting up initial positions of the wheels, which constitute the external key</value>
   </data>
   <data name="Step4Caption" xml:space="preserve">
     <value>4. Setting up the opeation settings: 
