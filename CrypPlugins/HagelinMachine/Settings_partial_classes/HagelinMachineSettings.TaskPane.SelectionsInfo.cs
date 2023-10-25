@@ -34,8 +34,8 @@ namespace CrypTool.Plugins.HagelinMachine
                 switch (_model)
                 {
                     case ModelType.CX52a:
-                        _selectedModel ="CX-52a";
-                         break;
+                        _selectedModel = "CX-52a";
+                        break;
                     case ModelType.CX52b:
                         _selectedModel = "CX-52b";
                         break;
@@ -51,10 +51,22 @@ namespace CrypTool.Plugins.HagelinMachine
                     case ModelType.C52d:
                         _selectedModel = "C-52d";
                         break;
+                    case ModelType.EIRE:
+                        _selectedModel = "CX-52 EIRE";
+                        break;
+                    case ModelType.FRANCE:
+                        _selectedModel = "CX-52 French version";
+                        break;
+                    case ModelType.M209:
+                        _selectedModel = "M209";
+                        break;
+                    case ModelType.Custom:
+                        _selectedModel = "Custom";
+                        break;
                 }
 
 
-                OnPropertyChanged("SelectedModel");
+                        OnPropertyChanged("SelectedModel");
             }
         }
 
