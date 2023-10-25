@@ -115,7 +115,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bar has lugs.
+        ///   Looks up a localized string similar to Bar has lugs:.
         /// </summary>
         internal static string BarHasLugsCaption {
             get {
@@ -133,7 +133,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bar lugs.
+        ///   Looks up a localized string similar to Bar lugs:.
         /// </summary>
         internal static string BarLugsCaption {
             get {
@@ -151,7 +151,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tooth type of the bar.
+        ///   Looks up a localized string similar to Tooth type of the bar:.
         /// </summary>
         internal static string BarToothTypeCaption {
             get {
@@ -169,7 +169,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type of the bar.
+        ///   Looks up a localized string similar to Type of the bar:.
         /// </summary>
         internal static string BarTypeCaption {
             get {
@@ -187,7 +187,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can start the execution now..
+        ///   Looks up a localized string similar to You can start the execution now by pressing the &quot;Play&quot; button in the top tool bar..
         /// </summary>
         internal static string CanStartCaption {
             get {
@@ -232,7 +232,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ↓Wheel2.
+        ///   Looks up a localized string similar to ↓Wheel 2.
         /// </summary>
         internal static string CaptionDownWheel2 {
             get {
@@ -1199,9 +1199,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///Selected model.
+        ///   Looks up a localized string similar to Selected model:.
         /// </summary>
         internal static string SelectedModelCaption {
             get {
@@ -1219,7 +1217,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selected wheels.
+        ///   Looks up a localized string similar to Selected wheels:.
         /// </summary>
         internal static string SelectedWheelsCaption {
             get {
@@ -1291,7 +1289,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1.1 - Select the Hagelin model and the operation mode. The model defines the bars used in the machine and the compatible pin-wheels. With the default settings, there is no need to go over all the steps. Execution can be started any time..
+        ///   Looks up a localized string similar to 1.1.  Select the Hagelin model and the operation mode. The model defines the bars used in the machine and the compatible pin-wheels. With the default settings, there is no need to go over all the steps. Execution can be started any time..
         /// </summary>
         internal static string Step11Caption {
             get {
@@ -1318,7 +1316,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 2.1. Setting up pins for the weels - part of inner key. Values added here will be ingnored if the pins are provided as an input.
+        ///   Looks up a localized string similar to 2.1. Setting up pins for the weels, which constitute the first part of the internal key.
         /// </summary>
         internal static string Step21Caption {
             get {
@@ -1327,7 +1325,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 2.2. Setting up lugs of the bars - part of inner key. Values added here will be ingnored if the lugs are provided as an input.
+        ///   Looks up a localized string similar to 2.2. Setting up lugs of the bars, which constitute the second part of the internal key..
         /// </summary>
         internal static string Step22Caption {
             get {
@@ -1336,7 +1334,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 3. Setting up initial positions of the wheels - external key. The step is not necessary if the initial state is provided as an input.
+        ///   Looks up a localized string similar to 3. Setting up initial positions of the wheels, which constitute the external key.
         /// </summary>
         internal static string Step3Caption {
             get {
@@ -1346,9 +1344,9 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to 4. Setting up the opeation settings: 
-        ///4.1 Mode: Encryption/Decryption; 
-        ///4.2 Text options; 
-        ///4.3: Position of output ring with respect to the input ring..
+        ///4.1 Mode: Encryption/Decryption
+        ///4.2 Text options
+        ///4.3: Position of output ring with respect to the input ring.
         /// </summary>
         internal static string Step4Caption {
             get {
@@ -1357,7 +1355,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Text options.
+        ///   Looks up a localized string similar to Text options:.
         /// </summary>
         internal static string TextOptionsGroup {
             get {
@@ -1384,7 +1382,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unknown Symbols Handling.
+        ///   Looks up a localized string similar to Unknown symbols Handling.
         /// </summary>
         internal static string UnknownSymbolCaption {
             get {
@@ -1402,7 +1400,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use Z As Space.
+        ///   Looks up a localized string similar to Use Z as space.
         /// </summary>
         internal static string UseZCaption {
             get {
@@ -1429,7 +1427,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Active pins of the wheel.
+        ///   Looks up a localized string similar to Active pins of the wheel:.
         /// </summary>
         internal static string WheelActivePinsCaption {
             get {
@@ -1474,7 +1472,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wheels state.
+        ///   Looks up a localized string similar to Wheels&apos; state:.
         /// </summary>
         internal static string WheelsStateCaption {
             get {
@@ -1501,7 +1499,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wheels with active pins.
+        ///   Looks up a localized string similar to Wheels with active pins:.
         /// </summary>
         internal static string WheelsWithActivePins {
             get {
@@ -1510,7 +1508,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type of the wheel.
+        ///   Looks up a localized string similar to Type of the wheel:.
         /// </summary>
         internal static string WheelTypeCaption {
             get {
