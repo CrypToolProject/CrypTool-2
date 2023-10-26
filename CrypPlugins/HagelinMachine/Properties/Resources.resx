@@ -274,7 +274,7 @@
     <value>Rotate the wheel up by 1 position. The initial wheels state is shown on the panel above</value>
   </data>
   <data name="InfoAndControlGroup" xml:space="preserve">
-    <value>Info and Control</value>
+    <value>Info and control</value>
   </data>
   <data name="InitialOffsetCaption" xml:space="preserve">
     <value>Initial offset</value>

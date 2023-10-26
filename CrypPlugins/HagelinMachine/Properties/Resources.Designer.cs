@@ -556,7 +556,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Info and Control.
+        ///   Looks up a localized string similar to Info and control.
         /// </summary>
         internal static string InfoAndControlGroup {
             get {
