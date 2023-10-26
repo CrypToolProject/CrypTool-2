@@ -305,7 +305,7 @@ Buchstabe</value>
     <value>Input bar lugs</value>
   </data>
   <data name="InputBarLugsTip" xml:space="preserve">
-    <value>Input numbers of the weels for which lugs of each bar have to be active.  Lugs have to be separated with a comma. Active Lugs for each wheel start from a separate line</value>
+    <value>Input numbers of the wheels for which lugs of each bar have to be active.  Lugs have to be separated with a comma. Active Lugs for each wheel start from a separate line</value>
   </data>
   <data name="InputTextCaption" xml:space="preserve">
     <value>Input text</value>
@@ -564,13 +564,13 @@ Cam types: 0 - never, B - not displaced, A - displaced, C - always</value>
     <value>1.1. Select the Hagelin model and the operation mode. The model defines the bars used in the machine and the compatible pin-wheels. With the default settings, there is no need to go over all the steps. Execution can be started any time.</value>
   </data>
   <data name="Step12Caption" xml:space="preserve">
-    <value>1.2. Selection of the wheels: If the current  model allows that, select the pin wheels. Once ready, press Next button</value>
+    <value>1.2. Selection of the wheels: If the current  model allows that, select the pinwheels. Once ready, press Next button</value>
   </data>
   <data name="Step13Caption" xml:space="preserve">
     <value>1.3. Select the bars to be used in the Machine. Once ready, press Next button</value>
   </data>
   <data name="Step21Caption" xml:space="preserve">
-    <value>2.1. Setting up pins for the weels, which constitute the first part of the internal key</value>
+    <value>2.1. Setting up pins for the wheels, which constitute the first part of the internal key</value>
   </data>
   <data name="Step22Caption" xml:space="preserve">
     <value>2.2. Setting up lugs of the bars, which constitute the second part of the internal key</value>
