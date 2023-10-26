@@ -43,9 +43,9 @@
             </DataGrid>
 
             <DataGrid x:Name="dataGridWheel1" HorizontalAlignment="Left" Height="187" Margin="139,78,0,0" VerticalAlignment="Top"
-                      Width="43" Background="#FF939292" OpacityMask="#FFF7F6F6" ColumnHeaderHeight="0" AutoGenerateColumns="False" FontSize="20"
+                      Width="43" Background="#FF939292" ColumnHeaderHeight="0" AutoGenerateColumns="False" FontSize="20"
                       Foreground="Black" HeadersVisibility="None" BorderBrush="Black" HorizontalScrollBarVisibility="Hidden" 
-                      VerticalScrollBarVisibility="Hidden" Grid.RowSpan="2" RowBackground="#FF8F8F8F" RowHeight="37" AreRowDetailsFrozen="True" RenderTransformOrigin="0.5,0.5">
+                      VerticalScrollBarVisibility="Hidden" Grid.RowSpan="2" RowBackground="#FF8F8F8F" RowHeight="37" AreRowDetailsFrozen="True" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False">
                 <DataGrid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -60,27 +60,27 @@
             </DataGrid>
 
             <DataGrid x:Name="dataGridWheel2" HorizontalAlignment="Left" Height="187" Margin="215,78,0,0" Grid.RowSpan="2"
-                        VerticalAlignment="Top" Width="43" Background="#FFA8A8A8" OpacityMask="#FFF7F6F6" ColumnHeaderHeight="0" 
+                        VerticalAlignment="Top" Width="43" Background="#FF939292" ColumnHeaderHeight="0" 
                         AutoGenerateColumns="False" FontSize="20" Foreground="Black" BorderBrush="Black" HorizontalScrollBarVisibility="Hidden"
-                        VerticalScrollBarVisibility="Hidden" RowBackground="#FF9B9B9B" RowHeight="37" HeadersVisibility="None">
+                        VerticalScrollBarVisibility="Hidden" RowBackground="#FF8F8F8F" RowHeight="37" HeadersVisibility="None" IsHitTestVisible="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="{Loc PresentatinCol1Label}" Binding =  "{Binding W2_position}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 
             <DataGrid x:Name="dataGridWheel3" HorizontalAlignment="Left" Height="187" Margin="297,78,0,0" Grid.RowSpan="2"
-                      VerticalAlignment="Top" Width="43" Background="#FF979797" OpacityMask="#FFF7F6F6" ColumnHeaderHeight="0"
+                      VerticalAlignment="Top" Width="43" Background="#FF939292" ColumnHeaderHeight="0"
                       AutoGenerateColumns="False" FontSize="18" Foreground="Black" BorderBrush="Black" HorizontalScrollBarVisibility="Hidden"
-                      VerticalScrollBarVisibility="Hidden" RowBackground="#FF959595" RowHeight="37" HeadersVisibility="None">
+                      VerticalScrollBarVisibility="Hidden" RowBackground="#FF8F8F8F" RowHeight="37" HeadersVisibility="None" IsHitTestVisible="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="{Loc PresentatinCol1Label}" Binding = "{Binding W3_position}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 
             <DataGrid x:Name="dataGridWheel4" HorizontalAlignment="Left" Height="187" Margin="378,78,0,0" Grid.RowSpan="2" VerticalAlignment="Top"
-                      Width="43" Background="#FF898989" OpacityMask="#FFF7F6F6" ColumnHeaderHeight="0" AutoGenerateColumns="False" FontSize="18"
-                      Foreground="Black" BorderBrush="Black" HorizontalScrollBarVisibility="Hidden"  VerticalScrollBarVisibility="Hidden"
-                      RowBackground="#FFA2A2A2" RowHeight="37"  HeadersVisibility="None" RenderTransformOrigin="0.5,0.5">
+                      Width="43" Background="#FF939292" ColumnHeaderHeight="0" AutoGenerateColumns="False" FontSize="18"
+                      Foreground="Black" BorderBrush="Black" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"
+                      RowBackground="#FF8F8F8F" RowHeight="37"  HeadersVisibility="None" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False">
                 <DataGrid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -95,9 +95,9 @@
             </DataGrid>
 
             <DataGrid x:Name="dataGridWheel5" HorizontalAlignment="Left" Height="187" Margin="459,78,0,0" Grid.RowSpan="2" VerticalAlignment="Top"
-                      Width="43" Background="#FF939393" OpacityMask="#FFF7F6F6" ColumnHeaderHeight="0" AutoGenerateColumns="False" FontSize="18"
-                      Foreground="Black" BorderBrush="Black" HorizontalScrollBarVisibility="Hidden"  VerticalScrollBarVisibility="Hidden" 
-                      RowBackground="#FFA6A6A6" RowHeight="37"  HeadersVisibility="None">
+                      Width="43" Background="#FF939292" ColumnHeaderHeight="0" AutoGenerateColumns="False" FontSize="18"
+                      Foreground="Black" BorderBrush="Black" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" 
+                      RowBackground="#FF8F8F8F" RowHeight="37"  HeadersVisibility="None" IsHitTestVisible="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="{Loc PresentatinCol1Label}" Binding = "{Binding W5_position}" Width="*"/>
 
@@ -105,9 +105,9 @@
             </DataGrid>
 
             <DataGrid x:Name="dataGridWheel6" HorizontalAlignment="Left" Height="187" Margin="536,78,0,0" Grid.RowSpan="2" VerticalAlignment="Top
-                      " Width="43" Background="#FF8F8F8F" OpacityMask="#FFF7F6F6" ColumnHeaderHeight="0" AutoGenerateColumns="False" FontSize="18"
+                      " Width="43" Background="#FF939292" ColumnHeaderHeight="0" AutoGenerateColumns="False" FontSize="18"
                       Foreground="Black" BorderBrush="Black" HorizontalScrollBarVisibility="Hidden"  VerticalScrollBarVisibility="Hidden" 
-                      RowBackground="#FF8D8D8D" RowHeight="37"  HeadersVisibility="None">
+                      RowBackground="#FF8F8F8F" RowHeight="37"  HeadersVisibility="None" IsHitTestVisible="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="{Loc PresentatinCol1Label}" Binding = "{Binding W6_position}" Width="*"/>
                 </DataGrid.Columns>
