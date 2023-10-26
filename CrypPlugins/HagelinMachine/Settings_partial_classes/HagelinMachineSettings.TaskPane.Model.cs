@@ -24,7 +24,7 @@ namespace CrypTool.Plugins.HagelinMachine
     public partial class HagelinMachineSettings : ISettings
     {
         #region Model
-        [TaskPane("ModelCaption", "ModelTip", "Hagelin model", 19, false, ControlType.ComboBox, new string[] { "CX-52a", "CX-52b", "CX-52c", "C-52d", "CX-M", "CX-M late version", "CX-52 French version", "CX-52 EIRE", "M209", "Custom" })]
+        [TaskPane("ModelCaption", "ModelTip", "Hagelin model", 19, false, ControlType.ComboBox, new string[] { "CX-52a", "CX-52b", "CX-52c", "C-52d", "CX-M", "CX-M late version", "CX-52 French version", "CX-52 EIRE", "M-209", "Custom" })]
         public ModelType Model
         {
             get
@@ -35,43 +35,7 @@ namespace CrypTool.Plugins.HagelinMachine
             {
                 if (_model != value)
                 {
-                    _model = value;
-                    switch (_model)
-                    {
-                        case ModelType.CX52a:
-                            _selectedModel = "CX-52a";
-                            break;
-                        case ModelType.CX52b:
-                            _selectedModel = "CX-52b";
-                            break;
-                        case ModelType.CX52c:
-                            _selectedModel = "CX-52c";
-                            break;
-                        case ModelType.CXM:
-                            _selectedModel = "CX-M";
-                            break;
-                        case ModelType.CXM_LATE_VERSION:
-                            _selectedModel = "CX-M late version";
-                            break;
-                        case ModelType.C52d:
-                            _selectedModel = "C-52d";
-                            break;
-                        case ModelType.EIRE:
-                            _selectedModel = "CX-52 EIRE";
-                            break;
-                        case ModelType.FRANCE:
-                            _selectedModel = "CX-52 French version";
-                            break;
-                        case ModelType.M209:
-                            _selectedModel = "M209";
-                            break;
-                        case ModelType.Custom:
-                            _selectedModel = "Custom";
-                            break;
-
-
-                    }
-                    // HOWTO: MUST be called every time a property value changes with correct parameter name
+                    _model = value;                   
                     ApplyModel();
                     HideModelBars();
                     OnPropertyChanged("Model");

@@ -19,7 +19,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -426,6 +426,33 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         internal static string CurrentStepTip {
             get {
                 return ResourceManager.GetString("CurrentStepTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom.
+        /// </summary>
+        internal static string Custom {
+            get {
+                return ResourceManager.GetString("Custom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CX-52 French version.
+        /// </summary>
+        internal static string CX_52_French_version {
+            get {
+                return ResourceManager.GetString("CX-52 French version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CX-M late version.
+        /// </summary>
+        internal static string CX_M_late_version {
+            get {
+                return ResourceManager.GetString("CX-M late version", resourceCulture);
             }
         }
         

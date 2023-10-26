@@ -647,4 +647,13 @@ letter</value>
     <value>Output
 letter</value>
   </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="CX-52 French version" xml:space="preserve">
+    <value>CX-52 French version</value>
+  </data>
+  <data name="CX-M late version" xml:space="preserve">
+    <value>CX-M late version</value>
+  </data>
 </root>

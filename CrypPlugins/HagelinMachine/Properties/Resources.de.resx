@@ -240,6 +240,15 @@
   <data name="CurrentStepTip" xml:space="preserve">
     <value>Please follow the istructions. With the default settings, there is no need to go over all the steps. Execution can be started any time</value>
   </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Benutzerdefiniert</value>
+  </data>
+  <data name="CX-52 French version" xml:space="preserve">
+    <value>CX-52 französische Version</value>
+  </data>
+  <data name="CX-M late version" xml:space="preserve">
+    <value>CX-M späte Version</value>
+  </data>
   <data name="DecryptCaption" xml:space="preserve">
     <value>Decrypt</value>
   </data>

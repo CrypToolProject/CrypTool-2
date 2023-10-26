@@ -53,7 +53,7 @@ namespace CrypTool.Plugins.HagelinMachine
         public PluginStates _pluginState = PluginStates.ModelSelection;
         public string _hintMessage = "1 - Select the model of Hagelin Machine and Operation Mode";
         public string _selectedModelMessage = "Selected model - CX-52a";
-        private string _selectedModel = "CX-52a";
+        //private string _selectedModel = "CX-52a";
         private string _selectedWheels;
         private string _selectedBars;
         private string _selectedInitOffset;

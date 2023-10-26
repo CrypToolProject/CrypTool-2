@@ -14,6 +14,7 @@
    limitations under the License.
 */
 using CrypTool.PluginBase;
+using System;
 using System.Text;
 using static HagelinMachine.HagelinEnums;
 
@@ -26,47 +27,31 @@ namespace CrypTool.Plugins.HagelinMachine
         public string SelectedModel
         {
             get
-            {
-                return _selectedModel;
-            }
-            set
-            {
+            {                
                 switch (_model)
                 {
                     case ModelType.CX52a:
-                        _selectedModel = "CX-52a";
-                        break;
+                        return "CX-52a";
                     case ModelType.CX52b:
-                        _selectedModel = "CX-52b";
-                        break;
+                        return "CX-52b";
                     case ModelType.CX52c:
-                        _selectedModel = "CX-52c";
-                        break;
+                        return "CX-52c";
                     case ModelType.CXM:
-                        _selectedModel = "CX-M";
-                        break;
+                        return "CX-M";
                     case ModelType.CXM_LATE_VERSION:
-                        _selectedModel = "CX-M late version";
-                        break;
+                        return "CX-M late version";
                     case ModelType.C52d:
-                        _selectedModel = "C-52d";
-                        break;
+                        return  "C-52d";
                     case ModelType.EIRE:
-                        _selectedModel = "CX-52 EIRE";
-                        break;
+                        return  "CX-52 EIRE";
                     case ModelType.FRANCE:
-                        _selectedModel = "CX-52 French version";
-                        break;
+                        return  "CX-52 French version";
                     case ModelType.M209:
-                        _selectedModel = "M209";
-                        break;
+                        return  "M-209";
+                    default:
                     case ModelType.Custom:
-                        _selectedModel = "Custom";
-                        break;
+                        return  "Custom";
                 }
-
-
-                        OnPropertyChanged("SelectedModel");
             }
         }
 
