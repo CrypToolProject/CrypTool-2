@@ -577,9 +577,9 @@ Cam types: 0 - never, B - not displaced, A - displaced, C - always</value>
   </data>
   <data name="Step4Caption" xml:space="preserve">
     <value>4. Setting up the opeation settings: 
-4.1 Mode: Encryption/Decryption
-4.2 Text options
-4.3: Position of output ring with respect to the input ring</value>
+4.1. Mode: Encryption/Decryption
+4.2. Text options
+4.3. Position of output ring with respect to the input ring</value>
   </data>
   <data name="TextOptionsGroup" xml:space="preserve">
     <value>Text options:</value>

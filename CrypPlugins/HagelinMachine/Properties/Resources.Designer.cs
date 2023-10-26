@@ -1344,9 +1344,9 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to 4. Setting up the opeation settings: 
-        ///4.1 Mode: Encryption/Decryption
-        ///4.2 Text options
-        ///4.3: Position of output ring with respect to the input ring.
+        ///4.1. Mode: Encryption/Decryption
+        ///4.2. Text options
+        ///4.3. Position of output ring with respect to the input ring.
         /// </summary>
         internal static string Step4Caption {
             get {
