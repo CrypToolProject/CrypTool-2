@@ -304,7 +304,7 @@ namespace CrypTool.Plugins.HagelinMachine
             bool ModelHasFVFeature = new[] { ModelType.CX52a, ModelType.CX52b, ModelType.CX52c, ModelType.Custom }.Contains(_model);
             if (ModelHasFVFeature)
             {
-                ShowSettingsElement("Mode");
+            //    ShowSettingsElement("Mode");
                 ShowSettingsElement("FVFeatureIsActive");
                 SetVisibility();
             }
