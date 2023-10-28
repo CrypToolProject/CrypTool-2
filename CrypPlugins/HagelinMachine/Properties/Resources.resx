@@ -576,13 +576,12 @@ Cam types: 0 - never, B - not displaced, A - displaced, C - always</value>
     <value>3. Setting up initial positions of the wheels, which constitute the external key</value>
   </data>
   <data name="Step4Caption" xml:space="preserve">
-    <value>4. Setting up the opeation settings: 
-4.1. Mode: Encryption/Decryption
-4.2. Text options
-4.3. Position of output ring with respect to the input ring</value>
+    <value>4. Setting up the operation settings
+4.1. Text options
+4.2. Position of output ring with respect to the input ring</value>
   </data>
   <data name="TextOptionsGroup" xml:space="preserve">
-    <value>Text options:</value>
+    <value>Text options</value>
   </data>
   <data name="UnknownSymbolCaption" xml:space="preserve">
     <value>Unknown symbols handling:</value>
