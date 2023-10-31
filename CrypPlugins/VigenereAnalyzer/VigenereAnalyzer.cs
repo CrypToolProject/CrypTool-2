@@ -45,7 +45,6 @@ namespace CrypTool.VigenereAnalyzer
         private bool _stopped;
         private DateTime _startTime;
         private DateTime _endTime;
-        private const string DefaultAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string Alphabet = null;
         private string _ciphertextInput;
         private Grams _grams = null;
@@ -96,8 +95,8 @@ namespace CrypTool.VigenereAnalyzer
 
         public void PreExecution()
         {
-            Alphabet = DefaultAlphabet;
-            VigenereAlphabet = DefaultAlphabet;
+            Alphabet = LanguageStatistics.Alphabets[LanguageStatistics.LanguageCode(_settings.Language)];
+            VigenereAlphabet = LanguageStatistics.Alphabets[LanguageStatistics.LanguageCode(_settings.Language)];
         }
 
         public void PostExecution()
