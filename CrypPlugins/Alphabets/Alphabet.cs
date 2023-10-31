@@ -38,7 +38,6 @@ namespace CrypTool.Alphabets
             set => settings = (AlphabetSettings)value;
         }
 
-        private readonly int count = 0;
         public Alphabet()
         {
             settings = new AlphabetSettings();
@@ -54,13 +53,7 @@ namespace CrypTool.Alphabets
                 alphabetString = alphabetPresentation.GetAlphabet();
                 OnPropertyChanged("AlphabetOutput");
             }, null);
-
-        }
-
-        private void alphabetPresentation_OnGuiLogNotificationOccured(IPlugin sender, GuiLogEventArgs args)
-        {
-            GuiLogMessage(args.Message, args.NotificationLevel);
-        }
+        }      
 
         private string alphabetString = string.Empty;
 
@@ -68,7 +61,7 @@ namespace CrypTool.Alphabets
         public string AlphabetOutput
         {
             get => alphabetString;
-            set { } //readonly
+            set { } 
         }
 
 

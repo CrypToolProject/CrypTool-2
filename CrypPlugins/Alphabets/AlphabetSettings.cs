@@ -26,10 +26,9 @@ namespace CrypTool.Alphabets
 {
     public class AlphabetSettings : ISettings
     {
-
         public AlphabetSettings()
         {
-            data = AlphabetSettings.SerializeData<Data>(Default);
+            data = SerializeData<Data>(Default);
         }
 
         public Data Default = new Data()
@@ -39,16 +38,21 @@ namespace CrypTool.Alphabets
                 new OutputOrder() { Caption = Properties.Resources.Upper, OutputType = OutputType.Upper },
                 new OutputOrder() { Caption = Properties.Resources.Lower, OutputType = OutputType.Lower },
                 new OutputOrder() { Caption = Properties.Resources.Numeric, OutputType = OutputType.Numeric },
-                new OutputOrder() { Caption = Properties.Resources.Special, OutputType = OutputType.Special }}
-                ),
+                new OutputOrder() { Caption = Properties.Resources.Special, OutputType = OutputType.Special }
+            }),
 
-            AlphabetData = new List<AlphabetItemData>(new AlphabetItemData[]
-            {
-                new AlphabetItem(BasicAlphabet.BasicLatin, Properties.Resources.BasicLatin, true).Data,
-                new AlphabetItem(BasicAlphabet.Cyrillic, Properties.Resources.Cyrillic, true).Data,
-                new AlphabetItem(BasicAlphabet.Greek, Properties.Resources.Greek, true).Data
-            })
+            AlphabetData = new List<AlphabetItemData>(CreateAlphabetItems())
         };
+
+        private static List<AlphabetItemData> CreateAlphabetItems()
+        {
+            List<AlphabetItemData> alphabetItemDatas = new List<AlphabetItemData>();
+            foreach(BasicAlphabet basicAlphabet in BasicAlphabet.BasicAlphabets)
+            {
+                alphabetItemDatas.Add(new AlphabetItem(basicAlphabet, basicAlphabet.Name, true).Data);
+            }            
+            return alphabetItemDatas;
+        }
 
         private string data;
         public string Data
@@ -73,7 +77,6 @@ namespace CrypTool.Alphabets
             }
             catch (SerializationException)
             {
-                //Console.WriteLine("Failed to serialize. Reason: " + e.Message);
             }
             finally
             {
@@ -98,8 +101,7 @@ namespace CrypTool.Alphabets
                 ret = (T)formatter.Deserialize(stream);
             }
             catch (SerializationException)
-            {
-                //Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
+            {                
             }
             finally
             {
