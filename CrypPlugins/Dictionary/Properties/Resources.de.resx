@@ -117,15 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="dic_file_not_found" xml:space="preserve">
-    <value>Wörterbuch-Datei "{0}" nicht gefunden.</value>
-  </data>
-  <data name="finished_loading_dic" xml:space="preserve">
-    <value>...Wörterbuch geladen in {0} Millisekunden.</value>
-  </data>
-  <data name="loading_dic_now" xml:space="preserve">
-    <value>Das Wörterbuch "{0}" wird geladen...</value>
-  </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>Wörterbuch</value>
   </data>
@@ -150,25 +141,10 @@
   <data name="DictionaryTooltip" xml:space="preserve">
     <value>Wählen Sie das Wörterbuch mit den Schlüsselwörtern.</value>
   </data>
-  <data name="English_dictionary" xml:space="preserve">
-    <value>Englisches Wörterbuch</value>
+  <data name="CapitalizationCaption" xml:space="preserve">
+    <value>Großschreibung</value>
   </data>
-  <data name="German_dictionary" xml:space="preserve">
-    <value>Deutsches Wörterbuch</value>
-  </data>
-  <data name="WordPatterns_English" xml:space="preserve">
-    <value>Englische Wortmuster</value>
-  </data>
-  <data name="WordPatterns_German" xml:space="preserve">
-    <value>Deutsche Wortmuster</value>
-  </data>
-  <data name="NumberEntriesCaption" xml:space="preserve">
-    <value>Einträge: </value>
-  </data>
-  <data name="NumberEntriesTooltip" xml:space="preserve">
-    <value>Anzahl der Einträge im aktuellen Wörterbuch</value>
-  </data>
-  <data name="NoDictChosen" xml:space="preserve">
-    <value>Kein Wörterbuch ausgewählt.</value>
+  <data name="CapitalizationTooltip" xml:space="preserve">
+    <value>Wählt zwischen Groß- und Kleinschreibung</value>
   </data>
 </root>
