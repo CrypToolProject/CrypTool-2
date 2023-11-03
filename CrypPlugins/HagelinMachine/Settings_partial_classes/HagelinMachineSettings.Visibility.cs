@@ -14,6 +14,7 @@
    limitations under the License.
 */
 using CrypTool.PluginBase;
+using System;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -103,7 +104,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
                 case PluginStates.Encryption:
                     HideAll();
-                    _hintMessage = CrypTool.Plugins.HagelinMachine.Properties.Resources.ReadyToCaption + _mode.ToString().ToLower() + ". "+ CrypTool.Plugins.HagelinMachine.Properties.Resources.CanStartCaption;
+                    _hintMessage = CrypTool.Plugins.HagelinMachine.Properties.Resources.ReadyToCaption + TranslateMode(_mode) + ". "+ CrypTool.Plugins.HagelinMachine.Properties.Resources.CanStartCaption;
                     OnPropertyChanged("HintMessage");
                     ShowSettingsElement("SelectedModel");
                     ShowSettingsElement("SelectedWheels");
@@ -127,6 +128,25 @@ namespace CrypTool.Plugins.HagelinMachine
                     break;
             }
             OnPropertyChanged("PluginState");
+        }
+
+        /// <summary>
+        /// Translates the mode to a string
+        /// </summary>
+        /// <param name="mode"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        private string TranslateMode(ModeType mode)
+        {
+            switch (mode)
+            {
+                case ModeType.Encrypt:
+                    return Properties.Resources.EncryptCaption;
+                case ModeType.Decrypt:
+                    return Properties.Resources.DecryptCaption;
+                default:
+                    throw new Exception("There is nothing besides encryption and decryption...");
+            }
         }
 
         private void ShowSettingsElement(string element)
