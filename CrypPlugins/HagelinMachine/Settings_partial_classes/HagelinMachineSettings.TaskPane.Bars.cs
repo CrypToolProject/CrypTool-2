@@ -27,7 +27,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar1
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 1", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum1", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar1Type
         {
@@ -44,7 +44,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 1", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum1", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar1HasLugs
         {
@@ -61,7 +61,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 1", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum1", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar1CamTypes
         {
             get
@@ -78,7 +78,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 1", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum1", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar1Lugs
         {
             get
@@ -94,7 +94,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 1", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum1", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar1ToothType
         {
@@ -114,7 +114,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar2
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 2", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum2", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar2Type
         {
@@ -131,7 +131,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 2", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum2", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar2HasLugs
         {
@@ -148,7 +148,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 2", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum2", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar2CamTypes
         {
             get
@@ -165,7 +165,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 2", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum2", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar2Lugs
         {
             get
@@ -181,7 +181,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 2", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum2", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar2ToothType
         {
@@ -200,7 +200,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar3
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 3", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum3", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar3Type
         {
@@ -217,7 +217,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 3", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum3", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar3HasLugs
         {
@@ -234,7 +234,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "Selected values represent how cams influence each of the wheels. That is: 0 - never, A - when displaced, B - when not displaced,  C - always", "Bar 3", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "Selected values represent how cams influence each of the wheels. That is: 0 - never, A - when displaced, B - when not displaced,  C - always", "BarNum3", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar3CamTypes
         {
             get
@@ -251,7 +251,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 3", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum3", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar3Lugs
         {
             get
@@ -267,7 +267,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 3", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum3", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar3ToothType
         {
@@ -286,7 +286,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar4
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 4", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum4", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar4Type
         {
@@ -303,7 +303,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 4", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum4", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar4HasLugs
         {
@@ -320,7 +320,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 4", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum4", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar4CamTypes
         {
             get
@@ -337,7 +337,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 4", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum4", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar4Lugs
         {
             get
@@ -353,7 +353,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 4", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum4", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar4ToothType
         {
@@ -372,7 +372,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar5
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 5", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum5", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar5Type
         {
@@ -389,7 +389,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 5", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum5", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar5HasLugs
         {
@@ -406,7 +406,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 5", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum5", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar5CamTypes
         {
             get
@@ -423,7 +423,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 5", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum5", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar5Lugs
         {
             get
@@ -439,7 +439,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 5", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum5", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar5ToothType
         {
@@ -458,7 +458,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar6
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 6", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum6", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar6Type
         {
@@ -475,7 +475,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 6", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum6", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar6HasLugs
         {
@@ -492,7 +492,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 6", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum6", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar6CamTypes
         {
             get
@@ -510,7 +510,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 6", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum6", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar6Lugs
         {
             get
@@ -526,7 +526,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 6", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum6", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar6ToothType
         {
@@ -545,7 +545,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar7
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 7", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum7", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar7Type
         {
@@ -562,7 +562,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 7", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum7", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar7HasLugs
         {
@@ -579,7 +579,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 7", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum7", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar7CamTypes
         {
             get
@@ -596,7 +596,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 7", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum7", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar7Lugs
         {
             get
@@ -612,7 +612,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 7", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum7", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar7ToothType
         {
@@ -631,7 +631,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar8
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 8", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum8", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar8Type
         {
@@ -648,7 +648,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 8", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum8", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar8HasLugs
         {
@@ -665,7 +665,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 8", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum8", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar8CamTypes
         {
             get
@@ -682,7 +682,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 8", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum8", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar8Lugs
         {
             get
@@ -698,7 +698,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 8", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum8", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar8ToothType
         {
@@ -717,7 +717,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar9
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 9", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum9", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar9Type
         {
@@ -734,7 +734,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 9", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum9", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar9HasLugs
         {
@@ -751,7 +751,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 9", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum9", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar9CamTypes
         {
             get
@@ -768,7 +768,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 9", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum9", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar9Lugs
         {
             get
@@ -784,7 +784,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 9", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum9", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar9ToothType
         {
@@ -803,7 +803,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar10
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 10", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum10", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar10Type
         {
@@ -820,7 +820,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 10", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum10", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar10HasLugs
 
@@ -839,7 +839,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 10", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum10", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar10CamTypes
         {
             get
@@ -856,7 +856,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 10", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum10", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar10Lugs
         {
             get
@@ -872,7 +872,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 10", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum10", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar10ToothType
         {
@@ -891,7 +891,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar11
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 11", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum11", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar11Type
         {
@@ -908,7 +908,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 11", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum11", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar11HasLugs
         {
@@ -925,7 +925,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 11", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum11", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar11CamTypes
         {
             get
@@ -942,7 +942,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 11", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum11", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar11Lugs
         {
             get
@@ -958,7 +958,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 11", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum11", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar11ToothType
         {
@@ -977,7 +977,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar12
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 12", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum12", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar12Type
         {
@@ -994,7 +994,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 12", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum12", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar12HasLugs
         {
@@ -1011,7 +1011,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 12", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum12", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar12CamTypes
         {
             get
@@ -1028,7 +1028,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 12", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum12", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar12Lugs
         {
             get
@@ -1044,7 +1044,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 12", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum12", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar12ToothType
         {
@@ -1063,7 +1063,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar13
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 13", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum13", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar13Type
         {
@@ -1080,7 +1080,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 13", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum13", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar13HasLugs
         {
@@ -1097,7 +1097,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 13", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum13", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar13CamTypes
         {
             get
@@ -1114,7 +1114,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 13", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum13", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar13Lugs
         {
             get
@@ -1130,7 +1130,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 13", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum13", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar13ToothType
         {
@@ -1149,7 +1149,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar14
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 14", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum14", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar14Type
         {
@@ -1166,7 +1166,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 14", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum14", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar14HasLugs
         {
@@ -1183,7 +1183,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 14", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum14", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar14CamTypes
         {
             get
@@ -1200,7 +1200,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 14", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum14", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar14Lugs
         {
             get
@@ -1216,7 +1216,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 14", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum14", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar14ToothType
         {
@@ -1235,7 +1235,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar15
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 15", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum15", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar15Type
         {
@@ -1252,7 +1252,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 15", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum15", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar15HasLugs
         {
@@ -1269,7 +1269,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 15", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum15", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar15CamTypes
         {
             get
@@ -1286,7 +1286,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 15", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum15", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar15Lugs
         {
             get
@@ -1302,7 +1302,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 15", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum15", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar15ToothType
         {
@@ -1321,7 +1321,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar16
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 16", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum16", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar16Type
         {
@@ -1338,7 +1338,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 16", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum16", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar16HasLugs
         {
@@ -1355,7 +1355,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 16", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum16", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar16CamTypes
         {
             get
@@ -1372,7 +1372,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 16", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum16", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar16Lugs
         {
             get
@@ -1388,7 +1388,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 16", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum16", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar16ToothType
         {
@@ -1407,7 +1407,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar17
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 17", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum17", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar17Type
         {
@@ -1424,7 +1424,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 17", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum17", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar17HasLugs
         {
@@ -1441,7 +1441,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 17", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum17", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar17CamTypes
         {
             get
@@ -1458,7 +1458,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 17", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum17", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar17Lugs
         {
             get
@@ -1474,7 +1474,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 17", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum17", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar17ToothType
         {
@@ -1493,7 +1493,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar18
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 18", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum18", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar18Type
         {
@@ -1510,7 +1510,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 18", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum18", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar18HasLugs
         {
@@ -1527,7 +1527,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 18", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum18", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar18CamTypes
         {
             get
@@ -1544,7 +1544,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 18", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum18", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar18Lugs
         {
             get
@@ -1560,7 +1560,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 18", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum18", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar18ToothType
         {
@@ -1579,7 +1579,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar19
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 19", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum19", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar19Type
         {
@@ -1596,7 +1596,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 19", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum19", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar19HasLugs
         {
@@ -1613,7 +1613,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 19", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum19", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar19CamTypes
         {
             get
@@ -1630,7 +1630,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 19", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum19", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar19Lugs
         {
             get
@@ -1646,7 +1646,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 19", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum19", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar19ToothType
         {
@@ -1665,7 +1665,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar20
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 20", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum20", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar20Type
         {
@@ -1682,7 +1682,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 20", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum20", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar20HasLugs
         {
@@ -1699,7 +1699,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 20", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum20", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar20CamTypes
         {
             get
@@ -1716,7 +1716,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 20", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum20", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar20Lugs
         {
             get
@@ -1732,7 +1732,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 20", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum20", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar20ToothType
         {
@@ -1751,7 +1751,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar21
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 21", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum21", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar21Type
         {
@@ -1768,7 +1768,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 21", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum21", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar21HasLugs
         {
@@ -1785,7 +1785,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 21", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum21", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar21CamTypes
         {
             get
@@ -1802,7 +1802,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 21", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum21", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar21Lugs
         {
             get
@@ -1818,7 +1818,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 21", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum21", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar21ToothType
         {
@@ -1837,7 +1837,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar22
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 22", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum22", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar22Type
         {
@@ -1854,7 +1854,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 22", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum22", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar22HasLugs
         {
@@ -1871,7 +1871,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 22", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum22", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar22CamTypes
         {
             get
@@ -1888,7 +1888,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 22", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum22", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar22Lugs
         {
             get
@@ -1904,7 +1904,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 22", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum22", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar22ToothType
         {
@@ -1923,7 +1923,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar23
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 23", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum23", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar23Type
         {
@@ -1940,7 +1940,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 23", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum23", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar23HasLugs
         {
@@ -1957,7 +1957,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 23", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum23", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar23CamTypes
         {
             get
@@ -1974,7 +1974,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 23", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum23", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar23Lugs
         {
             get
@@ -1990,7 +1990,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 23", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum23", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar23ToothType
         {
@@ -2009,7 +2009,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar24
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 24", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum24", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar24Type
         {
@@ -2026,7 +2026,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 24", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum24", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar24HasLugs
         {
@@ -2043,7 +2043,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 24", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum24", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar24CamTypes
         {
             get
@@ -2060,7 +2060,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 24", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum24", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar24Lugs
         {
             get
@@ -2076,7 +2076,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 24", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum24", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar24ToothType
         {
@@ -2095,7 +2095,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar25
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 25", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum25", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar25Type
         {
@@ -2112,7 +2112,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 25", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum25", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar25HasLugs
         {
@@ -2129,7 +2129,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 25", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum25", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar25CamTypes
         {
             get
@@ -2146,7 +2146,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 25", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum25", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar25Lugs
         {
             get
@@ -2162,7 +2162,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 25", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum25", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar25ToothType
         {
@@ -2181,7 +2181,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar26
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 26", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum26", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar26Type
         {
@@ -2198,7 +2198,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 26", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum26", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar26HasLugs
 
@@ -2216,7 +2216,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 26", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum26", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar26CamTypes
         {
             get
@@ -2233,7 +2233,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 26", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum26", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar26Lugs
         {
             get
@@ -2249,7 +2249,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 26", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum26", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar26ToothType
         {
@@ -2268,7 +2268,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar27
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 27", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum27", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar27Type
         {
@@ -2285,7 +2285,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 27", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum27", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar27HasLugs
 
@@ -2303,7 +2303,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 27", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum27", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar27CamTypes
         {
             get
@@ -2320,7 +2320,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 27", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum27", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar27Lugs
         {
             get
@@ -2336,7 +2336,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 27", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum27", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar27ToothType
         {
@@ -2355,7 +2355,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar28
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 28", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum28", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar28Type
         {
@@ -2372,7 +2372,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 28", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum28", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar28HasLugs
 
@@ -2390,7 +2390,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 28", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum28", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar28CamTypes
         {
             get
@@ -2407,7 +2407,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 28", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum28", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar28Lugs
         {
             get
@@ -2423,7 +2423,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 28", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum28", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar28ToothType
         {
@@ -2442,7 +2442,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar29
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 29", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum29", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar29Type
         {
@@ -2459,7 +2459,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 29", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum29", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar29HasLugs
         {
@@ -2476,7 +2476,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 29", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum29", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar29CamTypes
         {
             get
@@ -2493,7 +2493,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 29", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum29", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar29Lugs
         {
             get
@@ -2509,7 +2509,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 29", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum29", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar29ToothType
         {
@@ -2528,7 +2528,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar30
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 30", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum30", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar30Type
         {
@@ -2545,7 +2545,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 30", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum30", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar30HasLugs
 
@@ -2563,7 +2563,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 30", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum30", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar30CamTypes
         {
             get
@@ -2580,7 +2580,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 30", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum30", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar30Lugs
         {
             get
@@ -2596,7 +2596,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 30", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum30", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar30ToothType
         {
@@ -2615,7 +2615,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar31
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 31", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum31", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar31Type
         {
@@ -2632,7 +2632,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 31", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum31", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar31HasLugs
 
@@ -2650,7 +2650,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 31", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum31", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar31CamTypes
         {
             get
@@ -2667,7 +2667,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 31", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum31", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar31Lugs
         {
             get
@@ -2683,7 +2683,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 31", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum31", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar31ToothType
         {
@@ -2702,7 +2702,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Bar32
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarTypeCaption", "BarTypeTip", "Bar 32", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
+        [TaskPane("BarTypeCaption", "BarTypeTip", "BarNum32", 0, false, ControlType.ComboBox, new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "35", "54", "56", "57", "60", "64", "68", "105", "106", "107", "108", "109", "111", "157" })]
 
         public int Bar32Type
         {
@@ -2719,7 +2719,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "0")]
-        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "Bar 32", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
+        [TaskPane("BarHasLugsCaption", "BarHasLugsTip", "BarNum32", 1, false, ControlType.ComboBox, new string[] { "False", "True" })]
 
         public bool Bar32HasLugs
 
@@ -2736,7 +2736,7 @@ namespace CrypTool.Plugins.HagelinMachine
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "Bar 32", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
+        [TaskPane("BarCamTypesCaption", "BarCamTypesTip", "BarNum32", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "^[0,A,B,C]{0,12}")]
         public string Bar32CamTypes
         {
             get
@@ -2753,7 +2753,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("BarLugsCaption", "BarLugsTip", "Bar 32", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
+        [TaskPane("BarLugsCaption", "BarLugsTip", "BarNum32", 3, false, ControlType.TextBox, ValidationType.RegEx, "[1-6 ;,]*$")]
         public string Bar32Lugs
         {
             get
@@ -2769,7 +2769,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
         //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "Bar 32", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
+        [TaskPane("BarToothTypeCaption", "BarToothTypeTip", "BarNum32", 4, false, ControlType.ComboBox, new string[] { "Displace when shifted", "Do not displace", "Displace when not shifted" })]
 
         public ToothType Bar32ToothType
         {

@@ -655,4 +655,37 @@ letter</value>
   <data name="CX-M late version" xml:space="preserve">
     <value>CX-M late version</value>
   </data>
+  <data name="Ignore" xml:space="preserve">
+    <value>Ignore</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="ReplaceWithQuestionMark" xml:space="preserve">
+    <value>Replace with ?</value>
+  </data>
+<data name="WheelNum1" xml:space="preserve">
+    <value>Wheel 1</value>
+</data>
+
+<data name="WheelNum2" xml:space="preserve">
+    <value>Wheel 2</value>
+</data>
+
+<data name="WheelNum3" xml:space="preserve">
+    <value>Wheel 3</value>
+</data>
+
+<data name="WheelNum4" xml:space="preserve">
+    <value>Wheel 4</value>
+</data>
+
+<data name="WheelNum5" xml:space="preserve">
+    <value>Wheel 5</value>
+</data>
+
+<data name="WheelNum6" xml:space="preserve">
+    <value>Wheel 6</value>
+</data>
+
 </root>
