@@ -323,7 +323,7 @@ namespace CrypTool.Plugins.GrandpreCipher
 
             foreach (char c in plaintext.ToUpper())
             {
-                if (ALPHABET.Contains(c))
+                if (_alphabet.Contains(c))
                 {
                     if (key.ContainsKey(c))
                     {
