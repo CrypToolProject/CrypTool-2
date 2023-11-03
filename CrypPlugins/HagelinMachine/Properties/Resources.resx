@@ -655,4 +655,135 @@ letter</value>
   <data name="CX-M late version" xml:space="preserve">
     <value>CX-M late version</value>
   </data>
+  <data name="Ignore" xml:space="preserve">
+    <value>Ignore</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="ReplaceWithQuestionMark" xml:space="preserve">
+    <value>Replace with ?</value>
+  </data>
+<data name="WheelNum1" xml:space="preserve">
+    <value>Wheel 1</value>
+</data>
+
+<data name="WheelNum2" xml:space="preserve">
+    <value>Wheel 2</value>
+</data>
+
+<data name="WheelNum3" xml:space="preserve">
+    <value>Wheel 3</value>
+</data>
+
+<data name="WheelNum4" xml:space="preserve">
+    <value>Wheel 4</value>
+</data>
+
+<data name="WheelNum5" xml:space="preserve">
+    <value>Wheel 5</value>
+</data>
+
+<data name="WheelNum6" xml:space="preserve">
+    <value>Wheel 6</value>
+</data>
+
+<data name="BarNum1" xml:space="preserve">
+    <value>Bar 1</value>
+</data>
+<data name="BarNum2" xml:space="preserve">
+    <value>Bar 2</value>
+</data>
+<data name="BarNum3" xml:space="preserve">
+    <value>Bar 3</value>
+</data>
+<data name="BarNum4" xml:space="preserve">
+    <value>Bar 4</value>
+</data>
+<data name="BarNum5" xml:space="preserve">
+    <value>Bar 5</value>
+</data>
+<data name="BarNum6" xml:space="preserve">
+    <value>Bar 6</value>
+</data>
+<data name="BarNum7" xml:space="preserve">
+    <value>Bar 7</value>
+</data>
+<data name="BarNum8" xml:space="preserve">
+    <value>Bar 8</value>
+</data>
+<data name="BarNum9" xml:space="preserve">
+    <value>Bar 9</value>
+</data>
+<data name="BarNum10" xml:space="preserve">
+    <value>Bar 10</value>
+</data>
+<data name="BarNum11" xml:space="preserve">
+    <value>Bar 11</value>
+</data>
+<data name="BarNum12" xml:space="preserve">
+    <value>Bar 12</value>
+</data>
+<data name="BarNum13" xml:space="preserve">
+    <value>Bar 13</value>
+</data>
+<data name="BarNum14" xml:space="preserve">
+    <value>Bar 14</value>
+</data>
+<data name="BarNum15" xml:space="preserve">
+    <value>Bar 15</value>
+</data>
+<data name="BarNum16" xml:space="preserve">
+    <value>Bar 16</value>
+</data>
+<data name="BarNum17" xml:space="preserve">
+    <value>Bar 17</value>
+</data>
+<data name="BarNum18" xml:space="preserve">
+    <value>Bar 18</value>
+</data>
+<data name="BarNum19" xml:space="preserve">
+    <value>Bar 19</value>
+</data>
+<data name="BarNum20" xml:space="preserve">
+    <value>Bar 20</value>
+</data>
+<data name="BarNum21" xml:space="preserve">
+    <value>Bar 21</value>
+</data>
+<data name="BarNum22" xml:space="preserve">
+    <value>Bar 22</value>
+</data>
+<data name="BarNum23" xml:space="preserve">
+    <value>Bar 23</value>
+</data>
+<data name="BarNum24" xml:space="preserve">
+    <value>Bar 24</value>
+</data>
+<data name="BarNum25" xml:space="preserve">
+    <value>Bar 25</value>
+</data>
+<data name="BarNum26" xml:space="preserve">
+    <value>Bar 26</value>
+</data>
+<data name="BarNum27" xml:space="preserve">
+    <value>Bar 27</value>
+</data>
+<data name="BarNum28" xml:space="preserve">
+    <value>Bar 28</value>
+</data>
+<data name="BarNum29" xml:space="preserve">
+    <value>Bar 29</value>
+</data>
+<data name="BarNum30" xml:space="preserve">
+    <value>Bar 30</value>
+</data>
+<data name="BarNum31" xml:space="preserve">
+    <value>Bar 31</value>
+</data>
+<data name="BarNum32" xml:space="preserve">
+    <value>Bar 32</value>
+</data>
+
+
 </root>

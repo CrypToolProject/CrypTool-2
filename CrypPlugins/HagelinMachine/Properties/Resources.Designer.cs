@@ -19,7 +19,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -579,6 +579,15 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         internal static string HagelinModel {
             get {
                 return ResourceManager.GetString("HagelinModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ignore.
+        /// </summary>
+        internal static string Ignore {
+            get {
+                return ResourceManager.GetString("Ignore", resourceCulture);
             }
         }
         
@@ -1144,6 +1153,24 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace with ?.
+        /// </summary>
+        internal static string ReplaceWithQuestionMark {
+            get {
+                return ResourceManager.GetString("ReplaceWithQuestionMark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset the model and start from Step 1.
         /// </summary>
         internal static string ResetButtonCaption {
@@ -1485,6 +1512,15 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         internal static string WheelLabelsTip {
             get {
                 return ResourceManager.GetString("WheelLabelsTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel .
+        /// </summary>
+        internal static string WheelNum {
+            get {
+                return ResourceManager.GetString("WheelNum", resourceCulture);
             }
         }
         
