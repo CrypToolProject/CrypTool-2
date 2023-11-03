@@ -31,26 +31,26 @@ namespace CrypTool.Plugins.HagelinMachine
                 switch (_model)
                 {
                     case ModelType.CX52a:
-                        return "CX-52a";
+                        return Properties.Resources.CX52a;
                     case ModelType.CX52b:
-                        return "CX-52b";
+                        return Properties.Resources.CX52b;
                     case ModelType.CX52c:
-                        return "CX-52c";
+                        return Properties.Resources.CX52c;
                     case ModelType.CXM:
-                        return "CX-M";
+                        return Properties.Resources.CXM;
                     case ModelType.CXM_LATE_VERSION:
-                        return "CX-M late version";
+                        return Properties.Resources.CXMLateVersion;
                     case ModelType.C52d:
-                        return  "C-52d";
+                        return Properties.Resources.C52d;
                     case ModelType.EIRE:
-                        return  "CX-52 EIRE";
+                        return Properties.Resources.CX52EIRE;
                     case ModelType.FRANCE:
-                        return  "CX-52 French version";
+                        return Properties.Resources.CX52FrenchVersion;
                     case ModelType.M209:
-                        return  "M-209";
+                        return Properties.Resources.M209;
                     default:
                     case ModelType.Custom:
-                        return "Custom";
+                        return Properties.Resources.Custom;
                 }
             }
         }

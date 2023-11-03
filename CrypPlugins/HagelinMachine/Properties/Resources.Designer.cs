@@ -19,7 +19,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -151,6 +151,294 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bar 1.
+        /// </summary>
+        internal static string BarNum1 {
+            get {
+                return ResourceManager.GetString("BarNum1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 10.
+        /// </summary>
+        internal static string BarNum10 {
+            get {
+                return ResourceManager.GetString("BarNum10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 11.
+        /// </summary>
+        internal static string BarNum11 {
+            get {
+                return ResourceManager.GetString("BarNum11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 12.
+        /// </summary>
+        internal static string BarNum12 {
+            get {
+                return ResourceManager.GetString("BarNum12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 13.
+        /// </summary>
+        internal static string BarNum13 {
+            get {
+                return ResourceManager.GetString("BarNum13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 14.
+        /// </summary>
+        internal static string BarNum14 {
+            get {
+                return ResourceManager.GetString("BarNum14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 15.
+        /// </summary>
+        internal static string BarNum15 {
+            get {
+                return ResourceManager.GetString("BarNum15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 16.
+        /// </summary>
+        internal static string BarNum16 {
+            get {
+                return ResourceManager.GetString("BarNum16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 17.
+        /// </summary>
+        internal static string BarNum17 {
+            get {
+                return ResourceManager.GetString("BarNum17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 18.
+        /// </summary>
+        internal static string BarNum18 {
+            get {
+                return ResourceManager.GetString("BarNum18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 19.
+        /// </summary>
+        internal static string BarNum19 {
+            get {
+                return ResourceManager.GetString("BarNum19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 2.
+        /// </summary>
+        internal static string BarNum2 {
+            get {
+                return ResourceManager.GetString("BarNum2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 20.
+        /// </summary>
+        internal static string BarNum20 {
+            get {
+                return ResourceManager.GetString("BarNum20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 21.
+        /// </summary>
+        internal static string BarNum21 {
+            get {
+                return ResourceManager.GetString("BarNum21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 22.
+        /// </summary>
+        internal static string BarNum22 {
+            get {
+                return ResourceManager.GetString("BarNum22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 23.
+        /// </summary>
+        internal static string BarNum23 {
+            get {
+                return ResourceManager.GetString("BarNum23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 24.
+        /// </summary>
+        internal static string BarNum24 {
+            get {
+                return ResourceManager.GetString("BarNum24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 25.
+        /// </summary>
+        internal static string BarNum25 {
+            get {
+                return ResourceManager.GetString("BarNum25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 26.
+        /// </summary>
+        internal static string BarNum26 {
+            get {
+                return ResourceManager.GetString("BarNum26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 27.
+        /// </summary>
+        internal static string BarNum27 {
+            get {
+                return ResourceManager.GetString("BarNum27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 28.
+        /// </summary>
+        internal static string BarNum28 {
+            get {
+                return ResourceManager.GetString("BarNum28", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 29.
+        /// </summary>
+        internal static string BarNum29 {
+            get {
+                return ResourceManager.GetString("BarNum29", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 3.
+        /// </summary>
+        internal static string BarNum3 {
+            get {
+                return ResourceManager.GetString("BarNum3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 30.
+        /// </summary>
+        internal static string BarNum30 {
+            get {
+                return ResourceManager.GetString("BarNum30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 31.
+        /// </summary>
+        internal static string BarNum31 {
+            get {
+                return ResourceManager.GetString("BarNum31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 32.
+        /// </summary>
+        internal static string BarNum32 {
+            get {
+                return ResourceManager.GetString("BarNum32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 4.
+        /// </summary>
+        internal static string BarNum4 {
+            get {
+                return ResourceManager.GetString("BarNum4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 5.
+        /// </summary>
+        internal static string BarNum5 {
+            get {
+                return ResourceManager.GetString("BarNum5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 6.
+        /// </summary>
+        internal static string BarNum6 {
+            get {
+                return ResourceManager.GetString("BarNum6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 7.
+        /// </summary>
+        internal static string BarNum7 {
+            get {
+                return ResourceManager.GetString("BarNum7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 8.
+        /// </summary>
+        internal static string BarNum8 {
+            get {
+                return ResourceManager.GetString("BarNum8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 9.
+        /// </summary>
+        internal static string BarNum9 {
+            get {
+                return ResourceManager.GetString("BarNum9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tooth type of the bar:.
         /// </summary>
         internal static string BarToothTypeCaption {
@@ -183,6 +471,15 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         internal static string BarTypeTip {
             get {
                 return ResourceManager.GetString("BarTypeTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C-52d.
+        /// </summary>
+        internal static string C52d {
+            get {
+                return ResourceManager.GetString("C52d", resourceCulture);
             }
         }
         
@@ -439,20 +736,65 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CX-52a.
+        /// </summary>
+        internal static string CX52a {
+            get {
+                return ResourceManager.GetString("CX52a", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CX-52b.
+        /// </summary>
+        internal static string CX52b {
+            get {
+                return ResourceManager.GetString("CX52b", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CX-52c.
+        /// </summary>
+        internal static string CX52c {
+            get {
+                return ResourceManager.GetString("CX52c", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CX-52 EIRE.
+        /// </summary>
+        internal static string CX52EIRE {
+            get {
+                return ResourceManager.GetString("CX52EIRE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CX-52 French version.
         /// </summary>
-        internal static string CX_52_French_version {
+        internal static string CX52FrenchVersion {
             get {
-                return ResourceManager.GetString("CX-52 French version", resourceCulture);
+                return ResourceManager.GetString("CX52FrenchVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CX-M.
+        /// </summary>
+        internal static string CXM {
+            get {
+                return ResourceManager.GetString("CXM", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to CX-M late version.
         /// </summary>
-        internal static string CX_M_late_version {
+        internal static string CXMLateVersion {
             get {
-                return ResourceManager.GetString("CX-M late version", resourceCulture);
+                return ResourceManager.GetString("CXMLateVersion", resourceCulture);
             }
         }
         
@@ -715,6 +1057,15 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         internal static string InputWheelsStateTip {
             get {
                 return ResourceManager.GetString("InputWheelsStateTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M-209.
+        /// </summary>
+        internal static string M209 {
+            get {
+                return ResourceManager.GetString("M209", resourceCulture);
             }
         }
         
@@ -1516,11 +1867,56 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wheel .
+        ///   Looks up a localized string similar to Wheel 1.
         /// </summary>
-        internal static string WheelNum {
+        internal static string WheelNum1 {
             get {
-                return ResourceManager.GetString("WheelNum", resourceCulture);
+                return ResourceManager.GetString("WheelNum1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 2.
+        /// </summary>
+        internal static string WheelNum2 {
+            get {
+                return ResourceManager.GetString("WheelNum2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 3.
+        /// </summary>
+        internal static string WheelNum3 {
+            get {
+                return ResourceManager.GetString("WheelNum3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 4.
+        /// </summary>
+        internal static string WheelNum4 {
+            get {
+                return ResourceManager.GetString("WheelNum4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 5.
+        /// </summary>
+        internal static string WheelNum5 {
+            get {
+                return ResourceManager.GetString("WheelNum5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 6.
+        /// </summary>
+        internal static string WheelNum6 {
+            get {
+                return ResourceManager.GetString("WheelNum6", resourceCulture);
             }
         }
         

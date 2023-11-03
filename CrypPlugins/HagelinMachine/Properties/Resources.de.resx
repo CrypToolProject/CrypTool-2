@@ -643,10 +643,10 @@ Buchstabe</value>
   <data name="Custom" xml:space="preserve">
     <value>Benutzerdefiniert</value>
   </data>
-  <data name="CX-52 French version" xml:space="preserve">
-    <value>CX-52 Französische Version</value>
+  <data name="CX52FrenchVersion" xml:space="preserve">
+    <value>CX-52 franz. Version</value>
   </data>
-  <data name="CX-M late version" xml:space="preserve">
+  <data name="CXMLateVersion" xml:space="preserve">
     <value>CX-M späte Version</value>
   </data>
   <data name="Ignore" xml:space="preserve">

@@ -24,7 +24,7 @@ namespace CrypTool.Plugins.HagelinMachine
     public partial class HagelinMachineSettings : ISettings
     {
         #region Model
-        [TaskPane("ModelCaption", "ModelTip", "Hagelin model", 19, false, ControlType.ComboBox, new string[] { "CX-52a", "CX-52b", "CX-52c", "C-52d", "CX-M", "CX-M late version", "CX-52 French version", "CX-52 EIRE", "M-209", "Custom" })]
+        [TaskPane("ModelCaption", "ModelTip", "Hagelin model", 19, false, ControlType.ComboBox, new string[] { "CX52a", "CX52b", "CX52c", "C52d", "CXM", "CXMLateVersion", "CX52FrenchVersion", "CX52EIRE", "M209", "Custom" })]
         public ModelType Model
         {
             get
