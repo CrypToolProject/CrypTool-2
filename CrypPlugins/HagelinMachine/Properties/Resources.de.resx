@@ -408,7 +408,7 @@ Aktuelle Verschiebung: </value>
     <value>Nach oben drehen</value>
   </data>
   <data name="SelectedBarsCaption" xml:space="preserve">
-    <value>Stangen, die in dieser Maschine verwendet werden:</value>
+    <value>Verwendete Stangen:</value>
   </data>
   <data name="SelectedBarsTip" xml:space="preserve">
     <value>Informationen über Stangen:

@@ -50,7 +50,7 @@ namespace CrypTool.Plugins.HagelinMachine
                         return  "M-209";
                     default:
                     case ModelType.Custom:
-                        return  "Custom";
+                        return "Custom";
                 }
             }
         }
