@@ -24,7 +24,7 @@
     Die Hagelin M-209 ist eine tragbare Chiffriemachine, welche vom US-Militär wären dem zweiten Weltkrieg und bis zum Korea Krieg verwendet wurde.
     Die originale M-209 ist vollständig analog und hat einen größeren Schlüsselraum als die Enigma, die von den Deutschen im zweiten Weltkrieg verwendet wurde.
     <newline/>
-    Diese Analysator stellt zwei Arten von Angriffen bereits: ciphertext-only und known-plaintext.
+    Dieser Analysator stellt zwei Arten von Angriffen bereits: ciphertext-only und known-plaintext.
     <newline/>
     Der Ciphertext-Only Angriff verwendet Hillclimbing und Simulated Annealing um nach optimalen Schlüsseleinstellungen zu suchen.
     Diese Methoden werden in einem verschachteltem Hybrid-Ansatz verwendet.

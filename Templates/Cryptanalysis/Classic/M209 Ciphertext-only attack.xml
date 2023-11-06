@@ -64,7 +64,7 @@ Die Hagelin M-209 ist eine tragbare Rotor-Chiffriermaschine, die hauptsächlich 
 Sie ist sehr kompakt und handlich, zudem vollständig analog und hat einen größeren Schlüsselraum als die Enigma, die von den Deutschen im zweiten Weltkrieg verwendet wurde.
 \line
 \line
-Um verschlüsselten Text für den Angriff zu erhalten, kann man die M-209 Komponente Komponente verwenden. \line
+Um verschlüsselten Text für den Angriff zu erhalten, kann man die M-209 Komponente verwenden. \line
 Zu beachten ist, dass der vorliegende Angriff annimmt, dass sich beim Verschlüsseln an eine der bekannten Anleitungen für die Schlüsseleinstellungen gehalten wurde. \line
 Diese Anleitungen beinhalten bestimmte Vorgaben, um keine leicht zu knackenden Schlüssel zu erzeugen. Folgende Anleitungen sind bekannt: \line \line
 - TM 11-380 27.April 1942 (https://maritime.org/tech/csp1500inst.php) \line
@@ -76,7 +76,7 @@ Bei einem Ciphertext-Only Angriff, steht dem Angreifer nur der verschlüsselte T
 Der hier verwendete Algorithmus, nutzt Hillclimbing und Simulated Annealing um nach optimalen Schlüsseleinstellungen zu suchen. \line
 Diese Methoden werden in einem verschachteltem Hybrid-Ansatz, wie folgt, verwendet: \line \line
 	{\b Hill Climbing} Algorithmus für die Lug Einstellungen:\line
-	1. Es werden eine bestimmte Anzahl an zufälligen Schlüsseln erstellt. Jeder Schlüssel wird ausgewertet, indem man mit dem Schlüssel den verschlüsselten Text entschlüsselt. Anhand der relativen Häufigkeiten der Buchstaben, im entschlüsselten Text, wird ein Bewertungswert berechnet. \line
+	1. Es wird eine bestimmte Anzahl an zufälligen Schlüsseln erstellt. Jeder Schlüssel wird ausgewertet, indem man mit dem Schlüssel den verschlüsselten Text entschlüsselt. Anhand der relativen Häufigkeiten der Buchstaben, im entschlüsselten Text, wird ein Bewertungswert berechnet. \line
 	   Die bewerteten Schlüssel werden verglichen und der beste Schlüssel wird weiter im Algorithmus verwendet. \line
 	2. Solange es keinen neuen besten Schlüssel gibt, werden folgende Schritte durchgeführt: \line
      a. Es werden kleine Änderungen an Lug Einstellungen gemacht (2 Einstellungen verändert). \line
