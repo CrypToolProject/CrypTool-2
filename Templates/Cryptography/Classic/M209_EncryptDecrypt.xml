@@ -28,7 +28,7 @@ The  machine consists of three main elements:
   There are 8 positions for the lugs: two 0 positions, where the lugs have no effect, and positions 1-6.\line
 \line
 - 6 wheels, each with it own alphabet:\line
-  | Wheel No. 1  | 26 Letters  | ABCDEFGHIJKLMNOPQRSTUVWXYZ \line
+	| Wheel No. 1  | 26 Letters  | ABCDEFGHIJKLMNOPQRSTUVWXYZ \line
 	| Wheel No. 2  | 25 Letters  | ABCDEFGHIJKLMNOPQRSTUVXYZ \line
 	| Wheel No. 3  | 23 Letters  | ABCDEFGHIJKLMNOPQRSTUVX \line
 	| Wheel No. 4  | 21 Letters  | ABCDEFGHIJKLMNOPQRSTU \line
@@ -55,9 +55,7 @@ The  machine consists of three main elements:
   (During encryption, Letters are represented by their numerical value, i.e. A=1, B=2, etc.)\line
   \line
   \line
-  To enter the key via the text field, you must first enter the pin settings and then the Lug settings, e.g.:\line
-  ADFGMOPSVX,BCEHIJKNOPQYZ,ADEFGHJLNQRSUV,ACEILNOPQRTU,BCGHKLMPQS,CEFGKMQ,1,1,1,1,1,1,1,1,1,1,1,1,2,2,4,4,5,5,5,5,5,5,6,14,26,25,23 \line
-  Please note that there must be no line breaks. The start position of the rotors must be set manually.
+  To enter the key via the text field, you can take a look at the M209 Key Setup template.
 	" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -111,9 +109,7 @@ Die Verschlüsselung kann auch durch folgende Formel repräsentiert werden: C[i]
 (Buchstaben werden während der Verschlüsselung durch ihren Zahlenwert repräsentier d.h. A=1, B=2, usw.)\line
 \line
 \line
-Um den Schlüssel über das Textfeld einzugeben, müssen zuerst die Pin-Einstellungen und anschließend die Lug-Einstellungen angegeben werden z.B.:\line
-ADFGMOPSVX,BCEHIJKNOPQYZ,ADEFGHJLNQRSUV,ACEILNOPQRTU,BCGHKLMPQS,CEFGKMQ,1,1,1,1,1,1,1,1,1,1,1,1,2,2,4,4,5,5,5,5,5,5,6,14,26,25,23 \line
-Zu beachten ist dabei, dass keine Zeilenumbrüche vorhanden sein dürfen. Die Startposition der Rotoren muss von Hand eingestellt werden.
+Um den Schlüssel über das Textfeld einzugeben, können sie sich die Vorlage M209-Chiffre Schlüsseleingabe ansehen.
 " />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
