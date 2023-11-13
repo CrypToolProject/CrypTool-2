@@ -88,16 +88,19 @@ namespace CrypTool.Plugins.M209
 
                 string[] s = value.Split(new char[] { ',' });
 
-                if (s.Length != settings.Stangen + settings.Rotoren)
+                if (s.Length != 1 + settings.Stangen + settings.Rotoren)
                 {
                     GuiLogMessage("The given internal key is not valid.", NotificationLevel.Error);
                     return;
                 }
 
-                string[] pins = s.Take(settings.Rotoren).ToArray();
-                string[] lugs = s.Skip(settings.Rotoren).Take(settings.Stangen).ToArray();
+                string[] startwert = s.Take(1).ToArray();
+                string[] pins = s.Skip(1).Take(settings.Rotoren).ToArray();
+                string[] lugs = s.Skip(1).Skip(settings.Rotoren).Take(settings.Stangen).ToArray();
                 updatePins(pins);
                 updateLugs(lugs);
+
+                settings.Startwert = startwert[0];
 
                 OnPropertyChanged("OutputInternalKey");
             }
