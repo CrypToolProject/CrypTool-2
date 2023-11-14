@@ -13,6 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.M209;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
@@ -20,7 +21,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.M209
 {
@@ -34,6 +37,7 @@ namespace CrypTool.Plugins.M209
         #region Private Variables
 
         private readonly M209Settings settings = new M209Settings();
+        private M209Presentation _presentation = new M209Presentation();
 
         #endregion
 
@@ -48,10 +52,15 @@ namespace CrypTool.Plugins.M209
             "ABCDEFGHIJKLMNOPQ"             // no R-Z
         };
 
+        private bool _gridsToBeCreated = true;
+
         private readonly bool[,] pins = new bool[6, 27];
         private readonly int[,] StangeSchieber = new int[27, 2];
         private readonly int[,] rotorpos = new int[6, 26];
         private readonly int[] rotorofs = new int[6] { 15, 14, 13, 12, 11, 10 };  // position of 'active' pin wrt upper pin
+
+        public string[,] _shownWheelPositions = new string[6, 5];
+        public string[] _activeWheelPositions = new string[6];
 
         private readonly Random rnd = new Random();
 
@@ -129,17 +138,18 @@ namespace CrypTool.Plugins.M209
         {
             get
             {
-                string keycheck = cipherText("AAAAAAAAAAAAAAAAAAAAAAAAAA", "AAAAAA", 0, false);
-                keycheck = BlockFormat(keycheck, 5);
+                //string keycheck = cipherText("AAAAAAAAAAAAAAAAAAAAAAAAAA", "AAAAAA", 0, false);
+                //keycheck = BlockFormat(keycheck, 5);
 
-                if (!settings.FormattedCheck)
-                {
-                    return keycheck;
-                }
+                //if (!settings.FormattedCheck)
+                //{
+                //    return keycheck;
+                //}
 
-                string sep = "-------------------------------\n";
+                //string sep = "-------------------------------\n";
 
-                return sep + "NR LUGS  1  2  3  4  5  6\n" + sep + settings.FormattedInternalKey + "\n" + sep + "26 LETTER CHECK\n\n" + keycheck + "\n" + sep;
+                //return sep + "NR LUGS  1  2  3  4  5  6\n" + sep + settings.FormattedInternalKey + "\n" + sep + "26 LETTER CHECK\n\n" + keycheck + "\n" + sep;
+                return "TEst";
             }
         }
 
@@ -323,6 +333,17 @@ namespace CrypTool.Plugins.M209
             {
                 text = text.Replace(' ', 'Z');
             }
+            UpdateWheelPosition(key);
+
+            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                _presentation.ShowDisplayedPositionsInGrid(_shownWheelPositions);
+                _presentation.ShowActivePositionsInGrid(_activeWheelPositions);
+                //_presentation.ShowWheelPinActivityInGrid(_wheelsWithActivePin);
+                _presentation.ShowWheelPositionsinGrid(_shownWheelPositions);
+                _presentation.labelInput.Content = string.Empty;
+                _presentation.labelOutput.Content = string.Empty;
+            }, null);
 
             string upperText = text.ToUpper();
 
@@ -336,6 +357,20 @@ namespace CrypTool.Plugins.M209
                     char enc = calculateOffset(key, uc);
                     key = rotateWheel(key);
                     c = char.IsUpper(c) ? enc : enc.ToString().ToLower()[0];
+
+                    UpdateWheelPosition(key);
+
+                    Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                    {
+                        _presentation.ShowDisplayedPositionsInGrid(_shownWheelPositions);
+                        _presentation.ShowActivePositionsInGrid(_activeWheelPositions);
+                        //_presentation.ShowWheelsAdvancementsInGrid(_advancementsToShow);
+                        //_presentation.ShowWheelPinActivityInGrid(_wheelsWithActivePin);
+                        _presentation.ShowWheelPositionsinGrid(_shownWheelPositions);
+                        _presentation.labelInput.Content = text[i];
+                        _presentation.labelOutput.Content = c;
+                    }, null);
+
                 }
 
                 switch (settings.UnknownSymbolHandling)
@@ -360,6 +395,7 @@ namespace CrypTool.Plugins.M209
                         break;
                 }
             }
+
 
             //CaseHandling
             switch (settings.CaseHandling)
@@ -409,13 +445,68 @@ namespace CrypTool.Plugins.M209
             return new string(neuePos);
         }
 
+        public void UpdateWheelPosition(string key)
+        {
+            for (int i = 0; i < settings.Rotoren; i++)
+            {
+                string[] WheelPositionsArray = settings.initrotors[i].ToCharArray().Select(c => c.ToString()).ToArray();
+                _shownWheelPositions[i, 0] = WheelPositionsArray[Mod((getRotorPostion(key[i], i) - 2), 6)];
+                _shownWheelPositions[i, 1] = WheelPositionsArray[Mod((getRotorPostion(key[i], i) - 1), 6)];
+                _shownWheelPositions[i, 2] = WheelPositionsArray[Mod((getRotorPostion(key[i], i)), 6)];
+                _shownWheelPositions[i, 3] = WheelPositionsArray[Mod((getRotorPostion(key[i], i) + 1), 6)];
+                _shownWheelPositions[i, 4] = WheelPositionsArray[Mod((getRotorPostion(key[i], i) + 2), 6)];
+                int offset = 0;
+
+                switch (settings.initrotors[i].Length)
+                {
+                    case 26:
+                        offset = 15;
+                        break;
+                    case 25:
+                        offset = 14;
+                        break;
+                    case 23:
+                        offset = 13;
+                        break;
+                    case 21:
+                        offset = 12;
+                        break;
+                    case 19:
+                        offset = 11;
+                        break;
+                    case 17:
+                        offset = 10;
+                        break;
+                    default:
+                        break;
+                }
+
+                string curPosition = WheelPositionsArray[(getRotorPostion(key[i], i) + offset) % settings.initrotors[i].Length];
+                _activeWheelPositions[i] = curPosition;
+
+                //if (_wheels[i]._pins.IndexOf(curPosition) >= 0)
+                //{
+                //    _wheelsWithActivePin[i] = true;
+                //}
+                //else
+                //{
+                //    _wheelsWithActivePin[i] = false;
+                //}
+            }
+        }
+
+        private int Mod(int x, int m)
+        {
+            return (x % m + m) % m;
+        }
+
         #endregion
 
         #region IPlugin Members
 
         public ISettings Settings => settings;
 
-        public UserControl Presentation => null;
+        public UserControl Presentation => _presentation;
 
         public UserControl QuickWatchPresentation => null;
 
@@ -451,6 +542,16 @@ namespace CrypTool.Plugins.M209
             setPins();
             setBars();
 
+            if (_gridsToBeCreated)
+            {
+                Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                {
+                    _presentation.CreateDinamicInfoGrid();
+                    _presentation.CreateWheelsInfoGrids();
+                    _gridsToBeCreated = false;
+                }, null);
+            }
+
             // check if each rotor has at least one active pin
             bool found = false;
             for (int i = 0; i < settings.Rotoren; i++)
@@ -478,14 +579,16 @@ namespace CrypTool.Plugins.M209
                 GuiLogMessage(string.Format("The internal key is weak. It generates only {0} of the 26 possible offsets.", ofs - 1), NotificationLevel.Warning);
             }
 
+
+            //string check = BlockFormat(cipherText("AAAAAAAAAAAAAAAAAAAAAAAAAA", "AAAAAA", 0, true), 5);
+            //GuiLogMessage(string.Format("26 letters check: {0}", check), NotificationLevel.Debug);
+
             OutputString = cipherText(Text, settings.Startwert, settings.Action, settings.ZSpace);
             if (settings.BlockOutput)
             {
                 OutputString = BlockFormat(OutputString, 5);  // in Fünfergruppen ausgeben
             }
 
-            string check = BlockFormat(cipherText("AAAAAAAAAAAAAAAAAAAAAAAAAA", "AAAAAA", 0, true), 5);
-            GuiLogMessage(string.Format("26 letters check: {0}", check), NotificationLevel.Debug);
 
             OnPropertyChanged("OutputString");
             OnPropertyChanged("OutputInternalKey");

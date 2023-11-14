@@ -363,6 +363,33 @@
   <data name="PluginTooltip" xml:space="preserve">
     <value>Classic Cipher Machine from the 2nd World War (USA)</value>
   </data>
+  <data name="PositionCurrentlyActive" xml:space="preserve">
+    <value>Position currently active</value>
+  </data>
+  <data name="PositionCurrentlyDisplayedToUser" xml:space="preserve">
+    <value>Position currently displayed to user</value>
+  </data>
+  <data name="PresentatinCol1Label" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="PresentatinCol2Label" xml:space="preserve">
+    <value>Wheel 1</value>
+  </data>
+  <data name="PresentatinCol3Label" xml:space="preserve">
+    <value>Wheel 2</value>
+  </data>
+  <data name="PresentatinCol4Label" xml:space="preserve">
+    <value>Wheel 3</value>
+  </data>
+  <data name="PresentatinCol5Label" xml:space="preserve">
+    <value>Wheel 4</value>
+  </data>
+  <data name="PresentatinCol6Label" xml:space="preserve">
+    <value>Wheel 5</value>
+  </data>
+  <data name="PresentatinCol7Label" xml:space="preserve">
+    <value>Wheel 6</value>
+  </data>
   <data name="RandomKeyCaption" xml:space="preserve">
     <value>Generate internal key</value>
   </data>
@@ -440,6 +467,12 @@
   </data>
   <data name="WheelGroup" xml:space="preserve">
     <value>Pin positions</value>
+  </data>
+  <data name="WheelsAdvancementsAtThisStep" xml:space="preserve">
+    <value>Wheels advancements at this step</value>
+  </data>
+  <data name="WheelsWithActivePins" xml:space="preserve">
+    <value>Wheels with active pins</value>
   </data>
   <data name="ZSpaceCaption" xml:space="preserve">
     <value>Replace space with 'Z'</value>
