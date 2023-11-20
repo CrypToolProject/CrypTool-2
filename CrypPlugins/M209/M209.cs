@@ -61,6 +61,7 @@ namespace CrypTool.Plugins.M209
 
         public string[,] _shownWheelPositions = new string[6, 5];
         public string[] _activeWheelPositions = new string[6];
+        public bool[] _wheelsWithActivePin = new bool[6];
 
         private readonly Random rnd = new Random();
 
@@ -364,8 +365,7 @@ namespace CrypTool.Plugins.M209
                     {
                         _presentation.ShowDisplayedPositionsInGrid(_shownWheelPositions);
                         _presentation.ShowActivePositionsInGrid(_activeWheelPositions);
-                        //_presentation.ShowWheelsAdvancementsInGrid(_advancementsToShow);
-                        //_presentation.ShowWheelPinActivityInGrid(_wheelsWithActivePin);
+                        _presentation.ShowWheelPinActivityInGrid(_wheelsWithActivePin);
                         _presentation.ShowWheelPositionsinGrid(_shownWheelPositions);
                         _presentation.labelInput.Content = text[i];
                         _presentation.labelOutput.Content = c;
@@ -450,11 +450,11 @@ namespace CrypTool.Plugins.M209
             for (int i = 0; i < settings.Rotoren; i++)
             {
                 string[] WheelPositionsArray = settings.initrotors[i].ToCharArray().Select(c => c.ToString()).ToArray();
-                _shownWheelPositions[i, 0] = WheelPositionsArray[Mod((getRotorPostion(key[i], i) - 2), 6)];
-                _shownWheelPositions[i, 1] = WheelPositionsArray[Mod((getRotorPostion(key[i], i) - 1), 6)];
-                _shownWheelPositions[i, 2] = WheelPositionsArray[Mod((getRotorPostion(key[i], i)), 6)];
-                _shownWheelPositions[i, 3] = WheelPositionsArray[Mod((getRotorPostion(key[i], i) + 1), 6)];
-                _shownWheelPositions[i, 4] = WheelPositionsArray[Mod((getRotorPostion(key[i], i) + 2), 6)];
+                _shownWheelPositions[i, 0] = WheelPositionsArray[Mod((getRotorPostion(key[i], i) - 2), settings.initrotors[i].Length)];
+                _shownWheelPositions[i, 1] = WheelPositionsArray[Mod((getRotorPostion(key[i], i) - 1), settings.initrotors[i].Length)];
+                _shownWheelPositions[i, 2] = WheelPositionsArray[Mod((getRotorPostion(key[i], i)), settings.initrotors[i].Length)];
+                _shownWheelPositions[i, 3] = WheelPositionsArray[Mod((getRotorPostion(key[i], i) + 1), settings.initrotors[i].Length)];
+                _shownWheelPositions[i, 4] = WheelPositionsArray[Mod((getRotorPostion(key[i], i) + 2), settings.initrotors[i].Length)];
                 int offset = 0;
 
                 switch (settings.initrotors[i].Length)
@@ -484,14 +484,9 @@ namespace CrypTool.Plugins.M209
                 string curPosition = WheelPositionsArray[(getRotorPostion(key[i], i) + offset) % settings.initrotors[i].Length];
                 _activeWheelPositions[i] = curPosition;
 
-                //if (_wheels[i]._pins.IndexOf(curPosition) >= 0)
-                //{
-                //    _wheelsWithActivePin[i] = true;
-                //}
-                //else
-                //{
-                //    _wheelsWithActivePin[i] = false;
-                //}
+                var position = getRotorPostion(key[i], i);
+
+                _wheelsWithActivePin[i] = pins[i, getRotorPostion(key[i], i)];
             }
         }
 

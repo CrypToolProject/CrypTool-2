@@ -61,22 +61,9 @@ namespace CrypTool.M209
                 W6_value = wheelValues[5].ToString(),
             });
         }
-        internal void ShowWheelsAdvancementsInGrid(int[] wheelValues)
-        {
-            DataGridDynamicInformation.Items[2] = (new DynamicGridRowValue
-            {
-                Title = Properties.Resources.WheelsAdvancementsAtThisStep,
-                W1_value = wheelValues[0].ToString(),
-                W2_value = wheelValues[1].ToString(),
-                W3_value = wheelValues[2].ToString(),
-                W4_value = wheelValues[3].ToString(),
-                W5_value = wheelValues[4].ToString(),
-                W6_value = wheelValues[5].ToString()
-            });
-        }
         internal void ShowWheelPinActivityInGrid(bool[] wheelValues)
         {
-            DataGridDynamicInformation.Items[3] = (new DynamicGridRowValue
+            DataGridDynamicInformation.Items[2] = (new DynamicGridRowValue
             {
                 Title = Properties.Resources.WheelsWithActivePins,
                 W1_value = wheelValues[0] ? "+" : string.Empty,
@@ -104,17 +91,6 @@ namespace CrypTool.M209
             DataGridDynamicInformation.Items.Add(new DynamicGridRowValue
             {
                 Title = Properties.Resources.PositionCurrentlyActive,
-                W1_value = string.Empty,
-                W2_value = string.Empty,
-                W3_value = string.Empty,
-                W4_value = string.Empty,
-                W5_value = string.Empty,
-                W6_value = string.Empty
-            });
-
-            DataGridDynamicInformation.Items.Add(new DynamicGridRowValue
-            {
-                Title = Properties.Resources.WheelsAdvancementsAtThisStep,
                 W1_value = string.Empty,
                 W2_value = string.Empty,
                 W3_value = string.Empty,
