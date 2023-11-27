@@ -292,10 +292,10 @@
     <value>This diagram shows how the steganography procedure normaly works over an insecure communication channel.</value>
   </data>
   <data name="Intro1Text2" xml:space="preserve">
-    <value>The secret message can be encrypted (ciphertext) or plaintext.</value>
+    <value>The message which you want to hide can be an arbitrary text.</value>
   </data>
   <data name="Intro2BPCSText1" xml:space="preserve">
-    <value>BPCS algorithm was introduced to overcome the shortcomings of traditional steganography techniques with limited data hiding capacity. This technique can hide up to 50% of the cover image data amount without much distortion in the visual appearance of the original image.</value>
+    <value>The BPCS algorithm was introduced to increase the limited capacity of traditional digital steganography techniques. This algorithm can replace up to 50% of the cover image data without severely distorting its visual appearance.</value>
   </data>
   <data name="Intro2BPCSText2" xml:space="preserve">
     <value>In BPCS, a multi-valued image consisting of 24-bit pixels can bedecomposed into a set of 24 binary pictures (bit planes).</value>
@@ -304,7 +304,7 @@
     <value>These planes are divided into 8 x 8 pixel blocks, the blocks are then classified into noise like regions and informative regions, </value>
   </data>
   <data name="Intro2BPCSText4" xml:space="preserve">
-    <value>Noise like regions (complex regions) can be replaced with 8 x 8 bit blocks of the secret message which should also be complex. If the message block is not complex it should be conjugated to keep the complexity level of the image block, </value>
+    <value>Noisy regions ("noise-like"; complex regions with a "lot of noise") can be replaced with 8 x 8 bit blocks of the secret message which should also be complex. If the message block is not complex it should be conjugated to keep the complexity level of the image block, </value>
   </data>
   <data name="Intro2BPCSTitle" xml:space="preserve">
     <value>BPCS Algorithm</value>
@@ -322,7 +322,7 @@
     <value>LSB Algorithm</value>
   </data>
   <data name="Intro3BPCSTitle" xml:space="preserve">
-    <value>Noise-like vs. Informative Regions Examples</value>
+    <value>Noise-like vs. Informative Regions – Examples</value>
   </data>
   <data name="Intro3LSBText1" xml:space="preserve">
     <value>This is going to be an interactive visualization where you are able to choose the bits that the secret message bits will replace and see the difference between choosing the MSB and LSB for example.</value>
@@ -483,8 +483,8 @@
   <data name="SteganographyLabel" xml:space="preserve">
     <value>Steganography</value>
   </data>
-  <data name="SteganographyModelLabel" xml:space="preserve">
-    <value>Steganography Model</value>
+  <data name="SteganographyProcessLabel" xml:space="preserve">
+    <value>Steganography Process</value>
   </data>
   <data name="StegModelUrl" xml:space="preserve">
     <value>images/model_en.png</value>

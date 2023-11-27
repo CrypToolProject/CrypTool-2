@@ -130,7 +130,7 @@
     <value>Wählen Sie eine Aktion aus</value>
   </data>
   <data name="ApplyButton" xml:space="preserve">
-    <value>übernehmen</value>
+    <value>Übernehmen</value>
   </data>
   <data name="ApplyChangesButton" xml:space="preserve">
     <value>Änderungen übernehmen</value>
@@ -157,7 +157,7 @@
     <value>Blaue Bitebenen</value>
   </data>
   <data name="BlueValueLabel" xml:space="preserve">
-    <value>Blau Wert: </value>
+    <value>Blau-Wert: </value>
   </data>
   <data name="BPCSMainMenu1" xml:space="preserve">
     <value>Wie der Algorithmus funktioniert</value>
@@ -199,13 +199,13 @@
     <value>Konjugiert: </value>
   </data>
   <data name="ConjugationText" xml:space="preserve">
-    <value>P ist der originale Nachrichtenblock, Wc ist das Schachbrettmuster was dem Erhöhen der Komplexität dient, P* ist die konjugierte Version des Nachrichtenblocks P.</value>
+    <value>P ist der originale Nachrichtenblock, Wc ist das Schachbrettmuster, das die Komplexität erhöht, und P* ist die konjugierte Version des Nachrichtenblocks P.</value>
   </data>
   <data name="ConversionViewText1" xml:space="preserve">
-    <value>Das Verstecken ist jetzt nun abgeschlossen, Sie können das Ergebnis im Bildausgabe Komponente.</value>
+    <value>Das Verstecken ist jetzt abgeschlossen, das Ergebnis wird von der Komponente ausgegeben.</value>
   </data>
   <data name="ConversionViewText2" xml:space="preserve">
-    <value>Sie können die Konvertierung in den Pixeln sehen, indem Sie die x- und y-Koordinaten des Pixels in das Textfeld unten eingeben, oder mittels den Pfeilen um die Pixels zu browsen.</value>
+    <value>Sie können die Konvertierung in den Pixeln sehen, indem Sie die x- und y-Koordinaten des Pixels in das Textfeld unten eingeben, oder indem Sie die Pfeile nutzen, um durch die Pixel zu wandern.</value>
   </data>
   <data name="CurrentComplexBlockNrLabel" xml:space="preserve">
     <value>Nummer des aktuellen complexen Bildblocks: </value>
@@ -226,7 +226,7 @@
     <value>Grüne Bitebenen</value>
   </data>
   <data name="GreenValueLabel" xml:space="preserve">
-    <value>Grün Wert: </value>
+    <value>Grün-Wert: </value>
   </data>
   <data name="HiderBlocksPanelText1" xml:space="preserve">
     <value>Der Bildblock rechts ist mit dem Nachrichtenblock links ersetzt</value>
@@ -289,13 +289,13 @@
     <value>Steganografie kann mit Kryptografie kombiniert werden, um mehr Sicherheit zu gewährleisten bei vertraulichen Daten.</value>
   </data>
   <data name="Intro1Text1" xml:space="preserve">
-    <value>Dieses Diagramm zeigt, wie das Steganografie Verfahren normalerweise über einen unsicheren Kommunikationskanal funktioniert.</value>
+    <value>Dieses Diagramm zeigt, wie das Steganografie-Verfahren normalerweise über einen unsicheren Kommunikationskanal funktioniert.</value>
   </data>
   <data name="Intro1Text2" xml:space="preserve">
-    <value>Die geheime Nachricht kann verschlüsselt (Geheimtext) oder Klartext sein.</value>
+    <value>Die zu versteckende Nachricht kann ein beliebiger Text sein.</value>
   </data>
   <data name="Intro2BPCSText1" xml:space="preserve">
-    <value>Der BPCS-Algorithmus wurde eingeführt, um die Mängel traditioneller Steganografietechniken mit begrenzter Kapazität zum Verstecken von Daten zu überwinden. Diese Technik kann bis zu 50% der Datenmenge von dem Coverbild verstecken, ohne dass die visuelle Erscheinung des Originalbilds stark verzerrt wird.</value>
+    <value>Der BPCS-Algorithmus wurde eingeführt, um die begrenzte Kapazität traditioneller digitaler Steganografie-Techniken zu erhöhen. Dieser Algorithmus kann bis zu 50% der Daten des Coverbilds ersetzen, ohne dass dessen visuelle Erscheinung stark verzerrt wird.</value>
   </data>
   <data name="Intro2BPCSText2" xml:space="preserve">
     <value>In BPCS kann ein mehrwertiges Bild, das aus 24-bit-Pixeln besteht, in einen Satz von 24 Binärbildern (Bitebenen) zerlegt werden.</value>
@@ -304,7 +304,7 @@
     <value>Diese Ebenen sind in 8 × 8-Pixelblöcke unterteilt, die Blöcke werden dann in Noise-like Regionen und informative Regionen klassifiziert, </value>
   </data>
   <data name="Intro2BPCSText4" xml:space="preserve">
-    <value>Noise-like Regionen (komplexe Regionen) können durch 8 x 8-bit-Blöcke der geheimen Nachricht ersetzt werden, die ebenfalls komplex sein sollten. Wenn der Nachrichtenblock nicht komplex ist, sollte er konjugiert werden, um den Komplexitätsgrad des Bildblocks beizubehalten, </value>
+    <value>Verrauschte Bildregionen ("Noise-Like", komplexe Regionen mit "viel Rauschen") können durch 8 x 8-bit-Blöcke der geheimen Nachricht ersetzt werden, die ebenfalls komplex sein sollten. Wenn der Nachrichtenblock nicht komplex ist, sollte er konjugiert werden, um den Komplexitätsgrad des Bildblocks beizubehalten, </value>
   </data>
   <data name="Intro2BPCSTitle" xml:space="preserve">
     <value>BPCS-Algorithmus</value>
@@ -322,7 +322,7 @@
     <value>LSB Algorithmus</value>
   </data>
   <data name="Intro3BPCSTitle" xml:space="preserve">
-    <value>Noise-like vs. informative Regionen Beispiele</value>
+    <value>Noise-Like vs. informative Regionen – Beispiele</value>
   </data>
   <data name="Intro3LSBText1" xml:space="preserve">
     <value>Dies wird eine interaktive Visualisierung sein, in der Sie die Bits auswählen können, die die geheimen Nachrichtenbits ersetzen, und beispielsweise den Unterschied zwischen der Auswahl des MSB und des LSB erkennen können.</value>
@@ -340,7 +340,7 @@
     <value>Mehr Informationen bevor wir anfangen</value>
   </data>
   <data name="Intro4BPCSTitle" xml:space="preserve">
-    <value>Konjugation Illustration</value>
+    <value>Illustration der Konjugation </value>
   </data>
   <data name="InvalidComplexityThresholdInput" xml:space="preserve">
     <value>Ungültige Eingabe für den Komplexitätsgrenzwert, der Wert soll zwischen 0 und 1 liegen</value>
@@ -445,7 +445,7 @@
     <value>Rote Bitebenen</value>
   </data>
   <data name="RedValueLabel" xml:space="preserve">
-    <value>Rot Wert: </value>
+    <value>Rot-Wert: </value>
   </data>
   <data name="SeePixelConversionButton" xml:space="preserve">
     <value>Pixel Konvertierung ansehen</value>
@@ -483,8 +483,8 @@
   <data name="SteganographyLabel" xml:space="preserve">
     <value>Steganografie</value>
   </data>
-  <data name="SteganographyModelLabel" xml:space="preserve">
-    <value>Steganografie Model</value>
+  <data name="SteganographyProcessLabel" xml:space="preserve">
+    <value>Steganografie-Prozess</value>
   </data>
   <data name="StegModelUrl" xml:space="preserve">
     <value>images/model_de.png</value>

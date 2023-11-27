@@ -583,7 +583,7 @@ namespace ImageSteganographyVisualization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The secret message can be encrypted (ciphertext) or plaintext..
+        ///   Looks up a localized string similar to The message which you want to hide can be an arbitrary text..
         /// </summary>
         internal static string Intro1Text2 {
             get {
@@ -592,7 +592,7 @@ namespace ImageSteganographyVisualization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BPCS algorithm was introduced to overcome the shortcomings of traditional steganography techniques with limited data hiding capacity. This technique can hide up to 50% of the cover image data amount without much distortion in the visual appearance of the original image..
+        ///   Looks up a localized string similar to The BPCS algorithm was introduced to increase the limited capacity of traditional digital steganography techniques. This algorithm can replace up to 50% of the cover image data without severely distorting its visual appearance..
         /// </summary>
         internal static string Intro2BPCSText1 {
             get {
@@ -619,7 +619,7 @@ namespace ImageSteganographyVisualization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Noise like regions (complex regions) can be replaced with 8 x 8 bit blocks of the secret message which should also be complex. If the message block is not complex it should be conjugated to keep the complexity level of the image block, .
+        ///   Looks up a localized string similar to Noisy regions (&quot;noise-like&quot;; complex regions with a &quot;lot of noise&quot;) can be replaced with 8 x 8 bit blocks of the secret message which should also be complex. If the message block is not complex it should be conjugated to keep the complexity level of the image block, .
         /// </summary>
         internal static string Intro2BPCSText4 {
             get {
@@ -673,7 +673,7 @@ namespace ImageSteganographyVisualization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Noise-like vs. Informative Regions Examples.
+        ///   Looks up a localized string similar to Noise-like vs. Informative Regions – Examples.
         /// </summary>
         internal static string Intro3BPCSTitle {
             get {
@@ -1159,11 +1159,11 @@ namespace ImageSteganographyVisualization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Steganography Model.
+        ///   Looks up a localized string similar to Steganography Process.
         /// </summary>
-        internal static string SteganographyModelLabel {
+        internal static string SteganographyProcessLabel {
             get {
-                return ResourceManager.GetString("SteganographyModelLabel", resourceCulture);
+                return ResourceManager.GetString("SteganographyProcessLabel", resourceCulture);
             }
         }
         
