@@ -28,6 +28,7 @@ When you open a new command prompt and just type "CrypConsole" you should see th
   -input=type,name,data               -> specifies an input parameter
                                         type can be number,text,file
   -output=name                        -> specifies an output parameter
+  -setting=name.settingname,value     -> specifies a setting of a component (name) to change to defined value
   -timeout=duration                   -> specifies a timeout in seconds. If timeout is reached, the process is killed
   -jsonoutput                         -> enables the json output
   -verbose                            -> writes logs etc to the console; for debugging
@@ -96,6 +97,25 @@ ciphertext=URYYB JBEYQ
 
 The cwm file we used in this example contained four components: (1) a TextInput component named "plaintext", connected to a (2) Caesar component, connected to a (3) TextOutput component named "ciphertext", and (4) a NumberInput component named "key".
 
+### Changing component settings
+
+With -setting=ComponentName.SettingName,value you can change the value of a component's setting. If the setting is an enum, you have to provide the exact enum value as defined in the C# code. To get the exact name you can use -discover. For example, with -discover on CT2's Caesar template you find the following enum values for the Action setting:
+
+```
+- Settings:
+-- "Action" ("CrypTool.Caesar.CaesarSettings+CaesarMode")
+--- Possible values:
+---> "Encrypt"
+---> "Decrypt"
+```
+
+So with 
+
+```
+ -setting=Caesar.Action,Decrypt
+```
+you change the action of the Caesar component to "decrypt".
+
 ### Some more options
 
 With -verbose, CrypConsole shows debug messages. 
@@ -138,6 +158,3 @@ With -jsonoutput, CrypConsole outputs the results in a json structure. Also, the
 {"progress":{"value":"100"}}
 {"output":{"name":"ciphertext","value":"URYYB JBEYQ"}}
 ```
-### Changing component settings
-
-Allowing to change component settings is an open todo and will be included in future releases of CrypConsole.
