@@ -90,6 +90,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LugSettings.cs" />
+    <Compile Include="M209Presentation.xaml.cs">
+      <DependentUpon>M209Presentation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="M209Settings.cs" />
     <Compile Include="M209.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -149,6 +152,15 @@
     <Resource Include="DetailedDescription\doc.xml">
       <SubType>Designer</SubType>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="M209Presentation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="wheels.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

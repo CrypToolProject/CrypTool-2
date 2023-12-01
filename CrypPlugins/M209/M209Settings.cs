@@ -104,11 +104,11 @@ namespace CrypTool.Plugins.M209
 
         public string InternalKey
         {
-            get => string.Join(",", rotor) + "," + string.Join(",", bar);
+            get => Startwert + "," + string.Join(",", rotor) + "," + string.Join(",", bar);
             set
             {
                 string[] s = value.Split(new char[] { ',' });
-                if (s.Length != Stangen + Rotoren)
+                if (s.Length != 1 + Stangen + Rotoren)
                 {
                     return;
                 }

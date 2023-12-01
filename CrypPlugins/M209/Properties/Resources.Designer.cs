@@ -799,6 +799,87 @@ namespace CrypTool.M209.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Position currently active.
+        /// </summary>
+        internal static string PositionCurrentlyActive {
+            get {
+                return ResourceManager.GetString("PositionCurrentlyActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position currently displayed to user.
+        /// </summary>
+        internal static string PositionCurrentlyDisplayedToUser {
+            get {
+                return ResourceManager.GetString("PositionCurrentlyDisplayedToUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        internal static string PresentatinCol1Label {
+            get {
+                return ResourceManager.GetString("PresentatinCol1Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 1.
+        /// </summary>
+        internal static string PresentatinCol2Label {
+            get {
+                return ResourceManager.GetString("PresentatinCol2Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 2.
+        /// </summary>
+        internal static string PresentatinCol3Label {
+            get {
+                return ResourceManager.GetString("PresentatinCol3Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 3.
+        /// </summary>
+        internal static string PresentatinCol4Label {
+            get {
+                return ResourceManager.GetString("PresentatinCol4Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 4.
+        /// </summary>
+        internal static string PresentatinCol5Label {
+            get {
+                return ResourceManager.GetString("PresentatinCol5Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 5.
+        /// </summary>
+        internal static string PresentatinCol6Label {
+            get {
+                return ResourceManager.GetString("PresentatinCol6Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 6.
+        /// </summary>
+        internal static string PresentatinCol7Label {
+            get {
+                return ResourceManager.GetString("PresentatinCol7Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Generate internal key.
         /// </summary>
         internal static string RandomKeyCaption {
@@ -1029,6 +1110,24 @@ namespace CrypTool.M209.Properties {
         internal static string WheelGroup {
             get {
                 return ResourceManager.GetString("WheelGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheels advancements at this step.
+        /// </summary>
+        internal static string WheelsAdvancementsAtThisStep {
+            get {
+                return ResourceManager.GetString("WheelsAdvancementsAtThisStep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheels with active pins.
+        /// </summary>
+        internal static string WheelsWithActivePins {
+            get {
+                return ResourceManager.GetString("WheelsWithActivePins", resourceCulture);
             }
         }
         
