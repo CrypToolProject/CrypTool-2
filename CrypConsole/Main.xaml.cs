@@ -23,7 +23,6 @@ using System.Threading;
 using System.Windows;
 using WorkspaceManager.Execution;
 using WorkspaceManager.Model;
-using WorkspaceManagerModel.Model.Tools;
 using Path = System.IO.Path;
 
 namespace CrypTool.CrypConsole
@@ -170,7 +169,31 @@ namespace CrypTool.CrypConsole
                 Environment.Exit(-3);
             }
 
-            //Step 6: Get output parameters
+            //Step 6: Get settings
+            List<Setting> settings = null;
+            try
+            {
+                settings = ArgsHelper.GetSettings(args);
+                if (_verbose)
+                {
+                    foreach (Parameter param in inputParameters)
+                    {
+                        Console.WriteLine("Setting given: " + param);
+                    }
+                }
+            }
+            catch (InvalidParameterException ipex)
+            {
+                Console.WriteLine(ipex.Message);
+                Environment.Exit(-3);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception occured while parsing settings: {0}", ex.Message);
+                Environment.Exit(-3);
+            }
+
+            //Step 7: Get output parameters
             List<Parameter> outputParameters = null;
             try
             {
@@ -194,7 +217,7 @@ namespace CrypTool.CrypConsole
                 Environment.Exit(-3);
             }
 
-            //Step 7: Update application domain. This allows loading additional .net assemblies
+            //Step 8: Update application domain. This allows loading additional .net assemblies
             try
             {
                 UpdateAppDomain();
@@ -205,7 +228,7 @@ namespace CrypTool.CrypConsole
                 Environment.Exit(-4);
             }
 
-            //Step 8: Load cwm file and create model            
+            //Step 9: Load cwm file and create model            
             try
             {
                 ModelPersistance modelPersistance = new ModelPersistance();
@@ -222,7 +245,7 @@ namespace CrypTool.CrypConsole
                 Environment.Exit(-5);
             }
 
-            //Step 9: Set input parameters
+            //Step 10: Set input parameters
             foreach (Parameter param in inputParameters)
             {
                 string name = param.Name;
@@ -239,12 +262,12 @@ namespace CrypTool.CrypConsole
                     {
                         if (component.PluginType.FullName.Equals("CrypTool.TextInput.TextInput"))
                         {
-                            ISettings settings = component.Plugin.Settings;
-                            PropertyInfo textProperty = settings.GetType().GetProperty("Text");
+                            ISettings plugin_settings = component.Plugin.Settings;
+                            PropertyInfo textProperty = plugin_settings.GetType().GetProperty("Text");
 
                             if (param.ParameterType == ParameterType.Text)
                             {
-                                textProperty.SetValue(settings, param.Value);
+                                textProperty.SetValue(plugin_settings, param.Value);
                             }
                             else if (param.ParameterType == ParameterType.File)
                             {
@@ -256,7 +279,7 @@ namespace CrypTool.CrypConsole
                                         Environment.Exit(-7);
                                     }
                                     string value = File.ReadAllText(param.Value);
-                                    textProperty.SetValue(settings, value);
+                                    textProperty.SetValue(plugin_settings, value);
                                 }
                                 catch (Exception ex)
                                 {
@@ -271,12 +294,12 @@ namespace CrypTool.CrypConsole
                         }
                         else if (component.PluginType.FullName.Equals("CrypTool.Plugins.Numbers.NumberInput"))
                         {
-                            ISettings settings = component.Plugin.Settings;
-                            PropertyInfo textProperty = settings.GetType().GetProperty("Number");
+                            ISettings plugin_settings = component.Plugin.Settings;
+                            PropertyInfo textProperty = plugin_settings.GetType().GetProperty("Number");
 
                             if (param.ParameterType == ParameterType.Number)
                             {
-                                textProperty.SetValue(settings, param.Value);
+                                textProperty.SetValue(plugin_settings, param.Value);
                             }
                             //we need to call initialize to get the new text to the ui of the TextInput component
                             //otherwise, it will output the value retrieved by deserialization
@@ -291,8 +314,14 @@ namespace CrypTool.CrypConsole
                     Environment.Exit(-7);
                 }
             }
+            
+            //Step 11: Set settings
+            foreach(Setting setting in settings)
+            {
+                ChangeSetting(setting);                
+            }
 
-            //Step 10: Set output parameters
+            //Step 12: Set output parameters
             foreach (Parameter param in outputParameters)
             {
                 string name = param.Name;
@@ -311,17 +340,17 @@ namespace CrypTool.CrypConsole
                 if (!found)
                 {
                     Console.WriteLine("TextOutput for setting output parameter not found: {0}", param);
-                    Environment.Exit(-7);
+                    Environment.Exit(-8);
                 }
             }
 
-            //Step 11: add OnPluginProgressChanged handlers
+            //Step 13: add OnPluginProgressChanged handlers
             foreach (PluginModel plugin in _workspaceModel.GetAllPluginModels())
             {
                 plugin.Plugin.OnPluginProgressChanged += OnPluginProgressChanged;
             }
 
-            //Step 12: Create execution engine            
+            //Step 14: Create execution engine            
             try
             {
                 _engine = new ExecutionEngine(null);
@@ -331,10 +360,10 @@ namespace CrypTool.CrypConsole
             catch (Exception ex)
             {
                 Console.WriteLine("Exception occured while executing model: {0}", ex.Message);
-                Environment.Exit(-7);
+                Environment.Exit(-9);
             }        
 
-            //Step 13: Start execution in a dedicated thread
+            //Step 15: Start execution in a dedicated thread
             DateTime endTime = DateTime.Now.AddSeconds(_timeout);
             Thread t = new Thread(() =>
             {
@@ -349,7 +378,6 @@ namespace CrypTool.CrypConsole
                     }
                 }
 
-                //Step 14: Output if no output was selected
                 if (!_jsonoutput)
                 {
                     foreach (string value in _outputValues)
@@ -367,6 +395,139 @@ namespace CrypTool.CrypConsole
                 Environment.Exit(0);
             });
             t.Start();
+        }
+
+        /// <summary>
+        /// Changes the setting of a CrypTool component to the given value
+        /// </summary>
+        /// <param name="setting"></param>
+        private void ChangeSetting(Setting setting)
+        {
+            bool found = false;
+            foreach (PluginModel component in _workspaceModel.GetAllPluginModels())
+            {
+                if (component.GetName().ToLower().Equals(setting.ComponentName.ToLower()))
+                {
+                    found = true;
+                    ISettings plugin_settings = component.Plugin.Settings;
+                    PropertyInfo property = plugin_settings.GetType().GetProperty(setting.SettingName);
+                    if (property == null)
+                    {
+                        Console.WriteLine("Setting \"{0}\" not found in component \"{1}\"", setting.SettingName, setting.ComponentName);
+                        Environment.Exit(-7);
+                    }
+
+                    //handle case setting is text
+                    if (property.PropertyType.FullName.Equals("System.String"))
+                    {
+                        property.SetValue(plugin_settings, setting.Value);
+                        return;
+                    }
+
+                    //handle case setting is number
+                    if (property.PropertyType.FullName.Equals("System.Int32"))
+                    {
+                        try
+                        {
+                            int value = int.Parse(setting.Value);
+                            property.SetValue(plugin_settings, value);
+                            return;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Exception occured while parsing value \"{0}\" to int: {1}", setting.Value, ex.Message);
+                            Environment.Exit(-7);
+                        }
+                    }
+                   
+                    //handle case setting is long
+                    if (property.PropertyType.FullName.Equals("System.Int64"))
+                    {
+                        try
+                        {
+                            long value = long.Parse(setting.Value);
+                            property.SetValue(plugin_settings, value);
+                            return;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Exception occured while parsing value \"{0}\" to long: {1}", setting.Value, ex.Message);
+                            Environment.Exit(-7);
+                        }
+                    }
+
+                    //handle case setting is float
+                    if (property.PropertyType.FullName.Equals("System.Single"))
+                    {
+                        try
+                        {
+                            float value = float.Parse(setting.Value);
+                            property.SetValue(plugin_settings, value);
+                            return;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Exception occured while parsing value \"{0}\" to float: {1}", setting.Value, ex.Message);
+                            Environment.Exit(-7);
+                        }
+                    }
+
+                    //handle case setting is double
+                    if (property.PropertyType.FullName.Equals("System.Double"))
+                    {
+                        try
+                        {
+                            double value = double.Parse(setting.Value);
+                            property.SetValue(plugin_settings, value);
+                            return;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Exception occured while parsing value \"{0}\" to double: {1}", setting.Value, ex.Message);
+                            Environment.Exit(-7);
+                        }
+                    }
+
+
+                    //handle case setting is bool
+                    if (property.PropertyType.FullName.Equals("System.Boolean"))
+                    {
+                        try
+                        {
+                            bool value = bool.Parse(setting.Value);
+                            property.SetValue(plugin_settings, value);
+                            return;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Exception occured while parsing value \"{0}\" to bool: {1}", setting.Value, ex.Message);
+                            Environment.Exit(-7);
+                        }
+                    }
+                    
+                    //handle case setting is enum
+                    if (property.PropertyType.IsEnum)
+                    {
+                        try
+                        {
+                            object value = Enum.Parse(property.PropertyType, setting.Value);
+                            property.SetValue(plugin_settings, value);
+                            return;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Exception occured while parsing value \"{0}\" to enum: {1}", setting.Value, ex.Message);
+                            Environment.Exit(-7);
+                        }
+                    }
+                }
+            }
+
+            if(!found)
+            {
+                Console.WriteLine("Component \"{0}\" not found", setting.ComponentName);
+                Environment.Exit(-7);
+            }
         }
 
         /// <summary>
@@ -398,6 +559,10 @@ namespace CrypTool.CrypConsole
             DiscoverWorkspaceModel(cwm_file);
         }
 
+        /// <summary>
+        /// Discovers the workspace model and outputs the results to console
+        /// </summary>
+        /// <param name="cwm_file"></param>
         private void DiscoverWorkspaceModel(string cwm_file)
         {
             if (_jsonoutput)
@@ -455,6 +620,14 @@ namespace CrypTool.CrypConsole
                     foreach (TaskPaneAttribute taskPaneAttribute in taskPaneAttributes)
                     {
                         Console.WriteLine("-- \"{0}\" (\"{1}\")", taskPaneAttribute.PropertyName, taskPaneAttribute.PropertyInfo.PropertyType.FullName);
+                        if (taskPaneAttribute.PropertyInfo.PropertyType.IsEnum)
+                        {
+                            Console.WriteLine("--- Possible values:");
+                            foreach (object value in Enum.GetValues(taskPaneAttribute.PropertyInfo.PropertyType))
+                            {
+                                Console.WriteLine("---> \"{0}\"", value.ToString());
+                            }
+                        }
                     }
                 }
                 Console.WriteLine();
