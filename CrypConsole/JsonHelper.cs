@@ -118,12 +118,36 @@ namespace CrypTool.CrypConsole
                 int counter = 0;
                 foreach (TaskPaneAttribute taskPaneAttribute in taskPaneAttributes)
                 {
-                    counter++;
-                    stringBuilder.AppendFormat("{{\"name\":\"{0}\",\"type\":\"{1}\"}}", taskPaneAttribute.PropertyName, taskPaneAttribute.PropertyInfo.PropertyType.FullName);
-                    if (counter < taskPaneAttributes.Length)
+                    //if enum generate possible values
+                    if (taskPaneAttribute.PropertyInfo.PropertyType.IsEnum)
                     {
-                        stringBuilder.Append(",");
+                        stringBuilder.AppendFormat("{{\"name\":\"{0}\",\"type\":\"{1}\",\"values\":[", taskPaneAttribute.PropertyName, taskPaneAttribute.PropertyInfo.PropertyType.FullName);
+                        int enumCounter = 0;
+                        foreach (string enumValue in Enum.GetNames(taskPaneAttribute.PropertyInfo.PropertyType))
+                        {
+                            enumCounter++;
+                            stringBuilder.AppendFormat("{{\"name\":\"{0}\",\"value\":\"{1}\"}}", enumValue, enumValue);
+                            if (enumCounter < Enum.GetNames(taskPaneAttribute.PropertyInfo.PropertyType).Length)
+                            {
+                                stringBuilder.Append(",");
+                            }
+                        }
+                        stringBuilder.AppendFormat("]}}");                        
+                        counter++;
+                        if (counter < taskPaneAttributes.Length)
+                        {
+                            stringBuilder.Append(",");
+                        }
                     }
+                    else
+                    {
+                        counter++;
+                        stringBuilder.AppendFormat("{{\"name\":\"{0}\",\"type\":\"{1}\"}}", taskPaneAttribute.PropertyName, taskPaneAttribute.PropertyInfo.PropertyType.FullName);
+                        if (counter < taskPaneAttributes.Length)
+                        {
+                            stringBuilder.Append(",");
+                        }
+                    }                 
                 }
                 stringBuilder.AppendFormat("]");
             }
