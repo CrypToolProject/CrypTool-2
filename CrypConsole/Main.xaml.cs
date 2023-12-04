@@ -45,14 +45,15 @@ namespace CrypTool.CrypConsole
         private ExecutionEngine _engine = null;
         private int _globalProgress;
         private DateTime _startTime;
-        private readonly object _progressLockObject = new object();
-        private bool _jsonoutput = false;
+        private readonly object _progressLockObject = new object();        
         private NotificationLevel _loglevel = NotificationLevel.Warning;
         private bool _terminate = false;
         private string _cwm_file = null;
         private List<Setting> _settings = null;
         private List<Parameter> _inputParameters = null;
         private List<Parameter> _outputParameters = null;
+
+        public static bool JsonOutput { get; private set; } = false;
 
         /// <summary>
         /// Constructor
@@ -117,7 +118,7 @@ namespace CrypTool.CrypConsole
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception occured while updating AppDomain: {0}", ex.Message);
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while updating AppDomain: {0}", ex.Message), JsonOutput);
                 Environment.Exit(-4);
             }
 
@@ -133,8 +134,8 @@ namespace CrypTool.CrypConsole
                 }
             }
             catch (Exception ex)
-            {
-                Console.WriteLine("Exception occured while loading model from cwm file: {0}", ex.Message);
+            {                
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while loading model from cwm file: {0}", ex.Message), JsonOutput);
                 Environment.Exit(-5);
             }
 
@@ -167,16 +168,16 @@ namespace CrypTool.CrypConsole
                                 try
                                 {
                                     if (!File.Exists(param.Value))
-                                    {
-                                        Console.WriteLine("Input file does not exist: {0}", param.Value);
+                                    {                                        
+                                        JsonHelper.WriteOutput("Exception", string.Format("Input file does not exist: {0}", param.Value), JsonOutput);
                                         Environment.Exit(-7);
                                     }
                                     string value = File.ReadAllText(param.Value);
                                     textProperty.SetValue(plugin_settings, value);
                                 }
                                 catch (Exception ex)
-                                {
-                                    Console.WriteLine("Exception occured while reading file {0}: {0}", param.Value, ex.Message);
+                                {                                    
+                                    JsonHelper.WriteOutput("Exception", string.Format("Exception occured while reading file {0}: {1}", param.Value, ex.Message), JsonOutput);
                                     Environment.Exit(-7);
                                 }
                             }
@@ -203,7 +204,7 @@ namespace CrypTool.CrypConsole
                 }
                 if (!found)
                 {
-                    Console.WriteLine("Component for setting input parameter not found: {0}", param);
+                    JsonHelper.WriteOutput("Exception", string.Format("Component for setting input parameter not found: {0}", param), JsonOutput);
                     Environment.Exit(-7);
                 }
             }
@@ -228,8 +229,8 @@ namespace CrypTool.CrypConsole
                     }
                 }
                 if (!found)
-                {
-                    Console.WriteLine("TextOutput for setting output parameter not found: {0}", param);
+                {                    
+                    JsonHelper.WriteOutput("Exception", string.Format("TextOutput for setting output parameter not found: {0}", param), JsonOutput);
                     Environment.Exit(-8);
                 }
             }
@@ -249,7 +250,7 @@ namespace CrypTool.CrypConsole
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception occured while executing model: {0}", ex.Message);
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while executing model: {0}", ex.Message), JsonOutput);
                 Environment.Exit(-9);
             }        
 
@@ -263,24 +264,26 @@ namespace CrypTool.CrypConsole
                     Thread.Sleep(100);
                     if (_timeout < int.MaxValue && DateTime.Now >= endTime)
                     {
-                        Console.WriteLine("Timeout ({0} seconds) reached. Kill process hard now", _timeout);
+                        JsonHelper.WriteOutput("Message", string.Format("Timeout ({0} seconds) reached. Kill process hard now", _timeout), JsonOutput);
                         Environment.Exit(-8);
                     }
-                }
-
-                if (!_jsonoutput)
-                {
-                    foreach (string value in _outputValues)
-                    {
-                        Console.WriteLine(value);
-                    }
-                }
+                }                          
 
                 _engine.Stop();
-                if (_verbose)
+
+                //Output all output values
+                foreach (string output in _outputValues)
                 {
-                    Console.WriteLine("Execution engine stopped. Terminate now");
-                    Console.WriteLine("Total execution took: {0}", DateTime.Now - _startTime);
+                    if (output != null)
+                    {
+                        JsonHelper.WriteOutput("Output", output, JsonOutput);
+                    }
+                }                
+
+                if (_verbose)
+                {                    
+                    JsonHelper.WriteOutput("Message", "ExecutionEngine stopped.Terminate now", JsonOutput);
+                    JsonHelper.WriteOutput("Message", string.Format("Total execution took: {0}", DateTime.Now - _startTime), JsonOutput);
                 }
                 Environment.Exit(0);
             });
@@ -296,13 +299,13 @@ namespace CrypTool.CrypConsole
             //Step 2: Get cwm_file to open
             _cwm_file = ArgsHelper.GetCWMFileName(args);
             if (_cwm_file == null)
-            {
-                Console.WriteLine("Please specify a cwm file using -cwm=filename");
+            {                
+                JsonHelper.WriteOutput("Exception", "Please specify a cwm file using -cwm=filename", JsonOutput);
                 Environment.Exit(-1);
             }
             if (!File.Exists(_cwm_file))
-            {
-                Console.WriteLine("Specified cwm file \"{0}\" does not exist", _cwm_file);
+            {                
+                JsonHelper.WriteOutput("Exception", string.Format("Specified cwm file \"{0}\" does not exist", _cwm_file), JsonOutput);
                 Environment.Exit(-2);
             }
 
@@ -314,13 +317,13 @@ namespace CrypTool.CrypConsole
                 //check, if timeout <=0
                 if (_timeout <= 0)
                 {
-                    Console.WriteLine("Timeout must be greater than 0");
+                    JsonHelper.WriteOutput("Exception", "Timeout must be greater than 0", JsonOutput);
                     Environment.Exit(-2);
                 }
             }
             catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+            {                
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing timeout: {0}", ex.Message), JsonOutput);
                 Environment.Exit(-2);
             }            
 
@@ -330,16 +333,16 @@ namespace CrypTool.CrypConsole
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing loglevel: {0}", ex.Message), JsonOutput);
                 Environment.Exit(-2);
             }
             try
             {
-                _jsonoutput = ArgsHelper.CheckJsonOutput(args);
+                JsonOutput = ArgsHelper.CheckJsonOutput(args);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing jsonoutput: {0}", ex.Message), JsonOutput);
                 Environment.Exit(-2);
             }
 
@@ -357,19 +360,19 @@ namespace CrypTool.CrypConsole
                 if (_verbose)
                 {
                     foreach (Parameter param in _inputParameters)
-                    {
-                        Console.WriteLine("Input parameter given: " + param);
+                    {                       
+                        JsonHelper.WriteOutput("InputParameter", string.Format("Input parameter given: ", param), JsonOutput);
                     }
                 }
             }
             catch (InvalidParameterException ipex)
             {
-                Console.WriteLine(ipex.Message);
+                JsonHelper.WriteOutput("Exception", ipex.Message, JsonOutput);
                 Environment.Exit(-3);
             }
             catch (Exception ex)
-            {
-                Console.WriteLine("Exception occured while parsing parameters: {0}", ex.Message);
+            {                
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing parameters: {0}", ex.Message), JsonOutput);
                 Environment.Exit(-3);
             }
 
@@ -381,7 +384,7 @@ namespace CrypTool.CrypConsole
                 {
                     foreach (Setting setting in _settings)
                     {
-                        Console.WriteLine("Setting given: " + setting);
+                        JsonHelper.WriteOutput("Setting", string.Format("Setting given: {0}", setting), JsonOutput);
                     }
                 }
             }
@@ -391,8 +394,8 @@ namespace CrypTool.CrypConsole
                 Environment.Exit(-3);
             }
             catch (Exception ex)
-            {
-                Console.WriteLine("Exception occured while parsing settings: {0}", ex.Message);
+            {                
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing settings: {0}", ex.Message), JsonOutput);
                 Environment.Exit(-3);
             }
 
@@ -404,18 +407,18 @@ namespace CrypTool.CrypConsole
                 {
                     foreach (Parameter param in _outputParameters)
                     {
-                        Console.WriteLine("Output parameter given: " + param);
+                        JsonHelper.WriteOutput("OutputParameter", string.Format("Output parameter given: {0}", param), JsonOutput);
                     }
                 }
             }
             catch (InvalidParameterException ipex)
             {
-                Console.WriteLine(ipex.Message);
+                JsonHelper.WriteOutput("Exception", ipex.Message, JsonOutput);
                 Environment.Exit(-3);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception occured while parsing parameters: {0}", ex.Message);
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing parameters: {0}", ex.Message), JsonOutput);
                 Environment.Exit(-3);
             }
         }
@@ -428,7 +431,7 @@ namespace CrypTool.CrypConsole
         {
             if (!File.Exists(jsonfile))
             {
-                Console.WriteLine("Specified json file \"{0}\" does not exist", jsonfile);
+                JsonHelper.WriteOutput("Exception", string.Format("Specified json file \"{0}\" does not exist", jsonfile), JsonOutput);
                 Environment.Exit(-2);
             }
 
@@ -439,14 +442,14 @@ namespace CrypTool.CrypConsole
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception occured while parsing json file: {0}", ex.Message);
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing json file: {0}", ex.Message), JsonOutput);   
                 Environment.Exit(-3);
             }
 
             _verbose = jsonInput.Verbose;
             _timeout = jsonInput.Timeout;
             _loglevel = jsonInput.Loglevel;
-            _jsonoutput = jsonInput.JsonOutput;
+            JsonOutput = jsonInput.JsonOutput;
             _cwm_file = jsonInput.CwmFile;
             _settings = jsonInput.Settings;
             _inputParameters = jsonInput.InputParameters;
@@ -469,7 +472,7 @@ namespace CrypTool.CrypConsole
                     PropertyInfo property = plugin_settings.GetType().GetProperty(setting.SettingName);
                     if (property == null)
                     {
-                        Console.WriteLine("Setting \"{0}\" not found in component \"{1}\"", setting.SettingName, setting.ComponentName);
+                        JsonHelper.WriteOutput("Exception", string.Format("Setting \"{0}\" not found in component \"{1}\"", setting.SettingName, setting.ComponentName), JsonOutput);   
                         Environment.Exit(-7);
                     }
 
@@ -491,7 +494,7 @@ namespace CrypTool.CrypConsole
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine("Exception occured while parsing value \"{0}\" to int: {1}", setting.Value, ex.Message);
+                            JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing value \"{0}\" to int: {1}", setting.Value, ex.Message), JsonOutput); 
                             Environment.Exit(-7);
                         }
                     }
@@ -507,7 +510,7 @@ namespace CrypTool.CrypConsole
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine("Exception occured while parsing value \"{0}\" to long: {1}", setting.Value, ex.Message);
+                            JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing value \"{0}\" to long: {1}", setting.Value, ex.Message), JsonOutput);
                             Environment.Exit(-7);
                         }
                     }
@@ -523,7 +526,7 @@ namespace CrypTool.CrypConsole
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine("Exception occured while parsing value \"{0}\" to float: {1}", setting.Value, ex.Message);
+                            JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing value \"{0}\" to float: {1}", setting.Value, ex.Message), JsonOutput);
                             Environment.Exit(-7);
                         }
                     }
@@ -539,7 +542,8 @@ namespace CrypTool.CrypConsole
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine("Exception occured while parsing value \"{0}\" to double: {1}", setting.Value, ex.Message);
+                            //write using JsonHelper.WriteOutput
+                            JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing value \"{0}\" to double: {1}", setting.Value, ex.Message), JsonOutput);      
                             Environment.Exit(-7);
                         }
                     }
@@ -556,7 +560,7 @@ namespace CrypTool.CrypConsole
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine("Exception occured while parsing value \"{0}\" to bool: {1}", setting.Value, ex.Message);
+                            JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing value \"{0}\" to bool: {1}", setting.Value, ex.Message), JsonOutput);    
                             Environment.Exit(-7);
                         }
                     }
@@ -572,7 +576,7 @@ namespace CrypTool.CrypConsole
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine("Exception occured while parsing value \"{0}\" to enum: {1}", setting.Value, ex.Message);
+                            JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing value \"{0}\" to enum: {1}", setting.Value, ex.Message), JsonOutput);    
                             Environment.Exit(-7);
                         }
                     }
@@ -581,7 +585,7 @@ namespace CrypTool.CrypConsole
 
             if(!found)
             {
-                Console.WriteLine("Component \"{0}\" not found", setting.ComponentName);
+                JsonHelper.WriteOutput("Exception", string.Format("Component \"{0}\" not found", setting.ComponentName), JsonOutput);       
                 Environment.Exit(-7);
             }
         }
@@ -598,7 +602,7 @@ namespace CrypTool.CrypConsole
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception occured while updating AppDomain: {0}", ex.Message);
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while updating AppDomain: {0}", ex.Message), JsonOutput);
                 Environment.Exit(-4);
             }
 
@@ -609,7 +613,7 @@ namespace CrypTool.CrypConsole
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception occured during loading of cwm file: {0}", ex.Message);
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured during loading of cwm file: {0}", ex.Message), JsonOutput);
                 Environment.Exit(0);
             }
             DiscoverWorkspaceModel(cwm_file);
@@ -621,7 +625,7 @@ namespace CrypTool.CrypConsole
         /// <param name="cwm_file"></param>
         private void DiscoverWorkspaceModel(string cwm_file)
         {
-            if (_jsonoutput)
+            if (JsonOutput)
             {
                 Console.Write("{\"components\":[");
             }
@@ -635,7 +639,7 @@ namespace CrypTool.CrypConsole
             foreach (PluginModel pluginModel in allPluginModels)
             {
                 counter++;
-                if (!_jsonoutput)
+                if (!JsonOutput)
                 {
                     Console.WriteLine("\"{0}\" (\"{1}\")", pluginModel.GetName(), pluginModel.Plugin.GetType().FullName);
                 }
@@ -645,7 +649,7 @@ namespace CrypTool.CrypConsole
                 ISettings settings = pluginModel.Plugin.Settings;
                 TaskPaneAttribute[] taskPaneAttributes = settings.GetSettingsProperties(pluginModel.Plugin);
 
-                if (_jsonoutput)
+                if (JsonOutput)
                 {
                     Console.Write("{0}", JsonHelper.GetPluginDiscoveryString(pluginModel, inputs, outputs, taskPaneAttributes));
                     if (counter < allPluginModels.Count)
@@ -688,7 +692,7 @@ namespace CrypTool.CrypConsole
                 }
                 Console.WriteLine();
             }
-            if (_jsonoutput)
+            if (JsonOutput)
             {
                 Console.Write("]}");
             }
@@ -732,11 +736,7 @@ namespace CrypTool.CrypConsole
                     totalProgress += value;
                 }
                 if (!_terminate && totalProgress == numberOfPlugins)
-                {
-                    if (_verbose)
-                    {
-                        Console.WriteLine("Global progress reached 100%, stop execution engine now");
-                    }
+                {                   
                     _terminate = true;
                 }
                 int newProgress = (int)(totalProgress / numberOfPlugins * 100);
@@ -745,11 +745,7 @@ namespace CrypTool.CrypConsole
                     _globalProgress = newProgress;
                     if (_verbose)
                     {
-                        Console.WriteLine("Global progress change: {0}%", _globalProgress);
-                    }
-                    if (_jsonoutput)
-                    {
-                        Console.WriteLine(JsonHelper.GetProgressJson(_globalProgress));
+                        JsonHelper.WriteOutput("Message", string.Format("Progress:{0}", _globalProgress), JsonOutput);
                     }
                 }
             }
@@ -769,18 +765,13 @@ namespace CrypTool.CrypConsole
                 return;
             }
             string output = string.Format("{0}={1}", _pluginNames[plugin], property.GetValue(plugin).ToString());
-            if (_verbose)
+            
+            object value = property.GetValue(plugin);
+            if (value != null && _verbose)
             {
-                Console.WriteLine("Output: {0}", output);
+                JsonHelper.WriteOutput("Output", output, JsonOutput);
             }
-            if (_jsonoutput)
-            {
-                object value = property.GetValue(plugin);
-                if (value != null)
-                {
-                    Console.WriteLine(JsonHelper.GetOutputJsonString(value.ToString(), _pluginNames[plugin]));
-                }
-            }
+            
             _outputValues.Add(output);
         }
 
@@ -796,13 +787,9 @@ namespace CrypTool.CrypConsole
                 return;
             }
             if (_verbose)
-            {
-                Console.WriteLine("GuiLog:{0}:{1}:{2}:{3}", DateTime.Now, args.NotificationLevel, (sender != null ? sender.GetType().Name : "null"), args.Message);
-            }
-            if (_jsonoutput)
-            {
-                Console.WriteLine(JsonHelper.GetLogJsonString(sender, args));
-            }
+            {                
+                JsonHelper.WriteOutput("GuiLog", string.Format("{0}:{1}:{2}", args.NotificationLevel, (sender != null ? sender.GetType().Name : "null"), args.Message), JsonOutput);
+            }            
         }
 
         /// <summary>
@@ -831,7 +818,7 @@ namespace CrypTool.CrypConsole
                     Assembly assembly = Assembly.LoadFrom(assemblyPath);
                     if (_verbose)
                     {
-                        Console.WriteLine("Loaded assembly: " + assemblyPath);
+                        JsonHelper.WriteOutput("Message", string.Format("Loaded assembly:{0}", assemblyPath), JsonOutput);
                     }
                     return assembly;
                 }
@@ -841,7 +828,7 @@ namespace CrypTool.CrypConsole
                     Assembly assembly = Assembly.LoadFrom(assemblyPath);
                     if (_verbose)
                     {
-                        Console.WriteLine("Loaded assembly: " + assemblyPath);
+                        JsonHelper.WriteOutput("Message", string.Format("Loaded assembly:{0}", assemblyPath), JsonOutput);
                     }
                     return assembly;
                 }

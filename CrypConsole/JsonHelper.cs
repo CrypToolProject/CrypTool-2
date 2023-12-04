@@ -51,7 +51,7 @@ namespace CrypTool.CrypConsole
         /// <returns></returns>
         public static string GetOutputJsonString(string output, string name)
         {
-            return string.Format("{{\"output\":{{\"name\":\"{0}\",\"value\":\"{1}\"}}}}", name, EscapeString(output));
+            return string.Format("{{\"name\":\"{0}\",\"value\":\"{1}\"}}", name, EscapeString(output));
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace CrypTool.CrypConsole
                                 jsonInput.Loglevel = NotificationLevel.Error;
                                 break;
                             default:
-                                Console.WriteLine("Error parsing loglevel from json file. Invalid logtype given: {0}", loglevel.GetString().ToLower());
+                                WriteOutput("Error", "Error parsing loglevel from json file. Invalid logtype given: " + loglevel.GetString().ToLower(), Main.JsonOutput);
                                 Environment.Exit(-3);
                                 break;
                         }                        
@@ -332,35 +332,51 @@ namespace CrypTool.CrypConsole
                 }
             }
             catch (Exception ex)
-            {
-                Console.WriteLine("Error parsing json input file: " + ex.Message);
+            {                
+                WriteOutput("Error", "Error parsing json input file: " + ex.Message, Main.JsonOutput);
                 Environment.Exit(-3);
             }
 
             //show error message, if cwm file is not specified
             if (jsonInput.CwmFile == null)
             {
-                Console.WriteLine("Please specify a cwm file using \"cwmfile\":\"C:\\\\Path\\\\To\\\\cwm file\" ");
+                WriteOutput("Error", "Please specify a cwm file using \"cwmfile\":\"C:\\\\Path\\\\To\\\\cwm file\" ", Main.JsonOutput);
                 Environment.Exit(-1);
             }
 
             //show error message, if cwm file does not exist
             if (!File.Exists(jsonInput.CwmFile))
             {
-                Console.WriteLine("Specified cwm file \"{0}\" does not exist", jsonInput.CwmFile);
+                WriteOutput("Error", "Specified cwm file \"" + jsonInput.CwmFile + "\" does not exist", Main.JsonOutput);
                 Environment.Exit(-2);
             }
 
             //check, if timeout <=0
             if (jsonInput.Timeout <= 0)
             {
-                Console.WriteLine("Timeout must be greater than 0");
+                WriteOutput("Error", "Timeout must be greater than 0", Main.JsonOutput);
                 Environment.Exit(-2);
             }
 
             return jsonInput;
         }
         
-            
+        /// <summary>
+        /// Writes the output as standard output, if jsonoutput is false; otherwise as json string
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="output"></param>
+        /// <param name="jsonoutput"></param>
+        public static void WriteOutput(string name, string output, bool jsonoutput)
+        {
+            if (jsonoutput)
+            {
+                Console.WriteLine(GetOutputJsonString(output, name));
+            }
+            else
+            {
+                Console.WriteLine(output);
+            }
+        }
     }
 }
