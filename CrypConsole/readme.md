@@ -31,8 +31,9 @@ When you open a new command prompt and just type "CrypConsole" you should see th
   -setting=name.settingname,value     -> specifies a setting of a component (name) to change to defined value
   -timeout=duration                   -> specifies a timeout in seconds. If timeout is reached, the process is killed
   -jsonoutput                         -> enables the json output
+  -jsoninputfile=path\to\file.json    -> specifies a path to a json file that should be used as input
   -verbose                            -> writes logs etc to the console; for debugging
-  -loglevel=info/debug/warning/error  -> changes the log level; default is "warning"
+  -loglevel=Info/Debug/Warning/Error  -> changes the log level; default is "warning"
 ```
 
 #### Discover a cwm file
@@ -115,6 +116,45 @@ So with
  -setting=Caesar.Action,Decrypt
 ```
 you change the action of the Caesar component to "decrypt".
+
+### Json input file
+
+You may define the complete settings in a json file and provide it using the 
+```
+-jsoninputfile=path\to\file.json
+```
+command line argument. If you do so, all other command line arguments are ignored and only the json input file is used.
+
+An example input json file looks like:
+
+```
+{
+   "verbose":false,
+   "timeout":30,
+   "loglevel":"error",
+   "jsonoutput":true,
+   "cwmfile":"Path\\to\\Caesar.cwm",
+   "inputs":[
+      {
+         "type":"text",
+         "name":"Plaintext",
+         "value":"rovvy gybvn"
+      }
+   ],
+   "outputs":[
+      {
+         "name":"Ciphertext"
+      }
+   ],
+   "settings":[
+      {
+         "component":"Caesar",
+         "setting":"Action",
+         "value":"Decrypt"
+      }
+   ]
+}
+```
 
 ### Some more options
 
