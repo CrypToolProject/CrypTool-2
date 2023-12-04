@@ -49,6 +49,10 @@ namespace CrypTool.CrypConsole
         private bool _jsonoutput = false;
         private NotificationLevel _loglevel = NotificationLevel.Warning;
         private bool _terminate = false;
+        private string _cwm_file = null;
+        private List<Setting> _settings = null;
+        private List<Parameter> _inputParameters = null;
+        private List<Parameter> _outputParameters = null;
 
         /// <summary>
         /// Constructor
@@ -95,127 +99,16 @@ namespace CrypTool.CrypConsole
                 Environment.Exit(0);
             }
 
-            //Step 2: Get cwm_file to open
-            string cwm_file = ArgsHelper.GetCWMFileName(args);
-            if (cwm_file == null)
+            string jsonInput = null;
+            //check, if not jsoninput is given
+            if ((jsonInput = ArgsHelper.GetJsonInput(args)) == null)
             {
-                Console.WriteLine("Please specify a cwm file using -cwm=filename");
-                Environment.Exit(-1);
+                GetArgumentValues(args);
             }
-            if (!File.Exists(cwm_file))
+            else
             {
-                Console.WriteLine("Specified cwm file \"{0}\" does not exist", cwm_file);
-                Environment.Exit(-2);
-            }
-
-            //Step 3: Get additional parameters
-            _verbose = ArgsHelper.CheckVerboseMode(args);
-            try
-            {
-                _timeout = ArgsHelper.GetTimeout(args);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Environment.Exit(-2);
-            }
-            try
-            {
-                _loglevel = ArgsHelper.GetLoglevel(args);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Environment.Exit(-2);
-            }           
-            try
-            {
-                _jsonoutput = ArgsHelper.CheckJsonOutput(args);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Environment.Exit(-2);
-            }
-
-            //Step 4: Check, if discover mode was selected
-            if (ArgsHelper.CheckDiscoverMode(args))
-            {
-                DiscoverCWMFile(cwm_file);
-                Environment.Exit(0);
-            }
-
-            //Step 5: Get input parameters
-            List<Parameter> inputParameters = null;
-            try
-            {
-                inputParameters = ArgsHelper.GetInputParameters(args);
-                if (_verbose)
-                {
-                    foreach (Parameter param in inputParameters)
-                    {
-                        Console.WriteLine("Input parameter given: " + param);
-                    }
-                }
-            }
-            catch (InvalidParameterException ipex)
-            {
-                Console.WriteLine(ipex.Message);
-                Environment.Exit(-3);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception occured while parsing parameters: {0}", ex.Message);
-                Environment.Exit(-3);
-            }
-
-            //Step 6: Get settings
-            List<Setting> settings = null;
-            try
-            {
-                settings = ArgsHelper.GetSettings(args);
-                if (_verbose)
-                {
-                    foreach (Parameter param in inputParameters)
-                    {
-                        Console.WriteLine("Setting given: " + param);
-                    }
-                }
-            }
-            catch (InvalidParameterException ipex)
-            {
-                Console.WriteLine(ipex.Message);
-                Environment.Exit(-3);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception occured while parsing settings: {0}", ex.Message);
-                Environment.Exit(-3);
-            }
-
-            //Step 7: Get output parameters
-            List<Parameter> outputParameters = null;
-            try
-            {
-                outputParameters = ArgsHelper.GetOutputParameters(args);
-                if (_verbose)
-                {
-                    foreach (Parameter param in inputParameters)
-                    {
-                        Console.WriteLine("Output parameter given: " + param);
-                    }
-                }
-            }
-            catch (InvalidParameterException ipex)
-            {
-                Console.WriteLine(ipex.Message);
-                Environment.Exit(-3);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception occured while parsing parameters: {0}", ex.Message);
-                Environment.Exit(-3);
-            }
+                ParseJsonInputFile(jsonInput);
+            }            
 
             //Step 8: Update application domain. This allows loading additional .net assemblies
             try
@@ -232,7 +125,7 @@ namespace CrypTool.CrypConsole
             try
             {
                 ModelPersistance modelPersistance = new ModelPersistance();
-                _workspaceModel = modelPersistance.loadModel(cwm_file, true);
+                _workspaceModel = modelPersistance.loadModel(_cwm_file, true);
 
                 foreach (PluginModel pluginModel in _workspaceModel.GetAllPluginModels())
                 {
@@ -246,7 +139,7 @@ namespace CrypTool.CrypConsole
             }
 
             //Step 10: Set input parameters
-            foreach (Parameter param in inputParameters)
+            foreach (Parameter param in _inputParameters)
             {
                 string name = param.Name;
                 bool found = false;
@@ -316,25 +209,22 @@ namespace CrypTool.CrypConsole
             }
             
             //Step 11: Set settings
-            foreach(Setting setting in settings)
+            foreach(Setting setting in _settings)
             {
                 ChangeSetting(setting);                
             }
 
             //Step 12: Set output parameters
-            foreach (Parameter param in outputParameters)
+            foreach (Parameter param in _outputParameters)
             {
                 string name = param.Name;
                 bool found = false;
                 foreach (PluginModel component in _workspaceModel.GetAllPluginModels())
                 {
-                    if (component.GetName().ToLower().Equals(param.Name.ToLower()))
-                    {
-                        if (component.PluginType.FullName.Equals("TextOutput.TextOutput"))
-                        {
-                            component.Plugin.PropertyChanged += Plugin_PropertyChanged;
-                            found = true;
-                        }
+                    if (component.GetName().ToLower().Equals(param.Name.ToLower()) && component.PluginType.FullName.Equals("TextOutput.TextOutput"))
+                    {                     
+                        component.Plugin.PropertyChanged += Plugin_PropertyChanged;
+                        found = true;                    
                     }
                 }
                 if (!found)
@@ -395,6 +285,172 @@ namespace CrypTool.CrypConsole
                 Environment.Exit(0);
             });
             t.Start();
+        }
+
+        /// <summary>
+        /// Handles the case we have arguments instead of a json file
+        /// </summary>
+        /// <param name="args"></param>
+        private void GetArgumentValues(string[] args)
+        {
+            //Step 2: Get cwm_file to open
+            _cwm_file = ArgsHelper.GetCWMFileName(args);
+            if (_cwm_file == null)
+            {
+                Console.WriteLine("Please specify a cwm file using -cwm=filename");
+                Environment.Exit(-1);
+            }
+            if (!File.Exists(_cwm_file))
+            {
+                Console.WriteLine("Specified cwm file \"{0}\" does not exist", _cwm_file);
+                Environment.Exit(-2);
+            }
+
+            //Step 3: Get additional parameters
+            _verbose = ArgsHelper.CheckVerboseMode(args);
+            try
+            {
+                _timeout = ArgsHelper.GetTimeout(args);
+                //check, if timeout <=0
+                if (_timeout <= 0)
+                {
+                    Console.WriteLine("Timeout must be greater than 0");
+                    Environment.Exit(-2);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Environment.Exit(-2);
+            }            
+
+            try
+            {
+                _loglevel = ArgsHelper.GetLoglevel(args);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Environment.Exit(-2);
+            }
+            try
+            {
+                _jsonoutput = ArgsHelper.CheckJsonOutput(args);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Environment.Exit(-2);
+            }
+
+            //Step 4: Check, if discover mode was selected
+            if (ArgsHelper.CheckDiscoverMode(args))
+            {
+                DiscoverCWMFile(_cwm_file);
+                Environment.Exit(0);
+            }
+
+            //Step 5: Get input parameters
+            try
+            {
+                _inputParameters = ArgsHelper.GetInputParameters(args);
+                if (_verbose)
+                {
+                    foreach (Parameter param in _inputParameters)
+                    {
+                        Console.WriteLine("Input parameter given: " + param);
+                    }
+                }
+            }
+            catch (InvalidParameterException ipex)
+            {
+                Console.WriteLine(ipex.Message);
+                Environment.Exit(-3);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception occured while parsing parameters: {0}", ex.Message);
+                Environment.Exit(-3);
+            }
+
+            //Step 6: Get settings
+            try
+            {
+                _settings = ArgsHelper.GetSettings(args);
+                if (_verbose)
+                {
+                    foreach (Setting setting in _settings)
+                    {
+                        Console.WriteLine("Setting given: " + setting);
+                    }
+                }
+            }
+            catch (InvalidParameterException ipex)
+            {
+                Console.WriteLine(ipex.Message);
+                Environment.Exit(-3);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception occured while parsing settings: {0}", ex.Message);
+                Environment.Exit(-3);
+            }
+
+            //Step 7: Get output parameters
+            try
+            {
+                _outputParameters = ArgsHelper.GetOutputParameters(args);
+                if (_verbose)
+                {
+                    foreach (Parameter param in _outputParameters)
+                    {
+                        Console.WriteLine("Output parameter given: " + param);
+                    }
+                }
+            }
+            catch (InvalidParameterException ipex)
+            {
+                Console.WriteLine(ipex.Message);
+                Environment.Exit(-3);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception occured while parsing parameters: {0}", ex.Message);
+                Environment.Exit(-3);
+            }
+        }
+
+        /// <summary>
+        /// Parses the json file and sets the values defined in the file similiar to GetArgumentValues does with argument values
+        /// </summary>
+        /// <param name="jsonfile"></param>
+        private void ParseJsonInputFile(string jsonfile)
+        {
+            if (!File.Exists(jsonfile))
+            {
+                Console.WriteLine("Specified json file \"{0}\" does not exist", jsonfile);
+                Environment.Exit(-2);
+            }
+
+            JsonInput jsonInput = null;
+            try
+            {
+                jsonInput = JsonHelper.ParseAndValidateJsonInput(jsonfile);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception occured while parsing json file: {0}", ex.Message);
+                Environment.Exit(-3);
+            }
+
+            _verbose = jsonInput.Verbose;
+            _timeout = jsonInput.Timeout;
+            _loglevel = jsonInput.Loglevel;
+            _jsonoutput = jsonInput.JsonOutput;
+            _cwm_file = jsonInput.CwmFile;
+            _settings = jsonInput.Settings;
+            _inputParameters = jsonInput.InputParameters;
+            _outputParameters = jsonInput.OutputParameters;
         }
 
         /// <summary>

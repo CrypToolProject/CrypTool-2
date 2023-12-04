@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2020 Nils Kopal <kopal<AT>CrypTool.org>
+   Copyright 2023 Nils Kopal <kopal<AT>CrypTool.org>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,12 +15,33 @@
 */
 using CrypTool.PluginBase;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Text;
+using System.Threading;
 using WorkspaceManager.Model;
 
 namespace CrypTool.CrypConsole
 {
+    /// <summary>
+    /// Container for values defined in the json input file
+    /// </summary>
+    public class JsonInput
+    {
+        public bool Verbose { get; internal set; }
+        public int Timeout { get; internal set; }
+        public NotificationLevel Loglevel { get; internal set; }
+        public bool JsonOutput { get; internal set; }
+        public string CwmFile { get; internal set; }
+        public List<Setting> Settings { get; internal set; }
+        public List<Parameter> InputParameters { get; internal set; }
+        public List<Parameter> OutputParameters { get; internal set; }
+    }
+
+    /// <summary>
+    /// Helper class for parsing the json input file and generating json output
+    /// </summary>
     public class JsonHelper
     {
         /// <summary>
@@ -155,5 +176,180 @@ namespace CrypTool.CrypConsole
             return stringBuilder.ToString();
         }
 
+        /// <summary>
+        /// Parses the json input file and returns a JsonInput object using System.Text.Json
+        /// Example json input file:
+        /// 
+        /// {
+        ///    "verbose":false,
+        ///    "timeout":10,
+        ///    "loglevel":"Error",
+        ///    "jsonoutput":true,
+        ///    "cwmfile":"C:\\Path\\To\\Caesar.cwm",
+        ///    "inputs":[
+        ///       {
+        ///          "type":"text",
+        ///          "name":"plaintext",
+        ///          "value":"rovvy gybvn"
+        ///       }
+        ///    ],
+        ///    "outputs":[
+        ///       {
+        ///          "name":"Ciphertext"
+        ///       }
+        ///    ],
+        ///    "settings":[
+        ///       {
+        ///          "component":"Caesar",
+        ///          "setting":"Action",
+        ///          "value":"Decrypt"
+        ///       }
+        ///    ]
+        /// }
+        ///  
+        /// </summary>
+        /// <param name="jsonfile"></param>        
+        /// <returns></returns>
+        public static JsonInput ParseAndValidateJsonInput(string jsonfile)
+        {
+            JsonInput jsonInput = new JsonInput();
+            try
+            {
+                using (StreamReader file = File.OpenText(jsonfile))
+                {
+                    string json = file.ReadToEnd();
+                    System.Text.Json.JsonDocument jsonDocument = System.Text.Json.JsonDocument.Parse(json);
+                    
+                    //check, if verbose exists
+                    if (jsonDocument.RootElement.TryGetProperty("verbose", out System.Text.Json.JsonElement verbose))
+                    {
+                        jsonInput.Verbose = verbose.GetBoolean();
+                    }
+                    else
+                    {
+                        jsonInput.Verbose = false;
+                    }
+                    
+                    //check, if timeout exists
+                    if (jsonDocument.RootElement.TryGetProperty("timeout", out System.Text.Json.JsonElement timeout))
+                    {
+                        jsonInput.Timeout = timeout.GetInt32();
+                    }
+                    else
+                    {
+                        jsonInput.Timeout = int.MaxValue;
+                    }
+
+                    //check, if loglevel exists
+                    if (!jsonDocument.RootElement.TryGetProperty("loglevel", out System.Text.Json.JsonElement loglevel))
+                    {
+                        jsonInput.Loglevel = NotificationLevel.Error;
+                    }
+                    else
+                    {
+                        try
+                        {
+                            jsonInput.Loglevel = (NotificationLevel)Enum.Parse(typeof(NotificationLevel), loglevel.GetString());
+                        }catch(Exception ex)
+                        {
+                            Console.WriteLine("Error parsing loglevel from json file: " + ex.Message);
+                            Environment.Exit(-3);
+                        }
+                    }
+
+                    //check, if jsonoutput exists
+                    if (!jsonDocument.RootElement.TryGetProperty("jsonoutput", out System.Text.Json.JsonElement jsonoutput))
+                    {
+                        jsonInput.JsonOutput = false;
+                    }
+                    else
+                    {
+                        jsonInput.JsonOutput = jsonoutput.GetBoolean();
+                    }
+
+                    //check, if cwmfile exists
+                    if (!jsonDocument.RootElement.TryGetProperty("cwmfile", out System.Text.Json.JsonElement cwmfile))
+                    {
+                        jsonInput.CwmFile = null;
+                    }
+                    else
+                    {
+                        jsonInput.CwmFile = cwmfile.GetString();
+                    }
+
+                    //check, if inputs exist
+                    if (!jsonDocument.RootElement.TryGetProperty("inputs", out System.Text.Json.JsonElement inputs))
+                    {
+                        jsonInput.InputParameters = new List<Parameter>();
+                    }
+                    else
+                    {
+                        jsonInput.InputParameters = new List<Parameter>();
+                        foreach (System.Text.Json.JsonElement input in inputs.EnumerateArray())
+                        {
+                            jsonInput.InputParameters.Add(new Parameter(input.GetProperty("type").GetString(), input.GetProperty("name").GetString(), input.GetProperty("value").GetString()));
+                        }
+                    }
+
+                    //check, if outputs exist
+                    if (!jsonDocument.RootElement.TryGetProperty("outputs", out System.Text.Json.JsonElement outputs))
+                    {
+                        jsonInput.OutputParameters = new List<Parameter>();
+                    }
+                    else
+                    {
+                        jsonInput.OutputParameters = new List<Parameter>();
+                        foreach (System.Text.Json.JsonElement output in outputs.EnumerateArray())
+                        {
+                            jsonInput.OutputParameters.Add(new Parameter(ParameterType.Output, output.GetProperty("name").GetString(), "none"));
+                        }
+                    }
+
+                    //check, if settings exist
+                    if (!jsonDocument.RootElement.TryGetProperty("settings", out System.Text.Json.JsonElement settings))
+                    {
+                        jsonInput.Settings = new List<Setting>();
+                    }
+                    else
+                    {
+                        jsonInput.Settings = new List<Setting>();
+                        foreach (System.Text.Json.JsonElement setting in settings.EnumerateArray())
+                        {
+                            jsonInput.Settings.Add(new Setting(setting.GetProperty("component").GetString(), setting.GetProperty("setting").GetString(), setting.GetProperty("value").GetString()));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error parsing json input file: " + ex.Message);
+                Environment.Exit(-3);
+            }
+
+            //show error message, if cwm file is not specified
+            if (jsonInput.CwmFile == null)
+            {
+                Console.WriteLine("Please specify a cwm file using \"cwmfile\":\"C:\\\\Path\\\\To\\\\cwm file\" ");
+                Environment.Exit(-1);
+            }
+
+            //show error message, if cwm file does not exist
+            if (!File.Exists(jsonInput.CwmFile))
+            {
+                Console.WriteLine("Specified cwm file \"{0}\" does not exist", jsonInput.CwmFile);
+                Environment.Exit(-2);
+            }
+
+            //check, if timeout <=0
+            if (jsonInput.Timeout <= 0)
+            {
+                Console.WriteLine("Timeout must be greater than 0");
+                Environment.Exit(-2);
+            }
+
+            return jsonInput;
+        }
+        
+            
     }
 }

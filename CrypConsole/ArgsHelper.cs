@@ -138,7 +138,7 @@ namespace CrypTool.CrypConsole
                 catch (Exception)
                 {
                     throw new InvalidParameterException(string.Format("Invalid timeout found: {0}", p));
-                }
+                }                
             }
             return int.MaxValue;
         }        
@@ -238,12 +238,7 @@ namespace CrypTool.CrypConsole
                     throw new InvalidParameterException(string.Format("Inval input parameter arg type found: {0}", p));
                 }
 
-                Parameter parameter = new Parameter
-                {
-                    ParameterType = parameterType,
-                    Name = split[1],
-                    Value = split[2]
-                };
+                Parameter parameter = new Parameter(parameterType, split[1], split[2]);
                 parameters.Add(parameter);
             }
             return parameters;
@@ -275,12 +270,7 @@ namespace CrypTool.CrypConsole
                     p = p.Substring(0, p.Length - 1);
                 }
 
-                Parameter parameter = new Parameter
-                {
-                    ParameterType = ParameterType.Output,
-                    Value = "none",
-                    Name = p
-                };
+                Parameter parameter = new Parameter(ParameterType.Output, p, "none");                
                 parameters.Add(parameter);
             }
             return parameters;
@@ -309,7 +299,7 @@ namespace CrypTool.CrypConsole
                 }
                 if (p.EndsWith("\""))
                 {
-                    p = p.Substring(0, p.Length - 2);
+                    p = p.Substring(0, p.Length - 1);
                 }
 
                 //1) check, if setting has two arguments
@@ -326,15 +316,38 @@ namespace CrypTool.CrypConsole
                     throw new InvalidParameterException(string.Format("Invalid (first argument has to be \"ComponentName.SettingName\") setting found: {0}", p));
                 }
 
-                Setting setting = new Setting
-                {
-                    ComponentName = split2[0],
-                    SettingName = split2[1],
-                    Value = split[1]
-                };
+                Setting setting = new Setting(split2[0], split2[1], split[1]);
                 settings.Add(setting);
             }
             return settings;
+        }
+
+        /// <summary>
+        /// Checks, if json input is given and returns location of the file
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public static string GetJsonInput(string[] args)
+        {
+            IEnumerable<string> query = from str in args
+                                        where (str.Length >= 14 && str.ToLower().Substring(0, 15).Equals("-jsoninputfile="))
+                                            || (str.Length >= 15 && str.ToLower().Substring(0, 16).Equals("--jsoninputfile="))
+                                        select str;
+
+            if (query.Count() > 0)
+            {
+                string split = query.Last().Split('=')[1];
+                if (split.StartsWith("\""))
+                {
+                    split = split.Substring(1, split.Length - 1);
+                }
+                if (split.EndsWith("\""))
+                {
+                    split = split.Substring(0, split.Length - 1);
+                }
+                return split;
+            }
+            return null;
         }
 
         /// <summary>
@@ -377,6 +390,7 @@ namespace CrypTool.CrypConsole
             Console.WriteLine(" -setting=name.settingname,value     -> specifies a setting of a component (name) to change to defined value");
             Console.WriteLine(" -timeout=duration                   -> specifies a timeout in seconds. If timeout is reached, the process is killed");
             Console.WriteLine(" -jsonoutput                         -> enables the json output");
+            Console.WriteLine(" -jsoninputfile=path\\to\\file.json    -> specifies a path to a json file that should be used as input");
             Console.WriteLine(" -verbose                            -> writes logs etc to the console; for debugging");
             Console.WriteLine(" -loglevel=info/debug/warning/error  -> changes the log level; default is \"warning\"");
         }
@@ -431,6 +445,49 @@ namespace CrypTool.CrypConsole
             get;
             set;
         }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="parameterType"></param>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        public Parameter(ParameterType parameterType, string name, string value)
+        {
+            ParameterType = parameterType;
+            Name = name;
+            Value = value;
+        }
+
+        /// <summary>
+        /// Constructor that takes a string as parameter type
+        /// </summary>
+        /// <param name="parameterType"></param>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <exception cref="InvalidParameterException"></exception>
+        public Parameter(string parameterType, string name, string value)
+        {
+            switch (parameterType.ToLower())
+            {
+                case "number":
+                    ParameterType = ParameterType.Number;
+                    break;
+                case "text":
+                    ParameterType = ParameterType.Text;
+                    break;
+                case "file":
+                    ParameterType = ParameterType.File;
+                    break;
+                case "output":
+                    ParameterType = ParameterType.Output;
+                    break;
+                default:
+                    throw new InvalidParameterException(string.Format("Invalid parameter type given: {0}", parameterType));
+            }
+            Name = name;
+            Value = value;
+        }
     }
 
     /// <summary>
@@ -460,6 +517,19 @@ namespace CrypTool.CrypConsole
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="componentName"></param>
+        /// <param name="settingName"></param>
+        /// <param name="value"></param>
+        public Setting(string componentName, string settingName, string value)
+        {
+            ComponentName = componentName;
+            SettingName = settingName;
+            Value = value;
         }
     }
 }
