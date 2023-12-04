@@ -247,14 +247,25 @@ namespace CrypTool.CrypConsole
                     }
                     else
                     {
-                        try
+                        switch (loglevel.GetString().ToLower())
                         {
-                            jsonInput.Loglevel = (NotificationLevel)Enum.Parse(typeof(NotificationLevel), loglevel.GetString());
-                        }catch(Exception ex)
-                        {
-                            Console.WriteLine("Error parsing loglevel from json file: " + ex.Message);
-                            Environment.Exit(-3);
-                        }
+                            case "debug":
+                                jsonInput.Loglevel = NotificationLevel.Debug;
+                                break;
+                            case "info":
+                                jsonInput.Loglevel = NotificationLevel.Info;
+                                break;
+                            case "warning":
+                                jsonInput.Loglevel = NotificationLevel.Warning;
+                                break;
+                            case "error":
+                                jsonInput.Loglevel = NotificationLevel.Error;
+                                break;
+                            default:
+                                Console.WriteLine("Error parsing loglevel from json file. Invalid logtype given: {0}", loglevel.GetString().ToLower());
+                                Environment.Exit(-3);
+                                break;
+                        }                        
                     }
 
                     //check, if jsonoutput exists
