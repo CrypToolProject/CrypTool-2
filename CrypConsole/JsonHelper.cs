@@ -14,12 +14,13 @@
    limitations under the License.
 */
 using CrypTool.PluginBase;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
-using System.Threading;
 using WorkspaceManager.Model;
 
 namespace CrypTool.CrypConsole
@@ -218,12 +219,13 @@ namespace CrypTool.CrypConsole
                 using (StreamReader file = File.OpenText(jsonfile))
                 {
                     string json = file.ReadToEnd();
-                    System.Text.Json.JsonDocument jsonDocument = System.Text.Json.JsonDocument.Parse(json);
+                    JObject jobject = (JObject)JsonConvert.DeserializeObject(json);
                     
-                    //check, if verbose exists
-                    if (jsonDocument.RootElement.TryGetProperty("verbose", out System.Text.Json.JsonElement verbose))
+                    //check, if verbose exists in inputm then assign it to jsonInput.Verbose
+                    //otherwise assign false to jsonInput.Verbose
+                    if (jobject["verbose"] != null)
                     {
-                        jsonInput.Verbose = verbose.GetBoolean();
+                        jsonInput.Verbose = jobject["verbose"].Value<string>().ToLower() == "true" ? true : false;
                     }
                     else
                     {
@@ -231,23 +233,20 @@ namespace CrypTool.CrypConsole
                     }
                     
                     //check, if timeout exists
-                    if (jsonDocument.RootElement.TryGetProperty("timeout", out System.Text.Json.JsonElement timeout))
+                    if (jobject["timeout"] != null)
                     {
-                        jsonInput.Timeout = timeout.GetInt32();
+                        jsonInput.Timeout = int.Parse(jobject["timeout"].Value<string>());
                     }
                     else
                     {
-                        jsonInput.Timeout = int.MaxValue;
+                        jsonInput.Timeout = 10;
                     }
 
                     //check, if loglevel exists
-                    if (!jsonDocument.RootElement.TryGetProperty("loglevel", out System.Text.Json.JsonElement loglevel))
+                    if (jobject["loglevel"] != null)
                     {
-                        jsonInput.Loglevel = NotificationLevel.Error;
-                    }
-                    else
-                    {
-                        switch (loglevel.GetString().ToLower())
+                        string loglevel = jobject["loglevel"].Value<string>();
+                        switch (loglevel.ToLower())
                         {
                             case "debug":
                                 jsonInput.Loglevel = NotificationLevel.Debug;
@@ -262,71 +261,75 @@ namespace CrypTool.CrypConsole
                                 jsonInput.Loglevel = NotificationLevel.Error;
                                 break;
                             default:
-                                WriteOutput("Error", "Error parsing loglevel from json file. Invalid logtype given: " + loglevel.GetString().ToLower(), Main.JsonOutput);
+                                WriteOutput("Error", "Error parsing loglevel from json file. Invalid logtype given: " + loglevel.ToLower(), Main.JsonOutput);
                                 Environment.Exit(-3);
                                 break;
-                        }                        
+                        }
+                    }
+                    else
+                    {
+                        jsonInput.Loglevel = NotificationLevel.Error;
                     }
 
                     //check, if jsonoutput exists
-                    if (!jsonDocument.RootElement.TryGetProperty("jsonoutput", out System.Text.Json.JsonElement jsonoutput))
+                    if (jobject["jsonoutput"] != null)
+                    {
+                        jsonInput.JsonOutput = jobject["jsonoutput"].Value<string>().ToLower() == "true" ? true : false;
+                    }
+                    else
                     {
                         jsonInput.JsonOutput = false;
                     }
-                    else
-                    {
-                        jsonInput.JsonOutput = jsonoutput.GetBoolean();
-                    }
 
                     //check, if cwmfile exists
-                    if (!jsonDocument.RootElement.TryGetProperty("cwmfile", out System.Text.Json.JsonElement cwmfile))
+                    if (jobject["cwmfile"] != null)
+                    {
+                        jsonInput.CwmFile = jobject["cwmfile"].Value<string>();
+                    }
+                    else
                     {
                         jsonInput.CwmFile = null;
                     }
-                    else
-                    {
-                        jsonInput.CwmFile = cwmfile.GetString();
-                    }
 
                     //check, if inputs exist
-                    if (!jsonDocument.RootElement.TryGetProperty("inputs", out System.Text.Json.JsonElement inputs))
+                    if (jobject["inputs"] == null)
                     {
                         jsonInput.InputParameters = new List<Parameter>();
                     }
                     else
                     {
                         jsonInput.InputParameters = new List<Parameter>();
-                        foreach (System.Text.Json.JsonElement input in inputs.EnumerateArray())
+                        foreach (JToken input in jobject["inputs"].Children())
                         {
-                            jsonInput.InputParameters.Add(new Parameter(input.GetProperty("type").GetString(), input.GetProperty("name").GetString(), input.GetProperty("value").GetString()));
+                            jsonInput.InputParameters.Add(new Parameter(input["type"].Value<string>(), input["name"].Value<string>(), input["value"].Value<string>()));
                         }
                     }
 
                     //check, if outputs exist
-                    if (!jsonDocument.RootElement.TryGetProperty("outputs", out System.Text.Json.JsonElement outputs))
+                    if (jobject["outputs"] == null)
                     {
                         jsonInput.OutputParameters = new List<Parameter>();
                     }
                     else
                     {
                         jsonInput.OutputParameters = new List<Parameter>();
-                        foreach (System.Text.Json.JsonElement output in outputs.EnumerateArray())
+                        foreach (JToken output in jobject["outputs"].Children())
                         {
-                            jsonInput.OutputParameters.Add(new Parameter(ParameterType.Output, output.GetProperty("name").GetString(), "none"));
+                            jsonInput.OutputParameters.Add(new Parameter(ParameterType.Output, output["name"].Value<string>(), "none"));
                         }
                     }
 
                     //check, if settings exist
-                    if (!jsonDocument.RootElement.TryGetProperty("settings", out System.Text.Json.JsonElement settings))
+                    if (jobject["settings"] == null)
                     {
                         jsonInput.Settings = new List<Setting>();
                     }
                     else
                     {
                         jsonInput.Settings = new List<Setting>();
-                        foreach (System.Text.Json.JsonElement setting in settings.EnumerateArray())
+                        foreach (JToken setting in jobject["settings"].Children())
                         {
-                            jsonInput.Settings.Add(new Setting(setting.GetProperty("component").GetString(), setting.GetProperty("setting").GetString(), setting.GetProperty("value").GetString()));
+                            jsonInput.Settings.Add(new Setting(setting["component"].Value<string>(), setting["setting"].Value<string>(), setting["value"].Value<string>()));
                         }
                     }
                 }
