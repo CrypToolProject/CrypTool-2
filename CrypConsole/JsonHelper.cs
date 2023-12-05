@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
-using System.Threading;
+using System.Text.Json;
 using WorkspaceManager.Model;
 
 namespace CrypTool.CrypConsole
@@ -218,7 +218,7 @@ namespace CrypTool.CrypConsole
                 using (StreamReader file = File.OpenText(jsonfile))
                 {
                     string json = file.ReadToEnd();
-                    System.Text.Json.JsonDocument jsonDocument = System.Text.Json.JsonDocument.Parse(json);
+                    JsonDocument jsonDocument = JsonDocument.Parse(json);
                     
                     //check, if verbose exists
                     if (jsonDocument.RootElement.TryGetProperty("verbose", out System.Text.Json.JsonElement verbose))
