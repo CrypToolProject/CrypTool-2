@@ -349,6 +349,157 @@ namespace CrypTool.PluginBase.Miscellaneous
         #endregion
     }
 
+    /// <summary>
+    /// A tokenizer that splits a string into text blocks based on a set of delimiters.
+    /// </summary>
+    public class SymbolTokenizer : IEnumerable<string>
+    {
+        public static IEnumerable<string> tokenize(string input, string delimiters)
+        {
+            return new SymbolTokenizer(input, delimiters);
+        }
+
+        private readonly string input;
+        private readonly string delimiters;
+
+        private SymbolTokenizer(string input, string delimiters)
+        {
+            this.input = input;
+            this.delimiters = delimiters;
+        }
+
+        #region IEnumerable<string> Members
+
+        public IEnumerator<string> GetEnumerator()
+        {
+            return new SymbolEnumerator(input, delimiters);
+        }
+
+        #endregion
+
+        #region IEnumerable Members
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return new SymbolEnumerator(input, delimiters);
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// An enumerator that delivers text blocks based on a set of delimiters.
+    /// </summary>
+    public class SymbolEnumerator : IEnumerator<string>
+    {
+        private readonly string input;
+        private readonly string delimiters;
+
+        private int offset = -1;
+        private string token = null;
+
+        public SymbolEnumerator(string input, string delimiters)
+        {
+            this.input = input;
+            this.delimiters = delimiters;
+        }
+
+        #region IEnumerator<string> Members
+
+        /// <summary>
+        /// According to IEnumerator contract this property throws an exception if Current is not pointing on a valid element.
+        /// </summary>
+        public string Current
+        {
+            get
+            {
+                if (token == null)
+                {
+                    throw new InvalidOperationException("Enumerator does not point on a valid token");
+                };
+
+                return token;
+            }
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+        }
+
+        #endregion
+
+        #region IEnumerator Members
+
+        // explicit implementation of non-generic interface
+        object IEnumerator.Current => Current;
+
+        public bool MoveNext()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            bool foundWord = false;
+            bool feeding = true;
+
+            do
+            {
+                if (++offset >= input.Length) // end of string
+                {
+                    if (foundWord)
+                    {
+                        break; // stop loop gracefully
+                    }
+                    else
+                    {
+                        token = null;
+                        return false; // abort
+                    }
+                }
+
+                if (delimiters.Contains(input[offset]))
+                {
+                    if (foundWord) // found delimiter at the end of a word
+                    {
+                        feeding = false;
+                    }
+                }
+                else // got letter
+                {
+                    foundWord = true;
+                    sb.Append(input[offset]);
+                }
+            } while (feeding);
+
+            token = sb.ToString();
+            return true;
+        }
+
+        public void Reset()
+        {
+            offset = -1;
+            token = null;
+        }
+
+        #endregion
+
+        #region Additional properties
+
+        ///<summary>
+        /// Returns current position in processing input string.
+        /// </summary>
+        public int Position => Math.Max(offset, 0);
+
+        ////<summary>
+        /// Returns length of input string.
+        /// </summary>
+        public int Length => input.Length;
+
+        #endregion
+    }
+
     public class GramEnumerator : IEnumerator<string>
     {
         private readonly string word;

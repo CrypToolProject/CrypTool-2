@@ -285,4 +285,25 @@
   <data name="ShowTotalTooltip" xml:space="preserve">
     <value>If this setting is checked, the total number of n-grams is shown as absolut value.</value>
   </data>
+  <data name="AnalysisModeCaption" xml:space="preserve">
+    <value>Analysis mode</value>
+  </data>
+  <data name="AnalysisModeTooltip" xml:space="preserve">
+    <value>The mode which should be used during analysis</value>
+  </data>
+  <data name="SymbolSeparatorsCaption" xml:space="preserve">
+    <value>Symbol separators</value>
+  </data>
+  <data name="SymbolSeparatorsTooltip" xml:space="preserve">
+    <value>With which symbols should the text be separated</value>
+  </data>
+  <data name="Frequencies" xml:space="preserve">
+    <value> Frequencies</value>
+  </data>
+  <data name="NGrams" xml:space="preserve">
+    <value>NGrams</value>
+  </data>
+  <data name="SymbolSeparated" xml:space="preserve">
+    <value>Symbol-separated</value>
+  </data>
 </root>
