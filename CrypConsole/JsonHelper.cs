@@ -221,7 +221,7 @@ namespace CrypTool.CrypConsole
                     JsonDocument jsonDocument = JsonDocument.Parse(json);
                     
                     //check, if verbose exists
-                    if (jsonDocument.RootElement.TryGetProperty("verbose", out System.Text.Json.JsonElement verbose))
+                    if (jsonDocument.RootElement.TryGetProperty("verbose", out JsonElement verbose))
                     {
                         jsonInput.Verbose = verbose.GetBoolean();
                     }
@@ -231,7 +231,7 @@ namespace CrypTool.CrypConsole
                     }
                     
                     //check, if timeout exists
-                    if (jsonDocument.RootElement.TryGetProperty("timeout", out System.Text.Json.JsonElement timeout))
+                    if (jsonDocument.RootElement.TryGetProperty("timeout", out JsonElement timeout))
                     {
                         jsonInput.Timeout = timeout.GetInt32();
                     }
@@ -241,7 +241,7 @@ namespace CrypTool.CrypConsole
                     }
 
                     //check, if loglevel exists
-                    if (!jsonDocument.RootElement.TryGetProperty("loglevel", out System.Text.Json.JsonElement loglevel))
+                    if (!jsonDocument.RootElement.TryGetProperty("loglevel", out JsonElement loglevel))
                     {
                         jsonInput.Loglevel = NotificationLevel.Error;
                     }
@@ -269,7 +269,7 @@ namespace CrypTool.CrypConsole
                     }
 
                     //check, if jsonoutput exists
-                    if (!jsonDocument.RootElement.TryGetProperty("jsonoutput", out System.Text.Json.JsonElement jsonoutput))
+                    if (!jsonDocument.RootElement.TryGetProperty("jsonoutput", out JsonElement jsonoutput))
                     {
                         jsonInput.JsonOutput = false;
                     }
@@ -279,7 +279,7 @@ namespace CrypTool.CrypConsole
                     }
 
                     //check, if cwmfile exists
-                    if (!jsonDocument.RootElement.TryGetProperty("cwmfile", out System.Text.Json.JsonElement cwmfile))
+                    if (!jsonDocument.RootElement.TryGetProperty("cwmfile", out JsonElement cwmfile))
                     {
                         jsonInput.CwmFile = null;
                     }
@@ -289,42 +289,42 @@ namespace CrypTool.CrypConsole
                     }
 
                     //check, if inputs exist
-                    if (!jsonDocument.RootElement.TryGetProperty("inputs", out System.Text.Json.JsonElement inputs))
+                    if (!jsonDocument.RootElement.TryGetProperty("inputs", out JsonElement inputs))
                     {
                         jsonInput.InputParameters = new List<Parameter>();
                     }
                     else
                     {
                         jsonInput.InputParameters = new List<Parameter>();
-                        foreach (System.Text.Json.JsonElement input in inputs.EnumerateArray())
+                        foreach (JsonElement input in inputs.EnumerateArray())
                         {
                             jsonInput.InputParameters.Add(new Parameter(input.GetProperty("type").GetString(), input.GetProperty("name").GetString(), input.GetProperty("value").GetString()));
                         }
                     }
 
                     //check, if outputs exist
-                    if (!jsonDocument.RootElement.TryGetProperty("outputs", out System.Text.Json.JsonElement outputs))
+                    if (!jsonDocument.RootElement.TryGetProperty("outputs", out JsonElement outputs))
                     {
                         jsonInput.OutputParameters = new List<Parameter>();
                     }
                     else
                     {
                         jsonInput.OutputParameters = new List<Parameter>();
-                        foreach (System.Text.Json.JsonElement output in outputs.EnumerateArray())
+                        foreach (JsonElement output in outputs.EnumerateArray())
                         {
                             jsonInput.OutputParameters.Add(new Parameter(ParameterType.Output, output.GetProperty("name").GetString(), "none"));
                         }
                     }
 
                     //check, if settings exist
-                    if (!jsonDocument.RootElement.TryGetProperty("settings", out System.Text.Json.JsonElement settings))
+                    if (!jsonDocument.RootElement.TryGetProperty("settings", out JsonElement settings))
                     {
                         jsonInput.Settings = new List<Setting>();
                     }
                     else
                     {
                         jsonInput.Settings = new List<Setting>();
-                        foreach (System.Text.Json.JsonElement setting in settings.EnumerateArray())
+                        foreach (JsonElement setting in settings.EnumerateArray())
                         {
                             jsonInput.Settings.Add(new Setting(setting.GetProperty("component").GetString(), setting.GetProperty("setting").GetString(), setting.GetProperty("value").GetString()));
                         }
