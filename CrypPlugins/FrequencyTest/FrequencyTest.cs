@@ -203,6 +203,12 @@ namespace CrypTool.FrequencyTest
         /// <param name="workstring"></param>
         private void ProcessWord(string workstring)
         {
+            if(settings.CaseSensitivity == 0)
+            {
+                workstring = workstring.ToUpper();
+                alphabet = alphabet.ToUpper();
+            }
+
             if (settings.ProcessUnknownSymbols == 0)
             {
                 workstring = StringUtil.StripUnknownSymbols(alphabet + (settings.AnalysisMode == AnalysisMode.SymbolSeparated ? settings.SymbolSeparators : ""), workstring);
