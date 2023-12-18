@@ -49,7 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\BestListResult.cs" />
+    <Compile Include="Common\CommandLine.cs" />
     <Compile Include="Common\CtBestList.cs" />
+    <Compile Include="Common\LimitedConcurrencyLevelTaskScheduler.cs" />
+    <Compile Include="Common\Logger.cs" />
     <Compile Include="Enums\EvalType.cs" />
     <Compile Include="Enums\Flag.cs" />
     <Compile Include="Enums\Language.cs" />
