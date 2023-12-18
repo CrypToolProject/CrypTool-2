@@ -10,7 +10,7 @@
   <title lang="en">M209 Cipher Machine</title>
   <summary lang="en">Usage of the <i>M209</i> cipher machine</summary>
   <description lang="en">This template shows the usage of the <i>M209</i> cipher machine.</description>
-  <keywords>Machine, World War, Rotor</keywords>
+  <keywords>Machine, World War, Rotor, M209, M-209</keywords>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
@@ -64,7 +64,7 @@ The  machine consists of three main elements:
   <title lang="de">M209-Chiffre</title>
   <summary lang="de">Benutzung der <i>M209</i>-Chiffriermaschine</summary>
   <description lang="de">Diese Vorlage zeigt die Benutzung der <i>M209</i>-Chiffriermaschine.</description>
-  <keywords lang="de">Maschine, Weltkrieg</keywords>
+  <keywords lang="de">Maschine, Weltkrieg, M209, M-209</keywords>
   <replacements lang="de">
     <replacement key="$Plaintext$" value="Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />

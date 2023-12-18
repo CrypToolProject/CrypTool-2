@@ -10,7 +10,7 @@
   <title lang="en">Hagelin Machine</title>
   <summary lang="en">Usage of the Hagelin Machine</summary>  
   <description lang="en">Shows the encyption and decryption of text using Hagelin Machine component</description>  
-  <keywords>Hagelin Machine, CX52a, CX52b, CX52c, C52d, CXM, EIRE, M209</keywords>  
+  <keywords>Hagelin Machine, CX52a, CX52b, CX52c, C52d, CXM, EIRE, M209, M-20, M-2099</keywords>  
   <replacements lang="en">
     <replacement key="$plaintext$" value="Plaintext" />
 	<replacement key="$text$" value="TO BE OR NOT TO BE!" />
@@ -39,7 +39,7 @@ More information about the Hagelin Machine models can be found here: https://www
 <title lang="de">Hagelin-Maschine</title>
 <summary lang="de">Benutzung der Hagelin-Maschinen-Komponente</summary>
 <description lang="de">Zeigt die Ver- und Entschlüsselung von Text mit der Hagelin-Maschinen-Komponente</description>
-<keywords lang="de">Hagelin Maschine, CX52a, CX52b, CX52c, C52d, CXM, EIRE, M209</keywords>
+<keywords lang="de">Hagelin Maschine, CX52a, CX52b, CX52c, C52d, CXM, EIRE, M209, M-209</keywords>
 <replacements lang="de">
     <replacement key="$plaintext$" value="Klartext" />
 	<replacement key="$text$" value="SEIN ODER NICHT SEIN!" />

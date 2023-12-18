@@ -7,32 +7,33 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">M209 Key Setup</title>
-  <summary lang="en">Usage of the <i>M209</i> cipher machine</summary>
-  <description lang="en">This template shows how the internal key of the <i>M209</i> cipher machine can be set up.</description>
-  <keywords>Machine, World War, Rotor, internal, key</keywords>
+  <title lang="en">M-209 Key Setup</title>
+  <summary lang="en">Usage of the <i>M-209</i> cipher machine</summary>
+  <description lang="en">This template shows how the internal key of the <i>M-209</i> cipher machine can be set up.</description>
+  <keywords>Machine, World War, Rotor, internal, key, M209, M-209</keywords>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Internal Key$" value="Internal Key" />
     <replacement key="$Internal Key (formatted)$" value="Internal Key (formatted)" />
-    <replacement key="$M209 Decryption$" value="M209 Decryption" />
-    <replacement key="$memo$" value="This template demonstrates how the internal key of the M-209 can be set by entering it on the input &quot;Input internal key&quot; of the M-209 component. The format of the internal key, as seen above, is the following: First the initial rotor position, consisting of 6 letters, then a comma-separated list of the active pins of the rotors, followed by the slider positions for the 27 rods.\line\line In the given example is the initail rotor position F, C, C, K, N, G and the first rotor has the effective pins B, C, E, J, O, P, S, T, U, V, X and Y. The first bar has one lug on position 1 and the other lug on the neutral position. On the last bar, the lugs are on positions 4 and 5." />
+    <replacement key="$M209 Decryption$" value="M-209 Decryption" />
+    <replacement key="$memo$" value="This template demonstrates how the internal key of the M-209 can be set by entering it on the input &quot;Input internal key&quot; of the M-209 component. The format of the internal key, as seen above, is the following: First the initial rotor position, consisting of 6 letters, then a comma-separated list of the active pins of the rotors, followed by the slider positions for the 27 rods.
+\line\line In the given example is the initail rotor position F, C, C, K, N, G and the first rotor has the effective pins B, C, E, J, O, P, S, T, U, V, X and Y. The first bar has one lug on position 1 and the other lug on the neutral position. On the last bar, the lugs are on positions 4 and 5.\line\line Hint: The generation of an internal key overwrites the current settings." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">M209-Chiffre Schlüsseleingabe</title>
-  <summary lang="de">Schlüsseleingabe bei der <i>M209</i>-Chiffriermaschine</summary>
-  <description lang="de">Diese Vorlage zeigt, wie der interne Schlüssel der <i>M209</i>-Chiffriermaschine eingestellt werden kann.</description>
-  <keywords lang="de">Maschine, Weltkrieg, interner, Schlüssel</keywords>
+  <title lang="de">M-209-Chiffre Schlüsseleingabe</title>
+  <summary lang="de">Schlüsseleingabe bei der <i>M-209</i>-Chiffriermaschine</summary>
+  <description lang="de">Diese Vorlage zeigt, wie der interne Schlüssel der <i>M-209</i>-Chiffriermaschine eingestellt werden kann.</description>
+  <keywords lang="de">Maschine, Weltkrieg, interner, Schlüssel,M209, M-209</keywords>
   <replacements lang="de">
     <replacement key="$Plaintext$" value="Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />
     <replacement key="$Internal Key$" value="Interner Schlüssel" />
     <replacement key="$Internal Key (formatted)$" value="Interner Schlüssel (formatiert)" />
-    <replacement key="$M209 Decryption$" value="M209 Entschlüsselung" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert, wie man den internen Schlüssel der M-209 über den Eingang &quot;Eingabe interner Schlüssel&quot; der Komponente setzen kann. Das Format des internen Schlüssels ist, wie oben zu sehen ist, folgender: Zuerst die initiale Rotorposition, bestehend aus 6 Buchstaben, dann eine durch Komma getrennte Liste der aktiven Stifte der Rotoren, gefolgt von den Schieberpositionen für die 27 Stangen.\line\line Im angegebenen Beispiel ist die initiale Rotorposition F, C, C, K, N, G und der erste Rotor hat die aktiven Stifte B, C, E, J, O, P, S, T, U, V, X und Y. Auf der ersten Stange ist ein Schieber auf Position 1 und der andere auf der neutralen Position. Auf der letzten Stange sind die Schieber auf den Positionen 4 und 5." />
+    <replacement key="$M209 Decryption$" value="M-209 Entschlüsselung" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert, wie man den internen Schlüssel der M-209 über den Eingang &quot;Eingabe interner Schlüssel&quot; der Komponente setzen kann. Das Format des internen Schlüssels ist, wie oben zu sehen ist, folgender: Zuerst die initiale Rotorposition, bestehend aus 6 Buchstaben, dann eine durch Komma getrennte Liste der aktiven Stifte der Rotoren, gefolgt von den Schieberpositionen für die 27 Stangen.\line\line Im angegebenen Beispiel ist die initiale Rotorposition F, C, C, K, N, G und der erste Rotor hat die aktiven Stifte B, C, E, J, O, P, S, T, U, V, X und Y. Auf der ersten Stange ist ein Schieber auf Position 1 und der andere auf der neutralen Position. Auf der letzten Stange sind die Schieber auf den Positionen 4 und 5.\line\line Hinweis: Die Erzeugung eines internen Schlüssels überschreibt die aktuellen Einstellungen." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

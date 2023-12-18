@@ -13,7 +13,7 @@
   <keywords>cryptanalysis, Hagelin, cipher, M209, M-209, ciphertext, ciphertext-only</keywords>
   <replacements lang="en">
     <replacement key="$M209Analyzer$" value="Hagelin M-209 Analyzer" />
-    <replacement key="$text$" value = "CLOSELY I AM ARMED THAT IS WELL TO MORROW I SHALL SET TO WORK UPON YOUR CASE I SHALL SEE YOU AT HORSHAM THEN NO YOUR SECRET LIES IN LONDON IT IS THERE THAT I SHALL SEEK IT THEN I SHALL CALL UPON YOU IN A DAY OR IN TWO DAYS WITH NEWS AS TO THE BOX AND THE PAPERS I SHALL TAKE YOUR ADVICE IN EVERY PARTICULAR HE SHOOK HANDS WITH US AND TOOK HIS LEAVE OUTSIDE THE WIND STILL SCREAMED AND THE RAIN SPLASHED AND PATTERED AGAINST THE WINDOWS THIS STRANGE WILD STORY SEEMED TO HAVE COME TO US FROM AMID THE MAD ELEMENTS BLOWN IN UPON US LIKE A SHEET OF SEA WEED IN A GALE AND NOW TO HAVE BEEN REABSORBED BY THEM ONCE MORE SHERLOCK HOLMES SAT FOR SOME TIME IN SILENCE WITH HIS HEAD SUNK FORWARD AND HIS EYES BENT UPON THE RED GLOW OF THE FIRE THEN HE LIT HIS PIPE AND LEANING BACK IN HIS CHAIR HE WATCHED THE BLUE SMOKE RINGS AS THEY CHASED EACH OTHER UP TO THE CEILING I THINK WATSON HE REMARKED AT LAST THAT OF ALL OUR CASES WE HAVE HAD NONE MORE FANTASTIC THAN THIS SAVE PERHAPS THE SIGN OF FOUR WELL YES SAVE PERHAPS THAT AND YET THIS JOHN OPENSHAW SEEMS TO ME TO BE WALKING AMID EVEN GREATER PERILS THAN DID THE SHOLTOS BUT HAVE YOU I ASKED FORMED ANY DEFINITE CONCEPTION AS TO WHAT THESE PERILS ARE THERE CAN BE NO QUESTION AS TO THEIR NATURE HE ANSWERED THEN WHAT ARE THEY WHO IS THIS K K K AND WHY DOES HE PURSUE THIS UNHAPPY FAMILY SHERLOCK HOLMES CLOSED HIS EYES AND PLACED HIS ELBOWS UPON THE ARMS OF HIS CHAIR WITH HIS FINGER TIPS TOGETHER THE IDEAL REASONER HE REMARKED WOULD WHEN HE HAD ONCE BE"/>
+    <replacement key="$text$" value = "ME THANK GOD HE CRIED YOU LL DO COME COME WHAT THEN I ASKED COME MAN COME ONLY THREE MINUTES OR IT WON T BE LEGAL I WAS HALF DRAGGED UP TO THE ALTAR AND BEFORE I KNEW WHERE I WAS I FOUND MYSELF MUMBLING RESPONSES WHICH WERE WHISPERED IN MY EAR AND VOUCHING FOR THINGS OF WHICH I KNEW NOTHING AND GENERALLY ASSISTING IN THE SECURE TYING UP OF IRENE ADLER SPINSTER TO GODFREY NORTON BACHELOR IT WAS ALL DONE IN AN INSTANT AND THERE WAS THE GENTLEMAN THANKING ME ON THE ONE SIDE AND THE LADY ON THE OTHER WHILE THE CLERGYMAN BEAMED ON ME IN FRONT IT WAS THE MOST PREPOSTEROUS POSITION IN WHICH I EVER FOUND MYSELF IN MY LIFE AND IT WAS THE THOUGHT OF IT THAT STARTED ME LAUGHING JUST NOW IT SEEMS THAT THERE HAD BEEN SOME INFORMALITY ABOUT THEIR LICENSE THAT THE CLERGYMAN ABSOLUTELY REFUSED TO MARRY THEM WITHOUT A WITNESS OF SOME SORT AND THAT MY LUCKY APPEARANCE SAVED THE BRIDEGROOM FROM HAVING TO SALLY OUT INTO THE STREETS IN SEARCH OF A BEST MAN THE BRIDE GAVE ME A SOVEREIGN AND I MEAN TO WEAR IT ON MY WATCH CHAIN IN MEMORY OF THE OCCASION THIS IS A VERY UNEXPECTED TURN OF AFFAIRS SAID I AND WHAT THEN WELL I FOUND MY PLANS VERY SERIOUSLY MENACED IT LOOKED AS IF THE PAIR MIGHT TAKE AN IMMEDIATE DEPARTURE AND SO NECESSITATE VERY PROMPT AND ENERGETIC MEASURES ON MY PART AT THE CHURCH DOOR HOWEVER THEY SEPARATED HE DRIVING BACK TO THE TEMPLE AND SHE TO HER OWN HOUSE I SHALL DRIVE OUT IN THE PARK AT FIVE AS USUAL SHE SAID AS SHE LEFT HIM I HEARD NO MORE THEY DROVE AWAY IN DIFFERENT DIRECTIONS AND I WENT OFF TO MAKE MY OWN ARRANGEMENTS WHICH ARE SOME COLD BEEF AND A GLASS OF BEER HE ANSWERED RINGING THE BELL I HAVE BEEN TOO BUSY TO THINK OF FOOD AND I AM LIKELY TO BE BUSIER STILL THIS EVENING BY THE WAY DOCTOR I SHALL WANT YOUR CO OPERATION I SHALL BE DELIGHTED YOU DON T MIND BREAKING THE LAW NOT IN THE LEAST NOR RUNNING A CHANCE OF ARREST NOT IN A GOOD CAUSE OH THE CAUSE IS EXCELLENT THEN I AM YOUR MAN I WAS SURE THAT I MIGHT RELY ON YOU BUT WHAT IS IT YOU WISH WHEN MRS TURNER HAS"/>
     <replacement key="$ciphertext$" value="Ciphertext" />
     <replacement key="$textoutput$" value="Decrypted text" />
 	<replacement key="$plaintext$" value="Plaintext" />
@@ -33,7 +33,7 @@ These instructions include certain defaults to avoid creating keys that are easi
 In a ciphertext-only attack, only the encrypted text is available to the attacker. \line
 The algorithm used here, uses hill climbing and simulated annealing to search for optimal key settings. \line
 These methods are used in a nested hybrid approach, as follows: \line\line
-	{\b Hill Climbing} algorithm for the Lug settings:\line
+	{\b Hill-Climbing}-algorithm for the Lug settings:\line
 	1. A certain number of random keys are created. Each key is evaluated by using the key to decrypt the encrypted text. Based on the relative frequencies of the letters, in the decrypted text, an score value is calculated. \line
 	   The evaluated keys are compared and the best key is used further in the algorithm. \line
 	2. as long as there is no new best key, the following steps are performed: \line
@@ -41,7 +41,7 @@ These methods are used in a nested hybrid approach, as follows: \line\line
 	    Then a simulated annealing algorithm is run on the pin settings, which is described below.
 		For the current lug settings, the best pin settings are searched and the best key is kept.\line
 	 b. If a. did not lead to a better key, major changes are made to the lug settings and then the best pin settings are searched for again (analogous to a.).\line\line
-	{\b Simulated Annealing} algorithm for pin settings:\line
+	{\b Simulated-Annealing} algorithm for pin settings:\line
 	1. Random pin settings are generated:\line
 	2. As long as the temperature is greater than a certain threshold, the temperature is used for following steps, otherwise the temperature is set to 0: \line
 	 a. Various changes are made to the pin settings.\line
@@ -52,46 +52,45 @@ These methods are used in a nested hybrid approach, as follows: \line\line
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">Ciphertext-Only Angriff gegen die Hagelin M-209 </title>
-  <summary lang="de">Diese Vorlage zeigt einen Ciphertext-Only Angriff gegen die Hagelin M-209.</summary>
-  <description lang="de">Diese Vorlage zeigt einen Ciphertext-Only Angriff gegen die Hagelin M-209.</description>
+  <title lang="de">Ciphertext-only-Angriff gegen die Hagelin M-209 </title>
+  <summary lang="de">Diese Vorlage zeigt einen Ciphertext-only-Angriff gegen die Hagelin M-209.</summary>
+  <description lang="de">Diese Vorlage zeigt einen Ciphertext-only-Angriff gegen die Hagelin M-209.</description>
   <keywords>Kryptoanalyse, Hagelin, cipher, M209, M-209, ciphertext, ciphertext-only</keywords>
   <replacements lang="de">
     <replacement key="$M209Analyzer$" value="Hagelin M-209 Analysator" />
-    <replacement key="$text$" value = "CLOSELY I AM ARMED THAT IS WELL TO MORROW I SHALL SET TO WORK UPON YOUR CASE I SHALL SEE YOU AT HORSHAM THEN NO YOUR SECRET LIES IN LONDON IT IS THERE THAT I SHALL SEEK IT THEN I SHALL CALL UPON YOU IN A DAY OR IN TWO DAYS WITH NEWS AS TO THE BOX AND THE PAPERS I SHALL TAKE YOUR ADVICE IN EVERY PARTICULAR HE SHOOK HANDS WITH US AND TOOK HIS LEAVE OUTSIDE THE WIND STILL SCREAMED AND THE RAIN SPLASHED AND PATTERED AGAINST THE WINDOWS THIS STRANGE WILD STORY SEEMED TO HAVE COME TO US FROM AMID THE MAD ELEMENTS BLOWN IN UPON US LIKE A SHEET OF SEA WEED IN A GALE AND NOW TO HAVE BEEN REABSORBED BY THEM ONCE MORE SHERLOCK HOLMES SAT FOR SOME TIME IN SILENCE WITH HIS HEAD SUNK FORWARD AND HIS EYES BENT UPON THE RED GLOW OF THE FIRE THEN HE LIT HIS PIPE AND LEANING BACK IN HIS CHAIR HE WATCHED THE BLUE SMOKE RINGS AS THEY CHASED EACH OTHER UP TO THE CEILING I THINK WATSON HE REMARKED AT LAST THAT OF ALL OUR CASES WE HAVE HAD NONE MORE FANTASTIC THAN THIS SAVE PERHAPS THE SIGN OF FOUR WELL YES SAVE PERHAPS THAT AND YET THIS JOHN OPENSHAW SEEMS TO ME TO BE WALKING AMID EVEN GREATER PERILS THAN DID THE SHOLTOS BUT HAVE YOU I ASKED FORMED ANY DEFINITE CONCEPTION AS TO WHAT THESE PERILS ARE THERE CAN BE NO QUESTION AS TO THEIR NATURE HE ANSWERED THEN WHAT ARE THEY WHO IS THIS K K K AND WHY DOES HE PURSUE THIS UNHAPPY FAMILY SHERLOCK HOLMES CLOSED HIS EYES AND PLACED HIS ELBOWS UPON THE ARMS OF HIS CHAIR WITH HIS FINGER TIPS TOGETHER THE IDEAL REASONER HE REMARKED WOULD WHEN HE HAD ONCE BE"/>
+    <replacement key="$text$" value = "ME THANK GOD HE CRIED YOU LL DO COME COME WHAT THEN I ASKED COME MAN COME ONLY THREE MINUTES OR IT WON T BE LEGAL I WAS HALF DRAGGED UP TO THE ALTAR AND BEFORE I KNEW WHERE I WAS I FOUND MYSELF MUMBLING RESPONSES WHICH WERE WHISPERED IN MY EAR AND VOUCHING FOR THINGS OF WHICH I KNEW NOTHING AND GENERALLY ASSISTING IN THE SECURE TYING UP OF IRENE ADLER SPINSTER TO GODFREY NORTON BACHELOR IT WAS ALL DONE IN AN INSTANT AND THERE WAS THE GENTLEMAN THANKING ME ON THE ONE SIDE AND THE LADY ON THE OTHER WHILE THE CLERGYMAN BEAMED ON ME IN FRONT IT WAS THE MOST PREPOSTEROUS POSITION IN WHICH I EVER FOUND MYSELF IN MY LIFE AND IT WAS THE THOUGHT OF IT THAT STARTED ME LAUGHING JUST NOW IT SEEMS THAT THERE HAD BEEN SOME INFORMALITY ABOUT THEIR LICENSE THAT THE CLERGYMAN ABSOLUTELY REFUSED TO MARRY THEM WITHOUT A WITNESS OF SOME SORT AND THAT MY LUCKY APPEARANCE SAVED THE BRIDEGROOM FROM HAVING TO SALLY OUT INTO THE STREETS IN SEARCH OF A BEST MAN THE BRIDE GAVE ME A SOVEREIGN AND I MEAN TO WEAR IT ON MY WATCH CHAIN IN MEMORY OF THE OCCASION THIS IS A VERY UNEXPECTED TURN OF AFFAIRS SAID I AND WHAT THEN WELL I FOUND MY PLANS VERY SERIOUSLY MENACED IT LOOKED AS IF THE PAIR MIGHT TAKE AN IMMEDIATE DEPARTURE AND SO NECESSITATE VERY PROMPT AND ENERGETIC MEASURES ON MY PART AT THE CHURCH DOOR HOWEVER THEY SEPARATED HE DRIVING BACK TO THE TEMPLE AND SHE TO HER OWN HOUSE I SHALL DRIVE OUT IN THE PARK AT FIVE AS USUAL SHE SAID AS SHE LEFT HIM I HEARD NO MORE THEY DROVE AWAY IN DIFFERENT DIRECTIONS AND I WENT OFF TO MAKE MY OWN ARRANGEMENTS WHICH ARE SOME COLD BEEF AND A GLASS OF BEER HE ANSWERED RINGING THE BELL I HAVE BEEN TOO BUSY TO THINK OF FOOD AND I AM LIKELY TO BE BUSIER STILL THIS EVENING BY THE WAY DOCTOR I SHALL WANT YOUR CO OPERATION I SHALL BE DELIGHTED YOU DON T MIND BREAKING THE LAW NOT IN THE LEAST NOR RUNNING A CHANCE OF ARREST NOT IN A GOOD CAUSE OH THE CAUSE IS EXCELLENT THEN I AM YOUR MAN I WAS SURE THAT I MIGHT RELY ON YOU BUT WHAT IS IT YOU WISH WHEN MRS TURNER HAS"/>
     <replacement key="$ciphertext$" value="Verschlüsselter Text" />
 	<replacement key="$plaintext$" value="Klartext" />
     <replacement key="$textoutput$" value="Entschlüsselter Text" />
 	<replacement key="$key$" value="Schlüssel" />
-    <replacement key="$memo$" value="
-Die Hagelin M-209 ist eine tragbare Rotor-Chiffriermaschine, die hauptsächlich während des Zweiten Weltkriegs, aber noch bis zum Korea Krieg, vom US-Militär eingesetzt wurde.\line
+    <replacement key="$memo$" value="Die Hagelin M-209 ist eine tragbare Rotor-Chiffriermaschine, die hauptsächlich während des Zweiten Weltkriegs, aber noch bis zum Koreakrieg, vom US-Militär eingesetzt wurde.\line
 Sie ist sehr kompakt und handlich, zudem vollständig analog und hat einen größeren Schlüsselraum als die Enigma, die von den Deutschen im zweiten Weltkrieg verwendet wurde.
 \line
 \line
-Um verschlüsselten Text für den Angriff zu erhalten, kann man die M-209 Komponente verwenden. \line
-Zu beachten ist, dass der vorliegende Angriff annimmt, dass sich beim Verschlüsseln an eine der bekannten Anleitungen für die Schlüsseleinstellungen gehalten wurde. \line
+Um verschlüsselten Text für den Angriff zu erhalten, wird hier die Komponente M-209 verwendet. \line
+Zu beachten ist, dass der vorliegende Angriff annimmt, dass man sich beim Verschlüsseln an eine der bekannten Anleitungen für die Schlüsseleinstellungen hielt. \line
 Diese Anleitungen beinhalten bestimmte Vorgaben, um keine leicht zu knackenden Schlüssel zu erzeugen. Folgende Anleitungen sind bekannt: \line \line
-- TM 11-380 27.April 1942 (https://maritime.org/tech/csp1500inst.php) \line
+- TM 11-380 27. April 1942 (https://maritime.org/tech/csp1500inst.php) \line
 - TM 11-380B 20.September 1943 (http://www.jfbouch.fr/crypto/m209/TM_11-380B_20Sep1943.pdf) \line
 - TM 11-380 17.März 1944 (http://www.jfbouch.fr/crypto/m209/manual.html) \line
 - TM 11-380 Mai 1947 \line
 \line
-Bei einem Ciphertext-Only Angriff, steht dem Angreifer nur der verschlüsselte Text zur Verfügung. \line
-Der hier verwendete Algorithmus, nutzt Hillclimbing und Simulated Annealing um nach optimalen Schlüsseleinstellungen zu suchen. \line
+Bei einem Ciphertext-only-Angriff steht dem Angreifer nur der verschlüsselte Text zur Verfügung. \line
+Der hier verwendete Algorithmus, nutzt Hill-Climbing und Simulated-Annealing um nach optimalen Schlüsseleinstellungen zu suchen. \line
 Diese Methoden werden in einem verschachteltem Hybrid-Ansatz, wie folgt, verwendet: \line \line
-	{\b Hill Climbing} Algorithmus für die Lug Einstellungen:\line
+	{\b Hill-Climbing}-Algorithmus für die Schieber (Lug) Einstellungen:\line
 	1. Es wird eine bestimmte Anzahl an zufälligen Schlüsseln erstellt. Jeder Schlüssel wird ausgewertet, indem man mit dem Schlüssel den verschlüsselten Text entschlüsselt. Anhand der relativen Häufigkeiten der Buchstaben, im entschlüsselten Text, wird ein Bewertungswert berechnet. \line
 	   Die bewerteten Schlüssel werden verglichen und der beste Schlüssel wird weiter im Algorithmus verwendet. \line
 	2. Solange es keinen neuen besten Schlüssel gibt, werden folgende Schritte durchgeführt: \line
-     a. Es werden kleine Änderungen an Lug Einstellungen gemacht (2 Einstellungen verändert). \line
-	    Anschließend wird ein Simulated Annealing Algorithmus auf den Pin Einstellungen ausgeführt, der weiter unten beschreiben ist.
-		Es werden zu den aktuellen Lug Einstellungen, die besten Pin Einstellungen gesucht und der beste Schlüssel wir behalten.\line
-	 b. Wenn a. zu keinem besseren Schlüssel beführt hat, werden größere Veränderungen an den Lug Einstellungen gemacht und anschließend wieder nach den besten Pin Einstellungen gesucht (analog zu a.).\line\line
-	{\b Simulated Annealing} Algorithmus für die Pin Einstellungen:\line
-	1. Es werden zufällige Pin Einstellungen generiert.\line
+     a. Es werden kleine Änderungen an Schiebereinstellungen gemacht (2 Einstellungen verändert). \line
+	    Anschließend wird ein Simulated-Annealing-Algorithmus auf den Stift (Pin) Einstellungen ausgeführt, der weiter unten beschreiben ist.
+		Es werden zu den aktuellen Schieber-Einstellungen, die besten Stifteinstellungen gesucht und der beste Schlüssel wir behalten.\line
+	 b. Wenn a. zu keinem besseren Schlüssel geführt hat, werden größere Veränderungen an den Schiebereinstellungen gemacht und anschließend wieder nach den besten Stifteinstellungen gesucht (analog zu a.).\line\line
+	{\b Simulated-Annealing}-Algorithmus für die Stifteinstellungen:\line
+	1. Es werden zufällige Stifteinstellungen generiert.\line
 	2. Solange die Temperatur größer als ein bestimmter Grenzwert ist, wird die Temperatur für folgende Schritte verwendet, ansonsten wird die Temperatur auf 0 gesetzt: \line
-	 a. Es werden verschiedene Änderungen an den Pin Einstellungen vorgenommen\line
-	    z.B. 1 Pin wird geflippt, alle Pins werden invertiert, 2 Pins an einem, oder an zwei unterschiedlichen Rotoren werden geflippt.\line
+	 a. Es werden verschiedene Änderungen an den Stifteinstellungen vorgenommen\line
+	    z.B. 1 Stift wird geflippt, alle Stifte werden invertiert, 2 Stifte an einem, oder an zwei unterschiedlichen Rotoren werden geflippt.\line
 	 b. Der so erhaltene Schlüssel wird ausgewertet.\line
 	 c. Abhängig vom Wert und von der Temperatur, wird entschieden, ob der Schlüssel ein neuer bester Schlüssel ist.\line
 
