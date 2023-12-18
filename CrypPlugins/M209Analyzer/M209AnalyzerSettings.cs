@@ -55,7 +55,7 @@ namespace CrypTool.Plugins.M209Analyzer
         /// HOWTO: This is an example for a setting entity shown in the settings pane on the right of the CT2 main window.
         /// This example setting uses a number field input, but there are many more input types available, see ControlType enumeration.
         /// </summary>
-        [TaskPane("AttackMode", "AttackModeCaption", "GeneralCaption", 0, false, ControlType.ComboBox, new string[] { "CiphertextOnly", "KnownPlaintext" })]
+        [TaskPane("AttackMode", "AttackModeCaption", "GeneralCaption", 0, false, ControlType.ComboBox, new string[] { "Ciphertext-only", "Known-plaintext" })]
         public AttackMode AttackMode
         {
             get

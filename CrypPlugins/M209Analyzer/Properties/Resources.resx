@@ -133,7 +133,7 @@
     <value>Ciphertext</value>
   </data>
   <data name="CiphertextTooltip" xml:space="preserve">
-    <value>Ciphertext only</value>
+    <value>Ciphertext-only</value>
   </data>
   <data name="CoresUsedCaption" xml:space="preserve">
     <value>Cores used</value>
@@ -167,6 +167,9 @@
   </data>
   <data name="KeyLabel" xml:space="preserve">
     <value>Key</value>
+  </data>
+  <data name="KeysPerMilisec" xml:space="preserve">
+    <value>keys/ms</value>
   </data>
   <data name="KeyTooltip" xml:space="preserve">
     <value>Key of the M-209</value>

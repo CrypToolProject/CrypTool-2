@@ -106,7 +106,7 @@ namespace CrypTool.Plugins.M209Analyzer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ciphertext only.
+        ///   Looks up a localized string similar to Ciphertext-only.
         /// </summary>
         internal static string CiphertextTooltip {
             get {
@@ -210,6 +210,15 @@ namespace CrypTool.Plugins.M209Analyzer.Properties {
         internal static string KeyLabel {
             get {
                 return ResourceManager.GetString("KeyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to keys/ms.
+        /// </summary>
+        internal static string KeysPerMilisec {
+            get {
+                return ResourceManager.GetString("KeysPerMilisec", resourceCulture);
             }
         }
         
