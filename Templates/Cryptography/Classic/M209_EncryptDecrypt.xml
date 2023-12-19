@@ -7,110 +7,77 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">M209 Cipher Machine</title>
-  <summary lang="en">Usage of the <i>M209</i> cipher machine</summary>
-  <description lang="en">This template shows the usage of the <i>M209</i> cipher machine.</description>
-  <keywords>Machine, World War, Rotor</keywords>
+  <title lang="en">M-209 Cipher Machine</title>
+  <summary lang="en">Usage of the <i>M-209</i> cipher machine</summary>
+  <description lang="en">This template shows the usage of the <i>M-209</i> cipher machine.</description>
+  <keywords>Machine, World War, Rotor, M209</keywords>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Decrypted Ciphertext$" value="Decrypted Ciphertext" />
-    <replacement key="$M209 Encrypt$" value="M209 Encrypt" />
-    <replacement key="$M209 Decrypt$" value="M209 Decrypt" />
-    <replacement key="$message$" value="Hello World" />
-	<replacement key="$memo$" value="
-The Hagelin M-209 is a portable rotor cipher machine that was used by the U.S. military mainly during World War II, but as late as the Korean War.
+    <replacement key="$M209 Encrypt$" value="M-209 Encrypt" />
+    <replacement key="$M209 Decrypt$" value="M-209 Decrypt" />
+    <replacement key="$message$" value="Hello World, this is a test of the M-209 component." />
+    <replacement key="$Internal Key$" value="Internal Key" />
+	<replacement key="$memo$" value="The {\b Hagelin M-209} is a portable rotor encryption machine that was used by the U.S. military mainly during World War II, but as late as the Korean War.
 Very compact and handy, it is also completely analog and has a larger key space than the Enigma used by the Germans in World War II.
 \line\line
-The  machine consists of three main elements:
+The machine consists of three main elements:
 \line\line
-- The rotating cage, consists of 27 bars. There are two sliders, so called lugs on each bar.\line
-  There are 8 positions for the lugs: two 0 positions, where the lugs have no effect, and positions 1-6.\line
+(1) The rotating cage, consists of 27 bars. There are two sliders, so called lugs on each bar. There are 8 positions for the lugs: two 0 positions, where the lugs have no effect, and positions 1-6.\line
 \line
-- 6 wheels, each with it own alphabet:\line
-	| Wheel No. 1  | 26 Letters  | ABCDEFGHIJKLMNOPQRSTUVWXYZ \line
-	| Wheel No. 2  | 25 Letters  | ABCDEFGHIJKLMNOPQRSTUVXYZ \line
-	| Wheel No. 3  | 23 Letters  | ABCDEFGHIJKLMNOPQRSTUVX \line
-	| Wheel No. 4  | 21 Letters  | ABCDEFGHIJKLMNOPQRSTU \line
-	| Wheel No. 5  | 19 Letters  | ABCDEFGHIJKLMNOPQRS \line
-	| Wheel No. 6  | 17 Letters  | ABCDEFGHIJKLMNOPQ \line
-  \line
-  Each letter has a pin that can be switched either active or inactive.\line
-  The pin settings are often represented by the letters having active pins.\line
-  After each coded letter, the wheels rotate one letter further.\line
-  The key also includes the start position of the wheels, e.g. 'AAAAAA'\line
-  The fact that the number of letters is not divisor-specific means that the wheels only have the same position after\line 
-  26x25x23x21x19x17 = 101,405,850 encrypted letters.\line
-  \line
-- The coding mechanism, which is a Beaufort cipher, i.e. a substitution cipher that reverses the letters.\line
-  'A' becomes 'Z', 'B' becomes 'Y', etc. The advantage of this is that decryption and encryption are the same.\line
-  \line
-  \line
-  How the Hagelin M-209 works is as follows: \line
-  The cage rotates once, engaging the bars where a lug hits an active pin.\line
-  If, for example, a lug is in position 2 and the second wheel has a letter with an active pin, the bar is engaged.\line
-  Each indented bar causes the displacement to be increased. \line
-  The encryption can also be represented by the following formula: C[i] = (Z - P[i] + D[i]) mod 26.\line
-  (C is CiphertextLetter, P is PlaintextLetter, D is Displacement and Z is the letter Z)\line
-  (During encryption, Letters are represented by their numerical value, i.e. A=1, B=2, etc.)\line
-  \line
-  \line
-  To enter the key via the text field, you can take a look at the M209 Key Setup template.
-	" />
+(2) The six wheels, each with its own alphabet:\line
+	| Wheel No. 1  | 26 letters  | ABCDEFGHIJKLMNOPQRSTUVWXYZ \line
+	| Wheel No. 2  | 25 letters  | ABCDEFGHIJKLMNOPQRSTUVXYZ \line
+	| Wheel No. 3  | 23 letters  | ABCDEFGHIJKLMNOPQRSTUVX \line
+	| Wheel No. 4  | 21 letters  | ABCDEFGHIJKLMNOPQRSTU \line
+	| Wheel No. 5  | 19 letters  | ABCDEFGHIJKLMNOPQRS \line
+	| Wheel No. 6  | 17 letters  | ABCDEFGHIJKLMNOPQ \line
+\line
+Each letter has a pin that can be switched either active or inactive. The pin settings are often represented by the letters having active pins. After processing a letter, the wheels rotate one letter further. The key also includes the start position of the wheels, e.g. 'AAAAAA'. The fact that the number of letters is not divisor-specific means that the wheels only have the same position after a period of 26x25x23x21x19x17 = 101,405,850 processed letters.\line
+\line
+(3) The coding mechanism, which is a Beaufort cipher, i.e. a substitution cipher that reverses the letters. 'A' becomes 'Z', 'B' becomes 'Y', etc. The advantage of this is that decryption and encryption are the same.\line  
+\line
+How the Hagelin M-209 works is as follows: The cage rotates once, engaging the bars where a lug hits an active pin. If, for example, a lug is in position 2 and the second wheel has a letter with an active pin, the bar is engaged. Each indented bar causes the displacement to be increased. The encryption can also be represented by the following formula: C[i] = (Z - P[i] + D[i]) mod 26. (C is a ciphertext letter, P is a plaintext letter, D is the displacement value, and Z is the numerical value of the letter Z (=26)). (During operation of the machine, letters are represented by their numerical value, i.e. A=1, B=2, etc.).\line
+\line
+To enter the key via the text field, you can take a look at the M-209 Key Setup template." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">M209-Chiffre</title>
-  <summary lang="de">Benutzung der <i>M209</i>-Chiffriermaschine</summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>M209</i>-Chiffriermaschine.</description>
-  <keywords lang="de">Maschine, Weltkrieg</keywords>
+  <title lang="de">M-209-Chiffre</title>
+  <summary lang="de">Benutzung der <i>M-209</i>-Chiffriermaschine</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>M-209</i>-Chiffriermaschine.</description>
+  <keywords lang="de">Maschine, Weltkrieg, M209</keywords>
   <replacements lang="de">
     <replacement key="$Plaintext$" value="Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />
     <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
-    <replacement key="$M209 Encrypt$" value="M209 Verschlüsselung" />
-    <replacement key="$M209 Decrypt$" value="M209 Entschlüsselung" />
-    <replacement key="$message$" value="Hallo Welt" />
-	<replacement key="$memo$" value="
-Die Hagelin M-209 ist eine tragbare Rotor-Chiffriermaschine, die hauptsächlich während des Zweiten Weltkriegs, aber noch bis zum Korea Krieg, vom US-Militär eingesetzt wurde.\line
-Sie ist sehr kompakt und handlich, zudem vollständig analog und hat einen größeren Schlüsselraum als die Enigma, die von den Deutschen im zweiten Weltkrieg verwendet wurde.\line
+    <replacement key="$M209 Encrypt$" value="M-209 Verschlüsselung" />
+    <replacement key="$M209 Decrypt$" value="M-209 Entschlüsselung" />
+    <replacement key="$message$" value="Hallo Welt, das ist ein Test der M-209-Komponente." />
+    <replacement key="$Internal Key$" value="Interner Schlüssel" />
+	<replacement key="$memo$" value="Die {\b Hagelin M-209} ist eine tragbare Rotor-Chiffriermaschine, die hauptsächlich während des Zweiten Weltkriegs, aber noch bis zum Korea Krieg, vom US-Militär eingesetzt wurde. Sie ist sehr kompakt und handlich, zudem vollständig analog und hat einen größeren Schlüsselraum als die Enigma, die von den Deutschen im zweiten Weltkrieg verwendet wurde.\line
 \line
 Die Hagelin M-209 besteht aus 3 Teilen:\line
 \line
-- Die Trommel, oder auch Käfig genannt, besteht aus 27 Stangen. An jeder Stange befinden sich zwei Schieber (im englischen 'Lugs' genannt).\line
-  Es gibt 8 Positionen für die Schieber: zwei 0 Positionen, wo die Schieber keine Wirkung haben und Positionen 1-6.\line
+(1) Die Trommel, oder auch Käfig genannt, besteht aus 27 Stangen. An jeder Stange befinden sich zwei Schieber (im englischen 'Lugs' genannt). Es gibt 8 Positionen für die Schieber: zwei 0 Positionen, wo die Schieber keine Wirkung haben und Positionen 1-6.\line
 \line
-- 6 Rotoren mit jeweils einem eigenen Alphabet:\line
+(2) Die sechs Rotoren mit jeweils einem eigenen Alphabet:\line
 	| Rotor Nr. 1  | 26 Buchstaben  | ABCDEFGHIJKLMNOPQRSTUVWXYZ \line
 	| Rotor Nr. 2  | 25 Buchstaben  | ABCDEFGHIJKLMNOPQRSTUVXYZ \line
 	| Rotor Nr. 3  | 23 Buchstaben  | ABCDEFGHIJKLMNOPQRSTUVX \line
 	| Rotor Nr. 4  | 21 Buchstaben  | ABCDEFGHIJKLMNOPQRSTU \line
 	| Rotor Nr. 5  | 19 Buchstaben  | ABCDEFGHIJKLMNOPQRS \line
 	| Rotor Nr. 6  | 17 Buchstaben  | ABCDEFGHIJKLMNOPQ \line
-	\line
-  An jedem Buchstaben befindet sich ein Pin, der entweder aktiv oder inaktiv geschaltet werden kann.\line
-  Die Pin-Einstellungen werden oft so dargestellt, dass nur die Buchstaben mit aktiven Pins angegeben werden.\line
-  Nach jedem chiffrierten Buchstaben drehen sich die Rotoren einen Buchstaben weiter.\line
-  Zum Schlüssel gehört auch die Startposition der Rotoren z.B. 'AAAAAA'\line
-  Der Umstand, dass die Anzahl der Buchstaben teilerfremd sind, führt dazu, dass die Rotoren erst nach\line
-  26x25x23x21x19x17 = 101.405.850 verschlüsselten Buchstaben die selbe Position haben.\line
+  \line
+An jedem Buchstaben befindet sich ein Pin, der entweder aktiv oder inaktiv geschaltet werden kann. Die Pin-Einstellungen werden oft so dargestellt, dass nur die Buchstaben mit aktiven Pins angegeben werden. Nach jedem chiffrierten Buchstaben drehen sich die Rotoren einen Buchstaben weiter. Zum Schlüssel gehört auch die Startposition der Rotoren z.B. 'AAAAAA'. Der Umstand, dass die Anzahl der Buchstaben teilerfremd ist, führt dazu, dass die Rotoren erst nach einer Periode von 26x25x23x21x19x17 = 101.405.850 verarbeiteten Buchstaben dieselbe Position haben.\line
 \line
-- Der Codierungsmechanismus, bei dem es sich um eine Beaufort-Cipher handelt, d.h. ein Substituonscipher, welcher die Buchstaben umkehrt.\line
-  'A' wird zu 'Z', 'B' wird zu 'Y, usw. Der Vorteil davon ist, dass Ent- und Verschlüsselung gleich sind.\line
+(3) Der Codierungsmechanismus, bei dem es sich um eine Beaufort-Cipher handelt, d.h. eine Substitutionschiffre, welche die Buchstaben umkehrt. 'A' wird zu 'Z', 'B' wird zu 'Y, usw. Der Vorteil davon ist, dass Ent- und Verschlüsselung gleich sind.\line
 \line
+Die Funktionsweise der Hagelin M-209 ist folgende: Die Trommel rotiert einmal. Dabei werden die Stangen, bei denen ein Schieber auf einen aktiven Pin trifft, eingerückt. Wenn z.B. ein Schieber auf Position 2 ist und beim zweiten Rotor ein Buchstabe mit einem aktiven Pin ist, wird diese Stange eingerückt. Jede eingerückte Stange führt dazu, dass die Verschiebung (im englischen 'Displacement') erhöht wird. Die Verschlüsselung kann auch durch folgende Formel repräsentiert werden: C[i] = (Z - P[i] + D[i]) mod 26. (C ist ein Geheimtextbuchstabe, P ist ein Klartextbuchstabe, D ist der Versatzwert (Displacement value) und Z ist der numerische Wert des Buchstabens Z (=26)). (Während der Ausführung der Maschine werden Buchstaben durch ihren numerischen Wert dargestellt, d.h. A=1, B=2, usw.).\line
 \line
-Die Funktionsweise der Hagelin M-209 ist folgender: \line
-Die Trommel rotiert einmal, dabei werden die Stangen, beidenen ein Schieber auf einen aktiven Pin trifft eingerückt.\line
-Wenn z.B. ein Schieber auf Position 2 ist und beim zweiten Rotor ein Buchstabe mit einem aktiven Pins ist, wird die Stange eingerückt.\line
-Jede eingerückte Stange führt dazu, dass die Verschiebung (im englischen 'Displacement') erhöht wird. \line
-Die Verschlüsselung kann auch durch folgende Formel repräsentiert werden: C[i] = (Z - P[i] + D[i]) mod 26.\line
-(C ist CiphertextLetter, P ist PlaintextLetter, D ist Displacement und Z ist der Buchstabe Z)\line
-(Buchstaben werden während der Verschlüsselung durch ihren Zahlenwert repräsentier d.h. A=1, B=2, usw.)\line
-\line
-\line
-Um den Schlüssel über das Textfeld einzugeben, können sie sich die Vorlage M209-Chiffre Schlüsseleingabe ansehen.
-" />
+Um den Schlüssel über ein Textfeld einzugeben, können sie sich die Vorlage M-209-Chiffre Schlüsseleingabe ansehen." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
