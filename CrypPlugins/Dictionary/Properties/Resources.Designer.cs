@@ -61,11 +61,20 @@ namespace Dictionary.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dictionary file &quot;{0}&quot; not found..
+        ///   Looks up a localized string similar to Capitalization.
         /// </summary>
-        public static string dic_file_not_found {
+        public static string CapitalizationCaption {
             get {
-                return ResourceManager.GetString("dic_file_not_found", resourceCulture);
+                return ResourceManager.GetString("CapitalizationCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selects between upper and lower case.
+        /// </summary>
+        public static string CapitalizationTooltip {
+            get {
+                return ResourceManager.GetString("CapitalizationTooltip", resourceCulture);
             }
         }
         
@@ -84,69 +93,6 @@ namespace Dictionary.Properties {
         public static string DictionaryTooltip {
             get {
                 return ResourceManager.GetString("DictionaryTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to English dictionary.
-        /// </summary>
-        public static string English_dictionary {
-            get {
-                return ResourceManager.GetString("English_dictionary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ...finished loading dictionary in {0} milliseconds..
-        /// </summary>
-        public static string finished_loading_dic {
-            get {
-                return ResourceManager.GetString("finished_loading_dic", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to German dictionary.
-        /// </summary>
-        public static string German_dictionary {
-            get {
-                return ResourceManager.GetString("German_dictionary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Loading dictionary &quot;{0}&quot; now....
-        /// </summary>
-        public static string loading_dic_now {
-            get {
-                return ResourceManager.GetString("loading_dic_now", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No dictionary chosen..
-        /// </summary>
-        public static string NoDictChosen {
-            get {
-                return ResourceManager.GetString("NoDictChosen", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Entries: .
-        /// </summary>
-        public static string NumberEntriesCaption {
-            get {
-                return ResourceManager.GetString("NumberEntriesCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Number of entries in the current dictionary.
-        /// </summary>
-        public static string NumberEntriesTooltip {
-            get {
-                return ResourceManager.GetString("NumberEntriesTooltip", resourceCulture);
             }
         }
         
@@ -201,24 +147,6 @@ namespace Dictionary.Properties {
         public static string PluginTooltip {
             get {
                 return ResourceManager.GetString("PluginTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to WordPatterns English.
-        /// </summary>
-        public static string WordPatterns_English {
-            get {
-                return ResourceManager.GetString("WordPatterns_English", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to WordPatterns German.
-        /// </summary>
-        public static string WordPatterns_German {
-            get {
-                return ResourceManager.GetString("WordPatterns_German", resourceCulture);
             }
         }
     }

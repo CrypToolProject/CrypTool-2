@@ -117,15 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="dic_file_not_found" xml:space="preserve">
-    <value>Dictionary file "{0}" not found.</value>
-  </data>
-  <data name="finished_loading_dic" xml:space="preserve">
-    <value>...finished loading dictionary in {0} milliseconds.</value>
-  </data>
-  <data name="loading_dic_now" xml:space="preserve">
-    <value>Loading dictionary "{0}" now...</value>
-  </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>Dictionary</value>
   </data>
@@ -150,25 +141,10 @@
   <data name="DictionaryTooltip" xml:space="preserve">
     <value>Select dictionary with keywords.</value>
   </data>
-  <data name="English_dictionary" xml:space="preserve">
-    <value>English dictionary</value>
+  <data name="CapitalizationCaption" xml:space="preserve">
+    <value>Capitalization</value>
   </data>
-  <data name="German_dictionary" xml:space="preserve">
-    <value>German dictionary</value>
-  </data>
-  <data name="WordPatterns_English" xml:space="preserve">
-    <value>WordPatterns English</value>
-  </data>
-  <data name="WordPatterns_German" xml:space="preserve">
-    <value>WordPatterns German</value>
-  </data>
-  <data name="NumberEntriesCaption" xml:space="preserve">
-    <value>Entries: </value>
-  </data>
-  <data name="NumberEntriesTooltip" xml:space="preserve">
-    <value>Number of entries in the current dictionary</value>
-  </data>
-  <data name="NoDictChosen" xml:space="preserve">
-    <value>No dictionary chosen.</value>
+  <data name="CapitalizationTooltip" xml:space="preserve">
+    <value>Selects between upper and lower case</value>
   </data>
 </root>

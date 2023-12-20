@@ -285,4 +285,25 @@
   <data name="ShowTotalTooltip" xml:space="preserve">
     <value>Wenn diese Einstellung aktiviert ist, wird die Gesamtzahl der n-Gramme als absoluter Wert angezeigt.</value>
   </data>
+  <data name="AnalysisModeCaption" xml:space="preserve">
+    <value>Analyse-Modus</value>
+  </data>
+  <data name="AnalysisModeTooltip" xml:space="preserve">
+    <value>Der Modus der während der Analyse durchgeführt werden soll</value>
+  </data>
+  <data name="SymbolSeparatorsCaption" xml:space="preserve">
+    <value>Symbol-Trennzeichen</value>
+  </data>
+  <data name="SymbolSeparatorsTooltip" xml:space="preserve">
+    <value>Mit welchen Symbolen soll der Text getrennt werden?</value>
+  </data>
+  <data name="Frequencies" xml:space="preserve">
+    <value>e Häufigkeiten</value>
+  </data>
+  <data name="NGrams" xml:space="preserve">
+    <value>N-Gramme</value>
+  </data>
+  <data name="SymbolSeparated" xml:space="preserve">
+    <value>Symbolgetrennt</value>
+  </data>
 </root>

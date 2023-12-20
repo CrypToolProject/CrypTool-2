@@ -66,7 +66,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Wheel1
         [SettingsFormat(1, "Bold", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "1")]
-        [TaskPane("WheelTypeCaption", "WheelTypeTip", "Wheel1", 1, false, ControlType.DynamicComboBox, new string[] { "SupportedWheelTypeNames" })]
+        [TaskPane("WheelTypeCaption", "WheelTypeTip", "WheelNum1", 1, false, ControlType.DynamicComboBox, new string[] { "SupportedWheelTypeNames" })]
 
         public int Wheel1TypeName
         {
@@ -77,8 +77,6 @@ namespace CrypTool.Plugins.HagelinMachine
             }
             set
             {
-
-
                 int thisWheelIndex = Int32.Parse(Regex.Match(MethodBase.GetCurrentMethod().Name, @"\d+").Value) - 1;
                 if (((int)value != -1) && _model != ModelType.M209) //In M209 the wheels are not interchangable
                 {
@@ -90,8 +88,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         }
 
-        //      [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "1")]
-        [TaskPane("WheelLabelsCaption", "WheelLabelsTip", "Wheel1", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "[A-Z0-9, ]*")]
+        [TaskPane("WheelLabelsCaption", "WheelLabelsTip", "WheelNum1", 2, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "[A-Z0-9, ]*")]
         public string Wheel1InitialState
         {
             get
@@ -107,8 +104,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
 
-        [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "1")]
-        [TaskPane("WheelActivePinsCaption", "WheelActivePinsTip", "Wheel1", 3, false, ControlType.TextBox, ValidationType.RegEx, "^[A-Z0-9, ]*$")]
+        [TaskPane("WheelActivePinsCaption", "WheelActivePinsTip", "WheelNum1", 3, false, ControlType.TextBox, ValidationType.RegEx, "^[A-Z0-9, ]*$")]
         public string Wheel1Pins
         {
             get
@@ -129,7 +125,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #region Wheel2
         [SettingsFormat(10, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("WheelTypeCaption", "WheelTypeTip", "Wheel2", 4, false, ControlType.DynamicComboBox, new string[] { "SupportedWheelTypeNames" })]
+        [TaskPane("WheelTypeCaption", "WheelTypeTip", "WheelNum2", 4, false, ControlType.DynamicComboBox, new string[] { "SupportedWheelTypeNames" })]
         public int Wheel2TypeName
         {
             get
@@ -152,11 +148,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         }
 
-
-
-
-        //       [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("WheelLabelsCaption", "WheelLabelsTip", "Wheel2", 5, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "[A-Z0-9, ]*")]
+        [TaskPane("WheelLabelsCaption", "WheelLabelsTip", "WheelNum2", 5, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "[A-Z0-9, ]*")]
         public string Wheel2InitialState
         {
             get
@@ -171,9 +163,7 @@ namespace CrypTool.Plugins.HagelinMachine
             }
         }
 
-
-        [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("WheelActivePinsCaption", "WheelActivePinsTip", "Wheel2", 6, false, ControlType.TextBox, ValidationType.RegEx, "[A-Z0-9, ]*")]
+        [TaskPane("WheelActivePinsCaption", "WheelActivePinsTip", "WheelNum2", 6, false, ControlType.TextBox, ValidationType.RegEx, "[A-Z0-9, ]*")]
         public string Wheel2Pins
         {
             get
@@ -188,13 +178,11 @@ namespace CrypTool.Plugins.HagelinMachine
             }
         }
 
-
-
         #endregion
 
         #region Wheel3
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("WheelTypeCaption", "WheelTypeTip", "Wheel3", 7, false, ControlType.DynamicComboBox, new string[] { "SupportedWheelTypeNames" })]
+        [TaskPane("WheelTypeCaption", "WheelTypeTip", "WheelNum3", 7, false, ControlType.DynamicComboBox, new string[] { "SupportedWheelTypeNames" })]
         public int Wheel3TypeName
         {
             get
@@ -217,8 +205,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         }
 
-        //       [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("WheelLabelsCaption", "WheelLabelsTip", "Wheel3", 8, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "[A-Z0-9, ]*")]
+        [TaskPane("WheelLabelsCaption", "WheelLabelsTip", "WheelNum3", 8, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "[A-Z0-9, ]*")]
         public string Wheel3InitialState
         {
             get
@@ -233,9 +220,7 @@ namespace CrypTool.Plugins.HagelinMachine
             }
         }
 
-
-        [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("WheelActivePinsCaption", "WheelActivePinsTip", "Wheel3", 9, false, ControlType.TextBox, ValidationType.RegEx, "[A-Z0-9, ]*")]
+        [TaskPane("WheelActivePinsCaption", "WheelActivePinsTip", "WheelNum3", 9, false, ControlType.TextBox, ValidationType.RegEx, "[A-Z0-9, ]*")]
         public string Wheel3Pins
         {
             get
@@ -250,13 +235,11 @@ namespace CrypTool.Plugins.HagelinMachine
             }
         }
 
-
-
         #endregion
 
         #region Wheel4
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "4")]
-        [TaskPane("WheelTypeCaption", "WheelTypeTip", "Wheel4", 10, false, ControlType.DynamicComboBox, new string[] { "SupportedWheelTypeNames" })]
+        [TaskPane("WheelTypeCaption", "WheelTypeTip", "WheelNum4", 10, false, ControlType.DynamicComboBox, new string[] { "SupportedWheelTypeNames" })]
         public int Wheel4TypeName
         {
             get
@@ -276,11 +259,9 @@ namespace CrypTool.Plugins.HagelinMachine
                     SetWheelType(thisWheelIndex, selectedWheelType);
                 }
             }
-
         }
 
-        //      [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "4")]
-        [TaskPane("WheelLabelsCaption", "WheelLabelsTip", "Wheel4", 11, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "[A-Z0-9, ]*")]
+        [TaskPane("WheelLabelsCaption", "WheelLabelsTip", "WheelNum4", 11, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "[A-Z0-9, ]*")]
         public string Wheel4InitialState
         {
             get
@@ -295,9 +276,7 @@ namespace CrypTool.Plugins.HagelinMachine
             }
         }
 
-
-        [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "4")]
-        [TaskPane("WheelActivePinsCaption", "WheelActivePinsTip", "Wheel4", 12, false, ControlType.TextBox, ValidationType.RegEx, "[A-Z0-9, ]*")]
+        [TaskPane("WheelActivePinsCaption", "WheelActivePinsTip", "WheelNum4", 12, false, ControlType.TextBox, ValidationType.RegEx, "[A-Z0-9, ]*")]
         public string Wheel4Pins
         {
             get
@@ -311,14 +290,11 @@ namespace CrypTool.Plugins.HagelinMachine
                 setWheelPins(thisWheelIndex, value);
             }
         }
-
-
-
         #endregion
 
         #region Wheel5
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "5")]
-        [TaskPane("WheelTypeCaption", "WheelTypeTip", "Wheel5", 13, false, ControlType.DynamicComboBox, new string[] { "SupportedWheelTypeNames" })]
+        [TaskPane("WheelTypeCaption", "WheelTypeTip", "WheelNum5", 13, false, ControlType.DynamicComboBox, new string[] { "SupportedWheelTypeNames" })]
         public int Wheel5TypeName
         {
             get
@@ -341,8 +317,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         }
 
-        //      [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "5")]
-        [TaskPane("WheelLabelsCaption", "WheelLabelsTip", "Wheel5", 14, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "[A-Z0-9, ]*")]
+        [TaskPane("WheelLabelsCaption", "WheelLabelsTip", "WheelNum5", 14, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "[A-Z0-9, ]*")]
         public string Wheel5InitialState
         {
             get
@@ -357,9 +332,7 @@ namespace CrypTool.Plugins.HagelinMachine
             }
         }
 
-
-        [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "5")]
-        [TaskPane("WheelActivePinsCaption", "WheelActivePinsTip", "Wheel5", 15, false, ControlType.TextBox, ValidationType.RegEx, "[A-Z0-9, ]*")]
+        [TaskPane("WheelActivePinsCaption", "WheelActivePinsTip", "WheelNum5", 15, false, ControlType.TextBox, ValidationType.RegEx, "[A-Z0-9, ]*")]
         public string Wheel5Pins
         {
             get
@@ -374,13 +347,11 @@ namespace CrypTool.Plugins.HagelinMachine
             }
         }
 
-
-
         #endregion
 
         #region Wheel6
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "6")]
-        [TaskPane("WheelTypeCaption", "WheelTypeTip", "Wheel6", 16, false, ControlType.DynamicComboBox, new string[] { "SupportedWheelTypeNames" })]
+        [TaskPane("WheelTypeCaption", "WheelTypeTip", "WheelNum6", 16, false, ControlType.DynamicComboBox, new string[] { "SupportedWheelTypeNames" })]
         public int Wheel6TypeName
         {
             get
@@ -402,8 +373,8 @@ namespace CrypTool.Plugins.HagelinMachine
             }
 
         }
-        //     [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "6")]
-        [TaskPane("WheelLabelsCaption", "WheelLabelsTip", "Wheel6", 17, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "[A-Z0-9, ]*")]
+
+        [TaskPane("WheelLabelsCaption", "WheelLabelsTip", "WheelNum6", 17, false, ControlType.TextBoxReadOnly, ValidationType.RegEx, "[A-Z0-9, ]*")]
         public string Wheel6InitialState
         {
             get
@@ -418,9 +389,7 @@ namespace CrypTool.Plugins.HagelinMachine
             }
         }
 
-
-        [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "6")]
-        [TaskPane("WheelActivePinsCaption", "WheelActivePinsTip", "Wheel6", 18, false, ControlType.TextBox, ValidationType.RegEx, "[A-Z0-9, ]*")]
+        [TaskPane("WheelActivePinsCaption", "WheelActivePinsTip", "WheelNum6", 18, false, ControlType.TextBox, ValidationType.RegEx, "[A-Z0-9, ]*")]
         public string Wheel6Pins
         {
             get
@@ -435,9 +404,9 @@ namespace CrypTool.Plugins.HagelinMachine
             }
         }
 
-
-
         #endregion
+
+        /*
 
         #region Wheel7
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "7")]
@@ -802,11 +771,9 @@ namespace CrypTool.Plugins.HagelinMachine
                 int thisWheelIndex = Int32.Parse(Regex.Match(MethodBase.GetCurrentMethod().Name, @"\d+").Value) - 1;
                 setWheelPins(thisWheelIndex, value);
             }
-        }
-
-
-
+        }        
         #endregion
+        */
         #endregion
     }
 }

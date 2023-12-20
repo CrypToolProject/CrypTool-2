@@ -97,7 +97,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cam types of the bar .
+        ///   Looks up a localized string similar to Cam types of the bar:.
         /// </summary>
         internal static string BarCamTypesCaption {
             get {
@@ -115,7 +115,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bar has lugs.
+        ///   Looks up a localized string similar to Bar has lugs:.
         /// </summary>
         internal static string BarHasLugsCaption {
             get {
@@ -133,7 +133,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bar lugs.
+        ///   Looks up a localized string similar to Bar lugs:.
         /// </summary>
         internal static string BarLugsCaption {
             get {
@@ -151,7 +151,295 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tooth type of the bar.
+        ///   Looks up a localized string similar to Bar 1.
+        /// </summary>
+        internal static string BarNum1 {
+            get {
+                return ResourceManager.GetString("BarNum1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 10.
+        /// </summary>
+        internal static string BarNum10 {
+            get {
+                return ResourceManager.GetString("BarNum10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 11.
+        /// </summary>
+        internal static string BarNum11 {
+            get {
+                return ResourceManager.GetString("BarNum11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 12.
+        /// </summary>
+        internal static string BarNum12 {
+            get {
+                return ResourceManager.GetString("BarNum12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 13.
+        /// </summary>
+        internal static string BarNum13 {
+            get {
+                return ResourceManager.GetString("BarNum13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 14.
+        /// </summary>
+        internal static string BarNum14 {
+            get {
+                return ResourceManager.GetString("BarNum14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 15.
+        /// </summary>
+        internal static string BarNum15 {
+            get {
+                return ResourceManager.GetString("BarNum15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 16.
+        /// </summary>
+        internal static string BarNum16 {
+            get {
+                return ResourceManager.GetString("BarNum16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 17.
+        /// </summary>
+        internal static string BarNum17 {
+            get {
+                return ResourceManager.GetString("BarNum17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 18.
+        /// </summary>
+        internal static string BarNum18 {
+            get {
+                return ResourceManager.GetString("BarNum18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 19.
+        /// </summary>
+        internal static string BarNum19 {
+            get {
+                return ResourceManager.GetString("BarNum19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 2.
+        /// </summary>
+        internal static string BarNum2 {
+            get {
+                return ResourceManager.GetString("BarNum2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 20.
+        /// </summary>
+        internal static string BarNum20 {
+            get {
+                return ResourceManager.GetString("BarNum20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 21.
+        /// </summary>
+        internal static string BarNum21 {
+            get {
+                return ResourceManager.GetString("BarNum21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 22.
+        /// </summary>
+        internal static string BarNum22 {
+            get {
+                return ResourceManager.GetString("BarNum22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 23.
+        /// </summary>
+        internal static string BarNum23 {
+            get {
+                return ResourceManager.GetString("BarNum23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 24.
+        /// </summary>
+        internal static string BarNum24 {
+            get {
+                return ResourceManager.GetString("BarNum24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 25.
+        /// </summary>
+        internal static string BarNum25 {
+            get {
+                return ResourceManager.GetString("BarNum25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 26.
+        /// </summary>
+        internal static string BarNum26 {
+            get {
+                return ResourceManager.GetString("BarNum26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 27.
+        /// </summary>
+        internal static string BarNum27 {
+            get {
+                return ResourceManager.GetString("BarNum27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 28.
+        /// </summary>
+        internal static string BarNum28 {
+            get {
+                return ResourceManager.GetString("BarNum28", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 29.
+        /// </summary>
+        internal static string BarNum29 {
+            get {
+                return ResourceManager.GetString("BarNum29", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 3.
+        /// </summary>
+        internal static string BarNum3 {
+            get {
+                return ResourceManager.GetString("BarNum3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 30.
+        /// </summary>
+        internal static string BarNum30 {
+            get {
+                return ResourceManager.GetString("BarNum30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 31.
+        /// </summary>
+        internal static string BarNum31 {
+            get {
+                return ResourceManager.GetString("BarNum31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 32.
+        /// </summary>
+        internal static string BarNum32 {
+            get {
+                return ResourceManager.GetString("BarNum32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 4.
+        /// </summary>
+        internal static string BarNum4 {
+            get {
+                return ResourceManager.GetString("BarNum4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 5.
+        /// </summary>
+        internal static string BarNum5 {
+            get {
+                return ResourceManager.GetString("BarNum5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 6.
+        /// </summary>
+        internal static string BarNum6 {
+            get {
+                return ResourceManager.GetString("BarNum6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 7.
+        /// </summary>
+        internal static string BarNum7 {
+            get {
+                return ResourceManager.GetString("BarNum7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 8.
+        /// </summary>
+        internal static string BarNum8 {
+            get {
+                return ResourceManager.GetString("BarNum8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar 9.
+        /// </summary>
+        internal static string BarNum9 {
+            get {
+                return ResourceManager.GetString("BarNum9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tooth type of the bar:.
         /// </summary>
         internal static string BarToothTypeCaption {
             get {
@@ -169,7 +457,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type of the bar.
+        ///   Looks up a localized string similar to Type of the bar:.
         /// </summary>
         internal static string BarTypeCaption {
             get {
@@ -187,7 +475,16 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can start the execution now..
+        ///   Looks up a localized string similar to C-52d.
+        /// </summary>
+        internal static string C52d {
+            get {
+                return ResourceManager.GetString("C52d", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can start the execution now by pressing the &quot;Play&quot; button in the top tool bar..
         /// </summary>
         internal static string CanStartCaption {
             get {
@@ -232,7 +529,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ↓Wheel2.
+        ///   Looks up a localized string similar to ↓Wheel 2.
         /// </summary>
         internal static string CaptionDownWheel2 {
             get {
@@ -421,11 +718,83 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please follow the istructions. With the default settings, there is no need to go over all the steps. Execution can be started any time.
+        ///   Looks up a localized string similar to Please follow the instructions. With the default settings, there is no need to go over all the steps. Execution can be started any time..
         /// </summary>
         internal static string CurrentStepTip {
             get {
                 return ResourceManager.GetString("CurrentStepTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom.
+        /// </summary>
+        internal static string Custom {
+            get {
+                return ResourceManager.GetString("Custom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CX-52a.
+        /// </summary>
+        internal static string CX52a {
+            get {
+                return ResourceManager.GetString("CX52a", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CX-52b.
+        /// </summary>
+        internal static string CX52b {
+            get {
+                return ResourceManager.GetString("CX52b", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CX-52c.
+        /// </summary>
+        internal static string CX52c {
+            get {
+                return ResourceManager.GetString("CX52c", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CX-52 EIRE.
+        /// </summary>
+        internal static string CX52EIRE {
+            get {
+                return ResourceManager.GetString("CX52EIRE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CX-52 French version.
+        /// </summary>
+        internal static string CX52FrenchVersion {
+            get {
+                return ResourceManager.GetString("CX52FrenchVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CX-M.
+        /// </summary>
+        internal static string CXM {
+            get {
+                return ResourceManager.GetString("CXM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CX-M late version.
+        /// </summary>
+        internal static string CXMLateVersion {
+            get {
+                return ResourceManager.GetString("CXMLateVersion", resourceCulture);
             }
         }
         
@@ -547,7 +916,25 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Info and Control.
+        ///   Looks up a localized string similar to Hagelin model.
+        /// </summary>
+        internal static string HagelinModel {
+            get {
+                return ResourceManager.GetString("HagelinModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ignore.
+        /// </summary>
+        internal static string Ignore {
+            get {
+                return ResourceManager.GetString("Ignore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Info and control.
         /// </summary>
         internal static string InfoAndControlGroup {
             get {
@@ -565,7 +952,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Initial offset.
+        ///   Looks up a localized string similar to Initial offset:.
         /// </summary>
         internal static string InitialOffsetSetCaption {
             get {
@@ -592,6 +979,16 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Input
+        ///letter.
+        /// </summary>
+        internal static string Input {
+            get {
+                return ResourceManager.GetString("Input", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Input bar lugs.
         /// </summary>
         internal static string InputBarLugsCaption {
@@ -601,7 +998,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Input numbers of the weels for which lugs of each bar have to be active.  Lugs have to be separated with a comma. Active Lugs for each wheel start from a separate line.
+        ///   Looks up a localized string similar to Input numbers of the wheels for which lugs of each bar have to be active.  Lugs have to be separated with a comma. Active Lugs for each wheel start from a separate line.
         /// </summary>
         internal static string InputBarLugsTip {
             get {
@@ -664,7 +1061,16 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Model.
+        ///   Looks up a localized string similar to M-209.
+        /// </summary>
+        internal static string M209 {
+            get {
+                return ResourceManager.GetString("M209", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Model:.
         /// </summary>
         internal static string ModelCaption {
             get {
@@ -727,7 +1133,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operation mode.
+        ///   Looks up a localized string similar to Operation mode:.
         /// </summary>
         internal static string OperationModeCaption {
             get {
@@ -741,6 +1147,16 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         internal static string OperationModeTip {
             get {
                 return ResourceManager.GetString("OperationModeTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output
+        ///letter.
+        /// </summary>
+        internal static string Output {
+            get {
+                return ResourceManager.GetString("Output", resourceCulture);
             }
         }
         
@@ -971,7 +1387,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Information.
+        ///   Looks up a localized string similar to Description.
         /// </summary>
         internal static string PresentatinCol1Label {
             get {
@@ -1079,11 +1495,29 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ready to.
+        ///   Looks up a localized string similar to Ready to .
         /// </summary>
         internal static string ReadyToCaption {
             get {
                 return ResourceManager.GetString("ReadyToCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace with ?.
+        /// </summary>
+        internal static string ReplaceWithQuestionMark {
+            get {
+                return ResourceManager.GetString("ReplaceWithQuestionMark", resourceCulture);
             }
         }
         
@@ -1142,7 +1576,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bars used in this machine.
+        ///   Looks up a localized string similar to Bars used in this machine:.
         /// </summary>
         internal static string SelectedBarsCaption {
             get {
@@ -1170,9 +1604,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///Selected model.
+        ///   Looks up a localized string similar to Selected model:.
         /// </summary>
         internal static string SelectedModelCaption {
             get {
@@ -1190,7 +1622,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selected wheels.
+        ///   Looks up a localized string similar to Selected wheels:.
         /// </summary>
         internal static string SelectedWheelsCaption {
             get {
@@ -1262,7 +1694,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1.1 - Select the Hagelin model and the operation mode. The model defines the bars used in the machine and the compatible pin-wheels. With the default settings, there is no need to go over all the steps. Execution can be started any time..
+        ///   Looks up a localized string similar to 1.1.  Select the Hagelin model and the operation mode. The model defines the bars used in the machine and the compatible pinwheels. With the default settings, there is no need to go over all the steps. Execution can be started any time..
         /// </summary>
         internal static string Step11Caption {
             get {
@@ -1271,7 +1703,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1.2. Selection of the wheels: If the current  model allows that, select the pin wheels. Once ready, press Next button.
+        ///   Looks up a localized string similar to 1.2. Selection of the wheels: If the current  model allows that, select the pinwheels. Once ready, press Next button.
         /// </summary>
         internal static string Step12Caption {
             get {
@@ -1289,7 +1721,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 2.1. Setting up pins for the weels - part of inner key. Values added here will be ingnored if the pins are provided as an input.
+        ///   Looks up a localized string similar to 2.1. Setting up pins for the wheels, which constitute the first part of the internal key.
         /// </summary>
         internal static string Step21Caption {
             get {
@@ -1298,7 +1730,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 2.2. Setting up lugs of the bars - part of inner key. Values added here will be ingnored if the lugs are provided as an input.
+        ///   Looks up a localized string similar to 2.2. Setting up lugs of the bars, which constitute the second part of the internal key.
         /// </summary>
         internal static string Step22Caption {
             get {
@@ -1307,7 +1739,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 3. Setting up initial positions of the wheels - external key. The step is not necessary if the initial state is provided as an input.
+        ///   Looks up a localized string similar to 3. Setting up initial positions of the wheels, which constitute the external key.
         /// </summary>
         internal static string Step3Caption {
             get {
@@ -1316,10 +1748,9 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 4. Setting up the opeation settings: 
-        ///4.1 Mode: Encryption/Decryption; 
-        ///4.2 Text options; 
-        ///4.3: Position of output ring with respect to the input ring..
+        ///   Looks up a localized string similar to 4. Setting up the operation settings
+        ///4.1. Text options
+        ///4.2. Position of output ring with respect to the input ring.
         /// </summary>
         internal static string Step4Caption {
             get {
@@ -1355,7 +1786,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unknown Symbols Handling.
+        ///   Looks up a localized string similar to Unknown symbols handling:.
         /// </summary>
         internal static string UnknownSymbolCaption {
             get {
@@ -1373,7 +1804,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use Z As Space.
+        ///   Looks up a localized string similar to Use Z as space.
         /// </summary>
         internal static string UseZCaption {
             get {
@@ -1400,7 +1831,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Active pins of the wheel.
+        ///   Looks up a localized string similar to Active pins of the wheel:.
         /// </summary>
         internal static string WheelActivePinsCaption {
             get {
@@ -1436,6 +1867,60 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wheel 1.
+        /// </summary>
+        internal static string WheelNum1 {
+            get {
+                return ResourceManager.GetString("WheelNum1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 2.
+        /// </summary>
+        internal static string WheelNum2 {
+            get {
+                return ResourceManager.GetString("WheelNum2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 3.
+        /// </summary>
+        internal static string WheelNum3 {
+            get {
+                return ResourceManager.GetString("WheelNum3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 4.
+        /// </summary>
+        internal static string WheelNum4 {
+            get {
+                return ResourceManager.GetString("WheelNum4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 5.
+        /// </summary>
+        internal static string WheelNum5 {
+            get {
+                return ResourceManager.GetString("WheelNum5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wheel 6.
+        /// </summary>
+        internal static string WheelNum6 {
+            get {
+                return ResourceManager.GetString("WheelNum6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wheels advancements at this step.
         /// </summary>
         internal static string WheelsAdvancementsAtThisStep {
@@ -1445,7 +1930,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wheels state.
+        ///   Looks up a localized string similar to Wheels&apos; state:.
         /// </summary>
         internal static string WheelsStateCaption {
             get {
@@ -1472,7 +1957,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wheels with active pins.
+        ///   Looks up a localized string similar to Wheels with active pins:.
         /// </summary>
         internal static string WheelsWithActivePins {
             get {
@@ -1481,7 +1966,7 @@ namespace CrypTool.Plugins.HagelinMachine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type of the wheel.
+        ///   Looks up a localized string similar to Type of the wheel:.
         /// </summary>
         internal static string WheelTypeCaption {
             get {

@@ -12,20 +12,47 @@
    limitations under the License.
 */
 using CrypTool.PluginBase;
+using System;
 using System.ComponentModel;
 using System.Windows;
 
 namespace CrypTool.FrequencyTest
 {
+    public enum AnalysisMode
+    {
+        NGrams,
+        SymbolSeparated
+    }
+
     public class FrequencyTestSettings : ISettings
     {
         #region INotifyPropertyChanged Members
 
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-
+            UpdateSettingsVisibility();
         }
+
+        /// <summary>
+        /// Upon changing the analysis mode, the visibility of the settings elements must be updated
+        /// </summary>
+        private void UpdateSettingsVisibility()
+        {
+            if (_analysisMode == AnalysisMode.NGrams)
+            {
+                showSettingsElement("GrammLength");
+                showSettingsElement("BoundaryFragments");
+                hideSettingsElement("SymbolSeparators");
+            }
+            else
+            {
+                hideSettingsElement("GrammLength");
+                hideSettingsElement("BoundaryFragments");
+                showSettingsElement("SymbolSeparators");
+            }
+        }
+
 
         protected void OnPropertyChanged(string name)
         {
@@ -51,6 +78,8 @@ namespace CrypTool.FrequencyTest
         private int maxNumberOfShownNGramms = 30;
         private bool showAbsoluteValues = false;
         private bool showTotal = false;
+        private AnalysisMode _analysisMode = AnalysisMode.NGrams;
+        private string _symbolSeparators = ".,:;";
 
         #endregion
 
@@ -85,11 +114,26 @@ namespace CrypTool.FrequencyTest
 
         #region Visible settings
 
+        [PropertySaveOrder(0)]
+        [TaskPane("AnalysisModeCaption", "AnalysisModeTooltip", null, 0, false, ControlType.ComboBox, new string[] { "NGrams", "SymbolSeparated" })]
+        public AnalysisMode AnalysisMode
+        {
+            get => _analysisMode;
+            set
+            {
+                if (value != _analysisMode)
+                {
+                    _analysisMode = value;
+                    UpdateSettingsVisibility();
+                    OnPropertyChanged("AnalysisMode");
+                }
+            }
+        }
+
         /// <summary>
         /// Visible setting how to deal with alphabet case. 0 = case insentive, 1 = case sensitive
         /// </summary>
         [PropertySaveOrder(1)]
-        [ContextMenu("CaseSensitivityCaption", "CaseSensitivityTooltip", 7, ContextMenuControlType.ComboBox, null, new string[] { "CaseSensitivityList1", "CaseSensitivityList2" })]
         [TaskPane("CaseSensitivityCaption", "CaseSensitivityTooltip", null, 7, false, ControlType.ComboBox, new string[] { "CaseSensitivityList1", "CaseSensitivityList2" })]
         public int CaseSensitivity
         {
@@ -102,9 +146,24 @@ namespace CrypTool.FrequencyTest
                     OnPropertyChanged("CaseSensitivity");
                 }
             }
-        }
+        }     
 
         [PropertySaveOrder(2)]
+        [TaskPane("SymbolSeparatorsCaption", "SymbolSeparatorsTooltip", null, 3, false, ControlType.TextBox)]
+        public string SymbolSeparators
+        {
+            get => _symbolSeparators;
+            set
+            {
+                if (value != _symbolSeparators)
+                {
+                    _symbolSeparators = value;
+                    OnPropertyChanged("SymbolSeparators");
+                }
+            }
+        }
+       
+        [PropertySaveOrder(3)]
         [TaskPane("GrammLengthCaption", "GrammLengthTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
         public int GrammLength
         {

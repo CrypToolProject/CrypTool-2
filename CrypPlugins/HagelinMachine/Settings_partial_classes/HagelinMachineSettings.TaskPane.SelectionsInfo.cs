@@ -14,7 +14,9 @@
    limitations under the License.
 */
 using CrypTool.PluginBase;
+using System;
 using System.Text;
+using static HagelinMachine.HagelinEnums;
 
 namespace CrypTool.Plugins.HagelinMachine
 {
@@ -25,15 +27,30 @@ namespace CrypTool.Plugins.HagelinMachine
         public string SelectedModel
         {
             get
-            {
-                return _selectedModel;
-            }
-            set
-            {
-                if (_selectedModel != _model.ToString())
+            {                
+                switch (_model)
                 {
-                    _selectedModel = _model.ToString();
-                    OnPropertyChanged("SelectedModel");
+                    case ModelType.CX52a:
+                        return Properties.Resources.CX52a;
+                    case ModelType.CX52b:
+                        return Properties.Resources.CX52b;
+                    case ModelType.CX52c:
+                        return Properties.Resources.CX52c;
+                    case ModelType.CXM:
+                        return Properties.Resources.CXM;
+                    case ModelType.CXM_LATE_VERSION:
+                        return Properties.Resources.CXMLateVersion;
+                    case ModelType.C52d:
+                        return Properties.Resources.C52d;
+                    case ModelType.EIRE:
+                        return Properties.Resources.CX52EIRE;
+                    case ModelType.FRANCE:
+                        return Properties.Resources.CX52FrenchVersion;
+                    case ModelType.M209:
+                        return Properties.Resources.M209;
+                    default:
+                    case ModelType.Custom:
+                        return Properties.Resources.Custom;
                 }
             }
         }

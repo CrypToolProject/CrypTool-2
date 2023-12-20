@@ -105,6 +105,16 @@ namespace CrypTool.Plugins.HagelinMachine
 
         #endregion
 
+        #region constructor
+
+        public HagelinMachine()
+        {
+            _settings.PropertyChanged += Settings_OnPropertyChanged;
+            UpdateHagelinModelString();
+        }
+
+        #endregion
+
         #region IPlugin Members
 
         /// <summary>
@@ -264,7 +274,6 @@ namespace CrypTool.Plugins.HagelinMachine
                     _presentation.ShowActivePositionsInGrid(hagelinImplementation._activeWheelPositions);
                     _presentation.ShowWheelPinActivityInGrid(hagelinImplementation._wheelsWithActivePin);
                     _presentation.ShowWheelPositionsinGrid(hagelinImplementation._shownWheelPositions);
-                    _presentation.LabelModel.Content = _settings.Model.ToString();
                     _presentation.labelInput.Content = string.Empty;
                     _presentation.labelOutput.Content = string.Empty;
                 }, null);
@@ -294,8 +303,7 @@ namespace CrypTool.Plugins.HagelinMachine
                             _presentation.ShowWheelPinActivityInGrid(hagelinImplementation._wheelsWithActivePin);
                             _presentation.ShowWheelPositionsinGrid(hagelinImplementation._shownWheelPositions);
                             _presentation.labelInput.Content = input[offset];
-                            _presentation.labelOutput.Content = outputChar;
-                            _presentation.LabelModel.Content = _settings.Model.ToString();
+                            _presentation.labelOutput.Content = outputChar;                            
                         }, null);
                     }
                     if (offset % 10 == 0) //only fire progress changed every 10th letter
@@ -339,6 +347,18 @@ namespace CrypTool.Plugins.HagelinMachine
             _executing = false;
             
         }
+
+        /// <summary>
+        /// Updates the model string shown in top of the presentatio
+        /// </summary>
+        private void UpdateHagelinModelString()
+        {
+            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                _presentation.LabelModel.Content = string.Format("{0}: {1}", Properties.Resources.HagelinModel, _settings.SelectedModel);
+            }, null);
+        }
+
 
         /// <summary>
         /// Called once after workflow execution has stopped.
@@ -397,6 +417,19 @@ namespace CrypTool.Plugins.HagelinMachine
         private void ProgressChanged(double value, double max)
         {
             EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
+        }
+
+        /// <summary>
+        /// Called, when a setting property changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="propertyChangedEvent"></param>
+        private void Settings_OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEvent)
+        {
+            if (propertyChangedEvent.PropertyName.Equals(nameof(HagelinMachineSettings.Model)))
+            {
+                UpdateHagelinModelString();
+            }
         }
 
         #endregion

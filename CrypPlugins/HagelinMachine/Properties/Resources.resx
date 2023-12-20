@@ -130,31 +130,31 @@
     <value>Return to the previous window</value>
   </data>
   <data name="BarCamTypesCaption" xml:space="preserve">
-    <value>Cam types of the bar </value>
+    <value>Cam types of the bar:</value>
   </data>
   <data name="BarCamTypesTip" xml:space="preserve">
     <value>Indicates how cams influence each of the wheels by typing a string which contains following characters: 0 - never, A - when displaced, B - when not displaced,  C - always</value>
   </data>
   <data name="BarHasLugsCaption" xml:space="preserve">
-    <value>Bar has lugs</value>
+    <value>Bar has lugs:</value>
   </data>
   <data name="BarHasLugsTip" xml:space="preserve">
     <value>Set if the bar has lugs</value>
   </data>
   <data name="BarLugsCaption" xml:space="preserve">
-    <value>Bar lugs</value>
+    <value>Bar lugs:</value>
   </data>
   <data name="BarLugsTip" xml:space="preserve">
     <value>Enumerate the indexes of the lugs of the bar which are to be set active. Indexes are to be separted by the comma sign</value>
   </data>
   <data name="BarToothTypeCaption" xml:space="preserve">
-    <value>Tooth type of the bar</value>
+    <value>Tooth type of the bar:</value>
   </data>
   <data name="BarToothTypeTip" xml:space="preserve">
     <value>Sets the type of the tooth of Bar</value>
   </data>
   <data name="BarTypeCaption" xml:space="preserve">
-    <value>Type of the bar</value>
+    <value>Type of the bar:</value>
   </data>
   <data name="BarTypeTip" xml:space="preserve">
     <value>Sets the type of the bar</value>
@@ -172,7 +172,7 @@
     <value>↓Wheel 12</value>
   </data>
   <data name="CaptionDownWheel2" xml:space="preserve">
-    <value>↓Wheel2</value>
+    <value>↓Wheel 2</value>
   </data>
   <data name="CaptionDownWheel3" xml:space="preserve">
     <value>↓Wheel 3</value>
@@ -235,7 +235,7 @@
     <value>Current step:</value>
   </data>
   <data name="CurrentStepTip" xml:space="preserve">
-    <value>Please follow the istructions. With the default settings, there is no need to go over all the steps. Execution can be started any time</value>
+    <value>Please follow the instructions. With the default settings, there is no need to go over all the steps. Execution can be started any time.</value>
   </data>
   <data name="ErrorGeneral" xml:space="preserve">
     <value>Exception occured during execution of HagelinMachine: {0}</value>
@@ -274,7 +274,7 @@
     <value>Rotate the wheel up by 1 position. The initial wheels state is shown on the panel above</value>
   </data>
   <data name="InfoAndControlGroup" xml:space="preserve">
-    <value>Info and Control</value>
+    <value>Info and control</value>
   </data>
   <data name="InitialOffsetCaption" xml:space="preserve">
     <value>Initial offset</value>
@@ -286,7 +286,7 @@
     <value>Input bar lugs</value>
   </data>
   <data name="InputBarLugsTip" xml:space="preserve">
-    <value>Input numbers of the weels for which lugs of each bar have to be active.  Lugs have to be separated with a comma. Active Lugs for each wheel start from a separate line</value>
+    <value>Input numbers of the wheels for which lugs of each bar have to be active.  Lugs have to be separated with a comma. Active Lugs for each wheel start from a separate line</value>
   </data>
   <data name="InputTextCaption" xml:space="preserve">
     <value>Input text</value>
@@ -307,7 +307,7 @@
     <value>Input indexes (letters or numbers) of the initial positions of the wheel.  Indexes have to be separated with a comma, e.g: "A, B, 11". </value>
   </data>
   <data name="ModelCaption" xml:space="preserve">
-    <value>Model</value>
+    <value>Model:</value>
   </data>
   <data name="ModelTip" xml:space="preserve">
     <value>Select the model of Hagelin Machine</value>
@@ -379,7 +379,7 @@ Current displacement: </value>
 </value>
   </data>
   <data name="PresentatinCol1Label" xml:space="preserve">
-    <value>Information</value>
+    <value>Description</value>
   </data>
   <data name="PresentatinCol2Label" xml:space="preserve">
     <value>Wheel 1</value>
@@ -412,7 +412,7 @@ Current displacement: </value>
     <value>Rotate up</value>
   </data>
   <data name="SelectedBarsCaption" xml:space="preserve">
-    <value>Bars used in this machine</value>
+    <value>Bars used in this machine:</value>
   </data>
   <data name="SelectedBarsTip" xml:space="preserve">
     <value>Information about bars:
@@ -453,21 +453,19 @@ x57      CA0000      Yes       Advances if shifted
 Cam types: 0 - never, B - not displaced, A - displaced, C - always</value>
   </data>
   <data name="SelectedModelCaption" xml:space="preserve">
-    <value>
-
-Selected model</value>
+    <value>Selected model:</value>
   </data>
   <data name="SelectedModelTip" xml:space="preserve">
     <value>Shows the model which was selected</value>
   </data>
   <data name="SelectedWheelsCaption" xml:space="preserve">
-    <value>Selected wheels</value>
+    <value>Selected wheels:</value>
   </data>
   <data name="SelectedWheelsTip" xml:space="preserve">
     <value>Shows the wheel types that were selected</value>
   </data>
   <data name="WheelActivePinsCaption" xml:space="preserve">
-    <value>Active pins of the wheel</value>
+    <value>Active pins of the wheel:</value>
   </data>
   <data name="WheelActivePinsTip" xml:space="preserve">
     <value>Enumerate the indexes of the pins of the wheel which are to be set active.</value>
@@ -479,19 +477,19 @@ Selected model</value>
     <value>Shows the labels of each position of the wheel . They may include Latin letters or numbers and have to be separted by the comma sign</value>
   </data>
   <data name="WheelsStateCaption" xml:space="preserve">
-    <value>Wheels state</value>
+    <value>Wheels' state:</value>
   </data>
   <data name="WheelsStateTip" xml:space="preserve">
     <value>Shows the indexes of the  positions of each wheel. In the beginning equal to external key. Indexes are to be separted by the comma sign</value>
   </data>
   <data name="WheelTypeCaption" xml:space="preserve">
-    <value>Type of the wheel</value>
+    <value>Type of the wheel:</value>
   </data>
   <data name="WheelTypeTip" xml:space="preserve">
     <value>Sets up the type of the wheel</value>
   </data>
   <data name="CanStartCaption" xml:space="preserve">
-    <value>You can start the execution now.</value>
+    <value>You can start the execution now by pressing the "Play" button in the top tool bar.</value>
   </data>
   <data name="DecryptCaption" xml:space="preserve">
     <value>Decrypt</value>
@@ -503,7 +501,7 @@ Selected model</value>
     <value>Encryption done</value>
   </data>
   <data name="InitialOffsetSetCaption" xml:space="preserve">
-    <value>Initial offset</value>
+    <value>Initial offset:</value>
   </data>
   <data name="InitialOffsetSetTip" xml:space="preserve">
     <value>Sets the initial offset between input ring and output ring</value>
@@ -512,7 +510,7 @@ Selected model</value>
     <value>Mode of operation</value>
   </data>
   <data name="OperationModeCaption" xml:space="preserve">
-    <value>Operation mode</value>
+    <value>Operation mode:</value>
   </data>
   <data name="OperationModeTip" xml:space="preserve">
     <value>Changes between encryption and decryption modes. For current models, there is no difference</value>
@@ -533,7 +531,7 @@ Selected model</value>
     <value>Randomly set wheel pins</value>
   </data>
   <data name="ReadyToCaption" xml:space="preserve">
-    <value>Ready to</value>
+    <value>Ready to </value>
   </data>
   <data name="ResetWheelsCaption" xml:space="preserve">
     <value>Reset wheels</value>
@@ -560,40 +558,39 @@ Selected model</value>
     <value>Show wheels</value>
   </data>
   <data name="Step11Caption" xml:space="preserve">
-    <value>1.1 - Select the Hagelin model and the operation mode. The model defines the bars used in the machine and the compatible pin-wheels. With the default settings, there is no need to go over all the steps. Execution can be started any time.</value>
+    <value>1.1.  Select the Hagelin model and the operation mode. The model defines the bars used in the machine and the compatible pinwheels. With the default settings, there is no need to go over all the steps. Execution can be started any time.</value>
   </data>
   <data name="Step12Caption" xml:space="preserve">
-    <value>1.2. Selection of the wheels: If the current  model allows that, select the pin wheels. Once ready, press Next button</value>
+    <value>1.2. Selection of the wheels: If the current  model allows that, select the pinwheels. Once ready, press Next button</value>
   </data>
   <data name="Step13Caption" xml:space="preserve">
     <value>1.3. Select the bars to be used in the Machine. Once ready, press Next button</value>
   </data>
   <data name="Step21Caption" xml:space="preserve">
-    <value>2.1. Setting up pins for the weels - part of inner key. Values added here will be ingnored if the pins are provided as an input</value>
+    <value>2.1. Setting up pins for the wheels, which constitute the first part of the internal key</value>
   </data>
   <data name="Step22Caption" xml:space="preserve">
-    <value>2.2. Setting up lugs of the bars - part of inner key. Values added here will be ingnored if the lugs are provided as an input</value>
+    <value>2.2. Setting up lugs of the bars, which constitute the second part of the internal key</value>
   </data>
   <data name="Step3Caption" xml:space="preserve">
-    <value>3. Setting up initial positions of the wheels - external key. The step is not necessary if the initial state is provided as an input</value>
+    <value>3. Setting up initial positions of the wheels, which constitute the external key</value>
   </data>
   <data name="Step4Caption" xml:space="preserve">
-    <value>4. Setting up the opeation settings: 
-4.1 Mode: Encryption/Decryption; 
-4.2 Text options; 
-4.3: Position of output ring with respect to the input ring.</value>
+    <value>4. Setting up the operation settings
+4.1. Text options
+4.2. Position of output ring with respect to the input ring</value>
   </data>
   <data name="TextOptionsGroup" xml:space="preserve">
     <value>Text options</value>
   </data>
   <data name="UnknownSymbolCaption" xml:space="preserve">
-    <value>Unknown Symbols Handling</value>
+    <value>Unknown symbols handling:</value>
   </data>
   <data name="UnknownSymbolTip" xml:space="preserve">
     <value>Set how to handle uknown Symbols</value>
   </data>
   <data name="UseZCaption" xml:space="preserve">
-    <value>Use Z As Space</value>
+    <value>Use Z as space</value>
   </data>
   <data name="UseZTip" xml:space="preserve">
     <value>Consider Z characters as spaces</value>
@@ -636,6 +633,170 @@ Bar</value>
     <value>Wheels advancements at this step</value>
   </data>
   <data name="WheelsWithActivePins" xml:space="preserve">
-    <value>Wheels with active pins</value>
+    <value>Wheels with active pins:</value>
+  </data>
+  <data name="HagelinModel" xml:space="preserve">
+    <value>Hagelin model</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Input
+letter</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Output
+letter</value>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="CX52FrenchVersion" xml:space="preserve">
+    <value>CX-52 French version</value>
+  </data>
+  <data name="CXMLateVersion" xml:space="preserve">
+    <value>CX-M late version</value>
+  </data>
+  <data name="Ignore" xml:space="preserve">
+    <value>Ignore</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="ReplaceWithQuestionMark" xml:space="preserve">
+    <value>Replace with ?</value>
+  </data>
+  <data name="WheelNum1" xml:space="preserve">
+    <value>Wheel 1</value>
+  </data>
+  <data name="WheelNum2" xml:space="preserve">
+    <value>Wheel 2</value>
+  </data>
+  <data name="WheelNum3" xml:space="preserve">
+    <value>Wheel 3</value>
+  </data>
+  <data name="WheelNum4" xml:space="preserve">
+    <value>Wheel 4</value>
+  </data>
+  <data name="WheelNum5" xml:space="preserve">
+    <value>Wheel 5</value>
+  </data>
+  <data name="WheelNum6" xml:space="preserve">
+    <value>Wheel 6</value>
+  </data>
+  <data name="BarNum1" xml:space="preserve">
+    <value>Bar 1</value>
+  </data>
+  <data name="BarNum2" xml:space="preserve">
+    <value>Bar 2</value>
+  </data>
+  <data name="BarNum3" xml:space="preserve">
+    <value>Bar 3</value>
+  </data>
+  <data name="BarNum4" xml:space="preserve">
+    <value>Bar 4</value>
+  </data>
+  <data name="BarNum5" xml:space="preserve">
+    <value>Bar 5</value>
+  </data>
+  <data name="BarNum6" xml:space="preserve">
+    <value>Bar 6</value>
+  </data>
+  <data name="BarNum7" xml:space="preserve">
+    <value>Bar 7</value>
+  </data>
+  <data name="BarNum8" xml:space="preserve">
+    <value>Bar 8</value>
+  </data>
+  <data name="BarNum9" xml:space="preserve">
+    <value>Bar 9</value>
+  </data>
+  <data name="BarNum10" xml:space="preserve">
+    <value>Bar 10</value>
+  </data>
+  <data name="BarNum11" xml:space="preserve">
+    <value>Bar 11</value>
+  </data>
+  <data name="BarNum12" xml:space="preserve">
+    <value>Bar 12</value>
+  </data>
+  <data name="BarNum13" xml:space="preserve">
+    <value>Bar 13</value>
+  </data>
+  <data name="BarNum14" xml:space="preserve">
+    <value>Bar 14</value>
+  </data>
+  <data name="BarNum15" xml:space="preserve">
+    <value>Bar 15</value>
+  </data>
+  <data name="BarNum16" xml:space="preserve">
+    <value>Bar 16</value>
+  </data>
+  <data name="BarNum17" xml:space="preserve">
+    <value>Bar 17</value>
+  </data>
+  <data name="BarNum18" xml:space="preserve">
+    <value>Bar 18</value>
+  </data>
+  <data name="BarNum19" xml:space="preserve">
+    <value>Bar 19</value>
+  </data>
+  <data name="BarNum20" xml:space="preserve">
+    <value>Bar 20</value>
+  </data>
+  <data name="BarNum21" xml:space="preserve">
+    <value>Bar 21</value>
+  </data>
+  <data name="BarNum22" xml:space="preserve">
+    <value>Bar 22</value>
+  </data>
+  <data name="BarNum23" xml:space="preserve">
+    <value>Bar 23</value>
+  </data>
+  <data name="BarNum24" xml:space="preserve">
+    <value>Bar 24</value>
+  </data>
+  <data name="BarNum25" xml:space="preserve">
+    <value>Bar 25</value>
+  </data>
+  <data name="BarNum26" xml:space="preserve">
+    <value>Bar 26</value>
+  </data>
+  <data name="BarNum27" xml:space="preserve">
+    <value>Bar 27</value>
+  </data>
+  <data name="BarNum28" xml:space="preserve">
+    <value>Bar 28</value>
+  </data>
+  <data name="BarNum29" xml:space="preserve">
+    <value>Bar 29</value>
+  </data>
+  <data name="BarNum30" xml:space="preserve">
+    <value>Bar 30</value>
+  </data>
+  <data name="BarNum31" xml:space="preserve">
+    <value>Bar 31</value>
+  </data>
+  <data name="BarNum32" xml:space="preserve">
+    <value>Bar 32</value>
+  </data>
+  <data name="C52d" xml:space="preserve">
+    <value>C-52d</value>
+  </data>
+  <data name="CX52a" xml:space="preserve">
+    <value>CX-52a</value>
+  </data>
+  <data name="CX52b" xml:space="preserve">
+    <value>CX-52b</value>
+  </data>
+  <data name="CX52c" xml:space="preserve">
+    <value>CX-52c</value>
+  </data>
+  <data name="CX52EIRE" xml:space="preserve">
+    <value>CX-52 EIRE</value>
+  </data>
+  <data name="CXM" xml:space="preserve">
+    <value>CX-M</value>
+  </data>
+  <data name="M209" xml:space="preserve">
+    <value>M-209</value>
   </data>
 </root>

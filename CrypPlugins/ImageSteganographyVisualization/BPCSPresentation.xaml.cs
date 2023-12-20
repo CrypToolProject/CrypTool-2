@@ -55,6 +55,7 @@ namespace ImageSteganographyVisualization
         /// </summary>
         public void EnableButtons()
         {
+            HowItWorksButton.IsEnabled = true;
             SeeBitPlanesButton.IsEnabled = true;
             SeeHidingProcessButton.IsEnabled = true;
             SeePixelConversionButton.IsEnabled = true;
@@ -68,6 +69,7 @@ namespace ImageSteganographyVisualization
         /// </summary>
         public void DisableButtons()
         {
+            HowItWorksButton.IsEnabled = false;
             SeeBitPlanesButton.IsEnabled = false;
             SeeHidingProcessButton.IsEnabled = false;
             SeePixelConversionButton.IsEnabled = false;

@@ -187,7 +187,7 @@ namespace CrypTool.FrequencyTest
                 StringOutput = sb.ToString();
 
                 // update the presentation data
-                updatePresentation();
+                UpdatePresentation();
             }
 
             OnPropertyChanged("StringOutput");
@@ -197,11 +197,21 @@ namespace CrypTool.FrequencyTest
             Progress(1.0, 1.0);
         }
 
+        /// <summary>
+        /// Processes a single word.
+        /// </summary>
+        /// <param name="workstring"></param>
         private void ProcessWord(string workstring)
         {
+            if(settings.CaseSensitivity == 0)
+            {
+                workstring = workstring.ToUpper();
+                alphabet = alphabet.ToUpper();
+            }
+
             if (settings.ProcessUnknownSymbols == 0)
             {
-                workstring = StringUtil.StripUnknownSymbols(alphabet, workstring);
+                workstring = StringUtil.StripUnknownSymbols(alphabet + (settings.AnalysisMode == AnalysisMode.SymbolSeparated ? settings.SymbolSeparators : ""), workstring);
             }
 
             if (workstring.Length == 0)
@@ -214,26 +224,51 @@ namespace CrypTool.FrequencyTest
                 workstring = workstring.ToUpper();
             }
 
-            int stepsize = 1;
-            if (!settings.CountOverlapping)
+            if(settings.AnalysisMode == AnalysisMode.NGrams)
             {
-                stepsize = settings.GrammLength;
-            }
+                int stepsize = 1;
+                if (!settings.CountOverlapping)
+                {
+                    stepsize = settings.GrammLength;
+                }
 
-            foreach (string g in GramTokenizer.tokenize(workstring, settings.GrammLength, settings.BoundaryFragments == 1, stepsize))
-            {
-                if (!_grams.ContainsKey(g))
+                foreach (string g in GramTokenizer.tokenize(workstring, settings.GrammLength, settings.BoundaryFragments == 1, stepsize))
                 {
-                    _grams[g] = new double[] { 1, 0, 0, 0 };
-                }
-                else
-                {
-                    _grams[g][ABSOLUTE]++;
+                    if (!_grams.ContainsKey(g))
+                    {
+                        _grams[g] = new double[] { 1, 0, 0, 0 };
+                    }
+                    else
+                    {
+                        _grams[g][ABSOLUTE]++;
+                    }
                 }
             }
+            else
+            {
+                string separators = ".";
+                if (!string.IsNullOrEmpty(settings.SymbolSeparators))
+                {
+                    separators = settings.SymbolSeparators;
+                }
+                foreach (string g in SymbolTokenizer.tokenize(workstring, separators))
+                {
+                    if (!_grams.ContainsKey(g))
+                    {
+                        _grams[g] = new double[] { 1, 0, 0, 0 };
+                    }
+                    else
+                    {
+                        _grams[g][ABSOLUTE]++;
+                    }
+                }
+            }         
         }
 
-        private void updatePresentation()
+        /// <summary>
+        /// Updates the presentation data.
+        /// </summary>
+        private void UpdatePresentation()
         {
 
             // remove all entries
@@ -245,36 +280,42 @@ namespace CrypTool.FrequencyTest
             {
                 valueType = Properties.Resources.AbsoluteValues;
             }
-
-            switch (settings.GrammLength)
+            if (settings.AnalysisMode == AnalysisMode.NGrams)
             {
-                case 1:
-                    presentation.SetHeadline(Properties.Resources.UnigramFrequencies + " " + valueType);
-                    break;
-                case 2:
-                    presentation.SetHeadline(Properties.Resources.BigramFrequencies + " " + valueType);
-                    break;
-                case 3:
-                    presentation.SetHeadline(Properties.Resources.TrigramFrequencies + " " + valueType);
-                    break;
-                case 4:
-                    presentation.SetHeadline(Properties.Resources.TetragramFrequencies + " " + valueType);
-                    break;
-                case 5:
-                    presentation.SetHeadline(Properties.Resources.PentagramFrequencies + " " + valueType);
-                    break;
-                case 6:
-                    presentation.SetHeadline(Properties.Resources.HexagramFrequencies + " " + valueType);
-                    break;
-                case 7:
-                    presentation.SetHeadline(Properties.Resources.HeptagramFrequencies + " " + valueType);
-                    break;
-                case 8:
-                    presentation.SetHeadline(Properties.Resources.OctagramFrequencies + " " + valueType);
-                    break;
-                default:
-                    presentation.SetHeadline(settings.GrammLength + Properties.Resources.nGram + " " + valueType);
-                    break;
+                switch (settings.GrammLength)
+                {
+                    case 1:
+                        presentation.SetHeadline(Properties.Resources.UnigramFrequencies + " " + valueType);
+                        break;
+                    case 2:
+                        presentation.SetHeadline(Properties.Resources.BigramFrequencies + " " + valueType);
+                        break;
+                    case 3:
+                        presentation.SetHeadline(Properties.Resources.TrigramFrequencies + " " + valueType);
+                        break;
+                    case 4:
+                        presentation.SetHeadline(Properties.Resources.TetragramFrequencies + " " + valueType);
+                        break;
+                    case 5:
+                        presentation.SetHeadline(Properties.Resources.PentagramFrequencies + " " + valueType);
+                        break;
+                    case 6:
+                        presentation.SetHeadline(Properties.Resources.HexagramFrequencies + " " + valueType);
+                        break;
+                    case 7:
+                        presentation.SetHeadline(Properties.Resources.HeptagramFrequencies + " " + valueType);
+                        break;
+                    case 8:
+                        presentation.SetHeadline(Properties.Resources.OctagramFrequencies + " " + valueType);
+                        break;
+                    default:
+                        presentation.SetHeadline(settings.GrammLength + Properties.Resources.nGram + " " + valueType);
+                        break;
+                }
+            }
+            else
+            {
+                presentation.SetHeadline(Properties.Resources.SymbolSeparated + Properties.Resources.Frequencies);
             }
 
             //update bars
@@ -337,7 +378,7 @@ namespace CrypTool.FrequencyTest
 
         private void presentation_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
         {
-            updatePresentation();
+            UpdatePresentation();
         }
 
         private void settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -346,7 +387,7 @@ namespace CrypTool.FrequencyTest
             {
                 case "Autozoom":
                 case "ChartHeight":
-                    updatePresentation();
+                    UpdatePresentation();
                     break;
                 case "Scale":
                     presentation.SetScaler(settings.Scale / 10000.0);

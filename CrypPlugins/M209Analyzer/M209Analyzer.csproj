@@ -106,6 +106,7 @@
     <ProjectReference Include="..\..\LibSource\M209Analyzer\M209Analyzer\M209AnalyzerLib.csproj">
       <Project>{bc60da91-4135-4cfb-b0f4-2b250d435c73}</Project>
       <Name>M209AnalyzerLib</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

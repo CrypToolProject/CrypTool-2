@@ -24,7 +24,7 @@ namespace CrypTool.Plugins.HagelinMachine
     public partial class HagelinMachineSettings : ISettings
     {
         #region Model
-        [TaskPane("ModelCaption", "ModelTip", "Hagelin model", 19, false, ControlType.ComboBox, new string[] { "CX52a", "CX52b", "CX52c", "C52d", "CXM", "CXM_LATE_VERSION", "FRANCE", "EIRE", "M209", "Custom" })]
+        [TaskPane("ModelCaption", "ModelTip", "Hagelin model", 19, false, ControlType.ComboBox, new string[] { "CX52a", "CX52b", "CX52c", "C52d", "CXM", "CXMLateVersion", "CX52FrenchVersion", "CX52EIRE", "M209", "Custom" })]
         public ModelType Model
         {
             get
@@ -35,9 +35,7 @@ namespace CrypTool.Plugins.HagelinMachine
             {
                 if (_model != value)
                 {
-                    _model = value;
-                    _selectedModel = _model.ToString();
-                    // HOWTO: MUST be called every time a property value changes with correct parameter name
+                    _model = value;                   
                     ApplyModel();
                     HideModelBars();
                     OnPropertyChanged("Model");

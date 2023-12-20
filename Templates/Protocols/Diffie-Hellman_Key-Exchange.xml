@@ -16,6 +16,7 @@
   Source: <external ref="http://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange" /></description>
   <keywords>protocol, color, colour, alice, bob, eve</keywords>
   <replacements lang="en">
+    <replacement key="$Shared Values$" value="Shared Values" />
     <replacement key="$Prime$" value="Prime" />
     <replacement key="$VariableStore$" value="store variable" />
     <replacement key="$Alice's secret$" value="Alice's secret" />
@@ -23,6 +24,7 @@
     <replacement key="$Shared secret (calculated by Alice)$" value="Shared secret (calculated by Alice)" />
     <replacement key="$Shared secret (calculated by Bob)$" value="Shared secret (calculated by Bob)" />
     <replacement key="$Comparator$" value="Comparator" />
+    <replacement key="$memo$" value="This template demonstrates the {\b Diffie-Hellman-Merkle (DH) key exchange protocol}. Alice and Bob each choose a private key (a and b) and agree on a public prime number (p) and a generator (g). Alice calculates her public value as A = g^a mod p, and Bob calculates his as B = g^b mod p. They exchange these public values, then use their private key and the other's public value to compute a shared secret. Alice calculates s = B^a mod p, and Bob calculates s = A^b mod p. This shared secret is the same for both, allowing secure encrypted communication."/>
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -34,6 +36,7 @@
   Quelle: <external ref="http://de.wikipedia.org/wiki/Diffie-Hellman-Schlüsselaustausch" /></description>
   <keywords lang="de">protokoll, schlüssel, alice, bob, eve</keywords>
   <replacements lang="de">
+    <replacement key="$Shared Values$" value="Gemeinsame Werte" />
     <replacement key="$Prime$" value="Primzahl" />
     <replacement key="$VariableStore$" value="speichere" />
     <replacement key="$Alice's secret$" value="Alices Geheimnis" />
@@ -41,6 +44,7 @@
     <replacement key="$Shared secret (calculated by Alice)$" value="Gemeinsames Geheimnis (berechnet von Alice)" />
     <replacement key="$Shared secret (calculated by Bob)$" value="Gemeinsames Geheimnis (berechnet von Bob)" />
     <replacement key="$Comparator$" value="Vergleich" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert das {\b Diffie-Hellman-Merkle (DH) Schlüsselaustauschprotokoll}. Alice und Bob wählen jeweils einen privaten Schlüssel (a und b) und einigen sich auf eine öffentliche Primzahl (p) und einen Generator (g). Alice berechnet ihren öffentlichen Wert als A = g^a mod p, und Bob berechnet seinen als B = g^b mod p. Sie tauschen diese öffentlichen Werte aus, dann verwenden sie ihren privaten Schlüssel und den öffentlichen Wert des anderen, um ein gemeinsames Geheimnis zu berechnen. Alice berechnet s = B^a mod p, und Bob berechnet s = A^b mod p. Dieses gemeinsame Geheimnis ist für beide gleich, was eine sichere verschlüsselte Kommunikation ermöglicht."/>
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

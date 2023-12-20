@@ -105,11 +105,16 @@ namespace CrypTool.Substitution
             Dictionary<string, string> dict;
             if (_settings.Action == 0) // Encrypt
             {
-                dict = GenerateSubstitutionDictionary(SourceAlphabet.Replace(Environment.NewLine, string.Empty), DestinationAlphabet.Replace(Environment.NewLine, string.Empty));
+                dict = GenerateSubstitutionDictionary(SourceAlphabet.Replace(Environment.NewLine, string.Empty), DestinationAlphabet.Replace(Environment.NewLine, string.Empty), ref _stopped);
             }
             else //Decrypt
             {
-                dict = GenerateSubstitutionDictionary(DestinationAlphabet.Replace(Environment.NewLine, string.Empty), SourceAlphabet.Replace(Environment.NewLine, string.Empty));
+                dict = GenerateSubstitutionDictionary(DestinationAlphabet.Replace(Environment.NewLine, string.Empty), SourceAlphabet.Replace(Environment.NewLine, string.Empty), ref _stopped);
+            }
+
+            if (_stopped)
+            {
+                return;
             }
 
             GeneratePresentationMapping(dict);
@@ -385,14 +390,14 @@ namespace CrypTool.Substitution
         /// <param name="sourceAlphabet"></param>
         /// <param name="destinationAlphabet"></param>
         /// <returns></returns>
-        private Dictionary<string, string> GenerateSubstitutionDictionary(string sourceAlphabet, string destinationAlphabet)
+        private Dictionary<string, string> GenerateSubstitutionDictionary(string sourceAlphabet, string destinationAlphabet, ref bool stop)
         {
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
 
             int duplicateSubstitution = 0;
 
             for (int sourceIndex = 0, destinationIndex = 0; sourceIndex < sourceAlphabet.Length && destinationIndex < destinationAlphabet.Length; sourceIndex++)
-            {
+            {                
                 string sourceCharacter = "";
                 string destinationCharacter = "";
                 //1. Find next source character (a "character" may be one or more chars in the string)
@@ -407,6 +412,10 @@ namespace CrypTool.Substitution
                         else
                         {
                             break;
+                        }
+                        if (stop)
+                        {
+                            return dictionary;
                         }
                     }
                 }
@@ -426,6 +435,10 @@ namespace CrypTool.Substitution
                         else
                         {
                             break;
+                        }
+                        if (stop)
+                        {
+                            return dictionary;
                         }
                     }
                 }
@@ -590,6 +603,11 @@ namespace CrypTool.Substitution
             Dictionary<string, int> polyCounterDictionary = new Dictionary<string, int>();
             foreach (string token in tokens)
             {
+                if (_stopped)
+                {
+                    return string.Empty;
+                }
+
                 string substitutionCharacter = GetSubstitutionValue(substitutionDictionary, token);
 
                 if (substitutionCharacter.Contains("|"))
@@ -642,7 +660,7 @@ namespace CrypTool.Substitution
                 }
 
                 counter++;
-                ProgressChanged(counter, tokens.Length);
+                ProgressChanged(counter, tokens.Length);               
             }
             return substitution.ToString();
         }

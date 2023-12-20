@@ -250,6 +250,35 @@ namespace CrypTool.PluginBase.Utils
             return CreateGrams((int)languageId, gramsType, useSpaces);
         }
 
+        /// <summary>
+        /// Loads a dictionary from the specified dictionary file
+        /// </summary>
+        /// <param name="languageCode"></param>
+        /// <returns></returns>
+        public static List<string> LoadDictionary(string languageCode)
+        {
+            return LoadWordTree(languageCode).ToList();
+        }
+
+        /// <summary>
+        /// Loads a word tree from the specified dictionary file
+        /// </summary>
+        /// <param name="languageCode"></param>
+        /// <returns></returns>
+        public static WordTree LoadWordTree(string languageCode)
+        {
+            string filename = Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, string.Format("Dictionary_{0}.dic", languageCode));
+            WordTree wordTree;
+            using (FileStream filestream = new FileStream(filename, FileMode.Open, FileAccess.Read))
+            using(GZipStream gzipStream = new GZipStream(filestream,CompressionMode.Decompress))
+            using (BinaryReader reader = new BinaryReader(gzipStream))
+            {
+
+                wordTree = WordTree.Deserialize(reader);
+            }
+            return wordTree;                   
+        }
+
         public static string Alphabet(string language, bool useSpaces = false)
         {
             if (!Alphabets.ContainsKey(language))
@@ -1392,6 +1421,269 @@ namespace CrypTool.PluginBase.Utils
                 Buffer.BlockCopy(frequencyData, 0, frequencyArray, 0, frequencyData.Length);
                 return frequencyArray;
             }
+        }
+    }
+
+
+    /// <summary>
+    /// A Node of a word tree.
+    /// </summary>
+    public class Node
+    {
+        /// <summary>
+        /// A symbol that indicates the end of a word.
+        /// </summary>
+        public const char WordEndSymbol = (char)1;
+
+        /// <summary>
+        /// A symbol that indicates an end of the tree.
+        /// </summary>
+        public const char TerminationSymbol = (char)0;
+
+        /// <summary>
+        /// The value of this node.
+        /// </summary>
+        public char Value { get; set; }
+
+        /// <summary>
+        /// A value indicating whether a word ends here.
+        /// </summary>
+        public bool WordEndsHere { get; set; }
+
+        /// <summary>
+        /// All child nodes of this node.
+        /// </summary>
+        public List<Node> ChildNodes { get; set; } = new List<Node>();
+
+        /// <summary>
+        /// Returns true if the given object is equal to this node.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(object obj)
+        {
+            //check if obj is null
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is Node))
+            {
+                return false;
+            }
+            Node node = (Node)obj;
+            if (node.Value != Value)
+            {
+                return false;
+            }
+            if (node.WordEndsHere != WordEndsHere)
+            {
+                return false;
+            }
+            if (node.ChildNodes.Count != ChildNodes.Count)
+            {
+                return false;
+            }
+            for (int i = 0; i < ChildNodes.Count; i++)
+            {
+                if (!ChildNodes[i].Equals(node.ChildNodes[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Returns the hash code of this node.
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            int hashCode = 1061660465;
+            hashCode = hashCode * -1521134295 + Value.GetHashCode();
+            hashCode = hashCode * -1521134295 + WordEndsHere.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<Node>>.Default.GetHashCode(ChildNodes);
+            return hashCode;
+        }
+    }
+
+    /// <summary>
+    /// A tree of words -- a tree-based dictionary.
+    /// </summary>
+    public class WordTree : Node
+    {
+        public int StoredWords { get; set; } = 0;
+        public string LanguageCode { get; set; } = string.Empty;
+        public string Alphabet { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Deserializes a tree from the given stream.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
+        public static WordTree Deserialize(BinaryReader reader)
+        {
+            char readChar;
+
+            //Word Tree data format:
+            // "CT2DIC" 6 bytes
+            // languageCodeBytes 0-terminated string;
+            // magicNo 4 byte integer;
+            // alphabet = 0-terminated string;
+            // numberOfWords = 4 byte integer
+
+            WordTree tree = new WordTree();
+
+            //1. load word tree header
+            string magicNo = new string(reader.ReadChars(6));
+            if (magicNo != "CT2DIC")
+            {
+                throw new Exception("File does not start with the expected magic number for word tree.");
+            }
+            
+            //read chars of language code until 0-termination
+            StringBuilder languageCodeBuilder = new StringBuilder();            
+            while ((readChar = reader.ReadChar()) != '\0')
+            {
+                languageCodeBuilder.Append(readChar);
+            }
+            tree.LanguageCode = languageCodeBuilder.ToString();
+
+            //read alphabet until 0-termination
+            StringBuilder alphabetBuilder = new StringBuilder();
+            while ((readChar = reader.ReadChar()) != '\0')
+            {
+                alphabetBuilder.Append(readChar);
+            }
+            tree.Alphabet = alphabetBuilder.ToString();
+
+            //read number of stored words                                 
+            tree.StoredWords = reader.ReadInt32();
+
+            //2. load word tree data structure
+            Stack<Node> stack = new Stack<Node>();
+            stack.Push(tree);
+            int symbol;
+            while ((symbol = reader.Read()) != -1)
+            {
+                readChar = (char)symbol;
+                if (readChar == Node.WordEndSymbol)
+                {
+                    stack.Peek().WordEndsHere = true;
+                    tree.StoredWords++;
+                    continue;
+                }
+                if (readChar == Node.TerminationSymbol)
+                {
+                    stack.Pop();
+                    continue;
+                }
+                Node newNode = new Node() { Value = readChar };
+                stack.Peek().ChildNodes.Add(newNode);
+                stack.Push(newNode);
+            }
+            return tree;
+        }
+
+        /// <summary>
+        /// Returns true if the tree contains the given word.
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public bool ContainsWord(string word)
+        {
+            Node currentNode = this;
+            for (int i = 0; i < word.Length; i++)
+            {
+                Node foundNode = null;
+                foreach (Node childNode in currentNode.ChildNodes)
+                {
+                    if (childNode.Value == word[i])
+                    {
+                        currentNode = childNode;
+                        break;
+                    }
+                }
+                if (foundNode == null)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }       
+
+        /// <summary>
+        /// Converts the tree to a list of words.
+        /// </summary>
+        public List<string> ToList()
+        {
+            List<string> list = new List<string>();
+            Stack<char> stack = new Stack<char>();
+            foreach (Node node in ChildNodes)
+            {
+                AddNodeToList(node, stack, list);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// Adds a node and all its children to the list.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="stack"></param>
+        private void AddNodeToList(Node node, Stack<char> stack, List<string> list)
+        {
+            stack.Push(node.Value);
+            if (node.WordEndsHere)
+            {
+                list.Add(new string(stack.Reverse().ToArray()));
+            }
+            foreach (Node childNode in node.ChildNodes)
+            {
+                AddNodeToList(childNode, stack, list);
+            }
+            stack.Pop();
+        }
+
+        /// <summary>
+        /// Returns true if the given object is equal to this tree.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(object obj)
+        {
+            //check if obj is null
+            if (obj == null)
+            {
+                return false;
+            }
+            //check if obj is a WordTree
+            if (!(obj is WordTree))
+            {
+                return false;
+            }
+            //check if stored number of words are equal
+            if (StoredWords != ((WordTree)obj).StoredWords)
+            {
+                return false;
+            }
+            return base.Equals(obj);
+        }
+
+        /// <summary>
+        /// Returns the hash code of this tree.
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            int hashCode = -1514771638;
+            hashCode = hashCode * -1521134295 + base.GetHashCode();
+            hashCode = hashCode * -1521134295 + Value.GetHashCode();
+            hashCode = hashCode * -1521134295 + WordEndsHere.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<Node>>.Default.GetHashCode(ChildNodes);
+            hashCode = hashCode * -1521134295 + StoredWords.GetHashCode();
+            return hashCode;
         }
     }
 }

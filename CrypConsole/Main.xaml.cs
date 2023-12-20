@@ -23,7 +23,6 @@ using System.Threading;
 using System.Windows;
 using WorkspaceManager.Execution;
 using WorkspaceManager.Model;
-using WorkspaceManagerModel.Model.Tools;
 using Path = System.IO.Path;
 
 namespace CrypTool.CrypConsole
@@ -46,10 +45,15 @@ namespace CrypTool.CrypConsole
         private ExecutionEngine _engine = null;
         private int _globalProgress;
         private DateTime _startTime;
-        private readonly object _progressLockObject = new object();
-        private bool _jsonoutput = false;
+        private readonly object _progressLockObject = new object();        
         private NotificationLevel _loglevel = NotificationLevel.Warning;
         private bool _terminate = false;
+        private string _cwm_file = null;
+        private List<Setting> _settings = null;
+        private List<Parameter> _inputParameters = null;
+        private List<Parameter> _outputParameters = null;
+
+        public static bool JsonOutput { get; private set; } = false;
 
         /// <summary>
         /// Constructor
@@ -96,120 +100,33 @@ namespace CrypTool.CrypConsole
                 Environment.Exit(0);
             }
 
-            //Step 2: Get cwm_file to open
-            string cwm_file = ArgsHelper.GetCWMFileName(args);
-            if (cwm_file == null)
+            string jsonInput = null;
+            //check, if not jsoninput is given
+            if ((jsonInput = ArgsHelper.GetJsonInput(args)) == null)
             {
-                Console.WriteLine("Please specify a cwm file using -cwm=filename");
-                Environment.Exit(-1);
+                GetArgumentValues(args);
             }
-            if (!File.Exists(cwm_file))
+            else
             {
-                Console.WriteLine("Specified cwm file \"{0}\" does not exist", cwm_file);
-                Environment.Exit(-2);
-            }
+                ParseJsonInputFile(jsonInput);
+            }            
 
-            //Step 3: Get additional parameters
-            _verbose = ArgsHelper.CheckVerboseMode(args);
-            try
-            {
-                _timeout = ArgsHelper.GetTimeout(args);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Environment.Exit(-2);
-            }
-            try
-            {
-                _loglevel = ArgsHelper.GetLoglevel(args);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Environment.Exit(-2);
-            }           
-            try
-            {
-                _jsonoutput = ArgsHelper.CheckJsonOutput(args);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Environment.Exit(-2);
-            }
-
-            //Step 4: Check, if discover mode was selected
-            if (ArgsHelper.CheckDiscoverMode(args))
-            {
-                DiscoverCWMFile(cwm_file);
-                Environment.Exit(0);
-            }
-
-            //Step 5: Get input parameters
-            List<Parameter> inputParameters = null;
-            try
-            {
-                inputParameters = ArgsHelper.GetInputParameters(args);
-                if (_verbose)
-                {
-                    foreach (Parameter param in inputParameters)
-                    {
-                        Console.WriteLine("Input parameter given: " + param);
-                    }
-                }
-            }
-            catch (InvalidParameterException ipex)
-            {
-                Console.WriteLine(ipex.Message);
-                Environment.Exit(-3);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception occured while parsing parameters: {0}", ex.Message);
-                Environment.Exit(-3);
-            }
-
-            //Step 6: Get output parameters
-            List<Parameter> outputParameters = null;
-            try
-            {
-                outputParameters = ArgsHelper.GetOutputParameters(args);
-                if (_verbose)
-                {
-                    foreach (Parameter param in inputParameters)
-                    {
-                        Console.WriteLine("Output parameter given: " + param);
-                    }
-                }
-            }
-            catch (InvalidParameterException ipex)
-            {
-                Console.WriteLine(ipex.Message);
-                Environment.Exit(-3);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception occured while parsing parameters: {0}", ex.Message);
-                Environment.Exit(-3);
-            }
-
-            //Step 7: Update application domain. This allows loading additional .net assemblies
+            //Step 8: Update application domain. This allows loading additional .net assemblies
             try
             {
                 UpdateAppDomain();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception occured while updating AppDomain: {0}", ex.Message);
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while updating AppDomain: {0}", ex.Message), JsonOutput);
                 Environment.Exit(-4);
             }
 
-            //Step 8: Load cwm file and create model            
+            //Step 9: Load cwm file and create model            
             try
             {
                 ModelPersistance modelPersistance = new ModelPersistance();
-                _workspaceModel = modelPersistance.loadModel(cwm_file, true);
+                _workspaceModel = modelPersistance.loadModel(_cwm_file, true);
 
                 foreach (PluginModel pluginModel in _workspaceModel.GetAllPluginModels())
                 {
@@ -217,13 +134,13 @@ namespace CrypTool.CrypConsole
                 }
             }
             catch (Exception ex)
-            {
-                Console.WriteLine("Exception occured while loading model from cwm file: {0}", ex.Message);
+            {                
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while loading model from cwm file: {0}", ex.Message), JsonOutput);
                 Environment.Exit(-5);
             }
 
-            //Step 9: Set input parameters
-            foreach (Parameter param in inputParameters)
+            //Step 10: Set input parameters
+            foreach (Parameter param in _inputParameters)
             {
                 string name = param.Name;
                 bool found = false;
@@ -239,28 +156,28 @@ namespace CrypTool.CrypConsole
                     {
                         if (component.PluginType.FullName.Equals("CrypTool.TextInput.TextInput"))
                         {
-                            ISettings settings = component.Plugin.Settings;
-                            PropertyInfo textProperty = settings.GetType().GetProperty("Text");
+                            ISettings plugin_settings = component.Plugin.Settings;
+                            PropertyInfo textProperty = plugin_settings.GetType().GetProperty("Text");
 
                             if (param.ParameterType == ParameterType.Text)
                             {
-                                textProperty.SetValue(settings, param.Value);
+                                textProperty.SetValue(plugin_settings, param.Value);
                             }
                             else if (param.ParameterType == ParameterType.File)
                             {
                                 try
                                 {
                                     if (!File.Exists(param.Value))
-                                    {
-                                        Console.WriteLine("Input file does not exist: {0}", param.Value);
+                                    {                                        
+                                        JsonHelper.WriteOutput("Exception", string.Format("Input file does not exist: {0}", param.Value), JsonOutput);
                                         Environment.Exit(-7);
                                     }
                                     string value = File.ReadAllText(param.Value);
-                                    textProperty.SetValue(settings, value);
+                                    textProperty.SetValue(plugin_settings, value);
                                 }
                                 catch (Exception ex)
-                                {
-                                    Console.WriteLine("Exception occured while reading file {0}: {0}", param.Value, ex.Message);
+                                {                                    
+                                    JsonHelper.WriteOutput("Exception", string.Format("Exception occured while reading file {0}: {1}", param.Value, ex.Message), JsonOutput);
                                     Environment.Exit(-7);
                                 }
                             }
@@ -271,12 +188,12 @@ namespace CrypTool.CrypConsole
                         }
                         else if (component.PluginType.FullName.Equals("CrypTool.Plugins.Numbers.NumberInput"))
                         {
-                            ISettings settings = component.Plugin.Settings;
-                            PropertyInfo textProperty = settings.GetType().GetProperty("Number");
+                            ISettings plugin_settings = component.Plugin.Settings;
+                            PropertyInfo textProperty = plugin_settings.GetType().GetProperty("Number");
 
                             if (param.ParameterType == ParameterType.Number)
                             {
-                                textProperty.SetValue(settings, param.Value);
+                                textProperty.SetValue(plugin_settings, param.Value);
                             }
                             //we need to call initialize to get the new text to the ui of the TextInput component
                             //otherwise, it will output the value retrieved by deserialization
@@ -287,41 +204,44 @@ namespace CrypTool.CrypConsole
                 }
                 if (!found)
                 {
-                    Console.WriteLine("Component for setting input parameter not found: {0}", param);
+                    JsonHelper.WriteOutput("Exception", string.Format("Component for setting input parameter not found: {0}", param), JsonOutput);
                     Environment.Exit(-7);
                 }
             }
+            
+            //Step 11: Set settings
+            foreach(Setting setting in _settings)
+            {
+                ChangeSetting(setting);                
+            }
 
-            //Step 10: Set output parameters
-            foreach (Parameter param in outputParameters)
+            //Step 12: Set output parameters
+            foreach (Parameter param in _outputParameters)
             {
                 string name = param.Name;
                 bool found = false;
                 foreach (PluginModel component in _workspaceModel.GetAllPluginModels())
                 {
-                    if (component.GetName().ToLower().Equals(param.Name.ToLower()))
-                    {
-                        if (component.PluginType.FullName.Equals("TextOutput.TextOutput"))
-                        {
-                            component.Plugin.PropertyChanged += Plugin_PropertyChanged;
-                            found = true;
-                        }
+                    if (component.GetName().ToLower().Equals(param.Name.ToLower()) && component.PluginType.FullName.Equals("TextOutput.TextOutput"))
+                    {                     
+                        component.Plugin.PropertyChanged += Plugin_PropertyChanged;
+                        found = true;                    
                     }
                 }
                 if (!found)
-                {
-                    Console.WriteLine("TextOutput for setting output parameter not found: {0}", param);
-                    Environment.Exit(-7);
+                {                    
+                    JsonHelper.WriteOutput("Exception", string.Format("TextOutput for setting output parameter not found: {0}", param), JsonOutput);
+                    Environment.Exit(-8);
                 }
             }
 
-            //Step 11: add OnPluginProgressChanged handlers
+            //Step 13: add OnPluginProgressChanged handlers
             foreach (PluginModel plugin in _workspaceModel.GetAllPluginModels())
             {
                 plugin.Plugin.OnPluginProgressChanged += OnPluginProgressChanged;
             }
 
-            //Step 12: Create execution engine            
+            //Step 14: Create execution engine            
             try
             {
                 _engine = new ExecutionEngine(null);
@@ -330,11 +250,11 @@ namespace CrypTool.CrypConsole
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception occured while executing model: {0}", ex.Message);
-                Environment.Exit(-7);
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while executing model: {0}", ex.Message), JsonOutput);
+                Environment.Exit(-9);
             }        
 
-            //Step 13: Start execution in a dedicated thread
+            //Step 15: Start execution in a dedicated thread
             DateTime endTime = DateTime.Now.AddSeconds(_timeout);
             Thread t = new Thread(() =>
             {
@@ -344,29 +264,330 @@ namespace CrypTool.CrypConsole
                     Thread.Sleep(100);
                     if (_timeout < int.MaxValue && DateTime.Now >= endTime)
                     {
-                        Console.WriteLine("Timeout ({0} seconds) reached. Kill process hard now", _timeout);
+                        JsonHelper.WriteOutput("Message", string.Format("Timeout ({0} seconds) reached. Kill process hard now", _timeout), JsonOutput);
                         Environment.Exit(-8);
                     }
-                }
-
-                //Step 14: Output if no output was selected
-                if (!_jsonoutput)
-                {
-                    foreach (string value in _outputValues)
-                    {
-                        Console.WriteLine(value);
-                    }
-                }
+                }                          
 
                 _engine.Stop();
-                if (_verbose)
+
+                //Output all output values
+                foreach (string output in _outputValues)
                 {
-                    Console.WriteLine("Execution engine stopped. Terminate now");
-                    Console.WriteLine("Total execution took: {0}", DateTime.Now - _startTime);
+                    if (output != null)
+                    {
+                        JsonHelper.WriteOutput("Output", output, JsonOutput);
+                    }
+                }                
+
+                if (_verbose)
+                {                    
+                    JsonHelper.WriteOutput("Message", "ExecutionEngine stopped.Terminate now", JsonOutput);
+                    JsonHelper.WriteOutput("Message", string.Format("Total execution took: {0}", DateTime.Now - _startTime), JsonOutput);
                 }
                 Environment.Exit(0);
             });
             t.Start();
+        }
+
+        /// <summary>
+        /// Handles the case we have arguments instead of a json file
+        /// </summary>
+        /// <param name="args"></param>
+        private void GetArgumentValues(string[] args)
+        {
+            //Step 2: Get cwm_file to open
+            _cwm_file = ArgsHelper.GetCWMFileName(args);
+            if (_cwm_file == null)
+            {                
+                JsonHelper.WriteOutput("Exception", "Please specify a cwm file using -cwm=filename", JsonOutput);
+                Environment.Exit(-1);
+            }
+            if (!File.Exists(_cwm_file))
+            {                
+                JsonHelper.WriteOutput("Exception", string.Format("Specified cwm file \"{0}\" does not exist", _cwm_file), JsonOutput);
+                Environment.Exit(-2);
+            }
+
+            //Step 3: Get additional parameters
+            _verbose = ArgsHelper.CheckVerboseMode(args);
+            try
+            {
+                _timeout = ArgsHelper.GetTimeout(args);
+                //check, if timeout <=0
+                if (_timeout <= 0)
+                {
+                    JsonHelper.WriteOutput("Exception", "Timeout must be greater than 0", JsonOutput);
+                    Environment.Exit(-2);
+                }
+            }
+            catch (Exception ex)
+            {                
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing timeout: {0}", ex.Message), JsonOutput);
+                Environment.Exit(-2);
+            }            
+
+            try
+            {
+                _loglevel = ArgsHelper.GetLoglevel(args);
+            }
+            catch (Exception ex)
+            {
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing loglevel: {0}", ex.Message), JsonOutput);
+                Environment.Exit(-2);
+            }
+            try
+            {
+                JsonOutput = ArgsHelper.CheckJsonOutput(args);
+            }
+            catch (Exception ex)
+            {
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing jsonoutput: {0}", ex.Message), JsonOutput);
+                Environment.Exit(-2);
+            }
+
+            //Step 4: Check, if discover mode was selected
+            if (ArgsHelper.CheckDiscoverMode(args))
+            {
+                DiscoverCWMFile(_cwm_file);
+                Environment.Exit(0);
+            }
+
+            //Step 5: Get input parameters
+            try
+            {
+                _inputParameters = ArgsHelper.GetInputParameters(args);
+                if (_verbose)
+                {
+                    foreach (Parameter param in _inputParameters)
+                    {                       
+                        JsonHelper.WriteOutput("InputParameter", string.Format("Input parameter given: ", param), JsonOutput);
+                    }
+                }
+            }
+            catch (InvalidParameterException ipex)
+            {
+                JsonHelper.WriteOutput("Exception", ipex.Message, JsonOutput);
+                Environment.Exit(-3);
+            }
+            catch (Exception ex)
+            {                
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing parameters: {0}", ex.Message), JsonOutput);
+                Environment.Exit(-3);
+            }
+
+            //Step 6: Get settings
+            try
+            {
+                _settings = ArgsHelper.GetSettings(args);
+                if (_verbose)
+                {
+                    foreach (Setting setting in _settings)
+                    {
+                        JsonHelper.WriteOutput("Setting", string.Format("Setting given: {0}", setting), JsonOutput);
+                    }
+                }
+            }
+            catch (InvalidParameterException ipex)
+            {
+                Console.WriteLine(ipex.Message);
+                Environment.Exit(-3);
+            }
+            catch (Exception ex)
+            {                
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing settings: {0}", ex.Message), JsonOutput);
+                Environment.Exit(-3);
+            }
+
+            //Step 7: Get output parameters
+            try
+            {
+                _outputParameters = ArgsHelper.GetOutputParameters(args);
+                if (_verbose)
+                {
+                    foreach (Parameter param in _outputParameters)
+                    {
+                        JsonHelper.WriteOutput("OutputParameter", string.Format("Output parameter given: {0}", param), JsonOutput);
+                    }
+                }
+            }
+            catch (InvalidParameterException ipex)
+            {
+                JsonHelper.WriteOutput("Exception", ipex.Message, JsonOutput);
+                Environment.Exit(-3);
+            }
+            catch (Exception ex)
+            {
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing parameters: {0}", ex.Message), JsonOutput);
+                Environment.Exit(-3);
+            }
+        }
+
+        /// <summary>
+        /// Parses the json file and sets the values defined in the file similiar to GetArgumentValues does with argument values
+        /// </summary>
+        /// <param name="jsonfile"></param>
+        private void ParseJsonInputFile(string jsonfile)
+        {
+            if (!File.Exists(jsonfile))
+            {
+                JsonHelper.WriteOutput("Exception", string.Format("Specified json file \"{0}\" does not exist", jsonfile), JsonOutput);
+                Environment.Exit(-2);
+            }
+
+            JsonInput jsonInput = null;
+            try
+            {
+                jsonInput = JsonHelper.ParseAndValidateJsonInput(jsonfile);
+            }
+            catch (Exception ex)
+            {
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing json file: {0}", ex.Message), JsonOutput);   
+                Environment.Exit(-3);
+            }
+
+            _verbose = jsonInput.Verbose;
+            _timeout = jsonInput.Timeout;
+            _loglevel = jsonInput.Loglevel;
+            JsonOutput = jsonInput.JsonOutput;
+            _cwm_file = jsonInput.CwmFile;
+            _settings = jsonInput.Settings;
+            _inputParameters = jsonInput.InputParameters;
+            _outputParameters = jsonInput.OutputParameters;
+        }
+
+        /// <summary>
+        /// Changes the setting of a CrypTool component to the given value
+        /// </summary>
+        /// <param name="setting"></param>
+        private void ChangeSetting(Setting setting)
+        {
+            bool found = false;
+            foreach (PluginModel component in _workspaceModel.GetAllPluginModels())
+            {
+                if (component.GetName().ToLower().Equals(setting.ComponentName.ToLower()))
+                {
+                    found = true;
+                    ISettings plugin_settings = component.Plugin.Settings;
+                    PropertyInfo property = plugin_settings.GetType().GetProperty(setting.SettingName);
+                    if (property == null)
+                    {
+                        JsonHelper.WriteOutput("Exception", string.Format("Setting \"{0}\" not found in component \"{1}\"", setting.SettingName, setting.ComponentName), JsonOutput);   
+                        Environment.Exit(-7);
+                    }
+
+                    //handle case setting is text
+                    if (property.PropertyType.FullName.Equals("System.String"))
+                    {
+                        property.SetValue(plugin_settings, setting.Value);
+                        return;
+                    }
+
+                    //handle case setting is number
+                    if (property.PropertyType.FullName.Equals("System.Int32"))
+                    {
+                        try
+                        {
+                            int value = int.Parse(setting.Value);
+                            property.SetValue(plugin_settings, value);
+                            return;
+                        }
+                        catch (Exception ex)
+                        {
+                            JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing value \"{0}\" to int: {1}", setting.Value, ex.Message), JsonOutput); 
+                            Environment.Exit(-7);
+                        }
+                    }
+                   
+                    //handle case setting is long
+                    if (property.PropertyType.FullName.Equals("System.Int64"))
+                    {
+                        try
+                        {
+                            long value = long.Parse(setting.Value);
+                            property.SetValue(plugin_settings, value);
+                            return;
+                        }
+                        catch (Exception ex)
+                        {
+                            JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing value \"{0}\" to long: {1}", setting.Value, ex.Message), JsonOutput);
+                            Environment.Exit(-7);
+                        }
+                    }
+
+                    //handle case setting is float
+                    if (property.PropertyType.FullName.Equals("System.Single"))
+                    {
+                        try
+                        {
+                            float value = float.Parse(setting.Value);
+                            property.SetValue(plugin_settings, value);
+                            return;
+                        }
+                        catch (Exception ex)
+                        {
+                            JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing value \"{0}\" to float: {1}", setting.Value, ex.Message), JsonOutput);
+                            Environment.Exit(-7);
+                        }
+                    }
+
+                    //handle case setting is double
+                    if (property.PropertyType.FullName.Equals("System.Double"))
+                    {
+                        try
+                        {
+                            double value = double.Parse(setting.Value);
+                            property.SetValue(plugin_settings, value);
+                            return;
+                        }
+                        catch (Exception ex)
+                        {
+                            //write using JsonHelper.WriteOutput
+                            JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing value \"{0}\" to double: {1}", setting.Value, ex.Message), JsonOutput);      
+                            Environment.Exit(-7);
+                        }
+                    }
+
+
+                    //handle case setting is bool
+                    if (property.PropertyType.FullName.Equals("System.Boolean"))
+                    {
+                        try
+                        {
+                            bool value = bool.Parse(setting.Value);
+                            property.SetValue(plugin_settings, value);
+                            return;
+                        }
+                        catch (Exception ex)
+                        {
+                            JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing value \"{0}\" to bool: {1}", setting.Value, ex.Message), JsonOutput);    
+                            Environment.Exit(-7);
+                        }
+                    }
+                    
+                    //handle case setting is enum
+                    if (property.PropertyType.IsEnum)
+                    {
+                        try
+                        {
+                            object value = Enum.Parse(property.PropertyType, setting.Value);
+                            property.SetValue(plugin_settings, value);
+                            return;
+                        }
+                        catch (Exception ex)
+                        {
+                            JsonHelper.WriteOutput("Exception", string.Format("Exception occured while parsing value \"{0}\" to enum: {1}", setting.Value, ex.Message), JsonOutput);    
+                            Environment.Exit(-7);
+                        }
+                    }
+                }
+            }
+
+            if(!found)
+            {
+                JsonHelper.WriteOutput("Exception", string.Format("Component \"{0}\" not found", setting.ComponentName), JsonOutput);       
+                Environment.Exit(-7);
+            }
         }
 
         /// <summary>
@@ -381,7 +602,7 @@ namespace CrypTool.CrypConsole
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception occured while updating AppDomain: {0}", ex.Message);
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured while updating AppDomain: {0}", ex.Message), JsonOutput);
                 Environment.Exit(-4);
             }
 
@@ -392,15 +613,19 @@ namespace CrypTool.CrypConsole
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception occured during loading of cwm file: {0}", ex.Message);
+                JsonHelper.WriteOutput("Exception", string.Format("Exception occured during loading of cwm file: {0}", ex.Message), JsonOutput);
                 Environment.Exit(0);
             }
             DiscoverWorkspaceModel(cwm_file);
         }
 
+        /// <summary>
+        /// Discovers the workspace model and outputs the results to console
+        /// </summary>
+        /// <param name="cwm_file"></param>
         private void DiscoverWorkspaceModel(string cwm_file)
         {
-            if (_jsonoutput)
+            if (JsonOutput)
             {
                 Console.Write("{\"components\":[");
             }
@@ -414,7 +639,7 @@ namespace CrypTool.CrypConsole
             foreach (PluginModel pluginModel in allPluginModels)
             {
                 counter++;
-                if (!_jsonoutput)
+                if (!JsonOutput)
                 {
                     Console.WriteLine("\"{0}\" (\"{1}\")", pluginModel.GetName(), pluginModel.Plugin.GetType().FullName);
                 }
@@ -424,7 +649,7 @@ namespace CrypTool.CrypConsole
                 ISettings settings = pluginModel.Plugin.Settings;
                 TaskPaneAttribute[] taskPaneAttributes = settings.GetSettingsProperties(pluginModel.Plugin);
 
-                if (_jsonoutput)
+                if (JsonOutput)
                 {
                     Console.Write("{0}", JsonHelper.GetPluginDiscoveryString(pluginModel, inputs, outputs, taskPaneAttributes));
                     if (counter < allPluginModels.Count)
@@ -455,11 +680,19 @@ namespace CrypTool.CrypConsole
                     foreach (TaskPaneAttribute taskPaneAttribute in taskPaneAttributes)
                     {
                         Console.WriteLine("-- \"{0}\" (\"{1}\")", taskPaneAttribute.PropertyName, taskPaneAttribute.PropertyInfo.PropertyType.FullName);
+                        if (taskPaneAttribute.PropertyInfo.PropertyType.IsEnum)
+                        {
+                            Console.WriteLine("--- Possible values:");
+                            foreach (object value in Enum.GetValues(taskPaneAttribute.PropertyInfo.PropertyType))
+                            {
+                                Console.WriteLine("---> \"{0}\"", value.ToString());
+                            }
+                        }
                     }
                 }
                 Console.WriteLine();
             }
-            if (_jsonoutput)
+            if (JsonOutput)
             {
                 Console.Write("]}");
             }
@@ -503,11 +736,7 @@ namespace CrypTool.CrypConsole
                     totalProgress += value;
                 }
                 if (!_terminate && totalProgress == numberOfPlugins)
-                {
-                    if (_verbose)
-                    {
-                        Console.WriteLine("Global progress reached 100%, stop execution engine now");
-                    }
+                {                   
                     _terminate = true;
                 }
                 int newProgress = (int)(totalProgress / numberOfPlugins * 100);
@@ -516,11 +745,7 @@ namespace CrypTool.CrypConsole
                     _globalProgress = newProgress;
                     if (_verbose)
                     {
-                        Console.WriteLine("Global progress change: {0}%", _globalProgress);
-                    }
-                    if (_jsonoutput)
-                    {
-                        Console.WriteLine(JsonHelper.GetProgressJson(_globalProgress));
+                        JsonHelper.WriteOutput("Message", string.Format("Progress:{0}", _globalProgress), JsonOutput);
                     }
                 }
             }
@@ -540,18 +765,13 @@ namespace CrypTool.CrypConsole
                 return;
             }
             string output = string.Format("{0}={1}", _pluginNames[plugin], property.GetValue(plugin).ToString());
-            if (_verbose)
+            
+            object value = property.GetValue(plugin);
+            if (value != null && _verbose)
             {
-                Console.WriteLine("Output: {0}", output);
+                JsonHelper.WriteOutput("Output", output, JsonOutput);
             }
-            if (_jsonoutput)
-            {
-                object value = property.GetValue(plugin);
-                if (value != null)
-                {
-                    Console.WriteLine(JsonHelper.GetOutputJsonString(value.ToString(), _pluginNames[plugin]));
-                }
-            }
+            
             _outputValues.Add(output);
         }
 
@@ -567,13 +787,9 @@ namespace CrypTool.CrypConsole
                 return;
             }
             if (_verbose)
-            {
-                Console.WriteLine("GuiLog:{0}:{1}:{2}:{3}", DateTime.Now, args.NotificationLevel, (sender != null ? sender.GetType().Name : "null"), args.Message);
-            }
-            if (_jsonoutput)
-            {
-                Console.WriteLine(JsonHelper.GetLogJsonString(sender, args));
-            }
+            {                
+                JsonHelper.WriteOutput("GuiLog", string.Format("{0}:{1}:{2}", args.NotificationLevel, (sender != null ? sender.GetType().Name : "null"), args.Message), JsonOutput);
+            }            
         }
 
         /// <summary>
@@ -602,7 +818,7 @@ namespace CrypTool.CrypConsole
                     Assembly assembly = Assembly.LoadFrom(assemblyPath);
                     if (_verbose)
                     {
-                        Console.WriteLine("Loaded assembly: " + assemblyPath);
+                        JsonHelper.WriteOutput("Message", string.Format("Loaded assembly:{0}", assemblyPath), JsonOutput);
                     }
                     return assembly;
                 }
@@ -612,7 +828,7 @@ namespace CrypTool.CrypConsole
                     Assembly assembly = Assembly.LoadFrom(assemblyPath);
                     if (_verbose)
                     {
-                        Console.WriteLine("Loaded assembly: " + assemblyPath);
+                        JsonHelper.WriteOutput("Message", string.Format("Loaded assembly:{0}", assemblyPath), JsonOutput);
                     }
                     return assembly;
                 }

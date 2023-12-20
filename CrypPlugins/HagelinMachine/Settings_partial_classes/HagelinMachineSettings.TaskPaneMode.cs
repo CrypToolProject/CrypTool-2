@@ -40,7 +40,7 @@ namespace CrypTool.Plugins.HagelinMachine
             }
         }
 
-        [TaskPane("UnknownSymbolCaption", "UnknownSymbolTip", "TextOptionsGroup", 4, false, ControlType.ComboBox, new string[] { "Ignore", "Remove", "Replace with ?" })]
+        [TaskPane("UnknownSymbolCaption", "UnknownSymbolTip", "TextOptionsGroup", 4, false, ControlType.ComboBox, new string[] { "Ignore", "Remove", "ReplaceWithQuestionMark" })]
         public UnknownSymbolHandling UnknownSymbolHandling
         {
             get { return _unknownSymbolHandling; }

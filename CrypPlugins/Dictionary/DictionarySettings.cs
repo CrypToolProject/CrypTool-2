@@ -1,5 +1,5 @@
-/*
-   Copyright 2008 Thomas Schmid, University of Siegen
+/*                              
+   Copyright 2023 Nils Kopal, CrypTool Project
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,63 +15,51 @@
 */
 
 using CrypTool.PluginBase;
-using System.Collections.ObjectModel;
+using CrypTool.PluginBase.Utils;
 using System.ComponentModel;
 
 namespace Dictionary
 {
+    public enum Case
+    {
+        Lowercase,
+        Uppercase        
+    }
+
     public class CrypToolDictionarySettings : ISettings
     {
         #region private_variables
-        private int currentDictionary;
-        private ObservableCollection<string> collection = new ObservableCollection<string>();
+        private string _languageCode = "en"; //default language is English
+        private Case _capitalization = Case.Uppercase;
         #endregion private_variables
 
         public delegate void ExecuteCallback();
 
-        [TaskPane("DictionaryCaption", "DictionaryTooltip", null, 0, true, ControlType.DynamicComboBox, new string[] { "Collection" })]
-        public int Dictionary
+        [TaskPane("DictionaryCaption", "DictionaryTooltip", null, 0, false, ControlType.LanguageSelector)]
+        public int Language
         {
-            get => currentDictionary;
+            get => LanguageStatistics.LanguageId(_languageCode);
             set
             {
-                if (value != currentDictionary)
+                if (value != LanguageStatistics.LanguageId(_languageCode))
                 {
-                    currentDictionary = value;
-                    OnPropertyChanged("Dictionary");
+                    _languageCode = LanguageStatistics.LanguageCode(value);
+                    OnPropertyChanged(nameof(Language));
                 }
             }
         }
 
-        private string numberEntries = string.Empty;
-
-        [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Eins")]
-        [TaskPane("NumberEntriesCaption", "NumberEntriesTooltip", null, 1, true, ControlType.TextBoxReadOnly)]
-        public string NumberEntries
+        [TaskPane("CapitalizationCaption", "CapitalizationTooltip", null, 1, false, ControlType.ComboBox, new string[] { "Lowercase", "Uppercase" })]
+        public Case Capitalization
         {
-            get => numberEntries;
-            set
+            get
             {
-                if (value != numberEntries)
-                {
-                    numberEntries = value;
-                    OnPropertyChanged("NumberEntries");
-                }
+                return _capitalization;
             }
-        }
-
-        // CrypWin requires this to be a collection of strings
-        [DontSave]
-        public ObservableCollection<string> Collection
-        {
-            get => collection;
             set
             {
-                if (value != collection)
-                {
-                    collection = value;
-                    OnPropertyChanged("Collection");
-                }
+                _capitalization = value;
+                OnPropertyChanged(nameof(Capitalization));
             }
         }
 

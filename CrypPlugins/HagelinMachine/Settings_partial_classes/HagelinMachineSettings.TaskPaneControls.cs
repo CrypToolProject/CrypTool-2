@@ -160,9 +160,7 @@ namespace CrypTool.Plugins.HagelinMachine
 
         private void ResetButton()
         {
-            _selectedModel = ModelType.CX52a.ToString();
             _model = ModelType.CX52a;
-            // HOWTO: MUST be called every time a property value changes with correct parameter name
             ApplyModel();
             _initOffset = 0;
             OnPropertyChanged("InitOffset");
@@ -184,7 +182,7 @@ namespace CrypTool.Plugins.HagelinMachine
         }
 
 
-        [TaskPane("Show all settings", "ShowAllTip", "InfoAndControlGroup", 11, false, ControlType.CheckBox)]
+        [TaskPane("ShowAllCaption", "ShowAllTip", "InfoAndControlGroup", 11, true, ControlType.CheckBox)]
         public bool ShowAllCheckBox
         {
             get
