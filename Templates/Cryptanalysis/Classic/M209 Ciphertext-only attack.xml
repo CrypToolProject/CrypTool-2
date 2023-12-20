@@ -18,11 +18,11 @@
     <replacement key="$textoutput$" value="Decrypted text" />
 	<replacement key="$plaintext$" value="Plaintext" />
 	<replacement key="$key$" value="Key" />
-    <replacement key="$memo$" value="The Hagelin M-209 is a portable rotor cipher machine that was used by the U.S. military mainly during World War II, but as late as the Korean War.\line
+    <replacement key="$memo$" value="The Hagelin M-209 is a portable rotor encryption machine that was used by the U.S. military mainly during World War II, but as late as the Korean War.\line
 Very compact and handy, it is also completely analog and has a larger key space than the Enigma used by the Germans in World War II.
 \line
 \line
-To get encrypted text for attack, you can use the M-209 component component. \line
+To get encrypted text for attack, you can use the M-209 component. \line
 It should be noted that the present attack assumes that one of the known instructions for the key settings was followed when encrypting. \line
 These instructions include certain defaults to avoid creating keys that are easily cracked. The following instructions are known: \line \line
 - TM 11-380 April 27, 1942 (https://maritime.org/tech/csp1500inst.php) \line
@@ -31,23 +31,7 @@ These instructions include certain defaults to avoid creating keys that are easi
 - TM 11-380 May 1947 \line
 \line
 In a ciphertext-only attack, only the encrypted text is available to the attacker. \line
-The algorithm used here, uses hill climbing and simulated annealing to search for optimal key settings. \line
-These methods are used in a nested hybrid approach, as follows: \line\line
-	{\b Hill-Climbing}-algorithm for the Lug settings:\line
-	1. A certain number of random keys are created. Each key is evaluated by using the key to decrypt the encrypted text. Based on the relative frequencies of the letters, in the decrypted text, an score value is calculated. \line
-	   The evaluated keys are compared and the best key is used further in the algorithm. \line
-	2. as long as there is no new best key, the following steps are performed: \line
-     a. Small changes are made to Lug settings (2 settings changed). \line
-	    Then a simulated annealing algorithm is run on the pin settings, which is described below.
-		For the current lug settings, the best pin settings are searched and the best key is kept.\line
-	 b. If a. did not lead to a better key, major changes are made to the lug settings and then the best pin settings are searched for again (analogous to a.).\line\line
-	{\b Simulated-Annealing} algorithm for pin settings:\line
-	1. Random pin settings are generated:\line
-	2. As long as the temperature is greater than a certain threshold, the temperature is used for following steps, otherwise the temperature is set to 0: \line
-	 a. Various changes are made to the pin settings.\line
-	    e.g. 1 pin is flipped, all pins are inverted, 2 pins on one, or on two different rotors are flipped.\line
-	 b. The obtained key is evaluated.\line
-	 c. Depending on the value and temperature, it is decided if the key is a new best key.\line" />
+The algorithm used here, uses hill climbing for recovering the lug settings and simulated annealing to search for optimal pin settings. \line"/>
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -76,24 +60,7 @@ Diese Anleitungen beinhalten bestimmte Vorgaben, um keine leicht zu knackenden S
 - TM 11-380 Mai 1947 \line
 \line
 Bei einem Ciphertext-only-Angriff steht dem Angreifer nur der verschlüsselte Text zur Verfügung. \line
-Der hier verwendete Algorithmus, nutzt Hill-Climbing und Simulated-Annealing um nach optimalen Schlüsseleinstellungen zu suchen. \line
-Diese Methoden werden in einem verschachteltem Hybrid-Ansatz, wie folgt, verwendet: \line \line
-	{\b Hill-Climbing}-Algorithmus für die Schieber (Lug) Einstellungen:\line
-	1. Es wird eine bestimmte Anzahl an zufälligen Schlüsseln erstellt. Jeder Schlüssel wird ausgewertet, indem man mit dem Schlüssel den verschlüsselten Text entschlüsselt. Anhand der relativen Häufigkeiten der Buchstaben, im entschlüsselten Text, wird ein Bewertungswert berechnet. \line
-	   Die bewerteten Schlüssel werden verglichen und der beste Schlüssel wird weiter im Algorithmus verwendet. \line
-	2. Solange es keinen neuen besten Schlüssel gibt, werden folgende Schritte durchgeführt: \line
-     a. Es werden kleine Änderungen an Schiebereinstellungen gemacht (2 Einstellungen verändert). \line
-	    Anschließend wird ein Simulated-Annealing-Algorithmus auf den Stift (Pin) Einstellungen ausgeführt, der weiter unten beschreiben ist.
-		Es werden zu den aktuellen Schieber-Einstellungen, die besten Stifteinstellungen gesucht und der beste Schlüssel wir behalten.\line
-	 b. Wenn a. zu keinem besseren Schlüssel geführt hat, werden größere Veränderungen an den Schiebereinstellungen gemacht und anschließend wieder nach den besten Stifteinstellungen gesucht (analog zu a.).\line\line
-	{\b Simulated-Annealing}-Algorithmus für die Stifteinstellungen:\line
-	1. Es werden zufällige Stifteinstellungen generiert.\line
-	2. Solange die Temperatur größer als ein bestimmter Grenzwert ist, wird die Temperatur für folgende Schritte verwendet, ansonsten wird die Temperatur auf 0 gesetzt: \line
-	 a. Es werden verschiedene Änderungen an den Stifteinstellungen vorgenommen\line
-	    z.B. 1 Stift wird geflippt, alle Stifte werden invertiert, 2 Stifte an einem, oder an zwei unterschiedlichen Rotoren werden geflippt.\line
-	 b. Der so erhaltene Schlüssel wird ausgewertet.\line
-	 c. Abhängig vom Wert und von der Temperatur, wird entschieden, ob der Schlüssel ein neuer bester Schlüssel ist.\line
-
+Der hier verwendete Algorithmus, nutzt Hill-Climbing zur Ermittlung der Lug-Einstellungen und Simulated-Annealing um nach optimalen Pin-Einstellungen zu suchen. \line
 " />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

@@ -10,7 +10,7 @@
   <title lang="en">M-209 Cipher Machine</title>
   <summary lang="en">Usage of the <i>M-209</i> cipher machine</summary>
   <description lang="en">This template shows the usage of the <i>M-209</i> cipher machine.</description>
-  <keywords>Machine, World War, Rotor, M209</keywords>
+  <keywords>Machine, World War, Rotor, M209, M-209</keywords>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
@@ -48,7 +48,7 @@ To enter the key via the text field, you can take a look at the M-209 Key Setup 
   <title lang="de">M-209-Chiffre</title>
   <summary lang="de">Benutzung der <i>M-209</i>-Chiffriermaschine</summary>
   <description lang="de">Diese Vorlage zeigt die Benutzung der <i>M-209</i>-Chiffriermaschine.</description>
-  <keywords lang="de">Maschine, Weltkrieg, M209</keywords>
+  <keywords lang="de">Maschine, Weltkrieg, M209, M-209</keywords>
   <replacements lang="de">
     <replacement key="$Plaintext$" value="Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />

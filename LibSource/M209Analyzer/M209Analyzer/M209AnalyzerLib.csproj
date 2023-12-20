@@ -16,7 +16,7 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\..\..\CrypBuild\Debug\Lib\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
