@@ -20,8 +20,10 @@ Source: <external ref="http://en.wikipedia.org/wiki/Transposition_cipher" /></de
     <replacement key="$Transposition (Encryption)$" value="Transposition (Encryption)" />
     <replacement key="$Transposition (Decryption)$" value="Transposition (Decryption)" />
     <replacement key="$text$" value="We were discovered, flee if you can" />
-    <replacement key="$memo$" value="This template demonstrates the use of the \{b Transposition Cipher Component} of CrypTool 2.\line
-The plaintext is entered into the plaintext TextInput component. The key is entered into the 'Key' TextInput. This is used for the encryption of the text. The first transposition cipher component then performs a columnar transposition that encrypts the text using the specified key. The encryption is performed live in the first transposition component and output in the ciphertext TextOutput component.\line
+    <replacement key="$memo$" value="This template demonstrates the use of the {\b Transposition Cipher Component} of CrypTool 2.\line
+The plaintext is entered into the plaintext TextInput component.\line
+\line
+The key is entered into the 'Key' TextInput. This is used for the encryption of the text. The first transposition cipher component then performs a columnar transposition that encrypts the text using the specified key. The encryption is performed live in the first transposition component and output in the ciphertext TextOutput component.\line
 \line
 Decryption is carried out by the second transposition cipher component in the reverse order and with the same key, so that the original plaintext is restored from the encrypted text. This is then available in the decrypted ciphertext TextOutput component." />
   </replacements>
