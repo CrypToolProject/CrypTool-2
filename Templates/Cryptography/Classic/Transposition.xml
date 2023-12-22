@@ -20,6 +20,10 @@ Source: <external ref="http://en.wikipedia.org/wiki/Transposition_cipher" /></de
     <replacement key="$Transposition (Encryption)$" value="Transposition (Encryption)" />
     <replacement key="$Transposition (Decryption)$" value="Transposition (Decryption)" />
     <replacement key="$text$" value="We were discovered, flee if you can" />
+    <replacement key="$memo$" value="This template demonstrates the use of the \{b Transposition Cipher Component} of CrypTool 2.\line
+The plaintext is entered into the plaintext TextInput component. The key is entered into the 'Key' TextInput. This is used for the encryption of the text. The first transposition cipher component then performs a columnar transposition that encrypts the text using the specified key. The encryption is performed live in the first transposition component and output in the ciphertext TextOutput component.\line
+\line
+Decryption is carried out by the second transposition cipher component in the reverse order and with the same key, so that the original plaintext is restored from the encrypted text. This is then available in the decrypted ciphertext TextOutput component." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -37,6 +41,11 @@ Quelle: <external ref="http://de.wikipedia.org/wiki/Transposition_(Kryptografie)
     <replacement key="$Transposition (Encryption)$" value="Transposition (Verschlüsselung)" />
     <replacement key="$Transposition (Decryption)$" value="Transposition (Entschlüsselung)" />
     <replacement key="$text$" value="Wir wurden entdeckt, flieh wenn du kannst" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert den Einsatz der {\b Transpositionschiffre-Komponente} von CrypTool 2.\line
+\line
+Der Klartext steht in der Klartext-TexteingabeKomponente. Der Schlüssel steht in der 'Schlüssel'-Texteingabe. Dieser wird für die Verschlüsselung des Textes verwendet wird. Die erste Transpositionschiffre-Komponente führt dann eine Spaltentransposition durch, die den Text unter Verwendung des angegebenen Schlüssels verschlüsselt. Die Verschlüsselung wird in der ersten Transpositionschiffre-Komponente live durchgeführt und in der Geheimtext-Textausgabe-Komponente ausgegeben.\line
+\line
+Die Entschlüsselung erfolgt durch die zweite Transpositions-Komponente in umgekehrter Reihenfolge und dem selben Schlüssel, sodass der ursprüngliche Klartext aus dem verschlüsselten Text wiederhergestellt wird. Dieser steht dann in der Entschlüsselter-Geheimtext-Textsausgabe-Komponente." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
