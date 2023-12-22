@@ -201,8 +201,8 @@ namespace CrypTool.Plugins.M209Analyzer
                 _presentation.EndTime.Value = _endTime.ToString();
                 _presentation.ElapsedTime.Value = elapsedspan.ToString();
                 _presentation.CurrentlyAnalyzedKey.Value = e.EvaluationCount.ToString();
-                _presentation.CurrentlyAnalyzedKey.Value = $"2 ^{(long)(Math.Log(_m209AttackManager.EvaluationCount) / Math.Log(2))}";
-                _presentation.KeyPerMilliSecond.Value = $"{(_m209AttackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : _m209AttackManager.EvaluationCount / _m209AttackManager.ElapsedTime.TotalMilliseconds).ToString("0.0#")} Key/ms";
+                _presentation.CurrentlyAnalyzedKey.Value = $"2^{(long)(Math.Log(_m209AttackManager.EvaluationCount) / Math.Log(2))}";
+                _presentation.KeyPerMilliSecond.Value = $"{(_m209AttackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : _m209AttackManager.EvaluationCount / _m209AttackManager.ElapsedTime.TotalMilliseconds).ToString("0.0#")} {Properties.Resources.KeysPerMilisec}";
 
                 if (_m209AttackManager.Threads == 1)
                 {

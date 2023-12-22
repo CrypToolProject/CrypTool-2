@@ -133,7 +133,7 @@
     <value>Schlüsseltext</value>
   </data>
   <data name="CiphertextTooltip" xml:space="preserve">
-    <value>Ciphertext only</value>
+    <value>Ciphertext-only</value>
   </data>
   <data name="CoresUsedCaption" xml:space="preserve">
     <value>Verwendete Kerne</value>
@@ -167,6 +167,9 @@
   </data>
   <data name="KeyLabel" xml:space="preserve">
     <value>Schlüssel</value>
+  </data>
+  <data name="KeysPerMilisec" xml:space="preserve">
+    <value>Schlüssel/ms</value>
   </data>
   <data name="KeyTooltip" xml:space="preserve">
     <value>Schlüssel der M-209</value>

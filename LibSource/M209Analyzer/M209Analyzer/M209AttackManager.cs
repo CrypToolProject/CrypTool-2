@@ -18,6 +18,7 @@ using M209AnalyzerLib.Enums;
 using M209AnalyzerLib.M209;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace M209AnalyzerLib
@@ -284,18 +285,29 @@ namespace M209AnalyzerLib
 
             if (CipherText != String.Empty)
             {
+                // Create a scheduler that uses two threads.
+                LimitedConcurrencyLevelTaskScheduler lcts = new LimitedConcurrencyLevelTaskScheduler(Threads);
+                List<Task> tasks = new List<Task>();
 
-                List<Action> tasks = new List<Action>();
+                // Create a TaskFactory and pass it our custom scheduler.
+                TaskFactory factory = new TaskFactory(lcts);
+                CancellationTokenSource cts = new CancellationTokenSource();
+
+                //List<Action> tasks = new List<Action>();
 
                 for (int i = 0; i < Threads; i++)
                 {
-                    tasks.Add(CipherTextOnlyTask);
+                    //tasks.Add(CipherTextOnlyTask);
+                    Task t = factory.StartNew(() =>
+                    {
+                        CipherTextOnlyTask();
+                    }, cts.Token);
                 }
 
-                foreach (var task in tasks)
-                {
-                    await Task.Run(task);
-                }
+                //foreach (var task in tasks)
+                //{
+                //    await Task.Run(task);
+                //}
 
             }
             else
@@ -365,4 +377,6 @@ namespace M209AnalyzerLib
             return Scoring.Evaluate(evalType, decryptedText, crib);
         }
     }
+
+
 }

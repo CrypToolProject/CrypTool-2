@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Hagelin_Machine.xml-->
@@ -10,7 +10,7 @@
   <title lang="en">Hagelin Machine</title>
   <summary lang="en">Usage of the Hagelin Machine</summary>  
   <description lang="en">Shows the encyption and decryption of text using Hagelin Machine component</description>  
-  <keywords>Hagelin Machine, CX-52a, CX-52b, CX-52c, C-52d, CX-M, EIRE, M-209</keywords>  
+  <keywords>Hagelin Machine, CX-52a, CX-52b, CX-52c, C-52d, CX-M, EIRE, M-209, M209</keywords>  
   <replacements lang="en">
     <replacement key="$plaintext$" value="Plaintext" />
 	<replacement key="$text$" value="TO BE OR NOT TO BE" />
@@ -38,7 +38,7 @@ In order to get a deeper insight into how the machines operate and to observe th
 <title lang="de">Hagelin-Maschine</title>
 <summary lang="de">Benutzung der Hagelin-Maschinen-Komponente</summary>
 <description lang="de">Zeigt die Ver- und Entschlüsselung von Text mit der Hagelin-Maschinen-Komponente</description>
-<keywords lang="de">Hagelin Maschine, CX-52a, CX-52b, CX-52c, C52-d, CX-M, EIRE, M-209</keywords>
+<keywords lang="de">Hagelin Maschine, CX-52a, CX-52b, CX-52c, C52-d, CX-M, EIRE, M-209, M209</keywords>
 <replacements lang="de">
     <replacement key="$plaintext$" value="Klartext" />
 	<replacement key="$text$" value="SEIN ODER NICHT SEIN" />

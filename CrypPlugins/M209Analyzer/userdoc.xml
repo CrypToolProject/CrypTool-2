@@ -14,9 +14,43 @@
     The ciphertext-only attack uses hill climbing and simulated annealing to search for optimal key settings.
     These methods are combinded using a hybrid nested approach. 
     A hill climbing process searches for optimal lug settings and an inner simulated annealing process searches for optimal pin settings for this lug setting.
+    These methods are as follows: 
+	  Hill-Climbing-algorithm for the Lug settings:
+	1. A certain number of random keys are created. Each key is evaluated by using the key to decrypt the encrypted text. Based on the relative frequencies of the letters, in the decrypted text, an score value is calculated. 
+	   The evaluated keys are compared and the best key is used further in the algorithm. 
+	2. as long as there is no new best key, the following steps are performed: 
+     a. Small changes are made to Lug settings (2 settings changed). 
+	    Then a simulated annealing algorithm is run on the pin settings, which is described below.
+		For the current lug settings, the best pin settings are searched and the best key is kept.
+	 b. If a. did not lead to a better key, major changes are made to the lug settings and then the best pin settings are searched for again (analogous to a.).
+	{\b Simulated-Annealing} algorithm for pin settings:
+	1. Random pin settings are generated:
+	2. As long as the temperature is greater than a certain threshold, the temperature is used for following steps, otherwise the temperature is set to 0: 
+	 a. Various changes are made to the pin settings.
+	    e.g. 1 pin is flipped, all pins are inverted, 2 pins on one, or on two different rotors are flipped.
+	 b. The obtained key is evaluated.
+	 c. Depending on the value and temperature, it is decided if the key is a new best key.
     <newline/>
     The known-plaintext attack uses hill climbing in three nested loops.
     Each loop applies different kinds of transformations on the key to get the correct key.
+    The algorithm works as follows: 
+	1. The external basic settings of the rotors are set to the default value 'AAAAA'.
+	2. A certain number (here: 100) of random keys are created.
+	3. Each key is analyzed using a scoring function and a score is calculated. The value calculated here is called the Aggregate Displacement Error (ADE) score.
+	   For the ADE score, the expected displacement is compared with the actual displacement. The difference is called displacement error.
+	   (Displacement refers to the distance between the encrypted and unencrypted letters.
+	    The displacement results from the various components of the key.)
+	   This score can only be calculated for the known-plaintext attack because it requires not only the encrypted but also the unencrypted text.
+	4. Of the 100 randomly generated keys, the one with the best score is used for the further attack.
+	5. The following 3 loops are carried out until the ADE no longer improves.
+	   (The target value of the ADE is 130,000, which has proven to be particularly suitable in the analyses.)
+		a. Various transformations are performed on the pin settings. The ADE is calculated after each transformation.
+		   If the new ADE is better than the previous one, the new key is used for the rest attack.
+		b. A number of transformations are performed on the lug settings, but only those that do not contain lug overlaps.
+		   The ADE is calculated after each transformation. If the new ADE is better than the previous one, the new key is used for the next attack.
+		c. Like b., except that all transformations are applied to the lug settings.
+	6. If the target value of 130,000 is reached, the correct key settings have been found. If 5a, 5b and 5c have not led to any improvements in the ADE,
+	   the process is restarted at step 2, i.e. with the creation of new random keys."
     
   </introduction>
 
@@ -29,9 +63,43 @@
     Der Ciphertext-Only Angriff verwendet Hillclimbing und Simulated Annealing um nach optimalen Schlüsseleinstellungen zu suchen.
     Diese Methoden werden in einem verschachteltem Hybrid-Ansatz verwendet.
     Ein Hillclimbing Prozess sucht nach optimalen Lug-Einstellungen und ein innerer Simulated Annealing Prozess sucht nach optimalen Pin-Einstellungen.
+    Diese Methoden werden wie folgt, verwendet:  
+	  HillClimbing-Algorithmus für die Schieber (Lug) Einstellungen:
+	1. Es wird eine bestimmte Anzahl an zufälligen Schlüsseln erstellt. Jeder Schlüssel wird ausgewertet, indem man mit dem Schlüssel den verschlüsselten Text entschlüsselt. Anhand der relativen Häufigkeiten der Buchstaben, im entschlüsselten Text, wird ein Bewertungswert berechnet. 
+	   Die bewerteten Schlüssel werden verglichen und der beste Schlüssel wird weiter im Algorithmus verwendet. 
+	2. Solange es keinen neuen besten Schlüssel gibt, werden folgende Schritte durchgeführt: 
+     a. Es werden kleine Änderungen an Schiebereinstellungen gemacht (2 Einstellungen verändert). 
+	    Anschließend wird ein Simulated-Annealing-Algorithmus auf den Stift (Pin) Einstellungen ausgeführt, der weiter unten beschreiben ist.
+		Es werden zu den aktuellen Schieber-Einstellungen, die besten Stifteinstellungen gesucht und der beste Schlüssel wir behalten.
+	 b. Wenn a. zu keinem besseren Schlüssel geführt hat, werden größere Veränderungen an den Schiebereinstellungen gemacht und anschließend wieder nach den besten Stifteinstellungen gesucht (analog zu a.).
+	{\b Simulated-Annealing}-Algorithmus für die Stifteinstellungen:
+	1. Es werden zufällige Stifteinstellungen generiert.
+	2. Solange die Temperatur größer als ein bestimmter Grenzwert ist, wird die Temperatur für folgende Schritte verwendet, ansonsten wird die Temperatur auf 0 gesetzt: 
+	 a. Es werden verschiedene Änderungen an den Stifteinstellungen vorgenommen
+	    z.B. 1 Stift wird geflippt, alle Stifte werden invertiert, 2 Stifte an einem, oder an zwei unterschiedlichen Rotoren werden geflippt.
+	 b. Der so erhaltene Schlüssel wird ausgewertet.
+	 c. Abhängig vom Wert und von der Temperatur, wird entschieden, ob der Schlüssel ein neuer bester Schlüssel ist.
     <newline/>
     Der Known-Plaintext Angriff verwendet Hillclimbin in drei verschachtelten Schleifen.
     Jede Schleife wendet verschiedene Arten von Transformationen auf den Schlüssel an um den richtigen Schlüssel zu erhalten.
+    Der Ablauf des Algorithmus ist folgender: 
+	1. Die externen Grundeinstellungen der Rotoren werden auf den Standardwert 'AAAAA' gesetzt.
+	2. Es wird eine bestimmte Anzahl (hier: 100) an zufälligen Schlüsseln erstellt.
+	3. Jeder Schlüssel wird mittels einer Scoring function analysiert und ein Wert (Score) berechnet. Die hier berechnete Wert wird Aggregate Displacement Error (ADE) Score genannt.
+	   Für den ADE Score wird der erwartete mit dem tatsächlichen Displacement verglichen. Der Unterschied wird Displacement Error genannt.
+	   (Displacement bezeichnet den Abstand zwischen dem verschlüsselten und unverschlüsselten Buchstaben.
+	   Das Displacement ergibt sich aus den verchiedenen Komponenten des Schlüssels.)
+	   Dieser Score kann nur bei dem Known-Plaintext Angriff berechnet werden, weil man dafür nicht nur den verschlüsselten, sondern auch den unverschlüsselten Text braucht.
+	4. Von den 100 zufällig erstellten Schlüsseln wird der, mit dem besten Score für den weiteren Angriff verwendet.
+	5. Folgende 3 Schleifen werden durchbeführt, bis der ADE sich nicht mehr verbessert.
+	   (Der Zielwert vom ADE ist 130 000. Dieser Wert hat sich bei den Analysen als besonders geeignet erwiesen.)
+		a. Verschiedene Transformationen an den Pin Einstellungen werden durchgeführt. Nach jeder Transformation wird der ADE berechnet.
+		   Ist der neue ADE besser, als der vorherige, wird der neue Schlüssel für den weiteren Angriff verwendet.
+		b. Eine Menge von Transformationen an den Lug Einstellungen werden durchgeführt, aber nur solche, welche keine Lug Overlaps enthalten.
+		   Nach jeder Transformation wird der ADE berechnet. Ist der neue ADE besser, als der vorherige, wird der neue Schlüssel für den weiteren Angriff verwendet.
+		c. Wie b., außer, dass alle Transformationen für die Lug Einstellungen angewendet werden.
+	6. Wird der Zielwert von 130 000 erreicht, wurden die richtigen Schlüsseleinstellungen gefunden. Falls 5a, 5b und 5c zu keinen Verbesserungen des ADE geführt haben,
+	   wird am Schritt 2 neugestartet, d.h. mit der Erstellung neuer zufälliger Schlüssel.
 </introduction>
 
   <usage lang="en">

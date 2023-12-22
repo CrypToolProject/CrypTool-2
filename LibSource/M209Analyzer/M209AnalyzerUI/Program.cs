@@ -1,4 +1,12 @@
-﻿namespace M209AnalyzerUI
+﻿using M209AnalyzerLib;
+using M209AnalyzerLib.Common;
+using M209AnalyzerLib.Enums;
+using M209AnalyzerLib.M209;
+using System;
+using System.Diagnostics;
+using System.Threading;
+
+namespace M209AnalyzerUI
 {
     internal class Program
     {
@@ -59,7 +67,7 @@
 
             m209Analyzer.OnLogMessage += M209Analyzer_OnLogMessage;
             m209Analyzer.OnNewBestListEntry += M209Analyzer_OnNewBestListEntry;
-            m209Analyzer.OnProgressStatusChanged += M209Analyzer_OnProgressStatusChanged;
+            //m209Analyzer.OnProgressStatusChanged += M209Analyzer_OnProgressStatusChanged;
 
 
             m209Analyzer.Threads = CommandLine.getIntegerValue(Flag.THREADS);
@@ -86,7 +94,7 @@
             _stopwatch = new Stopwatch();
             _stopwatch.Start();
 
-            simulationMode = 0;
+            simulationMode = 1;
 
             if (simulationMode != 0)
             {
@@ -100,8 +108,6 @@
                     m209Analyzer.KnownPlainTextAttack();
                 }
             }
-
-            m209Analyzer.CipherTextOnlyAttack("BCMIYXSPHEQDDTSPANWNUDGBZYAELFSBTKGHGWWKJDQFUAROIIBHLNTOGXHZPTICJZRJGWEHQJUZTDGGUPGUYYPZZIRBAWZCYSTWKERDAKDCFCLMHQJGWIWZKYYCNYIJXSBYQSELDQEGJVQMMNACQSDWCHXSWLGAKDVOKDPMMNNXAZMBIXACIYKNZSKCMMQALYRMPZUQZZKVTQHQBUGHKWUEMEZEZUHRQMMNENJKZWGTNAEIEVFKCOPBMBINLPMWFCPDTZKEELNPBLZFTCNUVJDPSWSCTAFNUHVZNSMCWAKIMZWORZLYZJLLKUMVPNHVWRUNVRCNOXMJLGGXUHPTKJIRMXLSGNTVPDDMMGZPMVZPTMPVEOHAEMDNWRJVLQCZQSQWNLATSPXNNZHQCWJXHDXKUIUYHBJUAAUEDJYSWDGNDOJBRLFNPFHMXUPKXYNCQSAJUOAYRNANMBYALIKNTQTKKUPETLSBTUOAUSDHWCGHYJLEYKBJSPNSCAJBUFBQTLMICFKVIVAUMUYTRJLNQWSBMNNSMRJHCBNFEPXSGWUIZUPWGKFBEEGOTWVBYKNAVWNLYIWEDRDAFMOIQOFIBFJJZPEUUUSSHZDIIQXCLTCIUAPZKKREJSJPOCZUGYOAZQIWJPOKYGUYHMMLPTEVKAIDOXYALQIMZZNGPTXACZYTUOQMMEJKAYIZNAIIDQUWSBKDEUEVDHZOJJJTKUJTPVUPMLXIUAPSLBRRYDDINQTOWSLDREMBPGNWMBQPPDPBVQFSTFCALZFIZODDKVLJRZRKLVNHDAUGGSVKPDOAWDMCRDVPHYCNALJSXBZSWBLLNFQRJLFDJYTAPUGIOLSJWMSJYLLDNJXZAJQJTAHEEDFTNZRAWLBDUHGAKKNWHEKCWMJUBLQKUABEJWTZSJZFHWDSQMJJAXXZKJYPJPLSQWPEMOLCEUGCTQVUQXPZHFDJJETKXFHQRVTFSZUGULSLGWMXGDPQRUWGXCTVKKGGVRZZWSBZBVUZJDZCUUACLKGHWZASWCUBCFSOFSAAKYEUUFHHTZCMBRTNJZMIHNWAJEJFURNQOQRUHQHQEWZEZNCBBGAEFCIFHSZGXPKPROEFRQAIJYQZGPTYPDCSRRFRERTCFTDBWXVOQNTHTZRVTZKMOJVQTQCNMTUZLKODNFWPYDQYCVWDTICUFLASFRRDRQJFQVIPKWWVCAVVUXSCDIZJFWDAWAGQWPYQCYLHCMSFHDKWGSLTQQYEMCXTIJDSZBQQUKWUSCDMPWWLKVKYFMWKVCEYGOCYDDSWCMKUWEKZGHFMCPUOPLZSFJIVTQCHRUSGFPRUDBDXAQQOCUDTKPGOUGGNDXQZTIFUFMJRUDESBUZKMJNXLFBCQTDJMNGJFDAPSOSJUGJFJAJZCUZQXYMCMYRZULESACLDKEPZUBNDCENTNAHCUWUKAWCURVCGQMVGCWTQMTQJDRBVMFWLMADPEIKHHDEADGTZNFDBRQTTIQYGGNVGDIFQTTOEFNTEJABDMKZOQLKWDMTQRBHFVDNFFHGCGEFAJFSJHHJNBXQZKWHJNYATFMHJWTDLXMCZHOPVQWXTICVOMJWOXAOICJWNNASGPBATLHABYSTWKVTTPGUEIQRODSPCGPXYKKYWBJQJLRDUWKYIPVEYRRTNPBKLVLBLRZMJVBAMTBWRDLAIDDFLQOPEXBCTMPWADFJAMSVYSDZVHHLUUMIINBGCNHJQLBDWGJRDHLGJRZYZWNIUPCPCHKJWUCMYVRJRLJJNKENXLTQWOMJNK");
 
             Console.ReadLine();
 
@@ -117,9 +123,9 @@
         private static void M209Analyzer_OnProgressStatusChanged(object sender, M209AttackManager.OnProgressStatusChangedEventArgs args)
         {
             double percentage = Math.Round(((double)(args.Counter) / (double)args.TargetValue) * 100);
-            Console.Write("\r");
-            Console.Write($"[{args.ElapsedTime}] [Thread {Thread.CurrentThread.ManagedThreadId}] Progress Changed: [{args.AttackType}|{args.Phase}]  \t- {args.Counter}/{args.TargetValue} ({percentage}%) " +
-                $"[2**{(long)(Math.Log(args.EvaluationCount) / Math.Log(2))}][{(args.ElapsedTime.TotalMilliseconds == 0 ? 0 : args.EvaluationCount / args.ElapsedTime.TotalMilliseconds)} K/s]");
+            //Console.Write("\r");
+            //Console.Write($"[{args.ElapsedTime}] [Thread {Thread.CurrentThread.ManagedThreadId}] Progress Changed: [{args.AttackType}|{args.Phase}]  \t- {args.Counter}/{args.TargetValue} ({percentage}%) " +
+            //    $"[2**{(long)(Math.Log(args.EvaluationCount) / Math.Log(2))}][{(args.ElapsedTime.TotalMilliseconds == 0 ? 0 : args.EvaluationCount / args.ElapsedTime.TotalMilliseconds)} K/s]");
             //Logger.WriteLog($"[{args.ElapsedTime}] [Thread {Thread.CurrentThread.ManagedThreadId}] Progress Changed: [{args.AttackType}|{args.Phase}]  \t- {args.Counter}/{args.TargetValue} ({percentage}%)");
         }
 
@@ -140,12 +146,12 @@
                     $"[2**{(long)(Math.Log(attackManager.EvaluationCount) / Math.Log(2))} ({attackManager.EvaluationCount})][{(attackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : attackManager.EvaluationCount / attackManager.ElapsedTime.TotalMilliseconds)} K/s] Length:{decyptedText.Length} ::: {decyptedText} \n";
                 //Console.WriteLine(msg);
                 _bestScore = args.Score;
-                Logger.WriteLog($"{attackManager.CipherText.Length} {attackManager.ElapsedTime}, {attackManager.EvaluationCount}, 2^{(long)(Math.Log(attackManager.EvaluationCount) / Math.Log(2))}, " +
-                        $"{(attackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : attackManager.EvaluationCount / attackManager.ElapsedTime.TotalMilliseconds)} K/s, " +
-                        $" Score: {args.Score} " +
-                        $"{attackManager.Threads} Threads" +
-                        $"\n {Utils.GetString(args.Decryption)}" +
-                        $"\n {attackManager.Crib} \n -------------");
+                //Logger.WriteLog($"{attackManager.CipherText.Length} {attackManager.ElapsedTime}, {attackManager.EvaluationCount}, 2^{(long)(Math.Log(attackManager.EvaluationCount) / Math.Log(2))}, " +
+                //        $"{(attackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : attackManager.EvaluationCount / attackManager.ElapsedTime.TotalMilliseconds)} K/s, " +
+                //        $" Score: {args.Score} " +
+                //        $"{attackManager.Threads} Threads" +
+                //        $"\n {Utils.GetString(args.Decryption)}" +
+                //        $"\n {attackManager.Crib} \n -------------");
             }
             lock (LOCK)
             {

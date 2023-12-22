@@ -531,7 +531,7 @@ namespace M209AnalyzerLib.M209
 
         public override string ToString()
         {
-            return $"[Slide {Slide}] [{Lugs.GetLugsString()}] [{Pins.AbsolutePinStringAll01()}]";
+            return $"[{Lugs.GetLugsString()}] [{Pins.AbsolutePinStringAll01()}]";
         }
 
     }

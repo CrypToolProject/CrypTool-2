@@ -17,7 +17,8 @@
     <replacement key="$ciphertext$" value="Ciphertext" />
 	<replacement key="$Plaintext$" value="EQUALITY AS THEY WERE FREQUENTLY TOGETHER MCCARTHY HAD ONE SON A LAD OF EIGHTEEN AND TURNER HAD AN O" />
 	<replacement key="$plaintext$" value="Plaintext" />
-    <replacement key="$textoutput$" value="Decrypted text" />
+    <replacement key="$$decryptedText$$" value="Decrypted text" />
+	<replacement key="$textoutput$" value="Text output" />
 	<replacement key="$key$" value="Key" />
     <replacement key="$memo$" value="The Hagelin M-209 is a portable rotor cipher machine that was used by the U.S. military mainly during World War II, but as late as the Korean War.\line
 Very compact and handy, it is also completely analog and has a larger key space than the Enigma used by the Germans in World War II.
@@ -31,31 +32,13 @@ These instructions include certain defaults to avoid creating keys that are easi
 - TM 11-380 March 17, 1944 (http://www.jfbouch.fr/crypto/m209/manual.html) \line
 - TM 11-380 May 1947 \line
 \line
-The known-plaintext attack uses hillclimbing in three nested loops.\line
-Each loop applies different types of transformations to the key to obtain the correct key.\line
-The algorithm works as follows: \line\line
-	1. The external basic settings of the rotors are set to the default value 'AAAAA'.\line
-	2. A certain number (here: 100) of random keys are created.\line
-	3. Each key is analyzed using a scoring function and a score is calculated. The value calculated here is called the Aggregate Displacement Error (ADE) score.\line
-	   For the ADE score, the expected displacement is compared with the actual displacement. The difference is called displacement error.\line
-	   (Displacement refers to the distance between the encrypted and unencrypted letters.\line
-	    The displacement results from the various components of the key.)\line
-	   This score can only be calculated for the known-plaintext attack because it requires not only the encrypted but also the unencrypted text.\line
-	4. Of the 100 randomly generated keys, the one with the best score is used for the further attack.
-	5. The following 3 loops are carried out until the ADE no longer improves.\line
-	   (The target value of the ADE is 130,000, which has proven to be particularly suitable in the analyses.)\line
-		a. Various transformations are performed on the pin settings. The ADE is calculated after each transformation.\line
-		   If the new ADE is better than the previous one, the new key is used for the rest attack.\line
-		b. A number of transformations are performed on the lug settings, but only those that do not contain lug overlaps.\line
-		   The ADE is calculated after each transformation. If the new ADE is better than the previous one, the new key is used for the next attack.\line
-		c. Like b., except that all transformations are applied to the lug settings.
-	6. If the target value of 130,000 is reached, the correct key settings have been found. If 5a, 5b and 5c have not led to any improvements in the ADE,\line
-	   the process is restarted at step 2, i.e. with the creation of new random keys." />
+The known-plaintext attack uses hillclimbing in three nested loops. Each loop applies different types of transformations to the key to obtain the correct key.
+" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">Known-Plaintext Angriff gegen die Hagelin M-209 </title>
+  <title lang="de">Known-Plaintext Angriff gegen die Hagelin M-209</title>
   <summary lang="de">Diese Vorlage zeigt einen Known-Plaintext Angriff gegen die Hagelin M-209.</summary>
   <description lang="de">Diese Vorlage zeigt einen Known-Plaintext Angriff gegen die Hagelin M-209.</description>
   <keywords>Kryptoanalyse, Hagelin, cipher, M209, M-209, ciphertext, ciphertext-only</keywords>
@@ -65,7 +48,8 @@ The algorithm works as follows: \line\line
     <replacement key="$ciphertext$" value="Verschlüsselter Text" />
 	<replacement key="$Plaintext$" value="EQUALITYZASZTHEYZWEREZFREQUENTLYZTOGETHERZMCCARTHYZHADZONEZSONZAZLADZOFZEIGHTEENZANDZTURNERZHADZANZO" />
 	<replacement key="$plaintext$" value="Klartext" />
-    <replacement key="$textoutput$" value="Entschlüsselter Text" />
+    <replacement key="$decryptedText$" value="Entschlüsselter Text" />
+	<replacement key="$textoutput$" value="Text Ausgabe" />
 	<replacement key="$key$" value="Schlüssel" />
     <replacement key="$memo$" value="Die Hagelin M-209 ist eine tragbare Rotor-Chiffriermaschine, die hauptsächlich während des Zweiten Weltkriegs, aber noch bis zum Korea Krieg, vom US-Militär eingesetzt wurde.\line
 Sie ist sehr kompakt und handlich, zudem vollständig analog und hat einen größeren Schlüsselraum als die Enigma, die von den Deutschen im zweiten Weltkrieg verwendet wurde.
@@ -79,26 +63,7 @@ Diese Anleitungen beinhalten bestimmte Vorgaben, um keine leicht zu knackenden S
 - TM 11-380 17.März 1944 (http://www.jfbouch.fr/crypto/m209/manual.html) \line
 - TM 11-380 Mai 1947 \line
 \line
-Der Known-Plaintext (bekannter Klartext) Angriff verwendet Hillclimbing in drei verschachtelten Schleifen.\line
-Jede Schleife wendet verschiedene Arten von Transformationen auf den Schlüssel an, um den richtigen Schlüssel zu erhalten.\line
-Der Ablauf des Algorithmus ist folgender: \line\line
-	1. Die externen Grundeinstellungen der Rotoren werden auf den Standardwert 'AAAAA' gesetzt.\line
-	2. Es wird eine bestimmte Anzahl (hier: 100) an zufälligen Schlüsseln erstellt.\line
-	3. Jeder Schlüssel wird mittels einer Scoring function analysiert und ein Wert (Score) berechnet. Die hier berechnete Wert wird Aggregate Displacement Error (ADE) Score genannt.\line
-	   Für den ADE Score wird der erwartete mit dem tatsächlichen Displacement verglichen. Der Unterschied wird Displacement Error genannt.\line
-	   (Displacement bezeichnet den Abstand zwischen dem verschlüsselten und unverschlüsselten Buchstaben.\line
-	    Das Displacement ergibt sich aus den verchiedenen Komponenten des Schlüssels.)\line
-	   Dieser Score kann nur bei dem Known-Plaintext Angriff berechnet werden, weil man dafür nicht nur den verschlüsselten, sondern auch den unverschlüsselten Text braucht.\line
-	4. Von den 100 zufällig erstellten Schlüsseln wird der, mit dem besten Score für den weiteren Angriff verwendet.
-	5. Folgende 3 Schleifen werden durchbeführt, bis der ADE sich nicht mehr verbessert.\line
-	   (Der Zielwert vom ADE ist 130 000. Dieser Wert hat sich bei den Analysen als besonders geeignet erwiesen.)\line
-		a. Verschiedene Transformationen an den Pin Einstellungen werden durchgeführt. Nach jeder Transformation wird der ADE berechnet.\line
-		   Ist der neue ADE besser, als der vorherige, wird der neue Schlüssel für den weiteren Angriff verwendet.\line
-		b. Eine Menge von Transformationen an den Lug Einstellungen werden durchgeführt, aber nur solche, welche keine Lug Overlaps enthalten.\line
-		   Nach jeder Transformation wird der ADE berechnet. Ist der neue ADE besser, als der vorherige, wird der neue Schlüssel für den weiteren Angriff verwendet.\line
-		c. Wie b., außer, dass alle Transformationen für die Lug Einstellungen angewendet werden.
-	6. Wird der Zielwert von 130 000 erreicht, wurden die richtigen Schlüsseleinstellungen gefunden. Falls 5a, 5b und 5c zu keinen Verbesserungen des ADE geführt haben,\line
-	   wird am Schritt 2 neugestartet, d.h. mit der Erstellung neuer zufälliger Schlüssel." />
+Der Known-Plaintext (bekannter Klartext) Angriff verwendet Hillclimbing in drei verschachtelten Schleifen. Jede Schleife wendet verschiedene Arten von Transformationen auf den Schlüssel an, um den richtigen Schlüssel zu erhalten." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

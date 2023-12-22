@@ -304,13 +304,13 @@
     <value>Groß-/Kleinschreibung</value>
   </data>
   <data name="CaseHandlingList1" xml:space="preserve">
-    <value>keine Änderung</value>
+    <value>Keine Änderung</value>
   </data>
   <data name="CaseHandlingList2" xml:space="preserve">
-    <value>in Großbuchstaben konvertieren</value>
+    <value>In Großbuchstaben konvertieren</value>
   </data>
   <data name="CaseHandlingList3" xml:space="preserve">
-    <value>in Kleinbuchstaben konvertieren</value>
+    <value>In Kleinbuchstaben konvertieren</value>
   </data>
   <data name="CaseHandlingTooltip" xml:space="preserve">
     <value>Wie sollen Groß- und Kleinbuchstaben behandelt werden?</value>
@@ -364,7 +364,7 @@
     <value>Verschlüsselungsmaschine, die vom US-Militär im Zweiten Weltkrieg benutzt wurde</value>
   </data>
   <data name="RandomKeyCaption" xml:space="preserve">
-    <value>generiere internen Schlüssel</value>
+    <value>Generiere internen Schlüssel</value>
   </data>
   <data name="RandomKeyGroup" xml:space="preserve">
     <value>Interner Schlüssel</value>
