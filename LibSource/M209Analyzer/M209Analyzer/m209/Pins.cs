@@ -361,7 +361,7 @@ namespace M209AnalyzerLib.M209
                 good = true;
                 int countActive = 0;
                 int countInactive = 0;
-                int rand = Common.Utils.random.Next();
+                int rand = Common.RandomGen.NextInt();
                 int consecutiveActive = 0;
                 int consecutiveInactive = 0;
                 for (int p = 0; p < total; p++)

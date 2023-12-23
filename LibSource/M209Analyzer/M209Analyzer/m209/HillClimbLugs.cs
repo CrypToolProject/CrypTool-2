@@ -45,15 +45,15 @@ namespace M209AnalyzerLib.M209
             new int[] { 2, -2,},
         };
 
-        static double Eval(Key key, EvalType evalType, M209AttackManager attackManager)
+        static double Eval(Key key, EvalType evalType, M209AttackManager attackManager, LocalState localState)
         {
 
             if (evalType == EvalType.PINS_SA_CRIB)
             {
-                return SimulatedAnnealingPins.SA(key, EvalType.CRIB, 10, attackManager);
+                return SimulatedAnnealingPins.SA(key, EvalType.CRIB, 10, attackManager, localState);
             }
             key.UpdateDecryptionIfInvalid();
-            return attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
+            return attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
         }
 
         public static double HillClimb(Key key, EvalType evalType, M209AttackManager attackManager, LocalState localState)
@@ -61,7 +61,7 @@ namespace M209AnalyzerLib.M209
 
             localState.BestTypeCount = key.Lugs.CreateTypeCountCopy();
             localState.BestPins = key.Pins.CreateCopy();
-            localState.BestScore = Eval(key, evalType, attackManager);
+            localState.BestScore = Eval(key, evalType, attackManager, localState);
 
             do
             {
@@ -141,13 +141,13 @@ namespace M209AnalyzerLib.M209
                             UndoChanges(localState.BestTypeCount, types, changes);
                             continue;
                         }
-                        newEval = Eval(key, evalType, attackManager);
+                        newEval = Eval(key, evalType, attackManager, localState);
                         if (newEval > localState.BestScore)
                         {
                             localState.Improved = true;
                             localState.BestScore = newEval;
                             key.Pins.Get(localState.BestPins);
-                            attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
+                            attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
                         }
                         else
                         {
@@ -194,13 +194,13 @@ namespace M209AnalyzerLib.M209
                                     UndoChanges(localState.BestTypeCount, types, changes);
                                     continue;
                                 }
-                                newEval = Eval(key, evalType, attackManager);
+                                newEval = Eval(key, evalType, attackManager, localState);
 
                                 if (newEval > localState.BestScore)
                                 {
                                     localState.Improved = true;
                                     localState.BestScore = newEval;
-                                    attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
+                                    attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
                                     key.Pins.Get(localState.BestPins);
                                     break;
                                 }
@@ -248,13 +248,13 @@ namespace M209AnalyzerLib.M209
                                 UndoChanges(localState.BestTypeCount, types, changes);
                                 continue;
                             }
-                            newEval = Eval(key, evalType, attackManager);
+                            newEval = Eval(key, evalType, attackManager, localState);
 
                             if (newEval > localState.BestScore)
                             {
                                 localState.Improved = true;
                                 localState.BestScore = newEval;
-                                attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
+                                attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
                                 key.Pins.Get(localState.BestPins);
                                 break;
                             }

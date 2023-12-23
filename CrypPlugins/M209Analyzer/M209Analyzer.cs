@@ -149,6 +149,7 @@ namespace CrypTool.Plugins.M209Analyzer
             _m209AttackManager = new M209AttackManager(new M209Scoring());
             _approximatedKeys = ApproximateKeyCountTarget(Ciphertext.Length);
 
+            _m209AttackManager.UseOwnBestList = false;
             _m209AttackManager.OnNewBestListEntry += HandleNewBestListEntry;
             _m209AttackManager.OnProgressStatusChanged += _m209AttackManager_OnProgressStatusChanged;
             _m209AttackManager.ShouldStop = !_running;

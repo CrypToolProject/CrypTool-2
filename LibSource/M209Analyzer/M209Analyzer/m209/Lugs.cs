@@ -13,7 +13,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using M209AnalyzerLib.Common;
 using M209AnalyzerLib.Enums;
 using System;
 using System.Linq;
@@ -118,6 +117,8 @@ namespace M209AnalyzerLib.M209
             TYPE_COUNT_W4W6,
             TYPE_COUNT_W5W6,
         };
+        private static long startTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        public static Random random = new Random((int)startTime);
 
         public Lugs(Key parentKey)
         {
@@ -137,11 +138,6 @@ namespace M209AnalyzerLib.M209
                 overlaps += typeCount[TYPES_WITH_OVERLAP[i]];
             }
             return overlaps;
-        }
-
-        private int GetOverlaps()
-        {
-            return GetOverlaps(TypeCount);
         }
 
         void SetLugsString(string lugsString, bool checkRules)
@@ -282,15 +278,14 @@ namespace M209AnalyzerLib.M209
 
         }
 
-        private int[] overlapPerW = new int[7];
-        private int[] dispRepetition = new int[28];
-
         private bool CompliesWithUserManualRules(int[] typeCount)
         {
+            int[] overlapPerW = new int[7];
+            int[] dispRepetition = new int[28];
 
             if (Global.VERSION == MachineVersion.SWEDISH)
             {
-                return Common.Utils.Sum(typeCount) == Key.BARS && GetOverlaps() <= Global.MAX_OVERLAP;
+                return Common.Utils.Sum(typeCount) == Key.BARS && GetOverlaps(typeCount) <= Global.MAX_OVERLAP;
             }
 
             for (int i = 0; i < overlapPerW.Length; i++)
@@ -411,7 +406,7 @@ namespace M209AnalyzerLib.M209
             {
                 return 0;
             }
-            int rand = Common.Utils.RandomNextInt(items);
+            int rand = Common.RandomGen.NextInt(items);
 
             return weighted[rand];
 
@@ -441,7 +436,7 @@ namespace M209AnalyzerLib.M209
                 return true;
             }
             int reference = 64;
-            long rand = Common.Utils.RandomNextInt(reference);
+            long rand = Common.RandomGen.NextInt(reference);
 
             for (int i = 0; i < same; i++)
             {
@@ -464,8 +459,8 @@ namespace M209AnalyzerLib.M209
             {
                 for (int i = 0; i < Key.BARS; i++)
                 {
-                    int w1 = Common.Utils.RandomNextInt(7);
-                    int w2 = Common.Utils.RandomNextInt(7);
+                    int w1 = Common.RandomGen.NextInt(7);
+                    int w2 = Common.RandomGen.NextInt(7);
                     if (w1 == 0)
                     {
                         TypeCount[0]++;
@@ -486,8 +481,8 @@ namespace M209AnalyzerLib.M209
             {
                 for (int i = 0; i < Key.BARS; i++)
                 {
-                    int w1 = 1 + Common.Utils.RandomNextInt(6);
-                    int w2 = Common.Utils.RandomNextInt(7);
+                    int w1 = 1 + Common.RandomGen.NextInt(6);
+                    int w2 = Common.RandomGen.NextInt(7);
                     if (w2 == 0 || w1 == w2 || GetOverlaps(TypeCount) >= Global.MAX_OVERLAP)
                     {
                         TypeCount[GetTypeCountIndex(w1)]++;
@@ -506,7 +501,7 @@ namespace M209AnalyzerLib.M209
             {
                 for (int i = 0; i < Key.BARS; i++)
                 {
-                    int w = Common.Utils.RandomNextInt(6) + 1;
+                    int w = Common.RandomGen.NextInt(6) + 1;
                     TypeCount[GetTypeCountIndex(w)]++;
                 }
                 ComputeVector();
@@ -523,7 +518,7 @@ namespace M209AnalyzerLib.M209
             int[] lugsCountSeq;
             while (true)
             {
-                int seqIndex = Common.Utils.RandomNextInt(LugsRules.validLugCountSequences.Count());
+                int seqIndex = Common.RandomGen.NextInt(LugsRules.validLugCountSequences.Count());
                 lugsCountSeq = LugsRules.validLugCountSequences.ElementAt(seqIndex);
                 lugCountSeqTotal = Common.Utils.Sum(lugsCountSeq);
                 lugCountSeqOverlaps = lugCountSeqTotal - Key.BARS;
@@ -537,7 +532,7 @@ namespace M209AnalyzerLib.M209
                 }
             }
 
-            int[] perm6 = Utils.RandomPerm6();
+            int[] perm6 = Common.Utils.RandomPerm6();
 
             for (int w = 1; w <= Key.WHEELS; w++)
             {

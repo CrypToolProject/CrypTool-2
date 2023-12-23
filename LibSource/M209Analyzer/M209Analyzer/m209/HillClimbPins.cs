@@ -25,7 +25,7 @@ namespace M209AnalyzerLib.M209
         {
 
             localState.BestScore = key.Eval(evalType);
-            localState.BestScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
+            localState.BestScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
             localState.BestPins = key.Pins.CreateCopy();
 
             MAX_COUNT = key.Pins.MaxCount();
@@ -85,13 +85,13 @@ namespace M209AnalyzerLib.M209
                     }
                     key.UpdateDecryption(wheel, pin);
 
-                    newEval = attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
+                    newEval = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
                     if (newEval > localState.BestScore)
                     {
                         localState.BestScore = newEval;
                         key.Pins.Get(localState.BestPins);
                         localState.Improved = true;
-                        attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
+                        attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
                     }
                     else
                     {
@@ -128,13 +128,13 @@ namespace M209AnalyzerLib.M209
                     continue;
                 }
 
-                newEval = attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
+                newEval = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
                 if (newEval > localState.BestScore)
                 {
                     localState.BestScore = newEval;
                     key.Pins.Get(localState.BestPins);
                     localState.Improved = true;
-                    attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
+                    attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
                 }
                 else
                 {
@@ -172,14 +172,14 @@ namespace M209AnalyzerLib.M209
                         }
                         key.UpdateDecryption(wheel, pin1, pin2);
 
-                        newEval = attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
+                        newEval = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
 
                         if (newEval > localState.BestScore)
                         {
                             localState.BestScore = newEval;
                             key.Pins.Get(localState.BestPins);
                             localState.Improved = true;
-                            attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
+                            attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
                         }
                         else
                         {
@@ -203,7 +203,7 @@ namespace M209AnalyzerLib.M209
             for (int v = 0; v <= 63; v++)
             {
                 key.Pins.InverseWheelBitmap(v);
-                double score = attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
+                double score = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
                 if (score > bestVscore)
                 {
                     bestVscore = score;
@@ -222,7 +222,7 @@ namespace M209AnalyzerLib.M209
                 key.Pins.InverseWheelBitmap(bestV);
                 key.Pins.Get(localState.BestPins);
                 localState.Improved = true;
-                attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
+                attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
             }
         }
 

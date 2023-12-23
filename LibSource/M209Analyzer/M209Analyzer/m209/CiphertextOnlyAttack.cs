@@ -67,7 +67,6 @@ namespace M209AnalyzerLib.M209
 
                 do
                 {
-
                     localState.Improved = false;
 
                     HillClimbingFirstTransformation(key, attackManager, localState);
@@ -125,7 +124,7 @@ namespace M209AnalyzerLib.M209
 
                 key.Lugs.Randomize();
 
-                double newEval = SimulatedAnnealingPins.SA(key, EvalType.MONO, 1, attackManager);
+                double newEval = SimulatedAnnealingPins.SA(key, EvalType.MONO, 1, attackManager, localState);
                 if (newEval > bestRandomScore)
                 {
                     bestRandomScore = newEval;
@@ -135,7 +134,7 @@ namespace M209AnalyzerLib.M209
                 if (bestRandomScore > localState.BestScore)
                 {
                     localState.BestScore = bestRandomScore;
-                    attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
+                    attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
                 }
 
                 if (attackManager.ShouldStop)
@@ -180,13 +179,13 @@ namespace M209AnalyzerLib.M209
                             continue;
                         }
 
-                        newEval = SimulatedAnnealingPins.SA(key, EvalType.MONO, 1, attackManager);
+                        newEval = SimulatedAnnealingPins.SA(key, EvalType.MONO, 1, attackManager, localState);
                         if (newEval > localState.BestScore)
                         {
                             localState.Improved = true;
                             localState.BestScore = newEval;
                             key.Pins.Get(localState.BestPins);
-                            attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
+                            attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
                         }
                         else
                         {
@@ -233,12 +232,12 @@ namespace M209AnalyzerLib.M209
 
                         // Evaluate the decryption using Monograms.
                         key.UpdateDecryptionIfInvalid();
-                        newEval = attackManager.Evaluate(EvalType.MONO, key.Decryption, key.CribArray);
+                        newEval = attackManager.Evaluate(EvalType.MONO, key.Decryption, key.CribArray, localState.TaskId);
                         if (newEval > localState.BestScore)
                         {
                             localState.Improved = true;
                             localState.BestScore = newEval;
-                            attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
+                            attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
                             key.Pins.Get(localState.BestPins);
                             break;
                         }
@@ -294,13 +293,13 @@ namespace M209AnalyzerLib.M209
                                 }
 
                                 key.UpdateDecryptionIfInvalid();
-                                newEval = attackManager.Evaluate(EvalType.MONO, key.Decryption, key.CribArray);
+                                newEval = attackManager.Evaluate(EvalType.MONO, key.Decryption, key.CribArray, localState.TaskId);
 
                                 if (newEval > localState.BestScore)
                                 {
                                     localState.Improved = true;
                                     localState.BestScore = newEval;
-                                    attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
+                                    attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
                                     key.Pins.Get(localState.BestPins);
                                     break;
                                 }
@@ -354,12 +353,12 @@ namespace M209AnalyzerLib.M209
                             }
 
                             key.UpdateDecryptionIfInvalid();
-                            newEval = attackManager.Evaluate(EvalType.MONO, key.Decryption, key.CribArray);
+                            newEval = attackManager.Evaluate(EvalType.MONO, key.Decryption, key.CribArray, localState.TaskId);
                             if (newEval > localState.BestScore)
                             {
                                 localState.Improved = true;
                                 localState.BestScore = newEval;
-                                attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
+                                attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
                                 key.Pins.Get(localState.BestPins);
                                 break;
                             }

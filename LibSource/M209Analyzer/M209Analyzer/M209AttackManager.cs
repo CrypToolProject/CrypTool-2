@@ -168,11 +168,30 @@ namespace M209AnalyzerLib
         private DateTime _lastProgressUpdate = DateTime.Now;
         private const int UPDATE_INTERVAL_SECONDS = 1;
 
-        public long EvaluationCount = 0;
+        public long EvaluationCount
+        {
+            get
+            {
+                long count = 0;
+                if (EvaluationCounter.Length != 0)
+                {
+                    for (int i = 0; i < EvaluationCounter.Length; i++)
+                    {
+                        count += EvaluationCounter[i];
+                    }
+                }
+                return count;
+            }
+        }
 
         private readonly object LOCK = new object();
 
         private int _taskCounter = 0;
+
+        private int _taskTracker = -1;
+
+        public CtBestList[] BestLists;
+        public long[] EvaluationCounter;
 
         #endregion
 
@@ -210,10 +229,11 @@ namespace M209AnalyzerLib
             }
         }
 
-        public void AddNewBestListEntry(double score, Key key, int[] decryption)
+        public void AddNewBestListEntry(double score, Key key, int[] decryption, int taskId)
         {
             lock (LOCK)
             {
+
                 if (UseOwnBestList)
                 {
                     BestList.PushResult(score, key, decryption);
@@ -224,20 +244,9 @@ namespace M209AnalyzerLib
 
         public void ProgressChanged(string attackType, string phase, int counter, int targetValue)
         {
-            lock (LOCK)
+            if (DateTime.Now > _lastProgressUpdate.AddSeconds(UPDATE_INTERVAL_SECONDS))
             {
-                if (DateTime.Now > _lastProgressUpdate.AddSeconds(UPDATE_INTERVAL_SECONDS))
-                {
-                    OnProgressStatusChanged?.Invoke(this, new OnProgressStatusChangedEventArgs(attackType, phase, counter, targetValue, EvaluationCount, ElapsedTime));
-                }
-            }
-        }
-
-        public void NewKeyFound()
-        {
-            lock (LOCK)
-            {
-                EvaluationCount++;
+                OnProgressStatusChanged?.Invoke(this, new OnProgressStatusChangedEventArgs(attackType, phase, counter, targetValue, EvaluationCount, ElapsedTime));
             }
         }
 
@@ -258,14 +267,14 @@ namespace M209AnalyzerLib
 
                 Key key = new Key();
                 key.SetCipherText(CipherText);
+                LocalState localState = new LocalState(_taskCounter++);
 
                 if (SimulationKey != null)
                 {
                     key.setOriginalKey(SimulationKey);
-                    key.setOriginalScore(Evaluate(EvalType.MONO, SimulationKey.CribArray, SimulationKey.CribArray));
+                    key.setOriginalScore(Evaluate(EvalType.MONO, SimulationKey.CribArray, SimulationKey.CribArray, localState.TaskId));
                 }
 
-                LocalState localState = new LocalState(_taskCounter++);
                 CiphertextOnlyAttack.Solve(key, this, localState);
                 if (ShouldStop)
                 {
@@ -294,6 +303,8 @@ namespace M209AnalyzerLib
                 CancellationTokenSource cts = new CancellationTokenSource();
 
                 //List<Action> tasks = new List<Action>();
+                BestLists = new CtBestList[Threads];
+                EvaluationCounter = new long[Threads];
 
                 for (int i = 0; i < Threads; i++)
                 {
@@ -352,7 +363,7 @@ namespace M209AnalyzerLib
             }
         }
 
-        public async void KnownPlainTextAttack()
+        public void KnownPlainTextAttack()
         {
             StartTimeMeasurement();
             if (CipherText != String.Empty && Crib != String.Empty)
@@ -366,14 +377,14 @@ namespace M209AnalyzerLib
 
                 foreach (var task in tasks)
                 {
-                    await Task.Run(task);
+                    Task.Run(task);
                 }
             }
         }
 
-        public double Evaluate(EvalType evalType, int[] decryptedText, int[] crib)
+        public double Evaluate(EvalType evalType, int[] decryptedText, int[] crib, int taskId)
         {
-            NewKeyFound();
+            EvaluationCounter[taskId]++;
             return Scoring.Evaluate(evalType, decryptedText, crib);
         }
     }

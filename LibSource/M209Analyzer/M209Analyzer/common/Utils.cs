@@ -328,28 +328,6 @@ namespace M209AnalyzerLib.Common
             return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - startTime + 1;
         }
 
-        public static Random random = new Random((int)startTime);
-        public static int RandomNextInt(int range)
-        {
-            return random.Next(range);
-        }
-        public static int RandomNextInt()
-        {
-            return random.Next();
-        }
-        public static double RandomNextDouble()
-        {
-            return random.NextDouble();
-        }
-        public static float RandomNextFloat()
-        {
-            // https://stackoverflow.com/questions/3365337/best-way-to-generate-a-random-float-in-c-sharp
-            var result = (random.NextDouble()
-                  * (Single.MaxValue - (double)Single.MinValue))
-                  + Single.MinValue;
-            return (float)result;
-        }
-
         public static int Sum(int[] a)
         {
             int sum = 0;
@@ -372,7 +350,7 @@ namespace M209AnalyzerLib.Common
 
         public static int[] RandomPerm6()
         {
-            return PERMS6[random.Next(PERMS6.Length)];
+            return PERMS6[RandomGen.NextInt(PERMS6.Length)];
         }
 
         private static int[][] CreatePerms6()
@@ -491,7 +469,7 @@ namespace M209AnalyzerLib.Common
             }
             if (startPosition < 0)
             {
-                startPosition = RandomNextInt(80 * fileLength / 100);
+                startPosition = RandomGen.NextInt(80 * fileLength / 100);
             }
 
             List<string> lines = File.ReadAllLines(fileName).ToList();
@@ -547,7 +525,7 @@ namespace M209AnalyzerLib.Common
 
             if (startPosition < 0)
             {
-                startPosition = RandomNextInt(80 * fileLength / 100);
+                startPosition = RandomGen.NextInt(80 * fileLength / 100);
             }
 
             StringReader stringReader = new StringReader(resource);

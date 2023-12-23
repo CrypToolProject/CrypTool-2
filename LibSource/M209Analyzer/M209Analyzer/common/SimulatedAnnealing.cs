@@ -42,7 +42,7 @@ namespace M209AnalyzerLib.Common
                 return false;
             }
             double ratio = diffScore / temperature;
-            return ratio > SAParameters.MinRatio && Math.Pow(Math.E, ratio) > Utils.RandomNextFloat();
+            return ratio > SAParameters.MinRatio && Math.Pow(Math.E, ratio) > RandomGen.NextFloat();
         }
     }
 }

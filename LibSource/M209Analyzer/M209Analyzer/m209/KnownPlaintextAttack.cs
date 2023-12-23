@@ -24,7 +24,7 @@ namespace M209AnalyzerLib.M209
     /// </summary>
     public class KnownPlaintextAttack
     {
-        private static double RandomizePinsAndLugs(Key key, bool lugs, bool pins, bool searchSlide, int randomCycles, int primaryCycle, M209AttackManager attackManager)
+        private static double RandomizePinsAndLugs(Key key, bool lugs, bool pins, bool searchSlide, int randomCycles, int primaryCycle, M209AttackManager attackManager, LocalState localState)
         {
 
             double bestLocal = Double.MinValue;
@@ -52,7 +52,7 @@ namespace M209AnalyzerLib.M209
                 }
                 if (!lugs && !pins)
                 {
-                    key.Pins.Randomize(Utils.RandomNextInt(Key.WHEELS) + 1);
+                    key.Pins.Randomize(RandomGen.NextInt(Key.WHEELS) + 1);
                 }
                 key.UpdateDecryptionIfInvalid();
                 if (attackManager.ShouldStop)
@@ -60,7 +60,7 @@ namespace M209AnalyzerLib.M209
                     return bestLocal;
                 }
 
-                double newEval = attackManager.Evaluate(EvalType.CRIB, key.Decryption, key.CribArray);
+                double newEval = attackManager.Evaluate(EvalType.CRIB, key.Decryption, key.CribArray, localState.TaskId);
                 if (newEval > bestLocal)
                 {
                     bestLocal = newEval;
@@ -94,7 +94,7 @@ namespace M209AnalyzerLib.M209
 
                 int semiRestarts = 8;
 
-                double newEval = RandomizePinsAndLugs(key, true, true, attackManager.SearchSlide, randomCycles, cycle, attackManager);
+                double newEval = RandomizePinsAndLugs(key, true, true, attackManager.SearchSlide, randomCycles, cycle, attackManager, localState);
                 if (attackManager.ShouldStop)
                 {
                     return;
@@ -120,7 +120,7 @@ namespace M209AnalyzerLib.M209
                         localState.Improved = true;
                     }
 
-                    newEval = SimulatedAnnealingPins.SA(key, EvalType.CRIB, newEval > 128000 ? 20 : 5, attackManager);
+                    newEval = SimulatedAnnealingPins.SA(key, EvalType.CRIB, newEval > 128000 ? 20 : 5, attackManager, localState);
                     localState.SingleIteration = false;
 
                     attackManager.ProgressChanged("Known-Plaintext", "Second hill climbing loop", 1, 1);
@@ -141,7 +141,7 @@ namespace M209AnalyzerLib.M209
 
                     if (!localState.Improved && semiRestarts > 0)
                     {
-                        double last = attackManager.Evaluate(EvalType.CRIB, key.Decryption, key.CribArray);
+                        double last = attackManager.Evaluate(EvalType.CRIB, key.Decryption, key.CribArray, localState.TaskId);
 
                         if (last >= 129000 && last < key.OriginalScore)
                         {
@@ -177,7 +177,7 @@ namespace M209AnalyzerLib.M209
 
                             if ((semiRestarts % 8) != 7)
                             {
-                                RandomizePinsAndLugs(key, true, false, attackManager.SearchSlide, randomCycles, cycle, attackManager);
+                                RandomizePinsAndLugs(key, true, false, attackManager.SearchSlide, randomCycles, cycle, attackManager, localState);
                                 localState.SingleIteration = true;
                                 attackManager.ProgressChanged("Known-Plaintext", "Third hill climbing loop", 1, 1);
                                 newEval = HillClimbPins.HillClimb(key, EvalType.CRIB, true, attackManager, localState);
@@ -188,7 +188,7 @@ namespace M209AnalyzerLib.M209
                             }
                             else
                             {
-                                RandomizePinsAndLugs(key, false, true, attackManager.SearchSlide, randomCycles, cycle, attackManager);
+                                RandomizePinsAndLugs(key, false, true, attackManager.SearchSlide, randomCycles, cycle, attackManager, localState);
                                 if (attackManager.ShouldStop)
                                 {
                                     return;

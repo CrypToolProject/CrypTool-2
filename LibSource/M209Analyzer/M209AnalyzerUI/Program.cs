@@ -67,7 +67,7 @@ namespace M209AnalyzerUI
 
             m209Analyzer.OnLogMessage += M209Analyzer_OnLogMessage;
             m209Analyzer.OnNewBestListEntry += M209Analyzer_OnNewBestListEntry;
-            //m209Analyzer.OnProgressStatusChanged += M209Analyzer_OnProgressStatusChanged;
+            m209Analyzer.OnProgressStatusChanged += M209Analyzer_OnProgressStatusChanged;
 
 
             m209Analyzer.Threads = CommandLine.getIntegerValue(Flag.THREADS);
@@ -123,9 +123,9 @@ namespace M209AnalyzerUI
         private static void M209Analyzer_OnProgressStatusChanged(object sender, M209AttackManager.OnProgressStatusChangedEventArgs args)
         {
             double percentage = Math.Round(((double)(args.Counter) / (double)args.TargetValue) * 100);
-            //Console.Write("\r");
-            //Console.Write($"[{args.ElapsedTime}] [Thread {Thread.CurrentThread.ManagedThreadId}] Progress Changed: [{args.AttackType}|{args.Phase}]  \t- {args.Counter}/{args.TargetValue} ({percentage}%) " +
-            //    $"[2**{(long)(Math.Log(args.EvaluationCount) / Math.Log(2))}][{(args.ElapsedTime.TotalMilliseconds == 0 ? 0 : args.EvaluationCount / args.ElapsedTime.TotalMilliseconds)} K/s]");
+            Console.Write("\r");
+            Console.Write($"[{args.ElapsedTime}] [Thread {Thread.CurrentThread.ManagedThreadId}] Progress Changed: [{args.AttackType}|{args.Phase}]  \t- {args.Counter}/{args.TargetValue} ({percentage}%) " +
+                $"[2**{(long)(Math.Log(args.EvaluationCount) / Math.Log(2))}][{(args.ElapsedTime.TotalMilliseconds == 0 ? 0 : args.EvaluationCount / args.ElapsedTime.TotalMilliseconds)} K/s]");
             //Logger.WriteLog($"[{args.ElapsedTime}] [Thread {Thread.CurrentThread.ManagedThreadId}] Progress Changed: [{args.AttackType}|{args.Phase}]  \t- {args.Counter}/{args.TargetValue} ({percentage}%)");
         }
 
@@ -159,7 +159,7 @@ namespace M209AnalyzerUI
                 {
                     Logger.WriteLog($"{attackManager.CipherText.Length} {attackManager.ElapsedTime}, {attackManager.EvaluationCount}, 2^{(long)(Math.Log(attackManager.EvaluationCount) / Math.Log(2))}, " +
                         $"{(attackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : attackManager.EvaluationCount / attackManager.ElapsedTime.TotalMilliseconds)} K/s, " +
-                        $"{attackManager.Threads} Threads" +
+                        $"{attackManager.Threads} Threads  Score: {args.Score} " +
                         $"\n {Utils.GetString(args.Decryption)}" +
                         $"\n {attackManager.Crib} \n -------------");
                     Console.WriteLine($"{attackManager.CipherText.Length} {attackManager.ElapsedTime}, {attackManager.EvaluationCount}, 2^{(long)(Math.Log(attackManager.EvaluationCount) / Math.Log(2))}, " +

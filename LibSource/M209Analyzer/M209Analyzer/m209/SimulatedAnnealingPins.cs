@@ -22,7 +22,7 @@ namespace M209AnalyzerLib.M209
     {
         private static double Step(Key key, EvalType evalType,
                                 bool[][] bestSAPins, double bestSAScore,
-                                double temperature, M209AttackManager attackManager)
+                                double temperature, M209AttackManager attackManager, LocalState localState)
         {
             SimulatedAnnealing.SAParameters = attackManager.SAParameters;
 
@@ -49,7 +49,7 @@ namespace M209AnalyzerLib.M209
                     }
                     key.UpdateDecryption(w, p);
 
-                    newScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
+                    newScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
                     if (SimulatedAnnealing.Accept(newScore, currLocalScore, temperature))
                     {
                         currLocalScore = newScore;
@@ -59,7 +59,7 @@ namespace M209AnalyzerLib.M209
                             key.Pins.Get(bestSAPins);
                             bestSAScore = newScore;
                         }
-                        attackManager.AddNewBestListEntry(currLocalScore, key, key.Decryption);
+                        attackManager.AddNewBestListEntry(currLocalScore, key, key.Decryption, localState.TaskId);
                     }
                     else
                     {
@@ -85,7 +85,7 @@ namespace M209AnalyzerLib.M209
                     continue;
                 }
                 key.UpdateDecryptionIfInvalid();
-                newScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
+                newScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
                 if (SimulatedAnnealing.Accept(newScore, currLocalScore, temperature))
                 {
                     currLocalScore = newScore;
@@ -95,7 +95,7 @@ namespace M209AnalyzerLib.M209
                         key.Pins.Get(bestSAPins);
                         bestSAScore = newScore;
                     }
-                    attackManager.AddNewBestListEntry(currLocalScore, key, key.Decryption);
+                    attackManager.AddNewBestListEntry(currLocalScore, key, key.Decryption, localState.TaskId);
 
                 }
                 else
@@ -135,7 +135,7 @@ namespace M209AnalyzerLib.M209
                         }
                         key.UpdateDecryption(w, p1, p2);
 
-                        newScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
+                        newScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
                         if (SimulatedAnnealing.Accept(newScore, currLocalScore, temperature))
                         {
                             currLocalScore = newScore;
@@ -145,7 +145,7 @@ namespace M209AnalyzerLib.M209
                                 key.Pins.Get(bestSAPins);
                                 bestSAScore = newScore;
                             }
-                            attackManager.AddNewBestListEntry(currLocalScore, key, key.Decryption);
+                            attackManager.AddNewBestListEntry(currLocalScore, key, key.Decryption, localState.TaskId);
                         }
                         else
                         {
@@ -173,7 +173,7 @@ namespace M209AnalyzerLib.M209
             {
                 key.Pins.InverseWheelBitmap(v);
                 double score = key.Eval(evalType);
-                score = attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
+                score = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
                 if (score > bestVscore)
                 {
                     bestVscore = score;
@@ -192,7 +192,7 @@ namespace M209AnalyzerLib.M209
                     key.Pins.Get(bestSAPins);
                     bestSAScore = newScore;
                 }
-                attackManager.AddNewBestListEntry(currLocalScore, key, key.Decryption);
+                attackManager.AddNewBestListEntry(currLocalScore, key, key.Decryption, localState.TaskId);
             }
 
             return bestSAScore;
@@ -200,10 +200,10 @@ namespace M209AnalyzerLib.M209
         }
 
 
-        public static double SA(Key key, EvalType evalType, int cycles, M209AttackManager attackManager)
+        public static double SA(Key key, EvalType evalType, int cycles, M209AttackManager attackManager, LocalState localState)
         {
             key.UpdateDecryptionIfInvalid();
-            double bestSAScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
+            double bestSAScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
             bool[][] bestSAPins = key.Pins.CreateCopy();
 
             for (int cycle = 0; cycle < cycles && !attackManager.ShouldStop; cycle++)
@@ -212,13 +212,13 @@ namespace M209AnalyzerLib.M209
 
                 for (double temperature = attackManager.SAParameters.StartTemperature; temperature >= attackManager.SAParameters.EndTemperature && !attackManager.ShouldStop; temperature /= attackManager.SAParameters.Decrement)
                 {
-                    bestSAScore = Step(key, evalType, bestSAPins, bestSAScore, temperature, attackManager);
+                    bestSAScore = Step(key, evalType, bestSAPins, bestSAScore, temperature, attackManager, localState);
                 }
                 double previous;
                 do
                 {
                     previous = bestSAScore;
-                    bestSAScore = Step(key, evalType, bestSAPins, bestSAScore, 0.0, attackManager);
+                    bestSAScore = Step(key, evalType, bestSAPins, bestSAScore, 0.0, attackManager, localState);
                 } while (bestSAScore > previous && !attackManager.ShouldStop);
             }
 
