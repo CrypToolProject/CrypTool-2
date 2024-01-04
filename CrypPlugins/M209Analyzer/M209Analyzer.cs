@@ -215,27 +215,6 @@ namespace CrypTool.Plugins.M209Analyzer
                 }
             }
             , null);
-
-            // Show never 100% if correct not found
-            if (_m209AttackManager.EvaluationCount >= _approximatedKeys && _settings.AttackMode == AttackMode.CiphertextOnly)
-            {
-                ProgressChanged(0.99, 1.0);
-            }
-            else if (_settings.AttackMode == AttackMode.CiphertextOnly)
-            {
-                ProgressChanged(_m209AttackManager.EvaluationCount, _approximatedKeys);
-            }
-            else if (_settings.AttackMode == AttackMode.KnownPlaintext)
-            {
-                if (_presentation.BestList.Count > 0)
-                {
-                    ProgressChanged(_presentation.BestList[0].Value, 130_000);
-                }
-                else
-                {
-                    ProgressChanged(0, 130_000);
-                }
-            }
         }
 
         /// <summary>
@@ -419,6 +398,33 @@ namespace CrypTool.Plugins.M209Analyzer
                         e.Ranking = ranking;
                         ranking++;
                     }
+                    var testValue = _presentation.BestList.First().Value;
+
+                    if (_presentation.BestList.Count == 0 || entry.Value >= _presentation.BestList.First().Value)
+                    {
+
+                        // Show never 100% if correct not found
+                        if (_m209AttackManager.EvaluationCount >= _approximatedKeys && _settings.AttackMode == AttackMode.CiphertextOnly)
+                        {
+                            ProgressChanged(0.99, 1.0);
+                        }
+                        else if (_settings.AttackMode == AttackMode.CiphertextOnly)
+                        {
+                            ProgressChanged(_presentation.BestList.First().Value, 50_000);
+                        }
+                        else if (_settings.AttackMode == AttackMode.KnownPlaintext)
+                        {
+                            if (_presentation.BestList.Count > 0)
+                            {
+                                ProgressChanged(_presentation.BestList[0].Value, 130_000);
+                            }
+                            else
+                            {
+                                ProgressChanged(0, 130_000);
+                            }
+                        }
+                    }
+
                 }
                 catch (Exception)
                 {
