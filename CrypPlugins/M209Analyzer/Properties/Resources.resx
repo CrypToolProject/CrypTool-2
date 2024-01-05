@@ -123,6 +123,9 @@
   <data name="AnalysisStepLabel" xml:space="preserve">
     <value>Analysis step:</value>
   </data>
+  <data name="AnalysisStepText" xml:space="preserve">
+    <value>- Only in single thread mode -</value>
+  </data>
   <data name="AttackModeCaption" xml:space="preserve">
     <value>Change the attack mode</value>
   </data>

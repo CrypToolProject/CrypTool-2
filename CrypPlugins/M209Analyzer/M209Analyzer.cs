@@ -211,7 +211,7 @@ namespace CrypTool.Plugins.M209Analyzer
                 }
                 else
                 {
-                    _presentation.AnalysisStep.Value = "";
+                    _presentation.AnalysisStep.Value = Properties.Resources.AnalysisStepText;
                 }
             }
             , null);
