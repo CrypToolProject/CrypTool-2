@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -606,10 +607,9 @@ namespace CrypToolStoreBuildSystem
                 }
             }
             
-            //Step 2: change project reference to correct path of needed dlls
+            //Step 2: change project reference to correct path of needed dlls                                   
             IEnumerable<XElement> projectReferences = csprojXDocument.Descendants();
             
-            bool changedCrypPluginBaseReference = false;
             foreach (XElement projectReference in projectReferences)
             {
                 XAttribute includeAttribute = projectReference.Attribute("Include");
@@ -643,7 +643,6 @@ namespace CrypToolStoreBuildSystem
                     hintPathElement.Value = @"..\..\..\CT2_Libraries\CrypPluginBase.dll";
                     projectReference.Add(hintPathElement);
 
-                    changedCrypPluginBaseReference = true;
                     Logger.LogText("(Buildstep 6) Changed reference to CrypPluginBase", this, Logtype.Info);
                 }
 
@@ -676,7 +675,6 @@ namespace CrypToolStoreBuildSystem
                     hintPathElement.Value = @"..\..\..\CT2_Libraries\CrypCore.dll";
                     projectReference.Add(hintPathElement);
 
-                    changedCrypPluginBaseReference = true;
                     Logger.LogText("(Buildstep 6) Changed reference to CrypCore", this, Logtype.Info);
                 }
 
@@ -709,7 +707,6 @@ namespace CrypToolStoreBuildSystem
                     hintPathElement.Value = @"..\..\..\CT2_Libraries\CrypWin.exe";
                     projectReference.Add(hintPathElement);
 
-                    changedCrypPluginBaseReference = true;
                     Logger.LogText("(Buildstep 6) Changed reference to CrypWin.exe", this, Logtype.Info);
                 }
 
@@ -742,8 +739,57 @@ namespace CrypToolStoreBuildSystem
                     hintPathElement.Value = @"..\..\..\CT2_Libraries\OnlineDocumentationGenerator.dll";
                     projectReference.Add(hintPathElement);
 
-                    changedCrypPluginBaseReference = true;
                     Logger.LogText("(Buildstep 6) Changed reference to OnlineDocumentationGenerator", this, Logtype.Info);
+                }
+
+                //change WorkspaceManagerModel
+                if (projectReference.Name.LocalName.ToLower().Equals("projectreference") &&
+                    includeAttribute != null && !string.IsNullOrEmpty(includeAttribute.Value) &&
+                    includeAttribute.Value.ToLower().Contains("workspacemanagermodel"))
+                {
+                    //change include attribute value
+                    includeAttribute.Value = @"WorkspaceManagerModel";
+
+                    //change/add private element
+                    XElement privateElement = projectReference.Element("Private");
+                    if (privateElement != null)
+                    {
+                        privateElement.Value = "false";
+                    }
+                    else
+                    {
+                        privateElement = new XElement(defaultNamespace + "Private");
+                        privateElement.Value = "false";
+                        projectReference.Add(privateElement);
+                    }
+
+                    //Change type of reference
+                    projectReference.Name = defaultNamespace + "Reference";
+
+                    //Add hint path to OnlineDocumentationGenerator                    
+                    XElement hintPathElement = new XElement(defaultNamespace + "HintPath");
+                    hintPathElement.Value = @"..\..\..\CT2_Libraries\WorkspaceManagerModel.dll";
+                    projectReference.Add(hintPathElement);
+
+                    Logger.LogText("(Buildstep 6) Changed reference to WorkspaceManagerModel", this, Logtype.Info);
+                }
+
+                //change Newtonsoft.Json
+                if (includeAttribute != null && !string.IsNullOrEmpty(includeAttribute.Value) && 
+                    includeAttribute.Value.ToLower().Contains("newtonsoft.json") &&
+                    projectReference.Elements().ElementAt(0).Name.LocalName.ToLower().Equals("hintpath"))
+                {
+                    projectReference.Elements().ElementAt(0).Value = @"..\..\..\CT2_Libraries\Newtonsoft.Json.dll";
+                    Logger.LogText("(Buildstep 6) Changed reference to Newtonsoft.Json", this, Logtype.Info);
+                }
+
+                //change Newtonsoft.Json
+                if (includeAttribute != null && !string.IsNullOrEmpty(includeAttribute.Value) &&
+                    includeAttribute.Value.ToLower().Contains("wpftoolkit.extended") &&
+                    projectReference.Elements().ElementAt(0).Name.LocalName.ToLower().Equals("hintpath"))
+                {
+                    projectReference.Elements().ElementAt(0).Value = @"..\..\..\CT2_Libraries\WPFToolkit.Extended.dll";
+                    Logger.LogText("(Buildstep 6) Changed reference to WPFToolkit.Extended", this, Logtype.Info);
                 }
             }
 
@@ -752,11 +798,7 @@ namespace CrypToolStoreBuildSystem
                 Logger.LogText("(Buildstep 6) Did not find Release target to change output path of build", this, Logtype.Error);
                 return false;
             }
-            if (!changedCrypPluginBaseReference)
-            {
-                Logger.LogText("(Buildstep 6) Did not find reference to CrypPluginBase.dll to change it", this, Logtype.Error);
-                return false;
-            }            
+                
             csprojXDocument.Save(CSProjFileName,SaveOptions.OmitDuplicateNamespaces);
             Logger.LogText(string.Format("(Buildstep 6) Wrote changes to {0}", CSProjFileName), this, Logtype.Info);
 
