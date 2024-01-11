@@ -546,7 +546,7 @@ namespace M209AnalyzerLib.M209
                 {
                     Randomize(w);
                 }
-            } while ((Count() < MinCount()) || (Count() > MaxCount()));
+            } while ((CountActivePins() < MinCount()) || (CountActivePins() > MaxCount()));
             if (_parentKey != null)
             {
                 _parentKey.InvalidateDecryption();
@@ -588,7 +588,7 @@ namespace M209AnalyzerLib.M209
             }
         }
 
-        public int Count()
+        public int CountActivePins()
         {
             int count = 0;
             var isoPins = IsoPins;

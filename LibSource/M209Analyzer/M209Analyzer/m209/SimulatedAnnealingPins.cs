@@ -41,7 +41,7 @@ namespace M209AnalyzerLib.M209
                 for (int p = 0; p < Key.WHEELS_SIZE[w]; p++)
                 {
                     key.Pins.Toggle(w, p);
-                    count = key.Pins.Count();
+                    count = key.Pins.CountActivePins();
                     if (count < MIN_COUNT || count > MAX_COUNT || key.Pins.LongSeq(w, p))
                     {
                         key.Pins.Toggle(w, p);
@@ -78,7 +78,7 @@ namespace M209AnalyzerLib.M209
             {
 
                 key.Pins.Inverse(w);
-                count = key.Pins.Count();
+                count = key.Pins.CountActivePins();
                 if (count < MIN_COUNT || count > MAX_COUNT)
                 {
                     key.Pins.Inverse(w);
