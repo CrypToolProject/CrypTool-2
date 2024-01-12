@@ -370,6 +370,8 @@ namespace M209AnalyzerLib
             {
                 List<Action> tasks = new List<Action>();
 
+                EvaluationCounter = new long[Threads];
+
                 for (int i = 0; i < Threads; i++)
                 {
                     tasks.Add(KnownPlainTextTask);
