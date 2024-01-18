@@ -53,6 +53,9 @@ namespace CrypTool.Plugins.M209Analyzer
         private DateTime _startTime;
         private DateTime _endTime;
 
+        private DateTime _lastUpdateTime = DateTime.Now;
+        private long _lastEvaluationCount = 0;
+
         private bool _running = false;
 
         private int _approximatedKeys = int.MaxValue;
@@ -190,31 +193,36 @@ namespace CrypTool.Plugins.M209Analyzer
 
             ProgressChanged(1, 1);
         }
-
         private void _m209AttackManager_OnProgressStatusChanged(object sender, M209AttackManager.OnProgressStatusChangedEventArgs e)
         {
-
-            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            if (DateTime.Now >= _lastUpdateTime.AddSeconds(1))
             {
-                _endTime = DateTime.Now;
-                TimeSpan elapsedtime = _m209AttackManager.ElapsedTime;
-                TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
-                _presentation.EndTime.Value = _endTime.ToString();
-                _presentation.ElapsedTime.Value = elapsedspan.ToString();
-                _presentation.CurrentlyAnalyzedKey.Value = e.EvaluationCount.ToString();
-                _presentation.CurrentlyAnalyzedKey.Value = $"2^{(long)(Math.Log(_m209AttackManager.EvaluationCount) / Math.Log(2))}";
-                _presentation.KeyPerMilliSecond.Value = $"{(_m209AttackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : _m209AttackManager.EvaluationCount / _m209AttackManager.ElapsedTime.TotalMilliseconds).ToString("0.0#")} {Properties.Resources.KeysPerMilisec}";
+                long diffEvaluationCount = _m209AttackManager.EvaluationCount - _lastEvaluationCount;
+                TimeSpan diffUpdateTime = DateTime.Now - _lastUpdateTime;
+                Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                {
+                    _endTime = DateTime.Now;
+                    TimeSpan elapsedtime = _m209AttackManager.ElapsedTime;
+                    TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
+                    _presentation.EndTime.Value = _endTime.ToString();
+                    _presentation.ElapsedTime.Value = elapsedspan.ToString();
+                    _presentation.CurrentlyAnalyzedKey.Value = e.EvaluationCount.ToString();
+                    _presentation.CurrentlyAnalyzedKey.Value = $"2^{(long)(Math.Log(_m209AttackManager.EvaluationCount) / Math.Log(2))}";
+                    _presentation.KeyPerMilliSecond.Value = $"{(_m209AttackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : (diffEvaluationCount / diffUpdateTime.TotalMilliseconds) * 1000).ToString("0#,0")} {Properties.Resources.KeysPerSec}";
 
-                if (_m209AttackManager.Threads == 1)
-                {
-                    _presentation.AnalysisStep.Value = e.Phase;
+                    if (_m209AttackManager.Threads == 1)
+                    {
+                        _presentation.AnalysisStep.Value = e.Phase;
+                    }
+                    else
+                    {
+                        _presentation.AnalysisStep.Value = Properties.Resources.AnalysisStepText;
+                    }
                 }
-                else
-                {
-                    _presentation.AnalysisStep.Value = Properties.Resources.AnalysisStepText;
-                }
+                , null);
+                _lastUpdateTime = DateTime.Now;
+                _lastEvaluationCount = _m209AttackManager.EvaluationCount;
             }
-            , null);
         }
 
         /// <summary>

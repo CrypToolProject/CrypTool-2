@@ -232,6 +232,15 @@ namespace CrypTool.Plugins.M209Analyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to keys/s.
+        /// </summary>
+        internal static string KeysPerSec {
+            get {
+                return ResourceManager.GetString("KeysPerSec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Key of the M-209.
         /// </summary>
         internal static string KeyTooltip {
