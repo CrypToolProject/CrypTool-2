@@ -36,6 +36,9 @@ namespace M209AnalyzerLib.M209
         public bool[] WheelPins5;
         public bool[] WheelPins6;
 
+        private static long startTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        public Random random = new Random((int)startTime);
+
 
         private Pins(Key parentKey)
         {
@@ -361,7 +364,7 @@ namespace M209AnalyzerLib.M209
                 good = true;
                 int countActive = 0;
                 int countInactive = 0;
-                int rand = Common.RandomGen.NextInt();
+                int rand = random.Next();
                 int consecutiveActive = 0;
                 int consecutiveInactive = 0;
                 for (int p = 0; p < total; p++)

@@ -118,7 +118,7 @@ namespace M209AnalyzerLib.M209
             TYPE_COUNT_W5W6,
         };
         private static long startTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-        public static Random random = new Random((int)startTime);
+        public Random random = new Random((int)startTime);
 
         public Lugs(Key parentKey)
         {
@@ -383,7 +383,7 @@ namespace M209AnalyzerLib.M209
         }
 
 
-        private static int FindWheelWithEnoughCountLeft(int[] targetCount, int[] actualCount, int notThisWheel)
+        private int FindWheelWithEnoughCountLeft(int[] targetCount, int[] actualCount, int notThisWheel)
         {
             int[] weighted = new int[100];
 
@@ -406,7 +406,7 @@ namespace M209AnalyzerLib.M209
             {
                 return 0;
             }
-            int rand = Common.RandomGen.NextInt(items);
+            int rand = random.Next(items);
 
             return weighted[rand];
 
@@ -425,7 +425,7 @@ namespace M209AnalyzerLib.M209
             } while (!CompliesWithUserManualRules(TypeCount));
         }
 
-        private static bool AcceptMultipleSimilarOverlaps(int same)
+        private bool AcceptMultipleSimilarOverlaps(int same)
         {
             if (same >= Global.MAX_OVERLAP)
             {
@@ -436,7 +436,7 @@ namespace M209AnalyzerLib.M209
                 return true;
             }
             int reference = 64;
-            long rand = Common.RandomGen.NextInt(reference);
+            long rand = random.Next(reference);
 
             for (int i = 0; i < same; i++)
             {
@@ -481,8 +481,8 @@ namespace M209AnalyzerLib.M209
             {
                 for (int i = 0; i < Key.BARS; i++)
                 {
-                    int w1 = 1 + Common.RandomGen.NextInt(6);
-                    int w2 = Common.RandomGen.NextInt(7);
+                    int w1 = 1 + random.Next(6);
+                    int w2 = random.Next(7);
                     if (w2 == 0 || w1 == w2 || GetOverlaps(TypeCount) >= Global.MAX_OVERLAP)
                     {
                         TypeCount[GetTypeCountIndex(w1)]++;
@@ -518,7 +518,7 @@ namespace M209AnalyzerLib.M209
             int[] lugsCountSeq;
             while (true)
             {
-                int seqIndex = Common.RandomGen.NextInt(LugsRules.validLugCountSequences.Count());
+                int seqIndex = random.Next(LugsRules.validLugCountSequences.Count());
                 lugsCountSeq = LugsRules.validLugCountSequences.ElementAt(seqIndex);
                 lugCountSeqTotal = Common.Utils.Sum(lugsCountSeq);
                 lugCountSeqOverlaps = lugCountSeqTotal - Key.BARS;
