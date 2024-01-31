@@ -84,7 +84,7 @@
                     <Image Source="/Startcenter;component/images/book.png" />
                 </Button.Content>
             </Button>
-            <TextBlock Grid.Column="1" Text="{Loc Open_the_ct_book_}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+            <TextBlock Grid.Column="1" Text="{Loc Visit_the_ct_book_page_}" VerticalAlignment="Center" TextWrapping="Wrap"/>
         </Grid>
 
         <Grid>

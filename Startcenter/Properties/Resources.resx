@@ -204,11 +204,8 @@
   <data name="CrypTutorials" xml:space="preserve">
     <value>Watch videos about CrypTool 2</value>
   </data>
-  <data name="CTBookFilename" xml:space="preserve">
-    <value>CrypToolBook\\CT-Book-en.pdf</value>
-  </data>
-  <data name="Open_the_ct_book_" xml:space="preserve">
-    <value>Open the CrypTool Book</value>
+  <data name="Visit_the_ct_book_page_" xml:space="preserve">
+    <value>Visit the CrypTool Book page on the CrypTool portal</value>
   </data>
   <data name="CollapseAll" xml:space="preserve">
     <value>Collapse all</value>
@@ -251,5 +248,8 @@
   </data>
   <data name="FileListClearQuestionTitle" xml:space="preserve">
     <value>Clear recently opened files list</value>
+  </data>
+  <data name="CTBookURL" xml:space="preserve">
+    <value>https://www.cryptool.org/en/documentation/ctbook/</value>
   </data>
 </root>

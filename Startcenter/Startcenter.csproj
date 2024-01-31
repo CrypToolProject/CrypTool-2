@@ -246,14 +246,6 @@
     <Resource Include="images\book.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CrypToolBook\CT-Book-de.pdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="CrypToolBook\CT-Book-en.pdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\news.png" />
   </ItemGroup>
   <ItemGroup>
