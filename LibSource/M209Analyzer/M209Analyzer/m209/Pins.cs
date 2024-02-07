@@ -24,7 +24,7 @@ namespace M209AnalyzerLib.M209
         //ISOMORPHIC pins, take into account the indicator and the active offset
         //for a given message at pos P and for wheel W, look at
         // isoPinsReal[W][POS%WHEEL_SIZE[W]]
-        public bool[][] IsoPins = new bool[Key.WHEELS + 1][];
+        public bool[][] IsoPins;
 
         public string Indicator = Key.NULL_INDICATOR;
         private Key _parentKey = null;
@@ -42,15 +42,19 @@ namespace M209AnalyzerLib.M209
 
         private Pins(Key parentKey)
         {
+            _parentKey = parentKey;
+
+            IsoPins = new bool[_parentKey.WHEELS + 1][];
+
             // Workaround for not possible initialization: new boolean[Key.WHEELS + 1][26];
             for (int i = 0; i < IsoPins.Length; i++)
             {
                 IsoPins[i] = new bool[26];
             }
 
-            for (int w = 1; w <= Key.WHEELS; w++)
+            for (int w = 1; w <= _parentKey.WHEELS; w++)
             {
-                IsoPins[w] = new bool[Key.WHEELS_SIZE[w]];
+                IsoPins[w] = new bool[_parentKey.WHEELS_SIZE[w]];
             }
             WheelPins1 = IsoPins[1];
             WheelPins2 = IsoPins[2];
@@ -58,7 +62,6 @@ namespace M209AnalyzerLib.M209
             WheelPins4 = IsoPins[4];
             WheelPins5 = IsoPins[5];
             WheelPins6 = IsoPins[6];
-            _parentKey = parentKey;
         }
 
         // Absolute PIN settings, as defined in the key
@@ -96,12 +99,12 @@ namespace M209AnalyzerLib.M209
         {
             bool[] pinsW = IsoPins[w];
             StringBuilder s = new StringBuilder();
-            for (int index = 0; index < Key.WHEELS_SIZE[w]; index++)
+            for (int index = 0; index < _parentKey.WHEELS_SIZE[w]; index++)
             {
                 int isoIndex = IsoIndex(w, index);
                 if (pinsW[isoIndex])
                 {
-                    s.Append(Key.WHEEL_LETTERS[w][index]);
+                    s.Append(_parentKey.WHEEL_LETTERS[w][index]);
                 }
             }
             return s.ToString();
@@ -110,7 +113,7 @@ namespace M209AnalyzerLib.M209
         private string AbsolutePinString0or1(int w)
         {
             StringBuilder s = new StringBuilder();
-            for (int index = 0; index < Key.WHEELS_SIZE[w]; index++)
+            for (int index = 0; index < _parentKey.WHEELS_SIZE[w]; index++)
             {
                 int isoIndex = IsoIndex(w, index);
                 if (IsoPins[w][isoIndex])
@@ -130,7 +133,7 @@ namespace M209AnalyzerLib.M209
             StringBuilder s = new StringBuilder();
             s.Append(Indicator);
             s.Append(" ");
-            for (int w = 1; w <= Key.WHEELS; w++)
+            for (int w = 1; w <= _parentKey.WHEELS; w++)
             {
                 s.Append(" ").Append(w).Append(": ");
                 s.Append(AbsolutePinString(w));
@@ -144,7 +147,7 @@ namespace M209AnalyzerLib.M209
             StringBuilder s = new StringBuilder();
             s.Append(Indicator);
             s.Append(" ");
-            for (int w = 1; w <= Key.WHEELS; w++)
+            for (int w = 1; w <= _parentKey.WHEELS; w++)
             {
                 s.Append(" ").Append(w).Append(": ");
                 s.Append(AbsolutePinString0or1(w)).Append(" ");
@@ -154,8 +157,8 @@ namespace M209AnalyzerLib.M209
 
         public string[] AbsolutePinsStringArray()
         {
-            string[] pins = new string[Key.WHEELS];
-            for (int w = 1; w <= Key.WHEELS; w++)
+            string[] pins = new string[_parentKey.WHEELS];
+            for (int w = 1; w <= _parentKey.WHEELS; w++)
             {
                 pins[w - 1] = AbsolutePinString(w);
             }
@@ -165,8 +168,8 @@ namespace M209AnalyzerLib.M209
 
         public bool[][] CreateCopy()
         {
-            bool[][] isoPins = new bool[Key.WHEELS + 1][];
-            for (int w = 1; w <= Key.WHEELS; w++)
+            bool[][] isoPins = new bool[_parentKey.WHEELS + 1][];
+            for (int w = 1; w <= _parentKey.WHEELS; w++)
             {
                 isoPins[w] = new bool[IsoPins[w].Length];
                 Array.Copy(IsoPins[w], 0, isoPins[w], 0, IsoPins[w].Length);
@@ -176,7 +179,7 @@ namespace M209AnalyzerLib.M209
 
         public void Get(bool[][] isoPins)
         {
-            for (int w = 1; w <= Key.WHEELS; w++)
+            for (int w = 1; w <= _parentKey.WHEELS; w++)
             {
                 Array.Copy(IsoPins[w], 0, isoPins[w], 0, IsoPins[w].Length);
             }
@@ -184,7 +187,7 @@ namespace M209AnalyzerLib.M209
 
         public void Set(bool[][] isoPins)
         {
-            for (int w = 1; w <= Key.WHEELS; w++)
+            for (int w = 1; w <= _parentKey.WHEELS; w++)
             {
                 Array.Copy(isoPins[w], 0, IsoPins[w], 0, IsoPins[w].Length);
             }
@@ -217,14 +220,14 @@ namespace M209AnalyzerLib.M209
 
         private void Set(string[] absolutePinsStringArray, string indicator)
         {
-            if (indicator.Length != Key.WHEELS)
+            if (indicator.Length != _parentKey.WHEELS)
             {
                 throw new Exception($"Wrong indicator length: {indicator}");
             }
-            for (int w = 1; w <= Key.WHEELS; w++)
+            for (int w = 1; w <= _parentKey.WHEELS; w++)
             {
                 char ic = indicator[w - 1];
-                int indicatorIndex = Key.WHEEL_LETTERS[w].IndexOf(ic);
+                int indicatorIndex = _parentKey.WHEEL_LETTERS[w].IndexOf(ic);
                 if (indicatorIndex == -1)
                 {
                     throw new Exception($"Invalid indicator letter [{ic}] for wheel: {w} - Does not appear in Wheel letters");
@@ -238,9 +241,9 @@ namespace M209AnalyzerLib.M209
                 return;
             }
 
-            if (absolutePinsStringArray.Length == Key.WHEELS)
+            if (absolutePinsStringArray.Length == _parentKey.WHEELS)
             {
-                for (int w = 1; w <= Key.WHEELS; w++)
+                for (int w = 1; w <= _parentKey.WHEELS; w++)
                 {
 
                     // need clean!
@@ -258,13 +261,13 @@ namespace M209AnalyzerLib.M209
                             pinw.Append(c);
                         }
                     }
-                    if (pinw.Length > Key.WHEELS_SIZE[w])
+                    if (pinw.Length > _parentKey.WHEELS_SIZE[w])
                     {
                         throw new Exception($"Too many isoPinsReal for wheel: {w} ({absolutePinsStringArray[w]})");
                     }
                     foreach (char c in pinw.ToString().ToCharArray())
                     {
-                        int index = Key.WHEEL_LETTERS[w].IndexOf(c);
+                        int index = _parentKey.WHEEL_LETTERS[w].IndexOf(c);
                         if (index == -1)
                         {
                             throw new Exception($"Invalid letter [{c}]for wheel: {w} ({absolutePinsStringArray[w]})");
@@ -280,9 +283,9 @@ namespace M209AnalyzerLib.M209
                     }
                 }
             }
-            else if (absolutePinsStringArray.Length == Key.WHEELS_SIZE[1])
+            else if (absolutePinsStringArray.Length == _parentKey.WHEELS_SIZE[1])
             {
-                for (int w = 1; w <= Key.WHEELS; w++)
+                for (int w = 1; w <= _parentKey.WHEELS; w++)
                 {
                     // need clean!
                     for (int i = 0; i < IsoPins[w].Length; i++)
@@ -300,13 +303,13 @@ namespace M209AnalyzerLib.M209
                         }
                     }
 
-                    if (pinw.Length > Key.WHEELS_SIZE[w])
+                    if (pinw.Length > _parentKey.WHEELS_SIZE[w])
                     {
                         throw new Exception($"Too many isoPinsReal for wheel: {w} ({pinw})");
                     }
                     foreach (char c in pinw.ToString().ToCharArray())
                     {
-                        int index = Key.WHEEL_LETTERS[w].IndexOf(c);
+                        int index = _parentKey.WHEEL_LETTERS[w].IndexOf(c);
                         if (index == -1)
                         {
                             throw new Exception($"Invalid letter [{c}]for wheel: {w} ({pinw})");
@@ -335,12 +338,12 @@ namespace M209AnalyzerLib.M209
         private int IsoIndex(int w, int index)
         {
             char ic = Indicator[w - 1];
-            int indicatorIndex = Key.WHEEL_LETTERS[w].IndexOf(ic);
+            int indicatorIndex = _parentKey.WHEEL_LETTERS[w].IndexOf(ic);
 
-            char activeC = Key.WHEELS_ACTIVE_PINS[w];
-            int activeIndex = Key.WHEEL_LETTERS[w].IndexOf(activeC);
+            char activeC = _parentKey.WHEELS_ACTIVE_PINS[w];
+            int activeIndex = _parentKey.WHEEL_LETTERS[w].IndexOf(activeC);
 
-            return (index - activeIndex - indicatorIndex + 2 * Key.WHEELS_SIZE[w]) % Key.WHEELS_SIZE[w];
+            return (index - activeIndex - indicatorIndex + 2 * _parentKey.WHEELS_SIZE[w]) % _parentKey.WHEELS_SIZE[w];
         }
 
         /// <summary>
@@ -545,7 +548,7 @@ namespace M209AnalyzerLib.M209
         {
             do
             {
-                for (int w = 1; w <= Key.WHEELS; w++)
+                for (int w = 1; w <= _parentKey.WHEELS; w++)
                 {
                     Randomize(w);
                 }
@@ -557,16 +560,16 @@ namespace M209AnalyzerLib.M209
         }
         public int MaxCount()
         {
-            return Utils.Sum(Key.WHEELS_SIZE) * Global.MAX_PERCENT_ACTIVE_PINS / 100;
+            return Utils.Sum(_parentKey.WHEELS_SIZE) * Global.MAX_PERCENT_ACTIVE_PINS / 100;
         }
         public int MinCount()
         {
-            return Utils.Sum(Key.WHEELS_SIZE) * Global.MIN_PERCENT_ACTIVE_PINS / 100;
+            return Utils.Sum(_parentKey.WHEELS_SIZE) * Global.MIN_PERCENT_ACTIVE_PINS / 100;
         }
         public void Inverse(int w)
         {
             bool[] isoPinsW = IsoPins[w];
-            for (int p = 0; p < Key.WHEELS_SIZE[w]; p++)
+            for (int p = 0; p < _parentKey.WHEELS_SIZE[w]; p++)
             {
                 isoPinsW[p] ^= true;
             }
@@ -578,9 +581,9 @@ namespace M209AnalyzerLib.M209
 
         public void InverseWheelBitmap(int v)
         {
-            for (int w = 1; w <= Key.WHEELS; w++)
+            for (int w = 1; w <= _parentKey.WHEELS; w++)
             {
-                if (Key.GetWheelBit(v, w))
+                if (_parentKey.GetWheelBit(v, w))
                 {
                     Inverse(w);
                 }

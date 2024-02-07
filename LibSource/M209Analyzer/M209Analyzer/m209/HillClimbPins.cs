@@ -21,173 +21,184 @@ namespace M209AnalyzerLib.M209
     {
         private static int MAX_COUNT;
         private static int MIN_COUNT;
-        public static double HillClimb(Key key, EvalType evalType, bool singleIteration, M209AttackManager attackManager, LocalState localState)
+
+        private Key _key;
+        private M209AttackManager _attackManager;
+        private LocalState _localState;
+
+        public HillClimbPins(Key key, M209AttackManager attackManager, LocalState localState)
+        {
+            _key = key;
+            _attackManager = attackManager;
+            _localState = localState;
+        }
+        public double HillClimb(EvalType evalType, bool singleIteration)
         {
 
-            localState.BestScore = key.Eval(evalType);
-            localState.BestScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
-            localState.BestPins = key.Pins.CreateCopy();
+            _localState.BestScore = _key.Eval(evalType);
+            _localState.BestScore = _attackManager.Evaluate(evalType, _key.Decryption, _key.CribArray, _localState.TaskId);
+            _localState.BestPins = _key.Pins.CreateCopy();
 
-            MAX_COUNT = key.Pins.MaxCount();
-            MIN_COUNT = key.Pins.MinCount();
+            MAX_COUNT = _key.Pins.MaxCount();
+            MIN_COUNT = _key.Pins.MinCount();
 
             int round = 0;
             do
             {
-                localState.Improved = false;
+                _localState.Improved = false;
 
-                Toggle1PinOn1Wheel(key, evalType, attackManager, localState);
+                Toggle1PinOn1Wheel(evalType);
 
-                Inverse1Wheel(key, evalType, attackManager, localState);
+                Inverse1Wheel(evalType);
 
-                if (localState.Improved)
+                if (_localState.Improved)
                 {
                     continue;
                 }
 
-                Toggle2PinsOn1Wheel(key, evalType, attackManager, localState);
+                Toggle2PinsOn1Wheel(evalType);
 
-                if (localState.Improved)
+                if (_localState.Improved)
                 {
                     continue;
                 }
 
-                InverseWheelBitmap(key, evalType, attackManager, localState);
+                InverseWheelBitmap(evalType);
 
                 round++;
-                if (attackManager.ShouldStop)
+                if (_attackManager.ShouldStop)
                 {
-                    return localState.BestScore;
+                    return _localState.BestScore;
                 }
-            } while (localState.Improved && !singleIteration && !attackManager.ShouldStop);
+            } while (_localState.Improved && !singleIteration && !_attackManager.ShouldStop);
 
 
-            key.Pins.Set(localState.BestPins);
-            return localState.BestScore;
+            _key.Pins.Set(_localState.BestPins);
+            return _localState.BestScore;
 
         }
 
-        public static void Toggle1PinOn1Wheel(Key key, EvalType evalType, M209AttackManager attackManager, LocalState localState)
+        public void Toggle1PinOn1Wheel(EvalType evalType)
         {
             double newEval;
             int count;
 
-            for (int wheel = 1; wheel <= Key.WHEELS; wheel++)
+            for (int wheel = 1; wheel <= _key.WHEELS; wheel++)
             {
-                for (int pin = 0; pin < Key.WHEELS_SIZE[wheel]; pin++)
+                for (int pin = 0; pin < _key.WHEELS_SIZE[wheel]; pin++)
                 {
-                    key.Pins.Toggle(wheel, pin);
-                    count = key.Pins.CountActivePins();
-                    if (count <= MIN_COUNT || count >= MAX_COUNT || key.Pins.LongSeq(wheel, pin))
+                    _key.Pins.Toggle(wheel, pin);
+                    count = _key.Pins.CountActivePins();
+                    if (count <= MIN_COUNT || count >= MAX_COUNT || _key.Pins.LongSeq(wheel, pin))
                     {
-                        key.Pins.Toggle(wheel, pin);
+                        _key.Pins.Toggle(wheel, pin);
                         continue;
                     }
-                    key.UpdateDecryption(wheel, pin);
+                    _key.UpdateDecryption(wheel, pin);
 
-                    newEval = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
-                    if (newEval > localState.BestScore)
+                    newEval = _attackManager.Evaluate(evalType, _key.Decryption, _key.CribArray, _localState.TaskId);
+                    if (newEval > _localState.BestScore)
                     {
-                        localState.BestScore = newEval;
-                        key.Pins.Get(localState.BestPins);
-                        localState.Improved = true;
-                        attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
+                        _localState.BestScore = newEval;
+                        _key.Pins.Get(_localState.BestPins);
+                        _localState.Improved = true;
+                        _attackManager.AddNewBestListEntry(_localState.BestScore, _key, _key.Decryption, _localState.TaskId);
                     }
                     else
                     {
-                        key.Pins.Toggle(wheel, pin);
-                        key.UpdateDecryption(wheel, pin);
+                        _key.Pins.Toggle(wheel, pin);
+                        _key.UpdateDecryption(wheel, pin);
                     }
-                    if (attackManager.ShouldStop)
+                    if (_attackManager.ShouldStop)
                     {
                         return;
                     }
                 }
 
-                if (localState.Improved)
+                if (_localState.Improved)
                 {
                     wheel--;
-                    localState.Improved = false;
+                    _localState.Improved = false;
                 }
             }
         }
 
-        public static void Inverse1Wheel(Key key, EvalType evalType, M209AttackManager attackManager, LocalState localState)
+        public void Inverse1Wheel(EvalType evalType)
         {
             double newEval;
             int count;
 
-            for (int wheel = 1; wheel <= Key.WHEELS; wheel++)
+            for (int wheel = 1; wheel <= _key.WHEELS; wheel++)
             {
 
-                key.Pins.Inverse(wheel);
-                count = key.Pins.CountActivePins();
+                _key.Pins.Inverse(wheel);
+                count = _key.Pins.CountActivePins();
                 if (count <= MIN_COUNT || count >= MAX_COUNT)
                 {
-                    key.Pins.Inverse(wheel);
+                    _key.Pins.Inverse(wheel);
                     continue;
                 }
 
-                newEval = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
-                if (newEval > localState.BestScore)
+                newEval = _attackManager.Evaluate(evalType, _key.Decryption, _key.CribArray, _localState.TaskId);
+                if (newEval > _localState.BestScore)
                 {
-                    localState.BestScore = newEval;
-                    key.Pins.Get(localState.BestPins);
-                    localState.Improved = true;
-                    attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
+                    _localState.BestScore = newEval;
+                    _key.Pins.Get(_localState.BestPins);
+                    _localState.Improved = true;
+                    _attackManager.AddNewBestListEntry(_localState.BestScore, _key, _key.Decryption, _localState.TaskId);
                 }
                 else
                 {
-                    key.Pins.Inverse(wheel);
+                    _key.Pins.Inverse(wheel);
                 }
 
-                if (attackManager.ShouldStop)
+                if (_attackManager.ShouldStop)
                 {
                     return;
                 }
             }
         }
 
-        public static void Toggle2PinsOn1Wheel(Key key, EvalType evalType, M209AttackManager attackManager, LocalState localState)
+        public void Toggle2PinsOn1Wheel(EvalType evalType)
         {
             double newEval;
 
-            for (int wheel = 1; wheel <= Key.WHEELS; wheel++)
+            for (int wheel = 1; wheel <= _key.WHEELS; wheel++)
             {
-                for (int pin1 = 0; pin1 < Key.WHEELS_SIZE[wheel]; pin1++)
+                for (int pin1 = 0; pin1 < _key.WHEELS_SIZE[wheel]; pin1++)
                 {
-                    for (int pin2 = pin1 + 1; pin2 < Key.WHEELS_SIZE[wheel]; pin2++)
+                    for (int pin2 = pin1 + 1; pin2 < _key.WHEELS_SIZE[wheel]; pin2++)
                     {
-                        if (key.Pins.Compare(wheel, pin1, pin2))
+                        if (_key.Pins.Compare(wheel, pin1, pin2))
                         {
                             continue;
                         }
                         // Because the two places have a different value, we do not check the count.
-                        key.Pins.Toggle(wheel, pin1, pin2);
+                        _key.Pins.Toggle(wheel, pin1, pin2);
 
-                        if (key.Pins.LongSeq(wheel, pin1, pin2))
+                        if (_key.Pins.LongSeq(wheel, pin1, pin2))
                         {
-                            key.Pins.Toggle(wheel, pin1, pin2);
+                            _key.Pins.Toggle(wheel, pin1, pin2);
                             continue;
                         }
-                        key.UpdateDecryption(wheel, pin1, pin2);
+                        _key.UpdateDecryption(wheel, pin1, pin2);
 
-                        newEval = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
+                        newEval = _attackManager.Evaluate(evalType, _key.Decryption, _key.CribArray, _localState.TaskId);
 
-                        if (newEval > localState.BestScore)
+                        if (newEval > _localState.BestScore)
                         {
-                            localState.BestScore = newEval;
-                            key.Pins.Get(localState.BestPins);
-                            localState.Improved = true;
-                            attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
+                            _localState.BestScore = newEval;
+                            _key.Pins.Get(_localState.BestPins);
+                            _localState.Improved = true;
+                            _attackManager.AddNewBestListEntry(_localState.BestScore, _key, _key.Decryption, _localState.TaskId);
                         }
                         else
                         {
-                            key.Pins.Toggle(wheel, pin1, pin2);
-                            key.UpdateDecryption(wheel, pin1, pin2);
+                            _key.Pins.Toggle(wheel, pin1, pin2);
+                            _key.UpdateDecryption(wheel, pin1, pin2);
                         }
 
-                        if (attackManager.ShouldStop)
+                        if (_attackManager.ShouldStop)
                         {
                             return;
                         }
@@ -196,33 +207,33 @@ namespace M209AnalyzerLib.M209
             }
         }
 
-        public static void InverseWheelBitmap(Key key, EvalType evalType, M209AttackManager attackManager, LocalState localState)
+        public void InverseWheelBitmap(EvalType evalType)
         {
             int bestV = -1;
             double bestVscore = 0;
             for (int v = 0; v <= 63; v++)
             {
-                key.Pins.InverseWheelBitmap(v);
-                double score = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
+                _key.Pins.InverseWheelBitmap(v);
+                double score = _attackManager.Evaluate(evalType, _key.Decryption, _key.CribArray, _localState.TaskId);
                 if (score > bestVscore)
                 {
                     bestVscore = score;
                     bestV = v;
                 }
-                key.Pins.InverseWheelBitmap(v);
+                _key.Pins.InverseWheelBitmap(v);
 
-                if (attackManager.ShouldStop)
+                if (_attackManager.ShouldStop)
                 {
                     return;
                 }
             }
-            if (bestVscore > localState.BestScore)
+            if (bestVscore > _localState.BestScore)
             {
-                localState.BestScore = bestVscore;
-                key.Pins.InverseWheelBitmap(bestV);
-                key.Pins.Get(localState.BestPins);
-                localState.Improved = true;
-                attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption, localState.TaskId);
+                _localState.BestScore = bestVscore;
+                _key.Pins.InverseWheelBitmap(bestV);
+                _key.Pins.Get(_localState.BestPins);
+                _localState.Improved = true;
+                _attackManager.AddNewBestListEntry(_localState.BestScore, _key, _key.Decryption, _localState.TaskId);
             }
         }
 

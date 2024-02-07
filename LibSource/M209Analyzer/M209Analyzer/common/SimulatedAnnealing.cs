@@ -13,24 +13,23 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using M209AnalyzerLib.M209;
 using System;
 
 namespace M209AnalyzerLib.Common
 {
     public class SimulatedAnnealing
     {
-        public static SimulatedAnnealingParameters SAParameters { get; set; }
-        public SimulatedAnnealing(SimulatedAnnealingParameters saParameters)
+        private M209AttackManager _attackManager;
+        public SimulatedAnnealing(M209AttackManager attackManager)
         {
-            SAParameters = saParameters;
+            _attackManager = attackManager;
         }
-        public static bool AcceptHexaScore(long newScore, long currLocalScore, int multiplier)
+        public bool AcceptHexaScore(long newScore, long currLocalScore, int multiplier)
         {
             return Accept(newScore, currLocalScore, 13.75 * multiplier);
         }
 
-        public static bool Accept(double newScore, double currLocalScore, double temperature)
+        public bool Accept(double newScore, double currLocalScore, double temperature)
         {
             double diffScore = newScore - currLocalScore;
             if (diffScore > 0)
@@ -42,7 +41,7 @@ namespace M209AnalyzerLib.Common
                 return false;
             }
             double ratio = diffScore / temperature;
-            return ratio > SAParameters.MinRatio && Math.Pow(Math.E, ratio) > RandomGen.NextFloat();
+            return ratio > _attackManager.SAParameters.MinRatio && Math.Pow(Math.E, ratio) > RandomGen.NextFloat();
         }
     }
 }

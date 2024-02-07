@@ -13,7 +13,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using M209AnalyzerLib.Common;
 using M209AnalyzerLib.Enums;
 using System;
 using System.Linq;
@@ -23,10 +22,13 @@ namespace M209AnalyzerLib.M209
 {
     public class Key
     {
-        public static readonly int WHEELS = 6;
-        public static int BARS = 27;
-        public static readonly int LUGS_PER_BAR = 2;
-        public static readonly string[] WHEEL_LETTERS = {
+        private M209AttackManager _attackManager;
+
+        #region readonly variables
+        public readonly int WHEELS = 6;
+        public readonly int BARS = 27;
+        public readonly int LUGS_PER_BAR = 2;
+        public readonly string[] WHEEL_LETTERS = {
             "????????????????????????????",
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             "ABCDEFGHIJKLMNOPQRSTUVXYZ",
@@ -38,7 +40,7 @@ namespace M209AnalyzerLib.M209
         };
 
         //38 41 42 43 46 47
-        public static readonly string[] WHEEL_LETTERS_C52 = {
+        public readonly string[] WHEEL_LETTERS_C52 = {
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZ6789012345[]{}<>@#$&*",
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZ6789012345[]{}<>@#$&*",
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZ6789012345[]{}<>@#$&",
@@ -48,35 +50,33 @@ namespace M209AnalyzerLib.M209
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZ6789012345[]",
         };
 
-        public static readonly int[] WHEELS_SIZE = {
-            -1, WHEEL_LETTERS[1].Length, WHEEL_LETTERS[2].Length,
-            WHEEL_LETTERS[3].Length, WHEEL_LETTERS[4].Length,
-            WHEEL_LETTERS[5].Length, WHEEL_LETTERS[6].Length
-        };
+        public readonly int[] WHEELS_SIZE;
 
-        public static readonly string Ax6 = "AAAAAA";
-        public static readonly string Ax26 = "AAAAAAAAAAAAAAAAAAAAAAAAAA";
-        public static readonly char[] WHEELS_ACTIVE_PINS = "?PONMLK".ToCharArray();
-        public static readonly string NULL_INDICATOR = "LLKJIH";
-        private static int SPACE = Common.Utils.Z;
-        private readonly static int S1 = WHEELS_SIZE[1];
-        private readonly static int S2 = WHEELS_SIZE[2];
-        private readonly static int S3 = WHEELS_SIZE[3];
-        private readonly static int S4 = WHEELS_SIZE[4];
-        private readonly static int S5 = WHEELS_SIZE[5];
-        private readonly static int S6 = WHEELS_SIZE[6];
+        public readonly string Ax6 = "AAAAAA";
+        public readonly string Ax26 = "AAAAAAAAAAAAAAAAAAAAAAAAAA";
+        public readonly char[] WHEELS_ACTIVE_PINS = "?PONMLK".ToCharArray();
+        public readonly static string NULL_INDICATOR = "LLKJIH";
+        private int SPACE = Common.Utils.Z;
+        private readonly int S1;
+        private readonly int S2;
+        private readonly int S3;
+        private readonly int S4;
+        private readonly int S5;
+        private readonly int S6;
 
-        private readonly static int M1 = 0x1;
-        private readonly static int M2 = M1 << 1;
-        private readonly static int M3 = M2 << 1;
-        private readonly static int M4 = M3 << 1;
-        private readonly static int M5 = M4 << 1;
-        private readonly static int M6 = M5 << 1;
+        private readonly int M1;
+        private readonly int M2;
+        private readonly int M3;
+        private readonly int M4;
+        private readonly int M5;
+        private readonly int M6;
+
+        private readonly int SLIDEPLUS25 = (0 + 25) % 26;
+        #endregion
 
         public Pins Pins;
         public Lugs Lugs;
         public int Slide = 0;
-        private int _slidePlus25 = (0 + 25) % 26;
 
         public int[] Decryption { get => _decryption; }
 
@@ -99,8 +99,32 @@ namespace M209AnalyzerLib.M209
 
         public static long evaluations = 0;
 
-        public Key(string[] pinsString, string indicator, string lugsString)
+        public Key(M209AttackManager attackManager, string[] pinsString, string indicator, string lugsString)
         {
+            WHEELS_SIZE = new int[]{
+                -1,
+                WHEEL_LETTERS[1].Length,
+                WHEEL_LETTERS[2].Length,
+                WHEEL_LETTERS[3].Length,
+                WHEEL_LETTERS[4].Length,
+                WHEEL_LETTERS[5].Length,
+                WHEEL_LETTERS[6].Length
+            };
+
+            S1 = WHEELS_SIZE[1];
+            S2 = WHEELS_SIZE[2];
+            S3 = WHEELS_SIZE[3];
+            S4 = WHEELS_SIZE[4];
+            S5 = WHEELS_SIZE[5];
+            S6 = WHEELS_SIZE[6];
+
+            M1 = 0x1;
+            M2 = M1 << 1;
+            M3 = M2 << 1;
+            M4 = M3 << 1;
+            M5 = M4 << 1;
+            M6 = M5 << 1;
+
             Pins = new Pins(this, pinsString, indicator);
             if ((lugsString == null) || string.IsNullOrEmpty(lugsString))
             {
@@ -113,11 +137,11 @@ namespace M209AnalyzerLib.M209
             InvalidateDecryption();
         }
 
-        public Key(string[] pinsString, string lugsString) : this(pinsString, lugsString, null) { }
+        public Key(M209AttackManager attackManager, string[] pinsString, string lugsString) : this(attackManager, pinsString, lugsString, null) { }
 
-        public Key() : this(null, NULL_INDICATOR, null) { }
+        public Key(M209AttackManager attackManager) : this(attackManager, null, NULL_INDICATOR, null) { }
 
-        public Key(Key key) : this(key.Pins.AbsolutePinsStringArray(), key.Pins.Indicator, key.Lugs.GetLugsString())
+        public Key(M209AttackManager attackManager, Key key) : this(attackManager, key.Pins.AbsolutePinsStringArray(), key.Pins.Indicator, key.Lugs.GetLugsString())
         {
             CipherArray = key.CipherArray;
             CribArray = key.CribArray;
@@ -186,7 +210,7 @@ namespace M209AnalyzerLib.M209
             for (int i = 0; i < 26; i++)
             {
                 int f = _decryptionFrequency[i];
-                mono += (int)Stats.MonogramStats[i] * f;
+                mono += (int)_attackManager.Stats.MonogramStats[i] * f;
             }
             return mono / CipherArray.Length;
         }
@@ -250,7 +274,7 @@ namespace M209AnalyzerLib.M209
             evaluations = 0;
         }
 
-        public static bool GetWheelBit(int bitmap, int w)
+        public bool GetWheelBit(int bitmap, int w)
         {
             return ((bitmap >> (w - 1)) & 0x1) == 0x1;
         }
@@ -268,7 +292,7 @@ namespace M209AnalyzerLib.M209
             }
         }
 
-        private void UpdateDecryption()
+        public void UpdateDecryption()
         {
 
             if (CipherArray == null)
@@ -295,17 +319,17 @@ namespace M209AnalyzerLib.M209
                 if (Pins.WheelPins6[pos6]) vector += M6;
 
 
-                symbol = _slidePlus25 - CipherArray[pos] + Lugs.DisplacementVector[vector];
+                symbol = SLIDEPLUS25 - CipherArray[pos] + Lugs.DisplacementVector[vector];
                 symbol = symbol % 26;
 
                 _decryption[pos] = symbol;
 
-                if (++pos1 == Key.S1) pos1 = 0;
-                if (++pos2 == Key.S2) pos2 = 0;
-                if (++pos3 == Key.S3) pos3 = 0;
-                if (++pos4 == Key.S4) pos4 = 0;
-                if (++pos5 == Key.S5) pos5 = 0;
-                if (++pos6 == Key.S6) pos6 = 0;
+                if (++pos1 == S1) pos1 = 0;
+                if (++pos2 == S2) pos2 = 0;
+                if (++pos3 == S3) pos3 = 0;
+                if (++pos4 == S4) pos4 = 0;
+                if (++pos5 == S5) pos5 = 0;
+                if (++pos6 == S6) pos6 = 0;
             }
 
             _decryptionValid = true;
@@ -365,29 +389,29 @@ namespace M209AnalyzerLib.M209
             int vector;
             int symbol;
             int pos1 = p, pos2 = p, pos3 = p, pos4 = p, pos5 = p, pos6 = p;
-            while (pos1 >= Key.S1)
+            while (pos1 >= S1)
             {
-                pos1 -= Key.S1;
+                pos1 -= S1;
             }
-            while (pos2 >= Key.S2)
+            while (pos2 >= S2)
             {
-                pos2 -= Key.S2;
+                pos2 -= S2;
             }
-            while (pos3 >= Key.S3)
+            while (pos3 >= S3)
             {
-                pos3 -= Key.S3;
+                pos3 -= S3;
             }
-            while (pos4 >= Key.S4)
+            while (pos4 >= S4)
             {
-                pos4 -= Key.S4;
+                pos4 -= S4;
             }
-            while (pos5 >= Key.S5)
+            while (pos5 >= S5)
             {
-                pos5 -= Key.S5;
+                pos5 -= S5;
             }
-            while (pos6 >= Key.S6)
+            while (pos6 >= S6)
             {
-                pos6 -= Key.S6;
+                pos6 -= S6;
             }
 
             // Performance improvement because of using local copys ? https://blog.tedd.no/2020/06/01/faster-c-array-access/
@@ -411,7 +435,7 @@ namespace M209AnalyzerLib.M209
                 if (pwp5[pos5]) vector += M5;
                 if (pwp6[pos6]) vector += M6;
 
-                symbol = _slidePlus25 - ca[pos] + ldv[vector];
+                symbol = SLIDEPLUS25 - ca[pos] + ldv[vector];
                 if (symbol >= 26)
                 {
                     symbol -= 26;
@@ -419,12 +443,12 @@ namespace M209AnalyzerLib.M209
 
                 _decryption[pos] = symbol;
 
-                for (pos1 += wheelSize; pos1 >= Key.S1; pos1 -= Key.S1) ;
-                for (pos2 += wheelSize; pos2 >= Key.S2; pos2 -= Key.S2) ;
-                for (pos3 += wheelSize; pos3 >= Key.S3; pos3 -= Key.S3) ;
-                for (pos4 += wheelSize; pos4 >= Key.S4; pos4 -= Key.S4) ;
-                for (pos5 += wheelSize; pos5 >= Key.S5; pos5 -= Key.S5) ;
-                for (pos6 += wheelSize; pos6 >= Key.S6; pos6 -= Key.S6) ;
+                for (pos1 += wheelSize; pos1 >= S1; pos1 -= S1) ;
+                for (pos2 += wheelSize; pos2 >= S2; pos2 -= S2) ;
+                for (pos3 += wheelSize; pos3 >= S3; pos3 -= S3) ;
+                for (pos4 += wheelSize; pos4 >= S4; pos4 -= S4) ;
+                for (pos5 += wheelSize; pos5 >= S5; pos5 -= S5) ;
+                for (pos6 += wheelSize; pos6 >= S6; pos6 -= S6) ;
             }
         }
 
@@ -464,7 +488,7 @@ namespace M209AnalyzerLib.M209
 
         public void setOriginalKey(Key originalKey)
         {
-            _originalKey = new Key(originalKey);
+            _originalKey = new Key(_attackManager, originalKey);
         }
 
         public void setOriginalScore(double originalScore)
@@ -479,7 +503,7 @@ namespace M209AnalyzerLib.M209
                 return 0;
             }
             int total = 0;
-            for (int w = 1; w <= Key.WHEELS; w++)
+            for (int w = 1; w <= WHEELS; w++)
             {
                 total += GetCountIncorrectPins(w);
             }
@@ -494,7 +518,7 @@ namespace M209AnalyzerLib.M209
             }
             int incorrect = 0;
 
-            for (int i = 0; i < Key.WHEELS_SIZE[w1]; i++)
+            for (int i = 0; i < WHEELS_SIZE[w1]; i++)
             {
                 if (Pins.IsoPins[w1][i] != _originalKey.Pins.IsoPins[w1][i])
                 {
@@ -502,7 +526,7 @@ namespace M209AnalyzerLib.M209
                 }
             }
 
-            return Math.Min(incorrect, Key.WHEELS_SIZE[w1] - incorrect);
+            return Math.Min(incorrect, WHEELS_SIZE[w1] - incorrect);
         }
 
         public int GetCountIncorrectLugs()

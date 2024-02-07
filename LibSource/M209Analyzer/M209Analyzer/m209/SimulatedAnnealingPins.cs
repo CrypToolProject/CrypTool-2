@@ -13,22 +13,28 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using M209AnalyzerLib.Common;
 using M209AnalyzerLib.Enums;
 
 namespace M209AnalyzerLib.M209
 {
     public class SimulatedAnnealingPins
     {
-        private static double Step(Key key, EvalType evalType,
-                                bool[][] bestSAPins, double bestSAScore,
-                                double temperature, M209AttackManager attackManager, LocalState localState)
+        private M209AttackManager _attackManager;
+        private Key _key;
+        private LocalState _localState;
+        public SimulatedAnnealingPins(Key key, M209AttackManager attackManager, LocalState localState)
         {
-            SimulatedAnnealing.SAParameters = attackManager.SAParameters;
-
+            _key = key;
+            _attackManager = attackManager;
+            _localState = localState;
+        }
+        private double Step(EvalType evalType,
+                                bool[][] bestSAPins, double bestSAScore,
+                                double temperature)
+        {
             double currLocalScore = 0;
-            int MAX_COUNT = key.Pins.MaxCount();
-            int MIN_COUNT = key.Pins.MinCount();
+            int MAX_COUNT = _key.Pins.MaxCount();
+            int MIN_COUNT = _key.Pins.MinCount();
 
             double newScore;
             int count;
@@ -36,37 +42,37 @@ namespace M209AnalyzerLib.M209
             bool changeAccepted = false;
 
             // T1
-            for (int w = 1; w <= Key.WHEELS; w++)
+            for (int w = 1; w <= _key.WHEELS; w++)
             {
-                for (int p = 0; p < Key.WHEELS_SIZE[w]; p++)
+                for (int p = 0; p < _key.WHEELS_SIZE[w]; p++)
                 {
-                    key.Pins.Toggle(w, p);
-                    count = key.Pins.CountActivePins();
-                    if (count < MIN_COUNT || count > MAX_COUNT || key.Pins.LongSeq(w, p))
+                    _key.Pins.Toggle(w, p);
+                    count = _key.Pins.CountActivePins();
+                    if (count < MIN_COUNT || count > MAX_COUNT || _key.Pins.LongSeq(w, p))
                     {
-                        key.Pins.Toggle(w, p);
+                        _key.Pins.Toggle(w, p);
                         continue;
                     }
-                    key.UpdateDecryption(w, p);
+                    _key.UpdateDecryption(w, p);
 
-                    newScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
-                    if (SimulatedAnnealing.Accept(newScore, currLocalScore, temperature))
+                    newScore = _attackManager.Evaluate(evalType, _key.Decryption, _key.CribArray, _localState.TaskId);
+                    if (_attackManager.SimulatedAnnealing.Accept(newScore, currLocalScore, temperature))
                     {
                         currLocalScore = newScore;
                         changeAccepted = true;
                         if (newScore > bestSAScore)
                         {
-                            key.Pins.Get(bestSAPins);
+                            _key.Pins.Get(bestSAPins);
                             bestSAScore = newScore;
                         }
-                        attackManager.AddNewBestListEntry(currLocalScore, key, key.Decryption, localState.TaskId);
+                        _attackManager.AddNewBestListEntry(currLocalScore, _key, _key.Decryption, _localState.TaskId);
                     }
                     else
                     {
-                        key.Pins.Toggle(w, p);
-                        key.UpdateDecryption(w, p);
+                        _key.Pins.Toggle(w, p);
+                        _key.UpdateDecryption(w, p);
                     }
-                    if (attackManager.ShouldStop)
+                    if (_attackManager.ShouldStop)
                     {
                         return bestSAScore;
                     }
@@ -74,86 +80,86 @@ namespace M209AnalyzerLib.M209
             }
 
             // T4
-            for (int w = 1; w <= Key.WHEELS; w++)
+            for (int w = 1; w <= _key.WHEELS; w++)
             {
 
-                key.Pins.Inverse(w);
-                count = key.Pins.CountActivePins();
+                _key.Pins.Inverse(w);
+                count = _key.Pins.CountActivePins();
                 if (count < MIN_COUNT || count > MAX_COUNT)
                 {
-                    key.Pins.Inverse(w);
+                    _key.Pins.Inverse(w);
                     continue;
                 }
-                key.UpdateDecryptionIfInvalid();
-                newScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
-                if (SimulatedAnnealing.Accept(newScore, currLocalScore, temperature))
+                _key.UpdateDecryptionIfInvalid();
+                newScore = _attackManager.Evaluate(evalType, _key.Decryption, _key.CribArray, _localState.TaskId);
+                if (_attackManager.SimulatedAnnealing.Accept(newScore, currLocalScore, temperature))
                 {
                     currLocalScore = newScore;
                     changeAccepted = true;
                     if (newScore > bestSAScore)
                     {
-                        key.Pins.Get(bestSAPins);
+                        _key.Pins.Get(bestSAPins);
                         bestSAScore = newScore;
                     }
-                    attackManager.AddNewBestListEntry(currLocalScore, key, key.Decryption, localState.TaskId);
+                    _attackManager.AddNewBestListEntry(currLocalScore, _key, _key.Decryption, _localState.TaskId);
 
                 }
                 else
                 {
-                    key.Pins.Inverse(w);
+                    _key.Pins.Inverse(w);
                 }
-                if (attackManager.ShouldStop)
+                if (_attackManager.ShouldStop)
                 {
                     return bestSAScore;
                 }
             }
 
-            if (changeAccepted | attackManager.ShouldStop)
+            if (changeAccepted | _attackManager.ShouldStop)
             {
                 return bestSAScore;
             }
 
             // T2
-            for (int w = 1; w <= Key.WHEELS; w++)
+            for (int w = 1; w <= _key.WHEELS; w++)
             {
-                for (int p1 = 0; p1 < Key.WHEELS_SIZE[w]; p1++)
+                for (int p1 = 0; p1 < _key.WHEELS_SIZE[w]; p1++)
                 {
-                    for (int p2 = p1 + 1; p2 < Key.WHEELS_SIZE[w]; p2++)
+                    for (int p2 = p1 + 1; p2 < _key.WHEELS_SIZE[w]; p2++)
                     {
-                        if (key.Pins.Compare(w, p1, p2))
+                        if (_key.Pins.Compare(w, p1, p2))
                         {
                             continue;
                         }
                         // Because the two places have a different value, we do not check the count.
 
-                        key.Pins.Toggle(w, p1, p2);
+                        _key.Pins.Toggle(w, p1, p2);
 
-                        if (key.Pins.LongSeq(w, p1, p2))
+                        if (_key.Pins.LongSeq(w, p1, p2))
                         {
-                            key.Pins.Toggle(w, p1, p2);
+                            _key.Pins.Toggle(w, p1, p2);
                             continue;
                         }
-                        key.UpdateDecryption(w, p1, p2);
+                        _key.UpdateDecryption(w, p1, p2);
 
-                        newScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
-                        if (SimulatedAnnealing.Accept(newScore, currLocalScore, temperature))
+                        newScore = _attackManager.Evaluate(evalType, _key.Decryption, _key.CribArray, _localState.TaskId);
+                        if (_attackManager.SimulatedAnnealing.Accept(newScore, currLocalScore, temperature))
                         {
                             currLocalScore = newScore;
                             changeAccepted = true;
                             if (newScore > bestSAScore)
                             {
-                                key.Pins.Get(bestSAPins);
+                                _key.Pins.Get(bestSAPins);
                                 bestSAScore = newScore;
                             }
-                            attackManager.AddNewBestListEntry(currLocalScore, key, key.Decryption, localState.TaskId);
+                            _attackManager.AddNewBestListEntry(currLocalScore, _key, _key.Decryption, _localState.TaskId);
                         }
                         else
                         {
-                            key.Pins.Toggle(w, p1, p2);
-                            key.UpdateDecryption(w, p1, p2);
+                            _key.Pins.Toggle(w, p1, p2);
+                            _key.UpdateDecryption(w, p1, p2);
                         }
 
-                        if (attackManager.ShouldStop)
+                        if (_attackManager.ShouldStop)
                         {
                             return bestSAScore;
                         }
@@ -161,7 +167,7 @@ namespace M209AnalyzerLib.M209
                 }
             }
 
-            if (changeAccepted | attackManager.ShouldStop)
+            if (changeAccepted | _attackManager.ShouldStop)
             {
                 return bestSAScore;
             }
@@ -171,28 +177,28 @@ namespace M209AnalyzerLib.M209
             double bestVscore = 0;
             for (int v = 0; v <= 63; v++)
             {
-                key.Pins.InverseWheelBitmap(v);
-                double score = key.Eval(evalType);
-                score = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
+                _key.Pins.InverseWheelBitmap(v);
+                double score = _key.Eval(evalType);
+                score = _attackManager.Evaluate(evalType, _key.Decryption, _key.CribArray, _localState.TaskId);
                 if (score > bestVscore)
                 {
                     bestVscore = score;
                     bestV = v;
                 }
-                key.Pins.InverseWheelBitmap(v);
+                _key.Pins.InverseWheelBitmap(v);
             }
             newScore = bestVscore;
-            if (SimulatedAnnealing.Accept(newScore, currLocalScore, temperature))
+            if (_attackManager.SimulatedAnnealing.Accept(newScore, currLocalScore, temperature))
             {
                 currLocalScore = newScore;
-                key.Pins.InverseWheelBitmap(bestV);
+                _key.Pins.InverseWheelBitmap(bestV);
                 changeAccepted = true;
                 if (newScore > bestSAScore)
                 {
-                    key.Pins.Get(bestSAPins);
+                    _key.Pins.Get(bestSAPins);
                     bestSAScore = newScore;
                 }
-                attackManager.AddNewBestListEntry(currLocalScore, key, key.Decryption, localState.TaskId);
+                _attackManager.AddNewBestListEntry(currLocalScore, _key, _key.Decryption, _localState.TaskId);
             }
 
             return bestSAScore;
@@ -200,29 +206,29 @@ namespace M209AnalyzerLib.M209
         }
 
 
-        public static double SA(Key key, EvalType evalType, int cycles, M209AttackManager attackManager, LocalState localState)
+        public double SA(EvalType evalType, int cycles)
         {
-            key.UpdateDecryptionIfInvalid();
-            double bestSAScore = attackManager.Evaluate(evalType, key.Decryption, key.CribArray, localState.TaskId);
-            bool[][] bestSAPins = key.Pins.CreateCopy();
+            _key.UpdateDecryptionIfInvalid();
+            double bestSAScore = _attackManager.Evaluate(evalType, _key.Decryption, _key.CribArray, _localState.TaskId);
+            bool[][] bestSAPins = _key.Pins.CreateCopy();
 
-            for (int cycle = 0; cycle < cycles && !attackManager.ShouldStop; cycle++)
+            for (int cycle = 0; cycle < cycles && !_attackManager.ShouldStop; cycle++)
             {
-                key.Pins.Randomize();
+                _key.Pins.Randomize();
 
-                for (double temperature = attackManager.SAParameters.StartTemperature; temperature >= attackManager.SAParameters.EndTemperature && !attackManager.ShouldStop; temperature /= attackManager.SAParameters.Decrement)
+                for (double temperature = _attackManager.SAParameters.StartTemperature; temperature >= _attackManager.SAParameters.EndTemperature && !_attackManager.ShouldStop; temperature /= _attackManager.SAParameters.Decrement)
                 {
-                    bestSAScore = Step(key, evalType, bestSAPins, bestSAScore, temperature, attackManager, localState);
+                    bestSAScore = Step(evalType, bestSAPins, bestSAScore, temperature);
                 }
                 double previous;
                 do
                 {
                     previous = bestSAScore;
-                    bestSAScore = Step(key, evalType, bestSAPins, bestSAScore, 0.0, attackManager, localState);
-                } while (bestSAScore > previous && !attackManager.ShouldStop);
+                    bestSAScore = Step(evalType, bestSAPins, bestSAScore, 0.0);
+                } while (bestSAScore > previous && !_attackManager.ShouldStop);
             }
 
-            key.Pins.Set(bestSAPins);
+            _key.Pins.Set(bestSAPins);
             return bestSAScore;
         }
     }

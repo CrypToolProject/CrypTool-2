@@ -149,7 +149,7 @@ namespace CrypTool.Plugins.M209Analyzer
 
             _running = true;
 
-            _m209AttackManager = new M209AttackManager(new M209Scoring());
+            _m209AttackManager = new M209AttackManager();
             _approximatedKeys = ApproximateKeyCountTarget(Ciphertext.Length);
 
             _m209AttackManager.UseOwnBestList = false;
@@ -359,6 +359,11 @@ namespace CrypTool.Plugins.M209Analyzer
             if (_presentation.BestList.Count > 10 && value <= _presentation.BestList.Last().Value)
             {
                 return;
+            }
+
+            if (text == null)
+            {
+                Console.Write("Test");
             }
 
             ResultEntry entry = new ResultEntry

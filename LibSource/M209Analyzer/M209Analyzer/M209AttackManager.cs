@@ -140,6 +140,11 @@ namespace M209AnalyzerLib
         /// </summary>
         public SimulatedAnnealingParameters SAParameters { get; set; } = new SimulatedAnnealingParameters();
 
+        public SimulatedAnnealing SimulatedAnnealing { get; set; }
+
+        public SimulatedAnnealingPins SimulatedAnnealingPins { get; set; }
+        public HillClimbLugs HillClimbLugs { get; set; }
+        public HillClimbPins HillClimbPins { get; set; }
         /// <summary>
         /// For scoring used function
         /// </summary>
@@ -193,11 +198,25 @@ namespace M209AnalyzerLib
         public CtBestList[] BestLists;
         public long[] EvaluationCounter;
 
+        public Stats Stats;
+
         #endregion
+
+        public M209AttackManager()
+        {
+            Stats = new Stats();
+            Stats.Load(Language, true);
+
+            BestList.SetThrottle(true);
+
+            Scoring = new M209Scoring(Stats);
+            SimulatedAnnealing = new SimulatedAnnealing(this);
+        }
 
         public M209AttackManager(IScoring scoring)
         {
             Scoring = scoring;
+            Stats = new Stats();
             Stats.Load(Language, true);
 
             BestList.SetThrottle(true);
@@ -265,7 +284,7 @@ namespace M209AnalyzerLib
             try
             {
 
-                Key key = new Key();
+                Key key = new Key(this);
                 key.SetCipherText(CipherText);
                 LocalState localState = new LocalState(_taskCounter++);
 
@@ -275,7 +294,9 @@ namespace M209AnalyzerLib
                     key.setOriginalScore(Evaluate(EvalType.MONO, SimulationKey.CribArray, SimulationKey.CribArray, localState.TaskId));
                 }
 
-                CiphertextOnlyAttack.Solve(key, this, localState);
+                CiphertextOnlyAttack cipherTextOnlyAttack = new CiphertextOnlyAttack(key, this, localState);
+
+                cipherTextOnlyAttack.Solve();
                 if (ShouldStop)
                 {
                     return;
@@ -341,7 +362,7 @@ namespace M209AnalyzerLib
             try
             {
 
-                Key key = new Key();
+                Key key = new Key(this);
                 key.SetCipherTextAndCrib(CipherText, Crib);
                 if (SimulationKey != null)
                 {
@@ -350,7 +371,8 @@ namespace M209AnalyzerLib
                 key.setOriginalScore(130000);
 
                 LocalState localState = new LocalState(_taskCounter++);
-                KnownPlaintextAttack.Solve(key, this, localState);
+                KnownPlaintextAttack knownPlaintextAttack = new KnownPlaintextAttack(key, this, localState);
+                knownPlaintextAttack.Solve();
                 if (ShouldStop)
                 {
                     return;
