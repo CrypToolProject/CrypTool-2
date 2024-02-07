@@ -574,6 +574,24 @@ namespace WorkspaceManager.Model
         }
 
         /// <summary>
+        /// Returns the PluginModel with the given name
+        /// Returns null if there is no PluginModel with the given name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public PluginModel GetPluginModelByName(string name)
+        {
+            foreach (PluginModel pluginModel in AllPluginModels)
+            {
+                if (pluginModel.Name == name)
+                {
+                    return pluginModel;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
         /// "Something" logged
         /// </summary>
         [field: NonSerialized]

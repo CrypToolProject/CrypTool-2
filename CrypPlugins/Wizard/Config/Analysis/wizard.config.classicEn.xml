@@ -293,88 +293,44 @@ Um zusätzlich automatisch unter allen "entschlüsselten" Text den richtigen zu 
       <description lang="de">Maximale Stabdicke:</description>
       <defaultvalue lang="en">20</defaultvalue>
     </inputBox>
-    <comboBox plugin="$Dictionary$" property="Dictionary" defaultValue="5" width="32,75%" group="parameters">
+    <comboBox plugin="$Dictionary$" property="Language" defaultValue="0" width="32,75%" group="parameters">
       <description lang="en">Assumed language:</description>
       <description lang="de">Angenommene Sprache:</description>
-      <item content="Arabic" lang="en" />
-      <item content="Bulgarian" lang="en" />
-      <item content="Cracklib" lang="en" />
-      <item content="Czech" lang="en" />
-      <item content="Danish" lang="en" />
-      <item content="English" lang="en" />
-      <item content="German" lang="en" />
-      <item content="Greek" lang="en" />
-      <item content="Spanish" lang="en" />
-      <item content="Estonian" lang="en" />
-      <item content="Farsi" lang="en" />
-      <item content="Finnish" lang="en" />
-      <item content="French" lang="en" />
-      <item content="Hebrew" lang="en" />
-      <item content="Croatian" lang="en" />
-      <item content="Hungarian" lang="en" />
-      <item content="Indonesian" lang="en" />
-      <item content="Icelandic" lang="en" />
-      <item content="Italian" lang="en" />
-      <item content="Lithuanian" lang="en" />
-      <item content="Latvian" lang="en" />
-      <item content="Macedonian" lang="en" />
-      <item content="Dutch" lang="en" />
-      <item content="Norwegian" lang="en" />
-      <item content="Polish" lang="en" />
-      <item content="Portuguese" lang="en" />
-      <item content="Romanian" lang="en" />
-      <item content="Russian" lang="en" />
-      <item content="Slovak" lang="en" />
-      <item content="Slovenian" lang="en" />
-      <item content="Albanian" lang="en" />
-      <item content="Serbian Cyrillic" lang="en" />
-      <item content="Serbian Latin" lang="en" />
-      <item content="Swedish" lang="en" />
-      <item content="Turkish" lang="en" />
-      <item content="Ukrainian" lang="en" />
-      <item content="Simplified Chinese" lang="en" />
-      <item content="Arabisch" lang="de" />
-      <item content="Bulgarisch" lang="de" />
-      <item content="Cracklib" lang="de" />
-      <item content="Tschechisch" lang="de" />
-      <item content="Dänisch" lang="de" />
-      <item content="Englisch" lang="de" />
-      <item content="Deutsch" lang="de" />
-      <item content="Griechisch" lang="de" />
-      <item content="Spanisch" lang="de" />
-      <item content="Estnisch" lang="de" />
-      <item content="Farsi" lang="de" />
-      <item content="Finnisch" lang="de" />
-      <item content="Französisch" lang="de" />
-      <item content="Hebräisch" lang="de" />
-      <item content="Kroatisch" lang="de" />
-      <item content="Ungarisch" lang="de" />
-      <item content="Indonesisch" lang="de" />
-      <item content="Isländisch" lang="de" />
-      <item content="Italienisch" lang="de" />
-      <item content="Litauisch" lang="de" />
-      <item content="Lettisch" lang="de" />
-      <item content="Mazedonisch" lang="de" />
-      <item content="Niederländisch" lang="de" />
-      <item content="Norwegisch" lang="de" />
-      <item content="Polnisch" lang="de" />
-      <item content="Portugisisch" lang="de" />
-      <item content="Rumänisch" lang="de" />
-      <item content="Russisch" lang="de" />
-      <item content="Slowakisch" lang="de" />
-      <item content="Slowenisch" lang="de" />
-      <item content="Albanisch" lang="de" />
-      <item content="Serbisch Kyrillisch" lang="de" />
-      <item content="Serbisch Lateinisch" lang="de" />
-      <item content="Swedisch" lang="de" />
-      <item content="Türkisch" lang="de" />
-      <item content="Ukrainisch" lang="de" />
-      <item content="Vereinfachtes Chinesisch" lang="de" />
+      <item content="English" lang="en"/>
+      <item content="German" lang="en"/>
+      <item content="Spanish" lang="en"/>
+      <item content="French" lang="en"/>
+      <item content="Italian" lang="en"/>
+      <item content="Hungarian" lang="en"/>
+      <item content="Russian" lang="en"/>
+      <item content="Czech" lang="en"/>
+      <item content="Greek" lang="en"/>
+      <item content="Latin" lang="en"/>
+      <item content="Dutch" lang="en"/>
+      <item content="Swedish" lang="en"/>
+      <item content="Portuguese" lang="en"/>
+      <item content="Polish" lang="en"/>
+      <item content="Turkish" lang="en"/>
+      <item content="Englisch" lang="de"/>
+      <item content="Deutsch" lang="de"/>
+      <item content="Spanisch" lang="de"/>
+      <item content="Französisch" lang="de"/>
+      <item content="Italienisch" lang="de"/>
+      <item content="Ungarisch" lang="de"/>
+      <item content="Russisch" lang="de"/>
+      <item content="Tschechisch" lang="de"/>
+      <item content="Griechisch" lang="de"/>
+      <item content="Latein" lang="de"/>
+      <item content="Niederländisch" lang="de"/>
+      <item content="Schwedisch" lang="de"/>
+      <item content="Portugiesisch" lang="de"/>
+      <item content="Polnisch" lang="de"/>
+      <item content="Türkisch" lang="de"/>
     </comboBox>
     <inputBox plugin="$Contains$" property="Hits" visibleLines="1" width="32,75%" group="parameters" regex="[0-9]+">
       <description lang="en">Number of words in dictionary:</description>
       <description lang="de">Anzahl Wörter in Wörterbuch:</description>
-      <defaultvalue lang="en">5</defaultvalue>
+      <defaultvalue lang="en">7</defaultvalue>
     </inputBox>
     <sampleViewer image="Scytale" file="Cryptanalysis\Classic\Scytale_ExhaustiveKeySearch.cwm">
       <name lang="en">Results</name>

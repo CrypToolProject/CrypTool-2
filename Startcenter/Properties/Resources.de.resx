@@ -198,11 +198,8 @@
   <data name="CrypTutorials" xml:space="preserve">
     <value>Schauen Sie sich Videos über CrypTool 2 an</value>
   </data>
-  <data name="CTBookFilename" xml:space="preserve">
-    <value>CrypToolBook\\CT-Book-de.pdf</value>
-  </data>
-  <data name="Open_the_ct_book_" xml:space="preserve">
-    <value>Öffnen Sie das CrypTool-Buch</value>
+  <data name="Visit_the_ct_book_page_" xml:space="preserve">
+    <value>Besuchen Sie die Seite des CrypTool-Buchs auf dem CrypTool-Portal</value>
   </data>
   <data name="CollapseAll" xml:space="preserve">
     <value>Alle zuklappen</value>
@@ -245,5 +242,8 @@
   </data>
   <data name="FileListClearQuestionTitle" xml:space="preserve">
     <value>Liste der zuletzt geöffneten Dateien löschen</value>
+  </data>
+  <data name="CTBookURL" xml:space="preserve">
+    <value>https://www.cryptool.org/de/documentation/ctbook/</value>
   </data>
 </root>

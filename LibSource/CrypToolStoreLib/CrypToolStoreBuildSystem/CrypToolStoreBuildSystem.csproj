@@ -100,7 +100,16 @@
     <Content Include="CT2_Libraries\CrypWin.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="CT2_Libraries\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="CT2_Libraries\OnlineDocumentationGenerator.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CT2_Libraries\WorkspaceManagerModel.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CT2_Libraries\WPFToolkit.Extended.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="CustomBuildTasks\CustomBuildTasks.exe">

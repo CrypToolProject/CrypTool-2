@@ -75,7 +75,8 @@ namespace Startcenter.Controls
         {
             try
             {
-                System.Diagnostics.Process.Start(Path.Combine(DirectoryHelper.BaseDirectory, Properties.Resources.CTBookFilename));
+                //open the CrypTool book webpage in the default browser
+                System.Diagnostics.Process.Start(Properties.Resources.CTBookURL);
             }
             catch (Exception)
             {

@@ -96,6 +96,10 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             _originalCiphertextSymbols = ConvertToList(_ciphertext, _separator);
             int homophoneNumber = Tools.Distinct(numbers).Length;
             _keylength = (int)(homophoneNumber * 1.3);
+            if(_keylength < 5)
+            {
+                _keylength = 5;
+            }
             Text text_ciphertext = new Text(Tools.ChangeToConsecutiveNumbers(numbers));
             AnalyzerConfiguration = new AnalyzerConfiguration(_keylength, text_ciphertext)
             {

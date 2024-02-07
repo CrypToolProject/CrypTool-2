@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: SM4.xml-->
+  <!--Last edited: 2023.01.24-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">SM4</title>
+  <summary lang="en">Usage of the <i>SM4</i> cipher</summary>
+  <description lang="en">The SM4 cipher, also known as SMS4, is a standard block cipher in China's Wireless LAN Standard and is widely used in various security protocols and applications.</description>
+  <keywords>block cipher, symmetric cipher</keywords>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key (Hex values)" />
+    <replacement key="$IV$" value="IV (Hex values)" />
+    <replacement key="$Message Encoder$" value="Message Encoder" />
+    <replacement key="$Message Decoder$" value="Message Decoder" />
+    <replacement key="$Key Decoder$" value="Key Decoder" />
+    <replacement key="$IV Decoder$" value="IV Decoder" />
+    <replacement key="$Decrypted_Ciphertext$" value="Decrypted Ciphertext" />
+    <replacement key="$text$" value="This is a test of the SM-4 cipher component of CrypTool 2" />
+    <replacement key="$memo$" value="The {\b SM4} cipher is a block cipher standardized by the Chinese government. It is a symmetric key algorithm, meaning it uses the same key for both encryption and decryption processes. SM4 operates on 128-bit blocks of data, and it uses a 128-bit key. The algorithm is structured as a substitution-permutation network (SPN), which is a series of linked operations involving substitutions and permutations (rearranging the order of bits). It was designed to offer a high level of security and efficiency, making it suitable for applications in various electronic data protection scenarios. \line
+\line
+SM4 is particularly significant as it represents an advancement in cryptographic technology within China, aligning with the country's increasing focus on developing independent and secure information technology infrastructures." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">SM4</title>
+  <summary lang="de">Nutzung der <i>SM4</i>-Chiffre</summary>
+  <description lang="en">Die SM4-Chiffre, auch bekannt als SMS4, ist eineStandard-Blockchiffre im Wireless LAN-Standard Chinas und wird in verschiedenen Sicherheitsprotokollen und Anwendungen weit verbreitet eingesetzt.</description>
+  <keywords>Blockchiffre, symmetrische Chiffre</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel (Hex-Werte)" />
+    <replacement key="$IV$" value="IV (Hex-Werte)" />
+    <replacement key="$Message Encoder$" value="Nachrichten-Encoder" />
+    <replacement key="$Message Decoder$" value="Nachrichten-Decoder" />
+    <replacement key="$Key Decoder$" value="Schlüssel-Decoder" />
+    <replacement key="$IV Decoder$" value="IV-Decoder" />
+    <replacement key="$Decrypted_Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$text$" value="Das ist ein Test der SM-4-Chiffre von CrypTool 2" />
+    <replacement key="$memo$" value="Die {\b SM4}-Chiffre ist ein von der chinesischen Regierung standardisierter Blockchiffre. Es handelt sich um einen symmetrischen Schlüsselalgorithmus, was bedeutet, dass er denselben Schlüssel sowohl für den Verschlüsselungs- als auch für den Entschlüsselungsprozess verwendet. SM4 arbeitet mit 128-Bit-Blöcken von Daten und verwendet 128-Bit-Schlüssel. Der Algorithmus ist strukturiert als ein Substitutions-Permutations-Netzwerk (SPN), eine Reihe von verknüpften Operationen, die Substitutionen und Permutationen (das Umordnen der Bitreihenfolge) beinhalten. Er wurde entwickelt, um ein hohes Maß an Sicherheit und Effizienz zu bieten, was ihn für Anwendungen in verschiedenen Szenarien des elektronischen Datenschutzes geeignet macht. \line
+\line
+SM4 ist besonders bedeutend, da er einen Fortschritt in der kryptografischen Technologie innerhalb Chinas darstellt und mit dem zunehmenden Fokus des Landes auf die Entwicklung unabhängiger und sicherer Informationstechnologie-Infrastrukturen übereinstimmt." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="SM4.png" />
+  <relevantPlugins>
+    <plugin name="SM4" />
+  </relevantPlugins>
+</sample>
