@@ -16,11 +16,18 @@
 using M209AnalyzerLib.Common;
 using M209AnalyzerLib.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace M209AnalyzerLib.M209
 {
     public class M209Scoring : IScoring
     {
+        private double increment = 10_000.0;
+        public Stats Stats;
+        public M209Scoring(Stats stats)
+        {
+            Stats = stats;
+        }
         public double Evaluate(EvalType evalType, int[] decryptedText, int[] crib)
         {
             double evalValue = 0.0;
@@ -46,14 +53,26 @@ namespace M209AnalyzerLib.M209
         private double EvalMono(int[] decryptedText)
         {
             int[] decryptionFrequency = CountDecryptionFrequency(decryptedText);
+            List<int> monos = new List<int>();
+            List<int> monof = new List<int>();
 
             int mono = 0;
+            int fSum = 0;
             for (int i = 0; i < 26; i++)
             {
                 int f = decryptionFrequency[i];
                 mono += (int)Stats.MonogramStats[i] * f;
+                monos.Add((int)Stats.MonogramStats[i] * f);
+                monof.Add(f);
             }
-            return mono / decryptedText.Length;
+            double test = mono / decryptedText.Length;
+            if (test > 200_000.0)
+            {
+                Console.WriteLine(monos);
+                Console.WriteLine(test);
+                Console.WriteLine(fSum);
+            }
+            return test;
         }
 
         private double EvalCrib(int[] decryptedText, int[] crib)

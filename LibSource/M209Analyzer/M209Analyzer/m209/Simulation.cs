@@ -22,7 +22,7 @@ namespace M209AnalyzerLib.M209
         public static Key CreateSimulationValues(M209AttackManager attackManager)
         {
 
-            Key simulationKey = new Key();
+            Key simulationKey = attackManager.SimulationKey;
             simulationKey.Pins.Randomize();
             simulationKey.Lugs.Randomize(attackManager.SimulationOverlaps);
 

@@ -24,17 +24,17 @@ namespace M209AnalyzerLib.Common
 {
     public class Stats
     {
-        public static long[] MonogramStats { get; set; } = new long[Utils.TEXT_ALPHABET_SIZE];
-        public static long[] BigramStats { get; set; } = new long[Utils.TEXT_ALPHABET_SIZE * 32];
-        public static long Evaluations { get; set; } = 0;
+        public long[] MonogramStats { get; set; } = new long[Utils.TEXT_ALPHABET_SIZE];
+        public long[] BigramStats { get; set; } = new long[Utils.TEXT_ALPHABET_SIZE * 32];
+        public long Evaluations { get; set; } = 0;
 
-        private static short[] HexagramStats = null;
+        private short[] HexagramStats = null;
 
-        private readonly static int POWER_26_5 = 26 * 26 * 26 * 26 * 26;
+        private readonly int POWER_26_5 = 26 * 26 * 26 * 26 * 26;
 
-        public static long EvalPlaintextHexagram(int[] plaintext, int plaintextLength)
+        public long EvalPlaintextHexagram(int[] plaintext, int plaintextLength)
         {
-            Stats.Evaluations++;
+            Evaluations++;
 
             int index = (((((((plaintext[0] * 26) + plaintext[1]) * 26) + plaintext[2]) * 26) + plaintext[3]) * 26 + plaintext[4]);
             long val = 0;
@@ -46,18 +46,18 @@ namespace M209AnalyzerLib.Common
             return (val * 1000) / (plaintextLength - 5);
         }
 
-        public static long EvalPlaintextHexagram(int[] plaintext)
+        public long EvalPlaintextHexagram(int[] plaintext)
         {
             return EvalPlaintextHexagram(plaintext, plaintext.Length);
         }
 
-        public static string EvaluationsSummary()
+        public string EvaluationsSummary()
         {
             long elapsed = Utils.GgetElapsedMillis();
-            return String.Format("[%,d sec.][%,dK decryptions (%,dK/sec.)]", elapsed / 1000, Stats.Evaluations / 1000, Stats.Evaluations / elapsed);
+            return String.Format("[%,d sec.][%,dK decryptions (%,dK/sec.)]", elapsed / 1000, Evaluations / 1000, Evaluations / elapsed);
         }
 
-        static int ReadBigramFile(string fileName)
+        public int ReadBigramFile(string fileName)
         {
             int items = 0;
 
@@ -87,7 +87,7 @@ namespace M209AnalyzerLib.Common
             return items;
         }
 
-        static int ReadMonogramFromResource(string resource)
+        public int ReadMonogramFromResource(string resource)
         {
             string line;
             int items = 0;
@@ -124,7 +124,7 @@ namespace M209AnalyzerLib.Common
             return items;
         }
 
-        static int ReadMonogramFile(string fileName)
+        public int ReadMonogramFile(string fileName)
         {
             string line;
             int items = 0;
@@ -154,7 +154,7 @@ namespace M209AnalyzerLib.Common
             return items;
         }
 
-        static int ReadFileForStats(string fileName, bool isM209)
+        public int ReadFileForStats(string fileName, bool isM209)
         {
             int length = 0;
             string from = "èéìùòàëáöæëüãþôâäíûóšøůěňïçñíàçèìåáßŕúµýˆ^άλêéąîőčžâªªºžńάλληφοράθęźðöżõřáěšďťˇי".ToUpper();
@@ -205,7 +205,7 @@ namespace M209AnalyzerLib.Common
         /// Exchange every value in stats array by the logarithm of this value
         /// </summary>
         /// <param name="stats">Array of values that have to be exchanged by log value of the value.</param>
-        private static void ConvertToLog(long[] stats)
+        private void ConvertToLog(long[] stats)
         {
             long minVal = long.MaxValue;
             foreach (long stat in stats)
@@ -233,7 +233,7 @@ namespace M209AnalyzerLib.Common
         /// <param name="language">Gram file for language</param>
         /// <param name="isM209">Is this for the m209?</param>
         /// <returns></returns>
-        public static bool Load(string dirname, Language language, bool isM209)
+        public bool Load(string dirname, Language language, bool isM209)
         {
             int n = 1;
             switch (language)
@@ -275,7 +275,7 @@ namespace M209AnalyzerLib.Common
         /// <param name="language">Gram file for language</param>
         /// <param name="isM209">Is this for the m209?</param>
         /// <returns></returns>
-        public static bool Load(Language language, bool isM209)
+        public bool Load(Language language, bool isM209)
         {
             int n = 1;
             switch (language)

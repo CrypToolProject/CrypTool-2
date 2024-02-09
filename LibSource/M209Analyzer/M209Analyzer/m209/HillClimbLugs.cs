@@ -19,7 +19,7 @@ namespace M209AnalyzerLib.M209
 {
     public class HillClimbLugs
     {
-        public static readonly int[][] changes4Types = {
+        public readonly int[][] changes4Types = {
             new int[] { -1, -1, 1, 1, },
             new int[] { -1, 1, -1, 1, },
             new int[] { -1, 1, 1, -1, },
@@ -28,7 +28,7 @@ namespace M209AnalyzerLib.M209
             new int[] { 1, 1, -1, -1, },
         };
 
-        public static readonly int[][] changes3Types = {
+        public readonly int[][] changes3Types = {
             new int[] { -2, 1, 1, },
             new int[] { 1, -2, 1, },
             new int[] { 1, 1, -2, },
@@ -38,36 +38,49 @@ namespace M209AnalyzerLib.M209
             new int[] { -1, -1, 2, },
         };
 
-        public static readonly int[][] changes2Types = {
+        public readonly int[][] changes2Types = {
             new int[] { -1, 1},
             new int[] { 1, -1,},
             new int[] { -2, 2,},
             new int[] { 2, -2,},
         };
 
-        static double Eval(Key key, EvalType evalType, M209AttackManager attackManager)
+        private M209AttackManager _attackManager;
+        private Key _key;
+
+        public HillClimbLugs(Key key, M209AttackManager attackManager, LocalState localState)
+        {
+            _attackManager = attackManager;
+            _key = key;
+        }
+
+        double Eval(EvalType evalType, M209AttackManager attackManager, LocalState localState)
         {
 
             if (evalType == EvalType.PINS_SA_CRIB)
             {
-                return SimulatedAnnealingPins.SA(key, EvalType.CRIB, 10, attackManager);
+                if (_attackManager.SimulatedAnnealingPins == null)
+                {
+                    _attackManager.SimulatedAnnealingPins = new SimulatedAnnealingPins(_key, attackManager, localState);
+                }
+                return _attackManager.SimulatedAnnealingPins.SA(EvalType.CRIB, 10);
             }
-            key.UpdateDecryptionIfInvalid();
-            return attackManager.Evaluate(evalType, key.Decryption, key.CribArray);
+            _key.UpdateDecryptionIfInvalid();
+            return attackManager.Evaluate(evalType, _key.Decryption, _key.CribArray, localState.TaskId);
         }
 
-        public static double HillClimb(Key key, EvalType evalType, M209AttackManager attackManager, LocalState localState)
+        public double HillClimb(EvalType evalType, M209AttackManager attackManager, LocalState localState)
         {
 
-            localState.BestTypeCount = key.Lugs.CreateTypeCountCopy();
-            localState.BestPins = key.Pins.CreateCopy();
-            localState.BestScore = Eval(key, evalType, attackManager);
+            localState.BestTypeCount = _key.Lugs.CreateTypeCountCopy();
+            localState.BestPins = _key.Pins.CreateCopy();
+            localState.BestScore = Eval(evalType, attackManager, localState);
 
             do
             {
                 localState.Improved = false;
 
-                Change2Types(key, evalType, attackManager, localState);
+                Change2Types(evalType, attackManager, localState);
                 if (attackManager.ShouldStop)
                 {
                     return localState.BestScore;
@@ -80,7 +93,7 @@ namespace M209AnalyzerLib.M209
 
                 if (!localState.Improved)
                 {
-                    Changes4Types(key, evalType, attackManager, localState);
+                    Changes4Types(evalType, attackManager, localState);
                     if (attackManager.ShouldStop)
                     {
                         return localState.BestScore;
@@ -89,7 +102,7 @@ namespace M209AnalyzerLib.M209
 
                 if (!localState.Improved)
                 {
-                    Change3Types(key, evalType, attackManager, localState);
+                    Change3Types(evalType, attackManager, localState);
                     if (attackManager.ShouldStop)
                     {
                         return localState.BestScore;
@@ -104,24 +117,24 @@ namespace M209AnalyzerLib.M209
 
             } while (localState.Improved && !localState.SingleIteration && !attackManager.ShouldStop);
 
-            key.Pins.Set(localState.BestPins);
+            _key.Pins.Set(localState.BestPins);
             return localState.BestScore;
 
         }
 
-        public static void Change2Types(Key key, EvalType evalType, M209AttackManager attackManager, LocalState localState)
+        public void Change2Types(EvalType evalType, M209AttackManager attackManager, LocalState localState)
         {
             int[] types = new int[4];
 
             double newEval;
 
-            for (int c1Index = 0; c1Index < Lugs.TYPES.Length; c1Index++)
+            for (int c1Index = 0; c1Index < _key.Lugs.TYPES.Length; c1Index++)
             {
-                int c1 = Lugs.TYPES[c1Index];
+                int c1 = _key.Lugs.TYPES[c1Index];
 
-                for (int c2Index = 0; c2Index < Lugs.TYPES.Length; c2Index++)
+                for (int c2Index = 0; c2Index < _key.Lugs.TYPES.Length; c2Index++)
                 {
-                    int c2 = Lugs.TYPES[c2Index];
+                    int c2 = _key.Lugs.TYPES[c2Index];
 
                     if (c1 == c2)
                     {
@@ -136,23 +149,23 @@ namespace M209AnalyzerLib.M209
                         {
                             continue;
                         }
-                        if (!key.Lugs.SetTypeCount(localState.BestTypeCount, false))
+                        if (!_key.Lugs.SetTypeCount(localState.BestTypeCount, false))
                         {
                             UndoChanges(localState.BestTypeCount, types, changes);
                             continue;
                         }
-                        newEval = Eval(key, evalType, attackManager);
+                        newEval = Eval(evalType, attackManager, localState);
                         if (newEval > localState.BestScore)
                         {
                             localState.Improved = true;
                             localState.BestScore = newEval;
-                            key.Pins.Get(localState.BestPins);
-                            attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
+                            _key.Pins.Get(localState.BestPins);
+                            attackManager.AddNewBestListEntry(localState.BestScore, _key, _key.Decryption, localState.TaskId);
                         }
                         else
                         {
                             UndoChanges(localState.BestTypeCount, types, changes);
-                            key.Lugs.SetTypeCount(localState.BestTypeCount, false);
+                            _key.Lugs.SetTypeCount(localState.BestTypeCount, false);
                         }
 
                         if (attackManager.ShouldStop)
@@ -164,24 +177,24 @@ namespace M209AnalyzerLib.M209
             }
         }
 
-        public static void Changes4Types(Key key, EvalType evalType, M209AttackManager attackManager, LocalState localState)
+        public void Changes4Types(EvalType evalType, M209AttackManager attackManager, LocalState localState)
         {
             int[] types = new int[4];
 
             double newEval;
 
-            for (int i1 = 0; i1 < Lugs.TYPES.Length && !localState.Improved; i1++)
+            for (int i1 = 0; i1 < _key.Lugs.TYPES.Length && !localState.Improved; i1++)
             {
-                types[0] = Lugs.TYPES[i1];
-                for (int i2 = i1 + 1; i2 < Lugs.TYPES.Length && !localState.Improved; i2++)
+                types[0] = _key.Lugs.TYPES[i1];
+                for (int i2 = i1 + 1; i2 < _key.Lugs.TYPES.Length && !localState.Improved; i2++)
                 {
-                    types[1] = Lugs.TYPES[i2];
-                    for (int i3 = i2 + 1; i3 < Lugs.TYPES.Length && !localState.Improved; i3++)
+                    types[1] = _key.Lugs.TYPES[i2];
+                    for (int i3 = i2 + 1; i3 < _key.Lugs.TYPES.Length && !localState.Improved; i3++)
                     {
-                        types[2] = Lugs.TYPES[i3];
-                        for (int i4 = i3 + 1; i4 < Lugs.TYPES.Length && !localState.Improved; i4++)
+                        types[2] = _key.Lugs.TYPES[i3];
+                        for (int i4 = i3 + 1; i4 < _key.Lugs.TYPES.Length && !localState.Improved; i4++)
                         {
-                            types[3] = Lugs.TYPES[i4];
+                            types[3] = _key.Lugs.TYPES[i4];
 
                             foreach (var changes in changes4Types)
                             {
@@ -189,25 +202,25 @@ namespace M209AnalyzerLib.M209
                                 {
                                     continue;
                                 }
-                                if (!key.Lugs.SetTypeCount(localState.BestTypeCount, false))
+                                if (!_key.Lugs.SetTypeCount(localState.BestTypeCount, false))
                                 {
                                     UndoChanges(localState.BestTypeCount, types, changes);
                                     continue;
                                 }
-                                newEval = Eval(key, evalType, attackManager);
+                                newEval = Eval(evalType, attackManager, localState);
 
                                 if (newEval > localState.BestScore)
                                 {
                                     localState.Improved = true;
                                     localState.BestScore = newEval;
-                                    attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
-                                    key.Pins.Get(localState.BestPins);
+                                    attackManager.AddNewBestListEntry(localState.BestScore, _key, _key.Decryption, localState.TaskId);
+                                    _key.Pins.Get(localState.BestPins);
                                     break;
                                 }
                                 else
                                 {
                                     UndoChanges(localState.BestTypeCount, types, changes);
-                                    key.Lugs.SetTypeCount(localState.BestTypeCount, false);
+                                    _key.Lugs.SetTypeCount(localState.BestTypeCount, false);
                                 }
                             }
 
@@ -221,21 +234,21 @@ namespace M209AnalyzerLib.M209
             }
         }
 
-        public static void Change3Types(Key key, EvalType evalType, M209AttackManager attackManager, LocalState localState)
+        public void Change3Types(EvalType evalType, M209AttackManager attackManager, LocalState localState)
         {
             int[] types = new int[4];
 
             double newEval;
 
-            for (int i1 = 0; i1 < Lugs.TYPES.Length && !localState.Improved; i1++)
+            for (int i1 = 0; i1 < _key.Lugs.TYPES.Length && !localState.Improved; i1++)
             {
-                types[0] = Lugs.TYPES[i1];
-                for (int i2 = i1 + 1; i2 < Lugs.TYPES.Length && !localState.Improved; i2++)
+                types[0] = _key.Lugs.TYPES[i1];
+                for (int i2 = i1 + 1; i2 < _key.Lugs.TYPES.Length && !localState.Improved; i2++)
                 {
-                    types[1] = Lugs.TYPES[i2];
-                    for (int i3 = i2 + 1; i3 < Lugs.TYPES.Length && !localState.Improved; i3++)
+                    types[1] = _key.Lugs.TYPES[i2];
+                    for (int i3 = i2 + 1; i3 < _key.Lugs.TYPES.Length && !localState.Improved; i3++)
                     {
-                        types[2] = Lugs.TYPES[i3];
+                        types[2] = _key.Lugs.TYPES[i3];
 
                         foreach (var changes in changes3Types)
                         {
@@ -243,25 +256,25 @@ namespace M209AnalyzerLib.M209
                             {
                                 continue;
                             }
-                            if (!key.Lugs.SetTypeCount(localState.BestTypeCount, false))
+                            if (!_key.Lugs.SetTypeCount(localState.BestTypeCount, false))
                             {
                                 UndoChanges(localState.BestTypeCount, types, changes);
                                 continue;
                             }
-                            newEval = Eval(key, evalType, attackManager);
+                            newEval = Eval(evalType, attackManager, localState);
 
                             if (newEval > localState.BestScore)
                             {
                                 localState.Improved = true;
                                 localState.BestScore = newEval;
-                                attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
-                                key.Pins.Get(localState.BestPins);
+                                attackManager.AddNewBestListEntry(localState.BestScore, _key, _key.Decryption, localState.TaskId);
+                                _key.Pins.Get(localState.BestPins);
                                 break;
                             }
                             else
                             {
                                 UndoChanges(localState.BestTypeCount, types, changes);
-                                key.Lugs.SetTypeCount(localState.BestTypeCount, false);
+                                _key.Lugs.SetTypeCount(localState.BestTypeCount, false);
                             }
 
                             if (attackManager.ShouldStop)
@@ -274,7 +287,7 @@ namespace M209AnalyzerLib.M209
             }
         }
 
-        public static bool DoChangesIfValid(int[] typeCount, int[] types, int[] changes)
+        public bool DoChangesIfValid(int[] typeCount, int[] types, int[] changes)
         {
 
             for (int i = 0; i < changes.Length; i++)
@@ -289,9 +302,9 @@ namespace M209AnalyzerLib.M209
             }
             DoChanges(typeCount, types, changes);
 
-            int overlaps = Lugs.GetOverlaps(typeCount);
+            int overlaps = _key.Lugs.GetOverlaps(typeCount);
 
-            if ((overlaps > Global.MAX_OVERLAP) || (overlaps < Global.MIN_OVERLAP) || (Global.VERSION == MachineVersion.SWEDISH && Common.Utils.Sum(typeCount) != Key.BARS))
+            if ((overlaps > Global.MAX_OVERLAP) || (overlaps < Global.MIN_OVERLAP) || (Global.VERSION == MachineVersion.SWEDISH && Common.Utils.Sum(typeCount) != _key.BARS))
             {
                 UndoChanges(typeCount, types, changes);
                 return false;
@@ -299,7 +312,7 @@ namespace M209AnalyzerLib.M209
             return true;
         }
 
-        public static void UndoChanges(int[] typeCount, int[] types, int[] changes)
+        public void UndoChanges(int[] typeCount, int[] types, int[] changes)
         {
             for (int i = 0; i < changes.Length; i++)
             {
@@ -309,7 +322,7 @@ namespace M209AnalyzerLib.M209
             }
         }
 
-        private static void DoChanges(int[] typeCount, int[] types, int[] changes)
+        private void DoChanges(int[] typeCount, int[] types, int[] changes)
         {
             for (int i = 0; i < changes.Length; i++)
             {

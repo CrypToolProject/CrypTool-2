@@ -53,6 +53,9 @@ namespace CrypTool.Plugins.M209Analyzer
         private DateTime _startTime;
         private DateTime _endTime;
 
+        private DateTime _lastUpdateTime = DateTime.Now;
+        private long _lastEvaluationCount = 0;
+
         private bool _running = false;
 
         private int _approximatedKeys = int.MaxValue;
@@ -146,9 +149,10 @@ namespace CrypTool.Plugins.M209Analyzer
 
             _running = true;
 
-            _m209AttackManager = new M209AttackManager(new M209Scoring());
+            _m209AttackManager = new M209AttackManager();
             _approximatedKeys = ApproximateKeyCountTarget(Ciphertext.Length);
 
+            _m209AttackManager.UseOwnBestList = false;
             _m209AttackManager.OnNewBestListEntry += HandleNewBestListEntry;
             _m209AttackManager.OnProgressStatusChanged += _m209AttackManager_OnProgressStatusChanged;
             _m209AttackManager.ShouldStop = !_running;
@@ -189,51 +193,35 @@ namespace CrypTool.Plugins.M209Analyzer
 
             ProgressChanged(1, 1);
         }
-
         private void _m209AttackManager_OnProgressStatusChanged(object sender, M209AttackManager.OnProgressStatusChangedEventArgs e)
         {
+            if (DateTime.Now >= _lastUpdateTime.AddSeconds(1))
+            {
+                long diffEvaluationCount = _m209AttackManager.EvaluationCount - _lastEvaluationCount;
+                TimeSpan diffUpdateTime = DateTime.Now - _lastUpdateTime;
+                Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                {
+                    _endTime = DateTime.Now;
+                    TimeSpan elapsedtime = _m209AttackManager.ElapsedTime;
+                    TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
+                    _presentation.EndTime.Value = _endTime.ToString();
+                    _presentation.ElapsedTime.Value = elapsedspan.ToString();
+                    _presentation.CurrentlyAnalyzedKey.Value = e.EvaluationCount.ToString();
+                    _presentation.CurrentlyAnalyzedKey.Value = $"2^{(long)(Math.Log(_m209AttackManager.EvaluationCount) / Math.Log(2))}";
+                    _presentation.KeyPerMilliSecond.Value = $"{(_m209AttackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : (diffEvaluationCount / diffUpdateTime.TotalMilliseconds) * 1000).ToString("0#,0")} {Properties.Resources.KeysPerSec}";
 
-            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-            {
-                _endTime = DateTime.Now;
-                TimeSpan elapsedtime = _m209AttackManager.ElapsedTime;
-                TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
-                _presentation.EndTime.Value = _endTime.ToString();
-                _presentation.ElapsedTime.Value = elapsedspan.ToString();
-                _presentation.CurrentlyAnalyzedKey.Value = e.EvaluationCount.ToString();
-                _presentation.CurrentlyAnalyzedKey.Value = $"2^{(long)(Math.Log(_m209AttackManager.EvaluationCount) / Math.Log(2))}";
-                _presentation.KeyPerMilliSecond.Value = $"{(_m209AttackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : _m209AttackManager.EvaluationCount / _m209AttackManager.ElapsedTime.TotalMilliseconds).ToString("0.0#")} {Properties.Resources.KeysPerMilisec}";
-
-                if (_m209AttackManager.Threads == 1)
-                {
-                    _presentation.AnalysisStep.Value = e.Phase;
+                    if (_m209AttackManager.Threads == 1)
+                    {
+                        _presentation.AnalysisStep.Value = e.Phase;
+                    }
+                    else
+                    {
+                        _presentation.AnalysisStep.Value = Properties.Resources.AnalysisStepText;
+                    }
                 }
-                else
-                {
-                    _presentation.AnalysisStep.Value = "";
-                }
-            }
-            , null);
-
-            // Show never 100% if correct not found
-            if (_m209AttackManager.EvaluationCount >= _approximatedKeys && _settings.AttackMode == AttackMode.CiphertextOnly)
-            {
-                ProgressChanged(0.99, 1.0);
-            }
-            else if (_settings.AttackMode == AttackMode.CiphertextOnly)
-            {
-                ProgressChanged(_m209AttackManager.EvaluationCount, _approximatedKeys);
-            }
-            else if (_settings.AttackMode == AttackMode.KnownPlaintext)
-            {
-                if (_presentation.BestList.Count > 0)
-                {
-                    ProgressChanged(_presentation.BestList[0].Value, 130_000);
-                }
-                else
-                {
-                    ProgressChanged(0, 130_000);
-                }
+                , null);
+                _lastUpdateTime = DateTime.Now;
+                _lastEvaluationCount = _m209AttackManager.EvaluationCount;
             }
         }
 
@@ -373,6 +361,11 @@ namespace CrypTool.Plugins.M209Analyzer
                 return;
             }
 
+            if (text == null)
+            {
+                Console.Write("Test");
+            }
+
             ResultEntry entry = new ResultEntry
             {
                 Key = key,
@@ -418,6 +411,33 @@ namespace CrypTool.Plugins.M209Analyzer
                         e.Ranking = ranking;
                         ranking++;
                     }
+                    var testValue = _presentation.BestList.First().Value;
+
+                    if (_presentation.BestList.Count == 0 || entry.Value >= _presentation.BestList.First().Value)
+                    {
+
+                        // Show never 100% if correct not found
+                        if (_m209AttackManager.EvaluationCount >= _approximatedKeys && _settings.AttackMode == AttackMode.CiphertextOnly)
+                        {
+                            ProgressChanged(0.99, 1.0);
+                        }
+                        else if (_settings.AttackMode == AttackMode.CiphertextOnly)
+                        {
+                            ProgressChanged(_presentation.BestList.First().Value, 50_000);
+                        }
+                        else if (_settings.AttackMode == AttackMode.KnownPlaintext)
+                        {
+                            if (_presentation.BestList.Count > 0)
+                            {
+                                ProgressChanged(_presentation.BestList[0].Value, 130_000);
+                            }
+                            else
+                            {
+                                ProgressChanged(0, 130_000);
+                            }
+                        }
+                    }
+
                 }
                 catch (Exception)
                 {

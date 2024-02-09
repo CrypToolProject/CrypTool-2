@@ -36,6 +36,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>..\..\..\CrypBuild\Release\Lib\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -55,6 +61,7 @@
     <Compile Include="Common\CtBestList.cs" />
     <Compile Include="Common\LimitedConcurrencyLevelTaskScheduler.cs" />
     <Compile Include="Common\Logger.cs" />
+    <Compile Include="Common\RandomGen.cs" />
     <Compile Include="Enums\EvalType.cs" />
     <Compile Include="Enums\Flag.cs" />
     <Compile Include="Enums\Language.cs" />

@@ -24,13 +24,21 @@ namespace M209AnalyzerLib.M209
     public class LugsRules
     {
 
-        public static bool print = false;
-        public static List<int[]> validLugCountSequences = null;
+        public bool print = false;
+        public List<int[]> validLugCountSequences = null;
 
-        private static int sameSucc(int[] lugSeq)
+        private Key _key;
+
+        public LugsRules(Key key)
+        {
+            _key = key;
+            createValidLugCountSequences();
+        }
+
+        private int sameSucc(int[] lugSeq)
         {
             int sameSucc = 0;
-            for (int w = 2; w <= Key.WHEELS; w++)
+            for (int w = 2; w <= Global.WHEELS; w++)
             {
                 if (lugSeq[w] == lugSeq[w - 1])
                 {
@@ -40,9 +48,9 @@ namespace M209AnalyzerLib.M209
             return sameSucc;
         }
 
-        private static bool tripleSameSucc(int[] lugSeq)
+        private bool tripleSameSucc(int[] lugSeq)
         {
-            for (int w = 3; w <= Key.WHEELS; w++)
+            for (int w = 3; w <= Global.WHEELS; w++)
             {
                 if ((lugSeq[w] == lugSeq[w - 1]) && (lugSeq[w - 1] == lugSeq[w - 2]))
                 {
@@ -51,10 +59,10 @@ namespace M209AnalyzerLib.M209
             }
             return false;
         }
-        private static int even(int[] lugSeq)
+        private int even(int[] lugSeq)
         {
             int even = 0;
-            for (int w = 1; w <= Key.WHEELS; w++)
+            for (int w = 1; w <= Global.WHEELS; w++)
             {
                 if ((lugSeq[w] % 2) == 0)
                 {
@@ -63,35 +71,35 @@ namespace M209AnalyzerLib.M209
             }
             return even;
         }
-        private static int sum(int[] lugSeq)
+        private int sum(int[] lugSeq)
         {
             int sum = 0;
-            for (int w = 1; w <= Key.WHEELS; w++)
+            for (int w = 1; w <= Global.WHEELS; w++)
             {
                 sum += lugSeq[w];
             }
             return sum;
         }
 
-        private static bool coverage(int[] lugSeq)
+        private bool coverage(int[] lugSeq)
         {
             bool[] cover = new bool[28]; // cover[1] is not used
             for (int comb = 1; comb <= 63; comb++)
             {
                 int sumComb = 0;
-                for (int w = 1; w <= Key.WHEELS; w++)
+                for (int w = 1; w <= Global.WHEELS; w++)
                 {
-                    if (Key.GetWheelBit(comb, w))
+                    if (_key.GetWheelBit(comb, w))
                     {
                         sumComb += lugSeq[w];
                     }
                 }
-                if (sumComb <= Key.BARS)
+                if (sumComb <= Global.BARS)
                 {
                     cover[sumComb] = true;
                 }
             }
-            for (int j = 1; j <= Key.BARS; j++)
+            for (int j = 1; j <= Global.BARS; j++)
             {
                 if (!cover[j])
                 {
@@ -101,7 +109,7 @@ namespace M209AnalyzerLib.M209
             return true;
         }
 
-        public static void createValidLugCountSequences()
+        public void createValidLugCountSequences()
         {
             if (validLugCountSequences == null)
             {
@@ -130,7 +138,7 @@ namespace M209AnalyzerLib.M209
             }
         }
 
-        private static List<int[]> getValidLugCountSequences()
+        private List<int[]> getValidLugCountSequences()
         {
             List<int[]> lugCountSequences = new List<int[]>();
 
@@ -159,7 +167,7 @@ namespace M209AnalyzerLib.M209
                                         continue;
                                     }
 
-                                    int overlaps = sum(lugSeq) - Key.BARS;
+                                    int overlaps = sum(lugSeq) - Global.BARS;
                                     if ((overlaps < Global.MIN_OVERLAP) || (overlaps > Global.MAX_OVERLAP))
                                     {
                                         continue;
@@ -261,12 +269,12 @@ namespace M209AnalyzerLib.M209
                     int[] lugsCountSequence = lugCountSequences[i];
 
                     int sum = 0;
-                    for (int w = 1; w <= Key.WHEELS; w++)
+                    for (int w = 1; w <= Global.WHEELS; w++)
                     {
                         Console.WriteLine($"\t{lugsCountSequence[w]}");
                         sum += lugsCountSequence[w];
                     }
-                    Console.WriteLine($"\t[{sum}\t{sum - Key.BARS}]\n");
+                    Console.WriteLine($"\t[{sum}\t{sum - Global.BARS}]\n");
 
                 }
             }
@@ -275,7 +283,7 @@ namespace M209AnalyzerLib.M209
         }
 
 
-        private static bool isLugCountSequenceCompliant(int[] lugsCountSequence)
+        private bool isLugCountSequenceCompliant(int[] lugsCountSequence)
         {
             int[] sorted = new int[7];
 
@@ -285,7 +293,7 @@ namespace M209AnalyzerLib.M209
             }
             if (Global.VERSION == MachineVersion.NO_OVERLAP || Global.VERSION == MachineVersion.SWEDISH)
             {
-                return Utils.Sum(lugsCountSequence) == Key.BARS;
+                return Utils.Sum(lugsCountSequence) == Global.BARS;
             }
 
             Array.Copy(lugsCountSequence, 0, sorted, 0, lugsCountSequence.Length);
@@ -295,7 +303,7 @@ namespace M209AnalyzerLib.M209
                 int[] validSeq = validLugCountSequences[i];
 
                 bool found = true;
-                for (int w = 1; w <= Key.WHEELS; w++)
+                for (int w = 1; w <= Global.WHEELS; w++)
                 {
                     if (sorted[w] != validSeq[w])
                     {
@@ -311,16 +319,16 @@ namespace M209AnalyzerLib.M209
             return false;
         }
 
-        public static bool isTypeCountCompliant(int[] simpleCount)
+        public bool isTypeCountCompliant(int[] simpleCount)
         {
 
-            int[] sequence = new int[Key.WHEELS + 1];
-            for (int w1 = 1; w1 <= Key.WHEELS; w1++)
+            int[] sequence = new int[Global.WHEELS + 1];
+            for (int w1 = 1; w1 <= Global.WHEELS; w1++)
             {
-                sequence[w1] += simpleCount[Lugs.GetTypeCountIndex(w1)];
-                for (int w2 = w1 + 1; w2 <= Key.WHEELS; w2++)
+                sequence[w1] += simpleCount[_key.Lugs.GetTypeCountIndex(w1)];
+                for (int w2 = w1 + 1; w2 <= Global.WHEELS; w2++)
                 {
-                    int count = simpleCount[Lugs.GetTypeCountIndex(w1, w2)];
+                    int count = simpleCount[_key.Lugs.GetTypeCountIndex(w1, w2)];
                     sequence[w1] += count;
                     sequence[w2] += count;
                 }
@@ -328,7 +336,7 @@ namespace M209AnalyzerLib.M209
             return isLugCountSequenceCompliant(sequence);
         }
 
-        private static readonly int[][] groupA = {
+        private readonly int[][] groupA = {
 
             new int[] { 1, 2, 3, 4, 8, 10, 1 },
             new int[] {1, 2, 3, 4, 7, 11, 1},
@@ -481,7 +489,7 @@ namespace M209AnalyzerLib.M209
             new int[] {1, 2, 4, 7, 12, 13, 12,},
             new int[] {1, 2, 4, 8, 11, 13, 12,},
         };
-        private static readonly int[][] groupB = {
+        private readonly int[][] groupB = {
             new int[] {1, 1, 2, 3, 8, 13, 1},
             new int[] {1, 1, 2, 4, 9, 11, 1},
             new int[] {1, 1, 2, 4, 8, 12, 1},
@@ -699,7 +707,7 @@ namespace M209AnalyzerLib.M209
             new int[] {1, 2, 3, 7, 13, 13, 12},
         };
 
-        private static List<int[]> readCountsFromTable(int[][] table)
+        private List<int[]> readCountsFromTable(int[][] table)
         {
             List<int[]> lugCountSequences = new List<int[]>();
 
@@ -719,10 +727,10 @@ namespace M209AnalyzerLib.M209
                     sum += seq[i];
                     lugSeq[i + 1] = seq[i];
                 }
-                int overlaps = sum - Key.BARS;
+                int overlaps = sum - Global.BARS;
                 if (overlaps != seq[6])
                 {
-                    Console.WriteLine($"Error with seq. Expected {seq[6]} - actual {sum - Key.BARS} - ");
+                    Console.WriteLine($"Error with seq. Expected {seq[6]} - actual {sum - Global.BARS} - ");
 
                     for (int i = 0; i < 6; i++)
                     {

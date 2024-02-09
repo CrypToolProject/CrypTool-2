@@ -123,6 +123,9 @@
   <data name="AnalysisStepLabel" xml:space="preserve">
     <value>Analysis step:</value>
   </data>
+  <data name="AnalysisStepText" xml:space="preserve">
+    <value>- Only in single thread mode -</value>
+  </data>
   <data name="AttackModeCaption" xml:space="preserve">
     <value>Change the attack mode</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="KeysPerMilisec" xml:space="preserve">
     <value>keys/ms</value>
+  </data>
+  <data name="KeysPerSec" xml:space="preserve">
+    <value>keys/s</value>
   </data>
   <data name="KeyTooltip" xml:space="preserve">
     <value>Key of the M-209</value>

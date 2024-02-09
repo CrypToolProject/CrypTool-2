@@ -24,19 +24,32 @@ namespace M209AnalyzerLib.M209
     /// </summary>
     public class KnownPlaintextAttack
     {
-        private static double RandomizePinsAndLugs(Key key, bool lugs, bool pins, bool searchSlide, int randomCycles, int primaryCycle, M209AttackManager attackManager)
+        private M209AttackManager _attackManager { get; set; }
+        public Key Key { get; set; }
+        public LocalState LocalState { get; set; }
+        public KnownPlaintextAttack(Key key, M209AttackManager attackManager, LocalState localState)
+        {
+            Key = key;
+            _attackManager = attackManager;
+            LocalState = localState;
+
+            _attackManager.SimulatedAnnealingPins = new SimulatedAnnealingPins(key, attackManager, localState);
+            _attackManager.HillClimbLugs = new HillClimbLugs(key, attackManager, localState);
+            _attackManager.HillClimbPins = new HillClimbPins(key, attackManager, localState);
+        }
+        private double RandomizePinsAndLugs(bool lugs, bool pins, bool searchSlide, int randomCycles, int primaryCycle)
         {
 
             double bestLocal = Double.MinValue;
-            bool[][] bestLocalPins = key.Pins.CreateCopy();
-            int[] bestLocalLugsTypeCount = key.Lugs.CreateTypeCountCopy();
+            bool[][] bestLocalPins = Key.Pins.CreateCopy();
+            int[] bestLocalLugsTypeCount = Key.Lugs.CreateTypeCountCopy();
 
             if (searchSlide)
             {
-                if (key.Slide != primaryCycle % 26)
+                if (Key.Slide != primaryCycle % 26)
                 {
-                    key.Slide = primaryCycle % 26;
-                    key.InvalidateDecryption();
+                    Key.Slide = primaryCycle % 26;
+                    Key.InvalidateDecryption();
                 }
             }
 
@@ -44,129 +57,129 @@ namespace M209AnalyzerLib.M209
             {
                 if (lugs)
                 {
-                    key.Lugs.Randomize();
+                    Key.Lugs.Randomize();
                 }
                 if (pins)
                 {
-                    key.Pins.Randomize();
+                    Key.Pins.Randomize();
                 }
                 if (!lugs && !pins)
                 {
-                    key.Pins.Randomize(Utils.RandomNextInt(Key.WHEELS) + 1);
+                    Key.Pins.Randomize(RandomGen.NextInt(Key.WHEELS) + 1);
                 }
-                key.UpdateDecryptionIfInvalid();
-                if (attackManager.ShouldStop)
+                Key.UpdateDecryptionIfInvalid();
+                if (_attackManager.ShouldStop)
                 {
                     return bestLocal;
                 }
 
-                double newEval = attackManager.Evaluate(EvalType.CRIB, key.Decryption, key.CribArray);
+                double newEval = _attackManager.Evaluate(EvalType.CRIB, Key.Decryption, Key.CribArray, LocalState.TaskId);
                 if (newEval > bestLocal)
                 {
                     bestLocal = newEval;
-                    key.Lugs.GetTypeCount(bestLocalLugsTypeCount);
-                    key.Pins.Get(bestLocalPins);
+                    Key.Lugs.GetTypeCount(bestLocalLugsTypeCount);
+                    Key.Pins.Get(bestLocalPins);
                 }
 
             }
 
-            key.Lugs.SetTypeCount(bestLocalLugsTypeCount, false);
-            key.Pins.Set(bestLocalPins);
+            Key.Lugs.SetTypeCount(bestLocalLugsTypeCount, false);
+            Key.Pins.Set(bestLocalPins);
 
             return bestLocal;
         }
 
-        public static void Solve(Key key, M209AttackManager attackManager, LocalState localState)
+        public void Solve()
         {
             int randomCycles = 100;
-            attackManager.ProgressChanged("Known-Plaintext", "", 1, randomCycles);
+            _attackManager.ProgressChanged("Known-Plaintext", "", 1, randomCycles);
 
-            if (attackManager.Cycles == 0)
+            if (_attackManager.Cycles == 0)
             {
-                attackManager.Cycles = int.MaxValue;
+                _attackManager.Cycles = int.MaxValue;
             }
 
             double old;
 
 
-            for (int cycle = 0; cycle < attackManager.Cycles; cycle++)
+            for (int cycle = 0; cycle < _attackManager.Cycles; cycle++)
             {
 
                 int semiRestarts = 8;
 
-                double newEval = RandomizePinsAndLugs(key, true, true, attackManager.SearchSlide, randomCycles, cycle, attackManager);
-                if (attackManager.ShouldStop)
+                double newEval = RandomizePinsAndLugs(true, true, _attackManager.SearchSlide, randomCycles, cycle);
+                if (_attackManager.ShouldStop)
                 {
                     return;
                 }
 
                 do
                 {
-                    localState.Improved = false;
+                    LocalState.Improved = false;
 
                     old = newEval;
-                    localState.Restarts = cycle;
-                    localState.SingleIteration = false;
-                    localState.Quick = false;
+                    LocalState.Restarts = cycle;
+                    LocalState.SingleIteration = false;
+                    LocalState.Quick = false;
 
-                    attackManager.ProgressChanged("Known-Plaintext", "First hill climbing loop", 1, 1);
-                    newEval = HillClimbLugs.HillClimb(key, EvalType.CRIB, attackManager, localState);
-                    if (attackManager.ShouldStop)
+                    _attackManager.ProgressChanged("Known-Plaintext", "First hill climbing loop", 1, 1);
+                    newEval = _attackManager.HillClimbLugs.HillClimb(EvalType.CRIB, _attackManager, LocalState);
+                    if (_attackManager.ShouldStop)
                     {
                         return;
                     }
                     if (newEval > old)
                     {
-                        localState.Improved = true;
+                        LocalState.Improved = true;
                     }
 
-                    newEval = SimulatedAnnealingPins.SA(key, EvalType.CRIB, newEval > 128000 ? 20 : 5, attackManager);
-                    localState.SingleIteration = false;
+                    newEval = _attackManager.SimulatedAnnealingPins.SA(EvalType.CRIB, newEval > 128000 ? 20 : 5);
+                    LocalState.SingleIteration = false;
 
-                    attackManager.ProgressChanged("Known-Plaintext", "Second hill climbing loop", 1, 1);
-                    newEval = HillClimbPins.HillClimb(key, EvalType.CRIB, false, attackManager, localState);
-                    if (attackManager.ShouldStop)
+                    _attackManager.ProgressChanged("Known-Plaintext", "Second hill climbing loop", 1, 1);
+                    newEval = _attackManager.HillClimbPins.HillClimb(EvalType.CRIB, false);
+                    if (_attackManager.ShouldStop)
                     {
                         return;
                     }
                     if (newEval > old)
                     {
-                        localState.Improved = true;
+                        LocalState.Improved = true;
                     }
 
-                    if (localState.Improved)
+                    if (LocalState.Improved)
                     {
                         semiRestarts = 8;
                     }
 
-                    if (!localState.Improved && semiRestarts > 0)
+                    if (!LocalState.Improved && semiRestarts > 0)
                     {
-                        double last = attackManager.Evaluate(EvalType.CRIB, key.Decryption, key.CribArray);
+                        double last = _attackManager.Evaluate(EvalType.CRIB, Key.Decryption, Key.CribArray, LocalState.TaskId);
 
-                        if (last >= 129000 && last < key.OriginalScore)
+                        if (last >= 129000 && last < Key.OriginalScore)
                         {
                             int deepCycles = 0;
                             do
                             {
 
-                                localState.Improved = false;
-                                localState.Restarts = cycle;
-                                localState.SingleIteration = true;
-                                localState.Quick = false;
-                                attackManager.ProgressChanged("Known-Plaintext", "Third hill climbing loop", 1, 1);
-                                newEval = HillClimbLugs.HillClimb(key, EvalType.PINS_SA_CRIB, attackManager, localState); // Single iteration, print
-                                if (attackManager.ShouldStop)
+                                LocalState.Improved = false;
+                                LocalState.Restarts = cycle;
+                                LocalState.SingleIteration = true;
+                                LocalState.Quick = false;
+                                _attackManager.ProgressChanged("Known-Plaintext", "Third hill climbing loop", 1, 1);
+                                newEval = _attackManager.HillClimbLugs.HillClimb(EvalType.PINS_SA_CRIB, _attackManager, LocalState); // Single iteration, print
+                                if (_attackManager.ShouldStop)
                                 {
                                     return;
                                 }
                                 if (newEval > last)
                                 {
                                     last = newEval;
-                                    localState.Improved = true;
+                                    LocalState.Improved = true;
                                 }
                                 deepCycles++;
 
-                            } while (localState.Improved || deepCycles < 3);
+                            } while (LocalState.Improved || deepCycles < 3);
 
 
                             semiRestarts /= 2;
@@ -177,41 +190,41 @@ namespace M209AnalyzerLib.M209
 
                             if ((semiRestarts % 8) != 7)
                             {
-                                RandomizePinsAndLugs(key, true, false, attackManager.SearchSlide, randomCycles, cycle, attackManager);
-                                localState.SingleIteration = true;
-                                attackManager.ProgressChanged("Known-Plaintext", "Third hill climbing loop", 1, 1);
-                                newEval = HillClimbPins.HillClimb(key, EvalType.CRIB, true, attackManager, localState);
-                                if (attackManager.ShouldStop)
+                                RandomizePinsAndLugs(true, false, _attackManager.SearchSlide, randomCycles, cycle);
+                                LocalState.SingleIteration = true;
+                                _attackManager.ProgressChanged("Known-Plaintext", "Third hill climbing loop", 1, 1);
+                                newEval = _attackManager.HillClimbPins.HillClimb(EvalType.CRIB, true);
+                                if (_attackManager.ShouldStop)
                                 {
                                     return;
                                 }
                             }
                             else
                             {
-                                RandomizePinsAndLugs(key, false, true, attackManager.SearchSlide, randomCycles, cycle, attackManager);
-                                if (attackManager.ShouldStop)
+                                RandomizePinsAndLugs(false, true, _attackManager.SearchSlide, randomCycles, cycle);
+                                if (_attackManager.ShouldStop)
                                 {
                                     return;
                                 }
-                                localState.Restarts = cycle;
-                                localState.SingleIteration = true;
-                                localState.Quick = true;
-                                attackManager.ProgressChanged("Known-Plaintext", "Third hill climbing loop", 1, 1);
-                                newEval = HillClimbLugs.HillClimb(key, EvalType.CRIB, attackManager, localState); // Single iteration, print
-                                if (attackManager.ShouldStop)
+                                LocalState.Restarts = cycle;
+                                LocalState.SingleIteration = true;
+                                LocalState.Quick = true;
+                                _attackManager.ProgressChanged("Known-Plaintext", "Third hill climbing loop", 1, 1);
+                                newEval = _attackManager.HillClimbLugs.HillClimb(EvalType.CRIB, _attackManager, LocalState); // Single iteration, print
+                                if (_attackManager.ShouldStop)
                                 {
                                     return;
                                 }
                             }
 
-                            localState.Improved = true;
+                            LocalState.Improved = true;
                             semiRestarts--;
 
                         }
                     }
-                } while (localState.Improved && !attackManager.ShouldStop);
+                } while (LocalState.Improved && !_attackManager.ShouldStop);
 
-                if (attackManager.ShouldStop)
+                if (_attackManager.ShouldStop)
                 {
                     return;
                 }

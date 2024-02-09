@@ -79,6 +79,15 @@ namespace CrypTool.Plugins.M209Analyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to - Only in single thread mode -.
+        /// </summary>
+        internal static string AnalysisStepText {
+            get {
+                return ResourceManager.GetString("AnalysisStepText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change the attack mode.
         /// </summary>
         internal static string AttackModeCaption {
@@ -219,6 +228,15 @@ namespace CrypTool.Plugins.M209Analyzer.Properties {
         internal static string KeysPerMilisec {
             get {
                 return ResourceManager.GetString("KeysPerMilisec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to keys/s.
+        /// </summary>
+        internal static string KeysPerSec {
+            get {
+                return ResourceManager.GetString("KeysPerSec", resourceCulture);
             }
         }
         

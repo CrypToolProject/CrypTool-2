@@ -17,7 +17,7 @@ using M209AnalyzerLib.Enums;
 
 namespace M209AnalyzerLib.M209
 {
-    public class Global
+    public static class Global
     {
         public static MachineVersion VERSION = initVersion(MachineVersion.V1947);
 
@@ -27,22 +27,27 @@ namespace M209AnalyzerLib.M209
 
         public static int MAX_OVERLAP;
         public static int MIN_OVERLAP;
+        public static int MAX_SAME_OVERLAP;
+        public static int MAX_TOTAL_OVERLAP;
+
         public static int MAX_KICK;
         public static int MAX_KICK_REPETITION_64;
+        public static int MAX_LOWEST_KICK;
+        public static int MIN_KICK;
+
         public static bool COVERAGE_27;
         public static bool SAME_SUCCESSOR_ALLOWED;
         public static bool EVEN_3;
         public static bool EVEN_2_3_4;
         public static int MAX_CONSECUTIVE_SAME_PINS;
-        public static int MAX_SAME_OVERLAP;
         public static int MIN_INVOLVED_WHEELS;
         public static bool OVERLAPS_SIDEBYSIDE_SEPARATED;
         public static bool OVERLAPS_EVENLY;
-        public static int MAX_TOTAL_OVERLAP;
-        public static int MAX_LOWEST_KICK;
-        public static int MIN_KICK;
         public static int MIN_PERCENT_ACTIVE_PINS;
         public static int MAX_PERCENT_ACTIVE_PINS;
+
+        public static int WHEELS = 6;
+        public static int BARS = 27;
 
         public static MachineVersion initVersion(MachineVersion version)
         {
@@ -83,7 +88,7 @@ namespace M209AnalyzerLib.M209
                 FROM_TABLE = false;
                 MAX_OVERLAP = 15;
                 MIN_OVERLAP = 0;
-                MAX_KICK = Key.BARS;
+                MAX_KICK = BARS;
                 MAX_KICK_REPETITION_64 = 100;
                 SAME_SUCCESSOR_ALLOWED = true;
                 EVEN_3 = false;
@@ -93,7 +98,7 @@ namespace M209AnalyzerLib.M209
                 MIN_INVOLVED_WHEELS = 0;
                 OVERLAPS_SIDEBYSIDE_SEPARATED = false;
                 OVERLAPS_EVENLY = false;
-                MAX_TOTAL_OVERLAP = Key.BARS;
+                MAX_TOTAL_OVERLAP = BARS;
                 MIN_KICK = 0;
                 MAX_LOWEST_KICK = MAX_KICK;
                 COVERAGE_27 = false;
@@ -101,9 +106,9 @@ namespace M209AnalyzerLib.M209
             else if (version == MachineVersion.UNRESTRICTED)
             {
                 FROM_TABLE = false;
-                MAX_OVERLAP = Key.BARS;
+                MAX_OVERLAP = BARS;
                 MIN_OVERLAP = 0;
-                MAX_KICK = Key.BARS;
+                MAX_KICK = BARS;
                 MAX_KICK_REPETITION_64 = 100;
                 SAME_SUCCESSOR_ALLOWED = true;
                 EVEN_3 = false;
@@ -115,7 +120,7 @@ namespace M209AnalyzerLib.M209
                 MIN_INVOLVED_WHEELS = 0;
                 OVERLAPS_SIDEBYSIDE_SEPARATED = false;
                 OVERLAPS_EVENLY = false;
-                MAX_TOTAL_OVERLAP = Key.BARS;
+                MAX_TOTAL_OVERLAP = BARS;
                 MIN_KICK = 0;
                 MAX_LOWEST_KICK = MAX_KICK;
                 COVERAGE_27 = false;
@@ -125,7 +130,7 @@ namespace M209AnalyzerLib.M209
                 FROM_TABLE = false;
                 MAX_OVERLAP = 0;
                 MIN_OVERLAP = 0;
-                MAX_KICK = Key.BARS;
+                MAX_KICK = BARS;
                 MAX_KICK_REPETITION_64 = 100;
                 SAME_SUCCESSOR_ALLOWED = true;
                 EVEN_3 = false;
@@ -143,7 +148,7 @@ namespace M209AnalyzerLib.M209
                 COVERAGE_27 = true;
             }
 
-            LugsRules.createValidLugCountSequences();
+            // LugsRules.createValidLugCountSequences();
 
             return VERSION;
 

@@ -25,82 +25,96 @@ namespace M209AnalyzerLib.M209
     /// </summary>
     public class CiphertextOnlyAttack
     {
-        public static void Solve(Key key, M209AttackManager attackManager, LocalState localState)
+        #region Properties
+        private M209AttackManager _attackManager { get; set; }
+        public Key Key { get; set; }
+        public LocalState LocalState { get; set; }
+        #endregion
+        public CiphertextOnlyAttack(Key key, M209AttackManager attackManager, LocalState localState)
         {
-            attackManager.ProgressChanged("Ciphertext-Only", "", 1, attackManager.Phase1Trials);
+            Key = key;
+            _attackManager = attackManager;
+            LocalState = localState;
 
-            localState.BestTypeCount = key.Lugs.CreateTypeCountCopy();
-            localState.BestPins = key.Pins.CreateCopy();
+            _attackManager.SimulatedAnnealingPins = new SimulatedAnnealingPins(key, attackManager, localState);
+            _attackManager.HillClimbLugs = new HillClimbLugs(key, attackManager, localState);
+        }
 
-            if (attackManager.Cycles == 0)
+        public void Solve()
+        {
+            _attackManager.ProgressChanged("Ciphertext-Only", "", 1, _attackManager.Phase1Trials);
+
+            LocalState.BestTypeCount = Key.Lugs.CreateTypeCountCopy();
+            LocalState.BestPins = Key.Pins.CreateCopy();
+
+            if (_attackManager.Cycles == 0)
             {
-                attackManager.Cycles = int.MaxValue;
-                attackManager.Cycles = 10_000_000;
+                _attackManager.Cycles = int.MaxValue;
+                _attackManager.Cycles = 10_000_000;
             }
 
-            for (int cycle = 0; cycle < attackManager.Cycles; cycle++)
+            for (int cycle = 0; cycle < _attackManager.Cycles; cycle++)
             {
-                Console.WriteLine($"[Thread {Thread.CurrentThread.ManagedThreadId}] ########## {cycle} / {attackManager.Cycles} ##########");
+                Console.WriteLine($"[Thread {Thread.CurrentThread.ManagedThreadId}] ########## {cycle} / {_attackManager.Cycles} ##########");
 
                 // never used?
-                if (attackManager.SearchSlide)
+                if (_attackManager.SearchSlide)
                 {
-                    key.Slide = cycle % 26;
-                    key.InvalidateDecryption();
+                    Key.Slide = cycle % 26;
+                    Key.InvalidateDecryption();
                 }
 
-                localState.CurrentCycle = cycle;
-                localState.BestScore = 0.0;
-                localState.Improved = false;
+                LocalState.CurrentCycle = cycle;
+                LocalState.BestScore = 0.0;
+                LocalState.Improved = false;
 
                 Stopwatch watch = Stopwatch.StartNew();
-                RandomTrialPhase(key, attackManager, localState);
-                if (attackManager.ShouldStop)
+                RandomTrialPhase();
+                if (_attackManager.ShouldStop)
                 {
                     return;
                 }
                 watch.Stop();
 
                 Console.WriteLine($"\n -- [Thread {Thread.CurrentThread.ManagedThreadId}] After phaseTrials  [{watch.ElapsedMilliseconds}]" +
-                    $"[{key.GetCountIncorrectLugs()}L/{key.GetCountIncorrectPins()}P]" +
-                    $"[2**{(long)(Math.Log(attackManager.EvaluationCount) / Math.Log(2))} ({attackManager.EvaluationCount})][{(attackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : attackManager.EvaluationCount / attackManager.ElapsedTime.TotalMilliseconds)} K/s]", "info");
+                    $"[{Key.GetCountIncorrectLugs()}L/{Key.GetCountIncorrectPins()}P]" +
+                    $"[2**{(long)(Math.Log(_attackManager.EvaluationCount) / Math.Log(2))} ({_attackManager.EvaluationCount})][{(_attackManager.ElapsedTime.TotalMilliseconds == 0 ? 0 : _attackManager.EvaluationCount / _attackManager.ElapsedTime.TotalMilliseconds)} K/s]", "info");
 
                 do
                 {
+                    LocalState.Improved = false;
 
-                    localState.Improved = false;
-
-                    HillClimbingFirstTransformation(key, attackManager, localState);
-                    if (attackManager.ShouldStop)
+                    HillClimbingFirstTransformation();
+                    if (_attackManager.ShouldStop)
                     {
                         return;
                     }
 
-                    HillClimbingSecondTransformation(key, attackManager, localState);
-                    if (attackManager.ShouldStop)
+                    HillClimbingSecondTransformation();
+                    if (_attackManager.ShouldStop)
                     {
                         return;
                     }
 
-                    if (!localState.Improved)
+                    if (!LocalState.Improved)
                     {
                         // Complex Transformation (?)
-                        HillClimbingThirdTransformation(key, attackManager, localState);
-                        if (attackManager.ShouldStop)
+                        HillClimbingThirdTransformation();
+                        if (_attackManager.ShouldStop)
                         {
                             return;
                         }
 
-                        HillClimbingFourthTransformation(key, attackManager, localState);
-                        if (attackManager.ShouldStop)
+                        HillClimbingFourthTransformation();
+                        if (_attackManager.ShouldStop)
                         {
                             return;
                         }
                     }
 
-                } while (localState.Improved && !attackManager.ShouldStop);
+                } while (LocalState.Improved && !_attackManager.ShouldStop);
 
-                if (attackManager.ShouldStop)
+                if (_attackManager.ShouldStop)
                 {
                     return;
                 }
@@ -113,52 +127,53 @@ namespace M209AnalyzerLib.M209
         /// <param name="task"></param>
         /// <param name="roundLayers"></param>
         /// <param name="layers"></param>
-        /// <param name="key"></param>
+        /// <param name="Key"></param>
         /// <returns></returns>
-        public static void RandomTrialPhase(Key key, M209AttackManager attackManager, LocalState localState)
+        public void RandomTrialPhase()
         {
             double bestRandomScore = int.MinValue;
 
-            for (int r = 0; r < attackManager.Phase1Trials; r++)
+            for (int r = 0; r < _attackManager.Phase1Trials; r++)
             {
-                attackManager.ProgressChanged("Ciphertext-Only", "Random trial phase", r + 1, attackManager.Phase1Trials);
+                _attackManager.ProgressChanged("Ciphertext-Only", "Random trial phase", r + 1, _attackManager.Phase1Trials);
 
-                key.Lugs.Randomize();
+                Key.Lugs.Randomize();
 
-                double newEval = SimulatedAnnealingPins.SA(key, EvalType.MONO, 1, attackManager);
+                double newEval = _attackManager.SimulatedAnnealingPins.SA(EvalType.MONO, 1);
                 if (newEval > bestRandomScore)
                 {
                     bestRandomScore = newEval;
-                    key.Lugs.GetTypeCount(localState.BestTypeCount);
-                    key.Pins.Get(localState.BestPins);
+                    Key.Lugs.GetTypeCount(LocalState.BestTypeCount);
+                    Key.Pins.Get(LocalState.BestPins);
                 }
-                if (bestRandomScore > localState.BestScore)
+                if (bestRandomScore > LocalState.BestScore)
                 {
-                    localState.BestScore = bestRandomScore;
-                    attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
+                    LocalState.BestScore = bestRandomScore;
+                    Key.UpdateDecryption();
+                    _attackManager.AddNewBestListEntry(LocalState.BestScore, Key, Key.Decryption, LocalState.TaskId);
                 }
 
-                if (attackManager.ShouldStop)
+                if (_attackManager.ShouldStop)
                 {
                     return;
                 }
             }
         }
 
-        public static void HillClimbingFirstTransformation(Key key, M209AttackManager attackManager, LocalState localState)
+        public void HillClimbingFirstTransformation()
         {
             int[] types = new int[4];
             double newEval;
 
-            for (int i = 0; i < Lugs.TYPES.Length; i++)
+            for (int i = 0; i < Key.Lugs.TYPES.Length; i++)
             {
-                int c1 = Lugs.TYPES[i];
+                int c1 = Key.Lugs.TYPES[i];
 
-                for (int j = 0; j < Lugs.TYPES.Length; j++)
+                for (int j = 0; j < Key.Lugs.TYPES.Length; j++)
                 {
-                    attackManager.ProgressChanged("Ciphertext-Only", "HillClimbing - first loop", (i * Lugs.TYPES.Length) + j + 1, (Lugs.TYPES.Length * Lugs.TYPES.Length));
+                    _attackManager.ProgressChanged("Ciphertext-Only", "HillClimbing - first loop", (i * Key.Lugs.TYPES.Length) + j + 1, (Key.Lugs.TYPES.Length * Key.Lugs.TYPES.Length));
 
-                    int c2 = Lugs.TYPES[j];
+                    int c2 = Key.Lugs.TYPES[j];
 
                     if (c1 >= c2)
                     {
@@ -166,36 +181,37 @@ namespace M209AnalyzerLib.M209
                     }
                     types[0] = c1;
                     types[1] = c2;
-                    for (int changesIndex = 0; changesIndex < HillClimbLugs.changes2Types.Length; changesIndex++)
+                    for (int changesIndex = 0; changesIndex < _attackManager.HillClimbLugs.changes2Types.Length; changesIndex++)
                     {
-                        int[] changes = HillClimbLugs.changes2Types[changesIndex];
+                        int[] changes = _attackManager.HillClimbLugs.changes2Types[changesIndex];
 
-                        if (!HillClimbLugs.DoChangesIfValid(localState.BestTypeCount, types, changes))
+                        if (!_attackManager.HillClimbLugs.DoChangesIfValid(LocalState.BestTypeCount, types, changes))
                         {
                             continue;
                         }
-                        if (!key.Lugs.SetTypeCount(localState.BestTypeCount, false))
+                        if (!Key.Lugs.SetTypeCount(LocalState.BestTypeCount, false))
                         {
-                            HillClimbLugs.UndoChanges(localState.BestTypeCount, types, changes);
+                            _attackManager.HillClimbLugs.UndoChanges(LocalState.BestTypeCount, types, changes);
                             continue;
                         }
 
-                        newEval = SimulatedAnnealingPins.SA(key, EvalType.MONO, 1, attackManager);
-                        if (newEval > localState.BestScore)
+                        newEval = _attackManager.SimulatedAnnealingPins.SA(EvalType.MONO, 1);
+                        if (newEval > LocalState.BestScore)
                         {
-                            localState.Improved = true;
-                            localState.BestScore = newEval;
-                            key.Pins.Get(localState.BestPins);
-                            attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
+                            LocalState.Improved = true;
+                            LocalState.BestScore = newEval;
+                            Key.Pins.Get(LocalState.BestPins);
+                            if (Key.Decryption == null)
+                                _attackManager.AddNewBestListEntry(LocalState.BestScore, Key, Key.Decryption, LocalState.TaskId);
                         }
                         else
                         {
-                            HillClimbLugs.UndoChanges(localState.BestTypeCount, types, changes);
-                            key.Lugs.SetTypeCount(localState.BestTypeCount, false);
-                            key.Pins.Set(localState.BestPins);
+                            _attackManager.HillClimbLugs.UndoChanges(LocalState.BestTypeCount, types, changes);
+                            Key.Lugs.SetTypeCount(LocalState.BestTypeCount, false);
+                            Key.Pins.Set(LocalState.BestPins);
                         }
 
-                        if (attackManager.ShouldStop)
+                        if (_attackManager.ShouldStop)
                         {
                             return;
                         }
@@ -204,51 +220,51 @@ namespace M209AnalyzerLib.M209
             }
         }
 
-        public static void HillClimbingSecondTransformation(Key key, M209AttackManager attackManager, LocalState localState)
+        public void HillClimbingSecondTransformation()
         {
             int[] types = new int[4];
             double newEval;
 
-            for (int i1 = 0; i1 < Lugs.TYPES.Length && !localState.Improved; i1++)
+            for (int i1 = 0; i1 < Key.Lugs.TYPES.Length && !LocalState.Improved; i1++)
             {
-                types[0] = Lugs.TYPES[i1];
-                for (int i2 = i1 + 1; i2 < Lugs.TYPES.Length && !localState.Improved; i2++)
+                types[0] = Key.Lugs.TYPES[i1];
+                for (int i2 = i1 + 1; i2 < Key.Lugs.TYPES.Length && !LocalState.Improved; i2++)
                 {
-                    types[1] = Lugs.TYPES[i2];
-                    for (int changesIndex = 0; changesIndex < HillClimbLugs.changes2Types.Length; changesIndex++)
+                    types[1] = Key.Lugs.TYPES[i2];
+                    for (int changesIndex = 0; changesIndex < _attackManager.HillClimbLugs.changes2Types.Length; changesIndex++)
                     {
-                        attackManager.ProgressChanged("Ciphertext-Only", "HillClimbing - second loop", (i1 * Lugs.TYPES.Length) + i2 + 1, Lugs.TYPES.Length * Lugs.TYPES.Length);
+                        _attackManager.ProgressChanged("Ciphertext-Only", "HillClimbing - second loop", (i1 * Key.Lugs.TYPES.Length) + i2 + 1, Key.Lugs.TYPES.Length * Key.Lugs.TYPES.Length);
 
-                        int[] changes = HillClimbLugs.changes2Types[changesIndex];
+                        int[] changes = _attackManager.HillClimbLugs.changes2Types[changesIndex];
 
-                        if (!HillClimbLugs.DoChangesIfValid(localState.BestTypeCount, types, changes))
+                        if (!_attackManager.HillClimbLugs.DoChangesIfValid(LocalState.BestTypeCount, types, changes))
                         {
                             continue;
                         }
-                        if (!key.Lugs.SetTypeCount(localState.BestTypeCount, false))
+                        if (!Key.Lugs.SetTypeCount(LocalState.BestTypeCount, false))
                         {
-                            HillClimbLugs.UndoChanges(localState.BestTypeCount, types, changes);
+                            _attackManager.HillClimbLugs.UndoChanges(LocalState.BestTypeCount, types, changes);
                             continue;
                         }
 
                         // Evaluate the decryption using Monograms.
-                        key.UpdateDecryptionIfInvalid();
-                        newEval = attackManager.Evaluate(EvalType.MONO, key.Decryption, key.CribArray);
-                        if (newEval > localState.BestScore)
+                        Key.UpdateDecryptionIfInvalid();
+                        newEval = _attackManager.Evaluate(EvalType.MONO, Key.Decryption, Key.CribArray, LocalState.TaskId);
+                        if (newEval > LocalState.BestScore)
                         {
-                            localState.Improved = true;
-                            localState.BestScore = newEval;
-                            attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
-                            key.Pins.Get(localState.BestPins);
+                            LocalState.Improved = true;
+                            LocalState.BestScore = newEval;
+                            _attackManager.AddNewBestListEntry(LocalState.BestScore, Key, Key.Decryption, LocalState.TaskId);
+                            Key.Pins.Get(LocalState.BestPins);
                             break;
                         }
                         else
                         {
-                            HillClimbLugs.UndoChanges(localState.BestTypeCount, types, changes);
-                            key.Lugs.SetTypeCount(localState.BestTypeCount, false);
+                            _attackManager.HillClimbLugs.UndoChanges(LocalState.BestTypeCount, types, changes);
+                            Key.Lugs.SetTypeCount(LocalState.BestTypeCount, false);
                         }
 
-                        if (attackManager.ShouldStop)
+                        if (_attackManager.ShouldStop)
                         {
                             return;
                         }
@@ -256,61 +272,61 @@ namespace M209AnalyzerLib.M209
                 }
 
             }
-            attackManager.LogMessage($"\n After second HC loop - improved:{localState.Improved}  (loop break)", "info");
+            _attackManager.LogMessage($"\n After second HC loop - improved:{LocalState.Improved}  (loop break)", "info");
         }
 
-        public static void HillClimbingThirdTransformation(Key key, M209AttackManager attackManager, LocalState localState)
+        public void HillClimbingThirdTransformation()
         {
             int[] types = new int[4];
             double newEval;
 
-            for (int i1 = 0; i1 < Lugs.TYPES.Length && !localState.Improved; i1++)
+            for (int i1 = 0; i1 < Key.Lugs.TYPES.Length && !LocalState.Improved; i1++)
             {
-                types[0] = Lugs.TYPES[i1];
-                for (int i2 = i1 + 1; i2 < Lugs.TYPES.Length && !localState.Improved; i2++)
+                types[0] = Key.Lugs.TYPES[i1];
+                for (int i2 = i1 + 1; i2 < Key.Lugs.TYPES.Length && !LocalState.Improved; i2++)
                 {
-                    types[1] = Lugs.TYPES[i2];
-                    for (int i3 = i2 + 1; i3 < Lugs.TYPES.Length && !localState.Improved; i3++)
+                    types[1] = Key.Lugs.TYPES[i2];
+                    for (int i3 = i2 + 1; i3 < Key.Lugs.TYPES.Length && !LocalState.Improved; i3++)
                     {
-                        types[2] = Lugs.TYPES[i3];
-                        for (int i4 = i3 + 1; i4 < Lugs.TYPES.Length && !localState.Improved; i4++)
+                        types[2] = Key.Lugs.TYPES[i3];
+                        for (int i4 = i3 + 1; i4 < Key.Lugs.TYPES.Length && !LocalState.Improved; i4++)
                         {
-                            types[3] = Lugs.TYPES[i4];
+                            types[3] = Key.Lugs.TYPES[i4];
 
-                            for (int changesIndex = 0; changesIndex < HillClimbLugs.changes3Types.Length; changesIndex++)
+                            for (int changesIndex = 0; changesIndex < _attackManager.HillClimbLugs.changes3Types.Length; changesIndex++)
                             {
-                                attackManager.ProgressChanged("Ciphertext-Only", "HillClimbing - third loop", (i1 * Lugs.TYPES.Length) + i2 + 1, Lugs.TYPES.Length * Lugs.TYPES.Length);
+                                _attackManager.ProgressChanged("Ciphertext-Only", "HillClimbing - third loop", (i1 * Key.Lugs.TYPES.Length) + i2 + 1, Key.Lugs.TYPES.Length * Key.Lugs.TYPES.Length);
 
-                                int[] changes = HillClimbLugs.changes3Types[changesIndex];
+                                int[] changes = _attackManager.HillClimbLugs.changes3Types[changesIndex];
 
-                                if (!HillClimbLugs.DoChangesIfValid(localState.BestTypeCount, types, changes))
+                                if (!_attackManager.HillClimbLugs.DoChangesIfValid(LocalState.BestTypeCount, types, changes))
                                 {
                                     continue;
                                 }
-                                if (!key.Lugs.SetTypeCount(localState.BestTypeCount, false))
+                                if (!Key.Lugs.SetTypeCount(LocalState.BestTypeCount, false))
                                 {
-                                    HillClimbLugs.UndoChanges(localState.BestTypeCount, types, changes);
+                                    _attackManager.HillClimbLugs.UndoChanges(LocalState.BestTypeCount, types, changes);
                                     continue;
                                 }
 
-                                key.UpdateDecryptionIfInvalid();
-                                newEval = attackManager.Evaluate(EvalType.MONO, key.Decryption, key.CribArray);
+                                Key.UpdateDecryptionIfInvalid();
+                                newEval = _attackManager.Evaluate(EvalType.MONO, Key.Decryption, Key.CribArray, LocalState.TaskId);
 
-                                if (newEval > localState.BestScore)
+                                if (newEval > LocalState.BestScore)
                                 {
-                                    localState.Improved = true;
-                                    localState.BestScore = newEval;
-                                    attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
-                                    key.Pins.Get(localState.BestPins);
+                                    LocalState.Improved = true;
+                                    LocalState.BestScore = newEval;
+                                    _attackManager.AddNewBestListEntry(LocalState.BestScore, Key, Key.Decryption, LocalState.TaskId);
+                                    Key.Pins.Get(LocalState.BestPins);
                                     break;
                                 }
                                 else
                                 {
-                                    HillClimbLugs.UndoChanges(localState.BestTypeCount, types, changes);
-                                    key.Lugs.SetTypeCount(localState.BestTypeCount, false);
+                                    _attackManager.HillClimbLugs.UndoChanges(LocalState.BestTypeCount, types, changes);
+                                    Key.Lugs.SetTypeCount(LocalState.BestTypeCount, false);
                                 }
 
-                                if (attackManager.ShouldStop)
+                                if (_attackManager.ShouldStop)
                                 {
                                     return;
                                 }
@@ -319,57 +335,57 @@ namespace M209AnalyzerLib.M209
                     }
                 }
             }
-            attackManager.LogMessage($"\n After third HC loop - improved:{localState.Improved}  (loop break)", "info");
+            _attackManager.LogMessage($"\n After third HC loop - improved:{LocalState.Improved}  (loop break)", "info");
         }
 
-        public static void HillClimbingFourthTransformation(Key key, M209AttackManager attackManager, LocalState localState)
+        public void HillClimbingFourthTransformation()
         {
             int[] types = new int[4];
             double newEval;
 
-            for (int i1 = 0; i1 < Lugs.TYPES.Length && !localState.Improved; i1++)
+            for (int i1 = 0; i1 < Key.Lugs.TYPES.Length && !LocalState.Improved; i1++)
             {
-                types[0] = Lugs.TYPES[i1];
-                for (int i2 = i1 + 1; i2 < Lugs.TYPES.Length && !localState.Improved; i2++)
+                types[0] = Key.Lugs.TYPES[i1];
+                for (int i2 = i1 + 1; i2 < Key.Lugs.TYPES.Length && !LocalState.Improved; i2++)
                 {
-                    types[1] = Lugs.TYPES[i2];
-                    for (int i3 = i2 + 1; i3 < Lugs.TYPES.Length && !localState.Improved; i3++)
+                    types[1] = Key.Lugs.TYPES[i2];
+                    for (int i3 = i2 + 1; i3 < Key.Lugs.TYPES.Length && !LocalState.Improved; i3++)
                     {
-                        types[2] = Lugs.TYPES[i3];
+                        types[2] = Key.Lugs.TYPES[i3];
 
-                        for (int changesIndex = 0; changesIndex < HillClimbLugs.changes4Types.Length; changesIndex++)
+                        for (int changesIndex = 0; changesIndex < _attackManager.HillClimbLugs.changes4Types.Length; changesIndex++)
                         {
-                            attackManager.ProgressChanged("Ciphertext-Only", "HillClimbing - third loop", (i1 * Lugs.TYPES.Length) + i2 + 1, Lugs.TYPES.Length * Lugs.TYPES.Length);
+                            _attackManager.ProgressChanged("Ciphertext-Only", "HillClimbing - third loop", (i1 * Key.Lugs.TYPES.Length) + i2 + 1, Key.Lugs.TYPES.Length * Key.Lugs.TYPES.Length);
 
-                            int[] changes = HillClimbLugs.changes4Types[changesIndex];
+                            int[] changes = _attackManager.HillClimbLugs.changes4Types[changesIndex];
 
-                            if (!HillClimbLugs.DoChangesIfValid(localState.BestTypeCount, types, changes))
+                            if (!_attackManager.HillClimbLugs.DoChangesIfValid(LocalState.BestTypeCount, types, changes))
                             {
                                 continue;
                             }
-                            if (!key.Lugs.SetTypeCount(localState.BestTypeCount, false))
+                            if (!Key.Lugs.SetTypeCount(LocalState.BestTypeCount, false))
                             {
-                                HillClimbLugs.UndoChanges(localState.BestTypeCount, types, changes);
+                                _attackManager.HillClimbLugs.UndoChanges(LocalState.BestTypeCount, types, changes);
                                 continue;
                             }
 
-                            key.UpdateDecryptionIfInvalid();
-                            newEval = attackManager.Evaluate(EvalType.MONO, key.Decryption, key.CribArray);
-                            if (newEval > localState.BestScore)
+                            Key.UpdateDecryptionIfInvalid();
+                            newEval = _attackManager.Evaluate(EvalType.MONO, Key.Decryption, Key.CribArray, LocalState.TaskId);
+                            if (newEval > LocalState.BestScore)
                             {
-                                localState.Improved = true;
-                                localState.BestScore = newEval;
-                                attackManager.AddNewBestListEntry(localState.BestScore, key, key.Decryption);
-                                key.Pins.Get(localState.BestPins);
+                                LocalState.Improved = true;
+                                LocalState.BestScore = newEval;
+                                _attackManager.AddNewBestListEntry(LocalState.BestScore, Key, Key.Decryption, LocalState.TaskId);
+                                Key.Pins.Get(LocalState.BestPins);
                                 break;
                             }
                             else
                             {
-                                HillClimbLugs.UndoChanges(localState.BestTypeCount, types, changes);
-                                key.Lugs.SetTypeCount(localState.BestTypeCount, false);
+                                _attackManager.HillClimbLugs.UndoChanges(LocalState.BestTypeCount, types, changes);
+                                Key.Lugs.SetTypeCount(LocalState.BestTypeCount, false);
                             }
 
-                            if (attackManager.ShouldStop)
+                            if (_attackManager.ShouldStop)
                             {
                                 return;
                             }
@@ -377,7 +393,7 @@ namespace M209AnalyzerLib.M209
                     }
                 }
             }
-            attackManager.LogMessage($"\n After fourth HC loop - improved:{localState.Improved} (loop break)", "info");
+            _attackManager.LogMessage($"\n After fourth HC loop - improved:{LocalState.Improved} (loop break)", "info");
         }
     }
 }
