@@ -14,12 +14,19 @@
   <replacements lang="en">
     <replacement key="$plaintext$" value="Plaintext" />
     <replacement key="$ciphertext$" value="Ciphertext" />
-    <replacement key="$decryptedciphertext$" value="Decrypted Ciphertext" />
-    <replacement key="$hillmatrix$" value="Hill Matrix" />
+    <replacement key="$decryptedciphertext$" value="Decrypted ciphertext" />
+    <replacement key="$hillmatrix$" value="Hill matrix" />
     <replacement key="$converter$" value="Converter" />
     <replacement key="$splitchars$" value="Split chars" />
     <replacement key="$split$" value="Split" />
     <replacement key="$hillcipher$" value="Hill Cipher" />
+    <replacement key="$memo$" value="The {\b Hill cipher} is a polygraphic substitution cipher based on linear algebra. 
+This was the first polygraphic cipher in which it was practical to operate on blocks of more than three letters at once. 
+The key is a quadratic matrix. Its dimension is the length of the block of letters. 
+To be able to decrypt an Hill-encrypted text, the used matrix has to be invertible. 
+  \line
+  \line
+The Hill cipher was invented in 1929 by Lester Hill. See Wikipedia: https://en.wikipedia.org/wiki/Hill_cipher" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -37,6 +44,12 @@
     <replacement key="$splitchars$" value="Trennzeichen" />
     <replacement key="$split$" value="Trennen" />
     <replacement key="$hillcipher$" value="Hill-Chiffre" />
+    <replacement key="$memo$" value="Die {\b Hill-Chiffre} ist eine polygraphische Substitutionschiffre, die auf linearer Algebra basiert. 
+Diese war die erste polygraphische Chiffre, bei der es praktikabel war, mit Blöcken von mehr als drei Buchstaben gleichzeitig zu arbeiten. 
+Der Schlüssel ist eine quadratische Matrix. Ihre Dimension ist die Länge des Buchstabenblocks. 
+Um einen mit Hill verschlüsselten Text entschlüsseln zu können, muss die verwendete Matrix invertierbar sein.\line
+\line
+Die Hill-Chiffre wurde 1929 von Lester Hill erfunden. Siehe Wikipedia: https://de.wikipedia.org/wiki/Hill-Chiffre"/>
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
