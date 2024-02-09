@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: CalculateLevenshteinDistance.xml-->
-  <!--Last edited: 2022.02.08-->
+  <!--Last edited: 2024.02.09-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -12,12 +12,19 @@
   <description lang="en">This template shows how to compute the <i>Levenshtein Distance</i> using the string operations component.</description>
   <keywords>levenshtein, distance, string, text, metric</keywords>
   <replacements lang="en">
-    <replacement key="$Expected Text$" value="Expected Text" />
-    <replacement key="$Text with Errors$" value="Text with Errors" />
-    <replacement key="$LevenshteinDistance$" value="Levenshtein Distance" />
-    <replacement key="$text$" value="This is a test of the Levenshtein Distance" />
-    <replacement key="$errortext$" value="This is a Xest of the LevenshteinXXX DistaXce" />
-    <replacement key="$memo$" value="This template demonstrates the {\b Levenshtein Distance} of two given texts.\line\line The Levenshtein Distance was considered by Vladimir Levenshtein in 1965. It is also called the &quot;edit distance&quot;. It is defined by the minimum amount of edits (insert, remove, replace) of single characters to change one text into the other.\line\line In this template the text &quot;This is a test of the Levenshtein Distance&quot; is compared to &quot;This is a Xest of the LevenshteinXXX DistaXce&quot;. The &quot;Expected Text&quot; could be the expected text in a data transmission. The &quot;Text with Errors&quot; could be a received text with errors. The Levenshtein Distance between these two texts is 5. To generate the one text out of the other, the first &quot;X&quot; (first error) has to be changed to &quot;t&quot;. Then, three errors (&quot;XXX&quot;) have to be removed. Finally, &quot;DistaXce&quot; has to be changed to &quot;Distance&quot;. In sum, we have 2 replacements and 3 removals, which adds to a total Levenshtein Distance of 5.\line\line For more information have a look at: http://en.wikipedia.org/wiki/Levenshtein_distance" />
+    <replacement key="$Expected Text$" value="Expected text" />
+    <replacement key="$Text with Errors$" value="Text with errors" />
+    <replacement key="$LevenshteinDistance$" value="Levenshtein distance" />
+    <replacement key="$text$" value="This is a test of the Levenshtein distance" />
+    <replacement key="$errortext$" value="This is a Xest of the LevenshteinXXX distaXce" />
+    <replacement key="$memo$" value="The {\b Levenshtein distance} measures the difference between two text strings.\line\line
+The Levenshtein Distance was developed by Vladimir Levenshtein in 1965.  It is also called the &quot;edit distance&quot;.
+The Levenshtein distance between two texts is the minimum number of single-character edits (insertions, deletions or substitutions) required to change one text into the other.\line\line
+In this template, the text &quot;This is a test of the Levenshtein distance&quot; is compared to &quot;This is a Xest of the LevenshteinXXX DistaXce&quot;. The &quot;Expected Text&quot; could be the expected text in a data transmission.
+The &quot;Text with Errors&quot; could be a received text with errors. The Levenshtein Distance between these two texts is 5. To generate the one text out of the other, the first &quot;X&quot; (first error) has to be changed to &quot;t&quot;. 
+Then, three errors (&quot;XXX&quot;) have to be removed. Finally, &quot;DistaXce&quot; has to be changed to &quot;Distance&quot;. In sum, we have 2 replacements and 3 removals, which adds to a total Levenshtein Distance of 5.\line\line
+While the Hamming distance measures the number of different bits between bit codewords of equal length, the Levenshtein distance measures strings (texts) of symbols of varying lengths.\line\line
+For more information have a look at: https://en.wikipedia.org/wiki/Levenshtein_distance" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -32,7 +39,14 @@
     <replacement key="$LevenshteinDistance$" value="Levenshtein-Distanz" />
     <replacement key="$text$" value="Dies ist ein Test der Levenshtein-Distanz" />
     <replacement key="$errortext$" value="Dies ist ein Xest der LevenshteinXXX-DistaXz" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert die {\b Levenshtein-Distanz} zweier gegebener Texte.\line\line Die Levenshtein-Distanz wurde 1965 von Vladimir Levenshtein eingeführt. Sie wird auch als &quot;Editierdistanz&quot; bezeichnet. Sie ist definiert als die minimale Anzahl von Editieroperationen (Einfügen, Löschen, Ersetzen) bezogen auf einen einzelnen Buchstaben, um einen Text in einen anderen Text umzuwandeln.\line\line In dieser Vorlage wird der Text &quot;Dies ist ein Test der Levenshtein-Distanz&quot; mit dem Text &quot;Dies ist ein Xest der LevenshteinXXX-DistaXz&quot; verglichen. Der Text in &quot;Erwarteter Text&quot; könnte der erwartete Text bei einer Datenübertragung sein. Der &quot;Text mit Fehlern&quot; stellt dann den mit Fehlern behafteten empfangenen Text dar. Die Levenshtein-Distanz zwischen diesen beiden Texten beträgt 5. Um den zweiten Text aus dem ersten zu erhalten, muss das erste &quot;X&quot; (erster Fehler) zu einem &quot;T&quot; abgeändert werden. Dann müssen drei Fehler entfernt werden (&quot;XXX&quot;). Schliesslich muss &quot;DistaXz&quot; zu &quot;Distanz&quot; geändert werden. Somit haben wir zwei Ersetzungen und drei Löschungen, was insgesamt eine Levenshtein-Distanz von 5 ergibt.\line\line Weitere Informationen sind hier zu finden: https://de.wikipedia.org/wiki/Levenshtein-Distanz" />
+    <replacement key="$memo$" value="Die {\b Levenshtein-Distanz} misst den Unterschied zwischen zwei Textstrings.\line\line
+Die Levenshtein-Distanz wurde 1965 von Wladimir Levenshtein entwickelt. Sie wird auch als &quot;Editierdistanz&quot; bezeichnet.
+Die Levenshtein-Distanz zwischen zwei Texten ist die minimale Anzahl von Einzelzeichen-Änderungen (Einfügungen, Löschungen oder Ersetzungen), die erforderlich sind, um einen Text in den anderen zu überführen.\line\line
+In dieser Vorlage wird der Text &quot;This is a test of the Levenshtein distance&quot; mit &quot;This is a Xest of the LevenshteinXXX DistaXce&quot; verglichen. Der &quot;Erwartete Text&quot; könnte der erwartete Text bei einer Datenübertragung sein.
+Der &quot;Text mit Fehlern&quot; könnte ein empfangener Text mit Fehlern sein. Die Levenshtein-Distanz zwischen diesen beiden Texten beträgt 5. Um den einen Text aus dem anderen zu generieren, muss das erste &quot;X&quot; (erster Fehler) in &quot;t&quot; geändert werden.
+Dann müssen drei Fehler (&quot;XXX&quot;) entfernt werden. Schließlich muss &quot;DistaXce&quot; in &quot;Distance&quot; geändert werden. Insgesamt haben wir 2 Ersetzungen und 3 Entfernungen, was eine gesamte Levenshtein-Distanz von 5 ergibt.\line\line
+Während die Hamming-Distanz die Anzahl unterschiedlicher Bits zwischen Bit-Codewörtern gleicher Länge misst, misst die Levenshtein-Distanz Strings (Texte) von Symbolen unterschiedlicher Länge.\line\line
+Für weitere Informationen siehe: https://de.wikipedia.org/wiki/Levenshtein-Distanz" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
