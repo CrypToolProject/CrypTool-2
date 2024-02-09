@@ -12,8 +12,12 @@
   <description lang="en">This template shows the usage of the <i>Boolean</i> components.</description>
   <keywords>Boole, binary, and, or, nand, nor, xor, exor, nor</keywords>
   <replacements lang="en">
-    <replacement key="$BooleanInput$" value="Boolean Input" />
-    <replacement key="$BooleanOutput$" value="Boolean Output" />
+    <replacement key="$BooleanInput$" value="Boolean input" />
+    <replacement key="$BooleanOutput$" value="Boolean output" />
+    <replacement key="$memo$" value="This template demonstrates the {\b boolean algebra} components implemented in CrypTool 2.\line
+\line
+The following boolean operations are performed: OR, AND, NOR, NAND, XOR.\line
+In the input and output components, a green light with small light beams represents TRUE and a red light without lights beams represents FALSE."/>
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -25,6 +29,10 @@
   <replacements lang="de">
     <replacement key="$BooleanInput$" value="Boolesche Eingabe" />
     <replacement key="$BooleanOutput$" value="Boolesche Ausgabe" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die {\b booleschen Algebra}-Komponenten, die in CrypTool 2 implementiert sind.\line
+\line
+Die folgenden booleschen Operationen werden durchgeführt: OR, AND, NOR, NAND, XOR.\line
+In den Eingabe- und Ausgabekomponenten repräsentiert ein grünes Licht mit kleinen Lichtstrahlen WAHR und ein rotes Licht ohne Lichtstrahlen repräsentiert FALSCH."/>
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
