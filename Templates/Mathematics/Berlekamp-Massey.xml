@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Berlekamp-Massey.xml-->
-  <!--Last edited: 2022.02.08-->
+  <!--Last edited: 2024.02.09-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -15,7 +15,10 @@
     <replacement key="$Input Sequence$" value="Input Sequence" />
     <replacement key="$Minimal Length$" value="Minimal Length" />
     <replacement key="$Feedback Polynomial$" value="Feedback Polynomial" />
-    <replacement key="$memo$" value="The Berlekamp-Massey algorithm is an algorithm that will find the shortest linear feedback shift register (LFSR) for a given binary output sequence. The algorithm will also find the minimal polynomial of a linearly recurrent sequence in an arbitrary field.\line\line http://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm\line http://de.wikipedia.org/wiki/Berlekamp-Massey-Algorithmus\line\line http://www.informationsuebertragung.ch/indexAlgorithmen.html" />
+    <replacement key="$memo$" value="The {\b Berlekamp-Massey} algorithm finds the shortest linear feedback shift register (LFSR) for a given binary output sequence. 
+The algorithm also finds the minimal polynomial of a linear recurrent sequence in an arbitrary field.
+\line\line 
+See: https://en.wikipedia.org/wiki/Berlekamp-Massey_algorithm" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -28,7 +31,13 @@
     <replacement key="$Input Sequence$" value="Eingabe-Sequenz" />
     <replacement key="$Minimal Length$" value="Minimale Länge" />
     <replacement key="$Feedback Polynomial$" value="Feedback-Polynom" />
-    <replacement key="$memo$" value="Der Berlekamp-Massey-Algorithmus ist ein Algorithmus, der für eine gegebene binäre Ausgabesequenz das kürzeste linear rückgekoppelte Schieberegister findet, das diese generiert. Der Algorithmus findet auch das Minimalpolynom einer linearen rekursiven Folge in einem beliebigen Körper.\line\line http://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm\line http://de.wikipedia.org/wiki/Berlekamp-Massey-Algorithmus\line\line http://www.informationsuebertragung.ch/indexAlgorithmen.html" />
+    <replacement key="$memo$" value="Der {\b Berlekamp-Massey-Algorithmus} findet das kürzeste lineare Rückkopplungs-Schieberegister (LFSR) für eine gegebene binäre Ausgabesequenz. Der Algorithmus findet auch das Minimalpolynom einer linear-rekurrenten Sequenz in einem beliebigen Feld.
+\line
+\line
+Siehe auch:
+\line
+https://de.wikipedia.org/wiki/Berlekamp-Massey-Algorithmus\line
+http://www.informationsuebertragung.ch/indexAlgorithmen.html" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
