@@ -14,9 +14,13 @@
   <replacements lang="en">
     <replacement key="$Codeword$" value="Codeword" />
     <replacement key="$HammingDistance$" value="Hamming Distance" />
-    <replacement key="$Distance Value between CW1 and CW2$" value="Distance Value between CW1 and CW2" />
-    <replacement key="$Distance Value between CW2 and CW3$" value="Distance Value between CW2 and CW3" />
-    <replacement key="$memo$" value="This template demonstrates how the hamming distance between codewords can be calculated in CrypTool 2. The hamming distance is the amount of different bits between two codewords.\line\line Here, Codeword1 and Codeword2 are different. Thus, the hamming distance is greater than 0.\line Codeword2 and Codeword3 are equal. Thus, the hamming distance is 0." />
+    <replacement key="$Distance Value between CW1 and CW2$" value="Distance value between CW1 and CW2" />
+    <replacement key="$Distance Value between CW2 and CW3$" value="Distance value between CW2 and CW3" />
+    <replacement key="$memo$" value="This template demonstrates how the {\b Hamming distance} between codewords can be calculated in CrypTool 2. 
+The Hamming distance is the number of different bits between two codewords of the same length.  Here, Codeword 1 and Codeword 2 are different. Thus, the hamming distance is greater than 0.
+Codeword 2 and Codeword 3 are equal. Thus, the hamming distance is 0. For comparing strings of different lengths, a more sophisticated metric like the Levenshtein distance is more appropriate.
+\line\line
+See: https://en.wikipedia.org/wiki/Hamming_distance" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -30,7 +34,11 @@
     <replacement key="$HammingDistance$" value="Hamming-Distanz" />
     <replacement key="$Distance Value between CW1 and CW2$" value="Distanz zwischen CW1 und CW2" />
     <replacement key="$Distance Value between CW2 and CW3$" value="Distanz zwischen CW2 und CW3" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert, wie man die Hamming-Distanz zwischen Codeworten in CrypTool 2 berechnen kann. Die Hamming-Distanz ist die Anzahl der Bits, in denen sich die beiden Codeworte unterscheiden.\line\line Codewort1 und Codewort2 sind unterschiedlich. Daher ist ihre Hamming-Distanz größer als 0.\line Codewort2 und Codewort3 sind gleich. Daher beträgt ihre Hamming-Distanz 0." />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert, wie der {\b Hamming-Abstand} zwischen Codewörtern in CrypTool 2 berechnet werden kann. 
+Der Hamming-Abstand ist die Anzahl der unterschiedlichen Bits zwischen zwei Codewörtern gleicher Länge. Hier sind Codewort 1 und Codewort 2 unterschiedlich. Daher ist der Hamming-Abstand größer als 0. 
+Codewort 2 und Codewort 3 sind gleich. Daher ist der Hamming-Abstand 0. Für den Vergleich von Zeichenketten unterschiedlicher Länge ist eine ausgefeiltere Metrik wie die Levenshtein-Distanz angemessener.
+\line\line
+Siehe: https://de.wikipedia.org/wiki/Hamming-Abstand" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
