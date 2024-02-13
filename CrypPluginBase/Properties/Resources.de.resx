@@ -135,49 +135,4 @@
   <data name="This_is_a_WorkspaceManager_file_" xml:space="preserve">
     <value>Dies ist eine Datei des Workspace-Editors.</value>
   </data>
-  <data name="LanguageCS" xml:space="preserve">
-    <value>Tschechisch</value>
-  </data>
-  <data name="LanguageDE" xml:space="preserve">
-    <value>Deutsch</value>
-  </data>
-  <data name="LanguageEN" xml:space="preserve">
-    <value>Englisch</value>
-  </data>
-  <data name="LanguageES" xml:space="preserve">
-    <value>Spanisch</value>
-  </data>
-  <data name="LanguageFR" xml:space="preserve">
-    <value>Französisch</value>
-  </data>
-  <data name="LanguageHU" xml:space="preserve">
-    <value>Ungarisch</value>
-  </data>
-  <data name="LanguageIT" xml:space="preserve">
-    <value>Italienisch</value>
-  </data>
-  <data name="LanguageRU" xml:space="preserve">
-    <value>Russisch</value>
-  </data>
-  <data name="LanguageEL" xml:space="preserve">
-    <value>Griechisch</value>
-  </data>
-  <data name="LanguageLA" xml:space="preserve">
-    <value>Lateinisch</value>
-  </data>
-  <data name="LanguageNL" xml:space="preserve">
-    <value>Niederländisch</value>
-  </data>
-  <data name="LanguagePL" xml:space="preserve">
-    <value>Polnisch</value>
-  </data>
-  <data name="LanguagePT" xml:space="preserve">
-    <value>Portugiesisch</value>
-  </data>
-  <data name="LanguageSV" xml:space="preserve">
-    <value>Schwedisch</value>
-  </data>
-  <data name="LanguageTR" xml:space="preserve">
-    <value>Türkisch</value>
-  </data>
 </root>

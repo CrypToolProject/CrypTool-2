@@ -182,7 +182,6 @@
     </Compile>
     <Compile Include="Utils\Graphics\Diagrams\Histogram\HistogramDataSource.cs" />
     <Compile Include="Utils\Graphics\Diagrams\Histogram\HistogramElement.cs" />
-    <Compile Include="Utils\LanguageStatistics.cs" />
     <Compile Include="Utils\UnicodeHelper.cs" />
     <Compile Include="Validation\IntegerRule.cs" />
     <Compile Include="Validation\RegExRule.cs" />

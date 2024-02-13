@@ -117,35 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="No_data_available_yet" xml:space="preserve">
-    <value>No data available yet!</value>
+  <data name="LanguageCS" xml:space="preserve">
+    <value>Czech</value>
   </data>
-  <data name="plugin_extension_create_object" xml:space="preserve">
-    <value>Error creating plugin type: {0}. Exception is: {1}</value>
+  <data name="LanguageDE" xml:space="preserve">
+    <value>German</value>
   </data>
-  <data name="plugin_extension_error_get_description" xml:space="preserve">
-    <value>Error getting description from plugin: {0}. Exception is: {1}</value>
+  <data name="LanguageEL" xml:space="preserve">
+    <value>Greek</value>
   </data>
-  <data name="plugin_extension_error_get_image" xml:space="preserve">
-    <value>Error getting image from plugin: {0}. Exception is: {1}</value>
+  <data name="LanguageEN" xml:space="preserve">
+    <value>English</value>
   </data>
-  <data name="Can_t_find_localization_key" xml:space="preserve">
-    <value>Can't find localization key {0} in class {1}!</value>
+  <data name="LanguageES" xml:space="preserve">
+    <value>Spanish</value>
   </data>
-  <data name="Error_trying_to_lookup_localization_key" xml:space="preserve">
-    <value>Error trying to lookup localization key {0}! Message: {1}</value>
+  <data name="LanguageFR" xml:space="preserve">
+    <value>French</value>
   </data>
-  <data name="This_is_a_standalone_component_" xml:space="preserve">
-    <value>This is a standalone component.</value>
+  <data name="LanguageHU" xml:space="preserve">
+    <value>Hungarian</value>
   </data>
-  <data name="This_is_a_WorkspaceManager_file_" xml:space="preserve">
-    <value>This is a workspace editor file.</value>
+  <data name="LanguageIT" xml:space="preserve">
+    <value>Italian</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="UnicodeData" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\UnicodeData.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="LanguageLA" xml:space="preserve">
+    <value>Latin</value>
   </data>
-  <data name="primes" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\primes.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="LanguageNL" xml:space="preserve">
+    <value>Dutch</value>
+  </data>
+  <data name="LanguagePL" xml:space="preserve">
+    <value>Polish</value>
+  </data>
+  <data name="LanguagePT" xml:space="preserve">
+    <value>Portuguese</value>
+  </data>
+  <data name="LanguageRU" xml:space="preserve">
+    <value>Russian</value>
+  </data>
+  <data name="LanguageSV" xml:space="preserve">
+    <value>Swedish</value>
+  </data>
+  <data name="LanguageTR" xml:space="preserve">
+    <value>Turkish</value>
   </data>
 </root>
