@@ -15,9 +15,8 @@
 */
 
 using CrypTool.PluginBase;
-using CrypTool.PluginBase.Utils;
+using LanguageStatisticsLib;
 using System.ComponentModel;
-
 
 namespace CrypTool.VigenereAnalyzer
 {

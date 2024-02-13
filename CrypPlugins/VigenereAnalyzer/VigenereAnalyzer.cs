@@ -15,8 +15,9 @@
 */
 using CrypTool.CrypAnalysisViewControl;
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.Utils;
+using LanguageStatisticsLib;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -143,7 +144,7 @@ namespace CrypTool.VigenereAnalyzer
             }
 
             //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
-            _grams = LanguageStatistics.CreateGrams(_settings.Language, (LanguageStatistics.GramsType)(_settings.GramsType + 1), false);
+            _grams = LanguageStatistics.CreateGrams(_settings.Language, DirectoryHelper.DirectoryLanguageStatistics, (GramsType)(_settings.GramsType + 1), false);
 
             //Create a unique alphabet from the given (maybe permuted) alphabet
             if (!string.IsNullOrEmpty(VigenereAlphabet))
