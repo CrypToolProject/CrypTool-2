@@ -103,6 +103,10 @@
       <Name>CrypPluginBase</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\LibSource\LanguageStatisticsLib\LanguageStatisticsLib.csproj">
+      <Project>{5b2e0f9e-f7b8-44fc-84d3-cbc00bc21f47}</Project>
+      <Name>LanguageStatisticsLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.png" />

@@ -20,7 +20,7 @@ namespace LanguageStatisticsLib
 {
     public class Trigrams : Grams
     {
-        private float[,,] Frequencies;
+        public float[,,] Frequencies;
 
         public Trigrams(string language,string languageStatisticsDirectory, bool useSpaces = false) : base(language, languageStatisticsDirectory, useSpaces)
         {

@@ -21,7 +21,7 @@ namespace LanguageStatisticsLib
 {
     public class Bigrams : Grams
     {
-        private float[,] Frequencies;
+        public float[,] Frequencies;
 
         public Bigrams(string language, string languageStatisticsDirectory, bool useSpaces = false) : base(language, languageStatisticsDirectory, useSpaces)
         {

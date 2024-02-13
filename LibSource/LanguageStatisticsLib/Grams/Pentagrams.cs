@@ -20,7 +20,7 @@ namespace LanguageStatisticsLib
 {
     public class Pentagrams : Grams
     {
-        private float[,,,,] Frequencies;
+        public float[,,,,] Frequencies;
 
         public Pentagrams(string language, string languageStatisticsDirectory, bool useSpaces = false) : base(language, languageStatisticsDirectory, useSpaces)
         {

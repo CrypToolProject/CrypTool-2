@@ -18,6 +18,7 @@ using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.Utils;
+using LanguageStatisticsLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -590,11 +591,11 @@ namespace CrypTool.M138Analyzer
             string lang = LanguageStatistics.LanguageCode(settings.Language);
             try
             {
-                grams = new Pentagrams(lang);
+                grams = new Pentagrams(lang, DirectoryHelper.DirectoryLanguageStatistics);
             }
             catch (Exception)
             {
-                grams = new Tetragrams(lang);
+                grams = new Tetragrams(lang, DirectoryHelper.DirectoryLanguageStatistics);
             }
         }
 

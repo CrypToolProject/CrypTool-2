@@ -15,8 +15,10 @@
 */
 using CrypTool.CrypAnalysisViewControl;
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.Utils;
+using LanguageStatisticsLib;
 using PlayfairAnalysis;
 using PlayfairAnalysis.Common;
 using System;
@@ -234,7 +236,7 @@ namespace CrypTool.PlayfairAnalyzer
 
         private void RunAnalysis()
         {
-            Grams grams = LanguageStatistics.CreateGrams(_settings.Language, LanguageStatistics.GramsType.Pentragrams, false);
+            Grams grams = LanguageStatistics.CreateGrams(_settings.Language, DirectoryHelper.DirectoryLanguageStatistics, GramsType.Pentragrams, false);
             grams.Normalize(10_000_000); //normalize cost function for simulated annealing
             AnalysisInstance analysisInstance = new AnalysisInstance(_settings.DiscardSamePlaintexts, grams);
             _analysisInstance = analysisInstance;

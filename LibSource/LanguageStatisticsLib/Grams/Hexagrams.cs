@@ -20,7 +20,7 @@ namespace LanguageStatisticsLib
 {
     public class Hexagrams : Grams
     {
-        private float[,,,,,] Frequencies;
+        public float[,,,,,] Frequencies;
 
         public Hexagrams(string language, string languageStatisticsDirectory, bool useSpaces = false) : base(language, languageStatisticsDirectory, useSpaces)
         {

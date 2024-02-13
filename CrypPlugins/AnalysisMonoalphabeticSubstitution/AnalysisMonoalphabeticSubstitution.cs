@@ -16,8 +16,10 @@
 using CrypTool.AnalysisMonoalphabeticSubstitution.Properties;
 using CrypTool.CrypAnalysisViewControl;
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.Utils;
+using LanguageStatisticsLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -147,7 +149,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             string lang = LanguageStatistics.LanguageCode(settings.Language);
 
             // create language statics
-            grams = LanguageStatistics.CreateGrams(settings.Language, (LanguageStatistics.GramsType)(settings.GramsType + 1), settings.UseSpaces);
+            grams = LanguageStatistics.CreateGrams(settings.Language, DirectoryHelper.DirectoryLanguageStatistics, (GramsType)(settings.GramsType + 1), settings.UseSpaces);
             grams.Normalize(10_000_000);
 
             plaintextalphabet = grams.Alphabet;

@@ -14,7 +14,9 @@
    limitations under the License.
 */
 using CrypTool.CrypAnalysisViewControl;
+using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Utils;
+using LanguageStatisticsLib;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -1673,25 +1675,25 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                                 //then, a starting temperature of 10_000 is a good value for the simulated annealing
                                 default:
                                 case 6:
-                                    Hexagrams hexaGrams = new Hexagrams(LanguageStatistics.LanguageCode(language), useSpaces);
+                                    Hexagrams hexaGrams = new Hexagrams(LanguageStatistics.LanguageCode(language), DirectoryHelper.DirectoryLanguageStatistics, useSpaces);
                                     hexaGrams.Normalize(10_000_000);
                                     NGramCache.Add(key, hexaGrams);
                                     loaded = true;
                                     break;
                                 case 5:
-                                    Pentagrams pentaGrams = new Pentagrams(LanguageStatistics.LanguageCode(language), useSpaces);
+                                    Pentagrams pentaGrams = new Pentagrams(LanguageStatistics.LanguageCode(language), DirectoryHelper.DirectoryLanguageStatistics, useSpaces);
                                     pentaGrams.Normalize(10_000_000);
                                     NGramCache.Add(key, pentaGrams);
                                     loaded = true;
                                     break;
                                 case 4:
-                                    Tetragrams quadGrams = new Tetragrams(LanguageStatistics.LanguageCode(language), useSpaces);
+                                    Tetragrams quadGrams = new Tetragrams(LanguageStatistics.LanguageCode(language), DirectoryHelper.DirectoryLanguageStatistics, useSpaces);
                                     quadGrams.Normalize(10_000_000);
                                     NGramCache.Add(key, quadGrams);
                                     loaded = true;
                                     break;
                                 case 3:
-                                    Trigrams triGrams = new Trigrams(LanguageStatistics.LanguageCode(language), useSpaces);
+                                    Trigrams triGrams = new Trigrams(LanguageStatistics.LanguageCode(language), DirectoryHelper.DirectoryLanguageStatistics, useSpaces);
                                     triGrams.Normalize(10_000_000);
                                     NGramCache.Add(key, triGrams);
                                     loaded = true;

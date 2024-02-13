@@ -16,8 +16,10 @@
 
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Control;
+using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.Utils;
+using LanguageStatisticsLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -151,11 +153,11 @@ namespace CrypTool.Plugins.CostFunction
             {
                 //CreateNGrams returns null, if it is not possible to create an Grams object based on the given settings
                 //this happens, e.g, when a n-gram size and language combination is selected, where we do not have a corrsponding language file
-                Grams = LanguageStatistics.CreateNGrams(settings.NGramSize, LanguageStatistics.LanguageCode(settings.Language), settings.UseSpaces);
+                Grams = LanguageStatistics.CreateGrams(settings.NGramSize, DirectoryHelper.DirectoryLanguageStatistics, LanguageStatistics.LanguageCode(settings.Language), settings.UseSpaces);
                 if (Grams == null)
                 {
                     GuiLogMessage(string.Format("CrypTool 2 has no {0}-grams for {1}. Falling back to English {0}-grams.", settings.NGramSize, LanguageStatistics.SupportedLanguages[settings.Language]), NotificationLevel.Error);
-                    Grams = LanguageStatistics.CreateNGrams(settings.NGramSize, "en", settings.UseSpaces);
+                    Grams = LanguageStatistics.CreateGrams(settings.NGramSize, "en", DirectoryHelper.DirectoryLanguageStatistics, settings.UseSpaces);
                 }
             }
             stopped = false;

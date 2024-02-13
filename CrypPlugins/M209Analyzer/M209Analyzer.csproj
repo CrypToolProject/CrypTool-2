@@ -103,6 +103,10 @@
       <Project>{4ab9be96-3e34-40cb-9270-a64480c851ee}</Project>
       <Name>CrypAnalysisViewControl</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\LibSource\LanguageStatisticsLib\LanguageStatisticsLib.csproj">
+      <Project>{5b2e0f9e-f7b8-44fc-84d3-cbc00bc21f47}</Project>
+      <Name>LanguageStatisticsLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\LibSource\M209Analyzer\M209Analyzer\M209AnalyzerLib.csproj">
       <Project>{bc60da91-4135-4cfb-b0f4-2b250d435c73}</Project>
       <Name>M209AnalyzerLib</Name>

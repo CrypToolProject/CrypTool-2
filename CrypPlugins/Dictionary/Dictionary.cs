@@ -15,8 +15,9 @@
 */
 
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.Utils;
+using LanguageStatisticsLib;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -87,7 +88,7 @@ namespace Dictionary
 
             if (!_dictionaryCache.ContainsKey(_settings.Language))
             {
-                List<string> dictionary = LanguageStatistics.LoadDictionary(LanguageStatistics.LanguageCode(_settings.Language));
+                List<string> dictionary = LanguageStatistics.LoadDictionary(LanguageStatistics.LanguageCode(_settings.Language), DirectoryHelper.DirectoryLanguageStatistics);
                 _dictionaryCache.Add(_settings.Language, dictionary.ToArray());
             }
 

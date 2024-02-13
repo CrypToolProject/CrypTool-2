@@ -20,7 +20,7 @@ namespace LanguageStatisticsLib
 {
     public class Unigrams : Grams
     {
-        private float[] Frequencies;
+        public float[] Frequencies;
 
         public Unigrams(string language, string languageStatisticsDirectory, bool useSpaces = false) : base(language, languageStatisticsDirectory, useSpaces)
         {

@@ -20,7 +20,7 @@ namespace LanguageStatisticsLib
 {
     public class Tetragrams : Grams
     {
-        private float[,,,] Frequencies;
+        public float[,,,] Frequencies;
 
         public Tetragrams(string language, string languageStatisticsDirectory, bool useSpaces = false) : base(language, languageStatisticsDirectory, useSpaces)
         {

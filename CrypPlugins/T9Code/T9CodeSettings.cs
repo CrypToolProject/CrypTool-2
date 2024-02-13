@@ -18,6 +18,7 @@ using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.Utils;
 using CrypTool.T9Code.Enums;
+using LanguageStatisticsLib;
 using System.ComponentModel;
 
 namespace CrypTool.T9Code

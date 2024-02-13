@@ -24,6 +24,8 @@ using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using LanguageStatisticsLib;
+using CrypTool.PluginBase.IO;
 
 namespace CrypTool.MexicanArmyCipherDiskAnalyzer
 {
@@ -136,10 +138,10 @@ namespace CrypTool.MexicanArmyCipherDiskAnalyzer
             if (string.IsNullOrWhiteSpace(Ciphertext) || string.IsNullOrWhiteSpace(Ciphertext))
             {
                 throw new ArgumentException(Properties.Resources.NoCiphertextGiven);
-            }            
+            }
 
             //the settings gramsType is between 0 and 4. Thus, we have to add 1 to cast it to a "GramsType", which starts at 1
-            Grams grams = LanguageStatistics.CreateGrams(_settings.Language, (LanguageStatistics.GramsType)(_settings.GramsType + 1), false);
+            Grams grams = LanguageStatistics.CreateGrams(_settings.Language, DirectoryHelper.DirectoryLanguageStatistics, (GramsType)(_settings.GramsType + 1), false);
             grams.Normalize(10_000_000);
 
             _running = true;

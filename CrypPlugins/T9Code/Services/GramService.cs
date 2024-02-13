@@ -1,5 +1,6 @@
-﻿using CrypTool.PluginBase.Utils;
+﻿using CrypTool.PluginBase.IO;
 using CrypTool.T9Code.Enums;
+using LanguageStatisticsLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,8 @@ namespace CrypTool.T9Code.Services
 
         private void FillCache()
         {
-            foreach (LanguageStatistics.GramsType enumValue in Enum.GetValues(typeof(LanguageStatistics.GramsType))
-                .Cast<LanguageStatistics.GramsType>())
+            foreach (GramsType enumValue in Enum.GetValues(typeof(GramsType))
+                .Cast<GramsType>())
             {
                 try
                 {
@@ -25,7 +26,7 @@ namespace CrypTool.T9Code.Services
                         continue;
                     }
 
-                    Grams grams = LanguageStatistics.CreateGrams(_languageIndex.Value, enumValue, false);
+                    Grams grams = LanguageStatistics.CreateGrams(_languageIndex.Value, DirectoryHelper.DirectoryLanguageStatistics, enumValue, false);
                     _gramsCache.Add(grams.GramSize(), grams);
                 }
                 catch
@@ -85,32 +86,32 @@ namespace CrypTool.T9Code.Services
             FillCache();
         }
 
-        private int GramTypeToInt(LanguageStatistics.GramsType gramsType)
+        private int GramTypeToInt(GramsType gramsType)
         {
             switch (gramsType)
             {
-                case LanguageStatistics.GramsType.Undefined:
+                case GramsType.Undefined:
                     return 0;
-                case LanguageStatistics.GramsType.Unigrams:
+                case GramsType.Unigrams:
                     return 1;
-                case LanguageStatistics.GramsType.Bigrams:
+                case GramsType.Bigrams:
                     return 2;
-                case LanguageStatistics.GramsType.Trigrams:
+                case GramsType.Trigrams:
                     return 3;
-                case LanguageStatistics.GramsType.Tetragrams:
+                case GramsType.Tetragrams:
                     return 4;
-                case LanguageStatistics.GramsType.Pentragrams:
+                case GramsType.Pentragrams:
                     return 5;
-                case LanguageStatistics.GramsType.Hexagrams:
+                case GramsType.Hexagrams:
                     return 6;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(gramsType), gramsType, null);
             }
         }
 
-        private LanguageStatistics.GramsType ConvertGramsType(InternalGramType gramType)
+        private GramsType ConvertGramsType(InternalGramType gramType)
         {
-            return (LanguageStatistics.GramsType)Enum.Parse(typeof(LanguageStatistics.GramsType), gramType.ToString());
+            return (GramsType)Enum.Parse(typeof(GramsType), gramType.ToString());
         }
     }
 }

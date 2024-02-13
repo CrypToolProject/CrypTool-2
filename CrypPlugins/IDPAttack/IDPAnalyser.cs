@@ -15,8 +15,10 @@
 */
 using CrypTool.CrypAnalysisViewControl;
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.Utils;
+using LanguageStatisticsLib;
 using System;
 using System.ComponentModel;
 using System.Text;
@@ -135,7 +137,7 @@ namespace IDPAnalyser
 
         public void Execute()
         {
-            _grams = LanguageStatistics.CreateGrams(_settings.Language, (LanguageStatistics.GramsType)2, false);
+            _grams = LanguageStatistics.CreateGrams(_settings.Language, DirectoryHelper.DirectoryLanguageStatistics, (GramsType)2, false);
             _grams.Normalize(10_000_000);
 
             if (_input == null)

@@ -202,6 +202,10 @@
       <Name>KeyTextBox</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\LibSource\LanguageStatisticsLib\LanguageStatisticsLib.csproj">
+      <Project>{5b2e0f9e-f7b8-44fc-84d3-cbc00bc21f47}</Project>
+      <Name>LanguageStatisticsLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\OnlineDocumentationGenerator\OnlineDocumentationGenerator.csproj">
       <Project>{0698CD9D-DAD6-41AE-9E0A-FB00959FE8B1}</Project>
       <Name>OnlineDocumentationGenerator</Name>
