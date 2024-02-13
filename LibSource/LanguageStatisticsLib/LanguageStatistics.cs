@@ -147,15 +147,15 @@ namespace LanguageStatisticsLib
             {"es", "ABCDEFGHIJKLMNOPQRSTUVWXYZÑ" },                     // Spanish
             {"it", "ABCDEFGHIJKLMNOPQRSTUVWXYZ" },                      // Italian
             {"hu", "ABCDEFGHIJKLMNOPQRSTUVWXYZ" },                      // Hungarian
-            {"ru", "?????????????????????????????????" },               // Russian
+            {"ru", "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ" },               // Russian
             {"cs", "ABCDEFGHIJKLMNOPQRSTUVWXYZ" },                      // Slovak
             {"la", "ABCDEFGHIJKLMNOPQRSTUVWXYZ" },                      // Latin
-            {"el", "??G????T?????????S??F??O" },                        // Greek
+            {"el", "ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ" },                        // Greek
             {"nl", "ABCDEFGHIJKLMNOPQRSTUVWXYZ"},                       // Dutch
             {"sv", "ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ"},                    // Swedish
             {"pt", "ABCDEFGHIJKLMNOPQRSTUVWXYZ"},                       // Portuguese 
-            {"pl", "AABCCDEEFGHIJKLLMNNOÓPQRSSTUVWXYZZZ"},              // Polish
-            {"tr", "ABCÇDEFGGHIIJKLMNOÖPRSSTUÜVYZ" }                    // Turkish
+            {"pl", "AĄBCĆDEĘFGHIJKLŁMNŃOÓPQRSŚTUVWXYZŹŻ"},              // Polish
+            {"tr", "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ" }                    // Turkish
         };        
 
         /// <summary>
