@@ -13,8 +13,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using LanguageStatisticsLib;
 using System.Threading;
-using CrypTool.PluginBase.Utils;
 
 namespace PlayfairAnalysis.Common
 {

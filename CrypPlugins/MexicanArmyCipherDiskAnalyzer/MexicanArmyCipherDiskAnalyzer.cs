@@ -16,7 +16,6 @@
 using CrypTool.CrypAnalysisViewControl;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.Utils;
 using System;
 using System.Linq;
 using System.ComponentModel;
