@@ -129,14 +129,16 @@ namespace LanguageStatisticsLib
 
         /// <summary>
         /// Converts the tree to a list of words.
+        /// <param name="maxDepth"> is the maximum depth of the tree (=max word length) to be converted.</param>
         /// </summary>
-        public List<string> ToList()
+        public List<string> ToList(int maxDepth = int.MaxValue)
         {
             List<string> list = new List<string>();
             Stack<char> stack = new Stack<char>();
+            int depth = 0;
             foreach (Node node in ChildNodes)
             {
-                AddNodeToList(node, stack, list);
+                AddNodeToList(node, stack, list, depth, maxDepth);
             }
             return list;
         }
@@ -146,16 +148,22 @@ namespace LanguageStatisticsLib
         /// </summary>
         /// <param name="node"></param>
         /// <param name="stack"></param>
-        private void AddNodeToList(Node node, Stack<char> stack, List<string> list)
+        /// <param name="depth"></param>
+        /// <param name="maxDepth"></param>
+        private void AddNodeToList(Node node, Stack<char> stack, List<string> list, int depth, int maxDepth)
         {
+            depth++;
             stack.Push(node.Value);
             if (node.WordEndsHere)
             {
                 list.Add(new string(stack.Reverse().ToArray()));
             }
-            foreach (Node childNode in node.ChildNodes)
+            if (depth < maxDepth)
             {
-                AddNodeToList(childNode, stack, list);
+                foreach (Node childNode in node.ChildNodes)
+                {
+                    AddNodeToList(childNode, stack, list, depth, maxDepth);
+                }
             }
             stack.Pop();
         }
@@ -183,7 +191,7 @@ namespace LanguageStatisticsLib
                 return false;
             }
             return base.Equals(obj);
-        }
+        }       
 
         /// <summary>
         /// Returns the hash code of this tree.
