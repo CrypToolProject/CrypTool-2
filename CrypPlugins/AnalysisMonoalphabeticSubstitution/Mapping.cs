@@ -119,7 +119,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         public bool IsMappingOK(byte[] a, byte[] b)
         {
             for (int i = 0; i < a.Length; i++)
-            {
+            {              
                 if (map[a[i]][b[i]] == false)
                 {
                     return false;

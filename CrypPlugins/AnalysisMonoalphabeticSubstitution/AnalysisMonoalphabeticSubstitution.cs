@@ -18,7 +18,6 @@ using CrypTool.CrypAnalysisViewControl;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.Utils;
 using LanguageStatisticsLib;
 using System;
 using System.Collections.Generic;
@@ -177,7 +176,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                 // Dictionary
                 try
                 {
-                    langDic = new Dictionary(LanguageStatistics.LanguageCode(settings.Language) + "-small.dic", plaintextalphabet.Length);
+                    langDic = new Dictionary(settings.Language);
                 }
                 catch (Exception ex)
                 {
@@ -305,11 +304,6 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             if (hillAttacker != null)
             {
                 hillAttacker.StopFlag = true;
-            }
-
-            if (langDic != null)
-            {
-                langDic.StopFlag = true;
             }
 
             lock (stopFlag)

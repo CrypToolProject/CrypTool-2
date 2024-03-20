@@ -1,138 +1,110 @@
-﻿using CrypTool.PluginBase.IO;
-using System;
+﻿/*
+   Copyright 2024 CrypTool 2 Team <ct2contact@CrypTool.org>
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using CrypTool.PluginBase.IO;
+using LanguageStatisticsLib;
 using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
 
 namespace CrypTool.AnalysisMonoalphabeticSubstitution
 {
     internal class Dictionary
     {
-        #region Variables
+        private WordTree wordTree;
 
-        private bool stopFlag;
-        private readonly Node root;
-        private readonly int amountOfCharacters;
-
-        #endregion
-
-        #region Constructor
-
-        public Dictionary(string filename, int amountOfCharacters)
+        /// <summary>
+        /// Creates a new dictionary for the given language.
+        /// </summary>
+        /// <param name="language"></param>
+        public Dictionary(int language)
         {
-            this.amountOfCharacters = amountOfCharacters;
-            root = new Node(amountOfCharacters);
-            using (MemoryStream ms = new MemoryStream())
-            {
-                using (FileStream fs = new FileStream(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename), FileMode.Open, FileAccess.Read))
-                {
-                    using (GZipStream zs = new GZipStream(fs, CompressionMode.Decompress))
-                    {
-                        byte[] buffer = new byte[1024];
-                        while (true)
-                        {
-                            int length = zs.Read(buffer, 0, 1024);
-                            if (length == 0)
-                            {
-                                break;
-                            }
-                            ms.Write(buffer, 0, length);
-                        }
-                    }
-                }
-                ms.Position = 0;
-                using (BinaryReader binReader = new BinaryReader(ms))
-                {
-                    while (ms.Position != ms.Length)
-                    {
-                        if (stopFlag)
-                        {
-                            break;
-                        }
-
-                        // Read length of pattern
-                        int lenPattern = binReader.ReadInt32();
-                        // Read pattern
-                        byte[] pattern = binReader.ReadBytes(lenPattern);
-                        // Read number of words with the same pattern
-                        int number = binReader.ReadInt32();
-                        // Read words for the pattern
-                        List<byte[]> words = new List<byte[]>();
-                        for (int i = 0; i < number; i++)
-                        {
-                            int len = binReader.ReadInt32();
-                            words.Add(binReader.ReadBytes(len));
-                        }
-                        // Add pattern and words to dictionary
-                        Add(pattern, words);
-                    }
-                }
-            }
+            wordTree = LanguageStatistics.LoadWordTree(LanguageStatistics.LanguageCode(language), DirectoryHelper.DirectoryLanguageStatistics);
         }
 
-        private void Add(byte[] pattern, List<byte[]> words)
-        {
-            Node actualNode = root;
-            for (int i = 0; i < pattern.Length; i++)
-            {
-                if (pattern[i] > amountOfCharacters)
-                {
-                    throw new Exception("Symbol > " + amountOfCharacters + " not possible in dictionary");
-                }
-                if (actualNode.Nodes[pattern[i]] == null)
-                {
-                    actualNode.Nodes[pattern[i]] = new Node(amountOfCharacters);
-                }
-                actualNode = actualNode.Nodes[pattern[i]];
-            }
-            if (actualNode.Words != null)
-            {
-                throw new Exception("Already words for this pattern stored in dictionary!");
-            }
-            actualNode.Words = words;
-        }
-
-        #endregion
-
-        #region Properties
-
-        public bool StopFlag
-        {
-            get => stopFlag;
-            set => stopFlag = value;
-        }
-
-        #endregion
-
+        /// <summary>
+        /// Returns a list of words that match the given pattern.
+        /// </summary>
+        /// <param name="pattern"></param>
+        /// <returns></returns>
         public List<byte[]> GetWordsFromPattern(byte[] pattern)
         {
-            Node actualNode = root;
-            for (int i = 0; i < pattern.Length; i++)
+            //get words of length pattern.Length
+            List<string> wordsOfLength = wordTree.ToList(pattern.Length);
+
+            //create list of byte[] from wordsOfLength
+            List<byte[]> words = new List<byte[]>();
+            foreach (string word in wordsOfLength)
             {
-                if (pattern[i] > amountOfCharacters)
+                char[] charArray = word.ToCharArray();
+                byte[] byteArray = new byte[charArray.Length];
+                for (int i = 0; i < charArray.Length; i++)
                 {
-                    throw new Exception("Symbol > " + amountOfCharacters + " not possible in dictionary");
+                    //here, we assume that the input is in upper case
+                    if (charArray[i] < 65 || charArray[i] > 90)
+                    {
+                        //if not a letter, set to 0 = first letter of the alphabet
+                        byteArray[i] = 0;
+                        continue;
+                    }
+                    byteArray[i] = (byte)(charArray[i] - 'A'); // hack: subtract 65 to let A=0, B=1, ...
                 }
-                actualNode = actualNode.Nodes[pattern[i]];
-                if (actualNode == null)
-                {
-                    return new List<byte[]>();
-                }
+                words.Add(byteArray);
             }
-            return (actualNode.Words ?? new List<byte[]>());
-        }
-    }
+            
+            //remove all words from words list that do not match the pattern
+            for (int i = words.Count - 1; i >= 0; i--)
+            {
+                if (!MatchPattern(words[i], pattern))
+                {
+                    words.RemoveAt(i);                
+                }
+                
+            }
 
-    public class Node
-    {
-        private readonly int amountOfCharacters;
-        public Node(int amountOfCharacters)
+            return words;
+        }
+
+        /// <summary>
+        /// This method checks if a given word matches a given pattern.
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <param name="pattern"></param>
+        /// <returns></returns>
+        private bool MatchPattern(byte[] word, byte[] pattern)
         {
-            this.amountOfCharacters = amountOfCharacters;
-            Nodes = new Node[this.amountOfCharacters];
-        }
+            if(word.Length != pattern.Length)
+            {
+                return false;
+            }
+            
+            Dictionary<byte, byte> mapping = new Dictionary<byte, byte>();
 
-        public Node[] Nodes;
-        public List<byte[]> Words { get; set; }
+            for(int i=0;i<word.Length;i++)
+            {
+                if (mapping.ContainsKey(pattern[i]))
+                {
+                    if (mapping[pattern[i]] != word[i])
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    mapping.Add(pattern[i], word[i]);
+                }
+            }            
+            return true;
+        }
     }
 }
