@@ -209,6 +209,20 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             foreach (string block in blocks)
             {
                 string trimmedblock = block.Trim();
+                //here, we check if the block is empty
+                //since we want to have spaces in our ciphertext, we need to check if the block contains a space or tab and add it to the trimmed block
+                if(trimmedblock.Length == 0 )
+                {
+                    if(block.Contains(" ") || block.Contains("\t"))
+                    {
+                        trimmedblock = " ";
+                    }
+                    else
+                    {
+                        //no space, so we ignore the empty trimmed block
+                        continue;
+                    }
+                }                
                 if (!homophones.ContainsKey(trimmedblock))
                 {
                     homophones.Add(trimmedblock, counter);
