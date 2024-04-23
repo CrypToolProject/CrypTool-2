@@ -23,7 +23,7 @@
 \line
 {\b l-Diversity (Entropy l-Diversity):} A variation of l-Diversity, where the entropy of the sensitive data in a group is considered. It aims to ensure sufficient &quot;disorder&quot; to complicate the prediction of sensitive data.\line
 \line
-{\b l-Diversity (Recursive (c,l)-Diversity):} This form improves l-Diversity by considering the difference in the number of the most and least common sensitive values and ensures that this difference stays within certain limits (defined by cc and ll).\line
+{\b l-Diversity (Recursive (c,l)-Diversity):} This form improves l-Diversity by considering the difference in the number of the most and least common sensitive values and ensures that this difference stays within certain limits (defined by c and l).\line
 \line
 {\b t-Closeness:} This method further refines k-Anonymity by demanding that the distribution of sensitive attributes in each anonymized group deviates no more than a threshold t from the distribution of the entire dataset, thus complicating the use of background information to uncover sensitive data." />\line
   </replacements>
@@ -47,7 +47,7 @@
 \line
 {\b l-Diversität (Entropie l-Diversität):} Eine Variation von l-Diversität, bei der die Entropie der sensiblen Daten in einer Gruppe betrachtet wird. Es zielt darauf ab, eine ausreichende &quot;Unordnung&quot; zu gewährleisten, um die Vorhersage von sensiblen Daten zu erschweren.\line
 \line
-{\b l-Diversität (Recursive (c,l)-Diversität):} Diese Form verbessert die l-Diversität, indem sie den Unterschied in der Anzahl der häufigsten und seltensten sensiblen Werte betrachtet und sicherstellt, dass dieser Unterschied innerhalb bestimmter Grenzen (definiert durch cc und ll) bleibt.\line
+{\b l-Diversität (Recursive (c,l)-Diversität):} Diese Form verbessert die l-Diversität, indem sie den Unterschied in der Anzahl der häufigsten und seltensten sensiblen Werte betrachtet und sicherstellt, dass dieser Unterschied innerhalb bestimmter Grenzen (definiert durch c und l) bleibt.\line
 \line
 {\b t-Closeness:} Diese Methode verfeinert k-Anonymität weiter, indem verlangt wird, dass die Verteilung der sensiblen Attribute in jeder anonymisierten Gruppe nicht mehr als einen Schwellenwert t von der Verteilung des gesamten Datensatzes abweicht, um die Verwendung von Hintergrundinformationen zur Aufdeckung sensibler Daten zu erschweren." />\line
   </replacements>
