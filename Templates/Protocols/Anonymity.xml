@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Anonymity.xml-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Anonymity</title>
+  <summary lang="en">Application of <i>Anonymization</i> </summary>
+  <description lang="en">Shows the application of anonymization methods to datasets</description>
+  <keywords>anonymization, k-Anonymity, l-Diversity, t-Closeness</keywords>
+  <replacements lang="en">
+  <replacement key="$textinput$" value="Input data" />
+  <replacement key="$dataset$" value="Name,Gender,Postal Code,Diagnosis&#10;John,male,68169,Flu&#10;Max,male,62317,Cancer&#10;George,male,64623,Depression&#10;Hans,male,65324,Cancer&#10;Sabine,female,49632,Cold&#10;Clara,female,47123,Flu&#10;Michelle,female,41339,Cancer&#10;Sarah,female,47965,Flu" />
+  <replacement key="$anonymity$" value="Anonymity" />
+  <replacement key="$textoutput$" value="Anonymized output data" />
+  <replacement key="$memo$" value="The {\b Anonymity Component} allows the application of anonymization methods such as k-Anonymity, l-Diversity (Distinct l-Diversity, Entropy l-Diversity, Recursive (c,l)-Diversity) and t-Closeness to a CSV-based dataset.\line
+\line
+{\b k-Anonymity:} This technique protects privacy by ensuring that the data of each individual in a publication cannot be distinguished from those of at least k−1 other individuals. This is often achieved through generalization or suppression of data sets.\line
+\line
+{\b l-Diversity (Distinct l-Diversity):} Extends k-Anonymity by requiring that there be at least l different sensitive values in each group of k-anonymous data. This helps prevent attacks such as homogeneity and background knowledge.\line
+\line
+{\b l-Diversity (Entropy l-Diversity):} A variation of l-Diversity, where the entropy of the sensitive data in a group is considered. It aims to ensure sufficient &quot;disorder&quot; to complicate the prediction of sensitive data.\line
+\line
+{\b l-Diversity (Recursive (c,l)-Diversity):} This form improves l-Diversity by considering the difference in the number of the most and least common sensitive values and ensures that this difference stays within certain limits (defined by cc and ll).\line
+\line
+{\b t-Closeness:} This method further refines k-Anonymity by demanding that the distribution of sensitive attributes in each anonymized group deviates no more than a threshold t from the distribution of the entire dataset, thus complicating the use of background information to uncover sensitive data." />\line
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Anonymität</title>
+  <summary lang="de">Anwendung von <i>Anonymität</i> </summary>
+  <description lang="de">Zeigt die Anwendung von Anonymitätsmethoden auf Datensätze</description>
+  <keywords lang="de">Anonymisierung, k-Anonymität, l-Diversität, t-Closeness </keywords>
+  <replacements lang="de">
+  <replacement key="$textinput$" value="Eingabedaten"/>
+  <replacement key="$dataset$" value="Name,Geschlecht,Postleitzahl,Diagnose&#10;John,männlich,68169,Grippe&#10;Max,männlich,62317,Krebs&#10;George,männlich,64623,Depression&#10;Hans,männlich,65324,Krebs&#10;Sabine,weiblich,49632,Erkältung&#10;Clara,weiblich,47123,Grippe&#10;Michelle,weiblich,41339,Krebs&#10;Sarah,weiblich,47965,Grippe" />
+  <replacement key="$anonymity$" value="Anonymität" />
+  <replacement key="$textoutput$" value="Anonymisierte Ausgabedaten" />
+  <replacement key="$memo$" value="Die {\b Anonymität-Komponente} erlaubt die Anwendung der Anonymisierungsmethoden k-Anonymität, l-Diversität (Distinct l-Diversität, Entropie l-Diversität, Recursive (c,l)-Diversität) und t-Closeness auf einen CSV-basierten Datensatz.\line
+\line
+{\b k-Anonymität:} Diese Technik schützt die Privatsphäre, indem sie sicherstellt, dass die Daten jedes Einzelnen in einer Veröffentlichung nicht von denen von mindestens k−1 anderen Individuen unterschieden werden können. Dies wird oft durch Generalisierung oder Unterdrückung von Datensätzen erreicht.\line
+\line
+{\b l-Diversität (Distinct l-Diversität):} Erweitert k-Anonymität, indem gefordert wird, dass es in jeder Gruppe von Daten, die k-anonym sind, mindestens l verschiedene sensitive Werte gibt. Dies hilft, Angriffe wie Homogenität und Hintergrundwissen zu verhindern.\line
+\line
+{\b l-Diversität (Entropie l-Diversität):} Eine Variation von l-Diversität, bei der die Entropie der sensiblen Daten in einer Gruppe betrachtet wird. Es zielt darauf ab, eine ausreichende &quot;Unordnung&quot; zu gewährleisten, um die Vorhersage von sensiblen Daten zu erschweren.\line
+\line
+{\b l-Diversität (Recursive (c,l)-Diversität):} Diese Form verbessert die l-Diversität, indem sie den Unterschied in der Anzahl der häufigsten und seltensten sensiblen Werte betrachtet und sicherstellt, dass dieser Unterschied innerhalb bestimmter Grenzen (definiert durch cc und ll) bleibt.\line
+\line
+{\b t-Closeness:} Diese Methode verfeinert k-Anonymität weiter, indem verlangt wird, dass die Verteilung der sensiblen Attribute in jeder anonymisierten Gruppe nicht mehr als einen Schwellenwert t von der Verteilung des gesamten Datensatzes abweicht, um die Verwendung von Hintergrundinformationen zur Aufdeckung sensibler Daten zu erschweren." />\line
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Anonymity.png" />
+  <relevantPlugins>
+    <plugin name="Anonymity" />
+  </relevantPlugins>
+</sample>

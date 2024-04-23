@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<documentation>
+  <language culture="en"/>
+  <language culture="de-DE"/>
+
+  <introduction lang="en">
+	  Anonymization methods are used on datasets to protect individual privacy. <newline/>
+	  The objective is to publish datasets without making it possible to re-identify any individual in the dataset. <newline/>
+	  The anonymization component enables the application of methods such as k-anonymity, l-diversity, and t-closeness to a provided dataset. <newline/>
+	  This dataset is displayed as a datatable, and for each anonymization method, specific columns are presented to indicate the status of the anonymization process.
+	  See <ref id="reference"/> for more information on anonymization. 
+  </introduction>
+
+  <introduction lang="de-DE">
+	  Anonymisierungsmethoden werden bei Datensätzen angewendet, um die Privatsphäre von Individuen zu schützen. <newline/>
+	  Das Ziel besteht darin, Datensätze zu veröffentlichen, ohne dass es möglich ist, eine Einzelperson in dem Datensatz wiederzuerkennen. <newline/>
+	  Die Anonymisierungskomponente ermöglicht die Anwendung von Methoden wie k-Anonymität, l-Diversity und t-Closeness auf einen bereitgestellten Datensatz. <newline/>
+	  Dieser Datensatz wird als Datentabelle dargestellt, und für jede Anonymisierungsmethode werden spezifische Spalten angezeigt, um den Status des Anonymisierungsprozesses anzuzeigen.
+	  Siehe <ref id="reference"/> für weitere Informationen zur Anonymisierung.
+  </introduction>
+
+  <usage lang="en">
+	  The component expects a dataset in CSV format. This can be provided using the CT2 tool 'Text Input'. <newline/>
+	  Define the appropriate delimiters for columns and rows in the component's settings. <newline/>
+	  Once executed, the dataset is displayed as a table in the component's presentation. <newline/>
+	  Now, the columns can be classified as identifiers, quasi-identifiers, and sensitive attributes. <newline/>
+	  Depending on whether a column classified as a quasi-identifier contains numerical or categorical values,
+	  different functionalities can be applied to aggregate the values.
+	  <section headline="Numerical Values">
+		  Numerical values in a column are arranged in ascending order within a gray container and are separated from each other by black dividing lines. <newline/>
+		  Clicking on these dividing lines removes them. Adjacent values without dividing lines are grouped as value ranges. <newline/>
+		  This range can be expanded by clicking on neighboring dividing lines or split into individual values by clicking again on the previously selected lines. <newline/>
+		  By clicking on additional dividing lines, more value ranges can also be created. The table is then updated following the pattern [minimum value - maximum value].
+	  </section>
+	  <section headline="Categorical Values">
+		  In columns with categorical values, these are represented as blue rectangles within a gray container. Each categorical value in a column appears in this container exactly once. <newline/>
+		  The blue rectangles can be moved using drag-and-drop. To group values, a rectangle can be moved so that it overlaps another. <newline/>
+		  When two blue rectangles overlap, they form a combined value. A combined value can be expanded by moving another blue rectangle so that it overlaps one of the already combined rectangles. <newline/>
+		  To separate grouped values, the user can move one of the combined rectangles so that they no longer overlap. The data table updates automatically after each move of a blue rectangle.
+	  </section>
+  </usage>
+
+  <usage lang="de-DE">
+	  Die Komponente erwartet einen Datensatz im CSV-Format. Dieser kann über das CT2-Werkzeug "Texteingabe" bereitgestellt werden. <newline/>
+	  Definiere in den Einstellungen der Komponente die entsprechenden Trennzeichen für Spalten und Zeilen. <newline/>
+	  Nach der Ausführung wird der Datensatz als Tabelle in der Präsentation der Komponente dargestellt. <newline/>
+	  Nun können die Spalten als Identifikatoren, Quasi-Identifikatoren und sensible Attribute klassifiziert werden. <newline/>
+	  Je nachdem, ob in einer als Quasi-Identifikator klassifizierten Spalte numerische oder kategorische Werte vorliegen, 
+	  können unterschiedliche Funktionalitäten zur Zusammenfassung der Werte angewendet werden.
+
+	  <section headline="Numerische Werte">
+		  Numerische Werte einer Spalte sind in einem grauen Container in aufsteigender Reihenfolge angeordnet und durch schwarze Trennlinien voneinander getrennt. <newline/> 
+		  Ein Klick auf die Trennlinien entfernt diese. Benachbarte Werte ohne Trennlinien werden als Wertebereiche zusammengefasst. <newline/>
+		  Dieser Bereich kann durch Anklicken benachbarter Trennlinien erweitert oder durch erneutes Anklicken der zuvor ausgewählten Trennlinien in einzelne Werte aufgeteilt werden. <newline/>
+		  Durch das Anklicken weiterer Trennlinien können zudem zusätzliche Wertebereiche erstellt werden. Die Tabelle wird dabei nach dem Muster [Minimalwert - Maximalwert] aktualisiert.
+	  </section>
+	   <section headline="Kategorische Werte">
+		   In Spalten mit kategorischen Werten werden diese als blaue Rechtecke innerhalb eines grauen Containers dargestellt. <newline/>
+		   Jeder kategorische Wert einer Spalte erscheint in diesem Container genau einmal. Die blauen Rechtecke können per Drag-and-Drop verschoben werden. <newline/>
+		   Um Werte zusammenzufassen, kann ein Rechteck so verschoben werden, dass es ein anderes überlappt. Wenn sich zwei blaue Rechtecke überschneiden, bilden sie einen zusammengefassten Wert. <newline/>
+		   Ein zusammengesetzter Wert kann erweitert werden, indem ein weiteres blaues Rechteck so verschoben wird, dass es eines der bereits kombinierten Rechtecke überlappt. <newline/>
+		   Um zusammengefasste Werte wieder zu trennen, kann der Nutzer eines der kombinierten Rechtecke so verschieben, dass sie sich nicht mehr überschneiden. <newline/>
+		   Die Datentabelle aktualisiert sich automatisch nach jeder Verschiebung eines blauen Rechtecks.
+	   </section>
+  </usage>
+  
+  <presentation lang="en">
+	  The presentation is divided into four sections. In the upper left section, the imported dataset is displayed as a table. 
+	  The columns of the imported dataset are listed in the upper right. Using comboboxes, these columns can be classified as identifiers, quasi-identifiers, or sensitive attributes. 
+	  The functionality for merging categorical values is located in the bottom left, while the functionality for merging numerical values can be found in the bottom right. 
+	  The representations of the anonymity methods can be accessed via the five tabs at the top.
+  </presentation>
+  
+  <presentation lang="de-DE">
+	  Die Präsentation ist in vier Bereiche unterteilt. Im oberen linken Bereich wird der eingelesene Datensatz als Tabelle dargestellt. 
+	  Oben rechts sind die Spalten des eingelesenen Datensatzes aufgelistet. Mithilfe von Comboboxen können diese Spalten als Identifikatoren, Quasi-Identifikatoren oder sensitive Attribute klassifiziert werden. 
+	  Unten links befindet sich die Funktionalität zum Zusammenführen von kategorischen Werten, während unten rechts die Funktionalität zum Zusammenführen von numerischen Werten zu finden ist. 
+	  Die Darstellungen der Anonymitätsmethoden können über die fünf oberen Tabs aufgerufen werden.
+  </presentation>
+  
+  <references>
+	  <linkReference id="reference">
+	  <link url="https://en.wikipedia.org/wiki/Data_anonymization" lang="en" />
+	  <caption lang="en">Wikipedia - Data Anonymization</caption>
+	  </linkReference>
+  </references>
+</documentation>

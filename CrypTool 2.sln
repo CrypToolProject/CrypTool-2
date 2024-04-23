@@ -464,6 +464,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SM4", "CrypPlugins\SM4\SM4.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageStatisticsLib", "LibSource\LanguageStatisticsLib\LanguageStatisticsLib.csproj", "{5B2E0F9E-F7B8-44FC-84D3-CBC00BC21F47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anonymity", "CrypPlugins\Anonymity\Anonymity.csproj", "{3F6EA8C4-DC29-49F0-B783-29DB4608E69E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1382,6 +1384,10 @@ Global
 		{5B2E0F9E-F7B8-44FC-84D3-CBC00BC21F47}.Debug|x64.Build.0 = Debug|x64
 		{5B2E0F9E-F7B8-44FC-84D3-CBC00BC21F47}.Release|x64.ActiveCfg = Release|x64
 		{5B2E0F9E-F7B8-44FC-84D3-CBC00BC21F47}.Release|x64.Build.0 = Release|x64
+		{3F6EA8C4-DC29-49F0-B783-29DB4608E69E}.Debug|x64.ActiveCfg = Debug|x64
+		{3F6EA8C4-DC29-49F0-B783-29DB4608E69E}.Debug|x64.Build.0 = Debug|x64
+		{3F6EA8C4-DC29-49F0-B783-29DB4608E69E}.Release|x64.ActiveCfg = Release|x64
+		{3F6EA8C4-DC29-49F0-B783-29DB4608E69E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1605,6 +1611,7 @@ Global
 		{B300C1F7-42CB-4668-9CCB-319D6AF8E3EB} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{4DAE65CB-8168-4F54-A8C8-7A7CF03362F1} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{5B2E0F9E-F7B8-44FC-84D3-CBC00BC21F47} = {1E472920-3A9C-413A-98B2-8372F0E283C5}
+		{3F6EA8C4-DC29-49F0-B783-29DB4608E69E} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92042D62-2CDA-4393-9D74-4FB5AC571A2D}
