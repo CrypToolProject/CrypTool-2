@@ -16,6 +16,7 @@
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Key$" value="Key" />
     <replacement key="$Decrypted plaintext$" value="Decrypted plaintext" />
+    <replacement key="$Crypto Box Cipher$" value="Crypto Box Cipher"/>
     <replacement key="$memo$" value="The {\b Crypto Box} cipher encrypts text through a series of shifts. \line
 It involves shifting the rows and columns within a text grid in various directions: left, right, up, or down. \line
  \line
@@ -35,7 +36,8 @@ Encryption Depth: Execute multiple shifts to increase the encryption complexity.
   <replacement key="$Ciphertext$" value="Geheimtext" />
   <replacement key="$Key$" value="Schlüssel" />
   <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
-  <replacement key="$memo$" value="Die {\b Krypto-Box-}-Chiffre verschlüsselt Text durch eine Reihe von Verschiebungen. \line
+  <replacement key="$Crypto Box Cipher$" value="Krypto-Box-Chiffre"/>
+  <replacement key="$memo$" value="Die {\b Krypto-Box}-Chiffre verschlüsselt Text durch eine Reihe von Verschiebungen. \line
 Sie umfasst das Verschieben der Zeilen und Spalten innerhalb eines Textgitters in verschiedene Richtungen: links, rechts, hoch oder runter. \line
  \line
 Eingabetext: Beginnen Sie, indem Sie den zu verschlüsselnden Text in die Krypto-Box-Komponente eingeben, die für die Verschlüsselung ein 10x10 Gitter verwendet. \line
