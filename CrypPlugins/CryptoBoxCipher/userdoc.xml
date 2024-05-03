@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<documentation>
+  <language culture="en"/>
+    The Crypto Box cipher encrypts text through a series of shifts. 
+    It involves shifting the rows and columns within a text grid in various directions: left, right, up, or down.<newline/>      
+  <language culture="de-DE"/>
+
+  <introduction lang="en">    
+  </introduction>
+
+  <introduction lang="de-DE">
+    Die Krypto-Box-Chiffre verschlüsselt Text durch eine Reihe von Verschiebungen. 
+    Dabei werden die Zeilen und Spalten innerhalb eines Textgitters in verschiedene Richtungen verschoben: nach links, rechts, oben oder unten.<newline/> 
+  </introduction>
+
+  <usage lang="en">
+    Input Text: Begin by entering the text you wish to encrypt into the Crypto Box component, which uses a grid of size 10x10 for encryption.<newline/>
+    Shift Operations: Choose to shift any row or column in the specified directions. Each move alters the text’s arrangement, further encrypting the content. The shifts are given as a key string.
+    The grid columns are named A to J, the rows are named 0 to 9. As second parameter the shift direction is given: U means up, D means down, L means left, R means right.
+    For example 0LAU2RFD means 0 left, A up, 2 right, and F down. <newline/>
+    Encryption Depth: Execute multiple shifts to increase the encryption complexity. More shifts result in a higher security level, making the cipher tougher to decode.<newline/>
+    <newline/>
+    Complexity and Security:
+    <newline/>
+    Each row or column can be moved in 39 possible ways, excluding redundant moves that revert the text to its original state.
+    The total number of possible combinations for five steps is 40 * 39 * 39 * 39 * 39 = 92,537,640, increasing exponentially with each additional step.
+    At 40 steps, the possible shift combinations reach approximately 4.5 x 10^63, offering a search space comparable to a 212-bit key encryption.
+  </usage>
+
+  <usage lang="de-DE">
+    Text eingeben: Beginnen Sie mit der Eingabe des zu verschlüsselnden Textes in die Krypto-Box-Komponente, die ein Raster der Größe 10x10 für die Verschlüsselung verwendet.<newline/>
+    Verschiebungsoperationen: Verschieben Sie eine beliebige Zeile oder Spalte in die angegebenen Richtungen. Jede Verschiebung verändert die Anordnung des Textes und verschlüsselt den Inhalt weiter. Die Verschiebungen werden in Form einer Schlüsselfolge angegeben.
+    Die Spalten des Gitters werden mit A bis J bezeichnet, die Zeilen mit 0 bis 9. Als zweites wird immer die Verschieberichtung angegeben: U bedeutet oben, D bedeutet unten, L bedeutet links, R bedeutet rechts.
+    Zum Beispiel 0LAU2RFD bedeutet 0 links, A oben, 2 rechts und F unten. <neue Zeile=""/>
+    Verschlüsselungstiefe: Führen Sie mehrere Verschiebungen aus, um die Komplexität der Verschlüsselung zu erhöhen. Mehr Verschiebungen führen zu einer höheren Sicherheitsstufe und machen die Chiffre schwieriger zu entschlüsseln.<newline/>
+    <newline/>
+    Komplexität und Sicherheit:
+    <newline/>
+    Jede Zeile oder Spalte kann auf 39 verschiedene Arten verschoben werden, wobei redundante Verschiebungen, die den Text in seinen ursprünglichen Zustand zurückversetzen, ausgeschlossen sind.
+    Die Gesamtzahl der möglichen Kombinationen für fünf Schritte beträgt 40 * 39 * 39 * 39 * 39 = 92.537.640 und steigt mit jedem weiteren Schritt exponentiell an.
+    Bei 40 Schritten erreichen die möglichen Verschiebungskombinationen etwa 4,5 x 10^63, was einem Suchraum vergleichbar mit einer 212-Bit-Schlüsselverschlüsselung entspricht.
+  </usage>
+  
+  <presentation lang="en">
+  </presentation>
+  
+  <presentation lang="de-DE">
+  </presentation>
+  
+  <references>
+    <linkReference>
+      <link lang="en" url="https://www.ciphermachinesandcryptology.com/en/cryptobox.htm" />
+      <caption lang="en">Dirk Rijmenants' Crypto Box website </caption>
+      <link lang="de-De" url="https://www.ciphermachinesandcryptology.com/en/cryptobox.htm" />
+      <caption lang="de-De">Dirk Rijmenants Crypto Box Webseite (Englisch) </caption>
+    </linkReference>
+  </references>
+</documentation>
