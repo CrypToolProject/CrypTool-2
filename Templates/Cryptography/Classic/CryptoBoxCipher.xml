@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: CryptoBoxCipher.xml-->
+  <!--Last edited: 2024.05.03-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">CryptoBox Cipher</title>
+  <summary lang="en">Usage of the <i>CryptoBox</i></summary>
+  <description lang="en">This template shows, how to build a CryptoBox cipher, a cipher created by Dirk Rijmenants.</description>
+  <keywords>Transposition, CryptoBox, Grid</keywords>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$Decrypted plaintext$" value="Decrypted plaintext" />
+    <replacement key="$memo$" value="The {\b Crypto Box} cipher encrypts text through a series of shifts. \line
+It involves shifting the rows and columns within a text grid in various directions: left, right, up, or down. \line
+ \line
+Input Text: Begin by entering the text you wish to encrypt into the Crypto Box component, which uses a grid of size 10x10 for encryption. \line
+Shift Operations: Choose to shift any row or column in the specified directions. Each move alters the text’s arrangement, further encrypting the content. The shifts are given as a key string. The grid columns are named A to J, the rows are named 0 to 9. As second parameter the shift direction is given: U means up, D means down, L means left, R means right. For example 0LAU2RFD means 0 left, A up, 2 right, and F down.  \line
+Encryption Depth: Execute multiple shifts to increase the encryption complexity. More shifts result in a higher security level, making the cipher tougher to decode." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Krypto-Box-Chiffre</title>
+<summary lang="de">Verwendung der <i>Krypto.Box</i>-Chiffre</summary>
+<description lang="de">Diese Vorlage zeigt, wie man eine KryptoBox-Ciffre baut, ein Verschlüsselungssystem, das von Dirk Rijmenants erstellt wurde.</description>
+<keywords>Transposition, CryptoBox, KryptoBox, Gitter</keywords>
+<replacements lang="de">
+  <replacement key="$Plaintext$" value="Klartext" />
+  <replacement key="$Ciphertext$" value="Geheimtext" />
+  <replacement key="$Key$" value="Schlüssel" />
+  <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
+  <replacement key="$memo$" value="Die {\b Krypto-Box-}-Chiffre verschlüsselt Text durch eine Reihe von Verschiebungen. \line
+Sie umfasst das Verschieben der Zeilen und Spalten innerhalb eines Textgitters in verschiedene Richtungen: links, rechts, hoch oder runter. \line
+ \line
+Eingabetext: Beginnen Sie, indem Sie den zu verschlüsselnden Text in die Krypto-Box-Komponente eingeben, die für die Verschlüsselung ein 10x10 Gitter verwendet. \line
+Verschiebungsoperationen: Wählen Sie, ob Sie eine Zeile oder Spalte in den angegebenen Richtungen verschieben möchten. Jeder Zug ändert die Anordnung des Textes und verschlüsselt den Inhalt weiter. Die Verschiebungen werden als Schlüsselstring gegeben. Die Spalten des Gitters werden von A bis J benannt, die Zeilen von 0 bis 9. Als zweiter Parameter wird die Verschiebungsrichtung angegeben: U bedeutet hoch, D bedeutet runter, L bedeutet links, R bedeutet rechts. Zum Beispiel bedeutet 0LAU2RFD 0 links, A hoch, 2 rechts und F runter. \line
+Verschlüsselungstiefe: Führen Sie mehrere Verschiebungen durch, um die Verschlüsselungskomplexität zu erhöhen. Mehr Verschiebungen führen zu einem höheren Sicherheitsniveau und machen die Verschlüsselung schwerer zu knacken." />
+</replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="CryptoBoxCipher.png" />
+  <relevantPlugins>
+    <plugin name="CryptoBoxCipher" />
+  </relevantPlugins>
+</sample>
