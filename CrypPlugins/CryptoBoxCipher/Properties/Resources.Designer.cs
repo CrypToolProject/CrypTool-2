@@ -196,7 +196,7 @@ namespace CrypTool.Plugins.CryptoBoxCipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The CryptoBox is a transposition cipher which encrypts and decrypts text by moving the letters in a 10x10 grid. It was developed by Dirk Rijmenants.
+        ///   Looks up a localized string similar to The CryptoBox is a transposition cipher which encrypts and decrypts text by moving the letters in a 10x10 grid. It was developed by Dirk Rijmenants..
         /// </summary>
         internal static string PluginTooltip {
             get {

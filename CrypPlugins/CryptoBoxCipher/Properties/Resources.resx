@@ -163,7 +163,7 @@
     <value>Crypto Box Cipher</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>The CryptoBox is a transposition cipher which encrypts and decrypts text by moving the letters in a 10x10 grid. It was developed by Dirk Rijmenants</value>
+    <value>The CryptoBox is a transposition cipher which encrypts and decrypts text by moving the letters in a 10x10 grid. It was developed by Dirk Rijmenants.</value>
   </data>
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>

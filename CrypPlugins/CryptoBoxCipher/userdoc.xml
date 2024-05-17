@@ -19,7 +19,7 @@
     Shift Operations: Choose to shift any row or column in the specified directions. Each move alters the text’s arrangement, further encrypting the content. The shifts are given as a key string.
     The grid columns are named A to J, the rows are named 0 to 9. As second parameter the shift direction is given: U means up, D means down, L means left, R means right.
     For example 0LAU2RFD means 0 left, A up, 2 right, and F down. <newline/>
-    Encryption Depth: Execute multiple shifts to increase the encryption complexity. More shifts result in a higher security level, making the cipher tougher to decode.<newline/>
+    Encryption Depth: Execute multiple shifts to increase the encryption complexity. More shifts result in a higher security level, making the cipher tougher to break.<newline/>
     <newline/>
     Complexity and Security:
     <newline/>
@@ -33,7 +33,7 @@
     Verschiebungsoperationen: Verschieben Sie eine beliebige Zeile oder Spalte in die angegebenen Richtungen. Jede Verschiebung verändert die Anordnung des Textes und verschlüsselt den Inhalt weiter. Die Verschiebungen werden in Form einer Schlüsselfolge angegeben.
     Die Spalten des Gitters werden mit A bis J bezeichnet, die Zeilen mit 0 bis 9. Als zweites wird immer die Verschieberichtung angegeben: U bedeutet oben, D bedeutet unten, L bedeutet links, R bedeutet rechts.
     Zum Beispiel 0LAU2RFD bedeutet 0 links, A oben, 2 rechts und F unten. <neue Zeile=""/>
-    Verschlüsselungstiefe: Führen Sie mehrere Verschiebungen aus, um die Komplexität der Verschlüsselung zu erhöhen. Mehr Verschiebungen führen zu einer höheren Sicherheitsstufe und machen die Chiffre schwieriger zu entschlüsseln.<newline/>
+    Verschlüsselungstiefe: Führen Sie mehrere Verschiebungen aus, um die Komplexität der Verschlüsselung zu erhöhen. Mehr Verschiebungen führen zu einer höheren Sicherheitsstufe und machen die Chiffre schwieriger zu knacken.<newline/>
     <newline/>
     Komplexität und Sicherheit:
     <newline/>
