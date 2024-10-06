@@ -244,7 +244,7 @@
     <value>Ungültige interne Schlüsseldefinition in Stange Schiebern: {0}</value>
   </data>
   <data name="ErrorInvalidPins" xml:space="preserve">
-    <value>Ungültige interne Schlüsseldefinition in Schlüsselräder Stiften: {0}</value>
+    <value>Ungültige interne Schlüsseldefinition in Schlüsselräder-Stifte: {0}</value>
   </data>
   <data name="ErrorInvalidSettingsBarLugs" xml:space="preserve">
     <value>Die eingegebenen aktiven Stange Schieber sind nicht gültig.</value>
@@ -627,7 +627,7 @@ x57      CA0000      Ja        Vorwärts, wenn verschoben
     <value>Schlüsselrad-Fortschritte</value>
   </data>
   <data name="WheelsWithActivePins" xml:space="preserve">
-    <value>Aktiven Stiften:</value>
+    <value>Aktive Stifte</value>
   </data>
   <data name="HagelinModel" xml:space="preserve">
     <value>Hagelin Modell</value>

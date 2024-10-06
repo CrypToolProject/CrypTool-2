@@ -633,7 +633,7 @@ Bar</value>
     <value>Wheels advancements at this step</value>
   </data>
   <data name="WheelsWithActivePins" xml:space="preserve">
-    <value>Wheels with active pins:</value>
+    <value>Wheels with active pins</value>
   </data>
   <data name="HagelinModel" xml:space="preserve">
     <value>Hagelin model</value>
