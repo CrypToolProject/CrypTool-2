@@ -129,6 +129,25 @@ namespace VoluntLib2.ManagementLayer
         }
         public bool IsDeleted { get; set; }
 
+        public DateTime DeletionTime
+        {
+            get
+            {
+                if (JobDeletionSignatureData == null || JobDeletionSignatureData.Length == 0)
+                {
+                    return DateTime.MinValue;
+                }
+                string magicNumber = UTF8Encoding.UTF8.GetString(JobDeletionSignatureData, 0, 4);
+                if (magicNumber.Equals("USER") || magicNumber.Equals("ADMN"))
+                {
+                    byte[] time = new byte[8];
+                    Array.Copy(JobDeletionSignatureData, 4 + 4 + JobId.ToByteArray().Length, time, 0, 8);
+                    return DateTime.FromBinary(BitConverter.ToInt64(time, 0));
+                }                
+                return DateTime.MinValue;
+            }
+        }
+
         /// <summary>
         /// Compares all fields of given Job with this one
         /// </summary>
@@ -996,6 +1015,26 @@ namespace VoluntLib2.ManagementLayer
                 bitmapImage.EndInit();
                 bitmapImage.Freeze();
                 return bitmapImage;
+            }
+        }
+
+        /// <summary>
+        /// Deletes the job from the file system
+        /// </summary>
+        internal void DeleteSerializedJobFile(string localStoragePath)
+        {
+            try
+            {
+                string filename = localStoragePath + Path.DirectorySeparatorChar + BitConverter.ToString(JobId.ToByteArray()) + ".job";
+                if (File.Exists(filename))
+                {
+                    File.Delete(filename);
+                    Logger.LogText(string.Format("Deleted serialized job file: {0}", filename), this, Logtype.Debug);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex, this, Logtype.Error);
             }
         }
     }

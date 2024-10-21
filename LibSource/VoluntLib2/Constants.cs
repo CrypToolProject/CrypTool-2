@@ -108,6 +108,13 @@ namespace VoluntLib2
         //UpdateJobsProgressOperation class
         public const int UPDATEJOBSPROGRESSOPERATION_UPDATE_TIME_INTERVAL = 1000; //1 sec
 
+        //HousekeepOldJobsOperation class (half year)
+        public const int HOUSEKEEPOLDJOBSOPERATION_CHECK_INTERVAL = 60; //1 min
+
+
+        //HousekeepOldJobsOperation class (half year)
+        public const int HOUSEKEEPOLDJOBSOPERATION_DELETE_INTERVAL = 60 * 24 * 182; //60 sec * 24 * 128 = 6 months
+
         /// <summary>
         /// Set of private IP ranges for IsPrivateIP-method of IPTools
         /// </summary>

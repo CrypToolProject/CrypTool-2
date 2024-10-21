@@ -705,4 +705,66 @@ namespace VoluntLib2.ManagementLayer
         {
         }
     }
+
+    /// <summary>
+    /// Operation for housekeeping old deleted jobs, meaning deleting their serialized version from them hard drive after a certain time
+    /// </summary>
+    internal class HousekeepOldDeletedJobsOperation : Operation
+    {
+        private readonly string localStoragePath;
+        private DateTime LastUpdateTime = DateTime.MinValue;       
+
+        /// <summary>
+        /// HousekeepOldJobsOperation never finishes
+        /// </summary>
+        public override bool IsFinished => false;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="localStoragePath"></param>
+        public HousekeepOldDeletedJobsOperation(string localStoragePath)
+        {
+            this.localStoragePath = localStoragePath;
+        }
+
+        /// <summary>
+        /// Deletes all jobs that are marked as deleted and the deletion time is older than HOUSEKEEPOLDJOBSOPERATION_DELETE_INTERVAL
+        /// </summary>
+        public override void Execute()
+        {
+            if (DateTime.Now > LastUpdateTime.AddSeconds(Constants.HOUSEKEEPOLDJOBSOPERATION_CHECK_INTERVAL))
+            {
+                //list of jobs to delete
+                List<Job> jobsToDelete = new List<Job>();
+
+                foreach (Job job in new List<Job>(JobManager.Jobs.Values))
+                {
+                    //check if Job is deleted AND deletion time is older than HOUSEKEEPOLDJOBSOPERATION_DELETE_INTERVAL
+                    if (job.IsDeleted && DateTime.Now > job.DeletionTime.AddSeconds(Constants.HOUSEKEEPOLDJOBSOPERATION_DELETE_INTERVAL))
+                    {
+                        Logger.GetLogger().LogText(string.Format("Job {0} is deleted and deletion time is older than {1} seconds. Remove it now", BitConverter.ToString(job.JobId.ToByteArray()), Constants.HOUSEKEEPOLDJOBSOPERATION_DELETE_INTERVAL), this, Logtype.Debug);
+                        jobsToDelete.Add(job);
+                        job.DeleteSerializedJobFile(localStoragePath);                        
+                        JobManager.OnJobListChanged();
+                    }
+                }
+
+                //remove all jobs from the list
+                foreach (Job job in jobsToDelete)
+                {
+                    JobManager.Jobs.TryRemove(job.JobId, out Job removedJob);
+                }
+                LastUpdateTime = DateTime.Now;
+            }
+        }
+
+        /// <summary>
+        /// Does nothing
+        /// </summary>
+        /// <param name="message"></param>
+        public override void HandleMessage(Message message)
+        {
+        }
+    }
 }

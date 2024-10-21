@@ -140,6 +140,8 @@ namespace VoluntLib2.ManagementLayer
             Operations.Enqueue(new JobsSerializationOperation() { JobManager = this });
             //This operation updates all job's progress every second
             Operations.Enqueue(new UpdateJobsProgressOperation() { JobManager = this });
+            //This operation checks every minute if there are old jobs to delete
+            Operations.Enqueue(new HousekeepOldDeletedJobsOperation(LocalStoragePath) { JobManager = this });
 
             Logger.LogText("JobManager started", this, Logtype.Info);
         }
