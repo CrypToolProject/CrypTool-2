@@ -196,6 +196,15 @@ namespace StringOperations.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Soundex.
+        /// </summary>
+        internal static string OperationList19 {
+            get {
+                return ResourceManager.GetString("OperationList19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Substring.
         /// </summary>
         internal static string OperationList2 {

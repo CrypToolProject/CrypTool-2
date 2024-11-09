@@ -252,4 +252,7 @@
   <data name="OperationList18" xml:space="preserve">
     <value>Shuffle</value>
   </data>
+  <data name="OperationList19" xml:space="preserve">
+    <value>SoundEx</value>
+  </data>
 </root>

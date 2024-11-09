@@ -17,6 +17,7 @@ using CrypTool.PluginBase;
 using StringOperations.Properties;
 using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -203,6 +204,10 @@ namespace StringOperations
                         _outputString = Shuffle(_string1);
                         OnPropertyChanged(nameof(OutputString));
                         break;
+                    case StringOperationType.SoundEx:
+                        _outputString = SoundEx(_string1);
+                        OnPropertyChanged(nameof(OutputString));
+                        break;
                 }
                 ProgressChanged(1, 1);
             }
@@ -292,6 +297,76 @@ namespace StringOperations
             }
 
             return v1[t.Length];
+        }
+
+        /// <summary>
+        /// Returns the Soundex code of a given string
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        private string SoundEx(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return string.Empty;
+            }
+
+            // Normalize the string to remove diacritics
+            str = RemoveDiacritics(str).ToUpper();
+
+            // The first letter of the Soundex code
+            char firstLetter = str[0];
+
+            // Define the mapping for the Soundex code
+            string[] map = { "0", "1", "2", "3", "0", "1", "2", "0", "0", "2", "2", "4", "5", "5", "0", "1", "2", "6", "2", "3", "0", "1", "0", "2", "0", "2" };
+
+            StringBuilder soundexCode = new StringBuilder();
+            soundexCode.Append(firstLetter);
+
+            // Process the rest of the letters
+            char previousDigit = map[firstLetter - 'A'][0];
+            for (int i = 1; i < str.Length && soundexCode.Length < 4; i++)
+            {
+                char letter = str[i];
+                if (letter < 'A' || letter > 'Z') continue;
+
+                char digit = map[letter - 'A'][0];
+                if (digit != '0' && digit != previousDigit)
+                {
+                    soundexCode.Append(digit);
+                }
+                previousDigit = digit;
+            }
+
+            // Pad with zeros to ensure a 4-character result
+            while (soundexCode.Length < 4)
+            {
+                soundexCode.Append('0');
+            }
+
+            return soundexCode.ToString();
+        }
+
+        /// <summary>
+        /// Removes diacritics from a given string
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        private static string RemoveDiacritics(string str)
+        {
+            var normalizedString = str.Normalize(NormalizationForm.FormD);
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (char c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
 
         /// <summary>

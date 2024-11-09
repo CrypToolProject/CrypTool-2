@@ -162,6 +162,9 @@
   <data name="OperationList18" xml:space="preserve">
     <value>Mischen</value>
   </data>
+  <data name="OperationList19" xml:space="preserve">
+    <value>SoundEx</value>
+  </data>
   <data name="OperationList2" xml:space="preserve">
     <value>Teilstring</value>
   </data>
