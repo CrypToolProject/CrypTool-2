@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Vigenere_Analyzer.xml-->
@@ -15,7 +15,7 @@
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Revealed Plaintext$" value="Revealed Plaintext" />
     <replacement key="$Vigenere Analyzer$" value="Vigenère Analyzer" />
-    <replacement key="$memo$" value="This template shows how to break a Vigenère cipher using the Vigenère Analyzer component. The component uses hill climbing to find the secret key. It tests keysizes between one and twenty. Plaintext and key candidates are shown in the best list.\line \line You can also use this template to break Vigenère autokey, Beaufort, or Beaufort autokey ciphers. To do so, change the mode in the component's settings." />
+    <replacement key="$memo$" value="This template demonstrates a {\b ciphertext-only attack on the Vigenère cipher}, showing how to break a Vigenère-encrypted ciphertext using the Vigenère analysis component. The component uses hill climbing to find the secret key. Key sizes between one and twenty are tested. Plaintext and key candidates are displayed on the leaderboard. \line \line You can also use this template to break the Vigenère-autokey, Beaufort, and Beaufort-autokey ciphers. To do this, you need to change the mode in the component settings." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -28,7 +28,7 @@
     <replacement key="$Ciphertext$" value="Geheimtext" />
     <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
     <replacement key="$Vigenere Analyzer$" value="Vigenère-Analyse" />
-    <replacement key="$memo$" value="Diese Vorlage zeigt, wie Sie eine Vigenère-Verschlüsselung mithilfe der Vigenère-Analyse-Komponente brechen. Die Komponente verwendet Hill climbing, um den geheimen Schlüssel zu finden. Es werden Schlüsselgrößen zwischen eins und zwanzig getestet. Klartext und Schlüsselkandidaten werden in der Bestenliste angezeigt.\line \line Sie können diese Vorlage auch verwenden, um Vigenère-Selbstschlüssel-, Beaufort-, oder Beaufort-Selbschlüssel-Chiffren zu brechen. Dazu müssen Sie den Modus in den Einstellungen der Komponente ändern." />
+    <replacement key="$memo$" value="Diese Vorlage zeigt einen {\b Ciphertext-only-Angriff gegen die Vigenère-Verschlüsselung}, also wie Sie einen mit Vigenère verschlüsselten Geheimtext mithilfe der Vigenère-Analyse-Komponente brechen können. Die Komponente verwendet Hill Climbing, um den geheimen Schlüssel zu finden. Es werden Schlüsselgrößen zwischen eins und zwanzig getestet. Klartext und Schlüsselkandidaten werden in der Bestenliste angezeigt.\line \line Sie können diese Vorlage auch verwenden, um die Chiffren Vigenère-Selbstschlüssel, Beaufort und Beaufort-Selbstschlüssel zu brechen. Dazu müssen Sie den Modus in den Einstellungen der Komponente ändern." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
