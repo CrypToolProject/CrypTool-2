@@ -4,6 +4,7 @@ using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace CrypTool.CertificateLibrary.Util
 {
@@ -76,8 +77,8 @@ namespace CrypTool.CertificateLibrary.Util
             }
 
             // Read the CN, O, OU, C, EmailAddress values from Destinguished Name
-            IList values = dn.GetValueList();
-            IList oids = dn.GetOidList();
+            var values = dn.GetValueList();
+            var oids = dn.GetOidList();
             if (values.Count != oids.Count)
             {
                 // Is thrown when the certificate was created in a very strange way ;)
@@ -133,8 +134,8 @@ namespace CrypTool.CertificateLibrary.Util
 
         public X509Name GetDN()
         {
-            Hashtable attrs = new Hashtable();
-            ArrayList order = new ArrayList();
+            var attrs = new Dictionary<DerObjectIdentifier, string>();
+            var order = new List<DerObjectIdentifier>();
 
             attrs.Add(X509Name.CN, CommonName);
             attrs.Add(X509Name.O, Organisation);
