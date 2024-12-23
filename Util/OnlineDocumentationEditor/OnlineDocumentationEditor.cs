@@ -36,7 +36,7 @@ namespace CrypTool.OnlineDocumentationEditor
 {
     [TabColor("LightSeaGreen")]
     [EditorInfo("xml", true, false, false, true, false, false)]    
-    [Author("Nils Kopal", "kopal@cryptool.org", "University of Siegen", "http://www.uni-siegen.de")]
+    [Author("Nils Kopal", "nils.kopal@cryptool.org", "University of Siegen", "http://www.uni-siegen.de")]
     [PluginInfo("CrypTool.OnlineDocumentationEditor.Properties.Resources", "PluginCaption", "PluginTooltip", null, "OnlineDocumentationEditor/icon.png")]
     public class OnlineDocumentationEditor : IEditor
     {

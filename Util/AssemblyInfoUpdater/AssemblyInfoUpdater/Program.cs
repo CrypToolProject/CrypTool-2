@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2018, Nils Kopal, kopal@cryptool.org
+   Copyright 2018, Nils Kopal, nils.kopal@cryptool.org
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

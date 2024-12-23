@@ -21,7 +21,7 @@ using System.Windows.Controls;
 
 namespace CrypTool.Plugins.AffineCipher
 {
-    [Author("Nils Kopal", "kopal@cryptool.org", "CrypTool 2 Team", "https://www.cryptool.org")]
+    [Author("Nils Kopal", "nils.kopal@cryptool.org", "CrypTool 2 Team", "https://www.cryptool.org")]
     [PluginInfo("CrypTool.Plugins.AffineCipher.Properties.Resources", "PluginCaption", "PluginTooltip", "AffineCipher/userdoc.xml", new[] { "AffineCipher/icon.png" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class AffineCipher : ICrypComponent

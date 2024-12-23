@@ -21,7 +21,7 @@ using System.ComponentModel;
 
 namespace CrypTool.Plugins.AudioInput
 {
-    [Author("Nils Kopal", "nils.kopal@uni-kassel.de", "University of Kassel", "")]
+    [Author("Nils Kopal", "nils.kopal@cryptool.org", "University of Kassel", "")]
     [PluginInfo("CrypTool.Plugins.AudioInput.Properties.Resources", "PluginCaption", "PluginTooltip", null, "AudioInput/icon.png")]
     [ComponentCategory(ComponentCategory.ToolsDataInputOutput)]
     public class AudioInput : ICrypComponent

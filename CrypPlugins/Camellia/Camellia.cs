@@ -28,7 +28,7 @@ using System.Windows.Controls;
 namespace Camellia
 {
 
-    [Author("Nils Kopal", "nils.kopal@uni-kassel.de", "Universität Kassel", "http://www.ais.uni-kassel.de")]
+    [Author("Nils Kopal", "nils.kopal@cryptool.org", "CrypTool Team", "http://www.cryptool.org")]
     [PluginInfo("Camellia.Properties.Resources", "PluginCaption", "PluginTooltip", "Camellia/DetailedDescription/doc.xml", "Camellia/icon.png")]
     [ComponentCategory(ComponentCategory.CiphersModernSymmetric)]
     public class Camellia : ICrypComponent

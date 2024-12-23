@@ -25,7 +25,7 @@ using System.Windows.Controls;
 
 namespace Dictionary
 {
-    [Author("Nils Kopal", "kopal@cryptool.org", "CrypTool 2 Team", "https://www.cryptool.org")]
+    [Author("Nils Kopal", "nils.kopal@cryptool.org", "CrypTool 2 Team", "https://www.cryptool.org")]
     [PluginInfo("Dictionary.Properties.Resources", "PluginCaption", "PluginTooltip", "Dictionary/DetailedDescription/doc.xml", "Dictionary/icon.png")]
     [ComponentCategory(ComponentCategory.ToolsDataInputOutput)]
     public class CrypToolDictionary : ICrypComponent

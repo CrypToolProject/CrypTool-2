@@ -25,7 +25,7 @@ using System.Windows.Controls;
 
 namespace CrypTool.Plugins.SIGABA
 {
-    [Author("George Lasry, Nils Kopal", "kopal@cryptool.org", "CrypTool project", "http://www.cryptool.org")]
+    [Author("George Lasry, Nils Kopal", "nils.kopal@cryptool.org", "CrypTool project", "http://www.cryptool.org")]
     [PluginInfo("CrypTool.Plugins.SIGABA.Properties.Resources", "PluginCaption", "PluginTooltip", "SIGABA/doc.xml", "SIGABA/icon.png")]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class SIGABA : ICrypComponent

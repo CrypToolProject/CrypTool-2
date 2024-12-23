@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{51a7d194-7f3c-4e5c-af4f-6be39e3dc8aa}</ProjectGuid>
+    <ProjectGuid>{51A7D194-7F3C-4E5C-AF4F-6BE39E3DC8AA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CrypTool.Plugins.ElsieFourCipher</RootNamespace>

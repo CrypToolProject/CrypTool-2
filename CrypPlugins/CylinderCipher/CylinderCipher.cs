@@ -28,7 +28,7 @@ using System.Text;
 
 namespace CrypTool.CylinderCipher
 {
-    [Author("Nils Kopal", "nils.kopal@uni-kassel.de", "Applied Information Security - University of Kassel", "http://www.ais.uni-kassel.de")]
+    [Author("Nils Kopal", "nils.kopal@cryptool.org", "CrypTool Team", "http://www.cryptool.org")]
     [PluginInfo("CrypTool.CylinderCipher.Properties.Resources", "PluginCaption", "PluginTooltip", "CylinderCipher/DetailedDescription/doc.xml", "CylinderCipher/Images/icon.png")]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class CylinderCipher : ICrypComponent
