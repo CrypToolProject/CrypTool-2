@@ -75,7 +75,7 @@ namespace CrypTool.Plugins.KKDFSHAKE256
             //update internal state
             shake256.BlockUpdate(input, 0, input.Length);
             //finish the hash.
-            shake256.DoFinal(result, 0, outputBytes);
+            shake256.DoFinal(result, 0);
 
             //DEBUG
             //Console.WriteLine("KM: " + BitConverter.ToString(result).Replace("-", ""));
