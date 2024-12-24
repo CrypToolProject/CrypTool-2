@@ -43,7 +43,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -1029,9 +1031,6 @@
     <EmbeddedResource Include="Util\PreCalculatedData\Cipher3\BestCharacteristicDepthSearch\globalMaximum\Cipher3_BestCharacteristicDepthSearch_globalMaximum_R5_SBoxes1101_Reduced.json" />
     <EmbeddedResource Include="Util\PreCalculatedData\Cipher3\BestCharacteristicDepthSearch\globalMaximum\Cipher3_BestCharacteristicDepthSearch_globalMaximum_R5_SBoxes1110_Reduced.json" />
     <EmbeddedResource Include="Util\PreCalculatedData\Cipher3\BestCharacteristicDepthSearch\globalMaximum\Cipher3_BestCharacteristicDepthSearch_globalMaximum_R5_SBoxes1111_Reduced.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Util\PreCalculatedData\Cipher2\AllCharacteristics\Cipher2_AllCharacteristics_R2_SBoxes0001_Reduced.json" />
