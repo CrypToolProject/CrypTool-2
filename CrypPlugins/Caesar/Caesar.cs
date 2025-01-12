@@ -88,7 +88,7 @@ namespace CrypTool.Caesar
             {
                 if (isRunning)
                 {
-                    settings.SetKeyByValue(value, false);
+                    settings.SetKeyByValue(value, false/*, true*/);
                 }
             }
         }

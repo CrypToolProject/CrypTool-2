@@ -50,7 +50,7 @@ namespace CrypTool.Caesar
         private readonly string lowerAlphabet = "abcdefghijklmnopqrstuvwxyz";
         private string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private int shiftValue = 3;
-        private string shiftString;
+        //private string shiftString;
         private UnknownSymbolHandlingMode unknownSymbolHandling = UnknownSymbolHandlingMode.Ignore;
         private bool caseSensitiveSensitive = false;
         private bool memorizeCase = false;
@@ -96,20 +96,21 @@ namespace CrypTool.Caesar
         /// <summary>
         /// Set the new shiftValue and the new shiftString to offset % alphabet.Length
         /// </summary>
-        public void SetKeyByValue(int offset, bool firePropertyChanges = true)
+        public void SetKeyByValue(int offset, bool firePropertyChangesShiftKey = true/*, bool firePropertyChangesShiftString = true*/)
         {
             // making sure the shift value lies within the alphabet range      
             shiftValue = ((offset % alphabet.Length) + alphabet.Length) % alphabet.Length;
-            shiftString = "A -> " + alphabet[shiftValue];
+            //shiftString = "A → " + alphabet[shiftValue];
 
             // Anounnce this to the settings pane
-            if (firePropertyChanges)
+            if (firePropertyChangesShiftKey)
             {
-                OnPropertyChanged("ShiftValue");
-                OnPropertyChanged("ShiftString");
+                OnPropertyChanged(nameof(ShiftKey));                
             }
-            // print some info in the log.
-            OnLogMessage("Accepted new shift value: " + offset, NotificationLevel.Debug);
+            /*if(firePropertyChangesShiftString)
+            {
+                OnPropertyChanged(nameof(ShiftString));
+            }*/
         }
 
         #endregion
@@ -139,9 +140,9 @@ namespace CrypTool.Caesar
             set => SetKeyByValue(value);
         }
 
-        [PropertySaveOrder(6)]
+        /*[PropertySaveOrder(6)]
         [TaskPane("ShiftStringCaption", "ShiftStringTooltip", null, 3, false, ControlType.TextBoxReadOnly)]
-        public string ShiftString => shiftString;
+        public string ShiftString => shiftString;*/
 
         //[SettingsFormat(0, "Normal", "Normal", "Black", "White", Orientation.Vertical)]
         [PropertySaveOrder(7)]
@@ -160,8 +161,7 @@ namespace CrypTool.Caesar
                 {
                     alphabet = a;
                     SetKeyByValue(shiftValue); //re-evaluate if the shiftvalue is still within the range
-                    OnLogMessage("Accepted new alphabet from user: \"" + alphabet + "\" (" + alphabet.Length.ToString() + " Symbols)", NotificationLevel.Info);
-                    OnPropertyChanged("AlphabetSymbols");
+                    OnPropertyChanged(nameof(AlphabetSymbols));
                 }
             }
         }
@@ -176,7 +176,7 @@ namespace CrypTool.Caesar
                 if (value != unknownSymbolHandling)
                 {
                     unknownSymbolHandling = value;
-                    OnPropertyChanged("UnknownSymbolHandling");
+                    OnPropertyChanged(nameof(UnknownSymbolHandling));
                 }
             }
         }
@@ -199,7 +199,7 @@ namespace CrypTool.Caesar
                 if (value == true)
                 {
                     memorizeCase = false;
-                    OnPropertyChanged("MemorizeCase");
+                    OnPropertyChanged(nameof(MemorizeCase));
                 }
 
                 caseSensitiveSensitive = value;
@@ -208,10 +208,7 @@ namespace CrypTool.Caesar
                     if (alphabet == upperAlphabet)
                     {
                         alphabet = upperAlphabet + lowerAlphabet;
-                        OnLogMessage(
-                            "Changing alphabet to: \"" + alphabet + "\" (" + alphabet.Length + " Symbols)",
-                            NotificationLevel.Debug);
-                        OnPropertyChanged("AlphabetSymbols");
+                        OnPropertyChanged(nameof(AlphabetSymbols));
                     }
                 }
                 else
@@ -219,10 +216,7 @@ namespace CrypTool.Caesar
                     if (alphabet == (upperAlphabet + lowerAlphabet))
                     {
                         alphabet = upperAlphabet;
-                        OnLogMessage(
-                            "Changing alphabet to: \"" + alphabet + "\" (" + alphabet.Length + " Symbols)",
-                            NotificationLevel.Debug);
-                        OnPropertyChanged("AlphabetSymbols");
+                        OnPropertyChanged(nameof(AlphabetSymbols));
                         // re-set also the key (shiftvalue/shiftString to be in the range of the new alphabet
                         SetKeyByValue(shiftValue);
                     }
@@ -234,11 +228,10 @@ namespace CrypTool.Caesar
 
                 if (a != alphabet)
                 {
-                    OnPropertyChanged("AlphabetSymbols");
-                    OnLogMessage("Changing alphabet to: \"" + alphabet + "\" (" + alphabet.Length.ToString() + " Symbols)", NotificationLevel.Info);
+                    OnPropertyChanged(nameof(AlphabetSymbols));
                 }
 
-                OnPropertyChanged("CaseSensitive");
+                OnPropertyChanged(nameof(CaseSensitive));
             }
         }
 
@@ -253,7 +246,7 @@ namespace CrypTool.Caesar
                 if (newMemorizeCase != memorizeCase)
                 {
                     memorizeCase = newMemorizeCase;
-                    OnPropertyChanged("MemorizeCase");
+                    OnPropertyChanged(nameof(MemorizeCase));
                 }
             }
         }
