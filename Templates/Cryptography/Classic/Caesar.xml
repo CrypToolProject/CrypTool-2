@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Caesar.xml-->
@@ -32,7 +32,7 @@
     <replacement key="$Alphabet$" value="Alphabet" />
     <replacement key="$Key$" value="Schlüssel" />
     <replacement key="$text$" value="Franz jagt im komplett verwahrlosten Taxi quer durch Bayern." />
-    <replacement key="$memo$" value="{\b Beschreibung der Chiffre}\line\line Die Caesar-Verschlüsselung (auch als Caesar-Chiffre, Caesar-Algorithmus oder Caesar-Verschiebung bezeichnet) ist eine klassische monographische und monoalphabetische Substitution.\line\line Als eines der einfachsten und unsichersten Verfahren dient es heute hauptsächlich dazu, Grundprinzipien der Kryptologie anschaulich darzustellen. Der Einfachheit halber werden oftmals nur die 26 Buchstaben des lateinischen Alphabets ohne Unterscheidung von Groß- und Kleinbuchstaben als Alphabet für Klartext und Geheimtext verwendet und Sonderzeichen, Satzzeichen usw. nicht betrachtet.\line \line Quelle: https://de.wikipedia.org/wiki/Caesar-Verschlüsselung" />
+    <replacement key="$memo$" value="{\b Beschreibung der Chiffre}\line\line Die Caesar-Verschlüsselung (auch als Caesar-Chiffre, Caesar-Algorithmus oder Caesar-Verschiebung bezeichnet) ist eine klassische monographische und monoalphabetische Substitution.\line\line Als eines der einfachsten und unsichersten Verfahren dient es heute hauptsächlich dazu, Grundprinzipien der Kryptologie anschaulich darzustellen. Der Einfachheit halber werden oftmals nur die 26 Buchstaben des lateinischen Alphabets ohne Unterscheidung von Groß- und Kleinbuchstaben als Alphabet für Klartext und Geheimtext verwendet (Sonderzeichen, Satzzeichen usw. werden nicht betrachtet).\line \line Quelle: https://de.wikipedia.org/wiki/Caesar-Verschlüsselung" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
