@@ -30,7 +30,7 @@ namespace CrypTool.VigenereAnalyzer
 {
     public delegate void PluginProgress(double current, double maximum);
     public delegate void UpdateOutput(string keyString, string plaintextString);
-    public delegate int[] DecryptFunction(int[] plaintext, int[] key, int[] alphabet, int offset, int[] oldciphertext);
+    public delegate int[] DecryptFunction(int[] plaintext, int[] key, int[] alphabet, int offset, int[] oldciphertext);    
 
     [Author("Nils Kopal", "Nils.Kopal@Uni-Kassel.de", "Uni Kassel", "https://www.ais.uni-kassel.de")]
     [PluginInfo("CrypTool.VigenereAnalyzer.Properties.Resources",
@@ -97,7 +97,7 @@ namespace CrypTool.VigenereAnalyzer
         public void PreExecution()
         {
             Alphabet = LanguageStatistics.Alphabets[LanguageStatistics.LanguageCode(_settings.Language)];
-            VigenereAlphabet = LanguageStatistics.Alphabets[LanguageStatistics.LanguageCode(_settings.Language)];
+            VigenereAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         }
 
         public void PostExecution()
