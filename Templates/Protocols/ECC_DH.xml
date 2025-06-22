@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: ECC_DH.xml-->
+  <!--Last edited: 2025.06.22-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Elliptic-Curve Diffie-Hellman (ECDH)</title>
+  <summary lang="en">Key exchange with a generator on an elliptic curve</summary>
+  <description lang="en">
+    This template demonstrates an ECDH key exchange using ECCInput, ECCOperations,
+    a Converter and SHA-256. Alice and Bob agree on a curve and a generator point,
+    exchange public keys, compute the shared secret point and finally derive a
+    shared key by hashing the point.
+  </description>
+  <keywords>ecdh,ecc,diffie-hellman</keywords>
+  <replacements lang="en">
+    <replacement key="$Step1$"             value="1. Alice and Bob choose an {\b elliptic curve} and a {\b generator point}.\line E.g. secp192r1" />
+    <replacement key="$AliceSideTitle$"    value="{\b Alice's side}" />
+    <replacement key="$AliceSteps$"        value="2. Alice chooses her secret {\b a} and computes her public key {\b a * P}\line 3. She sends it to Bob" />
+    <replacement key="$BobSideTitle$"      value="{\b Bob's side}" />
+    <replacement key="$BobSteps$"          value="2. Bob chooses his secret {\b b} and computes his public key {\b b * P}\line 3. He sends it to Alice" />
+    <replacement key="$AliceCompute$"      value="4. Alice computes the secret using her secret key and Bob's received public key: {\b b * (a * P)}" />
+    <replacement key="$BobCompute$"        value="4. Bob computes the secret using his secret key and Alice's received public key: {\b a * (b * P)}" />
+    <replacement key="$SharedPoint$"       value="5. Both now share the same {\b secret point}" />
+    <replacement key="$ComputedSharedSecretAlice$"         value="Computed shared secret on Alice's side" />
+    <replacement key="$ComputedSharedSecretBob$"         value="Computed shared secret on Bobs's side" />
+    <replacement key="$SharedKey$"         value="6. Both now share the same {\b secret key} after hashing the point (e.g. SHA-256)" />
+    <replacement key="$Converter$"         value="Converter" />
+    
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Elliptische-Kurven Diffie-Hellman (ECDH)</title>
+  <summary lang="de">Schlüsselaustausch mit einem Generatorpunkt auf einer elliptischen Kurve</summary>
+  <description lang="de">
+    Diese Vorlage demonstriert einen ECDH-Schlüsselaustausch mit ECCInput, ECCOperations,
+    einem Konverter und SHA-256. Alice und Bob einigen sich auf eine Kurve und einen
+    Generatorpunkt, tauschen öffentliche Schlüssel aus, berechnen den gemeinsamen
+    Punkt und leiten anschließend durch Hashen (z. B. SHA-256) einen gemeinsamen Schlüssel ab.
+  </description>
+  <keywords lang="de">ecdh,ecc,diffie-hellman</keywords>
+  <replacements lang="de">
+    <replacement key="$Step1$"             value="1.  Alice und Bob wählen eine {\b elliptische Kurve} und einen {\ Generatorpunkt}.\line z. B. secp192r1" />
+    <replacement key="$AliceSideTitle$"    value="{\b Alices Seite}" />
+    <replacement key="$AliceSteps$"        value="2. Alice wählt ihr Geheimnis {\b a} und berechnet ihren öffentlichen Schlüssel {\b a * P}\line 3. Sie sendet ihn an Bob" />
+    <replacement key="$BobSideTitle$"      value="{\b Bobs Seite}" />
+    <replacement key="$BobSteps$"          value="2. Bob wählt sein Geheimnis {\b b} und berechnet seinen öffentlichen Schlüssel {\b b * P}.\line 3. Er sendet ihn an Alice" />
+    <replacement key="$AliceCompute$"      value="4. Alice berechnet das Geheimnis mit ihrem privaten Schlüssel und Bobs öffentlichem Schlüssel: {\b b * (a * P)}" />
+    <replacement key="$BobCompute$"        value="4. Bob berechnet das Geheimnis mit seinem privaten Schlüssel und Alices öffentlichem Schlüssel: {\b a * (b * P)}" />
+    <replacement key="$SharedPoint$"       value="5. Beide teilen nun denselben {\b geheimen Punkt}" />
+    <replacement key="$ComputedSharedSecretAlice$"         value="Berechnetes gemeinsames Geheimnis auf Alices Seite" />
+    <replacement key="$ComputedSharedSecretBob$"         value="Berechnetes gemeinsames Geheimnis auf Bobs Seite" />
+    <replacement key="$SharedKey$"         value="6. Beide teilen nun denselben {\b geheimen Schlüssel}, nachdem der Punkt z. B. mit SHA-256 gehasht wurde" />
+    <replacement key="$Converter$"         value="Konvertierer" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="ECDH_ECC.png" />
+  <relevantPlugins>
+    <plugin name="ECCInput" />
+    <plugin name="ECCOperations" />
+    <plugin name="Converter" />
+    <plugin name="SHA" />
+  </relevantPlugins>
+</sample>

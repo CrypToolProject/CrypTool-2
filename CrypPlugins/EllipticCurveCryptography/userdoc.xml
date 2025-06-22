@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<documentation>
+  <language culture="en"/>
+  <language culture="de-DE"/>
+
+  <introduction lang="en">
+    Elliptic Curve Cryptography (ECC) is a modern form of public-key cryptography based on the algebraic structure of elliptic curves over finite fields.<newline/>
+    <newline/>
+    ECC enables secure key exchange, digital signatures, and encryption with smaller key sizes compared to traditional systems like RSA.<newline/>
+    <newline/>
+    In this component set, users can define a curve and generate or input points on that curve. Supported curve types include Weierstraß (Weierstrass), Montgomery, and Twisted Edwards curves.<newline/>
+    These components are typically used to build cryptographic protocols like ECDH (Elliptic Curve Diffie-Hellman) or ECDSA (Elliptic Curve Digital Signature Algorithm).
+  </introduction>
+
+  <introduction lang="de-DE">
+    Die Elliptische-Kurven-Kryptografie (ECC) ist eine moderne Form der asymmetrischen Kryptografie, die auf den mathematischen Eigenschaften elliptischer Kurven über endlichen Körpern basiert.<newline/>
+    <newline/>
+    ECC ermöglicht sicheren Schlüsselaustausch, digitale Signaturen und Verschlüsselung – bei deutlich kleineren Schlüssellängen im Vergleich zu klassischen Verfahren wie RSA.<newline/>
+    <newline/>
+    Dieses Komponenten-Set erlaubt die Definition einer Kurve sowie die Erzeugung oder Eingabe von Punkten auf dieser Kurve. Unterstützt werden Kurventypen wie Weierstraß, Montgomery und Twisted Edwards.<newline/>
+    Die Komponenten werden typischerweise für kryptographische Verfahren wie ECDH (Elliptic Curve Diffie-Hellman) oder ECDSA (Elliptic Curve Digital Signature Algorithm) eingesetzt.
+  </introduction>
+
+  <usage lang="en">
+    <b>ECCInput</b>:<newline/>
+    Define a curve by specifying the parameters a, b (or d), and the modulus p in the settings.<newline/>
+    Choose the curve type: Weierstraß, Montgomery, or Twisted Edwards.<newline/>
+    Choose between "Return generator" or "Return custom point" mode.<newline/>
+    - In generator mode: the component searches for a valid point G = (x, y) on the curve and outputs it.<newline/>
+    - In custom point mode: enter the x and y coordinates manually to output a specific point.<newline/>
+    <newline/>
+    <b>ECCOperations</b>:<newline/>
+    Takes either two ECC points (Point1 and Point2) or one point and a scalar value (Scalar).<newline/>
+    - If two points are connected, the component computes their sum P + Q.<newline/>
+    - If only one point and a scalar are connected, it computes the scalar multiplication n * P.<newline/>
+    The result is another point on the same curve, which can be further processed (e.g. hashed, used in ECDH).
+  </usage>
+
+  <usage lang="de-DE">
+    <b>ECC-Eingabe</b>:<newline/>
+    Definieren Sie eine Kurve, indem Sie die Parameter a, b (oder d) und das Modul p in den Einstellungen angeben.<newline/>
+    Wählen Sie den Kurventyp: Weierstraß, Montgomery oder Twisted Edwards.<newline/>
+    Wählen Sie zwischen den Modi "Generatorpunkt ausgeben" oder "Benutzerdefinierten Punkt eingeben".<newline/>
+    - Im Generator-Modus sucht die Komponente automatisch einen gültigen Punkt G = (x, y) auf der Kurve und gibt diesen aus.<newline/>
+    - Im benutzerdefinierten Modus geben Sie die Koordinaten x und y eines gewünschten Punkts manuell ein.<newline/>
+    <newline/>
+    <b>ECC-Operationen</b>:<newline/>
+    Diese Komponente erhält entweder zwei Punkte (Punkt1 und Punkt2) oder einen Punkt und einen Skalar (Scalar).<newline/>
+    - Wenn beide Punkte gesetzt sind, berechnet die Komponente die Punktaddition P + Q.<newline/>
+    - Wenn nur ein Punkt und ein Skalar vorhanden sind, wird die Skalarmultiplikation n * P berechnet.<newline/>
+    Das Ergebnis ist ein weiterer Punkt auf derselben Kurve, der weiterverwendet werden kann (z. B. gehasht oder in ECDH genutzt).
+  </usage>
+
+  <presentation lang="en">
+  </presentation>
+
+  <presentation lang="de-DE">
+  </presentation>
+
+  <references>
+    <reference>https://en.wikipedia.org/wiki/Elliptic-curve_cryptography</reference>
+    <reference>https://neuromancer.sk/std/secg/secp256k1</reference>
+    <reference>https://tools.ietf.org/html/rfc7748</reference>
+    <reference>https://tools.ietf.org/html/rfc8032</reference>
+    <reference>https://tools.ietf.org/html/rfc4357</reference>
+    <reference>https://tools.ietf.org/html/rfc7836</reference>
+  </references>
+</documentation>
