@@ -14,10 +14,13 @@
    limitations under the License.
 */
 using CrypTool.PluginBase;
+using CrypTool.Plugins.EllipticCurveCryptography.Views;
 using System;
 using System.ComponentModel;
 using System.Numerics;
+using System.Threading;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.EllipticCurveCryptography
 {
@@ -29,6 +32,7 @@ namespace CrypTool.Plugins.EllipticCurveCryptography
         #region Private Fields
 
         private ECCInputSettings _settings = new ECCInputSettings();
+        private EccCurveVisualizer _visualizer = new EccCurveVisualizer();
         private Point _point;
 
         #endregion
@@ -43,7 +47,7 @@ namespace CrypTool.Plugins.EllipticCurveCryptography
         [PropertyInfo(Direction.OutputData, "PointCaption", "PointTooltip")]
         public Point Point => _point;
 
-        public UserControl Presentation => null;
+        public UserControl Presentation => _visualizer;
 
         public void Execute()
         {
@@ -57,6 +61,17 @@ namespace CrypTool.Plugins.EllipticCurveCryptography
                     ReturnCustomPoint();
                     break;
             }
+            _visualizer.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                int max = 1024;
+                if(_point.Curve.P < 1024)
+                {
+                    max = (int)_point.Curve.P;
+                }
+                _visualizer.MaxRange = max;
+                _visualizer.UpdateCurve(_point.Curve);                
+            }, null);
+           
         }
 
         /// <summary>

@@ -53,9 +53,15 @@
   </usage>
 
   <presentation lang="en">
+    The included visualizer of the ECCInput shows all points (x, y) within a finite range that lie on the selected elliptic curve.<newline/>
+    The coordinate system is displayed from 0 to 1024 on both axes, with grid lines and axis labels.<newline/>
+    Curve points are marked as red dots and provide insight into the structure of the curve over the finite field.
   </presentation>
 
   <presentation lang="de-DE">
+    Die integrierte Visualisierung der ECC-Eingabe zeigt alle Punkte (x, y) innerhalb eines begrenzten Bereichs, die auf der gewählten elliptischen Kurve liegen.<newline/>
+    Das Koordinatensystem reicht von 0 bis 1024 auf beiden Achsen und enthält Gitterlinien sowie Achsbeschriftungen.<newline/>
+    Kurvenpunkte werden als rote Punkte dargestellt und geben einen Einblick in die Struktur der Kurve über dem endlichen Körper.
   </presentation>
 
   <references>

@@ -78,6 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BigIntegerExtensions.cs" />
+    <Compile Include="ECCCurveVisualizer.xaml.cs">
+      <DependentUpon>ECCCurveVisualizer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EllipticCurve.cs" />
     <Compile Include="ECCOperations.cs" />
     <Compile Include="Point.cs" />
@@ -136,6 +139,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ECCCurveVisualizer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
