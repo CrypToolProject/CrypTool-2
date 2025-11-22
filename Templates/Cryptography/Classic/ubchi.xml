@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sample>
+	<!-- Language 'en' starts here -->
+	<title lang="en">ÜBCHI Cipher</title>
+	<summary lang="en">Usage of the <i>ÜBCHI</i> cipher</summary>
+	<description lang="en">The ÜBCHI cipher is a double columnar transposition cipher used by the German Army at the beginning of World War I, starting in 1914. <newline/> In modern terminology, this cipher consists of two sequential columnar transposition operations using different permutation keys, with the addition of random null characters (dummy letters) between the two transpositions. Source: <external ref="https://en.wikipedia.org/wiki/World_War_I_cryptography"/></description>
+
+	<keywords>ÜBCHI, encryption, double transposition, world war i, cryptography, german army</keywords>
+
+	<replacements lang="en">
+		<replacement key="$text$" value="HOLD STRONG DEFENSIVE POSITIONS AGAINST ENEMY FORCES"/>
+		<replacement key="$key1$" value="GERMAN MILITARY"/>
+		<replacement key="$key2$" value="CRYPTOGRAPHY SECURITY"/>
+		<replacement key="$memo$" value="This template shows the usage of the ÜBCHI cipher. The ÜBCHI cipher has 2 different inputs for the keys and one for the plaintext.\line \line {\b Overview:}\line The ÜBCHI is a double columnar transposition cipher used by the German Army during World War I (1914-1918). It consists of two sequential encryption stages with the insertion of random null characters to obscure message length.\line \line {\b Key Requirements:}\line {\b Key 1 (Primary):} Must be 12-30 UPPERCASE characters (including spaces). Example: GERMAN MILITARY (16 characters, 2 words = 2 null characters).\line {\b Key 2 (Dual-Key):} Must be 12-30 UPPERCASE characters (including spaces). Example: CRYPTOGRAPHY SECURITY (21 characters, 2 words = 2 null characters).\line \line {\b Encryption Modes:}\line {\b Dual-Key Mode:} Uses different keys for each transposition stage. Checkbox 'Use Dual Key' must be enabled. Key 1 is used for first transposition, Key 2 for second transposition.\line {\b Single-Key Mode:} Uses only Key 1 for both transposition stages. Provides faster but slightly less secure encryption.\line {\b Custom Key Length:} Enable to override default key length requirements.\line \line {\b Null Character Generation:}\line Null characters are automatically generated based on the word count in the key. Number of nulls = number of words in key. Example: GERMAN MILITARY (2 words) = 2 null characters inserted between transpositions.\line \line {\b Encryption Process:}\line 1. First Transposition: Plaintext arranged in grid with columns = Key 1 length. Columns read in alphabetical order of Key 1 letters.\line 2. Add Nulls: Random dummy letters appended (count based on word count in key).\line 3. Second Transposition: Result transposed again using Key 2 (or Key 1 in single-key mode).\line \line {\b Decryption Process:}\line 1. Reverse Second Transposition using Key 2 (or Key 1).\line 2. Remove Null Characters (known count).\line 3. Reverse First Transposition using Key 1.\line \line {\b Example Military Phrases (WWI German Orders):}\line - HOLD STRONG DEFENSIVE POSITIONS AGAINST ENEMY FORCES\line - ENEMY ADVANCING FROM NORTHERN SECTOR\line - REINFORCE FRONTLINE IMMEDIATELY WITH RESERVES\line - ARTILLERY BOMBARDMENT BEGINS AT DAWN\line - SUPPLY CONVOY DEPARTS THIS EVENING\line - RETREAT TO SECONDARY POSITIONS NOW\line \line {\b Historical Note:}\line The ÜBCHI cipher was broken by French cryptanalysts, including Lieutenant Georges Painvin, in late 1914. The breakthrough was announced in the newspaper Le Matin in November 1914, forcing the Germans to abandon the cipher on November 18, 1914.\line \line {\b Sources:}\line Wikipedia: Double Transposition Cipher - https://en.wikipedia.org/wiki/Transposition_cipher#Double_transposition\line Wikipedia: World War I Cryptography - https://en.wikipedia.org/wiki/World_War_I_cryptography\line Historical Analysis: This Could Have Happened During WWI - https://prgomez.com/transposition-plus-cipher/\line Pavel Vondruška: Kryptografie, šifrování a tajná písma, Albatros, 2006"/>
+	</replacements>
+
+	<icon file="UbchiCipher.png"/>
+	<relevantPlugins>
+		<plugin name="UbchiCipher"/>
+	</relevantPlugins>
+
+</sample>
