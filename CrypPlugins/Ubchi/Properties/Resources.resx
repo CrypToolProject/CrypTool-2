@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<data name="Ubchi_PluginCaption" xml:space="preserve">
+		<value>Übchi</value>
+	</data>
+	<data name="Ubchi_PluginTooltip" xml:space="preserve">
+		<value>German WWI double columnar transposition cipher with nulls</value>
+	</data>
+	<data name="Ubchi_InputText_Name" xml:space="preserve">
+		<value>Input text</value>
+	</data>
+	<data name="Ubchi_InputText_Description" xml:space="preserve">
+		<value>Text to encrypt or decrypt</value>
+	</data>
+	<data name="Ubchi_Key1_Name" xml:space="preserve">
+		<value>Key 1</value>
+	</data>
+	<data name="Ubchi_Key1_Description" xml:space="preserve">
+		<value>Primary encryption key</value>
+	</data>
+	<data name="Ubchi_Key2_Name" xml:space="preserve">
+		<value>Key 2</value>
+	</data>
+	<data name="Ubchi_Key2_Description" xml:space="preserve">
+		<value>Secondary key for dual-key mode (optional)</value>
+	</data>
+	<data name="Ubchi_OutputText_Name" xml:space="preserve">
+		<value>Output text</value>
+	</data>
+	<data name="Ubchi_OutputText_Description" xml:space="preserve">
+		<value>Encrypted or decrypted result</value>
+	</data>
+	<data name="UbchiSettings_Action_Caption" xml:space="preserve">
+		<value>Action</value>
+	</data>
+	<data name="UbchiSettings_Action_Tooltip" xml:space="preserve">
+		<value>Choose whether to encrypt or decrypt the text</value>
+	</data>
+	<data name="UbchiSettings_Action_Encrypt" xml:space="preserve">
+		<value>Encrypt</value>
+	</data>
+	<data name="UbchiSettings_Action_Decrypt" xml:space="preserve">
+		<value>Decrypt</value>
+	</data>
+	<data name="UbchiSettings_UseDualKey_Caption" xml:space="preserve">
+		<value>Use Dual Key</value>
+	</data>
+	<data name="UbchiSettings_UseDualKey_Tooltip" xml:space="preserve">
+		<value>Use different keys for first and second transposition (Key 2 required)</value>
+	</data>
+	<data name="UbchiSettings_UseCustomKeyLength_Caption" xml:space="preserve">
+		<value>Allow Custom Key Length</value>
+	</data>
+	<data name="UbchiSettings_UseCustomKeyLength_Tooltip" xml:space="preserve">
+		<value>Allow keys of any length (if unchecked, requires 12-30 characters)</value>
+	</data>
+	<data name="Ubchi_Error_InputAndKeyRequired" xml:space="preserve">
+		<value>Input text and primary key are required</value>
+	</data>
+	<data name="Ubchi_Log_ActionWordsKey1" xml:space="preserve">
+		<value>Action: {0}, Words in Key1: {1}</value>
+	</data>
+	<data name="Ubchi_Log_WordsKey2TotalNulls" xml:space="preserve">
+		<value>Words in Key2: {0}, Total nulls: {1}</value>
+	</data>
+	<data name="Ubchi_Log_Completed" xml:space="preserve">
+		<value>UBCHI {0} completed successfully</value>
+	</data>
+	<data name="Ubchi_Log_ErrorPrefix" xml:space="preserve">
+		<value>Error: {0}</value>
+	</data>
+	<data name="Ubchi_Error_Key1Length" xml:space="preserve">
+		<value>Key 1 must be 12-30 characters long (currently {0}). Enable '{1}' to use any length.</value>
+	</data>
+	<data name="Ubchi_Error_Key2Length" xml:space="preserve">
+		<value>Key 2 must be 12-30 characters long (currently {0}). Enable '{1}' to use any length.</value>
+	</data>
+	<data name="Ubchi_Error_Key1Empty" xml:space="preserve">
+		<value>Key 1 cannot be empty or contain only spaces</value>
+	</data>
+	<data name="Ubchi_Error_Key2Required" xml:space="preserve">
+		<value>Key 2 is required for dual key mode and cannot be empty</value>
+	</data>
+	<data name="Ubchi_Error_Presentation" xml:space="preserve">
+		<value>Presentation error: {0}</value>
+	</data>
+	<data name="Ubchi_GridVisualizationError" xml:space="preserve">
+		<value>Grid visualization error</value>
+	</data>
+	<data name="Ubchi_NullCharsAdded" xml:space="preserve">
+		<value>Added null characters: {0}</value>
+	</data>
+	<data name="Ubchi_NullCharsRemoved" xml:space="preserve">
+		<value>Removed null characters: {0}</value>
+	</data>
+	<data name="Presentation_HeaderTitle" xml:space="preserve">
+		<value>UBCHI CIPHER STEPS</value>
+	</data>
+	<data name="Presentation_InputInformation_Header" xml:space="preserve">
+		<value>INPUT INFORMATION:</value>
+	</data>
+	<data name="Presentation_Input_Label" xml:space="preserve">
+		<value>Input: {0}</value>
+	</data>
+	<data name="Presentation_Key_Label" xml:space="preserve">
+		<value>Key: {0}</value>
+	</data>
+	<data name="Presentation_Action_Label" xml:space="preserve">
+		<value>Action: {0}</value>
+	</data>
+	<data name="Presentation_EncryptionNoun" xml:space="preserve">
+		<value>Encryption</value>
+	</data>
+	<data name="Presentation_DecryptionNoun" xml:space="preserve">
+		<value>Decryption</value>
+	</data>
+	<data name="Presentation_Nulls_Label" xml:space="preserve">
+		<value>Nulls: {0} (based on words in key)</value>
+	</data>
+	<data name="Presentation_Permutation_Header" xml:space="preserve">
+		<value>PERMUTATION:</value>
+	</data>
+	<data name="Presentation_Step1_FirstTransposition_Title" xml:space="preserve">
+		<value>STEP 1: FIRST TRANSPOSITION</value>
+	</data>
+	<data name="Presentation_Step1_ReverseSecondTransposition_Title" xml:space="preserve">
+		<value>STEP 1: REVERSE SECOND TRANSPOSITION</value>
+	</data>
+	<data name="Presentation_FillBy_RowsReadByColumns" xml:space="preserve">
+		<value>Fill by rows, read by columns:</value>
+	</data>
+	<data name="Presentation_FillBy_ColumnsReadByRows" xml:space="preserve">
+		<value>Fill by columns, read by rows:</value>
+	</data>
+	<data name="Presentation_Result_Label" xml:space="preserve">
+		<value>Result: {0}</value>
+	</data>
+	<data name="Presentation_Step2_AddNulls_Title" xml:space="preserve">
+		<value>STEP 2: ADD NULLS</value>
+	</data>
+	<data name="Presentation_Step2_RemoveNulls_Title" xml:space="preserve">
+		<value>STEP 2: REMOVE NULLS</value>
+	</data>
+	<data name="Presentation_AddingNulls_Message" xml:space="preserve">
+		<value>Adding {0} frequency-based null characters...</value>
+	</data>
+	<data name="Presentation_RemovingNulls_Message" xml:space="preserve">
+		<value>Removing {0} null characters...</value>
+	</data>
+	<data name="Presentation_WithNulls_Label" xml:space="preserve">
+		<value>With nulls: {0}</value>
+	</data>
+	<data name="Presentation_WithoutNulls_Label" xml:space="preserve">
+		<value>Without nulls: {0}</value>
+	</data>
+	<data name="Presentation_Step3_SecondTransposition_Title" xml:space="preserve">
+		<value>STEP 3: SECOND TRANSPOSITION</value>
+	</data>
+	<data name="Presentation_Step3_ReverseFirstTransposition_Title" xml:space="preserve">
+		<value>STEP 3: REVERSE FIRST TRANSPOSITION</value>
+	</data>
+	<data name="Presentation_FinalResult_Title" xml:space="preserve">
+		<value>FINAL RESULT (formatted in groups of 5):</value>
+	</data>
+	<data name="Presentation_ErrorUpdating" xml:space="preserve">
+		<value>Error updating presentation: {0}</value>
+	</data>
+	<data name="Presentation_ReadyMessage" xml:space="preserve">
+		<value>UBCHI Cipher - Ready for input...</value>
+	</data>
+</root>
