@@ -33,7 +33,7 @@ namespace CrypTool.Plugins.Ubchi
         /// Determines whether to encrypt or decrypt the input text
         /// Default: Encrypt
         /// </summary>
-        [TaskPane("Action", "Choose whether to encrypt or decrypt the text", null, 1, false, ControlType.ComboBox, new string[] { "Encrypt", "Decrypt" })]
+        [TaskPane("UbchiSettings_Action_Caption", "UbchiSettings_Action_Tooltip", null, 1, false, ControlType.ComboBox, new string[] { "UbchiSettings_Action_Encrypt", "UbchiSettings_Action_Decrypt" })]
         public UbchiAction Action
         {
             get => action;
@@ -46,7 +46,7 @@ namespace CrypTool.Plugins.Ubchi
         /// Default: false (single key mode)
         /// Requires Key 2 input when enabled
         /// </summary>
-        [TaskPane("Use Dual Key", "Use different keys for first and second transposition (Key 2 required)", null, 2, false, ControlType.CheckBox)]
+        [TaskPane("UbchiSettings_UseDualKey_Caption", "UbchiSettings_UseDualKey_Tooltip", null, 2, false, ControlType.CheckBox)]
         public bool UseDualKey
         {
             get => useDualKey;
@@ -58,7 +58,7 @@ namespace CrypTool.Plugins.Ubchi
         /// When unchecked, keys must be 12-30 characters long (historical cipher constraint)
         /// Default: false (enforces 12-30 character limit)
         /// </summary>
-        [TaskPane("Allow Custom Key Length", "Allow keys of any length (if unchecked, requires 12-30 characters)", null, 3, false, ControlType.CheckBox)]
+        [TaskPane("UbchiSettings_UseCustomKeyLength_Caption", "UbchiSettings_UseCustomKeyLength_Tooltip", null, 3, false, ControlType.CheckBox)]
         public bool UseCustomKeyLength
         {
             get => useCustomKeyLength;

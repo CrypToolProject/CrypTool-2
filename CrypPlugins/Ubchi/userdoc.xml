@@ -1,81 +1,122 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 
 
 <documentation>
-	<language culture="en"/>
+  <language culture="en"/>
+  <language culture="de"/>
 
-	<introduction lang="en">
-		The ÜBCHI cipher was a double columnar transposition cipher used by the German Army at the beginning of World War I, starting in 1914. It represents one of the most important field ciphers of the early 20th century and played a significant role in military cryptography during WWI.
+  <introduction lang="en">
+    The ÜBCHI cipher was a double columnar transposition cipher used by the German Army at the beginning of World War I, starting in 1914. It represents one of the most important field ciphers of the early 20th century and played a significant role in military cryptography during WWI.
 
-		The cipher consists of two sequential columnar transposition operations using mostly the same permutation key, with the addition of random null characters (dummy letters) between the two transpositions. The number of null characters typically equals the number of words in the keyword. This design was intended to provide strong security for tactical military communications while remaining practical for field use.
+    The cipher consists of two sequential columnar transposition operations using mostly the same permutation key, with the addition of random null characters (dummy letters) between the two transpositions. The number of null characters typically equals the number of words in the keyword. This design was intended to provide strong security for tactical military communications while remaining practical for field use.
 
-		Despite its theoretical strength, the ÜBCHI cipher was broken by French cryptanalysts, including Lieutenant Georges Painvin, in late 1914. The French success became widely publicized in the newspaper "Le Matin" in November 1914, forcing the Germans to abandon the cipher on November 18, 1914, and replace it with other systems.
-	</introduction>
+    Despite its theoretical strength, the ÜBCHI cipher was broken by French cryptanalysts, including Lieutenant Georges Painvin, in late 1914. The French success became widely publicized in the newspaper "Le Matin" in November 1914, forcing the Germans to abandon the cipher on November 18, 1914, and replace it with other systems.
+  </introduction>
 
-	<usage lang="en">
-		<b>Encryption Process:</b>
+  <introduction lang="de">
+    Die ÜBCHI-Verschlüsselung war eine doppelte Spaltentranspositions-Chiffre, die von der deutschen Armee zu Beginn des Ersten Weltkriegs ab 1914 verwendet wurde. Sie gilt als eine der bedeutendsten Feldchiffren des frühen 20. Jahrhunderts und spielte eine wichtige Rolle in der militärischen Kryptografie während des Ersten Weltkriegs.
 
-		1. <b>First Transposition:</b> The plaintext is written into a grid with a number of columns equal to the length of the keyword. The text is written row by row (left to right, top to bottom). The columns are then read out according to the alphabetical order of the keyword letters, creating the first intermediate ciphertext.
+    Die Chiffre besteht aus zwei aufeinanderfolgenden Spaltentranspositions-Vorgängen, die meist denselben Permutationsschlüssel verwenden. Zwischen den beiden Transpositionen werden zufällige Nullzeichen (Füllbuchstaben) eingefügt. Die Anzahl der Nullzeichen entspricht in der Regel der Anzahl der Wörter im Schlüsselwort. Dieses Design sollte eine starke Sicherheit für taktische militärische Kommunikation bieten und gleichzeitig im Feldeinsatz praktisch bleiben.
 
-		2. <b>Adding Nulls:</b> A number of null characters (dummy letters) are appended to the intermediate ciphertext. The number of nulls traditionally equals the number of words in the keyword. These nulls can be random letters or frequency-based characters selected to match the statistical distribution of the language.
+    Trotz ihrer theoretischen Stärke wurde die ÜBCHI-Chiffre Ende 1914 von französischen Kryptoanalytikern, darunter Leutnant Georges Painvin, gebrochen. Der französische Erfolg wurde im November 1914 in der Zeitung „Le Matin“ weithin bekannt gemacht, was die Deutschen dazu zwang, die Chiffre am 18. November 1914 aufzugeben und durch andere Systeme zu ersetzen.
+  </introduction>
 
-		3. <b>Second Transposition:</b> The intermediate ciphertext (with nulls) undergoes a second columnar transposition mostly using the same keyword and process as step 1, producing the final ciphertext.
+  <usage lang="en">
+    <b>Encryption Process:</b>
 
-		<b>Decryption Process:</b>
+    1. <b>First Transposition:</b> The plaintext is written into a grid with a number of columns equal to the length of the keyword. The text is written row by row (left to right, top to bottom). The columns are then read out according to the alphabetical order of the keyword letters, creating the first intermediate ciphertext.
 
-		Decryption reverses the encryption steps:
+    2. <b>Adding Nulls:</b> A number of null characters (dummy letters) are appended to the intermediate ciphertext. The number of nulls traditionally equals the number of words in the keyword. These nulls can be random letters or frequency-based characters selected to match the statistical distribution of the language.
 
-		1. <b>Reverse Second Transposition:</b> The ciphertext is arranged into columns according to the keyword permutation, then read row by row to recover the intermediate text with nulls.
+    3. <b>Second Transposition:</b> The intermediate ciphertext (with nulls) undergoes a second columnar transposition mostly using the same keyword and process as step 1, producing the final ciphertext.
 
-		2. <b>Remove Nulls:</b> The known number of null characters is removed from the end of the intermediate text.
+    <b>Decryption Process:</b>
 
-		3. <b>Reverse First Transposition:</b> A second reverse transposition recovers the original plaintext.
+    Decryption reverses the encryption steps:
 
-		<b>Key Management:</b>
+    1. <b>Reverse Second Transposition:</b> The ciphertext is arranged into columns according to the keyword permutation, then read row by row to recover the intermediate text with nulls.
 
-		The plugin supports both single-key and dual-key modes. In dual-key mode, different keywords are used for the first and second transpositions, significantly increasing security. The plugin also includes options for custom key length validation and frequency-based null generation based on English letter statistics.
-	</usage>
+    2. <b>Remove Nulls:</b> The known number of null characters is removed from the end of the intermediate text.
 
-	<presentation lang="en">
-		The visualization shows the complete encryption/decryption process with detailed step-by-step information:
+    3. <b>Reverse First Transposition:</b> A second reverse transposition recovers the original plaintext.
 
-		- <b>Input Information:</b> Displays the input text, key(s), action (encrypt/decrypt), and the number of null characters to be added/removed.
+    <b>Key Management:</b>
 
-		- <b>Permutation:</b> Shows the numeric permutation derived from the keyword(s), which determines the column ordering.
+    The plugin supports both single-key and dual-key modes. In dual-key mode, different keywords are used for the first and second transpositions, significantly increasing security. The plugin also includes options for custom key length validation and frequency-based null generation based on English letter statistics.
+  </usage>
 
-		- <b>Step 1 - First Transposition:</b> Displays the grid with the permutation header showing column numbers, followed by the grid content and the intermediate result.
+  <usage lang="de">
+    <b>Verschlüsselungsvorgang:</b>
 
-		- <b>Step 2 - Nulls:</b> Shows the addition (encryption) or removal (decryption) of null characters, with the number of nulls based on the keyword word count.
+    1. <b>Erste Transposition:</b> Der Klartext wird in ein Raster mit einer Spaltenanzahl geschrieben, die der Länge des Schlüsselworts entspricht. Der Text wird zeilenweise (von links nach rechts, von oben nach unten) eingetragen. Anschließend werden die Spalten gemäß der alphabetischen Reihenfolge der Buchstaben des Schlüsselworts ausgelesen, wodurch der erste Zwischenchiffretext entsteht.
 
-		- <b>Step 3 - Second Transposition:</b> Displays the second transposition grid and the final result.
+    2. <b>Einfügen von Nullzeichen:</b> Eine bestimmte Anzahl von Nullzeichen (Füllbuchstaben) wird an den Zwischenchiffretext angehängt. Die Anzahl dieser Nullzeichen entspricht traditionell der Anzahl der Wörter im Schlüsselwort. Diese Buchstaben können zufällig gewählt oder so bestimmt werden, dass sie der Häufigkeitsverteilung der Sprache entsprechen.
 
-		- <b>Final Result:</b> Shows the complete encrypted or decrypted text, formatted in groups of five characters for readability.
+    3. <b>Zweite Transposition:</b> Der Zwischenchiffretext (mit Nullzeichen) wird einer zweiten Spaltentransposition unterzogen, meist mit demselben Schlüsselwort und demselben Verfahren wie in Schritt 1. Das Ergebnis ist der endgültige Geheimtext.
 
-		The presentation uses thread-safe UI updates to ensure proper visualization even when the cipher runs in background threads.
-	</presentation>
+    <b>Entschlüsselungsvorgang:</b>
 
-	<references>
-		<linkReference id="wikipedia">
-			<link url="https://en.wikipedia.org/wiki/Transposition_cipher#Double_transposition" lang="en" />
-			<caption lang="en">Wikipedia: Double Transposition Cipher</caption>
-		</linkReference>
+    Die Entschlüsselung kehrt die Schritte der Verschlüsselung um:
 
-		<linkReference id="ww1crypto">
-			<link url="https://en.wikipedia.org/wiki/World_War_I_cryptography" lang="en" />
-			<caption lang="en">Wikipedia: World War I Cryptography</caption>
-		</linkReference>
+    1. <b>Rückgängigmachen der zweiten Transposition:</b> Der Geheimtext wird anhand der Permutation des Schlüsselworts in Spalten angeordnet und anschließend zeilenweise gelesen, um den Zwischenchiffretext mit Nullzeichen wiederherzustellen.
 
-		<linkReference id="historical">
-			<link url="https://prgomez.com/transposition-plus-cipher/" lang="en" />
-			<caption lang="en">Historical Analysis: This Could Have Happened During WWI</caption>
-		</linkReference>
+    2. <b>Entfernen der Nullzeichen:</b> Die bekannte Anzahl der Nullzeichen wird am Ende des Zwischenchiffretextes entfernt.
 
-		<bookReference id="oko2006">
-			<author>Pavel Vondruška</author>
-			<name>Kryptografie, šifrování a tajná písma</name>
-			<publisher>Albatros</publisher>
-			<year>2006</year>
-			<lang>Czech</lang>
-		</bookReference>
-	</references>
+    3. <b>Rückgängigmachen der ersten Transposition:</b> Eine zweite Rücktransposition stellt den ursprünglichen Klartext wieder her.
+
+    <b>Schlüsselverwaltung:</b>
+
+    Das Plugin unterstützt sowohl den Einzelschlüssel- als auch den Doppelschlüsselmodus. Im Doppelschlüsselmodus werden unterschiedliche Schlüsselwörter für die erste und zweite Transposition verwendet, was die Sicherheit erheblich erhöht. Das Plugin bietet zudem Optionen zur benutzerdefinierten Schlüssellängenprüfung und zur Generierung von Nullzeichen basierend auf englischen Buchstabenhäufigkeiten.
+  </usage>
+
+  <presentation lang="en">
+    The visualization shows the complete encryption/decryption process with detailed step-by-step information:
+
+    - <b>Input Information:</b> Displays the input text, key(s), action (encrypt/decrypt), and the number of null characters to be added/removed.
+    - <b>Permutation:</b> Shows the numeric permutation derived from the keyword(s), which determines the column ordering.
+    - <b>Step 1 - First Transposition:</b> Displays the grid with the permutation header showing column numbers, followed by the grid content and the intermediate result.
+    - <b>Step 2 - Nulls:</b> Shows the addition (encryption) or removal (decryption) of null characters, with the number of nulls based on the keyword word count.
+    - <b>Step 3 - Second Transposition:</b> Displays the second transposition grid and the final result.
+    - <b>Final Result:</b> Shows the complete encrypted or decrypted text, formatted in groups of five characters for readability.
+
+    The presentation uses thread-safe UI updates to ensure proper visualization even when the cipher runs in background threads.
+  </presentation>
+
+  <presentation lang="de">
+    Die Visualisierung zeigt den vollständigen Verschlüsselungs- und Entschlüsselungsprozess mit detaillierten Schritt-für-Schritt-Informationen:
+
+    - <b>Eingabeinformationen:</b> Zeigt den Eingabetext, den/die Schlüssel, die Aktion (Verschlüsselung/Entschlüsselung) und die Anzahl der hinzuzufügenden bzw. zu entfernenden Nullzeichen an.
+    - <b>Permutation:</b> Zeigt die numerische Permutation, die aus dem/den Schlüsselwort(en) abgeleitet wird und die Spaltenreihenfolge bestimmt.
+    - <b>Schritt 1 – Erste Transposition:</b> Zeigt das Raster mit der Permutationsüberschrift (Spaltennummern), gefolgt vom Rasterinhalt und dem Zwischenergebnis.
+    - <b>Schritt 2 – Nullzeichen:</b> Zeigt das Hinzufügen (bei Verschlüsselung) oder Entfernen (bei Entschlüsselung) der Nullzeichen. Die Anzahl richtet sich nach der Anzahl der Wörter im Schlüsselwort.
+    - <b>Schritt 3 – Zweite Transposition:</b> Zeigt das Raster der zweiten Transposition und das Endergebnis.
+    - <b>Endergebnis:</b> Zeigt den vollständigen verschlüsselten oder entschlüsselten Text, formatiert in Fünfergruppen zur besseren Lesbarkeit.
+
+    Die Visualisierung verwendet thread-sichere UI-Aktualisierungen, um eine korrekte Darstellung zu gewährleisten, selbst wenn die Chiffre in Hintergrund-Threads ausgeführt wird.
+  </presentation>
+
+  <references>
+    <linkReference id="wikipedia">
+      <link url="https://en.wikipedia.org/wiki/Transposition_cipher#Double_transposition" lang="en" />
+      <caption lang="en">Wikipedia: Double Transposition Cipher</caption>
+    </linkReference>
+
+    <linkReference id="ww1crypto">
+      <link url="https://en.wikipedia.org/wiki/World_War_I_cryptography" lang="en" />
+      <caption lang="en">Wikipedia: World War I Cryptography</caption>
+    </linkReference>
+
+    <linkReference id="historical">
+      <link url="https://prgomez.com/transposition-plus-cipher/" lang="en" />
+      <caption lang="en">Historical Analysis: This Could Have Happened During WWI</caption>
+    </linkReference>
+
+    <bookReference id="oko2006">
+      <author>Pavel Vondruška</author>
+      <name>Kryptografie, šifrování a tajná písma</name>
+      <publisher>Albatros</publisher>
+      <year>2006</year>
+      <lang>Tschechisch</lang>
+    </bookReference>
+  </references>
 </documentation>

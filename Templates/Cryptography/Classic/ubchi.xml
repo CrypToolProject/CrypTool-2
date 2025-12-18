@@ -3,7 +3,32 @@
 	<!-- Language 'en' starts here -->
 	<title lang="en">ÜBCHI Cipher</title>
 	<summary lang="en">Usage of the <i>ÜBCHI</i> cipher</summary>
-	<description lang="en">The ÜBCHI cipher is a double columnar transposition cipher used by the German Army at the beginning of World War I, starting in 1914. <newline/> In modern terminology, this cipher consists of two sequential columnar transposition operations using different permutation keys, with the addition of random null characters (dummy letters) between the two transpositions. Source: <external ref="https://en.wikipedia.org/wiki/World_War_I_cryptography"/></description>
+	<description lang="en">
+		The ÜBCHI cipher was a double columnar transposition cipher used by the German Army at the beginning of World War I (from 1914).
+		It consists of two sequential columnar transpositions (mostly using the same permutation key), with random null characters (dummy letters) inserted between them.
+		The null count traditionally equals the number of words in the keyword.
+		<br/><br/>
+		This template demonstrates the CrypTool 2 plugin implementation, including single-key and dual-key mode, configurable null handling, and a step-by-step visualization of the transposition grids.
+		<br/><br/>
+		Further reading:
+		<link url="https://en.wikipedia.org/wiki/Transposition_cipher#Double_transposition"/>,
+		<link url="https://en.wikipedia.org/wiki/World_War_I_cryptography"/>.
+	</description>
+
+	<!-- Language 'de' starts here -->
+	<title lang="de">ÜBCHI-Chiffre</title>
+	<summary lang="de">Verwendung der <i>ÜBCHI</i>-Chiffre</summary>
+	<description lang="de">
+		Die ÜBCHI-Chiffre war eine doppelte Spaltentranspositions-Chiffre, die von der deutschen Armee zu Beginn des Ersten Weltkriegs (ab 1914) eingesetzt wurde.
+		Sie besteht aus zwei aufeinanderfolgenden Spaltentranspositionen (meist mit demselben Permutationsschlüssel), wobei zwischen beiden Schritten zufällige Nullzeichen (Füllbuchstaben) eingefügt werden.
+		Die Anzahl der Nullzeichen entspricht traditionell der Anzahl der Wörter im Schlüsselwort.
+		<br/><br/>
+		Diese Vorlage demonstriert die CrypTool-2-Plugin-Implementierung, einschließlich Einzelschlüssel- und Doppelschlüsselmodus, konfigurierbarer Nullzeichenbehandlung sowie einer Schritt-für-Schritt-Visualisierung der Transpositionsraster.
+		<br/><br/>
+		Weiterführende Informationen:
+		<link url="https://de.wikipedia.org/wiki/Transpositionschiffre#Doppelte_Transposition"/>,
+		<link url="https://de.wikipedia.org/wiki/Kryptographie_im_Ersten_Weltkrieg"/>.
+	</description>
 
 	<keywords>ÜBCHI, encryption, double transposition, world war i, cryptography, german army</keywords>
 
@@ -11,7 +36,22 @@
 		<replacement key="$text$" value="HOLD STRONG DEFENSIVE POSITIONS AGAINST ENEMY FORCES"/>
 		<replacement key="$key1$" value="GERMAN MILITARY"/>
 		<replacement key="$key2$" value="CRYPTOGRAPHY SECURITY"/>
+		<replacement key="$Plaintext$" value="Plaintext"/>
+		<replacement key="$Ciphertext$" value="Ciphertext"/>
+		<replacement key="$Key 1 $" value="Key 1"/>
+		<replacement key="$Key 2 $" value="Key 2"/>
 		<replacement key="$memo$" value="This template shows the usage of the ÜBCHI cipher. The ÜBCHI cipher has 2 different inputs for the keys and one for the plaintext.\line \line {\b Overview:}\line The ÜBCHI is a double columnar transposition cipher used by the German Army during World War I (1914-1918). It consists of two sequential encryption stages with the insertion of random null characters to obscure message length.\line \line {\b Key Requirements:}\line {\b Key 1 (Primary):} Must be 12-30 UPPERCASE characters (including spaces). Example: GERMAN MILITARY (16 characters, 2 words = 2 null characters).\line {\b Key 2 (Dual-Key):} Must be 12-30 UPPERCASE characters (including spaces). Example: CRYPTOGRAPHY SECURITY (21 characters, 2 words = 2 null characters).\line \line {\b Encryption Modes:}\line {\b Dual-Key Mode:} Uses different keys for each transposition stage. Checkbox 'Use Dual Key' must be enabled. Key 1 is used for first transposition, Key 2 for second transposition.\line {\b Single-Key Mode:} Uses only Key 1 for both transposition stages. Provides faster but slightly less secure encryption.\line {\b Custom Key Length:} Enable to override default key length requirements.\line \line {\b Null Character Generation:}\line Null characters are automatically generated based on the word count in the key. Number of nulls = number of words in key. Example: GERMAN MILITARY (2 words) = 2 null characters inserted between transpositions.\line \line {\b Encryption Process:}\line 1. First Transposition: Plaintext arranged in grid with columns = Key 1 length. Columns read in alphabetical order of Key 1 letters.\line 2. Add Nulls: Random dummy letters appended (count based on word count in key).\line 3. Second Transposition: Result transposed again using Key 2 (or Key 1 in single-key mode).\line \line {\b Decryption Process:}\line 1. Reverse Second Transposition using Key 2 (or Key 1).\line 2. Remove Null Characters (known count).\line 3. Reverse First Transposition using Key 1.\line \line {\b Example Military Phrases (WWI German Orders):}\line - HOLD STRONG DEFENSIVE POSITIONS AGAINST ENEMY FORCES\line - ENEMY ADVANCING FROM NORTHERN SECTOR\line - REINFORCE FRONTLINE IMMEDIATELY WITH RESERVES\line - ARTILLERY BOMBARDMENT BEGINS AT DAWN\line - SUPPLY CONVOY DEPARTS THIS EVENING\line - RETREAT TO SECONDARY POSITIONS NOW\line \line {\b Historical Note:}\line The ÜBCHI cipher was broken by French cryptanalysts, including Lieutenant Georges Painvin, in late 1914. The breakthrough was announced in the newspaper Le Matin in November 1914, forcing the Germans to abandon the cipher on November 18, 1914.\line \line {\b Sources:}\line Wikipedia: Double Transposition Cipher - https://en.wikipedia.org/wiki/Transposition_cipher#Double_transposition\line Wikipedia: World War I Cryptography - https://en.wikipedia.org/wiki/World_War_I_cryptography\line Historical Analysis: This Could Have Happened During WWI - https://prgomez.com/transposition-plus-cipher/\line Pavel Vondruška: Kryptografie, šifrování a tajná písma, Albatros, 2006"/>
+</replacements>
+
+	<replacements lang="de">
+		<replacement key="$text$" value="HALTET STARKE VERTEIDIGUNGSSTELLUNGEN GEGEN FEINDLICHE KRÄFTE"/>
+		<replacement key="$key1$" value="DEUTSCHES MILITÄR"/>
+		<replacement key="$key2$" value="KRYPTOGRAFIE SICHERHEIT"/>
+		<replacement key="$Plaintext$" value="Klartext"/>
+		<replacement key="$Ciphertext$" value="Geheimtext"/>
+		<replacement key="$Key 1 $" value="Schlüssel 1"/>
+		<replacement key="$Key 2 $" value="Schlüssel 2"/>
+		<replacement key="$memo$" value="Diese Vorlage zeigt die Verwendung der ÜBCHI-Chiffre. Die ÜBCHI-Chiffre hat zwei verschiedene Eingaben für die Schlüssel und eine für den Klartext. \line \line {\b Übersicht:}\line Die ÜBCHI ist eine zweispaltige Transpositionschiffre, die von der deutschen Armee während des Ersten Weltkriegs (1914–1918) verwendet wurde. Sie besteht aus zwei aufeinanderfolgenden Verschlüsselungsstufen mit Einfügung von zufälligen Nullzeichen, um die Länge der Nachricht zu verschleiern.\line \line {\b Schlüsselanforderungen:}\line {\b Schlüssel 1 (primär):} Muss aus 12 bis 30 Großbuchstaben (einschließlich Leerzeichen) bestehen. Beispiel: GERMAN MILITARY (16 Zeichen, 2 Wörter = 2 Nullzeichen).\line {\b Schlüssel 2 (Dual-Schlüssel):} Muss aus 12 bis 30 Großbuchstaben (einschließlich Leerzeichen) bestehen. Beispiel: CRYPTOGRAPHY SECURITY (21 Zeichen, 2 Wörter = 2 Nullzeichen).\line \line {\b Verschlüsselungsmodi:}\line {\b Dual-Key-Modus:} Verwendet für jede Transpositionsstufe unterschiedliche Schlüssel. Das Kontrollkästchen „Dual-Key verwenden” muss aktiviert sein. Schlüssel 1 wird für die erste Transposition verwendet, Schlüssel 2 für die zweite Transposition.\line {\b Einzelschlüsselmodus:} Verwendet nur Schlüssel 1 für beide Transpositionsstufen. Bietet eine schnellere, aber etwas weniger sichere Verschlüsselung.\line {\b Benutzerdefinierte Schlüssellänge:} Aktivieren Sie diese Option, um die Standardanforderungen für die Schlüssellänge zu überschreiben.\line \line {\b Nullzeichengenerierung:}\line Nullzeichen werden automatisch basierend auf der Wortanzahl im Schlüssel generiert. Anzahl der Nullzeichen = Anzahl der Wörter im Schlüssel. Beispiel: GERMAN MILITARY (2 Wörter) = 2 Nullzeichen werden zwischen den Transpositionen eingefügt.\line \line {\b Verschlüsselungsprozess:}\line 1. Erste Transposition: Klartext wird in einem Raster mit Spalten = Länge von Schlüssel 1 angeordnet. Spalten werden in alphabetischer Reihenfolge der Buchstaben von Schlüssel 1 gelesen.\line 2. Nullzeichen hinzufügen: Zufällige Dummy-Buchstaben werden angehängt (Anzahl basierend auf der Wortanzahl im Schlüssel).\line 3. Zweite Transposition: Ergebnis wird erneut mit Schlüssel 2 (oder Schlüssel 1 im Ein-Schlüssel-Modus) transponiert. \line \line {\b Entschlüsselungsprozess:}\line 1. Umkehrung der zweiten Transposition mit Schlüssel 2 (oder Schlüssel 1). \line 2. Entfernen der Nullzeichen (bekannte Anzahl). \line 3. Umkehrung der ersten Transposition mit Schlüssel 1.\line \line {\b Beispiel für militärische Befehle (deutsche Befehle aus dem Ersten Weltkrieg):}\line - HALTET STARKE VERTEIDIGUNGSPOSITIONEN GEGEN FEINDLICHE STREITKRÄFTE\line - FEIND RÜCKT VON NÖRDLICHEM SEKTOR VOR\line - VERSTÄRKT SOFORT FRONTLEINE MIT RESERVEN\line - ARTILLERIE-BESCHUSS BEGINNT BEI SONNENAUFGANG\line - VERSORGUNGSKONVOI BRECHT HEUTE ABEND AUF\line - ZIEHT EUCH JETZT AUF ZWEITSTELLUNGEN ZURÜCK\line \line {\b Historischer Hinweis:}\line Die ÜBCHI-Chiffre wurde Ende 1914 von französischen Kryptoanalytikern, darunter Leutnant Georges Painvin, geknackt. Der Durchbruch wurde im November 1914 in der Zeitung Le Matin bekannt gegeben, woraufhin die Deutschen gezwungen waren, die Chiffre am 18. November 1914 aufzugeben. line \line {\b Quellen:}\line Wikipedia: Doppelte Transpositionschiffre – https://en.wikipedia.org/wiki/Transposition_cipher#Double_transposition\line Wikipedia: Kryptografie im Ersten Weltkrieg – https://en.wikipedia.org/wiki/World_War_I_cryptography\line Historische Analyse: Das hätte während des Ersten Weltkriegs passieren können – https://prgomez.com/transposition-plus-cipher/\line Pavel Vondruška: Kryptografie, šifrování a tajná písma, Albatros, 2006"/>
 	</replacements>
 
 	<icon file="UbchiCipher.png"/>

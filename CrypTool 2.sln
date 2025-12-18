@@ -470,6 +470,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LatticeCrypto", "CrypPlugin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EllipticCurveCryptography", "CrypPlugins\EllipticCurveCryptography\EllipticCurveCryptography.csproj", "{0AC26BF9-B410-4F53-834D-AD75ED43A809}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ubchi", "CrypPlugins\Ubchi\Ubchi.csproj", "{B9422D08-0F44-4531-970E-B2571B128BF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1400,6 +1402,10 @@ Global
 		{0AC26BF9-B410-4F53-834D-AD75ED43A809}.Debug|x64.Build.0 = Debug|x64
 		{0AC26BF9-B410-4F53-834D-AD75ED43A809}.Release|x64.ActiveCfg = Release|x64
 		{0AC26BF9-B410-4F53-834D-AD75ED43A809}.Release|x64.Build.0 = Release|x64
+		{B9422D08-0F44-4531-970E-B2571B128BF2}.Debug|x64.ActiveCfg = Debug|x64
+		{B9422D08-0F44-4531-970E-B2571B128BF2}.Debug|x64.Build.0 = Debug|x64
+		{B9422D08-0F44-4531-970E-B2571B128BF2}.Release|x64.ActiveCfg = Release|x64
+		{B9422D08-0F44-4531-970E-B2571B128BF2}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1626,6 +1632,7 @@ Global
 		{D8D12C51-34B1-40B0-A180-E8EB258219D0} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{3F92F927-E6FA-4048-AB98-04D98B82B69E} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{0AC26BF9-B410-4F53-834D-AD75ED43A809} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
+		{B9422D08-0F44-4531-970E-B2571B128BF2} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92042D62-2CDA-4393-9D74-4FB5AC571A2D}

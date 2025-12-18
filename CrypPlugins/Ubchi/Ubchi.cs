@@ -15,6 +15,7 @@
 */
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.Plugins.Ubchi.Properties;
 using System;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace CrypTool.Plugins.Ubchi
     /// with frequency-based null characters inserted between transpositions
     /// </summary>
     [Author("Adrián Lutišan", "adrian.lutisan@gmail.com", "Institute of Computer Science and Mathematics, Faculty of Electrical Engineering and Information Technology, Slovak University of Technology", "https://uim.fei.stuba.sk")]
-    [PluginInfo("Übchi", "German WWI double columnar transposition cipher with nulls", "Ubchi/userdoc.xml", new[] { "Ubchi/Images/ubchi.png" })]
+    [PluginInfo("CrypTool.Plugins.Ubchi.Properties.Resources", "Ubchi_PluginCaption", "Ubchi_PluginTooltip", "Ubchi/userdoc.xml", new[] { "Ubchi/Images/ubchi.png" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class Ubchi : ICrypComponent
     {
@@ -59,25 +60,25 @@ namespace CrypTool.Plugins.Ubchi
         /// <summary>
         /// Input text to be encrypted or decrypted
         /// </summary>
-        [PropertyInfo(Direction.InputData, "Input text", "Text to encrypt or decrypt")]
+        [PropertyInfo(Direction.InputData, "Ubchi_InputText_Name", "Ubchi_InputText_Description")]
         public string InputText { get; set; }
 
         /// <summary>
         /// Primary encryption key - determines column permutation for first transposition
         /// </summary>
-        [PropertyInfo(Direction.InputData, "Key 1", "Primary encryption key")]
+        [PropertyInfo(Direction.InputData, "Ubchi_Key1_Name", "Ubchi_Key1_Description")]
         public string Key1 { get; set; }
 
         /// <summary>
         /// Optional secondary key for dual-key mode - determines column permutation for second transposition
         /// </summary>
-        [PropertyInfo(Direction.InputData, "Key 2", "Secondary key for dual-key mode (optional)", false)]
+        [PropertyInfo(Direction.InputData, "Ubchi_Key2_Name", "Ubchi_Key2_Description", false)]
         public string Key2 { get; set; }
 
         /// <summary>
         /// Output text after encryption or decryption
         /// </summary>
-        [PropertyInfo(Direction.OutputData, "Output text", "Encrypted or decrypted result")]
+        [PropertyInfo(Direction.OutputData, "Ubchi_OutputText_Name", "Ubchi_OutputText_Description")]
         public string OutputText { get; set; }
 
         #endregion
@@ -116,7 +117,7 @@ namespace CrypTool.Plugins.Ubchi
             // Validate required inputs
             if (string.IsNullOrEmpty(InputText) || string.IsNullOrEmpty(Key1))
             {
-                GuiLogMessage("Input text and primary key are required", NotificationLevel.Error);
+                GuiLogMessage(Resources.Ubchi_Error_InputAndKeyRequired, NotificationLevel.Error);
                 _presentation?.ClearPresentation();
                 return;
             }
@@ -135,10 +136,10 @@ namespace CrypTool.Plugins.Ubchi
                 int wordsInKey2 = CountWords(Key2);
                 int totalWords = _settings.UseDualKey && !string.IsNullOrEmpty(Key2) ? wordsInKey1 + wordsInKey2 : wordsInKey1;
 
-                GuiLogMessage("Action: " + _settings.Action + ", Words in Key1: " + wordsInKey1, NotificationLevel.Info);
+                GuiLogMessage(string.Format(Resources.Ubchi_Log_ActionWordsKey1, GetLocalizedActionVerb(_settings.Action), wordsInKey1), NotificationLevel.Info);
                 if (_settings.UseDualKey && !string.IsNullOrEmpty(Key2))
                 {
-                    GuiLogMessage("Words in Key2: " + wordsInKey2 + ", Total nulls: " + totalWords, NotificationLevel.Info);
+                    GuiLogMessage(string.Format(Resources.Ubchi_Log_WordsKey2TotalNulls, wordsInKey2, totalWords), NotificationLevel.Info);
                 }
 
                 // Process the text (encrypt or decrypt)
@@ -147,11 +148,11 @@ namespace CrypTool.Plugins.Ubchi
 
                 OutputText = result;
                 OnPropertyChanged("OutputText");
-                GuiLogMessage("UBCHI " + _settings.Action + " completed successfully", NotificationLevel.Info);
+                GuiLogMessage(string.Format(Resources.Ubchi_Log_Completed, GetLocalizedActionVerb(_settings.Action)), NotificationLevel.Info);
             }
             catch (Exception ex)
             {
-                GuiLogMessage("Error: " + ex.Message, NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.Ubchi_Log_ErrorPrefix, ex.Message), NotificationLevel.Error);
                 _presentation?.ClearPresentation();
             }
 
@@ -174,7 +175,7 @@ namespace CrypTool.Plugins.Ubchi
                 string cleanKey1 = Key1.Trim().Replace(" ", "");
                 if (cleanKey1.Length < 12 || cleanKey1.Length > 30)
                 {
-                    GuiLogMessage("Key 1 must be 12-30 characters long (currently " + cleanKey1.Length + "). Enable 'Allow Custom Key Length' to use any length.", NotificationLevel.Error);
+                    GuiLogMessage(string.Format(Resources.Ubchi_Error_Key1Length, cleanKey1.Length, Resources.UbchiSettings_UseCustomKeyLength_Caption), NotificationLevel.Error);
                     return false;
                 }
 
@@ -183,7 +184,7 @@ namespace CrypTool.Plugins.Ubchi
                     string cleanKey2 = Key2.Trim().Replace(" ", "");
                     if (cleanKey2.Length < 12 || cleanKey2.Length > 30)
                     {
-                        GuiLogMessage("Key 2 must be 12-30 characters long (currently " + cleanKey2.Length + "). Enable 'Allow Custom Key Length' to use any length.", NotificationLevel.Error);
+                        GuiLogMessage(string.Format(Resources.Ubchi_Error_Key2Length, cleanKey2.Length, Resources.UbchiSettings_UseCustomKeyLength_Caption), NotificationLevel.Error);
                         return false;
                     }
                 }
@@ -192,13 +193,13 @@ namespace CrypTool.Plugins.Ubchi
             // Always check for empty keys
             if (string.IsNullOrWhiteSpace(Key1.Replace(" ", "")))
             {
-                GuiLogMessage("Key 1 cannot be empty or contain only spaces", NotificationLevel.Error);
+                GuiLogMessage(Resources.Ubchi_Error_Key1Empty, NotificationLevel.Error);
                 return false;
             }
 
             if (_settings.UseDualKey && string.IsNullOrWhiteSpace(Key2?.Replace(" ", "")))
             {
-                GuiLogMessage("Key 2 is required for dual key mode and cannot be empty", NotificationLevel.Error);
+                GuiLogMessage(Resources.Ubchi_Error_Key2Required, NotificationLevel.Error);
                 return false;
             }
 
@@ -638,7 +639,7 @@ namespace CrypTool.Plugins.Ubchi
             }
             catch
             {
-                return "Grid visualization error";
+                return Resources.Ubchi_GridVisualizationError;
             }
         }
 
@@ -661,12 +662,12 @@ namespace CrypTool.Plugins.Ubchi
                 if (isEncryption && withNulls.Length > firstResult.Length)
                 {
                     string addedNulls = withNulls.Substring(firstResult.Length);
-                    nullCharsInfo = "Added null characters: " + addedNulls;
+                    nullCharsInfo = string.Format(Resources.Ubchi_NullCharsAdded, addedNulls);
                 }
                 else if (!isEncryption && firstResult.Length > withNulls.Length)
                 {
                     string removedNulls = firstResult.Substring(withNulls.Length);
-                    nullCharsInfo = "Removed null characters: " + removedNulls;
+                    nullCharsInfo = string.Format(Resources.Ubchi_NullCharsRemoved, removedNulls);
                 }
 
                 _presentation.UpdatePresentation(inputText, key, isEncryption, permText,
@@ -674,13 +675,20 @@ namespace CrypTool.Plugins.Ubchi
             }
             catch (Exception ex)
             {
-                GuiLogMessage("Presentation error: " + ex.Message, NotificationLevel.Warning);
+                GuiLogMessage(string.Format(Resources.Ubchi_Error_Presentation, ex.Message), NotificationLevel.Warning);
             }
         }
 
         #endregion
 
         #region Helper Methods
+
+
+        /// <summary>
+        /// Returns a localized verb for the current action (Encrypt/Decrypt)
+        /// </summary>
+        private string GetLocalizedActionVerb(UbchiAction action) =>
+            action == UbchiAction.Encrypt ? Resources.UbchiSettings_Action_Encrypt : Resources.UbchiSettings_Action_Decrypt;
 
         /// <summary>
         /// Counts the number of words in a key string

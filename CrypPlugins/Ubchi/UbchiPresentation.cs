@@ -103,27 +103,27 @@ namespace CrypTool.Plugins.Ubchi
 
                 // Header
                 display.AppendLine("═══════════════════════════════════════════════════");
-                display.AppendLine("                 UBCHI CIPHER STEPS");
+                display.AppendLine("                 " + Properties.Resources.Presentation_HeaderTitle);
                 display.AppendLine("═══════════════════════════════════════════════════");
                 display.AppendLine();
 
                 // Input information section
-                display.AppendLine(" INPUT INFORMATION:");
-                display.AppendLine("   Input: " + (inputText.Length > 80 ? inputText.Substring(0, 80) + "..." : inputText));
-                display.AppendLine("   Key: " + key);
-                display.AppendLine("   Action: " + (isEncryption ? "Encryption" : "Decryption"));
-                display.AppendLine("   Nulls: " + CountWords(key) + " (based on words in key)");
+                display.AppendLine(" " + Properties.Resources.Presentation_InputInformation_Header);
+                display.AppendLine("   " + string.Format(Properties.Resources.Presentation_Input_Label, (inputText.Length > 80 ? inputText.Substring(0, 80) + "..." : inputText)));
+                display.AppendLine("   " + string.Format(Properties.Resources.Presentation_Key_Label, key));
+                display.AppendLine("   " + string.Format(Properties.Resources.Presentation_Action_Label, isEncryption ?Properties.Resources.Presentation_EncryptionNoun :Properties.Resources.Presentation_DecryptionNoun));
+                display.AppendLine("   " + string.Format(Properties.Resources.Presentation_Nulls_Label, CountWords(key)));
                 display.AppendLine();
 
                 // Permutation section
-                display.AppendLine(" PERMUTATION:");
+                display.AppendLine(" " + Properties.Resources.Presentation_Permutation_Header);
                 display.AppendLine("   " + permutationText);
                 display.AppendLine();
 
                 // Step 1: First or reverse second transposition
-                string step1Title = isEncryption ? " STEP 1: FIRST TRANSPOSITION" : " STEP 1: REVERSE SECOND TRANSPOSITION";
+                string step1Title = " " + (isEncryption ?Properties.Resources.Presentation_Step1_FirstTransposition_Title :Properties.Resources.Presentation_Step1_ReverseSecondTransposition_Title);
                 display.AppendLine(step1Title);
-                display.AppendLine("   Fill by " + (isEncryption ? "rows, read by columns:" : "columns, read by rows:"));
+                display.AppendLine("   " + (isEncryption ?Properties.Resources.Presentation_FillBy_RowsReadByColumns :Properties.Resources.Presentation_FillBy_ColumnsReadByRows));
                 display.AppendLine();
 
                 if (!string.IsNullOrEmpty(firstGridText))
@@ -131,37 +131,37 @@ namespace CrypTool.Plugins.Ubchi
                     DisplayFormattedGrid(display, firstGridText);
                 }
                 display.AppendLine();
-                display.AppendLine("   Result: " + FormatLongText(firstResult, 70));
+                display.AppendLine("   " + string.Format(Properties.Resources.Presentation_Result_Label, FormatLongText(firstResult, 70)));
                 display.AppendLine();
 
                 // Step 2: Add or remove nulls
                 if (isEncryption)
                 {
-                    display.AppendLine(" STEP 2: ADD NULLS");
-                    display.AppendLine("   Adding " + CountWords(key) + " frequency-based null characters...");
+                    display.AppendLine(" " + Properties.Resources.Presentation_Step2_AddNulls_Title);
+                    display.AppendLine("   " + string.Format(Properties.Resources.Presentation_AddingNulls_Message, CountWords(key)));
                     if (!string.IsNullOrEmpty(nullCharsInfo))
                     {
                         display.AppendLine("   " + nullCharsInfo);
                     }
-                    display.AppendLine("   With nulls: " + FormatLongText(withNulls, 70));
+                    display.AppendLine("   " + string.Format(Properties.Resources.Presentation_WithNulls_Label, FormatLongText(withNulls, 70)));
                     display.AppendLine();
                 }
                 else
                 {
-                    display.AppendLine(" STEP 2: REMOVE NULLS");
-                    display.AppendLine("   Removing " + CountWords(key) + " null characters...");
+                    display.AppendLine(" " + Properties.Resources.Presentation_Step2_RemoveNulls_Title);
+                    display.AppendLine("   " + string.Format(Properties.Resources.Presentation_RemovingNulls_Message, CountWords(key)));
                     if (!string.IsNullOrEmpty(nullCharsInfo))
                     {
                         display.AppendLine("   " + nullCharsInfo);
                     }
-                    display.AppendLine("   Without nulls: " + FormatLongText(withNulls, 70));
+                    display.AppendLine("   " + string.Format(Properties.Resources.Presentation_WithoutNulls_Label, FormatLongText(withNulls, 70)));
                     display.AppendLine();
                 }
 
                 // Step 3: Second or reverse first transposition
-                string step3Title = isEncryption ? " STEP 3: SECOND TRANSPOSITION" : " STEP 3: REVERSE FIRST TRANSPOSITION";
+                string step3Title = " " + (isEncryption ?Properties.Resources.Presentation_Step3_SecondTransposition_Title :Properties.Resources.Presentation_Step3_ReverseFirstTransposition_Title);
                 display.AppendLine(step3Title);
-                display.AppendLine("   Fill by " + (isEncryption ? "rows, read by columns:" : "columns, read by rows:"));
+                display.AppendLine("   " + (isEncryption ?Properties.Resources.Presentation_FillBy_RowsReadByColumns :Properties.Resources.Presentation_FillBy_ColumnsReadByRows));
                 display.AppendLine();
 
                 if (!string.IsNullOrEmpty(secondGridText))
@@ -169,12 +169,12 @@ namespace CrypTool.Plugins.Ubchi
                     DisplayFormattedGrid(display, secondGridText);
                 }
                 display.AppendLine();
-                display.AppendLine("   Result: " + FormatLongText(finalResult, 70));
+                display.AppendLine("   " + string.Format(Properties.Resources.Presentation_Result_Label, FormatLongText(finalResult, 70)));
                 display.AppendLine();
 
                 // Final result section
                 display.AppendLine("═══════════════════════════════════════════════════");
-                display.AppendLine(" FINAL RESULT (formatted in groups of 5):");
+                display.AppendLine(" " + Properties.Resources.Presentation_FinalResult_Title);
                 display.AppendLine("   " + FormatInGroupsOfFive(finalResult));
                 display.AppendLine("═══════════════════════════════════════════════════");
 
@@ -184,7 +184,7 @@ namespace CrypTool.Plugins.Ubchi
             }
             catch (Exception ex)
             {
-                displayTextBox.Text = "Error updating presentation: " + ex.Message;
+                displayTextBox.Text = string.Format(Properties.Resources.Presentation_ErrorUpdating, ex.Message);
             }
         }
 
@@ -269,13 +269,13 @@ namespace CrypTool.Plugins.Ubchi
         {
             if (Dispatcher.CheckAccess())
             {
-                displayTextBox.Text = "UBCHI Cipher - Ready for input...";
+                displayTextBox.Text =Properties.Resources.Presentation_ReadyMessage;
             }
             else
             {
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    displayTextBox.Text = "UBCHI Cipher - Ready for input...";
+                    displayTextBox.Text =Properties.Resources.Presentation_ReadyMessage;
                 }));
             }
         }
