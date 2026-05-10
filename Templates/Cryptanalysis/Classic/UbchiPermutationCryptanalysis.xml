@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: UbchiPermut.xml-->
+  <!--Last edited: 2026.05.09-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Übchi Permutation Analyzer</title>
+  <summary lang="en">Usage of the <i>Übchi Permutation Analyzer</i></summary>
+  <description lang="en">This template demonstrates crib-based cryptanalysis of an Übchi ciphertext.</description>
+  <keywords>Ubchi, Übchi, permutation, transposition, crib, cryptanalysis</keywords>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$text$" value="GEFECHTSBERICHTVOMVIERZEHNTENOKTOBERNEUNZEHNHUNDERTVIERZEHNANDENKOMMANDIERENDENGENERALSTABDERHEERESGRUPPEWESTFEINDLICHESTURMTRUPPENANGRIEFFENUNSEREGRAEBENABVIERUHRMORGENBEIDENKOMPANIENRECHTSDESWEGESANSTURMWURDEABGESCHLAGENVERLUSTEEIGENERSEITEDREIOFFIZIEREVIERUNDZWANZIGMANNVERWUNDETMUNITIONSVORRAETEREICNTENNURNOCHFUERZWEITAGEAUSDRINGENDNACHSCHUBINSBESONDEREGRANATENUNDLEUCHTMUNITIONARTILLERIEHATSTUETZPUNKTEAMWESTHANGNICHTERREICHTWETTERSCHLECHTDICKENEBELENDEDESMELDUNGDEROBERST" />
+    <replacement key="$crib$" value="GEFECHTSBERICHTVOM" />
+    <replacement key="$key$" value="LEUCHTMUNITION" />
+    <replacement key="$memo$" value="{\b Description of the cryptanalysis}\line\line This template shows how to use the Übchi Permutation Analyzer.\line\line {\b Overview}\line - Input 1: Ciphertext (required)\line - Input 2: Crib / known plaintext prefix (required)\line - Output: Best plaintext candidate and best permutation key\line\line {\b Important rule}\line - The analyzer requires a crib.\line - If crib is empty, analysis should stop with an error message.\line\line {\b Recommended workflow}\line 1. Paste the Übchi ciphertext into the ciphertext input.\line 2. Enter a known plaintext prefix (crib), e.g. GEFECHTSBERICHTVOM.\line 3. Set key-length range (MinKeyLength, MaxKeyLength).\line 4. Set null range (MinNulls, MaxNulls).\line 5. Set timeout per combination (TimeoutSeconds).\line 6. Run analysis.\line 7. Inspect top candidates and select the best one.\line\line {\b What filters mean}\line - MinKeyLength / MaxKeyLength: key lengths to test.\line - MinNulls / MaxNulls: number of possible inserted null chars.\line - MaxCandidates: number of top results kept in the table.\line - TimeoutSeconds: max runtime per (keyLen, nulls) combination.\line\line {\b How the analyzer works}\line - Domain filtering from crib constraints.\line - Cross-check (arc consistency) between columns.\line - CSP backtracking for unresolved columns.\line - Final ranking by crib match and language score.\line\line ---" />
+  </replacements>
+
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Übchi-Permutationsanalyse</title>
+  <summary lang="de">Verwendung des <i>Übchi-Permutationsanalysators</i></summary>
+  <description lang="de">Diese Vorlage zeigt die crib-basierte Kryptoanalyse eines Übchi-Geheimtextes.</description>
+  <keywords lang="de">Ubchi, Übchi, Permutation, Transposition, Crib, Kryptoanalyse</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$text$" value="GEFECHTSBERICHTVOMVIERZEHNTENOKTOBERNEUNZEHNHUNDERTVIERZEHNANDENKOMMANDIERENDENGENERALSTABDERHEERESGRUPPEWESTFEINDLICHESTURMTRUPPENANGRIEFFENUNSEREGRAEBENABVIERUHRMORGENBEIDENKOMPANIENRECHTSDESWEGESANSTURMWURDEABGESCHLAGENVERLUSTEEIGENERSEITEDREIOFFIZIEREVIERUNDZWANZIGMANNVERWUNDETMUNITIONSVORRAETEREICNTENNURNOCHFUERZWEITAGEAUSDRINGENDNACHSCHUBINSBESONDEREGRANATENUNDLEUCHTMUNITIONARTILLERIEHATSTUETZPUNKTEAMWESTHANGNICHTERREICHTWETTERSCHLECHTDICKENEBELENDEDESMELDUNGDEROBERST" />
+    <replacement key="$crib$" value="GEFECHTSBERICHTVOM" />
+    <replacement key="$key$" value="LEUCHTMUNITION" />
+    <replacement key="$memo$" value="{\b Beschreibung der Kryptoanalyse}\line\line Diese Vorlage zeigt, wie der Übchi-Permutationsanalysator verwendet wird.\line\line {\b Überblick}\line - Eingabe 1: Geheimtext (erforderlich)\line - Eingabe 2: Crib / bekanntes Klartextpräfix (erforderlich)\line - Ausgabe: Bester Klartextkandidat und bester Permutationsschlüssel\line\line {\b Wichtige Regel}\line - Der Analysator benötigt ein Crib.\line - Wenn das Crib leer ist, muss die Analyse mit einer Fehlermeldung abbrechen.\line\line {\b Empfohlener Arbeitsablauf}\line 1. Füge den Übchi-Geheimtext in das Geheimtext-Eingabefeld ein.\line 2. Gib ein bekanntes Klartextpräfix (Crib) ein, z.B. GEFECHTSBERICHTVOM.\line 3. Stelle den Schlüssellängenbereich (MinKeyLength, MaxKeyLength) ein.\line 4. Stelle den Nullbereich (MinNulls, MaxNulls) ein.\line 5. Setze das Timeout pro Kombination (TimeoutSeconds).\line 6. Starte die Analyse.\line 7. Prüfe die besten Kandidaten und wähle den besten aus.\line\line {\b Bedeutung der Filter}\line - MinKeyLength / MaxKeyLength: zu testende Schlüssellängen.\line - MinNulls / MaxNulls: Anzahl möglicher eingefügter Nullzeichen.\line - MaxCandidates: Anzahl der besten Kandidaten, die in der Tabelle behalten werden.\line - TimeoutSeconds: maximale Laufzeit pro (keyLen, nulls)-Kombination.\line\line {\b Wie der Analysator arbeitet}\line - Domain-Filterung anhand der Crib-Bedingungen.\line - Kreuzprüfung (Arc Consistency) zwischen Spalten.\line - CSP-Backtracking für noch nicht aufgelöste Spalten.\line - Endbewertung nach Crib-Treffer und Sprachscore.\line\line ---" />
+  </replacements>
+
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="UbchiPermut.png" />
+  <relevantPlugins>
+    <plugin name="Ubchi" />
+    <plugin name="UbchiCribAnalysis" />
+  </relevantPlugins>
+</sample>

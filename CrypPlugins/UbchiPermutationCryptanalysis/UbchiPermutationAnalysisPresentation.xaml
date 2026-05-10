@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="CrypTool.Plugins.UbchiPermutationCryptanalysis.UbchiPermutationAnalysisPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:crypanalysisviewcontrol="clr-namespace:CrypTool.CrypAnalysisViewControl;assembly=CrypAnalysisViewControl"
+             xmlns:properties="clr-namespace:CrypTool.Plugins.UbchiPermutationCryptanalysis.Properties">
+
+    <UserControl.Resources>
+        <Style x:Key="hcs" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
+    </UserControl.Resources>
+
+    <crypanalysisviewcontrol:CrypAnalysisViewControl
+        ResultHeaderCaption="{x:Static properties:Resources.Header_Caption}"
+        ResultListCaption="{x:Static properties:Resources.ResultList_Caption}"
+        ResultProgressCaption="{x:Static properties:Resources.Progress_Caption}">
+
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.Header_Status}" x:Name="HeaderStatus" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.Header_BestScore}" x:Name="HeaderBestScore" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.Header_ElapsedTime}" x:Name="HeaderElapsedTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.Header_KeysTested}" x:Name="HeaderKeysTested" />
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.ResultProgressLabels>
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.Progress_CurrentKeyLen}" x:Name="ProgressCurrentKeyLen" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.Progress_CurrentNulls}" x:Name="ProgressCurrentNulls" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.Progress_Completed}" x:Name="ProgressCompleted" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.Progress_Total}" x:Name="ProgressTotal" />
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultProgressLabels>
+
+        <crypanalysisviewcontrol:CrypAnalysisResultListView
+            Name="ResultListView"
+            ItemsSource="{Binding}"
+            ResultItemAction="HandleResultItemAction">
+            <crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+                <GridView>
+                    <GridViewColumn Header="{x:Static properties:Resources.Col_Rank}" DisplayMemberBinding="{Binding Path=Rank}" Width="30" />
+                    <GridViewColumn Header="{x:Static properties:Resources.Col_Score}" DisplayMemberBinding="{Binding Path=Score, StringFormat=F2}" Width="65" />
+                    <GridViewColumn Header="{x:Static properties:Resources.Col_Key}" DisplayMemberBinding="{Binding Path=KeyPermutation}" Width="120" />
+                    <GridViewColumn Header="{x:Static properties:Resources.Col_KeyLength}" DisplayMemberBinding="{Binding Path=KeyLength}" Width="55" />
+                    <GridViewColumn Header="{x:Static properties:Resources.Col_Nulls}" DisplayMemberBinding="{Binding Path=Nulls}" Width="45" />
+                    <GridViewColumn Header="{x:Static properties:Resources.Col_Plaintext}" DisplayMemberBinding="{Binding Path=PlaintextPreview}" Width="280" HeaderContainerStyle="{StaticResource hcs}" />
+                    <GridViewColumn Header="Analysis" DisplayMemberBinding="{Binding Path=AnalysisInfo}" Width="200" HeaderContainerStyle="{StaticResource hcs}" />
+                </GridView>
+            </crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+        </crypanalysisviewcontrol:CrypAnalysisResultListView>
+
+    </crypanalysisviewcontrol:CrypAnalysisViewControl>
+</UserControl>
+
