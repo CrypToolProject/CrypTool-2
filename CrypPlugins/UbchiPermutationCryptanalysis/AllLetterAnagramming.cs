@@ -1,37 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
 {
-    /// <summary>
-    /// CSP-based crib cryptanalysis of the Übchi double columnar transposition cipher.
-    /// Uses the "all-letter row-multiple" approach.
-    ///
-    /// The cipher uses the SAME permutation ? for both transpositions (?1 = ?2 = ?).
-    ///
-    /// Key idea:
-    ///   After a columnar transposition, a letter from row r in column c ends up at a
-    ///   ciphertext position that is approximately r + k*R (a multiple of the row count
-    ///   plus offset). Even common letters like E don't appear at every such position
-    ///   in the ciphertext. By checking ALL crib letters (not just rare Q,J,Z,V,W,X,Y,P),
-    ///   we restrict domains for ALL columns — not just the 2-3 anchor columns.
-    ///
-    ///   For double transposition: after the first transposition, a crib letter moves to
-    ///   an intermediate position ? (?(c)-1)*R1 + row1. In the second grid, it lands in
-    ///   some (row2, col2). After the second transposition with ?(col2)=w, it ends up at
-    ///   ciphertext position ? (w-1)*R2 + row2. We check if the letter actually appears
-    ///   at that ciphertext position. Multiple letters per column ? intersect valid sets.
-    ///
-    /// Algorithm:
-    ///   1. For EVERY crib letter in EVERY column, compute which ?(c) values are
-    ///      compatible with that letter appearing in the ciphertext after the double
-    ///      transposition. Multiple letters in the same column ? intersect domains.
-    ///   2. Solve the CSP using backtracking with MRV heuristic.
-    ///   3. During backtracking, check consistency of all crib letters through both
-    ///      transpositions whenever the full path is computable.
-    ///   4. Full permutation ? decrypt and verify crib match.
-    /// </summary>
     public static class AllLetterAnagramming
     {
         private static readonly double[] GermanFreq = new double[]
@@ -73,15 +45,11 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
 
                 GridParams gp = new GridParams(keyLength, ptLen, ciphertext.Length);
 
-                // Build crib letter info sorted row-0 first
                 CribLetterInfo[] cribLetters = BuildCribLetters(currentCrib, keyLength);
                 Array.Sort(cribLetters, (a, b) => a.Row1.CompareTo(b.Row1));
 
-                // Build ciphertext position lookup (HashSet for O(1) lookup)
                 Dictionary<char, HashSet<int>> ctPosLookup = BuildLetterPositionSets(ciphertext);
 
-                // Sort crib letters by increasing frequency in the CURRENT ciphertext
-                // so rare letters prune domains and backtracking earlier.
                 Array.Sort(cribLetters, (a, b) =>
                 {
                     int freqA = GetCipherLetterFrequency(ctPosLookup, a.Letter);
@@ -93,14 +61,11 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
                     return a.Col1.CompareTo(b.Col1);
                 });
 
-                // Compute restricted domains for ALL columns using ALL crib letters
                 List<int>[] domains = ComputeAllColumnDomains(ciphertext, ctPosLookup, cribLetters, keyLength, gp);
 
-                // Arc consistency: cross-column constraint propagation
                 if (!RefineDomainsIteratively(ciphertext, ctPosLookup, cribLetters, keyLength, gp, domains))
                     continue;
 
-                // Check for empty domains — this key length is impossible
                 bool impossible = false;
                 for (int c = 0; c < keyLength; c++)
                 {
@@ -108,7 +73,6 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
                 }
                 if (impossible) continue;
 
-                // Column assignment order: smallest domain first (MRV heuristic)
                 int[] colOrder = Enumerable.Range(0, keyLength).ToArray();
                 Array.Sort(colOrder, (a, b) => domains[a].Count.CompareTo(domains[b].Count));
 
@@ -172,21 +136,6 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
             return 0;
         }
 
-        /// <summary>
-        /// Compute domains for ALL columns using ALL crib letters (not just rare ones).
-        ///
-        /// For each column c, collect every crib letter that falls in that column.
-        /// For each such letter, determine which ?(c) values allow it to end up at
-        /// a matching position in the ciphertext through the double transposition.
-        /// Multiple letters in the same column ? intersect their valid value sets.
-        ///
-        /// The key insight:
-        ///   After a columnar transposition, a character from row r in column c
-        ///   ends up at position ? (?(c)-1)*R + r. Even common letters like E
-        ///   don't appear at every such "approximately multiple of R" position
-        ///   in the ciphertext. So checking ALL letters restricts ALL columns,
-        ///   not just the rare-letter columns.
-        /// </summary>
         private static List<int>[] ComputeAllColumnDomains(
             string ciphertext, Dictionary<char, HashSet<int>> ctPosLookup,
             CribLetterInfo[] cribLetters, int keyLength, GridParams gp)
@@ -195,7 +144,6 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
             for (int c = 0; c < keyLength; c++)
                 domains[c] = Enumerable.Range(1, keyLength).ToList();
 
-            // Group crib letters by column
             List<CribLetterInfo>[] lettersByCol = new List<CribLetterInfo>[keyLength];
             for (int c = 0; c < keyLength; c++)
                 lettersByCol[c] = new List<CribLetterInfo>();
@@ -206,9 +154,6 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
                     lettersByCol[col].Add(cribLetters[i]);
             }
 
-            int totalShort2 = keyLength - gp.FullCols2;
-
-            // Process each column
             for (int c = 0; c < keyLength; c++)
             {
                 List<CribLetterInfo> lettersInCol = lettersByCol[c];
@@ -221,8 +166,8 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
                     int row1 = cribLetter.Row1;
                     char letter = cribLetter.Letter;
 
-                    int col1Len = (c < gp.FullCols1) ? gp.R1 : (gp.R1 - 1);
-                    if (row1 >= col1Len) continue;
+                    int colLen = (c < gp.FullCols1) ? gp.R1 : (gp.R1 - 1);
+                    if (row1 >= colLen) continue;
 
                     HashSet<int> ctPosSet;
                     if (!ctPosLookup.TryGetValue(letter, out ctPosSet) || ctPosSet.Count == 0)
@@ -233,55 +178,11 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
 
                     HashSet<int> validForLetter = new HashSet<int>();
 
-                    // First transposition offset ranges for column c
-                    int totalShort1 = keyLength - gp.FullCols1;
-                    int selfShort1 = (c >= gp.FullCols1) ? 1 : 0;
-                    int otherShort1 = totalShort1 - selfShort1;
-                    int otherFull1 = (keyLength - 1) - otherShort1;
-
-                    for (int v = 1; v <= keyLength; v++)
+                    foreach (int p in ctPosSet)
                     {
-                        int numBefore1 = v - 1;
-                        int minS1 = Math.Max(0, numBefore1 - otherFull1);
-                        int maxS1 = Math.Min(numBefore1, otherShort1);
-
-                        bool foundForV = false;
-                        for (int ns1 = minS1; ns1 <= maxS1 && !foundForV; ns1++)
-                        {
-                            int interPos = numBefore1 * gp.R1 - ns1 + row1;
-                            if (interPos < 0 || interPos >= gp.PtLen) continue;
-
-                            int row2 = interPos / keyLength;
-                            int col2 = interPos % keyLength;
-                            int col2Len = (col2 < gp.FullCols2) ? gp.R2 : (gp.R2 - 1);
-                            if (row2 >= col2Len) continue;
-
-                            // Second transposition: try all w for col2
-                            int selfShort2 = (col2 >= gp.FullCols2) ? 1 : 0;
-                            int otherShort2 = totalShort2 - selfShort2;
-                            int otherFull2 = (keyLength - 1) - otherShort2;
-
-                            for (int w = 1; w <= keyLength && !foundForV; w++)
-                            {
-                                int numBefore2 = w - 1;
-                                int minS2 = Math.Max(0, numBefore2 - otherFull2);
-                                int maxS2 = Math.Min(numBefore2, otherShort2);
-
-                                for (int ns2 = minS2; ns2 <= maxS2 && !foundForV; ns2++)
-                                {
-                                    int ctPos = numBefore2 * gp.R2 - ns2 + row2;
-                                    if (ctPos >= 0 && ctPos < ciphertext.Length && ctPosSet.Contains(ctPos))
-                                    {
-                                        foundForV = true;
-                                    }
-                                }
-                            }
-                        }
-
-                        if (foundForV) validForLetter.Add(v);
+                        BackTraceFromCTPosition(p, row1, c, letter, keyLength, gp, validForLetter);
                     }
 
-                    // Intersect with other letters in the same column
                     if (validForCol == null)
                         validForCol = validForLetter;
                     else
@@ -300,13 +201,82 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
             return domains;
         }
 
-        /// <summary>
-        /// Arc consistency propagation.
-        /// Uses the CURRENT RESTRICTED domain(col2) when checking validity of v for col1.
-        /// When domain(col2) shrinks (due to other crib letters), v values that relied
-        /// on removed w values are invalidated. Iterates until stable.
-        /// Returns false if any domain becomes empty.
-        /// </summary>
+        private static void BackTraceFromCTPosition(
+            int p, int targetRow, int targetCol, char letter,
+            int keyLength, GridParams gp,
+            HashSet<int> validPiValues)
+        {
+            int L = keyLength;
+            int totalShort2 = L - gp.FullCols2;
+            int totalFull2 = gp.FullCols2;
+
+            for (int w = 1; w <= L; w++)
+            {
+                int numBefore2 = w - 1;
+
+                for (int blockIsFull2 = 0; blockIsFull2 <= 1; blockIsFull2++)
+                {
+                    int blockLen2 = blockIsFull2 == 1 ? gp.R2 : (gp.R2 - 1);
+                    if (blockLen2 <= 0) continue;
+
+                    int remainingFull2 = totalFull2 - blockIsFull2;
+                    int remainingShort2 = totalShort2 - (1 - blockIsFull2);
+                    if (remainingFull2 < 0 || remainingShort2 < 0) continue;
+
+                    int minFB2 = Math.Max(0, numBefore2 - remainingShort2);
+                    int maxFB2 = Math.Min(numBefore2, remainingFull2);
+
+                    for (int fb2 = minFB2; fb2 <= maxFB2; fb2++)
+                    {
+                        int ctStart = fb2 * gp.R2 + (numBefore2 - fb2) * (gp.R2 - 1);
+                        int row2 = p - ctStart;
+
+                        if (row2 < 0 || row2 >= blockLen2) continue;
+
+                        int col2Start = blockIsFull2 == 1 ? 0 : gp.FullCols2;
+                        int col2End = blockIsFull2 == 1 ? gp.FullCols2 : L;
+
+                        for (int col2 = col2Start; col2 < col2End; col2++)
+                        {
+                            int interPos = row2 * L + col2;
+                            if (interPos < 0 || interPos >= gp.PtLen) continue;
+
+                            int colLen1 = (targetCol < gp.FullCols1) ? gp.R1 : (gp.R1 - 1);
+                            int totalShort1 = L - gp.FullCols1;
+                            int totalFull1 = gp.FullCols1;
+                            int selfFull1 = (targetCol < gp.FullCols1) ? 1 : 0;
+                            int otherFull1 = totalFull1 - selfFull1;
+                            int otherShort1 = totalShort1 - (1 - selfFull1);
+
+                            for (int v = 1; v <= L; v++)
+                            {
+                                if (targetCol == col2 && v != w) continue;
+                                if (targetCol != col2 && v == w) continue;
+
+                                int numBefore1 = v - 1;
+                                int minFB1 = Math.Max(0, numBefore1 - otherShort1);
+                                int maxFB1 = Math.Min(numBefore1, otherFull1);
+
+                                for (int fb1 = minFB1; fb1 <= maxFB1; fb1++)
+                                {
+                                    int interStart = fb1 * gp.R1 + (numBefore1 - fb1) * (gp.R1 - 1);
+                                    int r1 = interPos - interStart;
+
+                                    if (r1 == targetRow)
+                                    {
+                                        if (r1 >= 0 && r1 < colLen1)
+                                        {
+                                            validPiValues.Add(v);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private static bool RefineDomainsIteratively(
             string ciphertext, Dictionary<char, HashSet<int>> ctPosLookup,
             CribLetterInfo[] cribLetters, int keyLength, GridParams gp,
@@ -329,6 +299,49 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
             while (anyChanged)
             {
                 anyChanged = false;
+
+                // 1. Bijection (AllDifferent)
+                for (int c = 0; c < keyLength; c++)
+                {
+                    if (domainSets[c].Count == 1)
+                    {
+                        int confirmedValue = domainSets[c].First();
+                        for (int other = 0; other < keyLength; other++)
+                        {
+                            if (other == c) continue;
+                            if (domainSets[other].Remove(confirmedValue))
+                            {
+                                anyChanged = true;
+                                if (domainSets[other].Count == 0) return false;
+                            }
+                        }
+                    }
+                }
+
+                // 2. Hidden Singles
+                for (int val = 1; val <= keyLength; val++)
+                {
+                    int foundIn = -1;
+                    int count = 0;
+                    for (int c = 0; c < keyLength; c++)
+                    {
+                        if (domainSets[c].Contains(val))
+                        {
+                            foundIn = c;
+                            count++;
+                            if (count > 1) break;
+                        }
+                    }
+                    if (count == 0) return false;
+                    if (count == 1 && domainSets[foundIn].Count > 1)
+                    {
+                        domainSets[foundIn].Clear();
+                        domainSets[foundIn].Add(val);
+                        anyChanged = true;
+                    }
+                }
+
+                // 3. Arc Consistency Propagation
                 for (int col1 = 0; col1 < keyLength; col1++)
                 {
                     if (lettersByCol[col1].Count == 0) continue;
@@ -377,6 +390,9 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
 
                                 foreach (int w in domainSets[col2])
                                 {
+                                    if (col1 == col2 && w != v) continue;
+                                    if (col1 != col2 && w == v) continue;
+
                                     int numBefore2 = w - 1;
                                     int minS2 = Math.Max(0, numBefore2 - otherFull2);
                                     int maxS2 = Math.Min(numBefore2, otherShort2);
@@ -421,10 +437,6 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
             return true;
         }
 
-        /// <summary>
-        /// Backtracking CSP solver with MRV heuristic, forward-checking, and
-        /// double-transposition consistency checking.
-        /// </summary>
         private static void BacktrackCSP(
             string ciphertext, string crib, int keyLength, int nullCount,
             CribLetterInfo[] cribLetters, GridParams gp,
@@ -444,7 +456,6 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
                 if (reportProgress != null && tested % 200 == 0)
                     reportProgress(tested);
 
-                // Full permutation found — decrypt and verify crib match
                 string plaintext = UbchiCore.DecryptUbchi(ciphertext, perm, nullCount);
 
                 if (plaintext.Length >= crib.Length &&
@@ -488,17 +499,6 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
             }
         }
 
-        /// <summary>
-        /// Combined consistency check with forward-checking.
-        /// 
-        /// Two levels of checking:
-        /// 1. EXACT CHECK: When both col1 and col2 are assigned AND all preceding columns
-        ///    in both reading orders are assigned, verify ciphertext[ctPos] == letter.
-        /// 2. FORWARD CHECK: When col1 is assigned to ?(col1)=v, compute the range
-        ///    of possible ciphertext positions using offset ranges.
-        ///    Check if the letter appears at ANY of those positions. This works even when
-        ///    not all preceding columns are assigned yet.
-        /// </summary>
         private static bool CheckConsistencyWithForwardCheck(
             string ciphertext, CribLetterInfo[] cribLetters, int[] perm, int keyLength,
             GridParams gp)
@@ -527,7 +527,6 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
 
                 int v = perm[col1];
 
-                // Try exact check first
                 int readOrder1 = v - 1;
                 int offset1 = ComputeExactReadOffset(orderToCol, readOrder1, gp.R1, gp.FullCols1);
 
@@ -541,6 +540,10 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
 
                     if (perm[col2] != 0)
                     {
+                        int w = perm[col2];
+                        if (col1 == col2 && w != v) return false;
+                        if (col1 != col2 && w == v) return false;
+
                         int col2Len = (col2 < gp.FullCols2) ? gp.R2 : (gp.R2 - 1);
                         if (row2 >= col2Len) continue;
 
@@ -559,7 +562,6 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
                     }
                 }
 
-                // Forward check with offset ranges
                 int assignedOffset1 = 0;
                 int unassignedBefore1 = 0;
                 for (int ord = 0; ord < v - 1; ord++)
@@ -587,6 +589,9 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
                     if (perm[col2] != 0)
                     {
                         int w = perm[col2];
+                        if (col1 == col2 && w != v) continue;
+                        if (col1 != col2 && w == v) continue;
+
                         int assignedOffset2 = 0;
                         int unassignedBefore2 = 0;
                         for (int ord = 0; ord < w - 1; ord++)
@@ -613,6 +618,9 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
                         int otherFull2 = (keyLength - 1) - otherShort2;
                         for (int w = 1; w <= keyLength && !anyMatch; w++)
                         {
+                            if (col1 == col2 && w != v) continue;
+                            if (col1 != col2 && w == v) continue;
+
                             int numBefore2 = w - 1;
                             int minS2 = Math.Max(0, numBefore2 - otherFull2);
                             int maxS2 = Math.Min(numBefore2, otherShort2);
@@ -633,18 +641,13 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
             return true;
         }
 
-        /// <summary>
-        /// Compute the exact read offset for a column at the given reading order.
-        /// Sums the actual lengths of all columns read before this one (orders 0..readOrder-1).
-        /// Returns -1 if any preceding column in the reading order is not yet assigned.
-        /// </summary>
         private static int ComputeExactReadOffset(int[] orderToCol, int readOrder, int gridRows, int fullCols)
         {
             int offset = 0;
             for (int ord = 0; ord < readOrder; ord++)
             {
                 int col = orderToCol[ord];
-                if (col < 0) return -1; // preceding column not assigned yet
+                if (col < 0) return -1;
                 offset += (col < fullCols) ? gridRows : (gridRows - 1);
             }
             return offset;
@@ -701,9 +704,6 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
         public int Col1;
     }
 
-    /// <summary>
-    /// Precomputed grid dimensions for both transpositions.
-    /// </summary>
     internal struct GridParams
     {
         public int L;
@@ -728,4 +728,3 @@ namespace CrypTool.Plugins.UbchiPermutationCryptanalysis
         }
     }
 }
-
