@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="de" />
+
+  <introduction lang="en">
+    The &#220;bchi Permutation Cryptanalysis component performs CSP-based crib cryptanalysis of the &#220;bchi double columnar transposition cipher. The attack exploits a key weakness of the &#220;bchi cipher: both transposition steps use the same permutation key.
+
+    By tracing each crib letter backward through both transpositions, the analyzer determines which permutation values are consistent with the observed ciphertext positions. Invalid values are discarded immediately, reducing the search space from L! (for example, 1,307,674,368,000 for L = 15) to a manageable set before any full decryption is attempted.
+
+    The method uses all crib letters, including common ones such as E, N, and R, rather than relying only on rare letters. After a columnar transposition, a letter from row r tends to appear at ciphertext positions related to the row count. Even common letters do not match all such positions, so checking all letters significantly reduces the search space across all columns and enables practical analysis of key lengths up to 30.
+  </introduction>
+
+  <introduction lang="de">
+    Die &#220;bchi-Permutationskryptoanalyse f&#252;hrt eine CSP-basierte Crib-Kryptoanalyse der &#220;bchi-Doppelspaltentranspositionschiffre durch. Der Angriff nutzt eine zentrale Schw&#228;che der &#220;bchi-Chiffre: Beide Transpositionsschritte verwenden denselben Permutationsschl&#252;ssel.
+
+    Durch die R&#252;ckverfolgung jedes Crib-Buchstabens durch beide Transpositionen stellt der Analysator fest, welche Permutationswerte mit den beobachteten Geheimtextpositionen vereinbar sind. Ung&#252;ltige Werte werden sofort verworfen, wodurch der Suchraum von L! (z.B. 1.307.674.368.000 bei L = 15) auf eine handhabbare Menge reduziert wird, bevor eine vollst&#228;ndige Entschl&#252;sselung versucht wird.
+
+    Die Methode verwendet alle Crib-Buchstaben, einschlie&#223;lich h&#228;ufiger wie E, N und R, anstatt sich nur auf seltene Buchstaben zu verlassen. Nach einer Spaltentransposition neigt ein Buchstabe aus Zeile r dazu, an Geheimtextpositionen zu erscheinen, die mit der Zeilenanzahl zusammenh&#228;ngen. Selbst h&#228;ufige Buchstaben passen nicht auf alle solchen Positionen, sodass die Pr&#252;fung aller Buchstaben den Suchraum f&#252;r alle Spalten drastisch einschr&#228;nkt und eine praktische Analyse von Schl&#252;ssell&#228;ngen bis zu 30 erm&#246;glicht.
+  </introduction>
+
+  <usage lang="en">
+    Inputs:
+
+    - Ciphertext (required): the &#220;bchi-encrypted message, normalized to A-Z.
+    - Crib (required): a known plaintext prefix, for example GEFECHTSBERICHTVOM or LAGEMELDUNG. The analysis does not start if the crib is empty.
+
+    Parameters:
+
+    - MinKeyLength / MaxKeyLength: range of key lengths to test. If the key length is known, set Min = Max to speed up the attack significantly.
+    - MinNulls / MaxNulls: number of null characters potentially inserted before the second transposition. If unknown, use 0-3.
+    - MaxCandidates: number of top-ranked results kept in the table.
+    - TimeoutSeconds: maximum runtime per (keyLen, nulls) combination. Increase for longer key lengths.
+
+    The total number of tested combinations is:
+    (MaxKeyLength - MinKeyLength + 1) &#215; (MaxNulls - MinNulls + 1)
+
+    Recommended workflow:
+
+    1. Connect the &#220;bchi ciphertext to the Ciphertext input.
+    2. Enter a known plaintext prefix (crib).
+    3. Set key-length range, null range, MaxCandidates, and TimeoutSeconds.
+    4. Start the analysis. Results are shown in ranked order.
+    5. Double-click a result to promote it to the outputs.
+    6. Inspect OutputBestPlaintext and OutputBestKey.
+  </usage>
+
+  <usage lang="de">
+    Eingaben:
+
+    - Geheimtext (erforderlich): die &#220;bchi-verschl&#252;sselte Nachricht, normalisiert auf A-Z.
+    - Crib (erforderlich): ein bekanntes Klartextpr&#228;fix, zum Beispiel GEFECHTSBERICHTVOM oder LAGEMELDUNG. Die Analyse startet nicht, wenn das Crib leer ist.
+
+    Parameter:
+
+    - MinKeyLength / MaxKeyLength: Bereich der zu testenden Schl&#252;ssell&#228;ngen. Wenn die Schl&#252;ssell&#228;nge bekannt ist, setzen Sie Min = Max, um den Angriff erheblich zu beschleunigen.
+    - MinNulls / MaxNulls: Anzahl der Nullzeichen, die m&#246;glicherweise vor der zweiten Transposition eingef&#252;gt wurden. Bei Unkenntnis 0-3 verwenden.
+    - MaxCandidates: Anzahl der besten Ergebnisse, die in der Tabelle behalten werden.
+    - TimeoutSeconds: maximale Laufzeit pro (keyLen, nulls) Kombination. F&#252;r l&#228;ngere Schl&#252;ssel erh&#246;hen.
+
+    Die Gesamtzahl der getesteten Kombinationen betr&#228;gt:
+    (MaxKeyLength - MinKeyLength + 1) &#215; (MaxNulls - MinNulls + 1)
+
+    Empfohlener Arbeitsablauf:
+
+    1. Verbinden Sie den &#220;bchi-Geheimtext mit dem Geheimtext-Eingang.
+    2. Geben Sie ein bekanntes Klartextpr&#228;fix (Crib) ein.
+    3. Stellen Sie den Bereich f&#252;r Schl&#252;ssell&#228;nge, Nullzeichen, MaxCandidates und TimeoutSeconds ein.
+    4. Starten Sie die Analyse. Die Ergebnisse werden in einer Rangliste angezeigt.
+    5. Doppelklicken Sie auf ein Ergebnis, um es an die Ausg&#228;nge weiterzuleiten.
+    6. &#220;berpr&#252;fen Sie OutputBestPlaintext und OutputBestKey.
+  </usage>
+
+  <presentation lang="en">
+    The analysis view shows results ranked by score in a table. Each row contains:
+
+    - Rank: position in the candidate ranking.
+    - Score: combined score from crib-match bonus and German letter-frequency fit (chi-square distance). Lower chi-square indicates a better language match.
+    - Key length: tested key length L.
+    - Nulls: number of null characters used in this candidate.
+    - Key permutation: recovered numeric permutation.
+    - Plaintext preview: beginning of the decrypted text.
+
+    The analysis iterates through all (keyLen, nulls) combinations. Progress is shown in real time. The best overall candidate is automatically written to OutputBestPlaintext and OutputBestKey. Double-clicking any table row promotes that candidate to the outputs.
+  </presentation>
+
+  <presentation lang="de">
+    Die Analyseansicht zeigt die Ergebnisse nach Score sortiert in einer Tabelle. Jede Zeile enth&#228;lt:
+
+    - Rang: Position in der Kandidatenrangliste.
+    - Score: kombinierter Wert aus Crib-Treffer-Bonus und deutscher Buchstabenh&#228;ufigkeit (Chi-Quadrat-Abstand). Ein niedrigerer Chi-Quadrat-Wert bedeutet eine bessere Sprach&#252;bereinstimmung.
+    - Schl&#252;ssell&#228;nge: getestete Schl&#252;ssell&#228;nge L.
+    - Nullzeichen: Anzahl der Nullzeichen f&#252;r diesen Kandidaten.
+    - Schl&#252;sselpermutation: wiederhergestellte numerische Permutation.
+    - Klartextvorschau: Beginn des entschl&#252;sselten Textes.
+
+    Die Analyse durchl&#228;uft alle (keyLen, nulls) Kombinationen. Der Fortschritt wird in Echtzeit angezeigt. Der beste Gesamtkandidat wird automatisch in OutputBestPlaintext und OutputBestKey geschrieben. Ein Doppelklick auf eine Tabellenzeile bef&#246;rdert diesen Kandidaten zu den Ausg&#228;ngen.
+  </presentation>
+
+  <references>
+    <linkReference id="wikipedia">
+      <link url="https://en.wikipedia.org/wiki/Transposition_cipher#Double_transposition" lang="en" />
+      <caption lang="en">Wikipedia: Double Transposition Cipher</caption>
+      <link url="https://de.wikipedia.org/wiki/Transpositionsverschl%C3%BCsselung" lang="de" />
+      <caption lang="de">Wikipedia: Transpositionsverschl&#252;sselung</caption>
+    </linkReference>
+  </references>
+</documentation>
+
+

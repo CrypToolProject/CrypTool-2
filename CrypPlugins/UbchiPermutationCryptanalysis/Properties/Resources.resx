@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="PluginCaption" xml:space="preserve">
+		<value>Übchi Permutation Cryptanalysis</value>
+	</data>
+	<data name="PluginTooltip" xml:space="preserve">
+		<value>Permutation cryptanalysis of the Übchi double columnar transposition cipher using mandatory crib constraints, domain filtering, arc consistency, and CSP backtracking.</value>
+	</data>
+	<data name="InputCiphertext_Name" xml:space="preserve">
+		<value>Ciphertext</value>
+	</data>
+	<data name="InputCiphertext_Description" xml:space="preserve">
+		<value>The Übchi ciphertext to be analyzed</value>
+	</data>
+	<data name="InputCrib_Name" xml:space="preserve">
+		<value>Crib</value>
+	</data>
+	<data name="InputCrib_Description" xml:space="preserve">
+		<value>Known plaintext prefix (mandatory). Analysis will not start without a crib.</value>
+	</data>
+	<data name="OutputBestPlaintext_Name" xml:space="preserve">
+		<value>Best Plaintext</value>
+	</data>
+	<data name="OutputBestPlaintext_Description" xml:space="preserve">
+		<value>The plaintext candidate with the highest score</value>
+	</data>
+	<data name="OutputBestKey_Name" xml:space="preserve">
+		<value>Best Key</value>
+	</data>
+	<data name="OutputBestKey_Description" xml:space="preserve">
+		<value>The permutation key of the best candidate</value>
+	</data>
+	<data name="MinKeyLength_Caption" xml:space="preserve">
+		<value>Min Key Length</value>
+	</data>
+	<data name="MinKeyLength_Tooltip" xml:space="preserve">
+		<value>Minimum number of columns (key length) to try during analysis</value>
+	</data>
+	<data name="MaxKeyLength_Caption" xml:space="preserve">
+		<value>Max Key Length</value>
+	</data>
+	<data name="MaxKeyLength_Tooltip" xml:space="preserve">
+		<value>Maximum number of columns (key length) to try during analysis</value>
+	</data>
+	<data name="MinNulls_Caption" xml:space="preserve">
+		<value>Min Nulls</value>
+	</data>
+	<data name="MinNulls_Tooltip" xml:space="preserve">
+		<value>Minimum number of null characters assumed at the end of the intermediate text</value>
+	</data>
+	<data name="MaxNulls_Caption" xml:space="preserve">
+		<value>Max Nulls</value>
+	</data>
+	<data name="MaxNulls_Tooltip" xml:space="preserve">
+		<value>Maximum number of null characters assumed at the end of the intermediate text</value>
+	</data>
+	<data name="MaxCandidates_Caption" xml:space="preserve">
+		<value>Max Candidates</value>
+	</data>
+	<data name="MaxCandidates_Tooltip" xml:space="preserve">
+		<value>Maximum number of top candidates to keep and display</value>
+	</data>
+	<data name="TimeoutSeconds_Caption" xml:space="preserve">
+		<value>Timeout per step (seconds)</value>
+	</data>
+	<data name="TimeoutSeconds_Tooltip" xml:space="preserve">
+		<value>Maximum time in seconds for analyzing each (key length, nulls) combination before moving to the next one</value>
+	</data>
+	<data name="Header_Caption" xml:space="preserve">
+		<value>Übchi Permutation Cryptanalysis</value>
+	</data>
+	<data name="ResultList_Caption" xml:space="preserve">
+		<value>Top Candidates</value>
+	</data>
+	<data name="Progress_Caption" xml:space="preserve">
+		<value>Analysis Progress</value>
+	</data>
+	<data name="Header_Status" xml:space="preserve">
+		<value>Status</value>
+	</data>
+	<data name="Header_BestScore" xml:space="preserve">
+		<value>Best Score</value>
+	</data>
+	<data name="Header_ElapsedTime" xml:space="preserve">
+		<value>Elapsed Time</value>
+	</data>
+	<data name="Header_KeysTested" xml:space="preserve">
+		<value>Keys Tested</value>
+	</data>
+	<data name="Progress_CurrentKeyLen" xml:space="preserve">
+		<value>Current Key Length</value>
+	</data>
+	<data name="Progress_CurrentNulls" xml:space="preserve">
+		<value>Current Nulls</value>
+	</data>
+	<data name="Progress_Completed" xml:space="preserve">
+		<value>Completed</value>
+	</data>
+	<data name="Progress_Total" xml:space="preserve">
+		<value>Total</value>
+	</data>
+	<data name="Log_NoCiphertext" xml:space="preserve">
+		<value>No ciphertext provided.</value>
+	</data>
+	<data name="Log_CiphertextTooShort" xml:space="preserve">
+		<value>Ciphertext is too short for the configured key length range.</value>
+	</data>
+	<data name="Log_Starting" xml:space="preserve">
+		<value>Starting Übchi permutation analysis...</value>
+	</data>
+	<data name="Log_Completed" xml:space="preserve">
+		<value>Analysis completed. Best Score: {0:F2}</value>
+	</data>
+	<data name="Log_AnalysisError" xml:space="preserve">
+		<value>Error during analysis: {0}</value>
+	</data>
+	<data name="Status_Running" xml:space="preserve">
+		<value>Running...</value>
+	</data>
+	<data name="Status_Finished" xml:space="preserve">
+		<value>Finished</value>
+	</data>
+	<data name="Status_Stopped" xml:space="preserve">
+		<value>Stopped</value>
+	</data>
+	<data name="Col_Rank" xml:space="preserve">
+		<value>#</value>
+	</data>
+	<data name="Col_Score" xml:space="preserve">
+		<value>Score</value>
+	</data>
+	<data name="Col_Key" xml:space="preserve">
+		<value>Key</value>
+	</data>
+	<data name="Col_KeyLength" xml:space="preserve">
+		<value>Key Len</value>
+	</data>
+	<data name="Col_Nulls" xml:space="preserve">
+		<value>Nulls</value>
+	</data>
+	<data name="Col_Plaintext" xml:space="preserve">
+		<value>Plaintext</value>
+	</data>
+	<data name="Col_Cribs" xml:space="preserve">
+		<value>Info</value>
+	</data>
+</root>
+
+

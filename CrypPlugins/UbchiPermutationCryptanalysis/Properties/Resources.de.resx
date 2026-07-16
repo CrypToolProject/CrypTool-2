@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="PluginCaption" xml:space="preserve">
+		<value>Übchi-Permutationsanalyse</value>
+	</data>
+	<data name="PluginTooltip" xml:space="preserve">
+		<value>Permutationskryptoanalyse der Übchi-Doppeltranspositions-Chiffre mit Pflicht-Crib, Domaenenfilterung, Arc-Consistency und CSP-Backtracking.</value>
+	</data>
+	<data name="InputCiphertext_Name" xml:space="preserve">
+		<value>Ciphertext</value>
+	</data>
+	<data name="InputCiphertext_Description" xml:space="preserve">
+		<value>Der zu analysierende Übchi-Chiffretext</value>
+	</data>
+	<data name="InputCrib_Name" xml:space="preserve">
+		<value>Crib</value>
+	</data>
+	<data name="InputCrib_Description" xml:space="preserve">
+		<value>Bekannter Klartextanfang (Pflichtfeld). Ohne Crib wird die Analyse nicht gestartet.</value>
+	</data>
+	<data name="OutputBestPlaintext_Name" xml:space="preserve">
+		<value>Best Plaintext</value>
+	</data>
+	<data name="OutputBestPlaintext_Description" xml:space="preserve">
+		<value>Der Klartextkandidat mit dem hoechsten Score</value>
+	</data>
+	<data name="OutputBestKey_Name" xml:space="preserve">
+		<value>Best Key</value>
+	</data>
+	<data name="OutputBestKey_Description" xml:space="preserve">
+		<value>Der Permutationsschluessel des besten Kandidaten</value>
+	</data>
+	<data name="MinKeyLength_Caption" xml:space="preserve">
+		<value>Min. Schluessell&#228;nge</value>
+	</data>
+	<data name="MinKeyLength_Tooltip" xml:space="preserve">
+		<value>Minimale Anzahl der Spalten (Schluessell&#228;nge) fuer die Analyse</value>
+	</data>
+	<data name="MaxKeyLength_Caption" xml:space="preserve">
+		<value>Max. Schluessell&#228;nge</value>
+	</data>
+	<data name="MaxKeyLength_Tooltip" xml:space="preserve">
+		<value>Maximale Anzahl der Spalten (Schluessell&#228;nge) fuer die Analyse</value>
+	</data>
+	<data name="MinNulls_Caption" xml:space="preserve">
+		<value>Min. Nullzeichen</value>
+	</data>
+	<data name="MinNulls_Tooltip" xml:space="preserve">
+		<value>Minimale Anzahl der Nullzeichen am Ende des Zwischentextes</value>
+	</data>
+	<data name="MaxNulls_Caption" xml:space="preserve">
+		<value>Max. Nullzeichen</value>
+	</data>
+	<data name="MaxNulls_Tooltip" xml:space="preserve">
+		<value>Maximale Anzahl der Nullzeichen am Ende des Zwischentextes</value>
+	</data>
+	<data name="MaxCandidates_Caption" xml:space="preserve">
+		<value>Max. Kandidaten</value>
+	</data>
+	<data name="MaxCandidates_Tooltip" xml:space="preserve">
+		<value>Maximale Anzahl der Top-Kandidaten in der Ergebnisliste</value>
+	</data>
+	<data name="TimeoutSeconds_Caption" xml:space="preserve">
+		<value>Timeout pro Schritt (Sekunden)</value>
+	</data>
+	<data name="TimeoutSeconds_Tooltip" xml:space="preserve">
+		<value>Maximale Zeit in Sekunden fuer die Analyse jeder (Schluessell&#228;nge, Nullzeichen)-Kombination</value>
+	</data>
+	<data name="Header_Caption" xml:space="preserve">
+		<value>Übchi-Permutationsanalyse</value>
+	</data>
+	<data name="Log_Starting" xml:space="preserve">
+		<value>Übchi-Permutationsanalyse wird gestartet...</value>
+	</data>
+	<data name="Status_Running" xml:space="preserve">
+		<value>Laeuft...</value>
+	</data>
+	<data name="Status_Finished" xml:space="preserve">
+		<value>Abgeschlossen</value>
+	</data>
+	<data name="Status_Stopped" xml:space="preserve">
+		<value>Gestoppt</value>
+	</data>
+</root>
+

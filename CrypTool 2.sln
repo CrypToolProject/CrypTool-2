@@ -1,3 +1,4 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32002.185
@@ -471,6 +472,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EllipticCurveCryptography", "CrypPlugins\EllipticCurveCryptography\EllipticCurveCryptography.csproj", "{0AC26BF9-B410-4F53-834D-AD75ED43A809}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ubchi", "CrypPlugins\Ubchi\Ubchi.csproj", "{B9422D08-0F44-4531-970E-B2571B128BF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UbchiPermutationCryptanalysis", "CrypPlugins\UbchiPermutationCryptanalysis\UbchiPermutationCryptanalysis.csproj", "{C7A92761-98C1-45A2-90F7-7A3D8C2E61B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1406,6 +1409,10 @@ Global
 		{B9422D08-0F44-4531-970E-B2571B128BF2}.Debug|x64.Build.0 = Debug|x64
 		{B9422D08-0F44-4531-970E-B2571B128BF2}.Release|x64.ActiveCfg = Release|x64
 		{B9422D08-0F44-4531-970E-B2571B128BF2}.Release|x64.Build.0 = Release|x64
+		{C7A92761-98C1-45A2-90F7-7A3D8C2E61B5}.Debug|x64.ActiveCfg = Debug|x64
+		{C7A92761-98C1-45A2-90F7-7A3D8C2E61B5}.Debug|x64.Build.0 = Debug|x64
+		{C7A92761-98C1-45A2-90F7-7A3D8C2E61B5}.Release|x64.ActiveCfg = Release|x64
+		{C7A92761-98C1-45A2-90F7-7A3D8C2E61B5}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1645,3 +1652,4 @@ Global
 		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal
+
