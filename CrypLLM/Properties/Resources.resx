@@ -1,0 +1,825 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CrypLLMSettings" xml:space="preserve">
+    <value>AI Chat</value>
+  </data>
+  <data name="AIChatSettings" xml:space="preserve">
+    <value>AI Chat settings</value>
+  </data>
+  <data name="ModelId" xml:space="preserve">
+    <value>LLM Model:</value>
+  </data>
+  <data name="ApiKey" xml:space="preserve">
+    <value>API key:</value>
+  </data>
+  <data name="OrgId" xml:space="preserve">
+    <value>Organization ID:</value>
+  </data>
+  <data name="ChatHelloMessage" xml:space="preserve">
+    <value>Hello! How can I help you today?</value>
+  </data>
+  <data name="AiChatWelcomeTitle" xml:space="preserve">
+    <value>Start a conversation</value>
+  </data>
+  <data name="AiChatWelcomeBody" xml:space="preserve">
+    <value>Ask a question about cryptography or CrypTool 2. Depending on which tools are enabled, the AI can read the current workspace and open tabs and may also change the workspace.</value>
+  </data>
+  <data name="NewChat" xml:space="preserve">
+    <value>New Chat</value>
+  </data>
+  <data name="NewThread" xml:space="preserve">
+    <value>New Thread</value>
+  </data>
+  <data name="DeleteThread" xml:space="preserve">
+    <value>Delete Thread</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>Send Message</value>
+  </data>
+  <data name="AiChatSelectModelPlaceholder" xml:space="preserve">
+    <value>Please select a model</value>
+  </data>
+  <data name="SelectAIModel" xml:space="preserve">
+    <value>Select an AI-Model for your request</value>
+  </data>
+  <data name="Provider" xml:space="preserve">
+    <value>Provider:</value>
+  </data>
+  <data name="ProviderOpenAI" xml:space="preserve">
+    <value>OpenAI API</value>
+  </data>
+  <data name="ProviderLocal" xml:space="preserve">
+    <value>Local model (LM Studio compatible)</value>
+  </data>
+  <data name="OpenAISection" xml:space="preserve">
+    <value>OpenAI settings</value>
+  </data>
+  <data name="LocalModelSection" xml:space="preserve">
+    <value>Local / LM Studio settings</value>
+  </data>
+  <data name="ActiveModelId" xml:space="preserve">
+    <value>Active model ID:</value>
+  </data>
+  <data name="ModelIdList" xml:space="preserve">
+    <value>Possible model ID's:</value>
+  </data>
+  <data name="LocalModelEndpoint" xml:space="preserve">
+    <value>Local model endpoint:</value>
+  </data>
+  <data name="LocalModelEndpointTooltip" xml:space="preserve">
+    <value>OpenAI-compatible endpoint of the local model server (e.g. LM Studio at http://localhost:1234/v1).</value>
+  </data>
+  <data name="AddModelTooltip" xml:space="preserve">
+    <value>Add model ID</value>
+  </data>
+  <data name="RemoveModelTooltip" xml:space="preserve">
+    <value>Remove model ID</value>
+  </data>
+  <data name="OpenAiAgentInstructions" xml:space="preserve">
+    <value>Open the ai instruction file</value>
+  </data>
+  <data name="ReloadAiAgent" xml:space="preserve">
+    <value>Reload the ai agent with new instructions</value>
+  </data>
+  <data name="LoadDefaultText" xml:space="preserve">
+    <value>Load default text</value>
+  </data>
+  <data name="InstructionIsNotToBeChanged" xml:space="preserve">
+    <value>This instruction is not to be changed</value>
+  </data>
+  <data name="InstructionKey" xml:space="preserve">
+    <value>Instruction-ID:</value>
+  </data>
+  <data name="ReasoningEffort" xml:space="preserve">
+    <value>Reasoning:</value>
+  </data>
+  <data name="ReasoningEffortLow" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="ReasoningEffortMedium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="ReasoningEffortHigh" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="LlmLogLevel" xml:space="preserve">
+    <value>CrypLLM logs:</value>
+  </data>
+  <data name="LlmLogLevelDebug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="LlmLogLevelInfo" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="LlmLogLevelWarning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="LlmLogLevelError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="LlmLogLevelBalloon" xml:space="preserve">
+    <value>Balloon</value>
+  </data>
+  <data name="AiToolPermissionsTab" xml:space="preserve">
+    <value>Tool permission</value>
+  </data>
+  <data name="AiToolPermissionsHint" xml:space="preserve">
+    <value>If “Allow AI changes” is disabled, the AI must not make changes in workspaces or anywhere else in CrypTool 2.</value>
+  </data>
+  <data name="AiToolPermissionsMethod" xml:space="preserve">
+    <value>Method</value>
+  </data>
+  <data name="AiToolPermissionsDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="AiToolPermissionsAllowed" xml:space="preserve">
+    <value>Allowed</value>
+  </data>
+  <data name="AiToolPermissionsMinContextHeader" xml:space="preserve">
+    <value>Min context</value>
+  </data>
+  <data name="AiToolPermissionsNoMinContextValue" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="OpenAIWindowOnStartup" xml:space="preserve">
+    <value>OpenAI-Chat on startup</value>
+  </data>
+  <data name="DeleteAllSavedAIChats" xml:space="preserve">
+    <value>Delete all chats with the AI</value>
+  </data>
+  <data name="ChatHistory" xml:space="preserve">
+    <value>chat history</value>
+  </data>
+  <data name="ChatHistoryReducerTargetLabel" xml:space="preserve">
+    <value>Message limit:</value>
+  </data>
+  <data name="ChatHistoryReducerTargetHint" xml:space="preserve">
+    <value>If the chat is longer, only the latest messages are sent to the AI. Full chat stays visible. Allowed range: {0}-{1}. Default: {2}. Non-numeric or empty input resets to default; numeric values outside the range are clamped to the nearest limit when leaving the field.</value>
+  </data>
+  <data name="InstructionDefaultStateMatches" xml:space="preserve">
+    <value>Matches the default text</value>
+  </data>
+  <data name="InstructionDefaultStateDiffers" xml:space="preserve">
+    <value>❗ Differs from the default text ❗</value>
+  </data>
+  <data name="AiDisclaimerTitle" xml:space="preserve">
+    <value>AI Assistant Disclaimer</value>
+  </data>
+  <data name="AiDisclaimerText" xml:space="preserve">
+    <value>Notice: Responses are generated by an AI system and may contain errors or incomplete information.
+When using online model providers, workspace data and user input may be transmitted to external services.
+Do not include sensitive or personal information.
+Results should be reviewed critically, especially in security-relevant contexts.</value>
+  </data>
+  <data name="AiDisclaimerPopupSettingsHint" xml:space="preserve">
+    <value>You can view this disclaimer anytime in the AI chat settings.</value>
+  </data>
+  <data name="AiToolPermissionsGroupWorkspaceTitle" xml:space="preserve">
+    <value>Workspace status</value>
+  </data>
+  <data name="AiToolPermissionsGroupWorkspaceDescription" xml:space="preserve">
+    <value>These tools only read the current workspace state. They are useful for safe analysis, debugging, validation and execution monitoring.</value>
+  </data>
+  <data name="AiToolPermissionsGroupCatalogTitle" xml:space="preserve">
+    <value>Component catalog</value>
+  </data>
+  <data name="AiToolPermissionsGroupCatalogDescription" xml:space="preserve">
+    <value>These tools browse available CrypTool components and documentation. No workspace is modified by this group.</value>
+  </data>
+  <data name="AiToolPermissionsGroupTemplatesTitle" xml:space="preserve">
+    <value>Templates</value>
+  </data>
+  <data name="AiToolPermissionsGroupTemplatesDescription" xml:space="preserve">
+    <value>These tools inspect template files, metadata and template workspace content. They also allow opening an existing template in a new tab.</value>
+  </data>
+  <data name="AiToolPermissionsGroupUiTextsTitle" xml:space="preserve">
+    <value>UI help texts</value>
+  </data>
+  <data name="AiToolPermissionsGroupUiTextsDescription" xml:space="preserve">
+    <value>These tools read explanatory UI and help texts. They are useful when the AI should explain features in a user-friendly way.</value>
+  </data>
+  <data name="AiToolPermissionsGroupWorkspaceEditTitle" xml:space="preserve">
+    <value>Workspace editing</value>
+  </data>
+  <data name="AiToolPermissionsGroupWorkspaceEditDescription" xml:space="preserve">
+    <value>These tools can actively change the current workspace (components, values and connections). Disable them if you want read-only AI assistance.</value>
+  </data>
+  <data name="AllowAiToolMutationsLabel" xml:space="preserve">
+    <value>Allow the AI to make changes and to start and stop workspaces.</value>
+  </data>
+  <data name="AllowAiToolMutationsHint" xml:space="preserve">
+    <value>If disabled, the AI must not change anything in workspaces or generally in CrypTool 2.</value>
+  </data>
+  <data name="AiToolPermissionsLockedTooltip" xml:space="preserve">
+    <value>This tool is disabled. While “Allow AI changes” is off, the AI must not change anything in workspaces or in CrypTool 2.</value>
+  </data>
+  <data name="ModelContextWindowSectionTitle" xml:space="preserve">
+    <value>Model context window</value>
+  </data>
+  <data name="ModelContextWindowModelLabel" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <data name="ModelContextWindowTokensLabel" xml:space="preserve">
+    <value>Context window (tokens)</value>
+  </data>
+  <data name="ModelContextWindowLockedByDeveloper" xml:space="preserve">
+    <value>Set by developer</value>
+  </data>
+  <data name="ModelContextWindowMinValidationMessage" xml:space="preserve">
+    <value>Please enter a context window of at least 4096 tokens.</value>
+  </data>
+  <data name="ModelContextWindowDialogTitle" xml:space="preserve">
+    <value>CrypLLM</value>
+  </data>
+  <data name="AiChatUnavailableToolsTooltipTitle" xml:space="preserve">
+    <value>Not all tools are currently available.</value>
+  </data>
+  <data name="AiChatUnavailableToolsTooltipModel" xml:space="preserve">
+    <value>Model: {0}</value>
+  </data>
+  <data name="AiChatUnavailableToolsTooltipContextWindow" xml:space="preserve">
+    <value>Context window: {0} tokens</value>
+  </data>
+  <data name="AiChatUnavailableToolsTooltipContextSection" xml:space="preserve">
+    <value>Minimum context window not reached:</value>
+  </data>
+  <data name="AiChatUnavailableToolsTooltipContextEntry" xml:space="preserve">
+    <value>- {0} (min {1})</value>
+  </data>
+  <data name="AiChatUnavailableToolsTooltipSettingsSection" xml:space="preserve">
+    <value>Disabled in settings:</value>
+  </data>
+  <data name="AiChatUnavailableToolsTooltipSettingsEntry" xml:space="preserve">
+    <value>- {0} ({1})</value>
+  </data>
+  <data name="AiChatUnavailableToolsTooltipSettingsEntryNoReason" xml:space="preserve">
+    <value>- {0}</value>
+  </data>
+  <data name="AiChatUnavailableToolsReasonMutationsDisabled" xml:space="preserve">
+    <value>AI changes are not allowed</value>
+  </data>
+  <data name="AiChatUnavailableToolsReasonManuallyDisabled" xml:space="preserve">
+    <value>manually disabled</value>
+  </data>
+  <data name="AiChatDebugButtonText" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="AiChatDebugButtonTooltip" xml:space="preserve">
+    <value>Debug: show the last AI invocation</value>
+  </data>
+  <data name="AiChatDebugDialogTitle" xml:space="preserve">
+    <value>Debug View</value>
+  </data>
+  <data name="AiChatDebugNoInvocationStored" xml:space="preserve">
+    <value>No last AI request is stored for this thread.</value>
+  </data>
+  <data name="LastInvocationWindowTitle" xml:space="preserve">
+    <value>AI Debug: Last Invocation</value>
+  </data>
+  <data name="LastInvocationTabContext" xml:space="preserve">
+    <value>Context</value>
+  </data>
+  <data name="LastInvocationGroupContextBeforeAnswer" xml:space="preserve">
+    <value>Context before answer</value>
+  </data>
+  <data name="LastInvocationTabReductions" xml:space="preserve">
+    <value>Reductions</value>
+  </data>
+  <data name="LastInvocationGroupOriginal" xml:space="preserve">
+    <value>Original</value>
+  </data>
+  <data name="LastInvocationGroupReduced" xml:space="preserve">
+    <value>Reduced</value>
+  </data>
+  <data name="LastInvocationTabLlmIo" xml:space="preserve">
+    <value>LLM I/O</value>
+  </data>
+  <data name="LastInvocationLabelUserQuestion" xml:space="preserve">
+    <value>User question:</value>
+  </data>
+  <data name="LastInvocationLabelHttpRequest" xml:space="preserve">
+    <value>HTTP request:</value>
+  </data>
+  <data name="LastInvocationGroupRequestJson" xml:space="preserve">
+    <value>Request JSON (sent to LLM)</value>
+  </data>
+  <data name="LastInvocationButtonCopyRequest" xml:space="preserve">
+    <value>Copy request</value>
+  </data>
+  <data name="LastInvocationGroupResponseJson" xml:space="preserve">
+    <value>Response JSON (received from LLM)</value>
+  </data>
+  <data name="LastInvocationButtonCopyResponse" xml:space="preserve">
+    <value>Copy response</value>
+  </data>
+  <data name="LastInvocationTabToolCalls" xml:space="preserve">
+    <value>Tool calls</value>
+  </data>
+  <data name="LastInvocationLabelToolCall" xml:space="preserve">
+    <value>Tool call:</value>
+  </data>
+  <data name="LastInvocationGroupToolRequestJson" xml:space="preserve">
+    <value>Tool request JSON (requested by AI)</value>
+  </data>
+  <data name="LastInvocationButtonCopyToolRequest" xml:space="preserve">
+    <value>Copy tool request</value>
+  </data>
+  <data name="LastInvocationGroupToolResponseJson" xml:space="preserve">
+    <value>Tool response JSON (returned to AI)</value>
+  </data>
+  <data name="LastInvocationButtonCopyToolResponse" xml:space="preserve">
+    <value>Copy tool response</value>
+  </data>
+  <data name="LastInvocationTabPreFinalAnswer" xml:space="preserve">
+    <value>Before final answer</value>
+  </data>
+  <data name="LastInvocationGroupPreFinalContext" xml:space="preserve">
+    <value>All information before the final answer</value>
+  </data>
+  <data name="LastInvocationButtonCopyContext" xml:space="preserve">
+    <value>Copy context</value>
+  </data>
+  <data name="LastInvocationGroupFinalAssistantResponse" xml:space="preserve">
+    <value>Final AI answer</value>
+  </data>
+  <data name="LastInvocationButtonCopyAnswer" xml:space="preserve">
+    <value>Copy answer</value>
+  </data>
+  <data name="LastInvocationButtonClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="LastInvocationToolNoCallsForQuestion" xml:space="preserve">
+    <value>No tool calls are stored for this user question.</value>
+  </data>
+  <data name="LastInvocationToolNoRequestJsonStored" xml:space="preserve">
+    <value>(no stored tool request JSON available)</value>
+  </data>
+  <data name="LastInvocationToolNoResponseJsonStored" xml:space="preserve">
+    <value>(no stored tool response JSON available)</value>
+  </data>
+  <data name="LastInvocationToolUnknownCall" xml:space="preserve">
+    <value>(unknown tool call)</value>
+  </data>
+  <data name="LastInvocationToolNoMetadata" xml:space="preserve">
+    <value>(no metadata)</value>
+  </data>
+  <data name="LastInvocationMetaSequence" xml:space="preserve">
+    <value>sequence</value>
+  </data>
+  <data name="LastInvocationMetaTool" xml:space="preserve">
+    <value>tool</value>
+  </data>
+  <data name="LastInvocationMetaPlugin" xml:space="preserve">
+    <value>plugin</value>
+  </data>
+  <data name="LastInvocationMetaFunction" xml:space="preserve">
+    <value>function</value>
+  </data>
+  <data name="LastInvocationMetaCallId" xml:space="preserve">
+    <value>callId</value>
+  </data>
+  <data name="LastInvocationMetaResponse" xml:space="preserve">
+    <value>response</value>
+  </data>
+  <data name="LastInvocationMetaReturnCallId" xml:space="preserve">
+    <value>returnCallId</value>
+  </data>
+  <data name="LastInvocationValueYes" xml:space="preserve">
+    <value>yes</value>
+  </data>
+  <data name="LastInvocationValueNo" xml:space="preserve">
+    <value>no</value>
+  </data>
+  <data name="LastInvocationValueEmpty" xml:space="preserve">
+    <value>(empty)</value>
+  </data>
+  <data name="LastInvocationValueNone" xml:space="preserve">
+    <value>(none)</value>
+  </data>
+  <data name="LastInvocationValueUnknown" xml:space="preserve">
+    <value>(unknown)</value>
+  </data>
+  <data name="LastInvocationPreFinalSectionUserInput" xml:space="preserve">
+    <value>[UserInput]</value>
+  </data>
+  <data name="LastInvocationPreFinalSectionPromptMessages" xml:space="preserve">
+    <value>[PromptMessagesBeforeFinalAnswer]</value>
+  </data>
+  <data name="LastInvocationPreFinalNoPromptMessages" xml:space="preserve">
+    <value>(no prompt messages stored)</value>
+  </data>
+  <data name="LastInvocationPreFinalSectionToolCalls" xml:space="preserve">
+    <value>[ToolCallsAvailableBeforeFinalAnswer]</value>
+  </data>
+  <data name="LastInvocationPreFinalSectionToolRequest" xml:space="preserve">
+    <value>[ToolRequest]</value>
+  </data>
+  <data name="LastInvocationPreFinalSectionToolResponse" xml:space="preserve">
+    <value>[ToolResponse]</value>
+  </data>
+  <data name="LastInvocationPreFinalNoToolCalls" xml:space="preserve">
+    <value>(no tool calls stored)</value>
+  </data>
+  <data name="LastInvocationPreFinalSectionSummaries" xml:space="preserve">
+    <value>[SummariesAfterReduction]</value>
+  </data>
+  <data name="LastInvocationPreFinalNoFinalResponse" xml:space="preserve">
+    <value>(no final response stored)</value>
+  </data>
+  <data name="LastInvocationSelectorNoTime" xml:space="preserve">
+    <value>(no time)</value>
+  </data>
+  <data name="LastInvocationSelectorEmptyQuestion" xml:space="preserve">
+    <value>(empty user question)</value>
+  </data>
+  <data name="LastInvocationSummaryTime" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="LastInvocationSummaryModel" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <data name="LastInvocationSummaryTabId" xml:space="preserve">
+    <value>tabId</value>
+  </data>
+  <data name="LastInvocationSummaryReducedThread" xml:space="preserve">
+    <value>reduced-thread</value>
+  </data>
+  <data name="LastInvocationSummaryBudget" xml:space="preserve">
+    <value>Budget</value>
+  </data>
+  <data name="LastInvocationSummaryContextWindow" xml:space="preserve">
+    <value>contextWindow</value>
+  </data>
+  <data name="LastInvocationSummaryEffectiveContext" xml:space="preserve">
+    <value>effectiveContext</value>
+  </data>
+  <data name="LastInvocationSummaryUncertaintyReserve" xml:space="preserve">
+    <value>uncertaintyReserve</value>
+  </data>
+  <data name="LastInvocationSummaryHistoryBudget" xml:space="preserve">
+    <value>historyBudget</value>
+  </data>
+  <data name="LastInvocationSummaryHistoryEstimated" xml:space="preserve">
+    <value>historyEstimated</value>
+  </data>
+  <data name="LastInvocationSummaryUserInputTokens" xml:space="preserve">
+    <value>userInputTokens</value>
+  </data>
+  <data name="LastInvocationSummaryToolSchema" xml:space="preserve">
+    <value>toolSchema</value>
+  </data>
+  <data name="LastInvocationSummaryResponseReserve" xml:space="preserve">
+    <value>responseReserve</value>
+  </data>
+  <data name="LastInvocationSummarySafety" xml:space="preserve">
+    <value>safety</value>
+  </data>
+  <data name="LastInvocationSummaryPreflightPlanned" xml:space="preserve">
+    <value>preflightPlanned</value>
+  </data>
+  <data name="LastInvocationSummaryPreflightPassed" xml:space="preserve">
+    <value>preflightPassed</value>
+  </data>
+  <data name="LastInvocationContextSectionPromptMessages" xml:space="preserve">
+    <value>[PromptMessages]</value>
+  </data>
+  <data name="LastInvocationReductionNoneDetected" xml:space="preserve">
+    <value>No direct text reductions (tool-result compaction) detected for the last request.</value>
+  </data>
+  <data name="LastInvocationReductionLabelFormat" xml:space="preserve">
+    <value>Reduction #{0}: {1} [{2}-&gt;{3}]</value>
+  </data>
+  <data name="LastInvocationReductionMetaFormat" xml:space="preserve">
+    <value>source={0}, method={1}, tool={2}, tokens={3}-&gt;{4}</value>
+  </data>
+  <data name="LastInvocationHttpNoRequestsForQuestion" xml:space="preserve">
+    <value>No HTTP requests are stored for this user question.</value>
+  </data>
+  <data name="LastInvocationHttpNoRequestJsonStored" xml:space="preserve">
+    <value>(no stored request JSON available)</value>
+  </data>
+  <data name="LastInvocationHttpNoResponseJsonStored" xml:space="preserve">
+    <value>(no stored response JSON available)</value>
+  </data>
+  <data name="LastInvocationHttpUnknownRequest" xml:space="preserve">
+    <value>(unknown HTTP request)</value>
+  </data>
+  <data name="LastInvocationHttpUnknownUri" xml:space="preserve">
+    <value>(unknown-uri)</value>
+  </data>
+  <data name="LastInvocationHttpNoMetadata" xml:space="preserve">
+    <value>(no metadata)</value>
+  </data>
+  <data name="LastInvocationHttpMetaRequest" xml:space="preserve">
+    <value>request</value>
+  </data>
+  <data name="LastInvocationHttpMetaResponse" xml:space="preserve">
+    <value>response</value>
+  </data>
+  <data name="LastInvocationHttpMetaError" xml:space="preserve">
+    <value>error</value>
+  </data>
+  <data name="AiChatToolActivityHeaderRunning" xml:space="preserve">
+    <value>Tool activity in progress</value>
+  </data>
+  <data name="AiChatToolActivityHeaderRunningCount" xml:space="preserve">
+    <value>Tool activity in progress ({0})</value>
+  </data>
+  <data name="AiChatToolActivityHeaderLastResponse" xml:space="preserve">
+    <value>Tool activity from the last response</value>
+  </data>
+  <data name="AiChatToolActivityHeaderLastResponseCount" xml:space="preserve">
+    <value>Tool activity from the last response ({0})</value>
+  </data>
+  <data name="AiChatToolActivityHeaderMessage" xml:space="preserve">
+    <value>Tool activity</value>
+  </data>
+  <data name="AiChatToolActivityHeaderMessageCount" xml:space="preserve">
+    <value>Tool activity ({0})</value>
+  </data>
+  <data name="AiChatToolActivityEmptyStateRunning" xml:space="preserve">
+    <value>No tool calls yet.</value>
+  </data>
+  <data name="AiChatToolActivityEmptyStateCompleted" xml:space="preserve">
+    <value>No tool calls in the last response.</value>
+  </data>
+  <data name="AiChatToolActivityArgumentsLabel" xml:space="preserve">
+    <value>Arguments</value>
+  </data>
+  <data name="AiChatToolActivityErrorLabel" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="AiChatToolActivityResultLabel" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="AiChatToolActivityStatusHintLabel" xml:space="preserve">
+    <value>Status / note</value>
+  </data>
+  <data name="AiChatToolActivityStatusRunning" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="AiChatToolActivityStatusSucceeded" xml:space="preserve">
+    <value>Succeeded</value>
+  </data>
+  <data name="AiChatToolActivityStatusDenied" xml:space="preserve">
+    <value>Denied</value>
+  </data>
+  <data name="AiChatToolActivityStatusCancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="AiChatToolActivityStatusFailed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="AiChatToolActivityStatusIncomplete" xml:space="preserve">
+    <value>Incomplete</value>
+  </data>
+  <data name="AiChatToolActivityCancelledMessage" xml:space="preserve">
+    <value>Tool execution was cancelled.</value>
+  </data>
+  <data name="AiChatToolActivityIncompleteMessage" xml:space="preserve">
+    <value>Tool execution did not complete.</value>
+  </data>
+  <data name="AiChatToolDeniedMutationsDisabled" xml:space="preserve">
+    <value>Denied by user setting: Modifying tools are disabled.</value>
+  </data>
+  <data name="AiChatToolDeniedFunctionDisabled" xml:space="preserve">
+    <value>Denied by user setting: This tool is disabled.</value>
+  </data>
+  <data name="AiChatToolDeniedBudgetExhausted" xml:space="preserve">
+    <value>Denied by runtime budget: The tool budget is exhausted.</value>
+  </data>
+  <data name="AiChatToolEmptyResult" xml:space="preserve">
+    <value>(empty result)</value>
+  </data>
+  <data name="AiChatToolUnknownError" xml:space="preserve">
+    <value>Unknown error.</value>
+  </data>
+  <data name="AiChatProcessingTooltip" xml:space="preserve">
+    <value>Processing...</value>
+  </data>
+  <data name="ExportChatTooltip" xml:space="preserve">
+    <value>Export chat as JSON</value>
+  </data>
+  <data name="ChatExportFileFilter" xml:space="preserve">
+    <value>JSON files (*.json)|*.json|All files (*.*)|*.*</value>
+  </data>
+  <data name="AgentInstructionsTab" xml:space="preserve">
+    <value>Agent instructions</value>
+  </data>
+  <data name="AiChatDialogTitle" xml:space="preserve">
+    <value>AI Chat</value>
+  </data>
+  <data name="AiChatNoActiveModel" xml:space="preserve">
+    <value>No active model is configured.</value>
+  </data>
+  <data name="AiChatAgentReloaded" xml:space="preserve">
+    <value>The agent was reloaded with the current instructions.</value>
+  </data>
+  <data name="AiChatAgentReloadError" xml:space="preserve">
+    <value>Failed to reload the agent: {0}</value>
+  </data>
+  <data name="AiChatDeleteAllConfirmation" xml:space="preserve">
+    <value>Delete all saved chats?</value>
+  </data>
+  <data name="AiChatFatalErrorTitle" xml:space="preserve">
+    <value>CrypTool 2 - Critical error</value>
+  </data>
+  <data name="AiChatFatalInitializationError" xml:space="preserve">
+    <value>Critical error while initializing CrypLLM (UiTextCatalogPlugin).
+The application will close.
+
+{0}</value>
+  </data>
+  <data name="AiChatUnknownRequestError" xml:space="preserve">
+    <value>Unknown error while processing the request.</value>
+  </data>
+  <data name="AiChatUnknownError" xml:space="preserve">
+    <value>Unknown error.</value>
+  </data>
+  <data name="AiChatUnknownModel" xml:space="preserve">
+    <value>&lt;unknown&gt;</value>
+  </data>
+  <data name="AiChatErrorModelLabel" xml:space="preserve">
+    <value>Model:</value>
+  </data>
+  <data name="AiChatInvocationError" xml:space="preserve">
+    <value>Failed to send the request.
+Provider: {0}
+Model: {1}
+Endpoint: {2}
+Cause: {3}</value>
+  </data>
+  <data name="AiChatRequestErrorDetails" xml:space="preserve">
+    <value>Failed to send the request.
+Provider: {0}
+Model: {1}
+Endpoint: {2}
+Details: {3}
+Summary: {4}</value>
+  </data>
+  <data name="AiChatRequestCancelled" xml:space="preserve">
+    <value>The request was cancelled by the client.</value>
+  </data>
+  <data name="AiChatLocalEndpointUnreachable" xml:space="preserve">
+    <value>The local endpoint is unreachable.</value>
+  </data>
+  <data name="AiChatAuthenticationFailed" xml:space="preserve">
+    <value>OpenAI authentication failed.</value>
+  </data>
+  <data name="AiChatRateLimitReached" xml:space="preserve">
+    <value>Rate limit or quota reached.</value>
+  </data>
+  <data name="AiChatResponseTimeout" xml:space="preserve">
+    <value>Timed out waiting for the response.</value>
+  </data>
+  <data name="AiChatStreamInterrupted" xml:space="preserve">
+    <value>The streaming connection to the model was interrupted.</value>
+  </data>
+  <data name="AiChatQwenStreamInterrupted" xml:space="preserve">
+    <value>The streaming connection to the model was interrupted. The local Qwen model may be stuck in thinking mode. Try disabling Enable Thinking in the model server or use a model without thinking mode.</value>
+  </data>
+  <data name="ShowAIChatInRibbon" xml:space="preserve">
+    <value>Show AI chat in the ribbon bar</value>
+  </data>
+  <data name="LocalApiKeyLabel" xml:space="preserve">
+    <value>API key (optional):</value>
+  </data>
+  <data name="LocalApiKeyTooltip" xml:space="preserve">
+    <value>API key for the configured local OpenAI-compatible server. Sent as a Bearer token. Leave empty if the server does not require authentication. Stored encrypted for the current Windows user.</value>
+  </data>
+  <data name="ContextCompressionSection" xml:space="preserve"><value>Context compression</value></data>
+  <data name="AutoCompressContextLabel" xml:space="preserve"><value>Automatically compress the chat context</value></data>
+  <data name="ContextCompressionTriggerLabel" xml:space="preserve"><value>Compress at:</value></data>
+  <data name="ContextCompressionTargetLabel" xml:space="preserve"><value>Target after compression:</value></data>
+  <data name="ContextCompressionInvalidPercent" xml:space="preserve"><value>Enter whole percentages: trigger 2–100%, target 1–99%. The target must be below the trigger.</value></data>
+  <data name="ContextCompressionHint" xml:space="preserve"><value>Percentages refer to the available chat history budget after system, tool and response reserves. Older messages are summarized before the next request; the complete conversation remains saved. Mandatory overflow protection remains active when this option is off.</value></data>
+  <data name="AiChatContextUsageFormat" xml:space="preserve"><value>Context: ≈ {0:N0} / {1:N0} tokens ({2:P1})</value></data>
+  <data name="AiChatContextUsageUnknownFormat" xml:space="preserve"><value>Context: ≈ {0:N0} tokens (limit unknown)</value></data>
+  <data name="AiChatContextUsageTooltip" xml:space="preserve"><value>Estimated tokens in the current chat context, including tool results and retained summaries after compression. The limit is the selected model's configured context window. System instructions, tool definitions, unsent input and response reserves are not included in the displayed usage. Actual model token counts may differ.</value></data>
+  <data name="AiChatNoVisibleModelAnswer" xml:space="preserve"><value>The model returned no displayable answer. Any tool activity is shown separately. Please retry; if this happens again, check the model server's reasoning output and chat template.</value></data>
+  <data name="AiChatUndoAgentChanges" xml:space="preserve"><value>Undo AI changes</value></data>
+  <data name="AiChatAgentChangesUndone" xml:space="preserve"><value>AI changes undone.</value></data>
+  <data name="AiChatAgentUndoUnavailable" xml:space="preserve"><value>Group undo unavailable: the workspace was closed, its history changed, or manual edits interrupted this group. Use the workspace's normal Undo.</value></data>
+  <data name="AiChatAgentChangesCount" xml:space="preserve"><value>{0} workspace operations in this AI step.</value></data>
+  <data name="AiChatLayoutUnavailable" xml:space="preserve"><value>Automatic layout check unavailable.</value></data>
+  <data name="AiChatLayoutSummary" xml:space="preserve"><value>Layout after this AI step: {0} errors, {1} warnings.</value></data>
+  <data name="AiChatLayoutPartialSummary" xml:space="preserve"><value>Partial layout check after this AI step: {0} errors, {1} warnings. Some memo or wire measurements were unavailable.</value></data>
+  <data name="AiChatAgentUndoContextNotice" xml:space="preserve"><value>I undid the AI changes in workspace “{0}” using the chat's Undo button. Re-read the workspace before making further changes; previous tool results may be outdated.</value></data>
+</root>

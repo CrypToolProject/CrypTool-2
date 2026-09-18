@@ -42,5 +42,6 @@ namespace CrypTool.CrypWin
         public static ButtonDropDownCommand Settings = new ButtonDropDownCommand(Properties.Resources.Settings, "Settings", typeof(CrypWin.MainWindow));
         public static ButtonDropDownCommand F2S = new ButtonDropDownCommand(Properties.Resources.Settings, "FitToScreen", typeof(CrypWin.MainWindow));
         public static ButtonDropDownCommand ShowHideLog = new ButtonDropDownCommand(Properties.Resources.Settings, "ShowHideLog", typeof(CrypWin.MainWindow));
+        public static ButtonDropDownCommand ShowHideAIChat = new ButtonDropDownCommand(Properties.Resources.Settings, "ShowHideAIChat", typeof(CrypWin.MainWindow));
     }
 }

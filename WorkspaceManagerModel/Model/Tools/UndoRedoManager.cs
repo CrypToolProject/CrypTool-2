@@ -14,6 +14,7 @@
    limitations under the License.
 */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using WorkspaceManagerModel.Model.Operations;
@@ -26,6 +27,50 @@ namespace WorkspaceManager.Model.Tools
         private readonly WorkspaceModel _workspaceModel = null;
         private readonly Stack<Operation> _undoStack = new Stack<Operation>();
         private readonly Stack<Operation> _redoStack = new Stack<Operation>();
+        [ThreadStatic] private static object recordingOwner;
+        private readonly Dictionary<Operation, object> operationOwners = new Dictionary<Operation, object>();
+        public event EventHandler HistoryChanged;
+        public int Revision { get; private set; }
+
+        /// <summary>Tag only synchronous tool edits, leaving intervening user edits independent.</summary>
+        public static IDisposable PushOperationOwner(object owner)
+        {
+            object previous = recordingOwner;
+            recordingOwner = owner;
+            return new OwnerScope(() => recordingOwner = previous);
+        }
+
+        private sealed class OwnerScope : IDisposable
+        {
+            private Action restore;
+            public OwnerScope(Action restore) { this.restore = restore; }
+            public void Dispose() { Action action = restore; restore = null; action?.Invoke(); }
+        }
+
+        /// <summary>Collapse a contiguous tool-owned suffix. Never absorb manual edits or saved intermediate states.</summary>
+        public Operation GroupOwnedOperations(object owner)
+        {
+            var owned = _undoStack.TakeWhile(op => operationOwners.TryGetValue(op, out object value) && ReferenceEquals(value, owner)).ToList();
+            bool fragmented = _undoStack.Skip(owned.Count).Any(op => operationOwners.TryGetValue(op, out object value) && ReferenceEquals(value, owner));
+            foreach (Operation op in operationOwners.Where(pair => ReferenceEquals(pair.Value, owner)).Select(pair => pair.Key).ToList())
+                operationOwners.Remove(op);
+            if (owned.Count == 0 || fragmented || owned.Skip(1).Any(op => op.SavedHere)) return null;
+            foreach (Operation op in owned) _undoStack.Pop();
+            bool savedHere = owned[0].SavedHere;
+            owned.Reverse();
+            var group = new GroupedOperation(owned) { SavedHere = savedHere };
+            _undoStack.Push(group);
+            HistoryChanged?.Invoke(this, EventArgs.Empty);
+            return group;
+        }
+
+        public bool CanUndo(Operation expected) => !IsCurrentlyWorking && _undoStack.Count > 0 && ReferenceEquals(_undoStack.Peek(), expected);
+        public bool TryUndo(Operation expected)
+        {
+            if (!CanUndo(expected)) return false;
+            Undo();
+            return true;
+        }
 
         internal UndoRedoManager(WorkspaceModel workspaceModel)
         {
@@ -94,6 +139,7 @@ namespace WorkspaceManager.Model.Tools
             finally
             {
                 IsCurrentlyWorking = false;
+                HistoryChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -134,6 +180,7 @@ namespace WorkspaceManager.Model.Tools
             finally
             {
                 IsCurrentlyWorking = false;
+                HistoryChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -144,6 +191,9 @@ namespace WorkspaceManager.Model.Tools
         {
             _undoStack.Clear();
             _redoStack.Clear();
+            operationOwners.Clear();
+            Revision++;
+            HistoryChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -164,6 +214,9 @@ namespace WorkspaceManager.Model.Tools
                 _redoStack.Clear();
             }
             _undoStack.Push(op);
+            if (recordingOwner != null) operationOwners[op] = recordingOwner;
+            Revision++;
+            HistoryChanged?.Invoke(this, EventArgs.Empty);
         }
 
         internal bool SavedHere

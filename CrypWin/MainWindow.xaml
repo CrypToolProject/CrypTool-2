@@ -1,4 +1,4 @@
-﻿<dc:RibbonWindow x:Class="CrypTool.CrypWin.MainWindow" Name="MainCrypToolWindow"
+<dc:RibbonWindow x:Class="CrypTool.CrypWin.MainWindow" Name="MainCrypToolWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dc="clr-namespace:DevComponents.WpfRibbon;assembly=DevComponents.WpfRibbon"
@@ -9,12 +9,20 @@
     xmlns:local="clr-namespace:CrypTool.CrypWin"
     xmlns:cw="clr-namespace:CrypTool.CrypWin"
     xmlns:con="clr-namespace:CrypTool.CrypWin.Helper"
+    xmlns:llm="clr-namespace:CrypTool.CrypLLM;assembly=CrypLLM"
+    xmlns:llmProperties="clr-namespace:CrypTool.CrypLLM.Properties;assembly=CrypLLM"
     xmlns:pb="clr-namespace:CrypTool.PluginBase;assembly=CrypPluginBase"
     xmlns:proprietary="clr-namespace:CrypProprietary;assembly=CrypProprietary"
     xmlns:ll="clr-namespace:System;assembly=mscorlib"
     xmlns:WinTheme="clr-namespace.Microsoft.Themes;assemly=PresentationFramework.Luna"      
     xmlns:properties="clr-namespace:CrypTool.CrypWin.Properties" xmlns:Resources="clr-namespace:CrypTool.CrypWin.Resources" xmlns:Resources1="clr-namespace:CrypTool.CrypWin.SettingsTabs.Resources" Height="700" Width="950" MinHeight="400" MinWidth="500" ResizeMode="CanResizeWithGrip"
-    Visibility="Hidden" StateChanged="MainCrypToolWindow_StateChanged">
+    Visibility="Hidden" StateChanged="MainCrypToolWindow_StateChanged"
+
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:Visibility="Visible">
+    <!-- Properties starting with "d:" execute only in the XAML Preview -->
 
     <dc:RibbonWindow.Resources>
         <cw:VisibilityToMarginHelper x:Key="VisibilityToMarginHelper"></cw:VisibilityToMarginHelper>
@@ -702,6 +710,17 @@
                                 </dc:ButtonDropDown>
                             </dc:RibbonBar>
 
+                            <dc:RibbonBar Header="{Loc RBHeader_AIChat}" DockPanel.Dock="Left" ToolTip="{Loc RBTooltip_AIChat}" Name="ribbonAIChat" Padding="7" ResizeOrderIndex="7"
+                                          Visibility="{Binding Source={x:Static llmProperties:Settings.Default}, Path=aiChatShowInRibbon, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <dc:ButtonDropDown Name="AIChatBTN" Click="AIChatBTN_Checked" IsCheckable="True" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="69" Style="{DynamicResource AppMenuCommandButton}" ImagePosition="Left" Header="{Loc AI_Chat}" ToolTip="{Loc RBTooltip_AIChat}">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/AIChatLogo.png" Height="32" Width="32" />
+                                    </dc:ButtonDropDown.Image>
+                                </dc:ButtonDropDown>
+                            </dc:RibbonBar>
+
+
+
                             <dc:RibbonBar Header="{Loc Plugin_editor_}" ToolTip="{Loc Dynamic_controls_of_the_current_plugin_editor_}" Name="ribbonBarEditor" VerticalAlignment="Center" Visibility="Collapsed">
                                 <!-- 
             Every Editor can add optional ribbon commands using the RibbonBarAttribute in the Settings-Class. 
@@ -1158,26 +1177,39 @@
                         </dd:DockWindowGroup>
                     </dd:SplitPanel>
 
-                    <!--Component Parameters -->
-                    <dd:SplitPanel Name="splitPanelAlgorithmSettings" dd:DockSite.Dock="Right" dd:DockSite.DockSize="195">
-                        <!--<dd:SplitPanel.Visibility>
+                    <!--Component Parameters-->
+                    <!--<dd:SplitPanel Name="splitPanelAlgorithmSettings" dd:DockSite.Dock="Right" dd:DockSite.DockSize="195">
+                        <dd:SplitPanel.Visibility>
                             <MultiBinding Converter="{StaticResource ResourceKey=BooleanToVisibilityConverter}" ConverterParameter="Setting">
                                 <Binding RelativeSource="{RelativeSource AncestorType=dc:RibbonWindow, Mode=FindAncestor}" Path="VisibilityStart"></Binding>
                                 <Binding ElementName="SettingBTN" Path="IsChecked"></Binding>
                                 <Binding ElementName="dockWindowAlgorithmSettings"></Binding>
                                 <Binding ElementName="splitPanelAlgorithmSettings"></Binding>
                             </MultiBinding>
-                        </dd:SplitPanel.Visibility>-->
+                        </dd:SplitPanel.Visibility>
 
                         <dd:DockWindowGroup x:Name="dockWindowGroupAlgorithmSettings">
                             <dd:DockWindow Name="dockWindowAlgorithmSettings" Header="{Loc Parameters}" CanAutoHide="False" ImageSource="images/MyFiles16.png" IsAutoHide="False" AutoHideOpen="False" 
                            CanClose="True" CanDockAsDocument="False" Closed="dockWindowAlgorithmSettings_Closed">
                             </dd:DockWindow>
                         </dd:DockWindowGroup>
+                    </dd:SplitPanel>-->
+
+                    <!-- AI Chat Dock Window -->
+
+                    <dd:SplitPanel Name="splitPanelAIChat" dd:DockSite.Dock="Right" dd:DockSite.DockSize="300
+                                   ">
+                        <dd:DockWindowGroup x:Name="dockWindowGroupAIChat" SelectionChanged="dockWindowGroupAIChat_SelectionChanged">
+                            <dd:DockWindow Name="dockWindowAIChat" Header="{Loc AI_Chat}" CanAutoHide="False" ImageSource="images/MyFiles16.png" IsAutoHide="False" AutoHideOpen="False"
+                           CanClose="True" CanDockAsDocument="False" Closed="dockWindowAIChat_Closed">
+                                <llm:AIChatContent x:Name="aiChatContent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                            </dd:DockWindow>
+                        </dd:DockWindowGroup>
                     </dd:SplitPanel>
 
+
                     <!--LogMessages-->
-                    <dd:SplitPanel Name="splitPanelLogMessages" dd:DockSite.Dock="Bottom" dd:DockSite.DockSize="250" >
+                    <dd:SplitPanel Name="splitPanelLogMessages" dd:DockSite.Dock="Bottom" dd:DockSite.DockSize="300" >
                         <!--<dd:SplitPanel.Visibility>
                             <MultiBinding Converter="{StaticResource ResourceKey=BooleanToVisibilityConverter}" ConverterParameter="Setting">
                                 <Binding RelativeSource="{RelativeSource AncestorType=dc:RibbonWindow, Mode=FindAncestor}" Path="VisibilityStart"></Binding>

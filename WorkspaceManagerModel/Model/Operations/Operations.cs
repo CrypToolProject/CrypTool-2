@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using CrypTool.PluginBase;
@@ -279,9 +280,28 @@ namespace WorkspaceManagerModel.Model.Operations
     /// </summary>
     public sealed class NewTextModelOperation : Operation
     {
+        private readonly bool selectNewElement;
+        private readonly string initialText;
+
         public NewTextModelOperation()
+            : this(true)
+        {
+        }
+
+        /// <summary>
+        /// Programmatic creation can leave selection and keyboard focus with the user.
+        /// The parameterless constructor preserves interactive memo creation behavior.
+        /// </summary>
+        public NewTextModelOperation(bool selectNewElement)
+            : this(selectNewElement, null)
+        {
+        }
+
+        public NewTextModelOperation(bool selectNewElement, string initialText)
             : base(null)
         {
+            this.selectNewElement = selectNewElement;
+            this.initialText = initialText;
         }
 
         #region Operation Members
@@ -291,12 +311,13 @@ namespace WorkspaceManagerModel.Model.Operations
             if (Model == null)
             {
                 Model = workspaceModel.newTextModel();
+                if (initialText != null) ((TextModel)Model).data = TextModel.CreatePlainTextData(null, initialText);
             }
             else
             {
                 workspaceModel.addTextModel((TextModel)Model);
             }
-            workspaceModel.OnNewChildElement(Model);
+            workspaceModel.OnNewChildElement(Model, selectNewElement);
             return Model;
         }
 
@@ -420,6 +441,53 @@ namespace WorkspaceManagerModel.Model.Operations
     }
 
     /// <summary>
+    /// Changes a connector's component side without changing its identity or wiring.
+    /// </summary>
+    public sealed class SetConnectorOrientationOperation : Operation
+    {
+        private readonly ConnectorOrientation oldOrientation;
+        private readonly ConnectorOrientation newOrientation;
+
+        public SetConnectorOrientationOperation(ConnectorModel connector, ConnectorOrientation orientation)
+            : base(connector ?? throw new ArgumentNullException(nameof(connector)))
+        {
+            if (!Enum.IsDefined(typeof(ConnectorOrientation), orientation) || orientation == ConnectorOrientation.Unset)
+                throw new ArgumentOutOfRangeException(nameof(orientation));
+            oldOrientation = connector.Orientation;
+            newOrientation = orientation;
+            Identifier = connector.GetHashCode();
+        }
+
+        internal override object Execute(WorkspaceModel workspaceModel, bool events = true)
+        {
+            var connector = (ConnectorModel)Model;
+            if (connector.WorkspaceModel != workspaceModel)
+                throw new InvalidOperationException("The connector belongs to a different workspace.");
+            if (connector.Orientation == newOrientation) return false;
+            Apply(workspaceModel, newOrientation);
+            return true;
+        }
+
+        internal override void Undo(WorkspaceModel workspaceModel)
+        {
+            Apply(workspaceModel, oldOrientation);
+        }
+
+        private void Apply(WorkspaceModel workspaceModel, ConnectorOrientation orientation)
+        {
+            var connector = (ConnectorModel)Model;
+            connector.Orientation = orientation;
+            // Discard obsolete bends so routing follows the relocated endpoint, also on Undo/Redo.
+            foreach (ConnectionModel connection in connector.GetInputConnections().Concat(connector.GetOutputConnections()).Distinct())
+            {
+                connection.IsCopy = true;
+                connection.PointList = null;
+            }
+            workspaceModel.OnConnectorOrientationChanged(connector);
+        }
+    }
+
+    /// <summary>
     /// Rename a model element
     /// </summary>
     public sealed class RenameModelElementOperation : Operation
@@ -460,6 +528,47 @@ namespace WorkspaceManagerModel.Model.Operations
     /// <summary>
     /// Wrapper around n Operations which will operate as one single operation
     /// </summary>
+    /// <summary>A complete agent request; deliberately separate from mouse gesture coalescing.</summary>
+    public sealed class GroupedOperation : Operation
+    {
+        private readonly List<Operation> operations;
+        public int OperationCount => operations.Count;
+        public GroupedOperation(List<Operation> operations) : base(null) { this.operations = new List<Operation>(operations); }
+        internal override object Execute(WorkspaceModel model, bool events = true)
+        {
+            foreach (Operation operation in operations) operation.Execute(model, events);
+            return true;
+        }
+        internal override void Undo(WorkspaceModel model)
+        {
+            for (int i = operations.Count - 1; i >= 0; i--) operations[i].Undo(model);
+        }
+    }
+
+    /// <summary>Preserve complete rich text data for undo/redo of agent memo text changes.</summary>
+    public sealed class ChangeMemoTextOperation : Operation
+    {
+        private readonly byte[] before;
+        private readonly byte[] after;
+        public ChangeMemoTextOperation(TextModel memo, string text) : base(memo)
+        {
+            before = memo.data == null ? null : (byte[])memo.data.Clone();
+            after = TextModel.CreatePlainTextData(before, text);
+        }
+        private void Apply(byte[] data)
+        {
+            var memo = (TextModel)Model;
+            memo.data = data == null ? null : (byte[])data.Clone();
+            if (memo.UpdateableView is System.Windows.FrameworkElement view && view.FindName("mainRTB") is System.Windows.Controls.RichTextBox box)
+            {
+                if (data == null) box.Document = new System.Windows.Documents.FlowDocument();
+                else memo.loadRTB(box);
+            }
+        }
+        internal override object Execute(WorkspaceModel model, bool events = true) { Apply(after); return true; }
+        internal override void Undo(WorkspaceModel model) { Apply(before); }
+    }
+
     public sealed class MultiOperation : Operation
     {
         private readonly List<Operation> _operations = null;

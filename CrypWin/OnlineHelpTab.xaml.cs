@@ -17,6 +17,7 @@ using CrypTool.PluginBase;
 using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.CrypLLM.Ports;
 using OnlineDocumentationGenerator.Generators.HtmlGenerator;
 using System;
 using System.Diagnostics;
@@ -219,6 +220,52 @@ namespace CrypTool.CrypWin
             }
         }
 
+        public bool TryGetCurrentDocumentationContext(string tabId, string tabTitle, out DocumentationContextAbstraction documentationContext)
+        {
+            documentationContext = null;
+
+            try
+            {
+                mshtml.IHTMLDocument2 doc = webBrowser.Document as mshtml.IHTMLDocument2;
+                if (doc == null)
+                {
+                    return false;
+                }
+
+                string bodyText = doc.body?.innerText;
+                string normalizedText = NormalizeDocumentationText(bodyText);
+                if (string.IsNullOrWhiteSpace(normalizedText))
+                {
+                    return false;
+                }
+
+                string source = null;
+                try
+                {
+                    source = webBrowser.Source?.LocalPath ?? webBrowser.Source?.AbsoluteUri;
+                }
+                catch (Exception)
+                {
+                    // Some browser states may throw while resolving Source; ignore and continue with null.
+                }
+
+                documentationContext = new DocumentationContextAbstraction
+                {
+                    TabId = tabId ?? string.Empty,
+                    TabTitle = tabTitle ?? string.Empty,
+                    PageTitle = doc.title ?? string.Empty,
+                    Source = source ?? string.Empty,
+                    Text = normalizedText
+                };
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public void Print()
         {
             try
@@ -233,6 +280,25 @@ namespace CrypTool.CrypWin
             {
                 //we do not handle errors from iexplore
             }
+        }
+
+        private static string NormalizeDocumentationText(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                return string.Empty;
+            }
+
+            string normalized = text
+                .Replace("\r", "\n")
+                .Replace("\u00A0", " ");
+
+            while (normalized.Contains("\n\n\n"))
+            {
+                normalized = normalized.Replace("\n\n\n", "\n\n");
+            }
+
+            return normalized.Trim();
         }
     }
 }

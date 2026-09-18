@@ -1,0 +1,98 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CrypTool.CrypLLM.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="aiChatVisibility" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Visible</Value>
+    </Setting>
+    <Setting Name="aiChatWindowAutoHide" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="apiKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="localApiKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="orgId" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="modelIds" Type="System.String" Scope="User">
+      <Value Profile="(Default)">gpt-5.4-mini
+gpt-5.4-nano
+gpt-5.5
+gpt-5.4</Value>
+    </Setting>
+    <Setting Name="selectedProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="openAiModelIds" Type="System.String" Scope="User">
+      <Value Profile="(Default)">gpt-5.4-mini
+gpt-5.4-nano
+gpt-5.5
+gpt-5.4</Value>
+    </Setting>
+    <Setting Name="localModelIds" Type="System.String" Scope="User">
+      <Value Profile="(Default)">openai/gpt-oss-20b
+openai/gpt-oss-120b
+qwen/qwen3.6-27b
+qwen/qwen3.6-35b-a3b</Value>
+    </Setting>
+    <Setting Name="localModelEndpoint" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://127.0.0.1:1234/v1</Value>
+    </Setting>
+    <Setting Name="activeModelId" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="reasoningLevel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">medium</Value>
+    </Setting>
+    <Setting Name="llmLogLevel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">info</Value>
+    </Setting>
+    <Setting Name="editorStatusAllowedFunctions" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="editorStatusFunctionDescriptions" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="defaultCultureKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">en</Value>
+    </Setting>
+    <Setting Name="developerModelContextWindows" Type="System.String" Scope="Application">
+      <Value Profile="(Default)"># Format: modelId=tokens
+gpt-5.4-mini=400000
+gpt-5.4-nano=400000
+gpt-5.5=1000000
+gpt-5.4=1000000
+openai/gpt-oss-20b=4096
+openai/gpt-oss-120b=8192
+qwen/qwen3.6-27b=8192
+qwen/qwen3.6-35b-a3b=8192</Value>
+    </Setting>
+    <Setting Name="autoCompressContext" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="contextCompressionTriggerPercent" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">90</Value>
+    </Setting>
+    <Setting Name="contextCompressionTargetPercent" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="aiChatShowInRibbon" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="aiChatOpenOnStartup" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="allowAiToolMutations" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="aiDisclaimerShown" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="userModelContextWindows" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -462,6 +462,7 @@ namespace WorkspaceManager.View.Visuals
                 model.NewChildElement += NewChild;
                 model.ChildPositionChanged += ChildPositionChanged;
                 model.ChildSizeChanged += ChildSizeChanged;
+                model.ConnectorOrientationChanged += ConnectorOrientationChanged;
                 model.ChildNameChanged += ChildNameChanged;
 
                 if (model.Zoom != 0)
@@ -1237,7 +1238,7 @@ namespace WorkspaceManager.View.Visuals
                     bin.PositionDeltaChanged += new EventHandler<PositionDeltaChangedArgs>(ComponentPositionDeltaChanged);
                     Paragraph p = new Paragraph();
                     bin.mainRTB.Document.Blocks.Add(p);
-                    SelectedText = bin;
+                    if (args.SelectNewElement) SelectedText = bin;
                     VisualCollection.Add(bin);
                 }
             }
@@ -1281,10 +1282,27 @@ namespace WorkspaceManager.View.Visuals
         }
 
         /// <summary>
-        /// The size of a child changed on model side
+        /// Relocates a connector visual and reroutes its existing wires after a model-side change.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
+        private void ConnectorOrientationChanged(object sender, ModelArgs args)
+        {
+            if (args.EffectedModelElement is ConnectorModel connector &&
+                connector.PluginModel.UpdateableView is ComponentVisual component)
+            {
+                component.UpdateConnectorOrientation(connector);
+                UpdateLayout();
+                component.ConnectorCollection.FirstOrDefault(item => item.Model == connector)?.RaiseUpdate();
+                foreach (ConnectionModel connection in connector.GetInputConnections().Concat(connector.GetOutputConnections()).Distinct())
+                {
+                    if (connection.UpdateableView is CryptoLineView view) view.Line?.Rearrange();
+                    else if (connection.UpdateableView is InternalCryptoLineView line) line.Rearrange();
+                }
+            }
+        }
+
+        /// <summary>The size of a child changed on model side.</summary>
         public void ChildSizeChanged(object sender, SizeArgs args)
         {
             if (args.NewHeight.Equals(args.OldHeight) &&

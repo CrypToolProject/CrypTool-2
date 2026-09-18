@@ -80,6 +80,9 @@
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Markdig, Version=0.44.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Markdig.0.44.0\lib\net462\Markdig.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework.Aero">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -112,6 +115,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Adapter\CrypWinAdapter.cs" />
     <Compile Include="Helper\StoredTab.cs" />
     <Compile Include="LicensesTab.xaml.cs">
       <DependentUpon>LicensesTab.xaml</DependentUpon>
@@ -343,7 +347,6 @@
   <ItemGroup>
     <Resource Include="images\Bold.png" />
     <Resource Include="images\Copy.png" />
-    <Resource Include="images\ctLogo.png" />
     <Resource Include="images\Cut.png" />
     <Resource Include="images\Exit.png" />
     <Resource Include="images\Find.png" />
@@ -476,6 +479,10 @@
       <Project>{FF5D473C-0716-4D3E-9078-2EBD979F94C6}</Project>
       <Name>CrypCore</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypLLM\CrypLLM.csproj">
+      <Project>{42c2e748-d829-463d-bfa7-e7723ac708f2}</Project>
+      <Name>CrypLLM</Name>
     </ProjectReference>
     <ProjectReference Include="..\CrypPluginBase\CrypPluginBase.csproj">
       <Project>{25DB2B47-A457-4EC2-960B-395CE07AE093}</Project>
@@ -698,6 +705,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\decrypt-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\AIChatLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ctLogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

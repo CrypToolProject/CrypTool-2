@@ -14,6 +14,7 @@
    limitations under the License.
 */
 using CrypTool.Core;
+using CrypTool.CrypLLM.Ports;
 using CrypTool.CrypWin.Properties;
 using CrypTool.CrypWin.Resources;
 using CrypTool.PluginBase;
@@ -32,6 +33,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Threading;
+using Application = System.Windows.Application;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace CrypTool.CrypWin
@@ -615,6 +617,66 @@ namespace CrypTool.CrypWin
         private bool FilterCallback(object item)
         {
             return listFilter.Contains(((LogMessage)item).LogLevel);
+        }
+
+        private void RegisterLLMLoggingBridge()
+        {
+            LoggingPort.OnLog += (msg, lvl) =>
+            {
+                try
+                {
+                    if (!IsCrypLlmLogEnabled(lvl))
+                    {
+                        return;
+                    }
+
+                    var mapped = Map(lvl);
+                    Dispatcher.BeginInvoke((Action)(() =>
+                        OnGuiLogNotificationOccured("CrypLLM", new GuiLogEventArgs(msg, null, mapped))));
+                }
+                catch { /* ignore */ }
+            };
+        }
+
+        private static bool IsCrypLlmLogEnabled(LLMNotificationLevel level)
+        {
+            var configuredLevel = CrypTool.CrypLLM.Properties.Settings.Default.llmLogLevel;
+            var minLevel = ParseCrypLlmLogLevel(configuredLevel);
+            return level >= minLevel;
+        }
+
+        private static LLMNotificationLevel ParseCrypLlmLogLevel(string raw)
+        {
+            if (string.IsNullOrWhiteSpace(raw))
+            {
+                return LLMNotificationLevel.Info;
+            }
+
+            switch (raw.Trim().ToLowerInvariant())
+            {
+                case "debug":
+                    return LLMNotificationLevel.Debug;
+                case "warning":
+                    return LLMNotificationLevel.Warning;
+                case "error":
+                    return LLMNotificationLevel.Error;
+                case "info":
+                default:
+                    return LLMNotificationLevel.Info;
+            }
+        }
+
+        private NotificationLevel Map(LLMNotificationLevel level)
+        {
+            switch (level)
+            {
+                case LLMNotificationLevel.Debug: return NotificationLevel.Debug;
+                case LLMNotificationLevel.Info: return NotificationLevel.Info;
+                case LLMNotificationLevel.Warning: return NotificationLevel.Warning;
+                case LLMNotificationLevel.Error: return NotificationLevel.Error;
+                case LLMNotificationLevel.Balloon: return NotificationLevel.Balloon;
+                default: return NotificationLevel.Info;
+            }
         }
     }
 }

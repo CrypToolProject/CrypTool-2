@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="ToolDescription_tabs_list" xml:space="preserve"><value>Listet alle geöffneten Tabs mit IDs, Titeln und Aktiv-Status auf.</value></data>
+  <data name="ToolDescription_ws_run" xml:space="preserve"><value>Startet die Workspace-Ausführung. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_stop" xml:space="preserve"><value>Stoppt die Workspace-Ausführung. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_wait_seconds" xml:space="preserve"><value>Wartet eine angegebene Anzahl Sekunden vor dem nächsten Tool-Schritt.</value></data>
+  <data name="ToolDescription_ws_model" xml:space="preserve"><value>Gibt das vollständige Workspace-Modell zurück. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_validate" xml:space="preserve"><value>Gibt eine kompakte Workspace-Validierung zurück. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_io" xml:space="preserve"><value>Liest sichtbare Text-/Zahl-I/O-Werte. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_settings" xml:space="preserve"><value>Gibt sichtbare Komponenten-Einstellungen zurück. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_bounds" xml:space="preserve"><value>Gibt Positionen, sichtbare Breite/Höhe, gespeicherte Maße, Größenherkunft und Mindest-/Maximalmaße in Canvas-Einheiten zurück. Gespeicherte Nullwerte bedeuten automatische Größenbestimmung. Optional tabId; verwendet sonst den zur Anfrage gehörenden Workspace.</value></data>
+  <data name="ToolDescription_app_log_recent" xml:space="preserve"><value>Gibt aktuelle In-Memory-Anwendungs-Logeinträge zurück.</value></data>
+
+  <data name="ToolDescription_comp_list" xml:space="preserve"><value>Listet Komponenten nach Kategorien. Kategorien: CiphersClassic, CiphersModernSymmetric, CiphersModernAsymmetric, Steganography, HashFunctions, CryptanalysisSpecific, CryptanalysisGeneric, Protocols, ToolsBoolean, ToolsDataflow, ToolsDataInputOutput, ToolsRandomNumbers, ToolsCodes, ToolsMisc, Undefined.</value></data>
+  <data name="ToolDescription_comp_list_by_category" xml:space="preserve"><value>Listet nur die Komponenten einer einzelnen Kategorie auf. Erlaubte Kategorien: CiphersClassic, CiphersModernSymmetric, CiphersModernAsymmetric, Steganography, HashFunctions, CryptanalysisSpecific, CryptanalysisGeneric, Protocols, ToolsBoolean, ToolsDataflow, ToolsDataInputOutput, ToolsRandomNumbers, ToolsCodes, ToolsMisc, Undefined.</value></data>
+  <data name="ToolDescription_comp_fullnames" xml:space="preserve"><value>Listet technische Full-Type-Namen aller verfügbaren Komponenten auf.</value></data>
+  <data name="ToolDescription_comp_docs" xml:space="preserve"><value>Gibt generierte Online-Hilfe/Dokumentation für einen Komponententyp zurück.</value></data>
+  <data name="ToolDescription_comp_defaults" xml:space="preserve"><value>Gibt die Standard-TaskPane-Einstellungen eines Komponententyps zurück.</value></data>
+
+  <data name="ToolDescription_tpl_list" xml:space="preserve"><value>Listet verfügbare Vorlagen kompakt mit templatePath und Titel auf.</value></data>
+  <data name="ToolDescription_tpl_info" xml:space="preserve"><value>Gibt Detail-Metadaten zu einer Vorlage zurück, inklusive Summary, Beschreibung und Keywords.</value></data>
+  <data name="ToolDescription_tpl_open" xml:space="preserve"><value>Öffnet eine vorhandene Vorlage in einem neuen sichtbaren Workspace-Tab und gibt mindestens die neue tabId zurück.</value></data>
+  <data name="ToolDescription_tpl_model" xml:space="preserve"><value>Lädt eine Vorlage und gibt deren Workspace-Modellabstraktion zurück.</value></data>
+  <data name="ToolDescription_tpl_io" xml:space="preserve"><value>Liest Text-/Zahl-I/O-Werte aus einem Vorlagen-Workspace.</value></data>
+  <data name="ToolDescription_tpl_bounds" xml:space="preserve"><value>Gibt Positionen und Größen von Elementen in einem Vorlagen-Workspace zurück.</value></data>
+  <data name="ToolDescription_tpl_settings" xml:space="preserve"><value>Gibt sichtbare Komponenten-Einstellungen eines Vorlagen-Workspaces zurück.</value></data>
+
+  <data name="ToolDescription_text_ui" xml:space="preserve"><value>Gibt UI-/Hilfetext nach Thema zurück: startcenter, wizard, workspace, crypcloud, store, homomorphic, prf_kdf.</value></data>
+  <data name="ToolDescription_open_documentation_text" xml:space="preserve"><value>Gibt den Klartext des aktuell aktiven Online-Hilfe-/Dokumentations-Tabs zurück. Optional tabId; ohne tabId wird der aktive Tab verwendet.</value></data>
+  <data name="ToolDescription_tutorial_docs_all" xml:space="preserve"><value>Gibt den vollständig zusammengesetzten Dokumentationstext für ein Kryptotutorial zurück. Erlaubte tutorialName-Werte: Attacks on PKCS#1, Lattice-based Cryptography, World of Primes.</value></data>
+  <data name="ToolDescription_tutorial_docs_summary" xml:space="preserve"><value>Gibt eine reduzierte Klartext-Zusammenfassung der Dokumentation für ein Kryptotutorial zurück. Erlaubte tutorialName-Werte: Attacks on PKCS#1, Lattice-based Cryptography, World of Primes.</value></data>
+
+  <data name="ToolDescription_ws_add_component" xml:space="preserve"><value>Fügt eine Komponente an optionaler Position hinzu. Optional name setzt den sichtbaren kurzen Anzeigenamen bzw. Beschreibungstext. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_new" xml:space="preserve"><value>Erzeugt einen neuen sichtbaren Tab mit einem leeren Workspace und gibt mindestens die neue tabId zurück.</value></data>
+  <data name="ToolDescription_ws_add_connection" xml:space="preserve"><value>Erstellt eine Verbindung zwischen Connectoren. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_set_component_text" xml:space="preserve"><value>Setzt einen Text-/Zahl-Wert per Komponenten-ID. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_set_component_name" xml:space="preserve"><value>Setzt den sichtbaren kurzen Anzeigenamen bzw. Beschreibungstext einer Komponente per Komponenten-ID. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_move_component" xml:space="preserve"><value>Verschiebt eine Komponente auf eine absolute x/y-Position. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_remove_component" xml:space="preserve"><value>Entfernt eine Komponente per Komponenten-ID. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_remove_connection" xml:space="preserve"><value>Entfernt eine Verbindung zwischen Connectoren. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_set_component_setting" xml:space="preserve"><value>Setzt eine sichtbare Komponenten-Einstellung per Komponenten-ID und Property-Name. Der Wert wird in den Zieltyp der Einstellung konvertiert. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_add_memo" xml:space="preserve"><value>Fügt ein Memofeld mit optionalem Starttext und optionaler x/y-Position hinzu. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_set_memo_text" xml:space="preserve"><value>Setzt den Klartext eines Memofelds per memoId. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_move_memo" xml:space="preserve"><value>Verschiebt ein Memofeld auf eine absolute x/y-Position. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_remove_memo" xml:space="preserve"><value>Entfernt ein Memofeld per memoId. Optional tabId; ohne tabId wird der aktive Workspace genutzt.</value></data>
+  <data name="ToolDescription_ws_screenshot" xml:space="preserve"><value>Erstellt ein echtes PNG-Bild des sichtbaren Workspace-Bereichs, ohne Zoom oder Scrollposition zu ändern. Erfordert ein Modell mit Bildverständnis. Optional tabId; verwendet sonst den zur Anfrage gehörenden Workspace.</value></data>
+  <data name="ToolDescription_ws_resize_component" xml:space="preserve"><value>Ändert Breite und Höhe einer vorhandenen Komponente in Canvas-Einheiten, ohne sie zu ersetzen. Öffnet bei Bedarf eine vergrößerbare Ansicht statt der Symbolansicht, beachtet Mindest-/Maximalmaße und unterstützt Undo/Redo. Text, Position und Verbindungen bleiben erhalten. Optional tabId.</value></data>
+  <data name="ToolDescription_ws_resize_memo" xml:space="preserve"><value>Ändert Breite und Höhe eines Memo-Textfelds in Canvas-Einheiten. Text und Position bleiben erhalten. Beachtet Mindest-/Maximalmaße und unterstützt Undo/Redo. Optional tabId.</value></data>
+  <data name="ToolDescription_ws_set_connector_orientation" xml:space="preserve"><value>Verschiebt einen vorhandenen Anschluss an die obere (North), untere (South), rechte (East) oder linke (West) Seite seiner Komponente. Ein-/Ausgangsrichtung und Verbindungen bleiben erhalten; angeschlossene Leitungen werden neu angeordnet. Unterstützt Undo/Redo und verwendet den technischen Anschlussnamen aus dem Workspace-Modell.</value></data>
+  <data name="ToolDescription_ws_check_layout" xml:space="preserve"><value>Prüft tatsächliche Überschneidungen, Abstände, abgeschnittene Memo-Texte und verfügbare Verbindungswege; meldet konkrete Probleme und fehlende Messungen.</value></data>
+  <data name="ToolDescription_ws_fit_memo" xml:space="preserve"><value>Passt ein Memo an den formatierten Inhalt bei gewählter Breite an. Inhalt und Fokus bleiben erhalten; unterstützt Rückgängig/Wiederholen.</value></data>
+  <data name="ToolDescription_tpl_search" xml:space="preserve"><value>Sucht Templates anhand von Aufgaben-Stichworten. Passende Templates sollen begründet vorgeschlagen werden; Öffnen oder Neubauen wartet auf die Auswahl des Nutzers.</value></data>
+</root>

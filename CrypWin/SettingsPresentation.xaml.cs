@@ -147,6 +147,61 @@ namespace CrypTool.CrypWin
             return singleton;
         }
 
+        public bool SelectSettingsTab(string tabName)
+        {
+            if (string.IsNullOrWhiteSpace(tabName))
+            {
+                return false;
+            }
+
+            TreeViewItem item = FindSettingsTab(settingsTree.Items, tabName.Trim());
+            if (item == null)
+            {
+                return false;
+            }
+
+            ExpandParents(item);
+            item.IsSelected = true;
+            item.BringIntoView();
+            return true;
+        }
+
+        private static TreeViewItem FindSettingsTab(ItemCollection items, string tabName)
+        {
+            foreach (object entry in items)
+            {
+                if (entry is TreeViewItem item)
+                {
+                    if (string.Equals(item.Name, tabName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return item;
+                    }
+
+                    TreeViewItem nested = FindSettingsTab(item.Items, tabName);
+                    if (nested != null)
+                    {
+                        return nested;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private static void ExpandParents(TreeViewItem item)
+        {
+            DependencyObject current = item;
+            while (current != null)
+            {
+                if (current is TreeViewItem parent)
+                {
+                    parent.IsExpanded = true;
+                }
+
+                current = VisualTreeHelper.GetParent(current);
+            }
+        }
+
         private void RegisterSettingsTab(Control tab)
         {
             SettingsTabAttribute settingsTabAttribute = (SettingsTabAttribute)Attribute.GetCustomAttribute(tab.GetType(), typeof(SettingsTabAttribute));

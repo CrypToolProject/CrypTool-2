@@ -609,6 +609,15 @@ namespace WorkspaceManager.Model
         [field: NonSerialized]
         public event EventHandler<SizeArgs> ChildSizeChanged;
 
+        /// <summary>Notifies the editor that a connector has moved to another component side.</summary>
+        [field: NonSerialized]
+        public event EventHandler<ModelArgs> ConnectorOrientationChanged;
+
+        internal void OnConnectorOrientationChanged(ConnectorModel connector)
+        {
+            ConnectorOrientationChanged?.Invoke(this, new ModelArgs(connector));
+        }
+
         /// <summary>
         /// A child of this WorkspaceModel is created
         /// </summary>
@@ -677,9 +686,14 @@ namespace WorkspaceManager.Model
         /// <param name="effectedModelElement"></param>
         internal void OnNewChildElement(VisualElementModel effectedModelElement)
         {
+            OnNewChildElement(effectedModelElement, true);
+        }
+
+        internal void OnNewChildElement(VisualElementModel effectedModelElement, bool selectNewElement)
+        {
             if (NewChildElement != null)
             {
-                NewChildElement(this, new ModelArgs(effectedModelElement));
+                NewChildElement(this, new ModelArgs(effectedModelElement) { SelectNewElement = selectNewElement });
             }
         }
 
@@ -897,6 +911,9 @@ namespace WorkspaceManager.Model
     /// </summary>
     public class ModelArgs : EventArgs
     {
+        /// <summary>Whether creating a visual should select it and enter interactive editing.</summary>
+        public bool SelectNewElement { get; internal set; } = true;
+
         public VisualElementModel EffectedModelElement { get; private set; }
 
         public ModelArgs(VisualElementModel effectedModelElement)

@@ -1,4 +1,4 @@
-﻿/*
+/*
    Copyright 2008 - 2022 CrypTool Team
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,8 @@
 using CrypCloud.Core;
 using CrypCloud.Manager;
 using CrypTool.Core;
+using CrypTool.CrypLLM.Ports;
+using CrypTool.CrypWin.Adapter;
 using CrypTool.CrypWin.Helper;
 using CrypTool.CrypWin.Properties;
 using CrypTool.CrypWin.Resources;
@@ -43,6 +45,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Security;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Messaging;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -282,6 +285,11 @@ namespace CrypTool.CrypWin
 
             EnforceTLS12();
 
+            // Upgrade persisted settings before reading the preferred UI culture.
+            // Otherwise a freshly migrated Release installation can still initialize
+            // early UI elements (including the first AI chat message) with fallback language.
+            UpgradeConfig();
+
             SetLanguage();
 
             CheckEssentialComponents();
@@ -336,8 +344,6 @@ namespace CrypTool.CrypWin
                 return;
             }
 
-            UpgradeConfig();
-
             CreateAndSetPersonalProjectsDirectory();
 
             SaveSettingsSavely();
@@ -373,6 +379,9 @@ namespace CrypTool.CrypWin
 
             InitCloud();
             GuiLogMessage("Finished creation of MainWindow", NotificationLevel.Debug);
+
+            RegisterLLMLoggingBridge();
+            RegisterAdapter();
         }
 
         /// <summary>
@@ -588,10 +597,21 @@ namespace CrypTool.CrypWin
         /// </summary>
         private void UpdateSomeUIElements()
         {
+            if (CrypLLM.Properties.Settings.Default.aiChatOpenOnStartup)
+            {
+                CrypLLM.Properties.Settings.Default.aiChatVisibility = Visibility.Visible.ToString();
+                CrypLLM.Properties.Settings.Default.Save();
+            }
+            else
+            {
+                CrypLLM.Properties.Settings.Default.aiChatVisibility = Visibility.Collapsed.ToString();
+                CrypLLM.Properties.Settings.Default.Save();
+            }
+
             try
             {
                 SettingBTN.IsChecked = false;
-                dockWindowAlgorithmSettings.Close();
+                //dockWindowAlgorithmSettings.Close();
 
                 if ((System.Windows.Visibility)Enum.Parse(typeof(System.Windows.Visibility), Properties.Settings.Default.PluginVisibility) == System.Windows.Visibility.Visible)
                 {
@@ -615,6 +635,17 @@ namespace CrypTool.CrypWin
                     dockWindowLogMessages.Close();
                 }
 
+                if ((System.Windows.Visibility)Enum.Parse(typeof(System.Windows.Visibility), CrypLLM.Properties.Settings.Default.aiChatVisibility) == System.Windows.Visibility.Visible)
+                {
+                    AIChatBTN.IsChecked = true;
+                    dockWindowAIChat.Open();
+                }
+                else
+                {
+                    AIChatBTN.IsChecked = false;
+                    dockWindowAIChat.Close();
+                }
+
                 if (!Settings.Default.ShowRibbonBar)
                 {
                     AppRibbon.IsEnabled = false;
@@ -627,7 +658,7 @@ namespace CrypTool.CrypWin
 
                 if (!Settings.Default.ShowAlgorithmsSettings)
                 {
-                    splitPanelAlgorithmSettings.Visibility = Visibility.Collapsed;
+                    //splitPanelAlgorithmSettings.Visibility = Visibility.Collapsed;
                 }
 
                 GuiLogMessage("Successfully updated some ui elements", NotificationLevel.Debug);
@@ -1357,6 +1388,7 @@ namespace CrypTool.CrypWin
                 Height = System.Windows.SystemParameters.PrimaryScreenHeight * Settings.Default.RelHeight;
             }
             dockWindowLogMessages.IsAutoHide = Settings.Default.logWindowAutoHide;
+            dockWindowAIChat.IsAutoHide = CrypLLM.Properties.Settings.Default.aiChatWindowAutoHide;
 
             IsEnabled = false;
             splashWindow = new Splash();
@@ -1677,6 +1709,7 @@ namespace CrypTool.CrypWin
         private void InitDebug()
         {
             dockWindowLogMessages.IsAutoHide = false;
+            dockWindowAIChat.IsAutoHide = false;
         }
 
         private readonly HashSet<Type> pluginInSearchListBox = new HashSet<Type>();
@@ -1919,8 +1952,8 @@ namespace CrypTool.CrypWin
 
                         // open projects at startup if necessary, return whether any project has been opened
                         CheckCommandOpenProject();
-                       
-                        AddEditorDispatched(typeof(Startcenter.StartcenterEditor));                       
+
+                        AddEditorDispatched(typeof(Startcenter.StartcenterEditor));
 
                         if (IsCommandParameterGiven("-silent"))
                         {
@@ -1928,6 +1961,9 @@ namespace CrypTool.CrypWin
                             statusBarItem.Content = null;
                             dockWindowLogMessages.IsAutoHide = true;
                             dockWindowLogMessages.Visibility = Visibility.Collapsed;
+                            dockWindowAIChat.IsAutoHide = true;
+                            dockWindowAIChat.Visibility = Visibility.Collapsed;
+
                         }
 
                         startUpRunning = false;
@@ -2022,7 +2058,7 @@ namespace CrypTool.CrypWin
                     GuiLogMessage(string.Format(Resource.workspace_loading, filePath), NotificationLevel.Info);
                     try
                     {
-                        OpenProject(filePath, FileLoadedOnStartup);
+                        OpenProject(filePath, null);
                     }
                     catch (Exception ex)
                     {
@@ -2253,7 +2289,7 @@ namespace CrypTool.CrypWin
         {
             IEditor editor = OpenEditor(e.Type, e.Info);
             editor.Open(e.Info.Filename.FullName);
-            OpenTab(editor, e.Info, null);           
+            OpenTab(editor, e.Info, null);
 
             //update project title to template name:
             if (contentToTabMap.ContainsKey(ActivePlugin))
@@ -2401,7 +2437,7 @@ namespace CrypTool.CrypWin
             if (parent != null)
             {
                 contentToParentMap.Add(content, parent);
-            }          
+            }
 
             tabs.SelectedItem = tabitem;
 
@@ -2742,6 +2778,7 @@ namespace CrypTool.CrypWin
                         Settings.Default.RelWidth = Width / System.Windows.SystemParameters.PrimaryScreenWidth;
                     }
                     Settings.Default.logWindowAutoHide = dockWindowLogMessages.IsAutoHide;
+                    CrypLLM.Properties.Settings.Default.aiChatWindowAutoHide = dockWindowAIChat.IsAutoHide;
 
                     SaveSettingsSavely();
 
@@ -2994,7 +3031,7 @@ namespace CrypTool.CrypWin
             Visibility v = ((ButtonDropDown)sender).IsChecked ? Visibility.Visible : Visibility.Collapsed;
             Properties.Settings.Default.SettingVisibility = v.ToString();
             SaveSettingsSavely();
-            dockWindowAlgorithmSettings.Close();
+            //dockWindowAlgorithmSettings.Close();
         }
 
         private void LogBTN_Checked(object sender, RoutedEventArgs e)
@@ -3028,6 +3065,26 @@ namespace CrypTool.CrypWin
             else
             {
                 dockWindowNaviPaneAlgorithms.Close();
+            }
+        }
+
+        private void AIChatBTN_Checked(object sender, RoutedEventArgs e)
+        {
+            //ActivePanelProperties.ShowLogPanel = ((ButtonDropDown)sender).IsChecked;
+
+            Visibility v = ((ButtonDropDown)sender).IsChecked ? Visibility.Visible : Visibility.Collapsed;
+            CrypLLM.Properties.Settings.Default.aiChatVisibility = v.ToString();
+            CrypLLM.Properties.Settings.Default.Save();
+
+            if (v == Visibility.Visible)
+            {
+                GuiLogMessage("Try to open the Chatwindow", NotificationLevel.Debug);
+                dockWindowAIChat.Open();
+            }
+            else
+            {
+                GuiLogMessage("Try to close the Chatwindow", NotificationLevel.Debug);
+                dockWindowAIChat.Close();
             }
         }
 
@@ -3199,6 +3256,12 @@ namespace CrypTool.CrypWin
             SettingBTN_Checked(SettingBTN, null);
         }
 
+        private void dockWindowAIChat_Closed(object sender, RoutedEventArgs e)
+        {
+            AIChatBTN.IsChecked = false;
+            AIChatBTN_Checked(AIChatBTN, null);
+        }
+
         private void dockWindowNaviPaneAlgorithms_Closed(object sender, RoutedEventArgs e)
         {
             PluginBTN.IsChecked = false;
@@ -3233,6 +3296,20 @@ namespace CrypTool.CrypWin
             ManagementRootMain.Children.Clear();
         }
 
+        private void dockWindowGroupAIChat_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dockWindowAIChat != null && dockWindowAIChat.IsSelected && aiChatContent != null)
+            {
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
+                {
+                    if (dockWindowAIChat.IsSelected)
+                    {
+                        aiChatContent.NotifyUserOpenedChat();
+                    }
+                }));
+            }
+        }
+
         private void AppRibbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ribbonTabHome.IsSelected)
@@ -3256,6 +3333,219 @@ namespace CrypTool.CrypWin
                 return;
             }
         }
+
+        #region CrypWinAdapter related methods
+
+        /// <summary>
+        /// Gathers metadata about all presently open tabs within the workspace.
+        /// This extraction enables the LLM bridge to build contextual awareness of the user's active environment,
+        /// utilizing volatile session hash codes as unique identifiers.
+        /// </summary>
+        /// <returns>A list of abstracted tab information structures.</returns>
+        public List<OpenTabsAbstraction> GetOpenTabs()
+        {
+            List<OpenTabsAbstraction> list = new List<OpenTabsAbstraction>();
+
+            // Use the internal tab/content maps to get accurate content type + title
+            foreach (var kvp in tabToContentMap)
+            {
+                CTTabItem tab = kvp.Key;
+                object content = kvp.Value;
+
+                string title = tab.Header as string ?? tab.Header?.ToString() ?? string.Empty;
+                string typeName = content != null ? content.GetType().FullName : "null";
+
+                // runtime-stable for the session
+                string tabId = RuntimeHelpers.GetHashCode(tab).ToString();
+
+                list.Add(new OpenTabsAbstraction
+                {
+                    Id = tabId,
+                    ContentType = typeName,
+                    Title = title,
+                    IsActive = tab.IsSelected
+                });
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Creates a new visible tab containing an empty workspace and returns metadata for the opened tab.
+        /// </summary>
+        public OpenTabsAbstraction CreateEmptyWorkspaceTab()
+        {
+            IEditor editor = OpenEditor(typeof(WorkspaceManager.WorkspaceManagerClass), new TabInfo());
+            if (editor == null || !contentToTabMap.TryGetValue(editor, out CTTabItem tab))
+            {
+                return null;
+            }
+
+            tab.IsSelected = true;
+            editor.Presentation.Focusable = true;
+            editor.Presentation.Focus();
+
+            string title = tab.Header as string ?? tab.Header?.ToString() ?? string.Empty;
+            return new OpenTabsAbstraction
+            {
+                Id = RuntimeHelpers.GetHashCode(tab).ToString(),
+                ContentType = editor.GetType().FullName ?? string.Empty,
+                Title = title,
+                IsActive = tab.IsSelected
+            };
+        }
+
+        /// <summary>
+        /// Opens an existing CT2 template in a new visible workspace tab and returns metadata for the opened tab.
+        /// </summary>
+        public OpenTabsAbstraction OpenTemplateWorkspaceTab(string templateFilePath)
+        {
+            if (string.IsNullOrWhiteSpace(templateFilePath))
+            {
+                return null;
+            }
+
+            var fileInfo = new FileInfo(templateFilePath);
+            if (!fileInfo.Exists)
+            {
+                return null;
+            }
+
+            TabInfo info = new TabInfo
+            {
+                Filename = fileInfo
+            };
+
+            IEditor editor = OpenEditor(typeof(WorkspaceManager.WorkspaceManagerClass), info);
+            if (editor == null)
+            {
+                return null;
+            }
+
+            editor.Open(fileInfo.FullName);
+            TabItem openedTab = OpenTab(editor, info, null);
+            if (openedTab == null || !contentToTabMap.TryGetValue(editor, out CTTabItem tab))
+            {
+                return null;
+            }
+
+            tab.IsSelected = true;
+            editor.Presentation.Focusable = true;
+            editor.Presentation.Focus();
+
+            string title = tab.Header as string ?? tab.Header?.ToString() ?? string.Empty;
+            return new OpenTabsAbstraction
+            {
+                Id = RuntimeHelpers.GetHashCode(tab).ToString(),
+                ContentType = editor.GetType().FullName ?? string.Empty,
+                Title = title,
+                IsActive = tab.IsSelected
+            };
+        }
+
+        /// <summary>
+        /// Resolves a workspace editor instance given a transient tab identifier.
+        /// This is required for the LLM subsystem to target specific active components for analysis or modification.
+        /// </summary>
+        /// <param name="tabID">The string representation of the tab's runtime hash code.</param>
+        /// <returns>The corresponding <see cref="IEditor"/> instance if found; otherwise, null.</returns>
+        public IEditor TryGetWorkspaceModelByTabId(string tabID)
+        {
+            // Use the internal tab/content maps to get accurate content type + title
+            foreach (var kvp in tabToContentMap)
+            {
+                CTTabItem tab = kvp.Key;
+                // runtime-stable for the session
+                string _tabID = RuntimeHelpers.GetHashCode(tab).ToString();
+
+                if (_tabID == tabID)
+                {
+                    object content = kvp.Value;
+
+                    return content as IEditor;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Attempts to extract the currently visible plain-text documentation from an Online Help tab.
+        /// If <paramref name="tabId"/> is null or empty, the currently selected tab is inspected.
+        /// </summary>
+        public bool TryGetDocumentationContextByTabId(string tabId, out DocumentationContextAbstraction documentationContext)
+        {
+            documentationContext = null;
+
+            foreach (var kvp in tabToContentMap)
+            {
+                CTTabItem tab = kvp.Key;
+                object content = kvp.Value;
+                string currentTabId = RuntimeHelpers.GetHashCode(tab).ToString();
+
+                bool matchesRequestedTab = !string.IsNullOrWhiteSpace(tabId)
+                    ? string.Equals(currentTabId, tabId, StringComparison.Ordinal)
+                    : tab.IsSelected;
+
+                if (!matchesRequestedTab)
+                {
+                    continue;
+                }
+
+                if (!(content is OnlineHelpTab onlineHelpTab))
+                {
+                    return false;
+                }
+
+                string title = tab.Header as string ?? tab.Header?.ToString() ?? string.Empty;
+                return onlineHelpTab.TryGetCurrentDocumentationContext(currentTabId, title, out documentationContext);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Commands the GUI to display the AI Chat interaction pane.
+        /// Marshals the request to the UI Dispatcher thread to prevent cross-thread access violations triggered by external logic components.
+        /// </summary>
+        public void ShowAIChatPane()
+        {
+            if (!Dispatcher.CheckAccess())
+            {
+                Dispatcher.BeginInvoke(new Action(ShowAIChatPane));
+                return;
+            }
+
+            AIChatBTN.IsChecked = true;
+            AIChatBTN_Checked(AIChatBTN, new RoutedEventArgs());
+        }
+
+        /// <summary>
+        /// Automates navigation to the AI Chat configuration settings menu.
+        /// Similarly marshals the context switch via the UI Dispatcher to ensure thread-safety when invoked by external systems or background workers.
+        /// </summary>
+        public void ShowAIChatSettings()
+        {
+            if (!Dispatcher.CheckAccess())
+            {
+                Dispatcher.BeginInvoke(new Action(ShowAIChatSettings));
+                return;
+            }
+
+            SettingsPresentation settingsPresentation = SettingsPresentation.GetSingleton();
+            OpenTab(settingsPresentation, new TabInfo() { Title = Properties.Resources.Settings }, null).IsSelected = true;
+            settingsPresentation.SelectSettingsTab("CrypLLMSettings");
+        }
+
+        /// <summary>
+        /// Initializes and registers the <see cref="CrypWinAdapter"/>.
+        /// This establishes the definitive bounded context and communication bridge between the main application GUI and the isolated LLM Chat runtime.
+        /// </summary>
+        private void RegisterAdapter()
+        {
+            CrypWinPort.Instance = new CrypWinAdapter(this);
+        }
+
+        #endregion CrypWinAdapter related methods
     }
 
     #region helper class

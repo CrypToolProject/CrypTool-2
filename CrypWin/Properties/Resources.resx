@@ -1000,4 +1000,13 @@
   <data name="LogWindow" xml:space="preserve">
     <value>Log window:</value>
   </data>
+  <data name="RBTooltip_AIChat" xml:space="preserve">
+    <value>Toggle visibility of the AI Chat window</value>
+  </data>
+  <data name="RBHeader_AIChat" xml:space="preserve">
+    <value>AI Chat</value>
+  </data>
+  <data name="AI_Chat" xml:space="preserve">
+    <value>AI Chat</value>
+  </data>
 </root>

@@ -1,0 +1,669 @@
+﻿<UserControl x:Class="CrypTool.CrypLLM.AIChatContent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CrypTool.CrypLLM"
+             xmlns:properties="clr-namespace:CrypTool.CrypLLM.Properties"
+             xmlns:markdig="clr-namespace:Markdig.Wpf;assembly=Markdig.Wpf"
+             xmlns:message="clr-namespace:Microsoft.SemanticKernel.ChatCompletion;assembly=Microsoft.SemanticKernel.Abstractions"
+             mc:Ignorable="d"
+             d:MaxWidth="400" d:MaxHeight="511"
+             Background="White">
+
+    <UserControl.Resources>
+        <x:Array x:Key="DesignMessages" Type="{x:Type local:ChatMessage}">
+            <local:ChatMessage Text="Please show me a compelling Markdown example" Role="{x:Static message:AuthorRole.User}"/>
+            <local:ChatMessage Text="**Lighthouse in the Storm** — Waves lashed against the cliffs, the light spun like a *heartbeat*. A flicker, a command, and the night answered." Role="{x:Static message:AuthorRole.Assistant}" />
+            <local:ChatMessage Text="A short paragraph with emphasis: *Important*, **quiet feeling**, and ***urgent*** combination." Role="{x:Static message:AuthorRole.User}" />
+            <local:ChatMessage Text="**Travel Plan** — Dawn at the harbor; Check the map; Set the sails; > 'Those who seek the unknown find stories." Role="{x:Static message:AuthorRole.Assistant}" />
+            <local:ChatMessage Text="Perfect — *one more* compact checklist I can tick off." Role="{x:Static message:AuthorRole.User}"/>
+        </x:Array>
+
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
+        <!-- NEW: small loading spinner animation -->
+        <Storyboard x:Key="SpinnerStoryboard" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetName="SpinnerRotate"
+                             Storyboard.TargetProperty="Angle"
+                             From="0"
+                             To="360"
+                             Duration="0:0:0.9" />
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Chat area -->
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>  <!-- Input area -->
+        </Grid.RowDefinitions>
+
+        <!-- Top header with thread name and selector -->
+        <DockPanel Grid.Row="0" Margin="8,8,8,4" LastChildFill="True">
+            <Button x:Name="DebugLastRequestButton"
+                    DockPanel.Dock="Right"
+                    Height="24"
+                    Margin="0,0,2,0"
+                    Padding="8,0,8,0"
+                    Cursor="Hand"
+                    Background="Transparent"
+                    BorderThickness="1"
+                    Visibility="Collapsed"
+                    ToolTip="{x:Static properties:Resources.AiChatDebugButtonTooltip}"
+                    Click="DebugLastRequestButton_Click">
+                <TextBlock Text="{x:Static properties:Resources.AiChatDebugButtonText}"/>
+            </Button>
+
+            <Button x:Name="OpenAiSettingsButton"
+                    DockPanel.Dock="Right"
+                    Width="24"
+                    Height="24"
+                    Margin="0,0,2,0"
+                    Cursor="Hand"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ToolTip="{x:Static properties:Resources.AIChatSettings}"
+                    Click="OpenAiSettingsButton_Click">
+                <Image Source="images/Settings.png" Stretch="Uniform"/>
+            </Button>
+
+            <Button x:Name="DeleteThreadButton"
+                    DockPanel.Dock="Right"
+                    Width="24"
+                    Height="24"
+                    Margin="0,0,0,0"
+                    Cursor="Hand"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ToolTip="{x:Static properties:Resources.DeleteThread}"
+                    Click="DeleteThreadButton_Click">
+                <Image Source="images/Delete.png" Stretch="Uniform"/>
+            </Button>
+
+            <Button x:Name="SaveChatButton"
+                    DockPanel.Dock="Right"
+                    Width="25"
+                    Height="25"
+                    Margin="0,0,0,0"
+                    Cursor="Hand"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ToolTip="{x:Static properties:Resources.ExportChatTooltip}"
+                    Click="SaveChatButton_Click">
+                <Viewbox Width="20" Height="20" Margin="0,0,0,0">
+                    <Image Source="images/Download.png" Stretch="Uniform"/>
+                </Viewbox>
+            </Button>
+
+            <Button x:Name="NewThreadButton"
+                    DockPanel.Dock="Right"
+                    Width="24"
+                    Height="24"
+                    Margin="0,0,2,0"
+                    Cursor="Hand"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ToolTip="{x:Static properties:Resources.NewThread}"
+                    Click="NewThreadButton_Click">
+                <Image Source="images/Add.png" Stretch="Uniform"/>
+            </Button>
+
+            <ComboBox x:Name="ThreadSelector"
+                      DisplayMemberPath="Name"
+                      SelectionChanged="ThreadSelector_SelectionChanged"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      Margin="0,0,4,0"/>
+        </DockPanel>
+
+        <!-- Chat area -->
+        <ScrollViewer x:Name="ChatScrollViewer"
+                      Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      Background="White"
+                      Margin="0,0,0,4"
+                      Padding="3"
+                      ScrollChanged="ChatScrollViewer_ScrollChanged"
+                      PreviewMouseWheel="ChatScrollViewer_PreviewMouseWheel">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="28"/>
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0">
+                    <ItemsControl x:Name="ChatItemsControl"
+                                  ItemsSource="{Binding Messages}"
+                                  d:ItemsSource="{StaticResource DesignMessages}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border x:Name="MessageBorder"
+                          CornerRadius="4"
+                          HorizontalAlignment="Left"
+                           Background="Transparent"
+                           Margin="0,3,0,3">
+                                    <Grid>
+                                        <Border x:Name="ToolActivitySummaryContainer"
+                                            Visibility="Collapsed"
+                                            Background="#FFF7F7F7"
+                                            BorderBrush="#FFE1E1E1"
+                                            BorderThickness="1"
+                                            CornerRadius="4"
+                                            Padding="8"
+                                            HorizontalAlignment="Stretch"
+                                            Margin="10,0,0,0">
+                                        <Expander IsExpanded="{Binding IsToolActivityExpanded, Mode=TwoWay}"
+                                                  HorizontalAlignment="Stretch"
+                                                  Header="{Binding Text}">
+                                            <ItemsControl ItemsSource="{Binding ToolActivities}"
+                                                          HorizontalAlignment="Stretch">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid Margin="0,4,0,4"
+                                                              HorizontalAlignment="Stretch">
+                                                            <Grid x:Name="ExpandableToolItem"
+                                                                  Visibility="{Binding HasExpandableDetails, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                </Grid.RowDefinitions>
+
+                                                                <ToggleButton x:Name="ToolToggle"
+                                                                              IsChecked="{Binding IsExpanded, Mode=TwoWay}"
+                                                                              Background="Transparent"
+                                                                              BorderThickness="0"
+                                                                              Padding="0"
+                                                                              HorizontalAlignment="Stretch"
+                                                                              HorizontalContentAlignment="Stretch">
+                                                                    <DockPanel LastChildFill="True">
+                                                                        <Border DockPanel.Dock="Right"
+                                                                                Background="{Binding StatusBackground}"
+                                                                                CornerRadius="10"
+                                                                                Padding="8,2,8,2"
+                                                                                Margin="8,0,0,0">
+                                                                            <Border.ToolTip>
+                                                                                <ToolTip MaxWidth="420"
+                                                                                         Visibility="{Binding HasStatusTooltip, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                                    <TextBlock Text="{Binding StatusTooltip}"
+                                                                                               TextWrapping="Wrap"/>
+                                                                                </ToolTip>
+                                                                            </Border.ToolTip>
+                                                                            <TextBlock Text="{Binding StatusLabel}"
+                                                                                       Foreground="{Binding StatusForeground}"
+                                                                                       FontSize="11"
+                                                                                       FontWeight="SemiBold"/>
+                                                                        </Border>
+
+                                                                        <StackPanel Orientation="Horizontal"
+                                                                                    VerticalAlignment="Center">
+                                                                            <TextBlock x:Name="ToolChevron"
+                                                                                       FontSize="8"
+                                                                                       Width="8"
+                                                                                       Margin="0,0,6,0"
+                                                                                       VerticalAlignment="Center"
+                                                                                       Foreground="#FF555555">
+                                                                                <TextBlock.Style>
+                                                                                    <Style TargetType="TextBlock">
+                                                                                        <Setter Property="Text" Value="▸"/>
+                                                                                        <Style.Triggers>
+                                                                                            <DataTrigger Binding="{Binding IsChecked, ElementName=ToolToggle}" Value="True">
+                                                                                                <Setter Property="Text" Value="▾"/>
+                                                                                            </DataTrigger>
+                                                                                        </Style.Triggers>
+                                                                                    </Style>
+                                                                                </TextBlock.Style>
+                                                                            </TextBlock>
+                                                                            <TextBlock Text="{Binding ToolDisplayName}"
+                                                                                       FontWeight="SemiBold"
+                                                                                       Foreground="#FF222222"
+                                                                                       VerticalAlignment="Center"/>
+                                                                            <Border Width="16"
+                                                                                    Height="16"
+                                                                                    Margin="6,0,0,0"
+                                                                                    CornerRadius="8"
+                                                                                    Background="#FFF0F0F0"
+                                                                                    BorderBrush="#FFD0D0D0"
+                                                                                    BorderThickness="1"
+                                                                                    VerticalAlignment="Center"
+                                                                                    Visibility="{Binding HasToolDescription, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                                <Border.ToolTip>
+                                                                                    <ToolTip MaxWidth="420">
+                                                                                        <TextBlock Text="{Binding ToolDescription}"
+                                                                                                   TextWrapping="Wrap"/>
+                                                                                    </ToolTip>
+                                                                                </Border.ToolTip>
+                                                                                <TextBlock Text="i"
+                                                                                           FontSize="10"
+                                                                                           FontWeight="Bold"
+                                                                                           Foreground="#FF555555"
+                                                                                           HorizontalAlignment="Center"
+                                                                                           VerticalAlignment="Center"/>
+                                                                            </Border>
+                                                                        </StackPanel>
+                                                                    </DockPanel>
+                                                                </ToggleButton>
+
+                                                                <StackPanel x:Name="ToolArgsPanel"
+                                                                            Grid.Row="1"
+                                                                            Margin="16,6,0,0"
+                                                                            Visibility="{Binding Path=IsChecked, ElementName=ToolToggle, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                    <Border BorderBrush="#FFD8D8D8"
+                                                                            Background="#FFF9F9F9"
+                                                                            BorderThickness="1"
+                                                                            CornerRadius="4"
+                                                                            Padding="8"
+                                                                            Visibility="{Binding HasArguments, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                        <TextBox Text="{Binding DisplayArgumentsText, Mode=OneWay}"
+                                                                                 IsReadOnly="True"
+                                                                                 IsReadOnlyCaretVisible="True"
+                                                                                 BorderThickness="0"
+                                                                                 Background="Transparent"
+                                                                                 TextWrapping="Wrap"
+                                                                                 AcceptsReturn="True"
+                                                                                 VerticalScrollBarVisibility="Auto"
+                                                                                 MaxHeight="140"
+                                                                                 FontSize="12"
+                                                                                 Padding="0"
+                                                                                 Foreground="#FF444444"/>
+                                                                    </Border>
+
+                                                                    <TextBlock Text="{Binding DataContext.ToolActivityErrorLabel, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                               FontWeight="SemiBold"
+                                                                               Foreground="#FF7A1E1E"
+                                                                               Margin="0,8,0,3"
+                                                                               Visibility="{Binding HasErrorDetails, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                                                    <TextBox Text="{Binding ErrorDetails}"
+                                                                             IsReadOnly="True"
+                                                                             BorderBrush="#FFE6B7B7"
+                                                                             Background="#FFFFF4F4"
+                                                                             TextWrapping="Wrap"
+                                                                             AcceptsReturn="True"
+                                                                             VerticalScrollBarVisibility="Auto"
+                                                                             MaxHeight="140"
+                                                                             FontFamily="Consolas"
+                                                                             FontSize="12"
+                                                                             Padding="6"
+                                                                             Foreground="#FF7A1E1E"
+                                                                             Visibility="{Binding HasErrorDetails, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                                                </StackPanel>
+                                                            </Grid>
+
+                                                            <DockPanel x:Name="SimpleToolItem"
+                                                                       LastChildFill="True"
+                                                                       Visibility="Collapsed">
+                                                                <Border DockPanel.Dock="Right"
+                                                                        Background="{Binding StatusBackground}"
+                                                                        CornerRadius="10"
+                                                                        Padding="8,2,8,2"
+                                                                        Margin="8,0,0,0">
+                                                                    <Border.ToolTip>
+                                                                        <ToolTip MaxWidth="420"
+                                                                                 Visibility="{Binding HasStatusTooltip, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                            <TextBlock Text="{Binding StatusTooltip}"
+                                                                                       TextWrapping="Wrap"/>
+                                                                        </ToolTip>
+                                                                    </Border.ToolTip>
+                                                                    <TextBlock Text="{Binding StatusLabel}"
+                                                                               Foreground="{Binding StatusForeground}"
+                                                                               FontSize="11"
+                                                                               FontWeight="SemiBold"/>
+                                                                </Border>
+
+                                                                <StackPanel Orientation="Horizontal"
+                                                                            VerticalAlignment="Center">
+                                                                    <Border Width="14"
+                                                                            Background="Transparent"
+                                                                            Margin="0,0,0,0"/>
+                                                                    <TextBlock Text="{Binding ToolDisplayName}"
+                                                                               FontWeight="SemiBold"
+                                                                               Foreground="#FF222222"
+                                                                               VerticalAlignment="Center"/>
+                                                                    <Border Width="16"
+                                                                            Height="16"
+                                                                            Margin="6,0,0,0"
+                                                                            CornerRadius="8"
+                                                                            Background="#FFF0F0F0"
+                                                                            BorderBrush="#FFD0D0D0"
+                                                                            BorderThickness="1"
+                                                                            VerticalAlignment="Center"
+                                                                            Visibility="{Binding HasToolDescription, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                        <Border.ToolTip>
+                                                                            <ToolTip MaxWidth="420">
+                                                                                <TextBlock Text="{Binding ToolDescription}"
+                                                                                           TextWrapping="Wrap"/>
+                                                                            </ToolTip>
+                                                                        </Border.ToolTip>
+                                                                        <TextBlock Text="i"
+                                                                                   FontSize="10"
+                                                                                   FontWeight="Bold"
+                                                                                   Foreground="#FF555555"
+                                                                                   HorizontalAlignment="Center"
+                                                                                   VerticalAlignment="Center"/>
+                                                                    </Border>
+                                                                </StackPanel>
+                                                            </DockPanel>
+                                                        </Grid>
+                                                        <DataTemplate.Triggers>
+                                                            <DataTrigger Binding="{Binding HasExpandableDetails}" Value="False">
+                                                                <Setter TargetName="SimpleToolItem" Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </DataTemplate.Triggers>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Expander>
+                                    </Border>
+                                    <!-- Plain Text for user messages -->
+                                    <TextBox x:Name="UserMessage"
+                                     Text="{Binding Text}"
+                                     IsReadOnly="True"
+                                     IsReadOnlyCaretVisible="False"
+                                     BorderThickness="0"
+                                     Background="Transparent"
+                                     TextWrapping="Wrap"
+                                     Foreground="Black"
+                                     Visibility="Visible"
+                                     TextAlignment="Right"
+                                     HorizontalAlignment="Right"
+                                     Padding="6"
+                                     FontFamily="Segoe UI"
+                                     FontSize="13"
+                                     />
+                                    <!-- Markdown.Xaml viewer for AI responses -->
+                                    <markdig:MarkdownViewer x:Name="AIMessage"
+                                                 Markdown="{Binding Text}"
+                                                 Visibility="Collapsed"
+                                                 Background="Transparent"
+                                                 BorderThickness="0"
+                                                 FontFamily="Segoe UI"
+                                                 FontSize="12"
+                                                 />
+
+                                    <TextBox x:Name="ErrorMessage"
+                                     Text="{Binding Text}"
+                                     IsReadOnly="True"
+                                     IsReadOnlyCaretVisible="False"
+                                     BorderThickness="0"
+                                     Background="Transparent"
+                                     TextWrapping="Wrap"
+                                     Foreground="#8B0000"
+                                     Visibility="Collapsed"
+                                     TextAlignment="Left"
+                                     HorizontalAlignment="Left"
+                                     Padding="6"
+                                     FontFamily="Segoe UI"
+                                     FontSize="12"
+                                     FontWeight="SemiBold"
+                                     />
+                                    </Grid>
+                                </Border>
+
+                                <DataTemplate.Triggers>
+                                    <!-- user messages -->
+                                    <DataTrigger Binding="{Binding Role}" Value="{x:Static message:AuthorRole.User}">
+                                        <Setter TargetName="MessageBorder" Property="HorizontalAlignment" Value="Right" />
+                                        <Setter TargetName="MessageBorder" Property="Background" Value="#C1D9F1" />
+                                        <Setter TargetName="UserMessage" Property="Visibility" Value="Visible" />
+                                        <Setter TargetName="AIMessage" Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+
+                                    <!-- AI messages -->
+                                    <DataTrigger Binding="{Binding Role}" Value="{x:Static message:AuthorRole.Assistant}">
+                                        <Setter TargetName="MessageBorder" Property="HorizontalAlignment" Value="Left" />
+                                        <Setter TargetName="MessageBorder" Property="Background" Value="Transparent" />
+                                        <Setter TargetName="UserMessage" Property="Visibility" Value="Collapsed" />
+                                        <Setter TargetName="AIMessage" Property="Visibility" Value="Visible" />
+                                        <Setter TargetName="ErrorMessage" Property="Visibility" Value="Collapsed" />
+                                        <Setter TargetName="MessageBorder" Property="Margin" Value="-14,3,0,3" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding IsError}" Value="True">
+                                        <Setter TargetName="MessageBorder" Property="Background" Value="#FFF4EAEA" />
+                                        <Setter TargetName="MessageBorder" Property="BorderBrush" Value="#FFE8A0A0" />
+                                        <Setter TargetName="MessageBorder" Property="BorderThickness" Value="1" />
+                                        <Setter TargetName="MessageBorder" Property="Margin" Value="0,3,0,3" />
+                                        <Setter TargetName="AIMessage" Property="Visibility" Value="Collapsed" />
+                                        <Setter TargetName="ErrorMessage" Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding IsToolActivitySummary}" Value="True">
+                                        <Setter TargetName="MessageBorder" Property="HorizontalAlignment" Value="Stretch" />
+                                        <Setter TargetName="MessageBorder" Property="Background" Value="Transparent" />
+                                        <Setter TargetName="MessageBorder" Property="BorderThickness" Value="0" />
+                                        <Setter TargetName="MessageBorder" Property="Margin" Value="0,3,0,3" />
+                                        <Setter TargetName="UserMessage" Property="Visibility" Value="Collapsed" />
+                                        <Setter TargetName="AIMessage" Property="Visibility" Value="Collapsed" />
+                                        <Setter TargetName="ErrorMessage" Property="Visibility" Value="Collapsed" />
+                                        <Setter TargetName="ToolActivitySummaryContainer" Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <Border HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            MaxWidth="360"
+                            Margin="20,24,20,20"
+                            Padding="14"
+                            Background="#FFF8FAFC"
+                            BorderBrush="#FFD7E0E8"
+                            BorderThickness="1"
+                            CornerRadius="10"
+                            Visibility="{Binding ChatWelcomeVisibility}">
+                        <StackPanel>
+                            <TextBox Text="{Binding ChatWelcomeTitle, Mode=OneWay}"
+                                     Margin="0,0,0,6"
+                                     IsReadOnly="True"
+                                     IsReadOnlyCaretVisible="True"
+                                     BorderThickness="0"
+                                     Background="Transparent"
+                                     Foreground="#FF1F2933"
+                                     FontSize="17"
+                                     FontWeight="SemiBold"
+                                     TextAlignment="Center"
+                                     TextWrapping="Wrap"
+                                     AcceptsReturn="True"
+                                     Padding="0"/>
+                            <TextBox Text="{Binding ChatWelcomeBody, Mode=OneWay}"
+                                     IsReadOnly="True"
+                                     IsReadOnlyCaretVisible="True"
+                                     BorderThickness="0"
+                                     Background="Transparent"
+                                     Foreground="#FF52606D"
+                                     FontSize="12"
+                                     TextAlignment="Center"
+                                     TextWrapping="Wrap"
+                                     AcceptsReturn="True"
+                                     Padding="0"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+                <!-- NEW: spinner right after model selector -->
+                <Grid x:Name="ProcessingIndicator"
+                              DockPanel.Dock="Left"
+                              Width="18"
+                              Height="18"
+                              Margin="7,10,5,0"
+                              Visibility="Collapsed"
+                            d:Visibility="Visible"
+                              ToolTip="{Binding ProcessingTooltipText}"
+                            HorizontalAlignment="Left"
+                            Grid.Row="1">
+                    <Grid.RenderTransform>
+                        <RotateTransform x:Name="SpinnerRotate"
+                            Angle="0"
+                            CenterX="9"
+                            CenterY="9"/>
+                    </Grid.RenderTransform>
+
+                    <!-- simple ring -->
+                    <Ellipse Width="16"
+                            Height="16"
+                            Stroke="#808080"
+                            StrokeThickness="2"
+                            Opacity="0.35"/>
+                    <!-- small arc/dot to visualize rotation -->
+                    <Ellipse Width="4"
+                            Height="4"
+                            Fill="#808080"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Margin="0,1,0,0"/>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+
+
+        <!-- Input area -->
+        <ScrollViewer Grid.Row="2" MaxHeight="140" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                      Visibility="{Binding AgentChangesVisibility}" Margin="5,2,5,2">
+            <ItemsControl ItemsSource="{Binding AgentChanges}" IsEnabled="{Binding CanInteractWithAgentChanges}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#FFF3F6FA" BorderBrush="#FFD5DFEA" BorderThickness="1" Padding="8" Margin="0,0,0,4">
+                            <StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Title}" FontWeight="SemiBold" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <Button IsEnabled="{Binding CanUndo}" Click="UndoAgentChanges_Click" HorizontalAlignment="Left" Padding="8,3" Margin="0,4,0,4">
+                                        <TextBlock Text="{Binding UndoLabel}" TextWrapping="Wrap"/>
+                                    </Button>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Status}" TextWrapping="Wrap" FontSize="11"/>
+                                <TextBlock Text="{Binding LayoutStatus}" TextWrapping="Wrap" FontSize="11" Foreground="#FF566477"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Grid Grid.Row="3" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>     <!-- Chat input field -->
+                <RowDefinition Height="5"/>     <!-- Spacer -->
+                <RowDefinition Height="Auto"/>  <!-- Chat Buttons -->
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="InputBox"
+                     Grid.Row="0"
+                     FontSize="12"
+                     BorderBrush="#444"
+                     BorderThickness="1"
+                     IsEnabled="False"
+                     AcceptsReturn="True"
+                     PreviewKeyDown="InputBox_PreviewKeyDown"
+                     VerticalScrollBarVisibility="Auto"
+                     TextWrapping="Wrap"
+                     MaxHeight="100"
+                     xml:space="preserve"> </TextBox>
+
+            <DockPanel Grid.Row="2" LastChildFill="True">
+                <Grid DockPanel.Dock="Left"
+                      Margin="0,0,8,0"
+                      Visibility="{Binding UnavailableToolsIndicatorVisibility}">
+                    <Button x:Name="UnavailableToolsButton"
+                            Width="22"
+                            Height="22"
+                            Padding="0"
+                            Cursor="Hand"
+                            Background="#FFF7E8C6"
+                            BorderBrush="#FFD0A24B"
+                            BorderThickness="1"
+                            ToolTip="{x:Static properties:Resources.AiChatUnavailableToolsTooltipTitle}"
+                            Click="UnavailableToolsButton_Click">
+                        <TextBlock Text="!"
+                                   Foreground="#8A5A00"
+                                   FontSize="13"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                    </Button>
+
+                    <Popup x:Name="UnavailableToolsPopup"
+                           PlacementTarget="{Binding ElementName=UnavailableToolsButton}"
+                           Placement="Bottom"
+                           HorizontalOffset="-6"
+                           VerticalOffset="6"
+                           StaysOpen="False"
+                           AllowsTransparency="True"
+                           IsOpen="{Binding IsUnavailableToolsPopupOpen, Mode=TwoWay}"
+                           Closed="UnavailableToolsPopup_Closed">
+                        <Border Width="460"
+                                MaxHeight="320"
+                                Padding="10"
+                                Background="White"
+                                BorderBrush="#FFD0A24B"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                SnapsToDevicePixels="True">
+                            <TextBox x:Name="UnavailableToolsPopupTextBox"
+                                     Text="{Binding UnavailableToolsTooltipText, Mode=OneWay}"
+                                     IsReadOnly="True"
+                                     IsReadOnlyCaretVisible="True"
+                                     BorderThickness="0"
+                                     Background="Transparent"
+                                     TextWrapping="Wrap"
+                                     AcceptsReturn="True"
+                                     VerticalScrollBarVisibility="Auto"
+                                     HorizontalScrollBarVisibility="Disabled"
+                                     MaxHeight="300"
+                                     Padding="0"
+                                     Cursor="IBeam" />
+                        </Border>
+                    </Popup>
+                </Grid>
+
+                <Rectangle Width="20" DockPanel.Dock="Right"/>
+
+                <Button x:Name="SendButton"
+                        DockPanel.Dock="Right"
+                        Width="24"
+                        Height="24"
+                        Cursor="Arrow"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        IsEnabled="False"
+                        ToolTip="{x:Static properties:Resources.SendMessage}"
+                        Click="SendButton_Click">
+                    <!-- Named image so code-behind can swap it -->
+                    <Image x:Name="SendImage" Source="images/Send.png" Stretch="Uniform"/>
+                </Button>
+                <WrapPanel>
+                    <Grid Width="160" Margin="0,0,8,0" VerticalAlignment="Center">
+                        <ComboBox x:Name="ModelSelector"
+                                  Background="Transparent"
+                                  BorderThickness="1"
+                                  SelectionChanged="ModelSelector_SelectionChanged"
+                                  ToolTip="{x:Static properties:Resources.SelectAIModel}" />
+                        <TextBlock Text="{Binding ModelSelectionPlaceholderText}"
+                                   Margin="6,0,24,0"
+                                   VerticalAlignment="Center"
+                                   Foreground="#FF6B7280"
+                                   TextTrimming="CharacterEllipsis"
+                                   IsHitTestVisible="False"
+                                   Visibility="{Binding ModelSelectionPlaceholderVisibility}" />
+                    </Grid>
+                    <TextBlock x:Name="ContextUsageLabel"
+                           Text="{Binding ContextUsageText}"
+                           ToolTip="{Binding ContextUsageTooltip}"
+                           Visibility="{Binding ContextUsageVisibility}"
+                           VerticalAlignment="Center"
+                           Margin="0,0,8,0"
+                           FontSize="11"
+                           Foreground="#FF6B7280"
+                           TextWrapping="Wrap" />
+                </WrapPanel>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</UserControl>

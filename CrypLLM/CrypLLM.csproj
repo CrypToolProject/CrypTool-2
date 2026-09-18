@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{42C2E748-D829-463D-BFA7-E7723AC708F2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CrypTool.CrypLLM</RootNamespace>
+    <AssemblyName>CrypLLM</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\CrypBuild\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>9.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\CrypBuild\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>9.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevComponents.WpfDock">
+      <HintPath>..\LibDev\DevComponents.WpfDock.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.WpfEditors">
+      <HintPath>..\LibDev\DevComponents.WpfEditors.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.WpfRibbon">
+      <HintPath>..\LibDev\DevComponents.WpfRibbon.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=6.3.0.90, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.6.3.0.90\lib\net462\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="Markdig, Version=0.44.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Markdig.0.44.0\lib\net462\Markdig.dll</HintPath>
+    </Reference>
+    <Reference Include="Markdig.Wpf, Version=0.5.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Markdig.Wpf.0.5.0.1\lib\net452\Markdig.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Agents.AI.Abstractions">
+      <HintPath>..\Lib\Microsoft.Agents.AI.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.10.0.6\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.AI">
+      <HintPath>..\Lib\Microsoft.Extensions.AI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.AI.Abstractions">
+      <HintPath>..\Lib\Microsoft.Extensions.AI.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.AI.OpenAI">
+      <HintPath>..\Lib\Microsoft.Extensions.AI.OpenAI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <HintPath>..\Lib\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=10.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.10.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=10.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.10.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Diagnostics.Abstractions">
+      <HintPath>..\Lib\Microsoft.Extensions.Diagnostics.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions">
+      <HintPath>..\Lib\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=10.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.10.0.0\lib\net462\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=10.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.10.0.0\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=10.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.10.0.0\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=10.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.10.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.VectorData.Abstractions">
+      <HintPath>..\Lib\Microsoft.Extensions.VectorData.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SemanticKernel.Abstractions">
+      <HintPath>..\Lib\Microsoft.SemanticKernel.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SemanticKernel.Agents.Abstractions">
+      <HintPath>..\Lib\Microsoft.SemanticKernel.Agents.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SemanticKernel.Agents.Core">
+      <HintPath>..\Lib\Microsoft.SemanticKernel.Agents.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SemanticKernel.Connectors.OpenAI">
+      <HintPath>..\Lib\Microsoft.SemanticKernel.Connectors.OpenAI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SemanticKernel.Core">
+      <HintPath>..\Lib\Microsoft.SemanticKernel.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenAI">
+      <HintPath>..\Lib\OpenAI.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ClientModel, Version=1.10.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\System.ClientModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.10.0.0\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Pipelines, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Pipelines.10.0.0\lib\net462\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory.Data">
+      <HintPath>..\Lib\System.Memory.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.ServerSentEvents">
+      <HintPath>..\Lib\System.Net.ServerSentEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.10.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.10.0.0\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AgentInstructions\InstructionEntry.cs" />
+    <Compile Include="AgentInstructions\InstructionManager.cs" />
+    <Compile Include="AIChatContent.xaml.cs">
+      <DependentUpon>AIChatContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LastInvocationDebugWindow.xaml.cs">
+      <DependentUpon>LastInvocationDebugWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="AgentInstructions\InstructionCatalog.cs" />
+    <Compile Include="Helper\Enums.cs" />
+    <Compile Include="Converter\ProviderToStringConverter.cs" />
+    <Compile Include="Plugins\\WorkspaceEditingPlugin.cs" />
+    <Compile Include="Plugins\\ComponentCatalogPlugin.cs" />
+    <Compile Include="Services\LLMPluginService.cs" />
+    <Compile Include="Services\SemanticKernelLoggerBridge.cs" />
+    <Compile Include="Plugins\\TemplateCatalogPlugin.cs" />
+    <Compile Include="Plugins\\UiTextCatalogPlugin.cs" />
+    <Compile Include="Plugins\\WorkspaceStatusPlugin.cs" />
+    <Compile Include="Properties\Resources1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\TemplateLoader.cs" />
+    <Compile Include="Services\WorkspaceInspector.cs" />
+    <Compile Include="Threads\AIThread.cs" />
+    <Compile Include="Threads\AssistantResponseText.cs" />
+    <Compile Include="Threads\ChatHistoryPersistence.cs" />
+    <Compile Include="Threads\ChatHistoryReductionEngine.cs" />
+    <Compile Include="Threads\WorkspaceScreenshotContent.cs" />
+    <Compile Include="Threads\AIThreadManager.cs" />
+    <Compile Include="Threads\ModelContextWindowResolver.cs" />
+    <Compile Include="Threads\ToolInvocationBudgetRuntime.cs" />
+    <Compile Include="Threads\ToolPermissionFilter.cs" />
+    <Compile Include="Ports\CrypWinPort.cs" />
+    <Compile Include="Ports\LoggingPort.cs" />
+    <Compile Include="Services\AISchemaGenerator.cs" />
+    <Compile Include="Services\WorkspaceElementGeometry.cs" />
+    <Compile Include="Services\WorkspaceLayoutService.cs" />
+    <Compile Include="Threads\AgentEditSession.cs" />
+    <Compile Include="LLMSettingsTab.xaml.cs">
+      <DependentUpon>LLMSettingsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <DependentUpon>Settings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Helper\Security.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AgentInstructions\Instructions.json" />
+    <EmbeddedResource Include="Properties\ToolDescriptions.de.resx" />
+    <EmbeddedResource Include="Properties\ToolDescriptions.resx" />
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="AIChatContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LastInvocationDebugWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LLMSettingsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CrypCore\CrypCore.csproj">
+      <Project>{ff5d473c-0716-4d3e-9078-2ebd979f94c6}</Project>
+      <Name>CrypCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPluginBase\CrypPluginBase.csproj">
+      <Project>{25db2b47-a457-4ec2-960b-395ce07ae093}</Project>
+      <Name>CrypPluginBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\Numbers\Numbers.csproj">
+      <Project>{40252d29-01c9-4f1a-9735-072b349ad165}</Project>
+      <Name>Numbers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\TextInput\TextInput.csproj">
+      <Project>{475e8850-4d82-4c5e-ad19-5fda82bc7576}</Project>
+      <Name>TextInput</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\TextOutput\TextOutput.csproj">
+      <Project>{a5529873-06ea-4e38-8b99-5abd84b20446}</Project>
+      <Name>TextOutput</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\WorkspaceManager\WorkspaceManager.csproj">
+      <Project>{949B4294-2894-43B4-BD73-E0B031F5434F}</Project>
+      <Name>WorkspaceManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibSource\LanguageStatisticsLib\LanguageStatisticsLib.csproj">
+      <Project>{5b2e0f9e-f7b8-44fc-84d3-cbc00bc21f47}</Project>
+      <Name>LanguageStatisticsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlineDocumentationGenerator\OnlineDocumentationGenerator.csproj">
+      <Project>{0698cd9d-dad6-41ae-9e0a-fb00959fe8b1}</Project>
+      <Name>OnlineDocumentationGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WorkspaceManagerModel\WorkspaceManagerModel.csproj">
+      <Project>{C35A6E71-D6FE-478B-A12D-FAD54FC4EDC9}</Project>
+      <Name>WorkspaceManagerModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Send.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Settings.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets" Condition="Exists('..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets'))" />
+  </Target>
+</Project>

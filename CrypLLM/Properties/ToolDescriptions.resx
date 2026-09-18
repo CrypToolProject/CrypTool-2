@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="ToolDescription_tabs_list" xml:space="preserve"><value>Lists all open tabs with IDs, titles and active state.</value></data>
+  <data name="ToolDescription_ws_run" xml:space="preserve"><value>Starts workspace execution. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_stop" xml:space="preserve"><value>Stops workspace execution. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_wait_seconds" xml:space="preserve"><value>Waits for a specified number of seconds before the next tool step.</value></data>
+  <data name="ToolDescription_ws_model" xml:space="preserve"><value>Returns the complete workspace model. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_validate" xml:space="preserve"><value>Returns compact workspace validation. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_io" xml:space="preserve"><value>Reads visible text/number I/O values. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_settings" xml:space="preserve"><value>Returns visible component settings. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_bounds" xml:space="preserve"><value>Returns positions, visible width/height, stored sizes, size source and minimum/maximum dimensions in canvas units. Stored zero dimensions mean automatic sizing. Optional tabId; defaults to the request-pinned workspace.</value></data>
+  <data name="ToolDescription_app_log_recent" xml:space="preserve"><value>Returns recent in-memory application log entries.</value></data>
+
+  <data name="ToolDescription_comp_list" xml:space="preserve"><value>Lists components by category. Categories: CiphersClassic, CiphersModernSymmetric, CiphersModernAsymmetric, Steganography, HashFunctions, CryptanalysisSpecific, CryptanalysisGeneric, Protocols, ToolsBoolean, ToolsDataflow, ToolsDataInputOutput, ToolsRandomNumbers, ToolsCodes, ToolsMisc, Undefined.</value></data>
+  <data name="ToolDescription_comp_list_by_category" xml:space="preserve"><value>Lists components for one category only. Allowed categories: CiphersClassic, CiphersModernSymmetric, CiphersModernAsymmetric, Steganography, HashFunctions, CryptanalysisSpecific, CryptanalysisGeneric, Protocols, ToolsBoolean, ToolsDataflow, ToolsDataInputOutput, ToolsRandomNumbers, ToolsCodes, ToolsMisc, Undefined.</value></data>
+  <data name="ToolDescription_comp_fullnames" xml:space="preserve"><value>Lists technical full type names of all available components.</value></data>
+  <data name="ToolDescription_comp_docs" xml:space="preserve"><value>Returns generated online help/documentation for a component type.</value></data>
+  <data name="ToolDescription_comp_defaults" xml:space="preserve"><value>Returns default TaskPane settings for a component type.</value></data>
+
+  <data name="ToolDescription_tpl_list" xml:space="preserve"><value>Lists available templates in compact form with templatePath and title.</value></data>
+  <data name="ToolDescription_tpl_info" xml:space="preserve"><value>Returns detailed metadata for one template, including summary, description and keywords.</value></data>
+  <data name="ToolDescription_tpl_open" xml:space="preserve"><value>Opens an existing template in a new visible workspace tab and returns at least the new tabId.</value></data>
+  <data name="ToolDescription_tpl_model" xml:space="preserve"><value>Loads a template and returns its workspace model abstraction.</value></data>
+  <data name="ToolDescription_tpl_io" xml:space="preserve"><value>Reads text/number I/O values from a template workspace.</value></data>
+  <data name="ToolDescription_tpl_bounds" xml:space="preserve"><value>Returns positions and sizes of elements in a template workspace.</value></data>
+  <data name="ToolDescription_tpl_settings" xml:space="preserve"><value>Returns visible component settings from a template workspace.</value></data>
+
+  <data name="ToolDescription_text_ui" xml:space="preserve"><value>Returns UI/help text by topic: startcenter, wizard, workspace, crypcloud, store, homomorphic, prf_kdf.</value></data>
+  <data name="ToolDescription_open_documentation_text" xml:space="preserve"><value>Returns the plain text of the currently active Online Help/documentation tab. Optional tabId: if omitted, the active tab is used.</value></data>
+  <data name="ToolDescription_tutorial_docs_all" xml:space="preserve"><value>Returns the full assembled documentation text for one crypto tutorial. Allowed tutorialName values: Attacks on PKCS#1, Lattice-based Cryptography, World of Primes.</value></data>
+  <data name="ToolDescription_tutorial_docs_summary" xml:space="preserve"><value>Returns a reduced plain-text summary of the documentation for one crypto tutorial. Allowed tutorialName values: Attacks on PKCS#1, Lattice-based Cryptography, World of Primes.</value></data>
+
+  <data name="ToolDescription_ws_add_component" xml:space="preserve"><value>Adds a component at optional position. Optional name sets the visible short user-facing label/description text. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_new" xml:space="preserve"><value>Creates a new visible tab with an empty workspace and returns at least the new tabId.</value></data>
+  <data name="ToolDescription_ws_add_connection" xml:space="preserve"><value>Creates a connection between connectors. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_set_component_text" xml:space="preserve"><value>Sets a text/number value by component ID. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_set_component_name" xml:space="preserve"><value>Sets the visible short user-facing label/description text of a component by component ID. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_move_component" xml:space="preserve"><value>Moves a component to absolute x/y position. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_remove_component" xml:space="preserve"><value>Removes a component by component ID. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_remove_connection" xml:space="preserve"><value>Removes a connection between connectors. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_set_component_setting" xml:space="preserve"><value>Sets one visible component setting by component ID and property name. Value is converted to the target setting type. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_add_memo" xml:space="preserve"><value>Adds a memo field with optional initial text and optional x/y position. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_set_memo_text" xml:space="preserve"><value>Sets the plain text of a memo field by memoId. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_move_memo" xml:space="preserve"><value>Moves a memo field to absolute x/y position. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_remove_memo" xml:space="preserve"><value>Removes a memo field by memoId. Optional tabId; active workspace is used if omitted.</value></data>
+  <data name="ToolDescription_ws_screenshot" xml:space="preserve"><value>Captures an actual PNG image of the visible workspace viewport without changing its zoom or scroll position. Requires a vision-capable model. Optional tabId; defaults to the request-pinned workspace.</value></data>
+  <data name="ToolDescription_ws_resize_component" xml:space="preserve"><value>Changes an existing component's width and height in canvas units without replacing it. Expands icon mode when a resizable view exists, respects minimum/maximum sizes and supports Undo/Redo. Preserves text, position and connections. Optional tabId.</value></data>
+  <data name="ToolDescription_ws_resize_memo" xml:space="preserve"><value>Changes a memo text box's width and height in canvas units, preserving its text and position. Respects minimum/maximum sizes and supports Undo/Redo. Optional tabId.</value></data>
+  <data name="ToolDescription_ws_set_connector_orientation" xml:space="preserve"><value>Moves an existing connector to the top (North), bottom (South), right (East), or left (West) side of its component. Preserves its input/output direction and connections, reroutes attached wires, and supports Undo/Redo. Uses the technical connector name from the workspace model.</value></data>
+  <data name="ToolDescription_ws_check_layout" xml:space="preserve"><value>Checks actual box overlaps, spacing, memo clipping and available wire routes; reports concrete problems and unavailable measurements.</value></data>
+  <data name="ToolDescription_ws_fit_memo" xml:space="preserve"><value>Fits a memo to its formatted content at the selected width, preserving content and focus with Undo/Redo.</value></data>
+  <data name="ToolDescription_tpl_search" xml:space="preserve"><value>Searches template metadata by task keywords. Suitable templates should be suggested with a reason; opening or building waits for the user's choice.</value></data>
+</root>

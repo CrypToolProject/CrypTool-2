@@ -718,6 +718,31 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
             BackgroundBrushColor = new SolidColorBrush(Background);
         }
 
+        /// <summary>Relocates the existing connector visual after a model operation, including Undo/Redo.</summary>
+        public void UpdateConnectorOrientation(ConnectorModel connectorModel)
+        {
+            ConnectorVisual connector = ConnectorCollection.FirstOrDefault(item => item.Model == connectorModel);
+            if (connector == null) return;
+            ConnectorOrientation storedOrientation = connectorModel.Orientation;
+            ConnectorOrientation orientation = connectorModel.Orientation == ConnectorOrientation.Unset
+                ? (connectorModel.Outgoing ? ConnectorOrientation.East : ConnectorOrientation.West)
+                : connectorModel.Orientation;
+            var destination = orientation == ConnectorOrientation.North ? NorthConnectorCollection
+                : orientation == ConnectorOrientation.South ? SouthConnectorCollection
+                : orientation == ConnectorOrientation.East ? EastConnectorCollection : WestConnectorCollection;
+            if (destination.Contains(connector)) return;
+            NorthConnectorCollection.Remove(connector);
+            SouthConnectorCollection.Remove(connector);
+            EastConnectorCollection.Remove(connector);
+            WestConnectorCollection.Remove(connector);
+            destination.Add(connector);
+            // The native connector panel sets orientation, arrow rotation and endpoint coordinates.
+            InvalidateMeasure();
+            UpdateLayout();
+            // Preserve an automatic/default orientation restored by Undo even after panel measurement.
+            connectorModel.Orientation = storedOrientation;
+        }
+
         private void addConnectorView(ConnectorModel model)
         {
             ConnectorVisual bin = new ConnectorVisual(model, this);

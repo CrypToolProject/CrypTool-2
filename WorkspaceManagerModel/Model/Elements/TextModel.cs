@@ -36,6 +36,16 @@ namespace WorkspaceManager.Model
 
         internal byte[] data = null;
 
+        internal static byte[] CreatePlainTextData(byte[] original, string text)
+        {
+            var memo = new TextModel(original);
+            var box = new RichTextBox();
+            memo.loadRTB(box);
+            new TextRange(box.Document.ContentStart, box.Document.ContentEnd).Text = text ?? string.Empty;
+            memo.saveRTB(box);
+            return memo.data;
+        }
+
         /// <summary>
         /// Instantiate a new TextModel
         /// </summary>
