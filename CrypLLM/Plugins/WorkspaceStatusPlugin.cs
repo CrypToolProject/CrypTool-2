@@ -94,7 +94,7 @@ namespace CrypTool.CrypLLM
 
         /// <summary>Check measured boxes, memo content and available orthogonal wire routes.</summary>
         [KernelFunction("ws_check_layout")]
-        [Description("Checks workspace rectangles for overlaps and spacing, formatted memo text for clipping, and available connection routes for crossings, shared segments and passage through boxes. Returns element IDs and errors/warnings. Unavailable measurements are reported. Resolve errors before finishing.")]
+        [Description("Checks occupied rectangles including connector rails/captions, memo clipping, and routes for crossings, shared segments and passage through ANY box, including the wire's own source/target. Wire penetration is an error. Returns IDs, connector names and conditional routingAdvice to move receivers or change port sides; recheck every branch of a shared output. Unavailable measurements are reported. Resolve errors before finishing.")]
         public string CheckWorkspaceLayout(double minimumGap = 40, string tabId = null)
         {
             return LLMPluginService.InvokeOnUi(() =>
@@ -139,7 +139,7 @@ namespace CrypTool.CrypLLM
 
         [KernelFunction("ws_bounds")]
         [ContextWindowToken(min: 5000)]
-        [Description("Returns workspace element positions, actual visible width/height, stored sizes, minimum/maximum sizes and sizeSource in device-independent canvas units. A stored size of zero means automatic sizing, not that resizing is impossible. Use ws_resize_component or ws_resize_memo to change dimensions. Optional tabId; defaults to the request-pinned workspace.")]
+        [Description("Returns element MOVE anchors (x/y), resizable inner window width/height, stored/minimum/maximum sizes and sizeSource in canvas units. bodyBounds locates the actual box including its offset from the anchor; occupiedBounds also includes connector rails and captions. Use occupiedBounds for spacing/overlaps and bodyBounds for wire clearance. Zero stored size means automatic sizing. Optional tabId defaults to the request-pinned workspace.")]
         public string GetWorkspaceElementBounds(string tabId = null)
         {
             return LLMPluginService.InvokeOnUi(() => GetWorkspaceElementBoundsInternal(tabId));

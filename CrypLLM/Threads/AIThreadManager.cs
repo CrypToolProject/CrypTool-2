@@ -92,7 +92,9 @@ namespace CrypTool.CrypLLM.Threads
             "increase the height generously when uncertain. Do not use a fixed short height for a long memo. " +
             "Do not remove requested content or reduce readability to make text fit. Resize first and place the memo outside component and wire corridors. " +
             "4. Components MUST NEVER overlap. Memos must not overlap components or one another. " +
-            "Read ws_bounds and plan with actual rectangle widths and heights, not just x/y positions or stored zero sizes. " +
+            "Read ws_bounds and plan with occupiedBounds, which include connector rails and captions, and bodyBounds, which locate the actual box. " +
+            "The top-level x/y are the MOVE anchor and width/height are the resizable inner window; the actual body is offset from that anchor. " +
+            "Do not combine the anchor with the inner window size and assume this describes the whole visible rectangle. " +
             "Leave at least 40 canvas units clear space between boxes, preferably 80-120 for wiring. " +
             "After ANY resize, recalculate downstream positions because enlarged boxes can invalidate earlier spacing. " +
             "Check every relevant pair of rectangles: one box's right edge plus the gap must be left of the other's left edge, " +
@@ -101,11 +103,23 @@ namespace CrypTool.CrypLLM.Threads
             "5. Arrange the main data flow left to right. Put key/parameter inputs in separate rows near their target components. " +
             "Keep wire corridors clear of boxes and memos. Avoid shared/overlaid wire segments and crossings wherever possible. " +
             "Use ws_set_connector_orientation to face connected sides toward one another: East/West for horizontal flow, North/South for vertical parameter feeds. " +
+            "Plan each directed connection from its source to its receiver, including output display branches and shared key inputs. " +
+            "For East-output to West-input routing, keep the ENTIRE source occupiedBounds left of the receiver occupiedBounds with a clear corridor; matching box centers is insufficient. " +
+            "Do not place a wide TextOutput directly beneath its source with a West input if this makes the return wire run through the source or the output box. " +
+            "Either move that output sufficiently to the right of its source, or use a South output and North input for a receiver below. " +
+            "For a key input above its cipher use South-output/North-input; for an input below use North-output/South-input. " +
+            "For right-to-left feeds use West-output/East-input. Never point a port through its own box to reach the other component. " +
+            "Changing the side of one output affects ALL its fan-out connections. When it also feeds the next cipher in the main row, " +
+            "keep the main East/West flow and move branch receivers into clear side corridors or change the branch input side appropriately, then inspect every branch again. " +
+            "A wire may touch its actual connector at the box boundary but MUST NOT run through ANY component or memo interior, including its own source and target. " +
+            "Treat wire_through_element as an error. Use its affected IDs, endpoint connector names and routingAdvice to move boxes or change connector sides. " +
+            "connector_sides_need_detour is conditional advice: choose positions or connector sides that clear the real route rather than blindly changing a shared port for one branch. " +
             "Align endpoints rather than just box centers, stagger input positions where necessary, and increase spacing to separate routes. " +
             "Preserve existing wiring; do not remove required connections just to simplify the drawing. " +
             "6. You MUST actually inspect the result before reporting completion; planning a check or describing an intended layout does not count. " +
             "Tool edits return automaticLayoutCheck findings: treat these as real defects to fix, not merely informational logs. " +
             "Call ws_check_layout, ws_model, ws_bounds and ws_validate after your last edits; resolve all layout errors involving your changes before finishing. " +
+            "Do not say 'no overlaps' while a wire_through_element or element_overlap remains. Re-run the layout check after each correction. " +
             "Minimize reported wire crossings/overlaid segments and spacing warnings; if unavoidable explain the specific reason. " +
             "A passed report with complete=false does not verify unavailable memo or wire measurements. " +
             "Verify actual connections, values, sizes and non-overlapping rectangles. " +
@@ -679,6 +693,11 @@ namespace CrypTool.CrypLLM.Threads
 
                 debugPromptMessages = invocationThread.ChatHistory?.ToList() ?? new List<ChatMessageContent>();
 
+                requestThread.BeginContextUsage(selectedModel);
+                // Enable after preparation so summary requests do not replace the agent meter.
+                llmHttpCaptureSession.ContextThread = requestThread;
+                llmHttpCaptureSession.ContextChanged = () => ToolActivityChanged?.Invoke(this, EventArgs.Empty);
+
                 // Log.Debug($"Chat history reduction: full={history.FullHistoryCount}, candidate={history.CandidateHistoryCount}, reduced={history.ReducedHistoryCount}, summarized={history.Summarized}, trimmed={history.Trimmed}, compressedTools={history.CompressedToolOutputs}, removed={history.RemovedMessagesCount}, cacheApplied={history.CacheApplied}, cacheUpdated={history.CacheUpdated}, cacheCovered={history.CacheCoveredSourceMessages}, usingReducedThread={usingReducedThread}");
 
                 IAsyncEnumerable<AgentResponseItem<ChatMessageContent>> responseStream;
@@ -877,6 +896,7 @@ namespace CrypTool.CrypLLM.Threads
             }
             finally
             {
+                requestThread.CompleteContextUsage();
                 LLMPluginService.InvokeOnUi(() => { editSession.Complete(); return true; });
                 ToolActivityChanged?.Invoke(this, EventArgs.Empty);
                 ClearRequestWorkspaceContext(requestThread);
@@ -1682,12 +1702,22 @@ namespace CrypTool.CrypLLM.Threads
 
         private sealed class LlmHttpCaptureSession
         {
+            internal AIThread ContextThread { get; set; }
+            internal Action ContextChanged { get; set; }
+            private int? _latestPromptTokens;
+
             private readonly object _sync = new object();
             private readonly List<LlmHttpExchange> _exchanges = new List<LlmHttpExchange>();
             private int _nextSequence = 1;
 
             public int RegisterRequest(string method, string uri, string headers, string body)
             {
+                _latestPromptTokens = ChatTokenEstimator.EstimateRequestTokens(body);
+                if (ContextThread != null && _latestPromptTokens.HasValue)
+                {
+                    ContextThread.UpdateContextUsage(_latestPromptTokens.Value);
+                    ContextChanged?.Invoke();
+                }
                 lock (_sync)
                 {
                     int sequence = _nextSequence++;
@@ -1717,6 +1747,11 @@ namespace CrypTool.CrypLLM.Threads
                     exchange.ReasonPhrase = reasonPhrase ?? string.Empty;
                     exchange.ResponseHeaders = headers ?? string.Empty;
                     exchange.ResponseBody = body ?? string.Empty;
+                }
+                if (ContextThread != null && _latestPromptTokens.HasValue)
+                {
+                    ContextThread.UpdateContextUsage(_latestPromptTokens.Value + ChatTokenEstimator.EstimateResponseTokens(body));
+                    ContextChanged?.Invoke();
                 }
             }
 
@@ -2023,9 +2058,20 @@ namespace CrypTool.CrypLLM.Threads
         }
 
         /// <summary>
-        /// Heuristically computes the token cost of dynamically injected tool definitions prior to inference.
-        /// Essential for prompt budgeting, as complex APIs continuously consume bounded context capacity.
+        /// Gets this conversation's live transport estimate, or estimates retained
+        /// history plus agent instructions/tools before a request is available.
         /// </summary>
+        internal int EstimateContextUsageTokens(AIThread thread, string modelId)
+        {
+            if (thread == null) return 0;
+            int baseTokens = _promptBudgetProfile != null &&
+                string.Equals(_promptBudgetProfile.ModelId, modelId, StringComparison.OrdinalIgnoreCase)
+                ? _promptBudgetProfile.SystemPromptTokens + _promptBudgetProfile.ToolSchemaTokens
+                : ChatTokenEstimator.EstimateTokens(Agent?.Instructions) + EstimateToolSchemaTokens(Agent?.Kernel);
+            return thread.EstimateContextUsageTokens(modelId, baseTokens);
+        }
+
+        /// <summary>Estimates injected tool definitions for preflight budgeting.</summary>
         private static int EstimateToolSchemaTokens(Kernel kernel)
         {
             if (kernel == null)

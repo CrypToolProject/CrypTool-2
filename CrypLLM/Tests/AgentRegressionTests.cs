@@ -48,6 +48,7 @@ internal static class AgentRegressionTests
             AiMemoCreationPreservesSelectionAndFocus();
             ResizeToolsPreserveWorkspaceAndSupportUndo();
             MemoFitAndLayoutChecks();
+            WireClearanceIncludesAttachedComponents();
             AgentGroupsPreserveManualChanges();
             TemplateSearchUsesBothLanguages();
             LocalizedResourcesResolve();
@@ -404,8 +405,36 @@ internal static class AgentRegressionTests
     private static async Task ScreenshotToolReachesModelAsImage()
     {
         var handler = new ScreenshotCompletionHandler();
+        var contextThread = new AIThread("Live context");
+        contextThread.ChatHistory.AddUserMessage(new string('a', 40000));
+        Call(contextThread, "BeginContextUsage", "vision-test");
+        object[] captureArguments = { null };
+        var captureScope = (IDisposable)CallStatic("Threads.AIThreadManager", "EnterLlmHttpCapture", captureArguments);
+        object session = captureArguments[0];
+        session.GetType().GetProperty("ContextThread", PrivateInstance).SetValue(session, contextThread);
+        int updates = 0;
+        session.GetType().GetProperty("ContextChanged", PrivateInstance).SetValue(session, (Action)(() => updates++));
+        int firstRequestTokens = 0;
+        handler.BeforeResponse = call =>
+        {
+            int currentTokens = (int)Call(contextThread, "EstimateContextUsageTokens", "vision-test", 0);
+            if (call == 1)
+            {
+                firstRequestTokens = currentTokens;
+                Assert(currentTokens > 20 && currentTokens < 10000,
+                    "Live usage must include wire tools, rather than the archived history.");
+            }
+            else
+            {
+                Assert(currentTokens > firstRequestTokens + 2048,
+                    "Tool results and image input must increase usage before the response completes.");
+                Assert(contextThread.ChatHistory.Count == 1,
+                    "Live updates must work without the SDK adding tool results to the original thread.");
+            }
+        };
         Type captureType = AgentType("Threads.AIThreadManager").GetNestedType("LlmHttpCaptureHandler", BindingFlags.NonPublic);
         var transport = (HttpMessageHandler)Activator.CreateInstance(captureType, new object[] { handler });
+        using (captureScope)
         using (var client = new HttpClient(transport))
         {
             var builder = Kernel.CreateBuilder();
@@ -427,7 +456,23 @@ internal static class AgentRegressionTests
             Assert(handler.SawToolBeforeImage, "The image must follow the complete tool-result group.");
             Assert(history.Any(message => message.Items.OfType<FunctionResultContent>().Any(item =>
                 item.Result is string text && text.Contains("imageDataUri"))), "The SDK history must retain the image envelope.");
+            Assert(updates == 4, "Both requests and both responses must refresh live context usage.");
+            Call(contextThread, "CompleteContextUsage");
+            int completedTokens = (int)Call(contextThread, "EstimateContextUsageTokens", "vision-test", 0);
+            Assert(completedTokens > firstRequestTokens + 2048, "The last prompt and answer must remain visible after completion.");
+            Assert((int)Call(contextThread, "EstimateContextUsageTokens", "another-model", 10) > 10000,
+                "Switching models must use the retained history and instruction estimate.");
+            contextThread.ChatHistory.Clear();
+            Assert((int)Call(contextThread, "EstimateContextUsageTokens", "vision-test", 10) == 10,
+                "Clearing a chat must invalidate its transport snapshot.");
         }
+
+        var imageRequest = new JObject { ["messages"] = new JArray(new JObject {
+            ["role"] = "user", ["content"] = new JArray(new JObject {
+                ["type"] = "image_url", ["image_url"] = new JObject { ["url"] = "data:image/png;base64," + new string('x', 100000) } }) }) };
+        Assert((int)CallStatic("Threads.ChatTokenEstimator", "EstimateRequestTokens", imageRequest.ToString()) == 2056,
+            "Base64 image bytes must not be counted as text tokens.");
+        Console.WriteLine("PASS: live context counts actual requests, tools/images and responses, with per-chat invalidation");
 
         // Parallel calls must all receive results before the inserted image input.
         string envelope = TestScreenshotEnvelope();
@@ -531,12 +576,14 @@ internal static class AgentRegressionTests
     private sealed class ScreenshotCompletionHandler : HttpMessageHandler
     {
         private int Calls;
+        internal Action<int> BeforeResponse;
         internal bool SawImage;
         internal bool SawToolBeforeImage;
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             JObject payload = JObject.Parse(await request.Content.ReadAsStringAsync());
             Calls++;
+            BeforeResponse?.Invoke(Calls);
             string message;
             if (Calls == 1)
                 message = "{\"role\":\"assistant\",\"content\":null,\"tool_calls\":[{\"id\":\"screenshot-call\",\"type\":\"function\",\"function\":{\"name\":\"CrypLLM_WorkspaceStatus-ws_screenshot\",\"arguments\":\"{}\"}}]}";
@@ -852,6 +899,94 @@ internal static class AgentRegressionTests
         finally { timer.Stop(); }
         Assert(task.IsCompleted, "The dispatched tool request must finish without deadlocking the UI.");
         task.GetAwaiter().GetResult();
+    }
+
+    private static void WireClearanceIncludesAttachedComponents()
+    {
+        var model = new WorkspaceManager.Model.WorkspaceModel();
+        var editor = new WorkspaceManager.WorkspaceManagerClass(model);
+        editor.New();
+        CrypWinPort.Instance = new ClosedWorkspaceAdapter { Workspace = editor };
+        var window = new System.Windows.Window { Content = editor.Presentation, Width = 1400, Height = 900, Left = -10000, Top = -10000, ShowActivated = false, ShowInTaskbar = false };
+        try
+        {
+            window.Show();
+            var source = (WorkspaceManager.Model.PluginModel)model.ModifyModel(new WorkspaceManagerModel.Model.Operations.NewPluginModelOperation(new System.Windows.Point(100, 100), 400, 220, typeof(CrypTool.TextInput.TextInput)), true);
+            var main = (WorkspaceManager.Model.PluginModel)model.ModifyModel(new WorkspaceManagerModel.Model.Operations.NewPluginModelOperation(new System.Windows.Point(650, 100), 400, 220, typeof(TextOutput.TextOutput)), true);
+            var branch = (WorkspaceManager.Model.PluginModel)model.ModifyModel(new WorkspaceManagerModel.Model.Operations.NewPluginModelOperation(new System.Windows.Point(100, 450), 400, 220, typeof(TextOutput.TextOutput)), true);
+            var mainWire = (WorkspaceManager.Model.ConnectionModel)model.ModifyModel(new WorkspaceManagerModel.Model.Operations.NewConnectionModelOperation(source.GetOutputConnectors().First(), main.GetInputConnectors().First(), typeof(string)), true);
+            var branchWire = (WorkspaceManager.Model.ConnectionModel)model.ModifyModel(new WorkspaceManagerModel.Model.Operations.NewConnectionModelOperation(source.GetOutputConnectors().First(), branch.GetInputConnectors().First(), typeof(string)), true);
+            window.UpdateLayout();
+            var sourceRect = (System.Windows.Rect)CallStatic("Services.WorkspaceElementGeometry", "GetBodyBounds", source);
+            var mainRect = (System.Windows.Rect)CallStatic("Services.WorkspaceElementGeometry", "GetBodyBounds", main);
+            var branchRect = (System.Windows.Rect)CallStatic("Services.WorkspaceElementGeometry", "GetBodyBounds", branch);
+            var sourceOccupied = (System.Windows.Rect)CallStatic("Services.WorkspaceElementGeometry", "GetOccupiedBounds", source);
+            var originalSourceOrientation = source.GetOutputConnectors().First().Orientation;
+            Assert(sourceRect.Left > source.GetPosition().X && sourceRect.Top > source.GetPosition().Y && sourceOccupied.Width > sourceRect.Width,
+                "Geometry must include the real body offset and distinguish occupied connector rails from the inner box.");
+            var status = Activator.CreateInstance(AgentType("WorkspaceStatusPlugin"), true);
+            var editing = Activator.CreateInstance(AgentType("WorkspaceEditingPlugin"), true);
+            using ((IDisposable)CallStatic("Services.LLMPluginService", "PushPreferredWorkspaceTabId", "resize-tab"))
+            {
+                JObject bounds = JObject.Parse((string)Call(status, "GetWorkspaceElementBounds", (object)null));
+                Assert((double)bounds[source.GetHashCode().ToString()]["bodyBounds"]["x"] == sourceRect.X &&
+                    (double)bounds[source.GetHashCode().ToString()]["occupiedBounds"]["width"] == sourceOccupied.Width, "Bounds tools must expose the same real geometry as the layout checker.");
+                ((WorkspaceManager.View.VisualComponents.CryptoLineView.CryptoLineView)mainWire.UpdateableView).Line.SetValue(WorkspaceManager.View.VisualComponents.CryptoLineView.InternalCryptoLineView.HasComputedProperty, true);
+                ((WorkspaceManager.View.VisualComponents.CryptoLineView.CryptoLineView)branchWire.UpdateableView).Line.SetValue(WorkspaceManager.View.VisualComponents.CryptoLineView.InternalCryptoLineView.HasComputedProperty, true);
+                double y = sourceRect.Top + 40;
+                mainWire.PointList = new List<System.Windows.Point> { new System.Windows.Point(sourceRect.Right, y), new System.Windows.Point(mainRect.Left, y) };
+                branchWire.PointList = new List<System.Windows.Point>
+                {
+                    new System.Windows.Point(sourceRect.Right, y), new System.Windows.Point(sourceRect.Left + 80, y),
+                    new System.Windows.Point(sourceRect.Left + 80, branchRect.Top + 40), new System.Windows.Point(branchRect.Left, branchRect.Top + 40)
+                };
+                JObject report = JObject.Parse((string)Call(status, "CheckWorkspaceLayout", 0.0, null));
+                var penetrations = report["issues"].Where(issue => (string)issue["code"] == "wire_through_element").ToArray();
+                Assert(penetrations.Any(issue => (string)issue["details"]["elementRole"] == "source") && penetrations.Any(issue => (string)issue["details"]["elementRole"] == "target") &&
+                    penetrations.All(issue => (string)issue["severity"] == "error") && !(bool)report["passed"], "Wires through their own source and target bodies must be real layout errors.");
+                JToken advice = report["issues"].Single(issue => (string)issue["code"] == "connector_sides_need_detour" && (string)issue["elementId"] == branchWire.GetHashCode().ToString())["details"];
+                Assert((string)advice["suggestedSourceOrientation"] == "South" && (string)advice["suggestedTargetOrientation"] == "North" && (int)advice["sharedOutputConnections"] == 2,
+                    "Vertical branch advice must include matching sides and warn about a shared output's other branches.");
+                Call(editing, "SetConnectorOrientationInWorkspace", branch.GetHashCode().ToString(), branchWire.To.PropertyName, "North", null);
+                JObject freshReport = JObject.Parse((string)Call(status, "CheckWorkspaceLayout", 0.0, null));
+                Assert((int)freshReport["uncheckedConnections"] == 0, "A live invalidated native route must be recomputed before its geometry is reported.");
+                ((WorkspaceManager.View.VisualComponents.CryptoLineView.CryptoLineView)branchWire.UpdateableView).Line.SetValue(WorkspaceManager.View.VisualComponents.CryptoLineView.InternalCryptoLineView.HasComputedProperty, true);
+                branchWire.PointList = new List<System.Windows.Point>
+                {
+                    new System.Windows.Point(sourceRect.Right, y), new System.Windows.Point(sourceRect.Right + 60, y),
+                    new System.Windows.Point(sourceRect.Right + 60, branchRect.Top - 60), new System.Windows.Point(branchRect.Left + 80, branchRect.Top - 60),
+                    new System.Windows.Point(branchRect.Left + 80, branchRect.Top)
+                };
+                report = JObject.Parse((string)Call(status, "CheckWorkspaceLayout", 0.0, null));
+                Assert((bool)report["passed"] && !report["issues"].Any(issue => (string)issue["code"] == "wire_through_element"),
+                    "Boundary attachment and a clear side corridor must be allowed without forcing a shared main output to change sides.");
+                Assert(source.GetOutputConnectors().First().Orientation == originalSourceOrientation && model.GetAllConnectionModels().Count == 2,
+                    "Advice and inspection must preserve output sides and all fan-out connections.");
+                model.ModifyModel(new WorkspaceManagerModel.Model.Operations.MoveModelElementOperation(branch, new System.Windows.Point(650, 450)), true);
+                Call(editing, "SetConnectorOrientationInWorkspace", branch.GetHashCode().ToString(), branchWire.To.PropertyName, "West", null);
+                window.UpdateLayout();
+                branchRect = (System.Windows.Rect)CallStatic("Services.WorkspaceElementGeometry", "GetBodyBounds", branch);
+                ((WorkspaceManager.View.VisualComponents.CryptoLineView.CryptoLineView)branchWire.UpdateableView).Line.SetValue(WorkspaceManager.View.VisualComponents.CryptoLineView.InternalCryptoLineView.HasComputedProperty, true);
+                branchWire.PointList = new List<System.Windows.Point>
+                {
+                    new System.Windows.Point(sourceRect.Right, y), new System.Windows.Point(sourceRect.Right + 60, y),
+                    new System.Windows.Point(sourceRect.Right + 60, branchRect.Top + 40), new System.Windows.Point(branchRect.Left, branchRect.Top + 40)
+                };
+                report = JObject.Parse((string)Call(status, "CheckWorkspaceLayout", 0.0, null));
+                Assert((bool)report["passed"] && !report["issues"].Any(issue => (string)issue["code"] == "connector_sides_need_detour" && (string)issue["elementId"] == branchWire.GetHashCode().ToString()),
+                    "Moving the receiver beyond the source's East side must clear both penetration and incompatible-side advice.");
+                var memo = (WorkspaceManager.Model.TextModel)model.ModifyModel(new WorkspaceManagerModel.Model.Operations.NewTextModelOperation(false, "Do not overlap the connector rails"), true);
+                model.ModifyModel(new WorkspaceManagerModel.Model.Operations.MoveModelElementOperation(memo, new System.Windows.Point(sourceRect.Right + 5, sourceRect.Top + 90)), true);
+                window.UpdateLayout();
+                report = JObject.Parse((string)Call(status, "CheckWorkspaceLayout", 0.0, null));
+                string sourceId = source.GetHashCode().ToString(), memoId = memo.GetHashCode().ToString();
+                Assert(report["issues"].Any(issue => (string)issue["code"] == "element_overlap" &&
+                    (((string)issue["elementId"] == sourceId && (string)issue["otherId"] == memoId) || ((string)issue["elementId"] == memoId && (string)issue["otherId"] == sourceId))),
+                    "Overlapping connector rails must be detected even when the inner body rectangles are separate.");
+            }
+            Console.WriteLine("PASS: attached source/target wire clearance, real body/occupied bounds, conditional fan-out advice and boundary attachment");
+        }
+        finally { window.Close(); }
     }
 
     private static void AgentGroupsPreserveManualChanges()

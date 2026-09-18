@@ -160,7 +160,7 @@ namespace CrypTool.CrypLLM
         public string ContextUsageTooltip => GetResourceText("AiChatContextUsageTooltip");
 
         /// <summary>
-        /// Displays an estimate of retained chat history against the selected
+        /// Displays an estimate of the actual prompt against the selected
         /// model's configured window. Unknown limits never produce a percentage.
         /// </summary>
         public string ContextUsageText
@@ -168,7 +168,7 @@ namespace CrypTool.CrypLLM
             get
             {
                 if (!TryGetSelectedModelId(out string modelId)) return string.Empty;
-                int usedTokens = ActiveThread?.EstimateContextHistoryTokens() ?? 0;
+                int usedTokens = AIThreadManager.Instance.EstimateContextUsageTokens(ActiveThread, modelId);
                 if (ModelContextWindowResolver.TryResolveContextWindowTokens(modelId, out int capacity))
                 {
                     return string.Format(CultureInfo.CurrentCulture, GetResourceText("AiChatContextUsageFormat"),

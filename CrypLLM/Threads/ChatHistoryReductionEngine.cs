@@ -24,6 +24,7 @@ using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using CrypTool.CrypLLM.Properties;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +44,54 @@ namespace CrypTool.CrypLLM.Threads
     {
         private const int BaseMessageOverheadTokens = 8;
         private const int ItemOverheadTokens = 16;
+
+        /// <summary>
+        /// Estimates the actual serialized prompt after transport normalization.
+        /// Image pixels have a fixed estimate; base64 size is not text token usage.
+        /// Request settings and response reserves do not occupy input context.
+        /// </summary>
+        internal static int? EstimateRequestTokens(string body)
+        {
+            try
+            {
+                var request = JObject.Parse(body);
+                if (request["messages"] is not JArray messages) return null;
+                int tokens = EstimateTokens(request["tools"]?.ToString(Formatting.None));
+                foreach (JToken message in messages)
+                    tokens += EstimateWireMessageTokens(message);
+                return tokens;
+            }
+            catch (JsonException) { return null; }
+        }
+
+        internal static int EstimateResponseTokens(string body)
+        {
+            try
+            {
+                // Only the selected completion is retained, never sum usage across calls.
+                JToken message = JObject.Parse(body)["choices"]?.First?["message"];
+                return message == null ? 0 : EstimateWireMessageTokens(message);
+            }
+            catch (JsonException) { return 0; }
+        }
+
+        private static int EstimateWireMessageTokens(JToken message)
+        {
+            int tokens = BaseMessageOverheadTokens;
+            JToken content = message["content"];
+            if (content is JArray parts)
+            {
+                foreach (JToken part in parts)
+                    tokens += (string)part["type"] == "image_url"
+                        ? WorkspaceScreenshotContent.EstimatedImageTokens
+                        : EstimateTokens((string)part["text"]);
+            }
+            else if (content?.Type == JTokenType.String)
+                tokens += EstimateTokens((string)content);
+            tokens += EstimateTokens(message["tool_calls"]?.ToString(Formatting.None));
+            tokens += EstimateTokens((string)message["name"]);
+            return tokens;
+        }
 
         public static int EstimateTokens(string content)
         {

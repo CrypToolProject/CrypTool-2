@@ -117,6 +117,54 @@ namespace CrypTool.CrypLLM.Threads
             return tokens;
         }
 
+        // Transport snapshots belong to this conversation, including when the SDK
+        // invokes a separate compressed thread or the user selects another chat.
+        private readonly object _contextUsageSync = new object();
+        private string _contextUsageModel;
+        private int? _contextUsageTokens;
+        private bool _contextUsageRunning;
+        private int _contextUsageHistoryCount;
+        private ChatMessageContent _contextUsageLastMessage;
+
+        internal void BeginContextUsage(string modelId)
+        {
+            lock (_contextUsageSync)
+            {
+                _contextUsageModel = modelId;
+                _contextUsageTokens = null;
+                _contextUsageRunning = true;
+            }
+        }
+
+        internal void UpdateContextUsage(int tokens)
+        {
+            lock (_contextUsageSync) _contextUsageTokens = tokens;
+        }
+
+        internal void CompleteContextUsage()
+        {
+            lock (_contextUsageSync)
+            {
+                _contextUsageRunning = false;
+                _contextUsageHistoryCount = ChatHistory.Count;
+                _contextUsageLastMessage = ChatHistory.LastOrDefault();
+            }
+        }
+
+        /// <summary>Uses the latest wire prompt while running, with an idle-history fallback.</summary>
+        internal int EstimateContextUsageTokens(string modelId, int systemAndToolTokens)
+        {
+            lock (_contextUsageSync)
+            {
+                if (_contextUsageTokens.HasValue &&
+                    string.Equals(modelId, _contextUsageModel, StringComparison.OrdinalIgnoreCase) &&
+                    (_contextUsageRunning || (_contextUsageHistoryCount == ChatHistory.Count &&
+                        ReferenceEquals(_contextUsageLastMessage, ChatHistory.LastOrDefault()))))
+                    return _contextUsageTokens.Value;
+            }
+            return EstimateContextHistoryTokens() + systemAndToolTokens;
+        }
+
         /// <summary>
         /// Cached reduced/summarized history used for prompt preparation.
         /// This does not affect the full history shown in the UI.
@@ -190,6 +238,7 @@ namespace CrypTool.CrypLLM.Threads
         /// </summary>
         internal void ClearReducedHistoryCache()
         {
+            lock (_contextUsageSync) _contextUsageTokens = null;
             ReducedHistoryCacheMessages = new List<ChatMessageContent>();
             ReducedHistoryCacheSourceMessageCount = 0;
         }

@@ -782,6 +782,8 @@ namespace CrypTool.CrypLLM.Services
                 ["maxWidth"] = size.MaxWidth,
                 ["maxHeight"] = size.MaxHeight,
                 ["sizeSource"] = size.SizeSource,
+                ["bodyBounds"] = WorkspaceElementGeometry.Project(WorkspaceElementGeometry.GetBodyBounds(element)),
+                ["occupiedBounds"] = WorkspaceElementGeometry.Project(WorkspaceElementGeometry.GetOccupiedBounds(element)),
                 ["zIndex"] = element.ZIndex
             };
         }
