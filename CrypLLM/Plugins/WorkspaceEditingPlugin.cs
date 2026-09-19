@@ -66,7 +66,7 @@ namespace CrypTool.CrypLLM
         [KernelFunction("ws_add_connection")]
         [AiToolMutation(true)]
         [ContextWindowToken(min: 10000)]
-        [Description("Creates a connection in a workspace. Optional tabId (active if omitted). Supports implicit conversions.")]
+        [Description("Creates a connection in a workspace. Copy the exact numeric component IDs and technical connector names from the latest ws_model result; never invent IDs or GUIDs. Optional tabId defaults to the request-pinned workspace. Supports implicit conversions. Verify the exact new connection with ws_model before reporting success.")]
         public string CreateConnectionInWorkspace(string fromComponentId, string fromConnector, string toComponentId, string toConnector, string tabId = null)
         {
             return LLMPluginService.InvokeOnUi(() =>
@@ -214,7 +214,7 @@ namespace CrypTool.CrypLLM
         [KernelFunction("ws_remove_component")]
         [AiToolMutation(true)]
         [ContextWindowToken(min: 10000)]
-        [Description("Removes a component by componentId. Optional tabId (active if omitted).")]
+        [Description("Removes a component by its exact numeric componentId from the latest ws_model result; never invent an ID or GUID. An unknown ID returns current component candidates for recovery. Optional tabId defaults to the request-pinned workspace. Verify with ws_model that the component is absent before reporting success.")]
         public string RemoveComponentFromWorkspace(string componentId, string tabId = null)
         {
             return LLMPluginService.InvokeOnUi(() =>
@@ -511,11 +511,7 @@ namespace CrypTool.CrypLLM
 
                 if (pluginModel == null)
                 {
-                    return JsonConvert.SerializeObject(new
-                    {
-                        success = false,
-                        error = $"component not found: {componentId}"
-                    }, Formatting.Indented);
+                    return SerializeComponentNotFound(model, componentId, "componentId");
                 }
 
                 List<ConnectionModel> connections = pluginModel.GetInputConnectors()
@@ -586,21 +582,13 @@ namespace CrypTool.CrypLLM
                 PluginModel fromPlugin = plugins.FirstOrDefault(p => GetRuntimeId(p) == fromComponentId);
                 if (fromPlugin == null)
                 {
-                    return JsonConvert.SerializeObject(new
-                    {
-                        success = false,
-                        error = $"from component not found: {fromComponentId}"
-                    }, Formatting.Indented);
+                    return SerializeComponentNotFound(model, fromComponentId, "fromComponentId");
                 }
 
                 PluginModel toPlugin = plugins.FirstOrDefault(p => GetRuntimeId(p) == toComponentId);
                 if (toPlugin == null)
                 {
-                    return JsonConvert.SerializeObject(new
-                    {
-                        success = false,
-                        error = $"to component not found: {toComponentId}"
-                    }, Formatting.Indented);
+                    return SerializeComponentNotFound(model, toComponentId, "toComponentId");
                 }
 
                 ConnectorModel from = fromPlugin.GetOutputConnectors()
@@ -696,11 +684,7 @@ namespace CrypTool.CrypLLM
 
                 if (pluginModel == null)
                 {
-                    return JsonConvert.SerializeObject(new
-                    {
-                        success = false,
-                        error = $"component not found: {componentId}"
-                    }, Formatting.Indented);
+                    return SerializeComponentNotFound(model, componentId, "componentId");
                 }
 
                 IPlugin plugin = pluginModel.Plugin as IPlugin;
@@ -804,11 +788,7 @@ namespace CrypTool.CrypLLM
 
                 if (pluginModel == null)
                 {
-                    return JsonConvert.SerializeObject(new
-                    {
-                        success = false,
-                        error = $"component not found: {componentId}"
-                    }, Formatting.Indented);
+                    return SerializeComponentNotFound(model, componentId, "componentId");
                 }
 
                 string trimmedName = name.Trim();
@@ -1072,11 +1052,7 @@ namespace CrypTool.CrypLLM
 
                 if (pluginModel == null)
                 {
-                    return JsonConvert.SerializeObject(new
-                    {
-                        success = false,
-                        error = $"component not found: {componentId}"
-                    }, Formatting.Indented);
+                    return SerializeComponentNotFound(model, componentId, "componentId");
                 }
 
                 Point oldPosition = pluginModel.GetPosition();
@@ -1423,21 +1399,13 @@ namespace CrypTool.CrypLLM
                 PluginModel fromPlugin = plugins.FirstOrDefault(p => GetRuntimeId(p) == fromComponentId);
                 if (fromPlugin == null)
                 {
-                    return JsonConvert.SerializeObject(new
-                    {
-                        success = false,
-                        error = $"from component not found: {fromComponentId}"
-                    }, Formatting.Indented);
+                    return SerializeComponentNotFound(model, fromComponentId, "fromComponentId");
                 }
 
                 PluginModel toPlugin = plugins.FirstOrDefault(p => GetRuntimeId(p) == toComponentId);
                 if (toPlugin == null)
                 {
-                    return JsonConvert.SerializeObject(new
-                    {
-                        success = false,
-                        error = $"to component not found: {toComponentId}"
-                    }, Formatting.Indented);
+                    return SerializeComponentNotFound(model, toComponentId, "toComponentId");
                 }
 
                 if (!TryResolveConnectionEndpoints(
@@ -2264,6 +2232,36 @@ namespace CrypTool.CrypLLM
             }
 
             return value;
+        }
+
+        /// <summary>
+        /// Gives the model enough current state to recover from a stale or
+        /// fabricated runtime ID without guessing another identifier.
+        /// </summary>
+        private static string SerializeComponentNotFound(
+            WorkspaceModel model,
+            string requestedComponentId,
+            string parameterName)
+        {
+            var availableComponents = (model?.GetAllPluginModels() ?? Enumerable.Empty<PluginModel>())
+                .Take(100)
+                .Select(component => new
+                {
+                    componentId = GetRuntimeId(component),
+                    name = component.GetName(),
+                    type = component.PluginType?.FullName,
+                    caption = (component.Plugin as IPlugin)?.GetPluginInfoAttribute()?.Caption
+                })
+                .ToArray();
+
+            return JsonConvert.SerializeObject(new
+            {
+                success = false,
+                error = $"component not found for {parameterName}: {requestedComponentId}",
+                requestedComponentId,
+                guidance = "Copy the exact numeric componentId from availableComponents or call ws_model and retry. Do not invent an ID or GUID.",
+                availableComponents
+            }, Formatting.Indented);
         }
 
         private static string GetRuntimeId(object instance)

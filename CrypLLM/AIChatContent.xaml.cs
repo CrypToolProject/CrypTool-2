@@ -437,6 +437,7 @@ namespace CrypTool.CrypLLM
 
                 mgr.ThreadListChanged += OnThreadListChanged;
                 mgr.ActiveThreadChanged += OnActiveThreadChanged;
+                mgr.NewChatMessageReceived += OnNewChatMessageReceived;
                 mgr.ToolActivityChanged += OnToolActivityChanged;
 
                 _subscribed = true;
@@ -468,6 +469,7 @@ namespace CrypTool.CrypLLM
                 {
                     mgr.ThreadListChanged -= OnThreadListChanged;
                     mgr.ActiveThreadChanged -= OnActiveThreadChanged;
+                    mgr.NewChatMessageReceived -= OnNewChatMessageReceived;
                     mgr.ToolActivityChanged -= OnToolActivityChanged;
                 }
 
@@ -537,6 +539,24 @@ namespace CrypTool.CrypLLM
                     RefreshToolActivities();
                     RefreshMessages(scrollMode: ChatViewportUpdateMode.FollowIfNearBottom);
                 }));
+            }
+        }
+
+        /// <summary>
+        /// Renders each completed model turn while the agent is still working.
+        /// Keeping this event separate from tool activity also updates pure text
+        /// responses and ensures the growing conversation remains visible.
+        /// </summary>
+        private void OnNewChatMessageReceived(object sender, EventArgs e)
+        {
+            if (Dispatcher.CheckAccess())
+            {
+                RefreshMessages(ChatViewportUpdateMode.ForceBottom);
+            }
+            else
+            {
+                Dispatcher.BeginInvoke(new Action(() =>
+                    RefreshMessages(ChatViewportUpdateMode.ForceBottom)));
             }
         }
 

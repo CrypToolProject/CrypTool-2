@@ -122,10 +122,10 @@ namespace CrypTool.CrypLLM.Services
 
         /// <summary>
         /// Resolves the contextually appropriate WorkspaceModel by evaluating cascading fallbacks.
-        /// Resolution priority establishes reliability when LLMs hallucinate inaccurate parameters:
-        /// 1) Explicit generative inference (<paramref name="tabId"/>).
-        /// 2) Request-local pinned tab id encapsulated in the async flow.
-        /// 3) Direct fallback to the host application's currently focused editor.
+        /// A request-local pin is the safety anchor. A different explicit tab may
+        /// be used only when both the pin and that tab still resolve. If the model
+        /// invents an invalid tab ID, resolution stays on the pinned workspace.
+        /// Without a request pin, an explicit tab and finally the active editor are used.
         /// </summary>
         public static bool TryGetWorkspaceModel(out WorkspaceModel model, string tabId = "")
         {
@@ -160,7 +160,8 @@ namespace CrypTool.CrypLLM.Services
         {
             workspaceManager = null;
             string explicitTabId = NormalizeTabId(tabId);
-            effectiveTabId = explicitTabId ?? _preferredWorkspaceTabId.Value;
+            string pinnedTabId = _preferredWorkspaceTabId.Value;
+            effectiveTabId = pinnedTabId ?? explicitTabId;
 
             ICrypWinAdapter bridge = CrypWinPort.Instance;
             if (bridge is null)
@@ -169,9 +170,33 @@ namespace CrypTool.CrypLLM.Services
                 return false;
             }
 
-            IEditor editor;
+            IEditor editor = null;
+            if (!string.IsNullOrWhiteSpace(pinnedTabId))
+            {
+                if (!bridge.TryGetWorkspaceEditorByTabId(pinnedTabId, out IEditor pinnedEditor))
+                {
+                    // Never redirect a request after its original workspace closes.
+                    Log.Warning($"The request-pinned workspace tab is no longer available: {pinnedTabId}");
+                    return false;
+                }
 
-            if (string.IsNullOrWhiteSpace(effectiveTabId))
+                editor = pinnedEditor;
+                effectiveTabId = pinnedTabId;
+                if (!string.IsNullOrWhiteSpace(explicitTabId) &&
+                    !string.Equals(explicitTabId, pinnedTabId, StringComparison.Ordinal))
+                {
+                    if (bridge.TryGetWorkspaceEditorByTabId(explicitTabId, out IEditor explicitEditor))
+                    {
+                        editor = explicitEditor;
+                        effectiveTabId = explicitTabId;
+                    }
+                    else
+                    {
+                        Log.Warning($"Ignoring unavailable model-supplied workspace tab '{explicitTabId}' and retaining request pin '{pinnedTabId}'.");
+                    }
+                }
+            }
+            else if (string.IsNullOrWhiteSpace(effectiveTabId))
             {
                 editor = bridge.ActiveEditor;
                 if (editor == null)
@@ -182,8 +207,6 @@ namespace CrypTool.CrypLLM.Services
             }
             else if (!bridge.TryGetWorkspaceEditorByTabId(effectiveTabId, out editor))
             {
-                // Keep the original target even after it closes. Read and write tools share
-                // this resolver, so falling back would redirect subsequent edits to another tab.
                 Log.Warning($"The requested workspace tab is no longer available: {effectiveTabId}");
                 return false;
             }
@@ -200,7 +223,7 @@ namespace CrypTool.CrypLLM.Services
 
         private static string ResolveEffectiveTabId(string tabId)
         {
-            return NormalizeTabId(tabId) ?? _preferredWorkspaceTabId.Value;
+            return _preferredWorkspaceTabId.Value ?? NormalizeTabId(tabId);
         }
 
         /// <summary>

@@ -56,7 +56,7 @@ namespace CrypTool.CrypLLM.Threads
             {
                 var request = JObject.Parse(body);
                 if (request["messages"] is not JArray messages) return null;
-                int tokens = EstimateTokens(request["tools"]?.ToString(Formatting.None));
+                int tokens = request["tools"]?.Type == JTokenType.Null ? 0 : EstimateTokens(request["tools"]?.ToString(Formatting.None));
                 foreach (JToken message in messages)
                     tokens += EstimateWireMessageTokens(message);
                 return tokens;
@@ -187,7 +187,6 @@ namespace CrypTool.CrypLLM.Threads
         public int SafetyMarginTokens { get; set; }
         public int KeepRawBudgetTokens { get; set; }
         public int SummaryBudgetTokens { get; set; }
-        public int ToolReturnBudgetTokens { get; set; }
         public int PreflightPlannedTokens { get; set; }
         public bool PreflightPassed { get; set; }
     }
@@ -226,8 +225,6 @@ namespace CrypTool.CrypLLM.Threads
         private const double MaxSystemAndToolShare = 0.50;
         private const double MaxUserInputShare = 0.20;
         private const double SafetyShare = 0.03;
-        private const double HistoryShare = 0.09;
-        private const double ToolReturnShare = 0.09;
         private const double ResponseReserveShare = 0.09;
         private const double KeepRawWithinHistoryShare = 0.35;
         private const double SummaryWithinHistoryShare = 0.25;
@@ -321,30 +318,12 @@ namespace CrypTool.CrypLLM.Threads
             }
 
             int usedSystemAndToolTokens = profile.SystemPromptTokens + profile.ToolSchemaTokens;
-            int unusedSystemAndToolTokens = Math.Max(0, profile.MaxSystemAndToolTokens - usedSystemAndToolTokens);
-            int unusedUserInputTokens = Math.Max(0, profile.MaxUserInputTokens - userInputTokens);
-            int unusedBudgetTokens = unusedSystemAndToolTokens + unusedUserInputTokens;
-
-            int safetyMarginTokens = PercentFloor(profile.EffectiveContextWindowTokens, SafetyShare);
-            int historyBudgetTokens = PercentFloor(profile.EffectiveContextWindowTokens, HistoryShare);
-            int toolReturnBudgetTokens = PercentFloor(profile.EffectiveContextWindowTokens, ToolReturnShare);
-            int responseReserveTokens = PercentFloor(profile.EffectiveContextWindowTokens, ResponseReserveShare);
-
-            int sharedBoost = unusedBudgetTokens / 3;
-            int remainder = unusedBudgetTokens % 3;
-
-            historyBudgetTokens += sharedBoost;
-            toolReturnBudgetTokens += sharedBoost;
-            responseReserveTokens += sharedBoost;
-
-            if (remainder > 0)
-            {
-                historyBudgetTokens++;
-            }
-            if (remainder > 1)
-            {
-                toolReturnBudgetTokens++;
-            }
+            int safetyMarginTokens = profile.SafetyMarginTokens;
+            int responseReserveTokens = profile.ResponseReserveTokens;
+            // All remaining input capacity belongs to retained context. There is
+            // no separate allocation or cumulative quota for tool interactions.
+            int historyBudgetTokens = Math.Max(0, profile.EffectiveContextWindowTokens -
+                usedSystemAndToolTokens - userInputTokens - safetyMarginTokens - responseReserveTokens);
 
             int estimatedHistoryTokens = ChatTokenEstimator.EstimateMessagesTokens(history);
             int keepRawBudgetTokens = Math.Max(1, PercentFloor(historyBudgetTokens, KeepRawWithinHistoryShare));
@@ -363,8 +342,7 @@ namespace CrypTool.CrypLLM.Threads
                 ResponseReserveTokens = responseReserveTokens,
                 SafetyMarginTokens = safetyMarginTokens,
                 KeepRawBudgetTokens = keepRawBudgetTokens,
-                SummaryBudgetTokens = summaryBudgetTokens,
-                ToolReturnBudgetTokens = toolReturnBudgetTokens
+                SummaryBudgetTokens = summaryBudgetTokens
             };
             UpdatePreflightEstimate(budget);
             LogBudgetInvariantDiagnostics(profile, budget, normalizedReason);
@@ -372,49 +350,10 @@ namespace CrypTool.CrypLLM.Threads
             Log.Info(
                 $"Prompt budgets calculated ({normalizedReason}): rawContext={profile.ContextWindowTokens}, effectiveContext={profile.EffectiveContextWindowTokens}, uncertaintyReserve={profile.UncertaintyReserveTokens}, " +
                 $"system={budget.SystemPromptBudgetTokens}, toolSchema={budget.ToolSchemaBudgetTokens}, user={budget.UserInputTokens}, " +
-                $"unusedSystemTool={unusedSystemAndToolTokens}, unusedUser={unusedUserInputTokens}, distributed={unusedBudgetTokens}, " +
-                $"history={budget.HistoryBudgetTokens}, toolReturn={budget.ToolReturnBudgetTokens}, responseReserve={budget.ResponseReserveTokens}, safety={budget.SafetyMarginTokens}, " +
+                $"history={budget.HistoryBudgetTokens}, responseReserve={budget.ResponseReserveTokens}, safety={budget.SafetyMarginTokens}, " +
                 $"preflightPlanned={budget.PreflightPlannedTokens}, preflightAllowed={budget.EffectiveContextWindowTokens}, preflightPassed={budget.PreflightPassed}");
 
             return budget;
-        }
-
-        /// <summary>
-        /// Executes a late-stage balancing optimization to recycle unspent historical buffer capacities into 
-        /// forward-looking generative margins (e.g., expanded tool outputs or dense reasoning allowances).
-        /// </summary>
-        public static void RedistributeUnusedHistoryToToolAndResponse(PromptBudget budget, int usedHistoryTokens, string reason)
-        {
-            if (budget == null)
-            {
-                return;
-            }
-
-            int normalizedUsedHistoryTokens = Math.Max(0, usedHistoryTokens);
-            int unusedHistoryTokens = Math.Max(0, budget.HistoryBudgetTokens - normalizedUsedHistoryTokens);
-            if (unusedHistoryTokens <= 0)
-            {
-                return;
-            }
-
-            int toolBoost = unusedHistoryTokens / 2;
-            int responseBoost = unusedHistoryTokens - toolBoost;
-
-            budget.EstimatedHistoryTokens = normalizedUsedHistoryTokens;
-            budget.HistoryBudgetTokens = normalizedUsedHistoryTokens;
-            budget.ToolReturnBudgetTokens += toolBoost;
-            budget.ResponseReserveTokens += responseBoost;
-            budget.KeepRawBudgetTokens = Math.Max(1, PercentFloor(budget.HistoryBudgetTokens, KeepRawWithinHistoryShare));
-            budget.SummaryBudgetTokens = Math.Max(1, PercentFloor(budget.HistoryBudgetTokens, SummaryWithinHistoryShare));
-            UpdatePreflightEstimate(budget);
-
-            string normalizedReason = string.IsNullOrWhiteSpace(reason) ? "default" : reason.Trim();
-            LogBudgetInvariantDiagnostics(null, budget, normalizedReason);
-            Log.Info(
-                $"Prompt budgets adjusted ({normalizedReason}): reason=unused-history-redistribution, " +
-                $"unusedHistory={unusedHistoryTokens}, toolReturn+={toolBoost}, responseReserve+={responseBoost}, " +
-                $"newHistory={budget.HistoryBudgetTokens}, newToolReturn={budget.ToolReturnBudgetTokens}, newResponseReserve={budget.ResponseReserveTokens}, " +
-                $"preflightPlanned={budget.PreflightPlannedTokens}, preflightAllowed={budget.EffectiveContextWindowTokens}, preflightPassed={budget.PreflightPassed}");
         }
 
         public static bool ValidatePreflight(PromptBudget budget, out int plannedTokens, out int allowedTokens, out int overflowTokens)
@@ -472,8 +411,6 @@ namespace CrypTool.CrypLLM.Threads
                 Math.Max(0, profile.SystemPromptTokens) +
                 Math.Max(0, profile.ToolSchemaTokens) +
                 Math.Max(0, profile.MaxUserInputTokens) +
-                PercentFloor(profile.EffectiveContextWindowTokens, HistoryShare) +
-                PercentFloor(profile.EffectiveContextWindowTokens, ToolReturnShare) +
                 PercentFloor(profile.EffectiveContextWindowTokens, ResponseReserveShare) +
                 PercentFloor(profile.EffectiveContextWindowTokens, SafetyShare);
             if (capacityWithMaxUser > profile.EffectiveContextWindowTokens)
@@ -498,7 +435,6 @@ namespace CrypTool.CrypLLM.Threads
                 Math.Max(0, budget.ToolSchemaBudgetTokens) +
                 Math.Max(0, budget.UserInputTokens) +
                 Math.Max(0, budget.HistoryBudgetTokens) +
-                Math.Max(0, budget.ToolReturnBudgetTokens) +
                 Math.Max(0, budget.ResponseReserveTokens) +
                 Math.Max(0, budget.SafetyMarginTokens);
 
@@ -515,7 +451,7 @@ namespace CrypTool.CrypLLM.Threads
                     $"[{BudgetInvariantErrorCode}] Budget allocation exceeds effective context ({normalizedReason}): allocated={allocatedCapacity}, " +
                     $"effectiveContext={effectiveContext}, rawContext={budget.ContextWindowTokens}, uncertaintyReserve={budget.UncertaintyReserveTokens}, " +
                     $"system={budget.SystemPromptBudgetTokens}, toolSchema={budget.ToolSchemaBudgetTokens}, user={budget.UserInputTokens}, history={budget.HistoryBudgetTokens}, " +
-                    $"toolReturn={budget.ToolReturnBudgetTokens}, responseReserve={budget.ResponseReserveTokens}, safety={budget.SafetyMarginTokens}.");
+                    $"responseReserve={budget.ResponseReserveTokens}, safety={budget.SafetyMarginTokens}.");
             }
 
             if (profile != null)
@@ -666,10 +602,6 @@ namespace CrypTool.CrypLLM.Threads
                 // Log.Debug($"Normalized {normalizedToolMessagesCount} orphan tool messages to assistant memory for strict provider compatibility.");
             }
 
-            PromptBudgetPlanner.RedistributeUnusedHistoryToToolAndResponse(
-                finalBudget,
-                usedHistoryTokens,
-                "post-history-construction");
             LogFinalReductionDiagnostics(modelId, finalBudget, fullMessages.Count, finalMessages.Count, shouldReduce);
 
             bool useReducedThread = !AreEquivalentMessages(fullMessages, finalMessages);

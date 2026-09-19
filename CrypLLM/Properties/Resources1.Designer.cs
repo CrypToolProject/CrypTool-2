@@ -496,15 +496,6 @@ namespace CrypTool.CrypLLM.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Denied by runtime budget: The tool budget is exhausted. ähnelt.
-        /// </summary>
-        public static string AiChatToolDeniedBudgetExhausted {
-            get {
-                return ResourceManager.GetString("AiChatToolDeniedBudgetExhausted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Denied by user setting: This tool is disabled. ähnelt.
         /// </summary>
         public static string AiChatToolDeniedFunctionDisabled {

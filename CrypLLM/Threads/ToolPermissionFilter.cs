@@ -16,7 +16,6 @@
 using CrypTool.CrypLLM.Helper;
 using CrypTool.CrypLLM.Properties;
 using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.ChatCompletion;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -25,13 +24,11 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 
 // Module overview:
 // Central policy filter for AI-triggered tool calls.
-// Responsibilities: permission gating, runtime budget enforcement,
-// and token-aware compaction/summarization of tool results.
+// Responsibilities: permission gating, tool activity and execution diagnostics.
 namespace CrypTool.CrypLLM.Threads
 {
     /// <summary>
@@ -39,12 +36,7 @@ namespace CrypTool.CrypLLM.Threads
     /// </summary>
     internal sealed class ToolPermissionFilter : IAutoFunctionInvocationFilter
     {
-        private const string ToolCompactionInvariantErrorCode = "CTX-TOOL-001";
-        private const string ToolRuntimeBudgetErrorCode = "CTX-TOOL-002";
         private const string PermissionControlledPluginPrefix = "CrypLLM_";
-        private const double ToolResultChunkCharsPerTargetTokenFactor = 8.0;
-        private const double PerChunkTargetShare = 0.75;
-        private const string ToolResultSummaryPrefix = "[tool-result-summary]";
         private static readonly Type[] KnownPluginTypes =
         {
             typeof(WorkspaceStatusPlugin),
@@ -58,13 +50,12 @@ namespace CrypTool.CrypLLM.Threads
             new Lazy<HashSet<string>>(BuildMutationFunctionNames);
 
         /// <summary>
-        /// Executes permission checks, runtime budget accounting, and optional
-        /// result compaction for each auto-invoked tool function.
+        /// Executes permission checks and reports activity for each tool function.
+        /// Context compression is performed before model requests, not by denying tools.
         /// </summary>
         /// <remarks>
-        /// Input: invocation metadata, arguments, and optional budget state from <see cref="ToolInvocationBudgetRuntime"/>.
-        /// Output: either an allowed invocation result, a denied result, or a compacted/summarized replacement result.
-        /// Limitation: token estimates are heuristic and intentionally conservative.
+        /// Input: invocation metadata and arguments.
+        /// Output: an allowed invocation result or a denial by user permissions.
         /// </remarks>
         public async Task OnAutoFunctionInvocationAsync(AutoFunctionInvocationContext context, Func<AutoFunctionInvocationContext, Task> next)
         {
@@ -113,38 +104,6 @@ namespace CrypTool.CrypLLM.Threads
                 }
             }
 
-            ToolInvocationBudgetRuntime.TryGet(out ToolInvocationBudgetRuntime.ToolInvocationBudgetState budgetBeforeCall);
-            if (permissionControlledInvocation && budgetBeforeCall == null)
-            {
-                Log.Warning($"Tool budget runtime state missing for tool call. Falling back to unbudgeted execution: plugin={pluginName}, function={functionName}");
-            }
-
-            if (permissionControlledInvocation && budgetBeforeCall != null)
-            {
-                // Section: reserve per-call runtime budget before tool execution.
-                int remainingBeforeReservation = budgetBeforeCall.RemainingToolTokens;
-                if (!budgetBeforeCall.TryRegisterToolCall())
-                {
-                    Log.Warning(
-                        $"Tool call denied (tool budget exhausted): plugin={pluginName}, function={functionName}, " +
-                        $"remainingToolTokens={budgetBeforeCall.RemainingToolTokens}, requiredForCall={budgetBeforeCall.RequiredTokensForToolCall}, " +
-                        $"arguments={FormatArgumentsForStructuredLog(argumentsForDisplay)}");
-                    AIThreadManager.Instance.ReportToolActivityFinished(
-                        callId,
-                        pluginName,
-                        functionName,
-                        ToolActivityStatus.Denied,
-                        GetResourceTextOrFallback("AiChatToolDeniedBudgetExhausted", "Denied by runtime budget: The tool budget is exhausted."));
-                    context.Result = new FunctionResult(context.Function, $"Denied by runtime budget (tool budget exhausted): {functionName}");
-                    return;
-                }
-
-                Log.Info(
-                    $"Tool budget changed: reason=tool-call-reservation, plugin={pluginName}, function={functionName}, " +
-                    $"reservationTokens={budgetBeforeCall.ToolCallReservationTokens}, requiredForCall={budgetBeforeCall.RequiredTokensForToolCall}, " +
-                    $"remainingBefore={remainingBeforeReservation}, remainingAfter={budgetBeforeCall.RemainingToolTokens}");
-            }
-
             Stopwatch stopwatch = permissionControlledInvocation ? Stopwatch.StartNew() : null;
             try
             {
@@ -169,8 +128,6 @@ namespace CrypTool.CrypLLM.Threads
                 throw;
             }
 
-            ToolInvocationBudgetRuntime.TryGet(out ToolInvocationBudgetRuntime.ToolInvocationBudgetState latestBudget);
-
             object resultObject = null;
             try
             {
@@ -179,74 +136,6 @@ namespace CrypTool.CrypLLM.Threads
             catch
             {
                 resultObject = null;
-            }
-
-            int originalResultTokens = EstimateResultTokens(resultObject);
-            int estimatedResultTokens = originalResultTokens;
-            // Section: compact result when it exceeds remaining tool budget.
-            ToolResultCompactionOutcome compactionOutcome = await TryCompactResultForBudgetAsync(
-                context,
-                latestBudget,
-                resultObject).ConfigureAwait(false);
-            if (compactionOutcome.IsCompacted)
-            {
-                context.Result = new FunctionResult(context.Function, compactionOutcome.CompactedResult);
-                resultObject = compactionOutcome.CompactedResult;
-                estimatedResultTokens = compactionOutcome.CompactedTokens;
-                latestBudget?.RegisterTextReduction(
-                    source: "ToolResultBudget",
-                    method: compactionOutcome.CompactionMethod,
-                    pluginName: pluginName,
-                    functionName: functionName,
-                    originalTokens: compactionOutcome.OriginalTokens,
-                    reducedTokens: compactionOutcome.CompactedTokens,
-                    originalText: compactionOutcome.OriginalText,
-                    reducedText: compactionOutcome.CompactedResult);
-
-                if (compactionOutcome.UsedSemanticSummary)
-                {
-                    Log.Info($"Tool result summarized for tool budget: plugin={pluginName}, function={functionName}, originalTokens={compactionOutcome.OriginalTokens}, summarizedTokens={compactionOutcome.CompactedTokens}, remainingToolTokens={latestBudget?.RemainingToolTokens.ToString(CultureInfo.InvariantCulture) ?? "n/a"}");
-                }
-                else
-                {
-                    Log.Info($"Tool result compacted for tool budget: plugin={pluginName}, function={functionName}, originalTokens={compactionOutcome.OriginalTokens}, compactedTokens={compactionOutcome.CompactedTokens}, remainingToolTokens={latestBudget?.RemainingToolTokens.ToString(CultureInfo.InvariantCulture) ?? "n/a"}");
-                }
-            }
-            else
-            {
-                Log.Info(
-                    $"Tool result kept raw for tool budget: plugin={pluginName}, function={functionName}, resultTokens={originalResultTokens}, " +
-                    $"remainingToolTokens={latestBudget?.RemainingToolTokens.ToString(CultureInfo.InvariantCulture) ?? "n/a"}");
-            }
-
-            if (latestBudget != null)
-            {
-                // Section: invariant checks before final budget consumption.
-                if (compactionOutcome.IsCompacted && estimatedResultTokens > latestBudget.RemainingToolTokens)
-                {
-                    Log.Error(
-                        $"[{ToolCompactionInvariantErrorCode}] Compacted tool result still exceeds remaining tool budget: plugin={pluginName}, function={functionName}, " +
-                        $"compactedTokens={estimatedResultTokens}, remainingToolTokens={latestBudget.RemainingToolTokens}, method={compactionOutcome.CompactionMethod}.");
-                }
-                else if (!compactionOutcome.IsCompacted && originalResultTokens > latestBudget.RemainingToolTokens)
-                {
-                    Log.Error(
-                        $"[{ToolCompactionInvariantErrorCode}] Raw tool result exceeds remaining tool budget but compaction was not applied: plugin={pluginName}, function={functionName}, " +
-                        $"rawTokens={originalResultTokens}, remainingToolTokens={latestBudget.RemainingToolTokens}.");
-                }
-
-                if (estimatedResultTokens > latestBudget.RemainingToolTokens)
-                {
-                    Log.Error(
-                        $"[{ToolRuntimeBudgetErrorCode}] Tool result tokens exceed remaining runtime tool budget before consume: plugin={pluginName}, function={functionName}, " +
-                        $"resultTokens={estimatedResultTokens}, remainingToolTokens={latestBudget.RemainingToolTokens}, originalResultTokens={originalResultTokens}, compactionMethod={compactionOutcome.CompactionMethod}.");
-                }
-
-                int remainingBeforeResultConsume = latestBudget.RemainingToolTokens;
-                latestBudget.ConsumeByTokens(estimatedResultTokens);
-                Log.Info(
-                    $"Tool budget changed: reason=tool-result-consume, plugin={pluginName}, function={functionName}, " +
-                    $"consumedTokens={estimatedResultTokens}, remainingBefore={remainingBeforeResultConsume}, remainingAfter={latestBudget.RemainingToolTokens}");
             }
 
             if (permissionControlledInvocation)
@@ -702,494 +591,12 @@ namespace CrypTool.CrypLLM.Threads
             return functionCalls[0];
         }
 
-        /// <summary>
-        /// Tries to reduce tool-result size to the remaining runtime budget.
-        /// </summary>
-        /// <remarks>
-        /// Strategy order: semantic summarization (if available) -> deterministic fallback preview.
-        /// </remarks>
-        private static async Task<ToolResultCompactionOutcome> TryCompactResultForBudgetAsync(
-            AutoFunctionInvocationContext context,
-            ToolInvocationBudgetRuntime.ToolInvocationBudgetState budgetState,
-            object resultObject)
-        {
-            int originalTokens = EstimateResultTokens(resultObject);
-
-            if (budgetState == null || resultObject == null)
-            {
-                return ToolResultCompactionOutcome.NotCompacted(originalTokens);
-            }
-
-            int targetTokens = Math.Max(1, budgetState.RemainingToolTokens);
-            if (originalTokens <= targetTokens)
-            {
-                return ToolResultCompactionOutcome.NotCompacted(originalTokens);
-            }
-
-            string serialized = SerializeResult(resultObject);
-            if (WorkspaceScreenshotContent.TryParse(serialized, out _))
-            {
-                // Never summarize or truncate PNG Base64 as if it were prose.
-                string denied = HardClampToTokenBudget("Workspace screenshot omitted: insufficient image context budget.", targetTokens);
-                return ToolResultCompactionOutcome.Compacted(denied, originalTokens, EstimateResultTokens(denied),
-                    usedSemanticSummary: false, compactionMethod: "ImageBudgetDenied", originalText: "[workspace screenshot]");
-            }
-            if (string.IsNullOrWhiteSpace(serialized))
-            {
-                return ToolResultCompactionOutcome.NotCompacted(originalTokens);
-            }
-
-            IChatCompletionService chatCompletionService = TryGetChatCompletionService(context);
-            CancellationToken cancellationToken = TryGetCancellationToken(context);
-            string summarizedContent = string.Empty;
-
-            if (chatCompletionService != null)
-            {
-                // Section: model-assisted summarization for oversized tool payloads.
-                try
-                {
-                    summarizedContent = await SummarizeToolResultWithSemanticKernelAsync(
-                        chatCompletionService,
-                        serialized,
-                        targetTokens,
-                        budgetState.ContextWindowTokens,
-                        cancellationToken).ConfigureAwait(false);
-                }
-                catch (Exception ex)
-                {
-                    Log.Warning($"Tool result semantic summarization failed. Falling back to compact preview. {ex.Message}");
-                }
-            }
-
-            if (!string.IsNullOrWhiteSpace(summarizedContent))
-            {
-                // Section: enforce strict post-summary budget compliance.
-                string normalizedSummary = await TrimToTokenBudgetAsync(
-                    summarizedContent,
-                    targetTokens,
-                    chatCompletionService,
-                    cancellationToken).ConfigureAwait(false);
-                if (!string.IsNullOrWhiteSpace(normalizedSummary))
-                {
-                    string summarizedResult = HardClampToTokenBudget(
-                        $"{ToolResultSummaryPrefix} {normalizedSummary}",
-                        targetTokens);
-                    int summarizedTokens = EstimateResultTokens(summarizedResult);
-                    if (summarizedTokens > targetTokens)
-                    {
-                        Log.Error(
-                            $"[{ToolCompactionInvariantErrorCode}] Semantic summary still exceeds target after hard clamp. Enforcing emergency trim. " +
-                            $"targetTokens={targetTokens}, summarizedTokens={summarizedTokens}");
-                        summarizedResult = HardClampToTokenBudget(summarizedResult, targetTokens);
-                        summarizedTokens = EstimateResultTokens(summarizedResult);
-                    }
-
-                    return ToolResultCompactionOutcome.Compacted(
-                        summarizedResult,
-                        originalTokens,
-                        summarizedTokens,
-                        usedSemanticSummary: true,
-                        compactionMethod: "SemanticSummary+HardClamp",
-                        originalText: serialized);
-                }
-            }
-
-            int maxChars = Math.Max(1, targetTokens * 4);
-            string preview = CompactWhitespace(serialized, maxChars);
-            string fallback = HardClampToTokenBudget(
-                $"{ToolResultSummaryPrefix} Output compacted for tool return budget. Original size ~{originalTokens} tokens. Preview: {preview}",
-                targetTokens);
-            int fallbackTokens = EstimateResultTokens(fallback);
-            if (fallbackTokens > targetTokens)
-            {
-                Log.Error(
-                    $"[{ToolCompactionInvariantErrorCode}] Fallback summary exceeds target after hard clamp. Enforcing emergency trim. " +
-                    $"targetTokens={targetTokens}, fallbackTokens={fallbackTokens}");
-                fallback = HardClampToTokenBudget(fallback, targetTokens);
-                fallbackTokens = EstimateResultTokens(fallback);
-            }
-
-            return ToolResultCompactionOutcome.Compacted(
-                fallback,
-                originalTokens,
-                fallbackTokens,
-                usedSemanticSummary: false,
-                compactionMethod: "CompactPreviewFallback",
-                originalText: serialized);
-        }
-
-        /// <summary>
-        /// Resolves a chat-completion service from invocation context or active thread kernel.
-        /// </summary>
-        private static IChatCompletionService TryGetChatCompletionService(AutoFunctionInvocationContext context)
-        {
-            try
-            {
-                object kernel =
-                    TryGetPropertyValue(context, "Kernel") ??
-                    TryGetPropertyValue(context?.Function, "Kernel") ??
-                    AIThreadManager.Instance?.Agent?.Kernel;
-                object services = TryGetPropertyValue(kernel, "Services");
-                if (services is not IServiceProvider provider)
-                {
-                    return null;
-                }
-
-                return provider.GetService(typeof(IChatCompletionService)) as IChatCompletionService;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Retrieves the invocation cancellation token when exposed by the runtime context.
-        /// </summary>
-        private static CancellationToken TryGetCancellationToken(AutoFunctionInvocationContext context)
-        {
-            object token = TryGetPropertyValue(context, "CancellationToken");
-            return token is CancellationToken cancellationToken ? cancellationToken : CancellationToken.None;
-        }
-
-        /// <summary>
-        /// Summarizes large tool output by chunking first, then optionally merging chunk summaries.
-        /// </summary>
-        private static async Task<string> SummarizeToolResultWithSemanticKernelAsync(
-            IChatCompletionService chatCompletionService,
-            string serializedResult,
-            int targetTokens,
-            int contextWindowTokens,
-            CancellationToken cancellationToken)
-        {
-            if (chatCompletionService == null || string.IsNullOrWhiteSpace(serializedResult))
-            {
-                return string.Empty;
-            }
-
-            int chunkTokenBudget = Math.Max(
-                1,
-                (int)Math.Ceiling(Math.Max(targetTokens * 2.0, contextWindowTokens * 0.02)));
-            int chunkChars = Math.Max(1, (int)Math.Ceiling(chunkTokenBudget * ToolResultChunkCharsPerTargetTokenFactor));
-            List<string> chunks = SplitTextIntoChunks(serializedResult, chunkChars);
-            if (chunks.Count == 0)
-            {
-                return string.Empty;
-            }
-
-            int perChunkTargetTokens = Math.Max(1, (int)Math.Ceiling(targetTokens * PerChunkTargetShare));
-            List<string> chunkSummaries = new List<string>(chunks.Count);
-
-            // Section: summarize each chunk independently to stabilize long-input behavior.
-            for (int i = 0; i < chunks.Count; i++)
-            {
-                string chunkPrompt =
-                    $"Tool output chunk {i + 1}/{chunks.Count}. " +
-                    $"Create a concise technical summary (max {perChunkTargetTokens} tokens). " +
-                    "Keep only key facts, ids, errors, warnings, numbers, file paths, and execution-relevant state.\n\n" +
-                    chunks[i];
-                string chunkSummary = await SummarizeTextAsync(
-                    chatCompletionService,
-                    chunkPrompt,
-                    perChunkTargetTokens,
-                    cancellationToken).ConfigureAwait(false);
-
-                if (string.IsNullOrWhiteSpace(chunkSummary))
-                {
-                    chunkSummary = CompactWhitespace(chunks[i], Math.Max(1, perChunkTargetTokens * 4));
-                }
-
-                if (!string.IsNullOrWhiteSpace(chunkSummary))
-                {
-                    chunkSummaries.Add(chunkSummary.Trim());
-                }
-            }
-
-            if (chunkSummaries.Count == 0)
-            {
-                return string.Empty;
-            }
-
-            string merged = string.Join(Environment.NewLine, chunkSummaries);
-            if (EstimateResultTokens(merged) <= targetTokens)
-            {
-                return merged;
-            }
-
-            // Section: second-pass merge keeps global coherence under the final token target.
-            string finalPrompt =
-                $"Merge the following chunk summaries into one final technical summary (max {targetTokens} tokens). " +
-                "Preserve essential facts and numeric values only.\n\n" +
-                merged;
-            string finalSummary = await SummarizeTextAsync(
-                chatCompletionService,
-                finalPrompt,
-                targetTokens,
-                cancellationToken).ConfigureAwait(false);
-
-            if (!string.IsNullOrWhiteSpace(finalSummary))
-            {
-                return finalSummary.Trim();
-            }
-
-            return merged;
-        }
-
-        /// <summary>
-        /// Performs one generic model summarization call for technical text compression.
-        /// </summary>
-        private static async Task<string> SummarizeTextAsync(
-            IChatCompletionService chatCompletionService,
-            string userPrompt,
-            int targetTokens,
-            CancellationToken cancellationToken)
-        {
-            if (chatCompletionService == null || string.IsNullOrWhiteSpace(userPrompt))
-            {
-                return string.Empty;
-            }
-
-            ChatHistory prompt = new ChatHistory
-            {
-                new ChatMessageContent(
-                    AuthorRole.System,
-                    "You summarize tool outputs for constrained LLM context windows. Keep factual technical details and remove repetition. Return plain text only."),
-                new ChatMessageContent(
-                    AuthorRole.User,
-                    $"{userPrompt}\n\nHard limit: approximately {Math.Max(1, targetTokens)} tokens.")
-            };
-
-            IReadOnlyList<ChatMessageContent> responses = await chatCompletionService.GetChatMessageContentsAsync(
-                prompt,
-                null,
-                null,
-                cancellationToken).ConfigureAwait(false);
-            if (responses == null || responses.Count == 0)
-            {
-                return string.Empty;
-            }
-
-            for (int i = 0; i < responses.Count; i++)
-            {
-                if (!string.IsNullOrWhiteSpace(responses[i]?.Content))
-                {
-                    return responses[i].Content.Trim();
-                }
-            }
-
-            return responses[0]?.Content?.Trim() ?? string.Empty;
-        }
-
-        /// <summary>
-        /// Splits text into bounded chunks, preferring newline boundaries when feasible.
-        /// </summary>
-        private static List<string> SplitTextIntoChunks(string text, int maxCharsPerChunk)
-        {
-            List<string> chunks = new List<string>();
-            if (string.IsNullOrWhiteSpace(text) || maxCharsPerChunk <= 0)
-            {
-                return chunks;
-            }
-
-            string normalized = text.Replace("\r\n", "\n");
-            int offset = 0;
-            while (offset < normalized.Length)
-            {
-                int remaining = normalized.Length - offset;
-                int length = Math.Min(maxCharsPerChunk, remaining);
-                int cut = normalized.LastIndexOf('\n', Math.Min(normalized.Length - 1, offset + length - 1), length);
-
-                if (cut < offset + (maxCharsPerChunk / 3))
-                {
-                    cut = offset + length - 1;
-                }
-
-                int finalLength = Math.Max(1, (cut - offset) + 1);
-                string chunk = normalized.Substring(offset, finalLength).Trim();
-                if (!string.IsNullOrWhiteSpace(chunk))
-                {
-                    chunks.Add(chunk);
-                }
-
-                offset += finalLength;
-            }
-
-            return chunks;
-        }
-
-        /// <summary>
-        /// Reduces content to a target token budget using semantic compression and hard fallback trimming.
-        /// </summary>
-        private static async Task<string> TrimToTokenBudgetAsync(
-            string content,
-            int tokenBudget,
-            IChatCompletionService chatCompletionService,
-            CancellationToken cancellationToken)
-        {
-            if (string.IsNullOrWhiteSpace(content))
-            {
-                return string.Empty;
-            }
-
-            int safeBudget = Math.Max(1, tokenBudget);
-            if (EstimateResultTokens(content) <= safeBudget)
-            {
-                return HardClampToTokenBudget(content.Trim(), safeBudget);
-            }
-
-            if (chatCompletionService != null)
-            {
-                string compactPrompt =
-                    $"Compress the following technical summary to at most {safeBudget} tokens. " +
-                    "Preserve key facts, ids, numbers, warnings, and errors. Return plain text only.\n\n" +
-                    content;
-                string compactedByModel = await SummarizeTextAsync(
-                    chatCompletionService,
-                    compactPrompt,
-                    safeBudget,
-                    cancellationToken).ConfigureAwait(false);
-                if (!string.IsNullOrWhiteSpace(compactedByModel))
-                {
-                    string normalized = compactedByModel.Trim();
-                    if (EstimateResultTokens(normalized) <= safeBudget)
-                    {
-                        return HardClampToTokenBudget(normalized, safeBudget);
-                    }
-
-                    // One more semantic compression attempt before falling back to hard trim.
-                    string secondPassPrompt =
-                        $"The text is still too long. Compress it further to at most {safeBudget} tokens. " +
-                        "Keep only essential technical facts and values.\n\n" +
-                        normalized;
-                    string secondPass = await SummarizeTextAsync(
-                        chatCompletionService,
-                        secondPassPrompt,
-                        safeBudget,
-                        cancellationToken).ConfigureAwait(false);
-                    if (!string.IsNullOrWhiteSpace(secondPass))
-                    {
-                        string secondNormalized = secondPass.Trim();
-                        if (EstimateResultTokens(secondNormalized) <= safeBudget)
-                        {
-                            return HardClampToTokenBudget(secondNormalized, safeBudget);
-                        }
-                    }
-                }
-            }
-
-            int maxChars = Math.Max(1, safeBudget * 4);
-            string compactFallback = CompactWhitespace(content, maxChars);
-            return HardClampToTokenBudget(compactFallback, safeBudget);
-        }
-
-        /// <summary>
-        /// Deterministically enforces a token budget via iterative character-level clamping.
-        /// </summary>
-        /// <remarks>
-        /// This is a last-resort safety path when semantic compression cannot meet constraints.
-        /// </remarks>
-        private static string HardClampToTokenBudget(string text, int tokenBudget)
-        {
-            int safeBudget = Math.Max(1, tokenBudget);
-            string candidate = string.IsNullOrWhiteSpace(text) ? string.Empty : text.Trim();
-            if (string.IsNullOrEmpty(candidate))
-            {
-                return ".";
-            }
-
-            int maxChars = Math.Max(1, safeBudget * 4);
-            if (candidate.Length > maxChars)
-            {
-                candidate = CompactWhitespace(candidate, maxChars);
-            }
-
-            int guard = 0;
-            while (EstimateResultTokens(candidate) > safeBudget && candidate.Length > 1 && guard < 128)
-            {
-                int overflowTokens = EstimateResultTokens(candidate) - safeBudget;
-                int shrinkChars = Math.Max(1, overflowTokens * 4);
-                int nextLength = Math.Max(1, candidate.Length - shrinkChars);
-                candidate = candidate.Substring(0, nextLength).TrimEnd();
-                guard++;
-            }
-
-            while (EstimateResultTokens(candidate) > safeBudget && candidate.Length > 1)
-            {
-                candidate = candidate.Substring(0, candidate.Length - 1).TrimEnd();
-            }
-
-            if (string.IsNullOrWhiteSpace(candidate))
-            {
-                return ".";
-            }
-
-            if (EstimateResultTokens(candidate) > safeBudget)
-            {
-                Log.Error(
-                    $"[{ToolCompactionInvariantErrorCode}] Hard clamp could not satisfy target token budget. Returning smallest possible text. " +
-                    $"targetTokens={safeBudget}, finalTokens={EstimateResultTokens(candidate)}, finalChars={candidate.Length}.");
-            }
-
-            return candidate;
-        }
-
-        /// <summary>
-        /// Value object describing whether and how a tool result was compacted.
-        /// </summary>
-        private sealed class ToolResultCompactionOutcome
-        {
-            public bool IsCompacted { get; private set; }
-            public string CompactedResult { get; private set; }
-            public int OriginalTokens { get; private set; }
-            public int CompactedTokens { get; private set; }
-            public bool UsedSemanticSummary { get; private set; }
-            public string CompactionMethod { get; private set; }
-            public string OriginalText { get; private set; }
-
-            public static ToolResultCompactionOutcome NotCompacted(int originalTokens)
-            {
-                return new ToolResultCompactionOutcome
-                {
-                    IsCompacted = false,
-                    CompactedResult = string.Empty,
-                    OriginalTokens = Math.Max(0, originalTokens),
-                    CompactedTokens = Math.Max(0, originalTokens),
-                    UsedSemanticSummary = false,
-                    CompactionMethod = string.Empty,
-                    OriginalText = string.Empty
-                };
-            }
-
-            public static ToolResultCompactionOutcome Compacted(
-                string compactedResult,
-                int originalTokens,
-                int compactedTokens,
-                bool usedSemanticSummary,
-                string compactionMethod,
-                string originalText)
-            {
-                return new ToolResultCompactionOutcome
-                {
-                    IsCompacted = true,
-                    CompactedResult = compactedResult ?? string.Empty,
-                    OriginalTokens = Math.Max(0, originalTokens),
-                    CompactedTokens = Math.Max(0, compactedTokens),
-                    UsedSemanticSummary = usedSemanticSummary,
-                    CompactionMethod = compactionMethod ?? string.Empty,
-                    OriginalText = originalText ?? string.Empty
-                };
-            }
-        }
-
         private sealed class ToolCompletionOutcome
         {
             public ToolActivityStatus Status { get; set; }
             public string DisplayText { get; set; } = string.Empty;
         }
 
-        /// <summary>
-        /// Indicates whether a plugin name belongs to the permission-controlled tool set.
-        /// </summary>
         private static bool IsPermissionControlledPlugin(string pluginName)
         {
             if (string.IsNullOrWhiteSpace(pluginName))
@@ -1294,22 +701,6 @@ namespace CrypTool.CrypLLM.Threads
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// Estimates token count for arbitrary values after stable serialization.
-        /// </summary>
-        private static int EstimateResultTokens(object value)
-        {
-            string serialized = SerializeResult(value);
-            if (WorkspaceScreenshotContent.TryParse(serialized, out _))
-                return WorkspaceScreenshotContent.EstimatedImageTokens;
-            if (string.IsNullOrWhiteSpace(serialized))
-            {
-                return 0;
-            }
-
-            return Math.Max(1, (int)Math.Ceiling(serialized.Length / 4.0));
         }
 
         /// <summary>

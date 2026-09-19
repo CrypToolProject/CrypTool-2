@@ -74,6 +74,10 @@ namespace CrypTool.CrypLLM.Threads
             "Stop and wait for the user's reply BEFORE tpl_open or any workspace construction for that task. Do not silently choose either option. " +
             "If the user already explicitly chose a template or explicitly chose building from scratch, honor that choice without asking again. " +
             "If no suitable template is found or discovery is unavailable, build normally and state that briefly. Small edits to an existing workspace do not require a template choice. " +
+            "EXECUTION DISCIPLINE: When the user explicitly says to perform a concrete edit (for example 'do it', 'fix it', 'remove it' or 'connect it'), execute the required mutation tools without asking for the same confirmation again. " +
+            "Never claim that a component was created, removed, moved, configured or connected unless the corresponding mutation tool returned success=true for that change, or ws_model proves that the requested state already exists. Plans, prose, earlier intentions and successful ws_run/ws_io output are not evidence that a structural edit happened. " +
+            "Never invent component, memo, connection or tab IDs. Copy the exact runtime IDs from the latest tool result; component IDs in the current workspace are numeric runtime strings, not fabricated GUIDs. If an ID is rejected, inspect the returned candidates or call ws_model again and retry with the exact ID. " +
+            "After every requested structural change, inspect ws_model and verify the exact postcondition: required source/output and target/input connector pair exists, removed elements and obsolete connections are absent, and unrelated branches remain. A correct data value from ws_io does not prove the requested topology. " +
             "1. Prefer connected, visible input components for data, keys, IVs, alphabets and other parameters whenever a matching input connector exists. " +
             "Inspect the component catalog/schema for real connector names and data types before wiring. " +
             "Use TextInput for text. For numeric input connectors, prefer a visible NumberInput (number input) with a compatible numeric output type. " +
@@ -469,7 +473,7 @@ namespace CrypTool.CrypLLM.Threads
 
             OpenAIPromptExecutionSettings settings = new OpenAIPromptExecutionSettings
             {
-                ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
+                ToolCallBehavior = ToolCallBehavior.EnableKernelFunctions
             };
 
             bool supportsExplicitReasoningEffort = provider == SupportedProviders.OpenAI;
@@ -563,6 +567,11 @@ namespace CrypTool.CrypLLM.Threads
             List<DebugHttpExchange> capturedHttpExchanges = new List<DebugHttpExchange>();
             using IDisposable llmHttpCaptureScope = EnterLlmHttpCapture(out LlmHttpCaptureSession llmHttpCaptureSession);
             using var editSession = new AgentEditSession(requestThread);
+            ChatHistoryAgentThread invocationThread = null;
+            int invocationBaseCount = 0;
+            bool usingReducedThread = false;
+            bool newMessagesMerged = false;
+            int publishedInvocationMessageCount = 0;
 
             try
             {
@@ -578,7 +587,6 @@ namespace CrypTool.CrypLLM.Threads
                     _promptBudgetProfile,
                     GetChatCompletionServiceOrThrow(),
                     cancellationToken);
-                int runtimeToolBudgetTokens = CalculateRuntimeToolBudgetTokens(history.Budget);
                 bool preflightPassed = PromptBudgetPlanner.ValidatePreflight(
                     history.Budget,
                     out int preflightPlannedTokens,
@@ -621,7 +629,7 @@ namespace CrypTool.CrypLLM.Threads
                         chatHistory?.ToList(),
                         history.InvocationMessages ?? new List<ChatMessageContent>(),
                         new List<ChatMessageContent>(),
-                        new List<ToolInvocationBudgetRuntime.ToolInvocationBudgetState.TextReductionEntry>(),
+                        new List<DebugTextReduction>(),
                         string.Empty,
                         rawLlmRequest,
                         rawLlmResponse,
@@ -631,17 +639,16 @@ namespace CrypTool.CrypLLM.Threads
                 }
 
                 Log.Info(
-                    $"Runtime tool budget prepared: model={selectedModel}, rawContext={history.Budget.ContextWindowTokens}, effectiveContext={history.Budget.EffectiveContextWindowTokens}, " +
-                    $"toolReturnBudget={history.Budget.ToolReturnBudgetTokens}, responseReserve={history.Budget.ResponseReserveTokens}, " +
+                    $"Context prepared: model={selectedModel}, rawContext={history.Budget.ContextWindowTokens}, effectiveContext={history.Budget.EffectiveContextWindowTokens}, " +
+                    $"responseReserve={history.Budget.ResponseReserveTokens}, " +
                     $"historyUsed={history.UsedHistoryTokens}/{history.Budget.HistoryBudgetTokens}, preflightPlanned={history.Budget.PreflightPlannedTokens}, preflightPassed={history.Budget.PreflightPassed}");
-                // Log.Debug($"Prompt budget: model={selectedModel}, estimatedContext={history.Budget.ContextWindowTokens}, userTokens={history.Budget.UserInputTokens}, historyBudget={history.Budget.HistoryBudgetTokens}, historyEstimated={history.Budget.EstimatedHistoryTokens}, historyUsed={history.UsedHistoryTokens}, historyMessages={history.CandidateHistoryCount}, keptMessages={history.ReducedHistoryCount}, toolSchemaBudget={history.Budget.ToolSchemaBudgetTokens}, runtimeToolBudget={runtimeToolBudgetTokens}, systemPromptBudget={history.Budget.SystemPromptBudgetTokens}, responseReserve={history.Budget.ResponseReserveTokens}, safety={history.Budget.SafetyMarginTokens}");
 
-                ChatHistoryAgentThread invocationThread = requestThread.AgentThread;
-                int invocationBaseCount = invocationThread.ChatHistory.Count;
-                bool usingReducedThread = history.UseReducedThread;
+                invocationThread = requestThread.AgentThread;
+                invocationBaseCount = invocationThread.ChatHistory.Count;
+                usingReducedThread = history.UseReducedThread;
                 List<ChatMessageContent> debugPromptMessages = null;
-                List<ToolInvocationBudgetRuntime.ToolInvocationBudgetState.TextReductionEntry> textReductions =
-                    new List<ToolInvocationBudgetRuntime.ToolInvocationBudgetState.TextReductionEntry>();
+                List<DebugTextReduction> textReductions =
+                    new List<DebugTextReduction>();
 
                 if (history.Summarized || history.Trimmed || history.CompressedToolOutputs || history.RemovedMessagesCount > 0)
                 {
@@ -697,39 +704,50 @@ namespace CrypTool.CrypLLM.Threads
                 // Enable after preparation so summary requests do not replace the agent meter.
                 llmHttpCaptureSession.ContextThread = requestThread;
                 llmHttpCaptureSession.ContextChanged = () => ToolActivityChanged?.Invoke(this, EventArgs.Empty);
+                var liveCompressor = new LiveContextCompressor(_promptBudgetProfile,
+                    requestAgent.Kernel.GetRequiredService<IChatCompletionService>());
+                llmHttpCaptureSession.PrepareContextAsync = liveCompressor.PrepareAsync;
+                textReductions = liveCompressor.Reductions;
 
                 // Log.Debug($"Chat history reduction: full={history.FullHistoryCount}, candidate={history.CandidateHistoryCount}, reduced={history.ReducedHistoryCount}, summarized={history.Summarized}, trimmed={history.Trimmed}, compressedTools={history.CompressedToolOutputs}, removed={history.RemovedMessagesCount}, cacheApplied={history.CacheApplied}, cacheUpdated={history.CacheUpdated}, cacheCovered={history.CacheCoveredSourceMessages}, usingReducedThread={usingReducedThread}");
 
                 IAsyncEnumerable<AgentResponseItem<ChatMessageContent>> responseStream;
                 using (LLMPluginService.PushPreferredWorkspaceTabId(context.ActiveTabId))
                 using (EnterToolActivitySession(requestThread))
-                using (ToolInvocationBudgetRuntime.Enter(
-                    history.Budget.EffectiveContextWindowTokens > 0
-                        ? history.Budget.EffectiveContextWindowTokens
-                        : history.Budget.ContextWindowTokens,
-                    runtimeToolBudgetTokens))
                 {
                     ToolActivitySessionCompletion toolActivityCompletion = ToolActivitySessionCompletion.Failed;
                     try
                     {
-                        responseStream = requestAgent.InvokeAsync(message, invocationThread,
-                            options: new() { KernelArguments = arguments }, cancellationToken: cancellationToken);
+                        Action publishCompletedRound = () =>
+                        {
+                            int availableCount = Math.Max(0, invocationThread.ChatHistory.Count - invocationBaseCount);
+                            if (usingReducedThread)
+                            {
+                                while (publishedInvocationMessageCount < availableCount)
+                                {
+                                    requestThread.ChatHistory.Add(invocationThread.ChatHistory[
+                                        invocationBaseCount + publishedInvocationMessageCount]);
+                                    publishedInvocationMessageCount++;
+                                }
+                            }
+                            else
+                            {
+                                publishedInvocationMessageCount = availableCount;
+                            }
 
-                        NewChatMessageReceived?.Invoke(this, EventArgs.Empty);
+                            if (ReferenceEquals(ActiveThread, requestThread))
+                            {
+                                NewChatMessageReceived?.Invoke(this, EventArgs.Empty);
+                            }
+                        };
+                        responseStream = InvokeWithContinuousToolsAsync(
+                            requestAgent, message, invocationThread, arguments, publishCompletedRound, cancellationToken);
 
                         await using var enumerator = responseStream.GetAsyncEnumerator(cancellationToken);
                         while (await enumerator.MoveNextAsync())
                         {
                             AgentResponseItem<ChatMessageContent> response = enumerator.Current;
                             sb.Append(response.Message.Content);
-                        }
-
-                        if (ToolInvocationBudgetRuntime.TryGet(out ToolInvocationBudgetRuntime.ToolInvocationBudgetState currentBudgetState))
-                        {
-                            textReductions = currentBudgetState.GetTextReductionSnapshot();
-                            Log.Info(
-                                $"Tool runtime diagnostics: model={selectedModel}, initialToolBudget={runtimeToolBudgetTokens}, remainingToolTokens={currentBudgetState.RemainingToolTokens}, " +
-                                $"toolCalls={currentBudgetState.ToolCallCount}, textReductions={textReductions.Count}");
                         }
 
                         toolActivityCompletion = ToolActivitySessionCompletion.Succeeded;
@@ -740,18 +758,10 @@ namespace CrypTool.CrypLLM.Threads
                             ? history.Budget.EffectiveContextWindowTokens
                             : history.Budget.ContextWindowTokens;
                         int preflightOverflow = Math.Max(0, history.Budget.PreflightPlannedTokens - effectiveContext);
-                        int remainingToolTokens = -1;
-                        int toolCalls = -1;
-                        if (ToolInvocationBudgetRuntime.TryGet(out ToolInvocationBudgetRuntime.ToolInvocationBudgetState runtimeState))
-                        {
-                            remainingToolTokens = runtimeState.RemainingToolTokens;
-                            toolCalls = runtimeState.ToolCallCount;
-                        }
-
                         Log.Error(
                             $"[{ContextInvokeErrorCode}] Provider rejected request due to context window overflow despite preflight. " +
                             $"model={selectedModel}, message={ex.Message}, preflightPassed={history.Budget.PreflightPassed}, preflightPlanned={history.Budget.PreflightPlannedTokens}, " +
-                            $"effectiveContext={effectiveContext}, preflightOverflow={preflightOverflow}, runtimeToolBudgetInitial={runtimeToolBudgetTokens}, remainingToolTokens={remainingToolTokens}, toolCalls={toolCalls}.");
+                            $"effectiveContext={effectiveContext}, preflightOverflow={preflightOverflow}.");
 
                         CaptureRawLlmHttpPayloads(llmHttpCaptureSession, out rawLlmRequest, out rawLlmResponse);
                         capturedHttpExchanges = GetCapturedHttpExchangesSnapshot(llmHttpCaptureSession);
@@ -855,7 +865,9 @@ namespace CrypTool.CrypLLM.Threads
 
                 if (usingReducedThread)
                 {
-                    for (int i = invocationBaseCount; i < invocationThread.ChatHistory.Count; i++)
+                    for (int i = invocationBaseCount + publishedInvocationMessageCount;
+                        i < invocationThread.ChatHistory.Count;
+                        i++)
                     {
                         requestThread.AgentThread.ChatHistory.Add(invocationThread.ChatHistory[i]);
                     }
@@ -865,6 +877,7 @@ namespace CrypTool.CrypLLM.Threads
                 List<ChatMessageContent> debugNewMessages = invocationThread.ChatHistory
                     .Skip(invocationBaseCount)
                     .ToList();
+                newMessagesMerged = true;
                 requestThread.ApplyToolActivityArguments(ExtractToolActivityArgumentInfos(debugNewMessages));
                 CaptureRawLlmHttpPayloads(llmHttpCaptureSession, out rawLlmRequest, out rawLlmResponse);
                 capturedHttpExchanges = GetCapturedHttpExchangesSnapshot(llmHttpCaptureSession);
@@ -896,10 +909,97 @@ namespace CrypTool.CrypLLM.Threads
             }
             finally
             {
+                // Preserve completed edits/results even if a reduced invocation
+                // is cancelled or fails before its final answer can be merged.
+                if (usingReducedThread && !newMessagesMerged && invocationThread != null)
+                {
+                    for (int i = invocationBaseCount + publishedInvocationMessageCount;
+                        i < invocationThread.ChatHistory.Count;
+                        i++)
+                    {
+                        requestThread.ChatHistory.Add(invocationThread.ChatHistory[i]);
+                    }
+                    SaveThreadHistoriesSafe();
+                }
                 requestThread.CompleteContextUsage();
                 LLMPluginService.InvokeOnUi(() => { editSession.Complete(); return true; });
                 ToolActivityChanged?.Invoke(this, EventArgs.Empty);
                 ClearRequestWorkspaceContext(requestThread);
+            }
+        }
+
+        /// <summary>
+        /// Runs explicit tool rounds until the model answers or the user cancels.
+        /// Disabling SDK auto-invocation avoids its fixed 128-round ceiling while
+        /// retaining the same permission filters, agent instructions and archive.
+        /// </summary>
+        private static async IAsyncEnumerable<AgentResponseItem<ChatMessageContent>> InvokeWithContinuousToolsAsync(
+            ChatCompletionAgent agent, ChatMessageContent message, ChatHistoryAgentThread thread,
+            KernelArguments arguments, Action onRoundCompleted,
+            [System.Runtime.CompilerServices.EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            var settings = agent.Arguments?.ExecutionSettings?.Values.OfType<OpenAIPromptExecutionSettings>()
+                .FirstOrDefault()?.Clone() as OpenAIPromptExecutionSettings ?? new OpenAIPromptExecutionSettings();
+            settings.FunctionChoiceBehavior = null;
+            settings.ToolCallBehavior = ToolCallBehavior.EnableKernelFunctions;
+            var invocationArguments = new KernelArguments(settings);
+            foreach (var pair in arguments) invocationArguments[pair.Key] = pair.Value;
+            int requestIndex = 0;
+            while (true)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                var responses = new List<AgentResponseItem<ChatMessageContent>>();
+                var stream = message == null
+                    ? agent.InvokeAsync(thread, options: new() { KernelArguments = invocationArguments }, cancellationToken: cancellationToken)
+                    : agent.InvokeAsync(message, thread, options: new() { KernelArguments = invocationArguments }, cancellationToken: cancellationToken);
+                await foreach (var response in stream)
+                    responses.Add(response);
+                message = null;
+                var toolMessage = responses.LastOrDefault()?.Message;
+                var calls = toolMessage?.Items.OfType<FunctionCallContent>().ToArray() ?? Array.Empty<FunctionCallContent>();
+                if (calls.Length == 0)
+                {
+                    onRoundCompleted?.Invoke();
+                    foreach (var response in responses) yield return response;
+                    yield break;
+                }
+                // The agent SDK does not archive a content-less assistant call
+                // when auto-invocation is disabled. Retain it before its results.
+                var archivedCalls = thread.ChatHistory.LastOrDefault()?.Items.OfType<FunctionCallContent>()
+                    .Select(call => call.Id) ?? Enumerable.Empty<string>();
+                if (!archivedCalls.SequenceEqual(calls.Select(call => call.Id)))
+                    thread.ChatHistory.Add(toolMessage);
+                onRoundCompleted?.Invoke();
+                for (int index = 0; index < calls.Length; index++)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    var call = calls[index];
+                    KernelFunction function;
+                    try { function = agent.Kernel.Plugins.GetFunction(call.PluginName, call.FunctionName); }
+                    catch (KeyNotFoundException)
+                    {
+                        thread.ChatHistory.Add(new FunctionResultContent(call, "Unknown tool. Inspect the available functions and choose a valid tool.").ToChatMessage());
+                        continue;
+                    }
+                    var context = new AutoFunctionInvocationContext(agent.Kernel, function,
+                        new FunctionResult(function), thread.ChatHistory, toolMessage)
+                    {
+                        Arguments = call.Arguments ?? new KernelArguments(), CancellationToken = cancellationToken,
+                        RequestSequenceIndex = requestIndex, FunctionSequenceIndex = index, ToolCallId = call.Id,
+                        ExecutionSettings = settings
+                    };
+                    Func<AutoFunctionInvocationContext, Task> next = async invocation =>
+                        invocation.Result = await invocation.Function.InvokeAsync(invocation.Kernel,
+                            invocation.Arguments, invocation.CancellationToken);
+                    foreach (var filter in agent.Kernel.AutoFunctionInvocationFilters.Reverse())
+                    {
+                        var following = next;
+                        next = invocation => filter.OnAutoFunctionInvocationAsync(invocation, following);
+                    }
+                    await next(context);
+                    thread.ChatHistory.Add(new FunctionResultContent(call, context.Result).ToChatMessage());
+                }
+                requestIndex++;
             }
         }
 
@@ -916,7 +1016,7 @@ namespace CrypTool.CrypLLM.Threads
             IReadOnlyList<ChatMessageContent> fullHistoryBeforeReduction,
             IReadOnlyList<ChatMessageContent> promptMessages,
             IReadOnlyList<ChatMessageContent> newMessages,
-            IReadOnlyList<ToolInvocationBudgetRuntime.ToolInvocationBudgetState.TextReductionEntry> textReductions,
+            IReadOnlyList<DebugTextReduction> textReductions,
             string finalAssistantResponse,
             string rawLlmRequest,
             string rawLlmResponse,
@@ -942,7 +1042,6 @@ namespace CrypTool.CrypLLM.Threads
                     EstimatedHistoryTokens = budget?.EstimatedHistoryTokens ?? 0,
                     SystemPromptBudgetTokens = budget?.SystemPromptBudgetTokens ?? 0,
                     ToolSchemaBudgetTokens = budget?.ToolSchemaBudgetTokens ?? 0,
-                    ToolReturnBudgetTokens = budget?.ToolReturnBudgetTokens ?? 0,
                     ResponseReserveTokens = budget?.ResponseReserveTokens ?? 0,
                     SafetyMarginTokens = budget?.SafetyMarginTokens ?? 0,
                     PreflightPlannedTokens = budget?.PreflightPlannedTokens ?? 0,
@@ -993,7 +1092,7 @@ namespace CrypTool.CrypLLM.Threads
 
         private static void CaptureTextReductionsForDebug(
             LastInvocationDebugInfo info,
-            IReadOnlyList<ToolInvocationBudgetRuntime.ToolInvocationBudgetState.TextReductionEntry> reductions)
+            IReadOnlyList<DebugTextReduction> reductions)
         {
             if (info == null || reductions == null || reductions.Count == 0)
             {
@@ -1002,7 +1101,7 @@ namespace CrypTool.CrypLLM.Threads
 
             for (int i = 0; i < reductions.Count; i++)
             {
-                ToolInvocationBudgetRuntime.ToolInvocationBudgetState.TextReductionEntry reduction = reductions[i];
+                DebugTextReduction reduction = reductions[i];
                 if (reduction == null)
                 {
                     continue;
@@ -1504,12 +1603,19 @@ namespace CrypTool.CrypLLM.Threads
 
             protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
             {
+                LlmHttpCaptureSession session = CurrentLlmHttpCapture.Value;
                 // The installed connector supports text tool results. Expand our persisted
                 // screenshot envelopes into actual image inputs before the next model call.
                 if (request.Content != null && request.Content.Headers.ContentType?.MediaType == "application/json")
                 {
                     string original = await request.Content.ReadAsStringAsync();
                     string expanded = AssistantResponseText.PrepareRequest(WorkspaceScreenshotContent.ExpandRequest(original));
+                    if (session?.PrepareContextAsync != null && !session.IsPreparingContext.Value)
+                    {
+                        session.IsPreparingContext.Value = true;
+                        try { expanded = await session.PrepareContextAsync(expanded, cancellationToken); }
+                        finally { session.IsPreparingContext.Value = false; }
+                    }
                     if (!string.Equals(original, expanded, StringComparison.Ordinal))
                     {
                         HttpContent oldContent = request.Content;
@@ -1523,7 +1629,6 @@ namespace CrypTool.CrypLLM.Threads
                         oldContent.Dispose();
                     }
                 }
-                LlmHttpCaptureSession session = CurrentLlmHttpCapture.Value;
                 if (session == null)
                 {
                     return await base.SendAsync(request, cancellationToken);
@@ -1704,6 +1809,8 @@ namespace CrypTool.CrypLLM.Threads
         {
             internal AIThread ContextThread { get; set; }
             internal Action ContextChanged { get; set; }
+            internal Func<string, CancellationToken, Task<string>> PrepareContextAsync { get; set; }
+            internal AsyncLocal<bool> IsPreparingContext { get; } = new AsyncLocal<bool>();
             private int? _latestPromptTokens;
 
             private readonly object _sync = new object();
@@ -1713,7 +1820,7 @@ namespace CrypTool.CrypLLM.Threads
             public int RegisterRequest(string method, string uri, string headers, string body)
             {
                 _latestPromptTokens = ChatTokenEstimator.EstimateRequestTokens(body);
-                if (ContextThread != null && _latestPromptTokens.HasValue)
+                if (ContextThread != null && _latestPromptTokens.HasValue && !IsPreparingContext.Value)
                 {
                     ContextThread.UpdateContextUsage(_latestPromptTokens.Value);
                     ContextChanged?.Invoke();
@@ -1748,7 +1855,7 @@ namespace CrypTool.CrypLLM.Threads
                     exchange.ResponseHeaders = headers ?? string.Empty;
                     exchange.ResponseBody = body ?? string.Empty;
                 }
-                if (ContextThread != null && _latestPromptTokens.HasValue)
+                if (ContextThread != null && _latestPromptTokens.HasValue && !IsPreparingContext.Value)
                 {
                     ContextThread.UpdateContextUsage(_latestPromptTokens.Value + ChatTokenEstimator.EstimateResponseTokens(body));
                     ContextChanged?.Invoke();
@@ -2211,16 +2318,6 @@ namespace CrypTool.CrypLLM.Threads
 
             int toolSchemaTokens = EstimateToolSchemaTokens(Agent?.Kernel);
             _promptBudgetProfile = PromptBudgetPlanner.BuildProfile(modelId, Agent?.Instructions ?? string.Empty, toolSchemaTokens);
-        }
-
-        private static int CalculateRuntimeToolBudgetTokens(PromptBudget budget)
-        {
-            if (budget == null)
-            {
-                return 0;
-            }
-
-            return Math.Max(0, budget.ToolReturnBudgetTokens);
         }
 
         /// <summary>

@@ -673,7 +673,6 @@ namespace CrypTool.CrypLLM.Threads
         public int EstimatedHistoryTokens { get; set; }
         public int SystemPromptBudgetTokens { get; set; }
         public int ToolSchemaBudgetTokens { get; set; }
-        public int ToolReturnBudgetTokens { get; set; }
         public int ResponseReserveTokens { get; set; }
         public int SafetyMarginTokens { get; set; }
         public int PreflightPlannedTokens { get; set; }

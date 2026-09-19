@@ -585,6 +585,9 @@ Ergebnisse sollten kritisch geprüft werden, insbesondere in sicherheitsrelevant
   <data name="LastInvocationSummaryToolSchema" xml:space="preserve">
     <value>toolSchema</value>
   </data>
+  <data name="AiChatCurrentContextCannotFit" xml:space="preserve">
+    <value>Die aktuelle Aufgabe, Tool-Definitionen und der letzte vollständige Austausch passen nicht in den eingestellten Modellkontext. Erhöhen Sie das tatsächlich verfügbare Kontextfenster oder verkleinern Sie diese Eingabe.</value>
+  </data>
   <data name="LastInvocationSummaryResponseReserve" xml:space="preserve">
     <value>responseReserve</value>
   </data>
@@ -702,9 +705,6 @@ Ergebnisse sollten kritisch geprüft werden, insbesondere in sicherheitsrelevant
   <data name="AiChatToolDeniedFunctionDisabled" xml:space="preserve">
     <value>Abgelehnt durch Benutzereinstellung: Dieses Werkzeug ist deaktiviert.</value>
   </data>
-  <data name="AiChatToolDeniedBudgetExhausted" xml:space="preserve">
-    <value>Abgelehnt durch Laufzeitbudget: Das Werkzeugbudget ist erschöpft.</value>
-  </data>
   <data name="AiChatToolEmptyResult" xml:space="preserve">
     <value>(leeres Ergebnis)</value>
   </data>
@@ -809,7 +809,7 @@ Kurztext: {4}</value>
   <data name="ContextCompressionTriggerLabel" xml:space="preserve"><value>Komprimieren ab:</value></data>
   <data name="ContextCompressionTargetLabel" xml:space="preserve"><value>Ziel nach Komprimierung:</value></data>
   <data name="ContextCompressionInvalidPercent" xml:space="preserve"><value>Ganze Prozentwerte eingeben: Auslöser 2–100 %, Ziel 1–99 %. Das Ziel muss unter dem Auslöser liegen.</value></data>
-  <data name="ContextCompressionHint" xml:space="preserve"><value>Die Prozentwerte beziehen sich auf das verfügbare Chat-Verlaufsbudget nach Reserven für System, Werkzeuge und Antworten. Ältere Nachrichten werden vor der nächsten Anfrage zusammengefasst; der vollständige Chat bleibt gespeichert. Der Schutz vor einem überfüllten Kontext bleibt auch bei ausgeschalteter Option aktiv.</value></data>
+  <data name="ContextCompressionHint" xml:space="preserve"><value>Die Prozentwerte beziehen sich auf die verfügbare Verlaufskapazität nach Anweisungen, Tool-Definitionen und Antwortreserven. Ältere Nachrichten werden vor Modellaufrufen zusammengefasst, auch innerhalb laufender Werkzeug-Schleifen; der vollständige Chat bleibt gespeichert. Es gibt kein separates Tool-Kontingent. Der Schutz vor einem überfüllten Kontext bleibt auch bei ausgeschalteter Option aktiv.</value></data>
   <data name="AiChatContextUsageFormat" xml:space="preserve"><value>Kontext: ≈ {0:N0} / {1:N0} Tokens ({2:P1})</value></data>
   <data name="AiChatContextUsageUnknownFormat" xml:space="preserve"><value>Kontext: ≈ {0:N0} Tokens (Limit unbekannt)</value></data>
   <data name="AiChatContextUsageTooltip" xml:space="preserve"><value>Geschätzte Kontextbelegung: die letzte Modellanfrage plus ihre empfangene Antwort, einschließlich Systemanweisungen, Tool-Definitionen, Tool-Ergebnissen und Bildern. Wird bei jedem Modellaufruf aktualisiert; nach der Komprimierung zählt der verbleibende Kontext. Vor einer Anfrage werden verbleibende Historie und Agent-Anweisungen/Tools geschätzt. Ungesendete Eingaben und ungenutzte Antwortreserven zählen nicht mit. Das Limit ist das eingestellte Modell-Kontextfenster; tatsächliche Tokenzahlen und Bildkosten können abweichen.</value></data>

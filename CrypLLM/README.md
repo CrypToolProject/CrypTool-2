@@ -119,9 +119,25 @@ The **Tool permissions** settings control which tools the agent can use. The **A
 
 Modifying tools have a global permission switch in addition to their individual permissions. Enabling a single modifying tool does not bypass that switch. Permission checks also run when a tool is invoked. Tool activity distinguishes completed calls, denied calls and failures; a denied call does not mean the requested operation happened.
 
-Tool returns have a runtime context budget. Large results may be compacted or summarized, and further calls can be denied when the budget is exhausted. Disabling automatic history compression does not disable these runtime limits.
+Tool calls have no separate token quota or fixed round limit. Before each model call, retained conversation and tool results are checked against the model's context capacity and compressed when needed. User permissions and cancellation remain authoritative.
 
-Workspace operations stay bound to the workspace selected when the request starts. Switching chats or tabs does not redirect an ongoing request. If that workspace is closed, subsequent operations report an error.
+### Continuous tool execution
+
+The agent runs explicit tool rounds until the model returns its answer or the user cancels. There is no cumulative token allowance per user request and no application-imposed maximum number of rounds. The SDK's automatic 128-round invocation ceiling is avoided by invoking tool rounds explicitly, through the same permission filters.
+
+Each completed assistant turn is published to the chat immediately while later tool rounds continue. The chat follows the growing response to the bottom, so progress text and tool activity remain visible throughout longer workspace tasks. Publishing uses the same archived message objects and therefore does not duplicate intermediate turns when the final response completes.
+
+Results are not truncated merely because previous tools consumed a quota. Instead, context preparation runs before every outbound model call. It summarizes older exchanges as complete groups and reuses a reduced-prefix cache when new results arrive. The full conversation archive remains intact.
+
+The current task, system instructions and latest complete tool exchange are retained. Parallel calls and their results stay together, and the latest screenshot's image input remains after its result group. A single oversized tool result can be summarized when necessary to fit the actual input context.
+
+Automatic compression follows the configured trigger and target. Mandatory reduction still protects against context overflow when proactive compression is disabled. If a semantic summary cannot be produced, a bounded archive preview is explicitly labeled so the agent knows to re-inspect omitted details.
+
+The actual model context window still limits each request. If the current task, tool definitions, image inputs and necessary exchange cannot fit even after reduction, the request reports a context-capacity error. Configure the actual server capacity; removing a local tool quota does not enlarge it. Continuous execution can be stopped with the chat's cancel control.
+
+Workspace operations stay bound to the workspace selected when the request starts. Switching chats or tabs does not redirect an ongoing request. A fabricated or stale model-supplied tab ID cannot displace a still-open request pin; a valid explicit tab can be selected only while the original pin remains valid. If the pinned workspace is closed, subsequent operations report an error rather than redirecting to another editor.
+
+Mutation tools require exact runtime IDs from workspace inspection. Removal and connection tools return current component IDs, names and types when a component ID is unknown, allowing the agent to recover instead of guessing another identifier. The runtime instructions require successful mutation results and an exact `ws_model` topology check before reporting a structural change. Matching `ws_io` values alone do not prove that requested components or connections were changed.
 
 ### Workspace inspection and screenshots
 
@@ -273,7 +289,7 @@ Under **AI Chat settings → Context compression**, automatic compression is ena
 
 These percentages refer to the available **chat history budget**, after reserves for system instructions, tool definitions and responses. They therefore differ from the percentage shown against the full context window in the chat footer.
 
-Compression happens before the next request and summarizes older messages. The complete conversation and its images remain saved. A reduced-history cache avoids summarizing the same archived messages repeatedly. Mandatory context overflow checks remain active when automatic compression is disabled.
+Compression happens before new user requests and within running tool loops before subsequent model calls, summarizing older messages. The complete conversation and its images remain saved. A reduced-history cache avoids summarizing the same archived messages repeatedly. Mandatory context overflow checks remain active when automatic compression is disabled.
 
 For example, if the available history budget is 100,000 tokens, a 90% trigger starts reduction at approximately 90,000 history tokens and aims for at most 50,000. This does not mean that the footer must show 90% of the full model window before compression can occur.
 
@@ -309,11 +325,12 @@ DPAPI protection is tied to the Windows user. Copying encrypted settings or hist
 | [`LLMSettingsTab.xaml`](LLMSettingsTab.xaml) and its code-behind | Provider configuration, permissions, instructions and context settings. |
 | [`Threads/AIThreadManager.cs`](Threads/AIThreadManager.cs) | Agent creation, request binding, invocation lifecycle, HTTP capture and history persistence. |
 | [`Threads/AIThread.cs`](Threads/AIThread.cs) | Per-conversation history, reduced cache, tool activity, runtime context usage and undo handles. |
-| [`Threads/ChatHistoryReductionEngine.cs`](Threads/ChatHistoryReductionEngine.cs) | Token estimation, prompt budgets and history compression. |
-| [`Threads/ToolPermissionFilter.cs`](Threads/ToolPermissionFilter.cs) | Permission enforcement, tool activity reporting and result budget handling. |
+| [`Threads/ChatHistoryReductionEngine.cs`](Threads/ChatHistoryReductionEngine.cs) | Token estimation, context capacity planning and history compression. |
+| [`Threads/ToolPermissionFilter.cs`](Threads/ToolPermissionFilter.cs) | Permission enforcement, tool activity reporting and execution diagnostics. |
 | [`Threads/AgentEditSession.cs`](Threads/AgentEditSession.cs) | Track AI-owned changes, run layout checks and create native undo groups. |
 | [`Threads/AssistantResponseText.cs`](Threads/AssistantResponseText.cs) | Filter visible answers and normalize prior assistant text for requests. |
 | [`Threads/WorkspaceScreenshotContent.cs`](Threads/WorkspaceScreenshotContent.cs) | Convert screenshot results into image inputs for model requests. |
+| [`Threads/LiveContextCompressor.cs`](Threads/LiveContextCompressor.cs) | Compress actual model requests within tool loops while retaining complete exchanges and caching reduced prefixes. |
 | `Plugins/` | Workspace, component catalog, template catalog and documentation tools. |
 | [`Services/LLMPluginService.cs`](Services/LLMPluginService.cs) | Marshal workspace operations onto the UI thread and perform native edits. |
 | `Services/Workspace*` | Inspect element geometry and workspace structure, and check layout. |
@@ -326,8 +343,8 @@ DPAPI protection is tied to the Windows user. Copying encrypted settings or hist
 1. Capture the selected conversation, agent and workspace target.
 2. Resolve the model context window and calculate the prompt budget.
 3. Prepare retained history, using compression and its cache where needed, and validate the request budget.
-4. Invoke the Semantic Kernel chat agent. Each tool invocation passes through permission and runtime budget checks; workspace edits run on the UI thread.
-5. Normalize outbound assistant text and screenshot inputs, then update the live context estimate from each actual model request and response.
+4. Invoke the Semantic Kernel chat agent. Each tool invocation passes through permission checks; workspace edits run on the UI thread.
+5. Normalize outbound assistant text and screenshot inputs, compress the current request if needed, then update the live context estimate from each actual model request and response.
 6. Preserve new messages in the full conversation archive, complete tool activity, check edited layouts and finalize eligible undo groups.
 7. Display the filtered answer and save conversation state.
 
@@ -347,7 +364,7 @@ Keep user-visible strings and tool descriptions in the English/German resource f
 | No selectable model | Select the provider and populate its model ID list, then choose a model in the chat. |
 | Request blocked because the context limit is unknown | Configure the context window for the exact selected model ID. |
 | Compatible server rejects the request | Verify its API base URL, model ID, credentials and support for the requested tool/image capabilities. |
-| Tool call denied | Check both the individual permission and the global modifying-tools switch; also inspect runtime budget findings. |
+| Tool call denied | Check both the individual permission and the global modifying-tools switch. Calls are not denied by a separate tool quota. |
 | Agent cannot find expected components | Build the complete solution and check that the running build contains the component DLLs. |
 | Screenshot unavailable | Keep the request-bound workspace open and visible, allow `ws_screenshot` and select a vision-capable model. |
 | Layout report is incomplete | Some visual measurements or routes were unavailable. Do not treat `passed` with `complete=false` as full verification. |
@@ -370,6 +387,6 @@ msbuild CrypWin/CrypWin.csproj /p:Configuration=Release /p:Platform=x64 /m
 
 To test an existing Debug build, pass `-Configuration Debug` instead.
 
-The suite covers instruction loading, chat persistence, request isolation across chat/workspace changes, provider authentication and encrypted key storage, answer filtering, screenshot capture and image transport, live context estimates, compression and caching, component/memo editing, connector orientation, layout checks, grouped Undo/Redo, template search and English/German resources.
+The suite covers instruction loading, chat persistence, request isolation across chat/workspace changes, provider authentication and encrypted key storage, answer filtering, screenshot capture and image transport, live context estimates, repeated compression in a 160-round tool loop, archive preservation on cancellation, complete parallel tool groups and images, compression caching and fallback, component/memo editing, connector orientation, layout checks, grouped Undo/Redo, template search and English/German resources.
 
 Provider responses and application adapters are local test doubles. The tests do not require a running model server or real API credentials and do not use the user's chat history files.

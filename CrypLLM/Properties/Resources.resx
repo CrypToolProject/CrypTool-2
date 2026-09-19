@@ -585,6 +585,9 @@ Results should be reviewed critically, especially in security-relevant contexts.
   <data name="LastInvocationSummaryToolSchema" xml:space="preserve">
     <value>toolSchema</value>
   </data>
+  <data name="AiChatCurrentContextCannotFit" xml:space="preserve">
+    <value>The current task, tool definitions and latest complete exchange cannot fit in the configured model context. Increase the actual available context window or reduce this input.</value>
+  </data>
   <data name="LastInvocationSummaryResponseReserve" xml:space="preserve">
     <value>responseReserve</value>
   </data>
@@ -702,9 +705,6 @@ Results should be reviewed critically, especially in security-relevant contexts.
   <data name="AiChatToolDeniedFunctionDisabled" xml:space="preserve">
     <value>Denied by user setting: This tool is disabled.</value>
   </data>
-  <data name="AiChatToolDeniedBudgetExhausted" xml:space="preserve">
-    <value>Denied by runtime budget: The tool budget is exhausted.</value>
-  </data>
   <data name="AiChatToolEmptyResult" xml:space="preserve">
     <value>(empty result)</value>
   </data>
@@ -809,7 +809,7 @@ Summary: {4}</value>
   <data name="ContextCompressionTriggerLabel" xml:space="preserve"><value>Compress at:</value></data>
   <data name="ContextCompressionTargetLabel" xml:space="preserve"><value>Target after compression:</value></data>
   <data name="ContextCompressionInvalidPercent" xml:space="preserve"><value>Enter whole percentages: trigger 2–100%, target 1–99%. The target must be below the trigger.</value></data>
-  <data name="ContextCompressionHint" xml:space="preserve"><value>Percentages refer to the available chat history budget after system, tool and response reserves. Older messages are summarized before the next request; the complete conversation remains saved. Mandatory overflow protection remains active when this option is off.</value></data>
+  <data name="ContextCompressionHint" xml:space="preserve"><value>Percentages refer to available history capacity after instructions, tool definitions and response reserves. Older messages are summarized before model calls, including within running tool loops; the complete conversation remains saved. There is no separate tool quota. Mandatory overflow protection remains active when this option is off.</value></data>
   <data name="AiChatContextUsageFormat" xml:space="preserve"><value>Context: ≈ {0:N0} / {1:N0} tokens ({2:P1})</value></data>
   <data name="AiChatContextUsageUnknownFormat" xml:space="preserve"><value>Context: ≈ {0:N0} tokens (limit unknown)</value></data>
   <data name="AiChatContextUsageTooltip" xml:space="preserve"><value>Estimated context tokens: the latest model request plus its received response, including system instructions, tool definitions, tool results and images. Updated for each model call; compression uses the retained context. Before a request, retained history and agent instructions/tools are estimated. Unsent input and unused response reserves are excluded. The limit is the configured model context window; actual model token counts and image costs may differ.</value></data>

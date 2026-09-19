@@ -37,6 +37,7 @@ internal static class AgentRegressionTests
             FirstStartLoadsInstructions();
             HistoryPreservesToolMessages();
             ClosedWorkspaceDoesNotRedirect();
+            PinnedWorkspaceSurvivesHallucinatedTabId();
             RequestStaysInOriginalChat().GetAwaiter().GetResult();
             ReasoningAndToolEchoesStayOutOfAnswers().GetAwaiter().GetResult();
             FailedAgentReloadRemainsDirty();
@@ -45,6 +46,8 @@ internal static class AgentRegressionTests
             ScreenshotToolReachesModelAsImage().GetAwaiter().GetResult();
             ConfigurableCompressionPreservesFullHistory().GetAwaiter().GetResult();
             ContextUsageFollowsCompressedHistory();
+            ContinuousToolRoundsCompressAndPreserveArchive().GetAwaiter().GetResult();
+            LiveCompressionPreservesParallelResultsAndImages().GetAwaiter().GetResult();
             AiMemoCreationPreservesSelectionAndFocus();
             ResizeToolsPreserveWorkspaceAndSupportUndo();
             MemoFitAndLayoutChecks();
@@ -91,6 +94,13 @@ internal static class AgentRegressionTests
         Assert(File.Exists(path), "Fresh profile defaults must be persisted.");
         Call(manager, "LoadOrInitialize");
         Assert(!string.IsNullOrWhiteSpace((string)Call(manager, "GetInstructionText", "Default")), "Persisted defaults must reload.");
+        string constructionRules = (string)AgentType("Threads.AIThreadManager")
+            .GetField("WorkspaceConstructionInstructions", BindingFlags.Static | BindingFlags.NonPublic)
+            .GetRawConstantValue();
+        Assert(constructionRules.Contains("Never claim that a component") &&
+            constructionRules.Contains("Never invent component") &&
+            constructionRules.Contains("ws_io does not prove the requested topology"),
+            "Runtime instructions must forbid unverified edits, invented IDs and value-only topology checks.");
         // All later code paths must use this isolated manager instead of a user profile.
         Type factoryType = typeof(Func<>).MakeGenericType(type);
         Delegate factory = System.Linq.Expressions.Expression.Lambda(factoryType,
@@ -147,6 +157,25 @@ internal static class AgentRegressionTests
             Assert(screenshot.Contains("error") && adapter.ActiveEditorReads == 0, "Screenshot tools must also fail closed on stale pins.");
         }
         Console.WriteLine("PASS: closed workspace never redirects subsequent tools");
+    }
+
+    private static void PinnedWorkspaceSurvivesHallucinatedTabId()
+    {
+        var model = new WorkspaceManager.Model.WorkspaceModel();
+        var editor = new WorkspaceManager.WorkspaceManagerClass(model);
+        editor.New();
+        var adapter = new ClosedWorkspaceAdapter { Workspace = editor };
+        CrypWinPort.Instance = adapter;
+        using ((IDisposable)CallStatic("Services.LLMPluginService", "PushPreferredWorkspaceTabId", "resize-tab"))
+        {
+            MethodInfo method = AgentType("Services.LLMPluginService").GetMethods(BindingFlags.Public | BindingFlags.Static)
+                .Single(item => item.Name == "TryGetWorkspaceEditor" && item.GetParameters().Length == 2);
+            object[] arguments = { null, "8fcbe280-4763-4522-8064-a9a0b2c43b48" };
+            Assert((bool)method.Invoke(null, arguments) && ReferenceEquals(arguments[0], editor),
+                "An invented explicit tab ID must not displace the live request-pinned workspace.");
+            Assert(adapter.ActiveEditorReads == 0, "Pinned recovery must not redirect through the active editor.");
+        }
+        Console.WriteLine("PASS: request pin survives a hallucinated model-supplied tab ID");
     }
 
     private static object NewManager()
@@ -501,7 +530,7 @@ internal static class AgentRegressionTests
         var service = new SummaryCompletionService();
         var history = new ChatHistory();
         for (int index = 0; index < 60; index++)
-            history.Add(new ChatMessageContent(index % 2 == 0 ? AuthorRole.User : AuthorRole.Assistant, "message " + index + " " + new string('x', 900)));
+            history.Add(new ChatMessageContent(index % 2 == 0 ? AuthorRole.User : AuthorRole.Assistant, "message " + index + " " + new string('x', 1200)));
         var thread = new AIThread("Compression test");
         object originalBudget = CallStatic("Threads.PromptBudgetPlanner", "Calculate", profile, "Next request.", history.ToList(), "test");
         int availableHistory = (int)originalBudget.GetType().GetProperty("HistoryBudgetTokens").GetValue(originalBudget);
@@ -528,6 +557,247 @@ internal static class AgentRegressionTests
         settings.autoCompressContext = false;
         Assert((int)limit.Invoke(null, new[] { budget }) == 1000, "Disabling proactive compression must preserve the hard budget.");
         Console.WriteLine("PASS: configurable compression threshold/target, model summary and full-history cache");
+    }
+
+    private static int ContinuousExecutions;
+    private static string TestContinuousStep(int sequence)
+    {
+        ContinuousExecutions++;
+        return JsonConvert.SerializeObject(new { success = true, componentId = "component-1", sequence,
+            details = "state-" + sequence + " " + new string('x', 900) });
+    }
+
+    private static async Task ContinuousToolRoundsCompressAndPreserveArchive()
+    {
+        Type type = AgentType("Threads.AIThreadManager");
+        FieldInfo singleton = type.GetField("_instance", BindingFlags.Static | BindingFlags.NonPublic);
+        object previousSingleton = singleton.GetValue(null);
+        var settings = CrypTool.CrypLLM.Properties.Settings.Default;
+        string windows = settings.userModelContextWindows, permissions = settings.editorStatusAllowedFunctions;
+        bool mutations = settings.allowAiToolMutations, compress = settings.autoCompressContext;
+        int trigger = settings.contextCompressionTriggerPercent, target = settings.contextCompressionTargetPercent;
+        try
+        {
+            settings.userModelContextWindows = windows + "\ncontinuous-test=20000";
+            settings.autoCompressContext = true;
+            settings.contextCompressionTriggerPercent = 60;
+            settings.contextCompressionTargetPercent = 30;
+            object manager = NewManager();
+            Type factoryType = typeof(Func<>).MakeGenericType(type);
+            Delegate factory = System.Linq.Expressions.Expression.Lambda(factoryType,
+                System.Linq.Expressions.Expression.Constant(manager, type)).Compile();
+            singleton.SetValue(null, Activator.CreateInstance(typeof(Lazy<>).MakeGenericType(type), new object[] { factory }));
+            foreach (int scenario in new[] { 0, 1, 2, 3 })
+            {
+                settings.allowAiToolMutations = scenario != 1;
+                settings.editorStatusAllowedFunctions = scenario == 2 ? "ws_move_component=false" : "";
+                ContinuousExecutions = 0;
+                var thread = new AIThread("Continuous work");
+                if (scenario == 3)
+                    for (int oldIndex = 0; oldIndex < 60; oldIndex++)
+                        thread.ChatHistory.Add(new ChatMessageContent(oldIndex % 2 == 0 ? AuthorRole.User : AuthorRole.Assistant,
+                            "Earlier task " + oldIndex + " " + new string('x', 1200)));
+                ((List<AIThread>)type.GetProperty("AIThreads").GetValue(manager)).Add(thread);
+                type.GetProperty("ActiveThread").SetValue(manager, thread);
+                int liveUpdates = 0;
+                int liveAssistantMessages = 0;
+                EventHandler liveHandler = (sender, args) =>
+                {
+                    liveUpdates++;
+                    liveAssistantMessages = Math.Max(liveAssistantMessages, thread.ChatHistory.Count(item =>
+                        item.Role == AuthorRole.Assistant && !string.IsNullOrWhiteSpace(item.Content)));
+                };
+                type.GetEvent("NewChatMessageReceived").AddEventHandler(manager, liveHandler);
+                using (var cancellation = new CancellationTokenSource())
+                {
+                    var handler = new ContinuousCompletionHandler { Rounds = scenario == 0 ? 160 : scenario == 3 ? int.MaxValue : 1,
+                        Cancellation = scenario == 3 ? cancellation : null };
+                    Type transportType = type.GetNestedType("LlmHttpCaptureHandler", BindingFlags.NonPublic);
+                    using (var client = new HttpClient((HttpMessageHandler)Activator.CreateInstance(transportType, new object[] { handler })))
+                    {
+                        var builder = Kernel.CreateBuilder();
+                        builder.AddOpenAIChatCompletion("continuous-test", new Uri("http://localhost:1234/v1"), "test-only", null, null, client);
+                        var kernel = builder.Build();
+                        kernel.Plugins.Add(KernelPluginFactory.CreateFromFunctions("CrypLLM_Test", new[] {
+                            KernelFunctionFactory.CreateFromMethod(typeof(AgentRegressionTests).GetMethod("TestContinuousStep",
+                                BindingFlags.Static | BindingFlags.NonPublic), target: null, functionName: "ws_move_component",
+                                description: null, parameters: null, returnParameter: null, loggerFactory: null) }));
+                        kernel.AutoFunctionInvocationFilters.Add((IAutoFunctionInvocationFilter)Activator.CreateInstance(AgentType("Threads.ToolPermissionFilter"), true));
+                        type.GetProperty("Agent").SetValue(manager, new ChatCompletionAgent { Kernel = kernel,
+                            Instructions = "Build and inspect component-1. Preserve the user's task." });
+                        try
+                        {
+                            string answer = await (Task<string>)Call(manager, "CreateAsync", "continuous-test", "Build and inspect component-1.", cancellation.Token);
+                            Assert(scenario != 3 && answer.Contains("Completed"), "The tool loop must finish normally or honor cancellation.");
+                        }
+                        catch (OperationCanceledException) { Assert(scenario == 3, "Only the cancellation scenario may be interrupted."); }
+                    }
+                    int archivedResults = thread.ChatHistory.Count(message => message.Items.OfType<FunctionResultContent>().Any());
+                    if (scenario == 0)
+                    {
+                        Assert(ContinuousExecutions == 160 && handler.Requests == 161 && archivedResults == 160,
+                            "More than 128 tool rounds must execute and remain archived.");
+                        Assert(liveUpdates >= 161 && liveAssistantMessages >= 161,
+                            "Every intermediate assistant turn must become visible before the request completes.");
+                        Assert(thread.ChatHistory.Count(item => item.Role == AuthorRole.Assistant &&
+                            !string.IsNullOrWhiteSpace(item.Content)) == 161,
+                            "Publishing intermediate turns must not duplicate them in the final archive.");
+                        Assert(handler.Summaries > 1 && handler.SawMemory && handler.MaxInput < 19000,
+                            "Repeated live compression must reuse memory and keep every request within model capacity.");
+                        Assert(thread.LastInvocationDebugInfo.TextReductions.Any(entry => entry.Source == "LiveContext"),
+                            "Invocation diagnostics must include live reductions.");
+                    }
+                    else if (scenario == 3)
+                        Assert(handler.Requests == 5 && archivedResults > 0, "Cancel must stop the loop and preserve completed exchanges.");
+                    else Assert(ContinuousExecutions == 0 && thread.ChatHistory.Any(message =>
+                        message.Items.OfType<FunctionResultContent>().Any(result => result.Result.ToString().Contains("Denied"))),
+                        "Global and per-tool mutation permissions must still be enforced.");
+                }
+                type.GetEvent("NewChatMessageReceived").RemoveEventHandler(manager, liveHandler);
+            }
+            Assert(AgentAssembly.GetType("CrypTool.CrypLLM.Threads.ToolInvocationBudgetRuntime") == null,
+                "The separate tool-budget implementation must be removed.");
+            Console.WriteLine("PASS: 160 tool rounds with repeated live compression, preserved archive, permissions and cancellation");
+        }
+        finally
+        {
+            singleton.SetValue(null, previousSingleton);
+            settings.userModelContextWindows = windows; settings.editorStatusAllowedFunctions = permissions;
+            settings.allowAiToolMutations = mutations; settings.autoCompressContext = compress;
+            settings.contextCompressionTriggerPercent = trigger; settings.contextCompressionTargetPercent = target;
+        }
+    }
+
+    private sealed class ContinuousCompletionHandler : HttpMessageHandler
+    {
+        internal int Rounds, Requests, Summaries, MaxInput;
+        internal bool SawMemory;
+        internal CancellationTokenSource Cancellation;
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            string body = await request.Content.ReadAsStringAsync();
+            var payload = JObject.Parse(body);
+            string message;
+            if (payload["tools"] is not JArray tools || tools.Count == 0)
+            {
+                Summaries++;
+                message = JsonConvert.SerializeObject(new { role = "assistant",
+                    content = "Task memory: continue building and inspecting component-1. Earlier steps succeeded; re-inspect current state." });
+            }
+            else
+            {
+                Requests++;
+                MaxInput = Math.Max(MaxInput, (int)CallStatic("Threads.ChatTokenEstimator", "EstimateRequestTokens", body));
+                var messages = (JArray)payload["messages"];
+                Assert(messages.Any(item => item["content"]?.Type == JTokenType.String &&
+                    (string)item["content"] == "Build and inspect component-1."), "Live compression must retain the current user task.");
+                SawMemory |= messages.Any(item => item["content"]?.Type == JTokenType.String &&
+                    ((string)item["content"]).StartsWith("[history-summary]"));
+                AssertCompleteToolGroups(messages);
+                if (Requests == 5 && Cancellation != null) Cancellation.Cancel();
+                message = Requests <= Rounds
+                    ? JsonConvert.SerializeObject(new { role = "assistant", content = "Working step " + Requests + ".", tool_calls = new[] {
+                        new { id = "step-" + Requests, type = "function", function = new {
+                            name = "CrypLLM_Test-ws_move_component", arguments = JsonConvert.SerializeObject(new { sequence = Requests }) } } } })
+                    : JsonConvert.SerializeObject(new { role = "assistant", content = "<ct2_answer>Completed the edits.</ct2_answer>" });
+            }
+            return new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(
+                "{\"id\":\"continuous\",\"object\":\"chat.completion\",\"created\":1,\"model\":\"continuous-test\",\"choices\":[{\"index\":0,\"message\":" +
+                message + ",\"finish_reason\":\"stop\"}]}", Encoding.UTF8, "application/json") };
+        }
+    }
+
+    private static async Task LiveCompressionPreservesParallelResultsAndImages()
+    {
+        var settings = CrypTool.CrypLLM.Properties.Settings.Default;
+        string previousWindows = settings.userModelContextWindows;
+        bool previousCompression = settings.autoCompressContext;
+        try
+        {
+            settings.userModelContextWindows = previousWindows + "\nlive-image-test=12000";
+            // Mandatory overflow reduction must still run when proactive reduction is off.
+            settings.autoCompressContext = false;
+            object profile = CallStatic("Threads.PromptBudgetPlanner", "BuildProfile", "live-image-test", "Inspect component-1.", 100);
+            var service = new SummaryCompletionService();
+            Type type = AgentType("Threads.LiveContextCompressor");
+            object compressor = Activator.CreateInstance(type, BindingFlags.Instance | BindingFlags.NonPublic, null,
+                new object[] { profile, service }, CultureInfo.InvariantCulture);
+            var messages = new JArray(new JObject { ["role"] = "system", ["content"] = "Inspect component-1." },
+                new JObject { ["role"] = "user", ["content"] = "Preserve component-1 and inspect its image." });
+            for (int index = 0; index < 35; index++)
+            {
+                messages.Add(new JObject { ["role"] = "assistant", ["content"] = JValue.CreateNull(), ["tool_calls"] = new JArray(
+                    new JObject { ["id"] = "old-" + index, ["type"] = "function", ["function"] = new JObject {
+                        ["name"] = "Test-inspect", ["arguments"] = "{}" } }) });
+                messages.Add(new JObject { ["role"] = "tool", ["tool_call_id"] = "old-" + index, ["content"] = new string('x', 1200) });
+            }
+            messages.Add(new JObject { ["role"] = "assistant", ["content"] = JValue.CreateNull(), ["tool_calls"] = new JArray(
+                new JObject { ["id"] = "current-a", ["type"] = "function", ["function"] = new JObject { ["name"] = "Test-inspect", ["arguments"] = "{}" } },
+                new JObject { ["id"] = "current-b", ["type"] = "function", ["function"] = new JObject { ["name"] = "Test-inspect", ["arguments"] = "{}" } }) });
+            messages.Add(new JObject { ["role"] = "tool", ["tool_call_id"] = "current-a", ["content"] = new string('a', 20000) });
+            messages.Add(new JObject { ["role"] = "tool", ["tool_call_id"] = "current-b", ["content"] = new string('b', 18000) });
+            string pixels = (string)JObject.Parse(TestScreenshotEnvelope())["imageDataUri"];
+            messages.Add(new JObject { ["role"] = "user", ["content"] = new JArray(new JObject {
+                ["type"] = "image_url", ["image_url"] = new JObject { ["url"] = pixels } }) });
+            var request = new JObject { ["model"] = "live-image-test", ["messages"] = messages };
+            string original = request.ToString(Formatting.None);
+            string reduced = await (Task<string>)Call(compressor, "PrepareAsync", original, CancellationToken.None);
+            var reducedMessages = (JArray)JObject.Parse(reduced)["messages"];
+            AssertCompleteToolGroups(reducedMessages);
+            Assert(reducedMessages.Any(message => (string)message["tool_call_id"] == "current-a") &&
+                reducedMessages.Any(message => (string)message["tool_call_id"] == "current-b"),
+                "Both latest parallel results must retain their call identities.");
+            Assert(reducedMessages.Any(message => message["content"] is JArray parts && parts.Any(part => (string)part["image_url"]?["url"] == pixels)),
+                "Live compression must retain the latest actual image pixels after the complete tool group.");
+            Assert(reducedMessages.Any(message => (string)message["role"] == "user" && message["content"]?.Type == JTokenType.String &&
+                ((string)message["content"]).Contains("Preserve component-1")), "The current task must be retained independently of image user messages.");
+            int effective = (int)profile.GetType().GetProperty("EffectiveContextWindowTokens").GetValue(profile);
+            int reserve = (int)profile.GetType().GetProperty("ResponseReserveTokens").GetValue(profile) +
+                (int)profile.GetType().GetProperty("SafetyMarginTokens").GetValue(profile);
+            Assert((int)CallStatic("Threads.ChatTokenEstimator", "EstimateRequestTokens", reduced) <= effective - reserve,
+                "An oversized latest exchange must be reduced to actual input capacity.");
+            Assert(service.Calls >= 3 && request.ToString(Formatting.None) == original,
+                "Oversized results and older history need bounded summaries while the archive remains untouched.");
+
+            // Cached reductions must extend by new tool groups instead of restoring the archive.
+            messages.Add(new JObject { ["role"] = "assistant", ["content"] = JValue.CreateNull(), ["tool_calls"] = new JArray(
+                new JObject { ["id"] = "new-call", ["type"] = "function", ["function"] = new JObject { ["name"] = "Test-inspect", ["arguments"] = "{}" } }) });
+            messages.Add(new JObject { ["role"] = "tool", ["tool_call_id"] = "new-call", ["content"] = "Latest state." });
+            string extended = await (Task<string>)Call(compressor, "PrepareAsync", request.ToString(Formatting.None), CancellationToken.None);
+            AssertCompleteToolGroups((JArray)JObject.Parse(extended)["messages"]);
+            Assert(extended.Contains("new-call") && !extended.Contains(new string('x', 1200)), "New exchanges must extend the reduced cache.");
+
+            object fallback = Activator.CreateInstance(type, BindingFlags.Instance | BindingFlags.NonPublic, null,
+                new object[] { profile, null }, CultureInfo.InvariantCulture);
+            string fallbackResult = await (Task<string>)Call(fallback, "PrepareAsync", original, CancellationToken.None);
+            Assert(fallbackResult.Contains("Archive preview") && (int)CallStatic("Threads.ChatTokenEstimator", "EstimateRequestTokens", fallbackResult) <= effective - reserve,
+                "Summary-service failure must use an explicitly labeled bounded preview.");
+            using (var cancellation = new CancellationTokenSource())
+            {
+                cancellation.Cancel();
+                try { await (Task<string>)Call(compressor, "PrepareAsync", original, cancellation.Token); throw new Exception("Cancelled compression must stop."); }
+                catch (OperationCanceledException) { }
+            }
+            Console.WriteLine("PASS: live compression preserves parallel tool groups, images and task, fits large results, extends cache and handles fallback/cancel");
+        }
+        finally { settings.userModelContextWindows = previousWindows; settings.autoCompressContext = previousCompression; }
+    }
+
+    private static void AssertCompleteToolGroups(JArray messages)
+    {
+        var pending = new HashSet<string>();
+        foreach (JToken message in messages)
+        {
+            if (message["tool_calls"] is JArray calls)
+            {
+                Assert(pending.Count == 0, "A call group must not interrupt pending results.");
+                foreach (JToken call in calls) Assert(pending.Add((string)call["id"]), "Call IDs must be unique within a group.");
+            }
+            else if ((string)message["role"] == "tool")
+                Assert(pending.Remove((string)message["tool_call_id"]), "Every result must have a retained originating call.");
+            else Assert(pending.Count == 0, "Memory/image/task messages must not split call/result groups.");
+        }
+        Assert(pending.Count == 0, "Every provider request must contain complete tool exchanges.");
     }
 
     private static void ContextUsageFollowsCompressedHistory()
@@ -704,6 +974,15 @@ internal static class AgentRegressionTests
             model.UndoRedoManager.ClearStacks();
             using ((IDisposable)CallStatic("Services.LLMPluginService", "PushPreferredWorkspaceTabId", "resize-tab"))
             {
+                JObject unknownComponent = JObject.Parse((string)Call(
+                    plugin,
+                    "RemoveComponentFromWorkspace",
+                    "58f74d29-52a8-4cbd-8d50-824f80cf3cae",
+                    "8fcbe280-4763-4522-8064-a9a0b2c43b48"));
+                Assert(unknownComponent.Value<bool>("success") == false &&
+                    unknownComponent["availableComponents"].Any(item => (string)item["componentId"] == inputId) &&
+                    model.GetAllPluginModels().Count == 2,
+                    "An invented component/tab GUID must retain the pinned workspace, expose exact recovery candidates and change nothing.");
                 JObject before = JObject.Parse((string)CallStatic("Services.WorkspaceInspector", "CreateWorkspaceElementBoundsJson", model));
                 Assert((double)before[inputId]["width"] > 0 && (double)before[memoId]["height"] > 0, "Auto-sized elements must expose real visible bounds.");
                 Assert((string)before[inputId]["sizeSource"] == "visual", "Bounds must distinguish visible dimensions from stored zero sizes.");

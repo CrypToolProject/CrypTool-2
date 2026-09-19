@@ -206,7 +206,7 @@
     <Compile Include="Threads\WorkspaceScreenshotContent.cs" />
     <Compile Include="Threads\AIThreadManager.cs" />
     <Compile Include="Threads\ModelContextWindowResolver.cs" />
-    <Compile Include="Threads\ToolInvocationBudgetRuntime.cs" />
+    <Compile Include="Threads\LiveContextCompressor.cs" />
     <Compile Include="Threads\ToolPermissionFilter.cs" />
     <Compile Include="Ports\CrypWinPort.cs" />
     <Compile Include="Ports\LoggingPort.cs" />
