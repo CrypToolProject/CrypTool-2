@@ -672,6 +672,7 @@ Results should be reviewed critically, especially in security-relevant contexts.
   <data name="AiChatReasoningBodyRunning" xml:space="preserve">
     <value>The model is preparing the next step. Any reasoning text it provides will appear here.</value>
   </data>
+  <data name="RetryRequestButton" xml:space="preserve"><value>Retry</value></data>
   <data name="AiChatReasoningDuration" xml:space="preserve">
     <value>Thinking time: {0}</value>
   </data>

@@ -633,11 +633,21 @@ namespace CrypTool.CrypLLM
                         // Only the actual user-facing answer is rendered as a normal assistant message.
                         if (!assistantToolRound && !string.IsNullOrWhiteSpace(text) && !IsInternalLogNoiseMessage(text))
                         {
+                            bool isRequestError = message.Role == AuthorRole.Assistant &&
+                                AIThreadManager.IsRetryableRequestError(text);
+                            ChatMessageContent originalUserMessage = isRequestError
+                                ? activeThread.ChatHistory.Take(historyIndex).LastOrDefault(item => item.Role == AuthorRole.User)
+                                : null;
                             displayMessages.Add(new ChatMessage
                             {
                                 Text = text,
                                 Role = message.Role,
-                                IsError = message.Role == AuthorRole.Assistant && IsAssistantErrorMessage(text)
+                                IsError = message.Role == AuthorRole.Assistant && IsAssistantErrorMessage(text),
+                                CanRetry = isRequestError && historyIndex == activeThread.ChatHistory.Count - 1 && originalUserMessage != null,
+                                RetryErrorMessage = message,
+                                RetryUserInput = originalUserMessage?.Content,
+                                RetryModelId = message.ModelId ?? originalUserMessage?.ModelId ??
+                                    activeThread.LastInvocationDebugInfo?.ModelId
                             });
                         }
                     }
@@ -1841,6 +1851,10 @@ namespace CrypTool.CrypLLM
             }
 
             string trimmed = text.TrimStart();
+            if (AIThreadManager.IsRetryableRequestError(trimmed))
+            {
+                return true;
+            }
             if (trimmed.StartsWith("Error:", StringComparison.OrdinalIgnoreCase))
             {
                 return true;
@@ -1950,6 +1964,22 @@ namespace CrypTool.CrypLLM
                 return;
             }
 
+            await RunRequestAsync(HandleUserInputAsync);
+        }
+
+        private async void RetryRequestButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_isRequestRunning || sender is not Button button ||
+                button.DataContext is not ChatMessage failed || !failed.CanRetry)
+            {
+                return;
+            }
+
+            await RunRequestAsync(token => HandleRetryAsync(failed, token));
+        }
+
+        private async Task RunRequestAsync(Func<CancellationToken, Task> execute)
+        {
             _requestCts = new CancellationTokenSource();
             _activeRequestCancelTrigger = "none";
             _isRequestRunning = true;
@@ -1959,7 +1989,7 @@ namespace CrypTool.CrypLLM
 
             try
             {
-                await HandleUserInputAsync(_requestCts.Token);
+                await execute(_requestCts.Token);
             }
             catch (OperationCanceledException) when (_requestCts?.IsCancellationRequested == true)
             {
@@ -2041,9 +2071,11 @@ namespace CrypTool.CrypLLM
                 requestThread.ChatHistory.Add(new ChatMessageContent
                 {
                     Role = AuthorRole.Assistant,
-                    Content = BuildChatErrorMessage(selectedModel, ex)
+                    Content = BuildChatErrorMessage(selectedModel, ex),
+                    ModelId = selectedModel
                 });
                 AIThreadManager.Instance.AttachLastCompletedToolActivityToLatestAssistantMessage(requestThread);
+                AIThreadManager.Instance.SaveChatHistoryAfterFailure();
 
                 Log.Error(BuildUiErrorLogMessage(selectedModel, ex));
                 Log.Error($"AI request exception details: {ex}");
@@ -2344,6 +2376,51 @@ namespace CrypTool.CrypLLM
             return itemCount > 0
                 ? FormatResourceText("AiChatToolActivityHeaderMessageCount", "Tool activity ({0})", itemCount)
                 : GetResourceTextOrFallback("AiChatToolActivityHeaderMessage", "Tool activity");
+        }
+
+        private async Task HandleRetryAsync(ChatMessage failed, CancellationToken cancellationToken)
+        {
+            AIThread requestThread = AIThreadManager.Instance.ActiveThread;
+            if (requestThread == null || string.IsNullOrWhiteSpace(failed?.RetryUserInput) ||
+                failed.RetryErrorMessage == null || !ReferenceEquals(requestThread.ChatHistory.LastOrDefault(), failed.RetryErrorMessage))
+            {
+                return;
+            }
+
+            string selectedModel = string.IsNullOrWhiteSpace(failed.RetryModelId)
+                ? Properties.Settings.Default.activeModelId
+                : failed.RetryModelId;
+            SetThinkingState(true, false);
+            try
+            {
+                await AIThreadManager.Instance.RetryAsync(selectedModel, failed.RetryUserInput,
+                    failed.RetryErrorMessage, cancellationToken);
+            }
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                // A stale button must not replace a newer request's error.
+                if (ReferenceEquals(requestThread.ChatHistory.LastOrDefault(), failed.RetryErrorMessage))
+                {
+                    Log.Warning($"Retry skipped: {ex.Message}");
+                    return;
+                }
+
+                requestThread.ChatHistory.Add(new ChatMessageContent(AuthorRole.Assistant,
+                    BuildChatErrorMessage(selectedModel, ex)) { ModelId = selectedModel });
+                AIThreadManager.Instance.AttachLastCompletedToolActivityToLatestAssistantMessage(requestThread);
+                AIThreadManager.Instance.SaveChatHistoryAfterFailure();
+                Log.Error(BuildUiErrorLogMessage(selectedModel, ex));
+            }
+            finally
+            {
+                SetThinkingState(false);
+                RefreshMessages(ChatViewportUpdateMode.FollowLatestAssistantStartIfNearBottom);
+                RefreshToolActivities();
+            }
         }
 
         private string BuildTimedToolActivityHeaderText(
@@ -3080,13 +3157,13 @@ namespace CrypTool.CrypLLM
         /// <summary>
         /// Toggles request-processing UI state (input lock, spinner, and send/stop icon).
         /// </summary>
-        private void SetThinkingState(bool isThinking)
+        private void SetThinkingState(bool isThinking, bool clearInput = true)
         {
             try
             {
                 if (isThinking) // Message accepted and currently being processed.
                 {
-                    InputBox.Clear();
+                    if (clearInput) InputBox.Clear();
                     SetSendImage(true);
 
                     ProcessingIndicator.Visibility = Visibility.Visible;
@@ -3169,6 +3246,10 @@ namespace CrypTool.CrypLLM
         public string Text { get; set; }
         public AuthorRole Role { get; set; }
         public bool IsError { get; set; }
+        public bool CanRetry { get; set; }
+        public ChatMessageContent RetryErrorMessage { get; set; }
+        public string RetryUserInput { get; set; }
+        public string RetryModelId { get; set; }
         public bool IsToolActivitySummary { get; set; }
         public bool IsReasoningSummary { get; set; }
         public bool IsAgentActivitySummary { get; set; }

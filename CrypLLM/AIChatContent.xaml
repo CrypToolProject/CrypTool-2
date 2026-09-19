@@ -500,22 +500,27 @@
                                                  FontSize="12"
                                                  />
 
-                                    <TextBox x:Name="ErrorMessage"
-                                     Text="{Binding Text}"
-                                     IsReadOnly="True"
-                                     IsReadOnlyCaretVisible="False"
-                                     BorderThickness="0"
-                                     Background="Transparent"
-                                     TextWrapping="Wrap"
-                                     Foreground="#8B0000"
-                                     Visibility="Collapsed"
-                                     TextAlignment="Left"
-                                     HorizontalAlignment="Left"
-                                     Padding="6"
-                                     FontFamily="Segoe UI"
-                                     FontSize="12"
-                                     FontWeight="SemiBold"
-                                     />
+                                    <StackPanel x:Name="ErrorMessage" Visibility="Collapsed">
+                                        <TextBox Text="{Binding Text}"
+                                                 IsReadOnly="True"
+                                                 IsReadOnlyCaretVisible="False"
+                                                 BorderThickness="0"
+                                                 Background="Transparent"
+                                                 TextWrapping="Wrap"
+                                                 Foreground="#8B0000"
+                                                 TextAlignment="Left"
+                                                 HorizontalAlignment="Left"
+                                                 Padding="6"
+                                                 FontFamily="Segoe UI"
+                                                 FontSize="12"
+                                                 FontWeight="SemiBold"/>
+                                        <Button Content="{x:Static properties:Resources.RetryRequestButton}"
+                                                Visibility="{Binding CanRetry, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                Click="RetryRequestButton_Click"
+                                                HorizontalAlignment="Left"
+                                                Margin="6,2,6,6"
+                                                Padding="10,3"/>
+                                    </StackPanel>
                                     </Grid>
                                 </Border>
 

@@ -40,6 +40,7 @@ internal static class AgentRegressionTests
             PinnedWorkspaceSurvivesHallucinatedTabId();
             RequestStaysInOriginalChat().GetAwaiter().GetResult();
             ReasoningAndToolEchoesStayOutOfAnswers().GetAwaiter().GetResult();
+            FailedRequestRetryPreservesCompletedTools().GetAwaiter().GetResult();
             FailedAgentReloadRemainsDirty();
             LocalProviderUsesItsOwnApiKey().GetAwaiter().GetResult();
             ScreenshotCaptureAndPersistence();
@@ -289,6 +290,108 @@ internal static class AgentRegressionTests
                     ["message"] = new JObject { ["role"] = "assistant", ["content"] = Content, ["reasoning_content"] = "separate private reasoning" } })
             };
             return new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(response.ToString(), Encoding.UTF8, "application/json") };
+        }
+    }
+
+    private static async Task FailedRequestRetryPreservesCompletedTools()
+    {
+        object manager = NewManager();
+        var thread = new AIThread("Retry request");
+        ((List<AIThread>)manager.GetType().GetProperty("AIThreads").GetValue(manager)).Add(thread);
+        manager.GetType().GetProperty("ActiveThread").SetValue(manager, thread);
+        var handler = new RetryCompletionHandler();
+        var builder = Kernel.CreateBuilder();
+        builder.AddOpenAIChatCompletion("gpt-5.4-mini", new Uri("http://localhost:1234/v1"), "test-only", null, null,
+            new HttpClient(handler));
+        var kernel = builder.Build();
+        kernel.Plugins.Add(KernelPluginFactory.CreateFromFunctions("CrypLLM_Test", new[]
+        {
+            KernelFunctionFactory.CreateFromMethod(typeof(AgentRegressionTests).GetMethod("TestContinuousStep",
+                BindingFlags.Static | BindingFlags.NonPublic), target: null, functionName: "ws_move_component",
+                description: null, parameters: null, returnParameter: null, loggerFactory: null)
+        }));
+        manager.GetType().GetProperty("Agent").SetValue(manager,
+            new ChatCompletionAgent { Kernel = kernel, Instructions = "Complete the user's task." });
+        ContinuousExecutions = 0;
+        bool failed = false;
+        try
+        {
+            await (Task<string>)Call(manager, "CreateAsync", "gpt-5.4-mini", "Build the workspace.", CancellationToken.None);
+        }
+        catch (InvalidOperationException) { failed = true; }
+        Assert(failed && ContinuousExecutions == 1 &&
+            thread.ChatHistory.Count(item => item.Items.OfType<FunctionResultContent>().Any()) == 1,
+            "A provider timeout after a completed tool must retain the successful tool result.");
+        Assert(thread.ChatHistory.Count(item => item.Role == AuthorRole.User && item.Content == "Build the workspace.") == 1,
+            "The original request must already be present exactly once before retry.");
+
+        var error = new ChatMessageContent(AuthorRole.Assistant,
+            "Failed to send the request.\nProvider: Local\nModel: gpt-5.4-mini\nEndpoint: test\nCause: Status: 504 (Gateway Time-out)")
+        { ModelId = "gpt-5.4-mini" };
+        thread.ChatHistory.Add(error);
+        handler.AllowRecovery = true;
+        string answer = await (Task<string>)Call(manager, "RetryAsync", "gpt-5.4-mini", "Build the workspace.", error, CancellationToken.None);
+        Assert(answer.Contains("Completed") && ContinuousExecutions == 1,
+            "Retry must continue after completed tool results without replaying the mutation.");
+        Assert(thread.ChatHistory.Count(item => item.Role == AuthorRole.User && item.Content == "Build the workspace.") == 1 &&
+            !thread.ChatHistory.Contains(error), "Retry must reuse the original user message and remove the failed assistant message.");
+        Assert((bool)CallStatic("Threads.AIThreadManager", "IsRetryableRequestError", error.Content) &&
+            (bool)CallStatic("Threads.AIThreadManager", "IsRetryableRequestError", "Fehler beim Senden der Anforderung.\nUrsache: 504"),
+            "English and German provider errors must expose the retry action.");
+        bool rejectedStale = false;
+        try { await (Task<string>)Call(manager, "RetryAsync", "gpt-5.4-mini", "Build the workspace.", error, CancellationToken.None); }
+        catch (TargetInvocationException ex) when (ex.InnerException is InvalidOperationException) { rejectedStale = true; }
+        Assert(rejectedStale, "A stale retry button must never replace a newer answer.");
+
+        object directManager = NewManager();
+        var directThread = new AIThread("Retry without tools");
+        ((List<AIThread>)directManager.GetType().GetProperty("AIThreads").GetValue(directManager)).Add(directThread);
+        directManager.GetType().GetProperty("ActiveThread").SetValue(directManager, directThread);
+        var directHandler = new RetryCompletionHandler(sendToolCall: false) { AllowRecovery = true };
+        var directBuilder = Kernel.CreateBuilder();
+        directBuilder.AddOpenAIChatCompletion("gpt-5.4-mini", new Uri("http://localhost:1234/v1"), "test-only", null, null,
+            new HttpClient(directHandler));
+        directManager.GetType().GetProperty("Agent").SetValue(directManager,
+            new ChatCompletionAgent { Kernel = directBuilder.Build(), Instructions = "Answer the user." });
+        directThread.ChatHistory.Add(new ChatMessageContent(AuthorRole.User, "Try again."));
+        var directError = new ChatMessageContent(AuthorRole.Assistant,
+            "Failed to send the request.\nProvider: Local\nCause: Status: 504 (Gateway Time-out)");
+        directThread.ChatHistory.Add(directError);
+        string directAnswer = await (Task<string>)Call(directManager, "RetryAsync", "gpt-5.4-mini", "Try again.", directError, CancellationToken.None);
+        Assert(directAnswer.Contains("Completed") && directThread.ChatHistory.Count(item => item.Role == AuthorRole.User) == 1 &&
+            !directThread.ChatHistory.Contains(directError),
+            "Retry without any prior tool call must resend the archived request once and replace the error.");
+        Console.WriteLine("PASS: provider timeout retry resends the archived request and preserves completed tools");
+    }
+
+    private sealed class RetryCompletionHandler : HttpMessageHandler
+    {
+        private readonly bool _sendToolCall;
+        internal bool AllowRecovery;
+        private bool _sentToolCall;
+
+        internal RetryCompletionHandler(bool sendToolCall = true) { _sendToolCall = sendToolCall; }
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            if (_sendToolCall && !_sentToolCall)
+            {
+                _sentToolCall = true;
+                return Task.FromResult(Completion("{\"role\":\"assistant\",\"content\":\"Preparing the workspace.\",\"tool_calls\":[{\"id\":\"retry-step\",\"type\":\"function\",\"function\":{\"name\":\"CrypLLM_Test-ws_move_component\",\"arguments\":\"{\\\"sequence\\\":1}\"}}]}"));
+            }
+
+            if (!AllowRecovery)
+                return Task.FromResult(new HttpResponseMessage(HttpStatusCode.GatewayTimeout) { Content = new StringContent("Gateway Time-out") });
+            return Task.FromResult(Completion("{\"role\":\"assistant\",\"content\":\"<ct2_answer>Completed the workspace.</ct2_answer>\"}"));
+        }
+
+        private static HttpResponseMessage Completion(string message)
+        {
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{\"id\":\"retry-test\",\"object\":\"chat.completion\",\"created\":1,\"model\":\"gpt-5.4-mini\",\"choices\":[{\"index\":0,\"message\":" +
+                    message + ",\"finish_reason\":\"stop\"}]}", Encoding.UTF8, "application/json")
+            };
         }
     }
 
@@ -1434,7 +1537,7 @@ internal static class AgentRegressionTests
     private static void LocalizedResourcesResolve()
     {
         var resources = CrypTool.CrypLLM.Properties.Resources.ResourceManager;
-        foreach (string key in new[] { "ExportChatTooltip", "AgentInstructionsTab", "AiChatDeleteAllConfirmation", "AiChatInvocationError", "AiChatFatalInitializationError", "LocalApiKeyLabel", "LocalApiKeyTooltip", "ContextCompressionSection", "AutoCompressContextLabel", "ContextCompressionTriggerLabel", "ContextCompressionTargetLabel", "ContextCompressionHint", "ContextCompressionInvalidPercent", "AiChatContextUsageFormat", "AiChatContextUsageUnknownFormat", "AiChatContextUsageTooltip", "AiChatNoVisibleModelAnswer", "AiChatActivityDuration", "AiChatReasoningHeaderRunning", "AiChatReasoningHeaderCompleted", "AiChatReasoningBody", "AiChatReasoningBodyRunning", "AiChatReasoningDuration", "AiChatAgentActivityHeader", "AiChatAgentActivityDuration" })
+        foreach (string key in new[] { "ExportChatTooltip", "AgentInstructionsTab", "AiChatDeleteAllConfirmation", "AiChatInvocationError", "RetryRequestButton", "AiChatFatalInitializationError", "LocalApiKeyLabel", "LocalApiKeyTooltip", "ContextCompressionSection", "AutoCompressContextLabel", "ContextCompressionTriggerLabel", "ContextCompressionTargetLabel", "ContextCompressionHint", "ContextCompressionInvalidPercent", "AiChatContextUsageFormat", "AiChatContextUsageUnknownFormat", "AiChatContextUsageTooltip", "AiChatNoVisibleModelAnswer", "AiChatActivityDuration", "AiChatReasoningHeaderRunning", "AiChatReasoningHeaderCompleted", "AiChatReasoningBody", "AiChatReasoningBodyRunning", "AiChatReasoningDuration", "AiChatAgentActivityHeader", "AiChatAgentActivityDuration" })
         {
             string english = resources.GetString(key, CultureInfo.GetCultureInfo("en"));
             string german = resources.GetString(key, CultureInfo.GetCultureInfo("de"));

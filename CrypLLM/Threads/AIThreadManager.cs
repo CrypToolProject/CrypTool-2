@@ -536,7 +536,49 @@ namespace CrypTool.CrypLLM.Threads
         /// <param name="userInput">The raw directive text submitted by the user interface.</param>
         /// <param name="cancellationToken">Permits asynchronous interruptions if the user discards the request context.</param>
         /// <returns>The finalized, combined response output returned by the invoked agent instance.</returns>
-        public async Task<string> CreateAsync(string selectedModel, string userInput, CancellationToken cancellationToken = default)
+        public Task<string> CreateAsync(string selectedModel, string userInput, CancellationToken cancellationToken = default)
+        {
+            return CreateAsyncCore(selectedModel, userInput, false, cancellationToken);
+        }
+
+        /// <summary>
+        /// Retries the latest failed request in its existing conversation. The original user message
+        /// and completed tool exchanges remain in history, so earlier mutations are not replayed.
+        /// </summary>
+        public Task<string> RetryAsync(string selectedModel, string userInput, ChatMessageContent failedMessage, CancellationToken cancellationToken = default)
+        {
+            AIThread thread = ActiveThread;
+            ChatHistory history = thread?.ChatHistory;
+            ChatMessageContent latestUserMessage = history?.LastOrDefault(item => item.Role == AuthorRole.User);
+            if (history == null || failedMessage == null || history.Count == 0 ||
+                !ReferenceEquals(history[history.Count - 1], failedMessage) ||
+                failedMessage.Role != AuthorRole.Assistant ||
+                !IsRetryableRequestError(failedMessage.Content) ||
+                !string.Equals(latestUserMessage?.Content?.Trim(), userInput?.Trim(), StringComparison.Ordinal))
+            {
+                throw new InvalidOperationException("The failed request is no longer the latest request in this chat.");
+            }
+
+            history.RemoveAt(history.Count - 1);
+            thread.ClearReducedHistoryCache();
+            SaveThreadHistoriesSafe();
+            return CreateAsyncCore(selectedModel, userInput, true, cancellationToken);
+        }
+
+        internal static bool IsRetryableRequestError(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return false;
+            string firstLine = text.TrimStart().Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() ?? string.Empty;
+            return firstLine.Equals("Failed to send the request.", StringComparison.OrdinalIgnoreCase) ||
+                   firstLine.Equals("Fehler beim Senden der Anforderung.", StringComparison.OrdinalIgnoreCase);
+        }
+
+        internal void SaveChatHistoryAfterFailure()
+        {
+            SaveThreadHistoriesSafe();
+        }
+
+        private async Task<string> CreateAsyncCore(string selectedModel, string userInput, bool retryExistingRequest, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(userInput))
             {
@@ -565,7 +607,7 @@ namespace CrypTool.CrypLLM.Threads
             }
 
             RequestWorkspaceContext context = CaptureRequestWorkspaceContext(requestThread);
-            var message = new ChatMessageContent(AuthorRole.User, userInput?.Trim() ?? string.Empty);
+            var message = new ChatMessageContent(AuthorRole.User, userInput?.Trim() ?? string.Empty) { ModelId = selectedModel };
             EnsurePromptBudgetProfile(selectedModel);
             DateTime requestStartedUtc = DateTime.UtcNow;
             Log.Debug($"LLM request started: threadId={requestThread?.Id ?? "<none>"}, model={selectedModel}, userTokens={ChatTokenEstimator.EstimateTokens(message.Content)}, activeTabId={context.ActiveTabId ?? "<none>"}");
@@ -597,7 +639,7 @@ namespace CrypTool.CrypLLM.Threads
                 HistoryPreparationResult history = await _historyReductionEngine.PrepareForInvocationAsync(
                     requestThread,
                     selectedModel,
-                    message.Content,
+                    retryExistingRequest ? string.Empty : message.Content,
                     chatHistory,
                     _promptBudgetProfile,
                     GetChatCompletionServiceOrThrow(),
@@ -624,7 +666,7 @@ namespace CrypTool.CrypLLM.Threads
                             selectedModel,
                             requestAgent.Instructions,
                             history.InvocationMessages,
-                            message,
+                            retryExistingRequest ? null : message,
                             arguments);
                     }
 
@@ -757,7 +799,7 @@ namespace CrypTool.CrypLLM.Threads
                         };
                         responseStream = InvokeWithContinuousToolsAsync(
                             requestAgent,
-                            message,
+                            retryExistingRequest ? null : message,
                             invocationThread,
                             arguments,
                             publishCompletedRound,

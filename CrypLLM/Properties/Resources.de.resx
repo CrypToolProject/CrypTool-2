@@ -672,6 +672,7 @@ Ergebnisse sollten kritisch geprüft werden, insbesondere in sicherheitsrelevant
   <data name="AiChatReasoningBodyRunning" xml:space="preserve">
     <value>Das Modell bereitet den nächsten Schritt vor. Ein gelieferter Begründungstext erscheint anschließend hier.</value>
   </data>
+  <data name="RetryRequestButton" xml:space="preserve"><value>Wiederholen</value></data>
   <data name="AiChatReasoningDuration" xml:space="preserve">
     <value>Denkzeit: {0}</value>
   </data>

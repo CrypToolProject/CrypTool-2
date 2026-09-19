@@ -2047,6 +2047,15 @@ namespace CrypTool.CrypLLM.Properties {
         }
         
         /// <summary>
+        ///   Returns the localized label for retrying a failed request.
+        /// </summary>
+        public static string RetryRequestButton {
+            get {
+                return ResourceManager.GetString("RetryRequestButton", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Send Message ähnelt.
         /// </summary>
         public static string SendMessage {
