@@ -47,7 +47,9 @@ namespace CrypTool.CrypLLM.Threads
         private List<ToolActivityEntry> _currentToolActivityEntries = new List<ToolActivityEntry>();
         private List<ToolActivityEntry> _lastCompletedToolActivityEntries = new List<ToolActivityEntry>();
         private List<ToolActivityMessageAttachment> _toolActivityMessageAttachments = new List<ToolActivityMessageAttachment>();
+        private readonly List<ReasoningActivityMessageAttachment> _reasoningActivityMessageAttachments = new List<ReasoningActivityMessageAttachment>();
         private bool _isToolActivitySessionActive;
+        private DateTime? _activeReasoningStartedAtLocal;
 
         /// <summary>
         /// Id of the thread.
@@ -337,6 +339,10 @@ namespace CrypTool.CrypLLM.Threads
             {
                 ApplyToolActivityArgumentsToEntries(_currentToolActivityEntries, infos);
                 ApplyToolActivityArgumentsToEntries(_lastCompletedToolActivityEntries, infos);
+                foreach (ToolActivityMessageAttachment attachment in _toolActivityMessageAttachments)
+                {
+                    ApplyToolActivityArgumentsToEntries(attachment?.Entries, infos);
+                }
             }
         }
 
@@ -410,9 +416,36 @@ namespace CrypTool.CrypLLM.Threads
             }
         }
 
-        internal void AttachLastCompletedToolActivitiesToAssistantMessage(int assistantMessageOrdinal)
+        internal void AttachCurrentToolActivitiesAfterMessage(ChatMessageContent message)
         {
-            if (assistantMessageOrdinal <= 0)
+            int historyMessageIndex = FindChatHistoryMessageIndex(message);
+            if (historyMessageIndex < 0)
+            {
+                return;
+            }
+
+            lock (_toolActivitySync)
+            {
+                if (_currentToolActivityEntries == null || _currentToolActivityEntries.Count == 0)
+                {
+                    return;
+                }
+
+                _toolActivityMessageAttachments.Add(new ToolActivityMessageAttachment
+                {
+                    HistoryMessageIndex = historyMessageIndex,
+                    Entries = _currentToolActivityEntries
+                        .Select(entry => entry.Clone())
+                        .ToList()
+                });
+                _currentToolActivityEntries = new List<ToolActivityEntry>();
+            }
+        }
+
+        internal void AttachLastCompletedToolActivitiesAfterMessage(ChatMessageContent message)
+        {
+            int historyMessageIndex = FindChatHistoryMessageIndex(message);
+            if (historyMessageIndex < 0)
             {
                 return;
             }
@@ -424,14 +457,82 @@ namespace CrypTool.CrypLLM.Threads
                     return;
                 }
 
-                _toolActivityMessageAttachments.RemoveAll(item => item.AssistantMessageOrdinal == assistantMessageOrdinal);
                 _toolActivityMessageAttachments.Add(new ToolActivityMessageAttachment
                 {
-                    AssistantMessageOrdinal = assistantMessageOrdinal,
-                    Entries = _lastCompletedToolActivityEntries
-                        .Select(entry => entry.Clone())
-                        .ToList()
+                    HistoryMessageIndex = historyMessageIndex,
+                    Entries = _lastCompletedToolActivityEntries.Select(entry => entry.Clone()).ToList()
                 });
+                _lastCompletedToolActivityEntries = new List<ToolActivityEntry>();
+            }
+        }
+
+        internal void BeginReasoningActivity()
+        {
+            lock (_toolActivitySync)
+            {
+                _activeReasoningStartedAtLocal = DateTime.Now;
+            }
+        }
+
+        internal void CompleteReasoningActivity(ChatMessageContent message)
+        {
+            int historyMessageIndex = FindChatHistoryMessageIndex(message);
+            lock (_toolActivitySync)
+            {
+                if (!_activeReasoningStartedAtLocal.HasValue)
+                {
+                    return;
+                }
+
+                if (historyMessageIndex >= 0)
+                {
+                    _reasoningActivityMessageAttachments.Add(new ReasoningActivityMessageAttachment
+                    {
+                        HistoryMessageIndex = historyMessageIndex,
+                        StartedAtLocal = _activeReasoningStartedAtLocal.Value,
+                        CompletedAtLocal = DateTime.Now,
+                        ReasoningText = ExtractVisibleReasoningText(message)
+                    });
+                }
+                _activeReasoningStartedAtLocal = null;
+            }
+        }
+
+        /// <summary>
+        /// Keeps only ordinary assistant text that accompanied a tool decision. Provider-private
+        /// reasoning fields and marked thinking blocks remain excluded by AssistantResponseText.
+        /// </summary>
+        private static string ExtractVisibleReasoningText(ChatMessageContent message)
+        {
+            if (message == null || !message.Items.OfType<FunctionCallContent>().Any())
+            {
+                return string.Empty;
+            }
+
+            return AssistantResponseText.GetVisibleText(message.Content ?? string.Empty).Trim();
+        }
+
+        internal void CancelReasoningActivity()
+        {
+            lock (_toolActivitySync)
+            {
+                _activeReasoningStartedAtLocal = null;
+            }
+        }
+
+        internal DateTime? GetActiveReasoningStartedAtSnapshot()
+        {
+            lock (_toolActivitySync)
+            {
+                return _activeReasoningStartedAtLocal;
+            }
+        }
+
+        internal List<ReasoningActivityMessageAttachment> GetReasoningActivityMessageAttachmentsSnapshot()
+        {
+            lock (_toolActivitySync)
+            {
+                return _reasoningActivityMessageAttachments.Select(item => item.Clone()).ToList();
             }
         }
 
@@ -450,10 +551,28 @@ namespace CrypTool.CrypLLM.Threads
             lock (_toolActivitySync)
             {
                 _toolActivityMessageAttachments = (attachments ?? Enumerable.Empty<ToolActivityMessageAttachment>())
-                    .Where(item => item != null && item.AssistantMessageOrdinal > 0 && item.Entries != null && item.Entries.Count > 0)
+                    .Where(item => item != null && item.HistoryMessageIndex >= 0 && item.Entries != null && item.Entries.Count > 0)
                     .Select(item => item.Clone())
                     .ToList();
             }
+        }
+
+        private int FindChatHistoryMessageIndex(ChatMessageContent message)
+        {
+            if (message == null || ChatHistory == null)
+            {
+                return -1;
+            }
+
+            for (int index = ChatHistory.Count - 1; index >= 0; index--)
+            {
+                if (ReferenceEquals(ChatHistory[index], message))
+                {
+                    return index;
+                }
+            }
+
+            return -1;
         }
 
         private bool IsMatchingToolActivitySession(string sessionId)
@@ -613,18 +732,37 @@ namespace CrypTool.CrypLLM.Threads
 
     internal sealed class ToolActivityMessageAttachment
     {
-        public int AssistantMessageOrdinal { get; set; }
+        public int HistoryMessageIndex { get; set; }
         public List<ToolActivityEntry> Entries { get; set; } = new List<ToolActivityEntry>();
 
         public ToolActivityMessageAttachment Clone()
         {
             return new ToolActivityMessageAttachment
             {
-                AssistantMessageOrdinal = AssistantMessageOrdinal,
+                HistoryMessageIndex = HistoryMessageIndex,
                 Entries = (Entries ?? new List<ToolActivityEntry>())
                     .Select(entry => entry?.Clone())
                     .Where(entry => entry != null)
                     .ToList()
+            };
+        }
+    }
+
+    internal sealed class ReasoningActivityMessageAttachment
+    {
+        public int HistoryMessageIndex { get; set; }
+        public DateTime StartedAtLocal { get; set; }
+        public DateTime CompletedAtLocal { get; set; }
+        public string ReasoningText { get; set; }
+
+        public ReasoningActivityMessageAttachment Clone()
+        {
+            return new ReasoningActivityMessageAttachment
+            {
+                HistoryMessageIndex = HistoryMessageIndex,
+                StartedAtLocal = StartedAtLocal,
+                CompletedAtLocal = CompletedAtLocal,
+                ReasoningText = ReasoningText
             };
         }
     }

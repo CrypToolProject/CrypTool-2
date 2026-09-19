@@ -21,6 +21,7 @@
 /// </summary>
 
 using CrypTool.CrypLLM.Helper;
+using CrypTool.CrypLLM.Ports;
 using CrypTool.CrypLLM.Services;
 using CrypTool.PluginBase;
 using CrypTool.Plugins.Numbers;
@@ -53,6 +54,15 @@ namespace CrypTool.CrypLLM
     internal sealed class WorkspaceEditingPlugin
     {
         #region KernelFunctions - Active Workspace
+
+        [KernelFunction("ws_new")]
+        [AiToolMutation(true)]
+        [ContextWindowToken(min: 10000)]
+        [Description("Creates a new visible tab containing a completely empty workspace and returns its tabId. Use this when the user chooses to build a new workspace from scratch. Pass the returned tabId to every subsequent workspace tool. Never open a template and delete its contents to imitate an empty workspace.")]
+        public string CreateEmptyWorkspace()
+        {
+            return LLMPluginService.InvokeOnUi(CreateEmptyWorkspaceInternal);
+        }
 
         [KernelFunction("ws_add_component")]
         [AiToolMutation(true)]
@@ -141,6 +151,16 @@ namespace CrypTool.CrypLLM
         public string SetConnectorOrientationInWorkspace(string componentId, string connectorName, string orientation, string tabId = null)
         {
             return LLMPluginService.InvokeOnUi(() => SetConnectorOrientationInternal(componentId, connectorName, orientation, tabId));
+        }
+
+        /// <summary>Discards one connection's stored bends and asks the editor to route that wire again.</summary>
+        [KernelFunction("ws_redraw_connection")]
+        [AiToolMutation(true)]
+        [ContextWindowToken(min: 10000)]
+        [Description("Redraws exactly one existing wire by its connectionId from ws_model. Clears only that connection's stored route and asks the workspace editor to calculate it again. Preserves the connection object, source and target connectors, components, settings and data flow. Use this when one wire has a stale or poor route, then verify with ws_check_layout and ws_screenshot. Optional tabId; defaults to the request-pinned workspace.")]
+        public string RedrawConnectionInWorkspace(string connectionId, string tabId = null)
+        {
+            return LLMPluginService.InvokeOnUi(() => RedrawConnectionInWorkspaceInternal(connectionId, tabId));
         }
 
         /// <summary>Resizes an existing component without replacing its content or connections.</summary>
@@ -279,6 +299,35 @@ namespace CrypTool.CrypLLM
         }
 
         #endregion
+
+        private static string CreateEmptyWorkspaceInternal()
+        {
+            try
+            {
+                ICrypWinAdapter bridge = CrypWinPort.Instance;
+                if (bridge == null)
+                    return JsonConvert.SerializeObject(new { success = false, error = "CrypWin bridge not available." }, Formatting.Indented);
+
+                OpenTabsAbstraction openedTab = bridge.CreateEmptyWorkspaceTab();
+                if (openedTab == null || string.IsNullOrWhiteSpace(openedTab.Id))
+                    return JsonConvert.SerializeObject(new { success = false, error = "Empty workspace could not be created." }, Formatting.Indented);
+
+                return JsonConvert.SerializeObject(new
+                {
+                    success = true,
+                    tabId = openedTab.Id,
+                    title = openedTab.Title,
+                    contentType = openedTab.ContentType,
+                    isActive = openedTab.IsActive,
+                    empty = true
+                }, Formatting.Indented);
+            }
+            catch (Exception ex)
+            {
+                Log.Warning($"create_empty_workspace failed: {ex.Message}");
+                return JsonConvert.SerializeObject(new { success = false, error = ex.Message }, Formatting.Indented);
+            }
+        }
 
         #region Internals - Active Workspace
 
@@ -1137,6 +1186,64 @@ namespace CrypTool.CrypLLM
             {
                 Log.Error($"set_connector_orientation failed: {ex.Message}");
                 return JsonConvert.SerializeObject(new { success = false, error = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Invalidates one persisted wire route without changing the graph topology, then immediately
+        /// invokes the native line router for the matching visual.
+        /// </summary>
+        private static string RedrawConnectionInWorkspaceInternal(string connectionId, string tabId)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(connectionId))
+                    return JsonConvert.SerializeObject(new { success = false, error = "connectionId is required." });
+                if (!LLMPluginService.TryGetWorkspaceModel(out WorkspaceModel model, tabId))
+                    return JsonConvert.SerializeObject(new { success = false, error = "Workspace model not available." });
+
+                ConnectionModel connection = model.GetAllConnectionModels()
+                    .FirstOrDefault(item => GetRuntimeId(item) == connectionId.Trim());
+                if (connection == null)
+                {
+                    return JsonConvert.SerializeObject(new
+                    {
+                        success = false,
+                        connectionId,
+                        error = "Connection not found; copy an exact connection id from ws_model.",
+                        availableConnections = model.GetAllConnectionModels().Select(item => new
+                        {
+                            connectionId = GetRuntimeId(item),
+                            from = new { componentId = GetRuntimeId(item.From.PluginModel), connector = item.From.PropertyName },
+                            to = new { componentId = GetRuntimeId(item.To.PluginModel), connector = item.To.PropertyName }
+                        }).ToArray()
+                    }, Formatting.Indented);
+                }
+
+                string stopError = EnsureWorkspaceStopped(tabId);
+                if (stopError != null) return stopError;
+
+                int previousPointCount = connection.PointList?.Count ?? 0;
+                connection.IsCopy = true;
+                connection.PointList = null;
+                int rearrangedConnections = RearrangeConnectionVisuals(new[] { connection });
+                WorkspaceElementGeometry.GetWindow(connection)?.UpdateLayout();
+
+                return JsonConvert.SerializeObject(new
+                {
+                    success = true,
+                    connectionId = GetRuntimeId(connection),
+                    previousPointCount,
+                    routeReset = true,
+                    rearrangedConnections,
+                    from = new { componentId = GetRuntimeId(connection.From.PluginModel), connector = connection.From.PropertyName },
+                    to = new { componentId = GetRuntimeId(connection.To.PluginModel), connector = connection.To.PropertyName }
+                }, Formatting.Indented);
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"redraw_connection failed: {ex.Message}");
+                return JsonConvert.SerializeObject(new { success = false, connectionId, error = ex.Message }, Formatting.Indented);
             }
         }
 

@@ -73,7 +73,8 @@ namespace CrypTool.CrypLLM.Threads
             "If an existing template solves the requested problem, name the actual template and explain why it fits, then ASK the user whether to open that template or build the workspace yourself. " +
             "Stop and wait for the user's reply BEFORE tpl_open or any workspace construction for that task. Do not silently choose either option. " +
             "If the user already explicitly chose a template or explicitly chose building from scratch, honor that choice without asking again. " +
-            "If no suitable template is found or discovery is unavailable, build normally and state that briefly. Small edits to an existing workspace do not require a template choice. " +
+            "If the user chooses building from scratch, or no suitable template is found, use ws_new to create a genuinely empty workspace tab and pass its returned tabId to every subsequent workspace tool. " +
+            "Never open a template and delete its components to simulate a blank workspace. Small edits to an existing workspace do not require a template choice or a new tab. " +
             "EXECUTION DISCIPLINE: When the user explicitly says to perform a concrete edit (for example 'do it', 'fix it', 'remove it' or 'connect it'), execute the required mutation tools without asking for the same confirmation again. " +
             "Never claim that a component was created, removed, moved, configured or connected unless the corresponding mutation tool returned success=true for that change, or ws_model proves that the requested state already exists. Plans, prose, earlier intentions and successful ws_run/ws_io output are not evidence that a structural edit happened. " +
             "Never invent component, memo, connection or tab IDs. Copy the exact runtime IDs from the latest tool result; component IDs in the current workspace are numeric runtime strings, not fabricated GUIDs. If an ID is rejected, inspect the returned candidates or call ws_model again and retry with the exact ID. " +
@@ -117,6 +118,8 @@ namespace CrypTool.CrypLLM.Threads
             "keep the main East/West flow and move branch receivers into clear side corridors or change the branch input side appropriately, then inspect every branch again. " +
             "A wire may touch its actual connector at the box boundary but MUST NOT run through ANY component or memo interior, including its own source and target. " +
             "Treat wire_through_element as an error. Use its affected IDs, endpoint connector names and routingAdvice to move boxes or change connector sides. " +
+            "If one existing wire still has a stale or poor route while its endpoints and nearby boxes are already placed correctly, call ws_redraw_connection with that exact connection ID from ws_model, then inspect the new route. " +
+            "Redrawing does not guarantee a clear corridor; if the problem remains, move the blocking boxes or change the relevant connector orientation. " +
             "connector_sides_need_detour is conditional advice: choose positions or connector sides that clear the real route rather than blindly changing a shared port for one branch. " +
             "Align endpoints rather than just box centers, stagger input positions where necessary, and increase spacing to separate routes. " +
             "Preserve existing wiring; do not remove required connections just to simplify the drawing. " +
@@ -471,6 +474,18 @@ namespace CrypTool.CrypLLM.Threads
                     "Read technical connector Name and current Orientation from ws_model. Moving a connector's side does not change input/output direction; keep existing wiring intact.";
             }
 
+            if (kernel.Plugins.Any(plugin => plugin.Any(function => function.Metadata.Name == "ws_redraw_connection")))
+            {
+                instructions += "\nUse ws_redraw_connection(connectionId) to recalculate only one existing wire route. " +
+                    "Copy its exact connection ID from ws_model; the tool preserves both endpoints and the dataflow. Verify the result with ws_check_layout and, when available, ws_screenshot.";
+            }
+
+            if (kernel.Plugins.Any(plugin => plugin.Any(function => function.Metadata.Name == "ws_new")))
+            {
+                instructions += "\nUse ws_new when a new workspace must be built from scratch. Continue exclusively in the returned tabId. " +
+                    "Do not clear a template or an unrelated open workspace to obtain an empty canvas.";
+            }
+
             OpenAIPromptExecutionSettings settings = new OpenAIPromptExecutionSettings
             {
                 ToolCallBehavior = ToolCallBehavior.EnableKernelFunctions
@@ -741,7 +756,15 @@ namespace CrypTool.CrypLLM.Threads
                             }
                         };
                         responseStream = InvokeWithContinuousToolsAsync(
-                            requestAgent, message, invocationThread, arguments, publishCompletedRound, cancellationToken);
+                            requestAgent,
+                            message,
+                            invocationThread,
+                            arguments,
+                            publishCompletedRound,
+                            BeginReasoningActivity,
+                            CompleteReasoningActivity,
+                            AttachCurrentToolActivityRound,
+                            cancellationToken);
 
                         await using var enumerator = responseStream.GetAsyncEnumerator(cancellationToken);
                         while (await enumerator.MoveNextAsync())
@@ -935,7 +958,8 @@ namespace CrypTool.CrypLLM.Threads
         /// </summary>
         private static async IAsyncEnumerable<AgentResponseItem<ChatMessageContent>> InvokeWithContinuousToolsAsync(
             ChatCompletionAgent agent, ChatMessageContent message, ChatHistoryAgentThread thread,
-            KernelArguments arguments, Action onRoundCompleted,
+            KernelArguments arguments, Action onRoundCompleted, Action onReasoningStarted,
+            Action<ChatMessageContent> onReasoningCompleted, Action<ChatMessageContent> onToolRoundCompleted,
             [System.Runtime.CompilerServices.EnumeratorCancellation] CancellationToken cancellationToken)
         {
             var settings = agent.Arguments?.ExecutionSettings?.Values.OfType<OpenAIPromptExecutionSettings>()
@@ -948,6 +972,7 @@ namespace CrypTool.CrypLLM.Threads
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
+                onReasoningStarted?.Invoke();
                 var responses = new List<AgentResponseItem<ChatMessageContent>>();
                 var stream = message == null
                     ? agent.InvokeAsync(thread, options: new() { KernelArguments = invocationArguments }, cancellationToken: cancellationToken)
@@ -960,6 +985,7 @@ namespace CrypTool.CrypLLM.Threads
                 if (calls.Length == 0)
                 {
                     onRoundCompleted?.Invoke();
+                    onReasoningCompleted?.Invoke(toolMessage);
                     foreach (var response in responses) yield return response;
                     yield break;
                 }
@@ -970,6 +996,7 @@ namespace CrypTool.CrypLLM.Threads
                 if (!archivedCalls.SequenceEqual(calls.Select(call => call.Id)))
                     thread.ChatHistory.Add(toolMessage);
                 onRoundCompleted?.Invoke();
+                onReasoningCompleted?.Invoke(toolMessage);
                 for (int index = 0; index < calls.Length; index++)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
@@ -999,6 +1026,7 @@ namespace CrypTool.CrypLLM.Threads
                     await next(context);
                     thread.ChatHistory.Add(new FunctionResultContent(call, context.Result).ToChatMessage());
                 }
+                onToolRoundCompleted?.Invoke(toolMessage);
                 requestIndex++;
             }
         }
@@ -2631,6 +2659,36 @@ namespace CrypTool.CrypLLM.Threads
             }
 
             session.Thread.FinalizeToolActivitySession(session.SessionId, completion);
+            session.Thread.CancelReasoningActivity();
+            if (session.LastRoundMessage != null)
+            {
+                session.Thread.AttachLastCompletedToolActivitiesAfterMessage(session.LastRoundMessage);
+            }
+            ToolActivityChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void BeginReasoningActivity()
+        {
+            ToolActivitySessionState session = CurrentToolActivitySession.Value;
+            session?.Thread?.BeginReasoningActivity();
+            ToolActivityChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void CompleteReasoningActivity(ChatMessageContent message)
+        {
+            ToolActivitySessionState session = CurrentToolActivitySession.Value;
+            if (session != null)
+            {
+                session.LastRoundMessage = message;
+                session.Thread?.CompleteReasoningActivity(message);
+            }
+            ToolActivityChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void AttachCurrentToolActivityRound(ChatMessageContent message)
+        {
+            ToolActivitySessionState session = CurrentToolActivitySession.Value;
+            session?.Thread?.AttachCurrentToolActivitiesAfterMessage(message);
             ToolActivityChanged?.Invoke(this, EventArgs.Empty);
         }
 
@@ -2646,38 +2704,14 @@ namespace CrypTool.CrypLLM.Threads
                 return;
             }
 
-            int assistantMessageOrdinal = FindLatestVisibleAssistantMessageOrdinal(thread.ChatHistory);
-            if (assistantMessageOrdinal <= 0)
+            ChatMessageContent latestAssistantMessage = thread.ChatHistory.LastOrDefault(message => message?.Role == AuthorRole.Assistant);
+            if (latestAssistantMessage == null)
             {
                 return;
             }
 
-            thread.AttachLastCompletedToolActivitiesToAssistantMessage(assistantMessageOrdinal);
+            thread.AttachLastCompletedToolActivitiesAfterMessage(latestAssistantMessage);
             ToolActivityChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        private static int FindLatestVisibleAssistantMessageOrdinal(IReadOnlyList<ChatMessageContent> chatHistory)
-        {
-            if (chatHistory == null || chatHistory.Count == 0)
-            {
-                return 0;
-            }
-
-            int assistantOrdinal = 0;
-            int latestAssistantOrdinal = 0;
-            for (int i = 0; i < chatHistory.Count; i++)
-            {
-                ChatMessageContent message = chatHistory[i];
-                if (!IsVisibleAssistantChatMessage(message))
-                {
-                    continue;
-                }
-
-                assistantOrdinal++;
-                latestAssistantOrdinal = assistantOrdinal;
-            }
-
-            return latestAssistantOrdinal;
         }
 
         private static bool IsVisibleAssistantChatMessage(ChatMessageContent message)
@@ -2726,6 +2760,7 @@ namespace CrypTool.CrypLLM.Threads
         {
             public string SessionId { get; set; }
             public AIThread Thread { get; set; }
+            public ChatMessageContent LastRoundMessage { get; set; }
         }
 
         private sealed class ToolActivitySessionScope : IDisposable

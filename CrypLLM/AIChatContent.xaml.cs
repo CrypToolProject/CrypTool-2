@@ -116,6 +116,7 @@ namespace CrypTool.CrypLLM
         }
 
         private Storyboard _spinnerStoryboard;
+        private readonly DispatcherTimer _activityElapsedTimer;
 
         public Visibility UnavailableToolsIndicatorVisibility =>
             string.IsNullOrWhiteSpace(_unavailableToolsTooltipText) ? Visibility.Collapsed : Visibility.Visible;
@@ -198,6 +199,11 @@ namespace CrypTool.CrypLLM
 #endif
 
             _spinnerStoryboard = TryFindResource("SpinnerStoryboard") as Storyboard;
+            _activityElapsedTimer = new DispatcherTimer(DispatcherPriority.Background)
+            {
+                Interval = TimeSpan.FromMilliseconds(500)
+            };
+            _activityElapsedTimer.Tick += ActivityElapsedTimer_Tick;
 
             Loaded += AIChatContent_Loaded;
             Unloaded += AIChatContent_Unloaded;
@@ -227,6 +233,7 @@ namespace CrypTool.CrypLLM
         private void AIChatContent_Unloaded(object sender, RoutedEventArgs e)
         {
             RememberCurrentThreadScrollOffset();
+            _activityElapsedTimer.Stop();
             SafeUnsubscribeFromThreadManager();
             Properties.Settings.Default.PropertyChanged -= Settings_PropertyChanged;
         }
@@ -542,6 +549,17 @@ namespace CrypTool.CrypLLM
             }
         }
 
+        private void ActivityElapsedTimer_Tick(object sender, EventArgs e)
+        {
+            if (!_isRequestRunning)
+            {
+                _activityElapsedTimer.Stop();
+                return;
+            }
+
+            RefreshMessages(ChatViewportUpdateMode.FollowIfNearBottom);
+        }
+
         /// <summary>
         /// Renders each completed model turn while the agent is still working.
         /// Keeping this event separate from tool activity also updates pure text
@@ -583,8 +601,6 @@ namespace CrypTool.CrypLLM
         /// </summary>
         private void RefreshMessages(ChatViewportUpdateMode scrollMode = ChatViewportUpdateMode.FollowIfNearBottom, string newMessage = "")
         {
-            OnPropertyChanged(nameof(AgentChanges));
-            OnPropertyChanged(nameof(AgentChangesVisibility));
             bool shouldFollowToBottom =
                 scrollMode == ChatViewportUpdateMode.ForceBottom ||
                 ((scrollMode == ChatViewportUpdateMode.FollowIfNearBottom ||
@@ -598,60 +614,39 @@ namespace CrypTool.CrypLLM
             var activeThread = AIThreadManager.Instance.ActiveThread;
             string targetThreadId = activeThread?.Id ?? string.Empty;
             string effectivePendingUserMessage = ResolvePendingUserPreviewMessage(activeThread, newMessage);
-            Dictionary<int, List<ToolActivityViewModel>> completedToolActivitiesByAssistantOrdinal =
-                BuildCompletedToolActivitiesByAssistantOrdinal(activeThread);
-            int assistantMessageOrdinal = 0;
+            Dictionary<int, ChatMessage> activityGroupsByUserHistoryIndex =
+                BuildAgentActivityGroupsByUserHistoryIndex(activeThread);
             if (activeThread?.ChatHistory != null)
             {
-                foreach (var message in activeThread.ChatHistory)
+                for (int historyIndex = 0; historyIndex < activeThread.ChatHistory.Count; historyIndex++)
                 {
-                    // Nur User- und Assistant-Nachrichten als normale Chat-Texte anzeigen
-                    if (message.Role != AuthorRole.User && message.Role != AuthorRole.Assistant)
+                    ChatMessageContent message = activeThread.ChatHistory[historyIndex];
+                    if (message.Role == AuthorRole.User || message.Role == AuthorRole.Assistant)
                     {
-                        continue;
-                    }
+                        bool assistantToolRound = message.Role == AuthorRole.Assistant &&
+                            message.Items.OfType<FunctionCallContent>().Any();
+                        string text = message.Role == AuthorRole.Assistant
+                            ? AssistantResponseText.GetVisibleText(message.Content)
+                            : message.Content ?? string.Empty;
 
-                    var text = message.Role == AuthorRole.Assistant
-                        ? AssistantResponseText.GetVisibleText(message.Content)
-                        : message.Content ?? string.Empty;
-                    if (string.IsNullOrWhiteSpace(text))
-                    {
-                        // Leere Nachrichten komplett überspringen, keine "Leerzeilen" im UI
-                        continue;
-                    }
-
-                    if (IsInternalLogNoiseMessage(text))
-                    {
-                        continue;
-                    }
-
-                    if (message.Role == AuthorRole.Assistant)
-                    {
-                        assistantMessageOrdinal++;
-                        if (completedToolActivitiesByAssistantOrdinal.TryGetValue(assistantMessageOrdinal, out List<ToolActivityViewModel> completedToolActivities) &&
-                            completedToolActivities?.Count > 0)
+                        // Intermediate tool-call prose belongs to the collapsed thinking block.
+                        // Only the actual user-facing answer is rendered as a normal assistant message.
+                        if (!assistantToolRound && !string.IsNullOrWhiteSpace(text) && !IsInternalLogNoiseMessage(text))
                         {
-                            string completedStateKey = BuildCompletedToolActivityStateKey(activeThread, assistantMessageOrdinal);
                             displayMessages.Add(new ChatMessage
                             {
-                                Text = BuildCompletedToolActivityHeaderText(completedToolActivities.Count),
-                                Role = AuthorRole.Assistant,
-                                ToolActivities = completedToolActivities,
-                                IsToolActivitySummary = true,
-                                ToolActivityStateKey = completedStateKey,
-                                IsToolActivityExpanded = GetRememberedToolActivityExpandedState(
-                                    completedStateKey,
-                                    GetRememberedToolActivityExpandedState(BuildActiveToolActivityStateKey(activeThread), false))
+                                Text = text,
+                                Role = message.Role,
+                                IsError = message.Role == AuthorRole.Assistant && IsAssistantErrorMessage(text)
                             });
                         }
                     }
 
-                    displayMessages.Add(new ChatMessage
+                    if (message.Role == AuthorRole.User &&
+                        activityGroupsByUserHistoryIndex.TryGetValue(historyIndex, out ChatMessage activityGroup))
                     {
-                        Text = text,
-                        Role = message.Role,
-                        IsError = message.Role == AuthorRole.Assistant && IsAssistantErrorMessage(text)
-                    });
+                        displayMessages.Add(activityGroup);
+                    }
                 }
                 if (!string.IsNullOrWhiteSpace(effectivePendingUserMessage))
                 {
@@ -662,41 +657,9 @@ namespace CrypTool.CrypLLM
                         IsError = false
                     });
                 }
-            }
-
-            List<ToolActivityViewModel> toolActivities = BuildToolActivityViewModelsForActiveThread();
-            if ((activeThread?.IsToolActivitySessionActive ?? false) && toolActivities.Count > 0)
-            {
-                string activeStateKey = BuildActiveToolActivityStateKey(activeThread);
-                ChatMessage toolActivityMessage = new ChatMessage
+                if (activityGroupsByUserHistoryIndex.TryGetValue(-1, out ChatMessage pendingActivityGroup))
                 {
-                    Text = BuildRunningToolActivityHeaderText(toolActivities.Count),
-                    Role = AuthorRole.Assistant,
-                    ToolActivities = toolActivities,
-                    IsToolActivitySummary = true,
-                    ToolActivityStateKey = activeStateKey,
-                    IsToolActivityExpanded = GetRememberedToolActivityExpandedState(activeStateKey, false)
-                };
-
-                int lastUserIndex = displayMessages.FindLastIndex(item => item.Role == AuthorRole.User);
-                if (lastUserIndex >= 0)
-                {
-                    int firstAssistantAfterUserIndex = displayMessages.FindIndex(
-                        lastUserIndex + 1,
-                        item => item.Role == AuthorRole.Assistant);
-
-                    if (firstAssistantAfterUserIndex >= 0)
-                    {
-                        displayMessages.Insert(firstAssistantAfterUserIndex, toolActivityMessage);
-                    }
-                    else
-                    {
-                        displayMessages.Insert(lastUserIndex + 1, toolActivityMessage);
-                    }
-                }
-                else
-                {
-                    displayMessages.Add(toolActivityMessage);
+                    displayMessages.Add(pendingActivityGroup);
                 }
             }
 
@@ -712,10 +675,14 @@ namespace CrypTool.CrypLLM
             int latestAssistantIndex = displayMessages.FindLastIndex(item =>
                 item.Role == AuthorRole.Assistant &&
                 !item.IsToolActivitySummary &&
+                !item.IsReasoningSummary &&
+                !item.IsAgentActivitySummary &&
                 !string.IsNullOrWhiteSpace(item.Text));
             ChatMessage latestAssistantMessage = displayMessages.LastOrDefault(item =>
                 item.Role == AuthorRole.Assistant &&
                 !item.IsToolActivitySummary &&
+                !item.IsReasoningSummary &&
+                !item.IsAgentActivitySummary &&
                 !string.IsNullOrWhiteSpace(item.Text));
             ChatMessage latestUserMessage = latestAssistantIndex > 0
                 ? displayMessages.Take(latestAssistantIndex).LastOrDefault(item => item.Role == AuthorRole.User)
@@ -728,13 +695,20 @@ namespace CrypTool.CrypLLM
             foreach (ChatMessage message in Messages)
             {
                 if (message == null ||
-                    !message.IsToolActivitySummary ||
+                    (!message.IsToolActivitySummary && !message.IsReasoningSummary && !message.IsAgentActivitySummary) ||
                     string.IsNullOrWhiteSpace(message.ToolActivityStateKey))
                 {
                     continue;
                 }
 
                 _toolActivityExpansionStates[message.ToolActivityStateKey] = message.IsToolActivityExpanded;
+                foreach (AgentActivityStepViewModel step in message.ActivitySteps ?? new List<AgentActivityStepViewModel>())
+                {
+                    if (step != null && !string.IsNullOrWhiteSpace(step.StateKey))
+                    {
+                        _toolActivityExpansionStates[step.StateKey] = step.IsExpanded;
+                    }
+                }
             }
         }
 
@@ -742,12 +716,16 @@ namespace CrypTool.CrypLLM
         {
             foreach (ChatMessage message in Messages)
             {
-                if (message?.ToolActivities == null || message.ToolActivities.Count == 0)
+                if (message == null)
                 {
                     continue;
                 }
 
                 CaptureToolActivityDetailExpansionStates(message.ToolActivities);
+                foreach (AgentActivityStepViewModel step in message.ActivitySteps ?? new List<AgentActivityStepViewModel>())
+                {
+                    CaptureToolActivityDetailExpansionStates(step?.ToolActivities);
+                }
             }
         }
 
@@ -808,9 +786,14 @@ namespace CrypTool.CrypLLM
             return $"thread:{activeThread?.Id ?? "unknown"}:tool-activity:active";
         }
 
-        private static string BuildCompletedToolActivityStateKey(AIThread activeThread, int assistantMessageOrdinal)
+        private static string BuildCompletedToolActivityStateKey(AIThread activeThread, int historyMessageIndex, int blockIndex)
         {
-            return $"thread:{activeThread?.Id ?? "unknown"}:tool-activity:assistant:{assistantMessageOrdinal}";
+            return $"thread:{activeThread?.Id ?? "unknown"}:tool-activity:message:{historyMessageIndex}:block:{blockIndex}";
+        }
+
+        private static string BuildReasoningActivityStateKey(AIThread activeThread, string activityId)
+        {
+            return $"thread:{activeThread?.Id ?? "unknown"}:reasoning:{activityId ?? "unknown"}";
         }
 
         private static string BuildToolActivityDetailStateKey(string detailStateKeyPrefix, ToolActivityEntry entry)
@@ -1044,18 +1027,19 @@ namespace CrypTool.CrypLLM
                 BuildActiveToolActivityStateKey(activeThread));
         }
 
-        private Dictionary<int, List<ToolActivityViewModel>> BuildCompletedToolActivitiesByAssistantOrdinal(AIThread activeThread)
+        private Dictionary<int, List<ChatMessage>> BuildCompletedToolActivityMessagesByHistoryIndex(AIThread activeThread)
         {
-            Dictionary<int, List<ToolActivityViewModel>> result = new Dictionary<int, List<ToolActivityViewModel>>();
+            Dictionary<int, List<ChatMessage>> result = new Dictionary<int, List<ChatMessage>>();
             List<ToolActivityMessageAttachment> attachments = activeThread?.GetToolActivityMessageAttachmentsSnapshot() ?? new List<ToolActivityMessageAttachment>();
-            foreach (ToolActivityMessageAttachment attachment in attachments)
+            for (int blockIndex = 0; blockIndex < attachments.Count; blockIndex++)
             {
-                if (attachment == null || attachment.AssistantMessageOrdinal <= 0)
+                ToolActivityMessageAttachment attachment = attachments[blockIndex];
+                if (attachment == null || attachment.HistoryMessageIndex < 0)
                 {
                     continue;
                 }
 
-                string completedStateKey = BuildCompletedToolActivityStateKey(activeThread, attachment.AssistantMessageOrdinal);
+                string completedStateKey = BuildCompletedToolActivityStateKey(activeThread, attachment.HistoryMessageIndex, blockIndex);
                 List<ToolActivityViewModel> viewModels = BuildToolActivityViewModels(
                     attachment.Entries ?? new List<ToolActivityEntry>(),
                     activeThread?.LastInvocationDebugInfo?.ToolCalls,
@@ -1065,10 +1049,257 @@ namespace CrypTool.CrypLLM
                     continue;
                 }
 
-                result[attachment.AssistantMessageOrdinal] = viewModels;
+                if (!result.TryGetValue(attachment.HistoryMessageIndex, out List<ChatMessage> messages))
+                {
+                    messages = new List<ChatMessage>();
+                    result[attachment.HistoryMessageIndex] = messages;
+                }
+
+                messages.Add(new ChatMessage
+                {
+                    Text = BuildTimedToolActivityHeaderText(viewModels.Count, viewModels, false),
+                    Role = AuthorRole.Assistant,
+                    ToolActivities = viewModels,
+                    IsToolActivitySummary = true,
+                    ToolActivityStateKey = completedStateKey,
+                    IsToolActivityExpanded = GetRememberedToolActivityExpandedState(
+                        completedStateKey,
+                        GetRememberedToolActivityExpandedState(BuildActiveToolActivityStateKey(activeThread), false)),
+                    ActivityFooterText = BuildToolActivityFooterText(viewModels)
+                });
             }
 
             return result;
+        }
+
+        private Dictionary<int, List<ChatMessage>> BuildReasoningActivityMessagesByHistoryIndex(AIThread activeThread)
+        {
+            Dictionary<int, List<ChatMessage>> result = new Dictionary<int, List<ChatMessage>>();
+            List<ReasoningActivityMessageAttachment> attachments =
+                activeThread?.GetReasoningActivityMessageAttachmentsSnapshot() ?? new List<ReasoningActivityMessageAttachment>();
+            for (int blockIndex = 0; blockIndex < attachments.Count; blockIndex++)
+            {
+                ReasoningActivityMessageAttachment attachment = attachments[blockIndex];
+                if (attachment == null || attachment.HistoryMessageIndex < 0)
+                {
+                    continue;
+                }
+
+                if (!result.TryGetValue(attachment.HistoryMessageIndex, out List<ChatMessage> messages))
+                {
+                    messages = new List<ChatMessage>();
+                    result[attachment.HistoryMessageIndex] = messages;
+                }
+
+                messages.Add(CreateReasoningActivityMessage(
+                    activeThread,
+                    $"message:{attachment.HistoryMessageIndex}:block:{blockIndex}",
+                    attachment.StartedAtLocal,
+                    attachment.CompletedAtLocal,
+                    attachment.ReasoningText));
+            }
+
+            return result;
+        }
+
+        private Dictionary<int, ChatMessage> BuildAgentActivityGroupsByUserHistoryIndex(AIThread activeThread)
+        {
+            var stepsByUserIndex = new Dictionary<int, List<AgentActivityStepViewModel>>();
+            if (activeThread?.ChatHistory == null)
+            {
+                return new Dictionary<int, ChatMessage>();
+            }
+
+            List<ReasoningActivityMessageAttachment> reasoningAttachments =
+                activeThread.GetReasoningActivityMessageAttachmentsSnapshot();
+            for (int blockIndex = 0; blockIndex < reasoningAttachments.Count; blockIndex++)
+            {
+                ReasoningActivityMessageAttachment attachment = reasoningAttachments[blockIndex];
+                if (attachment == null || attachment.HistoryMessageIndex < 0)
+                {
+                    continue;
+                }
+
+                int userIndex = FindPrecedingUserHistoryIndex(activeThread, attachment.HistoryMessageIndex);
+                AddAgentActivityStep(stepsByUserIndex, userIndex, CreateReasoningActivityStep(
+                    activeThread,
+                    $"message:{attachment.HistoryMessageIndex}:block:{blockIndex}",
+                    attachment.StartedAtLocal,
+                    attachment.CompletedAtLocal,
+                    attachment.ReasoningText,
+                    attachment.HistoryMessageIndex * 2));
+            }
+
+            List<ToolActivityMessageAttachment> toolAttachments = activeThread.GetToolActivityMessageAttachmentsSnapshot();
+            for (int blockIndex = 0; blockIndex < toolAttachments.Count; blockIndex++)
+            {
+                ToolActivityMessageAttachment attachment = toolAttachments[blockIndex];
+                if (attachment == null || attachment.HistoryMessageIndex < 0)
+                {
+                    continue;
+                }
+
+                int userIndex = FindPrecedingUserHistoryIndex(activeThread, attachment.HistoryMessageIndex);
+                string stateKey = BuildCompletedToolActivityStateKey(activeThread, attachment.HistoryMessageIndex, blockIndex);
+                List<ToolActivityViewModel> tools = BuildToolActivityViewModels(
+                    attachment.Entries ?? new List<ToolActivityEntry>(),
+                    activeThread.LastInvocationDebugInfo?.ToolCalls,
+                    stateKey);
+                if (tools.Count > 0)
+                {
+                    AddAgentActivityStep(stepsByUserIndex, userIndex, CreateToolActivityStep(
+                        stateKey,
+                        tools,
+                        false,
+                        attachment.HistoryMessageIndex * 2 + 1));
+                }
+            }
+
+            bool pendingUserNotArchived = !string.IsNullOrWhiteSpace(_pendingUserPreviewMessage) &&
+                !HasLatestVisibleUserMessage(activeThread, _pendingUserPreviewMessage);
+            int activeUserIndex = pendingUserNotArchived
+                ? -1
+                : FindPrecedingUserHistoryIndex(activeThread, activeThread.ChatHistory.Count - 1);
+            DateTime? activeReasoningStartedAt = activeThread.GetActiveReasoningStartedAtSnapshot();
+            if (activeReasoningStartedAt.HasValue)
+            {
+                AddAgentActivityStep(stepsByUserIndex, activeUserIndex, CreateReasoningActivityStep(
+                    activeThread,
+                    "active",
+                    activeReasoningStartedAt.Value,
+                    null,
+                    null,
+                    int.MaxValue - 1));
+            }
+
+            List<ToolActivityViewModel> activeTools = BuildToolActivityViewModelsForActiveThread();
+            if (activeThread.IsToolActivitySessionActive && activeTools.Count > 0)
+            {
+                AddAgentActivityStep(stepsByUserIndex, activeUserIndex, CreateToolActivityStep(
+                    BuildActiveToolActivityStateKey(activeThread),
+                    activeTools,
+                    true,
+                    int.MaxValue));
+            }
+
+            var result = new Dictionary<int, ChatMessage>();
+            foreach (KeyValuePair<int, List<AgentActivityStepViewModel>> pair in stepsByUserIndex)
+            {
+                List<AgentActivityStepViewModel> steps = pair.Value.OrderBy(step => step.SortOrder).ToList();
+                DateTime startedAt = steps.Min(step => step.StartedAtLocal);
+                bool isRunning = steps.Any(step => step.IsRunning);
+                DateTime completedAt = isRunning ? DateTime.Now : steps.Max(step => step.CompletedAtLocal);
+                string elapsedText = FormatElapsed(completedAt > startedAt ? completedAt - startedAt : TimeSpan.Zero);
+                string stateKey = $"thread:{activeThread.Id}:agent-activity:user:{pair.Key}";
+                string pendingStateKey = $"thread:{activeThread.Id}:agent-activity:user:-1";
+                result[pair.Key] = new ChatMessage
+                {
+                    Text = FormatResourceText("AiChatAgentActivityHeader", "Agent activity ({0} steps) · {1}", steps.Count, elapsedText),
+                    Role = AuthorRole.Assistant,
+                    IsAgentActivitySummary = true,
+                    ToolActivityStateKey = stateKey,
+                    IsToolActivityExpanded = GetRememberedToolActivityExpandedState(
+                        stateKey,
+                        GetRememberedToolActivityExpandedState(pendingStateKey, false)),
+                    ActivitySteps = steps,
+                    ActivityFooterText = FormatResourceText("AiChatAgentActivityDuration", "Total time: {0}", elapsedText)
+                };
+            }
+
+            return result;
+        }
+
+        private AgentActivityStepViewModel CreateReasoningActivityStep(
+            AIThread thread,
+            string activityId,
+            DateTime startedAtLocal,
+            DateTime? completedAtLocal,
+            string reasoningText,
+            int sortOrder)
+        {
+            bool isRunning = !completedAtLocal.HasValue;
+            DateTime effectiveCompletedAt = completedAtLocal ?? DateTime.Now;
+            string elapsedText = FormatElapsed(effectiveCompletedAt > startedAtLocal
+                ? effectiveCompletedAt - startedAtLocal
+                : TimeSpan.Zero);
+            string stateKey = BuildReasoningActivityStateKey(thread, activityId);
+            return new AgentActivityStepViewModel
+            {
+                HeaderText = isRunning
+                    ? FormatResourceText("AiChatReasoningHeaderRunning", "Thinking… {0}", elapsedText)
+                    : FormatResourceText("AiChatReasoningHeaderCompleted", "Thought for {0}", elapsedText),
+                StateKey = stateKey,
+                IsExpanded = GetRememberedToolActivityExpandedState(
+                    stateKey,
+                    GetRememberedToolActivityExpandedState(BuildReasoningActivityStateKey(thread, "active"), false)),
+                IsReasoning = true,
+                ReasoningBodyText = BuildReasoningBodyText(reasoningText, isRunning),
+                FooterText = FormatResourceText("AiChatReasoningDuration", "Thinking time: {0}", elapsedText),
+                StartedAtLocal = startedAtLocal,
+                CompletedAtLocal = effectiveCompletedAt,
+                IsRunning = isRunning,
+                SortOrder = sortOrder
+            };
+        }
+
+        private AgentActivityStepViewModel CreateToolActivityStep(
+            string stateKey,
+            List<ToolActivityViewModel> tools,
+            bool isRunning,
+            int sortOrder)
+        {
+            DateTime startedAt = tools.Where(tool => tool.StartedAtLocal != default)
+                .Select(tool => tool.StartedAtLocal)
+                .DefaultIfEmpty(DateTime.Now)
+                .Min();
+            DateTime completedAt = isRunning || tools.Any(tool => tool.CompletedAtLocal == default)
+                ? DateTime.Now
+                : tools.Max(tool => tool.CompletedAtLocal);
+            return new AgentActivityStepViewModel
+            {
+                HeaderText = BuildTimedToolActivityHeaderText(tools.Count, tools, isRunning),
+                StateKey = stateKey,
+                IsExpanded = GetRememberedToolActivityExpandedState(
+                    stateKey,
+                    GetRememberedToolActivityExpandedState(BuildActiveToolActivityStateKey(ActiveThread), false)),
+                IsToolActivity = true,
+                ToolActivities = tools,
+                FooterText = BuildToolActivityFooterText(tools),
+                StartedAtLocal = startedAt,
+                CompletedAtLocal = completedAt,
+                IsRunning = isRunning,
+                SortOrder = sortOrder
+            };
+        }
+
+        private static void AddAgentActivityStep(
+            Dictionary<int, List<AgentActivityStepViewModel>> stepsByUserIndex,
+            int userHistoryIndex,
+            AgentActivityStepViewModel step)
+        {
+            if (!stepsByUserIndex.TryGetValue(userHistoryIndex, out List<AgentActivityStepViewModel> steps))
+            {
+                steps = new List<AgentActivityStepViewModel>();
+                stepsByUserIndex[userHistoryIndex] = steps;
+            }
+            steps.Add(step);
+        }
+
+        private static int FindPrecedingUserHistoryIndex(AIThread thread, int fromIndex)
+        {
+            if (thread?.ChatHistory == null)
+            {
+                return -1;
+            }
+
+            for (int index = Math.Min(fromIndex, thread.ChatHistory.Count - 1); index >= 0; index--)
+            {
+                if (thread.ChatHistory[index]?.Role == AuthorRole.User)
+                {
+                    return index;
+                }
+            }
+            return -1;
         }
 
         private List<ToolActivityViewModel> BuildToolActivityViewModels(
@@ -1218,7 +1449,9 @@ namespace CrypTool.CrypLLM
                 StatusTooltip = statusTooltip,
                 StatusLabel = statusLabel,
                 StatusBackground = statusBackground,
-                StatusForeground = statusForeground
+                StatusForeground = statusForeground,
+                StartedAtLocal = entry?.StartedAtLocal ?? default,
+                CompletedAtLocal = entry?.CompletedAtLocal ?? default
             };
         }
 
@@ -2066,7 +2299,6 @@ namespace CrypTool.CrypLLM
 
         private void RefreshInputAvailability()
         {
-            OnPropertyChanged(nameof(CanInteractWithAgentChanges));
             bool hasSelectedModel = HasSelectedModel;
 
             // Keep previews and selection stable until the current request has completed.
@@ -2086,16 +2318,6 @@ namespace CrypTool.CrypLLM
                 SendButton.IsEnabled = canInteractWithSendButton;
                 SendButton.Cursor = canInteractWithSendButton ? Cursors.Hand : Cursors.Arrow;
             }
-        }
-
-        public IEnumerable<AgentWorkspaceChange> AgentChanges => ActiveThread?.AgentWorkspaceChanges;
-        public Visibility AgentChangesVisibility => ActiveThread?.AgentWorkspaceChanges.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
-        public bool CanInteractWithAgentChanges => !_isRequestRunning;
-
-        private void UndoAgentChanges_Click(object sender, RoutedEventArgs e)
-        {
-            if (_isRequestRunning || !(sender is FrameworkElement element) || !(element.DataContext is AgentWorkspaceChange change)) return;
-            if (change.Undo()) AIThreadManager.Instance.RecordAgentUndo(ActiveThread, change.Title);
         }
 
         private static string GetResourceText(string resourceKey)
@@ -2122,6 +2344,98 @@ namespace CrypTool.CrypLLM
             return itemCount > 0
                 ? FormatResourceText("AiChatToolActivityHeaderMessageCount", "Tool activity ({0})", itemCount)
                 : GetResourceTextOrFallback("AiChatToolActivityHeaderMessage", "Tool activity");
+        }
+
+        private string BuildTimedToolActivityHeaderText(
+            int itemCount,
+            IReadOnlyList<ToolActivityViewModel> activities,
+            bool isRunning)
+        {
+            string baseText = isRunning
+                ? BuildRunningToolActivityHeaderText(itemCount)
+                : BuildCompletedToolActivityHeaderText(itemCount);
+            return $"{baseText} · {FormatElapsed(GetToolActivityElapsed(activities))}";
+        }
+
+        private string BuildToolActivityFooterText(IReadOnlyList<ToolActivityViewModel> activities)
+        {
+            return FormatResourceText(
+                "AiChatActivityDuration",
+                "Duration: {0}",
+                FormatElapsed(GetToolActivityElapsed(activities)));
+        }
+
+        private ChatMessage CreateReasoningActivityMessage(
+            AIThread thread,
+            string activityId,
+            DateTime startedAtLocal,
+            DateTime? completedAtLocal,
+            string reasoningText)
+        {
+            bool isRunning = !completedAtLocal.HasValue;
+            TimeSpan elapsed = (completedAtLocal ?? DateTime.Now) - startedAtLocal;
+            string elapsedText = FormatElapsed(elapsed);
+            string stateKey = BuildReasoningActivityStateKey(thread, activityId);
+            string header = isRunning
+                ? FormatResourceText("AiChatReasoningHeaderRunning", "Thinking… {0}", elapsedText)
+                : FormatResourceText("AiChatReasoningHeaderCompleted", "Thought for {0}", elapsedText);
+
+            return new ChatMessage
+            {
+                Text = header,
+                Role = AuthorRole.Assistant,
+                IsReasoningSummary = true,
+                ToolActivityStateKey = stateKey,
+                IsToolActivityExpanded = GetRememberedToolActivityExpandedState(
+                    stateKey,
+                    GetRememberedToolActivityExpandedState(BuildReasoningActivityStateKey(thread, "active"), false)),
+                ReasoningBodyText = BuildReasoningBodyText(reasoningText, isRunning),
+                ActivityFooterText = FormatResourceText("AiChatReasoningDuration", "Thinking time: {0}", elapsedText)
+            };
+        }
+
+        private static string BuildReasoningBodyText(string reasoningText, bool isRunning)
+        {
+            if (!string.IsNullOrWhiteSpace(reasoningText))
+            {
+                return reasoningText.Trim();
+            }
+
+            return isRunning
+                ? GetResourceTextOrFallback("AiChatReasoningBodyRunning", "The model is preparing the next step. Any reasoning text it provides will appear here.")
+                : GetResourceTextOrFallback("AiChatReasoningBody", "The model provided no separate reasoning text for this step.");
+        }
+
+        private static TimeSpan GetToolActivityElapsed(IReadOnlyList<ToolActivityViewModel> activities)
+        {
+            List<ToolActivityViewModel> timed = (activities ?? Array.Empty<ToolActivityViewModel>())
+                .Where(item => item != null && item.StartedAtLocal != default)
+                .ToList();
+            if (timed.Count == 0)
+            {
+                return TimeSpan.Zero;
+            }
+
+            DateTime started = timed.Min(item => item.StartedAtLocal);
+            DateTime completed = timed.Any(item => item.CompletedAtLocal == default)
+                ? DateTime.Now
+                : timed.Max(item => item.CompletedAtLocal);
+            return completed > started ? completed - started : TimeSpan.Zero;
+        }
+
+        private static string FormatElapsed(TimeSpan elapsed)
+        {
+            double totalSeconds = Math.Max(0d, elapsed.TotalSeconds);
+            if (totalSeconds < 60d)
+            {
+                return string.Format(CultureInfo.CurrentCulture, "{0:0.0} s", totalSeconds);
+            }
+
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "{0}:{1:00} min",
+                (int)totalSeconds / 60,
+                (int)totalSeconds % 60);
         }
 
         private static string FormatResourceText(string resourceKey, string fallbackFormat, params object[] args)
@@ -2777,6 +3091,7 @@ namespace CrypTool.CrypLLM
 
                     ProcessingIndicator.Visibility = Visibility.Visible;
                     _spinnerStoryboard?.Begin(this, true);
+                    _activityElapsedTimer.Start();
                 }
                 else // Processing finished; restore interactive input state.
                 {
@@ -2784,6 +3099,7 @@ namespace CrypTool.CrypLLM
 
                     _spinnerStoryboard?.Stop(this);
                     ProcessingIndicator.Visibility = Visibility.Collapsed;
+                    _activityElapsedTimer.Stop();
 
                     RefreshInputAvailability();
                     if (InputBox.IsEnabled)
@@ -2854,9 +3170,30 @@ namespace CrypTool.CrypLLM
         public AuthorRole Role { get; set; }
         public bool IsError { get; set; }
         public bool IsToolActivitySummary { get; set; }
+        public bool IsReasoningSummary { get; set; }
+        public bool IsAgentActivitySummary { get; set; }
         public string ToolActivityStateKey { get; set; }
         public bool IsToolActivityExpanded { get; set; }
         public List<ToolActivityViewModel> ToolActivities { get; set; } = new List<ToolActivityViewModel>();
+        public List<AgentActivityStepViewModel> ActivitySteps { get; set; } = new List<AgentActivityStepViewModel>();
+        public string ReasoningBodyText { get; set; }
+        public string ActivityFooterText { get; set; }
+    }
+
+    public sealed class AgentActivityStepViewModel
+    {
+        public string HeaderText { get; set; }
+        public string StateKey { get; set; }
+        public bool IsExpanded { get; set; }
+        public bool IsReasoning { get; set; }
+        public bool IsToolActivity { get; set; }
+        public string ReasoningBodyText { get; set; }
+        public string FooterText { get; set; }
+        public List<ToolActivityViewModel> ToolActivities { get; set; } = new List<ToolActivityViewModel>();
+        public DateTime StartedAtLocal { get; set; }
+        public DateTime CompletedAtLocal { get; set; }
+        public bool IsRunning { get; set; }
+        public int SortOrder { get; set; }
     }
 
     public sealed class ToolActivityViewModel
@@ -2875,6 +3212,8 @@ namespace CrypTool.CrypLLM
         public string StatusLabel { get; set; }
         public Brush StatusBackground { get; set; }
         public Brush StatusForeground { get; set; }
+        public DateTime StartedAtLocal { get; set; }
+        public DateTime CompletedAtLocal { get; set; }
         public bool HasToolDescription => !string.IsNullOrWhiteSpace(ToolDescription);
         public bool HasArguments => ArgumentItems.Count > 0;
         public bool HasErrorDetails => !string.IsNullOrWhiteSpace(ErrorDetails);

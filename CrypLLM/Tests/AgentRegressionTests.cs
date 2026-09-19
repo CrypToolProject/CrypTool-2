@@ -53,6 +53,7 @@ internal static class AgentRegressionTests
             MemoFitAndLayoutChecks();
             WireClearanceIncludesAttachedComponents();
             AgentGroupsPreserveManualChanges();
+            BlankWorkspaceToolCreatesNewTab();
             TemplateSearchUsesBothLanguages();
             LocalizedResourcesResolve();
             Console.WriteLine("All agent regression tests passed.");
@@ -646,6 +647,23 @@ internal static class AgentRegressionTests
                             "Repeated live compression must reuse memory and keep every request within model capacity.");
                         Assert(thread.LastInvocationDebugInfo.TextReductions.Any(entry => entry.Source == "LiveContext"),
                             "Invocation diagnostics must include live reductions.");
+                        var toolBlocks = ((IEnumerable)Call(thread, "GetToolActivityMessageAttachmentsSnapshot"))
+                            .Cast<object>().ToList();
+                        var reasoningBlocks = ((IEnumerable)Call(thread, "GetReasoningActivityMessageAttachmentsSnapshot"))
+                            .Cast<object>().ToList();
+                        Assert(toolBlocks.Count == 160 && toolBlocks.All(block =>
+                            ((IEnumerable)block.GetType().GetProperty("Entries").GetValue(block)).Cast<object>().Count() == 1),
+                            "Every tool round must be attached as its own chronological activity block.");
+                        Assert(toolBlocks.Select(block => (int)block.GetType().GetProperty("HistoryMessageIndex").GetValue(block))
+                                .SequenceEqual(toolBlocks.Select(block => (int)block.GetType().GetProperty("HistoryMessageIndex").GetValue(block)).OrderBy(index => index)),
+                            "Tool activity blocks must retain chat-history order.");
+                        Assert(reasoningBlocks.Count == 161,
+                            "Every model round, including the final answer, must retain a timed reasoning block.");
+                        Assert(reasoningBlocks.Take(160).Select((block, index) =>
+                                (string)block.GetType().GetProperty("ReasoningText").GetValue(block) == "Working step " + (index + 1) + ".").All(value => value),
+                            "Expanded reasoning steps must show the ordinary rationale text emitted alongside each tool decision.");
+                        Assert(string.IsNullOrEmpty((string)reasoningBlocks.Last().GetType().GetProperty("ReasoningText").GetValue(reasoningBlocks.Last())),
+                            "The final user-facing answer must not be duplicated as a reasoning step.");
                     }
                     else if (scenario == 3)
                         Assert(handler.Requests == 5 && archivedResults > 0, "Cancel must stop the loop and preserve completed exchanges.");
@@ -1023,10 +1041,13 @@ internal static class AgentRegressionTests
                 Assert(!(bool)failed["success"] && input.GetWidth() == 600 && adapter.ActiveEditorReads == 0, "Closed pins must not redirect resize operations.");
                 failed = JObject.Parse((string)Call(plugin, "SetConnectorOrientationInWorkspace", inputId, connection.From.PropertyName, "North", null));
                 Assert(!(bool)failed["success"] && adapter.ActiveEditorReads == 0, "Closed pins must not redirect connector changes.");
+                failed = JObject.Parse((string)Call(plugin, "RedrawConnectionInWorkspace", System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(connection).ToString(), null));
+                Assert(!(bool)failed["success"] && adapter.ActiveEditorReads == 0, "Closed pins must not redirect wire redraws.");
             }
             Assert((bool)CallStatic("Threads.ToolPermissionFilter", "IsMutationFunction", "ws_resize_component") &&
                 (bool)CallStatic("Threads.ToolPermissionFilter", "IsMutationFunction", "ws_resize_memo"), "Resize tools must obey mutation permission gating.");
             Assert((bool)CallStatic("Threads.ToolPermissionFilter", "IsMutationFunction", "ws_set_connector_orientation"), "Connector orientation must obey mutation permission gating.");
+            Assert((bool)CallStatic("Threads.ToolPermissionFilter", "IsMutationFunction", "ws_redraw_connection"), "Wire redraws must obey mutation permission gating.");
             Console.WriteLine("PASS: real component/memo resizing, bounds, preserved contents/connections, Undo/Redo and invalid dimensions");
         }
         finally { window.Close(); }
@@ -1085,6 +1106,23 @@ internal static class AgentRegressionTests
         var schema = JObject.FromObject(CallStatic("Services.AISchemaGenerator", "CreateWorkspaceModelAbstraction", model));
         Assert(schema["Components"].Any(component => component["Outputs"].Any(item => (string)item["Orientation"] == "East")) &&
             schema["Components"].Any(component => component["Inputs"].Any(item => (string)item["Orientation"] == "East")), "The workspace schema must expose current connector sides.");
+        string connectionId = System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(connection).ToString();
+        connection.PointList = new List<System.Windows.Point>
+        {
+            new System.Windows.Point(10, 10),
+            new System.Windows.Point(20, 10),
+            new System.Windows.Point(20, 20)
+        };
+        JObject redrawn = JObject.Parse((string)Call(plugin, "RedrawConnectionInWorkspace", connectionId, null));
+        window.UpdateLayout();
+        Assert((bool)redrawn["success"] && (bool)redrawn["routeReset"] && (int)redrawn["previousPointCount"] == 3,
+            "A wire redraw must invalidate exactly the selected stored route.");
+        Assert((string)redrawn["connectionId"] == connectionId && model.GetAllConnectionModels().Count == 1 &&
+            ReferenceEquals(model.GetAllConnectionModels().Single(), connection) && connection.From == source.GetOutputConnectors().First() &&
+            connection.To == target.GetInputConnectors().First(), "A wire redraw must preserve connection identity and both endpoints.");
+        JObject missingWire = JObject.Parse((string)Call(plugin, "RedrawConnectionInWorkspace", "missing-connection", null));
+        Assert(!(bool)missingWire["success"] && missingWire["availableConnections"].Any(item => (string)item["connectionId"] == connectionId),
+            "An unknown connection ID must fail without changes and return exact recovery candidates.");
         Console.WriteLine("PASS: connector sides, visual placement/rotation, preserved wiring, Undo/Redo and invalid names/sides");
     }
 
@@ -1367,10 +1405,36 @@ internal static class AgentRegressionTests
         finally { property.GetSetMethod(true).Invoke(null, new object[] { original }); }
     }
 
+    private static void BlankWorkspaceToolCreatesNewTab()
+    {
+        var adapter = new ClosedWorkspaceAdapter
+        {
+            EmptyWorkspaceResult = new OpenTabsAbstraction
+            {
+                Id = "blank-tab",
+                Title = "New Project",
+                ContentType = "WorkspaceManager.WorkspaceManagerClass",
+                IsActive = true
+            }
+        };
+        CrypWinPort.Instance = adapter;
+        object plugin = Activator.CreateInstance(AgentType("WorkspaceEditingPlugin"), true);
+        JObject result = JObject.Parse((string)Call(plugin, "CreateEmptyWorkspace"));
+        Assert((bool)result["success"] && (bool)result["empty"] && (string)result["tabId"] == "blank-tab" && adapter.EmptyWorkspaceOpenCalls == 1,
+            "ws_new must create one real empty tab and return its exact ID.");
+        Assert((bool)CallStatic("Threads.ToolPermissionFilter", "IsMutationFunction", "ws_new"),
+            "Creating a blank workspace must obey mutation permission gating.");
+        adapter.EmptyWorkspaceResult = null;
+        result = JObject.Parse((string)Call(plugin, "CreateEmptyWorkspace"));
+        Assert(!(bool)result["success"] && adapter.EmptyWorkspaceOpenCalls == 2,
+            "A failed host-side workspace creation must be reported without invented tab metadata.");
+        Console.WriteLine("PASS: blank workspace tool creates a new tab and reports host failures");
+    }
+
     private static void LocalizedResourcesResolve()
     {
         var resources = CrypTool.CrypLLM.Properties.Resources.ResourceManager;
-        foreach (string key in new[] { "ExportChatTooltip", "AgentInstructionsTab", "AiChatDeleteAllConfirmation", "AiChatInvocationError", "AiChatFatalInitializationError", "LocalApiKeyLabel", "LocalApiKeyTooltip", "ContextCompressionSection", "AutoCompressContextLabel", "ContextCompressionTriggerLabel", "ContextCompressionTargetLabel", "ContextCompressionHint", "ContextCompressionInvalidPercent", "AiChatContextUsageFormat", "AiChatContextUsageUnknownFormat", "AiChatContextUsageTooltip", "AiChatNoVisibleModelAnswer" })
+        foreach (string key in new[] { "ExportChatTooltip", "AgentInstructionsTab", "AiChatDeleteAllConfirmation", "AiChatInvocationError", "AiChatFatalInitializationError", "LocalApiKeyLabel", "LocalApiKeyTooltip", "ContextCompressionSection", "AutoCompressContextLabel", "ContextCompressionTriggerLabel", "ContextCompressionTargetLabel", "ContextCompressionHint", "ContextCompressionInvalidPercent", "AiChatContextUsageFormat", "AiChatContextUsageUnknownFormat", "AiChatContextUsageTooltip", "AiChatNoVisibleModelAnswer", "AiChatActivityDuration", "AiChatReasoningHeaderRunning", "AiChatReasoningHeaderCompleted", "AiChatReasoningBody", "AiChatReasoningBodyRunning", "AiChatReasoningDuration", "AiChatAgentActivityHeader", "AiChatAgentActivityDuration" })
         {
             string english = resources.GetString(key, CultureInfo.GetCultureInfo("en"));
             string german = resources.GetString(key, CultureInfo.GetCultureInfo("de"));
@@ -1384,7 +1448,7 @@ internal static class AgentRegressionTests
             Assert(!string.IsNullOrWhiteSpace(english) && !string.IsNullOrWhiteSpace(german) && english != german, "Missing undo/layout translation: " + key);
         }
         var toolResources = new System.Resources.ResourceManager("CrypTool.CrypLLM.Properties.ToolDescriptions", AgentAssembly);
-        foreach (string key in new[] { "ToolDescription_ws_resize_component", "ToolDescription_ws_resize_memo", "ToolDescription_ws_set_connector_orientation", "ToolDescription_ws_fit_memo", "ToolDescription_ws_check_layout", "ToolDescription_tpl_search" })
+        foreach (string key in new[] { "ToolDescription_ws_new", "ToolDescription_ws_resize_component", "ToolDescription_ws_resize_memo", "ToolDescription_ws_set_connector_orientation", "ToolDescription_ws_redraw_connection", "ToolDescription_ws_fit_memo", "ToolDescription_ws_check_layout", "ToolDescription_tpl_search" })
         {
             string english = toolResources.GetString(key, CultureInfo.GetCultureInfo("en"));
             string german = toolResources.GetString(key, CultureInfo.GetCultureInfo("de"));
@@ -1430,6 +1494,8 @@ internal static class AgentRegressionTests
         internal IEditor Workspace;
         internal int ActiveEditorReads;
         internal int TemplateOpenCalls;
+        internal int EmptyWorkspaceOpenCalls;
+        internal OpenTabsAbstraction EmptyWorkspaceResult;
         public IEditor ActiveEditor { get { ActiveEditorReads++; return null; } }
         public IEnumerable<OpenTabsAbstraction> GetOpenTabs() { return new OpenTabsAbstraction[0]; }
         public bool TryGetWorkspaceEditorByTabId(string id, out IEditor editor) { editor = id == "resize-tab" ? Workspace : null; return editor != null; }
@@ -1437,7 +1503,7 @@ internal static class AgentRegressionTests
         public IList<string> GetRecentLogMessages(int maxLines) { return new List<string>(); }
         public void ShowAIChatPane() { }
         public void ShowAIChatSettings() { }
-        public OpenTabsAbstraction CreateEmptyWorkspaceTab() { return null; }
+        public OpenTabsAbstraction CreateEmptyWorkspaceTab() { EmptyWorkspaceOpenCalls++; return EmptyWorkspaceResult; }
         public OpenTabsAbstraction OpenTemplateWorkspaceTab(string path) { TemplateOpenCalls++; return null; }
     }
 }

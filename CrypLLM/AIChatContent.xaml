@@ -37,7 +37,6 @@
             <RowDefinition Height="Auto"/>
             <!-- Chat area -->
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>  <!-- Input area -->
         </Grid.RowDefinitions>
 
@@ -164,6 +163,7 @@
                                         <Expander IsExpanded="{Binding IsToolActivityExpanded, Mode=TwoWay}"
                                                   HorizontalAlignment="Stretch"
                                                   Header="{Binding Text}">
+                                            <StackPanel>
                                             <ItemsControl ItemsSource="{Binding ToolActivities}"
                                                           HorizontalAlignment="Stretch">
                                                 <ItemsControl.ItemTemplate>
@@ -360,6 +360,118 @@
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>
                                             </ItemsControl>
+                                                <TextBlock Text="{Binding ActivityFooterText}"
+                                                           Margin="0,7,0,0"
+                                                           Foreground="#FF687481"
+                                                           FontSize="11"/>
+                                            </StackPanel>
+                                        </Expander>
+                                    </Border>
+                                    <Border x:Name="ReasoningSummaryContainer"
+                                            Visibility="Collapsed"
+                                            Background="#FFF7F7F7"
+                                            BorderBrush="#FFE1E1E1"
+                                            BorderThickness="1"
+                                            CornerRadius="4"
+                                            Padding="8"
+                                            HorizontalAlignment="Stretch"
+                                            Margin="10,0,0,0">
+                                        <Expander IsExpanded="{Binding IsToolActivityExpanded, Mode=TwoWay}"
+                                                  HorizontalAlignment="Stretch"
+                                                  Header="{Binding Text}">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding ReasoningBodyText}"
+                                                           TextWrapping="Wrap"
+                                                           Foreground="#FF4B5563"/>
+                                                <TextBlock Text="{Binding ActivityFooterText}"
+                                                           Margin="0,7,0,0"
+                                                           Foreground="#FF687481"
+                                                           FontSize="11"/>
+                                            </StackPanel>
+                                        </Expander>
+                                    </Border>
+                                    <Border x:Name="AgentActivitySummaryContainer"
+                                            Visibility="Collapsed"
+                                            Background="#FFF7F7F7"
+                                            BorderBrush="#FFD8DEE6"
+                                            BorderThickness="1"
+                                            CornerRadius="4"
+                                            Padding="8"
+                                            HorizontalAlignment="Stretch"
+                                            Margin="10,0,0,0">
+                                        <Expander IsExpanded="{Binding IsToolActivityExpanded, Mode=TwoWay}"
+                                                  HorizontalAlignment="Stretch"
+                                                  Header="{Binding Text}">
+                                            <StackPanel>
+                                                <ItemsControl ItemsSource="{Binding ActivitySteps}">
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Border Background="#FFFFFFFF"
+                                                                    BorderBrush="#FFE1E5EA"
+                                                                    BorderThickness="1"
+                                                                    CornerRadius="3"
+                                                                    Padding="6"
+                                                                    Margin="0,4,0,0">
+                                                                <Expander Header="{Binding HeaderText}"
+                                                                          IsExpanded="{Binding IsExpanded, Mode=TwoWay}"
+                                                                          HorizontalAlignment="Stretch">
+                                                                    <StackPanel Margin="2,5,0,0">
+                                                                        <TextBlock Text="{Binding ReasoningBodyText}"
+                                                                                   TextWrapping="Wrap"
+                                                                                   Foreground="#FF4B5563"
+                                                                                   Visibility="{Binding IsReasoning, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                                                        <ItemsControl ItemsSource="{Binding ToolActivities}"
+                                                                                      Visibility="{Binding IsToolActivity, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                            <ItemsControl.ItemTemplate>
+                                                                                <DataTemplate>
+                                                                                    <Border BorderBrush="#FFE6E8EB"
+                                                                                            BorderThickness="0,0,0,1"
+                                                                                            Padding="0,5">
+                                                                                        <StackPanel>
+                                                                                            <DockPanel LastChildFill="True">
+                                                                                                <Border DockPanel.Dock="Right"
+                                                                                                        Background="{Binding StatusBackground}"
+                                                                                                        CornerRadius="8"
+                                                                                                        Padding="7,1"
+                                                                                                        Margin="8,0,0,0">
+                                                                                                    <TextBlock Text="{Binding StatusLabel}"
+                                                                                                               Foreground="{Binding StatusForeground}"
+                                                                                                               FontSize="10"
+                                                                                                               FontWeight="SemiBold"/>
+                                                                                                </Border>
+                                                                                                <TextBlock Text="{Binding ToolDisplayName}"
+                                                                                                           FontWeight="SemiBold"
+                                                                                                           Foreground="#FF222222"
+                                                                                                           TextWrapping="Wrap"/>
+                                                                                            </DockPanel>
+                                                                                            <TextBlock Text="{Binding DisplayArgumentsText}"
+                                                                                                       Margin="0,3,0,0"
+                                                                                                       FontFamily="Consolas"
+                                                                                                       FontSize="10"
+                                                                                                       Foreground="#FF5A6570"
+                                                                                                       TextWrapping="Wrap"
+                                                                                                       Visibility="{Binding HasArguments, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                                                                        </StackPanel>
+                                                                                    </Border>
+                                                                                </DataTemplate>
+                                                                            </ItemsControl.ItemTemplate>
+                                                                        </ItemsControl>
+                                                                        <TextBlock Text="{Binding FooterText}"
+                                                                                   Margin="0,7,0,0"
+                                                                                   Foreground="#FF687481"
+                                                                                   FontSize="11"/>
+                                                                    </StackPanel>
+                                                                </Expander>
+                                                            </Border>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                                <TextBlock Text="{Binding ActivityFooterText}"
+                                                           Margin="0,8,0,0"
+                                                           Foreground="#FF52606D"
+                                                           FontSize="11"
+                                                           FontWeight="SemiBold"/>
+                                            </StackPanel>
                                         </Expander>
                                     </Border>
                                     <!-- Plain Text for user messages -->
@@ -372,8 +484,8 @@
                                      TextWrapping="Wrap"
                                      Foreground="Black"
                                      Visibility="Visible"
-                                     TextAlignment="Right"
-                                     HorizontalAlignment="Right"
+                                     TextAlignment="Left"
+                                     HorizontalAlignment="Left"
                                      Padding="6"
                                      FontFamily="Segoe UI"
                                      FontSize="13"
@@ -410,7 +522,7 @@
                                 <DataTemplate.Triggers>
                                     <!-- user messages -->
                                     <DataTrigger Binding="{Binding Role}" Value="{x:Static message:AuthorRole.User}">
-                                        <Setter TargetName="MessageBorder" Property="HorizontalAlignment" Value="Right" />
+                                        <Setter TargetName="MessageBorder" Property="HorizontalAlignment" Value="Left" />
                                         <Setter TargetName="MessageBorder" Property="Background" Value="#C1D9F1" />
                                         <Setter TargetName="UserMessage" Property="Visibility" Value="Visible" />
                                         <Setter TargetName="AIMessage" Property="Visibility" Value="Collapsed" />
@@ -444,6 +556,28 @@
                                         <Setter TargetName="AIMessage" Property="Visibility" Value="Collapsed" />
                                         <Setter TargetName="ErrorMessage" Property="Visibility" Value="Collapsed" />
                                         <Setter TargetName="ToolActivitySummaryContainer" Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding IsReasoningSummary}" Value="True">
+                                        <Setter TargetName="MessageBorder" Property="HorizontalAlignment" Value="Stretch" />
+                                        <Setter TargetName="MessageBorder" Property="Background" Value="Transparent" />
+                                        <Setter TargetName="MessageBorder" Property="BorderThickness" Value="0" />
+                                        <Setter TargetName="MessageBorder" Property="Margin" Value="0,3,0,3" />
+                                        <Setter TargetName="UserMessage" Property="Visibility" Value="Collapsed" />
+                                        <Setter TargetName="AIMessage" Property="Visibility" Value="Collapsed" />
+                                        <Setter TargetName="ErrorMessage" Property="Visibility" Value="Collapsed" />
+                                        <Setter TargetName="ReasoningSummaryContainer" Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding IsAgentActivitySummary}" Value="True">
+                                        <Setter TargetName="MessageBorder" Property="HorizontalAlignment" Value="Stretch" />
+                                        <Setter TargetName="MessageBorder" Property="Background" Value="Transparent" />
+                                        <Setter TargetName="MessageBorder" Property="BorderThickness" Value="0" />
+                                        <Setter TargetName="MessageBorder" Property="Margin" Value="0,3,0,3" />
+                                        <Setter TargetName="UserMessage" Property="Visibility" Value="Collapsed" />
+                                        <Setter TargetName="AIMessage" Property="Visibility" Value="Collapsed" />
+                                        <Setter TargetName="ErrorMessage" Property="Visibility" Value="Collapsed" />
+                                        <Setter TargetName="AgentActivitySummaryContainer" Property="Visibility" Value="Visible" />
                                     </DataTrigger>
                                 </DataTemplate.Triggers>
                             </DataTemplate>
@@ -525,29 +659,7 @@
 
 
         <!-- Input area -->
-        <ScrollViewer Grid.Row="2" MaxHeight="140" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
-                      Visibility="{Binding AgentChangesVisibility}" Margin="5,2,5,2">
-            <ItemsControl ItemsSource="{Binding AgentChanges}" IsEnabled="{Binding CanInteractWithAgentChanges}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Background="#FFF3F6FA" BorderBrush="#FFD5DFEA" BorderThickness="1" Padding="8" Margin="0,0,0,4">
-                            <StackPanel>
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Title}" FontWeight="SemiBold" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                    <Button IsEnabled="{Binding CanUndo}" Click="UndoAgentChanges_Click" HorizontalAlignment="Left" Padding="8,3" Margin="0,4,0,4">
-                                        <TextBlock Text="{Binding UndoLabel}" TextWrapping="Wrap"/>
-                                    </Button>
-                                </StackPanel>
-                                <TextBlock Text="{Binding Status}" TextWrapping="Wrap" FontSize="11"/>
-                                <TextBlock Text="{Binding LayoutStatus}" TextWrapping="Wrap" FontSize="11" Foreground="#FF566477"/>
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
-
-        <Grid Grid.Row="3" Margin="5">
+        <Grid Grid.Row="2" Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>     <!-- Chat input field -->
                 <RowDefinition Height="5"/>     <!-- Spacer -->

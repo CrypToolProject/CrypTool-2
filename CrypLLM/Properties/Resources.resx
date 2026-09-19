@@ -657,6 +657,30 @@ Results should be reviewed critically, especially in security-relevant contexts.
   <data name="AiChatToolActivityHeaderMessageCount" xml:space="preserve">
     <value>Tool activity ({0})</value>
   </data>
+  <data name="AiChatActivityDuration" xml:space="preserve">
+    <value>Duration: {0}</value>
+  </data>
+  <data name="AiChatReasoningHeaderRunning" xml:space="preserve">
+    <value>Thinking… {0}</value>
+  </data>
+  <data name="AiChatReasoningHeaderCompleted" xml:space="preserve">
+    <value>Thought for {0}</value>
+  </data>
+  <data name="AiChatReasoningBody" xml:space="preserve">
+    <value>The model provided no separate reasoning text for this step.</value>
+  </data>
+  <data name="AiChatReasoningBodyRunning" xml:space="preserve">
+    <value>The model is preparing the next step. Any reasoning text it provides will appear here.</value>
+  </data>
+  <data name="AiChatReasoningDuration" xml:space="preserve">
+    <value>Thinking time: {0}</value>
+  </data>
+  <data name="AiChatAgentActivityHeader" xml:space="preserve">
+    <value>Agent activity ({0} steps) · {1}</value>
+  </data>
+  <data name="AiChatAgentActivityDuration" xml:space="preserve">
+    <value>Total time: {0}</value>
+  </data>
   <data name="AiChatToolActivityEmptyStateRunning" xml:space="preserve">
     <value>No tool calls yet.</value>
   </data>
