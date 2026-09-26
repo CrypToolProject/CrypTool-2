@@ -3,11 +3,27 @@
 <documentation>
   <language culture="en" />
   <language culture="de-DE" />
-  <introduction lang="en"></introduction>
-  <introduction lang="de-DE"></introduction>
-  <usage lang="en"></usage>
-  <usage lang="de-DE"></usage>
-  <presentation lang="en"></presentation>
-  <presentation lang="de-DE"></presentation>
-  <references></references>
+  <introduction lang="en">
+    FEAL (Fast Data Encipherment Algorithm) is a symmetric block cipher with a block size of 64 bits and a key size of 64 bits. This component implements the reduced-round variants FEAL-4 and FEAL-8. Both variants are cryptographically broken and should be used only for education, experimentation, and cryptanalysis—not for protecting sensitive data.
+  </introduction>
+  <introduction lang="de-DE">
+    FEAL (Fast Data Encipherment Algorithm) ist eine symmetrische Blockchiffre mit einer Blockgröße von 64 Bit und einer Schlüssellänge von 64 Bit. Diese Komponente implementiert die rundenreduzierten Varianten FEAL-4 und FEAL-8. Beide Varianten sind kryptografisch gebrochen und sollten ausschließlich für Lehre, Experimente und Kryptoanalyse verwendet werden, nicht zum Schutz sensibler Daten.
+  </introduction>
+  <usage lang="en">
+    Connect the data to be processed to <b>Input stream</b> and provide an eight-byte key at <b>Key</b>. Shorter keys are extended with zero bytes; longer keys are truncated to eight bytes. Choose FEAL-4 or FEAL-8, encryption or decryption, a block mode, and a padding method in the settings.<newline /><newline />
+    ECB mode does not use an initialization vector. CBC, CFB, and OFB use the optional <b>Initialization vector</b> input. The IV is normalized to the block size of eight bytes: missing or short values are extended with zero bytes and longer values are truncated. Encryption applies the selected padding method to incomplete final blocks. Use the same key, block mode, IV, and padding method for decryption.<newline /><newline />
+    If <b>Enable key parity bits</b> is selected, the least significant bit of every key byte is cleared before processing. The resulting encrypted or decrypted data is written to <b>Output stream</b>.
+  </usage>
+  <usage lang="de-DE">
+    Verbinden Sie die zu verarbeitenden Daten mit <b>Eingabestrom</b> und übergeben Sie am Anschluss <b>Schlüssel</b> einen acht Byte langen Schlüssel. Kürzere Schlüssel werden mit Nullbytes aufgefüllt; längere Schlüssel werden auf acht Byte gekürzt. Wählen Sie in den Einstellungen FEAL-4 oder FEAL-8, Ver- oder Entschlüsselung, einen Betriebsmodus und eine Padding-Methode aus.<newline /><newline />
+    Der ECB-Modus verwendet keinen Initialisierungsvektor. CBC, CFB und OFB verwenden den optionalen Eingang <b>Initialisierungsvektor</b>. Der IV wird auf die Blockgröße von acht Byte gebracht: Fehlende oder zu kurze Werte werden mit Nullbytes aufgefüllt, längere Werte werden gekürzt. Bei der Verschlüsselung wird die ausgewählte Padding-Methode auf unvollständige letzte Blöcke angewendet. Verwenden Sie für die Entschlüsselung denselben Schlüssel, Betriebsmodus, IV und dieselbe Padding-Methode.<newline /><newline />
+    Wenn <b>Schlüsselparitätsbits aktivieren</b> ausgewählt ist, wird vor der Verarbeitung das niederwertigste Bit jedes Schlüsselbytes gelöscht. Die ver- oder entschlüsselten Daten werden über <b>Ausgabestrom</b> ausgegeben.
+  </usage>
+  <presentation lang="en">
+    The presentation shows the internal round structure of the selected FEAL variant. After execution, it visualizes the processing of the last encrypted or decrypted block with the effective key.
+  </presentation>
+  <presentation lang="de-DE">
+    Die Präsentation zeigt die interne Rundenstruktur der ausgewählten FEAL-Variante. Nach der Ausführung visualisiert sie die Verarbeitung des letzten ver- oder entschlüsselten Blocks mit dem tatsächlich verwendeten Schlüssel.
+  </presentation>
+  <references />
 </documentation>

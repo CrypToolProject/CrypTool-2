@@ -25,7 +25,7 @@ using System.Windows.Threading;
 namespace CrypTool.Plugins.AudioOutput
 {
     [Author("Nils Kopal", "nils.kopal@cryptool.org", "University of Kassel", "")]
-    [PluginInfo("CrypTool.Plugins.AudioOutput.Properties.Resources", "PluginCaption", "PluginTooltip", null, "AudioOutput/icon.png")]
+    [PluginInfo("CrypTool.Plugins.AudioOutput.Properties.Resources", "PluginCaption", "PluginTooltip", "AudioOutput/userdoc.xml", "AudioOutput/icon.png")]
     [ComponentCategory(ComponentCategory.ToolsDataInputOutput)]
     public class AudioOutput : ICrypComponent
     {

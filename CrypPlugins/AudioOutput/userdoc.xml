@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The Audio Output component plays uncompressed audio data through a loudspeaker, headset, or another Windows playback device. Its presentation displays the waveform of the incoming samples while the audio is being played.
+  </introduction>
+  <introduction lang="de-DE">
+    Die Audioausgabe-Komponente gibt unkomprimierte Audiodaten über einen Lautsprecher, ein Headset oder ein anderes Windows-Wiedergabegerät aus. Während der Wiedergabe zeigt die Präsentation die Wellenform der eingehenden Abtastwerte an.
+  </introduction>
+  <usage lang="en">
+    Connect the mandatory <b>Audio Input</b> connector to a source of compatible, uncompressed audio bytes. The <docRef item="CrypTool.Plugins.AudioInput.AudioInput" /> component supplies data in the expected format. Select the desired playback device in the settings and start the workflow.<newline /><newline />
+    The <b>Buffer Size</b> setting specifies the playback buffer duration in milliseconds. A larger buffer can make playback more tolerant of irregular input timing, but it also increases latency. If the buffer overflows, excess data is discarded so that the workflow can continue. Compressed audio files must be decoded before they are passed to this component.
+  </usage>
+  <usage lang="de-DE">
+    Verbinden Sie den obligatorischen Anschluss <b>Audioeingabe</b> mit einer Quelle kompatibler, unkomprimierter Audiobytes. Die <docRef item="CrypTool.Plugins.AudioInput.AudioInput" />-Komponente liefert Daten im erwarteten Format. Wählen Sie in den Einstellungen das gewünschte Wiedergabegerät aus und starten Sie den Workflow.<newline /><newline />
+    Die Einstellung <b>Puffergröße</b> legt die Dauer des Wiedergabepuffers in Millisekunden fest. Ein größerer Puffer kann die Wiedergabe unempfindlicher gegenüber unregelmäßig eintreffenden Eingabedaten machen, erhöht jedoch die Verzögerung. Bei einem Pufferüberlauf werden überschüssige Daten verworfen, damit der Workflow weiterlaufen kann. Komprimierte Audiodateien müssen vor der Übergabe an diese Komponente dekodiert werden.
+  </usage>
+  <presentation lang="en">
+    The presentation plots the waveform of the most recently received audio samples. It is a visual monitor only and does not change the audio data.
+  </presentation>
+  <presentation lang="de-DE">
+    Die Präsentation stellt die Wellenform der zuletzt empfangenen Audio-Abtastwerte dar. Sie dient ausschließlich der visuellen Kontrolle und verändert die Audiodaten nicht.
+  </presentation>
+  <references />
+</documentation>

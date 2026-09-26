@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The Audio Input component records sound from a microphone or another recording device and provides the recorded audio as a sequence of byte arrays. It is intended for workflows that process live audio data, for example in combination with the Audio Output component.
+  </introduction>
+  <introduction lang="de-DE">
+    Die Audioeingabe-Komponente nimmt Ton von einem Mikrofon oder einem anderen Aufnahmegerät auf und stellt die aufgenommenen Audiodaten als Folge von Byte-Arrays bereit. Sie ist für Workflows vorgesehen, die Audiodaten in Echtzeit verarbeiten, beispielsweise in Verbindung mit der Audioausgabe-Komponente.
+  </introduction>
+  <usage lang="en">
+    Add the component to the workspace and select the desired recording device in the settings. Connect the <b>Audio Output</b> connector to a component that accepts the recorded audio bytes. When the workflow starts, the component begins recording and emits a new byte array whenever another audio buffer is available. Stopping the workflow stops the recording.<newline /><newline />
+    The output contains uncompressed audio data in the recording format used by the component. For direct monitoring, connect it to the <docRef item="CrypTool.Plugins.AudioOutput.AudioOutput" /> component. The selected device must be available when execution starts.
+  </usage>
+  <usage lang="de-DE">
+    Fügen Sie die Komponente dem Arbeitsbereich hinzu und wählen Sie in den Einstellungen das gewünschte Aufnahmegerät aus. Verbinden Sie den Anschluss <b>Audioausgabe</b> mit einer Komponente, die die aufgenommenen Audiobytes verarbeiten kann. Beim Start des Workflows beginnt die Aufnahme. Sobald ein weiterer Audiopuffer verfügbar ist, gibt die Komponente ein neues Byte-Array aus. Das Anhalten des Workflows beendet die Aufnahme.<newline /><newline />
+    Die Ausgabe enthält unkomprimierte Audiodaten in dem von der Komponente verwendeten Aufnahmeformat. Für eine direkte Wiedergabe kann sie mit der <docRef item="CrypTool.Plugins.AudioOutput.AudioOutput" />-Komponente verbunden werden. Das ausgewählte Gerät muss beim Start der Ausführung verfügbar sein.
+  </usage>
+  <presentation lang="en">
+    This component has no dedicated presentation. The recording device is selected in the component settings.
+  </presentation>
+  <presentation lang="de-DE">
+    Diese Komponente besitzt keine eigene Präsentation. Das Aufnahmegerät wird in den Komponenteneinstellungen ausgewählt.
+  </presentation>
+  <references />
+</documentation>

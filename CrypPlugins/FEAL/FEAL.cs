@@ -27,7 +27,7 @@ using static CrypTool.PluginBase.Miscellaneous.BlockCipherHelper;
 namespace CrypTool.Plugins.FEAL
 {
     [Author("Nils Kopal", "Nils.Kopal@CrypTool.org", "CrypTool 2 Team", "https://www.CrypTool.org")]
-    [PluginInfo("CrypTool.Plugins.Feal.Properties.Resources", "PluginCaption", "PluginTooltip", "", "FEAL/Images/icon.png")]
+    [PluginInfo("CrypTool.Plugins.Feal.Properties.Resources", "PluginCaption", "PluginTooltip", "FEAL/userdoc.xml", "FEAL/Images/icon.png")]
     [ComponentCategory(ComponentCategory.CiphersModernSymmetric)]
     public class FEAL : ICrypComponent
     {
