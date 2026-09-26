@@ -24,14 +24,14 @@
     upper limit is found, the algorithm stops and generates a warning message.
     <newline /><newline />
 
-    If the plugin should only find the smallest prime factor, it sends the first prime factor it found to the ouput labeled 'Prime factor'. It then divides
+    If the plugin should only find the smallest prime factor, it sends the first prime factor it found to the output labeled 'Prime factor'. It then divides
     the input number by the prime factor and sends the result to the output labeled 'Remainder'.
     Observe that 'Remainder' is generally not a prime number, but a composite number.
     If the input number is a prime number, the plugin sends the number to the 'Prime factor' output and the number 1 to the 'Remainder' output.
     If the upper limit is activated and no smaller prime factors were found, the number is sent to the 'Prime factor' output and the 'Remainder' output stays empty.
     <newline /><newline />
 
-    If the plugin should find all prime factors, it sends the array of the found prime factors to the ouput labeled 'Prime factors'.
+    If the plugin should find all prime factors, it sends the array of the found prime factors to the output labeled 'Prime factors'.
     If the upper limit is activated, only those prime factors that are smaller than the limit are found.
     The last number in the array that is sent to the output 'Prime factors' is then set to the product of those prime factors of the input number, that are bigger than the limit.
     <newline /><newline />

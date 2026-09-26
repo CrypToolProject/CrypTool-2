@@ -8,7 +8,7 @@
 </introduction>
   <usage lang="en">Set up the trigger type in the Gate parameters. Usually you will want to wait for a boolean "true" value. If you set it to "no trigger", the control input will be ignored and any input object will be either forwarded instantly (always open) or not at all (always closed).
 </usage>
-  <usage lang="de-DE">Die Art des Triggers kann in den Gate-Parametern eingestellt werden. Üblicherweise wird ein boolscher "true"-Wert verwendet. Wenn "kein Trigger" ausgewählt ist, wird der Kontrolleingang ignoriert und alle Eingabedaten werden entweder sofort weitergeleitet (immer geöffnet) oder gar nicht (immer geschlossen).
+  <usage lang="de-DE">Die Art des Triggers kann in den Gate-Parametern eingestellt werden. Üblicherweise wird ein boolescher "true"-Wert verwendet. Wenn "kein Trigger" ausgewählt ist, wird der Kontrolleingang ignoriert und alle Eingabedaten werden entweder sofort weitergeleitet (immer geöffnet) oder gar nicht (immer geschlossen).
 </usage>
   <presentation lang="en"></presentation>
   <presentation lang="de-DE"></presentation>

@@ -90,7 +90,7 @@
     Mit der Enigma-Komponente kann man Texte ver- und entschlüsseln. Für die Analyse eines Geheimtextes verwenden Sie bitte die Komponente <docRef item="CrypTool.EnigmaAnalyzer.EnigmaAnalyzer" />.
   </introduction>
   <usage lang="de">
-    Im Hauptmenu der Einstellungen kann zunächst das Enigma-Modell gewählt werden. Unter "Rotorlage" kann die initiale Rotorlage eingestellt werden.
+    Im Hauptmenü der Einstellungen kann zunächst das Enigma-Modell gewählt werden. Unter "Rotorlage" kann die initiale Rotorlage eingestellt werden.
     <newline /><newline />
     Im Menü "Text-Optionen" befinden sich Einstellungen zur Behandlung von Sonderzeichen, Leerzeichen und der Groß-/Kleinschreibung.
     Diese Einstellungen sind nötig, da die Enigma nur Großbuchstaben verarbeitete.

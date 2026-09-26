@@ -14,7 +14,7 @@
     die von Ronald Rivest entwickelt worden sind: RC4, RC5 und RC6.
     <newline /><newline />
     Der RC2-Algorithmus benutzt einen Schlüssel variabler Länge. Die Geschwindigkeit der Verschlüsselung hängt dabei nicht von der Schlüssellänge ab, da aus dem Schlüssel vorab eine schlüsselabhängige Tabelle mit 128 Bytes berechnet wird.
-    Die 18 Runden sind als Feistelnetzwerk angelegt, 16 davon sind vom Typ MIXING, 2 weitere vom Typ MASHING. Eine Runde des Typs MIXING besteht aus der vierfachen Anwendung der Mix-Tansformation.
+    Die 18 Runden sind als Feistelnetzwerk angelegt, 16 davon sind vom Typ MIXING, 2 weitere vom Typ MASHING. Eine Runde des Typs MIXING besteht aus der vierfachen Anwendung der Mix-Transformation.
     <newline /><newline /><i>Quelle: <ref id="wikipedia" /></i></introduction>
   <usage lang="en">
     The RC2 component has three inputs and one output. On one input, it expects the RC2 key as a byte array. The size of the key must be between 40 and 128 bits, so the provided byte array must consist of 5 to 16 bytes.

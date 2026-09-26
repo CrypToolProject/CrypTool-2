@@ -28,7 +28,7 @@
   <usage lang="en">
     The frequencies are supplied by the <docRef item="CrypTool.FrequencyTest.FrequencyTest" /> component. A typical usage scenario looks like this:<newline /><newline /><img src="FriedmanTest/DetailedDescription/Images/usage.png" caption="Usage scenario" /></usage>
   <usage lang="de-DE">
-    Die benötgten Buchstabenhäufigkeiten erhält man mit der Komponente <docRef item="CrypTool.FrequencyTest.FrequencyTest" />. Ein typisches Anwendungsszenario sieht folgendermaßen aus:
+    Die benötigten Buchstabenhäufigkeiten erhält man mit der Komponente <docRef item="CrypTool.FrequencyTest.FrequencyTest" />. Ein typisches Anwendungsszenario sieht folgendermaßen aus:
     <newline /><newline /><img src="FriedmanTest/DetailedDescription/Images/usage.png" caption="Anwendungsszenario" /></usage>
   <presentation lang="en"></presentation>
   <presentation lang="de-DE"></presentation>

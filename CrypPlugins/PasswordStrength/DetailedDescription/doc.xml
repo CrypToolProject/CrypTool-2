@@ -8,7 +8,7 @@
     The largest and most complex assessment algorithm is the algorithm, which we used from www.passwordmeter.com. This awards plus points and minus points by applying a set of rules. 
     These rules are divided in different types (Flat, Cond / Incr, Cond, Comp) and can be viewed as equations in the user interface of the component.
     In addition to the points (green = positive points, red = negative points), the "results" of individual rules are also represented by colored symbols
-    (blue = rule statisfied completely, green = rule statisfied partially, red = rule not statisfied). Within the rules the number of matching symbols (n) and the length of the password (len) are used.
+    (blue = rule satisfied completely, green = rule satisfied partially, red = rule not satisfied). Within the rules the number of matching symbols (n) and the length of the password (len) are used.
     For example, the following rule calculates the points for the number of capital letters as follows: <newline /><newline />
     Rule: Uppercase symbols<newline />
     Example Password: HELLOworld123 <newline />

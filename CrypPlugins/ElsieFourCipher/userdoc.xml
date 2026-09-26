@@ -9,7 +9,7 @@
     ElsieFour is intended for encrypted communication between humans and therefore encrypts plaintexts consisting only of the English letters A to Z and some other characters.
     <newline/>
     <newline/>
-    ElsieFour is based on the well-known modern stream cipher RC4 (thats why it is abbreviated LC4).
+    ElsieFour is based on the well-known modern stream cipher RC4 (that's why it is abbreviated LC4).
     The RC4 cipher is probably the simplest modern encryption algorithm which was in widespread use.
     However, since RC4 is considered insecure and broken, it is no longer used today for any security purposes.
   </introduction>

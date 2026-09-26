@@ -15,7 +15,7 @@
     There are three types of this cipher, which you can create using this component:<newline/>
     (1) Only a digit key is used and the table order is known.<newline/>
     (2) Only a keyword is used to permute the table, but the digit key is known.<newline/>
-    (3) Both, digit key and keyword are unknow.<newline/>
+    (3) Both, digit key and keyword are unknown.<newline/>
     <newline/>
     The cipher was described in Military Cryptanalytics Part 1 Chapter XI, April 1956 by William F. Friedman and Lambros D.
   </introduction>

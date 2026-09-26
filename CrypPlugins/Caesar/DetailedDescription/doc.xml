@@ -6,7 +6,7 @@
     Caesar is a classic encryption algorithm, it was used as far back as the Romans.
     <newline />
     It is a symmetric encryption algorithm using an alphabet character as key.
-    The characters of the cleartext are shifted cyclically acoording to the position of the key within the alphabet.
+    The characters of the cleartext are shifted cyclically according to the position of the key within the alphabet.
     If the alphabet consists of the 26 characters "A", "B", "C", ..., "Z" (which is the classic case), the encryption corresponds to a shift by one character for "A", a shift by two characters for "B", a shift by three characters for "C", and so forth. Upon decryption the encrypted text is simply shifted in the opposing direction.
   </introduction>
   <introduction lang="de-DE">

@@ -5,10 +5,10 @@
   <introduction lang="en">
     In cryptography, the Advanced Encryption Standard (AES), also known as Rijndael, is a block cipher adopted as an encryption standard by the U.S. government.
     It has been analyzed extensively and is now used worldwide, as was the case with its predecessor, the Data Encryption Standard <docRef item="CrypTool.Plugins.Cryptography.Encryption.DES">(DES)</docRef>. 
-    AES was announced by National Institute of Standards and Technology (NIST) as U.S. FIPS PUB 197 (FIPS 197) <ref id="fips197" /> on November 26, 2001 after a 5-year standardization process. 
-    It became effective as a standard May 26, 2002. As of 2006, AES is one of the most popular algorithms used in symmetric key cryptography.
+    AES was announced by the National Institute of Standards and Technology (NIST) as U.S. FIPS PUB 197 (FIPS 197) <ref id="fips197" /> on November 26, 2001 after a 5-year standardization process.
+    It became effective as a standard on May 26, 2002. As of 2006, AES is one of the most popular algorithms used in symmetric key cryptography.
     <newline />
-    Rijdael is considered secure; only after 10 years after its standardisation the first – theoretical interesting, but with no practical relevance – attack has been discovered <ref id="RelatedKeyCrypt" />.
+    Rijndael is considered secure; only after 10 years after its standardisation the first – theoretical interesting, but with no practical relevance – attack has been discovered <ref id="RelatedKeyCrypt" />.
     Strictly speaking, AES is not precisely Rijndael (although in practice they are used interchangeably) as Rijndael supports a larger range of block and key sizes; 
     AES has a fixed block size of 128 bits and a key size of 128, 192, or 256 bits, whereas Rijndael can be specified with key and block sizes in any multiple of 32 bits, 
     with a minimum of 128 bits and a maximum of 256 bits.
@@ -49,7 +49,7 @@
       Finally, the plaintext will be sent to the output of the component as a data stream.
       <newline /><newline /></section><section headline="Cryptographic Mode">
       Block ciphers divide their input data into blocks of a fixed size and apply the encryption or decryption function on the blocks of the input.
-      The chaining mode determines the way in which consecutive blocks, after being encrypted or decryted, are combined in order to achieve better security or error tolerance.
+      The chaining mode determines the way in which consecutive blocks, after being encrypted or decrypted, are combined in order to achieve better security or error tolerance.
       The AES component offers the following block chaining modes: ECB (Electronic Code Book), CBC (Cipher Block Chaining), CFB (Cipher Feedback) and OFB (Output Feedback).
       Select the appropriate chaining mode in the settings of the component.
       <newline />
@@ -77,7 +77,7 @@
       <newline /><newline /></section><section headline="Entschlüsselung">
       In der Betriebsart "Entschlüsselung" erwartet die Komponente den zu entschlüsselnden Geheimtext als Datenstrom am Eingang "Eingabe".
       Die Länge der Eingabe muss hierbei ein Vielfaches der Blockgröße sein, andernfalls wird die Berechnung mit einer
-      Fehlermeldung abgebrochen. Der Schlüssel wird wie bei der Entschlüsselung eingegeben. Der entschlüsselte Klartext
+      Fehlermeldung abgebrochen. Der Schlüssel wird wie bei der Verschlüsselung eingegeben. Der entschlüsselte Klartext
       wird dann schließlich am Ausgang der Komponente als Datenstrom bereitgestellt.
       <newline /><newline /></section><section headline="Kryptographischer Modus">
       Blockverschlüsselungsverfahren unterteilen die Eingabedaten in Blöcke festgelegter Größen und

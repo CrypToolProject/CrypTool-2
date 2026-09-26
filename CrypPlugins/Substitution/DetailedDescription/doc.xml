@@ -9,7 +9,7 @@
     Die monoalphabetische Substitution ist ein Verschlüsselungsverfahren, bei dem nach einem bestimmten System Einheiten aus Klartext durch Ciphertext ersetzt ("substituiert") werden. Zur Entschlüsselung führt der Empfänger eine inverse Substitution durch.
   </introduction>
   <usage lang="en">
-    After dragging the Substituion component onto the workspace, you need to specify a data source that represents the text to be encrypted or decrypted. This data source is mandatory. Optional data sources include the cleartext alphabet and the keyword.
+    After dragging the Substitution component onto the workspace, you need to specify a data source that represents the text to be encrypted or decrypted. This data source is mandatory. Optional data sources include the cleartext alphabet and the keyword.
     <newline />
     In the component settings you can decide whether you want to encrypt or decrypt. You can also adjust the alphabets for both cleartext and ciphertext as well as some other options.
   </usage>

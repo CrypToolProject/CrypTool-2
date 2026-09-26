@@ -37,7 +37,7 @@
     In the presentation view of the component, the additional output bit will be marked orange.
     <newline /><newline />
     The component can generate the output automatically or control the shift register with an external clock signal.
-    Disable the checkbox "Use BoolClock" in the settings, if the output sould be generated automatically, and enter the number of output bits you want to generate in the "Rounds" field.
+    Disable the checkbox "Use BoolClock" in the settings, if the output should be generated automatically, and enter the number of output bits you want to generate in the "Rounds" field.
     In this case, the clock input of the component must not be connected.
     <newline /><newline />
     Activate the checkbox, if the shift register should be clocked by an external signal.
@@ -74,7 +74,7 @@
   </presentation>
   <presentation lang="de-DE">
     In der Präsentationsansicht zeigt die Komponente das durch die Rückkopplungsfunktion und den Seed definierte NLFSR.
-    Um die Effizienz der Ausführug zu verbessern, haben Sie die Möglichkeit, die Aktualisierung der Präsentation durch die Aktivierung des entsprechenden Kontrollkästchens in den Einstellungen auszuschalten.
+    Um die Effizienz der Ausführung zu verbessern, haben Sie die Möglichkeit, die Aktualisierung der Präsentation durch die Aktivierung des entsprechenden Kontrollkästchens in den Einstellungen auszuschalten.
     Beachten Sie, dass die Präsentationsansicht nur aktualisiert wird, wenn die Komponente durch ein externes Taktsignal gesteuert wird.
   </presentation>
   <references>

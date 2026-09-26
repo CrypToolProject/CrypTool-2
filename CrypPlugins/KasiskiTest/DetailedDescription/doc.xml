@@ -39,7 +39,7 @@
     <newline /><newline />
     On the text output of the component you will get numbers sorted in two columns. The two columns are divided by the column (":") sign. The left column contains all factors (and therefore keylengths) the component took into consideration.
     Each value on the right corresponds to a factor on the left and represents the number of times this particular factor was encountered during the examination of the input string.
-    The factors are also output as an integer array, where the index corresponds to the examined factor, and the entry at that index is the frequency with which the factor occured.
+    The factors are also output as an integer array, where the index corresponds to the examined factor, and the entry at that index is the frequency with which the factor occurred.
   </usage>
   <usage lang="de-DE">
     Geben Sie den zu analysierenden Text am Eingang der Komponente an. Der Text muss ein mit dem Vigenère-Verfahren verschlüsselter Geheimtext sein.

@@ -4,7 +4,7 @@
   <language culture="de-DE" />
   <introduction lang="en">
     Visual cryptography is a method of encryption which allows to encrypt data (e.g. text and images) in such a way that the decrypted information appears as a visual image.<newline /><newline />
-    The first visual encryption algorithm was invented by Moni Naor und Adi Shamir in 1994 <ref id="NaorShamir" /><ref id="wikipedia" />. It is a visual secret-sharing method, where a plaintext image is divided into n ciphertext images.
+    The first visual encryption algorithm was invented by Moni Naor and Adi Shamir in 1994 <ref id="NaorShamir" /><ref id="wikipedia" />. It is a visual secret-sharing method, where a plaintext image is divided into n ciphertext images.
     An arbitrary subset of ciphertext images of size n - 1 is not enough to reveal the plaintext image.
     To reveal the plaintext image, all ciphertext images have to be combined.
   </introduction>

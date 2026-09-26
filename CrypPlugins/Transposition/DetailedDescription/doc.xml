@@ -25,7 +25,7 @@
     will produce the same output as read in by <b>row</b>, permute by <b>row</b> and read out by <b>column</b>).
     <newline /><newline />
     In the settings of the component you can also select whether it should work in encryption or in decryption mode.
-    When you choose decryption, the rows or columns will not be orderd according to the permutation that results from the keyword, but by its inverse.
+    When you choose decryption, the rows or columns will not be ordered according to the permutation that results from the keyword, but by its inverse.
     Furthermore, the reading-in and reading-out operations are swapped, allowing for the same operation settings for the encryption process as for the decryption process.
   </usage>
   <presentation lang="en">

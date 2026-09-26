@@ -48,7 +48,7 @@
     The presentation of this component displays the stego text while highlighting the changes that were made to the original cover text. 
   </presentation>
   <presentation lang="de-DE">
-    Die Preäsentation dieser Komponente zeigt den Stego-Text, währenddessen werden die Änderungen hervorgehoben, die am ursprünglichen Cover-Text vorgenommen wurden.
+    Die Präsentation dieser Komponente zeigt den Stego-Text, währenddessen werden die Änderungen hervorgehoben, die am ursprünglichen Cover-Text vorgenommen wurden.
   </presentation>
   <references>
     <linkReference id="steganographywiki">

@@ -14,7 +14,7 @@
   <introduction lang="de-DE">
     Die Häufigkeitsanalyse liefert statistische Informationen über einen Text, die hilfreich für Analysezwecke sind oder, z.B. im Falle der monoalphabetischen Chiffre, bereits als Entschlüsselungswerkzeug Verwendung finden können.<newline /><newline />
     Monoalphabetische Chiffren sind besonders anfällig gegenüber der Häufigkeitsanalyse. Bei der Häufigkeitsanalyse wird einfach die Häufigkeit der im Geheimtext auftretenden Buchstaben festgestellt und kann dann mit den bekannten Buchstabenhäufigkeiten
-    von Texten in verschiedenen Sprachen verglichen werden. Am Bespiel der Caesar-Chiffre wird hier gezeigt, wie eine monoalphabetische Chiffre mit Hilfe der Häufigkeitsanalyse gebrochen werden kann:<newline /><newline /><img src="FrequencyTest/DetailedDescription/Images/frequencies.png" /><newline />
+    von Texten in verschiedenen Sprachen verglichen werden. Am Beispiel der Caesar-Chiffre wird hier gezeigt, wie eine monoalphabetische Chiffre mit Hilfe der Häufigkeitsanalyse gebrochen werden kann:<newline /><newline /><img src="FrequencyTest/DetailedDescription/Images/frequencies.png" /><newline />
     Im Bild ist erkennbar, dass die gleichen Muster vorliegen, obwohl unterschiedliche Texte zugrunde liegen. Dies kann im Allgemeinen von Texten in beliebigen Sprachen erwartet werden.
     Weiterhin kann man sehen, dass das Muster des Geheimtextes in diesem Fall um genau drei Positionen nach rechts verschoben ist. Wenn man also jeden Buchstaben des Geheimtextes durch den Buchstaben ersetzt, der drei Positionen weiter links erscheint,
     erhält man den Klartext.<newline /><newline />
@@ -58,7 +58,7 @@
     The frequency analysis component visualizes data in a bar graph. In the settings of the component, you can select whether the diagram should adapt automatically to the viewport size, or
     you can manually enter the display size. It is also possible to adjust the zoom factor of the diagram.<newline /><newline /><img src="FrequencyTest/DetailedDescription/Images/presentation.png" /></presentation>
   <presentation lang="de-DE">
-    Die Häufigkeitsanalyse-Komponente visualisiert die Häufigkeiten als Balkendiagramm. In den Einstellungen der Komponente kann ausgewählt werden, ob sich das Diagramm automatisch an den Darstellungsbereich angepassen soll.
+    Die Häufigkeitsanalyse-Komponente visualisiert die Häufigkeiten als Balkendiagramm. In den Einstellungen der Komponente kann ausgewählt werden, ob sich das Diagramm automatisch an den Darstellungsbereich anpassen soll.
     Es besteht auch die Möglichkeit einer manuellen Größenanpassung und der Angabe eines Zoomfaktors.<newline /><newline /><img src="FrequencyTest/DetailedDescription/Images/presentation.png" /></presentation>
   <references>
     <linkReference id="wikipedia">

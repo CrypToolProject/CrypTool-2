@@ -38,7 +38,7 @@
       This is only present in the BPCS mode. In order to better visualize and understand the difference between informative and noise-like regions, this view displays the 24 different bit planes of the cover image. Each 8 planes with the same color channel (red, green or blue) are grouped
       together and shown from MSB to the LSB. Using the below bar, you can see and compare these different groups of bit planes.
     </section><newline /><section headline="Overview: ">
-      You can find after each hiding process an overview where there are some general information about the secret message and the cover image. This include the size of the provided inputs and the hiding capacity in each case. In LSB, the hiding capcity depends on the number of bits you chose. In BPCS, this depends on the complexity threshold set in the settings. <newline />
+      After each hiding process, you can find an overview with general information about the secret message and the cover image. This includes the size of the provided inputs and the hiding capacity in each case. In LSB, the hiding capacity depends on the number of bits you choose. In BPCS, this depends on the complexity threshold set in the settings. <newline />
       In the BPCS mode you can also see a visual representation of the image blocks and message blocks that are defined when using the BPCS algorithm. You can also switch between viewing only complex image blocks or all image blocks by using the buttons in the bar below. 
       You can browse through these blocks by using the arrows or you can go to a certain block by entering a valid index. 
     </section></presentation>

@@ -99,7 +99,7 @@
     weitergeschaltet. Dies ist nützlich, wenn ein zu entschlüsselnder Geheimtext unleserliche Zeichen enthält, die z.B. durch ein "?" dargestellt werden. Würde dieses bei der Entschlüsselung einfach ignoriert werden, so würde der Geheimtext
     ab dem weggelassenen Zeichen falsch decodiert werden. Schließlich gibt es noch die Option, ein unbekanntes Zeichen in der Ausgabe durch ein Platzhalterzeichen zu ersetzen.
     <newline /><newline />
-    Unter dem Punkt <i>Ausgabeformatierung</i> kann ausgewählt werden, wie die Ausgabe der Komponente aufbearbeitet werden soll. Es gibt die Möglichkeit, entweder die Formatierung des Eingabetextes beizubehalten,
+    Unter dem Punkt <i>Ausgabeformatierung</i> kann ausgewählt werden, wie die Ausgabe der Komponente aufbereitet werden soll. Es gibt die Möglichkeit, entweder die Formatierung des Eingabetextes beizubehalten,
     alle Leerraumzeichen (Leerzeichen, Tabulator, Zeilenumbruch) zu löschen oder die Ausgabe in Blöcken zu 5 Zeichen zu formatieren.
     <newline /><newline />
     Schließlich kann noch die Behandlung der Groß-/Kleinschreibung gewählt werden. Man kann die Ausgabe komplett in Groß- oder Kleinbuchstaben konvertieren oder die Schreibweise des Eingangstextes beibehalten.

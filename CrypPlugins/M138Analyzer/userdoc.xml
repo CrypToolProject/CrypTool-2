@@ -29,7 +29,7 @@
     For the ciphertext-only attack, a hill-climbing algorithm was implemented. The algorithm is executed separately for every offset. In a first step,
     a random key is generated. After that, two elements of the key are swapped as long as a better key can be found. If a key can't be improved by swapping
     two of its elements, it is put into a bestlist where the best keys of all offsets are stored. The keys are rated by the quality of the plaintext they
-    create. This is calculated using tri- and quadgrams as well as the relative occurence of characters. The more a plaintext equals a natural language, the
+    create. This is calculated using tri- and quadgrams as well as the relative occurrence of characters. The more a plaintext equals a natural language, the
     better it is rated. The algorithm is restarted several times for each offset so different random startkeys can be tested. The number of restarts can be
     configured in the settings. In case no manual input is given, the number is set dependent on the length of the given ciphertext. The longer the ciphertext
     is, the less restarts are done as the quality of the key can be calculated more reliable due to more text to be analyzed being available.
@@ -122,7 +122,7 @@
     Dies sind die Startzeit, zu der der Angriff gestartet wurde, sowie die seit dem Start vergangene Zeit. Solange ein Angriff läuft, wird die erwartete
     Endzeit anhand der bereits geprüften Offsets und der dafür benötigten Zeit sowie den noch zu testenden Offsets berechnet. Ist der Angriff abgeschlossen,
     so wird in diesem Feld die tatsächliche Endzeit angezeigt. Im Feld "Vergangene Zeit" wird in diesem Fall die Zeit, die der Angriff benötigt hat, angezeigt.
-    Desweiteren wird der Offset, der aktuell analzsiert wird, angezeigt. In der unteren Zeile sieht man, wie viele Schlüssel aktuell pro Sekunde getestet werden
+    Desweiteren wird der Offset, der aktuell analysiert wird, angezeigt. In der unteren Zeile sieht man, wie viele Schlüssel aktuell pro Sekunde getestet werden
     und wie viele Schlüssel seit Beginn des Angriffs durchschnittlich pro Sekunde getestet wurden.
     <newline />
     Im unteren Teil wird eine Liste von Schlüsseln mit einigen Informationen zu diesen angezeigt:

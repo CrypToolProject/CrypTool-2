@@ -16,7 +16,7 @@
 	If there weren't any errors the execution of this plugin results in the same key for both, Alice and Bob. 
   </usage>
   <usage lang="de-DE">
-	Als Eingabe benötigt dieses Plugin einen String aus Bits, welcher entweder den von Alice gesendeten oder den von Bob empfangenden Schlüssel darstellt.
+	Als Eingabe benötigt dieses Plugin einen String aus Bits, welcher entweder den von Alice gesendeten oder den von Bob empfangenen Schlüssel darstellt.
 	Außerdem werden die Basen-Strings beider Parteien benötigt. Bei der Ausführung werden die Stellen des Schlüssels, bei denen die entsprechenden Stellen 
 	in den Basen-Strings übereinstimmen, in einen neuen String übertragen, welcher letztlich ausgegeben wird. Somit haben Alice und Bob bei fehlerloser 
 	Übertragung nach der Ausführung dieses Plugins die gleichen Schlüssel.

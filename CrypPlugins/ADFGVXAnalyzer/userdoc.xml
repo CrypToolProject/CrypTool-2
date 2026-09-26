@@ -4,8 +4,8 @@
   <language culture="en" />
   <language culture="de-DE" />
   <introduction lang="en">
-    For centuries, news, especially in times of war, transmitted encrypted - including during the First World War in Germany.
-    The news analyst Fritz Nebel developed the ADFGVX book in two steps in order to encrypt radio messages from the army.
+    For centuries, messages, especially in times of war, have been transmitted in encrypted form—including during the First World War in Germany.
+    The intelligence officer Fritz Nebel developed the ADFGVX cipher in two steps to encrypt the army's radio messages.
     The first variant contained the letters ADFGX, later the V was added as the sixth letter. With this template, ADFGVX
     messages can be decrypted thanks to the heuristic method Simulated Annealing.
 
@@ -15,8 +15,8 @@
   </introduction>
   <introduction lang="de-DE">
     Seit Jahrhunderten werden Nachrichten, vor allem in Kriegszeiten, verschlüsselt übermittelt – so auch während des Ersten Weltkrieges in Deutschland. 
-    Der Nachrichtenoﬃzier Fritz Nebel entwickelte die ADFGVX-Chiﬀre in zwei Schritten, um Funksprüche des Heeres zu verschlüsseln. Die erste Variante 
-    beinhaltete die Buchstaben ADFGX, später kam das V als sechster Buchstabe hinzu. Mit diesem Template können ADFGVX Nachrichten, dank dem heuristischen 
+    Der Nachrichtenoffizier Fritz Nebel entwickelte die ADFGVX-Chiﬀre in zwei Schritten, um Funksprüche des Heeres zu verschlüsseln. Die erste Variante
+    beinhaltete die Buchstaben ADFGX, später kam das V als sechster Buchstabe hinzu. Mit diesem Template können ADFGVX-Nachrichten dank des heuristischen
     Verfahren Simulated Annealing, entschlüsselt werden.
 
     Diese Komponente kann nur die Transposition einer verschlüsselten ADFGVX-Nachricht entschlüsseln. George Lasry entwickelte im Jahr 2016 einen Algorithmus, 
@@ -35,7 +35,7 @@
     aus welchen Buchstaben die verschlüsselten Nachrichten bestehen. Dabei muss darauf geachtet werden, dass die Anzahl Zeichen im Klartext-Alphabet 
     das Quadrat der Anzahl Zeichen in der Geheimschrift bilden. Sonst startet der Algorithmus nicht. Um die Nachrichten erfolgreich zu entschlüsseln, 
     muss man die Länge des Transpositionsschlüssels kennen. Der Algorithmus wird mehrmals neu gestartet, wie oft dies geschehen soll, wird über die 
-    Anzahl der Neustarts angegeben. Darüber hinaus kann man den Algorithmus mehrfach parallel starten. Dabei ist zu beachten, das jeder eingestellte 
+    Anzahl der Neustarts angegeben. Darüber hinaus kann man den Algorithmus mehrfach parallel starten. Dabei ist zu beachten, dass jeder eingestellte
     Thread die eingestellten Neustarts durchführt. Die Neustarts werden nicht auf die Threads aufgeteilt.
   </usage>
   <presentation lang="en">

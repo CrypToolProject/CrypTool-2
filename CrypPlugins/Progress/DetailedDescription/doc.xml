@@ -15,8 +15,8 @@
   </usage>
   <usage lang="de-DE">
     Die Komponente hat zwei Eingänge. An beiden Eingängen werden ganzzahlige Werte erwartet.
-    Am Eingang <it>Maximum</it> muss der maximal zu erwartende Wert angegeben werden, der 100% entspicht und bei dem der Fortschrittsbalken vollständig ausgefüllt ist.
-    Am Eingang <it>Wert</it> wird der aktuelle darzustellende Wert erwartet. Der Fortschrittsbalken in der Präsentationsansicht der Komponente wird zu dem Prozentsatz ausgefüllt, dem dieser Wert im Vergleich zum Maximum etnspricht.
+    Am Eingang <it>Maximum</it> muss der maximal zu erwartende Wert angegeben werden, der 100% entspricht und bei dem der Fortschrittsbalken vollständig ausgefüllt ist.
+    Am Eingang <it>Wert</it> wird der aktuelle darzustellende Wert erwartet. Der Fortschrittsbalken in der Präsentationsansicht der Komponente wird zu dem Prozentsatz ausgefüllt, dem dieser Wert im Vergleich zum Maximum entspricht.
   </usage>
   <presentation lang="en">
     Open the component in presentation view in order to display the progress bar.

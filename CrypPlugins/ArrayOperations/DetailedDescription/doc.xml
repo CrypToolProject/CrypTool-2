@@ -15,7 +15,7 @@
             </li></ul>
 
         When providing the input values, three primary inputs of type "Array" can be used and are referred to as A1, A2 and A3. To make it easier to specify simple arrays, A2 and A3 can be specified by alternatively providing a single value for the generically "Object"-typed inputs O1 and O2, respectively. For example, if A2 is not specified, but O1 is, then the second array is assumed as {O1}, the one-element array that contains the value O1. <br /> Integer values are provided through inputs I1 and I2.
-        Therefore, when "A2" is referenced in the following descriptions of the operations, unless explicitely noted, O2 can be provided instead to specify a single-argument array.
+        Therefore, when "A2" is referenced in the following descriptions of the operations, unless explicitly noted, O2 can be provided instead to specify a single-argument array.
         <br /><br />
         Output of an array operation can either be an array R or an integer r.
 
@@ -58,7 +58,7 @@
             </item><item><b>Umkehren: </b>Kehrt die Reihenfolge der Elemente in A1 um und gibt das Ergebnis in R aus.
             </item><item><b>Subarray: </b>Das Subarray, welches in A1 mit dem Null-basierten Index I1 beginnt und die Länge I2 hat, wird in R abgelegt.
             </item><item><b>IndexOf: </b>Das Array A2 wird in A1 gesucht und dessen Null-basierter Index wird in r abgelegt. Wenn A2 nicht in A1 vorkommt, wird der Wert -1 in r abgelegt.
-            </item><item><b>Enthält: </b>Gibt den boolschen Wert in r aus, der aussagt, ob das Array A2 in A1 vorkommt
+            </item><item><b>Enthält: </b>Gibt den booleschen Wert in r aus, der aussagt, ob das Array A2 in A1 vorkommt
             </item></enum></usage>
   <presentation lang="en"></presentation>
   <presentation lang="de-DE"></presentation>

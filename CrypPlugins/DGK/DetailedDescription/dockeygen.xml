@@ -34,7 +34,7 @@
       </item></list>
     Die Komponente prüft die angegebenen Einschränkungen und gibt eine Fehlermeldung aus, falls sie nicht erfüllt sind.
     <newline /><newline />
-    Wenn die Komponente ausgeführt wird, so gibt sie an den Ausgägnen den privaten Schlüssel bestehend aus den Ausgaben VP, VQ und P aus,
+    Wenn die Komponente ausgeführt wird, so gibt sie an den Ausgängen den privaten Schlüssel bestehend aus den Ausgaben VP, VQ und P aus,
     und den öffentlichen Schlüssel bestehend aus den Ausgaben N, G, H und U.
   </usage>
   <presentation lang="en">

@@ -4,17 +4,17 @@
   <language culture="en" />
   <language culture="de-DE" />
   <introduction lang="en">
-    This component offers the possibility to embed watermarks into or extract them from images. Regarding watermarks, we differenciate between visible and invisible watermarks. <newline /><b>Visible watermarks:</b> Visible watermarks are created by adding a transparent layer containing the watermark text or image over the original image. In this component,
-    only the possibility to add a text as a watermark is implemented. This is the technique e.g. photographers use to mark their pictures. <newline /><b>Invisible watermarks:</b> Invisible watermarks are used to identify copies of pictures. Therefore, an invisble watermark is embedded into the original picture. These watermarks
+    This component offers the possibility to embed watermarks into or extract them from images. Regarding watermarks, we differentiate between visible and invisible watermarks. <newline /><b>Visible watermarks:</b> Visible watermarks are created by adding a transparent layer containing the watermark text or image over the original image. In this component,
+    only the possibility to add a text as a watermark is implemented. This is the technique e.g. photographers use to mark their pictures. <newline /><b>Invisible watermarks:</b> Invisible watermarks are used to identify copies of pictures. Therefore, an invisible watermark is embedded into the original picture. These watermarks
     are normally robust against manipulation like resizing, repainting, rotations,... <newline />
     There are different algorithms one can use to embed watermarks. Dependent on the algorithm used, the watermarks can be robust against different kinds of manipulations.
-    In general, we can differenciate between algorithms using discrete cosinus transformation, discrete wavelet transformation and discrete fourier transformation. <newline />
-    In this component, we implemented an algorithm which uses the discrete cosinus transformation. The watermarks created by this algorithm are robust against compression, e.g. applied
+    In general, we can differentiate between algorithms using discrete cosine transformation, discrete wavelet transformation and discrete Fourier transformation. <newline />
+    In this component, we implemented an algorithm which uses the discrete cosine transformation. The watermarks created by this algorithm are robust against compression, e.g. applied
     when uploading a picture to some website, and geometrical manipulations, e.g. repainting of some parts of the image. <newline /></introduction>
   <introduction lang="de-DE">
     Diese Komponente bietet die Möglichkeit, Wasserzeichen in Bildern einzubetten und auszulesen. Dabei wird unterschieden zwischen sichtbaren und unsichtbaren Wasserzeichen. <newline /><b>Sichtbare Wasserzeichen:</b> Sichtbare Wasserzeichen entstehen, indem man einen Text oder ein Bild mit einer gewissen Transparenz über das ursprüngliche Bild legt. In dieser
     Komponente ist lediglich die Möglichkeit realisiert, einen Text als Wasserzeichen einzufügen. So etwas nutzen viele Fotografen als Copyright-Wasserzeichen.<newline /><b>Unsichtbare Wasserzeichen:</b> Unsichtbare Wasserzeichen werden hauptsächlich verwendet, um festzustellen, ob ein Bild eine Kopie eines anderen Bildes ist. Dazu wird in das
-    Original ein unsichtbares Wasserzeichen eingebracht. Diese sind meistens robust gegen verschiedene Veränderungen, wie z.B. ändern der Größe, ändern von Farben, Drehungen,...
+    Original ein unsichtbares Wasserzeichen eingebracht. Diese sind meistens robust gegen verschiedene Veränderungen, wie z. B. Änderungen der Größe, Farbänderungen oder Drehungen.
     Wogegen ein Wasserzeichen robust ist, hängt von den genutzten Algorithmen ab. Die Verfahren nutzen eine Diskrete Cosinus Transformation, eine Diskrete Fourier Transformation 
     oder eine Diskrete Wavelet Transformation. <newline />
     In dieser Komponente wird ein Algorithmus verwendet, der die Diskrete Cosinus Transformation nutzt. Solche Algorithmen sind robust gegenüber Komprimierungen des Bildes, zum Beispiel
@@ -70,7 +70,7 @@
       können im Bild gespeichert werden. Allerdings erhöht sich im Gegenzug die Robustheit und das Wasserzeichen wird weniger sichtbar. In einem 100x100 Pixel großen
       Bild können somit bei einer Box-Größe von 10x10 Pixeln 100 bit versteckt werden; bei einer Box-Größe von 20x20 Pixeln nur noch 25 Bits.
       <newline /><b>Deckkraft des Wasserzeichens:</b> Die Deckkraft kann auf Werte zwischen 0 und 1000 festgelegt werden. Je höher die Deckkraft des
-      Wasserzeichens ist, desto Robuster ist das Wasserzeichen gegen Veränderungen. Allerdings wird es dadurch auch sichtbarer. Wählt man allerdings eine zu geringe Deckkraft,
+      Wasserzeichens ist, desto robuster ist das Wasserzeichen gegen Veränderungen. Allerdings wird es dadurch auch sichtbarer. Wählt man allerdings eine zu geringe Deckkraft,
       kann es passieren, dass das Wasserzeichen sehr schnell nicht mehr korrekt wiedererkannt wird. Es ist zu empfehlen, mindestens eine Deckkraft von 500 zu wählen.
       <newline /><b>Zufallszahlen:</b> Hier kann der Nutzer zwei beliebige Zahlen auswählen, die als Startpunkt für den internen Zufallszahlengenerator genutzt werden.
       <newline />
@@ -81,7 +81,7 @@
       In diesem Modus wird nur der Eingang "Bild" verwendet. Dem Eingang hängt man eine Dateieingabe an, in der man das Bild, aus dem das Wasserzeichen
       ausgelesen werden soll, auswählt. Die Komponente selbst ermöglicht einige Einstellmöglichkeiten. Allerdings werden diese nur angezeigt, wenn man den "Expertenmodus" wählt.
       Diese Einstellmöglichkeiten sind identisch mit denen, die beim Einfügen eines Wasserzeichens verwendet werden. Achten Sie bitte darauf, dass die Werte für die Box-Größe und
-      die beiden Zufallszahlen <b>identisch</b> zu denen sein müssen, die beim Einfügen des Wasserzeichens genutzt wurden. Ansonsten kann das Wasserzeiche nicht ausgelesen werden.
+      die beiden Zufallszahlen <b>identisch</b> zu denen sein müssen, die beim Einfügen des Wasserzeichens genutzt wurden. Ansonsten kann das Wasserzeichen nicht ausgelesen werden.
       <newline />
       Die Komponente nutzt nur einen Ausgang, den "Eingebetteten Text". An diesen Ausgang hängt man eine "Textausgabe", in der das gefundene Wasserzeichen angezeigt wird.
     </section></usage>

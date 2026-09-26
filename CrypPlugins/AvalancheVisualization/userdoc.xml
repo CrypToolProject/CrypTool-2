@@ -102,7 +102,7 @@
       In the case of DES the input data is initially shown in binary format.
       <newline />
       Afterwards, changes in the input can be made as described in the usage section.
-      When clicking on a single bit it flips from "0" to "1" or viceversa and it turns red.
+      When clicking on a single bit it flips from "0" to "1" or vice versa and it turns red.
       You can also undo the action by using the Clear button, which makes all flipped bits return to its initial state.
       <newline />
       After the initial input has been modified, a new view emerges depicting the differences between initial and modified input.
@@ -125,7 +125,7 @@
       <newline />
       If you want to make new changes or undo the ones already made you can go back to the initial input data by clicking on the Input Data button.
     </section><newline /><newline /><section headline="Unprepared methods">
-      The unprepared methods have, besides the intructions view, only one view where all the bit comparison takes place.
+      The unprepared methods have, besides the instructions view, only one view where all the bit comparison takes place.
 
       After the instructions you get to see the initial input.
       Right after modificating the initial message, the changed message is also shown on the window, next to the first one.

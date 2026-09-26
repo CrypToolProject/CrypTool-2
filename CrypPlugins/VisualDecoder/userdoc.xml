@@ -38,7 +38,7 @@
 		Und neben der Tatsache, dass es das es einfache Möglichkeiten gibt die Herkunft eines visuellen Codes zu authentifizieren (siehe "RSA signierter QRCode" Vorlage), sind fast alle visuellen Codes nicht signiert.
   </introduction>
   <usage lang="en">
-	 After you drag the component onto the workspace, you may select in the settings a code type or you let the component determine the type automaticly.
+	 After you drag the component onto the workspace, you may select in the settings a code type or you let the component determine the type automatically.
 	  <newline />
 	 The component will now try to decode the present image.
   </usage>

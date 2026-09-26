@@ -74,7 +74,7 @@
     unter anderem im Blog von Klaus Schmeh unter <external ref="http://scienceblogs.de/klausis-krypto-kolumne/m-138-challenge/" />.
   </usage>
   <presentation lang="en">
-    The component contains a presentation. The presentation helps understanding how de- and encypting texts with the M-138 works. It has the shape of a table.
+    The component contains a presentation. The presentation helps users understand how encrypting and decrypting texts with the M-138 works. It has the shape of a table.
     In the first row, the meaning of the columns is described. In the first column, the position of the letter within the given text is shown. In the second
     column, the used strip is shown. Dependent of the length of the key, the content of this column is repeating from some point on. In the following column,
     the content of the strip used is shown per row. The content is shifted in a way, the user can read the plaintext from top to bottom in column "0". This

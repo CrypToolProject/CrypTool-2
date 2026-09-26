@@ -43,7 +43,7 @@
     Depending on the size of the dictionary the precomputation may take some seconds.
     The output is a list of matching words as single string, separated by newlines.
     <newline /><newline />
-    In the settings of the component you can adjust whether an uppercase letter and its correspondig lowercase letter in the input word should be treated as the same or as different.
+    In the settings of the component you can adjust whether an uppercase letter and its corresponding lowercase letter in the input word should be treated as the same or as different.
     <newline />
     If you want to use separator characters in the input word, you can enter them in the text field labeled "Set of separators". For example, if you enter the character "-" here, you can enter
     the input word ANNA as A-N-N-A. It is possible to specify more than one separator character.

@@ -35,9 +35,9 @@
     The "Boolean If-Else Operator" returns at one output "true" and the other "false" if its input is "true".
   </usage>
   <usage lang="de-DE">
-    CrypTool verfügt über eine Reihe von Funktionen, die die Arbeit mit booleschen Operatoren bzw boolscher Algebra ermöglichen. Als
+    CrypTool verfügt über eine Reihe von Funktionen, die die Arbeit mit booleschen Operatoren bzw boolescher Algebra ermöglichen. Als
     einfache Eingabemöglichkeit eines Wahrheitswertes ("Wahr"/"Falsch") gibt es die "Boolesche Eingabe". Mittels Einstellung kann der
-    Benutzer wählen, ob "Wahr" oder "Falsch" ausgegeben werden soll. Um Wahrheitswerte miteinander zu verknüpfen gibt es denn
+    Benutzer wählen, ob "Wahr" oder "Falsch" ausgegeben werden soll. Um Wahrheitswerte miteinander zu verknüpfen, gibt es den
     "Booleschen Binären Operator", der als Eingabe zwei Boolsche Werte entegennimmt und aus diesen seinen Ausgabewert bestimmt.
     Der Operator kann als einer der folgenden Booleschen Operatoren fungieren: UND, ODER, NAND, NOR, XOR.
     Die Operatoren verhalten sich wie folgt:
@@ -72,7 +72,7 @@
       <link lang="en" url="https://www.iconfinder.com/Utha_design" />
       <caption lang="en">The bulp icons (true/false) are based on Utha design's bulp and was downloaded from iconfinder</caption>
       <link lang="de" url="https://www.iconfinder.com/Utha_design" />
-      <caption lang="de">Die Glühbirngen-Icons (wahr/falsch) basieren auf Utha designs Glühbirne und wurde von iconfinder heruntergeladen</caption>
+      <caption lang="de">Die Glühbirnen-Icons (wahr/falsch) basieren auf Utha designs Glühbirne und wurde von iconfinder heruntergeladen</caption>
     </lineReference>
     <linkReference>
       <link lang="en" url="http://en.wikipedia.org/wiki/Boolean_algebra_%28structure%29" />

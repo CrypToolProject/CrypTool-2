@@ -14,7 +14,7 @@
     <b>Ciphertext-only attack</b>
     <newline/>
     The ciphertext-only attack uses hill climbing and simulated annealing to search for optimal key settings.
-    These methods are combinded using a hybrid nested approach. 
+    These methods are combined using a hybrid nested approach.
     A hill climbing process searches for optimal lug settings and an inner simulated annealing process searches for optimal pin settings for this lug setting.
     <newline/>
     These methods are as follows:
@@ -81,7 +81,7 @@
   </introduction>
 
   <introduction lang="de-DE">
-    Die Hagelin M-209 ist eine tragbare Chiffriemachine, welche vom US-Militär wären dem zweiten Weltkrieg und bis zum Korea Krieg verwendet wurde.
+    Die Hagelin M-209 ist eine tragbare Chiffriermaschine, die vom US-Militär während des Zweiten Weltkriegs und bis zum Koreakrieg verwendet wurde.
     Die originale M-209 ist vollständig analog und hat einen größeren Schlüsselraum als die Enigma, die von den Deutschen im zweiten Weltkrieg verwendet wurde.
     <newline/>
     Dieser Analysator stellt zwei Arten von Angriffen bereits: ciphertext-only und known-plaintext.
@@ -133,12 +133,12 @@
     3. Jeder Schlüssel wird mittels einer Scoring function analysiert und ein Wert (Score) berechnet. Die hier berechnete Wert wird Aggregate Displacement Error (ADE) Score genannt.
 	   Für den ADE Score wird der erwartete mit dem tatsächlichen Displacement verglichen. Der Unterschied wird Displacement Error genannt.
 	   (Displacement bezeichnet den Abstand zwischen dem verschlüsselten und unverschlüsselten Buchstaben.
-	   Das Displacement ergibt sich aus den verchiedenen Komponenten des Schlüssels.)
+	   Das Displacement ergibt sich aus den verschiedenen Komponenten des Schlüssels.)
 	   Dieser Score kann nur bei dem Known-Plaintext Angriff berechnet werden, weil man dafür nicht nur den verschlüsselten, sondern auch den unverschlüsselten Text braucht.
 	  <newline/>
     4. Von den 100 zufällig erstellten Schlüsseln wird der, mit dem besten Score für den weiteren Angriff verwendet.
 	  <newline/>
-    5. Folgende 3 Schleifen werden durchbeführt, bis der ADE sich nicht mehr verbessert.
+    5. Folgende 3 Schleifen werden durchgeführt, bis der ADE sich nicht mehr verbessert.
 	   (Der Zielwert vom ADE ist 130 000. Dieser Wert hat sich bei den Analysen als besonders geeignet erwiesen.)
 		<newline/>
     a. Verschiedene Transformationen an den Pin Einstellungen werden durchgeführt. Nach jeder Transformation wird der ADE berechnet.
@@ -179,7 +179,7 @@
     <newline/>
     Im 'Verwendete Kerne' Eingabefeld kann man einstellen, wie viele Kerne die Anwendung für den Angriff verwenden darf.
     <newline/>
-    Im 'Sprache' Menü kann man die Sprache der Texte angeben, die anmgegriffen werden.
+    Im 'Sprache' Menü kann man die Sprache der Texte angeben, die angegriffen werden.
     <newline/>
     Im 'Buchstabenanzahl des Alphabets' Menu kann man die Zahl der Buchstaben der Sprache angeben.e.
     <newline/>

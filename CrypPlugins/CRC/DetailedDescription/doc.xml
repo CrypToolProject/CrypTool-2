@@ -65,7 +65,7 @@
     Die Parameter haben folgende Bedeutung:
     <list><item><b>Größe:</b> Dies gibt den Grad des Generatorpolynoms an. Erlaubt sind Werte von 1 bis 64.
       </item><item><b>Generatorpolynom:</b> Hier wird das Generatorpolynom in Normaldarstellung als Hexadezimalzahl eingegeben. Das höchste gesetzte Bit wird in dieser Darstellung ignoriert, da seine Position durch den Parameter <b>Größe</b> bereits bestimmt ist.
-        Besipiel: Das Generatorpolynom x^5 + x^4 + x^3 + 1 wird durch die Bitfolge 111001 repräsentiert. Wenn das höchste gesetzte Bit ignoriert wird, ergibt sich 11001, also hexadezimal 19.
+        Beispiel: Das Generatorpolynom x^5 + x^4 + x^3 + 1 wird durch die Bitfolge 111001 repräsentiert. Wenn das höchste gesetzte Bit ignoriert wird, ergibt sich 11001, also hexadezimal 19.
       </item><item><b>Startwert:</b> Mit diesem Wert wird der CRC-Prüfwert initialisiert. 
         Da führende Nullen den Wert eines Polynoms nicht verändern erhalten Datenfolgen, die sich nur durch die Anzahl ihrer führenden Nullen unterscheiden, denselben Prüfwert.
         Um dies zu vermeiden initialisieren viele CRC-Varianten den CRC-Prüfwert mit einem Wert ungleich 0. Geben Sie den Startwert in hexadezimaler Schreibweise an.

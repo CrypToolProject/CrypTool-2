@@ -21,7 +21,7 @@ Das Zeichen '+' ist hierbei eine Photonenbasis aus einem horizontalen und einem 
   For correct usage of the BB84 protocol this plugin can be used along with the BB84 Photon Encoder, the BB84 Photon Decoder, and the BB84-Man-In-The-Middle. 
   </usage>
   <usage lang="de-DE">
-  Um den Basis-String ausgeben zu können, muss das Plugin zunächst die Anzahl der zu generiernden Basen wissen. Hierzu steht wahlweise ein Setting bereit, 
+  Um den Basis-String ausgeben zu können, muss das Plugin zunächst die Anzahl der zu generierenden Basen wissen. Hierzu steht wahlweise ein Setting bereit,
   in welchem die Anzahl eingestellt werden kann, oder es muss der Eingabekonnektor mit der Bezeichnung "Längeneingabe" benutzt werden. In letzterem Fall wird,
   wenn ein Textfeld an den Konnektor angebunden wird, die Anzahl der enthaltenen Zeichen als Stringlänge festgelegt. Wird hingegen eine Zahleneingabe gewählt, 
   wird die eingegebene Zahl direkt als Länge verwendet. Wird das Plugin ausgeführt, wird ein String mit der festgelegten Größe zufällig mit 'x'- und '+'-Zeichen gefüllt und 

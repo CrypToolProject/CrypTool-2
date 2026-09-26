@@ -31,7 +31,7 @@
   </usage>
   <presentation lang="en">
 	If the status of the plugin is set to "inactive" the animation shows only how photons are moving through the channel. Otherwise you see how every single 
-	photon is sensed by a random photon base, eventually changed, copied and forwarded. In this way the user can see all cases where an error occured. The animation
+	photon is sensed by a random photon base, eventually changed, copied and forwarded. In this way the user can see all cases where an error occurred. The animation
 	speed can be changed in the settings, which also affects the speed of all other photon encoders, decoders and men-in-the-middle to ensure synchronity. 
   </presentation>
   <presentation lang="de-DE">

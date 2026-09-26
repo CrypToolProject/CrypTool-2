@@ -20,7 +20,7 @@
     <section headline="Input and Output">
       The AES plugin has two inputs and one output.  One input is for the plaintext and one for the key. Both input should have the form of a hexadecimal string. <newline />
       For the plaintext you need a 16 bytes (128 bits). Each byte is represented by two hexadecimal characters. <newline />
-      The length of the key depends on your selecetion. <newline />
+      The length of the key depends on your selection. <newline />
       If an input is too long it will be cut off at the correct length. If it is too short it will be padded with 0s.
       The output will display the 128 bit ciphertext once the presentation is completed. <newline /></section>
     <section headline="Parameters">
@@ -71,7 +71,7 @@
       Links von den Runden-Buttons befindet sich ein Button, mit dem man die Schlüsselerweiterung überspringen und direkt zur Verschlüsselung gehen kann.<newline />
       In der Reihe darüber befindet sich ganz links der Button, mit dem man durch die einzelnen Schritte schalten kann. Der Button rechts davon lässt alle Schritte der aktuellen Runde automatisch mit kurzen Pausen dazwischen ablaufen.
       Die Pausenzeit kann man mit dem Schieberegler in derselben Reihe einstellen.<newline />
-      Direkt daneben sind außerdem zwei Buttons, mit denen man die aktuelle Runde überspringen oder zur vorheringen zurückkehren kann.<newline />
+      Direkt daneben sind außerdem zwei Buttons, mit denen man die aktuelle Runde überspringen oder zur vorherigen zurückkehren kann.<newline />
       Die letzten beiden Button bringen einen entweder zurück zu Anfang des Plugins oder ganz ans Ende.
     </section><section headline="Verschlüsselung">
       Der zweite Teil ist die eigentliche Verschlüsselung.<newline />
@@ -89,7 +89,7 @@
       <link url="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard" lang="en" />
       <caption lang="en">Advanced Encryption Standard (Wikipedia)</caption>
       <link url="https://de.wikipedia.org/wiki/Advanced_Encryption_Standard" lang="de-DE" />
-      <caption lang="de-DE">Advanced Encryptopm Standard (Wikipedia)</caption>
+      <caption lang="de-DE">Advanced Encryption Standard (Wikipedia)</caption>
     </linkReference>
   </references>
 </documentation>

@@ -20,7 +20,7 @@
     <section headline="Geschichte">
       Dieser Blockhash wurde in einer Präsentation von Dr. Martin Steinebach des Fraunhofer SIT in 2011 beschrieben.
     </section><section headline="Algorithmus">
-      Der Blockhash ist einer aus einer Reihe von Bild-Hashfunktionen, die dazu genutzt werden Bilder einem von Computern nutzbaren Wert zuzuordnern. Solch ein Hashwert ist typischer Weise 256-bit lang, aber dieser Algorithmus erlaubt dem Nutzer diese Länge zu verändern.
+      Der Blockhash ist einer aus einer Reihe von Bild-Hashfunktionen, die dazu genutzt werden Bilder einem von Computern nutzbaren Wert zuzuordnen. Solch ein Hashwert ist typischer Weise 256-bit lang, aber dieser Algorithmus erlaubt dem Nutzer diese Länge zu verändern.
       <newline />
       Der Blockhash wird mittels der folgenden Schritte berechnet:
       <newline /><newline />
@@ -47,14 +47,14 @@
     <newline /><newline /><b>Ausgabedateiformat:</b><newline />
     Der Nutzer darf zwischen Bmp, Png und Tiff als Ausgabeformat wählen. Dadurch ändert sich das Format des Ausgabe-Datenstroms der erzeugt wird. Der Standard ist Bmp.
     <newline /><newline /><b>Jeden Schritt anzeigen:</b><newline />
-    Dieses Kontrollkästchen ist standardmäßig nicht markiert. Dadurch wird ist der einzige Ausgabe-Datenstrom der erzeugt wird der des resultierenden Schwarz-Weißbildes. Wenn dieses Kästchen markiert ist wird jeder Schritt des Hashverfahrens direkt zu einem Ausgabe-Datenstrom verarbeitet und an den Ausgabe-Konektor weiter gegeben. Dadurch kann ein Flackern entstehen, denn die meisten Schritte werden sehr schnell verarbeitet. Diese Einstellung ist eher dann interessant, wenn der Nutzer sehr große Größen auswählt. Dann kann er beobachten, wo die Verarbeitung am längsten dauert.
+    Dieses Kontrollkästchen ist standardmäßig nicht markiert. Dadurch wird ist der einzige Ausgabe-Datenstrom der erzeugt wird der des resultierenden Schwarz-Weißbildes. Wenn dieses Kästchen markiert ist wird jeder Schritt des Hashverfahrens direkt zu einem Ausgabe-Datenstrom verarbeitet und an den Ausgabe-Konnektor weiter gegeben. Dadurch kann ein Flackern entstehen, denn die meisten Schritte werden sehr schnell verarbeitet. Diese Einstellung ist eher dann interessant, wenn der Nutzer sehr große Größen auswählt. Dann kann er beobachten, wo die Verarbeitung am längsten dauert.
     <newline /><newline /><b>Schieberegler:</b><newline />
     Dieser Schieberegler macht das gesamte Hashverfahren sehr viel lebendiger. Durch schieben kann der Nutzer sehr schnell die einzelnen Schritte des Hashverfahrens durchwechseln. Wenn der Schieberegler vor der Berechnung zum Beispiel auf Schritt 3 geschoben wird, so wird Schritt 4 gar nicht erst angezeigt. Nach der Berechnung (während die Komponente noch läuft) kann der Schieberegler beliebig verschoben werden um die einzelnen Schritte zu sehen.
   </usage>
   <references>
     <linkReference id="wikipedia">
       <link url="http://www.anwendertag-forensik.de/content/dam/anwendertag-forensik/de/documents/2011/Vortrag_Steinebach.pdf" lang="en" />
-      <caption lang="en">Robust Hashs for forensic image recognition</caption>
+      <caption lang="en">Robust Hashes for forensic image recognition</caption>
       <link url="http://www.anwendertag-forensik.de/content/dam/anwendertag-forensik/de/documents/2011/Vortrag_Steinebach.pdf" lang="de-DE" />
       <caption lang="de-DE">Robuste Hashes zur forensischen Bilderkennung</caption>
     </linkReference>

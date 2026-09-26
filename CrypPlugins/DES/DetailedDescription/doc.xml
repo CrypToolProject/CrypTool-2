@@ -82,7 +82,7 @@
       Finally, the plaintext will be sent to the output of the component as a data stream.
       <newline /><newline /></section><section headline="Cryptographic Mode">
       Block ciphers divide their input data into blocks of a fixed size and apply the encryption or decryption function on the blocks of the input.
-      The chaining mode determines the way in which consecutive blocks, after being encrypted or decryted, are combined in order to achieve better security or error tolerance.
+      The chaining mode determines the way in which consecutive blocks, after being encrypted or decrypted, are combined in order to achieve better security or error tolerance.
       The DES component offers the following block chaining modes: ECB (Electronic Code Book), CBC (Cipher Block Chaining), CFB (Cipher Feedback) and OFB (Output Feedback).
       Select the appropriate chaining mode in the settings of the component.
       <newline />

@@ -3,7 +3,7 @@
   <language culture="en" />
   <language culture="de-DE" />
   <introduction lang="en">
-    RSA is an asymmetric algorithm devoloped 1977 by Ronald L. Rivest, Adi Shamir und Leonard Adleman at the Massachusetts Institute of
+    RSA is an asymmetric algorithm developed in 1977 by Ronald L. Rivest, Adi Shamir and Leonard Adleman at the Massachusetts Institute of
     Technology. It is known as the first published asymmetric algorithm. The security of RSA is based on the factorization
     problem and the assumption that there is no suitable algorithm to factorize a big number in suitable time
     (this means that a factorization is finished not in centuries but in realistic time like hours or days).

@@ -22,7 +22,7 @@
     be appended to the output until the required number of output digits is reached.
     If there are too few hexadecimal digits below A, the sequence of hexadecimals is treated another time. This time all digits 
     above or equal A are considered. The value of the digit will be subtracted by A and it gets appended to the output until 
-    the claimed nummber of decimal digits is reached. This step only creates digits between 0 and 5. <newline />
+    the claimed number of decimal digits is reached. This step only creates digits between 0 and 5. <newline />
     If the binary input is too short to create the requested amount of decimal 
     digits a warning will be sent to the CrypTool 2 environment.<newline />
     A variant of the Visa method is the modified Visa method. If the binary input is too short another binary input is requested
@@ -37,7 +37,7 @@
     Starting with the most left hexadecimal digit, each hexadecimal digit of the sequence, which has a value below A, is considered
     for the decimal. The following number is created: 945. Due to a lack of enough hexadecimal digits, which 
     have a value below A, the intermediate decimal has only 3 instead of 4 digits. Now, the hexadecimal digits, which are
-    above or equal A, are considered to get the last decimal digit. Thus, the digit B is choosen, it is reduced by A, and it is appended
+    above or equal A, are considered to get the last decimal digit. Thus, the digit B is chosen, it is reduced by A, and it is appended
     to the decimal. The result is the decimal 9451.
     <newline /><newline /><b>(2) IBM</b><newline />
     The IBM method is similar to the Visa method. The binary input is converted to a sequence of hexadecimals.
@@ -112,7 +112,7 @@
     <newline /><newline /><b>(1) Visa</b><newline />
     Bei dem Visa-Verfahren werden im ersten Schritt die binären Eingabedaten in hexadezimale Ziffern überführt. 
     Nach dieser Konvertierung werden der Reihe nach Ziffern, die kleiner als A sind, aus der Folge der hexadezimalen 
-    Ziffern ausgewählt und nacheinandner als Ziffern der Dezimalzahl übernommen. Besitzt die Dezimalzahl nach diesem Schritt noch
+    Ziffern ausgewählt und nacheinander als Ziffern der Dezimalzahl übernommen. Besitzt die Dezimalzahl nach diesem Schritt noch
     nicht die gewünschte Anzahl von Ziffern, wird die hexadezimale Zahlenfolge ein weiteres Mal der Reihe nach und
     von vorne beginnend betrachtet. Diesmal werden nur Ziffern, die einen Wert größer gleich A haben ausgewählt, um
     den Wert A verringert und an das Ende der Dezimalzahl übernommen. In diesem zweiten Schritt können nur die Ziffern
@@ -120,7 +120,7 @@
     Liefern die binären Eingabedaten eine zu kleine 
     hexadezimale Ziffernfolge für die gewünschte Anzahl von dezimalen Ziffern, wird der CrypTool 2-Umgebung eine Warnung<newline />
     Eine Variante des Visa-Verfahrens ist das modifizierte Visa-Verfahren. Diese Methode erfordert eine weitere Menge
-    binärer Eingabedaten falls die ersten Binärdaten nicht genügend hexadezimale Ziffern kleiner A liefern. Das modifzierte
+    binärer Eingabedaten falls die ersten Binärdaten nicht genügend hexadezimale Ziffern kleiner A liefern. Das modifizierte
     Visa-Verfahren wurde noch nicht implementiert.
     gesendet.
     <newline /><newline /><u>Beispiel</u><newline /><newline />
@@ -184,7 +184,7 @@
     Annahme, dass die binären Eingabedaten gleichverteilt sind, bestimmt werden. Bei einer idealen Methode zur Dezimalisierung
     von Binärdaten wären alle k-stelligen Dezimalzahlen gleich wahrscheinlich. <newline />
     In diesem Sinne hat das IBM-Verfahren eine geringe Qualität, da Dezimalzahlen mit Ziffern auf die, die hexadezimalen Ziffern
-    A - F abgebildet werden, eine höhere Wahrscheinlichkeit haben. Diesselbe Schlussfolgerung trifft auf das Visa-Verfahren zu,
+    A - F abgebildet werden, eine höhere Wahrscheinlichkeit haben. Dieselbe Schlussfolgerung trifft auf das Visa-Verfahren zu,
     falls eine geringe Menge an binären Eingabedaten zur Verfügung steht. Ist dagegen die Menge der binären Eingabedaten
     groß genug, muss keine hexadezimale Ziffer aus dem Bereich A - F in den Bereich 0 - 9 abgebildet werden. Dadurch tritt keine
     dezimale Ziffer mit einer höheren Wahrscheinlichkeit auf und das Visa-Verfahren erreicht eine hohe Qualität. <newline />
@@ -194,7 +194,7 @@
   <references lang="de-DE">
     <linkReference id="Dec">
       <caption lang="de-DE">Koy, H./ Blank, M.: Qualität von Dezimalisierungsverfahren. Januar 2010.</caption>
-      <caption lang="en">Koy, H./ Blank, M.: Qualität von Dezimalisierungsverfahren (Quality of Decimalization Methods). Januar 2010.</caption>
+      <caption lang="en">Koy, H./ Blank, M.: Qualität von Dezimalisierungsverfahren (Quality of Decimalization Methods). January 2010.</caption>
     </linkReference>
   </references>
 </documentation>

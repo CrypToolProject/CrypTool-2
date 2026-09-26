@@ -95,9 +95,9 @@
 	  In the other Tab you can find the balance log, which tracks the balance of all addresses specified in the addresses input before.<newline /></presentation>
   <presentation lang="de-DE">
 	  Die Präsentation für diese Komponente besteht aus drei Teilen.<newline />
-	  Oben finden Sie den Header, indem Informationen zum Block, wie Block-ID, Hash-Wert oder Hash-Wert des vorherigen Blocks etc., stehen.<newline />
+	  Oben finden Sie den Header, in dem Informationen zum Block, wie Block-ID, Hash-Wert oder Hash-Wert des vorherigen Blocks etc., stehen.<newline />
 	  Unter dem Header ist eine weitere Zeile mit Statistiken zum Mining Prozess. Dort können Sie sehen wie viele Hash-Werte pro Sekunde berechnet werden, welche Hash-Funktion verwendet wird und welche Mining-Schwierigkeit in den Einstellungen angegeben wurde.<newline />
-	  Dadrunter finden Sie das Transaktionsprotokoll, in dem Sie die Transaktionen und deren Status sowie Fehlermeldungen im Falle einer ungültigen Transaktion sehen können.<newline />
+	  Darunter finden Sie das Transaktionsprotokoll, in dem Sie die Transaktionen und deren Status sowie Fehlermeldungen im Falle einer ungültigen Transaktion sehen können.<newline />
 	  Im Tab daneben ist das Balance-Protokoll, das den Saldo aller in der Adresseingabe angegebenen Adressen erfasst.<newline /></presentation>
   <references></references>
 </documentation>

@@ -39,7 +39,7 @@
     Example: 1N6R3R8R7N,0R2R4N5R9R,34021,VYRIV,RCMLL,25137 <newline />    
     The first part of the key ("1N6R3R8R7N" in the example) defines the used cipher rotors (N means, the rotor is in normal orientation; R means, it is in reversed orientation).
     After that, the control rotors ("0R2R4N5R9R" in the example) are defined, followed by the index rotors ("34021" in the example).
-    The last three parts ("VYRIV,RCMLL,25137" in the exampel) define the starting positions of the rotors.
+    The last three parts ("VYRIV,RCMLL,25137" in the example) define the starting positions of the rotors.
   </usage>
   <usage lang="de-DE">
     Um die SIGABA-Komponente zu verwenden, werden nur eine Texteingabe-Komponente und eine Textausgabe-Komponente benötigt.

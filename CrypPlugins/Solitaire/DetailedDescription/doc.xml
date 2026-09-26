@@ -51,7 +51,7 @@
     Bei 'Eingabe' wird die Reihenfolge der Karten als eine durch Kommas getrennte Liste von Karten erwartet, wobei die Karten entsprechend ihrer Wertigkeit durchnummeriert sind und die zwei Joker mit A und B bezeichnet werden. 
     Die Eingabe 1,2,A,B steht also für die Karten Kreuz As, Kreuz 2, Joker 1 und Joker 2.
     <newline />
-    Der initiale Kartenstapel kann auch durch ein Schlüsselwort erzeugt werden. Eine detailierte Beschreibung (auf englisch) finden Sie auf der Webseite von Bruce Schneier: http://www.schneier.com/solitaire.html
+    Der initiale Kartenstapel kann auch durch ein Schlüsselwort erzeugt werden. Eine detaillierte Beschreibung (auf englisch) finden Sie auf der Webseite von Bruce Schneier: http://www.schneier.com/solitaire.html
     <newline />
     An den Eingabetext werden 'X' angehängt, bis seine Länge ein Vielfaches von 5 ist. Dann wird ein Schlüsselstrom mit derselben Länge wie der ergänzte Eingabetext erzeugt, der schließlich zum Eingabetext addiert wird (modulo 26).
     <newline />

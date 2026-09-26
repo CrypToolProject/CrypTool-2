@@ -3,7 +3,7 @@
   <language culture="en" />
   <language culture="de-DE" />
   <usage lang="en">
-    The CrypTool 2 Wizard is – beside of the Workspace Manager and the Crypto Tutorials – one of the most important utility in CrypTool 2. The Wizard was developed especially to faciliate the entry into CrypTool 2 of new and/or inexperienced users. Therefore, the Wizard provides an assistant, which makes it step-by-step possible to configure and call up easily, predefined templates. This offers you as the user the advantage, to navigate clearly through the wide amount of templates of CrypTool 2. At the same time you don't have to bother about the complexity in configuration and interaction between components of quiet a few templates.
+    Alongside the Workspace Manager and the Crypto Tutorials, the CrypTool 2 Wizard is one of the most important utilities in CrypTool 2. The Wizard was developed especially to help new and inexperienced users get started with CrypTool 2. It provides an assistant that guides users step by step through configuring and opening predefined templates. This makes it easy to navigate CrypTool 2's wide range of templates without having to deal with the complex configuration and interaction of components in quite a few templates.
     <newline /><newline />
     The easiest way to call up the Wizard is in the Startcenter. Pressing the button "Wizard" in the section "Main functions" opens 
     a new Wizard tab. The Wizard can also be called in the dropdown menu of the "New" button in the "File" section of the "Home" ribbon, which is located in the top left corner of the CrypTool 2 window.
@@ -12,15 +12,15 @@
     <newline /><newline />
     The Wizard opens, as can be seen in Figure 1, in a new tab in the CrypTool 2 window, likewise a workspace or the Startcenter. The Wizard will always open with the main page. On the left side of the page are checkboxes in order to choose the category of the desired template. Descriptions of the chosen category are displayed in the center of the page. Down on the right side are navigation controls to return to the previous page, to proceed to the next or to cancel and close the Wizard.
     <newline /><newline />
-    The Wizard was designed as a kind of decision tree offering the template, which is closest to your problem, task or target. While the seperations in the beginning are more rough – like the question whether should something be decrypted or analyzed – the decisions getting with every page more and more fine-grained. In the best case the Wizard provides on the last page the template which does what you've been looking for.
+    The Wizard was designed as a decision tree that offers the template closest to your problem, task, or goal. The choices at the beginning are broad—such as whether something should be decrypted or analyzed—and become more fine-grained with each page. Ideally, the Wizard provides the template you are looking for on the last page.
     <newline />
     In the further extending configuration settings may be necessary. Should problems arise here please read the documentation of the components which were used in the template.
     <newline /><newline /><img src="Wizard/DetailedDescription/Images/Figure2.png" />    
     Figure 2: Visualization of the decision path
     <newline /><newline />
-    In the lower part of the page, the path through the decision tree is represented graphically, as can be ssen in Figure 2. Double-clicking on a segment of the path leads back to that step.
+    In the lower part of the page, the path through the decision tree is represented graphically, as can be seen in Figure 2. Double-clicking on a segment of the path leads back to that step.
     <newline /><newline />
-    Depending on the choosen template, either the Wizard will open the template in a new workspace or the most important information will be summarized on a further page. In case of the later one, the Wizard will provide a button in the upper right corner which opens the corresponding template as a new workspace with the configurations.
+    Depending on the chosen template, either the Wizard will open the template in a new workspace or the most important information will be summarized on a subsequent page. In the latter case, the Wizard provides a button in the upper-right corner that opens the configured template in a new workspace.
     <newline /><newline />
     Settings
     <newline /><newline />
@@ -42,15 +42,15 @@
     <newoine /><newline />
     Der Wizard wurde dabei so konzipiert, dass man sich wie in einer Art Entscheidungsbaum jener Vorlage annähert, welche dem eigenen Problem/Aufgabe/Ziel am nächsten kommt. Während am Anfang noch grobe Unterteilungen getroffen werden, wie z.B. ob etwas verschlüsselt oder analysiert werden soll, werden die Entscheidungen mit jeder Seite feingranularer. Am Ende wird im günstigsten Fall die Vorlage erreicht, welche gesucht wurde.<newline />
     Im weiteren Verlauf können dann Konfigurationseinstellungen notwendig werden. 
-    Sollten an dieser Stelle Probleme autreten, müssen die Hilfeseiten der Komponenten der Vorlage zu Rate gezogen werden.
+    Sollten an dieser Stelle Probleme auftreten, müssen die Hilfeseiten der Komponenten der Vorlage zu Rate gezogen werden.
     <newline /><newline /><img src="Wizard/DetailedDescription/Images/Figure2.png" /> 
     Abbildung 2: Visualisierung des Entscheidungspfades  
     <newline /><newline />
-    Im unteren Bereich des Fensters wird der Pfad durch den Entscheidungsbaum grafisch dargstellt, wie in Abbildung 2 zu sehen. Mit einem Doppelklick auf ein Segment des Pfades, kann an diese Stelle im Baum zurück gesprungen werden.
+    Im unteren Bereich des Fensters wird der Pfad durch den Entscheidungsbaum grafisch dargestellt, wie in Abbildung 2 zu sehen. Mit einem Doppelklick auf ein Segment des Pfades kann an diese Stelle im Baum zurückgesprungen werden.
     <newline /><newline />
     Abhängig von der gewählten Vorlage, wird im letzten Schritt entweder ein Arbeitsbereich mit den entsprechenden Konfigurationen aufgerufen, oder eine weitere Seite im Wizard, die die wichtigsten Informationen grafisch zusammenfasst. Sollte Letzteres der Fall sein, bietet eine Schaltfläche in der rechten oberen Ecke weiterhin die Möglichkeit, einen Arbeitsbereich mit der entsprechenden Vorlage und den Konfigurationen aufzurufen.
     <newline /><newline />
-    Eintstellungen
+    Einstellungen
     <newline /><newline />
     In den globalen Einstellungen von CrypTool 2 kann man unter dem Menüpunkt "Wizard" Einstellungen für den Wizard vornehmen. Unter "Vorlagen automatisch ausführen" kann eingestellt werden, ob im letzten Schritt der neue Arbeitsbereich mit der Vorlage vom Wizard gestartet werden soll oder nicht.
     Im Menü-Punkt "Animationen anzeigen" können die Animationen beim Wechsel der Seiten deaktiviert werden.

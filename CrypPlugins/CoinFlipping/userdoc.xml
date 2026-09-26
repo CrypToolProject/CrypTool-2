@@ -16,7 +16,7 @@
         Alice flips a coin.
       </item><item>
         Alice chooses a random string as her secret key and appends the result of her coin flip to it. She then applies a cryptographic one-way function (for example SHA) to the concatenated string and sends the resulting hash code to Bob.
-        She has now commited to her coin flip result.
+        She has now committed to her coin flip result.
       </item><item>
         Bob sends his guess about the result of Alice's coin flip to Alice.
       </item><item>
@@ -26,7 +26,7 @@
         Alice gives Bob the opportunity to check her honesty by telling him her secret key and her (alleged) coin flip result.
       </item><item>
         Bob applies the same one-way function to Alice's secret key and announced coin flip result and compares it to the hash code Alice sent him before.
-        If they are equal, Bob knows that Alice was honest. If they differ, he knows that Alice has cheated by altering the coin flip result to which she has commited herself.
+        If they are equal, Bob knows that Alice was honest. If they differ, he knows that Alice has cheated by altering the coin flip result to which she has committed herself.
       </item></enum></introduction>
   <introduction lang="de">
     In der Kryptografie bietet ein "Commitment Scheme" bei der Kommunikation zweier Parteien die Möglichkeit, dass sich eine Partei für einen bestimmten Wert entscheiden kann, ohne der
@@ -58,7 +58,7 @@
   <usage lang="en">
     This component implements Alice's action in step 4 of the protocol, all other steps can be implemented with regular CrypTool components.
     <newline /><newline />
-    It has two inputs: "A's flipped coin", where the result of Alice's coin flip is expected as a boolean value, and "B's guess", which must provide Bob's guess as a boolen value.
+    It has two inputs: "A's flipped coin", where the result of Alice's coin flip is expected as a boolean value, and "B's guess", which must provide Bob's guess as a boolean value.
     <newline /><newline />
     In the settings, you must select the behaviour of Alice: honest or dishonest. If she is honest, she will compare Bob's guess with her real coin flip result, the one she has committed to.
     If she is dishonest, she will alter the result of her coin flip so, that she is the winner. But of course Bob can then detect this change, as Alice has committed to the real result of her coin flip.

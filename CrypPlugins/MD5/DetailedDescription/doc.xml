@@ -18,7 +18,7 @@
       MD5 takes a message of arbitrary length as input and generates a hash value of fixed length (128 bits).
       First, the message is padded so that its length is 64 bits less than a multiple of 512 bits, by appending a '1'-bit and then as many '0'-bits as necessary to reach the desired length.
       Then a 64-bit number, that represents the length of the input message, is appended so that the message length is now a multiple of 512.
-      The main algorithmm of MD5 works on a 128-bit buffer that is divided into four 32-bit words A, B, C and D. They are initialized with certain fixed values.
+      The main algorithm of MD5 works on a 128-bit buffer that is divided into four 32-bit words A, B, C and D. They are initialized with certain fixed values.
       The encryption function (also known as compression function) is now applied to this buffer, where the first 512-bit block is used as a key parameter.
       The processing of a message block consists of four similar stages, termed rounds. Each round is composed of 16 operations based on a non-linear function "F", modular addition, and left rotation.
       There are four possible "F"-functions. A different one is used in each round:

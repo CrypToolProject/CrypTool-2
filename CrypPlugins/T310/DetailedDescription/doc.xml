@@ -52,7 +52,7 @@
       encrypt characters of the CCITT-2 encoding table, which is a 5 bit teleprinting standard. Due to the short
       length of only 5 bits the amount of available characters was limited. It supports only upper case letters,
       numbers from 0-9 and some other characters. This version will truncate all input data which is not 7 bit ASCII encoded
-      by default and without warning. If the input still contains non-convertable characters, you will receive a warning.
+      by default and without warning. If the input still contains non-convertible characters, you will receive a warning.
       They will be truncated from the message before encrypting. Lower case letters will be converted automatically to upper case.
       <newline /><newline />
       The newer T-310/51 could encrypt any kind of byte-based data. It reduces bytes to 5-bit words before encrypting it.

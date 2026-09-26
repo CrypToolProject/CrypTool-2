@@ -8,7 +8,7 @@
   </introduction>
   <introduction lang="de-DE">
     Eine Webcam ist eine im Computer integrierte oder über eine Schnittstelle angeschlossene Kamera.
-    Diese Komponente zeichnet Bilder über eine angeschlosssene Webcam in bestimmten Intervallen auf und stellt sie für die weitere Verarbeitung zur Verfügung.
+    Diese Komponente zeichnet Bilder über eine angeschlossene Webcam in bestimmten Intervallen auf und stellt sie für die weitere Verarbeitung zur Verfügung.
   </introduction>
   <usage lang="en">
     After you drag the component onto the workspace, you may select in the settings which of the detected cameras you want to use.

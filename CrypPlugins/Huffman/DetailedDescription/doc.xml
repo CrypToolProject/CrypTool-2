@@ -20,7 +20,7 @@
     than compressing data in its original form (for e.g. decoding UTF-32 encoded text to code page 437 will result in 4 times longer text).
     <newline /><newline /><section headline="Compression"><newline />
       Huffman compression involves the following steps:      
-      <enum><item>Calculate character frequencies</item><item>Create a node for each characacter-frequency pair and add it to a priority queue</item><item>Combine two nodes with smallest frequencies until there is only one node left - the Huffman tree</item><item>Create a code table by traversing the tree to each character and note down the paths taken (0 for left turn, 1 for rigth turn)</item><item>Represent characters using their newly created codewords</item></enum>      
+      <enum><item>Calculate character frequencies</item><item>Create a node for each character-frequency pair and add it to a priority queue</item><item>Combine two nodes with smallest frequencies until there is only one node left - the Huffman tree</item><item>Create a code table by traversing the tree to each character and note down the paths taken (0 for left turn, 1 for right turn)</item><item>Represent characters using their newly created codewords</item></enum>
       Below is an example tree generated from the sentence "this is an example of a huffman tree":
       <newline /><img src="Huffman/DetailedDescription/example_tree.png"></img><newline /><newline />
       Note that compressing small amounts of data and/or high entropy data will result in a bigger compressed size. That is because we need to have

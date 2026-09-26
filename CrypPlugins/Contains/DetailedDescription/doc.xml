@@ -4,7 +4,7 @@
   <language culture="de-DE" />
   <introduction lang="en">
     This plugin tests whether a word (or several words) occurs in a given text or in a list of words and provides the count
-    of occurances.
+    of occurrences.
   </introduction>
   <introduction lang="de-DE">
     Dieses Plugin testet, ob und wie oft ein Wort (bzw. mehrere Worte) in einem Eingabetext oder in einer Liste von 
@@ -21,16 +21,16 @@
     <newline />
     When the plugin is started, it checks for each word in the 'Search word' list whether it occurs in the 'Input' list
     and increases the hit count accordingly. You can specify in the settings tab if a word that occurs several times should
-    be counted on each occurance or only once. The hit count is then presented at the plugin output.
+    be counted on each occurrence or only once. The hit count is then presented at the plugin output.
     <newline /><newline />
 
     When 'Aho-Corasick' is selected, the plugin again expects a word list on the 'Search word' input. On 'Input', it now
-    expects a regular text. When the plugin is started, it searches for all occurances of words in the 'Search word' list in the
+    expects a regular text. When the plugin is started, it searches for all occurrences of words in the 'Search word' list in the
     input text using the Aho-Corasick string matching algorithm.
     <newline /><newline />
 
     For both operating modes you can select whether the search should be case sensitive or case insensitive.
-    Furthermore you can select wheter diacritical marks (i.e. accents, circumflex, diaeresis, ...) should be taken
+    Furthermore you can select whether diacritical marks (i.e. accents, circumflex, diaeresis, ...) should be taken
     into account when comparing characters. Example: If diacritics are to be ignored, the character 'a' matches 'à', 'á' and 'ä'
     and 'Vigenère' matches 'Vigenere'.
     <newline /><newline />

@@ -21,7 +21,7 @@
     Bazeries based the keyword of the Polybius square on the number key.
     For example, the number key 123 would result in the keyword  &quot;ONEHUNDREDTWENTYTHREE&quot;.<newline/>
     <newline/>
-    In contast to the original cipher, the component allows to use keyword and number key independently. 
+    In contrast to the original cipher, the component allows to use keyword and number key independently.
     Also, the component supports a 36-character Polybius square, which contains all Latin letters as well as all digits from 0 to 9.    
   </usage>
 

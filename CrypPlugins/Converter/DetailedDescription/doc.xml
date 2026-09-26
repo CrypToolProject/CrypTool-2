@@ -30,7 +30,7 @@
     will produce the number 769 as output. If this also fails, the plugin tries to interpret the input as a hexadecimal number. This
     can also be enforced by prefixing the string with "0x". So if you want the input string "100" to be interpreted as a hexadecimal
     number instead of decimal, you should enter "0x100".
-    If we still get no result, the plugin removes any non-hexadecimal characters from the input and interpretes the remainder
+    If we still get no result, the plugin removes any non-hexadecimal characters from the input and interprets the remainder
     as a hexadecimal number. This enables the input of numbers in other formats: the input string "{ 0x01, 0x00, 0x02 }", which
     represents an array definition in the programming language C, will be interpreted as the BigInteger 0x10002 (or 65538 in decimal).
     <newline /><newline /><b>Converting to Double</b><newline /><newline />

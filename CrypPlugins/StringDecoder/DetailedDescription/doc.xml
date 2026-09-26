@@ -18,7 +18,7 @@
     If you choose ISO8859-15 as output encoding, the result is <i>FC 62 65 72</i>. The difference is caused by the different byte representations of the letter 'ü' in the two encodings.
     <newline /><newline />
     If you choose the format <b>Binary</b>, the input string must consist of the characters '0' and '1'. It is split into blocks of 8 characters, that are interpreted as bytes in binary notation.
-    The output of the component consists of the resulting byte sequence. For improving the readibility, the input can be interspersed with separator characters. Check the appropriate checkbox in the settings to
+    The output of the component consists of the resulting byte sequence. For improving the readability, the input can be interspersed with separator characters. Check the appropriate checkbox in the settings to
     activate the separator characters. The default separators are the space character and the comma, but you can provide your own set of characters in the settings.
     <newline /><newline /><b>Example:</b> The input <i>1000000001000001</i> will produce the byte sequence <i>80 41</i>. If separator characters are used, <i>10000000 01000001</i> will generate the same byte sequence,
     but the input <i>100000 0001000 001</i> will generate <i>20 08 01</i>.

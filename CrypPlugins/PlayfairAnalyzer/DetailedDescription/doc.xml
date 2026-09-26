@@ -20,7 +20,7 @@
     Die <b>Playfair-Analyse</b>-Komponente erwartet an ihrem Eingang <b>Geheimtext</b> einen mit der Playfair-Chiffre verschlüsselten Geheimtext. Die Komponente analysiert den Geheimtext mit einem
     Hill-Climbing-Algorithmus und gibt den am besten bewertete Klartexte an ihrem Ausgang <b>Klartext</b> und den dazugehörigen Schlüssel am Ausgang <b>Schlüssel</b> aus.
     <newline />
-    In den Einstellungen für die Komponente können Sie angeben, wieviele Iterationen (Neustarts) der Hill-Climbing-Algorithmus durchführen soll. Wenn hier der Wert 0 angegeben wird, macht die Komponente
+    In den Einstellungen für die Komponente können Sie angeben, wie viele Iterationen (Neustarts) der Hill-Climbing-Algorithmus durchführen soll. Wenn hier der Wert 0 angegeben wird, macht die Komponente
     unendlich viele Iterationen. Ausserdem kann man die maximale Länge des Geheimtextes angeben, der für die Analyse verwendet werden soll. Wenn der Geheimtext sehr lang ist, genügt es oft, nur einen Teil davon
     für die Analyse zu benutzen. Dies beschleunigt den Algorithmus erheblich.
   </usage>

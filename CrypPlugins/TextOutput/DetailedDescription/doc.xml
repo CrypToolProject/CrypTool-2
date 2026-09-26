@@ -30,7 +30,7 @@
     The appended text is separated from the present text by an adjustable number of line breaks.
     <newline /><newline />
     You can furthermore use the setting 'Show changes' to compare the texts of two executions of the component. Here the component offers three modes of comparison: 'Show only differences', 'Show inserts and deletions', and 'Show different symbols'.
-    With 'Show only differences', the text changes are marked blue using a unix-like diff algorithm. With 'Show inserts and deletions', the text inserts are marked green and the text deletions are marked red. With 'Show different symbols', a one by one comparision of the texts is done. Here, each changed symbol is marked blue.
+    With 'Show only differences', the text changes are marked blue using a unix-like diff algorithm. With 'Show inserts and deletions', the text inserts are marked green and the text deletions are marked red. With 'Show different symbols', a one by one comparison of the texts is done. Here, each changed symbol is marked blue.
     <newline /><newline /><b>'Show only differences' example:</b><newline />
     First component run shows: The quick brown fox jumps over the lazy dog.<newline />
     We change 'quick' to 'QUICK'.<newline />
@@ -52,7 +52,7 @@
       </item><item>
         Ist die Eingabe vom Typ <i>Boolean</i>, so wird 'True' oder 'False' ausgegeben.
       </item><item>
-        Numerische Eingaben werden in eine Zeichenkette konvertiert, die der Repäsentation der Zahl im Dezimalsystem entspricht.
+        Numerische Eingaben werden in eine Zeichenkette konvertiert, die der Repräsentation der Zahl im Dezimalsystem entspricht.
       </item></list>
     Die Größe der Daten, die die Komponente akzeptiert, ist beschränkt. Wenn die anliegenden Daten größer sind, so wird der über das Limit hinausgehende Teil ignoriert.
     Das Limit kann in den Einstellungen der Komponente unter dem Punkt <i>Maximale Länge</i> angepasst werden. Voreingestellt ist ein Wert von 64 Kilobytes.

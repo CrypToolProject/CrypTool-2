@@ -18,9 +18,9 @@
     The component settings can be used to determine how fast the animation is displayed in the presentation of the component.
   </usage>
   <usage lang="de-DE">
-    Fügen Sie die Chaocipher-Komponente Ihrem Arbeitsbereich hinzu. Verbinden Sie anschließend eine Datenquelle mit dem Eingang 'Texteingabe'. Verbinden Sie außerdem eine Textausgabe-Komponente mit dem Ausgang 'Ausgabetext'. Legen Sie nun entweder über den Eingang 'Schlüssel' oder über die gleichnamige Einstellung den Schlüssel fest. Der Schlüssel besteht aus dem Inhalt der linken und rechten Scheibe, die für das Verfahren verwendet werden. Trennen Sie die Scheiben durch ein ';' voneinander. Beispielsweise kann folgender Schlüssel verwendet werden: 'abcdefghijklmnopqrstuvwxyz;wmxrafzonhuqtligcyskbjevpd'. Beachten Sie, dass die linke und die rechte Scheibe die gleichen Zeichen enthalten müssen, es darf nur die Reihnefolge vertauscht werden.
+    Fügen Sie die Chaocipher-Komponente Ihrem Arbeitsbereich hinzu. Verbinden Sie anschließend eine Datenquelle mit dem Eingang 'Texteingabe'. Verbinden Sie außerdem eine Textausgabe-Komponente mit dem Ausgang 'Ausgabetext'. Legen Sie nun entweder über den Eingang 'Schlüssel' oder über die gleichnamige Einstellung den Schlüssel fest. Der Schlüssel besteht aus dem Inhalt der linken und rechten Scheibe, die für das Verfahren verwendet werden. Trennen Sie die Scheiben durch ein ';' voneinander. Beispielsweise kann folgender Schlüssel verwendet werden: 'abcdefghijklmnopqrstuvwxyz;wmxrafzonhuqtligcyskbjevpd'. Beachten Sie, dass die linke und die rechte Scheibe die gleichen Zeichen enthalten müssen, es darf nur die Reihenfolge vertauscht werden.
 
-    Über die Einstellungen der Komponente kann festgelegt werden, wie schnell die Animation in der Präsentation der Komponete dargestellt wird.
+    Über die Einstellungen der Komponente kann festgelegt werden, wie schnell die Animation in der Präsentation der Komponente dargestellt wird.
   </usage>
   <presentation lang="en">
     The presentation shows the slices used for the procedure on the left side. On the right side, controls for playing the animation are shown in the upper part. Below that, a list with the description of the current step is displayed. By double-clicking on one of the steps, the animation jumps to the clicked step.

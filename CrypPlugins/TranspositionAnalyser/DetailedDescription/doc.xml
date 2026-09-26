@@ -85,7 +85,7 @@
 		Zu den "Kinderschlüsseln" Child1 und Child2 von jedem Schlüsselpaar wird der jeweilige Kostenwert berechnet und in MAXLIST gespeichert. Nun werden erneut alle Schlüssel nach ihrem Kostenwert sortiert.
 		Solange die maximale Anzahl an Durchläufen nicht erreicht ist, werden erneut die N/2 schlechtesten Schlüssel gelöscht. Aus den verbleibenden Schlüsseln werden erneut "Kinderschlüssel" erstellt.
 		</section><section headline="Hill-Climbing-Algorithmus">
-      Der Hill-Climbing-Algorithmus generiert einen zufälligen Schlüssel und entschlüsselt damit den Geheimtext. Der resutierende Klartext wird mit einer Kostenfunktion bewertet. Dann wird eine kleine zufällige Änderung am Schlüssel
+      Der Hill-Climbing-Algorithmus generiert einen zufälligen Schlüssel und entschlüsselt damit den Geheimtext. Der resultierende Klartext wird mit einer Kostenfunktion bewertet. Dann wird eine kleine zufällige Änderung am Schlüssel
       vorgenommen und mit dem neuen Schlüssel wird der Vorgang wiederholt. Hat der neue Klartext eine schlechtere Bewertung als der vorhergehende Klartext, so wird der neue Schlüssel verworfen. Ist der neue Klartext dagegen besser bewertet,
       wird der neue Schlüssel als der aktuelle Schlüssel übernommen. Dieser Vorgang wird viele Male wiederholt. Da immer nur Änderungen übernommen werden, die einer Verbesserung des Schlüssels entsprechen, ähnelt der Algorithmus einem Bergsteiger,
       der immer nur bergauf geht.

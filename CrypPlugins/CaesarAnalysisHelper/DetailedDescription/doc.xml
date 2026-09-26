@@ -18,7 +18,7 @@
     You can use the <docRef item="CrypTool.FrequencyTest.FrequencyTest" /> component to create this string.
     You must also select the supposed language of the underlying plaintext.
     The ciphertext will then be analyzed using the letter and bigram frequencies of the selected language.
-    The analysis result will be sent to the ouput of the component as an integer. 
+    The analysis result will be sent to the output of the component as an integer.
     This integer indicates the probable shift value that was used for the Caesar encryption.
 </usage>
   <usage lang="de-DE">

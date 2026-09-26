@@ -93,7 +93,7 @@
     Mit der Enigma-Komponente kann man Texte nicht nur ver- und entschlüsseln, sondern auch Geheimtexte analysieren.
   </introduction>
   <usage lang="de">
-    Im Hauptmenu der Einstellungen kann zunächst das Enigma-Modell gewählt werden. Unter "Schlüssel" kann die Rotorlage gewählt werden, und unter "Betriebsart",
+    Im Hauptmenü der Einstellungen kann zunächst das Enigma-Modell gewählt werden. Unter "Schlüssel" kann die Rotorlage gewählt werden, und unter "Betriebsart",
     ob die Komponente den Text verarbeiten oder analysieren soll.
     <newline /><newline />
     Im Menü "Text-Optionen" befinden sich Einstellungen zur Behandlung von Sonderzeichen, Leerzeichen und der Groß-/Kleinschreibung.

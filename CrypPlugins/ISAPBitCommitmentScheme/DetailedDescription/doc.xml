@@ -69,7 +69,7 @@
     <newline /><newline />
     The <i>ISAP bit Commitment Scheme</i> component has a lot of output connectors (see below), which allow you to obtain the results of
     the algorithm.<newline />
-    The <i>Log message</i> output gives a lot of informations about the intermediate steps of the used algorithm and
+    The <i>Log message</i> output gives a lot of information about the intermediate steps of the used algorithm and
     its results.
   </usage>
   <usage lang="de">

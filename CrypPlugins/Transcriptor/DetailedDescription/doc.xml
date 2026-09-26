@@ -58,7 +58,7 @@
 
     <section headline="Semi-Autoamtisch">
       Im Semi-Automatischen Modus werden beim Hinzufügen eines neuen Symbols automatisch ähnlich aussehende Symbole hinzugefügt.
-      Dabei wird das Symbol in der Auswahl mit dem gesamten Bild verglichen und ein Korrelationskoeffizient <ref id="wikipedia" /> zu jeden Abschnitt gebildet.
+      Dabei wird das Symbol in der Auswahl mit dem gesamten Bild verglichen und ein Korrelationskoeffizient <ref id="wikipedia" /> zu jedem Abschnitt gebildet.
       Eine perfekte Übereinstimmung ergibt 100% und absolut keine Übereinstimmung 0%. Mit der Grenze kann man einstellen, ab welchen Wert ein Abschnitt akzeptiert werden soll.
       Symbole die nicht gefunden wurden, können mit einem Doppelklick auf das entsprechende Symbol in die Liste hinzugefügt werden.
       Die Reihenfolge in dem die Symbole markiert werden spielt keine Rolle. Nach dem alle Symbole markiert sind, muss noch auf die 1. Symbol-Taste

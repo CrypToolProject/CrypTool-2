@@ -11,22 +11,22 @@
   </introduction>
 
   <introduction lang="de-DE">
-    Der SM4-Chiffre, auch bekannt als SMS4, ist ein Standard-Blockchiffre im Wireless LAN-Standard Chinas und wird in verschiedenen Sicherheitsprotokollen und Anwendungen weit verbreitet eingesetzt.
+    Die SM4-Chiffre, auch bekannt als SMS4, ist eine Standard-Blockchiffre im Wireless-LAN-Standard Chinas und wird in verschiedenen Sicherheitsprotokollen und Anwendungen häufig eingesetzt.
     Entwickelt für schnelle und effiziente Verschlüsselung, ist SM4 ein symmetrischer Verschlüsselungsalgorithmus mit einer Blockgröße von 128 Bits und einer Schlüsselgröße von 128 Bits, was ein hohes Maß an Sicherheit gewährleistet.
-    Die Komponente ermöglicht Verschlüsselung und Entschlüsselung mit dem SM4-Chiffre. Sie unterstützt verschiedene Betriebsmodi von Blockchiffren, einschließlich ECB, CBC, CFB und OFB.
+    Die Komponente ermöglicht Verschlüsselung und Entschlüsselung mit der SM4-Chiffre. Sie unterstützt verschiedene Betriebsmodi von Blockchiffren, einschließlich ECB, CBC, CFB und OFB.
     Außerdem unterstützt sie die Padding-Modi PKCS7, ANSI X.923, ISO 10126, Zero-One Padding und Zero Padding.
   </introduction>
 
   <usage lang="en">
-    To use the component, you have to drag it to the Cryptool 2 workspace.
+    To use the component, you have to drag it to the CrypTool 2 workspace.
     Then, you have to connect it to the data you want to encrypt or decrypt.
     To do so, use TextInput components to enter the data and Converters to convert the data to the required format (CrypToolStream).
     The output of the component is a CrypToolStream, which can be converted back to a string using a Converter and displayed in a TextOutput component.
-    Since the output is in binary format, you should onvert it to a hexadecimal string using a Converter.
+    Since the output is in binary format, you should convert it to a hexadecimal string using a Converter.
   </usage>
 
   <usage lang="de-DE">
-    Um die Komponente zu verwenden, müssen Sie sie auf den Arbeitsbereich von Cryptool 2 ziehen.
+    Um die Komponente zu verwenden, müssen Sie sie auf den Arbeitsbereich von CrypTool 2 ziehen.
     Dann müssen Sie sie mit den Daten verbinden, die Sie verschlüsseln oder entschlüsseln möchten.
     Verwenden Sie dazu TextEingabe-Komponenten, um die Daten einzugeben, und Konverter, um die Daten in das erforderliche Format (CrypToolStream) zu konvertieren.
     Der Ausgang der Komponente ist ein CrypToolStream, der mit einem Konverter zurück in einen String konvertiert und in einer TextAusgabe-Komponente angezeigt werden kann.

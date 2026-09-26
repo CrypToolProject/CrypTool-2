@@ -22,7 +22,7 @@
       von einer unabhängigen Dritt-Partei, welche den Inhalt dessen was signiert wird nicht sehen kann.
       <newline /><newline />
       Blinde Signaturen wurden 1982 von David Chaum vorgeschlagen. Die anfängliche Idee war, um spezifische digitale Dienste zu erschaffen, welche ein gewisses Maß an Anonymität bieten sollten, dass
-      eine Dritt-Patei eine Nachricht signiert ohne den Inhalt lesen zu können. Dadurch ist eine digitale Signatur nicht länger eine Aussage, über den Inhalt und die Integrität einer Nachricht,
+      eine Dritt-Partei eine Nachricht signiert ohne den Inhalt lesen zu können. Dadurch ist eine digitale Signatur nicht länger eine Aussage, über den Inhalt und die Integrität einer Nachricht,
       sondern dass zu einem bestimmten Zeitpunkt die Nachricht durch eine Institution bestätigt wurde. Das Anwendungsfeld war für digitale Finanztransaktionen und elektronische Wahlsysteme vorgesehen.
       Beide dieser Felder sollten Nutzern ein gewisses Maß an Anonymität gewähren.
       Traurigerweise, trotzdessen dass jegliche möglichen Angriffswege beseitigt werden können, konnte die Idee sich nicht durchsetzen. Chaums eigenes Unternehmen für online Finanztransaktionen ging
@@ -36,7 +36,7 @@
       <newline /><newline />
       Settings:
       <enum><item> Hash algorithm: this setting option allows you to choose freely between several hash algorithms, with which your message will be hashed and the hash blindly signed.</item><item> Signing algorithm: this setting option allows you to choose freely between several signing algorithms, with which your signature will be generated. 
-          Remember to de-crypt the signature for verifying with the same algorithm you choose here.</item><item> Blind Signing Security Level: this setting option allows you to choose what level of security you whish against blind signing attacks. For this setting to have any effect it is nessecary to use both Message Inputs (both the "public" one and the regular one).</item></enum><newline />
+          Remember to de-crypt the signature for verifying with the same algorithm you choose here.</item><item> Blind Signing Security Level: this setting option allows you to choose what level of security you wish against blind signing attacks. For this setting to have any effect it is necessary to use both Message Inputs (both the "public" one and the regular one).</item></enum><newline />
       Input:
       <enum><item> Message M: Please input your message here.</item><item> Public Message M: Please input your publicly visible message here.</item><item> Modulo N: Please input the public Modulo N of the keys generated for your chosen signing Algorithm here.</item><item> Public Key E/G: Please input the public key E (exponent) or G of the keys generated for your chosen signing Algorithm here.</item><item> Private Key D/Lambda: Please input the private Key D/Lambda of the keys generated for your chosen signing Algorithm here.</item></enum><newline />
       Output:

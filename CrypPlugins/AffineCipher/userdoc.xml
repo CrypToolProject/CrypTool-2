@@ -39,7 +39,7 @@
   </usage>
 
   <usage lang="de-DE">
-    Der Benutzer gibt den Klartext oder Geheimtext (über einen Konnektor) und die Schlüsselparameter (über die Einstellungen oder Konnektoren) in die Komponente ein .<newline/>
+    Der Benutzer gibt den Klartext oder Geheimtext (über einen Konnektor) und die Schlüsselparameter (über die Einstellungen oder Konnektoren) in die Komponente ein.<newline/>
     Die Komponente verarbeitet die Eingabe unter Verwendung der affinen Transformation, um den Geheimtext oder Klartext zu erzeugen.
   </usage>
   
