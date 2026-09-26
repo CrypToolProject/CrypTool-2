@@ -490,23 +490,23 @@ namespace CrypTool.Plugins.Blowfish
         /// </summary>
         private void CheckTweak()
         {
-            //if no tweak is given, we set it to an array with length 24
+            //if no tweak is given, use an all-zero 128-bit tweak
             if (_InputTweak == null)
             {
                 //default tweak is all set to zero
                 _InputTweak = new byte[16];
             }
-            //Extend or cut tweak to length 24
+            //Extend or cut tweak to the 128-bit size required by Threefish
             if (_InputTweak.Length < 16)
             {
                 byte[] tweak = new byte[16];
-                Array.Copy(_InputTweak, 0, tweak, 0, _InputIV.Length);
+                Array.Copy(_InputTweak, 0, tweak, 0, _InputTweak.Length);
                 GuiLogMessage(string.Format(Resources.Blowfish_CheckTweak_Tweak_too_short, _InputTweak.Length, 16), NotificationLevel.Warning);
                 _InputTweak = tweak;
             }
             if (_InputTweak.Length > 16)
             {
-                byte[] tweak = new byte[24];
+                byte[] tweak = new byte[16];
                 Array.Copy(_InputTweak, 0, tweak, 0, 16);
                 GuiLogMessage(string.Format(Resources.Blowfish_CheckTweak_Tweak_too_long, _InputTweak.Length, 16), NotificationLevel.Warning);
                 _InputTweak = tweak;

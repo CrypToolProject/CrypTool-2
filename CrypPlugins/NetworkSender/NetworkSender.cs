@@ -316,7 +316,7 @@ namespace CrypTool.Plugins.NetworkSender
         {
             presentation.RefreshMetaData(++packageCount);
             sendDataSize += packetData.Length;
-            int length = packetData.Length % 100;
+            int length = Math.Min(packetData.Length, 100);
             presentation.AddPresentationPackage(new PresentationPackage
             {
                 IPFrom = remoteEndPoint.Address.ToString(),

@@ -34,7 +34,11 @@ namespace ADFGVXAnalyzer
                 return false;
             }
 
-            double probThreshold = random.NextDouble(); // 0.0 to 1.0
+            double probThreshold;
+            lock (random)
+            {
+                probThreshold = random.NextDouble(); // 0.0 to 1.0
+            }
             return prob > probThreshold;
         }
     }

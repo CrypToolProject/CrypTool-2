@@ -122,11 +122,8 @@ namespace CrypTool.Plugins.SM4
 
             //Select crypto function based on blockmode and action
             BlockCipher blockCipher = null;
-            if (_SM4Settings.BlockMode == BlockMode.CFB)
-            {
-                blockCipher = new BlockCipher(SM4Cipher.EncryptBlock); //uses always encryption since it only XORs the result of cipher
-            }
-            if (_SM4Settings.BlockMode == BlockMode.OFB)
+            if (_SM4Settings.BlockMode == BlockMode.CFB ||
+                _SM4Settings.BlockMode == BlockMode.OFB)
             {
                 blockCipher = new BlockCipher(SM4Cipher.EncryptBlock); //uses always encryption since it only XORs the result of cipher
             }

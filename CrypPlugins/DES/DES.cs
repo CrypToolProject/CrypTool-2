@@ -1,4 +1,19 @@
-﻿using CrypTool.PluginBase;
+﻿/*
+   Copyright (C) CrypTool 2 Team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using CrypTool.PluginBase;
 using CrypTool.PluginBase.Control;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
@@ -319,7 +334,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 ICrypToolStream inputdata = InputStream;
 
                 // append 1-0 padding (special handling, as it's not present in System.Security.Cryptography.PaddingMode)
-                if (action == 0)
+                if (action == 0 && (settings.Mode != 3 || settings.Padding == 5))
                 {
                     inputdata = BlockCipherHelper.AppendPadding(InputStream, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
                 }
@@ -349,15 +364,17 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     byte[] tmpInput = BlockCipherHelper.StreamToByteArray(inputdata);
                     byte[] outputData = new byte[tmpInput.Length];
 
-                    for (int pos = 0; pos <= tmpInput.Length - p_encryptor.InputBlockSize;)
+                    byte[] keyStreamBlock = new byte[p_encryptor.InputBlockSize];
+                    for (int pos = 0; pos < tmpInput.Length;)
                     {
-                        int l = p_encryptor.TransformBlock(IV, 0, p_encryptor.InputBlockSize, outputData, pos);
-                        for (int i = 0; i < l; i++)
+                        int l = p_encryptor.TransformBlock(IV, 0, p_encryptor.InputBlockSize, keyStreamBlock, 0);
+                        Array.Copy(keyStreamBlock, IV, l);
+                        int bytesInBlock = Math.Min(l, tmpInput.Length - pos);
+                        for (int i = 0; i < bytesInBlock; i++)
                         {
-                            IV[i] = outputData[pos + i];
-                            outputData[pos + i] ^= tmpInput[pos + i];
+                            outputData[pos + i] = (byte)(keyStreamBlock[i] ^ tmpInput[pos + i]);
                         }
-                        pos += l;
+                        pos += bytesInBlock;
                     }
 
                     outputStreamWriter.Write(outputData);
@@ -398,7 +415,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 //DateTime stopTime = DateTime.Now;
                 //TimeSpan duration = stopTime - startTime;
 
-                if (action == 1)
+                if (action == 1 && (settings.Mode != 3 || settings.Padding == 5 || settings.Padding == 1))
                 {
                     outputStreamWriter = BlockCipherHelper.StripPadding(outputStreamWriter, settings.padmap[settings.Padding], p_alg.BlockSize / 8) as CStreamWriter;
                 }

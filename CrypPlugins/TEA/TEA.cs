@@ -138,7 +138,6 @@ namespace CrypTool.TEA
                 byte[] outputbuffer = new byte[8];
 
                 uint[] key = new uint[4];
-                long[] longKey = new long[4];
                 long keybytes = inputKey.Length;
                 GuiLogMessage("inputKey length [byte]: " + keybytes.ToString(), NotificationLevel.Debug);
 
@@ -148,20 +147,10 @@ namespace CrypTool.TEA
                     return;
                 }
 
-                if (settings.Version != 2)
-                {
-                    key[0] = BitConverter.ToUInt32(inputKey, 0);
-                    key[1] = BitConverter.ToUInt32(inputKey, 4);
-                    key[2] = BitConverter.ToUInt32(inputKey, 8);
-                    key[3] = BitConverter.ToUInt32(inputKey, 12);
-                }
-                else
-                {
-                    longKey[0] = BitConverter.ToUInt32(inputKey, 0);
-                    longKey[1] = BitConverter.ToUInt32(inputKey, 4);
-                    longKey[2] = BitConverter.ToUInt32(inputKey, 8);
-                    longKey[3] = BitConverter.ToUInt32(inputKey, 12);
-                }
+                key[0] = BitConverter.ToUInt32(inputKey, 0);
+                key[1] = BitConverter.ToUInt32(inputKey, 4);
+                key[2] = BitConverter.ToUInt32(inputKey, 8);
+                key[3] = BitConverter.ToUInt32(inputKey, 12);
 
                 //check for a valid IV
                 if (inputIV == null)

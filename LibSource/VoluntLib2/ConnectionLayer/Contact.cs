@@ -197,5 +197,20 @@ namespace VoluntLib2.ConnectionLayer
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                foreach (byte value in PeerId ?? new byte[0])
+                {
+                    hash = (hash * 397) ^ value;
+                }
+                hash = (hash * 397) ^ (IPAddress == null ? 0 : IPAddress.GetHashCode());
+                hash = (hash * 397) ^ Port.GetHashCode();
+                return hash;
+            }
+        }
     }
 }

@@ -1144,12 +1144,46 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         /// <summary>
         /// Called every time this plugin is run in the workflow execution.
         /// </summary>
+        private void RunWorker()
+        {
+            try
+            {
+                tExecute();
+            }
+            catch (ThreadInterruptedException)
+            {
+                // Cooperative stop while the worker is waiting for presentation input.
+            }
+            catch (Exception exception)
+            {
+                GuiLogMessage(exception.Message, NotificationLevel.Error);
+                _keyMaterial = new byte[0];
+                OnPropertyChanged("KeyMaterial");
+                ProgressChanged(1, 1);
+            }
+        }
+
+        private void RequestWorkerStop()
+        {
+            if (workerThread == null || !workerThread.IsAlive)
+            {
+                return;
+            }
+
+            pres.buttonStartClickedEvent.Set();
+            pres.buttonNextClickedEvent.Set();
+            pres.buttonPrevClickedEvent.Set();
+            pres.buttonRestartClickedEvent.Set();
+            workerThread.Interrupt();
+            workerThread.Join(2000);
+        }
+
         public void Execute()
         {
             //Implementation with threads: this approach handles an inputchange in a better way
             if (workerThread == null)
             {
-                workerThread = new Thread(new ThreadStart(tExecute))
+                workerThread = new Thread(new ThreadStart(RunWorker))
                 {
                     IsBackground = true
                 };
@@ -1159,8 +1193,13 @@ namespace CrypTool.Plugins.KKDFSHAKE256
             {
                 if (workerThread.IsAlive)
                 {
-                    workerThread.Abort();
-                    workerThread = new Thread(new ThreadStart(tExecute))
+                    RequestWorkerStop();
+                    if (workerThread.IsAlive)
+                    {
+                        GuiLogMessage("The previous calculation is still stopping.", NotificationLevel.Warning);
+                        return;
+                    }
+                    workerThread = new Thread(new ThreadStart(RunWorker))
                     {
                         IsBackground = true
                     };
@@ -1168,7 +1207,7 @@ namespace CrypTool.Plugins.KKDFSHAKE256
                 }
                 else
                 {
-                    workerThread = new Thread(new ThreadStart(tExecute))
+                    workerThread = new Thread(new ThreadStart(RunWorker))
                     {
                         IsBackground = true
                     };
@@ -1190,10 +1229,7 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         /// </summary>
         public void Stop()
         {
-            if (workerThread.IsAlive)
-            {
-                workerThread.Abort();
-            }
+            RequestWorkerStop();
 
             pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
@@ -1450,6 +1486,7 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         /// </summary>
         public void Dispose()
         {
+            RequestWorkerStop();
         }
 
         #endregion

@@ -34,6 +34,7 @@ namespace CrypTool.CRC
 
         private CStreamWriter outputStreamWriter;
         private readonly bool integrity;
+        private bool configurationValid;
 
         private readonly ulong[] table = new ulong[256];
 
@@ -108,6 +109,10 @@ namespace CrypTool.CRC
         public void Execute()
         {
             Initialize();
+            if (!configurationValid)
+            {
+                return;
+            }
             printInfo();
 
             ProgressChanged(0.0, 1.0);
@@ -263,6 +268,7 @@ namespace CrypTool.CRC
 
         public void Initialize()
         {
+            configurationValid = false;
             try
             {
                 crcspec.width = settings.Width;
@@ -278,10 +284,12 @@ namespace CrypTool.CRC
                 {
                     crcspec.mask = (crcspec.mask << 1) + 1;
                 }
+                configurationValid = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-            };
+                GuiLogMessage("Invalid CRC configuration: " + ex.Message, NotificationLevel.Error);
+            }
         }
 
         public void PostExecution()

@@ -69,7 +69,6 @@ namespace DCAPathFinder.Util
 
             data = JsonConvert.DeserializeObject<DifferentialAttackRoundConfiguration>(configurationString, new Newtonsoft.Json.JsonSerializerSettings
             {
-                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
             });
 

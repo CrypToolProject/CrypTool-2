@@ -764,7 +764,7 @@ namespace Primes.WpfControls.Components
             catch (ControlValidationException cvex)
             {
                 cvex.HelpAction = m_Validator.LinkOnlinehelp;
-                throw cvex;
+                throw;
             }
 
             return result;

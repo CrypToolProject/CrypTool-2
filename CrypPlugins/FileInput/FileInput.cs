@@ -135,7 +135,16 @@ namespace FileInput
                 {
                     fileInputPresentation.CloseFile();
                     fileInputPresentation.OpenFile(settings.OpenFilename);
-                    FileSize = (int)new FileInfo(fileName).Length;
+                    long fileLength = new FileInfo(fileName).Length;
+                    if (fileLength > int.MaxValue)
+                    {
+                        FileSize = int.MaxValue;
+                        GuiLogMessage("The file size exceeds the maximum value supported by the FileSize output; the reported value was clamped.", NotificationLevel.Warning);
+                    }
+                    else
+                    {
+                        FileSize = (int)fileLength;
+                    }
                     GuiLogMessage("Opened file: " + settings.OpenFilename, NotificationLevel.Info);
                     settings.SettingChanged("CloseFile", Visibility.Visible);
                 }

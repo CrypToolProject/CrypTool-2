@@ -237,6 +237,31 @@ namespace VoluntLib2.ManagementLayer.Messages
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                foreach (byte item in CertificateData ?? new byte[0])
+                {
+                    hash = (hash * 397) ^ item;
+                }
+                foreach (byte item in MessageId ?? new byte[0])
+                {
+                    hash = (hash * 397) ^ item;
+                }
+                hash = (hash * 397) ^ MessageType.GetHashCode();
+                hash = (hash * 397) ^ PayloadLength.GetHashCode();
+                hash = (hash * 397) ^ (SenderName == null ? 0 : SenderName.GetHashCode());
+                foreach (byte item in SignatureData ?? new byte[0])
+                {
+                    hash = (hash * 397) ^ item;
+                }
+                hash = (hash * 397) ^ (WorldName == null ? 0 : WorldName.GetHashCode());
+                return hash;
+            }
+        }
     }
 
     /// <summary>
@@ -362,6 +387,19 @@ namespace VoluntLib2.ManagementLayer.Messages
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = MessageHeader == null ? 0 : MessageHeader.GetHashCode();
+                foreach (byte item in Payload ?? new byte[0])
+                {
+                    hash = (hash * 397) ^ item;
+                }
+                return (hash * 397) ^ VoluntLibVersion;
+            }
+        }
     }
 
     /// <summary>
@@ -389,6 +427,8 @@ namespace VoluntLib2.ManagementLayer.Messages
             }
             return false;
         }
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 
     /// <summary>
@@ -500,6 +540,8 @@ namespace VoluntLib2.ManagementLayer.Messages
 
             return false;
         }
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 
     /// <summary>
@@ -542,6 +584,8 @@ namespace VoluntLib2.ManagementLayer.Messages
             }
             return false;
         }
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 
     /// <summary>
@@ -585,5 +629,7 @@ namespace VoluntLib2.ManagementLayer.Messages
             }
             return false;
         }
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

@@ -323,7 +323,7 @@ namespace ArrayOperations
                 object[] result = new object[v1.Length - v2.Length + v3.Length];
                 Array.Copy(v1, 0, result, 0, idx);
                 Array.Copy(v3, 0, result, idx, v3.Length);
-                Array.Copy(v1, idx+v3.Length, result, idx+v3.Length, v1.Length-idx-v3.Length);
+                Array.Copy(v1, idx + v2.Length, result, idx + v3.Length, v1.Length - idx - v2.Length);
                 return result;
             }
             else

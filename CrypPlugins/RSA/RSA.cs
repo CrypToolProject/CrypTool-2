@@ -383,11 +383,11 @@ namespace CrypTool.Plugins.RSA
 
                     //Check if the text could be encrypted/decrypted
                     //this is only possible if m < N
-                    if (bint > InputN)
+                    if (bint >= InputN)
                     {
                         //Go out with an error because encryption/decryption is not possible
                         string mode = (settings.Action == 0) ? "encrypting" : "decrypting";
-                        GuiLogMessage("N = " + InputN + " is not suitable for " + mode + " this text: M = " + new BigInteger(help) + " > N.", NotificationLevel.Error);
+                        GuiLogMessage("N = " + InputN + " is not suitable for " + mode + " this text: M = " + new BigInteger(help) + " >= N.", NotificationLevel.Error);
                         return;
                     }
 

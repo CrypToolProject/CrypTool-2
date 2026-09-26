@@ -1,4 +1,19 @@
-﻿using CrypTool.PluginBase;
+﻿/*
+   Copyright (C) CrypTool 2 Team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections;
@@ -153,11 +168,11 @@ namespace CrypTool.KasiskiTest
 
                 for (int d = 3; d <= settings.grammLength; d++)
                 {
-                    for (int i = 0; i <= workstring2.Length - settings.grammLength; i++)   //go through string 
+                    for (int i = 0; i <= workstring2.Length - d; i++)   //go through string
                     {
                         grammToSearch = workstring2.Substring(i, d);   //  get every gramm(substring) with gramLength from Settings
 
-                        for (int n = i + settings.grammLength; n <= workstring2.Length - settings.grammLength; n++)  //go through workString starting after the end of the taken grammToSearch
+                        for (int n = i + d; n <= workstring2.Length - d; n++)  //go through workString starting after the end of the taken grammToSearch
                         {
                             if (grammToSearch == workstring2.Substring(n, d)) //if grammToSearch in workString
                             {
@@ -182,6 +197,12 @@ namespace CrypTool.KasiskiTest
 
                 int x = 0;
 
+
+                if (settings.factorSize < 2)
+                {
+                    GuiLogMessage("Factor size must be at least 2.", NotificationLevel.Error);
+                    return;
+                }
 
                 int[,] factors = new int[distances.Count, settings.factorSize /*sqrtOfLargestDist */];    //Rectangular array factors     
 
@@ -221,6 +242,10 @@ namespace CrypTool.KasiskiTest
                     {
                         bigestheight = factorCounter[z];
                     }
+                }
+                if (bigestheight == 0)
+                {
+                    bigestheight = 1;
                 }
 
                 for (int n = 2; n <= factorCounter.Count() - 1; n++)
@@ -285,6 +310,11 @@ namespace CrypTool.KasiskiTest
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
+        }
+
+        private void GuiLogMessage(string message, NotificationLevel level)
+        {
+            EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(message, this, level));
         }
 
         #endregion

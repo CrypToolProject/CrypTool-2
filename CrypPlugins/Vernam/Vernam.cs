@@ -48,7 +48,7 @@ namespace CrypTool.Plugins.Vernam
                 if (value != InputString)
                 {
                     inputString = value;
-                    OnPropertyChanged("newInputString");
+                    OnPropertyChanged(nameof(InputString));
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace CrypTool.Plugins.Vernam
                 if (value != keyString)
                 {
                     keyString = value;
-                    OnPropertyChanged("newKeyString");
+                    OnPropertyChanged(nameof(KeyString));
                 }
             }
         }

@@ -58,8 +58,10 @@ namespace CrypTool.Plugins.VisualDecoder.Decoders
 
         public Bitmap ByteArrayToImage(byte[] byteArrayIn)
         {
-            Image img = (Image)imageConverter.ConvertFrom(byteArrayIn);
-            return new Bitmap(img);
+            using (Image img = (Image)imageConverter.ConvertFrom(byteArrayIn))
+            {
+                return new Bitmap(img);
+            }
         }
         #endregion helper
     }

@@ -275,9 +275,13 @@ namespace CrypTool.Plugins.Numbers
                             result = pi;
                             break;
                         case NumberOperation.PrimeN:
+                            if (Input1 <= 0)
+                            {
+                                throw new ArgumentOutOfRangeException(nameof(Input1), "The prime index must be greater than zero.");
+                            }
                             BigInteger p = 0;
                             BigInteger i = 2;
-                            while (Input1 <= 0 && _running)
+                            while (_running)
                             {
                                 if (i.IsProbablePrime())
                                 {
@@ -289,6 +293,10 @@ namespace CrypTool.Plugins.Numbers
                                     }
                                 }
                                 i++;
+                            }
+                            if (!_running)
+                            {
+                                return;
                             }
                             break;
                         case NumberOperation.Nextprime:

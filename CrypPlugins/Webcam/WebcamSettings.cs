@@ -159,7 +159,7 @@ namespace CrypTool.Plugins.Webcam
                 if (_captureFrequency != value)
                 {
                     _captureFrequency = value;
-                    OnPropertyChanged("SendImage");
+                    OnPropertyChanged(nameof(CaptureFrequency));
                 }
             }
         }

@@ -141,9 +141,8 @@ namespace CrypTool.Plugins.SATSolver
             inputStream = InputStream.CreateReader();
             BinaryWriter bw;
 
-            if (settings.ClearOutputHandling == 0)
+            if (settings.ClearOutputHandling == 0 || outputConsoleString == null)
             {
-                outputConsoleString = null; // delete output from last execution
                 outputConsoleString = new StringBuilder();
             }
             else
@@ -205,12 +204,14 @@ namespace CrypTool.Plugins.SATSolver
 
                 // attach event handler for process' data output
                 solverProcess.OutputDataReceived += new DataReceivedEventHandler(ReadProcessOutput);
+                solverProcess.ErrorDataReceived += new DataReceivedEventHandler(ReadProcessError);
 
                 solverProcess.Start();
                 ProgressChanged(1, 100);
 
                 // begin asynchronous read
                 solverProcess.BeginOutputReadLine();
+                solverProcess.BeginErrorReadLine();
                 solverProcess.WaitForExit();
                 exitcode = solverProcess.ExitCode;
 
@@ -344,6 +345,14 @@ namespace CrypTool.Plugins.SATSolver
                         break;
                     }
                 default: break;
+            }
+        }
+
+        private void ReadProcessError(object sendingProcess, DataReceivedEventArgs data)
+        {
+            if (!string.IsNullOrEmpty(data.Data))
+            {
+                GuiLogMessage(data.Data, NotificationLevel.Error);
             }
         }
 

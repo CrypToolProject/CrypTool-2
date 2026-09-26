@@ -100,7 +100,7 @@ namespace CrypTool.Plugins.Huffman
 
         public void Execute()
         {
-            if (InputBytes.Length == 0)
+            if (InputBytes == null || InputBytes.Length == 0)
             {
                 GuiLogMessage("No input bytes provided", NotificationLevel.Error);
                 return;
@@ -155,46 +155,54 @@ namespace CrypTool.Plugins.Huffman
             }
             else
             {
-                if (InputHuffmanTree.Length == 0)
+                try
                 {
-                    GuiLogMessage("No Huffman tree provided", NotificationLevel.Error);
+                    if (InputHuffmanTree == null || InputHuffmanTree.Length == 0)
+                    {
+                        GuiLogMessage("No Huffman tree provided", NotificationLevel.Error);
+                        return;
+                    }
+                    // Get encoding
+                    Encoding en = getEncoding(settings.Presentation, settings.Encoding);
+                    ProgressChanged(1, 8);
+
+                // Extract encoded tree
+                    List<bool> encodedTree = extractData(InputHuffmanTree);
+                    ProgressChanged(2, 8);
+
+                    // Rebuild Huffman tree
+                    HuffmanTree tree = new HuffmanTree();
+                    tree.setRoot(decodeTree(ref encodedTree, en));
+                    ProgressChanged(3, 8);
+
+                    // Extract compressed data
+                    List<bool> compressed = extractData(InputBytes);
+                    ProgressChanged(4, 8);
+
+                    // Decompress data
+                    string decompressed = tree.Decompress(compressed);
+                    ProgressChanged(5, 8);
+
+                    // Encode and output data
+                    outputBytes = en.GetBytes(decompressed);
+                    OnPropertyChanged("OutputBytes");
+                    ProgressChanged(6, 8);
+
+                    // Get character frequencies for displaying in presentation view
+                    Dictionary<char, int> histogram = getCharFrequencies(decompressed);
+                    ProgressChanged(7, 8);
+
+                // Calculate compressed size and fill code table in presentation view
+                    int compressedSize = InputBytes.Count() + InputHuffmanTree.Count();
+                    tree.CreateCodeTable(histogram);
+                    presentation.fillCodeTable(tree.getCodeTable(), histogram, decompressed.Count(), compressedSize);
+                    ProgressChanged(8, 8);
+                }
+                catch (Exception ex)
+                {
+                    GuiLogMessage("Invalid Huffman data: " + ex.Message, NotificationLevel.Error);
                     return;
                 }
-                // Get encoding
-                Encoding en = getEncoding(settings.Presentation, settings.Encoding);
-                ProgressChanged(1, 8);
-
-                // Extract encoded tree                
-                List<bool> encodedTree = extractData(InputHuffmanTree);
-                ProgressChanged(2, 8);
-
-                // Rebuild Huffman tree
-                HuffmanTree tree = new HuffmanTree();
-                tree.setRoot(decodeTree(ref encodedTree, en));
-                ProgressChanged(3, 8);
-
-                // Extract compressed data
-                List<bool> compressed = extractData(InputBytes);
-                ProgressChanged(4, 8);
-
-                // Decompress data
-                string decompressed = tree.Decompress(compressed);
-                ProgressChanged(5, 8);
-
-                // Encode and output data
-                outputBytes = en.GetBytes(decompressed);
-                OnPropertyChanged("OutputBytes");
-                ProgressChanged(6, 8);
-
-                // Get character frequencies for displaying in presentation view
-                Dictionary<char, int> histogram = getCharFrequencies(decompressed);
-                ProgressChanged(7, 8);
-
-                // Calculate compressed size and fill code table in presentation view 
-                int compressedSize = InputBytes.Count() + InputHuffmanTree.Count();
-                tree.CreateCodeTable(histogram);
-                presentation.fillCodeTable(tree.getCodeTable(), histogram, decompressed.Count(), compressedSize);
-                ProgressChanged(8, 8);
             }
         }
 
@@ -416,17 +424,24 @@ namespace CrypTool.Plugins.Huffman
 
         private static List<bool> extractData(byte[] packed)
         {
+            if (packed == null || packed.Length == 0)
+            {
+                throw new ArgumentException("Packed Huffman data must contain an offset byte.", nameof(packed));
+            }
+
             List<bool> data = toBits(new List<byte>(packed));
 
             // Get data offset and remove it from data
             int offset = toByte(data.GetRange(0, 8));
             data.RemoveRange(0, 8);
 
-            // Remove padding from data
-            for (int i = 0; i < offset; i++)
+            if (offset < 1 || offset > 8 || offset > data.Count)
             {
-                data.RemoveAt(data.Count - 1);
+                throw new ArgumentException("Packed Huffman data contains an invalid padding offset.", nameof(packed));
             }
+
+            // Remove padding from data
+            data.RemoveRange(data.Count - offset, offset);
 
             return data;
         }

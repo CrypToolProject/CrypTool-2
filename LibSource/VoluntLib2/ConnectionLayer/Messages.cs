@@ -199,6 +199,19 @@ namespace VoluntLib2.ConnectionLayer.Messages
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                foreach (byte item in Serialize())
+                {
+                    hash = (hash * 397) ^ item;
+                }
+                return hash;
+            }
+        }
     }
 
     /// <summary>
@@ -290,6 +303,19 @@ namespace VoluntLib2.ConnectionLayer.Messages
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = MessageHeader == null ? 0 : MessageHeader.GetHashCode();
+                foreach (byte item in Payload ?? new byte[0])
+                {
+                    hash = (hash * 397) ^ item;
+                }
+                return (hash * 397) ^ VoluntLibVersion;
+            }
+        }
     }
 
     /// <summary>
@@ -332,6 +358,8 @@ namespace VoluntLib2.ConnectionLayer.Messages
             }
             return false;
         }
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 
     /// <summary>
@@ -375,6 +403,8 @@ namespace VoluntLib2.ConnectionLayer.Messages
             }
             return false;
         }
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 
     /// <summary>
@@ -416,6 +446,8 @@ namespace VoluntLib2.ConnectionLayer.Messages
             }
             return false;
         }
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 
     /// <summary>
@@ -493,6 +525,8 @@ namespace VoluntLib2.ConnectionLayer.Messages
             }
             return false;
         }
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 
     /// <summary>
@@ -551,6 +585,8 @@ namespace VoluntLib2.ConnectionLayer.Messages
             }
             return false;
         }
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 
     /// <summary>
@@ -609,6 +645,8 @@ namespace VoluntLib2.ConnectionLayer.Messages
             }
             return false;
         }
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 
     /// <summary>
@@ -635,6 +673,8 @@ namespace VoluntLib2.ConnectionLayer.Messages
             }
             return false;
         }
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 
     /// <summary>
@@ -661,5 +701,7 @@ namespace VoluntLib2.ConnectionLayer.Messages
             }
             return false;
         }
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

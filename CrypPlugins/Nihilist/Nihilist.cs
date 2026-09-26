@@ -78,6 +78,17 @@ namespace CrypTool.Nihilist
 
         public void Execute()
         {
+            if (InputText == null || Key1 == null || Key2 == null)
+            {
+                GuiLogMessage("Input text and both keys must be set.", NotificationLevel.Error);
+                return;
+            }
+            string alphabet = _settings.AlphabetVersion == AlphabetVersion.Twentyfive ? ALPHABET25 : ALPHABET36;
+            if (Key2.ToUpper().Any(symbol => !alphabet.Contains(symbol)))
+            {
+                GuiLogMessage("Key 2 contains a symbol that is not part of the selected alphabet.", NotificationLevel.Error);
+                return;
+            }
             switch (_settings.Action)
             {
                 case Action.Encrypt:
@@ -251,7 +262,7 @@ namespace CrypTool.Nihilist
                         switch (_settings.UnknownSymbolHandling)
                         {
                             case UnknownSymbolHandlingMode.Ignore:
-                                plaintextBuilder.Append(keyNumber);
+                                plaintextBuilder.Append(ciphertextNumber);
                                 break;
                             case UnknownSymbolHandlingMode.Replace:
                                 plaintextBuilder.Append("?");
@@ -310,6 +321,11 @@ namespace CrypTool.Nihilist
         public void OnPropertyChanged(string name)
         {
             EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(name));
+        }
+
+        private void GuiLogMessage(string message, NotificationLevel level)
+        {
+            EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(message, this, level));
         }
     }
 }

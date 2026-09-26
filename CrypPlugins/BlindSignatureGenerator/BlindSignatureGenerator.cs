@@ -36,7 +36,6 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
         #region Private Variables
         private readonly BlindSignatureGeneratorSettings settings = new BlindSignatureGeneratorSettings();
         private readonly BlindSignatureGeneratorPresentation presentation = new BlindSignatureGeneratorPresentation();
-        private static readonly Random random = new Random();
         private readonly RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
         private BigInteger modulo;
         private BigInteger publickey;
@@ -436,7 +435,7 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
                     messages[i] = blindedmessage;
                 }
                 //C picks one at random.
-                int chosenOne = random.Next((int)securitylevel);
+                int chosenOne = GetRandomIndex((int)securitylevel);
                 //C demands the unblinding of all other blind messages and checks if those are equal to what C has been told the message is.
                 for (int i = 0; i < chosenOne; i++)
                 {
@@ -541,7 +540,7 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
                 }
 
                 //C picks one at random.
-                int chosenOne = random.Next((int)securitylevel);
+                int chosenOne = GetRandomIndex((int)securitylevel);
                 //C demands the unblinding of all other blind messages and checks if those are equal to what C has been told the message is.
                 for (int i = 0; i < chosenOne; i++)
                 {
@@ -596,6 +595,27 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
                 }
                 //note that the chosenOne message has not been unblinded and C has not read it. Therefore it remaines a blind signature.
             }
+        }
+
+        private int GetRandomIndex(int exclusiveUpperBound)
+        {
+            if (exclusiveUpperBound <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(exclusiveUpperBound));
+            }
+
+            uint bound = (uint)exclusiveUpperBound;
+            uint rejectionThreshold = unchecked(0u - bound) % bound;
+            byte[] randomBytes = new byte[sizeof(uint)];
+            uint value;
+            do
+            {
+                rng.GetBytes(randomBytes);
+                value = BitConverter.ToUInt32(randomBytes, 0);
+            }
+            while (value < rejectionThreshold);
+
+            return (int)(value % bound);
         }
 
         public BigInteger Randomnumber(int size = 16)

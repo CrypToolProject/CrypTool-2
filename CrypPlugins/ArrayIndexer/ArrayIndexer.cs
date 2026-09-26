@@ -87,9 +87,14 @@ namespace CrypTool.Plugins.ArrayIndexer
             if (ObjInput != null)
             {
                 // error case, if array index is greater than the length of the array
-                if (ObjInput.Length <= ArrayIndex)
+                if (ArrayIndex < 0 || ObjInput.Length <= ArrayIndex)
                 {
-                    GuiLogMessage("Array Index is greater than the length of the array", NotificationLevel.Error);
+                    GuiLogMessage("Array index is outside the bounds of the array", NotificationLevel.Error);
+                    return;
+                }
+                if (ObjInput.Rank != 1)
+                {
+                    GuiLogMessage("Only one-dimensional arrays are supported", NotificationLevel.Error);
                     return;
                 }
 

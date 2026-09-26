@@ -52,7 +52,7 @@ namespace CrypTool.TEA
                 if (value != version)
                 {
                     version = value;
-                    OnPropertyChanged("Padding");
+                    OnPropertyChanged(nameof(Version));
                 }
             }
         }

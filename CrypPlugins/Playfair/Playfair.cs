@@ -146,6 +146,11 @@ namespace CrypTool.Playfair
                     preFormatedInputString = inputString;
                 }
 
+                if (!ValidatePreparedInput())
+                {
+                    return;
+                }
+
                 OnPropertyChanged("PreFormatedInputString");
 
                 //begin the encryption
@@ -216,6 +221,11 @@ namespace CrypTool.Playfair
                 else
                 {
                     preFormatedInputString = inputString;
+                }
+
+                if (!ValidatePreparedInput())
+                {
+                    return;
                 }
 
                 OnPropertyChanged("PreFormatedInputString");
@@ -316,6 +326,21 @@ namespace CrypTool.Playfair
         #endregion
 
         #region Private methods
+
+        private bool ValidatePreparedInput()
+        {
+            if ((preFormatedInputString.Length & 1) != 0)
+            {
+                GuiLogMessage("Playfair input must contain an even number of characters.", NotificationLevel.Error);
+                return false;
+            }
+            if (preFormatedInputString.Any(c => KeyString.IndexOf(c) < 0))
+            {
+                GuiLogMessage("Playfair input contains a character that is not part of the key alphabet.", NotificationLevel.Error);
+                return false;
+            }
+            return true;
+        }
 
         private int getRightNeighbour(int index)
         {

@@ -185,9 +185,9 @@ namespace ByteArrayOperations
             Array.Copy(array, 0, result, 0, array.Length);
 
             Random random = new Random();
-            for (int i = result.Length - 1; i >= 0; i--)
+            for (int i = result.Length - 1; i > 0; i--)
             {
-                int j = random.Next(0, i);
+                int j = random.Next(i + 1);
                 (result[i], result[j]) = (result[j], result[i]);
             }
             return result;

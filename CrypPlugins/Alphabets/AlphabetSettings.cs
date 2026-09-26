@@ -19,8 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
 
 namespace CrypTool.Alphabets
 {
@@ -67,51 +66,45 @@ namespace CrypTool.Alphabets
 
         public static string SerializeData<T>(T items)
         {
-            MemoryStream stream = new MemoryStream();
-            string ret = string.Empty;
             try
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, items);
-                ret = Convert.ToBase64String(stream.GetBuffer());
-            }
-            catch (SerializationException)
-            {
-            }
-            finally
-            {
-                if (stream != null)
+                using (MemoryStream stream = new MemoryStream())
                 {
-                    stream.Close();
+                    XmlSerializer serializer = new XmlSerializer(typeof(T));
+                    serializer.Serialize(stream, items);
+                    return Convert.ToBase64String(stream.ToArray());
                 }
             }
-
-            return ret;
+            catch (InvalidOperationException)
+            {
+                return string.Empty;
+            }
         }
 
         public static T DeserializeData<T>(string serItems)
         {
-            T ret = default(T);
-            MemoryStream stream = null;
+            if (string.IsNullOrWhiteSpace(serItems))
+            {
+                return default(T);
+            }
+
             try
             {
                 byte[] buffer = Convert.FromBase64String(serItems);
-                stream = new MemoryStream(buffer);
-                BinaryFormatter formatter = new BinaryFormatter();
-                ret = (T)formatter.Deserialize(stream);
-            }
-            catch (SerializationException)
-            {                
-            }
-            finally
-            {
-                if (stream != null)
+                using (MemoryStream stream = new MemoryStream(buffer, false))
                 {
-                    stream.Close();
+                    XmlSerializer serializer = new XmlSerializer(typeof(T));
+                    return (T)serializer.Deserialize(stream);
                 }
             }
-
-            return ret;
+            catch (FormatException)
+            {
+                return default(T);
+            }
+            catch (InvalidOperationException)
+            {
+                return default(T);
+            }
         }
 
         #region INotifyPropertyChanged Members

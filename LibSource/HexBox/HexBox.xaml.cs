@@ -518,7 +518,6 @@ namespace HexBox
 
             if (Path != "" && Path != " ")
             {
-                _cell = _cell;
                 Key k = e.Key;
 
                 bool releasemark = true;

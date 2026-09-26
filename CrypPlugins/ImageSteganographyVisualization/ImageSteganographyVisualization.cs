@@ -284,6 +284,16 @@ namespace ImageSteganographyVisualization
 
             BitArray messageBits = new BitArray(Encoding.UTF8.GetBytes(InputSecretMessage));
             int totalBitsToHide = messageBits.Length;
+            if (inputBitmap.Width < 3 || inputBitmap.Height < 1)
+            {
+                GuiLogMessage("The image must be at least three pixels wide to store the LSB header.", NotificationLevel.Error);
+                return;
+            }
+            if (totalBitsToHide > GetLsbCapacity())
+            {
+                GuiLogMessage(Properties.Resources.NotEnoughHidingCapacity, NotificationLevel.Error);
+                return;
+            }
             int counter = 0;
 
             for (int y = 0; y < inputBitmap.Height; y++)
@@ -368,6 +378,11 @@ namespace ImageSteganographyVisualization
         /// </summary>
         public void ExtractDataLSB()
         {
+            if (inputBitmap.Width < 3 || inputBitmap.Height < 1)
+            {
+                GuiLogMessage("The image is too small to contain an LSB header.", NotificationLevel.Error);
+                return;
+            }
             byte[] lengthBytes = new byte[4];
             int lastX = inputBitmap.Width - 1;
             int lastY = inputBitmap.Height - 1;
@@ -382,6 +397,11 @@ namespace ImageSteganographyVisualization
             lengthBytes[3] = lastPixel1.B;
 
             int totalBitsToExtract = BitConverter.ToInt32(lengthBytes, 0);
+            if (totalBitsToExtract < 0 || totalBitsToExtract > GetLsbCapacity())
+            {
+                GuiLogMessage("The LSB header contains an invalid message length.", NotificationLevel.Error);
+                return;
+            }
             BitArray bits = new BitArray(totalBitsToExtract);
             int counter = 0;
 
@@ -605,14 +625,25 @@ namespace ImageSteganographyVisualization
             }
 
             // Get header message block to determine length of the message
+            if (hiderBlocks.Count == 0)
+            {
+                GuiLogMessage("The image does not contain a BPCS header block.", NotificationLevel.Error);
+                return;
+            }
             ImageBlock lengthBlock = (ImageBlock)hiderBlocks[0];
             lengthBlock.GetOriginal();
             bool[] lengthBoolArray = lengthBlock.GetArray();
             byte[] lengthBytes = ConvertToBytes(new BitArray(lengthBoolArray));
             long totalBits = BitConverter.ToInt64(lengthBytes, 0);
+            long capacity = (long)(hiderBlocks.Count - 1) * 63;
+            if (totalBits < 0 || totalBits > capacity || totalBits > int.MaxValue)
+            {
+                GuiLogMessage("The BPCS header contains an invalid message length.", NotificationLevel.Error);
+                return;
+            }
 
             // Retrieve message bits from complex image blocks, exit loop when total bits of message length is achieved
-            bool[] messageBits = new bool[totalBits];
+            bool[] messageBits = new bool[(int)totalBits];
             int counter = 0;
             for (int i = 1; i < hiderBlocks.Count; i++)
             {
@@ -682,9 +713,21 @@ namespace ImageSteganographyVisualization
         /// </summary>
         private byte[] ConvertToBytes(BitArray bits)
         {
-            byte[] bytes = new byte[bits.Length / 8 + 1];
+            byte[] bytes = new byte[(bits.Length + 7) / 8];
             bits.CopyTo(bytes, 0);
             return bytes;
+        }
+
+        private long GetLsbCapacity()
+        {
+            int bitsPerPixel = 0;
+            for (int i = 0; i < 8; i++)
+            {
+                if (rBitMask[i]) bitsPerPixel++;
+                if (gBitMask[i]) bitsPerPixel++;
+                if (bBitMask[i]) bitsPerPixel++;
+            }
+            return Math.Max(0L, ((long)inputBitmap.Width * inputBitmap.Height - 3) * bitsPerPixel);
         }
 
         #endregion

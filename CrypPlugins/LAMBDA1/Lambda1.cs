@@ -158,7 +158,7 @@ namespace CrypTool.Plugins.LAMBDA1
             }
             else
             {
-                // iV gets initialized to 0 by default
+                iV = new byte[LAMBDA1Algorithm.BlockSize];
                 GuiLogMessage(Properties.Resources.InfoIVMissing, NotificationLevel.Info);
             }
 
@@ -215,7 +215,7 @@ namespace CrypTool.Plugins.LAMBDA1
             }
             else
             {
-                // iV gets initialized to 0 by default
+                iV = new byte[LAMBDA1Algorithm.BlockSize];
                 GuiLogMessage(Properties.Resources.InfoIVMissing, NotificationLevel.Info);
             }
 

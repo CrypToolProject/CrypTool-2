@@ -653,9 +653,9 @@ namespace KeySearcher.KeyPattern
                         memStream.Write(bytePattern, 0, bytePattern.Length);
                         retByte = memStream.ToArray();
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        throw ex;
+                        throw;
                     }
                     finally
                     {
@@ -717,9 +717,9 @@ namespace KeySearcher.KeyPattern
                 pattern_temp = encoder.GetString(bytePattern, 0, bytePattern.Length);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {

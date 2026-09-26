@@ -270,7 +270,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
         public byte[] ComputeHash(byte[] data)
         {
             byte[] hash = _hashAlgorithm.ComputeHash(data);
-            if (hash.Length != _hashAlgorithmWidth)
+            if (_hashAlgorithmWidth < hash.Length)
             {
                 //reduce length of hashvalue based on settings
                 byte[] reduced_hash = new byte[_hashAlgorithmWidth];

@@ -67,7 +67,7 @@ namespace CrypTool.Plugins.Sosemanuk
             set
             {
                 inputData = value;
-                OnPropertyChanged("InputString");
+                OnPropertyChanged(nameof(InputData));
             }
         }
 

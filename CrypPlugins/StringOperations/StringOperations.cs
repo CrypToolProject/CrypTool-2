@@ -231,9 +231,9 @@ namespace StringOperations
             }
             Random random = new Random();
             char[] array = str.ToCharArray();
-            for(int i = array.Length - 1; i >= 0; i--)
+            for (int i = array.Length - 1; i > 0; i--)
             {
-                int j = random.Next(0, i);
+                int j = random.Next(i + 1);
                 (array[i], array[j]) = (array[j], array[i]);
             }
             return new string(array);
@@ -313,6 +313,11 @@ namespace StringOperations
 
             // Normalize the string to remove diacritics
             str = RemoveDiacritics(str).ToUpper();
+            str = new string(str.Where(c => c >= 'A' && c <= 'Z').ToArray());
+            if (str.Length == 0)
+            {
+                return string.Empty;
+            }
 
             // The first letter of the Soundex code
             char firstLetter = str[0];

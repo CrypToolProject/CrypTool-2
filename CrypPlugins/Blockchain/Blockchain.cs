@@ -706,17 +706,8 @@ namespace CrypTool.Plugins.Blockchain
 
         public bool VerifyDifficulty()
         {
-            if (_hashAlgorithmName == "SHA1" && _miningDifficultyLimit > 160)
-            {
-                GuiLogMessage(Properties.Resources.MiningDifficultyWarning, NotificationLevel.Error);
-                return false;
-            }
-            if (_hashAlgorithmName == "SHA256" && _miningDifficultyLimit > 256)
-            {
-                GuiLogMessage(Properties.Resources.MiningDifficultyWarning, NotificationLevel.Error);
-                return false;
-            }
-            if (_hashAlgorithmName == "SHA512" && _miningDifficultyLimit > 512)
+            long effectiveHashWidthInBits = Math.Min((long)_miningDifficultyLimit, (long)_hashAlgorithmWrapperWidth * 8);
+            if (_settings.MiningDifficulty > effectiveHashWidthInBits)
             {
                 GuiLogMessage(Properties.Resources.MiningDifficultyWarning, NotificationLevel.Error);
                 return false;
@@ -950,7 +941,7 @@ namespace CrypTool.Plugins.Blockchain
                     position++;
                 }
 
-                if (position == array.Length - 1)
+                if (position == array.Length)
                 {
                     return count;
                 }
@@ -1127,7 +1118,7 @@ namespace CrypTool.Plugins.Blockchain
             public byte[] ComputeHash(byte[] data)
             {
                 byte[] hash = _hashAlgorithm.ComputeHash(data);
-                if (hash.Length != _hashAlgorithmWidth)
+                if (_hashAlgorithmWidth < hash.Length)
                 {
                     //reduce length of hashvalue based on settings
                     byte[] reduced_hash = new byte[_hashAlgorithmWidth];

@@ -50,6 +50,7 @@ namespace CrypTool.Plugins.AudioOutput
         public void PreExecution()
         {
             ClearPresentation();
+            player?.Dispose();
             player = new WaveOutEvent();
             provider = new BufferedWaveProvider(recorder.WaveFormat);
             player.DeviceNumber = settings.DeviceChoice;
@@ -116,7 +117,7 @@ namespace CrypTool.Plugins.AudioOutput
 
         public void Stop()
         {
-            player.Stop();
+            player?.Stop();
         }
 
         public void Initialize()
@@ -128,7 +129,9 @@ namespace CrypTool.Plugins.AudioOutput
 
         public void Dispose()
         {
-
+            player?.Dispose();
+            player = null;
+            recorder.Dispose();
         }
 
         private void OnPropertyChanged(string name)

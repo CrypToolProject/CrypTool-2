@@ -502,36 +502,25 @@ namespace M209AnalyzerLib.Common
                 // Handle string or numeric values.
                 if (currentArgument.type == Argument.Type.NUMERIC)
                 {
-                    int value = 0;
-                    try
-                    {
-                        value = int.Parse(arg);
-                        if (value >= currentArgument.minIntValue && value <= currentArgument.maxIntValue)
-                        {
-                            if (!currentArgument.multiple && currentArgument.integerArrayList.Count() > 0)
-                            {
-                                return $"Duplicate value >{arg}< for -{currentArgument.flag.ToString()} " +
-                                    $"({currentArgument.shortDesc}).\nPrevious value >{currentArgument.integerArrayList[0]}<.\n";
-                            }
-                            currentArgument.integerArrayList.Add(value);
-                            currentArgument.set = true;
-                            currentArgument = null;
-                            continue;
-                        }
-                        else
-                        {
-                            value = 0;
-                        }
-                    }
-                    catch (FormatException ignored)
-                    {
-                    }
-                    if (value == null)
+                    int value;
+                    if (!int.TryParse(arg, out value) ||
+                        value < currentArgument.minIntValue ||
+                        value > currentArgument.maxIntValue)
                     {
                         return $"Invalid value >{arg}< for -{currentArgument.flag.ToString()} ({currentArgument.shortDesc}). \n" +
-                                        $"Should be between {currentArgument.minIntValue} and {currentArgument.maxIntValue} " +
-                                        $"(default is {currentArgument.defaultIntValue}).\n{currentArgument.longDesc}\n"; ;
+                               $"Should be between {currentArgument.minIntValue} and {currentArgument.maxIntValue} " +
+                               $"(default is {currentArgument.defaultIntValue}).\n{currentArgument.longDesc}\n";
                     }
+
+                    if (!currentArgument.multiple && currentArgument.integerArrayList.Count() > 0)
+                    {
+                        return $"Duplicate value >{arg}< for -{currentArgument.flag.ToString()} " +
+                               $"({currentArgument.shortDesc}).\nPrevious value >{currentArgument.integerArrayList[0]}<.\n";
+                    }
+                    currentArgument.integerArrayList.Add(value);
+                    currentArgument.set = true;
+                    currentArgument = null;
+                    continue;
                 }
 
                 if (currentArgument.type == Argument.Type.STRING)

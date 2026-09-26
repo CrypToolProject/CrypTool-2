@@ -150,39 +150,36 @@ namespace FileOutput
                         },
                         null);
 
-                        FileStream fs;
-                        if (!settings.Append)
+                        FileMode fileMode = settings.Append ? FileMode.Append : FileMode.Create;
+                        using (FileStream fs = new FileStream(settings.TargetFilename, fileMode))
                         {
-                            fs = new FileStream(settings.TargetFilename, FileMode.Create);
-                        }
-                        else
-                        {
-                            fs = new FileStream(settings.TargetFilename, FileMode.Append);
-                            for (int i = 0; i < settings.AppendBreaks; i++)
+                            if (settings.Append)
                             {
-                                const string nl = "\n";
-                                fs.Write(Encoding.ASCII.GetBytes(nl), 0, Encoding.ASCII.GetByteCount(nl));
+                                for (int i = 0; i < settings.AppendBreaks; i++)
+                                {
+                                    const string nl = "\n";
+                                    fs.Write(Encoding.ASCII.GetBytes(nl), 0, Encoding.ASCII.GetByteCount(nl));
+                                }
                             }
-                        }
 
-                        byte[] byteValues = new byte[1024];
-                        int byteRead;
+                            byte[] byteValues = new byte[1024];
+                            int byteRead;
 
-                        long position = fs.Position;
-                        GuiLogMessage("Start writing to target file now: " + settings.TargetFilename,
-                                      NotificationLevel.Debug);
-                        while ((byteRead = reader.Read(byteValues, 0, byteValues.Length)) != 0)
-                        {
-                            fs.Write(byteValues, 0, byteRead);
-                            if (OnPluginProgressChanged != null && reader.Length > 0 &&
-                                (int)(reader.Position * 100 / reader.Length) > position)
+                            long position = fs.Position;
+                            GuiLogMessage("Start writing to target file now: " + settings.TargetFilename,
+                                          NotificationLevel.Debug);
+                            while ((byteRead = reader.Read(byteValues, 0, byteValues.Length)) != 0)
                             {
-                                position = (int)(reader.Position * 100 / reader.Length);
-                                Progress(reader.Position, reader.Length);
+                                fs.Write(byteValues, 0, byteRead);
+                                if (OnPluginProgressChanged != null && reader.Length > 0 &&
+                                    (int)(reader.Position * 100 / reader.Length) > position)
+                                {
+                                    position = (int)(reader.Position * 100 / reader.Length);
+                                    Progress(reader.Position, reader.Length);
+                                }
                             }
+                            fs.Flush();
                         }
-                        fs.Flush();
-                        fs.Close();
 
                         GuiLogMessage("Finished writing: " + settings.TargetFilename, NotificationLevel.Debug);
                     }

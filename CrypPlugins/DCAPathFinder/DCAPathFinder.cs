@@ -3361,7 +3361,6 @@ namespace CrypTool.Plugins.DCAPathFinder
             JsonSerializer serializer = new JsonSerializer
             {
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
-                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
                 Formatting = Newtonsoft.Json.Formatting.Indented
             };
             serializer.Serialize(sw, conf);
@@ -3377,7 +3376,6 @@ namespace CrypTool.Plugins.DCAPathFinder
             JsonSerializer serializer = new JsonSerializer
             {
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
-                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
                 Formatting = Newtonsoft.Json.Formatting.Indented
             };
             serializer.Serialize(sw, data);

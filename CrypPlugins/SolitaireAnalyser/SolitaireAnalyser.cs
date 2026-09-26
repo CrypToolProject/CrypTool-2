@@ -83,7 +83,7 @@ namespace SolitaireAnalyser
             set
             {
                 wordDictionary = value;
-                OnPropertyChanged("Dictionary");
+                OnPropertyChanged(nameof(WordDictionary));
             }
         }
 

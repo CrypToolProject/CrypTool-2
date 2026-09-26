@@ -1,4 +1,19 @@
-﻿using CrypTool.PluginBase;
+﻿/*
+   Copyright (C) CrypTool 2 Team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
@@ -182,7 +197,7 @@ namespace CrypTool.StreamComparator
         /// </summary>
         public void CreateDiffView()
         {
-            if (!isBinary || true)
+            if (!isBinary)
             {
                 int maxLength = 65536;
                 GuiTextChanged("Generating diff now...", NotificationLevel.Info);
@@ -199,19 +214,18 @@ namespace CrypTool.StreamComparator
                             GuiTextChanged("Streams too big for complete diff, reading end of files only.", NotificationLevel.Warning);
                         }
 
-                        long startIndex = Math.Max(
-                  readerOne.Length - maxLength,
-                  readerTwo.Length - maxLength);
+                        long startIndexOne = Math.Max(0, readerOne.Length - maxLength);
+                        long startIndexTwo = Math.Max(0, readerTwo.Length - maxLength);
 
                         StreamReader sr = new StreamReader(readerOne, Encoding.ASCII);
                         StringBuilder strTxt1 = new StringBuilder();
 
-                        int size = startIndex > 0 ? (int)(readerOne.Length - startIndex) : (int)readerOne.Length;
+                        int size = (int)(readerOne.Length - startIndexOne);
                         char[] bArr = new char[size];
 
-                        if (startIndex > 0)
+                        if (startIndexOne > 0)
                         {
-                            sr.BaseStream.Seek(startIndex, SeekOrigin.Begin);
+                            sr.BaseStream.Seek(startIndexOne, SeekOrigin.Begin);
                         }
 
                         sr.Read(bArr, 0, bArr.Length);
@@ -224,14 +238,14 @@ namespace CrypTool.StreamComparator
                         }
 
                         sr = new StreamReader(readerTwo, Encoding.ASCII);
-                        if (startIndex > 0)
+                        if (startIndexTwo > 0)
                         {
-                            sr.BaseStream.Seek(startIndex, SeekOrigin.Begin);
+                            sr.BaseStream.Seek(startIndexTwo, SeekOrigin.Begin);
                         }
 
                         StringBuilder strTxt2 = new StringBuilder();
 
-                        size = startIndex > 0 ? (int)(readerTwo.Length - startIndex) : (int)readerTwo.Length;
+                        size = (int)(readerTwo.Length - startIndexTwo);
                         bArr = new char[size];
                         sr.Read(bArr, 0, bArr.Length);
                         test = sr.EndOfStream;

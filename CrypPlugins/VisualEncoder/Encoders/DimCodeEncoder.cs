@@ -42,14 +42,16 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
 
             if (VerifyInput(input, settings))
             {
-                Image pureBitmap = GenerateBitmap(input, settings);
-                Image preBitmap = GeneratePresentationBitmap(pureBitmap, settings);
-                return new DimCodeEncoderItem
+                using (Image pureBitmap = GenerateBitmap(input, settings))
+                using (Image preBitmap = GeneratePresentationBitmap(pureBitmap, settings))
                 {
-                    Legend = GetLegend(input, settings),
-                    PureBitmap = ImageToByteArray(pureBitmap),
-                    PresentationBitmap = ImageToByteArray(preBitmap)
-                };
+                    return new DimCodeEncoderItem
+                    {
+                        Legend = GetLegend(input, settings),
+                        PureBitmap = ImageToByteArray(pureBitmap),
+                        PresentationBitmap = ImageToByteArray(preBitmap)
+                    };
+                }
             }
             return null;
         }

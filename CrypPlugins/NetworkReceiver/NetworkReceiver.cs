@@ -236,20 +236,17 @@ namespace CrypTool.Plugins.NetworkReceiver
 
             receivedPackagesCount++;
             // package recieved. fill local storage
+            lastPackages.Insert(0, data);
             if (lastPackages.Count > NetworkReceiverPresentation.MaxStoredPackage)
             {
                 lastPackages.RemoveAt(lastPackages.Count - 1);
-            }
-            else
-            {
-                lastPackages.Add(data);
             }
 
             uniqueSrcIps.Add(ipFrom);
             ReceivedDataSize += data.Length;
 
             // create Package
-            int length = data.Length % 100;
+            int length = Math.Min(data.Length, 100);
             PresentationPackage packet = new PresentationPackage
             {
                 PackageSize = generateSizeString(data.Length) + "yte", // 42B + "yte"
@@ -329,7 +326,6 @@ namespace CrypTool.Plugins.NetworkReceiver
                 Socket socket = state.Connection.TCPClient.Client;
 
                 int bytesRead = socket.EndReceive(ar);
-                socket.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0, OnReceivingFromClient, state);
 
                 if (bytesRead > 0)
                 {
@@ -340,6 +336,11 @@ namespace CrypTool.Plugins.NetworkReceiver
                         UpdatePresentation(data, state.Connection.RemoteEndPoint.Address.ToString());
                         UpdateOutputs(data, state.Connection.ID);
                     }
+                    socket.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0, OnReceivingFromClient, state);
+                }
+                else
+                {
+                    state.Connection.Close();
                 }
             }
             catch (Exception) { }

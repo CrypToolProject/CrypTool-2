@@ -22,6 +22,23 @@ namespace UnitTests
             }
         }
 
+        [TestMethod]
+        public void DESOFBProcessesPartialFinalBlock()
+        {
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("DES");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputStream", "InputIV", "InputKey", ".Action", ".Mode", ".Padding", ".TripleDES" }, new[] { "OutputStream" });
+
+            object[] output = scenario.GetOutputs(new object[]
+            {
+                "000000".HexToStream(),
+                "0000000000000000".HexToByteArray(),
+                "3b3898371520f75e".HexToByteArray(),
+                0, 3, 0, false
+            });
+
+            Assert.AreEqual("83A1E8", output[0].ToHex());
+        }
+
         private struct TestVector
         {
             public string key, IV, input, output;

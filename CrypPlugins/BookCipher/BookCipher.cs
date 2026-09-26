@@ -217,7 +217,7 @@ namespace CrypTool.BookCipher
                 string character = c.ToString();
                 if (dictionary.ContainsKey(character))
                 {
-                    ciphertextBuilder.Append(string.Format("{0} ", dictionary[character][random.Next(0, dictionary[character].Count - 1)].GetPosition(
+                    ciphertextBuilder.Append(string.Format("{0} ", dictionary[character][random.Next(dictionary[character].Count)].GetPosition(
                         _settings.EncodePages,
                         _settings.EncodeLines,
                         _settings.PageDigits,
@@ -292,7 +292,7 @@ namespace CrypTool.BookCipher
                 }
                 if (dictionary.ContainsKey(word))
                 {
-                    ciphertextBuilder.Append(string.Format("{0} ", dictionary[word][random.Next(0, dictionary[word].Count - 1)].GetPosition(
+                    ciphertextBuilder.Append(string.Format("{0} ", dictionary[word][random.Next(dictionary[word].Count)].GetPosition(
                         _settings.EncodePages,
                         _settings.EncodeLines,
                         _settings.PageDigits,

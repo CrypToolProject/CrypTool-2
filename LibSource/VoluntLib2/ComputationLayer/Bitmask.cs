@@ -161,7 +161,7 @@ namespace VoluntLib2.ComputationLayer
         /// <param name="bit"></param>
         public void SetBit(uint offset, bool bit)
         {
-            if (offset > MaskSize * 8)
+            if (offset >= MaskSize * 8)
             {
                 throw new ArgumentException(string.Format("Selected offset {0} to set bit in bitmask was greater than the bitmask's size {1}!", offset, MaskSize));
             }
@@ -182,7 +182,7 @@ namespace VoluntLib2.ComputationLayer
         /// <returns></returns>
         public bool GetBit(uint offset)
         {
-            if (offset > MaskSize * 8)
+            if (offset >= MaskSize * 8)
             {
                 throw new ArgumentException(string.Format("Selected offset {0} to get bit in bitmask was greater than the bitmask's size {1}!", offset, MaskSize));
             }
@@ -203,7 +203,7 @@ namespace VoluntLib2.ComputationLayer
             {
                 return -1;
             }
-            uint randomnumber = (uint)random.Next(0, (int)freebits + 1);
+            uint randomnumber = (uint)random.Next(1, (int)freebits + 1);
             uint counter = 0;
             uint position = 0;
             for (uint i = 0; i < MaskSize; i++)
@@ -266,6 +266,19 @@ namespace VoluntLib2.ComputationLayer
                        bitmask.mask.SequenceEqual(mask);
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = (int)MaskSize;
+                foreach (byte value in mask)
+                {
+                    hash = (hash * 397) ^ value;
+                }
+                return hash;
+            }
         }
     }
 }

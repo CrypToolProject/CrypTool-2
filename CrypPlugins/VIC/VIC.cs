@@ -839,30 +839,30 @@ namespace CrypTool.Plugins.VIC
 
             if (character.Equals('Н'))
             {
-                if (nextCharacter.Equals('/') && index + 2 < input.Length - 1)
+                if (nextCharacter.Equals('/') && index + 2 < input.Length)
                 {
                     if (input.ElementAt(index + 2).Equals('Ц'))
                     {
-                        outputMessage += LocatestringInMatrix(substitutionTable, "Н/Ц");
+                        outputMessage = LocatestringInMatrix(substitutionTable, "Н/Ц");
                         iterationsToSkip = 2;
                         return true;
                     }
                 }
                 else if (nextCharacter.Equals('Т'))
                 {
-                    outputMessage += LocatestringInMatrix(substitutionTable, "НТ");
+                    outputMessage = LocatestringInMatrix(substitutionTable, "НТ");
                     iterationsToSkip = 1;
                     return true;
                 }
             }
             else if (character.Equals('Л'))
             {
-                if (nextCharacter.Equals('/') && index + 2 < input.Length - 1)
+                if (nextCharacter.Equals('/') && index + 2 < input.Length)
                 {
                     if (input.ElementAt(index + 2).Equals('П'))
                     {
-                        outputMessage += LocatestringInMatrix(substitutionTable, "Л/П");
-                        iterationsToSkip = 1;
+                        outputMessage = LocatestringInMatrix(substitutionTable, "Л/П");
+                        iterationsToSkip = 2;
                         return true;
                     }
                 }
@@ -890,30 +890,30 @@ namespace CrypTool.Plugins.VIC
 
             if (character.Equals('T'))
             {
-                if (nextCharacter.Equals('/') && index + 2 < message.Length - 1)
+                if (nextCharacter.Equals('/') && index + 2 < message.Length)
                 {
                     if (message.ElementAt(index + 2).Equals('N'))
                     {
-                        outputMessage += LocatestringInMatrix(substitutionTable, "T/N");
+                        outputMessage = LocatestringInMatrix(substitutionTable, "T/N");
                         iterationsToSkip = 2;
                         return true;
                     }
                 }
                 else if (nextCharacter.Equals('S'))
                 {
-                    outputMessage += LocatestringInMatrix(substitutionTable, "TS");
+                    outputMessage = LocatestringInMatrix(substitutionTable, "TS");
                     iterationsToSkip = 1;
                     return true;
                 }
             }
             else if (character.Equals('P'))
             {
-                if (nextCharacter.Equals('/') && index + 2 < message.Length - 1)
+                if (nextCharacter.Equals('/') && index + 2 < message.Length)
                 {
                     if (message.ElementAt(index + 2).Equals('L'))
                     {
-                        outputMessage += LocatestringInMatrix(substitutionTable, "P/L");
-                        iterationsToSkip = 1;
+                        outputMessage = LocatestringInMatrix(substitutionTable, "P/L");
+                        iterationsToSkip = 2;
                         return true;
                     }
                 }

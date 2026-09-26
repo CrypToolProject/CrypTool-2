@@ -22,6 +22,23 @@ namespace UnitTests
             }
         }
 
+        [TestMethod]
+        public void AESOFBProcessesPartialFinalBlock()
+        {
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("AES");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputStream", "InputIV", "InputKey", ".Action", ".Blocksize", ".Keysize", ".CryptoAlgorithm", ".Mode", ".Padding", ".Keysize" }, new[] { "OutputStream" });
+
+            object[] output = scenario.GetOutputs(new object[]
+            {
+                "00000000000000".HexToStream(),
+                "f34481ec3cc627bacd5dc3fb08f273e6".HexToByteArray(),
+                "00000000000000000000000000000000".HexToByteArray(),
+                0, 0, 0, 0, 3, 0, 0
+            });
+
+            Assert.AreEqual("0336763E966D92", output[0].ToHex());
+        }
+
         private struct TestVector
         {
             public string key, IV, input, output;

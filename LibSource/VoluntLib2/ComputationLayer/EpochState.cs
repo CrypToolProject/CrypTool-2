@@ -195,5 +195,22 @@ namespace VoluntLib2.ComputationLayer
 
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = EpochNumber.GetHashCode();
+                hash = (hash * 397) ^ (Bitmask == null ? 0 : Bitmask.GetHashCode());
+                foreach (byte[] entry in ResultList ?? Enumerable.Empty<byte[]>())
+                {
+                    foreach (byte value in entry ?? new byte[0])
+                    {
+                        hash = (hash * 397) ^ value;
+                    }
+                }
+                return hash;
+            }
+        }
     }
 }

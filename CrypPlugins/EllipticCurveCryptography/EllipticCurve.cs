@@ -181,6 +181,18 @@ namespace CrypTool.Plugins.EllipticCurveCryptography
         {
             return obj is WeierstraßCurve c && _a == c._a && _b == c._b && _p == c._p;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = 17;
+                hashCode = hashCode * 31 + _a.GetHashCode();
+                hashCode = hashCode * 31 + _b.GetHashCode();
+                hashCode = hashCode * 31 + _p.GetHashCode();
+                return hashCode;
+            }
+        }
     }
 
     public class MontgomeryCurve : EllipticCurve
@@ -299,6 +311,18 @@ namespace CrypTool.Plugins.EllipticCurveCryptography
         {
             return obj is MontgomeryCurve c && _a == c._a && _b == c._b && _p == c._p;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = 17;
+                hashCode = hashCode * 31 + _a.GetHashCode();
+                hashCode = hashCode * 31 + _b.GetHashCode();
+                hashCode = hashCode * 31 + _p.GetHashCode();
+                return hashCode;
+            }
+        }
     }
 
     public class TwistedEdwardsCurve : EllipticCurve
@@ -414,6 +438,18 @@ namespace CrypTool.Plugins.EllipticCurveCryptography
         public override bool Equals(object obj)
         {
             return obj is TwistedEdwardsCurve c && _a == c._a && _d == c._d && _p == c._p;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = 17;
+                hashCode = hashCode * 31 + _a.GetHashCode();
+                hashCode = hashCode * 31 + _d.GetHashCode();
+                hashCode = hashCode * 31 + _p.GetHashCode();
+                return hashCode;
+            }
         }
     }
 }

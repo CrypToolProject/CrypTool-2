@@ -70,7 +70,10 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             ProgressChanged(0, 1);
 
             //Step 1: read and check settings
-            ReadSettings();
+            if (!ReadSettings())
+            {
+                return;
+            }
 
             //Step 2: create algorithm object
             CreateRandomAlgorithm();
@@ -139,8 +142,6 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 case OutputType.Number:
                     {
                         byte[] output = _generator.GenerateRandomByteArray();
-                        OnPropertyChanged("Output");
-                        _output = new CStreamWriter(output);
                         //if the highest bit is set, we have to add 1 byte to allow
                         //the maximum number range and keep the number positive (highest bit =0)
                         if ((output[output.Length - 1] & 0b10000000) > 0)
@@ -172,6 +173,11 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                                 return;
                             }
                         }
+                        if (outputamount <= 0)
+                        {
+                            GuiLogMessage(string.Format(Resources.InvalidOutputAmount, _settings.OutputAmount), NotificationLevel.Error);
+                            return;
+                        }
                         BigInteger[] array = new BigInteger[outputamount];
                         for (int i = 0; i < outputamount; i++)
                         {
@@ -201,7 +207,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             }
         }
 
-        private void ReadSettings()
+        private bool ReadSettings()
         {
             try
             {
@@ -213,7 +219,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             catch (Exception)
             {
                 GuiLogMessage(string.Format(Resources.InvalidSeedValue, _settings.Seed), NotificationLevel.Error);
-                return;
+                return false;
             }
             try
             {
@@ -225,7 +231,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             catch (Exception)
             {
                 GuiLogMessage(string.Format(Resources.InvalidModulus, _settings.Modulus), NotificationLevel.Error);
-                return;
+                return false;
             }
 
             try
@@ -238,7 +244,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             catch (Exception)
             {
                 GuiLogMessage(string.Format(Resources.InvalidOutputLength, _settings.OutputLength), NotificationLevel.Error);
-                return;
+                return false;
             }
             if (_outputlength <= 0)
             {
@@ -255,7 +261,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             catch (Exception)
             {
                 GuiLogMessage(string.Format(Resources.InvalidaValue, _settings.Modulus), NotificationLevel.Error);
-                return;
+                return false;
             }
             try
             {
@@ -267,8 +273,9 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             catch (Exception)
             {
                 GuiLogMessage(string.Format(Resources.InvalidbValue, _settings.Modulus), NotificationLevel.Error);
-                return;
+                return false;
             }
+            return true;
         }
 
         /// <summary>

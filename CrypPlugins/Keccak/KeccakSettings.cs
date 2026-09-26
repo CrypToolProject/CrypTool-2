@@ -15,6 +15,7 @@
 */
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.ComponentModel;
 using System.Windows;
 
@@ -77,6 +78,10 @@ namespace CrypTool.Plugins.Keccak
             get => (int)selectedKeccakFunction;
             set
             {
+                if (value < 0 || value >= KeccakFunctions.Length)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value));
+                }
                 selectedKeccakFunction = KeccakFunctions[value].name;
                 OnPropertyChanged("KECCAKFunction");
                 SelectedStateSize = (int)stateSizeName.bits1600;
@@ -109,12 +114,12 @@ namespace CrypTool.Plugins.Keccak
             get => (int)selectedStateSize;
             set
             {
-                selectedStateSize = (stateSizeName)value;
-
-                if (value <= stateSizes.Length)
+                if (value < 0 || value >= stateSizes.Length)
                 {
-                    stateSize = stateSizes[value];
+                    throw new ArgumentOutOfRangeException(nameof(value));
                 }
+                selectedStateSize = (stateSizeName)value;
+                stateSize = stateSizes[value];
 
                 OnPropertyChanged("SelectedStateSize");
                 OnPropertyChanged("SelectedStateSizeReadonly");

@@ -248,7 +248,9 @@ namespace CrypTool.Plugins.VisualDecoder
                 if (curImage != null && curImage.Length != 0)
                 {
                     //we did the null and lengthcheck but the only way to know for sure that curImage is a byte[] image is to convert it.
-                    codeTypeHandler[VisualDecoderSettings.DimCodeType.QRCode].ByteArrayToImage(curImage);
+                    using (System.Drawing.Bitmap bitmap = codeTypeHandler[VisualDecoderSettings.DimCodeType.QRCode].ByteArrayToImage(curImage))
+                    {
+                    }
                     ProcessImage(curImage);
                 }
 

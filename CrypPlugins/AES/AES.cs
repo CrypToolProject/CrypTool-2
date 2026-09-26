@@ -258,15 +258,17 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     byte[] tmpInput = BlockCipherHelper.StreamToByteArray(inputdata);
                     byte[] outputData = new byte[tmpInput.Length];
 
-                    for (int pos = 0; pos <= tmpInput.Length - encrypt.InputBlockSize;)
+                    byte[] keyStreamBlock = new byte[encrypt.InputBlockSize];
+                    for (int pos = 0; pos < tmpInput.Length;)
                     {
-                        int l = encrypt.TransformBlock(IV, 0, encrypt.InputBlockSize, outputData, pos);
-                        for (int i = 0; i < l; i++)
+                        int l = encrypt.TransformBlock(IV, 0, encrypt.InputBlockSize, keyStreamBlock, 0);
+                        Array.Copy(keyStreamBlock, IV, l);
+                        int bytesInBlock = Math.Min(l, tmpInput.Length - pos);
+                        for (int i = 0; i < bytesInBlock; i++)
                         {
-                            IV[i] = outputData[pos + i];
-                            outputData[pos + i] ^= tmpInput[pos + i];
+                            outputData[pos + i] = (byte)(keyStreamBlock[i] ^ tmpInput[pos + i]);
                         }
-                        pos += l;
+                        pos += bytesInBlock;
                     }
 
                     int validBytes = (int)inputdata.Length;

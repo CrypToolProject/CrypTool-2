@@ -383,12 +383,6 @@ namespace FormatPreservingEncryptionWeydstone
                 throw new ArgumentException("maxTlen must be greater than or equal to zero: " + maxTlen);
             }
 
-            // validate method
-            if (method == null)
-            {
-                throw new NullReferenceException("method must not be null.");
-            }
-
             // validate split function
             if (split == null)
             {
@@ -480,12 +474,6 @@ namespace FormatPreservingEncryptionWeydstone
             if (maxTlen < 0)
             {
                 throw new ArgumentException("maxTlen must be greater than or equal to zero: " + maxTlen);
-            }
-
-            // validate method
-            if (feistelMethod == null)
-            {
-                throw new NullReferenceException("method must not be null.");
             }
 
             // validate arithmetic function

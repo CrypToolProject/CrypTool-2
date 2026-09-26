@@ -38,6 +38,7 @@ namespace CrypTool.Plugins.AudioInput
 
         public void PreExecution()
         {
+            DisposeRecorder();
             recorder = new WaveInEvent
             {
                 DeviceNumber = settings.DeviceChoice
@@ -75,8 +76,11 @@ namespace CrypTool.Plugins.AudioInput
 
         public void Stop()
         {
-            recorder.DataAvailable -= recorder_DataAvailable;
-            recorder.StopRecording();
+            if (recorder != null)
+            {
+                recorder.DataAvailable -= recorder_DataAvailable;
+                recorder.StopRecording();
+            }
         }
 
         public void Initialize()
@@ -88,7 +92,19 @@ namespace CrypTool.Plugins.AudioInput
 
         public void Dispose()
         {
+            DisposeRecorder();
+        }
 
+        private void DisposeRecorder()
+        {
+            if (recorder == null)
+            {
+                return;
+            }
+
+            recorder.DataAvailable -= recorder_DataAvailable;
+            recorder.Dispose();
+            recorder = null;
         }
 
         private void OnPropertyChanged(string name)

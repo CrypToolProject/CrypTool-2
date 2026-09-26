@@ -37,30 +37,32 @@ namespace CrypTool.Plugins.VisualDecoder.Decoders
 
         public override DimCodeDecoderItem Decode(byte[] input)
         {
-            Bitmap image = ByteArrayToImage(input);
-
-            BarcodeReader barcodeReader = new BarcodeReader
+            using (Bitmap image = ByteArrayToImage(input))
             {
-                AutoRotate = true,
-                PossibleFormats = list,
-                PureBarcode = false,
-                TryHarder = true
-            };
 
-            Result result = barcodeReader.Decode(image);  // decode barcode
-
-            if (result != null)
-            {
-                image = DrawRectangleZXing(image, result);
-
-                return new DimCodeDecoderItem
+                BarcodeReader barcodeReader = new BarcodeReader
                 {
-                    BitmapWithMarkedCode = ImageToByteArray(image),
-                    CodePayload = result.Text,
-                    CodeType = codeType
+                    AutoRotate = true,
+                    PossibleFormats = list,
+                    PureBarcode = false,
+                    TryHarder = true
                 };
+
+                Result result = barcodeReader.Decode(image);  // decode barcode
+
+                if (result != null)
+                {
+                    DrawRectangleZXing(image, result);
+
+                    return new DimCodeDecoderItem
+                    {
+                        BitmapWithMarkedCode = ImageToByteArray(image),
+                        CodePayload = result.Text,
+                        CodeType = codeType
+                    };
+                }
+                return null;
             }
-            return null;
         }
 
 

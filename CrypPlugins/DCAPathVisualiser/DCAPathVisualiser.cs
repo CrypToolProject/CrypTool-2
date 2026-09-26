@@ -123,6 +123,13 @@ namespace CrypTool.Plugins.DCAPathVisualiser
 
             DifferentialAttackRoundConfiguration conf = ReadConfiguration(Differential);
 
+            if (conf == null)
+            {
+                GuiLogMessage("The differential configuration is invalid.", NotificationLevel.Error);
+                ProgressChanged(1, 1);
+                return;
+            }
+
             //check component setting
             if (conf.SelectedAlgorithm != _settings.CurrentAlgorithm)
             {
@@ -196,7 +203,6 @@ namespace CrypTool.Plugins.DCAPathVisualiser
             {
                 config = JsonConvert.DeserializeObject<DifferentialAttackRoundConfiguration>(json, new JsonSerializerSettings
                 {
-                    TypeNameHandling = TypeNameHandling.Auto,
                     NullValueHandling = NullValueHandling.Ignore,
                 });
 

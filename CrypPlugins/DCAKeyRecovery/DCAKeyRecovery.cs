@@ -2132,7 +2132,6 @@ namespace CrypTool.Plugins.DCAKeyRecovery
                 config = JsonConvert.DeserializeObject<DifferentialAttackRoundConfiguration>(json,
                     new Newtonsoft.Json.JsonSerializerSettings
                     {
-                        TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
                         NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                     });
             }
