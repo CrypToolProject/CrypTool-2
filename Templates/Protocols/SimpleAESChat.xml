@@ -36,7 +36,7 @@
     <replacement key="$Destination IP$" value="Ziel-IP" />
     <replacement key="$Converter$" value="Konvertierer" />
     <replacement key="$Received decrypted message$" value="Entschlüsselte empfangene Nachricht" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verwendung der Komponenten Netzwerk-Sender und Netzwerk-Empfänger.\line\line In der Ziel-IP wird die IP-Adresse eingegeben, an die die Nachricht geschickt werden soll.\line\line Wenn diese Vorlage in CrypTool 2 auf zwei Rechnern läuft und beide den selben geheimen Schlüssel haben, können mit AES-256 verschlüsselte Nachrichten zwischen den Rechnern ausgetauscht werden." />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verwendung der Komponenten Netzwerk-Sender und Netzwerk-Empfänger.\line\line In der Ziel-IP wird die IP-Adresse eingegeben, an die die Nachricht geschickt werden soll.\line\line Wenn diese Vorlage in CrypTool 2 auf zwei Rechnern läuft und beide denselben geheimen Schlüssel haben, können mit AES-256 verschlüsselte Nachrichten zwischen den Rechnern ausgetauscht werden." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

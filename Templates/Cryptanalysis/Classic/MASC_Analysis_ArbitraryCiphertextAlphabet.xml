@@ -42,7 +42,7 @@
     <replacement key="$Cryptanalysis$" value="Kryptoanalyse des Geheimtextes" />
     <replacement key="$Output of the key$" value="Ausgabe des Schlüssels" />
     <replacement key="$Recovered plaintext$" value="Ermittelter Klartext" />
-    <replacement key="$memo$" value="Diese Vorlage zeigt, wie man Geheimtexte brechen kann, deren Zeichen mit beliebigen Zeichen monoalphabetisch substituiert wurden.\line Zunächst wird ein Beispielklartext mit Hilfe der Substitutions-Komponente, welches das Klartext- und Geheimtextalphabet nutzt, verschlüsselt.\line Danach wird der Geheimext mittels der Komponente 'Monoalphabetischen Substitutionsanalyse' gebrochen.\line Als Ergebnis werden der Klartext, das Klartext-Alphabet und der Schlüssel ausgegeben." />
+    <replacement key="$memo$" value="Diese Vorlage zeigt, wie man Geheimtexte brechen kann, deren Zeichen mit beliebigen Zeichen monoalphabetisch substituiert wurden.\line Zunächst wird ein Beispielklartext mit Hilfe der Substitutions-Komponente, welches das Klartext- und Geheimtextalphabet nutzt, verschlüsselt.\line Danach wird der Geheimtext mittels der Komponente 'Monoalphabetischen Substitutionsanalyse' gebrochen.\line Als Ergebnis werden der Klartext, das Klartext-Alphabet und der Schlüssel ausgegeben." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

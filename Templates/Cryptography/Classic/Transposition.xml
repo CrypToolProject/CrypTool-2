@@ -47,7 +47,7 @@ Quelle: <external ref="http://de.wikipedia.org/wiki/Transposition_(Kryptografie)
 \line
 Der Klartext steht in der Klartext-TexteingabeKomponente. Der Schlüssel steht in der 'Schlüssel'-Texteingabe. Dieser wird für die Verschlüsselung des Textes verwendet wird. Die erste Transpositionschiffre-Komponente führt dann eine Spaltentransposition durch, die den Text unter Verwendung des angegebenen Schlüssels verschlüsselt. Die Verschlüsselung wird in der ersten Transpositionschiffre-Komponente live durchgeführt und in der Geheimtext-Textausgabe-Komponente ausgegeben.\line
 \line
-Die Entschlüsselung erfolgt durch die zweite Transpositions-Komponente in umgekehrter Reihenfolge und dem selben Schlüssel, sodass der ursprüngliche Klartext aus dem verschlüsselten Text wiederhergestellt wird. Dieser steht dann in der Entschlüsselter-Geheimtext-Textsausgabe-Komponente." />
+Die Entschlüsselung erfolgt durch die zweite Transpositions-Komponente in umgekehrter Reihenfolge und dem selben Schlüssel, sodass der ursprüngliche Klartext aus dem verschlüsselten Text wiederhergestellt wird. Dieser steht dann in der Entschlüsselter-Geheimtext-Textausgabe-Komponente." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

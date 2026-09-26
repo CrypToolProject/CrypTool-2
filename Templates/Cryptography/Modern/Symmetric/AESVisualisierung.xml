@@ -26,7 +26,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">AES-Visualisierung</title>
   <summary lang="de">Benutzung der <i>AES-Visualisierung</i></summary>
-  <description lang="de">Mit dieser Vorlagen können Sie sich den Verschlüsselungsprozess des Advanced Encryption Standards (AES) schrittweise anschauen. Da das eigentliche Ziel die
+  <description lang="de">Mit dieser Vorlage können Sie sich den Verschlüsselungsprozess des Advanced Encryption Standards (AES) schrittweise anschauen. Da das eigentliche Ziel die
  Visualisierung des AES-Algorithmus ist, wurden Methoden des Padding nicht integriert. Das bedeutet, dass das Plugin genau einen Block mit 128 Bits als Klartext erwartet.
  Die Schlüssellänge ist je nach Auswahl 128, 192 oder 256 Bits.</description>
   <keywords lang="de">symmetrisch, Visualisierung</keywords>

@@ -11,7 +11,7 @@
   <summary lang="en">Usage of the <i>BB84 Key Exchange</i></summary>
   <description lang="en">BB84 Key Exchange is a photon-based method of exchanging cryptographic keys.
   It is one of the earliest practical examples of key exchange implemented within the field of cryptography.
-  The BB84-Protocol is one of the most recent cryptographic procedures on the base of quantum physics. A key is sent through unsecure channel via polarized photons.  
+  The BB84 protocol is a cryptographic procedure based on quantum physics. A key is sent over an insecure channel via polarized photons.
   This key can then be used to encrypt subsequent communications using a symmetric key cipher.<newline /><newline />
   Source: <external ref="http://en.wikipedia.org/wiki/BB84" /></description>
   <keywords>protocol, bennet, brassard, 1984, photon, photons, polarization, light, quantum, physics, alice, bob</keywords>

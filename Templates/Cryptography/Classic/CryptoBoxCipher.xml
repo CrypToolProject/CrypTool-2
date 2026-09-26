@@ -29,7 +29,7 @@ Encryption Depth: Execute multiple shifts to increase the encryption complexity.
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Krypto-Box-Chiffre</title>
 <summary lang="de">Verwendung der <i>Krypto.Box</i>-Chiffre</summary>
-<description lang="de">Diese Vorlage zeigt, wie man eine KryptoBox-Ciffre baut, ein Verschlüsselungssystem, das von Dirk Rijmenants erstellt wurde.</description>
+<description lang="de">Diese Vorlage zeigt, wie man eine KryptoBox-Chiffre baut, ein Verschlüsselungssystem, das von Dirk Rijmenants erstellt wurde.</description>
 <keywords>Transposition, CryptoBox, KryptoBox, Gitter</keywords>
 <replacements lang="de">
   <replacement key="$Plaintext$" value="Klartext" />

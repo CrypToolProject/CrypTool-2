@@ -9,7 +9,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">RAPPOR</title>
   <summary lang="en">Usage of the <i>RAPPOR</i> mechanism</summary>
-  <description lang="en">The RAPPOR mechanism allows for anonymously data collection with tunable privacy gurantees.</description>
+  <description lang="en">The RAPPOR mechanism allows for anonymous data collection with tunable privacy guarantees.</description>
   <keywords>RAPPOR, Differential, Privacy, Bloom, Filter, Randomized, Response</keywords>
   <replacements lang="en">
     <replacement key="$Initial_data_ set_box$" value="Initial data set" />

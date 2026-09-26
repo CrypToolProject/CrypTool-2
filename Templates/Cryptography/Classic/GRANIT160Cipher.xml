@@ -9,7 +9,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">GRANIT/160-Chiffre</title>
   <summary lang="de">Ver- und Entschlüsselung mit der <i>GRANIT/160-Chiffre</i></summary>
-  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels GRANIT/160-Chiffre. Die GRANIT/160-Chiffre ist eine manuelle Chiffre, die für Spione der DDR erfunden wurde. Sie verwendet eine Substitution und eine doppelte Spaltentransposition.</description>
+  <description lang="de">Diese Vorlage zeigt die Ver- und Entschlüsselung mittels GRANIT/160-Chiffre. Die GRANIT/160-Chiffre ist eine manuelle Chiffre, die für Spione der DDR erfunden wurde. Sie verwendet eine Substitution und eine doppelte Spaltentransposition.</description>
   <keywords lang="de">Bazeries, chiffre</keywords>
   <replacements lang="de">
     <replacement key="$Plaintext$" value="Klartext" />

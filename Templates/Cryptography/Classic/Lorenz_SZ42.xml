@@ -30,7 +30,7 @@ A very nice implementation and simulation of the internal workings of the machin
   <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Lorenz SZ42</title>
   <summary lang="de">Diese Vorlage zeigt, wie die deutsche <i>Lorenz SZ42-Chiffriermaschine</i>zum Ver- und Entschlüsseln von Text verwendet werden kann.</summary>
-  <description lang="de">Mit dieser Vorlage veranschaulichen wir die Verschlüsselung eines Klartextes mit Hilfe einer deutchen<b>Lorenz SZ42-Chiffriermaschine</b>. Die Maschine wurde zum Verschlüsseln von Fernschreibtexten verwendet und war eine der ersten Stromchiffren.</description>
+  <description lang="de">Mit dieser Vorlage veranschaulichen wir die Verschlüsselung eines Klartextes mit Hilfe einer deutschen <b>Lorenz SZ42-Chiffriermaschine</b>. Die Maschine wurde zum Verschlüsseln von Fernschreibtexten verwendet und war eine der ersten Stromchiffren.</description>
   <keywords>Schlüsselgerät, Rotor, Rad, Maschine</keywords>
   <replacements lang="de">
     <replacement key="$Message$" value="Hallo Welt, dies ist ein Test der Lorenz SZ42-Chiffriermaschinen-Komponente von CrypTool 2 :-)" />
@@ -44,7 +44,7 @@ Die Lorenz SZ42 wurde in erster Linie von der deutschen Armee und Regierungsbeam
 \line
 In dieser Vorlage werden drei Lorenz SZ42-Komponenten verwendet. Die erste generiert einen zufälligen Schlüssel gemäß den Schlüssel-Generierungsregeln der SZ42. Die beiden anderen führen Ver- und Entschlüsselung durch.\line
 \line
-Eine sehr schöne (Englische) Implementierung und Simulation des Innenlebens der Maschine finden Sie unter: https://lorenz.virtualcolossus.co.uk/" />
+Eine sehr schöne (englische) Implementierung und Simulation des Innenlebens der Maschine finden Sie unter: https://lorenz.virtualcolossus.co.uk/" />
   </replacements>
   <!--= - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

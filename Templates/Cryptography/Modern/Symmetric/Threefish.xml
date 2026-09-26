@@ -40,7 +40,7 @@
     <replacement key="$stringencoder$" value="String-Encodierer" />
     <replacement key="$stringdecoder$" value="String-Decodierer" />
     <replacement key="$tweak$" value="Tweak" />
-    <replacement key="$memo$" value="Diese Vorlage verschlüsselt Text mit Threefish (einer von 3 Verschlüsselungs-Algorithmen in der Blowfish-Komponente).\line\line\line Sie können einen beliebigen Text in die Komponente &quot;Klartext&quot; auf der linken Seite eingegeben. Der verschlüsselte Text wird in der Komponente &quot;Geheimtext&quot; auf der rechten Seite angezeigt, nachdem Sie auf die Schaltfläche &quot;Starten&quot; geklickt haben. Im gleichen Workflow wird der Geheimtext danach wieder entschlüsselt und in der rechten &quot;Klartext (entschlüsselt)&quot;-Komponente angezeigt." />
+    <replacement key="$memo$" value="Diese Vorlage verschlüsselt Text mit Threefish (einer von 3 Verschlüsselungs-Algorithmen in der Blowfish-Komponente).\line\line\line Sie können einen beliebigen Text in die Komponente &quot;Klartext&quot; auf der linken Seite eingeben. Der verschlüsselte Text wird in der Komponente &quot;Geheimtext&quot; auf der rechten Seite angezeigt, nachdem Sie auf die Schaltfläche &quot;Starten&quot; geklickt haben. Im gleichen Workflow wird der Geheimtext danach wieder entschlüsselt und in der rechten &quot;Klartext (entschlüsselt)&quot;-Komponente angezeigt." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

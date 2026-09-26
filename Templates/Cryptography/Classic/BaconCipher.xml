@@ -9,7 +9,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Bacon-Chiffre</title>
   <summary lang="de">Ver- und Entschlüsselung mit der <i>Bacon-Chiffre</i></summary>
-  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels Bacon-Chiffre. Das Verfahren bildet Buchstaben auf einen Code aus zwei Zeichen ab. Dieser Code kann dann beispielsweise in Texte eingebettet werden.</description>
+  <description lang="de">Diese Vorlage zeigt die Ver- und Entschlüsselung mittels Bacon-Chiffre. Das Verfahren bildet Buchstaben auf einen Code aus zwei Zeichen ab. Dieser Code kann dann beispielsweise in Texte eingebettet werden.</description>
   <keywords lang="de">Bacon, chiffre, einfach</keywords>
   <replacements lang="de">
     <replacement key="$BaconCipher$" value="Bacon-Chiffre" />

@@ -9,7 +9,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Four-Square-Chiffre</title>
   <summary lang="de">Ver- und Entschlüsselung mit der <i>Four-Square-Chiffre</i></summary>
-  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels Four-Square-Chiffre. In der klassischen Kryptographie ist die Four-Square-Chiffre eine Chiffre, die vier Polybius-Quadrate nutzt. Sie wurde um 1901 von Felix Delastelle erfunden.</description>
+  <description lang="de">Diese Vorlage zeigt die Ver- und Entschlüsselung mittels Four-Square-Chiffre. In der klassischen Kryptographie ist die Four-Square-Chiffre eine Chiffre, die vier Polybius-Quadrate nutzt. Sie wurde um 1901 von Felix Delastelle erfunden.</description>
   <keywords lang="de">Bifid, chiffre</keywords>
   <replacements lang="de">
     <replacement key="$Four-square Cipher$" value="Four-Square-Chiffre" />

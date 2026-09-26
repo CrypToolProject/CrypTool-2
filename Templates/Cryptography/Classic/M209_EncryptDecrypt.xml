@@ -57,7 +57,7 @@ To enter the key via the text field, you can take a look at the M-209 Key Setup 
     <replacement key="$M209 Decrypt$" value="M-209 Entschlüsselung" />
     <replacement key="$message$" value="Hallo Welt, das ist ein Test der M-209-Komponente." />
     <replacement key="$Internal Key$" value="Interner Schlüssel" />
-	<replacement key="$memo$" value="Die {\b Hagelin M-209} ist eine tragbare Rotor-Chiffriermaschine, die hauptsächlich während des Zweiten Weltkriegs, aber noch bis zum Korea Krieg, vom US-Militär eingesetzt wurde. Sie ist sehr kompakt und handlich, zudem vollständig analog und hat einen größeren Schlüsselraum als die Enigma, die von den Deutschen im zweiten Weltkrieg verwendet wurde.\line
+	<replacement key="$memo$" value="Die {\b Hagelin M-209} ist eine tragbare Rotor-Chiffriermaschine, die hauptsächlich während des Zweiten Weltkriegs, aber noch bis zum Koreakrieg, vom US-Militär eingesetzt wurde. Sie ist sehr kompakt und handlich, zudem vollständig analog und hat einen größeren Schlüsselraum als die Enigma, die von den Deutschen im Zweiten Weltkrieg verwendet wurde.\line
 \line
 Die Hagelin M-209 besteht aus 3 Teilen:\line
 \line

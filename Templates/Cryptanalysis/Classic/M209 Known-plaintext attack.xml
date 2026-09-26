@@ -51,8 +51,8 @@ The known-plaintext attack uses hillclimbing in three nested loops. Each loop ap
     <replacement key="$decryptedText$" value="Entschlüsselter Text" />
 	<replacement key="$textoutput$" value="Text Ausgabe" />
 	<replacement key="$key$" value="Schlüssel" />
-    <replacement key="$memo$" value="Die Hagelin M-209 ist eine tragbare Rotor-Chiffriermaschine, die hauptsächlich während des Zweiten Weltkriegs, aber noch bis zum Korea Krieg, vom US-Militär eingesetzt wurde.\line
-Sie ist sehr kompakt und handlich, zudem vollständig analog und hat einen größeren Schlüsselraum als die Enigma, die von den Deutschen im zweiten Weltkrieg verwendet wurde.
+    <replacement key="$memo$" value="Die Hagelin M-209 ist eine tragbare Rotor-Chiffriermaschine, die hauptsächlich während des Zweiten Weltkriegs, aber noch bis zum Koreakrieg, vom US-Militär eingesetzt wurde.\line
+Sie ist sehr kompakt und handlich, zudem vollständig analog und hat einen größeren Schlüsselraum als die Enigma, die von den Deutschen im Zweiten Weltkrieg verwendet wurde.
 \line
 \line
 Um verschlüsselten Text für den Angriff zu erhalten, kann man die M-209 Komponente verwenden. \line

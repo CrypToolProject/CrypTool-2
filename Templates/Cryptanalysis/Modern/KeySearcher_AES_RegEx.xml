@@ -34,7 +34,7 @@
     <replacement key="$StringDecoder$" value="String-Dekodierer" />
     <replacement key="$Key$" value="Schlüssel" />
     <replacement key="$KeySearcher$" value="Schlüsselsuche" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verwendung eines regulären Ausdruckes als Kostenfunktion für die Schlüsselsucher-Komponente. Es wird angenommen, dass man vom empfangenen Geheimtext nur weiss, dass er mit dem Wort &quot;CrypTool&quot; endet." />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verwendung eines regulären Ausdruckes als Kostenfunktion für die Schlüsselsucher-Komponente. Es wird angenommen, dass man vom empfangenen Geheimtext nur weiß, dass er mit dem Wort &quot;CrypTool&quot; endet." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

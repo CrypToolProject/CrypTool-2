@@ -9,7 +9,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Bifid-Chiffre</title>
   <summary lang="de">Ver- und Entschlüsselung mit der <i>Bifid-Chiffre</i></summary>
-  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels Bifid-Chiffre. In der klassischen Kryptographie ist die Bifid-Chiffre eine Chiffre, die ein Polybius-Quadrat mit Transposition kombiniert und somit eine Fraktionierung erzeugt. Sie wurde um 1901 von Felix Delastelle erfunden.</description>
+  <description lang="de">Diese Vorlage zeigt die Ver- und Entschlüsselung mittels Bifid-Chiffre. In der klassischen Kryptographie ist die Bifid-Chiffre eine Chiffre, die ein Polybius-Quadrat mit Transposition kombiniert und somit eine Fraktionierung erzeugt. Sie wurde um 1901 von Felix Delastelle erfunden.</description>
   <keywords lang="de">Bifid, chiffre</keywords>
   <replacements lang="de">
     <replacement key="$Bifid Cipher$" value="Bifid-Chiffre" />
@@ -18,7 +18,7 @@
     <replacement key="$Decrypted plaintext$" value="Entschlüsselter Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />
     <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise der {\b Bifid-Chiffre}. Die Komponente wurde nach der Definition der American Cryptogram Association (ACA) entwickelt und unterstützt die Ver- und Entschlüsselung von Texten.\line\line
-In den Einstellungen der Komponente kann zwischen einem 25-Buchstaben-Alphabet (J = I) und einem 36-Zeichen-Alphabet (Buchstaben + Ziffern) umgeschalten werden. Außerdem kann festgelegt werden, ob der Klartext insgesamt an einem Stück oder periodisch in Blöcken fester Größe verschlüsselt werden soll." />
+In den Einstellungen der Komponente kann zwischen einem 25-Buchstaben-Alphabet (J = I) und einem 36-Zeichen-Alphabet (Buchstaben + Ziffern) umgeschaltet werden. Außerdem kann festgelegt werden, ob der Klartext insgesamt an einem Stück oder periodisch in Blöcken fester Größe verschlüsselt werden soll." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->

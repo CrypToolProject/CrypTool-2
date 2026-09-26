@@ -40,7 +40,7 @@
     <replacement key="$memo1$" value="In diesem Beispiel werden ein JPG-Bild und ein BMP-Bild mit dem Huffman-Algorithmus komprimiert, um den Einfluss der Entropie der Eingangsdaten auf die Kompressionsrate der Huffman-Komprimierung zu demonstrieren." />
     <replacement key="$memo2$" value="Da das JPG-Bild bereits komprimiert ist, ist die Anwendung der Huffman-Komprimierung nicht effektiv und führt sogar zu einer Vergrößerung der Datenmenge um 1%." />
     <replacement key="$memo3$" value="Konvertiere das Eingabebild von JPG nach BMP." />
-    <replacement key="$memo4$" value="Das BMP-Bildformat speichert die Bilddaten in einer umkomprimierten Form, so dass die Anwendung der Huffman-Komprimierung sehr effektiv ist. Die Kompressionsrate beträgt 29%." />
+    <replacement key="$memo4$" value="Das BMP-Bildformat speichert die Bilddaten in einer unkomprimierten Form, so dass die Anwendung der Huffman-Komprimierung sehr effektiv ist. Die Kompressionsrate beträgt 29%." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

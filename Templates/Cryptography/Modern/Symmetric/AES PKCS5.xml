@@ -30,7 +30,7 @@
   <title lang="de">AES mit PKCS#5</title>
   <summary lang="de">Benutzung der <i>AES</i>-Chiffre mit <i>PKCS#5</i>, wobei der Sitzungsschlüssel per <i>PKCS#5</i> aus einem Passwort erzeugt wird und der Geheimtext in Base-64 ausgegeben wird</summary>
   <description lang="de">Diese Vorlage zeigt die Benutzung der <i>AES</i>-Chiffre mit <i>PKCS#5</i>. <i>PKCS#5</i> wird benutzt, um aus den eingegebenen Passwörtern Verschlüsselungsschlüssel zu gewinnen.</description>
-  <keywords lang="de">symmetrisch, passwort, standart</keywords>
+  <keywords lang="de">symmetrisch, Passwort, Standard</keywords>
   <replacements lang="de">
     <replacement key="$Plaintext$" value="Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />

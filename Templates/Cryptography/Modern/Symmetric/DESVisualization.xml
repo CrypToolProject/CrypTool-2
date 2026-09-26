@@ -27,7 +27,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">DES-Visualisierung</title>
   <summary lang="de">Benutzung der <i>DES-Visualisierung</i></summary>
-  <description lang="de">Mit dieser Vorlagen können Sie sich den Verschlüsselungsprozess des Data Encryption Standards schrittweise anschauen. Da das eigentliche Ziel die
+  <description lang="de">Mit dieser Vorlage können Sie sich den Verschlüsselungsprozess des Data Encryption Standards schrittweise anschauen. Da das eigentliche Ziel die
  Visualisierung des DES-Algorithmus ist, wurden Methoden des Padding und Betriebsmodi nicht integriert. Das bedeutet, dass das Plugin genau ein Block mit 64 Bits als Klartext
   erwartet.</description>
   <keywords lang="de">symmetrisch, modern, Blockchiffre, Verschlüsselung, Lucifer, Visualisierung, DES</keywords>

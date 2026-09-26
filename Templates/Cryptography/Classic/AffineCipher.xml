@@ -9,7 +9,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Affine Chiffre</title>
   <summary lang="de">Ver- und Entschlüsselung mit der <i>Affinen Chiffre</i></summary>
-  <description lang="de">Diese Vorlage zeigt Ver- und Entschlüsselung mittels affiner Chiffre. Die affine Chiffre ist eine klassische Substitutions-Chiffre, die die Prinzipien der Caesar-Chiffre und der Multiplikations-Chiffre kombiniert.</description>
+  <description lang="de">Diese Vorlage zeigt die Ver- und Entschlüsselung mittels affiner Chiffre. Die affine Chiffre ist eine klassische Substitutions-Chiffre, die die Prinzipien der Caesar-Chiffre und der Multiplikations-Chiffre kombiniert.</description>
   <keywords lang="de">affin, mathematisch, chiffre</keywords>
   <replacements lang="de">
     <replacement key="$AffineCipher$" value="Affine Chiffre" />

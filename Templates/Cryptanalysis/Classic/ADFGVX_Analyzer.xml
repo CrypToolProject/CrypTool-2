@@ -9,7 +9,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">ADFGVX Heuristic Analysis</title>
   <summary lang="en">Heuristic analysis of the <i>ADFGVX</i> cipher with simulated annealing</summary>
-  <description lang="en">With this template, ADFGVX messages can be decrypted in a ciphertext-only attack thanks to the heuristic method simulated annealing.  The the ADFGVX cipher was developed by the signal officer Fritz Nebel in order to encrypt radio messages from the army in World War 2. His first variant contained the five letters ADFGX, later the V was added as the sixth letter.</description>
+  <description lang="en">With this template, ADFGVX messages can be decrypted in a ciphertext-only attack thanks to the heuristic method simulated annealing.  The ADFGVX cipher was developed by the signal officer Fritz Nebel in order to encrypt radio messages from the army in World War 2. His first variant contained the five letters ADFGX, later the V was added as the sixth letter.</description>
   <keywords>ADFGVX, Lasry, Simulated Annealing</keywords>
   <replacements lang="en">
     <replacement key="$adfgvxAnalyzer$" value="ADFGVX Analyzer" />

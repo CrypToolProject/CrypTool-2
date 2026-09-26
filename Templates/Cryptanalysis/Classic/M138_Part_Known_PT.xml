@@ -32,7 +32,7 @@
     <replacement key="$Key$" value="Schlüssel" />
     <replacement key="$M-138 Analyzer$" value="M-138-Analysierer" />
     <replacement key="$memo1$" value="Das obige Textfeld enthält den bekannten Klartext, der an die Analysekomponente geschickt wird, das untere Textfeld den zugehörigen bekannten Geheimtext." />
-    <replacement key="$memo2$" value="Diese Vorlage führt einen Partially-Known-Plaintext-Angriff auf die M-138 durch. Links können die Klar- und Geheimtexte, die an die Analysekomponente geschickt werden, eingegeben werden. In den Einstellungen des Analysierers kann die Sprache des Klartextes angegeben werden.\line In der Präsentationsansicht der Analysekomponente werden weitere Informationen über den Angriff dargestellt, z.B. eine Liste der besten Schlüssel bezüglich eines Wertes, in dessen Berechnung Trigramme, Tetragramme und die relativen Buchstabenhäufigkeiten einfliessen." />
+    <replacement key="$memo2$" value="Diese Vorlage führt einen Partially-Known-Plaintext-Angriff auf die M-138 durch. Links können die Klar- und Geheimtexte, die an die Analysekomponente geschickt werden, eingegeben werden. In den Einstellungen des Analysierers kann die Sprache des Klartextes angegeben werden.\line In der Präsentationsansicht der Analysekomponente werden weitere Informationen über den Angriff dargestellt, z.B. eine Liste der besten Schlüssel bezüglich eines Wertes, in dessen Berechnung Trigramme, Tetragramme und die relativen Buchstabenhäufigkeiten einfließen." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

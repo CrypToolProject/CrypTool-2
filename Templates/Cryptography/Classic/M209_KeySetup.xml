@@ -18,7 +18,7 @@
     <replacement key="$Internal Key (formatted)$" value="Internal Key (formatted)" />
     <replacement key="$M209 Decryption$" value="M-209 Decryption" />
     <replacement key="$memo$" value="This template demonstrates how the internal key of the M-209 can be set by entering it on the input &quot;Input internal key&quot; of the M-209 component. The format of the internal key, as seen above, is the following: First the initial rotor position, consisting of 6 letters, then a comma-separated list of the active pins of the rotors, followed by the slider positions for the 27 rods.
-\line\line In the given example is the initail rotor position F, C, C, K, N, G and the first rotor has the effective pins B, C, E, J, O, P, S, T, U, V, X and Y. The first bar has one lug on position 1 and the other lug on the neutral position. On the last bar, the lugs are on positions 4 and 5.\line\line Hint: The generation of an internal key overwrites the current settings." />
+\line\line In the given example is the initial rotor position F, C, C, K, N, G and the first rotor has the effective pins B, C, E, J, O, P, S, T, U, V, X and Y. The first bar has one lug on position 1 and the other lug on the neutral position. On the last bar, the lugs are on positions 4 and 5.\line\line Hint: The generation of an internal key overwrites the current settings." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

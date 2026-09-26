@@ -32,7 +32,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">ChaCha-Chiffre (Präsentation)</title>
   <summary lang="de">Dieses Template zeigt die <i>ChaCha</i>-Chiffre im Vollbildmodus (Präsentation)</summary>
-  <description lang="de">ChaCha ist eine 256-bit Stromchiffre, die 2008 von Daniel J. Bernstein (DJB) entwickelt wurde. Sie basiert auf der Salsa-Chiffre des selben Autors.
+  <description lang="de">ChaCha ist eine 256-Bit-Stromchiffre, die 2008 von Daniel J. Bernstein (DJB) entwickelt wurde. Sie basiert auf der Salsa-Chiffre desselben Autors.
   
 Dieses Template beinhaltet eine detaillierte Visualisierung des Ver- und Entschlüsselungsprozesses sowie beide existierende Versionen der Chiffre: Die originale Version von DJB mit einem 64-bit Zähler und einem 64-bit Initialisierungsvektor und die modifizierte Version der Internet Engineering Task Force (IETF) mit einem 32-bit Zähler und einem 96-bit Initialisierungsvektor. Die Version kann in den Komponenten-Einstellungen ausgewählt werden.
   </description>

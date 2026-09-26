@@ -30,7 +30,7 @@
     <replacement key="$WordPatterns$" value="Wortmuster" />
     <replacement key="$Dictionary$" value="Wörterbuch" />
     <replacement key="$Found patterns$" value="Gefundene Muster" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert, wie mit der Wortmuster-Komponente Wörter gefunden werden können, die dasselbe Muster wie ein Eingabewort (Suchmuster) haben. In diesem Beispiel hat das Eingabewort TREE das Muster 1233, genauso wie die Worte ball, bass, bell etc.\line Wenn die Vorlage ausgeführt wird, wird die Wortliste von der Komponente geladen. Danach kann das Eingabewort interaktiv geändert werden, um neue Muster zu suchen, ohne dass die Wortliste neu geladen wird." />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert, wie mit der Wortmuster-Komponente Wörter gefunden werden können, die dasselbe Muster wie ein Eingabewort (Suchmuster) haben. In diesem Beispiel hat das Eingabewort TREE das Muster 1233, genauso wie die Wörter ball, bass, bell etc.\line Wenn die Vorlage ausgeführt wird, wird die Wortliste von der Komponente geladen. Danach kann das Eingabewort interaktiv geändert werden, um neue Muster zu suchen, ohne dass die Wortliste neu geladen wird." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
