@@ -26,8 +26,8 @@ namespace CrypTool.CrypWin
         private readonly MainWindow window;
         private Thread thread;
 
-        private bool isRunning;
-        private bool shallStop;
+        private volatile bool isRunning;
+        private volatile bool shallStop;
 
         private string[] filelist;
         private int currentFile;
@@ -116,7 +116,11 @@ namespace CrypTool.CrypWin
                 }
                 catch (Exception ex)
                 {
-                    logWriter.WriteLine("Exception occured during execution of {0}: {1}", file, ex.Message);
+                    if (logWriter != null)
+                    {
+                        logWriter.WriteLine("Exception occurred during execution of {0}: {1}", file, ex.Message);
+                        logWriter.Flush();
+                    }
                 }
             }
 

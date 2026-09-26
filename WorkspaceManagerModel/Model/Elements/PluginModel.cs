@@ -155,21 +155,18 @@ namespace WorkspaceManager.Model
                     Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
                     foreach (Assembly assembly in assemblies)
                     {
+                        if (!string.IsNullOrEmpty(PluginTypeAssemblyName) &&
+                            !assembly.GetName().Name.Equals(PluginTypeAssemblyName, StringComparison.OrdinalIgnoreCase))
+                        {
+                            continue;
+                        }
                         Type type = assembly.GetType(PluginTypeName);
-                        if (type != null)
+                        if (type != null && !type.IsAbstract && typeof(ICrypComponent).IsAssignableFrom(type))
                         {
                             _pluginType = type;
                             PluginTypeAssemblyName = assembly.GetName().Name;
                             return type;
                         }
-                    }
-                    //2. try to load the type
-                    if (PluginTypeName != null)
-                    {
-                        Assembly assembly = Assembly.Load(PluginTypeAssemblyName);
-                        Type t = assembly.GetType(PluginTypeName);
-                        PluginTypeAssemblyName = assembly.GetName().Name;
-                        return t;
                     }
                 }
                 return null;
@@ -573,7 +570,9 @@ namespace WorkspaceManager.Model
                             else if (connectorModel.ConnectorType.FullName == "System.Numerics.BigInteger" &&
                                (data.GetType().FullName == "System.Int32" || data.GetType().FullName == "System.Int64"))
                             {
-                                data = new BigInteger((int)data);
+                                data = data is long longValue
+                                    ? new BigInteger(longValue)
+                                    : new BigInteger((int)data);
                             }
                             //Cast from System.Byte[] -> System.String (UTF8)
                             else if (connectorModel.ConnectorType.FullName == "System.String" && data.GetType().FullName == "System.Byte[]")

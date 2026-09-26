@@ -54,6 +54,7 @@ namespace CrypTool.Core
 
         public void ChangeListLength(int listLength)
         {
+            listLength = Math.Max(0, listLength);
             Properties.Settings.Default.RecentFileListSize = listLength;
             try
             {
@@ -77,12 +78,12 @@ namespace CrypTool.Core
                 recentFiles.RemoveRange(ListLength, recentFiles.Count - ListLength);
             }
             Store();
-            ListChanged(recentFiles);
+            NotifyListChanged();
         }
 
         private RecentFileList(int listLength)
         {
-            ListLength = listLength;
+            ListLength = Math.Max(0, listLength);
             Load();
         }
 
@@ -101,60 +102,57 @@ namespace CrypTool.Core
             }
 
             Store();
-            ListChanged(recentFiles);
+            NotifyListChanged();
         }
 
         public void RemoveFile(string fileName)
         {
             recentFiles.Remove(fileName);
             Store();
-            ListChanged(recentFiles);
+            NotifyListChanged();
         }
 
         public List<string> GetRecentFiles()
         {
-            return recentFiles;
+            return new List<string>(recentFiles);
         }
 
         public void Clear()
         {
             recentFiles.Clear();
             Store();
-            ListChanged(recentFiles);
+            NotifyListChanged();
         }
 
         private void Store()
         {
-            RegistryKey k = Registry.CurrentUser.OpenSubKey(RegistryKey);
-            if (k == null)
+            using (RegistryKey k = Registry.CurrentUser.CreateSubKey(RegistryKey))
             {
-                k = Registry.CurrentUser.CreateSubKey(RegistryKey);
+                k?.SetValue(valueKey, recentFiles.ToArray());
             }
-
-            k = Registry.CurrentUser.OpenSubKey(RegistryKey, true);
-
-            k.SetValue(valueKey, recentFiles.ToArray());
         }
 
         private void Load()
         {
-            RegistryKey k = Registry.CurrentUser.OpenSubKey(RegistryKey);
-            if (k == null)
+            using (RegistryKey k = Registry.CurrentUser.CreateSubKey(RegistryKey))
             {
-                k = Registry.CurrentUser.CreateSubKey(RegistryKey);
-            }
-
-            if (k.GetValue(valueKey) != null && k.GetValueKind(valueKey) == RegistryValueKind.MultiString)
-            {
-                string[] list = (string[])(k.GetValue(valueKey));
-                for (int i = list.Length - ListLength; i < list.Length; i++)
+                if (k?.GetValue(valueKey) != null && k.GetValueKind(valueKey) == RegistryValueKind.MultiString)
                 {
-                    if ((i >= 0) && File.Exists(list[i]))
+                    string[] list = (string[])k.GetValue(valueKey);
+                    for (int i = list.Length - ListLength; i < list.Length; i++)
                     {
-                        recentFiles.Add(list[i]);
+                        if ((i >= 0) && File.Exists(list[i]))
+                        {
+                            recentFiles.Add(list[i]);
+                        }
                     }
                 }
             }
+        }
+
+        private void NotifyListChanged()
+        {
+            ListChanged?.Invoke(new List<string>(recentFiles));
         }
 
         public int Count

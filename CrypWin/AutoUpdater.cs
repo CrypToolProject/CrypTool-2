@@ -25,11 +25,13 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
 using System.Xml.Linq;
+using System.Xml;
 
 namespace CrypTool.CrypWin
 {
@@ -58,6 +60,7 @@ namespace CrypTool.CrypWin
         /// </summary>
         private string changelogText;
         private string updateName;
+        private string expectedUpdateSha256;
         private readonly System.Timers.Timer checkTimer = new System.Timers.Timer(1000 * 60 * Settings.Default.CheckInterval);
         private System.Timers.Timer progressTimer;
 
@@ -104,7 +107,9 @@ namespace CrypTool.CrypWin
 
         public string FilePathTemporary => Path.Combine(TempPath, "CT2Update.part");
 
-        public bool IsUpdateReady => File.Exists(FilePath);
+        public bool IsUpdateReady => VerifyDownloadedUpdate();
+
+        private string HashFilePath => FilePath + ".sha256";
 
         #endregion
 
@@ -399,9 +404,17 @@ namespace CrypTool.CrypWin
             {
                 client = new WebClient();
                 client.Headers["User-Agent"] = GetUserAgentString(userAgentRef);
-                Stream stream = client.OpenRead(XmlPath);
-                XElement xml = XElement.Load(stream);
-                onlineUpdateVersions = xml.Element("x64");
+                using (Stream stream = client.OpenRead(XmlPath))
+                using (XmlReader reader = XmlReader.Create(stream, new XmlReaderSettings
+                {
+                    DtdProcessing = DtdProcessing.Prohibit,
+                    XmlResolver = null,
+                    MaxCharactersInDocument = 1024 * 1024
+                }))
+                {
+                    XElement xml = XElement.Load(reader);
+                    onlineUpdateVersions = xml.Element("x64");
+                }
 
                 // Retrieve the current version from the server (for nightly, beta and stable)
                 Version.TryParse(onlineUpdateVersions.Element(GetBuildTypeXmlString()).Attribute("version").Value, out onlineUpdateVersion);
@@ -455,16 +468,20 @@ namespace CrypTool.CrypWin
                 webClient.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(wc_DownloadFileCompleted);
 
                 Uri downloadUri = null;
+                string hashAttribute = null;
                 switch (AssemblyHelper.InstallationType)
                 {
                     case Ct2InstallationType.MSI:
                         downloadUri = new Uri(onlineUpdateVersions.Element(GetBuildTypeXmlString()).Attribute("msidownload").Value);
+                        hashAttribute = "msisha256";
                         break;
                     case Ct2InstallationType.NSIS:
                         downloadUri = new Uri(onlineUpdateVersions.Element(GetBuildTypeXmlString()).Attribute("nsisdownload").Value);
+                        hashAttribute = "nsissha256";
                         break;
                     case Ct2InstallationType.ZIP:
                         downloadUri = new Uri(onlineUpdateVersions.Element(GetBuildTypeXmlString()).Attribute("zipdownload").Value);
+                        hashAttribute = "zipsha256";
                         break;
                     case Ct2InstallationType.Developer:
                         // For testing dowloads uncomment the next three codelines and comment the 3 codelins afterwards
@@ -477,6 +494,18 @@ namespace CrypTool.CrypWin
                     default:
                         GuiLogMessage("AutoUpdate: Unknown installation type (" + AssemblyHelper.InstallationType.ToString() + "). Cannot download appropiate update package.", NotificationLevel.Error);
                         return;
+                }
+
+                if (!IsTrustedDownloadUri(downloadUri))
+                {
+                    throw new InvalidDataException("The update URL must use HTTPS and a cryptool.org host.");
+                }
+
+                XAttribute hash = onlineUpdateVersions.Element(GetBuildTypeXmlString()).Attribute(hashAttribute);
+                expectedUpdateSha256 = hash?.Value?.Trim();
+                if (!IsValidSha256(expectedUpdateSha256))
+                {
+                    throw new InvalidDataException("The update manifest does not contain a valid SHA-256 hash for this package.");
                 }
 
                 lastTime = DateTime.Now;
@@ -571,20 +600,83 @@ namespace CrypTool.CrypWin
             try
             {
                 progressTimer.Stop();
+                if (!VerifySha256(FilePathTemporary, expectedUpdateSha256))
+                {
+                    throw new InvalidDataException("The downloaded update does not match the SHA-256 hash in the update manifest.");
+                }
                 string exepath = Assembly.GetExecutingAssembly().Location;
                 string exedir = Path.GetDirectoryName(exepath);
 
                 File.Copy(Path.Combine(exedir, "Lib\\Ionic.Zip.Reduced.dll"), Path.Combine(TempPath, "Ionic.Zip.Reduced.dll"), true);
+                if (File.Exists(FilePath))
+                {
+                    File.Delete(FilePath);
+                }
                 File.Move(FilePathTemporary, FilePath);
+                File.WriteAllText(HashFilePath, expectedUpdateSha256);
 
                 GuiLogMessage("AutoUpdate: Update ready to install (" + GetBuildTypeXmlString() + ").", NotificationLevel.Info);
 
                 CurrentState = State.UpdateReady;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                GuiLogMessage("AutoUpdate: Cannot prepare update procedure (" + GetBuildTypeXmlString() + ").", NotificationLevel.Error);
+                try { File.Delete(FilePathTemporary); } catch { }
+                GuiLogMessage("AutoUpdate: Cannot prepare update procedure (" + GetBuildTypeXmlString() + "): " + ex.Message, NotificationLevel.Error);
                 CurrentState = State.UpdateAvailable;
+            }
+        }
+
+        private static bool IsTrustedDownloadUri(Uri uri)
+        {
+            return uri != null && uri.IsAbsoluteUri && uri.Scheme.Equals(Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase) &&
+                (uri.Host.Equals("cryptool.org", StringComparison.OrdinalIgnoreCase) ||
+                 uri.Host.EndsWith(".cryptool.org", StringComparison.OrdinalIgnoreCase));
+        }
+
+        private static bool IsValidSha256(string hash)
+        {
+            if (hash == null || hash.Length != 64)
+            {
+                return false;
+            }
+            foreach (char character in hash)
+            {
+                if (!Uri.IsHexDigit(character))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private static bool VerifySha256(string path, string expectedHash)
+        {
+            if (!File.Exists(path) || !IsValidSha256(expectedHash))
+            {
+                return false;
+            }
+            using (SHA256 sha256 = SHA256.Create())
+            using (FileStream stream = File.OpenRead(path))
+            {
+                string actualHash = BitConverter.ToString(sha256.ComputeHash(stream)).Replace("-", string.Empty);
+                return actualHash.Equals(expectedHash, StringComparison.OrdinalIgnoreCase);
+            }
+        }
+
+        public bool VerifyDownloadedUpdate()
+        {
+            try
+            {
+                if (!File.Exists(FilePath) || !File.Exists(HashFilePath))
+                {
+                    return false;
+                }
+                return VerifySha256(FilePath, File.ReadAllText(HashFilePath).Trim());
+            }
+            catch
+            {
+                return false;
             }
         }
 

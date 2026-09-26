@@ -139,6 +139,18 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         public static int StripPadding(byte[] input, int bytesRead, PaddingType paddingtype, int blocksize)
         {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+            if (blocksize <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(blocksize));
+            }
+            if (bytesRead <= 0 || bytesRead > input.Length)
+            {
+                throw new Exception("Padding requires at least one complete input block.");
+            }
             //if (bytesRead != input.Length) throw new Exception("Unexpected size of padding");
             if (bytesRead % blocksize != 0)
             {
@@ -147,48 +159,41 @@ namespace CrypTool.PluginBase.Miscellaneous
 
             if (paddingtype == PaddingType.Zeros)   // ... | DD DD DD DD DD DD DD DD | DD DD DD DD 00 00 00 00 |
             {
-                for (bytesRead--; bytesRead > 0; bytesRead--)
+                int end = bytesRead;
+                while (bytesRead > 0 && input[bytesRead - 1] == 0)
                 {
-                    if (input[bytesRead] != 0)
-                    {
-                        break;
-                    }
+                    bytesRead--;
                 }
-
-                bytesRead++;
-                if (bytesRead == 0)
+                if (bytesRead == end)
                 {
-                    throw new Exception("Error in Zeros padding");
+                    return bytesRead;
                 }
             }
 
             if (paddingtype == PaddingType.OneZeros)    // ... | DD DD DD DD DD DD DD DD | DD DD DD DD 01 00 00 00 |
             {
-                for (bytesRead--; bytesRead > 0; bytesRead--)
+                while (bytesRead > 0 && input[bytesRead - 1] == 0)
                 {
-                    if (input[bytesRead] != 0)
-                    {
-                        break;
-                    }
+                    bytesRead--;
                 }
-
-                if (bytesRead < 0 || input[bytesRead] != 0x01)
+                if (bytesRead == 0 || input[bytesRead - 1] != 0x01)
                 {
                     throw new Exception("Unexpected byte in 1-0 padding");
                 }
+                bytesRead--;
             }
 
             if (paddingtype == PaddingType.PKCS7)   // ... | DD DD DD DD DD DD DD DD | DD DD DD DD 04 04 04 04 |
             {
-                int l = input[input.Length - 1];
-                if (l > blocksize)
+                int l = input[bytesRead - 1];
+                if (l < 1 || l > blocksize || l > bytesRead)
                 {
                     throw new Exception("Unexpected byte in PKCS7 padding");
                 }
 
                 for (int i = 1; i <= l; i++)
                 {
-                    if (input[input.Length - i] != l)
+                    if (input[bytesRead - i] != l)
                     {
                         throw new Exception("Unexpected byte in PKCS7 padding");
                     }
@@ -199,8 +204,8 @@ namespace CrypTool.PluginBase.Miscellaneous
 
             if (paddingtype == PaddingType.ISO10126)    // ... | DD DD DD DD DD DD DD DD | DD DD DD DD 81 A6 23 04 |
             {
-                int l = input[input.Length - 1];
-                if (l > blocksize)
+                int l = input[bytesRead - 1];
+                if (l < 1 || l > blocksize || l > bytesRead)
                 {
                     throw new Exception("Unexpected byte in ISO10126 padding");
                 }
@@ -210,15 +215,15 @@ namespace CrypTool.PluginBase.Miscellaneous
 
             if (paddingtype == PaddingType.ANSIX923)    // ... | DD DD DD DD DD DD DD DD | DD DD DD DD 00 00 00 04 |
             {
-                int l = input[input.Length - 1];
-                if (l > blocksize)
+                int l = input[bytesRead - 1];
+                if (l < 1 || l > blocksize || l > bytesRead)
                 {
                     throw new Exception("Unexpected byte in ANSIX923 padding");
                 }
 
                 for (int i = 2; i <= l; i++)
                 {
-                    if (input[input.Length - i] != 0)
+                    if (input[bytesRead - i] != 0)
                     {
                         throw new Exception("Unexpected byte in ANSIX923 padding");
                     }
@@ -531,20 +536,10 @@ namespace CrypTool.PluginBase.Miscellaneous
                         else if (readcount > 0)
                         {
                             //Compute XOR with lastblock for CFB mode
-                            if (cipherAction == CipherAction.Encrypt)
-                            {
-                                byte[] block = new byte[blocksize];
-                                Array.Copy(inputBlock, 0, block, 0, readcount);
-                                outputblock = blockCipher(lastBlock, key);
-                                outputblock = XOR(outputblock, block);
-                            }
-                            else
-                            {
-                                byte[] block = new byte[blocksize];
-                                Array.Copy(inputBlock, 0, block, 0, readcount);
-                                outputblock = blockCipher(inputBlock, key);
-                                outputblock = XOR(outputblock, lastBlock);
-                            }
+                            byte[] block = new byte[blocksize];
+                            Array.Copy(inputBlock, 0, block, 0, readcount);
+                            outputblock = XOR(blockCipher(lastBlock, key), block);
+                            Array.Resize(ref outputblock, readcount);
                         }
 
                         //check if it is the last block and we decrypt, thus, we have to remove the padding
@@ -651,21 +646,12 @@ namespace CrypTool.PluginBase.Miscellaneous
                         //we read an incomplete block, thus, we are at the end of the stream
                         else if (readcount > 0)
                         {
-                            //Compute XOR with lastblock for CFB mode
-                            if (cipherAction == CipherAction.Encrypt)
-                            {
-                                byte[] block = new byte[blocksize];
-                                Array.Copy(inputBlock, 0, block, 0, readcount);
-                                outputblock = blockCipher(lastBlock, key);
-                                outputblock = XOR(outputblock, block);
-                            }
-                            else
-                            {
-                                byte[] block = new byte[blocksize];
-                                Array.Copy(inputBlock, 0, block, 0, readcount);
-                                outputblock = blockCipher(inputBlock, key);
-                                outputblock = XOR(outputblock, lastBlock);
-                            }
+                            // OFB uses the same keystream operation for encryption and decryption.
+                            byte[] block = new byte[blocksize];
+                            Array.Copy(inputBlock, 0, block, 0, readcount);
+                            lastBlock = blockCipher(lastBlock, key);
+                            outputblock = XOR(lastBlock, block);
+                            Array.Resize(ref outputblock, readcount);
                         }
 
                         //check if it is the last block and we decrypt, thus, we have to remove the padding

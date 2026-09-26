@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
 using CrypTool.PluginBase.IO;
 
 namespace WorkspaceManagerModel.Model.Tools
@@ -53,27 +53,16 @@ namespace WorkspaceManagerModel.Model.Tools
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        private static Thread workerThread;
         public static string GetDataPresentationString(object data)
         {
             try
             {
-                if (workerThread != null && workerThread.IsAlive)
+                Task<string> conversion = Task.Run(() => ConvertDataPresentation(data));
+                if (!conversion.Wait(TimeSpan.FromSeconds(1)))
                 {
-                    workerThread.Abort();
+                    throw new TimeoutException("Data representation exceeded the one second time limit.");
                 }
-
-                string str = "";
-                workerThread = new Thread(() => str = ConvertDataPresentation(data));
-
-                workerThread.Start();
-
-                bool finished = workerThread.Join(TimeSpan.FromMilliseconds(1000));
-                if (!finished)
-                {
-                    workerThread.Abort();
-                    throw new TimeoutException();
-                }
+                string str = conversion.Result ?? string.Empty;
 
                 //var str = ConvertDataPresentation(data);
                 if (str.Length > MaximumCharactersToShow)
@@ -124,13 +113,6 @@ namespace WorkspaceManagerModel.Model.Tools
             {
                 return string.Format("Exception during creation of data representation: {0}", ex.Message);
             }
-            finally
-            {
-                if (workerThread != null && workerThread.IsAlive)
-                {
-                    workerThread.Abort();
-                }
-            }
         }
 
         private static string ConvertDataPresentation(object data)
@@ -165,14 +147,16 @@ namespace WorkspaceManagerModel.Model.Tools
             ICrypToolStream stream = data as ICrypToolStream;
             if (stream != null)
             {
-                CStreamReader reader = stream.CreateReader();
-                if (reader.Length > 0)
+                using (CStreamReader reader = stream.CreateReader())
                 {
-                    byte[] buffer = new byte[reader.Length < MaximumCharactersToShow ? reader.Length : MaximumCharactersToShow];
-                    reader.Read(buffer, 0, buffer.Length);
-                    return ConvertDataPresentation(buffer);
+                    if (reader.Length > 0)
+                    {
+                        byte[] buffer = new byte[reader.Length < MaximumCharactersToShow ? reader.Length : MaximumCharactersToShow];
+                        reader.Read(buffer, 0, buffer.Length);
+                        return ConvertDataPresentation(buffer);
+                    }
+                    return "null";
                 }
-                return "null";
             }
 
             Array array = data as Array;

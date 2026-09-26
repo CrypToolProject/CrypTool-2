@@ -476,6 +476,11 @@ namespace CrypTool.CrypWin
 
             try
             {
+                if (!AutoUpdater.GetSingleton().VerifyDownloadedUpdate())
+                {
+                    GuiLogMessage("AutoUpdate: Update package integrity verification failed.", NotificationLevel.Error);
+                    return false;
+                }
                 File.Copy(Path.Combine(CrypToolFolderPath, "CrypUpdater.exe"), Path.Combine(DirectoryHelper.DirectoryLocalTemp, "CrypUpdater.exe"), true);
 
                 if (File.Exists(filePath) && File.Exists(updaterPath) && File.Exists(Path.Combine(DirectoryHelper.DirectoryLocalTemp, "Ionic.Zip.Reduced.dll")))

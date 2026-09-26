@@ -37,6 +37,120 @@ namespace XMLSerialization
     public static class XMLSerialization
     {
         private static readonly System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
+        private const long MaxXmlCharacters = 128L * 1024L * 1024L;
+        private const int MaxSerializedObjects = 100000;
+        private static readonly HashSet<string> AllowedModelTypes = new HashSet<string>(StringComparer.Ordinal)
+        {
+            "WorkspaceManager.Model.ConnectionModel",
+            "WorkspaceManager.Model.ConnectorModel",
+            "WorkspaceManager.Model.ImageModel",
+            "WorkspaceManager.Model.PersistantModel",
+            "WorkspaceManager.Model.PersistantPlugin",
+            "WorkspaceManager.Model.PersistantSetting",
+            "WorkspaceManager.Model.PluginModel",
+            "WorkspaceManager.Model.TextModel",
+            "WorkspaceManager.Model.WorkspaceModel"
+        };
+
+        private static XmlDocument LoadSecureXml(Stream stream)
+        {
+            XmlReaderSettings settings = new XmlReaderSettings
+            {
+                DtdProcessing = DtdProcessing.Prohibit,
+                XmlResolver = null,
+                MaxCharactersInDocument = MaxXmlCharacters,
+                MaxCharactersFromEntities = 0,
+                CloseInput = false
+            };
+            XmlDocument document = new XmlDocument { XmlResolver = null };
+            using (XmlReader reader = XmlReader.Create(stream, settings))
+            {
+                document.Load(reader);
+            }
+            return document;
+        }
+
+        private static string NormalizeLegacyTypeName(string name)
+        {
+            return RevertXMLSymbols(name).Replace("WorkspaceManager.View.Container", "WorkspaceManager.Model");
+        }
+
+        private static Type ResolveModelType(string serializedName)
+        {
+            string name = NormalizeLegacyTypeName(serializedName);
+            if (!AllowedModelTypes.Contains(name))
+            {
+                throw new InvalidDataException("The serialized model type is not allowed: " + name);
+            }
+            Type type = typeof(XMLSerialization).Assembly.GetType(name, false, false);
+            if (type == null || !type.IsSerializable)
+            {
+                throw new InvalidDataException("The serialized model type is unavailable: " + name);
+            }
+            return type;
+        }
+
+        private static FieldInfo GetSerializableField(object instance, string serializedName)
+        {
+            string name = RevertXMLSymbols(serializedName);
+            FieldInfo field = instance.GetType().GetField(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            if (field == null || field.IsNotSerialized)
+            {
+                throw new InvalidDataException("The serialized field is not allowed: " + instance.GetType().FullName + "." + name);
+            }
+            return field;
+        }
+
+        private static object DeserializeFieldValue(FieldInfo field, XmlNode member, XmlNode value)
+        {
+            Type type = field.FieldType;
+            string text = RevertXMLSymbols(value.InnerText);
+            if (type == typeof(string))
+            {
+                if (member.ChildNodes.Count > 3 && member.ChildNodes[3].Name.Equals("B64Encoded"))
+                {
+                    return enc.GetString(Convert.FromBase64String(value.InnerText));
+                }
+                return value.InnerText;
+            }
+            if (type == typeof(short)) return short.Parse(text, CultureInfo.InvariantCulture);
+            if (type == typeof(int)) return int.Parse(text, CultureInfo.InvariantCulture);
+            if (type == typeof(long)) return long.Parse(text, CultureInfo.InvariantCulture);
+            if (type == typeof(double)) return double.Parse(text.Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+            if (type == typeof(float)) return float.Parse(text.Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+            if (type == typeof(char)) return char.Parse(text);
+            if (type == typeof(bool)) return bool.Parse(text);
+            if (type == typeof(byte[])) return Convert.FromBase64String(value.InnerText);
+            if (type == typeof(Point))
+            {
+                string[] values = value.InnerText.Split(';');
+                if (values.Length != 2)
+                {
+                    throw new InvalidDataException(string.Format(Resources.XMLSerialization_Deserialize_Can_not_create_a_Point_with__0__Coordinates_, values.Length));
+                }
+                return new Point(
+                    double.Parse(values[0].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture),
+                    double.Parse(values[1].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture));
+            }
+            if (type == typeof(Color))
+            {
+                string[] values = value.InnerText.Split(';');
+                if (values.Length != 4)
+                {
+                    throw new InvalidDataException(string.Format(Resources.XMLSerialization_Deserialize_Can_not_create_a_Color_with__0__Channels_, values.Length));
+                }
+                return Color.FromArgb(byte.Parse(values[3]), byte.Parse(values[0]), byte.Parse(values[1]), byte.Parse(values[2]));
+            }
+            if (typeof(IList).IsAssignableFrom(type) && string.IsNullOrEmpty(value.InnerText))
+            {
+                return Activator.CreateInstance(type);
+            }
+            if (type.IsEnum)
+            {
+                return Enum.ToObject(type, int.Parse(text, CultureInfo.InvariantCulture));
+            }
+            throw new InvalidDataException("Unsupported value type: " + type.FullName);
+        }
 
         /// <summary>
         /// Serializes the given object and all of its members to the given file using UTF-8 encoding
@@ -390,47 +504,22 @@ namespace XMLSerialization
         /// <returns></returns>
         public static object Deserialize(string filename, bool compress = false)
         {
-            FileStream sourceFile = File.OpenRead(filename);
-            XmlDocument doc = new XmlDocument();
-            GZipStream compStream = null;
-
-            if (compress)
+            using (FileStream sourceFile = File.OpenRead(filename))
             {
-                compStream = new GZipStream(sourceFile, CompressionMode.Decompress);
-                doc.Load(compStream);
-            }
-            else
-            {
-                doc.Load(sourceFile);
-            }
-
-            try
-            {
-                return XMLSerialization.Deserialize(doc);
-            }
-            finally
-            {
-                if (compStream != null)
+                if (compress)
                 {
-                    compStream.Close();
+                    using (GZipStream compStream = new GZipStream(sourceFile, CompressionMode.Decompress))
+                    {
+                        return Deserialize(LoadSecureXml(compStream));
+                    }
                 }
+                return Deserialize(LoadSecureXml(sourceFile));
             }
         }
         public static object Deserialize(StreamWriter writer)
         {
-            XmlDocument doc = new XmlDocument();
             writer.BaseStream.Position = 0;
-
-            doc.Load(writer.BaseStream);
-
-            try
-            {
-                return XMLSerialization.Deserialize(doc);
-            }
-            finally
-            {
-                //writer.Close();
-            }
+            return Deserialize(LoadSecureXml(writer.BaseStream));
         }
 
         /// <summary>
@@ -445,6 +534,10 @@ namespace XMLSerialization
             LinkedList<object[]> links = new LinkedList<object[]>();
 
             XmlElement objects = doc.DocumentElement;
+            if (doc.OuterXml.Length > MaxXmlCharacters || objects == null || !objects.Name.Equals("objects", StringComparison.Ordinal) || objects.ChildNodes.Count == 0 || objects.ChildNodes.Count > MaxSerializedObjects)
+            {
+                throw new InvalidDataException("Invalid or oversized workspace document.");
+            }
 
             foreach (XmlNode objct in objects.ChildNodes)
             {
@@ -457,14 +550,23 @@ namespace XMLSerialization
                 {
                     //hack: to allow "old" models being loaded (because some model elements were in model namespace before
                     //creating new model)
-                    string name = type.InnerText.Replace("WorkspaceManager.View.Container", "WorkspaceManager.Model");
-                    newObject = Type.GetType(name).GetConstructor(BindingFlags.NonPublic |
+                    Type modelType = ResolveModelType(type.InnerText);
+                    ConstructorInfo constructor = modelType.GetConstructor(BindingFlags.NonPublic |
                                     BindingFlags.Instance | BindingFlags.Public,
-                                    null, new Type[0], null).Invoke(null);
+                                    null, Type.EmptyTypes, null);
+                    if (constructor == null)
+                    {
+                        throw new MissingMethodException(modelType.FullName, ".ctor()");
+                    }
+                    newObject = constructor.Invoke(null);
                 }
                 catch (Exception ex)
                 {
                     throw new Exception(string.Format(Resources.XMLSerialization_Deserialize_Could_not_create_instance_of___0_, type.InnerText), ex);
+                }
+                if (string.IsNullOrWhiteSpace(id.InnerText) || createdObjects.ContainsKey(id.InnerText))
+                {
+                    throw new InvalidDataException("Workspace contains an empty or duplicate object identifier.");
                 }
                 createdObjects.Add(id.InnerText, newObject);
 
@@ -478,158 +580,10 @@ namespace XMLSerialization
 
                     try
                     {
+                        FieldInfo targetField = GetSerializableField(newObject, membername.InnerText);
                         if (member.ChildNodes[2].Name.Equals("value"))
                         {
-                            if (RevertXMLSymbols(membertype.InnerText).Equals("System.String"))
-                            {
-                                if (member.ChildNodes.Count > 3 && member.ChildNodes[3].Name.Equals("B64Encoded"))
-                                {
-                                    byte[] bytes = Convert.FromBase64String(value.InnerText);
-                                    newObject.GetType().GetField(RevertXMLSymbols(membername.InnerText),
-                                                                 BindingFlags.NonPublic |
-                                                                 BindingFlags.Public |
-                                                                 BindingFlags.Instance).SetValue(newObject,
-                                                                                                 enc.GetString(bytes));
-                                }
-                                else
-                                {
-                                    newObject.GetType().GetField(RevertXMLSymbols(membername.InnerText),
-                                                                 BindingFlags.NonPublic |
-                                                                 BindingFlags.Public |
-                                                                 BindingFlags.Instance).SetValue(newObject,
-                                                                                                 value.InnerText);
-                                }
-                            }
-                            else if (RevertXMLSymbols(membertype.InnerText).Contains("System.Int"))
-                            {
-                                int.TryParse(RevertXMLSymbols(value.InnerText), out int result);
-                                newObject.GetType().GetField(RevertXMLSymbols(membername.InnerText),
-                                                             BindingFlags.NonPublic |
-                                                             BindingFlags.Public |
-                                                             BindingFlags.Instance).SetValue(newObject, result);
-                            }
-                            else if (RevertXMLSymbols(membertype.InnerText).Equals("System.Double"))
-                            {
-                                double.TryParse(RevertXMLSymbols(value.InnerText.Replace(',', '.')),
-                                                                        NumberStyles.Number,
-                                                                        CultureInfo.CreateSpecificCulture("en-Us"),
-                                                                        out double result);
-                                newObject.GetType().GetField(RevertXMLSymbols(membername.InnerText),
-                                                             BindingFlags.NonPublic |
-                                                             BindingFlags.Public |
-                                                             BindingFlags.Instance).SetValue(newObject, result);
-                            }
-                            else if (RevertXMLSymbols(membertype.InnerText).Equals("System.Single"))
-                            {
-                                float.TryParse(RevertXMLSymbols(value.InnerText.Replace(',', '.')),
-                                                                        NumberStyles.Number,
-                                                                        CultureInfo.CreateSpecificCulture("en-Us"),
-                                                                        out float result);
-                                newObject.GetType().GetField(RevertXMLSymbols(membername.InnerText),
-                                                             BindingFlags.NonPublic |
-                                                             BindingFlags.Public |
-                                                             BindingFlags.Instance).SetValue(newObject, result);
-                            }
-                            else if (RevertXMLSymbols(membertype.InnerText).Equals("System.Char"))
-                            {
-                                char.TryParse(RevertXMLSymbols(value.InnerText), out char result);
-                                newObject.GetType().GetField(RevertXMLSymbols(membername.InnerText),
-                                                             BindingFlags.NonPublic |
-                                                             BindingFlags.Public |
-                                                             BindingFlags.Instance).SetValue(newObject, result);
-                            }
-                            else if (RevertXMLSymbols(membertype.InnerText).Equals("System.Boolean"))
-                            {
-                                bool.TryParse(RevertXMLSymbols(value.InnerText), out bool result);
-                                newObject.GetType().GetField(RevertXMLSymbols(membername.InnerText),
-                                                             BindingFlags.NonPublic |
-                                                             BindingFlags.Public |
-                                                             BindingFlags.Instance).SetValue(newObject, result);
-                            }
-                            else if (RevertXMLSymbols(membertype.InnerText).Equals("System.Windows.Point"))
-                            {
-                                string[] values = value.InnerText.Split(new char[] { ';' });
-
-                                if (values.Length != 2)
-                                {
-                                    throw new Exception(string.Format(Resources.XMLSerialization_Deserialize_Can_not_create_a_Point_with__0__Coordinates_, values.Length));
-                                }
-
-                                double.TryParse(RevertXMLSymbols(values[0].Replace(',', '.')),
-                                                                        NumberStyles.Number,
-                                                                        CultureInfo.CreateSpecificCulture("en-Us"),
-                                                                        out double x);
-                                double.TryParse(RevertXMLSymbols(values[1].Replace(',', '.')),
-                                                                        NumberStyles.Number,
-                                                                        CultureInfo.CreateSpecificCulture("en-Us"),
-                                                                        out double y);
-
-                                System.Windows.Point result = new System.Windows.Point(x, y);
-                                newObject.GetType().GetField(RevertXMLSymbols(membername.InnerText),
-                                                             BindingFlags.NonPublic |
-                                                             BindingFlags.Public |
-                                                             BindingFlags.Instance).SetValue(newObject, result);
-                            }
-                            else if (RevertXMLSymbols(membertype.InnerText).Equals("System.Windows.Media.Color"))
-                            {
-                                string[] values = value.InnerText.Split(new char[] { ';' });
-
-                                if (values.Length != 4)
-                                {
-                                    throw new Exception(string.Format(Resources.XMLSerialization_Deserialize_Can_not_create_a_Color_with__0__Channels_, values.Length));
-                                }
-                                byte.TryParse(values[0], out byte r);
-                                byte.TryParse(values[1], out byte g);
-                                byte.TryParse(values[2], out byte b);
-                                byte.TryParse(values[3], out byte a);
-
-                                Color result = Color.FromArgb(a, r, g, b);
-
-                                newObject.GetType().GetField(RevertXMLSymbols(membername.InnerText),
-                                                             BindingFlags.NonPublic |
-                                                             BindingFlags.Public |
-                                                             BindingFlags.Instance).SetValue(newObject, result);
-                            }
-                            else if (RevertXMLSymbols(membertype.InnerText).Equals("System.Byte[]"))
-                            {
-                                byte[] bytearray = Convert.FromBase64String(value.InnerText);
-
-                                newObject.GetType().GetField(RevertXMLSymbols(membername.InnerText),
-                                                             BindingFlags.NonPublic |
-                                                             BindingFlags.Public |
-                                                             BindingFlags.Instance).SetValue(newObject, bytearray);
-                            }
-                            else
-                            {
-                                //hack: to allow "old" models being loaded (because some model elements were in model namespace before
-                                //creating new model)
-                                string name = membertype.InnerText.Replace("WorkspaceManager.View.Container", "WorkspaceManager.Model");
-                                newmember = Activator.CreateInstance(Type.GetType(RevertXMLSymbols(name)));
-
-                                if (newmember is Enum)
-                                {
-                                    int.TryParse(RevertXMLSymbols(value.InnerText), out int result);
-                                    //hack: to allow "old" models being loaded (because some model elements were in model namespace before
-                                    //creating new model)
-                                    name = membertype.InnerText.Replace("WorkspaceManager.View.Container", "WorkspaceManager.Model");
-
-                                    object newEnumValue =
-                                        Enum.ToObject(Type.GetType(RevertXMLSymbols(name)), result);
-
-                                    newObject.GetType().GetField(RevertXMLSymbols(membername.InnerText),
-                                                                 BindingFlags.NonPublic |
-                                                                 BindingFlags.Public |
-                                                                 BindingFlags.Instance).SetValue(newObject, newEnumValue);
-                                }
-                                else
-                                {
-                                    newObject.GetType().GetField(RevertXMLSymbols(membername.InnerText),
-                                                                 BindingFlags.NonPublic |
-                                                                 BindingFlags.Public |
-                                                                 BindingFlags.Instance).SetValue(newObject, newmember);
-                                }
-
-                            }
+                            targetField.SetValue(newObject, DeserializeFieldValue(targetField, member, value));
                         }
                         else if (member.ChildNodes[2].Name.Equals("reference"))
                         {
@@ -648,7 +602,11 @@ namespace XMLSerialization
 
                             if (types.Length == 1)
                             {
-                                newmember = System.Activator.CreateInstance(Type.GetType(types[0]));
+                                if (!typeof(IList).IsAssignableFrom(targetField.FieldType))
+                                {
+                                    throw new InvalidDataException("Serialized list does not target a list field.");
+                                }
+                                newmember = Activator.CreateInstance(targetField.FieldType);
                                 newObject.GetType().GetField(RevertXMLSymbols(membername.InnerText),
                                                              BindingFlags.NonPublic |
                                                              BindingFlags.Public |
@@ -657,18 +615,11 @@ namespace XMLSerialization
                             else if (types.Length == 2)
                             {
                                 //we have 2 types, that means that we have a generic list with generic type types[1]
-                                Type t = typeof(System.Collections.Generic.List<>);
-                                Type[] typeArgs;
-                                if (types[1].Equals("System.Windows.Point"))
+                                if (!targetField.FieldType.IsGenericType || targetField.FieldType.GetGenericTypeDefinition() != typeof(List<>))
                                 {
-                                    typeArgs = new Type[] { typeof(System.Windows.Point) };
+                                    throw new InvalidDataException("Serialized generic list does not match its declared field.");
                                 }
-                                else
-                                {
-                                    typeArgs = new Type[] { Type.GetType(types[1]) };
-                                }
-                                Type constructed = t.MakeGenericType(typeArgs);
-                                newmember = Activator.CreateInstance(constructed);
+                                newmember = Activator.CreateInstance(targetField.FieldType);
                                 newObject.GetType().GetField(RevertXMLSymbols(membername.InnerText),
                                                              BindingFlags.NonPublic |
                                                              BindingFlags.Public |
@@ -699,7 +650,7 @@ namespace XMLSerialization
 
                                     if (RevertXMLSymbols(typ.InnerText).Equals("System.String"))
                                     {
-                                        if (entry.ChildNodes.Count > 2 && member.ChildNodes[2].Name.Equals("B64Encoded"))
+                                        if (entry.ChildNodes.Count > 2 && entry.ChildNodes[2].Name.Equals("B64Encoded"))
                                         {
                                             byte[] bytes = Convert.FromBase64String(val.InnerText);
                                             ((IList)newmember).Add(RevertXMLSymbols(enc.GetString(bytes)));
@@ -780,7 +731,10 @@ namespace XMLSerialization
                 string membername = (string)triple[1];
                 string reference = (string)triple[2];
                 bool isList = (bool)triple[3];
-                createdObjects.TryGetValue(reference, out object obj2);
+                if (!createdObjects.TryGetValue(reference, out object obj2))
+                {
+                    throw new InvalidDataException("Workspace contains an unresolved object reference: " + reference);
+                }
 
                 try
                 {

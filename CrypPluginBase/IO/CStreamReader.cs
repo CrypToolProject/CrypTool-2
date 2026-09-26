@@ -257,7 +257,7 @@ namespace CrypTool.PluginBase.IO
             int readSum = 0;
             while (readSum < count)
             {
-                int read = Read(buffer, offset, (count - readSum));
+                int read = Read(buffer, offset + readSum, count - readSum);
 
                 if (read == 0) // EOF
                 {
@@ -296,7 +296,7 @@ namespace CrypTool.PluginBase.IO
                         _readPtr += (int)offset;
                         break;
                     case SeekOrigin.End:
-                        _readPtr = _writer.MemBuff.Length + (int)offset;
+                        _readPtr = checked((int)_writer.Length + (int)offset);
                         break;
                 }
 

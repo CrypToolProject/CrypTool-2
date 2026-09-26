@@ -220,7 +220,7 @@ namespace WorkspaceManager.Execution
                         }
                     }
 
-                    if (Math.Abs(finishedPercentage - _lastfinishedPercentage) > 0.005)
+                    if (count > 0 && Math.Abs(finishedPercentage - _lastfinishedPercentage) > 0.005)
                     {
                         ProgressChanged(finishedPercentage / count, 1.0);
                         _lastfinishedPercentage = finishedPercentage;
@@ -293,29 +293,43 @@ namespace WorkspaceManager.Execution
                     }
                     pluginModel.resetEvent.Set();
                 }
-                benchmarkTimer.Enabled = false;
+                if (benchmarkTimer != null)
+                {
+                    benchmarkTimer.Stop();
+                    benchmarkTimer.Dispose();
+                    benchmarkTimer = null;
+                }
                 workspaceModel.IsBeingExecuted = false;
 
                 //5. Wait for all threads to stop
                 GuiLogMessage(Resources.ExecutionEngine_Stop_Waiting_for_all_threads_to_stop, NotificationLevel.Debug);
-                foreach (Thread t in threads)
+                bool allThreadsStopped = true;
+                foreach (Thread t in threads.ToArray())
                 {
                     try
                     {
                         t.Join(MaxStopWaitingTime);
                         if (t.IsAlive)
                         {
-                            GuiLogMessage(string.Format(Resources.ExecutionEngine_Stop_Thread__0__did_not_stop_in__1__miliseconds_and_will_be_aborted_now_, t.Name, MaxStopWaitingTime), NotificationLevel.Warning);
-                            t.Abort();
+                            allThreadsStopped = false;
+                            GuiLogMessage(string.Format("Thread '{0}' did not stop within {1} milliseconds; it remains a background thread until it exits cooperatively.", t.Name, MaxStopWaitingTime), NotificationLevel.Warning);
                         }
                     }
                     catch (Exception ex)
                     {
                         GuiLogMessage(string.Format(Resources.ExecutionEngine_Stop_Exception_during_waiting_for_thread___0___to_stop___1_, t.Name, ex.Message), NotificationLevel.Error);
-                        GuiLogMessage(string.Format(Resources.ExecutionEngine_Stop_Aborting___0___now, t.Name), NotificationLevel.Debug);
-                        t.Abort();
+                        allThreadsStopped = false;
                     }
                 }
+
+                threads.RemoveAll(thread => !thread.IsAlive);
+
+                if (!allThreadsStopped)
+                {
+                    GuiLogMessage("Execution stopped, but one or more plugin threads are still shutting down. State reset and PostExecution were skipped to avoid racing active code.", NotificationLevel.Warning);
+                    return;
+                }
+                threads.Clear();
 
                 GuiLogMessage(Resources.ExecutionEngine_Stop_All_threads_stopped, NotificationLevel.Debug);
                 workspaceModel.resetStates();

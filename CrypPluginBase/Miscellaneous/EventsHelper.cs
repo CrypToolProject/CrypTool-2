@@ -49,13 +49,13 @@ namespace CrypTool.PluginBase.Miscellaneous
             Delegate[] delegates = handler.GetInvocationList();
             if (AsynchronousGuiLogMessage)
             {
-                AsyncCallback cleanUp = delegate (IAsyncResult asyncResult)
-                {
-                    asyncResult.AsyncWaitHandle.Close();
-                };
                 foreach (GuiLogNotificationEventHandler sink in delegates)
                 {
-                    sink.BeginInvoke(plugin, args, cleanUp, null);
+                    sink.BeginInvoke(plugin, args, asyncResult =>
+                    {
+                        try { sink.EndInvoke(asyncResult); }
+                        catch { /* Event consumers must not terminate the producer. */ }
+                    }, null);
                 }
             }
             else
@@ -83,13 +83,13 @@ namespace CrypTool.PluginBase.Miscellaneous
             Delegate[] delegates = handler.GetInvocationList();
             if (AsynchronousPropertyChanged)
             {
-                AsyncCallback cleanUp = delegate (IAsyncResult asyncResult)
-                {
-                    asyncResult.AsyncWaitHandle.Close();
-                };
                 foreach (PropertyChangedEventHandler sink in delegates)
                 {
-                    sink.BeginInvoke(sender, args, cleanUp, null);
+                    sink.BeginInvoke(sender, args, asyncResult =>
+                    {
+                        try { sink.EndInvoke(asyncResult); }
+                        catch { /* Event consumers must not terminate the producer. */ }
+                    }, null);
                 }
             }
             else
@@ -117,13 +117,13 @@ namespace CrypTool.PluginBase.Miscellaneous
             Delegate[] delegates = handler.GetInvocationList();
             if (AsynchronousProgressChanged)
             {
-                AsyncCallback cleanUp = delegate (IAsyncResult asyncResult)
-                {
-                    asyncResult.AsyncWaitHandle.Close();
-                };
                 foreach (PluginProgressChangedEventHandler sink in delegates)
                 {
-                    sink.BeginInvoke(plugin, args, cleanUp, null);
+                    sink.BeginInvoke(plugin, args, asyncResult =>
+                    {
+                        try { sink.EndInvoke(asyncResult); }
+                        catch { /* Event consumers must not terminate the producer. */ }
+                    }, null);
                 }
             }
             else
@@ -145,13 +145,13 @@ namespace CrypTool.PluginBase.Miscellaneous
             Delegate[] delegates = handler.GetInvocationList();
             if (AsynchronousStatusChanged)
             {
-                AsyncCallback cleanUp = delegate (IAsyncResult asyncResult)
-                {
-                    asyncResult.AsyncWaitHandle.Close();
-                };
                 foreach (StatusChangedEventHandler sink in delegates)
                 {
-                    sink.BeginInvoke(plugin, args, cleanUp, null);
+                    sink.BeginInvoke(plugin, args, asyncResult =>
+                    {
+                        try { sink.EndInvoke(asyncResult); }
+                        catch { /* Event consumers must not terminate the producer. */ }
+                    }, null);
                 }
             }
             else
