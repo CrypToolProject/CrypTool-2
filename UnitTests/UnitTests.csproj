@@ -75,6 +75,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics">
       <Private>False</Private>
     </Reference>
@@ -126,6 +127,7 @@
     <Compile Include="CamelliaTest.cs" />
     <Compile Include="MorseCodeTest.cs" />
     <Compile Include="CostFunctionTest.cs" />
+    <Compile Include="CrypPluginsAuditRegressionTests.cs" />
     <Compile Include="CrypPluginBase\CStream.cs" />
     <Compile Include="DESTest.cs" />
     <Compile Include="EnigmaTest.cs" />
@@ -180,7 +182,7 @@
     <ProjectReference Include="..\CrypPlugins\CostFunction\CostFunction.csproj">
       <Project>{3C72FF93-48C2-4929-B3B2-83F165AAE636}</Project>
       <Name>CostFunction</Name>
-      <Private>False</Private>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\Fialka\Fialka.csproj">
       <Project>{92c31d1c-a348-4c4d-b591-36d51f48f401}</Project>
@@ -190,7 +192,7 @@
     <ProjectReference Include="..\CrypPlugins\HKDFSHA256\HKDFSHA256.csproj">
       <Project>{103b3660-fcd0-486a-9712-7fd50f7e0593}</Project>
       <Name>HKDFSHA256</Name>
-      <Private>False</Private>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\KKDFSHA256\KKDFSHA256.csproj">
       <Project>{bcd9636f-c0dc-411b-8dd2-ce6933fcc9ec}</Project>
@@ -200,7 +202,7 @@
     <ProjectReference Include="..\CrypPlugins\KKDFSHAKE256\KKDFSHAKE256.csproj">
       <Project>{5c8fa726-5867-42ab-ab6d-801340967dcb}</Project>
       <Name>KKDFSHAKE256</Name>
-      <Private>False</Private>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\MD5\MD5.csproj">
       <Project>{1137719A-7468-4DEF-84B1-77AB82049656}</Project>
@@ -221,6 +223,76 @@
       <Project>{FF247A82-21AD-4010-B2FB-D93EE2B02677}</Project>
       <Name>Wizard</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\AlphabetPermutator\AlphabetPermutator.csproj">
+      <Project>{E21EA91A-DBC4-405C-B3AD-327644160FB7}</Project>
+      <Name>AlphabetPermutator</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\Blockchain\Blockchain.csproj">
+      <Project>{1FB08709-8917-4BCC-A8F5-9EC72130EF73}</Project>
+      <Name>Blockchain</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\CryptoBoxCipher\CryptoBoxCipher.csproj">
+      <Project>{D8D12C51-34B1-40B0-A180-E8EB258219D0}</Project>
+      <Name>CryptoBoxCipher</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\Decimalization\Decimalization.csproj">
+      <Project>{C84A772B-E07A-4A30-A8EF-92A8B8077B2D}</Project>
+      <Name>Decimalization</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\EllipticCurveCryptography\EllipticCurveCryptography.csproj">
+      <Project>{0AC26BF9-B410-4F53-834D-AD75ED43A809}</Project>
+      <Name>EllipticCurveCryptography</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\HomophonicSubstitutionAnalyzer\HomophonicSubstitutionAnalyzer.csproj">
+      <Project>{9F5CA45D-BD0E-423A-81E3-EE19AD68A510}</Project>
+      <Name>HomophonicSubstitutionAnalyzer</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\KeySearcher\KeySearcher.csproj">
+      <Project>{0579E099-66B2-43C3-B8A0-43CAE4895E68}</Project>
+      <Name>KeySearcher</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\LatticeCrypto\LatticeCrypto.csproj">
+      <Project>{3F92F927-E6FA-4048-AB98-04D98B82B69E}</Project>
+      <Name>LatticeCrypto</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\PBKDF\PBKDF.csproj">
+      <Project>{25DB2B47-A457-4EC2-960B-395CE07ABEEF}</Project>
+      <Name>PBKDF</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\Paillier\Paillier.csproj">
+      <Project>{9284A698-A5DD-4746-B2CF-8B619B2C5CCD}</Project>
+      <Name>Paillier</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\T310\T310.csproj">
+      <Project>{36F9DD52-9000-4E3D-8299-AD10C479B129}</Project>
+      <Name>T310</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\TextSteganography\TextSteganography.csproj">
+      <Project>{C83E7FAB-47C4-4878-A5BC-C886A4B451BD}</Project>
+      <Name>TextSteganography</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\VisualCryptography\VisualCryptography.csproj">
+      <Project>{670A2465-7B18-4914-B96A-228F5A052ED3}</Project>
+      <Name>VisualCryptography</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\LibSource\VoluntLib2\VoluntLib2.csproj">
+      <Project>{1B68FDAA-C5A7-4F8A-BD5B-5876E8AC1879}</Project>
+      <Name>VoluntLib2</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\LibSource\SSCext\SSCext.csproj">
       <Project>{E46A6AA6-56EE-4AE5-8725-DCD07DC95527}</Project>

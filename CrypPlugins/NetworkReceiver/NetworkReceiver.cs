@@ -135,12 +135,6 @@ namespace CrypTool.Plugins.NetworkReceiver
             ProgressChanged(0, 1);
             localEndPoint = new IPEndPoint(!settings.NetworkDevice ? IPAddress.Parse(settings.DeviceIp) : IPAddress.Any, settings.Port);
 
-            //init or reuse socket
-            if (!settings.ConnectionSwitch && settings.Protocol == NetworkSenderSettings.tcpProtocol)
-            {
-                StartTCPListener();
-            }
-
             //init / reset 
             uniqueSrcIps = new HashSet<string>();
             isRunning = true;
@@ -150,6 +144,12 @@ namespace CrypTool.Plugins.NetworkReceiver
             receivedPackagesCount = 0;
             ConnectionIDInput = 0;
             ConnectionIDOutput = 0;
+
+            // Start accepting only after every callback dependency has been initialized.
+            if (!settings.ConnectionSwitch && settings.Protocol == NetworkSenderSettings.tcpProtocol)
+            {
+                StartTCPListener();
+            }
 
             // reset gui
             presentation.ClearPresentation();
@@ -214,8 +214,9 @@ namespace CrypTool.Plugins.NetworkReceiver
         public void Stop()
         {
             isRunning = false;
-            availableConnections.Stop();
-            calculateSpeedrate.Stop();
+            availableConnections.CloseConnection(ConnectionIDInput);
+            availableConnections.CloseConnection(ConnectionIDOutput);
+            calculateSpeedrate?.Stop();
             if (settings.Protocol == NetworkReceiverSettings.tcpProtocol
                 && tcpServer != null) // null chk needed for the "use given connection"-mode
             {

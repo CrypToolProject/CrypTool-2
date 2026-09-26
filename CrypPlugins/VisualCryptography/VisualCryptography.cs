@@ -147,7 +147,10 @@ namespace CrypTool.Plugins.VisualCryptography
                 using (stream)
                 {
                     stream.Seek(0, SeekOrigin.Begin);
-                    bmp = new Bitmap(stream);
+                    using (Bitmap streamedBitmap = new Bitmap(stream))
+                    {
+                        bmp = new Bitmap(streamedBitmap);
+                    }
                 }
                 //convert bmp to black and white "image array"
                 image = new byte[bmp.Width * bmp.Height];
@@ -172,7 +175,14 @@ namespace CrypTool.Plugins.VisualCryptography
                 GuiLogMessage(string.Format(Resources.CouldNotReadImage, ex.Message), NotificationLevel.Error);
                 return;
             }
-            Encrypt((image, bmp.Width, bmp.Height), false);
+            try
+            {
+                Encrypt((image, bmp.Width, bmp.Height), false);
+            }
+            finally
+            {
+                bmp.Dispose();
+            }
         }
 
         /// <summary>
@@ -198,27 +208,28 @@ namespace CrypTool.Plugins.VisualCryptography
             (byte[] image1, byte[] image2, int width, int height) encrypted_images = EncryptImage(image.image, image.width, image.height);
 
             //convert raw image data (byte arrays) to actual bitmaps
-            Bitmap imageFile1 = CreateBitmap(encrypted_images.image1, encrypted_images.width, encrypted_images.height);
-            Bitmap imageFile2 = CreateBitmap(encrypted_images.image2, encrypted_images.width, encrypted_images.height);
-
-            _presentation.SetImages(encrypted_images);
-            _presentation.UpdateImage(0);
-
-            //output first bitmap
-            using (MemoryStream stream = new MemoryStream())
+            using (Bitmap imageFile1 = CreateBitmap(encrypted_images.image1, encrypted_images.width, encrypted_images.height))
+            using (Bitmap imageFile2 = CreateBitmap(encrypted_images.image2, encrypted_images.width, encrypted_images.height))
             {
-                imageFile1.Save(stream, ImageFormat.Png);
-                Image1 = stream.ToArray();
-            }
-            OnPropertyChanged("Image1");
+                _presentation.SetImages(encrypted_images);
+                _presentation.UpdateImage(0);
 
-            //output second bitmap
-            using (MemoryStream stream = new MemoryStream())
-            {
-                imageFile2.Save(stream, ImageFormat.Png);
-                Image2 = stream.ToArray();
+                //output first bitmap
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    imageFile1.Save(stream, ImageFormat.Png);
+                    Image1 = stream.ToArray();
+                }
+                OnPropertyChanged("Image1");
+
+                //output second bitmap
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    imageFile2.Save(stream, ImageFormat.Png);
+                    Image2 = stream.ToArray();
+                }
+                OnPropertyChanged("Image2");
             }
-            OnPropertyChanged("Image2");
 
             ProgressChanged(1, 1);
         }
@@ -372,9 +383,33 @@ namespace CrypTool.Plugins.VisualCryptography
         /// <returns></returns>
         public static Bitmap CreateBitmap(byte[] image, int width, int height)
         {
-            return new Bitmap(width, height, width,
-                PixelFormat.Format8bppIndexed,
-                Marshal.UnsafeAddrOfPinnedArrayElement(image, 0));
+            if (image == null || width <= 0 || height <= 0 || image.Length < width * height)
+            {
+                throw new ArgumentException("Invalid indexed image data.", nameof(image));
+            }
+
+            Bitmap bitmap = new Bitmap(width, height, PixelFormat.Format8bppIndexed);
+            ColorPalette palette = bitmap.Palette;
+            for (int i = 0; i < palette.Entries.Length; i++)
+            {
+                palette.Entries[i] = Color.FromArgb(i, i, i);
+            }
+            bitmap.Palette = palette;
+
+            Rectangle rectangle = new Rectangle(0, 0, width, height);
+            BitmapData data = bitmap.LockBits(rectangle, ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
+            try
+            {
+                for (int row = 0; row < height; row++)
+                {
+                    Marshal.Copy(image, row * width, IntPtr.Add(data.Scan0, row * data.Stride), width);
+                }
+            }
+            finally
+            {
+                bitmap.UnlockBits(data);
+            }
+            return bitmap;
         }
 
         /// <summary>

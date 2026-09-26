@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using LatticeCrypto.Utilities;
 
 namespace LatticeCrypto.Models
 {
@@ -94,13 +95,12 @@ namespace LatticeCrypto.Models
 
         private void GeneratePrivateKey()
         {
-            Random random = new Random();
             MatrixND S = new MatrixND(dim, dim);
             for (int i = 0; i < dim; i++)
             {
                 for (int j = 0; j < dim; j++)
                 {
-                    S[i, j] = random.Next(-l, l);
+                    S[i, j] = CryptoRandom.Next(-l, l);
                 }
             }
 
@@ -147,7 +147,6 @@ namespace LatticeCrypto.Models
         public void GeneratePublicKey()
         {
             //Generiere zunächst eine unimodulare Matrix mittels einer oberen Dreiecksmatrix
-            Random random = new Random();
             transU = new MatrixND(dim, dim);
             for (int i = 0; i < dim; i++)
             {
@@ -155,11 +154,11 @@ namespace LatticeCrypto.Models
                 {
                     if (i == j)
                     {
-                        transU[i, j] = random.NextDouble() < 0.5 ? 1 : -1;
+                        transU[i, j] = CryptoRandom.NextDouble() < 0.5 ? 1 : -1;
                     }
                     else if (i > j)
                     {
-                        transU[i, j] = random.Next(-maxValueForTransU, maxValueForTransU);
+                        transU[i, j] = CryptoRandom.Next(-maxValueForTransU, maxValueForTransU);
                     }
                 }
             }
@@ -222,13 +221,12 @@ namespace LatticeCrypto.Models
 
         public void GenerateErrorVector()
         {
-            Random random = new Random();
             errorVector = new VectorND(dim);
             errorVectorIntern = new MatrixND(dim, 1);
 
             for (int i = 0; i < dim; i++)
             {
-                int randomSigma = random.NextDouble() < 0.5 ? sigma : -sigma;
+                int randomSigma = CryptoRandom.NextDouble() < 0.5 ? sigma : -sigma;
                 errorVector.values[i] = randomSigma;
                 errorVectorIntern[i, 0] = randomSigma;
             }

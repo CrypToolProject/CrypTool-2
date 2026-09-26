@@ -407,21 +407,34 @@ namespace CrypTool.Plugins.GrandpreCipher
                     continue;
                 }
 
-                //handle unknown symbol
-                switch (_settings.UnknownSymbolHandling)
+                if (digitsBuilder.Length > 0)
                 {
-                    case UnknownSymbolHandlingMode.Ignore:
-                        plaintextBuilder.Append(c);
-                        break;
-                    case UnknownSymbolHandlingMode.Remove:
-                        //do nothing;
-                        break;
-                    case UnknownSymbolHandlingMode.Replace:
-                        plaintextBuilder.Append("?");
-                        break;
+                    AppendUnknownSymbol(plaintextBuilder, digitsBuilder[0]);
+                    digitsBuilder.Clear();
                 }
-            }            
+
+                //handle unknown symbol
+                AppendUnknownSymbol(plaintextBuilder, c);
+            }
+
+            if (digitsBuilder.Length > 0)
+            {
+                AppendUnknownSymbol(plaintextBuilder, digitsBuilder[0]);
+            }
             return plaintextBuilder.ToString();
+        }
+
+        private void AppendUnknownSymbol(StringBuilder builder, char symbol)
+        {
+            switch (_settings.UnknownSymbolHandling)
+            {
+                case UnknownSymbolHandlingMode.Ignore:
+                    builder.Append(symbol);
+                    break;
+                case UnknownSymbolHandlingMode.Replace:
+                    builder.Append('?');
+                    break;
+            }
         }
 
         /// <summary>

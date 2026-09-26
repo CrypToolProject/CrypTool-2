@@ -742,7 +742,7 @@ namespace CrypTool.Plugins.QuadraticSieve
         /// <param name="param">params</param>
         private void MSieveJob(object param)
         {
-            threadcount++;
+            Interlocked.Increment(ref threadcount);
             object[] parameters = (object[])param;
             IntPtr clone = (IntPtr)parameters[0];
             int update = (int)parameters[1];
@@ -776,24 +776,28 @@ namespace CrypTool.Plugins.QuadraticSieve
                     catch (Exception ex)
                     {
                         GuiLogMessage("Error using msieve." + ex.Message, NotificationLevel.Error);
-                        threadcount = 0;
                         return;
                     }
                 }
 
-                conf_listMutex.WaitOne();
-                if (conf_list != null)
-                {
-                    conf_list[threadNR] = null;
-                }
-
-                MethodInfo freeSieveConf = msieve.GetMethod("freeSieveConf");
-                freeSieveConf.Invoke(null, new object[] { clone });
-                conf_listMutex.ReleaseMutex();
             }
             finally
             {
-                threadcount--;
+                conf_listMutex.WaitOne();
+                try
+                {
+                    if (conf_list != null && threadNR >= 0 && threadNR < conf_list.Count)
+                    {
+                        conf_list[threadNR] = null;
+                    }
+                    MethodInfo freeSieveConf = msieve.GetMethod("freeSieveConf");
+                    freeSieveConf.Invoke(null, new object[] { clone });
+                }
+                finally
+                {
+                    conf_listMutex.ReleaseMutex();
+                    Interlocked.Decrement(ref threadcount);
+                }
             }
         }
 
@@ -823,9 +827,9 @@ namespace CrypTool.Plugins.QuadraticSieve
                 conf_listMutex.ReleaseMutex();
 
                 GuiLogMessage("Waiting for threads to stop!", NotificationLevel.Debug);
-                while (threadcount > 0)
+                while (Volatile.Read(ref threadcount) > 0)
                 {
-                    Thread.Sleep(0);
+                    Thread.Sleep(10);
                 }
                 GuiLogMessage("Threads stopped!", NotificationLevel.Debug);
             }

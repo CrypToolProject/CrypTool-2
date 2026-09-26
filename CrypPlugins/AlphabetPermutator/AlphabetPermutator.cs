@@ -19,7 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace AlphabetPermutator
 {
@@ -196,7 +195,15 @@ namespace AlphabetPermutator
             if (!string.IsNullOrEmpty(keyword))
             {
                 distinctKeyword = Distinct(keyword);
-                distinctSourceAlphabet = Regex.Replace(distinctSourceAlphabet, "[" + distinctKeyword + "]", "");
+                StringBuilder remainingCharacters = new StringBuilder(distinctSourceAlphabet.Length);
+                foreach (char character in distinctSourceAlphabet)
+                {
+                    if (distinctKeyword.IndexOf(character) < 0)
+                    {
+                        remainingCharacters.Append(character);
+                    }
+                }
+                distinctSourceAlphabet = remainingCharacters.ToString();
             }            
 
             builder.Append(distinctKeyword);

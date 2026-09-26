@@ -373,6 +373,7 @@ namespace CrypTool.BaconCipher
                 if (Char2String.ContainsKey(currentChar))
                 {
                     GuiLogMessage(Format(Resources.CharAlreadyMapped, currentChar), NotificationLevel.Error);
+                    continue;
                 }
 
                 switch (currentChar)

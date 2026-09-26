@@ -378,15 +378,13 @@ namespace CrypTool.Plugins.ImageProcessor
             }
 
             // Avoid "generic error in GDI+"
-            Bitmap saveableBitmap = CopyBitmap(bitmap, format);
-
-            // Save bitmap
-            MemoryStream outputStream = new MemoryStream();
-            saveableBitmap.Save(outputStream, format);
-            saveableBitmap.Dispose();
+            using (Bitmap saveableBitmap = CopyBitmap(bitmap, format))
+            using (MemoryStream outputStream = new MemoryStream())
+            {
+                saveableBitmap.Save(outputStream, format);
+                OutputImage = new CStreamWriter(outputStream.ToArray());
+            }
             bitmap.Dispose();
-
-            OutputImage = new CStreamWriter(outputStream.GetBuffer());
 
         }
 
@@ -396,10 +394,15 @@ namespace CrypTool.Plugins.ImageProcessor
         /// <returns>Definitely not broken bitmap.</returns>
         private Bitmap CopyBitmap(Bitmap bitmap, ImageFormat format)
         {
-            MemoryStream buffer = new MemoryStream();
-            bitmap.Save(buffer, format);
-            Bitmap saveableBitmap = (Bitmap)System.Drawing.Image.FromStream(buffer);
-            return saveableBitmap;
+            using (MemoryStream buffer = new MemoryStream())
+            {
+                bitmap.Save(buffer, format);
+                buffer.Position = 0;
+                using (Bitmap streamedBitmap = (Bitmap)System.Drawing.Image.FromStream(buffer))
+                {
+                    return new Bitmap(streamedBitmap);
+                }
+            }
         }
 
         private void CropImage()

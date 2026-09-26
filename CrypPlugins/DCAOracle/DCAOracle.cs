@@ -150,7 +150,7 @@ namespace CrypTool.Plugins.DCAOracle
             int i;
             for (i = 0; i < MessagePairsCount; i++)
             {
-                int xtemp = _random.Next(0, ((int)Math.Pow(2, _settings.WordSize) - 1));
+                int xtemp = _random.Next(0, (int)Math.Pow(2, _settings.WordSize));
                 int ytemp = xtemp ^ MessageDifference;
 
                 ushort x = (ushort)xtemp;

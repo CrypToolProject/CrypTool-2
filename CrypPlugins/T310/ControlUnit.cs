@@ -156,9 +156,14 @@ namespace CrypTool.Plugins.T310
             byte parity = 0;
             foreach (int element in key)
             {
-                parity ^= (byte)(element % 2);
+                int value = element & 0xFFFFFF;
+                while (value != 0)
+                {
+                    parity ^= (byte)(value & 1);
+                    value >>= 1;
+                }
             }
-            return parity == 0 ? false : true; //odd key
+            return parity != 0; // odd parity across all 120 key bits
         }
 
         /// <summary>
@@ -175,6 +180,7 @@ namespace CrypTool.Plugins.T310
 
             if (index == KeyIndex.S1)
             {
+                Array.Clear(S1, 0, S1.Length);
                 for (int i = 0, j = 0; i < 15 && j < 5; ++j)
                 {
                     for (int k = 0; k < 3; ++k)
@@ -182,11 +188,13 @@ namespace CrypTool.Plugins.T310
                         S1[j] |= (inputKey[i++] << (8 * k));
                     }
                 }
+                Array.Copy(S1, originalS1, S1.Length);
                 return CheckKeyParity(S1);
             }
 
             if (index == KeyIndex.S2)
             {
+                Array.Clear(S2, 0, S2.Length);
                 for (int i = 0, j = 0; i < 15 && j < 5; ++j)
                 {
                     for (int k = 0; k < 3; ++k)
@@ -194,6 +202,7 @@ namespace CrypTool.Plugins.T310
                         S2[j] |= (inputKey[i++] << (8 * k));
                     }
                 }
+                Array.Copy(S2, originalS2, S2.Length);
                 return CheckKeyParity(S2);
             }
 
@@ -260,14 +269,6 @@ namespace CrypTool.Plugins.T310
             }
 
 
-            /*DEBUGGING CODE BEGINNING*/
-            S1[0] = 0x1777d3;
-            S1[1] = 0x8617a3;
-            S1[2] = 0x183e59;
-            S1[3] = 0xfc2388;
-            S1[4] = 0x1fe1d2;
-            /*DEBUGGING CODE ENDING*/
-
             Array.Copy(S1, originalS1, originalS1.Length);
 
             return validKey;
@@ -293,20 +294,6 @@ namespace CrypTool.Plugins.T310
                     validKey = true;
                 }
             }
-
-            if (!validKey)
-            {
-                //Console.WriteLine("Key parity is incorrect (even)");
-
-                /*DEBUGGING CODE BEGINNING*/
-                S2[0] = 0x4c4f0d;
-            }
-
-            S2[1] = 0x19eba3;
-            S2[2] = 0xac7a7e;
-            S2[3] = 0x5d01fb;
-            S2[4] = 0x9e1d84;
-            /*DEBUGGING CODE ENDING*/
 
             Array.Copy(S2, originalS2, originalS2.Length);
             return validKey;

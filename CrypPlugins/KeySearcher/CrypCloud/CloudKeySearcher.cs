@@ -195,9 +195,20 @@ namespace KeySearcher
 
         private List<KeyResultEntry> ExtractResultList(JobProgressEventArgs progress)
         {
-            IEnumerable<KeyResultEntry> keyResultEntries = progress.ResultList
-                .Select(it => new KeyResultEntry(it))
-                .Distinct();
+            List<KeyResultEntry> validEntries = new List<KeyResultEntry>();
+            foreach (byte[] serializedEntry in progress.ResultList)
+            {
+                try
+                {
+                    validEntries.Add(new KeyResultEntry(serializedEntry));
+                }
+                catch (ArgumentException)
+                {
+                    // Ignore malformed peer data without terminating the callback thread.
+                }
+            }
+
+            IEnumerable<KeyResultEntry> keyResultEntries = validEntries.Distinct();
 
             keyResultEntries = SortAscending()
                 ? keyResultEntries.OrderBy(it => it)

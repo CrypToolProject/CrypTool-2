@@ -148,7 +148,10 @@ namespace CrypTool.Plugins.EllipticCurveCryptography
         /// <returns></returns>
         public override Point Multiply(BigInteger s, Point p)
         {
-            s = s.Mod(((WeierstraßCurve)p.Curve).P);
+            if (s.Sign < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(s), "The scalar must not be negative.");
+            }
 
             Point result = new Point { IsInfinity = true, Curve = p.Curve };
             Point addend = p;
@@ -289,7 +292,10 @@ namespace CrypTool.Plugins.EllipticCurveCryptography
 
         public override Point Multiply(BigInteger s, Point P)
         {
-            s = s.Mod(_p);
+            if (s.Sign < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(s), "The scalar must not be negative.");
+            }
             Point R = new Point { IsInfinity = true, Curve = this };
             Point addend = P;
 
@@ -413,7 +419,10 @@ namespace CrypTool.Plugins.EllipticCurveCryptography
         /// <returns></returns>
         public override Point Multiply(BigInteger s, Point P)
         {
-            s = s.Mod(_p);
+            if (s.Sign < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(s), "The scalar must not be negative.");
+            }
             Point R = new Point { IsInfinity = true, Curve = this };
             Point addend = P;
 

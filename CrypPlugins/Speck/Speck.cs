@@ -44,7 +44,7 @@ namespace CrypTool.Plugins.Speck
         // ReSharper disable once InconsistentNaming
         private byte[] _inputIV;
 
-        private readonly bool _stop = false;
+        private volatile bool _stop;
 
         private delegate byte[] CryptoFunction(byte[] text, byte[] key);
 
@@ -111,6 +111,7 @@ namespace CrypTool.Plugins.Speck
         /// </summary>
         public void PreExecution()
         {
+            _stop = false;
         }
 
         /// <summary>
@@ -341,6 +342,7 @@ namespace CrypTool.Plugins.Speck
         /// </summary>
         public void Stop()
         {
+            _stop = true;
         }
 
         /// <summary>
@@ -603,8 +605,8 @@ namespace CrypTool.Plugins.Speck
                             {
                                 byte[] block = new byte[(_settings.BlockSize_2n / 8)];
                                 Array.Copy(inputBlock, 0, block, 0, readcount);
-                                outputblock = cryptoFunction(inputBlock, _inputKey);
-                                outputblock = SpeckCiphers.Xor(outputblock, lastBlock);
+                                outputblock = cryptoFunction(lastBlock, _inputKey);
+                                outputblock = SpeckCiphers.Xor(outputblock, block);
                             }
                         }
 
@@ -633,7 +635,10 @@ namespace CrypTool.Plugins.Speck
                         //if we crypted something, we output it
                         if (outputblock != null)
                         {
-                            writer.Write(outputblock, 0, outputblock.Length);
+                            int bytesToWrite = _settings.PadMode == BlockCipherHelper.PaddingType.None
+                                ? Math.Min(readcount, outputblock.Length)
+                                : outputblock.Length;
+                            writer.Write(outputblock, 0, bytesToWrite);
                         }
                     }
 
@@ -708,8 +713,8 @@ namespace CrypTool.Plugins.Speck
                             {
                                 byte[] block = new byte[(_settings.BlockSize_2n / 8)];
                                 Array.Copy(inputBlock, 0, block, 0, readcount);
-                                outputblock = cryptoFunction(inputBlock, _inputKey);
-                                outputblock = SpeckCiphers.Xor(outputblock, lastBlock);
+                                outputblock = cryptoFunction(lastBlock, _inputKey);
+                                outputblock = SpeckCiphers.Xor(outputblock, block);
                             }
                         }
 
@@ -738,7 +743,10 @@ namespace CrypTool.Plugins.Speck
                         //if we crypted something, we output it
                         if (outputblock != null)
                         {
-                            writer.Write(outputblock, 0, outputblock.Length);
+                            int bytesToWrite = _settings.PadMode == BlockCipherHelper.PaddingType.None
+                                ? Math.Min(readcount, outputblock.Length)
+                                : outputblock.Length;
+                            writer.Write(outputblock, 0, bytesToWrite);
                         }
                     }
 

@@ -756,7 +756,8 @@ namespace CrypTool.Plugins.Blockchain
 
         public bool CheckTransaction(string transaction)
         {
-            if (Regex.IsMatch(transaction, "[a-zA-Z]+[;][a-zA-Z]+[;][0-9]+[.]*[0-9]*[;][0-9]+"))
+            if (!string.IsNullOrEmpty(transaction) &&
+                Regex.IsMatch(transaction, @"^[a-zA-Z]+;[a-zA-Z]+;[0-9]+(?:\.[0-9]+)?;[0-9]+$"))
             {
                 return true;
             }
@@ -781,7 +782,8 @@ namespace CrypTool.Plugins.Blockchain
 
         public bool CheckAddress(string address)
         {
-            if (Regex.IsMatch(address, "[#]?[a-zA-Z]+[;][0-9]+[0-9]+[;][0-9]+[;][0-9]+"))
+            if (!string.IsNullOrEmpty(address) &&
+                Regex.IsMatch(address, @"^#?[a-zA-Z]+;[0-9]+;[0-9]+;[0-9]+$"))
             {
                 return true;
             }

@@ -19,6 +19,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Net;
 using System.Collections.Generic;
+using System.IO;
 
 class CrypToolServer
 {
@@ -210,6 +211,10 @@ class CrypToolServer
                             var jobGuid = wrapped.ReadString();
                             var resultList = new List<KeyValuePair<float, int>>();
                             var resultListLength = wrapped.ReadInt();
+                            if (resultListLength < 0 || resultListLength > 100000)
+                            {
+                                throw new InvalidDataException("Invalid result list length: " + resultListLength);
+                            }
                             for (int c = 0; c < resultListLength; c++)
                             {
                                 var key = wrapped.ReadInt();

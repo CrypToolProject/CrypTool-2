@@ -140,7 +140,7 @@ namespace CrypTool.Plugins.CryptoBoxCipher
             //read the key into a list of strings, each length 2
             List<string> keyElements = new List<string>();
             key = key.ToUpper();
-            if (key.Length % 2 != 0)
+            if (key.Length == 0 || key.Length % 2 != 0)
             {
                 GuiLogMessage(Properties.Resources.Keymusthaveanevennumberofcharacters, NotificationLevel.Error);
                 return null;
@@ -149,7 +149,8 @@ namespace CrypTool.Plugins.CryptoBoxCipher
             {
                 //read in key element character
                 char keyElement = char.ToUpper(key[keyOffset]);
-                if (keyElement < '0' && keyElement > '9' && keyElement < 'A' && keyElement > 'J')
+                if (!((keyElement >= '0' && keyElement <= '9') ||
+                      (keyElement >= 'A' && keyElement <= 'J')))
                 {
                     GuiLogMessage(string.Format(Properties.Resources.Invalidkeyelementcharacter0inkeyatoffset1, keyElement, keyOffset), NotificationLevel.Error);
                     return null;

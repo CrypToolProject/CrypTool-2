@@ -783,6 +783,12 @@ namespace CrypTool.Plugins.HKDFSHA256
             curStep = 0;
 
             //Check for output length: max 5.242.880 byte = 5 Mb
+            if (OutputBytes < 0)
+            {
+                GuiLogMessage("The requested output length must not be negative.", NotificationLevel.Error);
+                return;
+            }
+
             if (!settings.InfinityOutput && OutputBytes > 5242880)
             {
                 GuiLogMessage(Resources.TooMuchOutputRequestedLogMSG.Replace("{0}", OutputBytes.ToString()), NotificationLevel.Warning);
@@ -1885,7 +1891,7 @@ namespace CrypTool.Plugins.HKDFSHA256
         /// </summary>
         public void Stop()
         {
-            if (workerThread.IsAlive)
+            if (workerThread != null && workerThread.IsAlive)
             {
                 workerThread.Abort();
             }

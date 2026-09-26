@@ -67,6 +67,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                         node = newNode;
                     }
                 }
+                node.IsWord = true;
             }
         }
 
@@ -96,7 +97,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     return false;
                 }
             }
-            return true;
+            return node.IsWord;
         }
 
         /// <summary>
@@ -108,14 +109,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         public Dictionary<int, int> FindWords(int[] plaintext)
         {
             Dictionary<int, int> _wordPositions = new Dictionary<int, int>();
-            for (int i = 0; i < plaintext.Length - _maxLength; i++)
+            for (int i = 0; i < plaintext.Length; i++)
             {
-                for (int length = _maxLength; length >= _minLength; length--)
+                int maximumLength = Math.Min(_maxLength, plaintext.Length - i);
+                for (int length = maximumLength; length >= _minLength; length--)
                 {
-                    if (i > plaintext.Length - _maxLength)
-                    {
-                        break;
-                    }
                     int[] word = GetWord(plaintext, i, length);
                     if (IsInDictionary(word))
                     {
@@ -151,6 +149,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
     public class LetterNode
     {
         public int Letter { get; set; }
+        public bool IsWord { get; set; }
         public List<LetterNode> nodes = new List<LetterNode>();
     }
 

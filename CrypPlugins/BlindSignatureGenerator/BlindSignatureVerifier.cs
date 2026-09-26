@@ -135,7 +135,8 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
 
             BigInteger s1 = 0;
             BigInteger s2 = 0;
-            if (BlindSignaturePaillierIn != null && BlindSignaturePaillierIn[0] != 0 && BlindSignaturePaillierIn[1] != 0)
+            if (BlindSignaturePaillierIn != null && BlindSignaturePaillierIn.Length >= 2 &&
+                BlindSignaturePaillierIn[0] != 0 && BlindSignaturePaillierIn[1] != 0)
             {
                 s1 = BlindSignaturePaillierIn[0];
                 s2 = BlindSignaturePaillierIn[1];

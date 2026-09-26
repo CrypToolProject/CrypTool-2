@@ -135,11 +135,23 @@ namespace CrypTool.HMAC
                     break;
             }
 
-            hmacAlgorithm.Key = key;
+            using (hmacAlgorithm)
+            {
+                hmacAlgorithm.Key = key;
+                if (inputData != null)
+                {
+                    using (CStreamReader reader = inputData.CreateReader())
+                    {
+                        OutputData = hmacAlgorithm.ComputeHash(reader);
+                    }
+                }
+                else
+                {
+                    OutputData = hmacAlgorithm.ComputeHash(new byte[] { });
+                }
 
-            OutputData = (inputData != null) ? hmacAlgorithm.ComputeHash(inputData.CreateReader()) : hmacAlgorithm.ComputeHash(new byte[] { });
-
-            GuiLogMessage(string.Format("HMAC computed. (using hash algorithm {0}: {1})", settings.SelectedHashFunction, hmacAlgorithm.GetType().Name), NotificationLevel.Info);
+                GuiLogMessage(string.Format("HMAC computed. (using hash algorithm {0}: {1})", settings.SelectedHashFunction, hmacAlgorithm.GetType().Name), NotificationLevel.Info);
+            }
 
             ProgressChanged(1, 1);
         }

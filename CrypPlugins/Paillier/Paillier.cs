@@ -18,6 +18,7 @@ using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Numerics;
 using System.Text;
 using System.Windows.Controls;
@@ -97,8 +98,9 @@ namespace CrypTool.Plugins.Paillier
                 GuiLogMessage("Cipher is bigger than N^2 - this will produce a wrong result!", NotificationLevel.Warning);
             }
 
-            BigInteger lambdainv = BigIntegerHelper.ModInverse(InputLambda, n);
-            return (((BigInteger.ModPow(c, InputLambda, n_square) - 1) / n) * lambdainv) % n;
+            BigInteger lOfG = (BigInteger.ModPow(InputG, InputLambda, n_square) - 1) / n;
+            BigInteger mu = BigIntegerHelper.ModInverse(lOfG, n);
+            return (((BigInteger.ModPow(c, InputLambda, n_square) - 1) / n) * mu) % n;
         }
 
         /// <summary>
@@ -136,7 +138,7 @@ namespace CrypTool.Plugins.Paillier
                 r = 1;
             }
 
-            return (((n * m + 1) % n_square) * r) % n_square;
+            return (BigInteger.ModPow(InputG, m, n_square) * r) % n_square;
         }
 
         /// <summary>
@@ -351,6 +353,33 @@ namespace CrypTool.Plugins.Paillier
             return output;
         }
 
+        private static byte[] FramePlaintext(byte[] input)
+        {
+            byte[] framed = new byte[input.Length + sizeof(int)];
+            byte[] length = BitConverter.GetBytes(input.Length);
+            Buffer.BlockCopy(length, 0, framed, 0, length.Length);
+            Buffer.BlockCopy(input, 0, framed, length.Length, input.Length);
+            return framed;
+        }
+
+        private static byte[] UnframePlaintext(byte[] input)
+        {
+            if (input.Length < sizeof(int))
+            {
+                throw new InvalidDataException("Paillier plaintext frame is truncated.");
+            }
+
+            int length = BitConverter.ToInt32(input, 0);
+            if (length < 0 || length > input.Length - sizeof(int))
+            {
+                throw new InvalidDataException("Paillier plaintext frame has an invalid length.");
+            }
+
+            byte[] output = new byte[length];
+            Buffer.BlockCopy(input, sizeof(int), output, 0, length);
+            return output;
+        }
+
         private BigInteger BigIntegerFromBuffer(byte[] buffer, int ofs, int len)
         {
             byte[] tmp = new byte[len + 1];  // extra byte makes sure that BigInteger is positive
@@ -430,6 +459,12 @@ namespace CrypTool.Plugins.Paillier
                 return;
             }
 
+            if (InputG <= 1 || InputG >= n_square)
+            {
+                GuiLogMessage("Illegal public key G - Paillier cannot work", NotificationLevel.Error);
+                return;
+            }
+
             if (settings.Action == 0)   // Encryption
             {
                 if (InputM is BigInteger)
@@ -438,7 +473,7 @@ namespace CrypTool.Plugins.Paillier
                 }
                 else if (InputM is byte[])
                 {
-                    OutputC2 = BlockConvert((byte[])InputM, n, n_square, encrypt, true);
+                    OutputC2 = BlockConvert(FramePlaintext((byte[])InputM), n, n_square, encrypt, true);
                 }
             }
             else if (settings.Action == 1)  // Decryption
@@ -455,7 +490,15 @@ namespace CrypTool.Plugins.Paillier
                 }
                 else if (InputM is byte[])
                 {
-                    OutputC2 = removeZeros(BlockConvert((byte[])InputM, n_square, n, decrypt, false));
+                    try
+                    {
+                        OutputC2 = UnframePlaintext(BlockConvert((byte[])InputM, n_square, n, decrypt, false));
+                    }
+                    catch (InvalidDataException ex)
+                    {
+                        GuiLogMessage(ex.Message, NotificationLevel.Error);
+                        return;
+                    }
                 }
             }
             else if (settings.Action == 2)  // Addition

@@ -93,12 +93,16 @@ namespace TextSteganography
             }
         }
 
-        [TaskPane("Offset", "OffsetTooltip", null, 2, false, ControlType.TextBox)]
+        [TaskPane("Offset", "OffsetTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int Offset
         {
             get => offset;
             set
             {
+                if (value < 0)
+                {
+                    return;
+                }
                 if (offset != value)
                 {
                     offset = value;

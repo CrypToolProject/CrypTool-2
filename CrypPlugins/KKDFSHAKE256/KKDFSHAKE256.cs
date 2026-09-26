@@ -22,6 +22,7 @@ using Org.BouncyCastle.Crypto.Digests;
 using System;
 using System.ComponentModel;
 using System.Numerics;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows;
@@ -36,6 +37,33 @@ namespace CrypTool.Plugins.KKDFSHAKE256
     [ComponentCategory(ComponentCategory.HashFunctions)]
     public class KKDFSHAKE256 : ICrypComponent
     {
+        private sealed class Shake256Xof : ShakeDigest
+        {
+            private static readonly MethodInfo AbsorbBitsMethod = typeof(KeccakDigest).GetMethod(
+                "AbsorbBits",
+                BindingFlags.Instance | BindingFlags.NonPublic);
+
+            public Shake256Xof()
+                : base(256)
+            {
+            }
+
+            public int DoFinal(byte[] output, int outputOffset, int outputLength)
+            {
+                if (AbsorbBitsMethod == null)
+                {
+                    throw new MissingMethodException(typeof(KeccakDigest).FullName, "AbsorbBits");
+                }
+
+                // The bundled Bouncy Castle version exposes only the fixed-size SHAKE DoFinal
+                // overload. Add SHAKE's 1111 domain suffix and squeeze the requested XOF length.
+                AbsorbBitsMethod.Invoke(this, new object[] { 0x0F, 4 });
+                Squeeze(output, outputOffset, (long)outputLength * 8);
+                Reset();
+                return outputLength;
+            }
+        }
+
         #region Private Variables
 
         private readonly KKDFSHAKE256Settings settings = new KKDFSHAKE256Settings();
@@ -62,7 +90,7 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         private static byte[] computeKKDFSHA256XOF(byte[] msg, byte[] key, int outputBytes)
         {
             //hash object
-            ShakeDigest shake256 = new ShakeDigest(256);
+            Shake256Xof shake256 = new Shake256Xof();
             //output byte array
             byte[] result = new byte[outputBytes];
             //array for input of hashfunction
@@ -74,8 +102,8 @@ namespace CrypTool.Plugins.KKDFSHAKE256
 
             //update internal state
             shake256.BlockUpdate(input, 0, input.Length);
-            //finish the hash.
-            shake256.DoFinal(result, 0);
+            // SHAKE is an extendable-output function, so explicitly request the configured length.
+            shake256.DoFinal(result, 0, result.Length);
 
             //DEBUG
             //Console.WriteLine("KM: " + BitConverter.ToString(result).Replace("-", ""));

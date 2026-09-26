@@ -124,6 +124,11 @@ namespace TextSteganography
             if (settings.Mode == ModeType.ZeroWidthSpace)
             {
                 offset = settings.Offset;
+                if (coverText == null || offset < 0 || offset > coverText.Length)
+                {
+                    GuiLogMessage("Offset must be between zero and the cover text length.", NotificationLevel.Error);
+                    return;
+                }
                 if (settings.Action == ActionType.Hide)
                 {
                     ZeroWidthSpaceHide();
@@ -637,7 +642,7 @@ namespace TextSteganography
         /// </summary>
         private byte[] ConvertToBytes(BitArray bits)
         {
-            byte[] bytes = new byte[bits.Length / 8 + 1];
+            byte[] bytes = new byte[(bits.Length + 7) / 8];
             bits.CopyTo(bytes, 0);
             return bytes;
         }

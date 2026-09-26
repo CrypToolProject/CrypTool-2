@@ -89,7 +89,7 @@ namespace IDPAnalyser
 
         private int key2Min = 8;
         [PropertySaveOrder(3)]
-        [TaskPaneAttribute("Key2MinCaption", "Key2MinTooltip", "KeyGroup", 7, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 2, 500)]
+        [TaskPaneAttribute("Key2MinCaption", "Key2MinTooltip", "KeyGroup", 7, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 2, 62)]
         public int Key2Min
         {
             get => key2Min;
@@ -105,7 +105,7 @@ namespace IDPAnalyser
 
         private int key2Max = 10;
         [PropertySaveOrder(3)]
-        [TaskPaneAttribute("Key2MaxCaption", "Key2MaxTooltip", "KeyGroup", 8, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 2, 500)]
+        [TaskPaneAttribute("Key2MaxCaption", "Key2MaxTooltip", "KeyGroup", 8, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 2, 62)]
         public int Key2Max
         {
             get => key2Max;

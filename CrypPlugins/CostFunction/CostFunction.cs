@@ -188,6 +188,18 @@ namespace CrypTool.Plugins.CostFunction
                     return;
                 }
 
+                if (bytesOffset < 0 || bytesOffset > InputText.Length)
+                {
+                    GuiLogMessage("bytesOffset must be between zero and the input length.", NotificationLevel.Error);
+                    return;
+                }
+
+                if (bytesToUse < 0)
+                {
+                    GuiLogMessage("bytesToUse must not be negative.", NotificationLevel.Error);
+                    return;
+                }
+
                 if (bytesToUse == 0 || bytesToUse > (InputText.Length - bytesOffset))
                 {
                     bytesToUse = InputText.Length - bytesOffset;

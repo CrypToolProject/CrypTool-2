@@ -27,6 +27,8 @@ using System.IO;
 /// </summary>
 public class PlatformIndependentWrapper
 {
+    private const int MaximumArrayLength = 16 * 1024 * 1024;
+    private const int MaximumStringLength = 1024 * 1024;
     private NetworkStream stream;
 
     public PlatformIndependentWrapper(TcpClient client)
@@ -37,6 +39,8 @@ public class PlatformIndependentWrapper
     public String ReadString()
     {
         int strlen = ReadInt();
+        if (strlen < 0 || strlen > MaximumStringLength)
+            throw new InvalidDataException("Invalid string length: " + strlen);
         if (strlen == 0)
             return string.Empty;
         byte[] str = ReadArray(strlen);
@@ -61,6 +65,8 @@ public class PlatformIndependentWrapper
 
     public byte[] ReadArray(int num)
     {
+        if (num < 0 || num > MaximumArrayLength)
+            throw new InvalidDataException("Invalid array length: " + num);
         byte[] buffer = new byte[num];
         int rec = 0;
         int offset = 0;

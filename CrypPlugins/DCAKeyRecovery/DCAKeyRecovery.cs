@@ -47,6 +47,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         #region Private Variables
 
         private readonly DCAKeyRecoverySettings _settings = new DCAKeyRecoverySettings();
+        private readonly Random _random = new Random();
         private readonly KeyRecoveryPres _pres = new KeyRecoveryPres();
         private string _differential;
         private int _messageDifference;
@@ -2026,7 +2027,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         {
             neededMessageCounterLastRound++;
             NeededMessageCount = 1;
-            MessageDifference = (new Random()).Next(0, ((int)Math.Pow(2, 16) - 1));
+            MessageDifference = _random.Next(0, 1 << 16);
         }
 
         /// <summary>

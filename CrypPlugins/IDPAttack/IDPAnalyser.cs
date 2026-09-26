@@ -21,6 +21,7 @@ using CrypTool.PluginBase.Utils;
 using LanguageStatisticsLib;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Controls;
@@ -143,6 +144,12 @@ namespace IDPAnalyser
             if (_input == null)
             {
                 GuiLogMessage("No input!", NotificationLevel.Error);
+                return;
+            }
+
+            if (_input.Any(c => LATIN_ALPHABET.IndexOf(c) < 0))
+            {
+                GuiLogMessage("Input may only contain the letters A-Z.", NotificationLevel.Error);
                 return;
             }
 

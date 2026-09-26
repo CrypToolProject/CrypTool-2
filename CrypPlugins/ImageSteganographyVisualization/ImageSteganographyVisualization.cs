@@ -101,6 +101,10 @@ namespace ImageSteganographyVisualization
 
         public void PreExecution()
         {
+            inputBitmap?.Dispose();
+            inputBitmap = null;
+            outputBitmap?.Dispose();
+            outputBitmap = null;
             InputImage = null;
         }
 
@@ -120,8 +124,11 @@ namespace ImageSteganographyVisualization
                 return;
             }
 
-            CStreamReader imageReader = InputImage.CreateReader();
-            inputBitmap = new Bitmap(imageReader);
+            using (CStreamReader imageReader = InputImage.CreateReader())
+            using (Bitmap streamedBitmap = new Bitmap(imageReader))
+            {
+                inputBitmap = new Bitmap(streamedBitmap);
+            }
 
             if (settings.SelectedMode == ModeType.LSB)
             {
@@ -263,6 +270,8 @@ namespace ImageSteganographyVisualization
 
         public void Dispose()
         {
+            inputBitmap?.Dispose();
+            outputBitmap?.Dispose();
         }
 
         #endregion
@@ -546,7 +555,8 @@ namespace ImageSteganographyVisualization
             // Display warning if hiding capacity is not enough to hide the entire message
             if (hiderBlocks.Count < messageBlocks.Count)
             {
-                GuiLogMessage(Properties.Resources.NotEnoughHidingCapacity, NotificationLevel.Warning);
+                GuiLogMessage(Properties.Resources.NotEnoughHidingCapacity, NotificationLevel.Error);
+                return;
             }
 
             // Replace complex blocks with message blocks

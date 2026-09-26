@@ -16,6 +16,7 @@
 using CrypTool.PluginBase;
 using System;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace CrypTool.Plugins.T310
 {
@@ -189,7 +190,7 @@ namespace CrypTool.Plugins.T310
         {
             int shift = selectorInternal == BitSelectorEnum.High ? 60 : 0;
             byte value = (byte)((initVector >> shift) & 0x01);
-            RotateInitVector(initVector);
+            initVector = RotateInitVector(initVector);
             return value;
         }
     }
@@ -210,18 +211,19 @@ namespace CrypTool.Plugins.T310
         /// <returns>A ulong containing 61 bits starting from the least significant bit</returns>
         public ulong GetRandomBits()
         {
-            Random rand = new Random();
-
             ulong r;
             byte[] bytes = new byte[8];
 
-            while (true)
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
-                rand.NextBytes(bytes);
-                r = BitConverter.ToUInt64(bytes, 0) & 0x1fffffffffffffff;    // mask the high bits 0
-                if (r != 0ul)
+                while (true)
                 {
-                    return r;
+                    rng.GetBytes(bytes);
+                    r = BitConverter.ToUInt64(bytes, 0) & 0x1fffffffffffffff;
+                    if (r != 0ul)
+                    {
+                        return r;
+                    }
                 }
             }
 

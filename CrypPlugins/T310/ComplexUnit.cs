@@ -88,7 +88,7 @@ namespace CrypTool.Plugins.T310
 
             Array.Copy(tmpKey, 0, P, 0, 27);
             Array.Copy(tmpKey, 27, D, 0, 9);
-            Array.Copy(tmpKey, 35, alpha, 0, 1);
+            Array.Copy(tmpKey, 36, alpha, 0, 1);
         }
 
 
@@ -140,12 +140,7 @@ namespace CrypTool.Plugins.T310
             byte[] T = new byte[10];
 
             uint unevenRound = rounds % 127;
-            if (unevenRound > 0)
-            {
-                rounds -= unevenRound;
-            }
-
-            uint outerRoundMax = rounds / 13;
+            uint outerRoundMax = rounds / 127;
 
             for (byte roundCount = 0; roundCount < outerRoundMax; roundCount++)
             {
@@ -195,7 +190,39 @@ namespace CrypTool.Plugins.T310
                 }
 
                 // Take the bit which is applied in alpha and add it to the result
-                a |= ((u >> (alpha[0] - 1) & 1ul) > 0 ? 1u : 0u) << roundCount;
+                if (roundCount < 13)
+                {
+                    a |= ((u >> (alpha[0] - 1) & 1ul) > 0 ? 1u : 0u) << roundCount;
+                }
+            }
+
+            CommitRemainingRounds(T, unevenRound);
+        }
+
+        private void CommitRemainingRounds(byte[] T, uint rounds)
+        {
+            for (uint round = 0; round < rounds; round++, controlUnit.ShiftS1(), controlUnit.ShiftS2())
+            {
+                T[9] = (byte)(T[8] ^ GetU(P[26]));
+                T[8] = (byte)(T[7] ^ Z(GetU(P[20]), GetU(P[21]), GetU(P[22]), GetU(P[23]), GetU(P[24]), GetU(P[25])));
+                T[7] = (byte)(T[6] ^ GetU(P[19]));
+                T[6] = (byte)(T[5] ^ controlUnit.GetS2Bit() ^ Z(GetU(P[13]), GetU(P[14]), GetU(P[15]), GetU(P[16]), GetU(P[17]), GetU(P[18])));
+                T[5] = (byte)(T[4] ^ GetU(P[12]));
+                T[4] = (byte)(T[3] ^ Z(GetU(P[6]), GetU(P[7]), GetU(P[8]), GetU(P[9]), GetU(P[10]), GetU(P[11])));
+                T[3] = (byte)(T[2] ^ GetU(P[5]));
+                T[2] = (byte)(T[1] ^ Z(controlUnit.GetS2Bit(), GetU(P[0]), GetU(P[1]), GetU(P[2]), GetU(P[3]), GetU(P[4])));
+                T[1] = synchronizationUnit.GetFBit();
+
+                ulong uOld = u;
+                for (int j = 9; j >= 1; j--)
+                {
+                    u &= ~(15ul << (4 * (j - 1)));
+                    u |= (ulong)((GetU(D[9 - j]) ^ T[j])) << (4 * j - 1);
+                    u |= ((uOld >> (4 * j - 1)) & 0x01ul) << (4 * j - 2);
+                    u |= ((uOld >> (4 * j - 2)) & 0x01ul) << (4 * j - 3);
+                    u |= ((uOld >> (4 * j - 3)) & 0x01ul) << (4 * j - 4);
+                }
+                u ^= (ulong)controlUnit.GetS1Bit() << 35;
             }
         }
 

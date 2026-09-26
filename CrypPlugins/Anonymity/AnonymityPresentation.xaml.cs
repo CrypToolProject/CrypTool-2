@@ -2353,6 +2353,10 @@ namespace CrypTool.Plugins.Anonymity
 
         private double CalculateEMDNumeric(List<double> orderedSensitiveValues, IEnumerable<DataRow> group, DataTable dt, int sensitiveIndex)
         {
+            if (orderedSensitiveValues == null || orderedSensitiveValues.Count <= 1)
+            {
+                return 0;
+            }
             double tValue = 0;
             double r = 0;
             for (int i = 0; i < orderedSensitiveValues.Count - 1; i++)
@@ -2381,6 +2385,10 @@ namespace CrypTool.Plugins.Anonymity
         /// <returns>double tValue</returns>
         public double CalculateEMDNumericSingleRowGroup(DataRow row, DataTable dataTable, int sensitiveIndex, List<double> orderedSensitiveValues)
         {
+            if (orderedSensitiveValues == null || orderedSensitiveValues.Count <= 1)
+            {
+                return 0;
+            }
             double tValue = 0;
             double r = 0;
             double currentValue = double.Parse(row[sensitiveIndex].ToString());

@@ -98,13 +98,13 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <returns></returns>
         public int GetNextSingleLetter()
         {
-            if (symbolIterator > symbols.Count)
+            if (symbolIterator >= symbols.Count)
             {
                 return -1;
             }
             int letter = symbols[symbolIterator][letterIterator];
             letterIterator++;
-            if (letterIterator > symbols[symbolIterator].Length)
+            if (letterIterator >= symbols[symbolIterator].Length)
             {
                 letterIterator = 0;
                 symbolIterator++;

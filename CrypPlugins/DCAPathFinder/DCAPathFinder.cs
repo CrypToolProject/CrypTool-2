@@ -49,6 +49,7 @@ namespace CrypTool.Plugins.DCAPathFinder
         #region Private Variables
 
         private readonly DCAPathFinderSettings settings = new DCAPathFinderSettings();
+        private readonly Random _random = new Random();
         private readonly DCAPathFinderPres _activePresentation = new DCAPathFinderPres();
         private int _expectedDifferential;
         private int _messageCount;
@@ -320,7 +321,7 @@ namespace CrypTool.Plugins.DCAPathFinder
 
                             //write data to outputs
                             MessageCount = 1;
-                            ExpectedDifferential = (new Random()).Next(0, ((int)Math.Pow(2, 16) - 1));
+                            ExpectedDifferential = _random.Next(0, 1 << 16);
                             Path = SerializeConfiguration(conf);
 
                             _currentProgress = 1.0;
@@ -345,7 +346,7 @@ namespace CrypTool.Plugins.DCAPathFinder
 
                             //write data to outputs
                             MessageCount = 1;
-                            ExpectedDifferential = (new Random()).Next(0, ((int)Math.Pow(2, 16) - 1));
+                            ExpectedDifferential = _random.Next(0, 1 << 16);
                             Path = SerializeConfiguration(conf);
 
                             _currentProgress = 1.0;
@@ -790,7 +791,7 @@ namespace CrypTool.Plugins.DCAPathFinder
 
                             //write data to outputs
                             MessageCount = 1;
-                            ExpectedDifferential = (new Random()).Next(0, ((int)Math.Pow(2, 16) - 1));
+                            ExpectedDifferential = _random.Next(0, 1 << 16);
                             Path = SerializeConfiguration(conf);
 
                             _currentProgress = 1.0;
@@ -1398,7 +1399,7 @@ namespace CrypTool.Plugins.DCAPathFinder
 
                             //write data to outputs
                             MessageCount = 1;
-                            ExpectedDifferential = (new Random()).Next(0, ((int)Math.Pow(2, 16) - 1));
+                            ExpectedDifferential = _random.Next(0, 1 << 16);
                             Path = SerializeConfiguration(conf);
                         }
                     }
@@ -2150,7 +2151,7 @@ namespace CrypTool.Plugins.DCAPathFinder
 
                             //write data to outputs
                             MessageCount = 1;
-                            ExpectedDifferential = (new Random()).Next(0, ((int)Math.Pow(2, 16) - 1));
+                            ExpectedDifferential = _random.Next(0, 1 << 16);
                             Path = SerializeConfiguration(conf);
                         }
                         else
@@ -3321,7 +3322,7 @@ namespace CrypTool.Plugins.DCAPathFinder
 
                             //write data to outputs
                             MessageCount = 1;
-                            ExpectedDifferential = (new Random()).Next(0, ((int)Math.Pow(2, 16) - 1));
+                            ExpectedDifferential = _random.Next(0, 1 << 16);
                             Path = SerializeConfiguration(conf);
 
                             _currentProgress = 1.0;

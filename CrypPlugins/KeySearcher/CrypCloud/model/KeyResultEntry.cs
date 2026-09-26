@@ -137,26 +137,43 @@ namespace KeySearcher.CrypCloud
 
         public byte[] Serialize()
         {
+            if (KeyBytes == null || Decryption == null)
+            {
+                throw new InvalidOperationException("A key result must contain key and decryption data.");
+            }
             return BitConverter.GetBytes(Costs)
-                .Concat(BitConverter.GetBytes((ushort)KeyBytes.Length))
+                .Concat(BitConverter.GetBytes(KeyBytes.Length))
                 .Concat(KeyBytes)
-                .Concat(BitConverter.GetBytes((ushort)Decryption.Length))
+                .Concat(BitConverter.GetBytes(Decryption.Length))
                 .Concat(Decryption).ToArray();
         }
 
         public void Deserialize(byte[] bytes)
         {
+            if (bytes == null || bytes.Length < sizeof(double) + 2 * sizeof(int))
+            {
+                throw new ArgumentException("Key result data is truncated.", nameof(bytes));
+            }
+
             int startIndex = 0;
             Costs = BitConverter.ToDouble(bytes, startIndex);
             startIndex += sizeof(double);
 
-            ushort length = BitConverter.ToUInt16(bytes, startIndex);
-            startIndex += sizeof(ushort);
+            int length = BitConverter.ToInt32(bytes, startIndex);
+            startIndex += sizeof(int);
+            if (length < 0 || length > bytes.Length - startIndex - sizeof(int))
+            {
+                throw new ArgumentException("Invalid key length.", nameof(bytes));
+            }
             KeyBytes = bytes.Skip(startIndex).Take(length).ToArray();
             startIndex += length;
 
-            length = BitConverter.ToUInt16(bytes, startIndex);
-            startIndex += sizeof(ushort);
+            length = BitConverter.ToInt32(bytes, startIndex);
+            startIndex += sizeof(int);
+            if (length < 0 || length != bytes.Length - startIndex)
+            {
+                throw new ArgumentException("Invalid decryption length.", nameof(bytes));
+            }
             Decryption = bytes.Skip(startIndex).Take(length).ToArray();
         }
 

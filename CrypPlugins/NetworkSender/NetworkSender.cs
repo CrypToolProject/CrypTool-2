@@ -117,8 +117,9 @@ namespace CrypTool.Plugins.NetworkSender
         /// </summary>
         public void Stop()
         {
-            availableConnections.Stop();
-            calculateSpeedrate.Stop();
+            availableConnections.CloseConnection(ConnectionIDInput);
+            availableConnections.CloseConnection(ConnectionIDOutput);
+            calculateSpeedrate?.Stop();
         }
 
         #endregion
@@ -277,23 +278,31 @@ namespace CrypTool.Plugins.NetworkSender
             else
             {
                 TcpClient client = new TcpClient();
-                Task.Factory.StartNew(() =>
+                try
                 {
-                    try
+                    IAsyncResult connectResult = client.BeginConnect(remoteEndPoint.Address, remoteEndPoint.Port, null, null);
+                    using (connectResult.AsyncWaitHandle)
                     {
-                        client.Connect(remoteEndPoint);
+                        if (!connectResult.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(5)))
+                        {
+                            client.Close();
+                            GuiLogMessage("Connection timed out.", NotificationLevel.Error);
+                            return null;
+                        }
                     }
-                    catch (Exception e)
-                    {
-                        GuiLogMessage("Connection Failed: " + e.Message, NotificationLevel.Error);
-                    }
-                });
+                    client.EndConnect(connectResult);
+                }
+                catch (Exception e)
+                {
+                    client.Close();
+                    GuiLogMessage("Connection Failed: " + e.Message, NotificationLevel.Error);
+                    return null;
+                }
                 newConnection = new TCPConnection
                 {
                     RemoteEndPoint = remoteEndPoint,
                     TCPClient = client
                 };
-                Thread.Sleep(100);
             }
             return newConnection;
         }

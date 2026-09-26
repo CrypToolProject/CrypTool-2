@@ -116,10 +116,14 @@ namespace CrypTool.PBKDF
             get => _iterations;
             set
             {
+                if (value < 1)
+                {
+                    return;
+                }
                 if (_iterations != value)
                 {
                     _iterations = value;
-                    OnPropertyChanged("HashAlgorithm");
+                    OnPropertyChanged("Iterations");
                 }
             }
         }

@@ -90,6 +90,21 @@ namespace NetworkSender
                 connections.RemoveAll(toRemove.Contains);
             }
         }
+
+        public void CloseConnection(int id)
+        {
+            if (id <= 0)
+            {
+                return;
+            }
+
+            NetworkConnection connection;
+            lock (connections)
+            {
+                connection = id <= connections.Count ? connections[id - 1] : null;
+            }
+            connection?.Close();
+        }
     }
 
     public abstract class NetworkConnection

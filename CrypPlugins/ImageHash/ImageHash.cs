@@ -234,25 +234,14 @@ namespace CrypTool.Plugins.ImageHash
 
                     // Step 3: Find brightest quarter
                     float[] subImage = new float[4];
-                    for (int i = 0; i < step2Img.Width && isRunning; i++)
+                    using (Bitmap step2Bitmap = step2Img.ToBitmap())
                     {
-                        for (int j = 0; j < step2Img.Height && isRunning; j++)
+                        for (int i = 0; i < step2Img.Width && isRunning; i++)
                         {
-                            if ((i < halfSize) && (j < halfSize))
+                            for (int j = 0; j < step2Img.Height && isRunning; j++)
                             {
-                                subImage[0] += step2Img.ToBitmap().GetPixel(i, j).GetBrightness();
-                            }
-                            else if ((i >= halfSize) && (j < halfSize))
-                            {
-                                subImage[1] += step2Img.ToBitmap().GetPixel(i, j).GetBrightness();
-                            }
-                            else if ((i < halfSize) && (j >= halfSize))
-                            {
-                                subImage[2] += step2Img.ToBitmap().GetPixel(i, j).GetBrightness();
-                            }
-                            else if ((i >= halfSize) && (j >= halfSize))
-                            {
-                                subImage[3] += step2Img.ToBitmap().GetPixel(i, j).GetBrightness();
+                                int quadrant = (i >= halfSize ? 1 : 0) + (j >= halfSize ? 2 : 0);
+                                subImage[quadrant] += step2Bitmap.GetPixel(i, j).GetBrightness();
                             }
                         }
                     }
@@ -569,15 +558,13 @@ namespace CrypTool.Plugins.ImageHash
             }
 
             // Avoid "generic error in GDI+"
-            Bitmap saveableBitmap = CopyBitmap(bitmap, format);
-
-            // Save bitmap
-            MemoryStream outputStream = new MemoryStream();
-            saveableBitmap.Save(outputStream, format);
-            saveableBitmap.Dispose();
+            using (Bitmap saveableBitmap = CopyBitmap(bitmap, format))
+            using (MemoryStream outputStream = new MemoryStream())
+            {
+                saveableBitmap.Save(outputStream, format);
+                OutputImage = new CStreamWriter(outputStream.ToArray());
+            }
             bitmap.Dispose();
-
-            OutputImage = new CStreamWriter(outputStream.GetBuffer());
         }
 
         /// <summary>Makes sure that a bitmap is not a useless "MemoryBitmap".</summary>
@@ -586,10 +573,15 @@ namespace CrypTool.Plugins.ImageHash
         /// <returns>Definitely not broken bitmap.</returns>
         private Bitmap CopyBitmap(Bitmap bitmap, ImageFormat format)
         {
-            MemoryStream buffer = new MemoryStream();
-            bitmap.Save(buffer, format);
-            Bitmap saveableBitmap = (Bitmap)System.Drawing.Image.FromStream(buffer);
-            return saveableBitmap;
+            using (MemoryStream buffer = new MemoryStream())
+            {
+                bitmap.Save(buffer, format);
+                buffer.Position = 0;
+                using (Bitmap streamedBitmap = (Bitmap)System.Drawing.Image.FromStream(buffer))
+                {
+                    return new Bitmap(streamedBitmap);
+                }
+            }
         }
 
         #endregion

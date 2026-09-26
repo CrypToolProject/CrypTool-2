@@ -28,6 +28,54 @@ using System.Windows.Media.Imaging;
 
 namespace LatticeCrypto.Utilities
 {
+    internal static class CryptoRandom
+    {
+        public static int Next(int maxExclusive)
+        {
+            return Next(0, maxExclusive);
+        }
+
+        public static int Next(int minInclusive, int maxExclusive)
+        {
+            if (minInclusive >= maxExclusive)
+            {
+                throw new ArgumentOutOfRangeException(nameof(maxExclusive));
+            }
+
+            uint range = (uint)(maxExclusive - minInclusive);
+            uint limit = uint.MaxValue - (uint.MaxValue % range);
+            byte[] bytes = new byte[sizeof(uint)];
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            {
+                uint value;
+                do
+                {
+                    rng.GetBytes(bytes);
+                    value = BitConverter.ToUInt32(bytes, 0);
+                }
+                while (value >= limit);
+                return minInclusive + (int)(value % range);
+            }
+        }
+
+        public static double NextDouble()
+        {
+            byte[] bytes = new byte[sizeof(ulong)];
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(bytes);
+            }
+            return (BitConverter.ToUInt64(bytes, 0) >> 11) * (1.0 / (1UL << 53));
+        }
+
+        public static double NextGaussian(double mean, double standardDeviation)
+        {
+            double u1 = 1.0 - NextDouble();
+            double u2 = 1.0 - NextDouble();
+            return mean + standardDeviation * Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
+        }
+    }
+
     public static class Util
     {
         public static double doubleMaxSize = Math.Pow(10, 8);
@@ -79,17 +127,24 @@ namespace LatticeCrypto.Utilities
 
         public static BigInteger ComputeRandomBigInt(BigInteger min, BigInteger max)
         {
+            if (min > max)
+            {
+                throw new ArgumentOutOfRangeException(nameof(min), "Minimum must not exceed maximum.");
+            }
+
             BigInteger temp;
             int maxByteLength = Math.Max(min.ToByteArray().Length, max.ToByteArray().Length);
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
             byte[] bytes = new byte[maxByteLength];
 
-            do
+            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
             {
-                rng.GetBytes(bytes);
-                temp = new BigInteger(bytes);
+                do
+                {
+                    rng.GetBytes(bytes);
+                    temp = new BigInteger(bytes);
+                }
+                while (temp < min || temp > max);
             }
-            while (temp < min || temp > max);
 
             return temp;
         }

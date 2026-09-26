@@ -441,7 +441,7 @@ namespace CrypTool.Plugins.HagelinMachine
         {
             try
             {
-                string[] s = InputWheelPositions.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] s = inputWheelPositions.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 if (s.Length != _settings.NumberOfWheels)
                 {
                     GuiLogMessage(CrypTool.Plugins.HagelinMachine.Properties.Resources.ErrorInvalidSettingsWheelPositions, NotificationLevel.Error);

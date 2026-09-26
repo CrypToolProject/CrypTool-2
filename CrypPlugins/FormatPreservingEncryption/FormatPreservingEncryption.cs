@@ -185,14 +185,24 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
             else if (settings.Mode == (int)Modes.XML)
             {
 
-                StringWriter sws = new StringWriter();
                 XmlDocument xmlDo = new XmlDocument();
-                xmlDo.LoadXml(Input);
-                xmlDo.Save(sws);
-                if (settings.PassPlaintext)
+                using (StringWriter sws = new StringWriter())
                 {
-                    Output = sws.ToString();
-                    OnPropertyChanged("Output");
+                    try
+                    {
+                        xmlDo.LoadXml(Input);
+                        xmlDo.Save(sws);
+                    }
+                    catch (Exception e)
+                    {
+                        GuiLogMessage(e.Message, NotificationLevel.Error);
+                        return;
+                    }
+                    if (settings.PassPlaintext)
+                    {
+                        Output = sws.ToString();
+                        OnPropertyChanged("Output");
+                    }
                 }
 
                 string[] tasks = Alphabet.Split(new char[] { TASK_SEPERATOR }, StringSplitOptions.RemoveEmptyEntries);
@@ -263,10 +273,12 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
 
                             xmlDoc.ImportNode(node, true);
                         }
-                        StringWriter sw = new StringWriter();
-                        xmlDoc.Save(sw);
-                        Output = sw.ToString();
-                        Input = sw.ToString();
+                        using (StringWriter sw = new StringWriter())
+                        {
+                            xmlDoc.Save(sw);
+                            Output = sw.ToString();
+                            Input = Output;
+                        }
 
                     }
                     catch (Exception e)

@@ -209,7 +209,7 @@ namespace CrypTool.Plugins.Decimalization
                     listres9.Add(hi - 10);
                 }
 
-                int lo = b % 0xf;
+                int lo = b & 0x0f;
                 if (lo < 10)
                 {
                     listres.Add(lo); if (listres.Count >= settings.Quant)
