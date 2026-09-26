@@ -157,7 +157,7 @@
     <value>Initialisierungsvektor</value>
   </data>
   <data name="InputIVTooltip" xml:space="preserve">
-    <value>Der Initialisierungsvektor (IV) der in den Blockmodi verwendet wird. Er muss die selbe größe wie die Blockgröße haben.</value>
+    <value>Der in den Blockmodi verwendete Initialisierungsvektor (IV). Er muss dieselbe Größe wie ein Block haben.</value>
   </data>
   <data name="InputKeyCaption" xml:space="preserve">
     <value>Schlüssel</value>

@@ -772,4 +772,11 @@ Buchstabe</value>
   <data name="BarNum32" xml:space="preserve">
     <value>Stange 32</value>
   </data>
+  <data name="C52d" xml:space="preserve"><value>C-52d</value></data>
+  <data name="CX52a" xml:space="preserve"><value>CX-52a</value></data>
+  <data name="CX52b" xml:space="preserve"><value>CX-52b</value></data>
+  <data name="CX52c" xml:space="preserve"><value>CX-52c</value></data>
+  <data name="CX52EIRE" xml:space="preserve"><value>CX-52 EIRE</value></data>
+  <data name="CXM" xml:space="preserve"><value>CX-M</value></data>
+  <data name="M209" xml:space="preserve"><value>M-209</value></data>
 </root>

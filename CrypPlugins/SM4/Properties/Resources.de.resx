@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="ActionCaption" xml:space="preserve"><value>Aktion</value></data>
+  <data name="ActionList1" xml:space="preserve"><value>Verschlüsseln</value></data>
+  <data name="ActionList2" xml:space="preserve"><value>Entschlüsseln</value></data>
+  <data name="ActionTooltip" xml:space="preserve"><value>Legt fest, ob die Eingabedaten ver- oder entschlüsselt werden.</value></data>
+  <data name="AlgorithmTypeCaption" xml:space="preserve"><value>Algorithmustyp</value></data>
+  <data name="AlgorithmTypeTooltip" xml:space="preserve"><value>Legt den Typ des SM4-Algorithmus fest.</value></data>
+  <data name="BlockModeCaption" xml:space="preserve"><value>Betriebsmodus</value></data>
+  <data name="BlockModeList1" xml:space="preserve"><value>Electronic Code Book (ECB)</value></data>
+  <data name="BlockModeList2" xml:space="preserve"><value>Cipher Block Chaining (CBC)</value></data>
+  <data name="BlockModeList3" xml:space="preserve"><value>Cipher Feedback (CFB)</value></data>
+  <data name="BlockModeList4" xml:space="preserve"><value>Output Feedback (OFB)</value></data>
+  <data name="BlockModeTooltip" xml:space="preserve"><value>Wählt den Betriebsmodus der Blockchiffre aus.</value></data>
+  <data name="InputIVCaption" xml:space="preserve"><value>Initialisierungsvektor</value></data>
+  <data name="InputIVTooltip" xml:space="preserve"><value>Der in verketteten Betriebsmodi verwendete Initialisierungsvektor (IV). Er muss dieselbe Größe wie ein Block haben.</value></data>
+  <data name="InputKeyCaption" xml:space="preserve"><value>Schlüssel</value></data>
+  <data name="InputKeyTooltip" xml:space="preserve"><value>Der Schlüssel muss 16 Byte lang sein. Zu kurze oder zu lange Schlüssel werden erweitert oder gekürzt.</value></data>
+  <data name="InputStreamCaption" xml:space="preserve"><value>Eingabedatenstrom</value></data>
+  <data name="InputStreamTooltip" xml:space="preserve"><value>Zu ver- oder entschlüsselnde Daten</value></data>
+  <data name="OutputStreamCaption" xml:space="preserve"><value>Ausgabedatenstrom</value></data>
+  <data name="OutputStreamTooltip" xml:space="preserve"><value>Dieser Anschluss gibt die ver- oder entschlüsselten Daten aus.</value></data>
+  <data name="PaddingCaption" xml:space="preserve"><value>Auffüllmodus</value></data>
+  <data name="PaddingList1" xml:space="preserve"><value>Keiner</value></data>
+  <data name="PaddingList2" xml:space="preserve"><value>Nullen</value></data>
+  <data name="PaddingList3" xml:space="preserve"><value>PKCS7</value></data>
+  <data name="PaddingList4" xml:space="preserve"><value>ANSIX923</value></data>
+  <data name="PaddingList5" xml:space="preserve"><value>ISO10126</value></data>
+  <data name="PaddingList6" xml:space="preserve"><value>1-0-Auffüllung</value></data>
+  <data name="PaddingTooltip" xml:space="preserve"><value>Wählt einen Modus zum Auffüllen unvollständiger Datenblöcke aus.</value></data>
+  <data name="PluginCaption" xml:space="preserve"><value>SM4</value></data>
+  <data name="PluginTooltip" xml:space="preserve"><value>ShāngMì 4 (SM4, 商密4), früher SMS4, ist eine Blockchiffre, die im chinesischen nationalen Standard WAPI für drahtlose Netzwerke sowie mit Transport Layer Security verwendet wird.</value></data>
+  <data name="SM4_CheckIV_IV_too_long" xml:space="preserve"><value>Die IV-Länge {0} ist zu groß. Der IV wird auf eine Länge von 16 Byte gekürzt.</value></data>
+  <data name="SM4_CheckIV_IV_too_short" xml:space="preserve"><value>Die IV-Länge {0} ist zu klein. Der IV wird mit Nullen auf eine Länge von 16 Byte aufgefüllt.</value></data>
+  <data name="SM4_Execute_Key_too_long" xml:space="preserve"><value>Die Schlüssellänge {0} ist zu groß. Der Schlüssel wird auf eine Länge von 16 Byte gekürzt.</value></data>
+  <data name="SM4_Execute_Key_too_short" xml:space="preserve"><value>Die Schlüssellänge {0} ist zu klein. Der Schlüssel wird mit Nullen auf eine Länge von 16 Byte aufgefüllt.</value></data>
+</root>

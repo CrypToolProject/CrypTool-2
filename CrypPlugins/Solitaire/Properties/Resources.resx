@@ -141,7 +141,7 @@
   <data name="DeckstateTooltip" xml:space="preserve">
     <value>Input a deckstate, the sequence represents the deck from top to bottom.
 Each card is represented by a number, the highest two being the jokers.
-Seperate the cards with a comma, e.g. '1,2,3,4'. Maximum number of cards is 54.</value>
+Separate the cards with commas, e.g. '1,2,3,4'. The maximum number of cards is 54.</value>
   </data>
   <data name="OutputStringCaption" xml:space="preserve">
     <value>Text Output</value>

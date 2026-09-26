@@ -249,4 +249,5 @@
   <data name="DontChange" xml:space="preserve">
     <value>Nicht ändern</value>
   </data>
+  <data name="PresentationFmt" xml:space="preserve"><value>{0:#,0} Zeichen ({1:#,0} Byte)</value></data>
 </root>

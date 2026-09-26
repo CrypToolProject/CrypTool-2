@@ -320,4 +320,5 @@ Zelle von i gesetzt wurde:</value>
   <data name="variablevalues" xml:space="preserve">
     <value>Variablen:</value>
   </data>
+  <data name="k" xml:space="preserve"><value></value></data>
 </root>

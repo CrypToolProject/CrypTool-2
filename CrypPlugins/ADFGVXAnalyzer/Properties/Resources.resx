@@ -298,10 +298,10 @@
     <value>Deviation in percent of the ideal cost value, from when the substitution analysis is to be carried out.</value>
   </data>
   <data name="ExceptionDuringCheckOfMessages" xml:space="preserve">
-    <value>Exception occured during check of messages: {0}</value>
+    <value>An exception occurred while checking the messages: {0}</value>
   </data>
   <data name="ExceptionDuringThread" xml:space="preserve">
-    <value>Exception occured during execution of ADFGVX Analyzer thread: {0}</value>
+    <value>An exception occurred while executing the ADFGVX Analyzer thread: {0}</value>
   </data>
   <data name="InvalidCharacters" xml:space="preserve">
     <value>One of the messages contains invalid characters: {0}</value>

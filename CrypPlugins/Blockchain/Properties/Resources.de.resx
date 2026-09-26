@@ -199,7 +199,7 @@
     <value>Millesekunden</value>
   </data>
   <data name="MiningAddressErrorCaption" xml:space="preserve">
-    <value>Mining Adresse ist keine ungültig</value>
+    <value>Die Mining-Adresse ist ungültig</value>
   </data>
   <data name="NameTableCaption" xml:space="preserve">
     <value>Name</value>
@@ -226,7 +226,7 @@
     <value>Keine Transaktion</value>
   </data>
   <data name="NoValidMiningAddressCaption" xml:space="preserve">
-    <value>Mining Adresse existiert nicht oder ist nicht valide</value>
+    <value>Die Mining-Adresse existiert nicht oder ist ungültig</value>
   </data>
   <data name="PreviousblockCaption" xml:space="preserve">
     <value>Vorheriger Block</value>
@@ -244,10 +244,10 @@
     <value>Hashwert der vorherigen Transaktion</value>
   </data>
   <data name="SettingsMiningAddressCaption" xml:space="preserve">
-    <value>Mining Adresse</value>
+    <value>Mining-Adresse</value>
   </data>
   <data name="SettingsMiningAddressTooltip" xml:space="preserve">
-    <value>Mining Adresse auswählen</value>
+    <value>Mining-Adresse auswählen</value>
   </data>
   <data name="SignatureCaption" xml:space="preserve">
     <value>Signatur: </value>
@@ -393,4 +393,6 @@
   <data name="PreviousBlockIDWrongCaption" xml:space="preserve">
     <value>Vorherige Block-ID ist falsch</value>
   </data>
+  <data name="BlockchainCaption" xml:space="preserve"><value>Blockchain</value></data>
+  <data name="InvalidChain" xml:space="preserve"><value>Die Blockchain ist ungültig</value></data>
 </root>

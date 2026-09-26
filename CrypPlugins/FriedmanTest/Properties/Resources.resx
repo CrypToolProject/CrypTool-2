@@ -139,13 +139,13 @@
     <value>Index of coincidence (IC)</value>
   </data>
   <data name="KappaCiphertextTooltip" xml:space="preserve">
-    <value>This output provides the calculated index of coincidence of the provided occurences of letters (frequency analysis).</value>
+    <value>This output provides the calculated index of coincidence for the supplied letter occurrences (frequency analysis).</value>
   </data>
   <data name="ArrayInputCaption" xml:space="preserve">
     <value>Letter count input</value>
   </data>
   <data name="ArrayInputTooltip" xml:space="preserve">
-    <value>This input accepts a list (array) with the absolute number of letter occurences in an encrypted text. This list can be generated e.g. with the frequency test.</value>
+    <value>This input accepts a list (array) containing the absolute number of letter occurrences in an encrypted text. This list can be generated, for example, with the Frequency Test component.</value>
   </data>
   <data name="KappaCaption" xml:space="preserve">
     <value>Kappa plain-text</value>

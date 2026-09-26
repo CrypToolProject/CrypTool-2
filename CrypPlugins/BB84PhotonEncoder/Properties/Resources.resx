@@ -171,4 +171,5 @@
   <data name="res_settings4Tooltip" xml:space="preserve">
     <value>Change mode for encoding on X base</value>
   </data>
+  <data name="res_Base" xml:space="preserve"><value>Basis</value></data>
 </root>

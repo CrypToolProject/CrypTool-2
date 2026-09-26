@@ -220,6 +220,6 @@
     <value>External ciphertext alphabet</value>
   </data>
   <data name="ErrorSplitCipherAlphabet" xml:space="preserve">
-    <value>Could not parse ciphertext alphabet input. Please use a seperator such as: "{0}". Stopping Execution!</value>
+    <value>Could not parse the ciphertext alphabet. Please use a separator such as "{0}". Stopping execution.</value>
   </data>
 </root>

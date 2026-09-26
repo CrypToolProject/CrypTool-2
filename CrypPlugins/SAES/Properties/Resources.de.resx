@@ -133,7 +133,7 @@
     <value>Schlüssel</value>
   </data>
   <data name="InputKeyTooltip" xml:space="preserve">
-    <value>Der Schlüssel muss 2 Bytes (16 Bits) lang sein.</value>
+    <value>Der Schlüssel muss 2 Byte (16 Bit) lang sein.</value>
   </data>
   <data name="OutputStreamCaption" xml:space="preserve">
     <value>Ausgabedatenstrom</value>
@@ -190,7 +190,7 @@
     <value>Initialisierungsvektor</value>
   </data>
   <data name="InputIVTooltip" xml:space="preserve">
-    <value>Der Initialisierungsvektor (IV) der in den Blockmodi verwendet wird. Er muss die selbe größe wie die Blockgröße haben.</value>
+    <value>Der in den Blockmodi verwendete Initialisierungsvektor (IV). Er muss dieselbe Größe wie ein Block haben.</value>
   </data>
   <data name="IVTooLong" xml:space="preserve">
     <value>Inititalisierungsvektor zu lang: {0}. Wird auf 2 Byte gekürzt.</value>
@@ -222,4 +222,11 @@
   <data name="PaddingList6" xml:space="preserve">
     <value>1-0 Padding</value>
   </data>
+  <data name="ActionCaption1" xml:space="preserve"><value>Aktion</value></data>
+  <data name="ActionList11" xml:space="preserve"><value>Verschlüsseln</value></data>
+  <data name="ActionList21" xml:space="preserve"><value>Entschlüsseln</value></data>
+  <data name="InputKeyCaption1" xml:space="preserve"><value>Schlüssel</value></data>
+  <data name="InputKeyTooltip1" xml:space="preserve"><value>Der Schlüssel muss 2 Byte lang sein. Zu kurze oder zu lange Schlüssel werden erweitert beziehungsweise gekürzt.</value></data>
+  <data name="InputStreamCaption1" xml:space="preserve"><value>Eingabedatenstrom</value></data>
+  <data name="InputStreamTooltip1" xml:space="preserve"><value>Zu ver- oder entschlüsselnde Daten</value></data>
 </root>

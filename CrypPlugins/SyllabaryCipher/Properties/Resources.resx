@@ -157,7 +157,7 @@
     <value>English</value>
   </data>
   <data name="ExceptionWhileGuiCreation" xml:space="preserve">
-    <value>Exception occured during creation of table: {0}</value>
+    <value>An exception occurred while creating the table: {0}</value>
   </data>
   <data name="Formatted" xml:space="preserve">
     <value>Formatted</value>

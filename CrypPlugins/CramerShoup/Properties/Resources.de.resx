@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="ActionCaption" xml:space="preserve"><value>Aktion</value></data>
+  <data name="ActionList1" xml:space="preserve"><value>Kapseln</value></data>
+  <data name="ActionList2" xml:space="preserve"><value>Entkapseln</value></data>
+  <data name="CurveCaption" xml:space="preserve"><value>Elliptische Kurve</value></data>
+  <data name="CurveTooltip" xml:space="preserve"><value>Wählen Sie eine elliptische Kurve aus.</value></data>
+  <data name="InputCiphertextCaption" xml:space="preserve"><value>Geheimtext</value></data>
+  <data name="InputCiphertextTooltip" xml:space="preserve"><value>Von einer Kapselungskomponente erzeugter Geheimtext</value></data>
+  <data name="InputPrivCaption" xml:space="preserve"><value>Privater Schlüssel</value></data>
+  <data name="InputPrivTooltip" xml:space="preserve"><value>Von einer Schlüsselerzeugungskomponente erzeugter privater Schlüssel</value></data>
+  <data name="InputPublCaption" xml:space="preserve"><value>Öffentlicher oder privater Schlüssel</value></data>
+  <data name="InputPublTooltip" xml:space="preserve"><value>Eingang für erzeugte Schlüssel</value></data>
+  <data name="KeySizeCaption" xml:space="preserve"><value>Schlüsselgröße</value></data>
+  <data name="KeySizeTooltip" xml:space="preserve"><value>Wählen Sie eine Schlüsselgröße (128, 256 oder 512 Bit) aus.</value></data>
+  <data name="OutputCiphertextCaption" xml:space="preserve"><value>Geheimtext</value></data>
+  <data name="OutputCiphertextTooltip" xml:space="preserve"><value>Für die Entkapselungskomponente erzeugter Geheimtext</value></data>
+  <data name="OutputKey2Tooltip" xml:space="preserve"><value>Aus einem Zufallswert erzeugt und mit der ausgewählten Hashfunktion gehasht</value></data>
+  <data name="OutputKeyCaption" xml:space="preserve"><value>Schlüssel</value></data>
+  <data name="OutputKeyTooltip" xml:space="preserve"><value>Aus dem Geheimtext extrahierter Schlüssel</value></data>
+  <data name="OutputPrivCaption" xml:space="preserve"><value>Privater Schlüssel</value></data>
+  <data name="OutputPrivTooltip" xml:space="preserve"><value>Erzeugter privater Schlüssel</value></data>
+  <data name="OutputPublCaption" xml:space="preserve"><value>Öffentlicher Schlüssel</value></data>
+  <data name="OutputPublTooltip" xml:space="preserve"><value>Erzeugter öffentlicher Schlüssel</value></data>
+  <data name="PluginCaption" xml:space="preserve"><value>Cramer-Shoup</value></data>
+  <data name="PluginKeyCaption" xml:space="preserve"><value>Cramer-Shoup-Schlüsselerzeugung</value></data>
+  <data name="PluginKeyTooltip" xml:space="preserve"><value>Erzeugt Cramer-Shoup-Schlüssel.</value></data>
+  <data name="PluginTooltip" xml:space="preserve"><value>Cramer-Shoup</value></data>
+</root>

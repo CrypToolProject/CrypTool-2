@@ -127,37 +127,37 @@
     <value>A=</value>
   </data>
   <data name="IBMATooltip" xml:space="preserve">
-    <value>Associate a number between 0 - 9 for hexdecimal value A.</value>
+    <value>Weisen Sie dem Hexadezimalwert A eine Zahl von 0 bis 9 zu.</value>
   </data>
   <data name="IBMBCaption" xml:space="preserve">
     <value>B=</value>
   </data>
   <data name="IBMBTooltip" xml:space="preserve">
-    <value>Associate a number between 0 - 9 for hexdecimal value B.</value>
+    <value>Weisen Sie dem Hexadezimalwert B eine Zahl von 0 bis 9 zu.</value>
   </data>
   <data name="IBMCCaption" xml:space="preserve">
     <value>C=</value>
   </data>
   <data name="IBMCTooltip" xml:space="preserve">
-    <value>Associate a number between 0 - 9 for hexdecimal value C.</value>
+    <value>Weisen Sie dem Hexadezimalwert C eine Zahl von 0 bis 9 zu.</value>
   </data>
   <data name="IBMDCaption" xml:space="preserve">
     <value>D=</value>
   </data>
   <data name="IBMDTooltip" xml:space="preserve">
-    <value>Associate a number between 0 - 9 for hexdecimal value D.</value>
+    <value>Weisen Sie dem Hexadezimalwert D eine Zahl von 0 bis 9 zu.</value>
   </data>
   <data name="IBMECaption" xml:space="preserve">
     <value>E=</value>
   </data>
   <data name="IBMETooltip" xml:space="preserve">
-    <value>Associate a number between 0 - 9 for hexdecimal value E.</value>
+    <value>Weisen Sie dem Hexadezimalwert E eine Zahl von 0 bis 9 zu.</value>
   </data>
   <data name="IBMFCaption" xml:space="preserve">
     <value>F=</value>
   </data>
   <data name="IBMFTooltip" xml:space="preserve">
-    <value>Associate a number between 0 - 9 for hexdecimal value F.</value>
+    <value>Weisen Sie dem Hexadezimalwert F eine Zahl von 0 bis 9 zu.</value>
   </data>
   <data name="InputCaption" xml:space="preserve">
     <value>Binärdaten</value>

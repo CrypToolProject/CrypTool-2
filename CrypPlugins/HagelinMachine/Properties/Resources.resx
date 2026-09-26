@@ -238,7 +238,7 @@
     <value>Please follow the instructions. With the default settings, there is no need to go over all the steps. Execution can be started any time.</value>
   </data>
   <data name="ErrorGeneral" xml:space="preserve">
-    <value>Exception occured during execution of HagelinMachine: {0}</value>
+    <value>An exception occurred while executing the Hagelin machine: {0}</value>
   </data>
   <data name="ErrorInvalidLugs" xml:space="preserve">
     <value>Invalid Internal Key definition in bar lugs: {0}</value>

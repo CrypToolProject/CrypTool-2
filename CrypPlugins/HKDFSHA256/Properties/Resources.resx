@@ -306,7 +306,7 @@ Byte 25 - 32: {4}</value>
     <value>While requesting memory from your system, there was an exception. Please try a smaller value for the output bytes.</value>
   </data>
   <data name="PresErrorText" xml:space="preserve">
-    <value>An error occured. Please find detailed information in the log of CrypTool2.</value>
+    <value>An error occurred. Detailed information is available in the CrypTool 2 log.</value>
   </data>
   <data name="PresFinishedSectionHeading" xml:space="preserve">
     <value>4. Calculation finished</value>
@@ -342,4 +342,5 @@ Byte 25 - 32: {4}</value>
   <data name="PrintToFileGroup" xml:space="preserve">
     <value>Saving-Parameters</value>
   </data>
+  <data name="ProcessGroup" xml:space="preserve"><value>Process configuration</value></data>
 </root>

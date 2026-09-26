@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="HashAlgorithmCaption" xml:space="preserve"><value>Hashalgorithmus</value></data>
+  <data name="HashAlgorithmTooltip" xml:space="preserve"><value>Zu verwendender Hashalgorithmus</value></data>
+  <data name="IterationsCaption" xml:space="preserve"><value>Iterationen</value></data>
+  <data name="IterationsTooltip" xml:space="preserve"><value>Anzahl der Iterationen, die zur Schlüsselerzeugung verwendet werden</value></data>
+  <data name="KDFCaption" xml:space="preserve"><value>Schlüsselableitungsfunktion</value></data>
+  <data name="KDFTooltip" xml:space="preserve"><value>Schlüsselableitungsfunktion, die zur Schlüsselerzeugung verwendet wird</value></data>
+  <data name="KeyCaption" xml:space="preserve"><value>Schlüssel</value></data>
+  <data name="KeyTooltip" xml:space="preserve"><value>Der erzeugte kryptografische Schlüssel</value></data>
+  <data name="OutputLengthCaption" xml:space="preserve"><value>Ausgabelänge</value></data>
+  <data name="OutputLengthTooltip" xml:space="preserve"><value>Länge des erzeugten Schlüssels in Byte</value></data>
+  <data name="PasswordCaption" xml:space="preserve"><value>Passwort</value></data>
+  <data name="PasswordTooltip" xml:space="preserve"><value>Passwort, das zur Erzeugung des kryptografischen Schlüssels verwendet wird</value></data>
+  <data name="PluginCaption" xml:space="preserve"><value>PBKDF</value></data>
+  <data name="PluginTooltip" xml:space="preserve"><value>Passwortbasierte Schlüsselableitungsfunktionen PBKDF1 und PBKDF2</value></data>
+  <data name="SaltCaption" xml:space="preserve"><value>Salt</value></data>
+  <data name="SaltTooltip" xml:space="preserve"><value>Salt, das bei der Erzeugung des kryptografischen Schlüssels verwendet wird</value></data>
+</root>

@@ -151,7 +151,7 @@
     <value>End time:</value>
   </data>
   <data name="ExceptionMessage" xml:space="preserve">
-    <value>Exception occured: {0}</value>
+    <value>An exception occurred: {0}</value>
   </data>
   <data name="ExpertModeCaption" xml:space="preserve">
     <value>Setting mode</value>

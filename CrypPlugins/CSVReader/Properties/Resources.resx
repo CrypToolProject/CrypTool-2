@@ -127,7 +127,7 @@
     <value>Column Separator</value>
   </data>
   <data name="ColumnSeparatorTooltip" xml:space="preserve">
-    <value>The separator symbol to seperate columns</value>
+    <value>The separator symbol used to separate columns</value>
   </data>
   <data name="InputCSVCaption" xml:space="preserve">
     <value>Input CSV</value>
@@ -157,6 +157,6 @@
     <value>Row Separator</value>
   </data>
   <data name="RowSeparatorTooltip" xml:space="preserve">
-    <value>The separator symbol to seperate rows</value>
+    <value>The separator symbol used to separate rows</value>
   </data>
 </root>

@@ -136,7 +136,7 @@
     <value>Schlüsseltext</value>
   </data>
   <data name="CiphertextTooltip" xml:space="preserve">
-    <value>Ciphertext-only</value>
+    <value>Nur Geheimtext</value>
   </data>
   <data name="CoresUsedCaption" xml:space="preserve">
     <value>Verwendete Kerne</value>

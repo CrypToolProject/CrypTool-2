@@ -175,10 +175,10 @@
     <value>Bytes als ASCII anzeigen</value>
   </data>
   <data name="IpInputCaption" xml:space="preserve">
-    <value>Ziel IP</value>
+    <value>Ziel-IP-Adresse</value>
   </data>
   <data name="IpInputTooltip" xml:space="preserve">
-    <value>Setzen Sie die Ziel IP-Adresse hier oder in den Einstellungen der Komponente.</value>
+    <value>Legen Sie die Ziel-IP-Adresse hier oder in den Einstellungen der Komponente fest.</value>
   </data>
   <data name="ProtocolCaption" xml:space="preserve">
     <value>Protokoll</value>

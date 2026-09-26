@@ -258,7 +258,7 @@ Key: {4}</value>
     <value>2. Construction of KKDF SHA-256</value>
   </data>
   <data name="PresErrorText" xml:space="preserve">
-    <value>An error occured. Please find detailed information in the log of CrypTool2.</value>
+    <value>An error occurred. Detailed information is available in the CrypTool 2 log.</value>
   </data>
   <data name="PresFinishedSectionHeading" xml:space="preserve">
     <value>4. Calculation finished</value>

@@ -195,4 +195,6 @@
   <data name="TweakTooltip" xml:space="preserve">
     <value>The Tweak.</value>
   </data>
+  <data name="Decrypt" xml:space="preserve"><value>Decrypt</value></data>
+  <data name="Encrypt" xml:space="preserve"><value>Encrypt</value></data>
 </root>

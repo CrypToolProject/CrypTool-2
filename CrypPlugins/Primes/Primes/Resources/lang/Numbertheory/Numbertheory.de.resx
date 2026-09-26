@@ -330,4 +330,5 @@
   <data name="tauvalues" xml:space="preserve">
     <value>Liste der Teiler</value>
   </data>
+  <data name="powermod_execution" xml:space="preserve"><value>{0}.&#9;{1}^{2} mod {3} = {4}</value></data>
 </root>

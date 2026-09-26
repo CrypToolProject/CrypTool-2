@@ -246,4 +246,5 @@
   <data name="NumberModeCaption" xml:space="preserve">
     <value>Art der Verarbeitung</value>
   </data>
+  <data name="Presentation" xml:space="preserve"><value>Präsentation</value></data>
 </root>

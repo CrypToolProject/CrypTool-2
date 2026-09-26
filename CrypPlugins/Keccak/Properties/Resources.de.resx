@@ -295,7 +295,7 @@
     <value>Keccak-f-Permutation</value>
   </data>
   <data name="PresKeccakFPhaseText" xml:space="preserve">
-    <value>Keccak-f besteht aus 12 + 2 * l Runden. Bei der eingestellten State-Größe entspricht l dem Wert {0} und die Gesamtanzahl an Runden beträgt 24. In jeder Runde werden fünf "Step-Mappings" ausgeführt, die den State auf unterschiedliche Weise permutieren. </value>
+    <value>Keccak-f besteht aus 12 + 2 * l Runden. Bei der eingestellten Zustandsgröße entspricht l dem Wert {0}, sodass insgesamt {1} Runden ausgeführt werden. Jede Runde besteht aus fünf Abbildungen, die den Zustand auf unterschiedliche Weise permutieren.</value>
   </data>
   <data name="PresKeccakFStateMapping" xml:space="preserve">
     <value>Damit die Step-Mappings einfacher dargestellt werden können, wird der State durch einen dreidimensionalen Würfel repräsentiert. Die Länge der Reihen (row) und Spalten (column) ist jeweils 5 bit. Die Länge der Lanes hängt von der State-Größe ab (bei der ausgewählten State-Größe beträgt die Länge der Lanes {1} bit).</value>

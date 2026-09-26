@@ -151,7 +151,7 @@
     <value>Password</value>
   </data>
   <data name="PasswordTooltip" xml:space="preserve">
-    <value>Password that is used to create a cryptographic  key</value>
+    <value>Password that is used to create a cryptographic key</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>PBKDF</value>

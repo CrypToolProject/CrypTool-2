@@ -189,4 +189,6 @@
   <data name="ReplaceUmlautsTooltip" xml:space="preserve">
     <value>If enabled, umlauts (Ä,Ö, and Ü) as well as ß are replaced by AE, OE, UE, and SS</value>
   </data>
+  <data name="PeriodCaption" xml:space="preserve"><value>Period</value></data>
+  <data name="PeriodTooltip" xml:space="preserve"><value>Size of the blocks (period) used for encryption or decryption</value></data>
 </root>

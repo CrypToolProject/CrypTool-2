@@ -463,10 +463,10 @@
     <value>Could not save model: {0}</value>
   </data>
   <data name="WorkspaceManagerClass_Undo_Can_not_undo___0_" xml:space="preserve">
-    <value>Can not undo: {0}</value>
+    <value>Cannot undo: {0}</value>
   </data>
   <data name="WorkspaceManagerClass_Redo_Can_not_redo___0_" xml:space="preserve">
-    <value>Can not redo: {0}</value>
+    <value>Cannot redo: {0}</value>
   </data>
   <data name="WorkspaceManagerClass_Print_Printing_document___0___now" xml:space="preserve">
     <value>Printing document '{0}' now</value>

@@ -685,20 +685,20 @@
     <value>{0} Zeichen</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Client__0__tried_to_auth_with_invalid_password" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="Client__0__tried_to_auth_with_invalid_password" xml:space="preserve">
+    <value>Client '{0}' hat versucht, sich mit einem ungültigen Passwort zu authentifizieren</value>
   </data>
-  <data name="Current__Information_" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="Current__Information_" xml:space="preserve">
+    <value>Aktuelle Informationen</value>
   </data>
-  <data name="_Information_" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="_Information_" xml:space="preserve">
+    <value>Informationen</value>
   </data>
-  <data name="Received_late_job_result_0_from_client_1" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="Received_late_job_result_0_from_client_1" xml:space="preserve">
+    <value>Verspätetes Auftragsergebnis {0} von Client '{1}' empfangen</value>
   </data>
-  <data name="Connection_lost__Waiting_for_reconnect___" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="Connection_lost__Waiting_for_reconnect___" xml:space="preserve">
+    <value>Verbindung verloren. Warten auf erneute Verbindung …</value>
   </data>
   <data name="day" xml:space="preserve">
     <value>Tag</value>
@@ -757,9 +757,6 @@
   <data name="local_throughput_sec" xml:space="preserve">
     <value>Durchsatz / sec:</value>
   </data>
-  <data name="Client__0__tried_to_auth_with_invalid_password1" xml:space="preserve">
-    <value>Client '{0}' versuchte Authentifizierung mit ungültigem Passwort</value>
-  </data>
   <data name="settings__caption_numberOfBlocks" xml:space="preserve">
     <value>Anzahl der Blöcke</value>
   </data>
@@ -781,4 +778,5 @@
   <data name="You_have_to_connect_the_KeySearcher_with_the_Cost_Control_" xml:space="preserve">
     <value>Sie müssen dem Schlüsselsucher eine Kostenfunktion hinzufügen!</value>
   </data>
+  <data name="settings__caption_numberOfChunks" xml:space="preserve"><value>Anzahl der Blöcke (log)</value></data>
 </root>

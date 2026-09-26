@@ -117,4 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActionCaption" xml:space="preserve"><value>Ver- / Entschlüsseln</value></data>
+  <data name="ActionTooltip" xml:space="preserve"><value>Wählen Sie, ob die Eingabe ver- oder entschlüsselt werden soll.</value></data>
+  <data name="CaseSensitivyCaption" xml:space="preserve"><value>Groß-/Kleinschreibung beachten</value></data>
+  <data name="CaseSensitivyTooltip" xml:space="preserve"><value>Legt fest, ob das Gerät zwischen Groß- und Kleinschreibung unterscheidet.</value></data>
+  <data name="Decrypt" xml:space="preserve"><value>Entschlüsseln</value></data>
+  <data name="DeviceType" xml:space="preserve"><value>Gerätetyp</value></data>
+  <data name="DeviceTypeTooltip" xml:space="preserve"><value>Typ des verwendeten Zylinderchiffriergeräts</value></data>
+  <data name="Device_Bazeries" xml:space="preserve"><value>Bazeries-Zylinder</value></data>
+  <data name="Device_M94" xml:space="preserve"><value>M-94</value></data>
+  <data name="Encrypt" xml:space="preserve"><value>Verschlüsseln</value></data>
+  <data name="InvalidCharacterHandlingCaption" xml:space="preserve"><value>Behandlung ungültiger Zeichen</value></data>
+  <data name="InvalidCharacterHandlingList1" xml:space="preserve"><value>Löschen</value></data>
+  <data name="InvalidCharacterHandlingList2" xml:space="preserve"><value>Ignorieren</value></data>
+  <data name="InvalidCharacterHandlingList3" xml:space="preserve"><value>Durch '?' ersetzen</value></data>
+  <data name="InvalidCharacterHandlingTooltip" xml:space="preserve"><value>Legt fest, wie Zeichen behandelt werden, die von den verwendeten Scheiben nicht unterstützt werden.</value></data>
+  <data name="KeyCaption" xml:space="preserve"><value>Schlüsseleingabe</value></data>
+  <data name="KeyTooltio" xml:space="preserve"><value>Schlüssel für die Ver- oder Entschlüsselung</value></data>
+  <data name="PluginCaption" xml:space="preserve"><value>Zylinderchiffre</value></data>
+  <data name="PluginTooltip" xml:space="preserve"><value>Komponente zur Ver- und Entschlüsselung mit einer Zylinderchiffre</value></data>
+  <data name="SeparatorOffCharCaption" xml:space="preserve"><value>Trennzeichen für Versatzwerte</value></data>
+  <data name="SeparatorOffCharTooltip" xml:space="preserve"><value>Trennzeichen zwischen den Scheibenversatzwerten</value></data>
+  <data name="SeparatorStripCaption" xml:space="preserve"><value>Trennzeichen für Scheiben</value></data>
+  <data name="SeparatorStripTooltip" xml:space="preserve"><value>Trennzeichen zwischen den verwendeten Scheiben</value></data>
+  <data name="TextInputCaption" xml:space="preserve"><value>Texteingabe</value></data>
+  <data name="TextInputTooltip" xml:space="preserve"><value>Mit der Zylinderchiffre zu verarbeitender Text</value></data>
+  <data name="TextOutputCaption" xml:space="preserve"><value>Textausgabe</value></data>
+  <data name="TextOutputTolltip" xml:space="preserve"><value>Mit der Zylinderchiffre verarbeiteter Text</value></data>
 </root>

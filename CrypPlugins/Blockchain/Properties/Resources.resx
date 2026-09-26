@@ -157,7 +157,7 @@
     <value>Error</value>
   </data>
   <data name="ExceptionCaption" xml:space="preserve">
-    <value>Exception occured: {0}</value>
+    <value>An exception occurred: {0}</value>
   </data>
   <data name="FailedCaption" xml:space="preserve">
     <value>Failed</value>
@@ -262,7 +262,7 @@
     <value>Status</value>
   </data>
   <data name="SuccessfullCaption" xml:space="preserve">
-    <value>Successfull</value>
+    <value>Successful</value>
   </data>
   <data name="TimeSpentCaption" xml:space="preserve">
     <value>Time spent: {0} ms</value>
@@ -319,7 +319,7 @@
     <value>Transactions</value>
   </data>
   <data name="InvalidAddressInTransaction" xml:space="preserve">
-    <value>Invalid adress in transaction</value>
+    <value>Invalid address in transaction</value>
   </data>
   <data name="GenTransactionWarning" xml:space="preserve">
     <value>No transactions possible in Genesis Block</value>
@@ -396,4 +396,5 @@
   <data name="PreviousBlockIDWrongCaption" xml:space="preserve">
     <value>Previous block ID wrong</value>
   </data>
+  <data name="zuCaption" xml:space="preserve"><value>to</value></data>
 </root>

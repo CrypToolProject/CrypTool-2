@@ -196,7 +196,7 @@
     <value>Alle Netzwerkgeräte benutzen</value>
   </data>
   <data name="NetworkDeviceTooltip" xml:space="preserve">
-    <value>Geben Sie die IP-Adresse ihrer Netzwerkkarte an, um nur von dieser zu empfangen.</value>
+    <value>Geben Sie die IP-Adresse Ihrer Netzwerkkarte an, um nur über diese zu empfangen.</value>
   </data>
   <data name="ByteAsciiSwitchCaption" xml:space="preserve">
     <value>Bytes als ASCII anzeigen  </value>

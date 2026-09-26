@@ -198,4 +198,5 @@
   <data name="res_WaitingIterationsTooltip" xml:space="preserve">
     <value>Sets the amount of iterations before animation starts</value>
   </data>
+  <data name="res_Settings3Tooltip" xml:space="preserve"><value>Changes the decoding mode to the X basis</value></data>
 </root>

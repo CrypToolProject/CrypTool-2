@@ -188,7 +188,7 @@
       <value>Zweiter Wert</value>
   </data>
   <data name="ArrayOperations_Execute_Could_not_execute_operation___0______1_" xml:space="preserve">
-      <value>Could not execute operation '{0}' : {1}</value>
+      <value>Die Operation „{0}“ konnte nicht ausgeführt werden: {1}</value>
   </data>
   <data name="OperationList1" xml:space="preserve">
       <value>Mengen-Vereinigung</value>

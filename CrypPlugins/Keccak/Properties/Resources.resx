@@ -861,4 +861,5 @@
   <data name="Bit" xml:space="preserve">
     <value>bit</value>
   </data>
+  <data name="CapacityCaption" xml:space="preserve"><value>Capacity</value></data>
 </root>

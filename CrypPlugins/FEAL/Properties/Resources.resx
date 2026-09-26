@@ -121,7 +121,7 @@
     <value>Initialization vector</value>
   </data>
   <data name="InputIVTooltip" xml:space="preserve">
-    <value>The initialization vector (IV) which is used in chaining modes. It must be the same as the blocksize.</value>
+    <value>The initialization vector (IV) used in chaining modes. It must have the same size as a block.</value>
   </data>
   <data name="InputKeyCaption" xml:space="preserve">
     <value>Key</value>

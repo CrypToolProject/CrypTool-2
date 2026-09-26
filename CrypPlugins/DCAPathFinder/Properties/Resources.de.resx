@@ -166,28 +166,28 @@
     <value>Bestimmt die Anzahl der zu generierenden Nachrichten-Paare</value>
   </data>
   <data name="Cipher1" xml:space="preserve">
-    <value>Tutorial 1: Chiffre 1 (16 bit Blockgröße, 2 Rundenschlüssel, 32 bit Schlüssellänge)</value>
+    <value>Tutorial 1: Chiffre 1 (16-Bit-Blockgröße, 2 Rundenschlüssel, 32-Bit-Schlüssellänge)</value>
   </data>
   <data name="Cipher2" xml:space="preserve">
-    <value>Tutorial 2: Chiffre 2 (16 bit Blockgröße, 4 Rundenschlüssel, 64 bit Schlüssellänge)</value>
+    <value>Tutorial 2: Chiffre 2 (16-Bit-Blockgröße, 4 Rundenschlüssel, 64-Bit-Schlüssellänge)</value>
   </data>
   <data name="Cipher3" xml:space="preserve">
-    <value>Tutorial 3: Chiffre 3 (16 bit Blockgröße, 6 Rundenschlüssel, 96 bit Schlüssellänge)</value>
+    <value>Tutorial 3: Chiffre 3 (16-Bit-Blockgröße, 6 Rundenschlüssel, 96-Bit-Schlüssellänge)</value>
   </data>
   <data name="Cipher4" xml:space="preserve">
-    <value>Tutorial 4: Chiffre 4 (4 bit Blockgröße , 4 Rundenschlüssel, 16 bit Schlüssellänge)</value>
+    <value>Tutorial 4: Chiffre 4 (4-Bit-Blockgröße, 4 Rundenschlüssel, 16-Bit-Schlüssellänge)</value>
   </data>
   <data name="DCAOptions" xml:space="preserve">
     <value>Differenzielle Kryptoanalyse Optionen</value>
   </data>
   <data name="DescriptionContent2" xml:space="preserve">
-    <value>Tutorial 1 verwendet Chiffre 1 der DKA-ToyCipher-Komponente. Diese Chiffre arbeitet auf 16 bit Blöcken und verwendet zwei je 16 bit lange Rundenschlüssel. Es wird eine Verschlüsselungsrunde ausgeführt. In diesem Tutorial werden beide unbekannte Rundenschlüssel wiederhergestellt.</value>
+    <value>Tutorial 1 verwendet Chiffre 1 der DKA-ToyCipher-Komponente. Diese Chiffre arbeitet mit 16-Bit-Blöcken und verwendet zwei jeweils 16 Bit lange Rundenschlüssel. Es wird eine Verschlüsselungsrunde ausgeführt. In diesem Tutorial werden die beiden unbekannten Rundenschlüssel wiederhergestellt.</value>
   </data>
   <data name="DescriptionContent3" xml:space="preserve">
-    <value>Tutorial 2 verwendet Chiffre 2 der DKA-ToyCipher-Komponente. Diese Chiffre arbeitet auf 16 bit Blöcken und verwendet vier je 16 bit lange Rundenschlüssel. Es werden drei Verschlüsselungsrunden ausgeführt. In diesem Tutorial werden alle unbekannte Rundenschlüssel wiederhergestellt.</value>
+    <value>Tutorial 2 verwendet Chiffre 2 der DKA-ToyCipher-Komponente. Diese Chiffre arbeitet mit 16-Bit-Blöcken und verwendet vier jeweils 16 Bit lange Rundenschlüssel. Es werden drei Verschlüsselungsrunden ausgeführt. In diesem Tutorial werden alle unbekannten Rundenschlüssel wiederhergestellt.</value>
   </data>
   <data name="DescriptionContent4" xml:space="preserve">
-    <value>Tutorial 3 verwendet Chiffre 3 der DKA-ToyCipher-Komponente. Diese Chiffre arbeitet auf 16 bit Blöcken und verwendet sechs je 16 bit lange Rundenschlüssel. Es werden fünf Verschlüsselungsrunden ausgeführt. In diesem Tutorial werden alle unbekannte Rundenschlüssel wiederhergestellt.</value>
+    <value>Tutorial 3 verwendet Chiffre 3 der DKA-ToyCipher-Komponente. Diese Chiffre arbeitet mit 16-Bit-Blöcken und verwendet sechs jeweils 16 Bit lange Rundenschlüssel. Es werden fünf Verschlüsselungsrunden ausgeführt. In diesem Tutorial werden alle unbekannten Rundenschlüssel wiederhergestellt.</value>
   </data>
   <data name="DescriptionHeader" xml:space="preserve">
     <value>Beschreibung der Tutorials</value>
@@ -577,7 +577,7 @@
     <value>Die Ein- und Ausgabe-Differenzen sowie die Einträge der Differenzverteilungs-Tabelle sind hexadezimal.</value>
   </data>
   <data name="Tutorial2AnalysisOfSBoxSlide3Content2" xml:space="preserve">
-    <value>Bei einer 4 bit S-Box gibt es je 16 verschiedene Eingaben und Ausgaben. Kombiniert man 2 Nachrichten zu einem Nachrichten-Paar mit je disjunkten Differenzen, können 256 verschiedene Übergänge von Differenzen beobachtet werden.</value>
+    <value>Bei einer 4-Bit-S-Box gibt es jeweils 16 verschiedene Eingaben und Ausgaben. Kombiniert man zwei Nachrichten zu einem Nachrichtenpaar mit jeweils disjunkten Differenzen, können 256 verschiedene Differenzübergänge beobachtet werden.</value>
   </data>
   <data name="Tutorial2AnalysisOfSBoxSlide3Content3" xml:space="preserve">
     <value>Eine wichtige Beobachtung ist, dass es Differenzen gibt, die häufiger vorkommen als andere. Es gibt auch Differenzen, die gar nicht auftreten. Zum Beispiel wird die Eingabe-Differenz 8 insgesamt 8 mal auf die Ausgabe-Differenz D abgebildet.</value>
@@ -694,13 +694,13 @@
     <value> unterscheiden. Notiert wird dies durch </value>
   </data>
   <data name="Tutorial2CharacteristicSlide1Content2" xml:space="preserve">
-    <value>Charakteristiken können miteinander kombiniert und so über mehrere Runden verbunden werden. Vorraussetzung dafür ist, dass die Ausgangsdifferenz der vorgänger Charakteristik denselben Wert wie die Eingangsdifferenz der nachfolgenden Charakteristik aufweist. Unter der Annahme, dass Charakteristiken unabhängig voneinander sind, können die Wahrscheinlichkeiten multipliziert werden. Auf diese Weise kann ein Weg von Differenzen durch die Chiffre gesucht werden.</value>
+    <value>Charakteristiken können miteinander kombiniert und so über mehrere Runden verbunden werden. Voraussetzung dafür ist, dass die Ausgangsdifferenz der vorherigen Charakteristik denselben Wert wie die Eingangsdifferenz der nachfolgenden Charakteristik aufweist. Unter der Annahme, dass Charakteristiken unabhängig voneinander sind, können die Wahrscheinlichkeiten multipliziert werden. Auf diese Weise kann ein Weg von Differenzen durch die Chiffre gesucht werden.</value>
   </data>
   <data name="Tutorial2CharacteristicSlide1Content2Run1" xml:space="preserve">
     <value>Wir bezeichnen ein solches Paar </value>
   </data>
   <data name="Tutorial2CharacteristicSlide1Content2Run2" xml:space="preserve">
-    <value> als differenzielle charakteristik unter der Operation der S-Box. Wie zuvor gesehen, hat eine differenzielle Charakteristik eine feste Wahrscheinlichkeit.</value>
+    <value> als differenzielle Charakteristik unter der Operation der S-Box. Wie zuvor gesehen, hat eine differenzielle Charakteristik eine feste Wahrscheinlichkeit.</value>
   </data>
   <data name="Tutorial2CharacteristicSlide1Content3" xml:space="preserve">
     <value>Ziel bei der Suche ist es einen Weg zu finden, der eine möglichst hohe Wahrscheinlichkeit aufweist. Diese Wege können in der DKA-PfadVisualisierer-Komponente graphisch dargestellt werden.</value>
@@ -709,19 +709,19 @@
     <value>Charakteristiken</value>
   </data>
   <data name="Tutorial2CharacteristicSlide2Content1" xml:space="preserve">
-    <value>Eine Verschlüsselungsrunde besteht bei Chiffre 2 aus Schlüsseladdition, Substitution und Permutation. Die Chiffre arbeitet auf 16 bit Blöcken. Die vorige Notation wird wie folgt erweitert, um eine differenzielle Charakteristik einer S-Box für 16 bit Blöcke zu bezeichnen</value>
+    <value>Eine Verschlüsselungsrunde besteht bei Chiffre 2 aus Schlüsseladdition, Substitution und Permutation. Die Chiffre arbeitet mit 16-Bit-Blöcken. Die vorherige Notation wird wie folgt erweitert, um eine differenzielle Charakteristik einer S-Box für 16-Bit-Blöcke zu bezeichnen</value>
   </data>
   <data name="Tutorial2CharacteristicSlide2Content2" xml:space="preserve">
     <value>Nach der Substitution werden die Bits in Chiffre 2 permutiert. Die Permutation der Chiffre ist bekannt und daher kann die differenzielle Charakteristik der Permutation wie folgt bezeichnet werden</value>
   </data>
   <data name="Tutorial2CharacteristicSlide2Content3" xml:space="preserve">
-    <value>Zusammenfassend wird eine differenzielle Charakteristik einer Verschlüsselungsrunde als Komination von Substitution und Permutation wie folgt notiert</value>
+    <value>Zusammenfassend wird eine differenzielle Charakteristik einer Verschlüsselungsrunde als Kombination von Substitution und Permutation wie folgt notiert</value>
   </data>
   <data name="Tutorial2CharacteristicSlide2Header" xml:space="preserve">
     <value>Charakteristiken</value>
   </data>
   <data name="Tutorial2CharacteristicSlide3Content1" xml:space="preserve">
-    <value>Die differenziellen Charakteristiken einzelner Runde sollen jetzt zu einem Weg von Differenzen durch die gesamte Chiffre kombiniert werden. Die Suche nach Pfaden mit hoher Wahrscheinlichkeit ist ein aufwändiges und zeitaufwändiges Problem bei Chiffren mit vielen Verschlüsselungsrunden und langen Blöcken.</value>
+    <value>Die differenziellen Charakteristiken einzelner Runden sollen jetzt zu einem Weg von Differenzen durch die gesamte Chiffre kombiniert werden. Die Suche nach Pfaden mit hoher Wahrscheinlichkeit ist ein aufwendiges und zeitaufwendiges Problem bei Chiffren mit vielen Verschlüsselungsrunden und langen Blöcken.</value>
   </data>
   <data name="Tutorial2CharacteristicSlide3Content2" xml:space="preserve">
     <value>Die DKA-PfadFinder-Komponente verfügt über verschiedene Suchoptionen zur Bestimmung von solchen Pfaden.</value>
@@ -742,7 +742,7 @@
     <value>5. Differenziale</value>
   </data>
   <data name="Tutorial2DifferentialSlide1Content1" xml:space="preserve">
-    <value>Bei der Suche nach Charakteristiken über n Runden kann es vorkommen, dass dass verschiedene Charakteristiken gefunden werden, die die selbe Eingangsdifferenz der ersten und Ausgangsdifferenz der letzten Verschlüsselungsrunde haben. Die Charakteristiken haben also die Form</value>
+    <value>Bei der Suche nach Charakteristiken über n Runden kann es vorkommen, dass verschiedene Charakteristiken gefunden werden, die dieselbe Eingangsdifferenz der ersten und Ausgangsdifferenz der letzten Verschlüsselungsrunde haben. Die Charakteristiken haben also die Form</value>
   </data>
   <data name="Tutorial2DifferentialSlide1Content2" xml:space="preserve">
     <value>Entscheidend bei der Verwendung von Charakteristiken für die differenzielle Kryptoanalyse sind Eingangs- und Ausgangswert der Differenz. Findet man mehrere Charakteristiken mit selben Eingangs- und Ausgangswert, können die Wahrscheinlichkeiten addiert werden. Eine Struktur, die aus mehreren Charakteristiken besteht, wird Differenzial genannt.</value>
@@ -793,7 +793,7 @@
     <value>Sie können nun in der DKA-KeyRecovery-Komponente die in der DKA-PfadFinder-Komponente generierte Angriffskonfiguration verwenden, um Schlüsselbits wiederherzustellen. Dazu müssen Sie auf den Button "Start" klicken.</value>
   </data>
   <data name="Tutorial2WaitingSlideContent2" xml:space="preserve">
-    <value>Optional können Sie sich in der DKA-PfadVisualiserer-Komponente das ermittelte Differenzial und die darin enthaltenen Charakteristiken anzeigen lassen.</value>
+    <value>Optional können Sie sich in der DKA-Pfadvisualisierer-Komponente das ermittelte Differenzial und die darin enthaltenen Charakteristiken anzeigen lassen.</value>
   </data>
   <data name="Tutorial2WaitingSlideHeader" xml:space="preserve">
     <value>Differenzielle Kryptoanalyse wird in den nachfolgenden Komponenten weitergeführt</value>
@@ -877,7 +877,7 @@
     <value>Sie können nun in der DKA-KeyRecovery-Komponente die in der DKA-PfadFinder-Komponente generierte Angriffskonfiguration verwenden, um Schlüsselbits wiederherzustellen. Dazu müssen Sie auf den Button "Start" klicken.</value>
   </data>
   <data name="Tutorial3WaitingSlideContent2" xml:space="preserve">
-    <value>Optional können Sie sich in der DKA-PfadVisualiserer-Komponente das ermittelte Differenzial und die darin enthaltenen Charakteristiken anzeigen lassen.</value>
+    <value>Optional können Sie sich in der DKA-Pfadvisualisierer-Komponente das ermittelte Differenzial und die darin enthaltenen Charakteristiken anzeigen lassen.</value>
   </data>
   <data name="Tutorial3WaitingSlideHeader" xml:space="preserve">
     <value>Differenzielle Kryptoanalyse wird in den nachfolgenden Komponenten weitergeführt</value>
@@ -1072,7 +1072,7 @@
     <value>Um eine Chiffre mit mehreren Verschlüsselgsrunden und Rundenschlüsseln mittels differenzieller Kryptoanalyse anzugreifen, muss diese genauer untersucht werden. Von Interesse sind die einzelnen Bestandteile der Verschlüsselungsrunden und wie diese sich verhalten.</value>
   </data>
   <data name="Tutorial2IntroductionSlide1Content4" xml:space="preserve">
-    <value>Aufgrund der mehrfachen Verschlüsselungsrunden kann diese Chiffre nicht wie Chiffre 1 angegriffen werden. Für Chiffre 2 wird ein Ansatz benötigt, der die Änderungen von Differenzen über mehrere Verschlüsselungsrunden mit einer gewissen Wahrscheinlichkeit vorraussagt.</value>
+    <value>Aufgrund der mehreren Verschlüsselungsrunden kann diese Chiffre nicht wie Chiffre 1 angegriffen werden. Für Chiffre 2 wird ein Ansatz benötigt, der die Änderungen von Differenzen über mehrere Verschlüsselungsrunden mit einer gewissen Wahrscheinlichkeit voraussagt.</value>
   </data>
   <data name="Tutorial3AttackFinishedContent1" xml:space="preserve">
     <value>Tutorial 3 zur differenziellen Kryptoanalyse in der DKA-PfadFinder-Komponente ist beendet. </value>

@@ -225,7 +225,7 @@
   <data name="KeyInputTooltip" xml:space="preserve">
     <value>Eingabe des Schlüssels der Lorenz SZ42-Maschine</value>
   </data>
-  <data name="KeyOutputCaption" xml:space="preserve">
+  <data name="KeyOututCaption" xml:space="preserve">
     <value>Schlüssel-Ausgabe</value>
   </data>
   <data name="KeyOutputTooltip" xml:space="preserve">

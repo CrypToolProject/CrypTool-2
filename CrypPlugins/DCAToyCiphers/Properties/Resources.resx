@@ -236,7 +236,7 @@
     <value>Plaintext / Ciphertext</value>
   </data>
   <data name="MessageInputTooltip" xml:space="preserve">
-    <value>Eingang für den Klartext / Geheimtext (je nach gewähltem Betriebsmodus)</value>
+    <value>Input for the plaintext/ciphertext (depending on the selected operating mode)</value>
   </data>
   <data name="MessageOutput" xml:space="preserve">
     <value>Plaintext / Ciphertext</value>

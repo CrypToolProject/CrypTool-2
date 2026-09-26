@@ -238,7 +238,7 @@
     <value>Vollständig genutzt Klartext-Sprache</value>
   </data>
   <data name="PTCaseSensitiveCaption" xml:space="preserve">
-    <value>Case sensitive</value>
+    <value>Groß-/Kleinschreibung beachten</value>
   </data>
   <data name="PTCaseSensitiveTooltip" xml:space="preserve">
     <value>Unterscheide zwischen Klein- und Großbuchstaben</value>
@@ -253,7 +253,7 @@
     <value>Separiere Klartext/Geheimtextsprache</value>
   </data>
   <data name="SeparateAlphabetsTooltip" xml:space="preserve">
-    <value>Use distinct languages for plaintext and ciphertext</value>
+    <value>Unterschiedliche Sprachen für Klartext und Geheimtext verwenden</value>
   </data>
   <data name="StartLabel" xml:space="preserve">
     <value>Start:</value>
@@ -271,10 +271,10 @@
     <value>Behandlung von Zeichen, die nicht im Alphabet vorkommen.</value>
   </data>
   <data name="UseDefaultWordSeparatorCaption" xml:space="preserve">
-    <value>Default word separator</value>
+    <value>Standard-Worttrenner</value>
   </data>
   <data name="UseDefaultWordSeparatorTooltip" xml:space="preserve">
-    <value>Use default word separator (blank) for dictionary attack or set manually a separator</value>
+    <value>Den Standard-Worttrenner (Leerzeichen) für den Wörterbuchangriff verwenden oder einen Trenner manuell festlegen</value>
   </data>
   <data name="ValueHeader" xml:space="preserve">
     <value>Wert</value>

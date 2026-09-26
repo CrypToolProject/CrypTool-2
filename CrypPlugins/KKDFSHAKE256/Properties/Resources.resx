@@ -220,7 +220,7 @@ The calculation takes place completely within the hash function SHAKE256...</val
     <value>The calculation of the key material can be described as following:</value>
   </data>
   <data name="PresConstructionPart2Text" xml:space="preserve">
-    <value>The key material is calculated by executing the hash function with the key as prefix. The hash function gets the length of the output as parameter. Compared to hash functions with fixed output length, the SHAKE256 does not require any additional design to allow any length of output. The generation of a hash value in the SHAKE256 is divided into two phases, wich are shown in the following diagram.</value>
+    <value>The key material is calculated by executing the hash function with the key as a prefix. The hash function receives the output length as a parameter. Unlike hash functions with a fixed output length, SHAKE256 requires no additional construction to produce output of any length. Generating a SHAKE256 hash value is divided into two phases, which are shown in the following diagram.</value>
   </data>
   <data name="PresConstructionPart3Text" xml:space="preserve">
     <value>The two phases are called &lt;Bold&gt;absorbing&lt;/Bold&gt; and &lt;Bold&gt;squeezing phase&lt;/Bold&gt;. In the &lt;Bold&gt;absorbing phase&lt;/Bold&gt;, the input is read and various operations are performed.</value>
@@ -238,7 +238,7 @@ The calculation takes place completely within the hash function SHAKE256...</val
     <value>2. Construction of KKDF SHAKE256</value>
   </data>
   <data name="PresErrorText" xml:space="preserve">
-    <value>An error occured. Please find detailed information in the log of CrypTool2.</value>
+    <value>An error occurred. Detailed information is available in the CrypTool 2 log.</value>
   </data>
   <data name="PresFinishedSectionHeading" xml:space="preserve">
     <value>4. Calculation finished</value>

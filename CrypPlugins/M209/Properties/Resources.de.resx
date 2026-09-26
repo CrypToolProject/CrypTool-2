@@ -421,7 +421,7 @@
     <value>Text-Optionen</value>
   </data>
   <data name="TextTooltip" xml:space="preserve">
-    <value>Input Text</value>
+    <value>Eingabetext</value>
   </data>
   <data name="UnknownSymbolHandlingCaption" xml:space="preserve">
     <value>Behandlung ungültiger Zeichen</value>
@@ -447,4 +447,15 @@
   <data name="ZSpaceTooltip" xml:space="preserve">
     <value>Ersetze Leerzeichen durch 'Z' bei der Verschlüsselung und 'Z' durch Leerzeichen bei der Entschlüsselung.</value>
   </data>
+  <data name="PositionCurrentlyActive" xml:space="preserve"><value>Derzeit aktive Position</value></data>
+  <data name="PositionCurrentlyDisplayedToUser" xml:space="preserve"><value>Derzeit angezeigte Position</value></data>
+  <data name="PresentatinCol1Label" xml:space="preserve"><value>Information</value></data>
+  <data name="PresentatinCol2Label" xml:space="preserve"><value>Rad 1</value></data>
+  <data name="PresentatinCol3Label" xml:space="preserve"><value>Rad 2</value></data>
+  <data name="PresentatinCol4Label" xml:space="preserve"><value>Rad 3</value></data>
+  <data name="PresentatinCol5Label" xml:space="preserve"><value>Rad 4</value></data>
+  <data name="PresentatinCol6Label" xml:space="preserve"><value>Rad 5</value></data>
+  <data name="PresentatinCol7Label" xml:space="preserve"><value>Rad 6</value></data>
+  <data name="WheelsAdvancementsAtThisStep" xml:space="preserve"><value>Radfortschaltungen in diesem Schritt</value></data>
+  <data name="WheelsWithActivePins" xml:space="preserve"><value>Räder mit aktiven Stiften</value></data>
 </root>

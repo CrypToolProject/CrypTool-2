@@ -255,4 +255,14 @@
   <data name="WordDigitsTooltip" xml:space="preserve">
     <value>How many digits should be used for the word encoding?</value>
   </data>
+  <data name="UnknownSymbolHandlingCaption" xml:space="preserve"><value>Handling of invalid characters</value></data>
+  <data name="UnknownSymbolHandlingTooltip" xml:space="preserve"><value>Specifies how input characters that are not part of the input alphabet are handled.</value></data>
+  <data name="UnknownSymbolHandlingList1" xml:space="preserve"><value>Ignore (leave unchanged)</value></data>
+  <data name="UnknownSymbolHandlingList2" xml:space="preserve"><value>Remove</value></data>
+  <data name="UnknownSymbolHandlingList3" xml:space="preserve"><value>Replace with '?'</value></data>
+  <data name="MemorizeCaseCaption" xml:space="preserve"><value>Preserve original capitalization</value></data>
+  <data name="MemorizeCaseTooltip" xml:space="preserve"><value>Preserves the original capitalization even though lowercase letters are mapped to uppercase letters before encryption.</value></data>
+  <data name="DiskKeySettingInvalid" xml:space="preserve"><value>Invalid key setting for disk {0}: {1}</value></data>
+  <data name="DiskKeysSettingInvalidHasToBe" xml:space="preserve"><value>Invalid key setting for disk {0}: {1}. It must be between {2} and {3}.</value></data>
+  <data name="InvalidKeyGiven" xml:space="preserve"><value>Invalid key. Expected 4 elements but received only {0}.</value></data>
 </root>

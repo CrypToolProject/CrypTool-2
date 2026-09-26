@@ -139,7 +139,7 @@
     <value>Control Master</value>
   </data>
   <data name="ControlMasterTooltip" xml:space="preserve">
-    <value>Used for bruteforcing</value>
+    <value>Wird für die Brute-Force-Suche verwendet</value>
   </data>
   <data name="CostMasterCaption" xml:space="preserve">
     <value>Kostenberechnung (Master) </value>

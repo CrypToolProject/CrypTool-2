@@ -223,7 +223,7 @@
     <value>Choose how many cores should be used</value>
   </data>
   <data name="CsvPathCaption" xml:space="preserve">
-    <value>Select the Comma-Seperated-Values file</value>
+    <value>Select the comma-separated values (CSV) file</value>
   </data>
   <data name="CsvPathTooltip" xml:space="preserve">
     <value>Select the folder and csv file you want to use.</value>
@@ -774,4 +774,6 @@
   <data name="You_have_to_connect_the_KeySearcher_with_the_Cost_Control_" xml:space="preserve">
     <value>You have to add a cost function to the KeySearcher!</value>
   </data>
+  <data name="UsePeerToPeerCaption" xml:space="preserve"><value>Use network</value></data>
+  <data name="UsePeerToPeerTooltip" xml:space="preserve"><value>Distribute the task across the network to use the combined computing power.</value></data>
 </root>

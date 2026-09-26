@@ -342,4 +342,6 @@
   <data name="BlindSigningSecurityTooltip" xml:space="preserve">
     <value>Choose the security level against blind signing attacks.</value>
   </data>
+  <data name="MessageNumber" xml:space="preserve"><value>Message M as a number</value></data>
+  <data name="MessageNumberTooltip" xml:space="preserve"><value>Enter message M as a number.</value></data>
 </root>

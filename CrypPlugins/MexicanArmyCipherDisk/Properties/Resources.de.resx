@@ -166,7 +166,7 @@
     <value>Ausgabeanzeige kennt ursprüngliche Groß-/Kleinschreibung</value>
   </data>
   <data name="MemorizeCaseTooltip" xml:space="preserve">
-    <value>Obwohl die Kleinbuchstaben vor der Verschlüsselung einander zu geordnet wurden (so dass ein "a" wie ein "A" behandelt wird), merkt sich das Programm, welche Schreibweise der Buchstabe hatte und stellt ihn in der Ausgabe entsprechend dar</value>
+    <value>Obwohl die Kleinbuchstaben vor der Verschlüsselung einander zugeordnet wurden (sodass ein "a" wie ein "A" behandelt wird), merkt sich das Programm die ursprüngliche Groß- und Kleinschreibung und stellt sie in der Ausgabe entsprechend wieder her.</value>
   </data>
   <data name="KeyCaption" xml:space="preserve">
     <value>Schlüssel</value>

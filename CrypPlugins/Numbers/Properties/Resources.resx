@@ -214,7 +214,7 @@
     <value>Statusbar</value>
   </data>
   <data name="ShowDigitsTooltip" xml:space="preserve">
-    <value>Set this to get informations about the amount of digits the given number has.</value>
+    <value>Enable this option to obtain information about the number of digits in the given number.</value>
   </data>
   <data name="Digit" xml:space="preserve">
     <value>decimal digit</value>

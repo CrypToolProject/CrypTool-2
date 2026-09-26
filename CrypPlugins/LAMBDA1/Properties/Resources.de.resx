@@ -180,4 +180,6 @@
   <data name="PluginTooltip" xml:space="preserve">
     <value>LAMBDA1 ist eine historische Blockchiffre, die auf DES basiert. Sie wurde in den 1980er Jahren in der Deutschen Demokratischen Republik (DDR) entwickelt.</value>
   </data>
+  <data name="InputIV" xml:space="preserve"><value>Initialisierungsvektor</value></data>
+  <data name="InputIVTooltip" xml:space="preserve"><value>Geben Sie den Initialisierungsvektor (IV) an.</value></data>
 </root>

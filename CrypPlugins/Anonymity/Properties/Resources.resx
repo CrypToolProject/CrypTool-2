@@ -124,10 +124,10 @@
     <value>Applies Anonymity methods to datasets</value>
   </data>
   <data name="EmptyMessage" xml:space="preserve">
-    <value>Empty CSV. Can not process.</value>
+    <value>Empty CSV. Cannot process.</value>
   </data>
   <data name="ExceptionMessage" xml:space="preserve">
-    <value>Exception occured during processing of CSV: {0}</value>
+    <value>An exception occurred while processing the CSV file: {0}</value>
   </data>
   <data name="InputCaption" xml:space="preserve">
     <value>Data input</value>

@@ -273,14 +273,14 @@ percentage of the code (7% - 30%) can be
 recovered in case of damage.</value>
   </data>
   <data name="QR_FORMAT_LABLE" xml:space="preserve">
-    <value>Format Informations</value>
+    <value>Format information</value>
   </data>
   <data name="QR_VERSION_DISC" xml:space="preserve">
     <value>The version specifies one of 40 pre-
 defined sizes for the QR code.</value>
   </data>
   <data name="QR_VERSION_LABLE" xml:space="preserve">
-    <value>Version Informations</value>
+    <value>Version information</value>
   </data>
   <data name="QR_NORMAL_DISC" xml:space="preserve">
     <value>In this area, the data is shown  
