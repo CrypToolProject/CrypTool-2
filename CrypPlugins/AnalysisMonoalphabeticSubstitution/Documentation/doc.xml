@@ -117,18 +117,26 @@
     <linkReference>
       <link url="http://en.wikipedia.org/wiki/Substitution_cipher" lang="en" />
       <caption lang="en">Substitution Cipher (Wikipedia)</caption>
+      <link url="https://de.wikipedia.org/wiki/Monoalphabetische_Substitution" lang="de-DE" />
+      <caption lang="de-DE">Monoalphabetische Substitution (Wikipedia)</caption>
     </linkReference>
     <linkReference>
       <link url="http://april.eecs.umich.edu/pdfs/olson2007crypt.pdf" lang="en" />
       <caption lang="en">Olson, E.: Robust Dictionary Attack of Short Simple Substitution Ciphers</caption>
+      <link url="http://april.eecs.umich.edu/pdfs/olson2007crypt.pdf" lang="de-DE" />
+      <caption lang="de-DE">Olson, E.: Robust Dictionary Attack of Short Simple Substitution Ciphers (englisch)</caption>
     </linkReference>
     <linkReference>
       <link url="http://en.wikipedia.org/wiki/Genetic_algorithm" lang="en" />
       <caption lang="en">Genetic Algorithm (Wikipedia)</caption>
+      <link url="https://de.wikipedia.org/wiki/Evolution%C3%A4rer_Algorithmus" lang="de-DE" />
+      <caption lang="de-DE">Evolutionärer Algorithmus (Wikipedia)</caption>
     </linkReference>
     <linkReference>
       <link url="http://sourceforge.net/projects/decrypto/" lang="en" />
       <caption lang="en">DeCrypto Project</caption>
+      <link url="http://sourceforge.net/projects/decrypto/" lang="de-DE" />
+      <caption lang="de-DE">DeCrypto-Projekt (englisch)</caption>
     </linkReference>
   </references>
 </documentation>

@@ -35,22 +35,30 @@
       <caption lang="en">
       Mihir Bellare, Thomas Ristenpart, Phillip Rogaway, and Till Stegers: "Format Preserving Encryption", 25 pages
     </caption>
+      <link lang="de-DE" url="http://eprint.iacr.org/2009/251.pdf" />
+      <caption lang="de-DE">Mihir Bellare, Thomas Ristenpart, Phillip Rogaway und Till Stegers: „Format Preserving Encryption“, 25 Seiten (englisch)</caption>
     </linkReference>
     <linkReference>
       <link lang="en" url="https://web.cs.ucdavis.edu/~rogaway/papers/synopsis.pdf" />
       <caption lang="en">
       Phillip Rogaway: A Synopsis ofFormat-Preserving Encryption, 2010
     </caption>
+      <link lang="de-DE" url="https://web.cs.ucdavis.edu/~rogaway/papers/synopsis.pdf" />
+      <caption lang="de-DE">Phillip Rogaway: A Synopsis of Format-Preserving Encryption, 2010 (englisch)</caption>
     </linkReference>
     <linkReference>
       <link lang="en" url="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-38G.pdf" />
       <caption lang="en">
       NIST: Recommendation for Block Cipher Modes of Operation: Methods for Format-Preserving Encryption, 2016
     </caption>
+      <link lang="de-DE" url="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-38G.pdf" />
+      <caption lang="de-DE">NIST: Empfehlung für Betriebsarten von Blockchiffren – Verfahren zur formaterhaltenden Verschlüsselung, 2016 (englisch)</caption>
     </linkReference>
     <linkReference>
       <link lang="en" url="https://www.CrypTool.org/images/ctp/documents/BA_Hirsch.pdf" />
       <caption lang="en">Alexander Hirsch: Implementierung und Visualisierung von Format-erhaltenden Verschlüsselungsverfahren in CrypTool 2, Bachelor thesis, 2018</caption>
+      <link lang="de-DE" url="https://www.CrypTool.org/images/ctp/documents/BA_Hirsch.pdf" />
+      <caption lang="de-DE">Alexander Hirsch: Implementierung und Visualisierung von formaterhaltenden Verschlüsselungsverfahren in CrypTool 2, Bachelorarbeit, 2018</caption>
     </linkReference>
   </references>
 </documentation>

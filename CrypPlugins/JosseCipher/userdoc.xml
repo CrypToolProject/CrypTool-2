@@ -26,7 +26,7 @@
     <linkReference id="weimann_thesis">
       <link url="https://www.cryptool.org/assets/ctp/documents/BA_Weimann.pdf" lang="de-DE" />
       <caption lang="de-DE">Niklas Weimann. „Implementierung und Visualisierung verschiedener kryptografischer Handverfahren und Codes in CrypTool 2“. 2021</caption>
-      <link url="https://www.cryptool.org/assets/ctp/documents/BA_Weimann.pdf" lang="ru" />
+      <link url="https://www.cryptool.org/assets/ctp/documents/BA_Weimann.pdf" lang="en" />
       <caption lang="en">Niklas Weimann. „Implementierung und Visualisierung verschiedener kryptografischer Handverfahren und Codes in CrypTool 2“. 2021</caption>
     </linkReference>
   </references>

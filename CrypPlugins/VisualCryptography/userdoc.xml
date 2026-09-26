@@ -52,12 +52,16 @@
     <bookReference id="NaorShamir">
       <author>Moni Naor and Adi Shamir</author>
       <publisher lang="en">Workshop on the Theory and Application of of Cryptographic Techniques. Springer, Berlin, Heidelberg</publisher>
+      <publisher lang="de-DE">Workshop über Theorie und Anwendung kryptografischer Verfahren. Springer, Berlin, Heidelberg</publisher>
       <name lang="en">Visual cryptography</name>
+      <name lang="de-DE">Visuelle Kryptografie</name>
       <year>1994</year>
     </bookReference>
     <linkReference id="wikipedia">
       <link lang="en" url="https://en.wikipedia.org/wiki/Visual_cryptography" />
       <caption lang="en">Visual Cryptography</caption>
+      <link lang="de-DE" url="https://de.wikipedia.org/wiki/Visuelle_Kryptographie" />
+      <caption lang="de-DE">Visuelle Kryptografie</caption>
     </linkReference>
   </references>
 </documentation>

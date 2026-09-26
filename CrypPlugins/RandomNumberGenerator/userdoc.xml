@@ -124,7 +124,9 @@
     <bookReference id="x2modn">
       <author>Blum, Lenore, Manuel Blum, and Mike Shub.</author>
       <publisher lang="en">SIAM Journal on computing 15.2 (1986): 364-383.</publisher>
+      <publisher lang="de-DE">SIAM Journal on Computing 15.2 (1986): 364–383.</publisher>
       <name lang="en">A simple unpredictable pseudo-random number generator.</name>
+      <name lang="de-DE">Ein einfacher, nicht vorhersagbarer Pseudozufallszahlengenerator.</name>
     </bookReference>
     <linkReference id="linearcongruential">
       <link url="https://en.wikipedia.org/wiki/Linear_congruential_generator" lang="en" />

@@ -59,14 +59,20 @@
     <linkReference id="msieve">
       <link url="http://sourceforge.net/projects/msieve/" lang="en" />
       <caption lang="en">Msieve SourceForge page</caption>
+      <link url="http://sourceforge.net/projects/msieve/" lang="de-DE" />
+      <caption lang="de-DE">Msieve-Projektseite auf SourceForge (englisch)</caption>
     </linkReference>
     <linkReference>
       <link url="http://en.wikipedia.org/wiki/Quadratic_sieve" lang="en" />
       <caption lang="en">Quadratic sieve in Wikipedia</caption>
+      <link url="https://de.wikipedia.org/wiki/Quadratisches_Sieb" lang="de-DE" />
+      <caption lang="de-DE">Quadratisches Sieb in Wikipedia</caption>
     </linkReference>
     <linkReference>
       <link url="http://en.wikipedia.org/wiki/Integer_factorization" lang="en" />
       <caption lang="en">Integer factorization in Wikipedia</caption>
+      <link url="https://de.wikipedia.org/wiki/Faktorisierungsverfahren" lang="de-DE" />
+      <caption lang="de-DE">Faktorisierungsverfahren in Wikipedia</caption>
     </linkReference>
   </references>
 </documentation>

@@ -77,7 +77,7 @@
     <linkReference>
       <link url="http://en.wikipedia.org/wiki/PRESENT_(cipher)" lang="en" />
       <caption lang="en">PRESENT in Wikipedia</caption>
-      <link url="http://en.wikipedia.org/wiki/PRESENT_(cipher)" lang="en" />
+      <link url="http://en.wikipedia.org/wiki/PRESENT_(cipher)" lang="de-DE" />
       <caption lang="de-DE">PRESENT in der englischen Wikipedia</caption>
     </linkReference>
     <linkReference>
@@ -89,10 +89,14 @@
     <linkReference>
       <link url="http://homes.esat.kuleuven.be/~abogdano/papers/present_ches07.pdf" lang="en" />
       <caption lang="en">A. Bogdanov, L.R. Knudsen, G. Leander, C. Paar, A. Poschmann, M.J.B. Robshaw, Y. Seurin, and C. Vikkelsoe: "PRESENT: An Ultra-Lightweight Block Cipher", 2007</caption>
+      <link url="http://homes.esat.kuleuven.be/~abogdano/papers/present_ches07.pdf" lang="de-DE" />
+      <caption lang="de-DE">A. Bogdanov, L. R. Knudsen, G. Leander, C. Paar, A. Poschmann, M. J. B. Robshaw, Y. Seurin und C. Vikkelsoe: „PRESENT: An Ultra-Lightweight Block Cipher“, 2007 (englisch)</caption>
     </linkReference>
     <linkReference>
       <link url="http://www.cosic.esat.kuleuven.be/publications/article-1234.pdf" lang="en" />
-      <caption lang="en">Onur Özen, Kerem Varici, Cihangir Tezcan, and Celebi Kocair: Lightweight Block Ciphers Revisited:Cryptanalysis of Reduced Round PRESENT and HIGHT</caption>
+      <caption lang="en">Onur Özen, Kerem Varici, Cihangir Tezcan, and Celebi Kocair: Lightweight Block Ciphers Revisited: Cryptanalysis of Reduced Round PRESENT and HIGHT</caption>
+      <link url="http://www.cosic.esat.kuleuven.be/publications/article-1234.pdf" lang="de-DE" />
+      <caption lang="de-DE">Onur Özen, Kerem Varici, Cihangir Tezcan und Celebi Kocair: Lightweight Block Ciphers Revisited: Cryptanalysis of Reduced Round PRESENT and HIGHT (englisch)</caption>
     </linkReference>
   </references>
 </documentation>

@@ -191,7 +191,7 @@
     Des Weiteren weisen das Modulo- und das Multiplikationsverfahren eine hohe Qualität auf. <newline />
     Eine genaue Betrachtung der Wahrscheinlichkeiten und der einzelnen Verfahren zur Dezimalisierung befindet sich in der
 	 Ausarbeitung auf das im Abschnitt <b>Referenzen</b> verwiesen wird.<ref id="Dec" /></presentation>
-  <references lang="de-DE">
+  <references>
     <linkReference id="Dec">
       <caption lang="de-DE">Koy, H./ Blank, M.: Qualität von Dezimalisierungsverfahren. Januar 2010.</caption>
       <caption lang="en">Koy, H./ Blank, M.: Qualität von Dezimalisierungsverfahren (Quality of Decimalization Methods). January 2010.</caption>

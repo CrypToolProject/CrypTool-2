@@ -110,6 +110,8 @@
     <linkReference id="RelatedKeyCrypt">
       <link url="http://cryptolux.uni.lu/mediawiki/uploads/1/1a/Aes-192-256.pdf" lang="en" />
       <caption lang="en">Related-key Cryptanalysis of the Full AES-192 and AES-256 (PDF)</caption>
+      <link url="http://cryptolux.uni.lu/mediawiki/uploads/1/1a/Aes-192-256.pdf" lang="de-DE" />
+      <caption lang="de-DE">Related-Key-Kryptoanalyse des vollständigen AES-192 und AES-256 (PDF, englisch)</caption>
     </linkReference>
   </references>
 </documentation>

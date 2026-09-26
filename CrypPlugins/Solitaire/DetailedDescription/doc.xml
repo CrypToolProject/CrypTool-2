@@ -85,6 +85,8 @@
       <caption lang="de">Bruce Schneier - The Solitaire Encryption Algorithm (englisch)</caption>
     </linkReference>
     <linkReference>
+      <link lang="en" url="http://www.nplaumann.de/kryptografie/solitaire.html" />
+      <caption lang="en">The 'Solitaire' encryption algorithm (German)</caption>
       <link lang="de" url="http://www.nplaumann.de/kryptografie/solitaire.html" />
       <caption lang="de">Der 'Solitaire'-Verschlüsselungsalgorithmus</caption>
     </linkReference>

@@ -82,6 +82,8 @@
 	  <linkReference id="reference">
 	  <link url="https://en.wikipedia.org/wiki/Data_anonymization" lang="en" />
 	  <caption lang="en">Wikipedia - Data Anonymization</caption>
+	  <link url="https://de.wikipedia.org/wiki/Anonymisierung_und_Pseudonymisierung" lang="de-DE" />
+	  <caption lang="de-DE">Wikipedia – Anonymisierung und Pseudonymisierung</caption>
 	  </linkReference>
   </references>
 </documentation>

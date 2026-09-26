@@ -49,6 +49,7 @@
     Der Beweiser führt daraufhin das Experiment durch und gibt das Resultat am Ausgang an den Verifizierer weiter.
   </usage>
   <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
   <references>
     <linkReference>
       <link url="http://en.wikipedia.org/wiki/Zero-knowledge_proof" lang="en" />

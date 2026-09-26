@@ -43,13 +43,13 @@
       <link url="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code" lang="en" />
       <caption lang="en">Hash-based message authentication code (Wikipedia)</caption>
       <link url="http://de.wikipedia.org/wiki/Keyed-Hash_Message_Authentication_Code" lang="de-DE" />
-      <caption lang="en">Keyed-Hash Message Authentication Code (Wikipedia)</caption>
+      <caption lang="de-DE">Keyed-Hash Message Authentication Code (Wikipedia)</caption>
     </linkReference>
     <linkReference id="fips">
       <link url="http://csrc.nist.gov/publications/fips/fips198/fips-198a.pdf" lang="en" />
       <caption lang="en">FIPS: The Keyed-Hash Message Authentication Code (PDF)</caption>
       <link url="http://csrc.nist.gov/publications/fips/fips198/fips-198a.pdf" lang="de-DE" />
-      <caption lang="en">FIPS: The Keyed-Hash Message Authentication Code (PDF, englisch)</caption>
+      <caption lang="de-DE">FIPS: The Keyed-Hash Message Authentication Code (PDF, englisch)</caption>
     </linkReference>
   </references>
 </documentation>

@@ -38,8 +38,8 @@
     </linkReference>
     <linkReference>
       <link lang="en" url="http://en.wikipedia.org/wiki/Levenshtein_distance" />
-      <caption lang="de-DE">Levenshtein Distance</caption>
-      <link lang="en" url="http://de.wikipedia.org/wiki/Levenshtein-Distanz" />
+      <caption lang="en">Levenshtein Distance</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/Levenshtein-Distanz" />
       <caption lang="de-DE">Levenshtein-Distanz</caption>
     </linkReference>
   </references>

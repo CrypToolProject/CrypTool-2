@@ -87,6 +87,8 @@
 	  <linkReference>
 		<link url="https://en.wikipedia.org/wiki/Beaufort_cipher" lang="en" />
 		<caption lang="en">Beaufort cipher in Wikipedia</caption>			
+		<link url="https://de.wikipedia.org/wiki/Beaufort-Chiffre" lang="de-DE" />
+		<caption lang="de-DE">Beaufort-Chiffre in Wikipedia</caption>
 	  </linkReference>
   </references>
 </documentation>

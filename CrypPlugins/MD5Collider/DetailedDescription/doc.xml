@@ -36,6 +36,7 @@
     <linkReference id="FCG">
       <link lang="en" url="http://www.win.tue.nl/hashclash/" />
       <caption lang="en">The "Fast Collision Generator" project.</caption>
+      <link lang="de" url="http://www.win.tue.nl/hashclash/" />
       <caption lang="de">Das "Fast Collision Generator"-Projekt.</caption>
     </linkReference>
   </references>

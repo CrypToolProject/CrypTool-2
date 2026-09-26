@@ -99,16 +99,22 @@
     <linkReference id="wikipedia">
       <link url="https://en.wikipedia.org/wiki/Transposition_cipher#Double_transposition" lang="en" />
       <caption lang="en">Wikipedia: Double Transposition Cipher</caption>
+      <link url="https://en.wikipedia.org/wiki/Transposition_cipher#Double_transposition" lang="de-DE" />
+      <caption lang="de-DE">Wikipedia: Doppelte Transpositionschiffre (englisch)</caption>
     </linkReference>
 
     <linkReference id="ww1crypto">
       <link url="https://en.wikipedia.org/wiki/World_War_I_cryptography" lang="en" />
       <caption lang="en">Wikipedia: World War I Cryptography</caption>
+      <link url="https://en.wikipedia.org/wiki/World_War_I_cryptography" lang="de-DE" />
+      <caption lang="de-DE">Wikipedia: Kryptografie im Ersten Weltkrieg (englisch)</caption>
     </linkReference>
 
     <linkReference id="historical">
       <link url="https://prgomez.com/transposition-plus-cipher/" lang="en" />
       <caption lang="en">Historical Analysis: This Could Have Happened During WWI</caption>
+      <link url="https://prgomez.com/transposition-plus-cipher/" lang="de-DE" />
+      <caption lang="de-DE">Historische Analyse: Dies hätte während des Ersten Weltkriegs geschehen können (englisch)</caption>
     </linkReference>
 
     <bookReference id="oko2006">
