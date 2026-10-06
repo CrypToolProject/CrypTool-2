@@ -16,7 +16,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Numerics;
 
-namespace Tests.TemplateAndPluginTests
+namespace UnitTests
 {
     [TestClass]
     public class ChaChaTest
@@ -41,13 +41,13 @@ namespace Tests.TemplateAndPluginTests
         }
 
         [TestMethod]
-        public void ChaChaTestMethodIETF()
+        public void IetfVersionMatchesPublishedVectors()
         {
             RunTests(ietfTestvectors);
         }
 
         [TestMethod]
-        public void ChaChaTestMethodDJB()
+        public void DjbVersionMatchesPublishedVectors()
         {
             RunTests(djbTestvectors);
         }

@@ -33,7 +33,7 @@ namespace UnitTests
         /// Experimental folder is excluded
         /// </summary>
         [TestMethod]
-        public void TemplateXMLTestMethod()
+        public void EveryTemplateMetadataFileIsValid()
         {
             string[] allFiles = Directory.GetFiles("Templates", "*.*", SearchOption.AllDirectories);
 

@@ -151,6 +151,15 @@ namespace WorkspaceManager.Model
                     //this here takes care that we can still load old models
                     PluginTypeName = PluginTypeName.Replace("Cryptool", "CrypTool");
 
+                    // Older differential-cryptanalysis templates used the former
+                    // assembly name although the component type already had its
+                    // current DCAToyCiphers name.
+                    if (PluginTypeAssemblyName == "ToyCiphers" &&
+                        PluginTypeName == "CrypTool.Plugins.DCAToyCiphers.DCAToyCiphers")
+                    {
+                        PluginTypeAssemblyName = "DCAToyCiphers";
+                    }
+
                     //1. check, if assembly has already been loaded for this type
                     Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
                     foreach (Assembly assembly in assemblies)

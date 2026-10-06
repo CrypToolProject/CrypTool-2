@@ -1,4 +1,19 @@
-﻿using CrypTool.Fialka;
+﻿/*
+   Copyright (C) CrypTool 2 Team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using CrypTool.Fialka;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTests
@@ -37,7 +52,7 @@ namespace UnitTests
         #region Encryption and decryption test
         // simple test the PT/CT for default settings
         [TestMethod]
-        public void FialkaTestMethodInOut()
+        public void EncryptsAndDecryptsKnownMessages()
         {
 
             // encryption
@@ -86,7 +101,7 @@ namespace UnitTests
 
         #region PROTON I test
         [TestMethod]
-        public void FialkaTestMethodSettingsProtonI()
+        public void ProtonISettingsMatchKnownVectors()
         {
 
             CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Fialka");
@@ -181,7 +196,7 @@ namespace UnitTests
         #region PROTON II test
 
         [TestMethod]
-        public void FialkaTestMethodSettingsProtonII()
+        public void ProtonIISettingsMatchKnownVectors()
         {
             CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Fialka");
             PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "Input", ".MachineModel", ".CountryLayout", ".RotorType", ".RotorSeries",
@@ -547,7 +562,7 @@ namespace UnitTests
         #region NUM LOCK 10 test
 
         [TestMethod]
-        public void FialkaTestMethodNumbers()
+        public void NumberModeMatchesKnownVectors()
         {
             CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Fialka");
             PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "Input", ".NumLockType", ".MachineModel", ".CountryLayout", ".RotorType", ".RotorSeries",

@@ -29,33 +29,18 @@ namespace UnitTests
     public class EveryComponentHasATemplateTest
     {
         /// <summary>
-        /// This test tests, which ICrypComponent have their own template file. It generates a report in standard out
+        /// Loads plugin assemblies so their concrete components can be compared with templates.
         /// </summary>
         public EveryComponentHasATemplateTest()
         {
-            TestHelpers.SetAssemblyPaths();
-
-            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\CrypPlugins";
-
-            foreach (string assemblyFile in Directory.GetFiles(path, "*.dll",SearchOption.TopDirectoryOnly))
-            {
-                try
-                {
-                    string assemblyName = Path.GetFileNameWithoutExtension(assemblyFile);
-                    Assembly.Load(assemblyName);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Can't load assembly {0}: {1}.", assemblyFile, ex);
-                }
-            }
+            TestHelpers.LoadPluginAssemblies();
         }
 
         /// <summary>
-        /// This test tests if each component is used in at least one template
+        /// Reports concrete components that do not appear in a template.
         /// </summary>
         [TestMethod]
-        public void EveryComponentHasATemplateTestMethod()
+        public void EveryConcreteComponentHasATemplate()
         {
             string[] allTemplates = GetAllTemplates();
             Dictionary<Type, List<string>> pluginTypesUsedInTemplatesDictionary = GetPluginTypesUsedInTemplatesDictionary(allTemplates);
@@ -89,14 +74,17 @@ namespace UnitTests
                 }
             }
 
-            Assert.IsTrue(iCrypComponentTypesWithoutTemplate.Count == 0, String.Format("{0} components have no template. See standard out for details!", iCrypComponentTypesWithoutTemplate.Count));
+            Assert.IsTrue(iCrypComponentTypesWithoutTemplate.Count == 0,
+                String.Format("{0} concrete components have no template: {1}",
+                    iCrypComponentTypesWithoutTemplate.Count,
+                    String.Join(", ", iCrypComponentTypesWithoutTemplate.Select(type => type.FullName))));
         }
 
         /// <summary>
-        /// Get all plugin types used in templates
+        /// Gets the plugin types referenced by templates.
         /// </summary>
-        /// <param name="templates"></param>
-        /// <returns></returns>
+        /// <param name="templates">Paths to the template files.</param>
+        /// <returns>Template paths grouped by component type.</returns>
         private Dictionary<Type, List<string>> GetPluginTypesUsedInTemplatesDictionary(string[] templates)
         {
             Dictionary<Type, List<string>> pluginTypesUsedInTemplatesDictionary = new Dictionary<Type, List<string>>();
@@ -127,9 +115,9 @@ namespace UnitTests
         }
 
         /// <summary>
-        /// Get all ICrypComponent Types
+        /// Gets concrete plugin component types from loaded assemblies.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Concrete component types.</returns>
         public List<Type> GetAllICrypComponentTypes()
         {
             List<Type> crypComponents = new List<Type>();
@@ -138,7 +126,7 @@ namespace UnitTests
             {
                 foreach (Type type in asm.GetTypes())
                 {
-                    if (iCrypComponentType.IsAssignableFrom(type) && type != iCrypComponentType)
+                    if (iCrypComponentType.IsAssignableFrom(type) && !type.IsAbstract && type != iCrypComponentType)
                     {
                         crypComponents.Add(type);
                     }
@@ -148,9 +136,9 @@ namespace UnitTests
         }
 
         /// <summary>
-        /// Returns a list of all template files
+        /// Gets all workspace template files.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Paths to workspace templates.</returns>
         public string[] GetAllTemplates()
         {
             string[] allTemplates = Directory.GetFiles("Templates", "*.cwm", SearchOption.AllDirectories);

@@ -121,49 +121,6 @@
       </presentation>
     </sampleViewer>
   </input>
-  <!-- Heartbeat input -->
-  <input image="HeartbleedTest">
-    <name lang="en">Heartbleed analysis</name>
-    <name lang="de">Heartbleed-Analyse</name>
-    <description lang="en">Here, you can test whether a server is vulnerable to the heartbleed-bug.</description>
-    <description lang="de">Hier können Sie überprüfen, ob ein Server mittels des Heartbleed-Bug angreifbar ist.</description>
-    <headline lang="en">Server IP Input</headline>
-    <headline lang="de">Server-IP-Eingabe</headline>
-    <task lang="en">Here, you can test whether a server is vulnerable to the heartbleed-bug.</task>
-    <task lang="de">Hier können Sie überprüfen, ob ein Server mittels des Heartbleed-Bug angreifbar ist.</task>
-    <inputBox plugin="$ServerIP$" property="Text" alignment="Left" width="30%" visibleLines="1">
-      <description lang="en">Server address:</description>
-      <description lang="de">Server Adresse:</description>
-      <defaultvalue>heartbleed.ais.uni-kassel.de</defaultvalue>
-    </inputBox>
-    <sampleViewer image="HeartbleedTest" file="Protocols\HeartbleedTest.cwm">
-      <name lang="en">Result</name>
-      <name lang="de">Ergebnis</name>
-      <description lang="en">-</description>
-      <description lang="de">-</description>
-      <headline lang="en">Heartbleed analysis</headline>
-      <headline lang="de">Heartbleed-Analyse</headline>
-      <task lang="en">Here you can see if a server is vulnerable to the heartbleed bug.</task>
-      <task lang="de">Hier können Sie sehen, ob der Server mittels des Heartbleed-Bug angreifbar ist.</task>
-      <inputBox plugin="$ServerIP$" property="Text" alignment="left" width="30%" visibleLines="1" group="1">
-        <description lang="en">Server address:</description>
-        <description lang="de">Server Adresse:</description>
-        <defaultvalue>heartbleed.ais.uni-kassel.de</defaultvalue>
-      </inputBox>
-      <presentation plugin="$HeartbeatState$" width="25%" alignment="Center" group="2">
-        <description lang="en">The server accepts malicious heartbeat messages: </description>
-        <description lang="de">Der Server akzeptiert bösartige Heartbeat-Nachrichten: </description>
-      </presentation>
-      <presentation plugin="$HeartbleedState$" width="25%" alignment="Center" group="2">
-        <description lang="en">The server is vulnerable to the heartbleed-bug: </description>
-        <description lang="de">Der Server ist über den Heartbleed-Bug angreifbar: </description>
-      </presentation>
-      <presentation plugin="$HeartbeatAnswer$" width="70%" alignment="Right" group="3">
-        <description lang="en">Heartbeat Answer: </description>
-        <description lang="de">Heartbeat Antwort: </description>
-      </presentation>
-    </sampleViewer>
-  </input>
   <!-- Random decimal number -->
   <input image="RND">
     <name lang="en">Random numbers</name>

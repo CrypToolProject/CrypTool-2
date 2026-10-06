@@ -1,4 +1,19 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿/*
+   Copyright (C) CrypTool 2 Team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace UnitTests
@@ -50,10 +65,10 @@ namespace UnitTests
         private CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerator pluginInstance;
 
         /// <summary>
-        /// The method contains the unittests
+        /// Checks deterministic generator outputs against fixed vectors.
         /// </summary>
         [TestMethod]
-        public void RandomNumberGeneratorTestMethod()
+        public void RandomNumberGeneratorMatchesExpectedVectors()
         {
             pluginInstance = (CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerator)TestHelpers.GetPluginInstance("RandomNumberGenerator");
             PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { ".AlgorithmType", ".OutputType", ".OutputLength", ".Seed", ".a", ".b", ".Modulus" }, new[] { "Output" });
@@ -62,7 +77,6 @@ namespace UnitTests
             //loop over each test vector and test it
             foreach (TestVector vector in testvectors)
             {
-                DateTime startTime = DateTime.Now;
                 output = scenario.GetOutputs(new object[] { vector.t, vector.o, vector.OutputAmount, vector.Seed, vector.A, vector.B, vector.Modulo });
                 outputData = (byte[])pluginInstance.Output;
                 Assert.AreEqual(vector.Result.ToLower(), outputData.ToHex().ToLower(), "Unexpected value in test #" + vector.n + ".");

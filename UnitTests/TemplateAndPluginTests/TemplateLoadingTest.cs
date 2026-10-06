@@ -29,14 +29,14 @@ namespace UnitTests
 
         public TemplateLoadingTest()
         {
-            TestHelpers.SetAssemblyPaths();
+            TestHelpers.LoadPluginAssemblies();
         }
 
         /// <summary>
-        /// This test tests if each template can be loaded and if each type (component) used inside the template can be instantiated
+        /// Verifies that every template loads and its component types can be instantiated.
         /// </summary>
         [TestMethod]
-        public void TemplateLoadingTestMethod()
+        public void EveryTemplateLoadsWithItsComponents()
         {
             string[] allTemplates = Directory.GetFiles("Templates", "*.cwm", SearchOption.AllDirectories);            
             foreach (string template in allTemplates)
@@ -56,7 +56,7 @@ namespace UnitTests
                 }
                 catch (Exception ex)
                 {
-                    Assert.Fail(string.Format("Exception during loading of template {0}: {1}", template, ex.Message));
+                    Assert.Fail(string.Format("Exception during loading of template {0}: {1}", template, ex));
                 }
             }
         }

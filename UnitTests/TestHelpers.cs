@@ -1,4 +1,19 @@
-﻿using CrypTool.PluginBase;
+﻿/*
+   Copyright (C) CrypTool 2 Team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -35,6 +50,29 @@ namespace UnitTests
             }
         }
 
+        public static void LoadPluginAssemblies()
+        {
+            SetAssemblyPaths();
+            string buildDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string pluginDirectory = Path.Combine(buildDirectory, "CrypPlugins");
+            if (!Directory.Exists(pluginDirectory))
+            {
+                throw new DirectoryNotFoundException("Plugin build directory not found: " + pluginDirectory);
+            }
+
+            foreach (string assemblyPath in Directory.GetFiles(pluginDirectory, "*.dll"))
+            {
+                try
+                {
+                    Assembly.Load(Path.GetFileNameWithoutExtension(assemblyPath));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Could not load plugin assembly {0}: {1}", assemblyPath, ex.Message);
+                }
+            }
+        }
+
         public static void TestFail(int number)
         {
             Assert.Fail(string.Format("Test {0} failed!", number));
@@ -58,7 +96,7 @@ namespace UnitTests
                 Assert.Fail(string.Format("Can't load assembly {0}: {1}.", assemblyName, ex));
             }
 
-            Type pluginType = a.GetTypes().First(x => x.Name == pluginName);
+            Type pluginType = a.GetTypes().FirstOrDefault(x => x.Name == pluginName);
             if (pluginType == null)
             {
                 Assert.Fail(string.Format("Can't load plugin {0} from assembly {1}.", pluginName, assemblyName));
@@ -67,25 +105,26 @@ namespace UnitTests
             return pluginType.CreateComponentInstance();
         }
 
-        public static ICrypToolStream HexToStream(this string HexString)
+        public static ICrypToolStream HexToStream(this string hexString)
         {
-            return HexString.HexToByteArray().ToStream();
+            return hexString.HexToByteArray().ToStream();
         }
 
-        public static byte[] HexToByteArray(this string HexString)
+        public static byte[] HexToByteArray(this string hexString)
         {
-            byte[] bytes = new byte[(HexString.Length + 1) / 2];
-
-            for (int i = 0; i < HexString.Length; i += 2)
+            if (hexString == null)
             {
-                try
-                {
-                    bytes[i / 2] = Convert.ToByte(HexString.Substring(i, 2), 16);
-                }
-                catch
-                {
-                    bytes[i / 2] = 0;
-                }
+                throw new ArgumentNullException(nameof(hexString));
+            }
+            if (hexString.Length % 2 != 0)
+            {
+                throw new FormatException("Hexadecimal input must contain an even number of characters.");
+            }
+
+            byte[] bytes = new byte[hexString.Length / 2];
+            for (int i = 0; i < hexString.Length; i += 2)
+            {
+                bytes[i / 2] = Convert.ToByte(hexString.Substring(i, 2), 16);
             }
 
             return bytes;

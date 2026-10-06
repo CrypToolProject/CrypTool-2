@@ -115,6 +115,7 @@
     <Compile Include="KKDFSHAKE256Test.cs" />
     <Compile Include="HKDFSHA256Test.cs" />
     <Compile Include="CaesarTest.cs" />
+    <Compile Include="ChaChaTest.cs" />
     <Compile Include="FialkaTest.cs" />
     <Compile Include="GroestlTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -136,6 +137,7 @@
     <Compile Include="HC128Test.cs" />
     <Compile Include="HMACTest.cs" />
     <Compile Include="M209Test.cs" />
+    <Compile Include="CipherVectorCoverageTests.cs" />
     <Compile Include="MD5Test.cs" />
     <Compile Include="MD5\Algorithm\PresentableMD5Test.cs" />
     <Compile Include="MD5\Presentation\Helpers\PresentationControlFactoryTest.cs" />
@@ -145,7 +147,7 @@
     <Compile Include="PRESENTTest.cs" />
     <Compile Include="PrimesGeneratorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="pkcsTest.cs" />
+    <Compile Include="PKCS5Test.cs" />
     <Compile Include="PurpleTest.cs" />
     <Compile Include="RabbitTest.cs" />
     <Compile Include="RC2Test.cs" />
@@ -170,6 +172,38 @@
     <Compile Include="WizardConfigTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CrypPlugins\AffineCipher\AffineCipher.csproj">
+      <Project>{B300C1F7-42CB-4668-9CCB-319D6AF8E3EB}</Project>
+      <Name>AffineCipher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\BaconCipher\BaconCipher.csproj">
+      <Project>{DFAFC4F2-4262-43D7-94F9-EEACA9A719DA}</Project>
+      <Name>BaconCipher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\ChaCha\ChaCha.csproj">
+      <Project>{3D890E75-8ACE-4780-8E5B-E7D94052834E}</Project>
+      <Name>ChaCha</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\Hill\Hill.csproj">
+      <Project>{26C44578-C758-424D-862C-D9AD26C8A35A}</Project>
+      <Name>Hill</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\RSA\RSA.csproj">
+      <Project>{B682CEB4-86F6-4C0D-918C-232C82E75673}</Project>
+      <Name>RSA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\Blowfish\Blowfish.csproj">
+      <Project>{DB36F62A-9567-40B9-A5E5-B8CFFBAFDE3A}</Project>
+      <Name>Blowfish</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\SM4\SM4.csproj">
+      <Project>{4DAE65CB-8168-4F54-A8C8-7A7CF03362F1}</Project>
+      <Name>SM4</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\TEA\TEA.csproj">
+      <Project>{1C42ADB9-643E-4B1C-A862-7DBE3CD22A7A}</Project>
+      <Name>TEA</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CrypPluginBase\CrypPluginBase.csproj">
       <Project>{25db2b47-a457-4ec2-960b-395ce07ae093}</Project>
       <Name>CrypPluginBase</Name>
@@ -332,6 +366,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="TestVectors\Sosemanuk.tsv">
+      <LogicalName>UnitTests.TestVectors.Sosemanuk.tsv</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

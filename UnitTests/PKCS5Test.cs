@@ -1,15 +1,30 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿/*
+   Copyright (C) CrypTool 2 Team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PKCS5;
 
 namespace UnitTests
 {
     /// <summary>
-    /// test methods for PKCS#5 Plugin
+    /// Known-answer tests for the PKCS#5 plugin.
     /// </summary>
     [TestClass]
-    public class pkcsTest
+    public class PKCS5Test
     {
-        public pkcsTest()
+        public PKCS5Test()
         {
             // nothing to do
         }
@@ -60,7 +75,7 @@ namespace UnitTests
         }
 
 
-        private void pkcs5part(byte[] key, byte[] salt, int hmac, int count, byte[] result)
+        private void VerifyDerivedKey(byte[] key, byte[] salt, int hmac, int count, byte[] result)
         {
             PKCS5Settings set = new PKCS5Settings
             {
@@ -83,25 +98,15 @@ namespace UnitTests
             byte[] h = p.HashOutputData;
             p.Dispose();
 
-            // both arrays of same size?
-            Assert.AreEqual(h.Length, result.Length, "Different hash sizes found");
-
             testContextInstance.WriteLine("expected hash is  " + ConvertByteToHex(result));
             testContextInstance.WriteLine("calculated hash is " + ConvertByteToHex(h));
-
-            // the next compares references etc ... but not the array content :-(
-            // Assert.AreEqual<byte[]>(result, h, "Different hash values found");
-            // compare by hand ...
-            for (int i = 0; i < h.Length; i++)
-            {
-                Assert.AreEqual(result[i], h[i], "Different hash values found");
-            }
+            CollectionAssert.AreEqual(result, h, "Derived key differs from the known answer.");
 
             testContextInstance.WriteLine("----");
         }
 
         [TestMethod]
-        public void pkcs5TestMethodMD5()
+        public void DerivesKnownKeysForSupportedHashes()
         {
             byte[] key = { 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64 };   // "password"
             byte[] salt = { 0x78, 0x57, 0x8E, 0x5A, 0x5D, 0x63, 0xCB, 0x06 };
@@ -127,11 +132,11 @@ namespace UnitTests
             byte[] result_SHA512 = { 0xe6, 0xfa, 0x68, 0xfe, 0xc0, 0xa2, 0xbe, 0x24, 0x77, 0x80, 0x9f, 0x89,
                                0x83, 0xe2, 0x71, 0x9e, 0xb2, 0x94, 0x15, 0xc6, 0x1e, 0xfa, 0xcf, 0x34 };
 
-            pkcs5part(key, salt, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.MD5, 2048, result_MD5);
-            pkcs5part(key, salt, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA1, 2048, result_SHA1);
-            pkcs5part(key, salt, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA256, 2048, result_SHA256);
-            pkcs5part(key, salt, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA384, 2048, result_SHA384);
-            pkcs5part(key, salt, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA512, 2048, result_SHA512);
+            VerifyDerivedKey(key, salt, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.MD5, 2048, result_MD5);
+            VerifyDerivedKey(key, salt, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA1, 2048, result_SHA1);
+            VerifyDerivedKey(key, salt, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA256, 2048, result_SHA256);
+            VerifyDerivedKey(key, salt, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA384, 2048, result_SHA384);
+            VerifyDerivedKey(key, salt, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA512, 2048, result_SHA512);
 
             // http://www.ietf.org/rfc/rfc3962.txt
             // Appendix B.  Sample Test Vectors, page 9
@@ -146,8 +151,8 @@ namespace UnitTests
                           0x22, 0xb2, 0x56, 0x35, 0x15, 0x0a, 0xd1, 0xf7, 0xa0, 0x4b, 0xb9,
                           0xf3, 0xa3, 0x33, 0xec, 0xc0, 0xe2, 0xe1, 0xf7, 0x08, 0x37 };
 
-            pkcs5part(key, salt2, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA1, 1, result1a);
-            pkcs5part(key, salt2, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA1, 1, result1b);
+            VerifyDerivedKey(key, salt2, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA1, 1, result1a);
+            VerifyDerivedKey(key, salt2, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA1, 1, result1b);
 
             byte[] result2a = { 0x01, 0xdb, 0xee, 0x7f, 0x4a, 0x9e, 0x24, 0x3e,
                           0x98, 0x8b, 0x62, 0xc7, 0x3c, 0xda, 0x93, 0x5d };
@@ -155,8 +160,8 @@ namespace UnitTests
                           0xc7, 0x3c, 0xda, 0x93, 0x5d, 0xa0, 0x53, 0x78, 0xb9, 0x32, 0x44,
                           0xec, 0x8f, 0x48, 0xa9, 0x9e, 0x61, 0xad, 0x79, 0x9d, 0x86 };
 
-            pkcs5part(key, salt2, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA1, 2, result2a);
-            pkcs5part(key, salt2, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA1, 2, result2b);
+            VerifyDerivedKey(key, salt2, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA1, 2, result2a);
+            VerifyDerivedKey(key, salt2, (int)System.Security.Cryptography.PKCS5MaskGenerationMethod.ShaFunction.SHA1, 2, result2b);
 
         }
     }
