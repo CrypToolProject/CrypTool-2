@@ -23,7 +23,13 @@ namespace NativeCryptography {
 	 * x = x XOR y 
 	 */
 	inline void xor64(void* x, void* y){
-		((long*)x)[0] ^= ((long*)y)[0];
+		// A Windows C++ long is only 32 bits, including in x64 builds.
+		unsigned char* destination = static_cast<unsigned char*>(x);
+		const unsigned char* source = static_cast<const unsigned char*>(y);
+		for (int i = 0; i < 8; i++)
+		{
+			destination[i] ^= source[i];
+		}
 	}
 
 	/*
@@ -31,8 +37,12 @@ namespace NativeCryptography {
 	* x = x XOR y
 	*/
 	inline void xor128(void* x, void* y){
-		((long*)x)[0] ^= ((long*)y)[0];
-		((long*)x)[1] ^= ((long*)y)[1];
+		unsigned char* destination = static_cast<unsigned char*>(x);
+		const unsigned char* source = static_cast<const unsigned char*>(y);
+		for (int i = 0; i < 16; i++)
+		{
+			destination[i] ^= source[i];
+		}
 	}
 
 	/*
@@ -318,7 +328,7 @@ namespace NativeCryptography {
 
 		if (IV == nullptr)
 		{
-			IV = zeroIV8;
+			IV = zeroIV16;
 		}
 
 		array<unsigned char>^ output = gcnew array<unsigned char>(length);
@@ -459,7 +469,7 @@ namespace NativeCryptography {
 
 		if (IV == nullptr)
 		{
-			IV = zeroIV8;
+			IV = zeroIV16;
 		}
 
 		array<unsigned char>^ output = gcnew array<unsigned char>(length);
@@ -601,7 +611,7 @@ namespace NativeCryptography {
 
 		if (IV == nullptr)
 		{
-			IV = zeroIV8;
+			IV = zeroIV16;
 		}
 
 		array<unsigned char>^ output = gcnew array<unsigned char>(length);

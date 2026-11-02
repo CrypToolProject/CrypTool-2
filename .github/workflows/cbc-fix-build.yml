@@ -1,0 +1,81 @@
+name: Build and test CBC fix
+
+on:
+  push:
+    branches: [fix/native-cbc-xor-width]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows-x64:
+    runs-on: windows-2022
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Enable long paths
+        run: git config --global core.longpaths true
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Locate MSBuild
+        run: |
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          $msbuild = & $vswhere -latest -products '*' -requires Microsoft.VisualStudio.Component.VC.CLI.Support -find 'MSBuild\**\Bin\MSBuild.exe' | Select-Object -First 1
+          if (!$msbuild) { throw 'MSBuild with C++/CLI support not found' }
+          "CT_MSBUILD=$msbuild" >> $env:GITHUB_ENV
+          New-Item -ItemType Directory -Force artifacts | Out-Null
+      - name: Build native cryptography from source
+        run: |
+          & $env:CT_MSBUILD LibSource/NativeCryptography/NativeCryptography.vcxproj /m:2 /t:Rebuild /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143 /p:TargetFrameworkVersion=v4.7.2 /v:minimal /nologo '/flp:logfile=artifacts/native-build.log;verbosity=normal'
+          if ($LASTEXITCODE -ne 0) { throw 'Native build failed' }
+      - name: Run software CBC regression tests
+        run: |
+          $log = Join-Path $PWD 'artifacts/cbc-regression.txt'
+          & powershell.exe -NoProfile -ExecutionPolicy Bypass -File LibSource/NativeCryptography/Tests/Run-CbcRegression.ps1 2>&1 | Tee-Object -FilePath $log
+          if ($LASTEXITCODE -ne 0) { throw 'CBC regression tests failed' }
+          $env:GITHUB_SHA | Set-Content artifacts/commit.txt
+      - name: Upload tested native library and test runner
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: native-cbc-x64
+          path: |
+            LibSource/NativeCryptography/Tests/bin/
+            artifacts/cbc-regression.txt
+            artifacts/commit.txt
+          retention-days: 14
+      - name: Restore application dependencies
+        run: |
+          nuget restore 'CrypTool 2.sln' -NonInteractive -Verbosity quiet
+          if ($LASTEXITCODE -ne 0) { throw 'NuGet restore failed' }
+      - name: Build CrypTool application and plugins
+        run: |
+          & $env:CT_MSBUILD 'CrypTool 2.sln' /m:2 /p:Configuration=Release /p:Platform=x64 /v:quiet /nologo '/flp:logfile=artifacts/application-build.log;verbosity=normal'
+          if ($LASTEXITCODE -ne 0) { throw 'Application build failed' }
+      - name: Verify and package application
+        run: |
+          $native = 'LibSource/NativeCryptography/bin/x64/Release/NativeCryptography.dll'
+          $packaged = 'CrypBuild/Release/Lib/NativeCryptography.dll'
+          if ((Get-FileHash $native).Hash -ne (Get-FileHash $packaged).Hash) { throw 'Packaged native DLL differs from tested DLL' }
+          Copy-Item artifacts/commit.txt CrypBuild/Release/BUILD-COMMIT.txt
+          Copy-Item artifacts/cbc-regression.txt CrypBuild/Release/CBC-TESTS.txt
+          Copy-Item LICENSE CrypBuild/Release/LICENSE -ErrorAction Stop
+          & 7z a -tzip -mx=5 artifacts/CrypTool2-CBC-fix-x64.zip './CrypBuild/Release/*'
+          if ($LASTEXITCODE -ne 0) { throw 'Packaging failed' }
+          Get-FileHash artifacts/CrypTool2-CBC-fix-x64.zip | Format-List | Out-File artifacts/SHA256.txt
+      - name: Upload portable CrypTool build
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: CrypTool2-CBC-fix-x64
+          path: |
+            artifacts/CrypTool2-CBC-fix-x64.zip
+            artifacts/SHA256.txt
+          retention-days: 14
+      - name: Upload build logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: build-logs
+          path: artifacts/*.log
+          retention-days: 14
