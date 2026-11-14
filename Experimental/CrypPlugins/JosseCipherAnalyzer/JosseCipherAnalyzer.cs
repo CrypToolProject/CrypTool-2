@@ -17,11 +17,14 @@
 using CrypTool.JosseCipherAnalyzer.AttackTypes;
 using CrypTool.JosseCipherAnalyzer.Enum;
 using CrypTool.JosseCipherAnalyzer.Evaluator;
+using CrypTool.JosseCipherAnalyzer.Properties;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.Utils;
+using LanguageStatisticsLib;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -44,6 +47,8 @@ namespace CrypTool.JosseCipherAnalyzer
         private DateTime _startTime;
         private DateTime _endTime;
         private AttackType _analyzer;
+        private volatile bool _stopped;
+        private const int MaxBestListEntries = 100;
 
         #endregion
 
@@ -123,6 +128,7 @@ namespace CrypTool.JosseCipherAnalyzer
         /// </summary>
         public void Execute()
         {
+            _stopped = false;
             ProgressChanged(0, 1);
             // Swap key length setting
             if (_settings.KeyLengthTo < _settings.KeyLengthFrom)
@@ -132,23 +138,84 @@ namespace CrypTool.JosseCipherAnalyzer
                 _settings.KeyLengthFrom = temp;
             }
             UpdateDisplayStart();
-            for (int currentLength = _settings.KeyLengthFrom; currentLength <= _settings.KeyLengthTo; currentLength++)
-            {
-                _analyzer = GetAnalyzer(currentLength);
-                IEvaluator evaluator = GetEvaluator();
 
-                _analyzer.ProcessChanged += (sender, d) =>
-                {
-                    ProgressChanged(d, 1);
-                };
+            string alphabet = AlphabetInput.ToUpper();
+            if (string.IsNullOrEmpty(CipherTextInput) || !CipherTextInput.ToUpper().Any(c => alphabet.IndexOf(c) >= 0))
+            {
+                GuiLogMessage(Resources.NoCiphertextLetters, NotificationLevel.Error);
+                return;
+            }
+            IEvaluator evaluator = GetEvaluator(alphabet);
+            int keyLengths = _settings.KeyLengthTo - _settings.KeyLengthFrom + 1;
+            ResultEntry best = null;
+
+            for (int currentLength = _settings.KeyLengthFrom; currentLength <= _settings.KeyLengthTo && !_stopped; currentLength++)
+            {
+                int lengthIndex = currentLength - _settings.KeyLengthFrom;
+                _analyzer = GetAnalyzer(alphabet, currentLength);
                 _analyzer.Evaluator = evaluator;
+                _analyzer.ProgressChanged += (sender, progress) => ProgressChanged(lengthIndex + progress, keyLengths);
+                _analyzer.ResultFound += (sender, entry) => AddNewBestListEntry(entry);
+                _analyzer.KeysPerSecondChanged += (sender, keysPerSecond) => UpdateKeysPerSecond(keysPerSecond);
+
                 ResultEntry result = _analyzer.Start(CipherTextInput);
-                KeyOutput = result?.Key;
-                PlainTextOutput = result?.Text;
                 UpdateDisplayEnd(currentLength);
+                if (result == null)
+                {
+                    // stopped
+                    break;
+                }
+                if (best == null || result.Value > best.Value)
+                {
+                    best = result;
+                }
             }
 
+            if (best != null)
+            {
+                KeyOutput = best.Key;
+                PlainTextOutput = best.Text;
+            }
             ProgressChanged(1, 1);
+        }
+
+        /// <summary>
+        /// Inserts a result into the best list, which stays sorted, free of duplicates and at most
+        /// <see cref="MaxBestListEntries"/> long.
+        /// </summary>
+        private void AddNewBestListEntry(ResultEntry entry)
+        {
+            _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                ObservableCollection<ResultEntry> bestList = _presentation.BestList;
+                if (bestList.Count >= MaxBestListEntries && entry.Value <= bestList[bestList.Count - 1].Value)
+                {
+                    return;
+                }
+                if (bestList.Any(e => e.Key == entry.Key))
+                {
+                    return;
+                }
+
+                int insertIndex = bestList.TakeWhile(e => e.Value > entry.Value).Count();
+                bestList.Insert(insertIndex, entry);
+                if (bestList.Count > MaxBestListEntries)
+                {
+                    bestList.RemoveAt(MaxBestListEntries);
+                }
+                for (int i = insertIndex; i < bestList.Count; i++)
+                {
+                    bestList[i].Ranking = i + 1;
+                }
+            }, null);
+        }
+
+        private void UpdateKeysPerSecond(long keysPerSecond)
+        {
+            _presentation.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                _presentation.Keys.Value = $"{keysPerSecond:N0}";
+            }, null);
         }
 
         /// <summary>
@@ -183,39 +250,39 @@ namespace CrypTool.JosseCipherAnalyzer
             }, null);
         }
 
-        private AttackType GetAnalyzer(int currentLength)
+        private AttackType GetAnalyzer(string alphabet, int keyLength)
         {
             switch (_settings.AnalyzerMode)
             {
                 case AnalyzerMode.Hillclimbing:
-                    return new Hillclimbing(AlphabetInput, currentLength, _settings.Restarts, _presentation);
+                    return new Hillclimbing(alphabet, keyLength, _settings.Restarts);
                 case AnalyzerMode.SimulatedAnnealing:
-                    return new SimulatedAnnealing(AlphabetInput, currentLength, _settings.Restarts, _presentation);
+                    return new SimulatedAnnealing(alphabet, keyLength, _settings.Restarts);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
-        private IEvaluator GetEvaluator()
+        private IEvaluator GetEvaluator(string alphabet)
         {
             switch (_settings.CostFunctionTypes)
             {
                 case CostFunctionTypes.Unigrams:
-                    return new NGram(LanguageStatistics.GramsType.Unigrams, _settings.Language, _settings.UseSpaces);
+                    return new NGram(GramsType.Unigrams, _settings.Language, _settings.UseSpaces, alphabet);
                 case CostFunctionTypes.Bigrams:
-                    return new NGram(LanguageStatistics.GramsType.Bigrams, _settings.Language, _settings.UseSpaces);
+                    return new NGram(GramsType.Bigrams, _settings.Language, _settings.UseSpaces, alphabet);
                 case CostFunctionTypes.Trigrams:
-                    return new NGram(LanguageStatistics.GramsType.Trigrams, _settings.Language, _settings.UseSpaces);
+                    return new NGram(GramsType.Trigrams, _settings.Language, _settings.UseSpaces, alphabet);
                 case CostFunctionTypes.Tetragrams:
-                    return new NGram(LanguageStatistics.GramsType.Tetragrams, _settings.Language, _settings.UseSpaces);
+                    return new NGram(GramsType.Tetragrams, _settings.Language, _settings.UseSpaces, alphabet);
                 case CostFunctionTypes.Pentragrams:
-                    return new NGram(LanguageStatistics.GramsType.Pentragrams, _settings.Language, _settings.UseSpaces);
+                    return new NGram(GramsType.Pentragrams, _settings.Language, _settings.UseSpaces, alphabet);
                 case CostFunctionTypes.Hexagrams:
-                    return new NGram(LanguageStatistics.GramsType.Hexagrams, _settings.Language, _settings.UseSpaces);
+                    return new NGram(GramsType.Hexagrams, _settings.Language, _settings.UseSpaces, alphabet);
                 case CostFunctionTypes.IoC:
-                    return new IndexOfCoincidence(AlphabetInput);
+                    return new IndexOfCoincidence(alphabet);
                 case CostFunctionTypes.Entropy:
-                    return new Entropy();
+                    return new Entropy(alphabet);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -226,7 +293,10 @@ namespace CrypTool.JosseCipherAnalyzer
         /// </summary>
         public void PostExecution()
         {
-            _analyzer.Evaluator = null;
+            if (_analyzer != null)
+            {
+                _analyzer.Evaluator = null;
+            }
             _startTime = new DateTime();
             _endTime = new DateTime();
         }
@@ -237,6 +307,7 @@ namespace CrypTool.JosseCipherAnalyzer
         /// </summary>
         public void Stop()
         {
+            _stopped = true;
             if (_analyzer != null)
             {
                 _analyzer.ShouldStop = true;

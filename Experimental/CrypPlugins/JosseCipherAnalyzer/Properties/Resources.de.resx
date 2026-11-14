@@ -267,4 +267,7 @@
   <data name="AnalyzerModeTooltip" xml:space="preserve">
     <value>Der Modus, der zur Analyse des verschlüsselten Textes verwendet wird</value>
   </data>
+  <data name="NoCiphertextLetters" xml:space="preserve">
+    <value>Der Geheimtext enthält keine Buchstaben des Alphabets.</value>
+  </data>
 </root>

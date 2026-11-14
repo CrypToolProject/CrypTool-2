@@ -1,7 +1,10 @@
-﻿namespace CrypTool.JosseCipherAnalyzer.Evaluator
+namespace CrypTool.JosseCipherAnalyzer.Evaluator
 {
     public interface IEvaluator
     {
-        double Evaluate(string input);
+        /// <summary>
+        /// Rates a plaintext given as letter numbers (indices into the analyzer alphabet); higher is better.
+        /// </summary>
+        double Evaluate(int[] plaintext);
     }
 }

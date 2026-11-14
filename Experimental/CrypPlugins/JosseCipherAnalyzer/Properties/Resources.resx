@@ -264,4 +264,7 @@
   <data name="ModeAnalyzerModeSimulatedAnnealing" xml:space="preserve">
     <value>Simulated annealing</value>
   </data>
+  <data name="NoCiphertextLetters" xml:space="preserve">
+    <value>The ciphertext contains no letters of the alphabet.</value>
+  </data>
 </root>

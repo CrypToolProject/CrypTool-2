@@ -1,208 +1,163 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Windows.Threading;
+using System;
 
 namespace CrypTool.JosseCipherAnalyzer.AttackTypes
 {
+    /// <summary>
+    /// Simulated annealing with random restarts. A step swaps two key letters or replaces one by an unused
+    /// letter; worse keys are accepted with a probability that shrinks as the temperature cools down.
+    /// The start temperature is taken from the cost function, so the schedule fits n-grams, IoC and entropy alike.
+    /// </summary>
     public class SimulatedAnnealing : AttackType
     {
-        private char[] Alphabet { get; }
-        public string KeyAlphabet { get; }
-        private int KeyLength { get; }
-        private int Restarts { get; set; }
-        private ResultEntry _finalResultEntry;
+        private const double CoolingRate = 0.97;
+        private const double FinalTemperatureRatio = 0.001;
+        private const int StepsPerTemperature = 200;
+        private const double InitialAcceptance = 0.8;
+        private const int TemperatureSamples = 100;
 
-        public SimulatedAnnealing(string alphabet, int keyLength, int restarts,
-            JosseCipherAnalyzerPresentation presentation)
+        // The last move, so it can be undone
+        private int _movePosition1;
+        private int _movePosition2;
+        private int _moveOldLetter;
+
+        public SimulatedAnnealing(string alphabet, int keyLength, int restarts)
+            : base(alphabet, keyLength, restarts)
         {
-            Alphabet = alphabet.ToUpper().ToCharArray();
-            KeyAlphabet = alphabet.ToUpper();
-            KeyLength = keyLength;
-            Restarts = restarts;
-            Presentation = presentation;
         }
 
-        public override ResultEntry Start(string ciphertext)
+        protected override ResultEntry Search(CipherImplementation cipher, int[] ciphertext)
         {
-            ciphertext = ciphertext.ToUpper();
-            Random random = new Random(Guid.NewGuid().GetHashCode());
-            DateTime lastTime = DateTime.Now;
-            CipherImplementation cipher = new CipherImplementation { Alphabet = new string(Alphabet) };
-            char[] currentKey = KeyAlphabet.OrderBy(_ => random.Next()).Take(KeyLength).ToArray();
+            int[] plaintext = new int[ciphertext.Length];
+            int[] key = new int[KeyLength];
+            int[] bestKey = new int[KeyLength];
+            bool[] used = new bool[Alphabet.Length];
+            int temperatureSteps = (int)Math.Ceiling(Math.Log(FinalTemperatureRatio) / Math.Log(CoolingRate));
+            ResultEntry best = null;
 
-            char[] bestKey = (char[])currentKey.Clone();
-
-            while (Restarts > 0)
+            for (int restart = 0; restart < Restarts; restart++)
             {
-                const double alpha = 0.995;
-                const double epsilon = 0.005;
-                const double initTemperature = 400;
-                double temperature = initTemperature;
-                char[] nextKey = new char[KeyLength];
-                cipher.BuildDictionaries(bestKey);
-                string initialPlaintext = cipher.Decipher(ciphertext);
-                double distance = Evaluator.Evaluate(initialPlaintext);
+                RandomKey(key, used);
+                double cost = Evaluate(cipher, key, ciphertext, plaintext);
+                double bestCost = cost;
+                Array.Copy(key, bestKey, KeyLength);
+                double temperature = InitialTemperature(cipher, key, used, cost, ciphertext, plaintext);
 
-                if (ShouldStop)
+                for (int step = 0; step < temperatureSteps; step++)
                 {
-                    return null;
-                }
+                    for (int i = 0; i < StepsPerTemperature; i++)
+                    {
+                        Move(key, used);
+                        double newCost = Evaluate(cipher, key, ciphertext, plaintext);
+                        double delta = newCost - cost;
+                        if (delta >= 0 || Random.NextDouble() < Math.Exp(delta / temperature))
+                        {
+                            cost = newCost;
+                            if (cost > bestCost)
+                            {
+                                bestCost = cost;
+                                Array.Copy(key, bestKey, KeyLength);
+                            }
+                        }
+                        else
+                        {
+                            UndoMove(key, used);
+                        }
+                    }
 
-                while (temperature > epsilon)
-                {
                     if (ShouldStop)
                     {
                         return null;
                     }
-
-                    // Generate new Key
-                    GenerateNewKey(currentKey, nextKey);
-
-                    // Get value for current Key
-                    cipher.BuildDictionaries(nextKey);
-                    string plaintext = cipher.Decipher(ciphertext);
-                    double currentCost = Evaluator.Evaluate(plaintext);
-
-                    // Annealing
-                    double delta = currentCost - distance;
-                    if (delta >= 0)
-                    {
-                        bestKey = (char[])currentKey.Clone();
-                        Assign(currentKey, nextKey);
-                        distance = delta + distance;
-                        AddNewBestListEntry(bestKey, currentCost, plaintext);
-                    }
-                    else
-                    {
-                        //reset key
-                        double probability = (float)random.NextDouble();
-                        if (probability < Math.Pow(Math.E, delta / temperature))
-                        {
-                            bestKey = (char[])currentKey.Clone();
-                            Assign(currentKey, nextKey);
-                            distance = delta + distance;
-                        }
-                    }
-
-                    if (DateTime.Now < lastTime.AddMilliseconds(100))
-                    {
-                        continue;
-                    }
-
-                    lastTime = DateTime.Now;
-
-                    //cooling process on every iteration
-                    temperature *= alpha;
-                    OnProcessChanged(GetPercentage(initTemperature, temperature, alpha, epsilon));
+                    temperature *= CoolingRate;
+                    OnProgressChanged((restart + (step + 1.0) / temperatureSteps) / Restarts);
                 }
 
-                currentKey = (char[])bestKey.Clone();
-                Restarts--;
+                ResultEntry result = CreateResult(cipher, bestKey, bestCost, ciphertext, plaintext);
+                OnResultFound(result);
+                if (best == null || result.Value > best.Value)
+                {
+                    best = result;
+                }
             }
 
-            return _finalResultEntry;
-        }
-
-        private static double GetPercentage(double initTemp, double temp, double alpha, double epsilon)
-        {
-            double steps = Math.Log(initTemp * Math.Log(epsilon, alpha), alpha);
-            return -((Math.Log(temp, alpha) + -Math.Log(initTemp, alpha) - 0) /
-                (steps - 0) * (1 - 0) + 0);
-        }
-
-        private void GenerateNewKey(IReadOnlyList<char> c, IList<char> n)
-        {
-            Random rnd = new Random(Guid.NewGuid().GetHashCode());
-            do
-            {
-                for (int i = 0; i < c.Count; i++)
-                {
-                    n[i] = c[i];
-                }
-
-                int i1 = rnd.Next(n.Count);
-                int i2 = rnd.Next(n.Count);
-                char aux = n[i1];
-                n[i1] = n[i2];
-                // Exchange this letter with a probability
-                if (rnd.Next(100) < 10)
-                {
-                    aux = Alphabet.OrderBy(_ => rnd.Next()).Take(1).ToArray().First();
-                }
-
-                n[i2] = aux;
-            } while (n.Distinct().Count() != n.Count);
-        }
-
-        private static void Assign(IList<char> c, IReadOnlyList<char> n)
-        {
-            for (int i = 0; i < c.Count; i++)
-            {
-                c[i] = n[i];
-            }
+            return best;
         }
 
         /// <summary>
-        /// Adds an entry to the BestList
+        /// Chooses the temperature at which a typical worse neighbour is accepted with <see cref="InitialAcceptance"/>.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <param name="plaintext"></param>
-        private void AddNewBestListEntry(char[] key, double value, string plaintext)
+        private double InitialTemperature(CipherImplementation cipher, int[] key, bool[] used, double cost, int[] ciphertext, int[] plaintext)
         {
-            ResultEntry entry = new ResultEntry
+            double sum = 0;
+            int count = 0;
+            for (int i = 0; i < TemperatureSamples; i++)
             {
-                Key = new string(key),
-                Text = plaintext,
-                Value = value
-            };
+                Move(key, used);
+                double delta = Evaluate(cipher, key, ciphertext, plaintext) - cost;
+                UndoMove(key, used);
+                if (delta < 0)
+                {
+                    sum -= delta;
+                    count++;
+                }
+            }
+            return count == 0 || sum == 0 ? double.Epsilon : sum / count / -Math.Log(InitialAcceptance);
+        }
 
-            if (Presentation.BestList.Count == 0 || entry.Value > Presentation.BestList.First().Value)
+        private void Move(int[] key, bool[] used)
+        {
+            bool canReplace = KeyLength < Alphabet.Length;
+            if (KeyLength == 1 && !canReplace)
             {
-                _finalResultEntry = entry;
+                // A one letter alphabet has no neighbours; "replace" the letter by itself
+                _movePosition1 = 0;
+                _movePosition2 = -1;
+                _moveOldLetter = key[0];
+                return;
+            }
+            if (KeyLength > 1 && (!canReplace || Random.Next(2) == 0))
+            {
+                // Swap two key letters
+                _movePosition1 = Random.Next(KeyLength);
+                do
+                {
+                    _movePosition2 = Random.Next(KeyLength);
+                } while (_movePosition2 == _movePosition1);
+                Swap(key, _movePosition1, _movePosition2);
+                return;
             }
 
-            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            // Replace one key letter by an unused one
+            _movePosition1 = Random.Next(KeyLength);
+            _movePosition2 = -1;
+            _moveOldLetter = key[_movePosition1];
+            int letter;
+            do
             {
-                try
-                {
-                    if (Presentation.BestList.Count > 0 && entry.Value <= Presentation.BestList.Last().Value)
-                    {
-                        return;
-                    }
+                letter = Random.Next(Alphabet.Length);
+            } while (used[letter]);
+            used[_moveOldLetter] = false;
+            used[letter] = true;
+            key[_movePosition1] = letter;
+        }
 
-                    //check for duplicates
-                    foreach (ResultEntry e in Presentation.BestList)
-                    {
-                        if (entry.Key.Equals(e.Key))
-                        {
-                            return;
-                        }
-                    }
+        private void UndoMove(int[] key, bool[] used)
+        {
+            if (_movePosition2 >= 0)
+            {
+                Swap(key, _movePosition1, _movePosition2);
+                return;
+            }
+            used[key[_movePosition1]] = false;
+            used[_moveOldLetter] = true;
+            key[_movePosition1] = _moveOldLetter;
+        }
 
-                    //Insert new entry at correct place to sustain order of list:
-                    int insertIndex = Presentation.BestList.TakeWhile(e => e.Value > entry.Value).Count();
-                    Presentation.BestList.Insert(insertIndex, entry);
-
-                    if (Presentation.BestList.Count > MaxBestListEntries)
-                    {
-                        Presentation.BestList.RemoveAt(MaxBestListEntries);
-                    }
-
-                    int ranking = 1;
-                    foreach (ResultEntry e in Presentation.BestList)
-                    {
-                        e.Ranking = ranking;
-                        ranking++;
-                    }
-                }
-                catch (Exception)
-                {
-                    // ignore
-                }
-            }, null);
+        private static void Swap(int[] key, int i, int j)
+        {
+            int letter = key[i];
+            key[i] = key[j];
+            key[j] = letter;
         }
     }
 }

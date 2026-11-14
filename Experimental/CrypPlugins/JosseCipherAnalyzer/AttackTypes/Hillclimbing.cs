@@ -1,190 +1,106 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using System.Windows.Threading;
-
 namespace CrypTool.JosseCipherAnalyzer.AttackTypes
 {
+    /// <summary>
+    /// Hill climbing with random restarts: replaces one key letter by an unused letter or swaps two key letters,
+    /// keeps every change that improves the rating, and stops when no single change helps any more.
+    /// </summary>
     public class Hillclimbing : AttackType
     {
-        private int _initialRestarts = int.MaxValue;
-        private int _restarts;
-        private int Restarts
+        public Hillclimbing(string alphabet, int keyLength, int restarts)
+            : base(alphabet, keyLength, restarts)
         {
-            get => _restarts;
-            set
-            {
-                _restarts = value;
-                _initialRestarts = value;
-            }
-        }
-        private char[] Alphabet { get; }
-        private int KeyLength { get; }
-        private ResultEntry _finalResultEntry;
-
-        public Hillclimbing(string alphabet, int keyLength, int restarts, JosseCipherAnalyzerPresentation presentation)
-        {
-            Alphabet = alphabet.ToUpper().ToCharArray();
-            KeyLength = keyLength;
-            Presentation = presentation;
-            Restarts = restarts;
         }
 
-        public override ResultEntry Start(string ciphertext)
+        protected override ResultEntry Search(CipherImplementation cipher, int[] ciphertext)
         {
-            ciphertext = ciphertext.ToUpper();
-            double globalHighestCost = double.MinValue;
-            char[] bestKey = new char[KeyLength];
             int alphabetLength = Alphabet.Length;
-            Random random = new Random(Guid.NewGuid().GetHashCode());
-            DateTime lastTime = DateTime.Now;
-            int keys = 0;
-            string plaintext = string.Empty;
-            char[] runKey = new char[KeyLength];
-            CipherImplementation cipher = new CipherImplementation { Alphabet = new string(Alphabet) };
+            int[] plaintext = new int[ciphertext.Length];
+            int[] key = new int[KeyLength];
+            bool[] used = new bool[alphabetLength];
+            ResultEntry best = null;
 
-
-            while (Restarts > 0)
+            for (int restart = 0; restart < Restarts; restart++)
             {
-                runKey = Alphabet.OrderBy(_ => random.Next()).Take(KeyLength).ToArray();
+                RandomKey(key, used);
+                double cost = Evaluate(cipher, key, ciphertext, plaintext);
 
-                bool betterKeyFound;
-                double highestCost = double.MinValue;
-
-                cipher.BuildDictionaries(runKey);
-
+                bool improved;
                 do
                 {
-                    betterKeyFound = false;
+                    improved = false;
+
+                    // Replace a key letter by an unused letter
                     for (int i = 0; i < KeyLength; i++)
                     {
-                        for (int j = 0; j < alphabetLength; j++)
+                        for (int letter = 0; letter < alphabetLength; letter++)
                         {
-                            char oldLetter = runKey[i];
-                            runKey[i] = Alphabet[j];
-                            if (runKey.Distinct().Count() != runKey.Length)
+                            if (used[letter])
                             {
                                 continue;
                             }
-                            cipher.BuildDictionaries(runKey);
-                            plaintext = cipher.Decipher(ciphertext);
 
-                            keys++;
-                            double currentCost = Evaluator.Evaluate(plaintext);
-
-                            if (currentCost > highestCost)
+                            int oldLetter = key[i];
+                            key[i] = letter;
+                            double newCost = Evaluate(cipher, key, ciphertext, plaintext);
+                            if (newCost > cost)
                             {
-                                highestCost = currentCost;
-                                bestKey = (char[])runKey.Clone();
-                                betterKeyFound = true;
+                                cost = newCost;
+                                used[oldLetter] = false;
+                                used[letter] = true;
+                                improved = true;
                             }
                             else
                             {
-                                //reset key
-                                runKey[i] = oldLetter;
-                                if (j == alphabetLength - 1)
-                                {
-                                    cipher.BuildDictionaries(runKey);
-                                    plaintext = cipher.Decipher(ciphertext);
-                                }
+                                key[i] = oldLetter;
                             }
-
-                            if (ShouldStop)
-                            {
-                                return null;
-                            }
-
-                            if (DateTime.Now < lastTime.AddMilliseconds(100))
-                            {
-                                continue;
-                            }
-
-                            int keysDispatcher = keys * 10;
-                            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                            {
-                                try
-                                {
-                                    Presentation.Keys.Value = $"{keysDispatcher:0,0}";
-                                }
-                                // ReSharper disable once EmptyGeneralCatchClause
-                                catch (Exception)
-                                {
-                                    // ignore
-                                }
-                            }, null);
-                            keys = 0;
-                            lastTime = DateTime.Now;
+                        }
+                        if (ShouldStop)
+                        {
+                            return null;
                         }
                     }
 
-                    runKey = (char[])bestKey.Clone();
-                } while (betterKeyFound);
+                    // Swap two key letters
+                    for (int i = 0; i < KeyLength - 1; i++)
+                    {
+                        for (int j = i + 1; j < KeyLength; j++)
+                        {
+                            Swap(key, i, j);
+                            double newCost = Evaluate(cipher, key, ciphertext, plaintext);
+                            if (newCost > cost)
+                            {
+                                cost = newCost;
+                                improved = true;
+                            }
+                            else
+                            {
+                                Swap(key, i, j);
+                            }
+                        }
+                        if (ShouldStop)
+                        {
+                            return null;
+                        }
+                    }
+                } while (improved);
 
-                Restarts--;
-
-
-                if (highestCost > globalHighestCost)
+                ResultEntry result = CreateResult(cipher, key, cost, ciphertext, plaintext);
+                OnResultFound(result);
+                if (best == null || result.Value > best.Value)
                 {
-                    globalHighestCost = highestCost;
-                    cipher.BuildDictionaries(bestKey);
-                    string bestPlaintext = cipher.Decipher(ciphertext);
-                    AddNewBestListEntry(bestKey, highestCost, bestPlaintext);
+                    best = result;
                 }
-
-                OnProcessChanged(_initialRestarts == 0 ? 0 : _restarts / _initialRestarts);
+                OnProgressChanged((restart + 1.0) / Restarts);
             }
 
-            return _finalResultEntry;
+            return best;
         }
 
-        /// <summary>
-        /// Adds an entry to the BestList
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <param name="plaintext"></param>
-        private void AddNewBestListEntry(char[] key, double value, string plaintext)
+        private static void Swap(int[] key, int i, int j)
         {
-            ResultEntry entry = new ResultEntry
-            {
-                Key = new string(key),
-                Text = plaintext,
-                Value = value
-            };
-
-            if (Presentation.BestList.Count == 0 || entry.Value > Presentation.BestList.First().Value)
-            {
-                _finalResultEntry = entry;
-            }
-
-            Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-            {
-                try
-                {
-                    if (Presentation.BestList.Count > 0 && entry.Value <= Presentation.BestList.Last().Value)
-                    {
-                        return;
-                    }
-                    //Insert new entry at correct place to sustain order of list:
-                    int insertIndex = Presentation.BestList.TakeWhile(e => e.Value > entry.Value).Count();
-                    Presentation.BestList.Insert(insertIndex, entry);
-
-                    if (Presentation.BestList.Count > MaxBestListEntries)
-                    {
-                        Presentation.BestList.RemoveAt(MaxBestListEntries);
-                    }
-                    int ranking = 1;
-                    foreach (ResultEntry e in Presentation.BestList)
-                    {
-                        e.Ranking = ranking;
-                        ranking++;
-                    }
-                }
-                catch (Exception)
-                {
-                    // ignore
-                }
-            }, null);
+            int letter = key[i];
+            key[i] = key[j];
+            key[j] = letter;
         }
     }
 }

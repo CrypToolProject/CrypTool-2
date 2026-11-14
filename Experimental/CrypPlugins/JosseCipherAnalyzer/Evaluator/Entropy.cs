@@ -1,34 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System;
 
 namespace CrypTool.JosseCipherAnalyzer.Evaluator
 {
+    /// <summary>
+    /// Negative Shannon entropy of the letter distribution, so lower entropy rates higher.
+    /// </summary>
     public class Entropy : IEvaluator
     {
-        public double Evaluate(string input)
+        private readonly int[] _counts;
+
+        public Entropy(string alphabet)
         {
-            Dictionary<char, double> table = new Dictionary<char, double>();
-
-
-            foreach (char c in input)
-            {
-                if (table.ContainsKey(c))
-                {
-                    table[c]++;
-                }
-                else
-                {
-                    table.Add(c, 1);
-                }
-            }
-
-            return table.Select(letter => letter.Value / input.Length).Select(freq => freq * LogTwo(freq)).Sum();
+            _counts = new int[alphabet.Length];
         }
 
-        private static double LogTwo(double num)
+        public double Evaluate(int[] plaintext)
         {
-            return Math.Log(num) / Math.Log(2);
+            Array.Clear(_counts, 0, _counts.Length);
+            foreach (int letter in plaintext)
+            {
+                _counts[letter]++;
+            }
+
+            double value = 0;
+            foreach (int count in _counts)
+            {
+                if (count > 0)
+                {
+                    double frequency = (double)count / plaintext.Length;
+                    value += frequency * Math.Log(frequency, 2);
+                }
+            }
+            return value;
         }
     }
 }

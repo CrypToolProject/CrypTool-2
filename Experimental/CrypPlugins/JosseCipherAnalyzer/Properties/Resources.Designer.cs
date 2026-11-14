@@ -115,6 +115,15 @@ namespace CrypTool.JosseCipherAnalyzer.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The ciphertext contains no letters of the alphabet. ähnelt.
+        /// </summary>
+        public static string NoCiphertextLetters {
+            get {
+                return ResourceManager.GetString("NoCiphertextLetters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die ABCDEFGHIJKLMNOPQRSTUVXYZ ähnelt.
         /// </summary>
         public static string BaseAlphabet {

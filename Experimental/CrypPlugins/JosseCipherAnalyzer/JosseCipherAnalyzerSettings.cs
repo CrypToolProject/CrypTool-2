@@ -18,7 +18,7 @@ using CrypTool.JosseCipherAnalyzer.Enum;
 using CrypTool.JosseCipherAnalyzer.Properties;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.Utils;
+using LanguageStatisticsLib;
 using System.ComponentModel;
 
 namespace CrypTool.JosseCipherAnalyzer
